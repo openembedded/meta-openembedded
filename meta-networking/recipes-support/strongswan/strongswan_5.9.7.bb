@@ -9,10 +9,9 @@ DEPENDS = "flex-native flex bison-native"
 DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
 
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-           file://0001-enum-Fix-compiler-warning.patch \
            "
 
-SRC_URI[sha256sum] = "91d0978ac448912759b85452d8ff0d578aafd4507aaf4f1c1719f9d0c7318ab7"
+SRC_URI[sha256sum] = "9e64a2ba62efeac81abff1d962522404ebc6ed6c0d352a23ab7c0b2c639e3fcf"
 
 UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
 
@@ -147,9 +146,13 @@ RDEPENDS:${PN} += "\
     ${PN}-plugin-constraints \
     ${PN}-plugin-des \
     ${PN}-plugin-dnskey \
+    ${PN}-plugin-drbg \
+    ${PN}-plugin-fips-prf \
     ${PN}-plugin-hmac \
+    ${PN}-plugin-kdf \
     ${PN}-plugin-kernel-netlink \
     ${PN}-plugin-md5 \
+    ${PN}-plugin-mgf1 \
     ${PN}-plugin-nonce \
     ${PN}-plugin-pem \
     ${PN}-plugin-pgp \
