@@ -13,7 +13,6 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
 "
 
 SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf70ef047"
@@ -42,6 +41,14 @@ do_export_sources() {
     install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/vbsfmount.c ${S}/utils
     install ${S}/../Makefile.utils ${S}/utils/Makefile
 
+    # some kernel versions have issues with stdarg.h and compatibility with
+    # the sysroot and libc-headers/uapi. If we include the file directly from
+    # the kernel source (STAGING_KERNEL_DIR) we get conflicting types on many
+    # structures, due to kernel .h files being found before libc .h files.
+    # if we grab just this one file from the source, and put it into our
+    # file structure, everything holds together
+    mkdir -p ${S}/vboxsf/include/linux
+    install ${STAGING_KERNEL_DIR}/include/linux/stdarg.h  ${S}/vboxsf/include/linux
 }
 
 do_configure:prepend() {
