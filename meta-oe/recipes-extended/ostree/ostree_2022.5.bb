@@ -19,9 +19,12 @@ DEPENDS = " \
 
 SRC_URI = " \
     gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
+    file://0001-Remove-unused-linux-fs.h-includes.patch \
+    file://0001-libostree-Remove-including-sys-mount.h.patch \
+    file://0001-s390x-se-luks-gencpio-There-is-no-bashism.patch \
     file://run-ptest \
 "
-SRCREV = "fbc6d21c2f71099fbab44cbdd74222b91f61c667"
+SRCREV = "15740d042c9c5258a1c082b5e228cf6f115edbb0"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
