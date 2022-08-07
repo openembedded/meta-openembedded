@@ -11,9 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
 SECTION = "libs"
 DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
 
-SRCREV = "0123ecebce0ad6aba3cdb320027192e15fd71e23"
+SRCREV = "f8f80fd7f9b85f2626d2c6452612962ad8efca9e"
 SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
-           file://0001-libknet-tests-Correct-include-path-for-poll.h.patch \
            file://0001-links.c-Fix-build-with-gcc-12.patch \
            "
 
