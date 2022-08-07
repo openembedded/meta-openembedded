@@ -9,8 +9,8 @@ SRC_URI = "\
     git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
 "
 
-SRCREV_xfstests = "37881397f1aa62df3c63468049c80b301b0e89eb"
-SRCREV_unionmount = "cec4c51a3bf8ba80bb99fc74b302749d4e3d2f1d"
+SRCREV_xfstests = "47ed066309716c73a97fff9b7f557f72d90bffb4"
+SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 
 S = "${WORKDIR}/git"
 
