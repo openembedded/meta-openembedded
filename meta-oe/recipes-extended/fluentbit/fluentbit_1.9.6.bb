@@ -16,6 +16,12 @@ SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-b
            file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
            file://0003-mbedtls-Do-not-overwrite-CFLAGS.patch \
            file://0004-build-Make-systemd-init-systemd-detection-contingent.patch \
+           file://0001-monkey-Define-_GNU_SOURCE-for-memmem-API-check.patch \
+           file://0002-mbedtls-Remove-unused-variable.patch \
+           file://0003-mbedtls-Disable-documentation-warning-as-error-with-.patch \
+           file://0004-Use-correct-type-to-store-return-from-flb_kv_item_cr.patch \
+           file://0005-stackdriver-Fix-return-type-mismatch.patch \
+           file://0006-monkey-Fix-TLS-detection-testcase.patch \
            "
 SRC_URI[sha256sum] = "5ef7dd97e10936269fe5f4e5d3ebf16559333066f7d6757ba12464a9d6186570"
 
@@ -60,6 +66,9 @@ EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off"
 
 # Enable systemd iff systemd is in DISTRO_FEATURES
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On','-DFLB_SYSTEMD=Off',d)}"
+
+# Enable release builds
+EXTRA_OECMAKE += "-DFLB_RELEASE=On"
 
 EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
 EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
