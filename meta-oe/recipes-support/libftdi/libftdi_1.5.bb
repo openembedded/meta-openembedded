@@ -12,8 +12,7 @@ LIC_FILES_CHKSUM= "\
 DEPENDS = "libusb1 python3 swig-native"
 
 SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
-SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
-SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74"
+SRC_URI[sha256sum] = "7c7091e9c86196148bd41177b4590dccb1510bfe6cea5bf7407ff194482eb049"
 
 S = "${WORKDIR}/${BPN}1-${PV}"
 
@@ -22,7 +21,8 @@ inherit cmake binconfig pkgconfig python3native
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=off -DFTDIPP=off,boost"
 
-EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+EXTRA_OECMAKE = "-DSTATICLIBS=off -DEXAMPLES=off -DFTDI_EEPROM=off \
+                 -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
                  -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so \
                  -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}"
 
