@@ -29,6 +29,7 @@ EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1"
 MAKE_TARGETS = "all"
 
 addtask export_sources after do_patch before do_configure
+do_export_sources[depends] += "virtual/kernel:do_shared_workdir"
 
 do_export_sources() {
     mkdir -p "${S}"
