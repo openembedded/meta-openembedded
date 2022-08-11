@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
 
 SRCREV = "8ad7be2510414b9506ec9f9e24f24d04d9b04a1a"
 
-inherit base ptest
+inherit ptest
 
 S = "${WORKDIR}/git/libraries/liblmdb"
 
