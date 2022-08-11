@@ -2,10 +2,10 @@ DESCRIPTION = "generate GCC code coverage reports"
 HOMEPAGE = "https://gcovr.com"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=08208c66520e8d69d5367483186d94ed"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e59af597b3484fa3b52c0fbfd5d17611"
 
 SRC_URI = "git://github.com/gcovr/gcovr.git;branch=master;protocol=https"
-SRCREV = "e71e883521b78122c49016eb4e510e6da06c6916"
+SRCREV = "1040a85ecfb3ef0d01635df9d50a3cae5059d566"
 
 S = "${WORKDIR}/git"
 
