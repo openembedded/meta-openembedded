@@ -41,6 +41,8 @@ SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766
 
 inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
 
+CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64', '', d)}"
+
 EXTRA_OECONF = "--disable-static \
                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
                 --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
