@@ -3,10 +3,13 @@ HOMEPAGE = "https://github.com/hamcrest/PyHamcrest"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=79391bf1501c898472d043f36e960612"
 
-PYPI_PACKAGE = "PyHamcrest"
-
-SRC_URI[sha256sum] = "dfb19cf6d71743e086fbb761ed7faea5aacbc8ec10c17a08b93ecde39192a3db"
+SRC_URI[sha256sum] = "b5d9ce6b977696286cf232ce2adf8969b4d0b045975b0936ac9005e84e67e9c1"
 
 inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += "${PYTHON_PN}-six"
+DEPENDS += "${PYTHON_PN}-hatch-vcs-native"
+
+RDEPENDS:${PN} += " \
+    ${PYTHON_PN}-six \
+    ${PYTHON_PN}-numbers \
+"
