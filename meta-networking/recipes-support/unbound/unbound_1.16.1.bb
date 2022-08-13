@@ -22,12 +22,11 @@ RDEPENDS:${PN} = "bash openssl-bin daemonize"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
-		--with-ssl=${STAGING_EXECPREFIXDIR}"
-		
+		--with-ssl=${STAGING_EXECPREFIXDIR} \
+                --enable-largefile"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'largefile systemd', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[dnscrypt] = "--enable-dnscrypt, --disable-dnscrypt, libsodium"
-PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 
 do_install:append() {
