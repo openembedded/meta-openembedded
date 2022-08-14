@@ -7,9 +7,11 @@ SRCREV_FORMAT = "xfstests_unionmount"
 SRC_URI = "\
     git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
     git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
+    file://0001-Add-a-return-type-to-aio_rw.patch \
+    file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
 "
 
-SRCREV_xfstests = "47ed066309716c73a97fff9b7f557f72d90bffb4"
+SRCREV_xfstests = "b91889d79e1d92e22860504e40108a2e4d054c33"
 SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 
 S = "${WORKDIR}/git"
@@ -24,6 +26,7 @@ RDEPENDS:${PN} += "\
     e2fsprogs \
     e2fsprogs-tune2fs \
     e2fsprogs-resize2fs \
+    libaio \
     libcap-bin \
     overlayfs-progs \
     perl \
