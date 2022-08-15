@@ -11,7 +11,7 @@ SRC_URI += "\
    file://0001-config_info.c-not-expose-build-info.patch \
 "
 
-SRC_URI[sha256sum] = "c23b6237c5231c791511bdc79098617d6852e9e3bdf360efd8b5d15a1a3d8f6a"
+SRC_URI[sha256sum] = "d4f72cb5fb857c9a9f75ec8cf091a1771272802f2178f0b2e65b7b6ff64f4a30"
 
 CVE_CHECK_IGNORE += "\
    CVE-2017-8806 \
