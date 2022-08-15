@@ -9,7 +9,7 @@ CVE_PRODUCT = "json-for-modern-cpp"
 SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1;protocol=https \
            "
 
-SRCREV = "4f8fba14066156b73f1189a2b8bd568bde5284c5"
+SRCREV = "bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d"
 
 S = "${WORKDIR}/git"
 
