@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ebd37caf53781e8b7223e6b99b63f4e"
 DEPENDS = "perl"
 
 SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=master;protocol=https"
-SRCREV = "af435a1635ef9e48a84adc3230099e7ecf20c79d"
+SRCREV = "44b1f2d2021615c88f2f6b1a6cbdd9aebaeb4ad1"
 
 S = "${WORKDIR}/git"
 
