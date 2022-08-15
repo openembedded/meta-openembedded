@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
 SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
            "
-SRC_URI[sha256sum] = "8d5d0f78a49c952f7f185d0f6713c6fabba597dcb713b1ac92e0e5795db29a25"
+SRC_URI[sha256sum] = "af7bab3472189febf50753eaecfac586901419d282cbcbff92e860d4b74894b3"
 
 UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
 
