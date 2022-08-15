@@ -17,8 +17,7 @@ CPAN_AUTHOR = "BIGJ"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/B/BI/${CPAN_AUTHOR}/${CPAN_PACKAGE}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "3d958f43d36db263994affde5da09b51"
-SRC_URI[sha256sum] = "ecbca346d379cef8d3c0e4ac0c8eb3b2613d737ffaaeae52271c38d7bf3c6cda"
+SRC_URI[sha256sum] = "98ca32e7f2f5ea89b8bfb9a0609977f3d153e242e2e51705126cb954f1a06b57"
 
 S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
 
