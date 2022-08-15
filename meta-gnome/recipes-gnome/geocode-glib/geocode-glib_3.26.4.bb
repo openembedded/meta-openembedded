@@ -14,6 +14,6 @@ DEPENDS = " \
     libsoup-2.4 \
 "
 
-SRC_URI[archive.sha256sum] = "1dfeae83b90eccca1b6cf7dcf7c5e3b317828cf0b56205c4471ef0f911999766"
+SRC_URI[archive.sha256sum] = "2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa"
 
 EXTRA_OEMESON = "-Denable-installed-tests=false"
