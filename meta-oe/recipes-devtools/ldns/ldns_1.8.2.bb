@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34330f15b2b4abbbaaa7623f79a6a019"
 
 SRC_URI = "https://www.nlnetlabs.nl/downloads/ldns/ldns-${PV}.tar.gz"
-SRC_URI[sha256sum] = "958229abce4d3aaa19a75c0d127666564b17216902186e952ca4aef47c6d7fa3"
+SRC_URI[sha256sum] = "b92b001cdd382de653620a05445e42e17a827eec93d64ee587ad291a533cc1e9"
 
 DEPENDS = "openssl"
 
