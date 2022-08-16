@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE;md5=a55c12a2d7d742ecb41ca9ae0a6ddc66"
 
 SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+           file://0001-test-test_syscalls.c-allow-EBADF-in-fcheck_stat-631.patch \
 "
 SRC_URI[sha256sum] = "b2e283485d47404ac896dd0bb7f7ba81e1470838e677e45f659804c3a3b69666"
 
