@@ -13,11 +13,11 @@ Features: \
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8"
 
-SRC_URI[sha256sum] = "8a85dd42e067131d5b26b71472336da7f7f4b87ff9c97350d89f5ff0de9adedc"
+SRC_URI[sha256sum] = "38cf5e90c56f906a8320ce82a50bfa92c902b93affd72e4dc81580115f355853"
 
 DEPENDS += "${PYTHON_PN}-six-native"
 
 PYPI_PACKAGE = "pyperf"
 inherit pypi setuptools3
 
-RDEPENDS:${PN} += "${PYTHON_PN}-misc"
+RDEPENDS:${PN} += "${PYTHON_PN}-misc ${PYTHON_PN}-statistics"
