@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/sumerc/yappi"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
 
-SRC_URI[sha256sum] = "f54c25f04aa7c613633b529bffd14e0699a4363f414dc9c065616fd52064a49b"
+SRC_URI[sha256sum] = "0a73c608a2603570a020a32d4369ba744012bc5267f37e5bd8026fb491abba56"
 
 SRC_URI += " \
     file://run-ptest \
