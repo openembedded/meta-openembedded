@@ -22,13 +22,13 @@ SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-b
            file://0004-Use-correct-type-to-store-return-from-flb_kv_item_cr.patch \
            file://0005-stackdriver-Fix-return-type-mismatch.patch \
            file://0006-monkey-Fix-TLS-detection-testcase.patch \
+           file://0001-Revert-Remove-unused-variable-in-mpi_mul_hlp.patch \
            "
 SRC_URI:append:libc-musl = "\
            file://0001-Use-posix-strerror_r-with-musl.patch \
            file://0002-chunkio-Link-with-fts-library-with-musl.patch \
            "
-SRC_URI[sha256sum] = "5ef7dd97e10936269fe5f4e5d3ebf16559333066f7d6757ba12464a9d6186570"
-
+SRC_URI[sha256sum] = "8ca2ac081d7eee717483c06608adcb5e3d5373e182ad87dba21a23f8278c6540"
 S = "${WORKDIR}/fluent-bit-${PV}"
 
 DEPENDS = "zlib bison-native flex-native openssl"
@@ -78,6 +78,9 @@ EXTRA_OECMAKE:append:libc-musl = ' -DFLB_JEMALLOC_OPTIONS="--with-jemalloc-prefi
 EXTRA_OECMAKE:append:riscv64 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:riscv32 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:mips = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+
+CFLAGS:append:x86 = " -DMBEDTLS_HAVE_SSE2"
 
 inherit cmake systemd pkgconfig
 
