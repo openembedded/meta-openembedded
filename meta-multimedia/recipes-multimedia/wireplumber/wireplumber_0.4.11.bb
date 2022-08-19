@@ -11,7 +11,7 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
 "
 
-SRCREV = "8b97b40c4467951fbd4181afb47e4175361365a6"
+SRCREV = "80b3559963f0ad40a7bfa6c23b0098275c0b5ebe"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
            file://90-OE-disable-session-dbus-dependent-features.lua \
            "
@@ -36,7 +36,7 @@ EXTRA_OEMESON += " \
 "
 
 PACKAGECONFIG ??= "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
 "
 
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
@@ -130,7 +130,9 @@ CONFFILES:${PN} += " \
 # Add pipewire to RRECOMMENDS, since WirePlumber expects a PipeWire daemon to
 # be present. While in theory any application that uses libpipewire can configure
 # itself to become a daemon, in practice, the PipeWire daemon is used.
-RRECOMMENDS:${PN} += "${PN}-scripts pipewire"
+RRECOMMENDS:${PN} += "pipewire ${PN}-scripts ${PN}-modules-meta"
+
+FILES:${PN} += "${systemd_user_unitdir}"
 
 FILES:libwireplumber = " \
     ${libdir}/libwireplumber-*.so.* \
