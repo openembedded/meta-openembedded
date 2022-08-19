@@ -75,8 +75,9 @@ EXTRA_OECMAKE += "-DFLB_RELEASE=On"
 # musl needs these options
 EXTRA_OECMAKE:append:libc-musl = ' -DFLB_JEMALLOC_OPTIONS="--with-jemalloc-prefix=je_ --with-lg-quantum=3" -DFLB_CORO_STACK_SIZE=24576'
 
-EXTRA_OECMAKE:append:riscv64 = " -DFLB_DEPS='atomic'"
-EXTRA_OECMAKE:append:riscv32 = " -DFLB_DEPS='atomic'"
+EXTRA_OECMAKE:append:riscv64 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+EXTRA_OECMAKE:append:riscv32 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+EXTRA_OECMAKE:append:mips = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 
 inherit cmake systemd pkgconfig
 
