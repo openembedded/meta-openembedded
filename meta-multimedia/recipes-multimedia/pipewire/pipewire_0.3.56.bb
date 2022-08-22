@@ -13,10 +13,10 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "64cf5e80e6240284e6b757907b900507fe56f1b5"
+SRCREV = "f274e53d25ee8f483ac6fce9e516bb1830abe88b"
 SRC_URI = " \
 	git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https \
-	file://0001-spa-fix-c90-header-include.patch \
+	file://0001-avb-fix-compilation-on-big-endian.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -62,7 +62,6 @@ EXTRA_OEMESON += " \
     -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
     -Dsystemd-system-unit-dir=${systemd_system_unitdir} \
     -Dsystemd-user-unit-dir=${systemd_user_unitdir} \
-    -Dvulkan=disabled \
     -Dman=disabled \
     -Dsession-managers='[]' \
     -Dlv2=disabled \
@@ -72,12 +71,26 @@ EXTRA_OEMESON += " \
     -Dlegacy-rtkit=false \
 "
 
-PACKAGECONFIG:class-target ??= "\
+# spa alsa plugin code uses typedef redefinition, which is officially a C11 feature.
+# Pipewire builds with 'c_std=gnu99' by default. Recent versions of gcc don't issue this warning in gnu99
+# mode but it looks like clang still does
+CFLAGS:append = " -Wno-typedef-redefinition"
+
+# According to wireplumber documentation only one session manager should be installed at a time
+# Possible options are media-session, which has fewer dependencies but is very simple,
+# or wireplumber, which is more powerful.
+PIPEWIRE_SESSION_MANAGER ??= "media-session"
+
+FFMPEG_AVAILABLE = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'ffmpeg', '', d)}"
+BLUETOOTH_AAC = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'bluez-aac', '', d)}"
+
+PACKAGECONFIG:class-target ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
-    gstreamer jack libusb pw-cat raop sndfile v4l2 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez ${BLUETOOTH_AAC}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
+    ${PIPEWIRE_SESSION_MANAGER} \
+    ${FFMPEG_AVAILABLE} gstreamer jack libusb pw-cat raop sndfile v4l2 udev volume \
 "
 
 # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
@@ -85,17 +98,19 @@ PACKAGECONFIG:class-target ??= "\
 # libjack.so* files, thus colliding with the libpack package. This
 # is why these two are marked in their respective packageconfigs
 # as being in conflict.
-PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib udev"
+PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib udev,,pipewire-alsa pipewire-alsa-card-profile"
 PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi"
 PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc"
 PACKAGECONFIG[bluez-aac] = "-Dbluez5-codec-aac=enabled,-Dbluez5-codec-aac=disabled,fdk-aac"
 PACKAGECONFIG[docs] = "-Ddocs=enabled,-Ddocs=disabled,doxygen-native graphviz-native"
 PACKAGECONFIG[ffmpeg] = "-Dffmpeg=enabled,-Dffmpeg=disabled,ffmpeg"
-PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base,,gstreamer1.0-pipewire"
 PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
-PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera libdrm"
 PACKAGECONFIG[libcanberra] = "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
 PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
+PACKAGECONFIG[media-session] = ",,,pipewire-media-session"
+PACKAGECONFIG[pulseaudio] = "-Dlibpulse=enabled,-Dlibpulse=disabled,pulseaudio,,pipewire-pulse"
 PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
 PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
 PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
@@ -109,8 +124,12 @@ PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsyst
 # currently lacks the feature of enabling user services.
 PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
 # pw-cat needs sndfile packageconfig to be enabled
+PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
 PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
+PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
+PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
 PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
+PACKAGECONFIG[wireplumber] = ",,,wireplumber"
 
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
@@ -227,10 +246,16 @@ PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-service', 'pipewire.service', '', d)}"
 CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
 FILES:${PN} = " \
-    ${datadir}/pipewire/pipewire.conf \
-    ${systemd_system_unitdir}/pipewire.* \
-    ${systemd_user_unitdir}/pipewire.* \
+    ${datadir}/pipewire \
+    ${systemd_system_unitdir}/pipewire* \
+    ${systemd_user_unitdir}/pipewire* \
     ${bindir}/pipewire \
+    ${bindir}/pipewire-avb \
+"
+
+RRECOMMENDS:${PN}:class-target += " \
+	pipewire-modules-meta \
+	pipewire-spa-plugins-meta \
 "
 
 FILES:${PN}-dev += " \
