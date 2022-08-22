@@ -1,8 +1,8 @@
 require wireguard.inc
 
-SRCREV = "122f06bfd8fc7b06a0899fa9adc4ce8e06900d98"
+SRCREV = "18fbcd68a35a892527345dc5679d0b2d860ee004"
 
-SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat;branch=master"
+SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat;protocol=https;branch=master"
 
 inherit module kernel-module-split
 
