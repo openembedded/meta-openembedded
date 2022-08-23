@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-prompt-toolkit.readthedocs.io/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
 
-SRC_URI[sha256sum] = "1bb05628c7d87b645974a1bad3f17612be0c29fa39af9f7688030163f680bad6"
+SRC_URI[sha256sum] = "859b283c50bde45f5f97829f77a4674d1c1fcd88539364f1b28a37805cfd89c0"
 
 inherit pypi setuptools3
 
