@@ -17,6 +17,6 @@ GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gnome-help vala
 
 SRC_URI += "file://0001-Avoid-running-trackertestutils.patch"
-SRC_URI[archive.sha256sum] = "686844b34ec73b24931ff6cc4f6033f0072947a6db60acdc7fb3eaf157a581c8"
+SRC_URI[archive.sha256sum] = "8518c3d954f93095d955624a044ce16a7345532f811d299dbfa1e114cfebab33"
 
 FILES:${PN} += "${libdir}/grilo-0.3"
