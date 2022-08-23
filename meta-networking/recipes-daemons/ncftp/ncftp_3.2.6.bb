@@ -21,8 +21,7 @@ CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[ccdv] = "--enable-ccdv,--disable-ccdv,,"
 
-EXTRA_OECONF = "--disable-precomp --disable-universal"
-#TARGET_CC_ARCH:append = " ${SELECTED_OPTIMIZATION}"
+EXTRA_OECONF = "--disable-precomp --disable-universal ac_cv_path_TAR=tar"
 ACLOCALEXTRAPATH:append = " -I ${S}/autoconf_local"
 
 do_install () {
