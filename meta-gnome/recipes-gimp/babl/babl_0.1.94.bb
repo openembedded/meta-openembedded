@@ -15,10 +15,8 @@ CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
 CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz \
-           file://0001-meson-fix-misspelled-kwarg-name.patch \
-           file://0002-meson-Various-fixes.patch \
            file://0001-meson-Do-not-run-git-rev-parse-during-configure.patch \
-"
-SRC_URI[sha256sum] = "f667735028944b6375ad18f160a64ceb93f5c7dccaa9d8751de359777488a2c1"
+           "
+SRC_URI[sha256sum] = "b6a8b28f55e0c17f5031fb7959e72ffe0fbf8196d1968ad6efc98d1b492c3bbe"
 
 BBCLASSEXTEND = "native"
