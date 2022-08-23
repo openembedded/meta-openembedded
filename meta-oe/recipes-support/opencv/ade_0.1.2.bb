@@ -4,11 +4,9 @@ and processing framework. ADE Framework is suitable for \
 organizing data flow processing and execution."
 HOMEPAGE = "https://github.com/opencv/ade"
 
-SRC_URI = "git://github.com/opencv/ade.git;branch=master;protocol=https \
-           file://0001-use-GNUInstallDirs-for-detecting-install-paths.patch \
-           "
+SRC_URI = "git://github.com/opencv/ade.git;branch=master;protocol=https"
 
-SRCREV = "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
+SRCREV = "1e02d7486bdb9c87993d91b9910e7cc6c4ddbf66"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
