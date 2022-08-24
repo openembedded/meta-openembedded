@@ -3,35 +3,46 @@ HOMEPAGE = "http://www.webdav.org/neon/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
-                    file://src/ne_utils.h;beginline=1;endline=20;md5=2caca609538eddaa6f6adf120a218037"
+                    file://src/ne_utils.h;beginline=1;endline=20;md5=34c8e338bfa0237561e68d30c3c71133"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
            file://pkgconfig.patch \
-           file://fix-package-check-for-libxml2.patch \
+           file://0001-Disable-installing-documentation.patch \
            file://run-ptest \
-          "
+           "
 
-SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
-SRC_URI[sha256sum] = "db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d1b15d3d967fbca"
+SRC_URI[sha256sum] = "7a25ba2c9223676b9aaec22a585a0ca118127bad71deed0b9ed6cd960fe5c353"
 
-inherit autotools binconfig-disabled lib_package pkgconfig ptest
+inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest
 
 # Enable gnutls or openssl, not both
-PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib"
-PACKAGECONFIG:class-native = "expat gnutls webdav zlib"
+PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib nls"
+PACKAGECONFIG:class-native = "expat gnutls webdav zlib nls"
+PACKAGECONFIG:remove:libc-musl = "nls"
 
 PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
 PACKAGECONFIG[gnutls] = "--with-ssl=gnutls,,gnutls"
 PACKAGECONFIG[gssapi] = "--with-gssapi,--without-gssapi,krb5"
 PACKAGECONFIG[libproxy] = "--with-libproxy,--without-libproxy,libproxy"
 PACKAGECONFIG[libxml2] = "--with-libxml2,--without-libxml2,libxml2"
+PACKAGECONFIG[nls] = ",--disable-nls,gettext-native"
 PACKAGECONFIG[openssl] = "--with-ssl=openssl,,openssl"
 PACKAGECONFIG[webdav] = "--enable-webdav,--disable-webdav,"
 PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
 
-EXTRA_OECONF += "--enable-shared"
+EXTRA_OECONF += "--enable-shared --enable-threadsafe-ssl=posix"
+
+# Do not install into /usr/local
+EXTRA_OEMAKE:append:class-native = "prefix=${prefix_native}"
+
+do_configure:prepend() {
+    echo "${PV}" > ${S}/.version
+}
 
 do_compile:append() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'nls', 'true', 'false', d)}; then
+        oe_runmake compile-gmo
+    fi
     oe_runmake -C test
 }
 
