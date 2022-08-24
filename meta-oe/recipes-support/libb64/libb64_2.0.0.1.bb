@@ -2,22 +2,20 @@ SUMMARY = "Base64 Encoding/Decoding Routines"
 DESCRIPTION = "base64 encoding/decoding library - runtime library \
 libb64 is a library of ANSI C routines for fast encoding/decoding data into \
 and from a base64-encoded format"
-HOMEPAGE = "http://libb64.sourceforge.net/"
+HOMEPAGE = "https://github.com/libb64"
 LICENSE = "PD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ce551aad762074c7ab618a0e07a8dca3"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=81296a564fa0621472714aae7c763d96"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${BP}.zip \
+PV .= "+2.0.0.2+git${SRCPV}"
+SRCREV = "ce864b17ea0e24a91e77c7dd3eb2d1ac4175b3f0"
+
+SRC_URI = "git://github.com/libb64/libb64;protocol=https;branch=master \
            file://0001-example-Do-not-run-the-tests.patch \
-           file://0002-use-BUFSIZ-as-buffer-size.patch \
-           file://0003-fix-integer-overflows.patch \
-           file://0004-Fix-off-by-one-error.patch \
-           file://0005-make-overriding-CFLAGS-possible.patch \
-           file://0006-do-not-export-the-CHARS_PER_LINE-variable.patch \
-           file://0007-initialize-encoder-decoder-state-in-the-constructors.patch \
+           file://0001-Makefile-fix-parallel-build-of-examples.patch \
+           file://0001-examples-Use-proper-function-prototype-for-main.patch \
            "
-SRC_URI[sha256sum] = "20106f0ba95cfd9c35a13c71206643e3fb3e46512df3e2efb2fdbf87116314b2"
 
-PARALLEL_MAKE = ""
+S = "${WORKDIR}/git"
 
 CFLAGS += "-fPIC"
 
