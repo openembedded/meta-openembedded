@@ -11,7 +11,7 @@ SRC_URI = "\
     file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
 "
 
-SRCREV_xfstests = "b91889d79e1d92e22860504e40108a2e4d054c33"
+SRCREV_xfstests = "16ddbd1aee295f64695916cf3621aef57f1163ba"
 SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 
 S = "${WORKDIR}/git"
