@@ -4,7 +4,8 @@ HOMEPAGE = "http://www.tortall.net/projects/yasm/"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a12d8903508fb6bfd49d8d82c6170dd9"
 
-DEPENDS += "flex-native bison-native xmlto-native"
+DEPENDS += "flex-native bison-native"
+PACKAGECONFIG[docs] = ",,xmlto-native,"
 
 PV = "1.3.0+git${SRCPV}"
 # v1.3.0
