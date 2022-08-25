@@ -24,7 +24,8 @@ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
 SRCREV = "6cafe8445fd1e04e5f7d67bbc73029a538d1b253"
 SRC_URI = "git://git.kernel.dk/fio.git;branch=master \
-"
+           file://0001-io_uring-Replace-pthread_self-with-s-tid.patch \
+           "
 
 S = "${WORKDIR}/git"
 
