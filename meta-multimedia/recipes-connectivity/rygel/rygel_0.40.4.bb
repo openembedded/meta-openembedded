@@ -8,33 +8,54 @@ HOMEPAGE = "http://live.gnome.org/Rygel"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
+DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 \
+           gstreamer1.0-plugins-base libgee libsoup-2.4 libmediaart-2.0 \
+           libunistring sqlite3 intltool-native gst-editing-services"
+
 RDEPENDS:${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
 RRECOMMENDS:${PN} = "rygel-plugin-media-export"
 
-inherit gnomebase vala gobject-introspection gettext systemd features_check
+inherit gnomebase features_check vala gobject-introspection gettext systemd meson
 
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-SRC_URI[archive.md5sum] = "7f95401903a3f855b464d5152b9d4c07"
-SRC_URI[archive.sha256sum] = "08c21a577f7bdad26446a75ffa32778b26842c3b1188165f0b19818559747d00"
+SRC_URI[archive.sha256sum] = "736d8adbe8615f6cbc8fcfff9845dc985fd10e16629da236b4b52dbedf0a348b"
 
-EXTRA_OECONF = "--disable-tracker-plugin --with-media-engine=gstreamer"
+GNOMEBASEBUILDCLASS = "meson"
+GIR_MESON_ENABLE_FLAG = 'enabled'
+GIR_MESON_DISABLE_FLAG = 'disabled'
+
+EXTRA_OEMESON = "-Dengines=gstreamer -Dplugins=${@strip_comma('${RYGEL_PLUGINS}')}"
+PACKAGECONFIG:append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk+3", "", d)}"
 
 PACKAGECONFIG ?= "external mpris ruih media-export gst-launch"
 
-PACKAGECONFIG:append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk+3", "", d)}"
+PACKAGECONFIG[external] = ""
+PACKAGECONFIG[mpris] = ""
+PACKAGECONFIG[ruih] = ""
+PACKAGECONFIG[media-export] = ""
+PACKAGECONFIG[gst-launch] = ""
+PACKAGECONFIG[lms] = ""
+PACKAGECONFIG[tracker3] = ""
+PACKAGECONFIG[gtk+3] = ",-Dgtk=false,gtk+3"
 
-PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
-PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
-PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
-PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin"
-PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
-PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
-PACKAGECONFIG[lms] = "--enable-lms-plugin,--disable-lms-plugin"
+RYGEL_PLUGINS = ""
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'external', ',external', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'mpris', ',mpris', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'ruih', ',ruih', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'gst-launch', ',gst-launch', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'lms', ',lms', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'media-export', ',media-export', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'tracker3', ',tracker3', '', d)}"
+RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'playbin', ',playbin', '', d)}"
 
 LIBV = "2.6"
+
+CFLAGS:append:toolchain-clang = " -Wno-error=int-conversion"
+
+def strip_comma(s):
+    return s.strip(',')
 
 do_install:append() {
        # Remove .la files for loadable modules
