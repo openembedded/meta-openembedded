@@ -83,7 +83,7 @@ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 
 RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-dev += "${PN}-compiler"
-RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python-protobuf', '', d)}"
+RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
 
 MIPS_INSTRUCTION_SET = "mips"
 
