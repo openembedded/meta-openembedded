@@ -23,6 +23,8 @@ RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
 inherit setuptools3
 inherit pypi
 
+CFLAGS += "-D_LARGEFILE64_SOURCE"
+
 export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
 
 BORING_SSL_PLATFORM:arm = "linux-arm"
