@@ -1,4 +1,4 @@
-From 8515ceec5ba3e2fcdbc819b5bf10fe742d7c9d5d Mon Sep 17 00:00:00 2001
+From 76980e1c84374e8bfa4dffcca78c5050783e83b9 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Thu, 27 Jun 2019 13:27:18 +0000
 Subject: [PATCH] Makefile.am: include descriptor.pb.cc when building
@@ -17,14 +17,14 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/src/Makefile.am b/src/Makefile.am
-index d4f11ce79..96d911746 100644
+index e6a7dc7fd..6b0fe6686 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -323,6 +323,7 @@ libprotoc_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotoc.map
+@@ -326,6 +326,7 @@ libprotoc_la_LDFLAGS += -Wl,--version-script=$(srcdir)/libprotoc.map
  EXTRA_libprotoc_la_DEPENDENCIES = libprotoc.map
  endif
  libprotoc_la_SOURCES =                                         \
 +  google/protobuf/descriptor.pb.cc                             \
    google/protobuf/compiler/code_generator.cc                   \
    google/protobuf/compiler/command_line_interface.cc           \
-   google/protobuf/compiler/cpp/cpp_enum.cc                     \
+   google/protobuf/compiler/cpp/enum.cc                         \
