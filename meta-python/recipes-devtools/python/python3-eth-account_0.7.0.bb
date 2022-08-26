@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=287820ad3553117aa2f92bf84c219324"
 
-SRC_URI[sha256sum] = "54b0b7d661e73f4cd12d508c9baa5c9a6e8c194aa7bafc39277cd673683ae50e"
+SRC_URI[sha256sum] = "61360e9e514e09e49929ed365ca0e1656758ecbd11248c629ad85b4335c2661a"
 
 inherit pypi setuptools3
 
