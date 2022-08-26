@@ -7,9 +7,9 @@ DEPENDS = "boost"
 
 SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
            file://0001-Do-not-strip-binaries.patch \
-           file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
 "
-SRCREV = "914c06fb252b6cc3727d0eedab6736e88a3fcb01"
+
+SRCREV = "aa304c9c7d725ffb9d10af08a3b34cb372307020"
 
 S = "${WORKDIR}/git"
 
