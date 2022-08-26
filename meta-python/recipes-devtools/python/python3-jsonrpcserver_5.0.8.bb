@@ -17,6 +17,7 @@ RDEPENDS:${PN} += "\
     python3-netclient \
     python3-pkgutil \
     python3-oslash \
+    python3-typing-extensions \
 "
 
 BBCLASSEXTEND = "native nativesdk"
