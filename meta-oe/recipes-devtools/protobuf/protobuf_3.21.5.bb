@@ -25,7 +25,9 @@ S = "${WORKDIR}/git"
 inherit cmake pkgconfig ptest
 
 PACKAGECONFIG ??= ""
+PACKAGECONFIG:class-native ?= "compiler"
 PACKAGECONFIG[python] = ",,"
+PACKAGECONFIG[compiler] = "-Dprotobuf_BUILD_PROTOC_BINARIES=ON,-Dprotobuf_BUILD_PROTOC_BINARIES=OFF"
 
 EXTRA_OECMAKE += "\
     -Dprotobuf_BUILD_SHARED_LIBS=ON \
