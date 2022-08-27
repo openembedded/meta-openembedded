@@ -2,9 +2,8 @@ SUMMARY = "Linux DVB API applications and utilities"
 HOMEPAGE = "http://www.linuxtv.org"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-SRCREV = "3d43b280298c39a67d1d889e01e173f52c12da35"
 
-SRC_URI = "hg://linuxtv.org/hg;module=dvb-apps;protocol=http \
+SRC_URI = "https://www.linuxtv.org/hg/dvb-apps/archive/3d43b280298c.tar.bz2;downloadfilename=${BPN}-3d43b280298c.tar.bz2 \
           file://dvb-scan-table \
           file://0001-Fix-generate-keynames.patch \
           file://0003-handle-static-shared-only-build.patch \
@@ -13,8 +12,8 @@ SRC_URI = "hg://linuxtv.org/hg;module=dvb-apps;protocol=http \
           file://0006-CA_SET_PID.patch \
           file://0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch \
           "
-
-S = "${WORKDIR}/${BPN}"
+SRC_URI[sha256sum] = "f39e2f0ebed7e32bce83522062ad4d414f67fccd5df1b647618524497e15e057"
+S = "${WORKDIR}/${BPN}-3d43b280298c"
 
 inherit perlnative
 
