@@ -22,6 +22,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0005-samba-build-dnsserver_common-code.patch \
            file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://0001-smbtorture-skip-test-case-tfork_cmd_send.patch \
+           file://0001-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
            "
 
 SRC_URI:append:libc-musl = " \
@@ -113,9 +114,11 @@ EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
                  --with-sockets-dir=/run/samba \
                  --with-modulesdir=${libdir}/samba \
+                 --with-privatelibdir=${libdir}/samba \
                  --with-lockdir=${localstatedir}/lib/samba \
                  --with-cachedir=${localstatedir}/lib/samba \
                  --disable-rpath-install \
+                 --disable-rpath \
                  --with-shared-modules=${SAMBA4_MODULES} \
                  --bundled-libraries=${SAMBA4_LIBS} \
                  ${@oe.utils.conditional('TARGET_ARCH', 'x86_64', '', '--disable-glusterfs', d)} \
