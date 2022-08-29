@@ -9,12 +9,11 @@ what could be described as a non-transparent Layer 4 router."
 HOMEPAGE = "http://www.inet.no/dante/"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=221118dda731fe93a85d0ed973467249"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=edd508404db7339042dfc861a3a690ad"
 
 SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
           "
-SRC_URI[md5sum] = "68c2ce12119e12cea11a90c7a80efa8f"
-SRC_URI[sha256sum] = "b6d232bd6fefc87d14bf97e447e4fcdeef4b28b16b048d804b50b48f261c4f53"
+SRC_URI[sha256sum] = "418a065fe1a4b8ace8fbf77c2da269a98f376e7115902e76cda7e741e4846a5d"
 
 # without --without-gssapi, config.log will contain reference to /usr/lib
 # as a consequence of GSSAPI path being set to /usr by default.
@@ -23,16 +22,17 @@ SRC_URI[sha256sum] = "b6d232bd6fefc87d14bf97e447e4fcdeef4b28b16b048d804b50b48f26
 # --enable-release        build prerelease as full release
 EXTRA_OECONF += "--without-gssapi --sbindir=${bindir}"
 
-DEPENDS += "flex-native bison-native libpam"
-
+DEPENDS += "flex-native bison-native libpam libtirpc"
 inherit autotools-brokensep features_check
+
+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+LIBS += "-ltirpc"
 
 REQUIRED_DISTRO_FEATURES = "pam"
 
 EXTRA_AUTORECONF = "-I ${S}"
 
 PACKAGECONFIG[libwrap] = ",--disable-libwrap,tcp-wrappers,libwrap"
-PACKAGECONFIG[krb5] = ",--without-krb5,krb5"
 
 PACKAGECONFIG ??= ""
 
