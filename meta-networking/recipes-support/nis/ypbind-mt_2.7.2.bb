@@ -29,13 +29,11 @@ RDEPENDS:${PN} += "yp-tools"
 PROVIDES += "ypbind"
 
 SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
+           file://0001-dns_hosts-Fix-build-with-musl.patch \
            file://ypbind.init \
            file://ypbind.service \
-           file://0001-dns_hosts-Fix-build-with-musl.patch \
-           file://0001-Add-configure-time-check-for-gettid-API.patch \
            "
-SRC_URI[md5sum] = "7cf89641fdc128d0919207e4b7caaf1d"
-SRC_URI[sha256sum] = "0696c0263c4fd48a4ff2ce6c109f05f37aab0f71646d81cb22c7c28591bf80eb"
+SRC_URI[sha256sum] = "064f2f185673c5493df83f6400b799f3a359de56118b6ba37c4327111f2fcd8b"
 
 inherit systemd update-rc.d
 
@@ -57,6 +55,8 @@ do_install:append () {
     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
 }
 
+# uses glibc internal APIs e.g. _hostalias
+COMPATIBLE_HOST:libc-musl = "null"
 
 RPROVIDES:${PN} += "${PN}-systemd"
 RREPLACES:${PN} += "${PN}-systemd"
