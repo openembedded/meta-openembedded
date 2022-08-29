@@ -9,10 +9,10 @@ SRC_URI = "https://pagure.io/dlm/archive/dlm-${PV}/dlm-dlm-${PV}.tar.gz \
            file://0001-dlm-fix-compile-error-since-xml2-config-should-not-b.patch \
            file://0001-Include-sys-sysmacros.h-for-major-minor-macros-in-gl.patch \
            file://0001-make-Replace-cp-a-with-mode-preserving-options.patch \
+           file://0004-include-string.h-for-memset-prototype.patch \
            "
 
-SRC_URI[md5sum] = "4c57a941a15547859cd38fd55f66388e"
-SRC_URI[sha256sum] = "d59142e067cbd603aaf66151a04e9fa34330219680b8827c953d20821b951991"
+SRC_URI[sha256sum] = "f12c0056b9196dfcecbec2fa8930feb87c605a86ef0f3d7bd6fb0b77cd7f45ca"
 
 UPSTREAM_CHECK_URI = "https://pagure.io/dlm/releases"
 UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
