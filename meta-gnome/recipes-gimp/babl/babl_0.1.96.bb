@@ -14,9 +14,7 @@ DEPENDS += "lcms"
 CFLAGS:append:toolchain-clang:mipsarch = " -ffp-exception-behavior=ignore "
 CFLAGS:append:toolchain-clang:riscv64 = " -ffp-exception-behavior=ignore "
 
-SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz \
-           file://0001-meson-Do-not-run-git-rev-parse-during-configure.patch \
-           "
-SRC_URI[sha256sum] = "b6a8b28f55e0c17f5031fb7959e72ffe0fbf8196d1968ad6efc98d1b492c3bbe"
+SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
+SRC_URI[sha256sum] = "33673fe459a983f411245a49f81fd7f1966af1ea8eca9b095a940c542b8545f6"
 
 BBCLASSEXTEND = "native"
