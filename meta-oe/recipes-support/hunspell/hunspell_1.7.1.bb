@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
 "
 
-SRCREV = "4ddd8ed5ca6484b930b111aec50c2750a6119a0f"
+SRCREV = "1180421f50f211984211e968eb6801ffd3390b8f"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
