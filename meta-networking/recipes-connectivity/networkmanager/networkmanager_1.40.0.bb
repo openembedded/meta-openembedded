@@ -29,9 +29,8 @@ SRC_URI = " \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
-    file://0001-do-not-ask-host-for-ifcfg-defaults.patch \
 "
-SRC_URI[sha256sum] = "82a4cf07ddfeb0816787b67c0f5058ae6c50d6259c0b0541a24e35156062b2ef"
+SRC_URI[sha256sum] = "aee7e057bc2cca5dab84e41f15f1da8b795eb290747b04cbeee822bad9e9fc03"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -88,7 +87,7 @@ PACKAGECONFIG[bluez5] = "-Dbluez5_dun=true,-Dbluez5_dun=false,bluez5"
 # consolekit is not picked by shlibs, so add it to RDEPENDS too
 PACKAGECONFIG[consolekit] = "-Dsession_tracking_consolekit=true,-Dsession_tracking_consolekit=false,consolekit,consolekit"
 PACKAGECONFIG[modemmanager] = "-Dmodem_manager=true,-Dmodem_manager=false,modemmanager mobile-broadband-provider-info"
-PACKAGECONFIG[ppp] = "-Dppp=true -Dpppd=${sbindir}/pppd,-Dppp=false,ppp,ppp"
+PACKAGECONFIG[ppp] = "-Dppp=true -Dpppd=${sbindir}/pppd,-Dppp=false,ppp"
 PACKAGECONFIG[dnsmasq] = "-Ddnsmasq=${bindir}/dnsmasq"
 PACKAGECONFIG[nss] = "-Dcrypto=nss,,nss"
 PACKAGECONFIG[resolvconf] = "-Dresolvconf=${base_sbindir}/resolvconf,-Dresolvconf=no,,resolvconf"
@@ -233,15 +232,20 @@ FILES:${PN}-daemon += " \
     ${nonarch_base_libdir}/udev/* \
     ${nonarch_libdir}/firewalld \
     ${nonarch_libdir}/NetworkManager/conf.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/no-wait.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-up.d \
-    ${nonarch_libdir}/NetworkManager/dispatcher.d/no-wait.d \
     ${nonarch_libdir}/NetworkManager/system-connections \
     ${nonarch_libdir}/NetworkManager/VPN \
     ${sbindir}/NetworkManager \
     ${sysconfdir}/init.d/network-manager \
     ${sysconfdir}/NetworkManager \
+    ${sysconfdir}/resolv-conf.NetworkManager \
+    ${sysconfdir}/sysconfig/network-scripts \
     ${systemd_system_unitdir} \
+"
+RDEPENDS:${PN}-daemon += "\
+    ${@bb.utils.contains('PACKAGECONFIG', 'ifupdown', 'bash', '', d)} \
 "
 RRECOMMENDS:${PN}-daemon += "\
     ${NETWORKMANAGER_FIREWALL_DEFAULT} \
