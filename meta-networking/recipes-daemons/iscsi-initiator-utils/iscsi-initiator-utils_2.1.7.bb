@@ -42,6 +42,7 @@ EXTRA_OEMAKE = ' \
     MANDIR="${mandir}" \
     OPTFLAGS="-DNO_SYSTEMD ${CFLAGS}" \
     PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
+    SED=sed \
 '
 
 
