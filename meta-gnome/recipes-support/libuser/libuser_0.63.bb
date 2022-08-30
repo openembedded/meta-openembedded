@@ -12,21 +12,33 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 SECTION = "base"
 
 SRC_URI = "https://releases.pagure.org/libuser/libuser-${PV}.tar.xz \
+           file://0001-docs-Disable-building.patch \
            file://0002-remove-unused-execinfo.h.patch \
-           file://0001-modules-files.c-parse_field-fix-string-formating-in-.patch \
+           file://0003-python-Compilation-warnings-update.patch \
            "
 
-SRC_URI[md5sum] = "63e5e5c551e99dc5302b40b80bd6d4f2"
-SRC_URI[sha256sum] = "a58ff4fabb01a25043b142185a33eeea961109dd60d4b40b6a9df4fa3cace20b"
+SRC_URI[sha256sum] = "8dc377255452a68e82c4837ba22c3ee4ae3658971bf0f2ef67ed0b77fc497f91"
 
-DEPENDS = "popt libpam glib-2.0 python3"
+DEPENDS = "bison-native popt libpam glib-2.0 python3"
 
-inherit features_check
+inherit autotools features_check gettext python3native python3-dir pkgconfig gtk-doc
+
 REQUIRED_DISTRO_FEATURES = "pam"
 
-inherit autotools gettext python3native python3-dir pkgconfig gtk-doc
-
 EXTRA_OEMAKE = "PYTHON_CPPFLAGS=-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}"
+
+GTKDOC_DOCDIR = "${S}/docs/reference"
+
+# run autopoint since it needs ABOUT-NLS and admin/config.rpath from gettext
+#EXTRA_AUTORECONF:remove = "--exclude=autopoint"
+
+do_configure:prepend() {
+    install -d ${S}/admin -d ${S}/m4
+    touch ${S}/ABOUT-NLS ${S}/admin/config.rpath
+    cd ${S}
+    bison lib/getdate.y -o lib/getdate.c
+    cd -
+}
 
 PACKAGES += "${PN}-python "
 
