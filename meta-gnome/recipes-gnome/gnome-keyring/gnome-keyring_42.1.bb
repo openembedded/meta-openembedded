@@ -21,7 +21,7 @@ inherit gnomebase gsettings features_check gettext
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "a3d24db08ee2fdf240fbbf0971a98c8ee295aa0e1a774537f4ea938038a3b931"
+SRC_URI[archive.sha256sum] = "c7f4d040cc76a6b7fe67e08ef9106911c3c80d40fc88cbfc8e2684a4c946e3e6"
 SRC_URI += " \
     file://0001-Set-paths-to-ssh-agent-and-ssh-add-by-configure-opti.patch \
     file://musl.patch \
@@ -41,6 +41,7 @@ FILES:${PN} += " \
     ${datadir}/xdg-desktop-portal \
     ${base_libdir}/security/*${SOLIBSDEV} \
     ${libdir}/pkcs11/gnome-keyring-pkcs11.so \
+    ${systemd_user_unitdir} \
 "
 # fix | gnome-keyring-daemon: insufficient process capabilities, unsecure memory might get used
 pkg_postinst:${PN} () {
