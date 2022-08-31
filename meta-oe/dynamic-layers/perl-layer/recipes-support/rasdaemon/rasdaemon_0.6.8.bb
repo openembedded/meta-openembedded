@@ -4,11 +4,11 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
 SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
-           file://0001-Fix-system-header-includes.patch \
+           file://0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "aa96737648d867a3d73e4151d05b54bbab494605"
+SRCREV = "c2255178a49f62c53009a456bc37dd5e37332f09"
 
 S = "${WORKDIR}/git"
 
@@ -31,10 +31,6 @@ PACKAGECONFIG[abrt-report] = "--enable-abrt-report,--disable-abrt-report"
 
 DEPENDS:append:libc-musl = " argp-standalone"
 LDFLAGS:append:libc-musl = " -largp"
-
-do_configure:prepend () {
-	( cd ${S}; autoreconf -vfi )
-}
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/init.d
