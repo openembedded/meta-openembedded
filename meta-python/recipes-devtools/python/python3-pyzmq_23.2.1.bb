@@ -43,6 +43,11 @@ do_compile:prepend() {
     echo no_libzmq_extension = True >> ${S}/setup.cfg
 }
 
+do_install:append() {
+        sed -i -e 's#${RECIPE_SYSROOT}##g' ${D}${PYTHON_SITEPACKAGES_DIR}/zmq/utils/config.json
+        sed -i -e 's#${RECIPE_SYSROOT}##g' ${D}${PYTHON_SITEPACKAGES_DIR}/zmq/utils/compiler.json
+}
+
 do_install_ptest() {
         install -d ${D}${PTEST_PATH}/tests
         cp -rf ${S}/zmq/tests/* ${D}${PTEST_PATH}/tests/
