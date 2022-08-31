@@ -7,11 +7,11 @@ SECTION = "System Environment/Base"
 
 SRC_URI = "\
     git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
+    file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
     file://run-ptest \
-    file://0001-genconfig.py-update-shebang.patch \
 "
 
-SRCREV = "4146c9296a0cbd26f1c5e411cb44877f350053bd"
+SRCREV = "b8dfb1fa34eb627a03adfb315326a29ec51214b3"
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
