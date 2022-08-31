@@ -5,16 +5,14 @@ screen and xterm to record user sessions to utmp and wtmp files."
 HOMEPAGE = "ftp://ftp.altlinux.org/pub/people/ldv/utempter"
 SECTION = "System Environment/Libraries"
 LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-only & MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
-SRCREV = "3ef74fff310f09e2601e241b9f042cd39d591018"
-PV = "1.1.6-alt2+git${SRCPV}"
+SRCREV = "63825e2244629d44dae21132b1065d7ecc0491c0"
 
 SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=master \
            file://0001-Fix-macro-error.patch \
            file://0002-Proper-macro-path-generation.patch \
-           file://libutempter-remove-glibc-assumption.patch \
-          "
+           "
 
 S = "${WORKDIR}/git/${BPN}"
 
