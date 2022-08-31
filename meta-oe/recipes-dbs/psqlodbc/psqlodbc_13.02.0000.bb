@@ -16,6 +16,18 @@ DESCRIPTION = "\
 SECTION = "libs"
 HOMEPAGE = "http://psqlodbc.projects.postgresql.org/"
 
+LICENSE = "LGPL-2.0-only"
+LIC_FILES_CHKSUM = "file://license.txt;md5=6db3822fc7512e83087ba798da013692"
+
+SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions/src/${BPN}-${PV}.tar.gz \
+    file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
+    file://psqlodbc-donot-use-the-hardcode-libdir.patch \
+    file://psqlodbc-fix-for-ptest-support.patch \
+    file://run-ptest \
+"
+
+SRC_URI[sha256sum] = "b39b7e5c41fd6475c551112fa724bf57c4a446175ec4188a90e2844cc1612585"
+
 DEPENDS += "postgresql unixodbc"
 
 EXTRA_OECONF = "\
@@ -24,8 +36,7 @@ EXTRA_OECONF = "\
     --with-unixodbc=yes \
     --with-libpq=${STAGING_LIBDIR}/.. \
     --enable-pthreads \
-    --disable-unicode \
-    LIBS="-lpthread" \
+    LIBS='-lpthread' \
 "
 
 inherit autotools pkgconfig ptest
@@ -48,3 +59,4 @@ FILES:${PN} += "${libdir}"
 
 # The tests need a local PostgreSQL server running
 RDEPENDS:${PN}-ptest = "postgresql"
+
