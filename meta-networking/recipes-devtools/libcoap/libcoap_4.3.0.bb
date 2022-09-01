@@ -23,10 +23,10 @@ PACKAGECONFIG ?= "\
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
 "
 PACKAGECONFIG[async] = "--enable-async,--disable-async"
-PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,openssl mbedtls"
+PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls,,,openssl mbedtls"
 PACKAGECONFIG[manpages] = "--enable-documentation --enable-doxygen --enable-manpages,--disable-documentation,asciidoc-native doxygen-native graphviz-native"
-PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,gnutls openssl"
-PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,gnutls mbedtls"
+PACKAGECONFIG[mbedtls] = "--with-mbedtls,--without-mbedtls,mbedtls,,,gnutls openssl"
+PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,,,gnutls mbedtls"
 PACKAGECONFIG[small-stack] = "--enable-small-stack,--disable-small-stack"
 PACKAGECONFIG[tcp] = "--enable-tcp,--disable-tcp"
 PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
