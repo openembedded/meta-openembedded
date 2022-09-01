@@ -25,10 +25,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
+    file://0001-initialize-msghdr-portably.patch \
     file://zabbix-agent.service \
 "
-
-SRC_URI[sha256sum] = "f3d6b7cf4e67d820ce7d28cd54ac67724f7453f261f668877e6410cd21ab9ea1"
+SRC_URI[sha256sum] = "f0e7a9abb0f65d700f531253b91c31165077a9c94769cc8d238a423ada852773"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
