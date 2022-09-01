@@ -32,6 +32,7 @@ RDEPENDS:${PN} += "\
 
 RDEPENDS:${PN}-ptest += "\
         ${PN}-test \
+        ${PYTHON_PN}-pytest \
 "
 
 do_compile:prepend() {
