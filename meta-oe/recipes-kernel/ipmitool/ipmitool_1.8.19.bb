@@ -21,24 +21,31 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9aa91e13d644326bf281924212862184"
 
 DEPENDS = "openssl readline ncurses"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
-           file://0001-Migrate-to-openssl-1.1.patch \
-           file://0001-fru-Fix-buffer-overflow-vulnerabilities.patch \
-           file://0001-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch \
-           file://0002-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch \
-           file://0003-channel-Fix-buffer-overflow.patch \
-           file://0004-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch \
-           file://0005-fru-sdr-Fix-id_string-buffer-overflows.patch \
-           file://0001-hpmfwupg-move-variable-definition-to-.c-file.patch \
+SRCREV = "19d78782d795d0cf4ceefe655f616210c9143e62"
+SRC_URI = "git://github.com/ipmitool/ipmitool;protocol=https;branch=master \
+           ${IANA_ENTERPRISE_NUMBERS} \
+           file://0001-ipmi_fru.c-Provide-missing-function-declarations.patch \
+           file://0001-configure-Remove-the-logic-to-download-IANA-PEN-data.patch \
            "
-SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
-SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
+IANA_ENTERPRISE_NUMBERS ?= ""
+
+# Add these via bbappend if this database is needed by the system
+#IANA_ENTERPRISE_NUMBERS ?= "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
+#SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
+
+S = "${WORKDIR}/git"
 
 inherit autotools
 
+do_install:append() {
+        if [ -e ${WORKDIR}/iana-enterprise-numbers ]; then
+                install -Dm 0755 ${WORKDIR}/iana-enterprise-numbers ${D}${datadir}/misc/enterprise-numbers
+        fi
+}
+
 PACKAGES =+ "${PN}-ipmievd"
 FILES:${PN}-ipmievd += "${sbindir}/ipmievd"
+FILES:${PN} += "${datadir}/misc"
 
 # --disable-dependency-tracking speeds up the build
 # --enable-file-security adds some security checks
