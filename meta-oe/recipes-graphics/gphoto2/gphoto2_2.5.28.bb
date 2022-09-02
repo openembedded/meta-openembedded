@@ -8,11 +8,9 @@ RDEPENDS:gphoto2 = "libgphoto2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;name=gphoto2 \
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-           file://0002-Look-for-popt-with-GP_CHECK_LIBRARY-function.patch \
+           file://0001-gphoto2-Use-pthread_t-abstract-type-for-thead-IDs.patch \
 "
-
-SRC_URI[gphoto2.md5sum] = "92d39b383c0e0354b4d3af1af7b8b416"
-SRC_URI[gphoto2.sha256sum] = "30054e93a1bb59f501aabd5018713177ea04ce0cb28935319bd6ca80061e8d38"
+SRC_URI[gphoto2.sha256sum] = "2a648dcdf12da19e208255df4ebed3e7d2a02f905be4165f2443c984cf887375"
 
 inherit autotools pkgconfig gettext
 
