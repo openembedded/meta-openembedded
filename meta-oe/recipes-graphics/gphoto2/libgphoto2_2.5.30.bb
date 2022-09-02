@@ -1,7 +1,7 @@
 SUMMARY = "libgphoto2 allows you to access digital cameras"
 SECTION = "libs"
 LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=477378d78dfeeaa93826ee4ec7c643fb"
 
 DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"
 
@@ -13,9 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://40-libgphoto2.rules \
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
 "
-
-SRC_URI[libgphoto2.md5sum] = "83a2f96dade72e95dffb8e5fa9628d7e"
-SRC_URI[libgphoto2.sha256sum] = "f8b85478c44948a0b0b52c4d4dfda2de1d7bcb7b262c76bd1ae306d9c63240d7"
+SRC_URI[libgphoto2.sha256sum] = "ee61a1dac6ad5cf711d114e06b90a6d431961a6e7ec59f4b757a7cd77b1c0fb4"
 
 inherit autotools pkgconfig gettext lib_package
 
@@ -57,4 +55,4 @@ FILES:libgphotoport = "${libdir}/libgphoto2_port.so.*"
 FILES:${PN} += "${nonarch_base_libdir}/udev/*"
 FILES:${PN}-dbg += "${libdir}/*/*/.debug"
 FILES:${PN}-dev += "${libdir}/*/*/*.la"
-FILES:${PN}-doc += "${datadir}/libgphoto2_port/0.12.0/vcamera/README.txt"
+FILES:${PN}-doc += "${datadir}/libgphoto2_port/0.12.?/vcamera/README.txt"
