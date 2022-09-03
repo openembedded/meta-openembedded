@@ -5,14 +5,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=20f2c819499cc2063e9a7b07b408815c"
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://configure.patch \
            file://fix-libusb-paths.patch \
-           file://999-remove-lImageProcessor.patch \
            file://600-fix.patch \
            file://030-replace_unsafe_memcpy_with_memmove.patch \
            file://050-fix-glibcisms.patch \
            file://hplip-3.19.6-fix-return.patch \
+           file://0001-common-utils-Include-string.h-for-strcasestr.patch \
+           file://0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch \
+           file://0003-pserror.c-Define-column-to-be-int-explcitly.patch \
+           file://0004-Define-missing-prototype-for-functions.patch \
+           file://0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch \
+           file://0006-Workaround-patch-for-missing-Python3-transition-of-t.patch \
 "
-SRC_URI[md5sum] = "d72bc77d791c150c2c22b84e9553bab3"
-SRC_URI[sha256sum] = "b7f398502fb659e0de8e54976237e3c6a64fec0b3c36054a515876f7b006b255"
+SRC_URI[sha256sum] = "27ed0d492febb0b47c656234820d3ce573b24ff5b62e3bf4b2c47f82868d6bb4"
 
 DEPENDS += "cups python3 libusb"
 
@@ -25,6 +29,7 @@ CFLAGS += "-I${STAGING_INCDIR}/python${PYTHON_BASEVERSION}${PYTHON_ABI}"
 
 EXTRA_OECONF += "\
         LIBUSBINCLUDEROOT=${STAGING_INCDIR} \
+        --enable-cups-drv-install \
         --enable-cups-ppd-install \
         --disable-network-build \
         --disable-doc-build \
@@ -39,6 +44,7 @@ EXTRA_OECONF += "\
         --enable-foomatic-drv-install \
         --disable-foomatic-ppd-install \
         --disable-foomatic-rip-hplip-install \
+        --disable-imageProcessor_build \
         --with-cupsbackenddir=${libexecdir}/cups/backend \
         --with-cupsfilterdir=${libexecdir}/cups/filter \
 "
