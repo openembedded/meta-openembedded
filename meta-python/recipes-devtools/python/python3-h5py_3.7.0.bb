@@ -28,4 +28,4 @@ RDEPENDS:${PN} = "python3-numpy \
                   python3-json \
                  "
 
-export HDF5_VERSION="1.8.21"
+export HDF5_VERSION="1.13.2"
