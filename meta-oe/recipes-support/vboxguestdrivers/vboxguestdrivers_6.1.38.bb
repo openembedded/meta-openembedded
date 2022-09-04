@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://Makefile.utils \
 "
 
-SRC_URI[sha256sum] = "e47942e42892c13c621869865e2b7b320340154f0fa74ecbdaf18fdaf70ef047"
+SRC_URI[sha256sum] = "56d997b58154df3974ce040a64970fa774add41e84b23dfb84b279b24545d7e4"
 
 S ?= "${WORKDIR}/vbox_module"
 S:task-patch = "${WORKDIR}/${VBOX_NAME}"
