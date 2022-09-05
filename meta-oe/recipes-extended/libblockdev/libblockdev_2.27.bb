@@ -11,9 +11,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 inherit autotools gobject-introspection pkgconfig
 
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https \
-           file://0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch \
 "
-SRCREV = "47ff12242c89e36a33259d18b7068b26c3bb1c64"
+SRCREV = "2a651c1366bc3a56982d97ebeec03744b5f9dcd0"
 S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
