@@ -8,6 +8,7 @@ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
            file://smi.conf \
            file://libsmi-fix-the-test-dump-files.patch \
            file://0001-Define-createIdentifierRef-prototype-in-yang-complex.patch \
+           file://0001-parser-yang-Define-_DEFAULT_SOURCE.patch \
           "
 
 SRC_URI[md5sum] = "4bf47483c06c9f07d1b10fbc74eddf11"
