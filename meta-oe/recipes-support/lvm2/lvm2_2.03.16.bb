@@ -68,6 +68,7 @@ FILES:${PN}-scripts = " \
 # Specified explicitly for the udev rules, just in case that it does not get picked
 # up automatically:
 FILES:${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
+RDEPENDS:${PN} = "bash"
 RDEPENDS:${PN}-udevrules = "libdevmapper"
 RDEPENDS:${PN}:append:class-target = " libdevmapper"
 RDEPENDS:${PN}:append:class-nativesdk = " libdevmapper"

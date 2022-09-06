@@ -18,7 +18,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
            file://reproducible-build.patch \
            "
 
-SRCREV = "3e8bd8d1bd70691f09a170785836aeb4f83154e6"
+SRCREV = "6d1e894a867681af7a811ed63bc435f3aa55fec8"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
