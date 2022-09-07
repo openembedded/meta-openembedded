@@ -45,6 +45,7 @@ SRC_URI = " \
     file://core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch;patchdir=system/core \
     file://core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch;patchdir=system/core \
     file://core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch;patchdir=system/core \
+    file://core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch;patchdir=system/core \
     file://extras/0001-ext4_utils-remove-selinux-extensions.patch;patchdir=system/extras \
     file://extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch;patchdir=system/extras \
     file://libselinux/0001-Remove-bionic-specific-calls.patch;patchdir=external/libselinux \
