@@ -19,9 +19,9 @@ DEPENDS = "\
     python3-dateutil-native \
     python3-pytz-native \
     python3-certifi-native \
+    python3-setuptools-scm-native \
 "
-
-SRC_URI[sha256sum] = "48cf850ce14fa18067f2d9e0d646763681948487a8080ec0af2686468b4607a2"
+SRC_URI[sha256sum] = "339cac48b80ddbc8bfd05daae0a3a73414651a8596904c2a881cfd1edb65f26c"
 
 inherit pypi setuptools3 pkgconfig
 
@@ -40,7 +40,6 @@ SRC_URI[qhull.sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b86500046
 # LTO with clang needs lld
 LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
 LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
-
 RDEPENDS:${PN} = "\
     freetype \
     libpng \
@@ -57,6 +56,7 @@ RDEPENDS:${PN} = "\
 ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
 ENABLELTO:toolchain-clang:riscv32 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
 ENABLELTO:toolchain-clang:mips = "echo enable_lto = False >> ${S}/mplsetup.cfg"
+
 do_compile:prepend() {
     echo [libs] > ${S}/mplsetup.cfg
     echo system_freetype = True >> ${S}/mplsetup.cfg
