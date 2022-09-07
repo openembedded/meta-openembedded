@@ -12,6 +12,8 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
            file://imap-2007f-format-security.patch \
            file://0001-Support-OpenSSL-1.1.patch \
            file://0001-Define-prototype-for-safe_flock.patch \
+           file://0001-Do-not-build-mtest.patch \
+           file://0002-tmail-Include-ctype.h-for-isdigit.patch \
            "
 
 SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
