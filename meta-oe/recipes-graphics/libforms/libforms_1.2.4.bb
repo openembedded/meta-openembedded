@@ -1,6 +1,5 @@
 DESCRIPTION = "The XForms graphical interface widget library	"
 HOMEPAGE = "http://savannah.nongnu.org/projects/xforms/"
-PR = "r0"
 
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=ade9a053df81f5b9408d2f4f5546df86"
@@ -10,10 +9,10 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
            file://add-absolute-path-for-include-dir.patch \
            file://fix-path-fdesign_LDADD.patch \
            file://0001-Make-extern-declarations-in-header-file.patch \
+           file://0001-Modify-include-dir.patch \
           "
 
-SRC_URI[md5sum] = "235720a758a8b8d9e6e452dc67190e9b"
-SRC_URI[sha256sum] = "7989b39598c769820ad451ad91e5cb0de29946940c8240aac94ca8238c2def61"
+SRC_URI[sha256sum] = "78cc6b07071bbeaa1f906e0a22d5e9980e48f8913577bc082d661afe5cb75696"
 
 inherit autotools features_check
 
