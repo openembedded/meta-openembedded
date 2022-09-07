@@ -25,13 +25,12 @@ inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
 LICENSE = "BSD-1-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1b4af6f3d4ee079a38107366e93b334d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ac99c8678577a1c2f9f04cccee411d5d"
 
 SRC_URI = "http://www.openwall.com/${BPN}/${BP}.tar.gz \
            file://makefile-add-ldflags.patch \
           "
-SRC_URI[md5sum] = "3878b57bcd3fdbcf3d4b362dbc6228b9"
-SRC_URI[sha256sum] = "d1fedeaf759e8a0f32d28b5811ef11b5a5365154849190f4b7fab670a70ffb14"
+SRC_URI[sha256sum] = "ff1f505764c020f6a4484b1e0cc4fdbf2e3f71b522926d90b4709104ca0604ab"
 
 # explicitly define LINUX_PAM in case DISTRO_FEATURES no pam
 # this package's pam_passwdqc.so needs pam
