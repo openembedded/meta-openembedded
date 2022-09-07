@@ -8,10 +8,10 @@ SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
     file://0001-remove-tests-dep-on-gobject-intro.patch \
     file://0002-fix-makefile-use-copy-rule-for-unmodified-files.patch \
+    file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[md5sum] = "beb88d8e70ee1da6ebd917c956217803"
-SRC_URI[sha256sum] = "afc82acc8ef9d51e0f34265a07a2f059f5b71a1df721b299e657a40a098cbb7f"
+SRC_URI[sha256sum] = "dde91a157ee8514112334653fa2775a99d71bd1b604067a48eaf7411114d19de"
 
 inherit gettext pkgconfig autotools systemd features_check
 
@@ -30,6 +30,7 @@ EXTRA_AUTORECONF = "-I tools"
 EXTRA_OECONF = " \
     --with-cockpit-user=${COCKPIT_USER_GROUP} \
     --with-cockpit-group=${COCKPIT_USER_GROUP} \
+    --with-admin-group=${COCKPIT_USER_GROUP} \
     --with-cockpit-ws-instance-user=${COCKPIT_WS_USER_GROUP} \
     --with-cockpit-ws-instance-group=${COCKPIT_WS_USER_GROUP} \
     --disable-doc \
@@ -170,6 +171,8 @@ FILES:${PN} += " \
     ${nonarch_libdir}/firewalld \
 "
 RDEPENDS:${PN} += "${PN}-bridge"
+# Needs bash for /usr/libexec/cockpit-certificate-helper
+RDEPENDS:${PN} += "bash"
 
 do_install:append() {
     pkgdatadir=${datadir}/cockpit
