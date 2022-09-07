@@ -19,6 +19,7 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
            file://0001-bn_mul.h-fix-x86-PIC-inline-ASM-compilation-with-GCC.patch \
            file://mbedtls.patch \
+           file://unused_var.patch \
            "
 
 S = "${WORKDIR}/git"
