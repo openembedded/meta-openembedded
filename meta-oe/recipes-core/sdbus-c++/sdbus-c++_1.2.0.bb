@@ -16,11 +16,10 @@ PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${libdir}/${B
 
 DEPENDS += "expat"
 
-SRCREV = "bca8e81037766a0454740c40307eea32831c101f"
+SRCREV = "751c1addc4fd2f949a466f488c1b7de2ca3b76dc"
 
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
-SRC_URI += "file://run-ptest \
-            file://7f437a6e06d2ec3abd3e2fd1101ab6aab386bc44.patch "
+SRC_URI += "file://run-ptest"
 
 EXTRA_OECMAKE = "-DBUILD_CODE_GEN=OFF \
                  -DBUILD_DOC=ON \
