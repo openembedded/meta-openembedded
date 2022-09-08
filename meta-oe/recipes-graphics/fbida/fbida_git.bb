@@ -1,23 +1,24 @@
 SUMMARY = "Framebuffer image and doc viewer tools"
 DESCRIPTION = "The fbida project contains a few applications for viewing and editing images, \
                with the main focus being photos."
-HOMEPAGE = "http://linux.bytesex.org/fbida/"
+HOMEPAGE = "https://www.kraxel.org/blog/linux/fbida/"
 AUTHOR = "Gerd Hoffmann"
 SECTION = "utils"
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e8feb78a32950a909621bbb51f634b39"
 
-DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman poppler libepoxy cairo"
+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman udev libinput poppler libepoxy cairo"
 
-SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
-	   file://0001-Avoid-using-host-path.patch \
-	   file://fix-preprocessor.patch \
+PV = "2.14+git${SRCPV}"
+SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master \
+           file://0001-Avoid-using-host-path.patch \
+           file://fix-preprocessor.patch \
            file://support-jpeg-turbo.patch \
-           file://cairo-weak-detect.patch \
            file://fbida-gcc10.patch \
-	   "
-SRC_URI[sha256sum] = "95b7c01556cb6ef9819f358b314ddfeb8a4cbe862b521a3ed62f03d163154438"
+"
+SRCREV = "ac9005bf0bbf50f14dc1b368be5084c8e0510a5d"
+S = "${WORKDIR}/git"
 
 inherit pkgconfig features_check
 
@@ -26,18 +27,12 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
 
-PACKAGECONFIG ??= "gif png curl"
-PACKAGECONFIG[curl] = ",,curl"
+PACKAGECONFIG ??= "gif png"
 PACKAGECONFIG[gif] = ",,giflib"
 PACKAGECONFIG[png] = ",,libpng"
 PACKAGECONFIG[tiff] = ",,tiff"
 PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
 PACKAGECONFIG[webp] = ",,libwebp"
-PACKAGECONFIG[lirc] = ",,lirc"
-# This can only be enabled when cairo has egl enabled in its packageconfig support too
-PACKAGECONFIG[egl] = ",,"
-
-EXTRA_OEMAKE += ""${@bb.utils.contains('PACKAGECONFIG', 'egl', 'HAVE_CAIRO_GL=yes', 'HAVE_CAIRO_GL=no', d)}""
 
 CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DEGL_NO_X11=1', d)}"
 
@@ -48,9 +43,6 @@ do_compile() {
 
     # Be sure to respect preferences (force to "no")
     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
-    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'curl', d)}" ]; then
-        sed -i -e '/^HAVE_LIBCURL/s/:=.*$/:= no/' ${S}/GNUmakefile
-    fi
     if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'gif', d)}" ]; then
         sed -i -e '/^HAVE_LIBGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
@@ -65,9 +57,6 @@ do_compile() {
     fi
     if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'webp', d)}" ]; then
         sed -i -e '/^HAVE_LIBWEBP/s/:=.*$/:= no/' ${S}/GNUmakefile
-    fi
-    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'lirc', d)}" ]; then
-        sed -i -e '/^HAVE_LIBLIRC/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
 
     oe_runmake
