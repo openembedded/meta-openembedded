@@ -1,9 +1,9 @@
 SUMMARY = "Computer algebra system (CAS) in Python"
 HOMEPAGE = "https://pypi.org/project/sympy/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=42976c55ba05d15b32a7b4757dee5e64"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9f6c7fdc2d69e31ad7abaea029c8ac16"
 
-SRC_URI[sha256sum] = "5939eeffdf9e152172601463626c022a2c27e75cf6278de8d401d50c9d58787b"
+SRC_URI[sha256sum] = "e32380dce63cb7c0108ed525570092fd45168bdae2faa17e528221ef72e88658"
 
 inherit pypi setuptools3
 
