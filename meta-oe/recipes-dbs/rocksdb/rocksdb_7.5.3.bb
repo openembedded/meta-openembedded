@@ -6,15 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "8608d75d85f8e1b3b64b73a4fb6d19baec61ba5c"
-SRCBRANCH = "6.20.fb"
+SRCREV = "540d5aae516265170564ec27b3e67a54a11b7045"
+SRCBRANCH = "7.5.fb"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
            file://0001-cmake-Add-check-for-atomic-support.patch \
            file://0001-cmake-Use-exported-target-for-bz2.patch \
-           file://0001-folly-Use-SYS_futex-for-syscall.patch \
-           file://0001-jemalloc_helper-Limit-the-mm_malloc.h-hack-to-glibc-.patch \
-           file://0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch \
            file://ppc64.patch \
            file://mips.patch \
            file://arm.patch \
