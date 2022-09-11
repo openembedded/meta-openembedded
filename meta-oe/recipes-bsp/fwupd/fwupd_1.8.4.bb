@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
            file://run-ptest"
-SRC_URI[sha256sum] = "5756466442eb9134fb40cdc8a46f9e01003247c8eac82fa5d8b16f6420375b79"
+SRC_URI[sha256sum] = "adfa07434cdc29ec41c40fef460e8d970963fe0c7e849dec7f3932adb161f886"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
@@ -47,7 +47,6 @@ PACKAGECONFIG ??= "curl gnutls gudev gusb \
                    plugin_synaptics_mst \
                    plugin_synaptics_rmi \
                    plugin_scsi \
-                   plugin_thunderbolt \
                    plugin_uf2 \
                    plugin_upower \
                    sqlite"
@@ -99,7 +98,6 @@ PACKAGECONFIG[plugin_redfish] = "-Dplugin_redfish=true,-Dplugin_redfish=false"
 PACKAGECONFIG[plugin_scsi] = "-Dplugin_scsi=true,-Dplugin_scsi=false"
 PACKAGECONFIG[plugin_synaptics_mst] = "-Dplugin_synaptics_mst=true,-Dplugin_synaptics_mst=false"
 PACKAGECONFIG[plugin_synaptics_rmi] = "-Dplugin_synaptics_rmi=true,-Dplugin_synaptics_rmi=false"
-PACKAGECONFIG[plugin_thunderbolt] = "-Dplugin_thunderbolt=true,-Dplugin_thunderbolt=false"
 PACKAGECONFIG[plugin_tpm] = "-Dplugin_tpm=true,-Dplugin_tpm=false,tpm2-tss"
 # Turn off the capsule splash as it needs G-I at buildtime, which isn't currently supported
 PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=true -Dplugin_uefi_capsule_splash=false,-Dplugin_uefi_capsule=false,efivar fwupd-efi"
@@ -108,7 +106,7 @@ PACKAGECONFIG[plugin_uf2] = "-Dplugin_uf2=true,-Dplugin_uf2=false"
 PACKAGECONFIG[plugin_upower] = "-Dplugin_upower=true,-Dplugin_upower=false"
 
 # Always disable these plugins on non-x86 platforms as they don't compile or are useless
-DISABLE_NON_X86 = "plugin_amt plugin_intel_spi plugin_msr plugin_thunderbolt"
+DISABLE_NON_X86 = "plugin_amt plugin_intel_spi plugin_msr"
 DISABLE_NON_X86:x86 = ""
 DISABLE_NON_X86:x86-64 = ""
 PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
