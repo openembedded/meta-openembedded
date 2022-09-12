@@ -81,8 +81,8 @@ do_install[cleandirs] += "${WORKDIR}/minifi-install"
 PSEUDO_CONSIDER_PATHS .= ",${WORKDIR}/minifi-install"
 
 do_configure:prepend:libc-musl() {
-    sed -i -e 's/-DHAVE_GLIBC_STRERROR_R=?/-DHAVE_GLIBC_STRERROR_R=0/' ${S}/CMakeLists.txt
-    sed -i -e 's/-DHAVE_POSIX_STRERROR_R=?/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
+    sed -i -e 's/-DHAVE_GLIBC_STRERROR_R=1/-DHAVE_GLIBC_STRERROR_R=0/' ${S}/CMakeLists.txt
+    sed -i -e 's/-DHAVE_POSIX_STRERROR_R=0/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
 }
 
 CFLAGS:append:libc-glibc = " -D_GNU_SOURCE"
