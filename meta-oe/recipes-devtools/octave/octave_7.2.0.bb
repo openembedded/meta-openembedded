@@ -32,7 +32,7 @@ SRC_URI = " \
     ${GNU_MIRROR}/octave/${BPN}-${PV}.tar.gz \
     file://fix-blas-library-integer-size.patch \
 "
-SRC_URI[sha256sum] = "d4a9d81f3f67b4a6e07cb7a80dcb10ad5e9176fcc30762c70a81580a64b8b0b6"
+SRC_URI[sha256sum] = "b12cb652587d31c5c382b39ed73463c22a5259ecb2fa6b323a27da409222dacc"
 
 # Note: Qt5Help is required for gui -> qttools(-native) must be build with
 # clang in PACKAGECONFIG
