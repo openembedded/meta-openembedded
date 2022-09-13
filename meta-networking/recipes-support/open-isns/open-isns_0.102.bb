@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/open-iscsi/open-isns;branch=master;protocol=https \
            file://0001-isnsd.socket-use-run-instead-of-var-run.patch \
            "
 
-SRCREV = "0d86dc31fae2e2d77a082ccea5aba95426b40c3c"
+SRCREV = "c0e6d9fedc5a7041260de477fe1a8455fa074113"
 
 S = "${WORKDIR}/git"
 
