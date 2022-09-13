@@ -10,11 +10,11 @@ DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
-SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=devel;protocol=https"
+SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.9;protocol=https"
 
-SRCREV = "752b7659773a11ca6d4600645547c06fdb8a23d9"
+SRCREV = "d463bad9639c910fadc2f30dac473c7688b11cfc"
 
-PV = "0.2.18"
+PV = "0.9.19"
 
 S = "${WORKDIR}/git"
 
