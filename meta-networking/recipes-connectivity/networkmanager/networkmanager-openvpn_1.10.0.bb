@@ -10,7 +10,7 @@ inherit gnomebase useradd gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "53dfb0acf64478adc728074f162f62e60bff62a605bd897eb88b267e7057927a"
+SRC_URI[sha256sum] = "5745d4107f3398a97afbb93f69239b510c9e45eb7fb62d60d9ed0a7297f4d101"
 
 S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
 
