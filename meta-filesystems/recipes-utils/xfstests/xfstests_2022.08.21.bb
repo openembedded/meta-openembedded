@@ -4,14 +4,13 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038
 
 SRCREV_FORMAT = "xfstests_unionmount"
 
-SRC_URI = "\
-    git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
-    git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
-    file://0001-Add-a-return-type-to-aio_rw.patch \
-    file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-"
+SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
+           git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
+           file://0001-Add-a-return-type-to-aio_rw.patch \
+           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+           "
 
-SRCREV_xfstests = "16ddbd1aee295f64695916cf3621aef57f1163ba"
+SRCREV_xfstests = "bf1ef26900eec3b028c1b0f55f65b3b233e47c56"
 SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 
 S = "${WORKDIR}/git"
