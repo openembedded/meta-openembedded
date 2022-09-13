@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5d503272f52c35147ec960cb56a03bf4"
 
 SRC_URI = "git://github.com/Danielhiversen/pyMetno.git;protocol=https;branch=master"
-SRCREV = "3b18971fb882deaaebb9aa511627c5fc6fb97526"
+SRCREV = "5fc18d7c5d627a9d9b2529db98d4e7e01a37dbf9"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
