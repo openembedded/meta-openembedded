@@ -9,7 +9,7 @@ DEPENDS = "gensio libyaml"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "542915e240ae8b5c7dcec8d1589e6067818532900d45cfef226cea9f0e671d13"
+SRC_URI[sha256sum] = "e5620975523059a38709bb53c0567600adbbcb8011066a2d2fe1b4db9efe0ba3"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
 
