@@ -10,7 +10,7 @@ ideal for firewalled environments. \
 HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging-system"
 
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=189c3826d32deaf83ad8d0d538a10023"
+LIC_FILES_CHKSUM = "file://COPYING;md5=71d15c2fb22f43e1a380f3f799ebde30"
 
 # util-linux added to get libuuid
 DEPENDS = "libpcre flex glib-2.0 openssl util-linux bison-native"
@@ -24,7 +24,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://syslog-ng.service-the-syslog-ng-service.patch \
 "
 
-SRC_URI[sha256sum] = "d67a320cb896cd5d62f24d9e1bec138847fa4618ae13a3946cae2b75c528ee14"
+SRC_URI[sha256sum] = "5491f686d0b829b69b2e0fc0d66a62f51991aafaee005475bfa38fab399441f7"
 
 UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
 
