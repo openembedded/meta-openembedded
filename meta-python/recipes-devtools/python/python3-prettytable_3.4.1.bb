@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
 
-SRC_URI[sha256sum] = "118eb54fd2794049b810893653b20952349df6d3bc1764e7facd8a18064fa9b0"
+SRC_URI[sha256sum] = "7d7dd84d0b206f2daac4471a72f299d6907f34516064feb2838e333a4e2567bd"
 
 do_install:append() {
     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
