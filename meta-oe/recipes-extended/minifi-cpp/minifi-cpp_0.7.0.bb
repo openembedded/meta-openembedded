@@ -58,6 +58,7 @@ EXTRA_OECMAKE += " \
     -DSKIP_TESTS=ON \
     -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
     -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
+    -DDISABLE_PYTHON_SCRIPTING=ON \
     "
 EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
 LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
