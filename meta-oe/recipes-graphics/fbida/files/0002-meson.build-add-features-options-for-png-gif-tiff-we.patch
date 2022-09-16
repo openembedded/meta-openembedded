@@ -1,9 +1,10 @@
-From fa60c06cadd6acd8abede91e75254e7250a087a3 Mon Sep 17 00:00:00 2001
+From cdcde5c1fd106a69118dff98118600911392762f Mon Sep 17 00:00:00 2001
 From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
-Date: Fri, 16 Sep 2022 13:40:25 +0200
-Subject: [PATCH] meson.build: add features options for png, gif, tiff, webp,
- and motif
+Date: Fri, 16 Sep 2022 16:25:38 +0200
+Subject: [PATCH] meson.build: add features options for png, gif, tiff, webp, and motif
 
+Upstream-Status: Pending
+Signed-off-by: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
 ---
  meson.build       | 41 +++++++++++++++++++++++++++--------------
  meson_options.txt |  5 +++++
@@ -12,10 +13,10 @@ Subject: [PATCH] meson.build: add features options for png, gif, tiff, webp,
  create mode 100644 meson_options.txt
 
 diff --git a/meson.build b/meson.build
-index cbed982..e66ee48 100644
+index cd9cc49..b5e3ffc 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -21,9 +21,9 @@ drm_dep      = dependency('libdrm')
+@@ -23,9 +23,9 @@ drm_dep      = dependency('libdrm')
  gbm_dep      = dependency('gbm')
  epoxy_dep    = dependency('epoxy')
  exif_dep     = dependency('libexif')
@@ -27,9 +28,9 @@ index cbed982..e66ee48 100644
 +webp_dep     = dependency('libwebp', required : get_option('webp'))
  udev_dep     = dependency('libudev')
  input_dep    = dependency('libinput')
- 
-@@ -32,20 +32,20 @@ cc           = meson.get_compiler('c')
- jpeg_dep     = cc.find_library('jpeg')
+ xkb_dep      = dependency('xkbcommon')
+@@ -36,20 +36,20 @@ jpeg_dep     = cc.find_library('jpeg')
+ util_dep     = cc.find_library('util')
  math_dep     = cc.find_library('m', required : false)
  pcd_dep      = cc.find_library('pcd', required : false)
 -gif_dep      = cc.find_library('gif', required : false)
@@ -57,7 +58,7 @@ index cbed982..e66ee48 100644
  image_deps   = [ jpeg_dep, png_dep, tiff_dep,
                   pcd_dep, gif_dep, webp_dep ]
  
-@@ -53,11 +53,21 @@ if pcd_dep.found()
+@@ -57,11 +57,21 @@ if pcd_dep.found()
      read_srcs += 'rd/read-pcd.c'
      config.set('HAVE_LIBPCD', true)
  endif
@@ -81,7 +82,7 @@ index cbed982..e66ee48 100644
      read_srcs += 'rd/read-webp.c'
      config.set('HAVE_LIBWEBP', true)
  endif
-@@ -153,7 +166,7 @@ ida_srcs     = [ 'ida.c', 'man.c', 'hex.c', 'x11.c', 'viewer.c',
+@@ -168,7 +181,7 @@ ida_srcs     = [ 'ida.c', 'man.c', 'hex.c', 'x11.c', 'viewer.c',
  ida_deps     = [ pixman_dep, exif_dep, image_deps, math_dep,
                   motif_dep, xpm_dep, xt_dep, xext_dep, x11_dep ]
  

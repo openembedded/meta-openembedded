@@ -3,6 +3,8 @@ From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
 Date: Fri, 9 Sep 2022 09:32:22 +0200
 Subject: [PATCH] meson.build: install fbgs shell script
 
+Upstream-Status: Pending
+Signed-off-by: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
 ---
  meson.build | 3 +++
  1 file changed, 3 insertions(+)
@@ -11,7 +13,7 @@ diff --git a/meson.build b/meson.build
 index cbed982..2129896 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -124,6 +124,9 @@ executable('fbpdf',
+@@ -126,6 +126,9 @@ executable('fbpdf',
             sources             : fbpdf_srcs,
             dependencies        : fbpdf_deps,
             install             : true)
@@ -19,8 +21,8 @@ index cbed982..2129896 100644
 +             install_dir        : get_option('bindir'),
 +             install_mode       : 'rwxr--r--')
  
- # build kbdtest
- executable('kbdtest',
+ # build fbcon
+ fbcon_srcs   = [ 'fbcon.c', 'drmtools.c', 'fbtools.c', 'gfx.c', 'vt.c', 'kbd.c' ]
 -- 
 2.37.3
 
