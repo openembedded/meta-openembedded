@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e0039a83d8a99726b5418f0b03302d0a"
 
-SRC_URI[sha256sum] = "6b953e09441e307504130755e5bd6b15850178d591f66292bba4608c4f7f9b00"
+SRC_URI[sha256sum] = "b25077a971c7da47bd6846a912a747f6963776d90720c88603b1b55d81790780"
 
 inherit pypi ptest setuptools3
 
