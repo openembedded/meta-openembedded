@@ -17,8 +17,9 @@ SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master \
            file://fbida-gcc10.patch \
            file://0001-meson.build-install-fbgs-shell-script.patch \
            file://0002-meson.build-add-features-options-for-png-gif-tiff-we.patch \
+           file://0003-meson.build-do-not-require-xkbcommon.patch \
 "
-SRCREV = "ac9005bf0bbf50f14dc1b368be5084c8e0510a5d"
+SRCREV = "eb769e3d7f4a073d4c37ed524ebd5017c6a578f5"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig features_check
