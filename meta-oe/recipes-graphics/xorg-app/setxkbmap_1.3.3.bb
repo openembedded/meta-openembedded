@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5feafdbe6dfe9e2bd32325be0cfc86f8"
 
 PE = "1"
 
-DEPENDS += "libxkbfile"
+DEPENDS += "libxkbfile xrandr"
 
 BBCLASSEXTEND = "native"
 
-SRC_URI[md5sum] = "93e736c98fb75856ee8227a0c49a128d"
-SRC_URI[sha256sum] = "8ff27486442725e50b02d7049152f51d125ecad71b7ce503cfa09d5d8ceeb9f5"
+SRC_URI_EXT = "xz"
+SRC_URI[sha256sum] = "b560c678da6930a0da267304fa3a41cc5df39a96a5e23d06f14984c87b6f587b"
