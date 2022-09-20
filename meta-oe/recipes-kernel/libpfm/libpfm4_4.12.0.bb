@@ -16,7 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/perfmon2/${BPN}/libpfm-${PV}.tar.gz \
            file://0001-Include-poll.h-instead-of-sys-poll.h.patch \
            file://0002-perf_examples-Remove-unused-sum-variable.patch \
            "
-SRC_URI[sha256sum] = "5da5f8872bde14b3634c9688d980f68bda28b510268723cc12973eedbab9fecc"
+SRC_URI[sha256sum] = "4b0c1f53f39a61525b69bebf532c68040c1b984d7544a8ae0844b13cd91e1ee4"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/perfmon2/files/libpfm4/"
 
