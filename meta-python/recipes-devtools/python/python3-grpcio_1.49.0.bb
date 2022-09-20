@@ -12,7 +12,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
                                 file://mips_bigendian.patch \
                                 file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
 "
-SRC_URI[sha256sum] = "660217eccd2943bf23ea9a36e2a292024305aec04bf747fbcff1f5032b83610e"
+SRC_URI[sha256sum] = "90ec337f36db26fbc70a4c032bcbabb2008f950f4194e99385118a12688fdf92"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
