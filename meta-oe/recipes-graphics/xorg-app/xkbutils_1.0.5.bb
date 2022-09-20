@@ -15,5 +15,5 @@ DEPENDS += "libxaw libxkbfile"
 
 BBCLASSEXTEND = "native"
 
-SRC_URI[md5sum] = "502b14843f610af977dffc6cbf2102d5"
-SRC_URI[sha256sum] = "d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130"
+SRC_URI_EXT = "xz"
+SRC_URI[sha256sum] = "f6a4a8e9c54582beb3787b1faa8168caab125c1fee0ca9cfa5b6c9c1df25eea4"
