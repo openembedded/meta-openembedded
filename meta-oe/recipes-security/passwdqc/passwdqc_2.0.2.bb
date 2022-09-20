@@ -57,7 +57,7 @@ do_install() {
 PROVIDES += "pam-${BPN}"
 PACKAGES =+ "lib${BPN} pam-${BPN}"
 
-FILES:lib${BPN} = "${base_libdir}/libpasswdqc.so.0"
+FILES:lib${BPN} = "${base_libdir}/libpasswdqc.so.1"
 FILES:pam-${BPN} = "${base_libdir}/security/pam_passwdqc.so"
 FILES:${PN}-dbg += "${base_libdir}/security/.debug"
 
