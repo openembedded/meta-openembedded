@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/explodinglabs/jsonrpcserver"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=61b63ea9d36f6fb63ddaaaac8265304f"
 
-SRC_URI[sha256sum] = "5150071e4abc9a93f086aa0fd0004dfe0410de66adfaaf513613baa2c2fc00d7"
+SRC_URI[sha256sum] = "a71fb2cfa18541c80935f60987f92755d94d74141248c7438847b96eee5c4482"
 
 inherit pypi setuptools3
 
