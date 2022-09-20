@@ -12,7 +12,7 @@ inherit autotools gobject-introspection pkgconfig
 
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https \
 "
-SRCREV = "2a651c1366bc3a56982d97ebeec03744b5f9dcd0"
+SRCREV = "1412dc51c8f76bf8d9a6008228737db4a9a26d69"
 S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
