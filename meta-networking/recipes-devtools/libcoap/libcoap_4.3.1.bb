@@ -5,14 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
 HOMEPAGE ="https://libcoap.net/"
 
 LICENSE = "BSD-2-Clause & BSD-1-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e44b3af4925ec58e9f49b9ff143b5493"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0fbe4435d52b2d27a16f980ffc8ffc80"
 
 SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
-           file://0001-libcoap-Fix-gnu-configize-error.patch \
-           file://0001-coap_session.c-Balance-SESSIONS_ADD-and-SESSIONS_DEL.patch \
            file://run-ptest \
            "
-SRCREV = "1da37b9abbe871675d5939395b498324ccc8ecfe"
+SRCREV = "02b76470ab9168947152c78ad50835bf043d7c84"
 
 S = "${WORKDIR}/git"
 
@@ -33,7 +31,7 @@ PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,cunit"
 
 EXTRA_OECONF = "\
     --with-epoll --enable-add-default-names \
-    --without-tinydtls \
+    --without-tinydtls --without-submodule-tinydtls \
     ${@bb.utils.contains_any('PACKAGECONFIG', 'gnutls openssl mbedtls', '--enable-dtls', '--disable-dtls', d)} \
 "
 
