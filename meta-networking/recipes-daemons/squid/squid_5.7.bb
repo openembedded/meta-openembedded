@@ -22,17 +22,14 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://set_sysroot_patch.patch \
            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
-           file://0001-tools.cc-fixed-unused-result-warning.patch \
-           file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
-           file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 
-SRC_URI[sha256sum] = "71635811e766ce8b155225a9e3c7757cfc7ff93df26b28d82e5e6fc021b9a605"
+SRC_URI[sha256sum] = "4c17e1eb324c4b7aa3c6889eba66eeca7ed98625d44076f7db7b027b2b093bd5"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://errors/COPYRIGHT;md5=0e03cd976052c45697ad5d96e7dff8dc \
+                    file://errors/COPYRIGHT;md5=0a7deb73d8fb7a9849af7145987829a4 \
                     "
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
@@ -80,12 +77,21 @@ do_install_ptest() {
     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
 
+    # Needed to generate file squid.conf.default
+    oe_runmake DESTDIR=${D}${PTEST_PATH} -C src install-data-local
+    install -d ${D}${sysconfdir}/squid
+    install -m 0644 ${D}${PTEST_PATH}/${sysconfdir}/squid/squid.conf.default ${D}${sysconfdir}/squid
+
+    # Don't need these directories
+    rm -rf ${D}${PTEST_PATH}/${sysconfdir}
+    rm -rf ${D}${PTEST_PATH}/usr
+    rm -rf ${D}${PTEST_PATH}/var
+
     # do NOT need to rebuild Makefile itself
     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
     # Add squid-conf-tests for runtime tests
     sed -e 's/^\(runtest-TESTS:\)/\1 squid-conf-tests/' \
-        -e "s/\(list=' \$(TESTS)\)/\1 squid-conf-tests/" \
         -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
     # Ensure the path for command true is correct
@@ -112,6 +118,7 @@ do_install:append() {
 FILES:${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES:${PN}-dbg += "/usr/src/debug"
 FILES:${PN}-doc += "${datadir}/*.txt"
+FILES:${PN}-ptest += "${sysconfdir}/squid/squid.conf.default"
 
 RDEPENDS:${PN} += "perl"
-RDEPENDS:${PN}-ptest += "make"
+RDEPENDS:${PN}-ptest += "perl make"
