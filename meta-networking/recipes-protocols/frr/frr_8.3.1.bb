@@ -9,12 +9,14 @@ LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING-LGPLv2.1;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.3 \
            file://0001-configure-Check-for-readline-function-instead-of-mai.patch \
+           file://0001-ospfd-Adding-SUPPORT_OSPF_API-define-in-ospf_spf.c.patch \
+           file://0001-bgpd-avoid-notify-race-between-io-and-main-pthreads.patch \
            file://frr.pam \
 	      "
 
-SRCREV = "79188bf710e92acf42fb5b9b0a2e9593a5ee9b05"
+SRCREV = "a74f7a9ad9623e6f9654fe4a7177e5da0b194828"
 
 S = "${WORKDIR}/git"
 
