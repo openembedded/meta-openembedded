@@ -1,0 +1,28 @@
+From f83fc5ca06e15729274463532173247d10268215 Mon Sep 17 00:00:00 2001
+From: Peter Bergin <peter@berginkonsult.se>
+Date: Tue, 1 Nov 2022 11:53:25 +0100
+Subject: [PATCH] trace-cmd: make it build against musl C library
+
+Add missing header file to make it compile with musl C library.
+
+Upstream-Status: Submitted [https://lore.kernel.org/linux-trace-devel/20221101105803.191324-1-peter@berginkonsult.se/]
+Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+---
+ lib/trace-cmd/trace-timesync-kvm.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/trace-cmd/trace-timesync-kvm.c b/lib/trace-cmd/trace-timesync-kvm.c
+index aa1799b1..bbef8b60 100644
+--- a/lib/trace-cmd/trace-timesync-kvm.c
++++ b/lib/trace-cmd/trace-timesync-kvm.c
+@@ -10,6 +10,7 @@
+ #include <sys/stat.h>
+ #include <dirent.h>
+ #include <ctype.h>
++#include <limits.h>
+ 
+ #include "trace-cmd.h"
+ #include "trace-cmd-private.h"
+-- 
+2.35.0
+

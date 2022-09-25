@@ -1,0 +1,38 @@
+From 416c8a39a221a43245d5c89af4fae48f03fd9563 Mon Sep 17 00:00:00 2001
+From: Peter Bergin <peter@berginkonsult.se>
+Date: Mon, 19 Sep 2022 17:21:28 +0200
+Subject: [PATCH] libtraceevent: make it possible to set libdir,includedir and
+ mandir from outside
+
+When building in build frameworks such as openembedded it is desired
+to use the defintion of directories from the build framework.
+
+Upstream-Status: Submitted [https://lore.kernel.org/linux-trace-devel/20221101111143.191772-1-peter@berginkonsult.se/]
+Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index aa659b4..321fc4c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -52,12 +52,12 @@ endif
+ 
+ libdir_relative ?= $(libdir_relative_temp)
+ prefix ?= /usr/local
+-man_dir = $(prefix)/share/man
++man_dir ?= $(prefix)/share/man
+ man_dir_SQ = '$(subst ','\'',$(man_dir))'
+-libdir = $(prefix)/$(libdir_relative)
++libdir ?= $(prefix)/$(libdir_relative)
+ libdir_SQ = '$(subst ','\'',$(libdir))'
+ includedir_relative ?= include/tracefs
+-includedir = $(prefix)/$(includedir_relative)
++includedir ?= $(prefix)/$(includedir_relative)
+ includedir_SQ = '$(subst ','\'',$(includedir))'
+ pkgconfig_dir ?= $(word 1,$(shell $(PKG_CONFIG) 		\
+ 			--variable pc_path pkg-config | tr ":" " "))
+-- 
+2.34.1
+
