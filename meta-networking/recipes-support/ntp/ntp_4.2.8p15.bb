@@ -139,8 +139,9 @@ PACKAGES += "ntpdate sntp ntpdc ntpq ${PN}-tickadj ${PN}-utils"
 # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
 # with wonky clocks (e.g. OpenSlug)
 RDEPENDS:${PN} = "${PN}-tickadj"
-# ntpd require libgcc for execution
+# ntpd & sntp require libgcc for execution due to phtread_cancel/pthread_exit calls
 RDEPENDS:${PN} += "libgcc"
+RDEPENDS:sntp += "libgcc"
 # Handle move from bin to utils package
 RPROVIDES:${PN}-utils = "${PN}-bin"
 RREPLACES:${PN}-utils = "${PN}-bin"
