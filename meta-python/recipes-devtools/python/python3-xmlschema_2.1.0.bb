@@ -1,9 +1,9 @@
 SUMMARY = "The xmlschema library is an implementation of XML Schema for Python (supports Python 3.6+)."
 HOMEPAGE = "https://github.com/sissaschool/xmlschema"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0ab20f8e337bea2e6874f372edfd12c0"
 
-SRC_URI[sha256sum] = "00d34f97c761c191c20e822899c490930d2c4c9ea6cc7e98f25360fde498f1ab"
+SRC_URI[sha256sum] = "e7f70c305e0def2a2293ab7110827086c477ab3c6f8757d2acb3ccbfa6b425a4"
 
 PYPI_PACKAGE = "xmlschema"
 inherit pypi setuptools3
