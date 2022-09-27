@@ -10,7 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
 GNOMEBN = "pangomm"
 inherit gnomebase features_check
 
-SRC_URI[archive.sha256sum] = "a27aa77e017b9afce9e751d85bd1cf890abbb3a58bf59d0fac917eef82db3b5b"
+SRC_URI[archive.sha256sum] = "ccc9923413e408c2bff637df663248327d72822f11e394b423e1c5652b7d9214"
 REQUIRED_DISTRO_FEATURES = "x11"
 
 S = "${WORKDIR}/${GNOMEBN}-${PV}"
