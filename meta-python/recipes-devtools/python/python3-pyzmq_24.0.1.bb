@@ -13,7 +13,7 @@ SRC_URI:append = " \
     file://club-rpath-out.patch \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "13b008bd142c9f6079ad75a30504eef2291502e9eac90e722b16fcf9ce856147"
+SRC_URI[sha256sum] = "216f5d7dbb67166759e59b0479bca82b8acf9bed6015b526b8eb10143fb08e77"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest
 
