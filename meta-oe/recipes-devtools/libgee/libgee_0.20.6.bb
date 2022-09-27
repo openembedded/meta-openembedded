@@ -18,4 +18,4 @@ do_configure:prepend() {
     done
 }
 
-SRC_URI[archive.sha256sum] = "31863a8957d5a727f9067495cabf0a0889fa5d3d44626e54094331188d5c1518"
+SRC_URI[archive.sha256sum] = "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d"
