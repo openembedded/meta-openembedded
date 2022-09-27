@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=http;branch=master;protocol=https \
 	file://0001-contrib-add-yocto-compatible-init-script.patch \
 "
-SRCREV = "cbed768b8ff9bfcf11089a5f1699b7e5707f1ea5"
+SRCREV = "137719522a8ea5b380fbb6206d2466f402f5b554"
 
 inherit autotools pkgconfig systemd update-rc.d
 
