@@ -3,11 +3,11 @@ Description = "Gerbera - An UPnP media server"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
 
-SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https;branch=master \
-           file://0001-Fix-for-fmt-8.0.patch \
+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
+           file://0001-Fix-build-with-fmt-9.0.patch \
           "
 
-SRCREV = "3b93d362ec33f738868a4e896a2c9ee8e9d7a92a"
+SRCREV = "d73d8c1346213d784753c02ea771970500e0df2a"
 
 S = "${WORKDIR}/git"
 
