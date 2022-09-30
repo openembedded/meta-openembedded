@@ -11,7 +11,7 @@ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
            file://run-ptest \
           "
 
-SRC_URI[sha256sum] = "927fb1fea1f685a328c10cf791eb655d7e1ed49d310eea5cb3101dfd8d6cba35"
+SRC_URI[sha256sum] = "8d1b4b18393af43698d10baa25d2b9b6397969beecac7816c35dd0714e4de50a"
 
 inherit autotools manpages pkgconfig ptest
 
