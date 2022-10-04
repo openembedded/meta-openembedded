@@ -42,3 +42,5 @@ PACKAGES =+ "${PN}-programs"
 FILES:${PN}-programs = "${bindir}/"
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_PRODUCT = "mbed_tls"
