@@ -4,7 +4,7 @@ a high-level synchronous API on top of the libevent event loop."
 HOMEPAGE = "http://www.gevent.org"
 LICENSE = "MIT & Python-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65"
-DEPENDS += "${PYTHON_PN}-greenlet libev libuv c-ares"
+DEPENDS += "${PYTHON_PN}-greenlet libev libuv c-ares python3-cython-native"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
 		  ${PYTHON_PN}-mime \
@@ -20,7 +20,16 @@ export GEVENTSETUP_EMBED_CARES = "0"
 export GEVENTSETUP_EMBED_LIBEV = "0"
 export GEVENTSETUP_EMBED_LIBUV = "0"
 
-# Delete the embedded copies of libraries so we can't accidentally link to them
 do_configure:append() {
+	# Delete the embedded copies of libraries so we can't accidentally link to them
 	rm -rf ${S}/deps
+
+	# Delete the generated cython files, as they are all out of date with python 3.11
+	rm -rf ${S}/src/gevent/*.c
 }
+
+do_compile:append() {
+        sed -i -e 's#${WORKDIR}##g' ${S}/src/gevent/*.c ${S}/src/gevent/libev/*.c ${S}/src/gevent/resolver/*.c
+}
+
+SRC_URI += "file://py-3.11.patch"
