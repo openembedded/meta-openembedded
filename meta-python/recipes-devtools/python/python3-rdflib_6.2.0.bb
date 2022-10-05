@@ -1,8 +1,8 @@
 SUMMARY = "RDFLib is a pure Python package for working with RDF"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b6cde159c801514e0e45a40cf0a9d3d9"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bcae79bd3c84b857f42a98a7ccf6ad47"
 
-SRC_URI[sha256sum] = "8dbfa0af2990b98471dacbc936d6494c997ede92fd8ed693fb84ee700ef6f754"
+SRC_URI[sha256sum] = "62dc3c86d1712db0f55785baf8047f63731fa59b2682be03219cb89262065942"
 
 inherit pypi setuptools3
 
@@ -12,6 +12,8 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-xml \
+    ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-core \
 "
 
 BBCLASSEXTEND = "native nativesdk"
