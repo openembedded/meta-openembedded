@@ -21,8 +21,7 @@ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
     file://lirc_options.conf \
     file://lirc.tmpfiles \
 "
-SRC_URI[md5sum] = "86c3f8e4efaba10571addb8313d1e040"
-SRC_URI[sha256sum] = "8b753c60df2a7f5dcda2db72c38e448ca300c3b4f6000c1501fcb0bd5df414f2"
+SRC_URI[sha256sum] = "3d44ec8274881cf262f160805641f0827ffcc20ade0d85e7e6f3b90e0d3d222a"
 
 SYSTEMD_PACKAGES = "lirc lirc-exec"
 SYSTEMD_SERVICE:${PN} = "lircd.service lircmd.service lircd-setup.service lircd-uinput.service"
