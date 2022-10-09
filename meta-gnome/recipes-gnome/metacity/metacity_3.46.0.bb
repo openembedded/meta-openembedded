@@ -23,7 +23,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit gnomebase gsettings gettext upstream-version-is-even features_check
 
-SRC_URI[archive.sha256sum] = "19c3c5d79d2171f45baa0f632cc8995f8607bf1231a16014439bac9ba165a7c0"
+SRC_URI[archive.sha256sum] = "4ba777e938547bfccbf9acca0967574c46643022e054c93a033419cb3cc7c1ec"
 SRC_URI += "file://0001-drop-zenity-detection.patch"
 
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
