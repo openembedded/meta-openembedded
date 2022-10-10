@@ -3,13 +3,12 @@ HOMEPAGE = "https://toolbelt.readthedocs.org"
 AUTHOR = "Ian Cordasco, Cory Benfield"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6f14302a4b4099009ab38b4dde5f1075"
 
 SRC_URI = "file://run-ptest \
           "
 
-SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
-SRC_URI[sha256sum] = "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
+SRC_URI[sha256sum] = "f695d6207931200b46c8ef6addbc8a921fb5d77cc4cd209c2e7d39293fcd2b30"
 
 inherit pypi setuptools3 ptest
 
