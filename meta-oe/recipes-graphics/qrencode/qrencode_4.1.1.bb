@@ -12,4 +12,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF += "--without-tools --without-tests"
+EXTRA_OECONF += "--without-tests"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[tools] = "--with-tools,--without-tools,libpng"
