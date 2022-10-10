@@ -1,4 +1,4 @@
-From 11adcf43a1e7aa39ee4d82fa567f37e5b0c6ca81 Mon Sep 17 00:00:00 2001
+From 2bc09bc7d933bc3d91c687e1cc2befdaa38d2c86 Mon Sep 17 00:00:00 2001
 From: Natanael Copa <ncopa@alpinelinux.org>
 Date: Wed, 18 Nov 2015 10:41:01 +0000
 Subject: [PATCH] Use configure test for sys/stat.h include
@@ -11,7 +11,7 @@ Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/open-vm-tools/services/plugins/vix/vixTools.c b/open-vm-tools/services/plugins/vix/vixTools.c
-index e5273786..cabc4137 100644
+index 34f3125d2..cebf4dd8d 100644
 --- a/open-vm-tools/services/plugins/vix/vixTools.c
 +++ b/open-vm-tools/services/plugins/vix/vixTools.c
 @@ -66,7 +66,7 @@
@@ -23,3 +23,6 @@ index e5273786..cabc4137 100644
  #include <sys/stat.h>
  #endif
  
+-- 
+2.25.1
+

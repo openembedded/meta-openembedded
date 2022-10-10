@@ -1,4 +1,4 @@
-From 5a795b234c617150915a607776c76377948870a6 Mon Sep 17 00:00:00 2001
+From 6be6cda5aea42b951212ec5f8a72778b1ef9c2da Mon Sep 17 00:00:00 2001
 From: Natanael Copa <ncopa@alpinelinux.org>
 Date: Wed, 18 Nov 2015 09:10:14 +0000
 Subject: [PATCH] Fix definition of ALLPERMS and ACCESSPERMS
@@ -15,7 +15,7 @@ Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
  2 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
-index f2b7ce67..0e6351a9 100644
+index 63c4e65f0..87d419a7b 100644
 --- a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
 +++ b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
 @@ -105,11 +105,13 @@ typedef struct DirectoryEntry {
@@ -36,10 +36,10 @@ index f2b7ce67..0e6351a9 100644
  #endif
  
 diff --git a/open-vm-tools/services/plugins/dndcp/dnd/dndLinux.c b/open-vm-tools/services/plugins/dndcp/dnd/dndLinux.c
-index 89133652..7e9c3a91 100644
+index 219065f74..b5b7e6203 100644
 --- a/open-vm-tools/services/plugins/dndcp/dnd/dndLinux.c
 +++ b/open-vm-tools/services/plugins/dndcp/dnd/dndLinux.c
-@@ -52,7 +52,7 @@
+@@ -53,7 +53,7 @@
  
  #define DND_ROOTDIR_PERMS     (S_IRWXU | S_IRWXG | S_IRWXO)
  #define DND_STAGINGDIR_PERMS  (S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH)
@@ -48,7 +48,7 @@ index 89133652..7e9c3a91 100644
  #define ACCESSPERMS           (S_IRWXU | S_IRWXG | S_IRWXO)
  #endif
  #ifdef __ANDROID__
-@@ -61,7 +61,6 @@
+@@ -62,7 +62,6 @@
   */
  #define NO_SETMNTENT
  #define NO_ENDMNTENT
@@ -56,3 +56,6 @@ index 89133652..7e9c3a91 100644
  #endif
  
  
+-- 
+2.25.1
+
