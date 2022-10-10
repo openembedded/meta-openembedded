@@ -1,4 +1,4 @@
-From 7a5db1cf47e70e72d78a42468912c276e57f865e Mon Sep 17 00:00:00 2001
+From 0c695d910b3e136e116cdbe0bfc6231dfac255a1 Mon Sep 17 00:00:00 2001
 From: Randy MacLeod <Randy.MacLeod@windriver.com>
 Date: Wed, 24 Mar 2021 16:21:35 -0400
 Subject: [PATCH] Rename poll.h to vm_poll.h
@@ -27,7 +27,7 @@ Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
  rename open-vm-tools/lib/include/{poll.h => vm_poll.h} (99%)
 
 diff --git a/open-vm-tools/lib/asyncsocket/asyncsocket.c b/open-vm-tools/lib/asyncsocket/asyncsocket.c
-index 9914ffc5..89679f7a 100644
+index b285c59c6..5c528820d 100644
 --- a/open-vm-tools/lib/asyncsocket/asyncsocket.c
 +++ b/open-vm-tools/lib/asyncsocket/asyncsocket.c
 @@ -87,7 +87,7 @@
@@ -40,7 +40,7 @@ index 9914ffc5..89679f7a 100644
  #include "err.h"
  #include "hostinfo.h"
 diff --git a/open-vm-tools/lib/hgfsServer/hgfsServer.c b/open-vm-tools/lib/hgfsServer/hgfsServer.c
-index 3a18a7e1..acdda54d 100644
+index 98f5b3f06..b436f0c7e 100644
 --- a/open-vm-tools/lib/hgfsServer/hgfsServer.c
 +++ b/open-vm-tools/lib/hgfsServer/hgfsServer.c
 @@ -51,7 +51,7 @@
@@ -53,7 +53,7 @@ index 3a18a7e1..acdda54d 100644
  #include "vm_basic_asm.h"
  #include "unicodeOperations.h"
 diff --git a/open-vm-tools/lib/include/asyncsocket.h b/open-vm-tools/lib/include/asyncsocket.h
-index 746dd78b..82c22f46 100644
+index dad848093..b61a2561f 100644
 --- a/open-vm-tools/lib/include/asyncsocket.h
 +++ b/open-vm-tools/lib/include/asyncsocket.h
 @@ -171,7 +171,7 @@ typedef struct AsyncSocket AsyncSocket;
@@ -66,7 +66,7 @@ index 746dd78b..82c22f46 100644
  typedef struct AsyncSocketPollParams {
     int flags;               /* Default 0, only POLL_FLAG_NO_BULL is valid */
 diff --git a/open-vm-tools/lib/include/pollImpl.h b/open-vm-tools/lib/include/pollImpl.h
-index 46442e55..8bc66997 100644
+index 46442e556..8bc669970 100644
 --- a/open-vm-tools/lib/include/pollImpl.h
 +++ b/open-vm-tools/lib/include/pollImpl.h
 @@ -44,7 +44,7 @@
@@ -82,7 +82,7 @@ diff --git a/open-vm-tools/lib/include/poll.h b/open-vm-tools/lib/include/vm_pol
 similarity index 99%
 rename from open-vm-tools/lib/include/poll.h
 rename to open-vm-tools/lib/include/vm_poll.h
-index c90f5dcd..73a56204 100644
+index ade356b9f..8759fb960 100644
 --- a/open-vm-tools/lib/include/poll.h
 +++ b/open-vm-tools/lib/include/vm_poll.h
 @@ -60,7 +60,7 @@ extern "C" {
@@ -95,7 +95,7 @@ index c90f5dcd..73a56204 100644
  #endif
  #ifdef __ANDROID__
 diff --git a/open-vm-tools/lib/rpcIn/rpcin.c b/open-vm-tools/lib/rpcIn/rpcin.c
-index 8b1fe759..f22fcd40 100644
+index 8b1fe759d..f22fcd402 100644
 --- a/open-vm-tools/lib/rpcIn/rpcin.c
 +++ b/open-vm-tools/lib/rpcIn/rpcin.c
 @@ -57,7 +57,7 @@
@@ -108,5 +108,5 @@ index 8b1fe759..f22fcd40 100644
  #  include "vmci_defs.h"
  #include "dataMap.h"
 -- 
-2.27.0
+2.25.1
 

@@ -1,4 +1,4 @@
-From e86a259e1ce19c70ecfdece69ab53a07c63a34e1 Mon Sep 17 00:00:00 2001
+From 921621a098f242953117747f5852d7e3136ae6c4 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 13 Jun 2018 23:16:53 -0700
 Subject: [PATCH] use posix strerror_r unless on gnu libc system
@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/open-vm-tools/lib/err/errPosix.c b/open-vm-tools/lib/err/errPosix.c
-index c81b4c13..7a403640 100644
+index c81b4c13f..7a4036402 100644
 --- a/open-vm-tools/lib/err/errPosix.c
 +++ b/open-vm-tools/lib/err/errPosix.c
 @@ -31,6 +31,7 @@
@@ -37,3 +37,6 @@ index c81b4c13..7a403640 100644
     ASSERT(p != NULL);
     return p;
  }
+-- 
+2.25.1
+

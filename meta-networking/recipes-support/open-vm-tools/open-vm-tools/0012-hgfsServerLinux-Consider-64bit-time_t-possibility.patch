@@ -1,4 +1,4 @@
-From c6836386549fb8f017761ce17a237fa42901434c Mon Sep 17 00:00:00 2001
+From 859c21b9a21c53d936301b05044d0c649d6cf32b Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 24 Mar 2021 17:36:26 -0400
 Subject: [PATCH] hgfsServerLinux: Consider 64bit time_t possibility
@@ -10,13 +10,12 @@ Refit for open-vm-tools-11.2.5.
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-
 ---
  open-vm-tools/lib/hgfsServer/hgfsServerLinux.c | 14 --------------
  1 file changed, 14 deletions(-)
 
 diff --git a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
-index f5cc80b7..5a79d645 100644
+index f5cc80b76..5a79d6451 100644
 --- a/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
 +++ b/open-vm-tools/lib/hgfsServer/hgfsServerLinux.c
 @@ -2566,20 +2566,6 @@ HgfsStatToFileAttr(struct stat *stats,       // IN: stat information
@@ -40,3 +39,6 @@ index f5cc80b7..5a79d645 100644
  
     attr->userId = stats->st_uid;
     attr->groupId = stats->st_gid;
+-- 
+2.25.1
+
