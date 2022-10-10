@@ -18,14 +18,11 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://initscript \
     file://slapd.service \
     file://remove-user-host-pwd-from-version.patch \
-    file://0001-ldif-filter-fix-parallel-build-failure.patch \
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
-    file://0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch \
-    file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
     file://0001-configure-Pass-pthread_t-to-pthread_detach.patch \
 "
 
-SRC_URI[sha256sum] = "d5086cbfc49597fa7d0670a429a9054552d441b16ee8b2435412797ab0e37b96"
+SRC_URI[sha256sum] = "ee3c430c4ef7b87c57b622108c7339376d6c27fbbf2767770be3de1df63d008c"
 
 DEPENDS = "util-linux groff-native"
 
