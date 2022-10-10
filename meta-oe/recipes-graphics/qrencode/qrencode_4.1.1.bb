@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+BBCLASSEXTEND = "native"
+
 EXTRA_OECONF += "--without-tests"
 
 PACKAGECONFIG ??= ""
