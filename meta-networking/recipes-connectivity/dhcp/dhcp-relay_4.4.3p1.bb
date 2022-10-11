@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c463f4afde26d9eb60f14f50aeb85f8f"
 
 DEPENDS = "openssl libcap zlib"
 
-SRC_URI = "https://downloads.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
+SRC_URI = "https://downloads.isc.org/isc/dhcp/4.4.3-P1/dhcp-4.4.3-P1.tar.gz \
            file://default-relay \
            file://init-relay \
            file://dhcrelay.service \
@@ -19,12 +19,12 @@ SRC_URI = "https://downloads.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
            file://0003-bind-Makefile.in-regenerate-configure.patch \
            "
 
-SRC_URI[sha256sum] = "0e3ec6b4c2a05ec0148874bcd999a66d05518378d77421f607fb0bc9d0135818"
+SRC_URI[sha256sum] = "0ac416bb55997ca8632174fd10737fd61cdb8dba2752160a335775bc21dc73c7"
 
 UPSTREAM_CHECK_URI = "http://ftp.isc.org/isc/dhcp/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.\d+\.(\d+?))/"
 
-S = "${WORKDIR}/dhcp-${PV}"
+S = "${WORKDIR}/dhcp-4.4.3-P1"
 
 inherit autotools-brokensep systemd pkgconfig
 
