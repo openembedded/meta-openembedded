@@ -5,9 +5,17 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 
-RDEPENDS:${PN} += "python3-urllib3"
+RDEPENDS:${PN} += "\
+	${PYTHON_PN}-urllib3 \
+	${PYTHON_PN}-core \
+	${PYTHON_PN}-json \
+	${PYTHON_PN}-logging \
+	${PYTHON_PN}-threading \
+	${PYTHON_PN}-compression \
+	${PYTHON_PN}-datetime \
+"
 
-SRC_URI[sha256sum] = "259535ba66933eacf85ab46524188c84dcb4c39f40348455ce15e2c0aca68863"
+SRC_URI[sha256sum] = "4fbace9a763285b608c06f01a807b51acb35f6059da6a01236654e08b0ee81ff"
 
 PYPI_PACKAGE = "sentry-sdk"
 
