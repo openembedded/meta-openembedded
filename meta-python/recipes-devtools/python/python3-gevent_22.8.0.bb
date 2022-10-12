@@ -11,7 +11,9 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
 		  ${PYTHON_PN}-pprint \
 		 "
 
-SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
+SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
+
+SRC_URI[sha256sum] = "868d500fe2b7f9750eadc07ada8ab32360c0e71976be2bf5919482f14a6477c7"
 
 inherit pypi setuptools3
 
@@ -31,5 +33,3 @@ do_configure:append() {
 do_compile:append() {
         sed -i -e 's#${WORKDIR}##g' ${S}/src/gevent/*.c ${S}/src/gevent/libev/*.c ${S}/src/gevent/resolver/*.c
 }
-
-SRC_URI += "file://py-3.11.patch"
