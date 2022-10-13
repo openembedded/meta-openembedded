@@ -7,14 +7,15 @@ DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-native"
 inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache
 
 SRC_URI = " \
-    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
+    git://github.com/blueman-project/blueman.git;protocol=https;branch=2-3-stable \
     file://0001-Search-for-cython3.patch \
     file://0002-fix-fail-to-enable-bluetooth.patch \
     file://0001-meson-add-pythoninstalldir-option.patch \
 "
-SRC_URI[sha256sum] = "55d639feeda0b43b18a659e65985213a54b47dcb1348f3b4effb5238db242602"
+S = "${WORKDIR}/git"
+SRCREV = "4275c35ffe372c3b194080726fbe1c99f974360f"
 
-EXTRA_OEMESON = "-Druntime_deps_check=false -Dappindicator=false -Dpythoninstalldir=${@noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
+EXTRA_OEMESON = "-Druntime_deps_check=false -Dpythoninstalldir=${@noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}-mechanism.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
