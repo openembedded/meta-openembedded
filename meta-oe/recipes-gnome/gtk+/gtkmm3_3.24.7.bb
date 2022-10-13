@@ -16,7 +16,7 @@ inherit gnomebase features_check
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "856333de86689f6a81c123f2db15d85db9addc438bc3574c36f15736aeae22e6"
+SRC_URI[archive.sha256sum] = "1d7a35af9c5ceccacb244ee3c2deb9b245720d8510ac5c7e6f4b6f9947e6789c"
 
 EXTRA_OEMESON = "-Dbuild-demos=false"
 
