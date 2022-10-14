@@ -28,7 +28,7 @@ SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRAN
            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
-CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
+CXXFLAGS:append:class-native = " -Wl,--no-as-needed -std=c++14"
 
 inherit cmake pkgconfig
 
