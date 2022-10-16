@@ -14,7 +14,14 @@ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-too
 "
 SRC_URI[sha256sum] = "099debcf57e81690ced57f516b493588a73518f48c14d656f823b29b4fc24b5d"
 
-inherit autotools update-rc.d pkgconfig
+inherit autotools update-rc.d pkgconfig systemd
+
+PACKAGECONFIG ?= "cthelper cttimeout \
+		  ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+
+PACKAGECONFIG[cthelper] = "--enable-cthelper,--disable-cthelper"
+PACKAGECONFIG[cttimeout] = "--enable-cttimeout,--disable-cttimeout"
+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 
 INITSCRIPT_NAME = "conntrackd"
 
