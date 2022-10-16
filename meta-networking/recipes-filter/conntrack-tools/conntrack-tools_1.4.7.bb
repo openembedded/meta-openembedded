@@ -26,21 +26,21 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 INITSCRIPT_NAME = "conntrackd"
 
 do_install:append() {
-    install -d ${D}/${sysconfdir}/conntrackd
-    install -d ${D}/${sysconfdir}/init.d
-    install -m 0644 ${S}/doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-    install -m 0755 ${WORKDIR}/conntrack-failover ${D}/${sysconfdir}/init.d/conntrack-failover
-    install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/conntrackd
+	install -d ${D}/${sysconfdir}/conntrackd
+	install -d ${D}/${sysconfdir}/init.d
+	install -m 0644 ${S}/doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
+	install -m 0755 ${WORKDIR}/conntrack-failover ${D}/${sysconfdir}/init.d/conntrack-failover
+	install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/conntrackd
 
-    # Fix hardcoded paths in scripts
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd
-    sed -i 's!/var/!${localstatedir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-    sed -i 's!^export PATH=.*!export PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}/${sysconfdir}/init.d/conntrackd
+	# Fix hardcoded paths in scripts
+	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd
+	sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd
+	sed -i 's!/var/!${localstatedir}/!g' ${D}/${sysconfdir}/init.d/conntrack-failover ${D}/${sysconfdir}/init.d/conntrackd ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
+	sed -i 's!^export PATH=.*!export PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}/${sysconfdir}/init.d/conntrackd
 }
 
 # fix error message: Do not forget that you need *root* or CAP_NET_ADMIN capabilities ;-)
 pkg_postinst:${PN} () {
-    setcap cap_net_admin+ep "$D/${sbindir}/conntrack"
+	setcap cap_net_admin+ep "$D/${sbindir}/conntrack"
 }
 PACKAGE_WRITE_DEPS += "libcap-native"
