@@ -9,7 +9,7 @@ inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc features
 # for webkitgtk
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "25b1146ab8549888a5a8da067f63b470b0f0f800b6ae889cacd114d01d713b41"
+SRC_URI[archive.sha256sum] = "a2c5fd0787a9089c722cc66bd0f85cdf7088d870e7b6cc85799f8e5bff9eac4b"
 
 DEPENDS += " \
     libxml2-native \
