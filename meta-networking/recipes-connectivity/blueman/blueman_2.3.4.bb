@@ -13,7 +13,7 @@ SRC_URI = " \
     file://0001-meson-add-pythoninstalldir-option.patch \
 "
 S = "${WORKDIR}/git"
-SRCREV = "4275c35ffe372c3b194080726fbe1c99f974360f"
+SRCREV = "89bb5313a7cc24ca6fdbeaf2b02f6142dc1a8e60"
 
 EXTRA_OEMESON = "-Druntime_deps_check=false -Dpythoninstalldir=${@noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
 
