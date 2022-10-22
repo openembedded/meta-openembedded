@@ -11,9 +11,9 @@ SRC_URI = "\
     file://lldpd.default \
     "
 
-SRC_URI[sha256sum] = "a74819214f116a5dbc407a3d490caa01ba401a249517ac826a374059c12d12e8"
+SRC_URI[sha256sum] = "f7fe3a130be98a19c491479ef60f36b8ee41a9e6bc4d7f2c41033f63956a3126"
 
-inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
+inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system -g lldpd --shell /bin/false lldpd"
