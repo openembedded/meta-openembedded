@@ -12,9 +12,9 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
 "
 
-SRCREV = "ed591e705c451d0ce14988ae96829a31a2ae2f9a"
+SRCREV = "a83aed77df1258e469c0eb42d9cb4f1938db53f2"
 
-PV = "202105+git${SRCPV}"
+PE = "1"
 
 S = "${WORKDIR}/git"
 
@@ -45,8 +45,8 @@ do_configure:prepend() {
 }
 
 do_install:append() {
-    chrpath -d ${D}${libdir}/libcamera.so.0.0.0
-    chrpath -d ${D}${libdir}/libcamera-base.so.0.0.0
+    chrpath -d ${D}${libdir}/libcamera.so
+    chrpath -d ${D}${libdir}/v4l2-compat.so
 }
 
 addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
@@ -62,13 +62,5 @@ do_recalculate_ipa_signatures_package() {
     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${modules}"
 }
 
-FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig"
-FILES:${PN}-dev += " ${libdir}/libcamera.so"
-FILES:${PN} += " ${libdir}/libcamera.so.0"
-FILES:${PN} += " ${libdir}/libcamera.so.0.0.0"
-FILES:${PN}-dev += " ${libdir}/libcamera-base.so"
-FILES:${PN} += " ${libdir}/libcamera-base.so.0"
-FILES:${PN} += " ${libdir}/libcamera-base.so.0.0.0"
 FILES:${PN} += " ${libdir}/v4l2-compat.so"
-FILES:${PN}-gst = "${libdir}/gstreamer-1.0/libgstlibcamera.so"
-FILES:${PN} += " ${bindir}/cam"
+FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
