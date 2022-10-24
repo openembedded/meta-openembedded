@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bb705b228ea4a14ea2728215b780d80"
 
-SRC_URI[sha256sum] = "b83cff68a0c8dcd2705b5e792796239accba2bfddb09bc8d05badc642f64e7f6"
+SRC_URI[sha256sum] = "629d2a0dd7a2b9af5bc5eb0c8402755e87a2d00f7015c72834fc0958ccda2835"
 
 inherit pypi setuptools3
 
