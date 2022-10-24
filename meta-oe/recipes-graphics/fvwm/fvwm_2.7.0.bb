@@ -36,7 +36,7 @@ SRC_URI = " \
     file://0001-Fix-compilation-for-disabled-gnome.patch \
 "
 
-SRCREV = "88eab6dc16da6e5dd25fe97fbb56b96ef0d58657"
+SRCREV = "7baf540e56fb1a3e91752acba872a88543529d46"
 
 S = "${WORKDIR}/git"
 
