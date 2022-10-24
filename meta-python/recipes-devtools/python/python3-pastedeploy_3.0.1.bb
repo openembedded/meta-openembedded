@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://license.txt;md5=1798f29d55080c60365e6283cb49779c"
 inherit pypi
 PYPI_PACKAGE = "PasteDeploy"
 
-SRC_URI[sha256sum] = "6dead6ab9823a85d585ef27f878bc647f787edb9ca8da0716aa9f1261b464817"
+SRC_URI[sha256sum] = "5f4b4d5fddd39b8947ea727161e366bf55b90efc60a4d1dd7976b9031d0b4e5f"
 
 S = "${WORKDIR}/PasteDeploy-${PV}"
 
