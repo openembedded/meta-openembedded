@@ -4,9 +4,9 @@
 SUMMARY = "Get CPU info with pure Python 2 & 3"
 HOMEPAGE = "https://github.com/workhorsy/py-cpuinfo"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b0b97c022f12b14d9e02de0b283ee9e9"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d2379ecb0d7a8299101b1e4c160cd1f7"
 
-SRC_URI[sha256sum] = "5f269be0e08e33fd959de96b34cd4aeeeacac014dd8305f70eb28d06de2345c5"
+SRC_URI[sha256sum] = "3cdbbf3fac90dc6f118bfd64384f309edeadd902d7c8fb17f02ffa1fc3f49690"
 
 inherit ptest pypi setuptools3
 
