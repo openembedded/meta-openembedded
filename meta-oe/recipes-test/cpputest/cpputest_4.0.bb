@@ -15,7 +15,9 @@ inherit cmake
 EXTRA_OECMAKE = "-DLONGLONG=ON \
                  -DC++11=ON \
                  -DTESTS=OFF \
-                 -DEXTENSIONS=OFF \
                  "
 
 FILES:${PN}-dev += "${libdir}/CppUTest/cmake/*"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[extensions] = "-DEXTENSIONS=ON,-DEXTENSIONS=OFF"
