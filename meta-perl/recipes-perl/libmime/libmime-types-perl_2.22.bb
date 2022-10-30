@@ -14,8 +14,7 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "6f1441addab947137bac92c379a47ba3"
-SRC_URI[sha256sum] = "e04ed7d42f1ff3150a303805f2689c28f80b92c511784d4641cb7f040d3e8ff6"
+SRC_URI[sha256sum] = "c2545eb30b094e942860ff8444f0f6cb54641caa8f7d386aaa2d925da4b02400"
 
 S = "${WORKDIR}/MIME-Types-${PV}"
 
@@ -23,19 +22,24 @@ inherit cpan ptest
 
 RDEPENDS:${PN} = "\
     perl-module-base \
+    perl-module-carp \
+    perl-module-constant \
+    perl-module-cwd \
+    perl-module-encode-encoding \
     perl-module-file-basename \
     perl-module-file-spec \
+    perl-module-list-util \
     perl-module-overload \
+    perl-module-perlio \
+    perl-module-perlio-encoding \
 "
 
-RDEPENDS:${PN}-ptest = "perl-module-lib perl-module-test-more"
-#RSUGGESTS:${PN}-ptest = "libmojo-base-perl"
+RDEPENDS:${PN}-ptest = "\
+    perl-module-lib \
+    perl-module-test-more \
+"
 
-do_install () {
-    cpan_do_install
-    install -d ${D}${bindir}
-    install -m 755 ${S}/bin/collect-types ${D}${bindir}/collect-types
-}
+#RSUGGESTS:${PN}-ptest = "libmojo-base-perl"
 
 do_install_ptest () {
     cp -r ${B}/t ${D}${PTEST_PATH}
