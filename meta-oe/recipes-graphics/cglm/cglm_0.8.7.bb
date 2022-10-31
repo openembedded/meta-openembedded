@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8dc95c4110ba741c43832734b51b7de7"
 
 SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
 # Tag v0.8.5
-SRCREV = "7e5d1f435f628b873347eb052b7d6605b0b997f2"
+SRCREV = "8cfc98d2835a8cd1a9041f257c7ba0bfe4fbc1f3"
 
 S = "${WORKDIR}/git"
 
