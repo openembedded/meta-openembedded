@@ -2,20 +2,22 @@ SUMMARY = "System performance benchmark"
 HOMEPAGE = "http://github.com/akopytov/sysbench"
 SECTION = "console/tests"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit autotools
+DEPENDS = "libtool libaio luajit concurrencykit"
+
+inherit autotools-brokensep pkgconfig
 
 # The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from
 # Launchpad until the next release is available from Github.
-SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz \
-           file://0001-Adding-volatile-modifier-to-tmp-variable-in-memory-t.patch \
-           "
+SRC_URI = "git://github.com/akopytov/sysbench.git;protocol=https;branch=master"
+SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
 
-SRC_URI[md5sum] = "3a6d54fdd3fe002328e4458206392b9d"
-SRC_URI[sha256sum] = "83fa7464193e012c91254e595a89894d8e35b4a38324b52a5974777e3823ea9e"
+S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "--enable-largefile"
+COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
+
+EXTRA_OECONF += "--enable-largefile --with-system-luajit --with-system-ck --without-gcc-arch"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[aio] = "--enable-aio,--disable-aio,libaio,"
 PACKAGECONFIG[mysql] = "--with-mysql \
