@@ -1,16 +1,13 @@
-DESCRIPTION = ""Compress::Raw::Lzma" provides an interface to the in-memory \
-compression/uncompression functions from the lzma compression library."
-
+SUMMARY = "Low-Level Interface to lzma compresion library."
+DESCRIPTION = "This module provides a Perl interface to allow reading and \
+wrting of lzma, lzip and xz files/buffers."
+HOMEPAGE = "https://metacpan.org/release/Compress-Raw-Lzma"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-MAINTAINER=	"Poky <poky@yoctoproject.org>"
-HOMEPAGE=	"https://metacpan.org/release/Compress-Raw-Lzma"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=2d411393b876fe63f9f1d546363f1a47"
 
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d"
-
-SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/Compress-Raw-Lzma-2.096.tar.gz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Lzma-${PV}.tar.gz"
 
 SRC_URI[md5sum] = "b5079bb43712fcd1e74b80777fa376ed"
 SRC_URI[sha256sum] = "f3afb267b1303b0f125976e9e4a70c6a4a205e35e7c99b408911f5e5c6578217"
@@ -20,6 +17,10 @@ DEPENDS += "xz"
 S = "${WORKDIR}/Compress-Raw-Lzma-${PV}"
 
 inherit cpan
+
+RDEPENDS:${PN} += "\
+    perl-module-universal \
+"
 
 export LIBLZMA_INCLUDE="-I${STAGING_DIR_HOST}${includedir}"
 export LIBLZMA_LIB="-I${STAGING_DIR_HOST}${libdir}"
