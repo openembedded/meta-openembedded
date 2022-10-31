@@ -11,7 +11,7 @@ DEPENDS = "libpcre2 zlib"
 SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
            file://run-ptest \
            "
-SRCREV = "be19dc4a2f30eb97cc9bdd7551460db11cc27353"
+SRCREV = "f1aefe34a46891b09230422bbc37465bc6d0a0d1"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
