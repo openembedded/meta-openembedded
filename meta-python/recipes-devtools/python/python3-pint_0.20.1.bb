@@ -10,7 +10,7 @@ PYPI_PACKAGE := "Pint"
 
 inherit pypi ptest python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "4035f6d1431913afd86a056959e35d342399b0ab7d6f8cad1f0f6058dc83fad8"
+SRC_URI[sha256sum] = "387cf04078dc7dfe4a708033baad54ab61d82ab06c4ee3d4922b1e45d5626067"
 
 DEPENDS += "python3-setuptools-scm-native"
 
