@@ -14,12 +14,11 @@ HOMEPAGE = "https://metacpan.org/release/IO-Compress"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=36e282c4a4078cf2650d656cdda23210"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=00f9580b6984ffc2d5f1dc4cc7c3dfcc"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "18ad197cad5ca87bc3a7d2538998e017"
-SRC_URI[sha256sum] = "9d219fd5df4b490b5d2f847921e3cb1c3392758fa0bae9b05a8992b3620ba572"
+SRC_URI[sha256sum] = "f6c55c4e39cfaa3219965dd3b36c9de1edee9a82a10a9cadeb3b74a9ceeeaaad"
 
 S = "${WORKDIR}/IO-Compress-${PV}"
 
@@ -33,6 +32,7 @@ RDEPENDS:${PN} += "\
     perl-module-file-spec \
     perl-module-posix \
     perl-module-scalar-util \
+    perl-module-time-local \
     perl-module-utf8 \
     libcompress-raw-bzip2-perl \
     libcompress-raw-zlib-perl \
