@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.twistedmatrix.com"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0f8d67f84b6e178c92d471011b2245fc"
 
-SRC_URI[sha256sum] = "e5b60de39f2d1da153fbe1874d885fe3fcbdb21fcc446fa759a53e8fc3513bed"
+SRC_URI[sha256sum] = "32acbd40a94f5f46e7b42c109bfae2b302250945561783a8b7a059048f2d4d31"
 
 PYPI_PACKAGE = "Twisted"
 
