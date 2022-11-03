@@ -7,7 +7,7 @@ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.t
            file://0001-Fix-for-Issue-31.patch \
 "
 
-SRC_URI[sha256sum] = "adc74f0ae125c77f65d5dd32abb9c3429300a79543bf263494f333f9c0b62a61"
+SRC_URI[sha256sum] = "bdbe630f6d6f540325746ad99977272ac8664ff81bd19f0adaba6d6f45efd864"
 
 DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
 
