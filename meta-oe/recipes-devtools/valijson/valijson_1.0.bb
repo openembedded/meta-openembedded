@@ -1,10 +1,10 @@
 SUMMARY = "Header-only C++ library for JSON Schema validation"
 HOMEPAGE = "https://github.com/tristanpenman/valijson"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=015106c62262b2383f6c72063f0998f2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
 
 SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https"
-SRCREV = "94d3bfd39ad4dca1be0f700b5eea8e4234d0e7e8"
+SRCREV = "78ac8a737df56b5334354efe104ea8f99e2a2f00"
 
 S = "${WORKDIR}/git"
 
