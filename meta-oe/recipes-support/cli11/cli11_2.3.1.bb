@@ -3,7 +3,7 @@ DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich f
 HOMEPAGE = "https://github.com/CLIUtils/CLI11"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9ad746b5f49c0fd53c08ca1faff1922c"
-SRCREV = "a66ae4145779c56dc0f9f98a631656417dd77de8"
+SRCREV = "c2ea58c7f9bb2a1da2d3d7f5b462121ac6a07f16"
 PV .= "+git${SRCPV}"
 
 SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
