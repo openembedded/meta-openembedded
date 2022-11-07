@@ -14,11 +14,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl libutempter"
 
-SRC_URI = "http://mosh.mit.edu/mosh-${PV}.tar.gz \
-           file://0001-Fix-building-with-libc.patch \
-           "
-SRC_URI[md5sum] = "5122f4d2b973ab7c38dcdac8c35cb61e"
-SRC_URI[sha256sum] = "da600573dfa827d88ce114e0fed30210689381bbdcff543c931e4d6a2e851216"
+SRC_URI = "http://mosh.mit.edu/mosh-${PV}.tar.gz"
+SRC_URI[sha256sum] = "872e4b134e5df29c8933dff12350785054d2fd2839b5ae6b5587b14db1465ddd"
 
 inherit autotools pkgconfig
 
