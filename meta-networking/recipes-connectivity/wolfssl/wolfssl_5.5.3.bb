@@ -13,7 +13,7 @@ PROVIDES += "cyassl"
 RPROVIDES:${PN} = "cyassl"
 
 SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master"
-SRCREV = "0ea0b887a51771cc1668d71b9113bbc286dd4f8a"
+SRCREV = "a7635da9e64a43028d2f8f14bce75e4bed39f162"
 
 S = "${WORKDIR}/git"
 
