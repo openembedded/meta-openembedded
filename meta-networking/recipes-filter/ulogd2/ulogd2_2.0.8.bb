@@ -15,7 +15,7 @@ SRC_URI = "git://git.netfilter.org/ulogd2;branch=master \
            file://ulogd.init \
            file://ulogd.service \
 "
-SRCREV = "5f9628c9273815b6e560603427fe86118e7cb5bb"
+SRCREV = "79aa980f2df9dda0c097e8f883a62f414b9e5138"
 
 S = "${WORKDIR}/git"
 
