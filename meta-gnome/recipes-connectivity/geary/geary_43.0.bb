@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2a2244d5a13871ad950c55877546a6a2"
 DEPENDS = " \
     appstream-glib \
     cairo \
+    desktop-file-utils-native \
     enchant2 \
     evolution-data-server \
     folks \
@@ -34,12 +35,10 @@ inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala featu
 
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
-        file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
-        file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "e561775c1580a9f60a726355b2b897bfc9cb3382"
+SRCREV = "94d6bec861daffb27efea85a296f347db7a5af6d"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
