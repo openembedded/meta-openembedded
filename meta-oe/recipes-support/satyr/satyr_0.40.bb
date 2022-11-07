@@ -9,9 +9,8 @@ inherit autotools-brokensep python3native pkgconfig
 
 SRC_URI = "git://github.com/abrt/satyr.git;branch=master;protocol=https \
            file://0002-fix-compile-failure-against-musl-C-library.patch \
-           file://0001-py_base_stacktrace.c-include-glib.h.patch \
-"
-SRCREV = "f8a0dbfe7fcc6e44f03d66ca5c81363aea318380"
+           "
+SRCREV = "61addf12d15ef9d0bff5e3cc26e08d08a4f88094"
 S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
