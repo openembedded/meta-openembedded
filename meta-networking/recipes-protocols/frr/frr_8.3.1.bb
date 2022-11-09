@@ -15,7 +15,8 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.3 \
            file://0001-bgpd-avoid-notify-race-between-io-and-main-pthreads.patch \
            file://0001-bgpd-Make-sure-hdr-length-is-at-a-minimum-of-what-is.patch \
            file://frr.pam \
-	      "
+           file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not-py.patch \
+           "
 
 SRCREV = "a74f7a9ad9623e6f9654fe4a7177e5da0b194828"
 
