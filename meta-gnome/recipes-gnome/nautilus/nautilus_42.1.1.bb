@@ -23,7 +23,7 @@ def gnome_verdir(v):
 
 SRC_URI[archive.sha256sum] = "8519d4565e842aa3d31d0fe39b21d48ac54edc0f0658fe1d8ea2da4e704c1b66"
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 EXTRA_OEMESON += " \
     -Dtests=none \
