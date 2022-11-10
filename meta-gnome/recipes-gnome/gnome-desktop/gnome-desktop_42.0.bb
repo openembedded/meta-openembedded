@@ -10,7 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspection features_check gtk-doc
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
