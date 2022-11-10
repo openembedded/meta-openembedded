@@ -18,7 +18,7 @@ EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 EXTRA_OECONF += "--disable-vala"
 
 PACKAGECONFIG ??= " \
-       ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
+       ${@bb.utils.contains('DISTRO_FEATURES', 'opengl','x11', "", d)} \
 "
 PACKAGECONFIG[gladeui2] = "--enable-gladeui2,--disable-gladeui2,glade"
 PACKAGECONFIG[x11] = "--enable-startup-notification,--disable-startup-notification,libepoxy libice libsm startup-notification"
