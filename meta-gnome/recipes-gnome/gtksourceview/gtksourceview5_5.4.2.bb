@@ -23,6 +23,7 @@ GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase lib_package gettext features_check gtk-doc gtk-icon-cache gobject-introspection vala
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI = "https://download.gnome.org/sources/gtksourceview/5.4/${PNAME}-${PV}.tar.xz"
 SRC_URI[sha256sum] = "ad140e07eb841910de483c092bd4885abd29baadd6e95fa22d93ed2df0b79de7"
