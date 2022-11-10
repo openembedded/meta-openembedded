@@ -14,7 +14,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 SRC_URI[archive.sha256sum] = "cfa2b8dfff21a105a1a021dadfa213f13627e6a179a77c7b59fdcedaca848dcc"
 
