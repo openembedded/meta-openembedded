@@ -24,7 +24,7 @@ GTKIC_VERSION = "4"
 
 inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 SRC_URI[archive.sha256sum] = "3d1e2720673bc9a242619dc5d231fd6e776c18a49da29f43cdc433055adb0170"
 
