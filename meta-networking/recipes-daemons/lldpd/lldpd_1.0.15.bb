@@ -9,11 +9,12 @@ SRC_URI = "\
     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
+    file://run-ptest \
     "
 
 SRC_URI[sha256sum] = "f7fe3a130be98a19c491479ef60f36b8ee41a9e6bc4d7f2c41033f63956a3126"
 
-inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases
+inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system -g lldpd --shell /bin/false lldpd"
@@ -61,3 +62,20 @@ RDEPENDS:${PN} += "os-release"
 FILES:${PN}-zsh-completion += "${datadir}/zsh/"
 # FIXME: zsh is broken in meta-oe so this cannot be enabled for now
 #RDEPENDS:${PN}-zsh-completion += "zsh"
+
+RDEPENDS:${PN}-ptest = "libcheck"
+DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'libcheck', '', d)}"
+
+TESTDIR = "tests"
+do_compile_ptest () {
+    # hack to remove the call to `make check-TESTS`
+    sed -i 's/$(MAKE) $(AM_MAKEFLAGS) check-TESTS//g' ${TESTDIR}/Makefile
+    oe_runmake check
+}
+
+do_install_ptest () {
+    # install the tests
+    cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
+    # remove the object files
+    rm ${D}${PTEST_PATH}/${TESTDIR}/*.o
+}
