@@ -12,7 +12,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/xforms/xforms-${PV}.tar.
            file://0001-Modify-include-dir.patch \
           "
 
-SRC_URI[sha256sum] = "78cc6b07071bbeaa1f906e0a22d5e9980e48f8913577bc082d661afe5cb75696"
+SRC_URI[sha256sum] = "92b5e6466ea2dffca7332aec12734e65b3e961825eb3100b7d889c0d1abb4697"
 
 inherit autotools features_check
 
