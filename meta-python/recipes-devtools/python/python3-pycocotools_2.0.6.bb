@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb5
 
 inherit setuptools3 pypi
 
-SRC_URI[sha256sum] = "41d1fb062df5bab5ebc3e92971455aa089479e7cd10553278ca54628b9dc9bf5"
+SRC_URI[sha256sum] = "7fe089b05cc18e806dcf3bd764708d86dab922a100f3734eb77fb77a70a1d18c"
 
 DEPENDS = "python3-cython-native python3-numpy-native virtual/crypt"
 RDEPENDS:${PN} = "python3-matplotlib python3-pillow python3-profile"
