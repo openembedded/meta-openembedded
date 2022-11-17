@@ -7,12 +7,22 @@ SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz \
            file://0001-Tty.xs-Do-not-mark-strlcpy-as-static.patch \
            "
 
-SRC_URI[md5sum] = "5ee30bf7c76f00cc69f92388ad776e2a"
-SRC_URI[sha256sum] = "8f1a09c070738adc695df903f2e7f74308dd8d991b914c0bc390a0e6021294dd"
+SRC_URI[sha256sum] = "a5f1a83020bc5b5dd6c1b570f48c7546e0a8f7fac10a068740b03925ad9e14e8"
 
 S = "${WORKDIR}/IO-Tty-${PV}"
 
-inherit cpan
+inherit cpan ptest-perl
+
+RDEPENDS:${PN} += "\
+    perl-module-carp \
+    perl-module-exporter \
+    perl-module-io-handle \
+    perl-module-posix \
+"
+
+RDEPENDS:${PN}-ptest += "\
+    perl-module-test-more \
+"
 
 FILES:${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/IO/Tty/.debug/"
 
