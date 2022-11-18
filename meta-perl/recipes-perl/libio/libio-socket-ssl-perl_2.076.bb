@@ -13,20 +13,19 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://META.yml;beginline=12;endline=12;md5=963ce28228347875ace682de56eef8e8"
 
 RDEPENDS:${PN} += "\
+    libmozilla-ca-perl \
     libnet-ssleay-perl \
     perl-module-autoloader \
-    perl-module-scalar-util \
     perl-module-io-socket \
+    perl-module-scalar-util \
 "
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
-           file://run-ptest \
-          "
-SRC_URI[sha256sum] = "c30ee2220b1e181a968ebbc81861d0cadf334b001377a44105ae5a8637ddae8c"
+SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
+SRC_URI[sha256sum] = "bdd148d9feaef1220251676d7053698fcf446c9850d706fe2e1c90ff232ed874"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
-inherit cpan ptest
+inherit cpan ptest-perl
 
 do_install:append () {
     mkdir -p ${D}${docdir}/${PN}/
@@ -38,8 +37,19 @@ do_install:append () {
     cp -pRP ${S}/example ${D}${docdir}/${PN}/
 }
 
-do_install_ptest () {
-    cp -r ${B}/t ${D}${PTEST_PATH}
+RDEPENDS:${PN}-ptest += "\
+    libnet-libidn-perl \
+    liburi-perl \
+    perl-module-file-glob \
+    perl-module-findbin \
+    perl-module-io-socket-inet \
+    perl-module-io-socket-ip \
+    perl-module-perlio \
+    perl-module-perlio-scalar \
+    perl-module-test-more \
+"
+
+do_install_ptest:append () {
     cp -r ${B}/certs ${D}${PTEST_PATH}
 }
 
