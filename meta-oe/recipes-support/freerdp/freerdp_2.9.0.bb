@@ -13,7 +13,7 @@ inherit pkgconfig cmake gitpkgv
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "0ad3f49f0e7eb78586acc6bf6e4605f96f88954e"
+SRCREV = "fa8e1b1c765a4466030ac52240f052c0b440a4d1"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
     file://winpr-makecert-Build-with-install-RPATH.patch \
 "
