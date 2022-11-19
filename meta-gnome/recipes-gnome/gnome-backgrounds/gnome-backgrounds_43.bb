@@ -8,7 +8,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gettext allarch
 
-SRC_URI[archive.sha256sum] = "4c7fe1a09f459c5f77189a5982524fce05d888944955d679910f234606c1295d"
+SRC_URI[archive.sha256sum] = "19f749d8c37f872f155bb69a2bbe7aca381175e6929f1998047d775cbc637244"
 
 FILES:${PN} += " \
     ${datadir}/backgrounds \
