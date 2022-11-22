@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "f54a72fd9a67eeb8d1502d6d75979dbddb00fdf2"
+SRCREV = "38382d002d0905d60a964fc84dcaf4f8b507a473"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -76,7 +76,7 @@ CFLAGS:append = " -Wno-typedef-redefinition"
 # According to wireplumber documentation only one session manager should be installed at a time
 # Possible options are media-session, which has fewer dependencies but is very simple,
 # or wireplumber, which is more powerful.
-PIPEWIRE_SESSION_MANAGER ??= "media-session"
+PIPEWIRE_SESSION_MANAGER ??= "wireplumber"
 
 FFMPEG_AVAILABLE = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'ffmpeg', '', d)}"
 BLUETOOTH_AAC = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'bluez-aac', '', d)}"
