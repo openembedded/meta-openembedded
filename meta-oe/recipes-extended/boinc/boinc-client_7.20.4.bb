@@ -26,15 +26,13 @@ DEPENDS = "curl \
            sqlite3 \
            virtual/egl \
            ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libnotify', '', d)} \
-           ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
+           ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+3 wxwidgets libnotify xcb-util libxscrnsaver', '', d)} \
            nettle \
 "
-SRCREV = "b49adfb118211e11c719766c0d71e7bdfe7f3363"
-BRANCH = "client_release/7/7.18"
+SRCREV = "1eca0c7931d0409d65a1254dc5d5c46abe058daa"
+BRANCH = "client_release/7/7.20"
 SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
            file://boinc-AM_CONDITIONAL.patch \
-           file://gtk-configure.patch \
-           file://4563.patch \
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
 "
 
@@ -60,14 +58,6 @@ EXTRA_OECONF += "\
     ac_cv_c_undeclared_builtin_options='none' \
 "
 export PKG_CONFIG = "${STAGING_BINDIR_NATIVE}/pkg-config"
-
-do_configure:prepend () {
-	if [ "${@bb.utils.contains('DEPENDS', 'gtk+', '1', '0', d)}" = "0" ]
-	then
-		export GTK2_CFLAGS=""
-		export GTK2_LIBS=""
-	fi
-}
 
 do_compile:prepend () {
 	# Disable rpaths
