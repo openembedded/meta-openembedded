@@ -19,14 +19,14 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    gitsm://github.com/wxWidgets/wxWidgets.git;branch=master;protocol=https \
+    gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https \
     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
     file://fix-libdir-for-multilib.patch \
-    file://respect-DESTDIR-when-create-link.patch \
+    file://create-links-with-relative-path.patch \
     file://not-append-system-name-to-lib-name.patch \
     file://wx-config-fix-libdir-for-multilib.patch \
 "
-SRCREV= "9c0a8be1dc32063d91ed1901fd5fcd54f4f955a1"
+SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
 S = "${WORKDIR}/git"
 
 # These can be either 'builtin' or 'sys' and builtin means cloned soures are
@@ -38,7 +38,6 @@ EXTRA_OECMAKE += " \
     -DwxUSE_LIBPNG=sys \
     -DwxUSE_LIBTIFF=sys \
     -DwxUSE_REGEX=builtin \
-    -DwxPLATFORM_LIB_DIR=${@d.getVar('baselib').replace('lib', '')} \
 "
 EXTRA_OECMAKE:append:libc-musl = " \
     -DHAVE_LOCALE_T=OFF \
@@ -100,13 +99,15 @@ do_compile:append() {
 do_install:append() {
     # do not ship bindir if empty
     rmdir --ignore-fail-on-non-empty ${D}${bindir}
+
+    # fix host contamination
+    sed -i -e "s#${STAGING_DIR_NATIVE}##g" \
+           -e "s#${STAGING_DIR_TARGET}##g" \
+           ${D}${libdir}/wx/config/gtk3-unicode-3.2 \
+           ${D}${libdir}/cmake/wxWidgets/wxWidgetsTargets.cmake
 }
 
-# lib names are not canonical
-FILES_SOLIBSDEV = ""
-
 FILES:${PN} += " \
-    ${libdir}/libwx_*.so \
     ${libdir}/wx/ \
 "
 
