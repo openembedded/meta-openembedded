@@ -8,7 +8,7 @@ DEPENDS = "ell"
 SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
            "
-SRC_URI[sha256sum] = "9fd13512dc27d83efb8d341f7df98f5488f70131686021fcd0d93fc97af013b8"
+SRC_URI[sha256sum] = "5a0bfbc567092476d60a8f9700f68a273e39fd46e7177ce2d69bbc74255a930c"
 
 inherit autotools manpages pkgconfig python3native systemd
 
