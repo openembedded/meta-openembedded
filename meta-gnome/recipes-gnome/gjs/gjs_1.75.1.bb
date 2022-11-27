@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-DEPENDS = "mozjs-91 cairo"
+DEPENDS = "mozjs-102 cairo"
 
 inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
 
-SRC_URI[archive.sha256sum] = "ddee379bdc5a7d303a5d894be2b281beb8ac54508604e7d3f20781a869da3977"
+SRC_URI[archive.sha256sum] = "81dcdf49d2665d08fa7e251700ea36466d77877418e9186d3a7e7efcd31aa960"
 SRC_URI += " \
     file://0001-Support-cross-builds-a-bit-better.patch \
     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
