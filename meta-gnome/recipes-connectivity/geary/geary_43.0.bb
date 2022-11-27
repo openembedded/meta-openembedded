@@ -10,7 +10,7 @@ DEPENDS = " \
     enchant2 \
     evolution-data-server \
     folks \
-    gcr \
+    gcr3 \
     gmime \
     gnome-online-accounts \
     gsound \
