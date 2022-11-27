@@ -11,11 +11,13 @@ DEPENDS = " \
     mutter \
     evolution-data-server \
     gcr \
+    geocode-glib \
     gjs \
     gnome-autoar \
     polkit \
     libcroco \
-    startup-notification \
+    libsoup-3.0 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'startup-notification', d)} \
     ibus \
     gsettings-desktop-schemas \
 "
@@ -31,7 +33,7 @@ GIR_MESON_OPTION = ""
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "33d404fb3c93b9de42984f0110a2969d6a4a7247c27fe7f5e24c67ecfec75094"
+SRC_URI[archive.sha256sum] = "df0444765def1bd0afee9617d2b5919bc79b4db86e7e757ac0e1f73748ec1bdc"
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
@@ -44,6 +46,7 @@ EXTRA_OEMESON = " \
     -Dextensions-app:gjs_path=${bindir}/gjs \
     -Dtests=false \
     -Dman=false \
+    -Dsoup2=false \
 "
 
 do_install:append() {
