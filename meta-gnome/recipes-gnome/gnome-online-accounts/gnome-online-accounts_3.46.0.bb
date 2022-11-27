@@ -13,7 +13,7 @@ SRC_URI[archive.sha256sum] = "5e7859ce4858a6b99d3995ed70527d66e297bb90bbf75ec878
 PACKAGECONFIG_SOUP ?= "soup3"
 PACKAGECONFIG ?= "kerberos owncloud lastfm google windows_live ${PACKAGECONFIG_SOUP}"
 
-PACKAGECONFIG[kerberos] = "-Dkerberos=true, -Dkerberos=false,krb5 gcr"
+PACKAGECONFIG[kerberos] = "-Dkerberos=true, -Dkerberos=false,krb5 gcr3"
 PACKAGECONFIG[exchange] = "-Dexchange=true, -Dexchange=false"
 PACKAGECONFIG[google] = "-Dgoogle=true, -Dgoogle=false"
 PACKAGECONFIG[owncloud] = "-Downcloud=true, -Downcloud=false"
