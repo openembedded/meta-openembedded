@@ -25,7 +25,7 @@ DEPENDS = " \
 REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "ed65851ae54adcd58a24c86837d624fc6a14bd84ab22e94df40a3a4cfd19ffdb"
+SRC_URI[archive.sha256sum] = "3513bb24fc6f8181667223a64a067534fdccf3bf66326a9403d38b0f0d6013d0"
 
 PACKAGECONFIG ??= " \
     cups nm \
@@ -42,5 +42,5 @@ PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland"
 
 FILES:${PN} += " \
     ${systemd_user_unitdir} \
-    ${libdir}/gnome-settings-daemon-42/libgsd.so \
+    /usr/lib/gnome-settings-daemon-43/libgsd.so \
 "
