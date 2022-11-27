@@ -10,15 +10,15 @@ S = "${WORKDIR}/${GNOMEBN}-${PV}"
 inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala
 
 SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
-SRC_URI[archive.sha256sum] = "440d44801b6f72b48c676e5e37f9109cfee1394fd74cc92725e1b1ba4fae834c"
+SRC_URI[archive.sha256sum] = "af8a812da0d8976a000e1d62572c256086a817323fbf35b066dbfdd8d2ca6203"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
 DEPENDS = " \
     geocode-glib \
-    gtk+3 \
+    gtk4 \
     json-glib \
-    libsoup-2.4 \
+    libsoup-3.0 \
     python3-pygobject-native \
 "
 
