@@ -7,7 +7,7 @@ DEPENDS = " \
     wayland-native \
     virtual/libx11 \
     graphene \
-    gtk+3 \
+    gtk4 \
     gdk-pixbuf \
     cairo \
     pango \
@@ -17,7 +17,7 @@ DEPENDS = " \
     gnome-settings-daemon \
     libxtst \
     libxkbfile \
-    xinerama \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xinerama', '', d)} \
     xwayland \
 "
 
@@ -25,7 +25,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "d1e240446b7f8cd8a3ff9daae336c1c9016193ba7e0769c79a5e6c03849022e5"
+SRC_URI[archive.sha256sum] = "f2f08b252783948a5ecc82f00e9e935a61ebbf8564844bdd92788ab44aa78264"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
@@ -60,7 +60,7 @@ PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-10"
+MUTTER_API_NAME = "mutter-11"
 
 do_install:append() {
     # Add gir links in standard paths. That makes dependents life much easier
@@ -78,6 +78,7 @@ PACKAGES =+ "${PN}-tests ${PN}-gsettings"
 
 FILES:${PN} += " \
     ${datadir}/gnome-control-center \
+    ${datadir}/gir-1.0 \
     ${libdir}/${MUTTER_API_NAME}/lib*${SOLIBS} \
     ${libdir}/${MUTTER_API_NAME}/*.typelib \
     ${libdir}/${MUTTER_API_NAME}/plugins \
