@@ -16,13 +16,13 @@ diff --git a/moz.configure b/moz.configure
 index fc66b520d0..15de9a2ee0 100755
 --- a/moz.configure
 +++ b/moz.configure
-@@ -994,15 +994,15 @@ def llvm_objdump(host_c_compiler, c_compiler, bindgen_config_paths):
-     return (llvm_objdump,)
+@@ -785,15 +785,15 @@
+     return llvm_tool
  
  
 -llvm_objdump = check_prog(
 -    "LLVM_OBJDUMP",
--    llvm_objdump,
+-    llvm_tool("llvm-objdump"),
 -    what="llvm-objdump",
 -    when="--enable-compile-environment",
 -    paths=clang_search_path,
@@ -31,13 +31,14 @@ index fc66b520d0..15de9a2ee0 100755
 -add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
 +#llvm_objdump = check_prog(
 +#    "LLVM_OBJDUMP",
-+#    llvm_objdump,
++#    llvm_tool("llvm-objdump"),
 +#    what="llvm-objdump",
 +#    when="--enable-compile-environment",
 +#    paths=clang_search_path,
 +#)
-+
++#
 +#add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
  
  
- option("--enable-dtrace", help="Build with dtrace support")
+ @depends(llvm_tool("llvm-readelf"), toolchain_prefix)
+

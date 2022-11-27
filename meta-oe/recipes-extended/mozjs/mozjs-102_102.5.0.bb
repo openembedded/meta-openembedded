@@ -11,15 +11,13 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://fix-musl-build.patch \
            file://0001-build-do-not-use-autoconf-s-config.sub-to-canonicali.patch \
            file://riscv32.patch \
-           file://0005-nojit-32bit-arch-fix.patch \
-           file://0006-Fix-build-on-powerpc.patch \
            file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
            file://0001-rewrite-cargo-host-linker-in-python3.patch  \
            file://py-3.11.patch \
            "
-SRC_URI[sha256sum] = "53be2bcde0b5ee3ec106bd8ba06b8ae95e7d489c484e881dfbe5360e4c920762"
+SRC_URI[sha256sum] = "017dd44b1285913f477074802707a4c76ed1a28270ec5a327bbb76574cc057d8"
 
-S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
+S = "${WORKDIR}/firefox-${PV}"
 
 inherit pkgconfig perlnative python3native rust
 
@@ -67,12 +65,12 @@ do_install() {
 
 inherit multilib_script multilib_header
 
-MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js91-config"
+MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js102-config"
 
 do_install:append() {
-    oe_multilib_header mozjs-91/js-config.h
+    oe_multilib_header mozjs-102/js-config.h
     sed -e 's@${STAGING_DIR_HOST}@@g' \
-        -i ${D}${bindir}/js91-config
+        -i ${D}${bindir}/js102-config
     rm -f ${D}${libdir}/libjs_static.ajs
 }
 

@@ -1,4 +1,4 @@
-From b13cad4abc53f816f64c8b0af70cb46820746c72 Mon Sep 17 00:00:00 2001
+From 2a6f66f39b4e623428b6d282bd4cb72dde67c1a6 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Thu, 11 Nov 2021 16:05:54 +0800
 Subject: [PATCH] util.configure: fix one occasionally reproduced configure
@@ -28,15 +28,16 @@ It should be another process that deleted this file by using
 Upstream-Status: Submitted [https://bugzilla.mozilla.org/show_bug.cgi?id=1740667]
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+
 ---
  build/moz.configure/util.configure | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/build/moz.configure/util.configure b/build/moz.configure/util.configure
-index 8f35e89c73..84e256647d 100644
+index 80c3a34522..0ac0c6b611 100644
 --- a/build/moz.configure/util.configure
 +++ b/build/moz.configure/util.configure
-@@ -222,7 +222,7 @@ def try_invoke_compiler(compiler, language, source, flags=None, onerror=None):
+@@ -216,7 +216,7 @@ def try_invoke_compiler(compiler, language, source, flags=None, onerror=None):
          "C++": ".cpp",
      }[language]
  
@@ -45,6 +46,3 @@ index 8f35e89c73..84e256647d 100644
      try:
          source = source.encode("ascii", "replace")
  
--- 
-2.17.1
-
