@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0974a390827087287db39928f7c524b5"
 
-SRC_URI[sha256sum] = "b27d10ad15740b45fd55f76e6901a4391e6dca3917ef48ecdcf17edf6e00d770"
+SRC_URI[sha256sum] = "ebea339af930f8ca5d7a699b921106c6e29c617fe9606fa7baa043c1cdae326f"
 
 inherit pypi setuptools3
 
