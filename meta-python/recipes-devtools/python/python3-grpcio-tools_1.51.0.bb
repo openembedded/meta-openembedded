@@ -12,7 +12,7 @@ DEPENDS += "${PYTHON_PN}-grpcio"
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
             file://0001-protobuf-Disable-musttail-attribute-on-mips.patch \
             "
-SRC_URI[sha256sum] = "88b75f2afd889c7c6939f58d76b58ab84de4723c7de882a1f8448af6632e256f"
+SRC_URI[sha256sum] = "264abafefc3240aacdc6e0c7765a8a20c284f1267ae0dd899084f07694b55095"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
 
