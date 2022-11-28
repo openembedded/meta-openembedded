@@ -10,8 +10,7 @@ SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
     file://0001-Add-build-rule-for-README.patch \
 "
 
-SRC_URI[md5sum] = "f246d6601856775310c86b841b616de5"
-SRC_URI[sha256sum] = "81549b3422469d503996d03a3aed2ef1375b359167f10d66be9e3844e729322e"
+SRC_URI[sha256sum] = "e7a78c398ec0d617a4f98bac70d5b64f78689284dd0ae87d4692e2857f117377"
 
 inherit autotools pkgconfig
 
