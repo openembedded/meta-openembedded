@@ -3,7 +3,7 @@ SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
-SRC_URI[sha256sum] = "59d92846ffb981e634e9e0f2d14a6b4967a875e3869bd2ba168c92c4db6b8b5d"
+SRC_URI[sha256sum] = "3f2b6b0dc5f459591d171ee0c0136dce79acedc2740ce695024aa3444e911bb9"
 
 PYPI_PACKAGE="python-can"
 
