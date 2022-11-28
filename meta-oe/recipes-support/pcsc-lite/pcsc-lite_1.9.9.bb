@@ -12,8 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
 DEPENDS = "autoconf-archive-native"
 
 SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-SRC_URI[md5sum] = "d063c6ca17c17fab39a85132811e155d"
-SRC_URI[sha256sum] = "502d80c557ecbee285eb99fe8703eeb667bcfe067577467b50efe3420d1b2289"
+SRC_URI[sha256sum] = "cbcc3b34c61f53291cecc0d831423c94d437b188eb2b97b7febc08de1c914e8a"
 
 inherit autotools systemd pkgconfig perlnative
 
