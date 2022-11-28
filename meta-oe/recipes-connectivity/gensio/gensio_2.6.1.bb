@@ -5,12 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
                     "
 
-SRCREV = "b6cd354afe6d5f63bc859c94fd3a455a3cdf0449"
+SRCREV = "d512218c4fa5667d4fe15977d3f15f05591f1f1a"
 
-SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master \
-           file://0001-tools-gensiot-Fix-build-with-musl.patch \
-           file://0001-configure-Check-for-request_init-API-when-probing-fo.patch \
-"
+SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
