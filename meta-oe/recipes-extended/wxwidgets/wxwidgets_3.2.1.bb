@@ -103,7 +103,7 @@ do_install:append() {
     # fix host contamination
     sed -i -e "s#${STAGING_DIR_NATIVE}##g" \
            -e "s#${STAGING_DIR_TARGET}##g" \
-           ${D}${libdir}/wx/config/gtk3-unicode-3.2 \
+           ${D}${libdir}/wx/config/*-unicode-3.2 \
            ${D}${libdir}/cmake/wxWidgets/wxWidgetsTargets.cmake
 }
 
