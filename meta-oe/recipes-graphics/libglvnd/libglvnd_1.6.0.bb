@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://README.md;beginline=323;md5=7ac5f0111f648b92fe5427efe
 SRC_URI = "git://git@gitlab.freedesktop.org/glvnd/libglvnd.git;protocol=https;branch=master"
 
 # v1.5.0 tag
-SRCREV = "c7cdf0cc4395b57563294d1f340b6bb1b95366a0"
+SRCREV = "b05bbcdaeb9b700cf7877e6d66f8fc3ac952295b"
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
