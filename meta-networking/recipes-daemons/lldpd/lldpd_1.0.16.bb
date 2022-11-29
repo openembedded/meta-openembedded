@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
 DEPENDS = "libbsd libevent"
 
 SRC_URI = "\
-    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+    http://media.luffy.cx/files/${BPN}/${BP}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
     file://run-ptest \
     "
 
-SRC_URI[sha256sum] = "f7fe3a130be98a19c491479ef60f36b8ee41a9e6bc4d7f2c41033f63956a3126"
+SRC_URI[sha256sum] = "e3b391650c7ba67cea2fe84d67fdb4d7fc8aa1ec5cf86eb8bb984711df8465a9"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
 
