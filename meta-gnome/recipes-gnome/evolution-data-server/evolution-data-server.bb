@@ -2,7 +2,7 @@ require ${BPN}.inc
 
 DEPENDS = " \
     ${BPN}-native intltool-native gperf-native \
-    glib-2.0 gtk+3 gtk4 libgdata libxml2 icu \
+    glib-2.0 gtk+3 gtk4 libxml2 icu \
     dbus db virtual/libiconv zlib libsoup-3.0 libical nss libsecret \
 "
 
