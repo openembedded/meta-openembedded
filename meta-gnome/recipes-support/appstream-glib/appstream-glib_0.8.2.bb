@@ -4,12 +4,12 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = " \
+    curl \
     gperf-native \
     glib-2.0 \
     gtk+3 \
     libyaml \
     libarchive \
-    libsoup-2.4 \
     json-glib \
     gdk-pixbuf \
     freetype \
@@ -20,7 +20,7 @@ DEPENDS = " \
 inherit meson gobject-introspection gettext bash-completion pkgconfig manpages
 
 SRC_URI = "https://people.freedesktop.org/~hughsient/${BPN}/releases/${BP}.tar.xz"
-SRC_URI[sha256sum] = "ca1ed22e3bde3912cb903aaa7de085d55771da454f1c0573fd9608e1de9c4002"
+SRC_URI[sha256sum] = "71256500add5048d6f08878904708b3d0c3875f402e0adcd358e91d47dcd8b96"
 
 EXTRA_OEMESON = " \
     -Drpm=false \
