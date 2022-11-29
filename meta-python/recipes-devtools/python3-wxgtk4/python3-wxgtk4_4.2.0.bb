@@ -13,6 +13,7 @@ PYPI_PACKAGE = "wxPython"
 SRC_URI += "file://add-back-option-build-base.patch \
             file://wxgtk-fixup-build-scripts.patch \
             file://not-overwrite-cflags-cxxflags.patch \
+            file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
             "
 SRC_URI[sha256sum] = "663cebc4509d7e5d113518865fe274f77f95434c5d57bc386ed58d65ceed86c7"
 
@@ -29,6 +30,7 @@ RDEPENDS:${PN} = "\
     python3-image \
     python3-numpy \
     python3-pillow \
+    python3-pip \
     python3-pprint \
     python3-pycairo \
     python3-six \
