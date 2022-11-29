@@ -10,7 +10,7 @@ DEPENDS = " \
     gtk+3 \
     gsettings-desktop-schemas \
     libpeas \
-    libsoup-2.4 \
+    libsoup \
     gspell \
     gtksourceview4 \
     tepl \
@@ -21,7 +21,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "3c6229111f0ac066ae44964920791d1265f5bbb56b0bd949a69b7b1261fc8fca"
+SRC_URI[archive.sha256sum] = "f950d2d35c594bb6c8dbc9f5440cad7788ca0a8688e2b07846f83de9a4e3fc25"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
