@@ -17,6 +17,8 @@ FILES:${PN} += "${datadir}/proj"
 BBCLASSEXTEND = "native"
 
 PACKAGECONFIG ?= "curl"
+PACKAGECONFIG:append:class-native = " apps"
+
 PACKAGECONFIG[apps] = "-DBUILD_APPS=ON, -DBUILD_APPS=OFF"
 PACKAGECONFIG[curl] = "-DENABLE_CURL=ON,-DENABLE_CURL=OFF,curl"
 PACKAGECONFIG[tiff] = "-DENABLE_TIFF=ON,-DENABLE_TIFF=OFF,tiff"
