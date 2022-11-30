@@ -8,6 +8,7 @@ DEPENDS = " \
     gtk-doc-native \
     libxslt-native \
     docbook-xsl-stylesheets-native \
+    python3-pygments-native \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
