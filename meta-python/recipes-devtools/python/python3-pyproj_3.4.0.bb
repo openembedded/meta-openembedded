@@ -14,3 +14,4 @@ RDEPENDS:${PN} = "${PYTHON_PN}-certifi proj"
 
 export PROJ_INCDIR = "${STAGING_INCDIR}"
 export PROJ_LIBDIR = "${STAGING_LIBDIR}"
+export PROJ_DIR = "${STAGING_BINDIR_NATIVE}/.."
