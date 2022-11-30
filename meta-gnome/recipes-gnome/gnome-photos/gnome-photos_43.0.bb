@@ -19,6 +19,7 @@ DEPENDS = " \
     gfbgraph \
     tracker \
     libhandy \
+    libportal \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
@@ -30,7 +31,7 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "25cb281425199dec7b045f13f32f8f96034cb0cb8b94d96f9dffaf4f5be68551"
+SRC_URI[archive.sha256sum] = "c7ac7458d533f29d955011c74b76224d79ea31bcc12e9d6d0ce7b6c3704d08e1"
 
 do_install:append() {
     # make gnome-photos available on all desktops
