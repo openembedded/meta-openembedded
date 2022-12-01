@@ -657,7 +657,6 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 = "crash makedumpfile oprofi
 RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 = "crash makedumpfile oprofile"
 
 RDEPENDS:packagegroup-meta-oe-multimedia ="\
-    alsa-oss \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", "", d)} \
     dirsplit \
     genisoimage \
@@ -690,8 +689,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} \
     libopusenc \
 "
-
-RDEPENDS:packagegroup-meta-oe-multimedia:remove:libc-musl = "alsa-oss"
 
 RDEPENDS:packagegroup-meta-oe-navigation ="\
     geos \
