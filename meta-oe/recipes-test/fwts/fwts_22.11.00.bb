@@ -11,12 +11,13 @@ SRC_URI = "http://fwts.ubuntu.com/release/fwts-V${PV}.tar.gz;subdir=${BP} \
            file://0004-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
            file://0005-Undefine-PAGE_SIZE.patch \
            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
+           file://0001-libfwtsiasl-Disable-parallel-builds-of-lex-bison-fil.patch \
            "
-SRC_URI[sha256sum] = "45045a095d9933d9ff39712372ab1f3078ca8e29c007b3f97b810cdb8c27b5c3"
+SRC_URI[sha256sum] = "4af4e1e0f1ae9313297af722d744ba47a81c81bc5bdeab3f4f40837a39e4b808"
 
 COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
 
-DEPENDS = "libpcre glib-2.0 dtc bison-native libbsd"
+DEPENDS = "libpcre glib-2.0 dtc bison-native flex-native libbsd"
 DEPENDS:append:libc-musl = " libexecinfo"
 
 inherit autotools bash-completion pkgconfig
