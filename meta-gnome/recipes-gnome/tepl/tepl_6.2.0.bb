@@ -13,6 +13,7 @@ DEPENDS = " \
     gtk-doc-native \
     libxslt-native \
     docbook-xsl-stylesheets-native \
+    python3-pygments-native \
 "
 
 inherit meson gobject-introspection gettext features_check pkgconfig
