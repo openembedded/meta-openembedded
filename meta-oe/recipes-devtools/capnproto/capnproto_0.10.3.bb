@@ -5,9 +5,8 @@ SECTION = "console/tools"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
 
-SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
-           "
-SRCREV = "2e88221d3dde22266bfccf40eaee6ff9b40d113d"
+SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-0.10.3;protocol=https"
+SRCREV = "a16468f296a9584f4068072efecdee8a9eb9c2ed"
 
 S = "${WORKDIR}/git/c++"
 
