@@ -4,19 +4,19 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 DEPENDS = " \
+    cairo \
     glib-2.0-native \
     gdk-pixbuf-native \
     librsvg-native \
     gtk+3 \
     babl \
+    dbus \
     gegl \
     geocode-glib \
+    gexiv2 \
     gnome-online-accounts \
-    grilo \
     gsettings-desktop-schemas \
     libdazzle \
-    libgdata \
-    gfbgraph \
     tracker \
     libhandy \
     libportal \
@@ -31,6 +31,9 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[doc] = "-Dmanuals=true,-Dmanuals=false,libxslt-native docbook-xsl-stylesheets-native"
+
 SRC_URI[archive.sha256sum] = "c7ac7458d533f29d955011c74b76224d79ea31bcc12e9d6d0ce7b6c3704d08e1"
 
 do_install:append() {
@@ -44,4 +47,12 @@ FILES:${PN} += " \
     ${datadir}/gnome-shell \
 "
 
-RRECOMMENDS:${PN} = "grilo-plugins"
+do_compile:append() {
+    # glib-mkenums is embedding full paths into this file. There's no
+    # option to it to use a sysroot style variable. So to avoid QA
+    # errors, we sed WORKDIR out and make its includes relative
+    sed -i "s|${B}||" src/photos-enums.h
+    sed -i "s|${B}||" src/photos-enums.c
+    sed -i "s|${B}||" src/photos-enums-gegl.c
+    sed -i "s|${B}||" src/photos-enums-gegl.h
+}
