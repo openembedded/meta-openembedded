@@ -24,7 +24,8 @@ PV = "${SRCREV_mc}"
 inherit go
 inherit goarch
 
-CGO_LDFLAGS:append:mips = " -no-pie"
+# | ./github.com/minio/mc/main.go:27:(.text+0xd258b8): relocation R_MIPS_HI16 against `a local symbol' cannot be used when making a shared object; recompile with -fPIC
+COMPATIBLE_HOST:mips = "null"
 
 DEPENDS += "rsync-native"
 
