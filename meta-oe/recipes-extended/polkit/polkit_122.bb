@@ -46,4 +46,4 @@ do_install:append() {
 	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
 }
 
-FILES:${PN} += "${libdir}/polkit-1 ${datadir}"
+FILES:${PN} += "${libdir}/polkit-1 ${nonarch_libdir}/polkit-1 ${datadir}"
