@@ -9,7 +9,7 @@ GO_INSTALL = "\
     ${GO_IMPORT}/cmd/crucible \
     ${GO_IMPORT}/cmd/habtool \
 "
-SRCREV = "837bdb65a20de240f92ea57727385352e06b977e"
+SRCREV = "6fc8c38cd1ae61b3855a3bd43b042dc5cdad7252"
 
 # Workaround for network access issue during compile step.
 # This needs to be fixed in the recipes buildsystem so that
