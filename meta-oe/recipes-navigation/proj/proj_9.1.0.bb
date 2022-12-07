@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "81b2239b94cad0886222cde4f53cb49d34905aad2a1317244a0c30a553
 
 inherit cmake lib_package
 
-EXTRA_OECMAKE = "-DBUILD_TESTING=OFF"
+EXTRA_OECMAKE = "-DBUILD_TESTING=OFF -DSQLITE3_LIBRARY:STRING=sqlite3"
 
 FILES:${PN} += "${datadir}/proj"
 
