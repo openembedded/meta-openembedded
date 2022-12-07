@@ -6,7 +6,6 @@ GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
     libxml2-native \
-    sassc-native \
     gtk4 \
     mutter \
     evolution-data-server \
