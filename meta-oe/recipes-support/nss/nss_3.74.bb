@@ -284,3 +284,7 @@ CVE_PRODUCT += "network_security_services"
 
 # CVE-2006-5201 affects only Sun Solaris
 CVE_CHECK_IGNORE += "CVE-2006-5201"
+
+# CVES CVE-2017-11695 CVE-2017-11696 CVE-2017-11697 CVE-2017-11698 only affect
+# the legacy db (libnssdbm), only compiled with --enable-legacy-db.
+CVE_CHECK_IGNORE += "CVE-2017-11695 CVE-2017-11696 CVE-2017-11697 CVE-2017-11698"
