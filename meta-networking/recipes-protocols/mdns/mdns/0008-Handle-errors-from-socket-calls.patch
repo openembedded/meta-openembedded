@@ -1,7 +1,7 @@
-From 382b3b924e43abd1bdc5792918161d0922666691 Mon Sep 17 00:00:00 2001
+From ed58146d3aeecdb9920fdc017f85c18b5b10f2db Mon Sep 17 00:00:00 2001
 From: Nate Karstens <nate.karstens@garmin.com>
 Date: Thu, 10 Aug 2017 08:27:32 -0500
-Subject: [PATCH 10/11] Handle errors from socket calls
+Subject: [PATCH 8/8] Handle errors from socket calls
 
 Adds handling for socket() or read() returning a
 negative value (indicating an error has occurred).
@@ -9,15 +9,16 @@ negative value (indicating an error has occurred).
 Upstream-Status: Submitted [dts@apple.com]
 
 Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSPosix/mDNSPosix.c | 12 +++++++++---
  1 file changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
-index 3243ed4..84af26b 100644
+index 77d982f4c50b..cab512160afb 100644
 --- a/mDNSPosix/mDNSPosix.c
 +++ b/mDNSPosix/mDNSPosix.c
-@@ -1129,7 +1129,7 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
+@@ -1677,7 +1677,7 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
  // Read through the messages on sd and if any indicate that any interface records should
  // be torn down and rebuilt, return affected indices as a bitmask. Otherwise return 0.
  {
@@ -26,7 +27,7 @@ index 3243ed4..84af26b 100644
      char buff[4096];
      struct nlmsghdr         *pNLMsg = (struct nlmsghdr*) buff;
  
-@@ -1138,7 +1138,10 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
+@@ -1686,7 +1686,10 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
      // enough to hold all pending data and so avoid message fragmentation.
      // (Note that FIONREAD is not supported on AF_NETLINK.)
  
@@ -38,7 +39,7 @@ index 3243ed4..84af26b 100644
      while (1)
      {
          // Make sure we've got an entire nlmsghdr in the buffer, and payload, too.
-@@ -1154,7 +1157,9 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
+@@ -1702,7 +1705,9 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
                  pNLMsg = (struct nlmsghdr*) buff;
  
                  // read more data
@@ -49,7 +50,7 @@ index 3243ed4..84af26b 100644
                  continue;                   // spin around and revalidate with new readCount
              }
              else
-@@ -1429,6 +1434,7 @@ mDNSlocal mDNSBool mDNSPlatformInit_CanReceiveUnicast(void)
+@@ -2017,6 +2022,7 @@ mDNSlocal mDNSBool mDNSPlatformInit_CanReceiveUnicast(void)
      int err;
      int s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
      struct sockaddr_in s5353;
@@ -58,5 +59,5 @@ index 3243ed4..84af26b 100644
      s5353.sin_port        = MulticastDNSPort.NotAnInteger;
      s5353.sin_addr.s_addr = 0;
 -- 
-2.17.1
+2.35.1
 
