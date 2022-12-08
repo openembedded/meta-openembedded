@@ -1,22 +1,23 @@
-From a2148df99ddcd122247f95c4cbcce5c4118581a1 Mon Sep 17 00:00:00 2001
+From 40ef0241afbb49f84e76afd65eb3ee17466bb582 Mon Sep 17 00:00:00 2001
 From: Nate Karstens <nate.karstens@garmin.com>
 Date: Wed, 28 Jun 2017 17:30:00 -0500
-Subject: [PATCH 02/11] Create subroutine for tearing down an interface
+Subject: [PATCH 2/8] Create subroutine for tearing down an interface
 
 Creates a subroutine for tearing down an interface.
 
 Upstream-Status: Submitted [dts@apple.com]
 
 Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSPosix/mDNSPosix.c | 22 ++++++++++++++++------
  1 file changed, 16 insertions(+), 6 deletions(-)
 
 diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
-index ffc9696..5e5b2cd 100644
+index fe7242d83599..a32a880c0ce5 100644
 --- a/mDNSPosix/mDNSPosix.c
 +++ b/mDNSPosix/mDNSPosix.c
-@@ -591,6 +591,19 @@ mDNSlocal void FreePosixNetworkInterface(PosixNetworkInterface *intf)
+@@ -1043,6 +1043,19 @@ mDNSlocal void FreePosixNetworkInterface(PosixNetworkInterface *intf)
      gRecentInterfaces = intf;
  }
  
@@ -36,7 +37,7 @@ index ffc9696..5e5b2cd 100644
  // Grab the first interface, deregister it, free it, and repeat until done.
  mDNSlocal void ClearInterfaceList(mDNS *const m)
  {
-@@ -599,13 +612,10 @@ mDNSlocal void ClearInterfaceList(mDNS *const m)
+@@ -1051,13 +1064,10 @@ mDNSlocal void ClearInterfaceList(mDNS *const m)
      while (m->HostInterfaces)
      {
          PosixNetworkInterface *intf = (PosixNetworkInterface*)(m->HostInterfaces);
@@ -52,7 +53,7 @@ index ffc9696..5e5b2cd 100644
 +    assert(num_registered_interfaces == 0);
  }
  
- // Sets up a send/receive socket.
+ mDNSlocal int SetupIPv6Socket(int fd)
 -- 
-2.17.1
+2.35.1
 

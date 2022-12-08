@@ -1,7 +1,7 @@
-From 0fcc0f210f3a9310a1963de640b384ce866410fd Mon Sep 17 00:00:00 2001
+From a8accffb95267490b50401c8b65ec18db57b5ef5 Mon Sep 17 00:00:00 2001
 From: Nate Karstens <nate.karstens@garmin.com>
 Date: Wed, 9 Aug 2017 09:16:58 -0500
-Subject: [PATCH 08/11] Mark deleted interfaces as being changed
+Subject: [PATCH 7/8] Mark deleted interfaces as being changed
 
 Netlink notification handling ignores messages for deleted links,
 RTM_DELLINK. It does handle RTM_GETLINK. According to libnl docu-
@@ -17,15 +17,16 @@ Testing and Verification Instructions:
 Upstream-Status: Submitted [dts@apple.com]
 
 Signed-off-by: Nate Karstens <nate.karstens@garmin.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSPosix/mDNSPosix.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
-index 798ab10..a8a57df 100644
+index 5d52de31f79b..77d982f4c50b 100644
 --- a/mDNSPosix/mDNSPosix.c
 +++ b/mDNSPosix/mDNSPosix.c
-@@ -1163,7 +1163,7 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
+@@ -1714,7 +1714,7 @@ mDNSlocal void          ProcessRoutingNotification(int sd, GenLinkedList *change
  #endif
  
          // Process the NetLink message
@@ -35,5 +36,5 @@ index 798ab10..a8a57df 100644
          else if (pNLMsg->nlmsg_type == RTM_DELADDR || pNLMsg->nlmsg_type == RTM_NEWADDR)
              AddInterfaceIndexToList(changedInterfaces, ((struct ifaddrmsg*) NLMSG_DATA(pNLMsg))->ifa_index);
 -- 
-2.17.1
+2.35.1
 
