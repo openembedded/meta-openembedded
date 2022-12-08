@@ -100,12 +100,12 @@ do_configure () {
 
     # If using the clang toolchain: use the clang host-side binaries built by Bitbake
     if [ "${TOOLCHAIN}" = "clang" ]; then
-        BB_CLANGXX="${BUILD_CXX} ${BUILD_LDFLAGS} ${TUNE_CCARGS}"
-        BB_CLANG="${BUILD_CC} ${TUNE_CCARGS}"
+        BB_CLANGXX="${BUILD_CXX} ${BUILD_LDFLAGS}"
+        BB_CLANG="${BUILD_CC}"
         BB_LLVM_OBJCOPY="${RECIPE_SYSROOT_NATIVE}/usr/bin/llvm-objcopy"
         
-        HOST_CLANGXX="${STAGING_DIR_NATIVE}/usr/bin/clang++ -stdlib=libc++ -rtlib=libgcc -unwindlib=libgcc ${TUNE_CCARGS}"
-        HOST_CLANG="${STAGING_DIR_NATIVE}/usr/bin/clang ${TUNE_CCARGS}"
+        HOST_CLANGXX="${STAGING_DIR_NATIVE}/usr/bin/clang++ -stdlib=libc++ -rtlib=libgcc -unwindlib=libgcc"
+        HOST_CLANG="${STAGING_DIR_NATIVE}/usr/bin/clang"
         HOST_LLVM_OBJCOPY="${STAGING_DIR_NATIVE}/usr/bin/llvm-objcopy"
 
         cd gcc_like_host
