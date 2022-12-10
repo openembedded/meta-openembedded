@@ -3,12 +3,15 @@ LICENSE="GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = " \
+    accountsservice \
+    audit \
     dconf-native \
     gtk+3 \
-    accountsservice \
+    keyutils \
     libcanberra \
-    libpam \
     libgudev \
+    libpam \
+    xserver-xorg \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
@@ -16,9 +19,9 @@ GIR_MESON_OPTION = ""
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstool gnome-help features_check
+inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "a328ac976937bec179971ff07829a1246b98ce724181c128ae32a0ba47ad3855"
+SRC_URI[archive.sha256sum] = "94d70d6ed7df59fa7fde4fd02fed1168593a8adce10fcee113c148d52b392294"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
@@ -55,4 +58,3 @@ FILES:${PN} += " \
 "
 
 RDEPENDS:${PN} += "${PN}-base"
-
