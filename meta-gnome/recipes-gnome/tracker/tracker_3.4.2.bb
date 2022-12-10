@@ -14,7 +14,7 @@ DEPENDS = " \
     dbus \
     icu \
     json-glib \
-    libsoup-2.4 \
+    libsoup-3.0 \
     libstemmer \
 "
 
@@ -22,7 +22,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check python3native
 
-SRC_URI[archive.sha256sum] = "ea9d41a9fb9c2b42ad80fc2c82327b5c713d594c969b09e1a49be63fb74f4fae"
+SRC_URI[archive.sha256sum] = "4e6df142a4f704878fca98ebb5a224750e5ea546aa2aaabaa726a73540bd1731"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
@@ -43,6 +43,7 @@ EXTRA_OEMESON = " \
     -Dman=false \
     -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
+    -Dsoup=soup3 \
 "
 
 FILES:${PN} += " \
