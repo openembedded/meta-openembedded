@@ -8,11 +8,11 @@ SECTION = "console/network"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bdfdd4986a0853eb84eeba85f9d0c4d6"
 
-DEPENDS = "glib-2.0 dbus json-glib libsoup-2.4 intltool-native"
+DEPENDS = "glib-2.0 dbus json-glib libsoup-3.0 intltool-native"
 
-inherit meson pkgconfig gtk-doc gobject-introspection vala
+inherit meson pkgconfig gtk-doc gobject-introspection vala useradd
 
-SRCREV = "3bb60dd600a8b247fd6049e7e5b1c73c2c5fc0e8"
+SRCREV = "becfa5837cfafa064219a5ab2c2a4eaf35b24c0b"
 SRC_URI = "git://gitlab.freedesktop.org/geoclue/geoclue.git;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
@@ -34,8 +34,18 @@ EXTRA_OEMESON += " \
     -Ddemo-agent=false \
 "
 
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
+
+do_install:append() {
+	#Fix up permissions on polkit rules.d to work with rpm4 constraints
+	chmod 700 ${D}/${datadir}/polkit-1/rules.d
+	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+}
+
 FILES:${PN} += " \
     ${datadir}/dbus-1/system-services \
+    ${datadir}/polkit-1/rules.d \
     ${libdir} \
     ${systemd_unitdir} \
     ${prefix}/libexec \
