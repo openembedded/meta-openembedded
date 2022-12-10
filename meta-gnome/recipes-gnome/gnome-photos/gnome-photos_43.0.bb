@@ -22,6 +22,8 @@ DEPENDS = " \
     libportal \
 "
 
+RDEPENDS:${PN} = "tracker-miners"
+
 GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gettext gnome-help features_check
