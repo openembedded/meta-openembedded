@@ -7,8 +7,9 @@ SECTION = "x11/gnome"
 DEPENDS = " \
     yelp-tools-native \
     gtk4 \
-    libsoup-2.4 \
+    libsoup-3.0 \
     libgee \
+    libxml2 \
     libmpc \
     gtksourceview5 \
     libadwaita \
@@ -28,7 +29,7 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "33dab1bca43658d66520958b0f674cb0ad3185cfd30c12e459e7f69481c5c6a0"
+SRC_URI[archive.sha256sum] = "02c12ded3cf5053d17537d95ec69587f4b919899d7726eceecdb4b47ffb1c90f"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
