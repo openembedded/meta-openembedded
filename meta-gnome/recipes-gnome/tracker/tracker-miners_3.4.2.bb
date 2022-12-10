@@ -19,7 +19,7 @@ SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.pat
             file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
            "
 
-SRC_URI[archive.sha256sum] = "2fce0ec85fb7617c8b2887c22797740d5dec84ec036db74d6c208bbab5c58c24"
+SRC_URI[archive.sha256sum] = "101e3608f1c28bfed8ae25522f7a720b559f889a76e280afbe50a4d8b064f92c"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
