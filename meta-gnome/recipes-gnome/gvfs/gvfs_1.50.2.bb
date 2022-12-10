@@ -12,6 +12,7 @@ DEPENDS += "\
     gsettings-desktop-schemas \
     libgudev \
     libsecret \
+    libxml2 \
     shadow-native \
 "
 
@@ -61,8 +62,8 @@ PACKAGECONFIG[admin] = "-Dadmin=true, -Dadmin=false, libcap polkit"
 PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
 PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
 PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
-PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr"
-PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-2.4"
+PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr3"
+PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-3.0"
 PACKAGECONFIG[libmtp] = "-Dmtp=true, -Dmtp=false, libmtp"
 PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
 PACKAGECONFIG[libgphoto2] = "-Dgphoto2=true, -Dgphoto2=false, libgphoto2"
