@@ -48,7 +48,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
     glib \
     gpgme \
-    soup \
+    curl \
 "
 
 # We include soup because ostree can't (currently) be built without
@@ -57,14 +57,14 @@ PACKAGECONFIG:class-native ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     builtin-grub2-mkconfig \
     gpgme \
-    soup \
+    curl \
 "
 
 PACKAGECONFIG:class-nativesdk ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     builtin-grub2-mkconfig \
     gpgme \
-    soup \
+    curl \
 "
 
 PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
