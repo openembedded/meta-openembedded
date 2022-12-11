@@ -66,6 +66,7 @@ RDEPENDS:${PN}-core = "${PYTHON_PN}-appdirs \
                        ${PYTHON_PN}-incremental \
                        ${PYTHON_PN}-pyhamcrest \
                        ${PYTHON_PN}-pyserial \
+                       ${PYTHON_PN}-typing-extensions \
                        ${PYTHON_PN}-unixadmin \
                        ${PYTHON_PN}-zopeinterface \
 "
