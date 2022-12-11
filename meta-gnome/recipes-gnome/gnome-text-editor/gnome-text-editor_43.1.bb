@@ -9,18 +9,17 @@ DEPENDS = " \
     libadwaita \
     gtk4 \
     gtksourceview5 \
+    editorconfig-core-c \
     enchant2 \
-    libpcre \
 "
 
 GTKIC_VERSION = "4"
 
 inherit gnomebase gtk-icon-cache itstool gnome-help mime-xdg features_check
 
-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "e56d4a8cdcbce8a8f1c0881b45de799f8b25205ec0cbf2269e532025761cc5da"
+SRC_URI[archive.sha256sum] = "973a4b0deb68f9f91a54a4dd415b6afde9b5ae3ee684bc761471f94290f9f6cb"
 
 FILES:${PN} += " \
     ${datadir}/metainfo \
