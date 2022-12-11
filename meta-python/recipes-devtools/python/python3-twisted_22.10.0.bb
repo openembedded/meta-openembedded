@@ -57,6 +57,7 @@ RDEPENDS:${PN} = "\
 "
 
 RDEPENDS:${PN}-core = "${PYTHON_PN}-appdirs \
+                       ${PYTHON_PN}-asyncio \
                        ${PYTHON_PN}-automat \
                        ${PYTHON_PN}-constantly \
                        ${PYTHON_PN}-core \
