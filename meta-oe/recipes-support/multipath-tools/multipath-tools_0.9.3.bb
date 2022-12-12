@@ -46,13 +46,11 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=mas
            file://0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch \
            file://0001-fix-bug-of-do_compile-and-do_install.patch \
            file://0001-add-explicit-dependency-on-libraries.patch \
-           file://0001-fix-boolean-value-with-json-c-0.14.patch \
-           file://0001-libmultipath-uevent.c-fix-error-handling-for-udev_mo.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "d4915917655b3d205aa0e339ca13080ed8182d0d"
+SRCREV = "1332947447133fdf26246012b836868a3d974f0e"
 
 S = "${WORKDIR}/git"
 
@@ -75,10 +73,15 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 #
 EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
                 OPTFLAGS="${CFLAGS}" \
+                prefix=${prefix} \
                 bindir=${base_sbindir} \
                 LIB=${base_libdir} libdir=${base_libdir}/multipath \
+                usrlibdir=${libdir} \
+                plugindir=${base_libdir}/multipath \
                 unitdir=${systemd_system_unitdir} \
                 libudevdir=${nonarch_base_libdir}/udev \
+                modulesloaddir=${sysconfdir}/modules-load.d \
+                tmpfilesdir=${sysconfdir}/tmpfiles.d \
                 ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "SYSTEMD=216", "", d)} \
                '
 
@@ -105,7 +108,7 @@ FILES:${PN}-dbg += "${base_libdir}/multipath/.debug"
 PACKAGES =+ "${PN}-libs"
 FILES:${PN}-libs = "${base_libdir}/lib*.so.* \
                     ${base_libdir}/multipath/lib*.so*"
-RDEPENDS:${PN} += "${PN}-libs bash"
+RDEPENDS:${PN} += "${PN}-libs bash libgcc"
 
 PROVIDES += "device-mapper-multipath"
 RPROVIDES:${PN} += "device-mapper-multipath"
