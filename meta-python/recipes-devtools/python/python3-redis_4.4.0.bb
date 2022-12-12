@@ -2,9 +2,9 @@ SUMMARY = "Python client for Redis key-value store"
 DESCRIPTION = "The Python interface to the Redis key-value store."
 HOMEPAGE = "http://github.com/andymccurdy/redis-py"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=51d9ad56299ab60ba7be65a621004f27"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1db1f331d351900707368237cc4880cf"
 
-SRC_URI[sha256sum] = "30c07511627a4c5c4d970e060000772f323174f75e745a26938319817ead7a12"
+SRC_URI[sha256sum] = "7b8c87d19c45d3f1271b124858d2a5c13160c4e74d4835e28273400fa34d5228"
 
 inherit pypi setuptools3
 
