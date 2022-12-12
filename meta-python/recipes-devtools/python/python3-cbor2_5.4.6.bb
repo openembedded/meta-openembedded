@@ -4,7 +4,7 @@ DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-SRC_URI[sha256sum] = "2256fdcc11613b0297a4b844e268d20db4f7d4be79d2002f51613bd8105366ef"
+SRC_URI[sha256sum] = "b893500db0fe033e570c3adc956af6eefc57e280026bd2d86fd53da9f1e594d7"
 
 inherit pypi python_setuptools_build_meta ptest
 
