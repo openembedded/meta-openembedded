@@ -7,7 +7,7 @@ PYPI_PACKAGE = "asttokens"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "e27b1f115daebfafd4d1826fc75f9a72f0b74bd3ae4ee4d9380406d74d35e52c"
+SRC_URI[sha256sum] = "4622110b2a6f30b77e1473affaa97e711bc2f07d3f10848420ff1898edbe94f3"
 
 DEPENDS += "python3-setuptools-scm-native"
 
