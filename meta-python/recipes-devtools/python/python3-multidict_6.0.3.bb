@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/multidict/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84c63e2bcd84e619d249af5181e2147f"
 
-SRC_URI[sha256sum] = "5ff3bd75f38e4c43f1f470f2df7a4d430b821c4ce22be384e1459cb57d6bb013"
+SRC_URI[sha256sum] = "2523a29006c034687eccd3ee70093a697129a3ffe8732535d3b2df6a4ecc279d"
 
 inherit pypi setuptools3 ptest
 
