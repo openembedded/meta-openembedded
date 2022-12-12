@@ -28,7 +28,7 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz 
     file://0001-initialize-msghdr-portably.patch \
     file://zabbix-agent.service \
 "
-SRC_URI[sha256sum] = "457e129b3cca47f90fcb33b84dd5a215a24bd10fc74c8048f47839f71db7336b"
+SRC_URI[sha256sum] = "ae40c8cd4b24159466a7483e65f85836a8c963a0bc394a3dd890142aaf30ac17"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
