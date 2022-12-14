@@ -23,8 +23,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
           "
 SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
-
-SRC_URI[sha256sum] = "887eadc55176ac1ead1fccfc89ade4b5990ef192745ad4dcd879acb41c050892"
+SRC_URI[sha256sum] = "ffacf84e74daf249ad64b9573d79a4e882f66b004614f8b33bfcb14a8e25da1d"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
 
