@@ -62,6 +62,10 @@ PARALLEL_MAKE = ""
 
 EXTRA_OEMAKE = "os=linux 'CC=${CCLD}' 'LD=${CCLD}' 'LINKOPTS=${LDFLAGS}' STRIP=: ${PACKAGECONFIG_CONFARGS}"
 
+# MDNS_VERSIONSTR_NODTS disables __DATE__ and __TIME__ in the version string,
+# which are fixed anyway for build reproducibility.
+TARGET_CPPFLAGS += "-DMDNS_VERSIONSTR_NODTS"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 MDNS_BUILDDIR = "build/${@bb.utils.contains('PACKAGECONFIG','debug','debug','prod', d)}"
