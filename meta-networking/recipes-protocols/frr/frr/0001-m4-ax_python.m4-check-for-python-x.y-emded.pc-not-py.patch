@@ -1,4 +1,4 @@
-From 6a2984718d7c47612b07be46d663e7b5e5b7c57d Mon Sep 17 00:00:00 2001
+From a82d704b1ec6ece47b01d12e0e067d4b62b10894 Mon Sep 17 00:00:00 2001
 From: Alexander Kanavin <alex@linutronix.de>
 Date: Wed, 9 Nov 2022 20:24:45 +0100
 Subject: [PATCH] m4/ax_python.m4: check for python-x.y-emded.pc, not
@@ -7,7 +7,9 @@ Subject: [PATCH] m4/ax_python.m4: check for python-x.y-emded.pc, not
 Only the embed version includes necessary linker flags to link
 with libpython.
 
-Upstream-Status: Submitted [https://github.com/FRRouting/frr/pull/12298]
+Upstream-Status: Backport
+[https://github.com/FRRouting/frr/commit/a82d704b1ec6ece47b01d12e0e067d4b62b10894]
+
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
  m4/ax_python.m4 | 2 +-
@@ -26,3 +28,6 @@ index 91d12b99b..f5e603b96 100644
      pkg="${pkg%-}"
      _PKG_CONFIG([PYTHON_CFLAGS], [cflags], [${pkg}])
      _PKG_CONFIG([PYTHON_LIBS], [libs], [${pkg}])
+-- 
+2.25.1
+
