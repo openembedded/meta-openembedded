@@ -18,14 +18,14 @@ DEPENDS += " \
     tiff \
 "
 
-SRC_URI = " \
-    gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https \
-    file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
-    file://fix-libdir-for-multilib.patch \
-    file://create-links-with-relative-path.patch \
-    file://not-append-system-name-to-lib-name.patch \
-    file://wx-config-fix-libdir-for-multilib.patch \
-"
+SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https \
+           file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
+           file://fix-libdir-for-multilib.patch \
+           file://create-links-with-relative-path.patch \
+           file://not-append-system-name-to-lib-name.patch \
+           file://wx-config-fix-libdir-for-multilib.patch \
+           file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
+           "
 SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
 S = "${WORKDIR}/git"
 
