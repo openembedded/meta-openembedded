@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
            file://0001-Use-relative-install-paths-for-CMake.patch \
            "
 
-SRCREV = "718ac672374a2b0f50cbc7d637d90e6471babc3d"
+SRCREV = "dabdcd9cc6a0058fd6966d7d2e19d508debcc0ac"
 
 S = "${WORKDIR}/git/libyui"
 
