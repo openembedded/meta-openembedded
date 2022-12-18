@@ -19,8 +19,10 @@ DEPENDS = " \
 DEPENDS:append:libc-musl = " argp-standalone"
 LDFLAGS:append:libc-musl = " -largp"
 
-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "fc0df945188172264ec5bf1d0bda08264fadc8a3f856d47eba91f31fe354b507"
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz \
+           file://0001-Replace-off64_t-with-off_t.patch \
+           "
+SRC_URI[sha256sum] = "44397ba76e75a9cde5b02177bc63cd7af428a785788e3a7067733e7761842735"
 
 inherit autotools gettext pkgconfig
 
@@ -30,7 +32,7 @@ PACKAGECONFIG ??= " \
     keyring \
     cryptsetup \
     veritysetup \
-    cryptsetup-reencrypt \
+    luks2-reencryption \
     integritysetup \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
     kernel_crypto \
@@ -50,7 +52,7 @@ PACKAGECONFIG[pwquality] = "--enable-pwquality,--disable-pwquality,libpwquality"
 PACKAGECONFIG[passwdqc] = "--enable-passwdqc,--disable-passwdqc,passwdqc"
 PACKAGECONFIG[cryptsetup] = "--enable-cryptsetup,--disable-cryptsetup"
 PACKAGECONFIG[veritysetup] = "--enable-veritysetup,--disable-veritysetup"
-PACKAGECONFIG[cryptsetup-reencrypt] = "--enable-cryptsetup-reencrypt,--disable-cryptsetup-reencrypt"
+PACKAGECONFIG[luks2-reencryption] = "--enable-luks2-reencryption,--disable-luks2-reencryption"
 PACKAGECONFIG[integritysetup] = "--enable-integritysetup,--disable-integritysetup"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux"
 PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,,udev lvm2-udevrules"
@@ -78,7 +80,8 @@ EXTRA_OECONF += "--enable-largefile"
 EXTRA_OECONF += "--disable-static-cryptsetup"
 # There's no recipe for libargon2 yet
 EXTRA_OECONF += "--disable-libargon2"
-
+# Disable documentation, there is no asciidoctor-native available in OE
+EXTRA_OECONF += "--disable-asciidoc"
 # libcryptsetup default PBKDF algorithm, Argon2 memory cost (KB), parallel threads and iteration time (ms)
 LUKS2_PBKDF ?= "argon2i"
 LUKS2_MEMORYKB ?= "1048576"
