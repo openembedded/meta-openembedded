@@ -11,7 +11,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gobject-introspection gtk-doc gettext vala
 
-SRC_URI[archive.sha256sum] = "0369d0b00bb0f59ba5f7aea8cfc665f38df14a5b4182d28c7c1e2cd15b518743"
+SRC_URI[archive.sha256sum] = "f352acf73665669934270636fede66b52da6801fe20f638c4048ab2678577b2d"
 
 GIR_MESON_OPTION = "enable-introspection"
 GTKDOC_MESON_OPTION = "enable-gtk-doc"
@@ -20,7 +20,7 @@ GTKDOC_MESON_OPTION = "enable-gtk-doc"
 # | bindings/vala/meson.build:15:0: ERROR: Unknown variable "grlnet_gir".
 PACKAGECONFIG ??= "net"
 
-PACKAGECONFIG[net] = "-Denable-grl-net=true, -Denable-grl-net=false, libsoup-2.4"
+PACKAGECONFIG[net] = "-Denable-grl-net=true, -Denable-grl-net=false, libsoup-3.0"
 PACKAGECONFIG[test-ui] = "-Denable-test-ui=true, -Denable-test-ui=false, gtk+3 liboauth"
 
 # Once we have a recipe for 'totem-plparser' this can turn into a PACKAGECONFIG
