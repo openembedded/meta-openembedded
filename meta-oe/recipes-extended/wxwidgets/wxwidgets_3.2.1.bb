@@ -25,6 +25,7 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https 
            file://not-append-system-name-to-lib-name.patch \
            file://wx-config-fix-libdir-for-multilib.patch \
            file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
+           file://musl-locale-l.patch \
            "
 SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
 S = "${WORKDIR}/git"
@@ -38,9 +39,6 @@ EXTRA_OECMAKE += " \
     -DwxUSE_LIBPNG=sys \
     -DwxUSE_LIBTIFF=sys \
     -DwxUSE_REGEX=builtin \
-"
-EXTRA_OECMAKE:append:libc-musl = " \
-    -DHAVE_LOCALE_T=OFF \
 "
 EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
 
