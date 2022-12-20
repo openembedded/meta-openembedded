@@ -11,10 +11,11 @@ DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
 PYPI_PACKAGE = "wxPython"
 
 SRC_URI += "file://add-back-option-build-base.patch \
-            file://wxgtk-fixup-build-scripts.patch \
-            file://not-overwrite-cflags-cxxflags.patch \
-            file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
-            "
+           file://wxgtk-fixup-build-scripts.patch \
+           file://not-overwrite-cflags-cxxflags.patch \
+           file://0001-pypubsub-Replace-deprecated-inspect.getargspec.patch \
+           file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
+           "
 SRC_URI[sha256sum] = "663cebc4509d7e5d113518865fe274f77f95434c5d57bc386ed58d65ceed86c7"
 
 S = "${WORKDIR}/wxPython-${PV}"
