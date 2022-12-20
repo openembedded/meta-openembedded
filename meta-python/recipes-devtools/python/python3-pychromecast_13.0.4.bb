@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
 
-SRC_URI[sha256sum] = "1b520e477492cd8fe022e4d041e676056d5fffbb6c05b2f4509801a06bc67bec"
+SRC_URI[sha256sum] = "792fba3f31e4968a5e99c19c771774083a2aa7e897ebf6f5e218e308e33a461f"
 
 PYPI_PACKAGE = "PyChromecast"
 
