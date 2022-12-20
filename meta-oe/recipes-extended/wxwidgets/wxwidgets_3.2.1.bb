@@ -26,6 +26,7 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https 
            file://wx-config-fix-libdir-for-multilib.patch \
            file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
            file://musl-locale-l.patch \
+           file://0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
            "
 SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
 S = "${WORKDIR}/git"
@@ -75,6 +76,9 @@ PACKAGECONFIG[opengl] = "-DwxUSE_OPENGL=ON,-DwxUSE_OPENGL=OFF,libglu"
 PACKAGECONFIG[sdl_audio] = "-DwxUSE_LIBSDL=ON,-DwxUSE_LIBSDL=OFF,libsdl2"
 PACKAGECONFIG[webkit] = "-DwxUSE_WEBVIEW_WEBKIT=ON,-DwxUSE_WEBVIEW_WEBKIT=OFF,webkitgtk,,,no_gui"
 PACKAGECONFIG[curl] = "-DwxUSE_WEBREQUEST_CURL=ON,-DwxUSE_WEBREQUEST_CURL=OFF,curl"
+
+# Support LFS unconditionally
+CXXFLAGS += "-D_FILE_OFFSET_BITS=64"
 
 do_compile:append() {
     # if not at re-compile
