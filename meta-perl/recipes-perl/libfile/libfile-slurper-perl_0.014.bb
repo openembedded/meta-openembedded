@@ -13,7 +13,7 @@ file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/File-Slurper-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "e2f6a4029a6a242d50054044f1fb86770b9b5cc4daeb1a967f91ffb42716a8c5"
+SRC_URI[sha256sum] = "d5a36487339888c3cd758e648160ee1d70eb4153cacbaff57846dbcefb344b0c"
 RDEPENDS:${PN} = " \
     perl-module-carp \
     perl-module-encode \
