@@ -9,6 +9,7 @@ DEPENDS = " \
 inherit pkgconfig gsettings gobject-introspection features_check cmake gtk-doc gettext perlnative vala
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI += " \
     file://0001-cmake-Do-not-export-CC-into-gir-compiler.patch \
