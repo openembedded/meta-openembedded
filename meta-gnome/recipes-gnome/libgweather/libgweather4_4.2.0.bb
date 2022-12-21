@@ -7,7 +7,9 @@ GNOMEBASEBUILDCLASS = "meson"
 GNOMEBN = "libgweather"
 S = "${WORKDIR}/${GNOMEBN}-${PV}"
 
-inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala
+inherit gnomebase gsettings gobject-introspection gettext gtk-doc vala features_check
+
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
 SRC_URI[archive.sha256sum] = "af8a812da0d8976a000e1d62572c256086a817323fbf35b066dbfdd8d2ca6203"
