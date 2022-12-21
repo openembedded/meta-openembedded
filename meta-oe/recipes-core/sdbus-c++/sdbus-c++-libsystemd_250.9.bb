@@ -10,11 +10,11 @@ inherit meson pkgconfig
 
 DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
 
-SRCREV = "73be9643910c3f7f3ff84765d63060846c110016"
+SRCREV = "1d5e0e9910500f3c3584485f77bfc35e601036e3"
 SRCBRANCH = "v250-stable"
 SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
            file://static-libsystemd-pkgconfig.patch \
-           file://0001-glibc-Remove-include-linux-fs.h-to-resolve-fsconfig_.patch \
+           file://0001-dirent-util-Remove-asserts-on-dirent64-dirent.patch \
            "
 
 # patches needed by musl
@@ -44,7 +44,6 @@ SRC_URI_MUSL = "\
                file://0025-Handle-__cpu_mask-usage.patch \
                file://0026-Handle-missing-gshadow.patch \
                file://0028-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch \
-               file://0001-pass-correct-parameters-to-getdents64.patch \
                file://0002-Add-sys-stat.h-for-S_IFDIR.patch \
                file://0001-Adjust-for-musl-headers.patch \
                "
