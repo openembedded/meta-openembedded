@@ -8,10 +8,10 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 DEPENDS = "virtual/kernel"
 
-SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
+SRC_URI = "https://pkg.linbit.com//downloads/drbd/9/${BP}.tar.gz \
            file://check_existence_of_modules_before_installing.patch \
            "
-SRC_URI[sha256sum] = "14970459f55bc465503b88b24d1a266b2ace0d69fe3cb387005b8477cd6475ed"
+SRC_URI[sha256sum] = "f59ee795188f21d4a62c5319c371ebad65ab3fb9b55e5212c3f1dd558978a843"
 
 inherit module
 

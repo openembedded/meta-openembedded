@@ -8,14 +8,15 @@ SECTION = "admin"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
-SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
+SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;protocol=https \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
+           file://0001-replace-off64_t-with-off_t.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
            "
-
-SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
-SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
+SRC_URI:append:libc-musl = " file://0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch "
+SRCREV_drbd-utils = "409097fe02187f83790b88ac3e0d94f3c167adab"
+SRCREV_drbd-headers = "9a0f151fa0085f57910a2dcbbd658d6069554f62"
 
 SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
