@@ -41,6 +41,7 @@ USERADD_PARAM:${PN} = "-U -m fsgqa; -N 123456-fsgqa; -N fsgqa2"
 
 EXTRA_OECONF = "INSTALL_USER=root INSTALL_GROUP=root"
 
+TARGET_CC_ARCH:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 # install-sh script in the project is outdated
 # we use the one from the latest libtool to solve installation issues
 # It looks like the upstream is not interested in having it fixed :(
