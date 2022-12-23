@@ -23,6 +23,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[gettext] = "--enable-gettext=yes,--enable-gettext=no,gettext"
 
 CFLAGS += "-D_FILE_OFFSET_BITS=64"
+TARGET_CC_ARCH:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
 do_configure () {
     export DEBUG="-DNDEBUG"
