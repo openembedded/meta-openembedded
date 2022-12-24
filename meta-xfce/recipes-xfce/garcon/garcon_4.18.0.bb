@@ -11,7 +11,7 @@ inherit xfce gtk-doc gobject-introspection features_check
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
-SRC_URI[sha256sum] = "84914927a2c1fda167f67af26a6640630a744a22940df508aa6c752cdbd3d21d"
+SRC_URI[sha256sum] = "54633487566a8b8502b71c11a7f719efe27c069bd5773cc95f11ff4ea8f11a14"
 
 EXTRA_OECONF = "--disable-gtk-doc"
 
