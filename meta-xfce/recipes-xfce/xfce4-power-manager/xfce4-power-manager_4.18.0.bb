@@ -11,7 +11,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[sha256sum] = "eb9c587c01b502fa45a32e7fc2aba98fa6d8391475133883654f77e562c43bf3"
+SRC_URI[sha256sum] = "2eee467886252f9fa704c978ec67dafad5274ede93e59b092a688faa7e72c39a"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
