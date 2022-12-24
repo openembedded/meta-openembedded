@@ -1,19 +1,19 @@
 SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
 SECTION = "x11"
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
+LICENSE = "GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "libwnck3 libsm libxfce4ui virtual/libx11"
 
 inherit xfce update-alternatives features_check
 
+SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
+SRC_URI[sha256sum] = "38badb500b272012f494543a60a9c0563c381647cc95bed73b68aec0b0b89a7f"
+
 REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
 PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
-
-SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
-SRC_URI[sha256sum] = "22f273f212481d71e0b5618c62710cd85f69aea74f5ea5c0093f7918b07d17b7"
 
 ALTERNATIVE:${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
