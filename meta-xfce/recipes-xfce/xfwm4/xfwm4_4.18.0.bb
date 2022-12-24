@@ -1,6 +1,6 @@
 DESCRIPTION = "Xfce4 Window Manager"
 SECTION = "x11/wm"
-LICENSE = "GPL-2.0-only"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
 DEPENDS = "virtual/libx11 libxfce4ui libwnck3 libxinerama"
 
@@ -8,7 +8,7 @@ inherit xfce update-alternatives features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "b5b24ca04bd73c642db0a4b4df81d262381d758f01b51108257d48b391b8718c"
+SRC_URI[sha256sum] = "92cd1b889bb25cb4bc06c1c6736c238d96e79c1e706b9f77fad0a89d6e5fc13f"
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
