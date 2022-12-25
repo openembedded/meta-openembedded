@@ -39,6 +39,7 @@ RDEPENDS:${PN} = " \
     bubblewrap \
     ca-certificates \
     dconf \
+    flatpak-xdg-utils \
 "
 
 GIR_MESON_OPTION = ""
