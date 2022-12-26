@@ -38,6 +38,7 @@ DEPENDS = " \
 	usbutils \
 	zlib \
 "
+DEPENDS:append:libc-musl = " libucontext"
 
 RDEPENDS:${PN} = "python3-pyparsing python3-six"
 
@@ -46,5 +47,7 @@ inherit meson pkgconfig vala gobject-introspection features_check
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMESON = "-Dpie=true -Dvapi=enabled -Dintrospection=enabled"
+EXTRA_OEMESON:append:libc-musl = " -Dcoroutine=libucontext"
+
 
 FILES:${PN} += "${datadir}"
