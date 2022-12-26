@@ -11,10 +11,11 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
 "
 
-SRCREV = "6f6e5df9c1b223907efa8dcbfcd538821d0dabc4"
-SRC_URI = "git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
-           file://90-OE-disable-session-dbus-dependent-features.lua \
-           "
+SRCREV = "7cb1b8b92e96ebd1b7e632cda32715fed713d333"
+SRC_URI = " \
+    git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
+    file://90-OE-disable-session-dbus-dependent-features.lua \
+"
 
 S = "${WORKDIR}/git"
 
@@ -45,17 +46,18 @@ PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=true,-Dsystemd
 # files to rootfs but not enable them as systemd.bbclass
 # currently lacks the feature of enabling user services.
 PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=true,-Dsystemd-user-service=false,systemd"
+PACKAGECONFIG[dbus] = ""
 
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
 
 WP_MODULE_SUBDIR = "wireplumber-0.4"
 
-add_custom_lua_config_scripts() {
-    install -m 0644 ${WORKDIR}/90-OE-disable-session-dbus-dependent-features.lua ${D}${datadir}/wireplumber/main.lua.d
+do_install:append() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'false', 'true', d)}; then
+        install -m 0644 ${WORKDIR}/90-OE-disable-session-dbus-dependent-features.lua ${D}${datadir}/wireplumber/main.lua.d
+    fi
 }
-
-do_install[postfuncs] += "add_custom_lua_config_scripts"
 
 python split_dynamic_packages () {
     # Create packages for each WirePlumber module.
