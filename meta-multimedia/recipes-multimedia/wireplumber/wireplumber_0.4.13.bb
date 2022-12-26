@@ -36,7 +36,7 @@ EXTRA_OEMESON += " \
     -Dtests=false \
 "
 
-PACKAGECONFIG ??= "\
+PACKAGECONFIG ??= " dbus \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
 "
 
