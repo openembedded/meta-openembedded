@@ -16,21 +16,22 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "f3caa293a5e86f6ccad18f817273db1c67061e680d79d839aa8a7528e5bb26d6"
-SRC_URI += " \
-    file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
-    file://0001-meson.build-Disable-libseccomp-for-all-archs.patch \
-"
+SRC_URI += "file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch"
+SRC_URI[archive.sha256sum] = "3d6e153317486157596aa3802f87676414c570738f450a94a041fe8835420a69"
 
 DEPENDS += " \
+    fontconfig \
+    gdk-pixbuf \
+    glib-2.0 \
     gsettings-desktop-schemas \
-    virtual/libx11 \
     gtk+3 \
     gtk4 \
-    startup-notification \
-    xkeyboard-config \
     iso-codes \
-    udev \
+    xext \
+    libseccomp \
+    libxkbcommon \
+    xkeyboard-config \
+    xrandr \
 "
 
 GTKDOC_MESON_OPTION = "gtk_doc"
