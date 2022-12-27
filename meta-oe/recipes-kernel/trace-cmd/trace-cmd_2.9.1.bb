@@ -16,6 +16,8 @@ DEPENDS += "libtraceevent libtracefs zstd xmlto-native asciidoc-native"
 
 inherit pkgconfig
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_compile() {
         oe_runmake libdir_relative=${BASELIB} all libs
 }
