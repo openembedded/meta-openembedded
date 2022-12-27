@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
 SRC_URI += "file://run-ptest \
 	    "
 
-SRC_URI[sha256sum] = "4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424"
+SRC_URI[sha256sum] = "9567dfe7bd8d3c8c892227827c41cce860b368104c3431da67a0c5a65a949506"
 
 export BUILD_SYS
 export HOST_SYS
