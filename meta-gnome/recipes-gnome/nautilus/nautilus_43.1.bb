@@ -7,22 +7,26 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
-    fontconfig \
-    gtk+3 \
-    gnome-desktop \
-    gsettings-desktop-schemas \
+    appstream-glib-native \
+    desktop-file-utils-native \
+    glib-2.0 \
     gnome-autoar \
-    tracker \
+    gnome-desktop \
+    gtk4 \
+    libadwaita \
+    libcloudproviders \
     libhandy \
+    libportal \
+    libxml2 \
+    tracker \
 "
 
-inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check mime-xdg
+inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check mime-xdg gtk-icon-cache
 
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI += " file://0001-Provide-parameter-prototype-for-functions-without-pa.patch"
-SRC_URI[archive.sha256sum] = "99212d2eb75996f181728ad04a2e2d86f2577b064e68a34c8b81a7037df4ccb2"
+SRC_URI[archive.sha256sum] = "0da1003c0cda08ac0546a4c143ed3a1697e36823c60fa73f4d2f4da7723bccaf"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
@@ -31,8 +35,8 @@ EXTRA_OEMESON += " \
 "
 
 PACKAGECONFIG = "extensions"
-PACKAGECONFIG[extensions] = "-Dextensions=true,-Dextensions=false, gexiv2 gstreamer1.0-plugins-base"
-PACKAGECONFIG[libportal] = "-Dlibportal=true,-Dlibportal=false, libportal"
+PACKAGECONFIG[extensions] = "-Dextensions=true,-Dextensions=false, gexiv2 gstreamer1.0-plugins-base gdk-pixbuf"
+PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,packagekit"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
@@ -43,4 +47,4 @@ FILES:${PN} += " \
 
 # mandatory - not checked during configuration:
 # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
-RDEPENDS:${PN} += "tracker-miners"
+RDEPENDS:${PN} += "tracker-miners bubblewrap"
