@@ -10,10 +10,10 @@ SRC_URI = "git://github.com/flatpak/${BPN}.git;protocol=https;branch=main"
 SRCREV = "13df0b887a7eb7b0f9b14069561a41f62e813155"
 S = "${WORKDIR}/git"
 
-inherit meson gtk-doc gobject-introspection features_check
+inherit meson gtk-doc gobject-introspection vala features_check
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-DEPENDS += "glib-2.0 glib-2.0-native gtk+3"
+DEPENDS += "glib-2.0 glib-2.0-native gtk+3 gtk4"
 
-EXTRA_OEMESON = "-Dbackends=gtk3 -Dvapi=false"
+EXTRA_OEMESON = "-Dbackends=gtk3,gtk4"
