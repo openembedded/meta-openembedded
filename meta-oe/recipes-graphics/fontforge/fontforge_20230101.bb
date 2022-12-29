@@ -14,7 +14,7 @@ inherit cmake pkgconfig python3native python3targetconfig features_check gettext
 REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
 
 # tag 20220308
-SRCREV = "582bd41a9bf04326300fc02a677fe3610d6d3ccd"
+SRCREV = "a1dad3e81da03d5d5f3c4c1c1b9b5ca5ebcfcecf"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
            file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
