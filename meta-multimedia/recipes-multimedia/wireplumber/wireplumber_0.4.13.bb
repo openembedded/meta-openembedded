@@ -124,7 +124,6 @@ PACKAGES =+ "\
 
 PACKAGES_DYNAMIC = "^${PN}-modules.*"
 
-SYSTEMD_SERVICE:${PN} = "wireplumber.service"
 CONFFILES:${PN} += " \
     ${datadir}/wireplumber/wireplumber.conf \
     ${datadir}/wireplumber/*.lua.d/* \
@@ -134,7 +133,7 @@ CONFFILES:${PN} += " \
 # itself to become a daemon, in practice, the PipeWire daemon is used.
 RRECOMMENDS:${PN} += "pipewire ${PN}-scripts ${PN}-modules-meta"
 
-FILES:${PN} += "${systemd_user_unitdir}"
+FILES:${PN} += "${systemd_user_unitdir} ${systemd_system_unitdir}"
 
 FILES:libwireplumber = " \
     ${libdir}/libwireplumber-*.so.* \
