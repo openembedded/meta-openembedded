@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c02ea30650b91528657db64baea1757"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "91b8e218852ef6007c2b98cd861601c6a09f1aa32bbbb74fab5b1c33d4a1e410"
+SRC_URI[sha256sum] = "b9a3859f24eb4e097502a3be1fb4b2abb79b6103dd9e2e0edb70613a4459a648"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-typing-extensions \
