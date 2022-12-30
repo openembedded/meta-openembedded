@@ -37,7 +37,7 @@ SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.pat
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
-PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false, networkmanager"
+PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false,networkmanager,networkmanager"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
 
 EXTRA_OEMESON = " \
@@ -65,7 +65,19 @@ FILES:${PN} += " \
     ${systemd_user_unitdir} \
 "
 
-RDEPENDS:${PN} += "gnome-desktop gsettings-desktop-schemas gdm-base librsvg-gtk ${PN}-gsettings"
+RDEPENDS:${PN} += " \
+	accountsservice \
+	gdm-base \
+	gnome-control-center \
+	gnome-backgrounds \
+	gnome-bluetooth \
+	gnome-desktop \
+	gnome-session \
+	gnome-settings-daemon \
+	gnome-shell-gsettings \
+	gsettings-desktop-schemas \
+	librsvg-gtk \
+"
 
 PACKAGES =+ "${PN}-tools ${PN}-gsettings"
 FILES:${PN}-tools = "${bindir}/*-tool"
