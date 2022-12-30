@@ -11,7 +11,7 @@ DEPENDS += " \
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "083b7172c2938412ae37c3a090250bfdd9e4a6e855442594f86c3608ed12729b"
+SRC_URI[sha256sum] = "e1431d84a9cfb23e6773e72078ce8e65cad6745816d4cbf9ae67da5ea419acda"
 
 inherit pkgconfig pypi python_setuptools_build_meta ptest
 
