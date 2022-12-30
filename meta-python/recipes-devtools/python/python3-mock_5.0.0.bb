@@ -13,4 +13,4 @@ RDEPENDS:${PN} += "${PYTHON_PN}-prettytable \
             ${PYTHON_PN}-pep8 \
             ${PYTHON_PN}-pyflakes"
 
-SRC_URI[sha256sum] = "7d3fbbde18228f4ff2f1f119a45cdffa458b4c0dee32eb4d2bb2f82554bac7bc"
+SRC_URI[sha256sum] = "fd552787228eb2ab8352f270470fa93c9ad8b9cbc565c5558ee3faed8edb3853"
