@@ -7,12 +7,10 @@ LIC_FILES_CHKSUM = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gnome-help gettext itstool upstream-version-is-even
+inherit gsettings gnome-help gettext itstool upstream-version-is-even
 
 DEPENDS = " \
-    glib-2.0-native \
-    intltool-native \
-    yelp-tools-native \
+    glib-2.0 \
     docbook-xsl-stylesheets-native libxslt-native \
     desktop-file-utils-native \
     gtk+3 \
@@ -22,14 +20,14 @@ DEPENDS = " \
     libpcre2 \
 "
 
-SRC_URI[archive.sha256sum] = "8a9c8e5ef7a3a73b246a947e1190bb08ec98935af860cf0b3aa2fbf4606817a0"
+SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1"
 SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
-SRC_URI += "  file://0001-build-Fix-for-newer-meson.patch"
+SRCREV = "816edf80cd7bf7f253366099ea9fcaf361676139"
+S = "${WORKDIR}/git"
 
-EXTRA_OEMESON += " \
-    -Dsearch_provider=false \
-    -Dnautilus_extension=false \
-"
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"
+PACKAGECONFIG[search_provider] = "-Dsearch_provider=true,-Dsearch_provider=false,,gnome-shell"
 
 FILES:${PN} += " \
     ${datadir}/metainfo \
