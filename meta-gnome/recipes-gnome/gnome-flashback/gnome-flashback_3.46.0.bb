@@ -14,11 +14,11 @@ DEPENDS += " \
     metacity \
     gdm \
     gnome-desktop \
-    gnome-bluetooth3 \
+    gnome-bluetooth \
     gnome-panel \
 "
 
-SRC_URI[archive.sha256sum] = "1df0838127c6246eecd89d1c50ff88fc82abf6de3b3068e52dde495a42bd550a"
+SRC_URI[archive.sha256sum] = "7a8d5c03310e4dfadd18a65e00a37741032afeea5418dd6804a975c4b0980045"
 
 do_install:append() {
     # no oe-layer has compiz -> remove dead session
