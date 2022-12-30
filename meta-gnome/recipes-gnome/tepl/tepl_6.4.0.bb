@@ -21,7 +21,7 @@ inherit meson gobject-introspection gettext features_check pkgconfig
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 SRC_URI = "git://gitlab.gnome.org/swilmet/tepl;protocol=https;branch=main"
-SRCREV = "34973a0d48ba5a0dd0a776c66bfc0c3f65682d9c"
+SRCREV = "d1e9cc2e4a0738f68d9002f13724b7239f075844"
 S = "${WORKDIR}/git"
 
 # gobject-introspection is mandatory and cannot be configured
