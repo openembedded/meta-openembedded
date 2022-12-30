@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/LudovicRousseau/pcsc-tools;protocol=https;branch=master"
 
-SRCREV = "c6e9fa746d00e08fc71c57c79e305669ff2e3106"
+SRCREV = "63e532cfa97932aac76ca5f7473d1ce11602a139"
 
 inherit autotools pkgconfig
 
