@@ -14,14 +14,12 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=dd4d0ad4c5e98abb58aa0d312f276791"
-DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d31018dba5a0ef195eb426a1e61f02e"
 
-inherit autotools-brokensep binconfig perlnative systemd update-rc.d
+inherit autotools-brokensep binconfig perlnative systemd update-rc.d pkgconfig
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
            file://crosscompile_nm.patch \
            file://etc/init.d/krb5-kdc \
@@ -30,26 +28,26 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://etc/default/krb5-admin-server \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
-           file://CVE-2021-36222.patch;striplevel=2 \
-           file://CVE-2021-37750.patch;striplevel=2 \
 "
-SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
-SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
+SRC_URI[md5sum] = "73f5780e7b587ccd8b8cfc10c965a686"
+SRC_URI[sha256sum] = "704aed49b19eb5a7178b34b2873620ec299db08752d6a8574f95d41879ab8851"
 
 CVE_PRODUCT = "kerberos"
 CVE_VERSION = "5-${PV}"
 
 S = "${WORKDIR}/${BP}/src"
 
+DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
+
 PACKAGECONFIG ??= "pkinit"
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
 PACKAGECONFIG[openssl] = "--with-crypto-impl=openssl,,openssl"
-PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
+PACKAGECONFIG[keyutils] = "--with-keyutils,--without-keyutils,keyutils"
 PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
 PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
 PACKAGECONFIG[pkinit] = "--enable-pkinit, --disable-pkinit"
 
-EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
+EXTRA_OECONF += "--with-system-et --disable-rpath"
 CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
                   ac_cv_file__etc_TIMEZONE=no"
@@ -85,6 +83,7 @@ do_install:append() {
 
         echo "RUN_KADMIND=true" >> ${D}/${sysconfdir}/default/krb5-admin-server
     fi
+
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/krb5kdc - - - -" \
