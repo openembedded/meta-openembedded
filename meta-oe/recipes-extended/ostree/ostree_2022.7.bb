@@ -18,18 +18,15 @@ DEPENDS = " \
 "
 
 SRC_URI = " \
-    gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
-    file://0001-Remove-unused-linux-fs.h-includes.patch \
-    file://0001-libostree-Remove-including-sys-mount.h.patch \
-    file://0001-s390x-se-luks-gencpio-There-is-no-bashism.patch \
-    file://0001-deploy-Don-t-rebuild-selinux-policy-on-first-deploym.patch \
+    https://github.com/ostreedev/ostree/releases/download/v${PV}/libostree-${PV}.tar.xz \
+    file://0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch \
     file://run-ptest \
 "
-SRCREV = "15740d042c9c5258a1c082b5e228cf6f115edbb0"
+SRC_URI[sha256sum] = "8be2a9261c94e8b9ec4113380ffc480f8598245fb321a009bad4fae4b822411f"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/libostree-${PV}"
 
 inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
 
