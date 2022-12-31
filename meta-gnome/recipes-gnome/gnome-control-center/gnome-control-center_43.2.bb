@@ -4,35 +4,40 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
 GNOMEBASEBUILDCLASS = "meson"
-
-inherit gnomebase gsettings gettext vala upstream-version-is-even bash-completion features_check
+GTKIC_VERSION = "4"
 
 DEPENDS = " \
-    gdk-pixbuf-native \
-    colord-gtk \
-    udisks2 \
-    upower \
-    polkit \
-    pulseaudio \
     accountsservice \
-    samba \
-    gsettings-desktop-schemas \
-    gnome-settings-daemon \
+    colord-gtk \
+    gcr3 \
+    gdk-pixbuf \
+    glib-2.0 \
+    gnome-bluetooth \
     gnome-desktop \
     gnome-online-accounts \
-    libnma \
-    gnome-bluetooth \
-    grilo \
-    libgtop \
-    gsound \
-    libpwquality \
+    gnome-settings-daemon \
+    gsettings-desktop-schemas \
+    gtk4 \
     libadwaita \
+    libepoxy \
+    libgtop \
+    libgudev \
+    libnma \
+    libpwquality \
+    libxml2 \
+    polkit \
+    pulseaudio \
+    samba \
+    udisks2 \
+    upower \
 "
 
-REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
+inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is-even bash-completion features_check useradd
 
-SRC_URI[archive.sha256sum] = "0732efa7c4171ce0a0ed4106580b4ce35a57b10152c0ea36d239134913777eda"
+REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
+
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
+SRC_URI[archive.sha256sum] = "d7f256aba80a92c727b329fd01c8602da4b78f0fddaec93fcd91096964700563"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
@@ -42,8 +47,10 @@ EXTRA_OEMESON = " \
     -Doe_sysroot=${STAGING_DIR_HOST} \
 "
 
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd"
+
 do_install:append() {
-	# If polkit is setup fixup permissions and ownership
     if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
         chmod 700 ${D}${datadir}/polkit-1/rules.d
         chown polkitd:root ${D}${datadir}/polkit-1/rules.d
