@@ -34,6 +34,7 @@ BRANCH = "client_release/7/7.20"
 SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
            file://boinc-AM_CONDITIONAL.patch \
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
+           file://0001-Do-not-undefine-_FILE_OFFSET_BITS.patch \
 "
 
 inherit gettext autotools pkgconfig features_check systemd
