@@ -1,5 +1,5 @@
 SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
-HOMEPAGE = "http://ldb.samba.org"
+HOMEPAGE = "https://ldb.samba.org"
 SECTION = "libs"
 LICENSE = "LGPL-3.0-or-later & LGPL-2.1-or-later & GPL-3.0-or-later"
 
@@ -9,9 +9,11 @@ RDEPENDS:pyldb += "python3"
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://0001-do-not-import-target-module-while-cross-compile.patch \
            file://0002-ldb-Add-configure-options-for-packages.patch \
-           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
-           file://libldb-fix-musl-libc-conflict-type-error.patch \
+           file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://0004-wscript-skip-checking-PYTHONHASHSEED.patch \
           "
+
+SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
@@ -26,14 +28,14 @@ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
 
-SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://0003-avoid-openldap-unless-wanted.patch', d)}"
+SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
 
 LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9adade \
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "b01d6913a06901c22c5bc6caedc548ac"
-SRC_URI[sha256sum] = "f2e88dcab7b6007d92724b62f8a16e7c6e77275885c60eb4f87097e4aa4082c1"
+SRC_URI[md5sum] = "3a5f54f511fb237b83e1f34e2c7e25cd"
+SRC_URI[sha256sum] = "467403f77df86782c3965bb175440baa2ed751a9feb9560194bd8c06bf1736c9"
 
 inherit pkgconfig waf-samba
 
