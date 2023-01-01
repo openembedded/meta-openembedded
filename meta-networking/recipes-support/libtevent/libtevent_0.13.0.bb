@@ -6,10 +6,11 @@ LICENSE = "LGPL-3.0-or-later"
 DEPENDS += "libtalloc libtirpc"
 RDEPENDS:python3-tevent = "python3"
 
+export PYTHONHASHSEED="1"
+
 SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
            file://0001-Add-configure-options-for-packages.patch \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
-           file://0003-wscript-skip-checking-PYTHONHASHSEED.patch \
           "
 
 SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"

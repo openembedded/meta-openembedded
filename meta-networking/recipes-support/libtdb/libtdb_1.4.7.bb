@@ -6,10 +6,11 @@ LICENSE = "LGPL-3.0-or-later & GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c98f48018c4 \
                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
 
+export PYTHONHASHSEED="1"
+
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://0001-tdb-Add-configure-options-for-packages.patch \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
-           file://0003-wscript-skip-checking-PYTHONHASHSEED.patch \
 "
 
 SRC_URI[md5sum] = "bc27d5b20c7f013305c40b3bced43b3a"
