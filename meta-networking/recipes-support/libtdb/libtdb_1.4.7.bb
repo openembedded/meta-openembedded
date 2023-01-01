@@ -1,5 +1,5 @@
 SUMMARY = "The tdb library"
-HOMEPAGE = "http://tdb.samba.org/"
+HOMEPAGE = "https://tdb.samba.org/"
 SECTION = "libs"
 LICENSE = "LGPL-3.0-or-later & GPL-3.0-or-later"
 
@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
 
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-           file://tdb-Add-configure-options-for-packages.patch \
-           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://0001-tdb-Add-configure-options-for-packages.patch \
+           file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://0003-wscript-skip-checking-PYTHONHASHSEED.patch \
 "
 
-SRC_URI[md5sum] = "e638e8890f743624a754304b3f994f4d"
-SRC_URI[sha256sum] = "c8058393dfa15f47e11ebd2f1d132693f0b3b3b8bf22d0201bfb305026f88a1b"
+SRC_URI[md5sum] = "bc27d5b20c7f013305c40b3bced43b3a"
+SRC_URI[sha256sum] = "a4fb168def533f31ff2c07f7d9844bb3131e6799f094ebe77d0380adc987c20e"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
@@ -35,6 +36,7 @@ inherit waf-samba
 export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
+                 --disable-rpath-install \
                  --bundled-libraries=NONE \
                  --builtin-libraries=replace \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
