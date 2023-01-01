@@ -19,29 +19,31 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0002-do-not-import-target-module-while-cross-compile.patch \
            file://0003-Add-config-option-without-valgrind.patch \
            file://0004-Add-options-to-configure-the-use-of-libbsd.patch \
-           file://0005-samba-build-dnsserver_common-code.patch \
-           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
-           file://0001-smbtorture-skip-test-case-tfork_cmd_send.patch \
-           file://0001-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
-           file://0001-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
+           file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
+           file://0007-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
+           file://0008-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
+           file://0009-wscript-skip-checking-PYTHONHASHSEED.patch \
            "
 
 SRC_URI:append:libc-musl = " \
-           file://netdb_defines.patch \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
-           file://samba-fix-musl-lib-without-innetgr.patch \
            "
 
-SRC_URI[sha256sum] = "abd5e9e6aa45e55114b188ba189ebdfc8fd3d7718d43f749e477ce7f791e5519"
+SRC_URI[sha256sum] = "c0512079db4cac707ccea4c18aebbd6b2eb3acf6e90735e7f645a326be1f4537"
 
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.17(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d perl-version pkgconfig
 
 # CVE-2011-2411 is valnerble only on HP NonStop Servers.
 CVE_CHECK_IGNORE += "CVE-2011-2411" 
+# Patch for CVE-2018-1050 is applied in version 4.5.15, 4.6.13, 4.7.5.
+CVE_CHECK_IGNORE += "CVE-2018-1050"
+# Patch for CVE-2018-1057 is applied in version 4.3.13, 4.4.16.
+CVE_CHECK_IGNORE += "CVE-2018-1057"
 
 # remove default added RDEPENDS on perl
 RDEPENDS:${PN}:remove = "perl"
@@ -60,10 +62,11 @@ COMPATIBLE_HOST:riscv32 = "null"
 INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
 
-SYSTEMD_PACKAGES = "${PN}-base ${PN}-ad-dc winbind"
+SYSTEMD_PACKAGES = "${PN}-base ${PN}-ad-dc winbind ctdb"
 SYSTEMD_SERVICE:${PN}-base = "nmb.service smb.service"
 SYSTEMD_SERVICE:${PN}-ad-dc = "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'samba.service', '', d)}"
 SYSTEMD_SERVICE:winbind = "winbind.service"
+SYSTEMD_SERVICE:ctdb = "ctdb.service"
 
 # There are prerequisite settings to enable ad-dc, so disable the service by default.
 # Reference:
@@ -74,13 +77,11 @@ SYSTEMD_AUTO_ENABLE:${PN}-ad-dc = "disable"
 #to cross Popen
 export WAF_NO_PREFORK="yes"
 
-# Use krb5.  Build active domain controller.
+# Use krb5. Build active domain controller.
 #
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd zeroconf', d)} \
                    acl cups ad-dc ldap mitkrb5 \
 "
-
-RDEPENDS:${PN}-ctdb-tests += "bash util-linux-getopt"
 
 PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
 PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
@@ -91,12 +92,12 @@ PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
 PACKAGECONFIG[dmapi] = "--with-dmapi,--without-dmapi,dmapi"
 PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
 PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
-PACKAGECONFIG[lttng] = "--with-lttng, --without-lttng,lttng-ust"
-PACKAGECONFIG[archive] = "--with-libarchive, --without-libarchive, libarchive"
-PACKAGECONFIG[libunwind] = ", , libunwind"
-PACKAGECONFIG[gpgme] = ",--without-gpgme,,"
-PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
-PACKAGECONFIG[libbsd] = "--with-libbsd, --without-libbsd, libbsd"
+PACKAGECONFIG[lttng] = "--with-lttng,--without-lttng,lttng-ust"
+PACKAGECONFIG[archive] = "--with-libarchive,--without-libarchive,libarchive"
+PACKAGECONFIG[libunwind] = "--with-libunwind,--without-libunwind,libunwind"
+PACKAGECONFIG[gpgme] = "--with-gpgme,--without-gpgme,gpgme"
+PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb"
+PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
 PACKAGECONFIG[ad-dc] = "--with-experimental-mit-ad-dc,--without-ad-dc,python3-markdown python3-dnspython,"
 PACKAGECONFIG[mitkrb5] = "--with-system-mitkrb5 --with-system-mitkdc=/usr/sbin/krb5kdc,,krb5,"
 
@@ -131,15 +132,14 @@ EXTRA_OECONF += "--enable-fhs \
 
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
-do_configure:append () {
+do_configure:append() {
     cd ${S}/pidl/
     perl Makefile.PL PREFIX=${prefix}
     sed -e 's,VENDORPREFIX)/lib/perl,VENDORPREFIX)/${baselib}/perl,g' \
         -e 's,PERLPREFIX)/lib/perl,PERLPREFIX)/${baselib}/perl,g' -i Makefile
-
 }
 
-do_compile:append () {
+do_compile:append() {
     oe_runmake -C ${S}/pidl
 }
 
@@ -199,7 +199,7 @@ do_install:append() {
 
     chmod 0750 ${D}${sysconfdir}/sudoers.d || true
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
-    
+
     for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc samba_dnsupdate samba_downgrade_db; do
         if [ -f "${D}${sbindir}/$f" ]; then
             sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${sbindir}/$f
@@ -217,8 +217,8 @@ do_install:append() {
 
 PACKAGES =+ "${PN}-python3 ${PN}-pidl \
              ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
-             winbind \
-             ${PN}-common ${PN}-base ${PN}-ad-dc ${PN}-ctdb-tests \
+             winbind ctdb ctdb-tests \
+             ${PN}-common ${PN}-base ${PN}-ad-dc \
              smbclient ${PN}-client ${PN}-server ${PN}-test"
 
 python samba_populate_packages() {
@@ -257,15 +257,30 @@ FILES:${PN}-ad-dc = "${sbindir}/samba \
                      ${systemd_system_unitdir}/samba.service \
                      ${libdir}/krb5/plugins/kdb/samba.so \
 "
+
 RDEPENDS:${PN}-ad-dc = "krb5-kdc"
 
-FILES:${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
-                          ${bindir}/ctdb_run_cluster_tests \
-                          ${sysconfdir}/ctdb/nodes \
-                          ${datadir}/ctdb-tests \
-                          ${datadir}/ctdb/tests \
-                          ${localstatedir}/lib/ctdb \
-                         "
+FILES:ctdb = "${bindir}/ctdb \
+              ${bindir}/ctdb_diagnostics \
+              ${bindir}/ltdbtool \
+              ${bindir}/onnode \
+              ${bindir}/ping_pong \
+              ${sbindir}/ctdbd \
+              ${datadir}/ctdb \
+              ${libexecdir}/ctdb \
+              ${localstatedir}/lib/ctdb \
+              ${sysconfdir}/ctdb \
+              ${sysconfdir}/sudoers.d/ctdb \
+              ${systemd_system_unitdir}/ctdb.service \
+"
+
+FILES:ctdb-tests = "${bindir}/ctdb_run_tests \
+                    ${bindir}/ctdb_run_cluster_tests \
+                    ${datadir}/ctdb-tests \
+                    ${datadir}/ctdb/tests \
+"
+
+RDEPENDS:ctdb-tests += "bash util-linux-getopt ctdb"
 
 FILES:${BPN}-common = "${sysconfdir}/default \
                        ${sysconfdir}/samba \
@@ -278,7 +293,6 @@ FILES:${PN} += "${libdir}/vfs/*.so \
                 ${libdir}/charset/*.so \
                 ${libdir}/*.dat \
                 ${libdir}/auth/*.so \
-                ${datadir}/ctdb/events/* \
 "
 
 FILES:${PN}-dsdb-modules = "${libdir}/samba/ldb"
@@ -317,10 +331,10 @@ FILES:smbclient = "${bindir}/cifsdd \
                    ${bindir}/smbtree \
                    ${libdir}/samba/smbspool_krb5_wrapper"
 
-RDEPENDS:${PN}-pidl:append = " perl libparse-yapp-perl"
 FILES:${PN}-pidl = "${bindir}/pidl \
                     ${libdir}/perl5 \
                    "
+RDEPENDS:${PN}-pidl:append = " perl libparse-yapp-perl"
 
 RDEPENDS:${PN}-client = "\
     smbclient \
@@ -340,13 +354,8 @@ RDEPENDS:${PN}-server = "\
 ALLOW_EMPTY:${PN}-server = "1"
 
 RDEPENDS:${PN}-test = "\
-    ${PN}-ctdb-tests \
+    ctdb-tests \
     ${PN}-testsuite \
     "
 
 ALLOW_EMPTY:${PN}-test = "1"
-
-# Patch for CVE-2018-1050 is applied in version 4.5.15, 4.6.13, 4.7.5.
-# Patch for CVE-2018-1057 is applied in version 4.3.13, 4.4.16.
-CVE_CHECK_IGNORE += "CVE-2018-1050"
-CVE_CHECK_IGNORE += "CVE-2018-1057"

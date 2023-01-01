@@ -1,4 +1,4 @@
-From 28ec4c9323e67cd114a0465015c9f3c2e64e6829 Mon Sep 17 00:00:00 2001
+From 95946ce8b6317f68c51338d19d237ce6da61d1c3 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 27 Aug 2022 13:05:26 -0700
 Subject: [PATCH] waf: Fix errors with Werror=implicit-function-declaration
@@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/buildtools/wafsamba/samba_waf18.py b/buildtools/wafsamba/samba_waf18.py
-index 7a0a08e..c0d2c3e 100644
+index e2a078b..e145c77 100644
 --- a/buildtools/wafsamba/samba_waf18.py
 +++ b/buildtools/wafsamba/samba_waf18.py
 @@ -209,7 +209,7 @@ def CHECK_LIBRARY_SUPPORT(conf, rpath=False, version_script=False, msg=None):
@@ -28,5 +28,5 @@ index 7a0a08e..c0d2c3e 100644
          if version_script:
              script = bld.srcnode.make_node('ldscript')
 -- 
-2.37.2
+2.25.1
 
