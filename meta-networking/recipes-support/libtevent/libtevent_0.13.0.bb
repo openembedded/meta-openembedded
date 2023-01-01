@@ -1,5 +1,5 @@
 SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
-HOMEPAGE = "http://tevent.samba.org"
+HOMEPAGE = "https://tevent.samba.org"
 SECTION = "libs"
 LICENSE = "LGPL-3.0-or-later"
 
@@ -7,14 +7,17 @@ DEPENDS += "libtalloc libtirpc"
 RDEPENDS:python3-tevent = "python3"
 
 SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
-           file://options-0.10.0.patch \
-           file://0001-libtevent-fix-musl-libc-compile-error.patch \
-           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
-"
-LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b85a"
+           file://0001-Add-configure-options-for-packages.patch \
+           file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://0003-wscript-skip-checking-PYTHONHASHSEED.patch \
+          "
 
-SRC_URI[md5sum] = "105c7a4dbb96f1751eb27dfd05e7fa84"
-SRC_URI[sha256sum] = "f8427822e5b2878fb8b28d6f50d96848734f3f3130612fb574fdd2d2148a6696"
+SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"
+
+LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
+
+SRC_URI[md5sum] = "9f413f3184f79a4deecd9444242a5dca"
+SRC_URI[sha256sum] = "b9437a917fa55344361beb64ec9e0042e99cae8879882a62dd38f6abe2371d0c"
 
 inherit pkgconfig waf-samba
 
@@ -38,7 +41,8 @@ S = "${WORKDIR}/tevent-${PV}"
 export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
-                 --bundled-libraries=NONE \
+                 --disable-rpath-install \
+                 --bundled-libraries=cmocka \
                  --builtin-libraries=replace \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                  --without-gettext \
@@ -48,6 +52,7 @@ PACKAGES += "python3-tevent"
 
 RPROVIDES:${PN}-dbg += "python3-tevent-dbg"
 
+FILES:${PN} += "${libdir}/tevent/*"
 FILES:python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
 
 INSANE_SKIP:${MLPREFIX}python3-tevent = "dev-so"
