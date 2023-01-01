@@ -1,20 +1,21 @@
-From 1f24231095a59debcf25d0e3309dc5d1056a7fad Mon Sep 17 00:00:00 2001
+From cc86b8bdd45ca30bdf65a3b8b0960b27aeb34522 Mon Sep 17 00:00:00 2001
 From: Jens Rehsack <rehsack@gmail.com>
 Date: Thu, 19 Nov 2015 20:45:56 +0100
 Subject: [PATCH] avoid openldap unless wanted
 
 Upstream-Status: Inappropriate [embedded specific]
 
+Signed-off-by: Jens Rehsack <rehsack@gmail.com>
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  wscript | 4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/wscript b/wscript
-index 722fdf6..22700d5 100644
+index 7f14847..092da2d 100644
 --- a/wscript
 +++ b/wscript
-@@ -153,9 +153,7 @@ def configure(conf):
+@@ -154,9 +154,7 @@ def configure(conf):
      if conf.env.standalone_ldb:
          conf.CHECK_XSLTPROC_MANPAGES()
  
@@ -26,5 +27,5 @@ index 722fdf6..22700d5 100644
          # we don't want any libraries or modules to rely on runtime
          # resolution of symbols
 -- 
-2.17.1
+2.25.1
 
