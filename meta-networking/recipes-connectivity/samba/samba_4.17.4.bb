@@ -12,6 +12,8 @@ ${SAMBA_MIRROR}    http://mirror.internode.on.net/pub/samba \n \
 ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 "
 
+export PYTHONHASHSEED="1"
+
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://smb.conf \
            file://volatiles.03_samba \
@@ -23,7 +25,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
            file://0007-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
            file://0008-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
-           file://0009-wscript-skip-checking-PYTHONHASHSEED.patch \
            "
 
 SRC_URI:append:libc-musl = " \

@@ -6,11 +6,12 @@ LICENSE = "LGPL-3.0-or-later & LGPL-2.1-or-later & GPL-3.0-or-later"
 DEPENDS += "libtdb libtalloc libtevent popt"
 RDEPENDS:pyldb += "python3"
 
+export PYTHONHASHSEED="1"
+
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://0001-do-not-import-target-module-while-cross-compile.patch \
            file://0002-ldb-Add-configure-options-for-packages.patch \
            file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
-           file://0004-wscript-skip-checking-PYTHONHASHSEED.patch \
           "
 
 SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"
