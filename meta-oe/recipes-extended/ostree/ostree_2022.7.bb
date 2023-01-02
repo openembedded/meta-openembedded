@@ -39,7 +39,9 @@ BUILD_OPTIMIZATION:remove = "-Og"
 BUILD_OPTIMIZATION:append = " -O2"
 
 # Package configuration - match ostree defaults, but without rofiles-fuse
-# otherwise we introduce a dependendency on meta-filesystems
+# otherwise we introduce a dependendency on meta-filesystems and swap
+# soup for curl to avoid bringing in deprecated libsoup2 (though
+# to run ptest requires that you have soup).
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
@@ -48,7 +50,7 @@ PACKAGECONFIG ??= " \
     curl \
 "
 
-# We include soup because ostree can't (currently) be built without
+# We include curl because ostree can't (currently) be built without
 # soup or curl - https://github.com/ostreedev/ostree/issues/1897
 PACKAGECONFIG:class-native ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
@@ -175,13 +177,20 @@ RDEPENDS:${PN}:class-target = " \
 #
 # Note that to get ptest to pass you also need:
 #
-#   xattr in DISTRO_FEATURES
-#   static ostree-prepare-root (PACKAGECONFIG:append:pn-ostree = " static")
-#   meta-python in your layers
-#   overlayfs in your kernel (KERNEL_EXTRA_FEATURES += "features/overlayfs/overlayfs.scc")
+#   xattr in DISTRO_FEATURES (default)
+#   static ostree-prepare-root
+#   ostree-trivial-httpd (requires soup - note soup and curl can coexist)
+#   overlayfs in your kernel
 #   busybox built statically
-#   /var/tmp as a real filesystem (not a tmpfs)
-#   Sufficient disk space (IMAGE_ROOTFS_SIZE = "524288") and RAM (QB_MEM = "-m 1024")
+#   C.UTF-8 locale available
+#   Sufficient disk space/RAM (e.g. core-image-sato-sdk)
+#
+# Something like this in your local.conf:
+#
+# PACKAGECONFIG:append:pn-ostree = " static soup"
+# KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
+# TARGET_CFLAGS:append:pn-busybox = " -static"
+# IMAGE_LINGUAS:append:libc-glibc = " c"
 #
 RDEPENDS:${PN}-ptest += " \
     attr \
