@@ -84,7 +84,7 @@ PACKAGECONFIG[selinux] = "--with-selinux, --without-selinux, libselinux, bubblew
 PACKAGECONFIG[smack] = "--with-smack, --without-smack, smack"
 PACKAGECONFIG[soup] = "--with-soup, --without-soup --disable-glibtest, libsoup-2.4"
 PACKAGECONFIG[static] = ""
-PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_unitdir}/system, --without-libsystemd, systemd"
+PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_system_unitdir}, --without-libsystemd, systemd"
 PACKAGECONFIG[trivial-httpd-cmdline] = "--enable-trivial-httpd-cmdline, --disable-trivial-httpd-cmdline"
 
 EXTRA_OECONF = " \
@@ -139,7 +139,7 @@ PACKAGE_BEFORE_PN = " \
 FILES:${PN} += " \
     ${nonarch_libdir}/${BPN} \
     ${nonarch_libdir}/tmpfiles.d \
-    ${systemd_unitdir}/system \
+    ${systemd_system_unitdir} \
     ${systemd_unitdir}/system-generators \
 "
 FILES:${PN}-dracut = " \
@@ -156,7 +156,7 @@ FILES:${PN}-mkinitcpio = " \
 "
 FILES:${PN}-switchroot = " \
     ${nonarch_libdir}/${BPN}/ostree-prepare-root \
-    ${systemd_unitdir}/system/ostree-prepare-root.service \
+    ${systemd_system_unitdir}/ostree-prepare-root.service \
 "
 FILES:${PN}-trivial-httpd = " \
     ${libexecdir}/libostree/ostree-trivial-httpd \
