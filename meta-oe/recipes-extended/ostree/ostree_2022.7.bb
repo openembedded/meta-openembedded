@@ -20,6 +20,7 @@ DEPENDS = " \
 SRC_URI = " \
     https://github.com/ostreedev/ostree/releases/download/v${PV}/libostree-${PV}.tar.xz \
     file://0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch \
+    file://0001-tests-Handle-musl-s-ERANGE-mapping.patch \
     file://run-ptest \
 "
 SRC_URI[sha256sum] = "8be2a9261c94e8b9ec4113380ffc480f8598245fb321a009bad4fae4b822411f"
