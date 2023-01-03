@@ -21,7 +21,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  			    ((statsvfs.f_bfree - 1) * statsvfs.f_frsize)) {
  				syslog(
  				    LOG_ERR,
-+#if _FILE_OFFSET_BITS == 64 && __WORDSIZE == 32
++#if (_FILE_OFFSET_BITS == 64 || __TIMESIZE == 64) && __WORDSIZE == 32
 +				    "Insufficient shared memory (%lld) to write the data of size: %" PRId64
 +#else
  				    "Insufficient shared memory (%ld) to write the data of size: %" PRId64
