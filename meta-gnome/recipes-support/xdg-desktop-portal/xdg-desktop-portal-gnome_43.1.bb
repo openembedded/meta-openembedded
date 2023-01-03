@@ -7,12 +7,15 @@ DEPENDS = " \
     glib-2.0-native \
     gtk4\
     xdg-desktop-portal \
+    xdg-desktop-portal-gtk \
     libadwaita \
     fontconfig \
     gsettings-desktop-schemas \
     gnome-desktop \
     dconf \
 "
+
+RDEPENDS:${PN} = "xdg-desktop-portal xdg-desktop-portal-gtk"
 
 inherit meson pkgconfig gsettings features_check
 
