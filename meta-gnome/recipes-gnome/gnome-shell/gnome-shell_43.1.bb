@@ -67,6 +67,8 @@ FILES:${PN} += " \
 
 RDEPENDS:${PN} += " \
 	accountsservice \
+	adwaita-icon-theme \
+	adwaita-icon-theme-cursors \
 	gdm-base \
 	gnome-control-center \
 	gnome-backgrounds \
