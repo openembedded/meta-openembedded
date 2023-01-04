@@ -28,4 +28,8 @@ FILES:${PN} += " \
     ${datadir}/xfce4/panel/plugins/* \
 "
 
-RRECOMMENDS:${PN} = "gvfs gvfsd-trash"
+RRECOMMENDS:${PN} = " \
+    gvfs \
+    gvfsd-trash \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'dbus', 'tumbler', '', d)} \
+"
