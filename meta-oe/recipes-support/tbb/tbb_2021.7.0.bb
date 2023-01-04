@@ -12,15 +12,10 @@ DEPENDS:append:libc-musl = " libucontext"
 PE = "1"
 
 BRANCH = "onetbb_2021"
-SRCREV = "3df08fe234f23e732a122809b40eb129ae22733f"
+SRCREV = "7673da272f7e1592876b42cfe98b9f4cadf6ae41"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
             file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
-            file://0001-Disable-use-of-_tpause-instruction.patch \
-            file://0001-Musl-linux-can-not-use-RTLD_DEEPBIND.patch \
-            file://0001-Disable-LTO-on-clang-riscv32.patch \
 "
-
 S = "${WORKDIR}/git"
 
 inherit cmake
@@ -30,7 +25,11 @@ EXTRA_OECMAKE += " \
                     -DTBB_TEST=OFF \
                     -DCMAKE_BUILD_TYPE=Release \
                 "
-
+# Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
+# tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: /tmp/lto-llvm-264bc2.o: can't link soft-float modules with double-float modules
+# tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: failed to merge target specific data of file /tmp/lto-llvm-264bc2.o
+EXTRA_OECMAKE:append:riscv32:toolchain-clang = " -DTBB_ENABLE_IPO=OFF "
+EXTRA_OECMAKE:append:riscv64:toolchain-clang = " -DTBB_ENABLE_IPO=OFF "
 
 # fails with thumb enabled:
 # | arm-oe-linux-gnueabi-g++  -march=armv7-a -mthumb -mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a9 -mcpu=cortex-a9 -D__ARM__ -D__LINUX_ARM_ARCH__=7 -funwind-tables -mvectorize-with-neon-quad -rdynamic --sysroot=/OE/sysroots/m14tv -c -MMD -DTBB_USE_DEBUG  -g -O0 -DUSE_PTHREAD -fPIC -D__TBB_BUILD=1 -Wall -Wno-parentheses -Wno-non-virtual-dtor -O2 -pipe -g -feliminate-unused-debug-types -fpermissive -fvisibility-inlines-hidden   -I../../src -I../../src/rml/include -I../../include ../../src/tbb/concurrent_queue.cpp
