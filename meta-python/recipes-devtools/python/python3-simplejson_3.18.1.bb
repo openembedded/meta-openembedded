@@ -4,7 +4,7 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
 
-SRC_URI[sha256sum] = "58a429d2c2fa80834115b923ff689622de8f214cf0dc4afa9f59e824b444ab31"
+SRC_URI[sha256sum] = "746086e3ef6d74b53599df31b491d88a355abf2e31c837137dd90f8c4561cafa"
 
 inherit pypi setuptools3
 
