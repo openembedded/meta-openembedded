@@ -414,7 +414,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-sqlparse \
     python3-sqlsoup \
     python3-stevedore \
-    python3-strict-rfc3339 \
     python3-supervisor \
     python3-sympy \
     python3-tabulate \
