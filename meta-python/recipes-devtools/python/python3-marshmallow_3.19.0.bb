@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = "git://github.com/marshmallow-code/marshmallow.git;protocol=https;branch=dev"
 
-SRCREV = "2805f32461fc7801a5f7b6d83facf7cbb8bca278"
+SRCREV = "78edf5582ee325bba99f097cb7167ef73b6f84d8"
 
 S = "${WORKDIR}/git"
 
