@@ -18,7 +18,10 @@ DEPENDS += "\
 
 RDEPENDS:${PN} += "gsettings-desktop-schemas"
 
-SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+SRC_URI = "\
+    https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive \
+    file://0001-daemon-PATH-expand-the-sftp-backend-ssh-client.patch \
+"
 
 SRC_URI[archive.sha256sum] = "03d72b8c15ef438110f0cf457b5655266c8b515d0412b30f4d55cfa0da06ac5e"
 
