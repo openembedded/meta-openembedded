@@ -7,7 +7,6 @@ DEPENDS = "libmnl libnftnl bison-native \
            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
-           file://0001-nftables-python-Split-root-from-prefix.patch \
            file://run-ptest \
           "
 SRC_URI[sha256sum] = "2407430ddd82987670e48dc2fda9e280baa8307abec04ab18d609df3db005e4c"
@@ -39,6 +38,11 @@ RDEPENDS:${PN}-ptest += " ${PN}-python bash make iproute2 iputils-ping procps py
 TESTDIR = "tests"
 
 PRIVATE_LIBS:${PN}-ptest:append = "libnftables.so.1"
+
+do_install:append() {
+    # Avoid "contains reference to TMPDIR" warning
+    find ${D} -name *.pyc -delete
+}
 
 do_install_ptest() {
     cp -rf ${S}/build-aux ${D}${PTEST_PATH}
