@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
     file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch"
 
-SRC_URI[sha256sum] = "460ebfb4ffc5609739a202a3a1d9fda1c30de033b634845b8baa136352bfb432"
+SRC_URI[sha256sum] = "dcf5c90f3f93030e04df1baeb8d388b678c40dd48b135ea12a7be7dee8944934"
 
 inherit autotools-brokensep bash-completion pkgconfig systemd github-releases
 
