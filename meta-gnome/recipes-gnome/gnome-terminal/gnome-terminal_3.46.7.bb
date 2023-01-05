@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gsettings gnome-help gettext itstool upstream-version-is-even
+inherit pkgconfig meson gsettings gnome-help gettext itstool upstream-version-is-even
 
 DEPENDS = " \
     glib-2.0 \
@@ -30,8 +30,8 @@ PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,
 PACKAGECONFIG[search_provider] = "-Dsearch_provider=true,-Dsearch_provider=false,,gnome-shell"
 
 FILES:${PN} += " \
-    ${datadir}/metainfo \
-    ${datadir}/dbus-1 \
+    ${datadir} \
+    ${libdir}/nautilus/extensions-4 \
     ${systemd_user_unitdir} \
 "
 
