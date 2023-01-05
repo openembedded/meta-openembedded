@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
 DEPENDS = "libmnl libnftnl bison-native \
            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
-SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
            file://0001-nftables-python-Split-root-from-prefix.patch \
            file://run-ptest \
           "
-
-SRC_URI[sha256sum] = "8d1b4b18393af43698d10baa25d2b9b6397969beecac7816c35dd0714e4de50a"
+SRC_URI[sha256sum] = "2407430ddd82987670e48dc2fda9e280baa8307abec04ab18d609df3db005e4c"
 
 inherit autotools manpages pkgconfig ptest
 
