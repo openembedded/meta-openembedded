@@ -16,11 +16,11 @@ SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/$
 
 SRC_URI[sha256sum] = "460ebfb4ffc5609739a202a3a1d9fda1c30de033b634845b8baa136352bfb432"
 
-inherit autotools-brokensep bash-completion pkgconfig systemd
+inherit autotools-brokensep bash-completion pkgconfig systemd github-releases
 
-DEPENDS = "glib-2.0-native libcap-ng libqb libxml2-native libxslt-native pegtl protobuf protobuf-native xmlto-native"
+DEPENDS = "glib-2.0-native libcap-ng libqb libxml2-native libxslt-native protobuf protobuf-native xmlto-native"
 
-S = "${WORKDIR}/${BPN}-${PV}"
+UPSTREAM_CHECK_REGEX = "releases/tag/usbguard-(?P<pver>\d+(\.\d+)+)"
 
 EXTRA_OECONF += "\
     --with-bundled-catch \
