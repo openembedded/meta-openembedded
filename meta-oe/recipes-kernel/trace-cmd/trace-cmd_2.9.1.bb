@@ -19,7 +19,8 @@ inherit pkgconfig
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile() {
-        oe_runmake libdir_relative=${BASELIB} all libs
+        oe_runmake libdir_relative=${BASELIB} libs
+        oe_runmake libdir_relative=${BASELIB} all
 }
 
 do_install() {
