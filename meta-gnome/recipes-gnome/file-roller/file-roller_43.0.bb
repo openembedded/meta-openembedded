@@ -15,7 +15,9 @@ DEPENDS = " \
     libportal \
 "
 
-inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache
+inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache features_check
+
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMESON += "-Dintrospection=enabled"
 
