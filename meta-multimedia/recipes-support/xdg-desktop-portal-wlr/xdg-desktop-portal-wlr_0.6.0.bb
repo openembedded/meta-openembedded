@@ -13,7 +13,8 @@ DEPENDS = " \
     virtual/libgbm \
 "
 
-inherit meson pkgconfig
+inherit meson pkgconfig features_check
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;nobranch=1"
 
