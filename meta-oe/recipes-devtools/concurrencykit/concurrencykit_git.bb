@@ -21,6 +21,7 @@ inherit autotools-brokensep
 
 PLAT:powerpc64 = "ppc64"
 PLAT:powerpc64le = "ppc64"
+PLAT:riscv32 = "riscv"
 PLAT ?= "${HOST_ARCH}"
 
 do_configure () {
