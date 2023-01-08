@@ -5,22 +5,19 @@ DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
 HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=79179bb373cd55cbd834463a514fb714"
 
-SRC_URI = "https://www.open-mpi.org/software/${BPN}/v1.11/downloads/${BP}.tar.bz2"
-SRC_URI[md5sum] = "3c792e23c209e9e1bafe9bdbc613d401"
-SRC_URI[sha256sum] = "a4494b7765f517c0990d1c7f09d98cb87755bb6b841e4e2cbfebca1b14bac9c8"
+SRC_URI = "https://www.open-mpi.org/software/${BPN}/v2.9/downloads/${BP}.tar.bz2"
+SRC_URI[sha256sum] = "2070e963596a2421b9af8eca43bdec113ee1107aaf7ccb475d4d3767a8856887"
+UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v2.9/"
 
-UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v1.11/"
-
-inherit autotools pkgconfig
+inherit autotools bash-completion pkgconfig
 
 DEPENDS += "ncurses udev zlib"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
 
 PACKAGECONFIG ?= "pci libxml2 ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
 
-PACKAGECONFIG[numactl] = "--enable-libnuma,--disable-libnuma,numactl,numactl"
 PACKAGECONFIG[libxml2] = "--enable-libxml2,--disable-libxml2,libxml2,libxml2"
 PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 cairo,cairo"
 PACKAGECONFIG[pci] = "--enable-pci,--disable-pci,libpciaccess,libpciaccess"
