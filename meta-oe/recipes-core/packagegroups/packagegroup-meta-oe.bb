@@ -77,14 +77,16 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     qperf \
     s-suite \
     stressapptest \
-    sysbench \
     tinymembench \
     tiobench \
     whetstone \
 "
-RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7a = " cpuburn-arm"
-RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7ve = " cpuburn-arm"
-RDEPENDS:packagegroup-meta-oe-benchmarks:append:aarch64 = " cpuburn-arm"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7a = " cpuburn-arm sysbench"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7ve = " cpuburn-arm sysbench"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:aarch64 = " cpuburn-arm sysbench"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:x86 = " sysbench"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:x86-64 = " sysbench"
+RDEPENDS:packagegroup-meta-oe-benchmarks:append:mips = " sysbench"
 
 RDEPENDS:packagegroup-meta-oe-benchmarks:remove:mipsarch = "libhugetlbfs"
 RDEPENDS:packagegroup-meta-oe-benchmarks:remove:mips64 = "tinymembench"
