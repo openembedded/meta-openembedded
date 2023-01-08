@@ -15,7 +15,7 @@ SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
+COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64).*-linux*"
 
 EXTRA_OECONF += "--enable-largefile --with-system-luajit --with-system-ck --without-gcc-arch"
 PACKAGECONFIG ??= ""
