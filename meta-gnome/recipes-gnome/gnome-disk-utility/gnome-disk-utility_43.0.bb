@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SECTION = "x11/gnome"
 
 DEPENDS = " \
+    desktop-file-utils-native \
     gtk+3 \
     libdvdread \
     libnotify \
@@ -12,6 +13,7 @@ DEPENDS = " \
     libpwquality \
     udisks2 \
     libhandy \
+    xz \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
@@ -28,7 +30,7 @@ PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
 PACKAGECONFIG[x11] = ",,libcanberra"
 
 SRC_URI:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', '', d)}"
-SRC_URI[archive.sha256sum] = "1b6564454d67426322cb3bfc5a5558653bfc7dfeea2ae0825b1d08629f01090b"
+SRC_URI[archive.sha256sum] = "7afca9805a6b92db6933dd7efcec4af8386c01bbc1f871e2dae4def7e192a2c5"
 
 EXTRA_OEMESON = "-Dman=false"
 
