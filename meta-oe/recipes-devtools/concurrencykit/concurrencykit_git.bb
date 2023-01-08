@@ -11,7 +11,8 @@ PV = "0.7.0+git${SRCPV}"
 SRCREV = "6e8e5bec2e2f8cef2072a68579cbb07ababf3331"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
 SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
-           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch"
+           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch \
+           file://0001-build-Use-ilp32d-abi-on-riscv32-and-lp64d-on-rv64.patch"
 
 S = "${WORKDIR}/git"
 
