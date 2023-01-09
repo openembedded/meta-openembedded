@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git;branch=master \
            file://0001-Replace-LFS64-interfaces-off64_t-and-lseek64.patch \
+           file://0002-Drop-using-_LARGEFILE64_SOURCE.patch \
            file://0001-Do-not-emit-useless-rpath.patch"
 SRCREV = "18233e4c32857cb7ddd4960beeec8360ed834fc5"
 
