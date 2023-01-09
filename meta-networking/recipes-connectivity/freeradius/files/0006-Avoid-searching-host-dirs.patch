@@ -1,14 +1,15 @@
-From dc41591d5ceb18900ec85894f8f7b7bb44bb3bd9 Mon Sep 17 00:00:00 2001
+From 8fe25b30b6fbb3170705f4468eb4c92eef3a968f Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Mon, 4 Jan 2016 01:44:04 -0500
-Subject: [PATCH] avoid searching host dirs
+Subject: [PATCH] Avoid searching host dirs
 
 Don't search the hardcoded host dirs to avoid
 host contamination.
 
-Upstream-Status: Inappropriate [cross-compile specific]
+Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  acinclude.m4                                                | 4 ++--
  src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac        | 4 ++--
@@ -21,19 +22,19 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
  8 files changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/acinclude.m4 b/acinclude.m4
-index da48acc..b513ae1 100644
+index a953d0e1b6..ede143d3c2 100644
 --- a/acinclude.m4
 +++ b/acinclude.m4
-@@ -178,7 +178,7 @@ if test "x$smart_lib" = "x"; then
-   FR_LOCATE_DIR(smart_lib_dir,[lib$1${libltdl_cv_shlibext}])
-   FR_LOCATE_DIR(smart_lib_dir,[lib$1.a])
- 
--  for try in $smart_lib_dir /usr/local/lib /opt/lib; do
+@@ -115,7 +115,7 @@ dnl #
+ dnl #  Try to guess possible locations.
+ dnl #
+ if test "x$smart_lib" = "x"; then
+-  for try in /usr/local/lib /opt/lib; do
 +  for try in $smart_lib_dir; do
      AC_MSG_CHECKING([for $2 in -l$1 in $try])
      LIBS="-l$1 $old_LIBS"
      CPPFLAGS="-L$try -Wl,-rpath,$try $old_CPPFLAGS"
-@@ -218,7 +218,7 @@ ac_safe=`echo "$1" | sed 'y%./+-%__pm%'`
+@@ -155,7 +155,7 @@ ac_safe=`echo "$1" | sed 'y%./+-%__pm%'`
  old_CPPFLAGS="$CPPFLAGS"
  smart_include=
  dnl #  The default directories we search in (in addition to the compilers search path)
@@ -43,10 +44,10 @@ index da48acc..b513ae1 100644
  dnl #  Our local versions
  _smart_try_dir=
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
-index 75c851a..a262d71 100644
+index 44f84aa27e..23a1899591 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
-@@ -57,14 +57,14 @@ if test x$with_[]modname != xno; then
+@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
  		esac])
  
  	dnl Check for SQLConnect in -ldb2
@@ -64,10 +65,10 @@ index 75c851a..a262d71 100644
  	if test "x$ac_cv_header_sqlcli_h" != xyes; then
  		fail="$fail sqlcli.h"
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
-index 4da57b3..752b043 100644
+index 4c2fd7ba9e..10c864def5 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
-@@ -56,14 +56,14 @@ if test x$with_[]modname != xno; then
+@@ -60,14 +60,14 @@ if test x$with_[]modname != xno; then
  		esac])
  
  	dnl Check for isc_attach_database in -lfbclient
@@ -85,10 +86,10 @@ index 4da57b3..752b043 100644
  	if test "x$ac_cv_header_ibase_h" != xyes; then
  		fail="$fail ibase.h"
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
-index ba6304f..3393557 100644
+index d26ac9c431..6e4500e948 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
-@@ -57,14 +57,14 @@ if test x$with_[]modname != xno; then
+@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
  		esac])
  
  	dnl Check for SQLConnect in -liodbc
@@ -106,10 +107,10 @@ index ba6304f..3393557 100644
  	if test "x$ac_cv_header_isql_h" != xyes; then
  		fail="$fail isql.h"
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
-index 1401677..2e7db44 100644
+index df36da77bf..31359041c7 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
-@@ -136,7 +136,7 @@ if test x$with_[]modname != xno; then
+@@ -140,7 +140,7 @@ if test x$with_[]modname != xno; then
  
  	dnl # Check for libmysqlclient_r
  	if test "x$have_a_libmysqlclient" != "xyes"; then
@@ -118,7 +119,7 @@ index 1401677..2e7db44 100644
  	    FR_SMART_CHECK_LIB(mysqlclient_r, mysql_init)
  	    if test "x$ac_cv_lib_mysqlclient_r_mysql_init" = "xyes"; then
  			have_a_libmysqlclient='yes'
-@@ -145,7 +145,7 @@ if test x$with_[]modname != xno; then
+@@ -149,7 +149,7 @@ if test x$with_[]modname != xno; then
  
  	dnl # Check for libmysqlclient
  	if test "x$have_a_libmysqlclient" != "xyes"; then
@@ -127,7 +128,7 @@ index 1401677..2e7db44 100644
  	    FR_SMART_CHECK_LIB(mysqlclient, mysql_init)
  	    if test "x$ac_cv_lib_mysqlclient_mysql_init" = "xyes"; then
  			have_a_libmysqlclient='yes'
-@@ -189,7 +189,7 @@ if test x$with_[]modname != xno; then
+@@ -243,7 +243,7 @@ if test x$with_[]modname != xno; then
      fi
  
      if test "x$have_mysql_h" != "xyes"; then
@@ -137,10 +138,10 @@ index 1401677..2e7db44 100644
  		if test "x$ac_cv_header_mysql_mysql_h" = "xyes"; then
  	    	AC_DEFINE(HAVE_MYSQL_MYSQL_H, [], [Define if you have <mysql/mysql.h>])
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
-index 3178462..5cbc8c2 100644
+index 3b45da582a..03e6607d2b 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
-@@ -63,7 +63,7 @@ if test x$with_[]modname != xno; then
+@@ -68,7 +68,7 @@ if test x$with_[]modname != xno; then
      dnl # Check for header files
      dnl ############################################################
  
@@ -150,10 +151,10 @@ index 3178462..5cbc8c2 100644
      if test "x$ORACLE_HOME" != "x"; then
  	smart_try_dir="${smart_try_dir} ${ORACLE_HOME}/include"
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
-index 4f9a890..e1cf811 100644
+index 8ac1022e89..d46c0f66bf 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
-@@ -41,7 +41,7 @@ if test x$with_[]modname != xno; then
+@@ -45,7 +45,7 @@ if test x$with_[]modname != xno; then
  	  esac ]
  	)
  
@@ -162,7 +163,7 @@ index 4f9a890..e1cf811 100644
  	FR_SMART_CHECK_INCLUDE(libpq-fe.h)
  	if test "x$ac_cv_header_libpqmfe_h" != "xyes"; then
  		fail="$fail libpq-fe.h"
-@@ -76,7 +76,7 @@ if test x$with_[]modname != xno; then
+@@ -94,7 +94,7 @@ if test x$with_[]modname != xno; then
  		  ])
  	fi
  
@@ -172,10 +173,10 @@ index 4f9a890..e1cf811 100644
  	if test "x$ac_cv_lib_pq_PQconnectdb" != "xyes"; then
  		fail="$fail libpq"
 diff --git a/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
-index 3545387..c543ed4 100644
+index f10279fe1f..0081a338c8 100644
 --- a/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
 +++ b/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
-@@ -57,14 +57,14 @@ if test x$with_[]modname != xno; then
+@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
  		esac])
  
  	dnl Check for SQLConnect in -lodbc
@@ -193,5 +194,5 @@ index 3545387..c543ed4 100644
  	if test "x$ac_cv_header_sql_h" != xyes; then
  		fail="$fail sql.h"
 -- 
-1.9.1
+2.25.1
 

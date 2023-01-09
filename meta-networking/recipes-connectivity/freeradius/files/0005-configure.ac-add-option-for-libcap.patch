@@ -1,7 +1,7 @@
-From 98a9eff357959d1113e33a615c2178751d5b2054 Mon Sep 17 00:00:00 2001
+From 9548dc5e1a6c835cd4f387ba384d8f3f14c3fc8b Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Thu, 22 Aug 2019 10:50:21 +0800
-Subject: [PATCH 2/2] configure.ac: add option for libcap
+Subject: [PATCH] configure.ac: add option for libcap
 
 Upstream-Status: Pending
 
@@ -12,10 +12,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
  1 file changed, 27 insertions(+), 9 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 65db61e..6486aac 100644
+index ef8fced680..263098f7fd 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -977,6 +977,22 @@ fi
+@@ -1161,6 +1161,22 @@ fi
  dnl Set by FR_SMART_CHECKLIB
  LIBS="${old_LIBS}"
  
@@ -38,7 +38,7 @@ index 65db61e..6486aac 100644
  dnl Check for cap
  dnl extra argument: --with-cap-lib-dir=DIR
  cap_lib_dir=
-@@ -1010,15 +1026,17 @@ AC_ARG_WITH(cap-include-dir,
+@@ -1194,15 +1210,17 @@ AC_ARG_WITH(cap-include-dir,
        ;;
    esac])
  
@@ -66,5 +66,5 @@ index 65db61e..6486aac 100644
  
  dnl #
 -- 
-2.7.4
+2.25.1
 

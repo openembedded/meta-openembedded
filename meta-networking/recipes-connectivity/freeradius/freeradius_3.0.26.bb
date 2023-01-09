@@ -16,28 +16,30 @@ DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0;;protocol=https \
     file://freeradius \
     file://volatiles.58_radiusd \
-    file://freeradius-enble-user-in-conf.patch \
-    file://freeradius-configure.ac-allow-cross-compilation.patch \
-    file://freeradius-libtool-detection.patch \
-    file://freeradius-configure.ac-add-option-for-libcap.patch \
-    file://freeradius-avoid-searching-host-dirs.patch \
-    file://freeradius-rlm_python-add-PY_INC_DIR.patch \
-    file://freeradius-libtool-do-not-use-jlibtool.patch \
-    file://freeradius-fix-quoting-for-BUILT_WITH.patch \
-    file://freeradius-fix-error-for-expansion-of-macro.patch \
-    file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-    file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
-    file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
-    file://0001-workaround-error-with-autoconf-2.7.patch \
     file://radiusd.service \
     file://radiusd-volatiles.conf \
-    file://check-openssl-cmds-in-script-bootstrap.patch \
-    file://0001-version.c-don-t-print-build-flags.patch \
+    file://0001-Add-autogen.sh.patch \
+    file://0002-Enable-and-change-user-and-group-of-freeradius-serve.patch \
+    file://0003-configure.ac-allow-cross-compilation.patch \
+    file://0004-Fix-libtool-detection.patch \
+    file://0005-configure.ac-add-option-for-libcap.patch \
+    file://0006-Avoid-searching-host-dirs.patch \
+    file://0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch \
+    file://0008-libtool-do-not-use-jlibtool.patch \
+    file://0009-Fix-quoting-for-BUILD_WITH.patch \
+    file://0010-fix-error-for-expansion-of-macro-in-thread.h.patch \
+    file://0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
+    file://0012-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
+    file://0013-raddb-certs-Makefile-fix-the-occasional-verification.patch \
+    file://0014-Workaround-error-with-autoconf-2.7.patch \
+    file://0015-bootstrap-check-commands-of-openssl-exist.patch \
+    file://0016-version.c-don-t-print-build-flags.patch \
+    file://0017-add-python.m4-for-detecting-python-3.10.patch \
 "
 
-raddbdir="${sysconfdir}/${MLPREFIX}raddb"
+raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
+SRCREV = "d956f683d37ea40e7977cc5907361f3e6988a439"
 
 CVE_CHECK_IGNORE = "\
     CVE-2002-0318 \
@@ -118,7 +120,7 @@ inherit cpan-base python3-dir
 
 # The modules subdirs also need to be processed by autoreconf. Use autogen.sh
 # in order to handle the subdirs correctly.
-do_configure () {
+do_configure() {
     ./autogen.sh
 
     # the configure of rlm_perl needs this to get correct
@@ -142,11 +144,9 @@ USERADD_PARAM:${PN} = "--system --no-create-home --shell /bin/false --user-group
 
 do_install() {
     rm -rf ${D}
-    mkdir -p ${D}/${sysconfdir}/logrotate.d
-    mkdir -p ${D}/${sysconfdir}/pam.d
-    mkdir -p ${D}/${sysconfdir}/init.d
-    mkdir -p ${D}/${localstatedir}/lib/radiusd
-    mkdir -p ${D}${sysconfdir}/default/volatiles
+    install -d ${D}/${sysconfdir}/logrotate.d
+    install -d ${D}/${sysconfdir}/pam.d
+    install -d ${D}/${localstatedir}/lib/radiusd
 
     export LD_LIBRARY_PATH=${D}/${libdir}
     oe_runmake install R=${D} INSTALLSTRIP=""
@@ -157,15 +157,20 @@ do_install() {
     # remove scripts that required Perl(DBI)
     rm -rf ${D}/${bindir}/radsqlrelay
 
-    cp -f ${WORKDIR}/freeradius ${D}/etc/init.d/radiusd
     rm -f ${D}/${sbindir}/rc.radiusd
-    chmod +x ${D}/${sysconfdir}/init.d/radiusd
     rm -rf ${D}/${localstatedir}/run/
     rm -rf ${D}/${localstatedir}/log/
-    install -m 0644 ${WORKDIR}/volatiles.58_radiusd  ${D}${sysconfdir}/default/volatiles/58_radiusd
 
     chown -R radiusd:radiusd ${D}/${raddbdir}
     chown -R radiusd:radiusd ${D}/${localstatedir}/lib/radiusd
+
+    # For sysvinit
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -d ${D}${sysconfdir}/default/volatiles
+        install -m 0755 ${WORKDIR}/freeradius ${D}/etc/init.d/radiusd
+        install -m 0644 ${WORKDIR}/volatiles.58_radiusd ${D}${sysconfdir}/default/volatiles/58_radiusd
+    fi
 
     # For systemd
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
@@ -180,7 +185,8 @@ do_install() {
         install -d ${D}${sysconfdir}/tmpfiles.d/
         install -m 0644 ${WORKDIR}/radiusd-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/radiusd.conf
     fi
-    oe_multilib_header freeradius/autoconf.h 
+
+    oe_multilib_header freeradius/autoconf.h
     oe_multilib_header freeradius/missing.h
     oe_multilib_header freeradius/radpaths.h
 }

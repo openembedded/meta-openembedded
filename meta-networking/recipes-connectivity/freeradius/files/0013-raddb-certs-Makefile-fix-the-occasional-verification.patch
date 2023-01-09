@@ -1,4 +1,4 @@
-From 3eda5d35fbaf66ed6bdc86ada4320a0a18681b7e Mon Sep 17 00:00:00 2001
+From bb1cb2ffc7a31c0a2bb2de51ef82d304b0a107c3 Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Wed, 5 Aug 2020 07:23:11 +0000
 Subject: [PATCH] raddb/certs/Makefile: fix the occasional verification failure
@@ -29,7 +29,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 15 insertions(+), 15 deletions(-)
 
 diff --git a/raddb/certs/Makefile b/raddb/certs/Makefile
-index 77eec9baa1..3dcb63fe71 100644
+index d064fe252d..86f4547804 100644
 --- a/raddb/certs/Makefile
 +++ b/raddb/certs/Makefile
 @@ -59,7 +59,7 @@ passwords.mk: server.cnf ca.cnf client.cnf inner-server.cnf
@@ -71,7 +71,7 @@ index 77eec9baa1..3dcb63fe71 100644
 +	@[ -f server.csr ] || $(OPENSSL) req -new  -out server.csr -keyout server.key -config ./server.cnf
  	chmod g+r server.key
  
- server.crt: server.csr ca.key ca.pem
+ server.crt: ca.key ca.pem server.csr
  	@[ -f server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in server.csr  -key $(PASSWORD_CA) -out server.crt -extensions xpserver_ext -extfile xpextensions -config ./server.cnf
  
  server.p12: server.crt
@@ -85,7 +85,7 @@ index 77eec9baa1..3dcb63fe71 100644
  	chmod g+r server.pem
  
  .PHONY: server.vrfy
-@@ -113,18 +113,18 @@ server.vrfy: ca.pem
+@@ -113,19 +113,19 @@ server.vrfy: ca.pem
  #
  ######################################################################
  client.csr client.key: client.cnf
@@ -93,13 +93,14 @@ index 77eec9baa1..3dcb63fe71 100644
 +	@[ -f client.csr ] || $(OPENSSL) req -new  -out client.csr -keyout client.key -config ./client.cnf
  	chmod g+r client.key
  
- client.crt: client.csr ca.pem ca.key
+ client.crt: ca.key ca.pem client.csr
  	@[ -f client.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key $(PASSWORD_CA) -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
  
  client.p12: client.crt
 -	$(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
 +	@[ -f client.p12 ] || $(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
  	chmod g+r client.p12
+ 	cp client.p12 $(USER_NAME).p12
  
  client.pem: client.p12
 -	$(OPENSSL) pkcs12 -in client.p12 -out client.pem -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
@@ -107,7 +108,7 @@ index 77eec9baa1..3dcb63fe71 100644
  	chmod g+r client.pem
  	cp client.pem $(USER_NAME).pem
  
-@@ -139,18 +139,18 @@ client.vrfy: ca.pem client.pem
+@@ -140,18 +140,18 @@ client.vrfy: ca.pem client.pem
  #
  ######################################################################
  inner-server.csr inner-server.key: inner-server.cnf
@@ -115,7 +116,7 @@ index 77eec9baa1..3dcb63fe71 100644
 +	@[ -f inner-server.csr] || $(OPENSSL) req -new  -out inner-server.csr -keyout inner-server.key -config ./inner-server.cnf
  	chmod g+r inner-server.key
  
- inner-server.crt: inner-server.csr ca.key ca.pem
+ inner-server.crt: ca.key ca.pem inner-server.csr
 -	$(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
 +	@[ -f inner-server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in inner-server.csr  -key $(PASSWORD_CA) -out inner-server.crt -extensions xpserver_ext -extfile xpextensions -config ./inner-server.cnf
  
@@ -131,5 +132,5 @@ index 77eec9baa1..3dcb63fe71 100644
  
  .PHONY: inner-server.vrfy
 -- 
-2.26.2
+2.25.1
 
