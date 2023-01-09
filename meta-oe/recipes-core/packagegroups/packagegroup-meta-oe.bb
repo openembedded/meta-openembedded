@@ -189,7 +189,6 @@ RDEPENDS:packagegroup-meta-oe-core = "\
     distro-feed-configs \
     mm-common \
     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "ndctl", "", d)} \
-    opencl-icd-loader \
     pim435 \
     proxy-libintl \
     safec \
@@ -304,7 +303,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     rapidjson \
     squashfs-tools-ng \
     uftrace \
-    unifex \
     valijson \
     libxerces-c \
     xerces-c-samples \
