@@ -1003,7 +1003,7 @@ RDEPENDS:packagegroup-meta-oe-fortran-packages = "\
 # They wont be built as part of images but might be interesting to include
 # with dev-pkgs images
 #
-# opencl-headers sdbus-c++-libsystemd boost-url nlohmann-fifo sqlite-orm
+# opencl-headers sdbus-c++-libsystemd nlohmann-fifo sqlite-orm
 # nlohmann-json exprtk liblightmodbus p8platform gnome-doc-utils-stub
 # glm ttf-mplus xbitmaps ceres-solver cli11 fftw gnulib libeigen ade
 # spdlog span-lite uthash websocketpp catch2 properties-cpp cpp-netlib
