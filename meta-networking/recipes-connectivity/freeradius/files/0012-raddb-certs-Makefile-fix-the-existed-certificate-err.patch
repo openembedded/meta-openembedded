@@ -1,4 +1,4 @@
-From 084f5467672f2ae37003b77e8f8706772f3da3ec Mon Sep 17 00:00:00 2001
+From 0f9f18fc330fe88080be13e43f300fbf7ba4a85a Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Mon, 13 Jul 2020 07:01:45 +0000
 Subject: [PATCH] raddb/certs/Makefile: fix the existed certificate error
@@ -29,13 +29,13 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/raddb/certs/Makefile b/raddb/certs/Makefile
-index 5cbfd467ce..77eec9baa1 100644
+index c9fbc9e864..d064fe252d 100644
 --- a/raddb/certs/Makefile
 +++ b/raddb/certs/Makefile
 @@ -92,7 +92,7 @@ server.csr server.key: server.cnf
  	chmod g+r server.key
  
- server.crt: server.csr ca.key ca.pem
+ server.crt: ca.key ca.pem server.csr
 -	$(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in server.csr  -key $(PASSWORD_CA) -out server.crt -extensions xpserver_ext -extfile xpextensions -config ./server.cnf
 +	@[ -f server.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in server.csr  -key $(PASSWORD_CA) -out server.crt -extensions xpserver_ext -extfile xpextensions -config ./server.cnf
  
@@ -44,12 +44,12 @@ index 5cbfd467ce..77eec9baa1 100644
 @@ -117,7 +117,7 @@ client.csr client.key: client.cnf
  	chmod g+r client.key
  
- client.crt: client.csr ca.pem ca.key
+ client.crt: ca.key ca.pem client.csr
 -	$(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key $(PASSWORD_CA) -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
 +	@[ -f client.crt ] || $(OPENSSL) ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key $(PASSWORD_CA) -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
  
  client.p12: client.crt
  	$(OPENSSL) pkcs12 -export -in client.crt -inkey client.key -out client.p12  -passin pass:$(PASSWORD_CLIENT) -passout pass:$(PASSWORD_CLIENT)
 -- 
-2.26.2
+2.25.1
 
