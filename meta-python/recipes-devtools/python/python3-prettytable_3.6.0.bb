@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
 
-SRC_URI[sha256sum] = "7d7dd84d0b206f2daac4471a72f299d6907f34516064feb2838e333a4e2567bd"
+SRC_URI[sha256sum] = "2e0026af955b4ea67b22122f310b90eae890738c08cb0458693a49b6221530ac"
 
 do_install:append() {
     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
@@ -16,13 +16,15 @@ UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
 UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
 
 BBCLASSEXTEND = "native nativesdk"
-inherit pypi ptest setuptools3
+inherit pypi ptest python_hatchling
 
 SRC_URI += " \
 	file://run-ptest \
 "
 
-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+DEPENDS += "\
+    ${PYTHON_PN}-hatch-vcs-native \
+"
 
 RDEPENDS:${PN} += " \
 	${PYTHON_PN}-math \
