@@ -122,5 +122,5 @@ FILES:kpartx = "${base_sbindir}/kpartx \
 RDEPENDS:${PN} += "kpartx"
 PARALLEL_MAKE = ""
 
-FILES:${PN}-libs += "usr/lib"
+FILES:${PN}-libs += "usr/lib/*.so.*"
 FILES:${PN}-libs += "usr/lib/tmpfiles.d/*"
