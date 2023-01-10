@@ -1,9 +1,9 @@
 SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c11d4fd926d3ce7aac13b0ed1e9b3a63"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f8d2fc4954306888fd0e4b27bef83525"
 
 # v2.7.6
-SRCREV = "b39d0430f29d7c953581186955c11b461e6c824f"
+SRCREV = "e6372b88e09a4d1c573b57270de6b40846825a8b"
 SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
            file://ldflags.patch \
 "
