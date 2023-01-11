@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://setup.py;md5=90fa5bae1547550f1c1993f651eda955"
 
 SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master"
 
-SRCREV = "502f1bada1ed11fdd1792646fda0bfafb8fa57fb"
+SRCREV = "dfb15b068960b771e2e1536d34790dac9b5bfe32"
 
 S = "${WORKDIR}/git"
 
