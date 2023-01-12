@@ -4,11 +4,18 @@ SECTION = "devel/python"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
 
-SRC_URI[sha256sum] = "1493fe8bd3dfd73dc35bd53c9d5b6e49ead98497c47b2307662556a5692d29d7"
+SRC_URI[sha256sum] = "3bc7834720e1a24ca797fd785d77efb14f7a28ee8e635ef040b6e2d80ccb3303"
 
-inherit pypi setuptools3
+SRC_URI += " \
+    file://0001-pyproject.toml-Replace-with.patch \
+"
 
-DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+inherit pypi python_setuptools_build_meta
+
+DEPENDS += "\
+    ${PYTHON_PN}-pytest-runner-native \
+    ${PYTHON_PN}-wheel-native \
+"
 
 PACKAGES =+ "${PN}-tests"
 
