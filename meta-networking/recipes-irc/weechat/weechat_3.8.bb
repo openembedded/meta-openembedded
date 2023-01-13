@@ -4,13 +4,13 @@ SECTION = "net"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-DEPENDS = "openssl zlib icu libgcrypt gnutls curl aspell"
+DEPENDS = "openssl zlib icu libgcrypt gnutls curl aspell zstd"
 
 SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz \
            file://0001-use-pkg-config-for-gcrypt-instead.patch \
            "
 
-SRC_URI[sha256sum] = "7e088109ad5dfbcb08a9a6b1dd70ea8236093fed8a13ee9d9c98881d7b1aeae7"
+SRC_URI[sha256sum] = "f7cb65c200f8c090c56f2cf98c0b184051e516e5f7099a4308cacf86f174bf28"
 
 inherit cmake pkgconfig
 
