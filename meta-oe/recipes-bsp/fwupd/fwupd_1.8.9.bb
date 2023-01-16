@@ -5,9 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-           file://c54ae9c524998e449b822feb465a0c90317cd735.patch \
            file://run-ptest"
-SRC_URI[sha256sum] = "adfa07434cdc29ec41c40fef460e8d970963fe0c7e849dec7f3932adb161f886"
+SRC_URI[sha256sum] = "719a791ac4ba5988aeb93ec42778bd65d33cb075d0c093b5c04e5e1682be528a"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
@@ -18,7 +17,7 @@ inherit meson vala gobject-introspection systemd bash-completion pkgconfig gi-do
 
 GIDOCGEN_MESON_OPTION = 'docs'
 GIDOCGEN_MESON_ENABLE_FLAG = 'docgen'
-GIDOCGEN_MESON_DISABLE_FLAG = 'none'
+GIDOCGEN_MESON_DISABLE_FLAG = 'disabled'
 
 PACKAGECONFIG ??= "curl gnutls gudev gusb \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
@@ -26,23 +25,25 @@ PACKAGECONFIG ??= "curl gnutls gudev gusb \
                    ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plugin_uefi_capsule plugin_uefi_pk', '', d)} \
                    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plugin_dummy', '', d)} \
                    hsi \
+                   plugin_android_boot \
                    plugin_acpi_phat \
-                   plugin_amt \
                    plugin_bcm57xx \
                    plugin_emmc \
                    plugin_ep963x \
                    plugin_fastboot \
                    plugin_flashrom \
                    plugin_gpio \
+                   plugin_igsc \
+                   plugin_intel_me \
                    plugin_intel_spi \
                    plugin_logitech_bulkcontroller \
+                   plugin_logitech_scribe \
                    plugin_modem_manager \
                    plugin_msr \
                    plugin_nitrokey \
                    plugin_nvme \
                    plugin_parade_lspcon \
                    plugin_pixart_rf \
-                   plugin_platform_integrity \
                    plugin_realtek_mst \
                    plugin_redfish \
                    plugin_synaptics_mst \
@@ -74,7 +75,7 @@ PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,gcab-native"
 
 # TODO plugins-all meta-option that expands to all plugin_*?
 PACKAGECONFIG[plugin_acpi_phat] = "-Dplugin_acpi_phat=true,-Dplugin_acpi_phat=false"
-PACKAGECONFIG[plugin_amt] = "-Dplugin_amt=true,-Dplugin_amt=false"
+PACKAGECONFIG[plugin_android_boot] = "-Dplugin_android_boot=enabled,-Dplugin_android_boot=disabled"
 PACKAGECONFIG[plugin_bcm57xx] = "-Dplugin_bcm57xx=true,-Dplugin_bcm57xx=false"
 PACKAGECONFIG[plugin_cfu] = "-Dplugin_cfu=true,-Dplugin_cfu=false"
 PACKAGECONFIG[plugin_dell] = "-Dplugin_dell=true,-Dplugin_dell=false,libsmbios"
@@ -84,15 +85,17 @@ PACKAGECONFIG[plugin_ep963x] = "-Dplugin_ep963x=true,-Dplugin_ep963x=false"
 PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=true,-Dplugin_fastboot=false"
 PACKAGECONFIG[plugin_flashrom] = "-Dplugin_flashrom=true,-Dplugin_flashrom=false,flashrom"
 PACKAGECONFIG[plugin_gpio] = "-Dplugin_gpio=true,-Dplugin_gpio=false"
+PACKAGECONFIG[plugin_igsc] = "-Dplugin_igsc=enabled,-Dplugin_igsc=disabled"
+PACKAGECONFIG[plugin_intel_me] = "-Dplugin_intel_me=enabled,-Dplugin_intel_me=disabled"
 PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true -Dlzma=true,-Dplugin_intel_spi=false -Dlzma=false,xz"
 PACKAGECONFIG[plugin_logitech_bulkcontroller] = "-Dplugin_logitech_bulkcontroller=true,-Dplugin_logitech_bulkcontroller=false,protobuf-c-native protobuf-c"
+PACKAGECONFIG[plugin_logitech_scribe] = "-Dplugin_logitech_scribe=enabled,-Dplugin_logitech_scribe=disabled"
 PACKAGECONFIG[plugin_modem_manager] = "-Dplugin_modem_manager=true,-Dplugin_modem_manager=false,libqmi modemmanager"
 PACKAGECONFIG[plugin_msr] = "-Dplugin_msr=true,-Dplugin_msr=false,cpuid"
 PACKAGECONFIG[plugin_nitrokey] = "-Dplugin_nitrokey=true,-Dplugin_nitrokey=false"
 PACKAGECONFIG[plugin_nvme] = "-Dplugin_nvme=true,-Dplugin_nvme=false"
 PACKAGECONFIG[plugin_parade_lspcon] = "-Dplugin_parade_lspcon=true,-Dplugin_parade_lspcon=false"
 PACKAGECONFIG[plugin_pixart_rf] = "-Dplugin_pixart_rf=true,-Dplugin_pixart_rf=false"
-PACKAGECONFIG[plugin_platform_integrity] = "-Dplugin_platform_integrity=true,-Dplugin_platform_integrity=false"
 PACKAGECONFIG[plugin_powerd] = "-Dplugin_powerd=true,-Dplugin_powerd=false"
 PACKAGECONFIG[plugin_realtek_mst] = "-Dplugin_realtek_mst=true,-Dplugin_realtek_mst=false"
 PACKAGECONFIG[plugin_redfish] = "-Dplugin_redfish=true,-Dplugin_redfish=false"
@@ -107,12 +110,13 @@ PACKAGECONFIG[plugin_uf2] = "-Dplugin_uf2=true,-Dplugin_uf2=false"
 PACKAGECONFIG[plugin_upower] = "-Dplugin_upower=true,-Dplugin_upower=false"
 
 # Always disable these plugins on non-x86 platforms as they don't compile or are useless
-DISABLE_NON_X86 = "plugin_amt plugin_intel_spi plugin_msr"
+DISABLE_NON_X86 = "plugin_intel_me plugin_intel_spi plugin_msr"
 DISABLE_NON_X86:x86 = ""
 DISABLE_NON_X86:x86-64 = ""
 PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
 
 FILES:${PN} += "${libdir}/fwupd-plugins-* \
+                ${libdir}/fwupd-${PV} \
                 ${systemd_unitdir} \
                 ${datadir}/fish \
                 ${datadir}/metainfo \
