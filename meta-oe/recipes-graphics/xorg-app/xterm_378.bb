@@ -2,13 +2,13 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
 SUMMARY = "xterm is the standard terminal emulator for the X Window System"
 DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses desktop-file-utils-native"
 
-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=5ec6748ed90e588caa9318b780a0d498"
+LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=9c96124b492c0c02356850c243aaeca2"
 
 SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
            file://0001-Add-configure-time-check-for-setsid.patch \
           "
 
-SRC_URI[sha256sum] = "db108fe7a45d8ed97e604721b58443b473649e61e263631bf8759f8618a990b2"
+SRC_URI[sha256sum] = "649dfbfd5edd0ed9e47cf8e4d953b4b0d3c30bc280166dfc4ffd14973fec3e92"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
