@@ -13,12 +13,12 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "5ff00f40b9d3ecfc38305edc27e9c2b01629802c"
+SRCREV = "bba452695eb673461c5cf626eec57728991eadf7"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
-inherit meson pkgconfig systemd gettext useradd
+inherit gsettings meson pkgconfig systemd gettext useradd
 
 USERADD_PACKAGES = "${PN}"
 
@@ -88,7 +88,7 @@ PACKAGECONFIG:class-target ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio gtk', 'gsettings', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
     ${PIPEWIRE_SESSION_MANAGER} \
-    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer jack libusb pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling \
+    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling libcamera \
 "
 
 # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
