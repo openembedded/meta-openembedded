@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
 	${PYTHON_PN}-datetime \
 "
 
-SRC_URI[sha256sum] = "5bbe4b72de22f9ac1e67f2a4e6efe8fbd595bb59b7b223443f50fe5802a5551c"
+SRC_URI[sha256sum] = "72da0766c3069a3941eadbdfa0996f83f5a33e55902a19ba399557cfee1dddcc"
 
 PYPI_PACKAGE = "sentry-sdk"
 
