@@ -30,7 +30,7 @@ SRC_URI = " \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
 "
-SRC_URI[sha256sum] = "aee7e057bc2cca5dab84e41f15f1da8b795eb290747b04cbeee822bad9e9fc03"
+SRC_URI[sha256sum] = "fa251455df3c38e2bf1e1ff806b4bc4346938dd135a3568bd250e92caa85eaf7"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
