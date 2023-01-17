@@ -26,7 +26,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "0da1003c0cda08ac0546a4c143ed3a1697e36823c60fa73f4d2f4da7723bccaf"
+SRC_URI[archive.sha256sum] = "a86a9aa7a455511b029ce49a1d8b4659c3c355b5d81d7360bb4d0de637afede0"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
