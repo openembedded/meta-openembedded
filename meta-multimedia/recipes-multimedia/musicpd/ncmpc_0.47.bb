@@ -34,6 +34,7 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https \
+    file://0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch \
 "
-SRCREV = "b9b5e11e10d8f66cd672ffb51728aa447f78ecd4"
+SRCREV = "fc8de01c71acdf10ad07c7aae756dc522b848124"
 S = "${WORKDIR}/git"
