@@ -27,7 +27,8 @@ inherit pypi setuptools3 pkgconfig
 
 # Stop the component from attempting to download when it detects a missing
 # dependency
-SRC_URI += "file://matplotlib-disable-download.patch"
+SRC_URI += "file://matplotlib-disable-download.patch \
+            file://0001-removed-RandomNumberGenerator-class-included-random-.patch"
 
 # This python module requires a full copy of freetype-2.6.1
 SRC_URI += "https://downloads.sourceforge.net/project/freetype/freetype2/2.6.1/freetype-2.6.1.tar.gz;name=freetype;subdir=matplotlib-${PV}/build"
@@ -40,6 +41,8 @@ SRC_URI[qhull.sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b86500046
 # LTO with clang needs lld
 LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
 LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
+LDFLAGS:remove:toolchain-clang:riscv64 = "-fuse-ld=lld"
+LDFLAGS:remove:toolchain-clang:riscv32 = "-fuse-ld=lld"
 RDEPENDS:${PN} = "\
     freetype \
     libpng \
