@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
 SECTION = "devel/python"
 LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "\
-    file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+    file://setup.py;beginline=283;endline=283;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
 "
 
@@ -21,7 +21,7 @@ DEPENDS = "\
     python3-certifi-native \
     python3-setuptools-scm-native \
 "
-SRC_URI[sha256sum] = "339cac48b80ddbc8bfd05daae0a3a73414651a8596904c2a881cfd1edb65f26c"
+SRC_URI[sha256sum] = "1f4d69707b1677560cd952544ee4962f68ff07952fb9069ff8c12b56353cb8c9"
 
 inherit pypi setuptools3 pkgconfig
 
