@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/andymccurdy/redis-py"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1db1f331d351900707368237cc4880cf"
 
-SRC_URI[sha256sum] = "f7a870c44868ab87bbecd6211c6d7c8720b1e9a796b743fbc4725d7ec75651c3"
+SRC_URI[sha256sum] = "a010f6cb7378065040a02839c3f75c7e0fb37a87116fb4a95be82a95552776c7"
 
 inherit pypi setuptools3
 
