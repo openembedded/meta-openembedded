@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings gobject-introspection gettext mime-xdg fea
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "fed79ff3ca19bac62f27155c9bdd69eef875870b971e6dcb0aa38c093d131971"
+SRC_URI[archive.sha256sum] = "9dcfdce5585a90e2bb1cf57e377cb1eb12d41bd9bcb9bbacdf506bc1b1354ef9"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
