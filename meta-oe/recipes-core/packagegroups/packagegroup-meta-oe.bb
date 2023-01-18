@@ -827,7 +827,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     liblinebreak \
     mailcap \
     liboauth \
-    libol \
     mg \
     monit \
     mscgen \
