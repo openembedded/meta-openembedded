@@ -6,7 +6,9 @@ DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
            file://c54ae9c524998e449b822feb465a0c90317cd735.patch \
-           file://run-ptest"
+           file://run-ptest \
+           file://CVE-2022-3287.patch \
+           "
 SRC_URI[sha256sum] = "adfa07434cdc29ec41c40fef460e8d970963fe0c7e849dec7f3932adb161f886"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
