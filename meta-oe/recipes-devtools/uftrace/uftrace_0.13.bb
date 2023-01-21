@@ -12,6 +12,7 @@ inherit autotools
 
 SRCREV = "53ec12d40701cf73ddcf5db8cff63b54736d0eda"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
+           file://0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch \
            "
 S = "${WORKDIR}/git"
 
