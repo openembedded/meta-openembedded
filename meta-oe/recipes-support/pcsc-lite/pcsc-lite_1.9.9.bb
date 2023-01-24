@@ -1,5 +1,5 @@
 SUMMARY = "PC/SC Lite smart card framework and applications"
-HOMEPAGE = "http://pcsclite.alioth.debian.org/"
+HOMEPAGE = "https://pcsclite.apdu.fr/"
 LICENSE = "BSD-3-Clause & GPL-3.0-or-later"
 LICENSE:${PN} = "BSD-3-Clause"
 LICENSE:${PN}-lib = "BSD-3-Clause"
