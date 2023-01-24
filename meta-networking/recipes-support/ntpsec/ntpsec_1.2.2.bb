@@ -2,25 +2,22 @@ SUMMARY = "The Network Time Protocol suite, refactored"
 HOMEPAGE = "https://www.ntpsec.org/"
 
 LICENSE = "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.adoc;md5=0520591566b6ed3a9ced8b15b4d4abf9 \
-                    file://libjsmn/LICENSE;md5=38118982429881235de8adf478a8e75d \
-                    file://docs/copyright.adoc;md5=9a1e3fce4b630078cb67ba2b619d2b13 \
-                    file://libaes_siv/COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSES/BSD-2;md5=653830da7b770a32f6f50f6107e0b186 \
+                    file://LICENSES/BSD-3;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
+                    file://LICENSES/CC-BY-4.0;md5=2ab724713fdaf49e4523c4503bfd068d \
+                    file://LICENSES/MIT;md5=5a9dfc801af3eb49df2055c9b07918b2 \
+                    file://LICENSES/NTP;md5=cb56b7747f86157c78ca81f224806694"
 
 DEPENDS += "bison-native \
             openssl \
             python3"
 
 SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
-           file://0001-Update-to-OpenSSL-3.0.0-alpha15.patch \
-           file://0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch \
-           file://0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch \
-           file://0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch \
            file://volatiles.ntpsec \
-           file://0001-wscript-Widen-the-search-for-tags.patch \
+           file://0001-wscript-Add-BISONFLAGS-support.patch \
            "
 
-SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
+SRC_URI[sha256sum] = "2f2848760b915dfe185b9217f777738b36ceeb78a7fc208b7e74e039dec22df5"
 
 UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
 
@@ -66,13 +63,18 @@ EXTRA_OECONF = "--cross-compiler='${CC}' \
                 --pyshebang=${bindir}/python3 \
                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
                 --pythonarchdir=${PYTHON_SITEPACKAGES_DIR} \
-                --enable-debug \
                 --enable-debug-gdb \
                 --enable-early-droproot"
 
 EXTRA_OEWAF_BUILD ?= "-v"
 
 NTP_USER_HOME ?= "/var/lib/ntp"
+
+BISONFLAGS = "--file-prefix-map=${WORKDIR}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}"
+
+do_configure:prepend() {
+	export BISONFLAGS="${BISONFLAGS}"
+}
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/init.d
