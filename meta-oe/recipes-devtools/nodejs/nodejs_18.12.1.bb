@@ -1,13 +1,13 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6e54852cd826c41e80c6d80f6db00a85"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dfd7ae796baf5326016a3865ee1dc632"
 
 DEPENDS = "openssl"
 DEPENDS:append:class-target = " qemu-native"
 DEPENDS:append:class-native = " c-ares-native"
 
-inherit pkgconfig python3native qemu
+inherit pkgconfig python3native qemu ptest
 
 COMPATIBLE_MACHINE:armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE:armv5 = "(!.*armv5).*"
@@ -26,6 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-liftoff-Correct-function-signatures.patch \
            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
            "
+
 SRC_URI:append:class-target = " \
            file://0001-Using-native-binaries.patch \
            "
@@ -35,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "1f8051a88f86f42064f4415fe7a980e59b0a502ecc8def583f6303bc4d445238"
+SRC_URI[sha256sum] = "4fa406451bc52659a290e52cfdb2162a760bd549da4b8bbebe6a29f296d938df"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -151,6 +152,7 @@ do_configure () {
 
 do_compile () {
     export LD="${CXX}"
+    install -D ${RECIPE_SYSROOT_NATIVE}/etc/ssl/openssl.cnf ${B}/deps/openssl/nodejs-openssl.cnf
     install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
     oe_runmake BUILDTYPE=Release
 }
@@ -159,10 +161,15 @@ do_install () {
     oe_runmake install DESTDIR=${D}
 }
 
+do_install_ptest () {
+    cp -r  ${B}/out/Release/cctest ${D}${PTEST_PATH}/
+    cp -r ${B}/test ${D}${PTEST_PATH}
+    chown -R root:root ${D}${PTEST_PATH}
+}
+
 BINARIES = " \
     bytecode_builtins_list_generator \
     ${@bb.utils.contains('PACKAGECONFIG', 'icu', 'gen-regexp-special-case', '', d)} \
-    mkcodecache \
     node_mksnapshot \
     torque \
 "
