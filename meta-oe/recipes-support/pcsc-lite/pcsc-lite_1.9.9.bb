@@ -9,7 +9,7 @@ LICENSE:${PN}-dbg = "BSD-3-Clause & GPL-3.0-or-later"
 LICENSE:${PN}-spy = "GPL-3.0-or-later"
 LICENSE:${PN}-spy-dev = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
-DEPENDS = "autoconf-archive-native"
+DEPENDS = "autoconf-archive-native flex-native"
 
 SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
 SRC_URI[sha256sum] = "cbcc3b34c61f53291cecc0d831423c94d437b188eb2b97b7febc08de1c914e8a"
