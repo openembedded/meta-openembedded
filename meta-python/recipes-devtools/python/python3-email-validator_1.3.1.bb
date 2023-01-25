@@ -3,7 +3,7 @@ SECTION = "devel/python"
 LICENSE = "CC0-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=65d3616852dbf7b1a6d4b53b00626032"
 
-SRC_URI[sha256sum] = "553a66f8be2ec2dea641ae1d3f29017ab89e9d603d4a25cdaac39eefa283d769"
+SRC_URI[sha256sum] = "d178c5c6fa6c6824e9b04f199cf23e79ac15756786573c190d2ad13089411ad2"
 
 PYPI_PACKAGE = "email_validator"
 
