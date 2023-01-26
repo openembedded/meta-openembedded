@@ -2,16 +2,12 @@ SUMMARY = "D-Bus wrapper in C++ for dbus"
 HOMEPAGE = "https://dbus-cxx.github.io/"
 BUGTRACKER = "https://github.com/libsigcplusplus/libsigcplusplus/issues"
 SECTION = "base"
-LICENSE = "GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=4cf0188f02184e1e84b9586ac53c3f83"
+LICENSE = "LGPL-3.0-or-later | BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=24594f493407a4cd401ce9794e0b9308"
 
 SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https \
-           file://0001-Include-typeinfo-for-typeid.patch \
-           file://0001-include-utility-header.patch \
-           file://0001-Include-missing-cstdint.patch \
-"
-SRC_URI:append:libc-musl = " file://fix_build_musl.patch"
-SRCREV = "73532d6a5faae9c721c2cc9535b8ef32d4d18264"
+           file://0001-Include-missing-cstdint.patch"
+SRCREV = "898f6ea8f7ffe454e81a9337002df555728d4199"
 
 DEPENDS = "\
 	dbus \
