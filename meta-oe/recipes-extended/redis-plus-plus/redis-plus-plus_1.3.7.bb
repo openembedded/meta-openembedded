@@ -12,7 +12,9 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-DEPENDS += "hiredis"
+EXTRA_OECMAKE += "-DREDIS_PLUS_PLUS_USE_TLS=ON"
+
+DEPENDS += "hiredis openssl"
 
 RDEPENDS:${PN} += "hiredis"
 
