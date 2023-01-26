@@ -12,6 +12,7 @@ SRCBRANCH = "7.5.fb"
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
            file://0001-cmake-Add-check-for-atomic-support.patch \
            file://0001-cmake-Use-exported-target-for-bz2.patch \
+           file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
            file://ppc64.patch \
            file://mips.patch \
            file://arm.patch \
