@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https"
-SRCREV = "58084931ed1a056d91fe96da7b9ea81fa023560a"
+SRCREV = "f3b19a8a1f609d1a1b79002802e5cf8c336dc262"
 
 S = "${WORKDIR}/git"
 
