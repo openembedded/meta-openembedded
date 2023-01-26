@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=htt
            file://0001-cmake-Add-check-for-atomic-support.patch \
            file://0001-cmake-Use-exported-target-for-bz2.patch \
            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+           file://0001-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
            file://ppc64.patch \
            file://mips.patch \
            file://arm.patch \
