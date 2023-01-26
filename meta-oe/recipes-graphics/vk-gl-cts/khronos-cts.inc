@@ -26,7 +26,7 @@ ANY_OF_DISTRO_FEATURES += "opengl wayland"
 DEPENDS += "python3-lxml-native libpng zlib virtual/libgles2 qemu-native"
 
 SRC_URI += " \
-            file://0001-vulkancts.patch \
+            file://0001-vulkancts-Include-missing-cstdint.patch \
             file://0001-use-library-sonames-for-linking.patch \
 "
 
