@@ -9,8 +9,7 @@ SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
            file://0001-configure-Fix-check-for-AC_CHECK_LIB.patch \
 "
 
-SRC_URI[md5sum] = "180418c863b861d1df221bc486a07ce7"
-SRC_URI[sha256sum] = "30c613ec26eba48b188d2520cfbe64244f3b1a541e60909ce9ed2efb381f5e8c"
+SRC_URI[sha256sum] = "4150ed1256f7b12b928c65113c485761552b9496c433778aac3f9afc3e767080"
 
 inherit autotools
 
