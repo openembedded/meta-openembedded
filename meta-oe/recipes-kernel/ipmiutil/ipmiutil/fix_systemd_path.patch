@@ -2,7 +2,7 @@ allow systemd path to be defined by configure option.
 
 The configure probes the host for systemd path information.
 
-Upstream Status: Inappropriate [Embedded]
+Upstream-Status: Inappropriate [Embedded]
 
 Signed-off-By: Armin Kuster <akuster@mvista.com>
 
