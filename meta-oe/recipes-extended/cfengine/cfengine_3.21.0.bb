@@ -17,6 +17,7 @@ DEPENDS += "attr tokyocabinet bison-native libxml2"
 #RDEPENDS:cfengine += "attr tokyocabinet bison-native libxml2"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BPN}-community-${PV}.tar.gz \
+           file://0001-Fixed-with-libxml2-no-case-in-configure.ac.patch \
            file://set-path-of-default-config-file.patch \
            "
 #SRC_URI[md5sum] = "5318e40702bc66a3ece44ec4ad77712b"
