@@ -4,7 +4,7 @@ https://github.com/openembedded/openembedded/tree/master/recipes/netkit-rpc/netk
 
 Upstream-Status: Backported
 
-Signed-off-By: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 
 --- netkit-rpc-0.17/rpcgen/rpc_cout.c~gcc4
 +++ netkit-rpc-0.17/rpcgen/rpc_cout.c
