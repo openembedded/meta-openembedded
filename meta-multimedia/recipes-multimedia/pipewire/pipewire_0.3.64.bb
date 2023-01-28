@@ -168,6 +168,9 @@ python set_dynamic_metapkg_rdepends () {
     import os
     import oe.utils
 
+    if bb.data.inherits_class('nativesdk', d) or bb.data.inherits_class('native', d):
+        return
+
     # Go through all generated SPA plugin and PipeWire module packages
     # (excluding the main package and the -meta package itself) and
     # add them to the -meta package as RDEPENDS.
