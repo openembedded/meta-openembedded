@@ -24,7 +24,7 @@ SRC_URI[sha256sum] = "881a13303e263b7dc7fe337534c8a541d4914552287879bed30bbe76c5
 
 PE = "1"
 
-inherit cmake pkgconfig python3native perlnative upstream-version-is-even mime mime-xdg
+inherit cmake pkgconfig python3native python3targetconfig perlnative upstream-version-is-even mime mime-xdg
 
 PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
 
