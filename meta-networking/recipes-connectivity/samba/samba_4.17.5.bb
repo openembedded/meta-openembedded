@@ -23,8 +23,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0004-Add-options-to-configure-the-use-of-libbsd.patch \
            file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
-           file://0007-waf-Fix-errors-with-Werror-implicit-function-declara.patch \
-           file://0008-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
+           file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
            "
 
 SRC_URI:append:libc-musl = " \
@@ -33,7 +32,7 @@ SRC_URI:append:libc-musl = " \
            file://cmocka-uintptr_t.patch \
            "
 
-SRC_URI[sha256sum] = "c0512079db4cac707ccea4c18aebbd6b2eb3acf6e90735e7f645a326be1f4537"
+SRC_URI[sha256sum] = "ebb7880d474ffc09d73b5fc77bcbd657f6235910337331a9c24d7f69ca11442b"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.17(\.\d+)+).tar.gz"
 
