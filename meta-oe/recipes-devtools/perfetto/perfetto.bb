@@ -32,6 +32,8 @@ DEPENDS += " ninja-native"
 
 COMPATIBLE_HOST = "(i.86|x86_64|aarch64|arm).*-linux*"
 
+CCACHE_DISABLE = "1"
+
 FILES:${PN}:append = " \
   ${bindir}/tracebox \
   "
