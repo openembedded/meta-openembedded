@@ -13,6 +13,7 @@ SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614d
 inherit autotools pkgconfig siteinfo
 
 EXTRA_OECONF += " --with-sqlite3=${STAGING_DIR_HOST}/usr"
+EXTRA_OECONF += " --with-objectstore-backend-db"
 EXTRA_OECONF += "${@oe.utils.conditional('SITEINFO_BITS', '64', ' --enable-64bit', '', d)}"
 
 PACKAGECONFIG ?= "ecc eddsa pk11 openssl"
