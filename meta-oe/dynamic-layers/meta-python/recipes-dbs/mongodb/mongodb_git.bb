@@ -76,6 +76,7 @@ WIREDTIGER:aarch64 = "on"
 
 EXTRA_OESCONS = "PREFIX=${prefix} \
                  DESTDIR=${D} \
+                 MAXLINELENGTH='2097152' \
                  LIBPATH=${STAGING_LIBDIR} \
                  LINKFLAGS='${LDFLAGS}' \
                  CXXFLAGS='${CXXFLAGS}' \
