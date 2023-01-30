@@ -17,7 +17,8 @@ SRC_URI:append = " \
            git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git;protocol=https;destsuffix=git/buildtools/libunwind;branch=main;name=libunwind \
            git://android.googlesource.com/platform/external/zlib.git;branch=master;protocol=https;destsuffix=git/buildtools/zlib;name=zlib \
            https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d782;subdir=git/buildtools/;name=gn \
-           file://0001-Remove-check_build_deps-build-steps.patch "
+           file://0001-Remove-check_build_deps-build-steps.patch \
+           file://0001-Add-missing-header-cstdint-for-uintXX_t-types.patch"
 
 SRCREV_protobuf = "6a59a2ad1f61d9696092f79b6d74368b4d7970a3"
 SRCREV_libcxx = "d9040c75cfea5928c804ab7c235fed06a63f743a"
