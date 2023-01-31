@@ -74,6 +74,10 @@ WIREDTIGER ?= "off"
 WIREDTIGER:x86-64 = "on"
 WIREDTIGER:aarch64 = "on"
 
+# ld.gold: fatal error: build/59f4f0dd/mongo/mongod: Structure needs cleaning
+LDFLAGS:append:x86:libc-musl = " -fuse-ld=bfd"
+LDFLAGS:remove:toolchain-clang = "-fuse-ld=bfd"
+
 EXTRA_OESCONS = "PREFIX=${prefix} \
                  DESTDIR=${D} \
                  MAXLINELENGTH='2097152' \
