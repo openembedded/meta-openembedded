@@ -246,6 +246,7 @@ PACKAGES =+ "\
 "
 
 PACKAGES_DYNAMIC = "^${PN}-spa-plugins.* ^${PN}-modules.*"
+PACKAGES_DYNAMIC:class-native = ""
 
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-service', 'pipewire.service', '', d)}"
 CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
