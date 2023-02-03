@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=71827c617ec7b45a0dd23658347cc1e9 \
                    "
 DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
 
-inherit autotools pkgconfig systemd update-rc.d
+inherit autotools pkgconfig ptest systemd update-rc.d
 
 SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
 
@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
            file://minicoredumper.service \
            file://minicoredumper.init \
            file://0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch \
+           file://run-ptest \
            "
 
 S = "${WORKDIR}/git"
@@ -29,6 +30,9 @@ INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME:${PN} = "minicoredumper"
 INITSCRIPT_PARAMS:${PN} = "defaults 89"
 
+EXTRA_OECONF:append = " \
+    ${@bb.utils.contains('PTEST_ENABLED', '1', '--with-minicoredumper_demo', '--without-libminicoredumper', d)} \
+"
 do_install:append() {
     rmdir ${D}${localstatedir}/run
     install -d ${D}/${sysconfdir}/minicoredumper
