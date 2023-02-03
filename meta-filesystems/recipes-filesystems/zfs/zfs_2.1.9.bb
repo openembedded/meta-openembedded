@@ -7,7 +7,7 @@ HOMEPAGE ="https://github.com/openzfs/zfs"
 SRC_URI = "https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
 "
-SRC_URI[sha256sum] = "6462e63e185de6ff10c64ffa6ed773201a082f9dd13e603d7e8136fcb4aca71b"
+SRC_URI[sha256sum] = "6b172cdf2eb54e17fcd68f900fab33c1430c5c59848fa46fab83614922fe50f6"
 
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.
