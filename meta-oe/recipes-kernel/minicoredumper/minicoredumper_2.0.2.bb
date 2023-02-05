@@ -9,15 +9,12 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
 
 inherit autotools pkgconfig ptest systemd update-rc.d
 
-SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
-
-PR .= "+git${SRCPV}"
+SRCREV = "0bed11b3d69877ce59b1a71359349af60f2009ff"
 
 SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
-           file://0001-replace-pthread_mutexattr_setrobust_np-with-pthread_.patch \
+           file://0001-minicoredumper_demo-Use-optnone-attribute-with-clang.patch \
            file://minicoredumper.service \
            file://minicoredumper.init \
-           file://0001-minicoredumper-retry-elf-parsing-as-long-as-needed.patch \
            file://run-ptest \
            "
 
