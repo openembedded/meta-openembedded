@@ -43,7 +43,7 @@ RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest \
     ${PYTHON_PN}-pytest-timeout \
     ${PYTHON_PN}-resource \
-    tk \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
 "
 
 CVE_PRODUCT = "pillow"
