@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.4 \
            file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not-py.patch \
            "
 
-SRCREV = "70151e264bbb697a10fed711aa8c937d4f0009b1"
+SRCREV = "62ac43de9f3bc470586cf4f51fadf013bf542b32"
 
 S = "${WORKDIR}/git"
 
