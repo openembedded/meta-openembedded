@@ -49,6 +49,9 @@ COMPATIBLE_HOST = "(i.86|x86_64|aarch64|arm).*-linux*"
 
 CCACHE_DISABLE = "1"
 
+# Some musl hacks gets through compiling it for musl
+# Nullifying -DTEMP_FAILURE_RETRY might be grossest of them
+TUNE_CCARGS:append:libc-musl = " -D_LIBCPP_HAS_MUSL_LIBC -Dgetprogname\(\)=program_invocation_name -DTEMP_FAILURE_RETRY="
 FILES:${PN}:append = " \
   ${bindir}/tracebox \
   "
@@ -133,13 +136,6 @@ do_configure () {
         cd ..
     fi
     # Done processing the Ninja files
-
-    # Workaround for the functions not supported by musl
-    if [ "${TCLIBC}" = "musl" ]; then
-        sed -e 's/strtoll_l(__a, \&__p2, __base, _LIBCPP_GET_C_LOCALE)/strtoll(__a, \&__p2, __base)/g' \
-            -e 's/strtoull_l(__a, \&__p2, __base, _LIBCPP_GET_C_LOCALE)/strtoull(__a, \&__p2, __base)/g' \
-            ${S}/buildtools/libcxx/include/locale -i
-    fi
 }
 
 # Perfetto generates a few different binaries, such as traced and traced_probes and perfetto.
