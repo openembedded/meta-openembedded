@@ -6,12 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d77679ce6a2cc4d873d4ebbf2a401e6"
 
 SECTION = "console/utils"
 
-DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
+DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng libexif"
 DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
 
-SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
+SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+           file://0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch"
+SRC_URI[sha256sum] = "270a3752a960368aa99d431fb5d34f4039b2ac943c576d840612d1d8185c9bb9"
 
-inherit autotools-brokensep gettext pkgconfig
+inherit autotools-brokensep gettext pkgconfig github-releases
 
 EXTRA_OECONF += " --enable-ghostscript --disable-ldap \
                        --with-pdftops=hybrid --enable-imagefilters \
