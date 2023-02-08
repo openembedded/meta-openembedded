@@ -9,9 +9,8 @@ inherit setuptools3_legacy
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=rhel9-branch \
-           file://0001-setup.py-switch-from-distutils-to-setuptools.patch \
-          "
-SRCREV = "c321ce22950aff76611a3c6beffa02b5ea3adbed"
+SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master"
+
+SRCREV = "eb5d4adc3b838704b6a68f0f77ada2063a11ab1b"
 
 FILES:${PN} += "${datadir}/python-meh"
