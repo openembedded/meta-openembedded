@@ -17,6 +17,9 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 
 EXTRA_OEMESON = "-Dinstalled_tests=false"
 
+# Disable ARM NEON support
+EXTRA_OEMESON:append:arm = " -Darm_neon=false"
+
 FILES:${PN} += "${libdir}/graphene-1.0"
 
 BBCLASSEXTEND = "native nativesdk"
