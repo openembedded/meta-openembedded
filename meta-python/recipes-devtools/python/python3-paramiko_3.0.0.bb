@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
 
-SRC_URI[sha256sum] = "376885c05c5d6aa6e1f4608aac2a6b5b0548b1add40274477324605903d9cd49"
+SRC_URI[sha256sum] = "fedc9b1dd43bc1d45f67f1ceca10bc336605427a46dcdf8dec6bfea3edf57965"
 
 PYPI_PACKAGE = "paramiko"
 
