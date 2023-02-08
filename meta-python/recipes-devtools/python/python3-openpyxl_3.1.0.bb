@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "e47805627aebcf860edb4edf7987b1309c1b3632f3750538ed962bbcc3bd7449"
+SRC_URI[sha256sum] = "eccedbe1cdd8b2494057e73959b496821141038dbb7eb9266ea59e3f34208231"
 
 RDEPENDS:${PN} += "\
 	${PYTHON_PN}-compression \
