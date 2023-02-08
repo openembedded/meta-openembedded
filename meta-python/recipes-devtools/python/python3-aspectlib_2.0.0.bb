@@ -6,14 +6,13 @@ DESCRIPTION = " It is useful when changing behavior in existing code is desired.
 It includes tools for debugging and testing: simple mock/record and a complete capture/replay framework."
 HOMEPAGE = "https://github.com/ionelmc/python-aspectlib"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d58b3f20fd10347a9458b8a03793b62e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=80721ace117fd1f814049ecb81c6be76"
 
-SRC_URI[sha256sum] = "d275ec82c4c2712e564bb760e4accff8f061f648e38774feabeb8b241cf3a4aa"
+SRC_URI[sha256sum] = "a4b461b9da0b531aebcb93efcde3de808a72c60226dd8d902c467d13faf7ce92"
 
 inherit ptest pypi setuptools3
 
 SRC_URI += "file://run-ptest \
-            file://0001-Remove-tornado-6-test-constraint.-Ref-15.patch \
            "
 
 do_install_ptest() {
