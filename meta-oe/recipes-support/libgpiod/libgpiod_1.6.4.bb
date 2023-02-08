@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 SRC_URI = " \
     https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
     file://run-ptest \
-    file://0001-build-don-t-expect-automake-to-set-PYTHON.patch \
 "
 
-SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
-SRC_URI[sha256sum] = "841be9d788f00bab08ef22c4be5c39866f0e46cb100a3ae49ed816ac9c5dddc7"
+SRC_URI[md5sum] = "7a2cca6ead9296c27e877070dd8853bc"
+SRC_URI[sha256sum] = "7b146e12f28fbca3df7557f176eb778c5ccf952ca464698dba8a61b2e1e3f9b5"
 
 inherit autotools pkgconfig python3native ptest
 
