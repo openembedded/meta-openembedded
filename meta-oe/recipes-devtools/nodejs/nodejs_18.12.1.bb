@@ -3,6 +3,8 @@ HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dfd7ae796baf5326016a3865ee1dc632"
 
+CVE_PRODUCT = "nodejs node.js"
+
 DEPENDS = "openssl"
 DEPENDS:append:class-target = " qemu-native"
 DEPENDS:append:class-native = " c-ares-native"
