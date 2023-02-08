@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0724597863f1581ab01429e0423e779f"
 DEPENDS += "icu"
 
 PYPI_PACKAGE = "PyICU"
-SRC_URI[sha256sum] = "f0b9549a87f87ba7c413f13679d137271e0b37f1f39b0109ace38257d4d148d6"
+SRC_URI[sha256sum] = "0c3309eea7fab6857507ace62403515b60fe096cbfb4f90d14f55ff75c5441c1"
 
 SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
 
