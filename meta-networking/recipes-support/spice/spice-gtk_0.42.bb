@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 	file://subprojects/keycodemapdb/LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
 "
 
-SRCREV = "74e673d7c3d9cd281d85c691fbc520107066da01"
+SRCREV = "f04479c16f0969fb394ebe74b6eff74e560a42f0"
 
 SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;branch=master"
 
