@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=f256b76d52e7b4d02bf
 DEPENDS = "ncurses libevent"
 
 SRC_URI = "https://github.com/tmux/tmux/releases/download/${PV}/tmux-${PV}.tar.gz"
-SRC_URI[md5sum] = "7301d3fa12f35051edb185496766c745"
-SRC_URI[sha256sum] = "918f7220447bef33a1902d4faff05317afd9db4ae1c9971bef5c787ac6c88386"
+SRC_URI[md5sum] = "8eee5883b9f6550fa4efaad0c9ec38f3"
+SRC_URI[sha256sum] = "e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f"
 
 UPSTREAM_CHECK_URI = "https://github.com/tmux/tmux/releases"
 
