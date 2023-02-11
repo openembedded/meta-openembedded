@@ -13,7 +13,7 @@ DEPENDS = " \
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
-SRCREV = "e5d5cf2404786af8bcc40bdb8a2962bef4ec18b6"
+SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
 
 inherit meson pkgconfig
 # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952
