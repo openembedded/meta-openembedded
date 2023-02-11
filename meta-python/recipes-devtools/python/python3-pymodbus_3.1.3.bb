@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2223d66c7e674b40527b5a4c35bd76"
 DEPENDS += "python3-six-native"
 
-SRC_URI[sha256sum] = "eeba02c86b13b1f885c0acc50adf4611df24ab85066ff54daa37c2d883c32525"
+SRC_URI[sha256sum] = "714e5d6b7e28c4016a94346e73033aff276b6ce8bd22e470ba4fd8b982e08a98"
 S = "${WORKDIR}/pymodbus-${PV}"
 
 inherit pypi setuptools3
