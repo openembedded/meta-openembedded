@@ -12,12 +12,8 @@ DEPENDS = "glib-2.0 glib-2.0-native"
 
 inherit meson pkgconfig bash-completion gobject-introspection
 
-SRCREV ?= "95108b6eebfefa6621a1c34565f562eeca9308b9"
-# patch 0001 is on main branch upstream
-SRC_URI = "\
-    git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-30 \
-    file://0001-build-use-python3-everywhere.patch \
-"
+SRCREV = "c6b38cc2752873c0c6c1f8c472d9ddea2b34ec72"
+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-32"
 
 S = "${WORKDIR}/git"
 
