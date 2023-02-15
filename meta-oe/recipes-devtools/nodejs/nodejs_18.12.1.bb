@@ -148,7 +148,7 @@ do_configure () {
                --without-etw \
                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
                --dest-os=linux \
-               --libdir=${libdir} \
+               --libdir=${baselib} \
                ${ARCHFLAGS} \
                ${PACKAGECONFIG_CONFARGS}
 }
