@@ -11,7 +11,7 @@ SRC_URI = " \
     file://libexecinfo.patch \
 "
 
-SRCREV = "8f9ccfe770add9e4c64e9b25c102658e3c763b73"
+SRCREV = "b33e3bad4c46c8a6345525fd822af355e5ef9446"
 
 S = "${WORKDIR}/git"
 
