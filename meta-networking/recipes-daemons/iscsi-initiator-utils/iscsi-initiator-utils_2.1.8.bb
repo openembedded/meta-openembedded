@@ -12,7 +12,7 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "7b53fcc502da8617110fd64d675b476772c28a6f"
+SRCREV = "543ba0f15d340b97f30782308cec424a6738fec3"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
            file://0001-Makefile-Do-not-set-Werror.patch \
@@ -22,7 +22,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
            file://iscsi-initiator.service \
            file://iscsi-initiator-targets.service \
            file://set_initiatorname \
-           file://0002-iscsiuio-Use-pthread_t-for-INVALID_THREAD.patch \
            "
 S = "${WORKDIR}/git"
 
