@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5a
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
 SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
 SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
-SRCREV = "dda4848a9911120a903bef6284fb88286f4464c9"
+SRCREV = "4915f2af869876d892a1f591ee2c21be21c6fc5c"
 
 S = "${WORKDIR}/git"
 
