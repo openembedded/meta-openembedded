@@ -17,15 +17,18 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-PACKAGECONFIG ?= "shared unwind"
+PACKAGECONFIG ?= "shared unwind 64bit-atomics"
 PACKAGECONFIG:remove:riscv64 = "unwind"
 PACKAGECONFIG:remove:riscv32 = "unwind"
+PACKAGECONFIG:remove:mipsarch = "64bit-atomics"
+
 PACKAGECONFIG:append:libc-musl:riscv64 = " execinfo"
 PACKAGECONFIG:append:libc-musl:riscv32 = " execinfo"
 
 PACKAGECONFIG[unwind] = "-DWITH_UNWIND=ON,-DWITH_UNWIND=OFF,libunwind,libunwind"
 PACKAGECONFIG[execinfo] = ",,libexecinfo"
 PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
+PACKAGECONFIG[64bit-atomics] = ",-DCMAKE_CXX_STANDARD_LIBRARIES='-latomic',,"
 
 do_configure:append() {
     # remove WORKDIR info to improve reproducibility
