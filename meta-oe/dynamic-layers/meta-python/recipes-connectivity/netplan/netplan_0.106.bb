@@ -11,12 +11,11 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 S = "${WORKDIR}/git"
-SRCREV = "3e522b7255310bdecca6c781137741dfc4abc021"
-PV = "0.104"
+SRCREV = "15ce044d1df27b5057556d84d0d14beef8dd4e4d"
+PV = "0.106"
 
 SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
            file://0001-Makefile-do-not-use-Werror.patch \
-           file://0001-Makefile-fix-parallel-build-failure.patch \
            "
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
