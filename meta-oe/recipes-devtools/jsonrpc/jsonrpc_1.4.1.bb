@@ -9,11 +9,9 @@ SECTION = "libs"
 
 DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
 
-SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https \
-	   file://0001-Fix-build-with-libmicrohttpd.patch \
-"
+SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https"
 
-SRCREV = "c696f6932113b81cd20cd4a34fdb1808e773f23e"
+SRCREV = "ec5ce12fc9c0299e1454cc002c70218b5a6f005b"
 
 S = "${WORKDIR}/git"
 
