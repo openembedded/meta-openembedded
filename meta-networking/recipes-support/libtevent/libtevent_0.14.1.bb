@@ -17,8 +17,7 @@ SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error
 
 LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
 
-SRC_URI[md5sum] = "9f413f3184f79a4deecd9444242a5dca"
-SRC_URI[sha256sum] = "b9437a917fa55344361beb64ec9e0042e99cae8879882a62dd38f6abe2371d0c"
+SRC_URI[sha256sum] = "ef85fcaa80ffd2351036ba4b347630fef2a1ac3da964a7f1820466bad03cd00d"
 
 inherit pkgconfig ptest waf-samba
 
