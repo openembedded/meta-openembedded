@@ -12,7 +12,7 @@ SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
            file://0001-talloc-Add-configure-options-for-packages.patch \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
 "
-SRC_URI[sha256sum] = "179f9ebe265e67e4ab2c26cad2b7de4b6a77c6c212f966903382869f06be6505"
+SRC_URI[sha256sum] = "6df36862c42466ef88f360444513870ef46934f9016c84383cc4008a7d0c46ba"
 
 inherit waf-samba
 
