@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f65159f73e603f89d6867d43191900e5"
 
 SRCREV = "d5c27eb7a9695d83569767e27ef69674173db39a"
 
-SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master \
+SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master;protocol=https \
            file://atftpd.init \
            file://atftpd.service \
 "
