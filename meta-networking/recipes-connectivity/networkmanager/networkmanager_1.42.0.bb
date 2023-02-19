@@ -30,6 +30,8 @@ SRC_URI = " \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
 "
+SRC_URI:append:libc-musl = " file://0001-libnm-std-aux-Adjust-signature-of-_nm_assert_fail_in.patch"
+
 SRC_URI[sha256sum] = "2f6756d507bb6b46716594b67e6fe7491891e1b5b167bbafc5157dfa7753d5b4"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
