@@ -17,19 +17,16 @@ DEPENDS = " \
     bison-native \
 "
 
+GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
 SRC_URI = " \
-    https://github.com/ostreedev/ostree/releases/download/v${PV}/libostree-${PV}.tar.xz \
-    file://0001-lib-repo-checkout-Add-ALLPERMS-for-musl.patch \
-    file://0001-tests-Handle-musl-s-ERANGE-mapping.patch \
+    ${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "8be2a9261c94e8b9ec4113380ffc480f8598245fb321a009bad4fae4b822411f"
-
-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+SRC_URI[sha256sum] = "dd792b167693a1971c9f6e3168013d906ac035100ff6c719a3b322eb44b96f55"
 
 S = "${WORKDIR}/libostree-${PV}"
 
-inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
+inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
 
 # Workaround compile failure:
 # |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
@@ -183,7 +180,7 @@ RDEPENDS:${PN}:class-target = " \
 #   ostree-trivial-httpd (requires soup - note soup and curl can coexist)
 #   overlayfs in your kernel
 #   busybox built statically
-#   C.UTF-8 locale available
+#   C.UTF-8 locale available (default)
 #   Sufficient disk space/RAM (e.g. core-image-sato-sdk)
 #
 # Something like this in your local.conf:
@@ -191,7 +188,6 @@ RDEPENDS:${PN}:class-target = " \
 # PACKAGECONFIG:append:pn-ostree = " static soup"
 # KERNEL_EXTRA_FEATURES:append = " features/overlayfs/overlayfs.scc"
 # TARGET_CFLAGS:append:pn-busybox = " -static"
-# IMAGE_LINGUAS:append:libc-glibc = " c"
 #
 RDEPENDS:${PN}-ptest += " \
     attr \
