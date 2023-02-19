@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "9558a5d5e0360d8af822431c76ee858a8c7495ac"
+SRCREV = "08b0ed65765a1033424a5c0d897a392a61f8a2a3"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -256,6 +256,8 @@ FILES:${PN} = " \
     ${systemd_user_unitdir} \
     ${bindir}/pipewire \
     ${bindir}/pipewire-avb \
+    ${bindir}/pipewire-aes67 \
+    ${sysconfdir}/security/limits.d \
 "
 
 RRECOMMENDS:${PN}:class-target += " \
