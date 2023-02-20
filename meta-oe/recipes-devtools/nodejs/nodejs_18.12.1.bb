@@ -137,18 +137,22 @@ addtask create_v8_qemu_wrapper after do_configure before do_compile
 
 LDFLAGS:append:x86 = " -latomic"
 
+CROSS_FLAGS = "--cross-compiling"
+CROSS_FLAGS:class-native = "--no-cross-compiling"
+
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
     export LD="${CXX}"
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
     # $TARGET_ARCH settings don't match --dest-cpu settings
-    python3 configure.py --verbose --prefix=${prefix} --cross-compiling \
+    python3 configure.py --verbose --prefix=${prefix} \
                --shared-openssl \
                --without-dtrace \
                --without-etw \
                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
                --dest-os=linux \
                --libdir=${baselib} \
+               ${CROSS_FLAGS} \
                ${ARCHFLAGS} \
                ${PACKAGECONFIG_CONFARGS}
 }
