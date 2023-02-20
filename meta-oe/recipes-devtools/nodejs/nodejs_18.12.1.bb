@@ -174,19 +174,6 @@ do_install_ptest () {
     chown -R root:root ${D}${PTEST_PATH}
 }
 
-BINARIES = " \
-    bytecode_builtins_list_generator \
-    ${@bb.utils.contains('PACKAGECONFIG', 'icu', 'gen-regexp-special-case', '', d)} \
-    node_mksnapshot \
-    torque \
-"
-
-do_install:append:class-native() {
-    # Install the native binaries to provide it within sysroot for the target compilation
-    install -d ${D}${bindir}
-    (cd ${S}/out/Release && install ${BINARIES} ${D}${bindir})
-}
-
 PACKAGES =+ "${PN}-npm"
 FILES:${PN}-npm = "${nonarch_libdir}/node_modules ${bindir}/npm ${bindir}/npx"
 RDEPENDS:${PN}-npm = "bash python3-core python3-shell python3-datetime \
