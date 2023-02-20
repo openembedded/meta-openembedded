@@ -140,9 +140,10 @@ LDFLAGS:append:x86 = " -latomic"
 CROSS_FLAGS = "--cross-compiling"
 CROSS_FLAGS:class-native = "--no-cross-compiling"
 
+#export LD="${CXX}"
+
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
-    export LD="${CXX}"
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
     # $TARGET_ARCH settings don't match --dest-cpu settings
     python3 configure.py --verbose --prefix=${prefix} \
@@ -158,7 +159,6 @@ do_configure () {
 }
 
 do_compile () {
-    export LD="${CXX}"
     install -D ${RECIPE_SYSROOT_NATIVE}/etc/ssl/openssl.cnf ${B}/deps/openssl/nodejs-openssl.cnf
     install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
     oe_runmake BUILDTYPE=Release
