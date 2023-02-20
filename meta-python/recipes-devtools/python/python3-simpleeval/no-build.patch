@@ -1,4 +1,4 @@
-Upstream-Status: Submitted [https://github.com/danthedeckie/simpleeval/pull/119]
+Upstream-Status: Backport [https://github.com/danthedeckie/simpleeval/pull/119]
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 
 From 08bc99211aec32882d5f1c83896eb5d72b9fb125 Mon Sep 17 00:00:00 2001
