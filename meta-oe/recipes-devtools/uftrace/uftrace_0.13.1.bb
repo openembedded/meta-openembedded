@@ -10,10 +10,8 @@ DEPENDS:append:libc-musl = " argp-standalone"
 
 inherit autotools
 
-SRCREV = "53ec12d40701cf73ddcf5db8cff63b54736d0eda"
-SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
-           file://0001-build-Fix-a-build-race-related-to-utils-mermaid.html.patch \
-           "
+SRCREV = "be3f46f7656bd9243b1835337b5350247b030b02"
+SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https"
 S = "${WORKDIR}/git"
 
 LDFLAGS:append:libc-musl = " -largp"
