@@ -93,17 +93,17 @@ python do_unpack() {
     import shutil
 
     bb.build.exec_func('base_do_unpack', d)
-    shutil.rmtree(d.getVar('S') + '/deps/openssl', True)
+    shutil.rmtree(d.getVar('S') + '/deps/openssl')
     if 'ares' in d.getVar('PACKAGECONFIG'):
-        shutil.rmtree(d.getVar('S') + '/deps/cares', True)
+        shutil.rmtree(d.getVar('S') + '/deps/cares')
     if 'brotli' in d.getVar('PACKAGECONFIG'):
-        shutil.rmtree(d.getVar('S') + '/deps/brotli', True)
+        shutil.rmtree(d.getVar('S') + '/deps/brotli')
     if 'libuv' in d.getVar('PACKAGECONFIG'):
-        shutil.rmtree(d.getVar('S') + '/deps/uv', True)
+        shutil.rmtree(d.getVar('S') + '/deps/uv')
     if 'nghttp2' in d.getVar('PACKAGECONFIG'):
-        shutil.rmtree(d.getVar('S') + '/deps/nghttp2', True)
+        shutil.rmtree(d.getVar('S') + '/deps/nghttp2')
     if 'zlib' in d.getVar('PACKAGECONFIG'):
-        shutil.rmtree(d.getVar('S') + '/deps/zlib', True)
+        shutil.rmtree(d.getVar('S') + '/deps/zlib')
 }
 
 # V8's JIT infrastructure requires binaries such as mksnapshot and
