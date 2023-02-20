@@ -142,7 +142,7 @@ do_configure () {
     export LD="${CXX}"
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
     # $TARGET_ARCH settings don't match --dest-cpu settings
-    python3 configure.py --prefix=${prefix} --cross-compiling \
+    python3 configure.py --verbose --prefix=${prefix} --cross-compiling \
                --shared-openssl \
                --without-dtrace \
                --without-etw \
