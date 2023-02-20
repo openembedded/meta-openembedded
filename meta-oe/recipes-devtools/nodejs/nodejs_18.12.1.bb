@@ -89,10 +89,9 @@ EXTRA_OEMAKE = "\
     builddir_name=./ \
 "
 
-python do_unpack() {
+python prune_sources() {
     import shutil
 
-    bb.build.exec_func('base_do_unpack', d)
     shutil.rmtree(d.getVar('S') + '/deps/openssl')
     if 'ares' in d.getVar('PACKAGECONFIG'):
         shutil.rmtree(d.getVar('S') + '/deps/cares')
@@ -105,6 +104,7 @@ python do_unpack() {
     if 'zlib' in d.getVar('PACKAGECONFIG'):
         shutil.rmtree(d.getVar('S') + '/deps/zlib')
 }
+do_unpack[postfuncs] += "prune_sources"
 
 # V8's JIT infrastructure requires binaries such as mksnapshot and
 # mkpeephole to be run in the host during the build. However, these
