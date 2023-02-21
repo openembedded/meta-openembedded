@@ -45,7 +45,7 @@ RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest-timeout \
     ${PYTHON_PN}-resource \
     ${PYTHON_PN}-unixadmin\
-    tk \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
 "
 
 CVE_PRODUCT = "pillow"
