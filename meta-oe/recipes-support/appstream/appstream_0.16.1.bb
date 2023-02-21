@@ -11,7 +11,6 @@ DEPENDS = " \
     gperf-native \
     glib-2.0 \
     libyaml \
-    libstemmer \
     libxml2 \
     libxmlb \
     libxslt-native \
@@ -26,9 +25,14 @@ GIR_MESON_OPTION = ""
 
 SRC_URI = "https://www.freedesktop.org/software/appstream/releases/AppStream-${PV}.tar.xz"
 SRC_URI:append:class-target = " file://0001-fix-crosscompile.patch"
-SRC_URI[sha256sum] = "cb15ed62cc2729683879a2dbf98c0a3267ea2b4d57bba6bc55e70a25500e04c2"
+SRC_URI[sha256sum] = "77e274e163db1f0a1bec8f4134b1d0f31e9c0a8c54cd37f724a7d30a71cf41d2"
 
 S = "${WORKDIR}/AppStream-${PV}"
+
+PACKAGECONFIG ?= "stemming ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+
+PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
+PACKAGECONFIG[stemming] = "-Dstemming=true,-Dstemming=false,libstemmer"
 
 FILES:${PN} += "${datadir}"
 
