@@ -1,0 +1,35 @@
+From e69d907c3fe8765ce50ce1258648ebc8283ef8a7 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Feb 2023 14:55:07 -0800
+Subject: [PATCH] meson: Use global function in argp check
+
+clang is optimizing away parse_opt() since its marked static and not
+used in main(), make life a bit harder for clang :)
+removing static now emits the global symbols to be resolved during link
+and when libargp is missing the error is thrown rightly
+
+riscv64-yoe-linux-musl-ld: /tmp/a-5ba039.o: in function `.Lpcrel_hi0':
+a.c:(.text+0x44): undefined reference to `argp_state_help'
+clang-16: error: linker command failed with exit code 1 (use -v to see invocation)
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Upstream-Status: Submitted [https://github.com/zchunk/zchunk/pull/92/]
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 3b92d58..ab54abd 100644
+--- a/meson.build
++++ b/meson.build
+@@ -57,7 +57,7 @@ if host_machine.system() == 'windows'
+ endif
+ 
+ # argp-standalone dependency (if required)
+-if build_machine.system() == 'windows' or build_machine.system() == 'darwin' or build_machine.system() == 'freebsd' or not cc.links('#include <argp.h>\nstatic error_t parse_opt (int key, char *arg, struct argp_state *state) { argp_usage(state); return 0; }; void main() {}')
++if build_machine.system() == 'windows' or build_machine.system() == 'darwin' or build_machine.system() == 'freebsd' or not cc.links('#include <argp.h>\nerror_t parse_opt (int key, char *arg, struct argp_state *state) { argp_usage(state); return 0; }; void main() {}')
+     argplib = cc.find_library('argp', has_headers : ['argp.h'], required: false)
+     if not argplib.found()
+         argplib = dependency('argp-standalone')
