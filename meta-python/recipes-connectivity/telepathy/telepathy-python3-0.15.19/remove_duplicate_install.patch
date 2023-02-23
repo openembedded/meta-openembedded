@@ -9,7 +9,7 @@ twice. Remove one errors.py from the installation list.
     
 Signed-off-by: Dongxiao Xu <dongxiao.xu@intel.com>
     
-Upstream-Status: Inappropirate [upstream inactive]
+Upstream-Status: Inappropriate [upstream inactive]
     
 diff --git a/src/Makefile.am b/src/Makefile.am
 index 5c27dfe..7536e43 100644

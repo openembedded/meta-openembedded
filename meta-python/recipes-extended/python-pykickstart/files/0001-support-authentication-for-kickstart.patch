@@ -9,7 +9,7 @@ we support basic/digest authentication.
 Add KickstartAuthError to report authentication failure,
 which the invoker could parse this specific error.
 
-Upstream-Status: inappropriate [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
