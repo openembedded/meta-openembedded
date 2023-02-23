@@ -8,7 +8,7 @@ network, it failed and wait 300s to break, we should retry
 to invoke request with timeout explicitly. So if it the
 network is up, the fetch works.
 
-Upstream-Status: inappropriate [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
