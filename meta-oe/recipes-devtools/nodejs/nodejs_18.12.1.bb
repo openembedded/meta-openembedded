@@ -140,8 +140,6 @@ LDFLAGS:append:x86 = " -latomic"
 CROSS_FLAGS = "--cross-compiling"
 CROSS_FLAGS:class-native = "--no-cross-compiling"
 
-#export LD="${CXX}"
-
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
