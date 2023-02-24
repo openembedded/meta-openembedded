@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 # If you want ptest support, use the git repo
 # UTscapy does not exist in the pypi pkg
 #
-SRCREV = "32cd7eb0f620d9adf171c48d55514e8326a538d7"
+SRCREV = "9473f77d8b548c8e478e52838bdd4c12f5d4f4ff"
 SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https \
            file://run-ptest"
 
@@ -28,14 +28,14 @@ inherit setuptools3 ptest
 
 do_install:append() {
         mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
-        mv ${D}${bindir}/UTscapy ${D}${bindir}/UTscapy3
 }
 
 do_install_ptest() {
+    install -m 0644 ${S}/scapy/tools/UTscapy.py ${D}${PTEST_PATH}
     install -m 0644 ${S}/test/regression.uts ${D}${PTEST_PATH}
     sed -i 's,@PTEST_PATH@,${PTEST_PATH},' ${D}${PTEST_PATH}/run-ptest
 }
 
 RDEPENDS:${PN} = "tcpdump ${PYTHON_PN}-compression ${PYTHON_PN}-cryptography ${PYTHON_PN}-netclient  \
                   ${PYTHON_PN}-netserver ${PYTHON_PN}-pydoc ${PYTHON_PN}-pkgutil ${PYTHON_PN}-shell \
-                  ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
+                  ${PYTHON_PN}-threading ${PYTHON_PN}-numbers ${PYTHON_PN}-fcntl"
