@@ -21,6 +21,8 @@ PE = "1"
 SRC_URI = " \
     git://github.com/libusb/libusb-compat-0.1.git;protocol=https;branch=master \
     file://0001-usb.h-Include-sys-types.h.patch \
+    file://0002-automake-make-example-programs-installable.patch \
+    file://run-ptest \
 "
 SRCREV = "c497eff1ae8c4cfd4fdff370f04c78fa0584f4f3"
 S = "${WORKDIR}/git"
@@ -29,5 +31,14 @@ UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
 
 BINCONFIG = "${bindir}/libusb-config"
 
-inherit autotools pkgconfig binconfig-disabled lib_package
+inherit autotools pkgconfig binconfig-disabled lib_package ptest
 
+# examples are used as ptest so enable them at configuration if needed
+EXTRA_OECONF += "${@bb.utils.contains('PTEST_ENABLED', '1', '--enable-examples-build', '', d)}"
+
+# Move test binaries out of bindir to avoid clashing with a "real" lsusb.
+do_install_ptest() {
+    for bin in lsusb testlibusb; do
+       mv ${D}${bindir}/$bin ${D}${PTEST_PATH}
+    done
+}
