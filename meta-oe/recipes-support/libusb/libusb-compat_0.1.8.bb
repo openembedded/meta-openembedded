@@ -22,7 +22,7 @@ SRC_URI = " \
     git://github.com/libusb/libusb-compat-0.1.git;protocol=https;branch=master \
     file://0001-usb.h-Include-sys-types.h.patch \
 "
-SRCREV = "88740f0fe497b473c8ef40093ab7daeebfb40eb6"
+SRCREV = "c497eff1ae8c4cfd4fdff370f04c78fa0584f4f3"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
