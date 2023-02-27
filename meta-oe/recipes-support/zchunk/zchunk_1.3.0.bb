@@ -4,10 +4,9 @@ AUTHOR = "Jonathan Dieter"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
 
-SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main \
-           file://clang.patch"
+SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
 
-SRCREV = "0bed8496262a71beadccd4e562bdac093ef6e06f"
+SRCREV = "1d8f14484b4e0b507487abe6c294fb2059b7b72f"
 S = "${WORKDIR}/git"
 
 DEPENDS = "zstd"
