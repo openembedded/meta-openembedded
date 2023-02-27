@@ -9,6 +9,9 @@ LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f2ac5f3ac4835e8f91324a26a590a423"
 DEPENDS = "libusb1"
 
+# libusb-compat dlopen() libusb1 so we need to explicitly RDEPENDS on it
+RDEPENDS:${PN} += "libusb1"
+
 # Few packages are known not to work with libusb-compat (e.g. libmtp-1.0.0),
 # so here libusb-0.1 is removed completely instead of adding virtual/libusb0.
 # Besides, libusb-0.1 uses a per 1ms polling that hurts a lot to power
