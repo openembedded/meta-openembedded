@@ -76,6 +76,8 @@ PACKAGECONFIG[mmjsonparse] = "--enable-mmjsonparse,--disable-mmjsonparse,"
 PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
 PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
 PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
+# For libcap-ng, see commit log and  https://github.com/rsyslog/rsyslog/issues/5091
+PACKAGECONFIG[libcap-ng] = "--enable-libcap-ng,--disable-libcap-ng,libcap-ng,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
 PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
 PACKAGECONFIG[imhttp] = "--enable-imhttp,--disable-imhttp,civetweb,"
