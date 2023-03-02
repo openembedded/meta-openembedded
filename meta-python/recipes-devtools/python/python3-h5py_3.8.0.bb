@@ -4,12 +4,9 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
 
-SRC_URI[sha256sum] = "3fcf37884383c5da64846ab510190720027dca0768def34dd8dcb659dbe5cbf3"
+SRC_URI[sha256sum] = "6fead82f0c4000cf38d53f9c030780d81bfa0220218aee13b90b7701c937d95f"
 
-SRC_URI:append = " \
-           file://0001-setup_build.py-avoid-absolute-path.patch \
-           file://0001-fix-wrong-file-driver-version.patch \
-          "
+SRC_URI += "file://0001-setup_build.py-avoid-absolute-path.patch"
 
 inherit pkgconfig pypi setuptools3
 
@@ -29,4 +26,4 @@ RDEPENDS:${PN} = "python3-numpy \
                   python3-json \
                  "
 
-export HDF5_VERSION="1.13.2"
+export HDF5_VERSION="1.14.0"
