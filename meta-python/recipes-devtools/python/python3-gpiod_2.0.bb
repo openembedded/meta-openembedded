@@ -12,7 +12,7 @@ require recipes-support/libgpiod/libgpiod-src.inc
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "1d1756d465525deb668526571dc6ed7e08f7b8e7745b10fc028208a22fb7adf8"
+SRC_URI[sha256sum] = "f74cbf82038b3cb98ebeb25bce55ee2553be28194002d2a9889b9268cce2dd07"
 S = "${WORKDIR}/libgpiod-2.0/bindings/python"
 
 inherit setuptools3 ptest
