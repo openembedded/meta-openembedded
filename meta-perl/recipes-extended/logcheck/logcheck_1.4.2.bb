@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
            file://99_logcheck \
 "
-SRC_URI[sha256sum] = "dfd95c980727108cc9b8921736af9388dea0f6157688c03e8e39de378107b3dc"
+SRC_URI[sha256sum] = "0c651deb31dc201f1584ecea292b259932bae6e3e8cef846db3109e89a7f217e"
 
 inherit useradd
 
