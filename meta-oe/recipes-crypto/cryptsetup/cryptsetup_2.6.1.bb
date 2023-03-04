@@ -19,10 +19,8 @@ DEPENDS = " \
 DEPENDS:append:libc-musl = " argp-standalone"
 LDFLAGS:append:libc-musl = " -largp"
 
-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz \
-           file://0001-Replace-off64_t-with-off_t.patch \
-           "
-SRC_URI[sha256sum] = "44397ba76e75a9cde5b02177bc63cd7af428a785788e3a7067733e7761842735"
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+SRC_URI[sha256sum] = "410ded65a1072ab9c8e41added37b9729c087fef4d2db02bb4ef529ad6da4693"
 
 inherit autotools gettext pkgconfig
 
