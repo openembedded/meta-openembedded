@@ -14,6 +14,8 @@ DEPENDS = " \
 "
 
 DEPENDS:append:toolchain-clang  = " openmp"
+DEPENDS:remove:toolchain-clang:riscv32  = "openmp"
+DEPENDS:remove:toolchain-clang:powerpc  = "openmp"
 
 GNOMEBASEBUILDCLASS = "meson"
 
