@@ -4,7 +4,7 @@ HOMEPAGE = "http://pmem.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b44ee63f162f9cdb18fff1224877aafd"
-DEPENDS = "ndctl"
+DEPENDS = "ndctl cmake-native"
 
 # Required to have the fts.h header for musl
 DEPENDS:append:libc-musl = " fts"
