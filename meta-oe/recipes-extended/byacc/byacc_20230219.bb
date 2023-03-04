@@ -7,4 +7,4 @@ LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=b56b7454f5f865de2e6e35ee2185b461"
 require byacc.inc
 
-SRC_URI[sha256sum] = "576cc9d9ae5e22503ed5e3582498cf2cccacef401969106420547b4d05c87d76"
+SRC_URI[sha256sum] = "36b972a6d4ae97584dd186925fbbc397d26cb20632a76c2f52ac7653cd081b58"
