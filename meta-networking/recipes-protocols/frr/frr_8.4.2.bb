@@ -16,6 +16,8 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.4 \
 
 SRCREV = "62ac43de9f3bc470586cf4f51fadf013bf542b32"
 
+UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+
 S = "${WORKDIR}/git"
 
 # Due to libyang not supported on these arches:
