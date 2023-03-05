@@ -21,9 +21,10 @@ SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;branch=3.0.x \
            file://0002-use-vorbisidec.patch \
            file://0003-fix-luaL-checkint.patch \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
-           file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
+           file://0005-ioctl-does-not-have-same-signature-between-glibc-and.patch \
+           file://0006-configure-Disable-incompatible-function-pointer-type.patch \
 "
-SRCREV = "aa76328c572d93f1d99c867a94ecad1dc3259733"
+SRCREV = "e9eceaed4d838dbd84638bfb2e4bdd08294163b1"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
