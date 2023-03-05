@@ -158,7 +158,6 @@ RDEPENDS:packagegroup-meta-networking-protocols = "\
     openl2tp \
     mdns \
     nopoll \
-    quagga \
     radiusclient-ng \
     tsocks \
     openlldp \
