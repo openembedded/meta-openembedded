@@ -11,7 +11,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SECTION = "net"
 
-SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV} \
+SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV};downloadfilename=${BPN}-${PV}.tar.gz \
            file://0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch \
            file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
            file://0003-mbedtls-Do-not-overwrite-CFLAGS.patch \
