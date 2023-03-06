@@ -64,7 +64,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
     libuvc \
     mimic \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "minidlna", "", d)} \
-    mycroft \
+    ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "mycroft", "", d)} \
     openal-soft \
     opusfile \
     opus-tools \
