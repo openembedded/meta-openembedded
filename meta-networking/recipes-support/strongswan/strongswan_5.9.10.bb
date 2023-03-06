@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "flex-native flex bison-native"
 DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
 
-SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-           "
+SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+          "
 
-SRC_URI[sha256sum] = "5e16580998834658c17cebfb31dd637e728669cf2fdd325460234a4643b8d81d"
+SRC_URI[sha256sum] = "3b72789e243c9fa6f0a01ccaf4f83766eba96a5e5b1e071d36e997572cf34654"
 
 UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
 
