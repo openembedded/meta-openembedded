@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "b0dc474160e389b9c9045da5db49d03ae17c6a6b"
-SRCREV_contrib = "7b77c355a8fdc97667b3fa1e7a0d37e4973fc868"
+SRCREV_opencv = "725e440d278aca07d35a5e8963ef990572b07316"
+SRCREV_contrib = "e247b680a6bd396f110274b6c214406a93171350"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
@@ -30,7 +30,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
-           file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
