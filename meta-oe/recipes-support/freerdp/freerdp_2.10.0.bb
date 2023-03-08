@@ -13,11 +13,10 @@ inherit pkgconfig cmake gitpkgv
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "fa8e1b1c765a4466030ac52240f052c0b440a4d1"
+SRCREV = "7471ae383e7b7a613f275e19f7b54958a193c891"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
-    file://winpr-makecert-Build-with-install-RPATH.patch \
-    file://0001-Fix-incompatible-function-pointer-types.patch \
-"
+           file://winpr-makecert-Build-with-install-RPATH.patch \
+           "
 
 S = "${WORKDIR}/git"
 
