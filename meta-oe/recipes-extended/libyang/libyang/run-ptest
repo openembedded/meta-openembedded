@@ -13,6 +13,7 @@ tests="utest_binary \
        utest_inet_types \
        utest_inout \
        utest_instanceid \
+       utest_instanceid_keys \
        utest_int16 \
        utest_int32 \
        utest_int64 \
@@ -27,19 +28,16 @@ tests="utest_binary \
        utest_new \
        utest_parser_json \
        utest_parser_xml \
-       utest_parser_yang \
-       utest_parser_yin \
        utest_pattern \
        utest_printer_tree \
        utest_printer_xml \
-       utest_printer_yang \
-       utest_printer_yin \
        utest_plugins \
        utest_range \
        utest_schema \
        utest_schema_mount \
        utest_set \
        utest_string \
+       utest_structure \
        utest_tree_data \
        utest_tree_schema_compile \
        utest_uint16 \
@@ -50,9 +48,11 @@ tests="utest_binary \
        utest_validation \
        utest_xml \
        utest_xpath \
+       utest_yang \
        utest_yangdata \
        utest_yang_types \
-       utest_yanglib"
+       utest_yanglib \
+       utest_yin"
 
 # cd into right directory
 ptestdir=$(dirname "$(readlink -f "$0")")
