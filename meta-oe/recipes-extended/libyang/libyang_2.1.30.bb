@@ -6,10 +6,9 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
 
-SRCREV = "87375f15159545a87a1e0de200f5d9d67e9091d7"
+SRCREV = "35131b9396a965e01f899127763fb4e0871b845a"
 
 SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
-           file://libyang-add-stdint-h.patch \
            file://run-ptest \
            "
 
@@ -37,3 +36,5 @@ do_install_ptest () {
     install -d ${D}${PTEST_PATH}/tests/plugins
     cp -f ${B}/tests/plugins/plugin_*.so ${D}${PTEST_PATH}/tests/plugins/
 }
+
+FILES:${PN} += "${datadir}/yang/*"
