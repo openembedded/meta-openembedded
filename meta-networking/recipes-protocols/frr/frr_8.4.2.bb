@@ -20,15 +20,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
 S = "${WORKDIR}/git"
 
-# Due to libyang not supported on these arches:
-COMPATIBLE_HOST:riscv32 = "null"
-COMPATIBLE_HOST:riscv64 = "null"
-COMPATIBLE_HOST:armv5 = "null"
-
-# Fail to build on mips64 with error:
-# Error: PC-relative reference to a different section
-COMPATIBLE_HOST:mips64 = "null"
-
 inherit autotools-brokensep python3native pkgconfig useradd systemd
 
 DEPENDS:class-native = "bison-native elfutils-native"
@@ -71,6 +62,7 @@ CACHED_CONFIGUREVARS += "ac_cv_path_PERL='/usr/bin/env perl'"
 LDFLAGS:append:mips = " -latomic"
 LDFLAGS:append:mipsel = " -latomic"
 LDFLAGS:append:powerpc = " -latomic"
+LDFLAGS:append:riscv32 = " -latomic"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "frr.service"
