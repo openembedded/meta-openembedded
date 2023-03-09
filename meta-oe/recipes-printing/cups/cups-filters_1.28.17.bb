@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "270a3752a960368aa99d431fb5d34f4039b2ac943c576d840612d1d818
 
 inherit autotools-brokensep gettext pkgconfig github-releases
 
-EXTRA_OECONF += " --enable-ghostscript --disable-ldap \
+EXTRA_OECONF += " --disable-ldap \
                        --with-pdftops=hybrid --enable-imagefilters \
                        --enable-ghostscript --with-gs-path=${bindir}/gs \
                        --with-pdftops-path=${bindir}/gs \
