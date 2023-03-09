@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://donnot-extract-gdb-during-do-compile.patch \
            file://gdb_build_jobs_and_not_write_crash_target.patch \
            "
-SRCREV = "ec568e2ea515b66343d3488d5d4b9a625d55b7ae"
+SRCREV = "f1cd581d1c4afa5b8ffdfaa6a3ea9f545fe4ec91"
 
 SRC_URI[gdb.sha256sum] = "b33ad58d687487a821ec8d878daab0f716be60d0936f2e3ac5cf08419ce70350"
 
