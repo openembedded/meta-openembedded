@@ -152,6 +152,7 @@ RDEPENDS:packagegroup-meta-networking-protocols = "\
     babeld \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "dante", "", d)} \
     freediameter \
+    frr \
     net-snmp \
     openflow \
     openflow \
