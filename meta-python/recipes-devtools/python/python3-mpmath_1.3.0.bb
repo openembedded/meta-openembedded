@@ -4,9 +4,9 @@
 SUMMARY = "Python library for arbitrary-precision floating-point arithmetic"
 HOMEPAGE = "https://pypi.org/project/mpmath/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=71970bd3749eebe1bfef9f1efff5b37a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bde3c575382996b75d85702949512751"
 
-SRC_URI[sha256sum] = "79ffb45cf9f4b101a807595bcb3e72e0396202e0b1d25d689134b48c4216a81a"
+SRC_URI[sha256sum] = "7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f"
 
 inherit pypi setuptools3
 
