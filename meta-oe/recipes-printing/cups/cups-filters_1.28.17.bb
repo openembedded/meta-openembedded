@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d77679ce6a2cc4d873d4ebbf2a401e6"
 
 SECTION = "console/utils"
 
-DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng libexif"
+DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms poppler qpdf libpng libexif"
 DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
 
 SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
@@ -51,6 +51,7 @@ PACKAGES =+ "\
 FILES:${PN}-gst = "\
 	${libexecdir}/cups/filter/gsto* \
 	"
+RDEPENDS:${PN}-gst += "ghostscript"
 
 FILES:${PN}-data = "\
 	${datadir}/cups/data \
@@ -71,6 +72,8 @@ FILES:${PN} += "\
         ${datadir}/cups/ppdc \
         ${datadir}/cups/banners \
 "
+RDEPENDS:${PN} += "bash"
+RDEPENDS:${PN} += "ghostscript"
 
 do_install:append() {
 	# remove braille dir
@@ -79,5 +82,3 @@ do_install:append() {
 	# remove sysroot path contamination from pkgconfig file
 	sed -i -e 's:${STAGING_DIR_TARGET}::' ${D}/${libdir}/pkgconfig/libcupsfilters.pc
 }
-
-RDEPENDS:${PN} += "bash"
