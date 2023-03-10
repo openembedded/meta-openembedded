@@ -1,0 +1,18 @@
+Description: Use Python 3 for `mkbootimg`
+Bug: https://android.googlesource.com/platform/system/core/+/c434cf82d526f07cd3dcebf53582eeddf12b0a74
+--- a/mkbootimg/mkbootimg.py
++++ b/mkbootimg/mkbootimg.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python3
+ # Copyright 2015, The Android Open Source Project
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+--- a/mkbootimg/unpack_bootimg.py
++++ b/mkbootimg/unpack_bootimg.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python3
+ # Copyright 2018, The Android Open Source Project
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");

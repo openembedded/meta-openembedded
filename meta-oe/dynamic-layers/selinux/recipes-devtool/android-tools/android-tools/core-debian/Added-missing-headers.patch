@@ -1,0 +1,94 @@
+Description: Added missing headers causing compile errors
+Author: Umang Parmar <umangjparmar@gmail.com>
+Forwarded: not-needed
+
+--- a/adb/sysdeps/posix/network.cpp
++++ b/adb/sysdeps/posix/network.cpp
+@@ -22,6 +22,7 @@
+ #include <sys/socket.h>
+ 
+ #include <string>
++#include <cstring>
+ 
+ #include <android-base/logging.h>
+ #include <android-base/stringprintf.h>
+--- a/base/errors_unix.cpp
++++ b/base/errors_unix.cpp
+@@ -17,6 +17,7 @@
+ #include "android-base/errors.h"
+ 
+ #include <errno.h>
++#include <cstring>
+ 
+ namespace android {
+ namespace base {
+--- a/base/file.cpp
++++ b/base/file.cpp
+@@ -26,6 +26,7 @@
+ #include <sys/stat.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#include <cstring>
+ 
+ #include <memory>
+ #include <mutex>
+--- a/base/logging.cpp
++++ b/base/logging.cpp
+@@ -24,6 +24,7 @@
+ #include <inttypes.h>
+ #include <libgen.h>
+ #include <time.h>
++#include <cstring>
+ 
+ // For getprogname(3) or program_invocation_short_name.
+ #if defined(__ANDROID__) || defined(__APPLE__)
+--- a/libcutils/include/cutils/jstring.h
++++ b/libcutils/include/cutils/jstring.h
+@@ -19,6 +19,7 @@
+ 
+ #include <stdint.h>
+ #include <stddef.h>
++#include <uchar.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+--- a/libbacktrace/BacktraceMap.cpp
++++ b/libbacktrace/BacktraceMap.cpp
+@@ -21,6 +21,7 @@
+ #include <stdint.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#include <algorithm>
+ 
+ #include <log/log.h>
+ 
+--- a/demangle/Demangler.cpp
++++ b/demangle/Demangler.cpp
+@@ -20,6 +20,7 @@
+ #include <stack>
+ #include <string>
+ #include <vector>
++#include <cstring>
+ 
+ #include "Demangler.h"
+ 
+--- a/libbacktrace/UnwindStackMap.cpp
++++ b/libbacktrace/UnwindStackMap.cpp
+@@ -20,6 +20,7 @@
+ 
+ #include <string>
+ #include <vector>
++#include <algorithm>
+ 
+ #include <backtrace/BacktraceMap.h>
+ #include <unwindstack/Elf.h>
+--- a/adb/types.h
++++ b/adb/types.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ 
+ #include <algorithm>
++#include <cstring>
+ #include <deque>
+ #include <memory>
+ #include <type_traits>

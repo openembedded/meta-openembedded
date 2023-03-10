@@ -1,0 +1,32 @@
+From 19a16829ef7b7ffd6466b9b90585d667a1663969 Mon Sep 17 00:00:00 2001
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Fri, 3 Mar 2023 13:43:50 +0100
+Subject: [PATCH 15/15] Use namespace std to compile libbacktrace
+
+To Fix the below error
+
+ In file included from libunwindstack/DwarfSection.cpp:21:
+| libunwindstack/include/unwindstack/DwarfMemory.h:32:29: error: unknown type name 'size_t'; did you mean 'std::size_t'?
+|   bool ReadBytes(void* dst, size_t num_bytes);
+|                             ^~~~~~
+|                             std::size_t
+---
+ libunwindstack/include/unwindstack/DwarfMemory.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libunwindstack/include/unwindstack/DwarfMemory.h b/libunwindstack/include/unwindstack/DwarfMemory.h
+index 244c0e12..0a3fefeb 100644
+--- a/libunwindstack/include/unwindstack/DwarfMemory.h
++++ b/libunwindstack/include/unwindstack/DwarfMemory.h
+@@ -23,7 +23,7 @@ namespace unwindstack {
+ 
+ // Forward declarations.
+ class Memory;
+-
++using namespace std;
+ class DwarfMemory {
+  public:
+   DwarfMemory(Memory* memory) : memory_(memory) {}
+-- 
+2.36.1.vfs.0.0
+
