@@ -4,23 +4,20 @@ SECTION = "libs"
 LICENSE = "LGPL-2.0-or-later & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f4ba6ad04fcb05cc30a4cfa5062c55a3"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14.orig.tar.gz \
-    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.14-1.debian.tar.bz2;name=1.14-1 \
+SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17.orig.tar.gz \
+    ${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17-1.debian.tar.bz2;name=1.17-1 \
     file://configure.patch \
     file://0001-Makefile.in-add-DESTDIR.patch \
     file://0001-Makefile.in-install-nfslock-libs.patch \
     file://liblockfile-fix-install-so-to-man-dir.patch \
     file://0001-Makefile.in-redefine-LOCKPROG.patch \
-    file://0001-Makefile.in-Don-t-try-to-run-ldconfig.patch \
+    file://0001-Makefile.in-fix-install-failure-on-host-without-ldco.patch \
 "
 
-SRC_URI[md5sum] = "420c056ba0cc4d1477e402f70ba2f5eb"
-SRC_URI[sha256sum] = "ab40d4a3e8cbc204f7e87fea637a4e4ddf9a1149aaa0a723a4267febd0b1d060"
+SRC_URI[sha256sum] = "6e937f3650afab4aac198f348b89b1ca42edceb17fb6bb0918f642143ccfd15e"
+SRC_URI[1.17-1.sha256sum] = "e3657c0e3facfeccb58900c0b48d56cd68ad5f9f24d1b4c6eaa69c26490fb673"
 
-SRC_URI[1.14-1.md5sum] = "f9a44928c3477d218c56252712ebc479"
-SRC_URI[1.14-1.sha256sum] = "73f9be769e602149391588c28f0f4f5cda131e30fb94c0777dbb23d811ac21ff"
-
-S = "${WORKDIR}/${BPN}"
+S = "${WORKDIR}/${BP}"
 
 inherit autotools-brokensep
 
