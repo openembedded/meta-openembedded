@@ -115,10 +115,6 @@ PREREQUISITE_core = "libbase libsparse liblog libcutils"
 TOOLS_TO_BUILD = "libcrypto_utils libadb libziparchive fastboot adb img2simg simg2img libbacktrace"
 TOOLS_TO_BUILD:append:class-target = " adbd"
 
-# Adb needs sys/capability.h, which is not available for native*
-TOOLS:class-native = "boringssl fastboot ext4_utils mkbootimg"
-TOOLS:class-nativesdk = "boringssl fastboot ext4_utils mkbootimg"
-
 do_compile() {
 
     case "${HOST_ARCH}" in
