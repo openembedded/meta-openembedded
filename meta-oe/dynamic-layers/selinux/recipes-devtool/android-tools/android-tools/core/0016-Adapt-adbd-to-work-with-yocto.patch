@@ -1,0 +1,161 @@
+From 1c836e4402ae170b3e0bf31da9012b7a3b1c40a1 Mon Sep 17 00:00:00 2001
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Wed, 8 Mar 2023 15:21:49 +0100
+Subject: [PATCH] Adapt adbd to work with yocto
+
+Co-authored-by: JJ Robertson <jrobertson@snap.com>
+Co-authored-by: Wejdene Smida <wsmida@snap.com>
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+---
+ adb/daemon/file_sync_service.cpp               | 4 ++--
+ adb/daemon/main.cpp                            | 4 ++--
+ adb/daemon/reboot_service.cpp                  | 5 ++++-
+ adb/daemon/set_verity_enable_state_service.cpp | 6 +++++-
+ adb/daemon/shell_service.cpp                   | 4 ++++
+ adb/types.h                                    | 1 +
+ 6 files changed, 18 insertions(+), 6 deletions(-)
+
+diff --git a/adb/daemon/file_sync_service.cpp b/adb/daemon/file_sync_service.cpp
+index e82a51f2..ba112cbe 100644
+--- a/adb/daemon/file_sync_service.cpp
++++ b/adb/daemon/file_sync_service.cpp
+@@ -111,7 +111,7 @@ static bool secure_mkdirs(const std::string& path) {
+         partial_path += path_component;
+ 
+         if (should_use_fs_config(partial_path)) {
+-            fs_config(partial_path.c_str(), 1, nullptr, &uid, &gid, &mode, &capabilities);
++            // fs_config(partial_path.c_str(), 1, nullptr, &uid, &gid, &mode, &capabilities);
+         }
+         if (adb_mkdir(partial_path.c_str(), mode) == -1) {
+             if (errno != EEXIST) {
+@@ -434,7 +434,7 @@ static bool do_send(int s, const std::string& spec, std::vector<char>& buffer) {
+         uint64_t capabilities = 0;
+         if (should_use_fs_config(path)) {
+             unsigned int broken_api_hack = mode;
+-            fs_config(path.c_str(), 0, nullptr, &uid, &gid, &broken_api_hack, &capabilities);
++            // fs_config(path.c_str(), 0, nullptr, &uid, &gid, &broken_api_hack, &capabilities);
+             mode = broken_api_hack;
+         }
+ 
+diff --git a/adb/daemon/main.cpp b/adb/daemon/main.cpp
+index e5a49171..c75263c4 100644
+--- a/adb/daemon/main.cpp
++++ b/adb/daemon/main.cpp
+@@ -191,6 +191,8 @@ int adbd_main(int server_port) {
+     umask(0);
+ 
+     signal(SIGPIPE, SIG_IGN);
++    signal(SIGINT, SIG_DFL);
++    signal(SIGQUIT, SIG_DFL);
+ 
+ #if defined(__BIONIC__)
+     auto fdsan_level = android_fdsan_get_error_level();
+@@ -232,13 +234,11 @@ int adbd_main(int server_port) {
+ 
+     bool is_usb = false;
+ 
+-#if defined(__ANDROID__)
+     if (access(USB_FFS_ADB_EP0, F_OK) == 0) {
+         // Listen on USB.
+         usb_init();
+         is_usb = true;
+     }
+-#endif
+ 
+     // If one of these properties is set, also listen on that port.
+     // If one of the properties isn't set and we couldn't listen on usb, listen
+diff --git a/adb/daemon/reboot_service.cpp b/adb/daemon/reboot_service.cpp
+index a5a11b86..6bd069d4 100644
+--- a/adb/daemon/reboot_service.cpp
++++ b/adb/daemon/reboot_service.cpp
+@@ -28,7 +28,9 @@
+ #include <android-base/logging.h>
+ #include <android-base/properties.h>
+ #include <android-base/stringprintf.h>
+-#include <bootloader_message/bootloader_message.h>
++// #include <bootloader_message/bootloader_message.h>
++#include <linux/reboot.h>
++#include <sys/signal.h>
+ #include <cutils/android_reboot.h>
+ 
+ #include "adb_io.h"
+@@ -76,6 +78,7 @@ void reboot_service(unique_fd fd, const std::string& arg) {
+             return;
+         }
+     }
++    syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, reboot_arg.c_str());
+     // Don't return early. Give the reboot command time to take effect
+     // to avoid messing up scripts which do "adb reboot && adb wait-for-device"
+     while (true) {
+diff --git a/adb/daemon/set_verity_enable_state_service.cpp b/adb/daemon/set_verity_enable_state_service.cpp
+index 889229fe..51e9be93 100644
+--- a/adb/daemon/set_verity_enable_state_service.cpp
++++ b/adb/daemon/set_verity_enable_state_service.cpp
+@@ -22,7 +22,7 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <inttypes.h>
+-#include <libavb_user/libavb_user.h>
++// #include <libavb_user/libavb_user.h>
+ #include <stdarg.h>
+ #include <stdio.h>
+ #include <sys/mount.h>
+@@ -65,6 +65,7 @@ static bool make_block_device_writable(const std::string& dev) {
+ /* Turn verity on/off */
+ static bool set_verity_enabled_state(int fd, const char* block_device, const char* mount_point,
+                                      bool enable) {
++#if defined(__ANDROID__)
+     if (!make_block_device_writable(block_device)) {
+         WriteFdFmt(fd, "Could not make block device %s writable (%s).\n",
+                    block_device, strerror(errno));
+@@ -115,6 +116,7 @@ static bool set_verity_enabled_state(int fd, const char* block_device, const cha
+                    mount_point, strerror(errno));
+     }
+     WriteFdFmt(fd, "Verity %s on %s\n", enable ? "enabled" : "disabled", mount_point);
++#endif
+     return true;
+ }
+ 
+@@ -126,6 +128,7 @@ static std::string get_ab_suffix() {
+     return android::base::GetProperty("ro.boot.slot_suffix", "");
+ }
+ 
++#if defined(__ANDROID__)
+ static bool is_avb_device_locked() {
+     return android::base::GetProperty("ro.boot.vbmeta.device_state", "") == "locked";
+ }
+@@ -245,3 +248,4 @@ void set_verity_enabled_state_service(unique_fd fd, bool enable) {
+         WriteFdExactly(fd.get(), "Now reboot your device for settings to take effect\n");
+     }
+ }
++#endif
+diff --git a/adb/daemon/shell_service.cpp b/adb/daemon/shell_service.cpp
+index 3c8f3939..84f4f54d 100644
+--- a/adb/daemon/shell_service.cpp
++++ b/adb/daemon/shell_service.cpp
+@@ -264,6 +264,10 @@ bool Subprocess::ForkAndExec(std::string* error) {
+         env["TMPDIR"] = "/data/local/tmp";
+         env["USER"] = pw->pw_name;
+     }
++    if (env.find("PS1") == env.end()) {
++        env["PS1"] = "\\h:\\w\\$ ";
++    }
++
+ 
+     if (!terminal_type_.empty()) {
+         env["TERM"] = terminal_type_;
+diff --git a/adb/types.h b/adb/types.h
+index 6af4a150..9efe223b 100644
+--- a/adb/types.h
++++ b/adb/types.h
+@@ -20,6 +20,7 @@
+ #include <cstring>
+ #include <deque>
+ #include <memory>
++#include <string>
+ #include <type_traits>
+ #include <utility>
+ #include <vector>
+-- 
+2.36.1.vfs.0.0
+
