@@ -1,0 +1,17 @@
+Description: remove clang-ism
+Forwarded: not-needed
+
+--- a/base/include/android-base/logging.h
++++ b/base/include/android-base/logging.h
+@@ -484,10 +484,7 @@
+ //       -Wno-user-defined-warnings to CPPFLAGS.
+ #pragma clang diagnostic push
+ #pragma clang diagnostic ignored "-Wgcc-compat"
+-#define OSTREAM_STRING_POINTER_USAGE_WARNING \
+-    __attribute__((diagnose_if(true, "Unexpected logging of string pointer", "warning")))
+-inline std::ostream& operator<<(std::ostream& stream, const std::string* string_pointer)
+-    OSTREAM_STRING_POINTER_USAGE_WARNING {
++inline std::ostream& operator<<(std::ostream& stream, const std::string* string_pointer) {
+   return stream << static_cast<const void*>(string_pointer);
+ }
+ #pragma clang diagnostic pop

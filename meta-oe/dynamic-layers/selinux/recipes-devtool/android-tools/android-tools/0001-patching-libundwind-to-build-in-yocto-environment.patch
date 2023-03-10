@@ -1,0 +1,58 @@
+From d5fb34aef65b5c5472544e4f42ad777d8fa16ba9 Mon Sep 17 00:00:00 2001
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Fri, 3 Mar 2023 13:41:52 +0100
+Subject: [PATCH] patching libundwind to build in yocto environment.
+
+Changes include:
+Introduced an output folder which will keep all the outputs from the
+android-tools.
+
+Adding an include file that is setting the common flags.
+Changed the cppflag to include the headers from other components
+of android-tools
+
+Modified LDflags so that the libraries that are coming from other android-tools
+are searched in the output folder.
+
+Modified the build rule so that it outputs the binary to the OUT_DIR
+
+Passing the architecture details($CPU)from the recipe.
+
+Signed-off-by: Nisha Parrakat <Nisha.Parrakat@kpit.com>
+
+Upstream-Status: Pending
+---
+ debian/libunwind.mk | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/debian/libunwind.mk b/debian/libunwind.mk
+index 738b205..ada4ef9 100644
+--- a/debian/libunwind.mk
++++ b/debian/libunwind.mk
+@@ -1,4 +1,4 @@
+-include debian/detect_arch.mk
++include ../../rules_yocto.mk 
+ 
+ ARCH_SOURCES = is_fpreg.c \
+                regname.c \
+@@ -131,10 +131,12 @@ CFLAGS += -DHAVE_CONFIG_H -DNDEBUG -D_GNU_SOURCE -Werror -Wno-unused-parameter -
+ CPPFLAGS += -Iinclude -Isrc $($(CPU)_INCLUDES) -Idebian/include
+ LDFLAGS += -shared -Wl,-soname,$(NAME).so.0 \
+            -Wl,-rpath=/usr/lib/$(DEB_HOST_MULTIARCH)/android \
+-           -lpthread -nostdlib -lc -lgcc -Ldebian/out -l7z
++           -lpthread -nostdlib -lc -lgcc -l7z -Wno-error=unused-command-line-argument
+ 
+ build: $(SOURCES)
+-	mkdir --parents debian/out
+-	ln -s /usr/lib/p7zip/7z.so debian/out/lib7z.so
+-	$(CC) $^ -o debian/out/$(NAME).so.0 $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+-	ln -s $(NAME).so.0 debian/out/$(NAME).so
++	mkdir --parents $(OUT_DIR)/usr/lib/$(DEB_HOST_MULTIARCH)/android/ 
++	mkdir --parents $(OUT_DIR)/usr/include/android/libunwind
++	$(CC) $^ -o $(OUT_DIR)/usr/lib/$(DEB_HOST_MULTIARCH)/android/$(NAME).so.0 $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -Wno-header-guard -Wno-absolute-value
++	ln -sf $(NAME).so.0 $(OUT_DIR)/usr/lib/$(DEB_HOST_MULTIARCH)/android/$(NAME).so
++	cp -r include/* debian/include/* $(OUT_DIR)/usr/include/android/libunwind/
++
+-- 
+2.36.1.vfs.0.0
+

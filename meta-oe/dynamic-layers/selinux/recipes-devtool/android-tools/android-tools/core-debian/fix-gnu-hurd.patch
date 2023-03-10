@@ -1,0 +1,150 @@
+From: Roger Shimizu <rosh@debian.org>
+Date: Sun, 10 Jan 2021 19:03:17 +0900
+Subject: Fix GNU/Hurd
+
+Reference:
+- https://www.gnu.org/software/hurd/hurd/porting/guidelines.html
+
+Closes: #915762
+---
+ base/cmsg.cpp                  |  2 ++
+ base/threads.cpp               |  2 +-
+ libcutils/ashmem-host.cpp      | 20 +++++++++++++++++---
+ libcutils/canned_fs_config.cpp |  2 +-
+ libcutils/fs.cpp               | 20 ++++++++++++++++----
+ 5 files changed, 37 insertions(+), 9 deletions(-)
+
+diff --git a/base/cmsg.cpp b/base/cmsg.cpp
+index ae5bb16..e5ec321 100644
+--- a/base/cmsg.cpp
++++ b/base/cmsg.cpp
+@@ -20,7 +20,9 @@
+ #include <fcntl.h>
+ #include <stdlib.h>
+ #include <sys/socket.h>
++#ifndef __GNU__
+ #include <sys/user.h>
++#endif
+ 
+ #include <memory>
+ 
+diff --git a/base/threads.cpp b/base/threads.cpp
+index 48f6197..19cc293 100644
+--- a/base/threads.cpp
++++ b/base/threads.cpp
+@@ -47,7 +47,7 @@ uint64_t GetThreadId() {
+ }  // namespace base
+ }  // namespace android
+ 
+-#if defined(__GLIBC__)
++#if defined(__GLIBC__) && !defined(__GNU__)
+ int tgkill(int tgid, int tid, int sig) {
+   return syscall(__NR_tgkill, tgid, tid, sig);
+ }
+diff --git a/libcutils/ashmem-host.cpp b/libcutils/ashmem-host.cpp
+index 32446d4..83dd622 100644
+--- a/libcutils/ashmem-host.cpp
++++ b/libcutils/ashmem-host.cpp
+@@ -31,16 +31,30 @@
+ #include <sys/types.h>
+ #include <time.h>
+ #include <unistd.h>
++#include <stdint.h>
+ 
+ #include <utils/Compat.h>
+ 
+ int ashmem_create_region(const char* /*ignored*/, size_t size) {
+-    char pattern[PATH_MAX];
+-    snprintf(pattern, sizeof(pattern), "/tmp/android-ashmem-%d-XXXXXXXXX", getpid());
++    char *pattern;
++    size_t pattern_size = 128;
++    while(1) {
++        pattern = (char*) malloc(pattern_size);
++        if(snprintf(pattern, strlen(pattern), "/tmp/android-ashmem-%d-XXXXXXXXX", getpid()) < pattern_size)
++            break;
++        free(pattern);
++        pattern_size *= 2;
++        if(pattern_size >= INT_LEAST16_MAX)
++            return -1;
++    }
+     int fd = mkstemp(pattern);
+-    if (fd == -1) return -1;
++    if (fd == -1) {
++        free(pattern);
++        return -1;
++	}
+ 
+     unlink(pattern);
++    free(pattern);
+ 
+     if (TEMP_FAILURE_RETRY(ftruncate(fd, size)) == -1) {
+       close(fd);
+diff --git a/libcutils/canned_fs_config.cpp b/libcutils/canned_fs_config.cpp
+index 2772ef0..1e41f37 100644
+--- a/libcutils/canned_fs_config.cpp
++++ b/libcutils/canned_fs_config.cpp
+@@ -42,7 +42,7 @@ static int path_compare(const void* a, const void* b) {
+ }
+ 
+ int load_canned_fs_config(const char* fn) {
+-    char buf[PATH_MAX + 200];
++    char buf[1024];
+     FILE* f;
+ 
+     f = fopen(fn, "r");
+diff --git a/libcutils/fs.cpp b/libcutils/fs.cpp
+index ef85acc..2884835 100644
+--- a/libcutils/fs.cpp
++++ b/libcutils/fs.cpp
+@@ -33,6 +33,7 @@
+ #include <sys/stat.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#include <stdint.h>
+ 
+ #include <log/log.h>
+ 
+@@ -150,15 +151,24 @@ fail:
+ }
+ 
+ int fs_write_atomic_int(const char* path, int value) {
+-    char temp[PATH_MAX];
+-    if (snprintf(temp, PATH_MAX, "%s.XXXXXX", path) >= PATH_MAX) {
+-        ALOGE("Path too long");
+-        return -1;
++    char *temp;
++    size_t temp_size = 128;
++    while(1) {
++        temp = (char*) malloc(temp_size);
++        if(snprintf(temp, strlen(temp), "%s.XXXXXX", path) < temp_size)
++            break;
++        free(temp);
++        temp_size *= 2;
++        if(temp_size >= INT_LEAST16_MAX) {
++            ALOGE("Path too long");
++            return -1;
++        }
+     }
+ 
+     int fd = TEMP_FAILURE_RETRY(mkstemp(temp));
+     if (fd == -1) {
+         ALOGE("Failed to open %s: %s", temp, strerror(errno));
++        free(temp);
+         return -1;
+     }
+ 
+@@ -182,12 +192,14 @@ int fs_write_atomic_int(const char* path, int value) {
+         goto fail_closed;
+     }
+ 
++    free(temp);
+     return 0;
+ 
+ fail:
+     close(fd);
+ fail_closed:
+     unlink(temp);
++    free(temp);
+     return -1;
+ }
+ 
