@@ -9,11 +9,10 @@ DEPENDS = "elfutils zlib libbpf"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|aarch64).*-linux"
 
-SRCREV = "f02af2553ea58ae1186226af0d0ec835a248358f"
+PV .= "+1.25+git${SRCPV}"
+SRCREV = "a9498899109d3be14f17abbc322a8f55a1067bee"
 SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master \
-           file://0001-CMakeList.txt-make-python-optional.patch \
-           file://0002-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch \
-           file://0003-CMakeList.txt-don-t-download-libbpf-source-when-syst.patch"
+           file://0002-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch"
 
 S = "${WORKDIR}/git"
 
