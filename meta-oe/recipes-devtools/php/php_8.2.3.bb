@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
 SECTION = "console/network"
 
 LICENSE = "PHP-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5ebd5be8e2a89f634486445bd164bef0"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "cd9f0ea14d82d9455587a49a0b6c802a7b8d8ff79703f9f48b17db010fb633ce"
+SRC_URI[sha256sum] = "87bb58865f38f5e2941813029152cea2102fe2961bb4d68b88f831ddd0548d0f"
 
 CVE_CHECK_IGNORE += "\
     CVE-2007-2728 \
