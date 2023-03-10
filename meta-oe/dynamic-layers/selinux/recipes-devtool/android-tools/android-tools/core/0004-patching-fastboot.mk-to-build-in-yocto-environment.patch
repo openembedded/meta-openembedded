@@ -52,12 +52,12 @@ index d1aba626..e75fa87c 100644
  
  build: $(SOURCES)
 -	$(CXX) $^ -o fastboot/$(NAME) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
-+	mkdir --parents $(OUT_DIR)/usr/bin/fastboot
-+	$(CXX) $^ -o $(OUT_DIR)/usr/bin/fastboot/$(NAME) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
++	mkdir --parents $(OUT_DIR)/usr/bin/
++	$(CXX) $^ -o $(OUT_DIR)/usr/bin/$(NAME) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
  
  clean:
 -	$(RM) fastboot/$(NAME)
-+	$(RM) $(OUT_DIR)/usr/bin/fastboot/$(NAME)
++	$(RM) $(OUT_DIR)/usr/bin/$(NAME)
 -- 
 2.36.1.vfs.0.0
 
