@@ -13,8 +13,7 @@ SRC_URI = " \
     file://0001-Enable-system-malloc-on-all-linux.patch \
     file://0002-Add-debian-csh-scripts.patch \
 "
-SRC_URI[md5sum] = "fa2b347fa9ae866eb036e6e4bb85fe1a"
-SRC_URI[sha256sum] = "eb16356243218c32f39e07258d72bf8b21e62ce94bb0e8a95e318b151397e231"
+SRC_URI[sha256sum] = "74e4e9805cbd9413ed34b4ffa1d72fc8d0ef81a5b79476854091416ce9336995"
 
 EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
 inherit autotools
