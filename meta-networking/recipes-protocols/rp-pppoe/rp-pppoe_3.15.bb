@@ -4,25 +4,22 @@ SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
 
-PR = "r10"
+PR = "r11"
 
 SRC_URI = "https://dianne.skoll.ca/projects/rp-pppoe/download/rp-pppoe-${PV}.tar.gz \
            file://top-autoconf.patch \
            file://configure_in_cross.patch \
            file://update-config.patch \
-           file://dont-swallow-errors.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
            file://configure.patch \
            file://pppoe-server.default \
            file://pppoe-server.init \
-           file://configure.in-Error-fix.patch \
            file://pppoe-server.service \
            file://0001-ppoe-Dont-include-linux-if_ether.h.patch \
            file://0002-Enable-support-for-the-kernel-module.patch \
            "
 
-SRC_URI[md5sum] = "ec9dccd9a367a1f71f2dc81069796dd8"
-SRC_URI[sha256sum] = "8cd6bc71ba46bd5f6eb4daf60220ccdcd991a8525111dee466501b1b9717e676"
+SRC_URI[sha256sum] = "b1f318bc7e4e5b0fd8a8e23e8803f5e6e43165245a5a10a7162a92a6cf17829a"
 
 inherit autotools-brokensep update-rc.d systemd
 
