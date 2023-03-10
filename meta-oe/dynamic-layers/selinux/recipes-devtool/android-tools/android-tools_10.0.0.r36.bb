@@ -206,9 +206,14 @@ do_install() {
     fi
 }
 
-PACKAGES += "${PN}-fstools"
+PACKAGES =+ "${PN}-fstools ${PN}-adbd"
 
 RDEPENDS:${BPN} = "${BPN}-conf p7zip"
+
+FILES:${PN}-adbd = "\
+    ${bindir}/adbd \
+    ${systemd_unitdir}/system/android-tools-adbd.service \
+"
 
 FILES:${PN}-fstools = "\
     ${bindir}/ext2simg \
