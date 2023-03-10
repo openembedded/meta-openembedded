@@ -40,7 +40,7 @@ index 738b205..ada4ef9 100644
  LDFLAGS += -shared -Wl,-soname,$(NAME).so.0 \
             -Wl,-rpath=/usr/lib/$(DEB_HOST_MULTIARCH)/android \
 -           -lpthread -nostdlib -lc -lgcc -Ldebian/out -l7z
-+           -lpthread -nostdlib -lc -lgcc -l7z -Wno-error=unused-command-line-argument
++           -lpthread -nostdlib -lc -lgcc -l7z
  
  build: $(SOURCES)
 -	mkdir --parents debian/out

@@ -1,0 +1,157 @@
+From d198ecb4c36b645e5428aa5117f7673bf2f7a3e6 Mon Sep 17 00:00:00 2001
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Tue, 14 Mar 2023 11:42:08 +0100
+Subject: [PATCH] Fix compilation with gcc
+
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+---
+ adb/adb_listeners.cpp   | 18 ++++++++++++------
+ adb/daemon/auth.cpp     |  3 ++-
+ adb/daemon/usb.cpp      |  3 ++-
+ adb/fdevent.cpp         |  3 ++-
+ adb/transport_fd.cpp    |  3 ++-
+ adb/transport_local.cpp |  3 ++-
+ 6 files changed, 22 insertions(+), 11 deletions(-)
+
+diff --git a/adb/adb_listeners.cpp b/adb/adb_listeners.cpp
+index 29909a55..fbdf4487 100644
+--- a/adb/adb_listeners.cpp
++++ b/adb/adb_listeners.cpp
+@@ -109,7 +109,8 @@ static void listener_event_func(int _fd, unsigned ev, void* _l)
+ }
+ 
+ // Called as a transport disconnect function. |arg| is the raw alistener*.
+-static void listener_disconnect(void* arg, atransport*) EXCLUDES(listener_list_mutex) {
++ EXCLUDES(listener_list_mutex)
++static void listener_disconnect(void* arg, atransport*) {
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     for (auto iter = listener_list.begin(); iter != listener_list.end(); ++iter) {
+         if (iter->get() == arg) {
+@@ -121,7 +122,8 @@ static void listener_disconnect(void* arg, atransport*) EXCLUDES(listener_list_m
+ }
+ 
+ // Write the list of current listeners (network redirections) into a string.
+-std::string format_listeners() EXCLUDES(listener_list_mutex) {
++EXCLUDES(listener_list_mutex)
++std::string format_listeners() {
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     std::string result;
+     for (auto& l : listener_list) {
+@@ -139,8 +141,9 @@ std::string format_listeners() EXCLUDES(listener_list_mutex) {
+     return result;
+ }
+ 
++EXCLUDES(listener_list_mutex)
+ InstallStatus remove_listener(const char* local_name, atransport* transport)
+-    EXCLUDES(listener_list_mutex) {
++{
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     for (auto iter = listener_list.begin(); iter != listener_list.end(); ++iter) {
+         if (local_name == (*iter)->local_name) {
+@@ -151,7 +154,8 @@ InstallStatus remove_listener(const char* local_name, atransport* transport)
+     return INSTALL_STATUS_LISTENER_NOT_FOUND;
+ }
+ 
+-void remove_all_listeners() EXCLUDES(listener_list_mutex) {
++EXCLUDES(listener_list_mutex)
++void remove_all_listeners() {
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     auto iter = listener_list.begin();
+     while (iter != listener_list.end()) {
+@@ -164,7 +168,8 @@ void remove_all_listeners() EXCLUDES(listener_list_mutex) {
+     }
+ }
+ 
+-void close_smartsockets() EXCLUDES(listener_list_mutex) {
++EXCLUDES(listener_list_mutex)
++void close_smartsockets() {
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     auto pred = [](const std::unique_ptr<alistener>& listener) {
+         return listener->local_name == "*smartsocket*";
+@@ -172,9 +177,10 @@ void close_smartsockets() EXCLUDES(listener_list_mutex) {
+     listener_list.remove_if(pred);
+ }
+ 
++EXCLUDES(listener_list_mutex)
+ InstallStatus install_listener(const std::string& local_name, const char* connect_to,
+                                atransport* transport, int no_rebind, int* resolved_tcp_port,
+-                               std::string* error) EXCLUDES(listener_list_mutex) {
++                               std::string* error) {
+     std::lock_guard<std::mutex> lock(listener_list_mutex);
+     for (auto& l : listener_list) {
+         if (local_name == l->local_name) {
+diff --git a/adb/daemon/auth.cpp b/adb/daemon/auth.cpp
+index a18afa4e..0fd60a1f 100644
+--- a/adb/daemon/auth.cpp
++++ b/adb/daemon/auth.cpp
+@@ -98,8 +98,9 @@ bool adbd_auth_verify(const char* token, size_t token_size, const std::string& s
+     return false;
+ }
+ 
++REQUIRES(framework_mutex)
+ static bool adbd_send_key_message_locked(std::string_view msg_type, std::string_view key)
+-        REQUIRES(framework_mutex) {
++{
+     if (framework_fd < 0) {
+         LOG(ERROR) << "Client not connected to send msg_type " << msg_type;
+         return false;
+diff --git a/adb/daemon/usb.cpp b/adb/daemon/usb.cpp
+index 1abae87c..3a466782 100644
+--- a/adb/daemon/usb.cpp
++++ b/adb/daemon/usb.cpp
+@@ -628,7 +628,8 @@ struct UsbFfsConnection : public Connection {
+         return CreateWriteBlock(std::move(block), 0, len, id);
+     }
+ 
+-    void SubmitWrites() REQUIRES(write_mutex_) {
++    REQUIRES(write_mutex_)
++    void SubmitWrites() {
+         if (writes_submitted_ == kUsbWriteQueueDepth) {
+             return;
+         }
+diff --git a/adb/fdevent.cpp b/adb/fdevent.cpp
+index 32f90863..bff24544 100644
+--- a/adb/fdevent.cpp
++++ b/adb/fdevent.cpp
+@@ -376,7 +376,8 @@ static void fdevent_call_fdfunc(fdevent* fde) {
+             fde->func);
+ }
+ 
+-static void fdevent_run_flush() EXCLUDES(run_queue_mutex) {
++EXCLUDES(run_queue_mutex)
++static void fdevent_run_flush() {
+     // We need to be careful around reentrancy here, since a function we call can queue up another
+     // function.
+     while (true) {
+diff --git a/adb/transport_fd.cpp b/adb/transport_fd.cpp
+index a93e68a0..c5af09ff 100644
+--- a/adb/transport_fd.cpp
++++ b/adb/transport_fd.cpp
+@@ -168,7 +168,8 @@ struct NonblockingFdConnection : public Connection {
+         TryAgain,
+     };
+ 
+-    WriteResult DispatchWrites() REQUIRES(write_mutex_) {
++    REQUIRES(write_mutex_)
++    WriteResult DispatchWrites() {
+         CHECK(!write_buffer_.empty());
+         auto iovs = write_buffer_.iovecs();
+         ssize_t rc = adb_writev(fd_.get(), iovs.data(), iovs.size());
+diff --git a/adb/transport_local.cpp b/adb/transport_local.cpp
+index b9f738df..a273e8f7 100644
+--- a/adb/transport_local.cpp
++++ b/adb/transport_local.cpp
+@@ -345,8 +345,9 @@ struct EmulatorConnection : public FdConnection {
+ };
+ 
+ /* Only call this function if you already hold local_transports_lock. */
++REQUIRES(local_transports_lock)
+ static atransport* find_emulator_transport_by_adb_port_locked(int adb_port)
+-    REQUIRES(local_transports_lock) {
++{
+     auto it = local_transports.find(adb_port);
+     if (it == local_transports.end()) {
+         return nullptr;
+-- 
+2.36.1.vfs.0.0
+

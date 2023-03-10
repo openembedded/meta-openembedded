@@ -58,7 +58,7 @@ SRC_URI += " \
     file://libunwind-debian/20150704-CVE-2015-3239_dwarf_i.h.patch;patchdir=external/libunwind \
 "
 
-# meta-clang specific patches + files:
+# meta-openembedded specific patches + files:
 SRC_URI += " \
     file://core/0001-patching-adb.mk-to-build-in-yocto-environment.patch;patchdir=system/core \
     file://core/0002-libadb.mk-modifications-to-make-it-build-in-yocto-en.patch;patchdir=system/core \
@@ -76,6 +76,9 @@ SRC_URI += " \
     file://core/0014-patching-libbacktrace.mk-to-build-in-yocto-environme.patch;patchdir=system/core \
     file://core/0015-Use-namespace-std-to-compile-libbacktrace.patch;patchdir=system/core \
     file://core/0016-Adapt-adbd-to-work-with-yocto.patch;patchdir=system/core \
+    file://core/0017-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch;patchdir=system/core \
+    file://core/0018-img2simg-Fix-wrong-rpath.patch;patchdir=system/core \
+    file://core/0019-Fix-compilation-with-gcc.patch;patchdir=system/core \
     file://0001-libcrypto.mk-modifications-to-make-it-build-in-yocto.patch;patchdir=external/boringssl \
     file://0001-patching-libundwind-to-build-in-yocto-environment.patch;patchdir=external/libunwind \
     file://0001-libext4_utils.mk-modifications-to-make-it-build-in-y.patch;patchdir=system/extras \
@@ -96,14 +99,7 @@ COMPATIBLE_HOST:powerpc = "(null)"
 COMPATIBLE_HOST:powerpc64 = "(null)"
 COMPATIBLE_HOST:powerpc64le = "(null)"
 
-inherit systemd clang
-
-TOOLCHAIN = "clang"
-TOOLCHAIN:class-native = "clang"
-DEPENDS:append:class-target = "\
-    clang-cross-${TARGET_ARCH} \
-"
-DEPENDS:append:class-native = " clang-native"
+inherit systemd
 
 SYSTEMD_SERVICE:${PN} = "android-tools-adbd.service"
 
@@ -175,9 +171,11 @@ do_compile() {
 }
 
 do_install() {
-    if echo ${TOOLS_TO_BUILD} | grep -q "ext4_utils" ; then
-        install -D -p -m0755 ${S}/system/core/libsparse/simg_dump.py ${D}${bindir}/simg_dump
-    fi
+    for tool in img2simg simg2img fastboot; do
+        if echo ${TOOLS_TO_BUILD} | grep -q "$tool" ; then
+            install -D -p -m0755 ${S}/debian/out/usr/bin/$tool ${D}${bindir}/$tool
+        fi
+    done
 
     if echo ${TOOLS_TO_BUILD} | grep -q "adb " ; then
         install -d ${D}${bindir}
@@ -192,11 +190,6 @@ do_install() {
     # Outside the if statement to avoid errors during do_package
     install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
       ${D}${systemd_unitdir}/system/android-tools-adbd.service
-
-    if echo ${TOOLS_TO_BUILD} | grep -q "fastboot" ; then
-        install -d ${D}${bindir}
-        install -m0755 ${S}/debian/out/usr/bin/fastboot/fastboot ${D}${bindir}
-    fi
 
     install -d  ${D}${libdir}/android/
     install -m0755 ${S}/debian/out/usr/lib/android/*.so.* ${D}${libdir}/android/
