@@ -7,7 +7,7 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master \
            file://0001-configure.ac-Add-serial-tests.patch \
            file://run-ptest \
            "
-SRCREV = "141cc997755dd91e94dd64c5497f2a23bd9a894c"
+SRCREV = "c62bef65fef638452b4ed1893c2451fc253ca7ca"
 
 S = "${WORKDIR}/git"
 
