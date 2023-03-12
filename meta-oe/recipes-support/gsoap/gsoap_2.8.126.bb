@@ -5,9 +5,9 @@ LICENSE = "GPL-2.0-with-OpenSSL-exception"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
                     file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
-           "
-SRC_URI[sha256sum] = "4b798780989338f665ef8e171bbcc422a271004d62d5852666d5eeca33a6a636"
+SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip"
+SRC_URI:append:libc-musl = " file://0001-Simplify-check-for-gethostbyname_r.patch"
+SRC_URI[sha256sum] = "b65190ebf8c2517d6fafbdc2000bc7bc650d921a02f4aa53eb1e3df267592c4a"
 
 inherit autotools
 
@@ -15,6 +15,7 @@ BBCLASSEXTEND = "native"
 
 S = "${WORKDIR}/${BPN}-2.8"
 
+EXTRA_OECONF += "--enable-ipv6 --enable-c-locale"
 PARALLEL_MAKE = ""
 
 EXTRA_OEMAKE:class-target = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
