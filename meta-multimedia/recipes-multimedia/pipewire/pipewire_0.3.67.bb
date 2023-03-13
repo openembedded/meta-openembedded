@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "08b0ed65765a1033424a5c0d897a392a61f8a2a3"
+SRCREV = "26623ff8cb3c9ba774537379a1835c5efb0d5159"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -288,6 +288,7 @@ FILES:${PN}-tools = " \
     ${bindir}/pw-dot \
     ${bindir}/pw-dsdplay \
     ${bindir}/pw-dump \
+    ${bindir}/pw-encplay \
     ${bindir}/pw-link \
     ${bindir}/pw-loopback \
     ${bindir}/pw-metadata \
