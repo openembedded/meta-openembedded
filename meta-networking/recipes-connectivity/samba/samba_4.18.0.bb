@@ -32,9 +32,9 @@ SRC_URI:append:libc-musl = " \
            file://cmocka-uintptr_t.patch \
            "
 
-SRC_URI[sha256sum] = "ebb7880d474ffc09d73b5fc77bcbd657f6235910337331a9c24d7f69ca11442b"
+SRC_URI[sha256sum] = "70348656ef807be9c8be4465ca157cef4d99818e234253d2c684cc18b8408149"
 
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.17(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.18(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d perl-version pkgconfig
 
@@ -210,8 +210,8 @@ do_install:append() {
     fi
 
     oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
-    find ${D}${libdir}/ -type f -name "perllocal.pod" | xargs rm -f
-    rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
+    find ${D}${libdir}/perl5/ -type f -name "perllocal.pod" -delete
+    find ${D}${libdir}/perl5/ -type f -name ".packlist" -delete
     sed -i -e '1s,#!.*perl,#!${bindir}/env perl,' ${D}${bindir}/pidl
 }
 
@@ -329,12 +329,12 @@ FILES:smbclient = "${bindir}/cifsdd \
                    ${bindir}/smbspool \
                    ${bindir}/smbtar \
                    ${bindir}/smbtree \
-                   ${libdir}/samba/smbspool_krb5_wrapper"
+                   ${libexecdir}/samba/smbspool_krb5_wrapper"
 
 FILES:${PN}-pidl = "${bindir}/pidl \
                     ${libdir}/perl5 \
                    "
-RDEPENDS:${PN}-pidl:append = " perl libparse-yapp-perl"
+RDEPENDS:${PN}-pidl += "perl perl-modules libparse-yapp-perl"
 
 RDEPENDS:${PN}-client = "\
     smbclient \
