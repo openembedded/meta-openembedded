@@ -1,0 +1,25 @@
+From 0bc94c83b9d846416613f9c8831cae6caf1713e5 Mon Sep 17 00:00:00 2001
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Tue, 14 Mar 2023 13:53:51 +0100
+Subject: [PATCH] adb: Allow adbd to be run as root
+
+Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+---
+ adb/daemon/main.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/adb/daemon/main.cpp b/adb/daemon/main.cpp
+index c75263c4..d27f6996 100644
+--- a/adb/daemon/main.cpp
++++ b/adb/daemon/main.cpp
+@@ -72,6 +72,7 @@ static bool should_drop_capabilities_bounding_set() {
+ }
+ 
+ static bool should_drop_privileges() {
++    return true;
+     // "adb root" not allowed, always drop privileges.
+     if (!ALLOW_ADBD_ROOT && !is_device_unlocked()) return true;
+ 
+-- 
+2.36.1.vfs.0.0
+
