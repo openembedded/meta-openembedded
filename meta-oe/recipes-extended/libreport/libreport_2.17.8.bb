@@ -17,7 +17,9 @@ SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0003-without-build-plugins.patch \
             file://0004-configure.ac-remove-prog-test-of-augparse.patch \
 "
-SRCREV = "eaff08f38d771d9362923765bb404b1514c5ca0a"
+
+# 2.17.8
+SRCREV = "46a99a14adba7276e5697b7c613d918796792345"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
@@ -31,7 +33,7 @@ inherit gettext autotools python3native python3targetconfig pkgconfig
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','x11','gtk','',d)}"
 PACKAGECONFIG[gtk] = "--with-gtk, --without-gtk, gtk+3,"
 
-EXTRA_OECONF += "--without-python2 --with-python3"
+EXTRA_OECONF += "--with-python3"
 
 RDEPENDS:python3-libreport += "${PN}"
 
