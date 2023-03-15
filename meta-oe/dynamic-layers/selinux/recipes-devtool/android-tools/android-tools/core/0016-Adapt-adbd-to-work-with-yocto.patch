@@ -1,19 +1,25 @@
-From 1c836e4402ae170b3e0bf31da9012b7a3b1c40a1 Mon Sep 17 00:00:00 2001
+From fbbcb1a9359b5bf0c09bcf56b149594473f91e3a Mon Sep 17 00:00:00 2001
 From: Etienne Cordonnier <ecordonnier@snap.com>
 Date: Wed, 8 Mar 2023 15:21:49 +0100
 Subject: [PATCH] Adapt adbd to work with yocto
 
+- remove TMPDIR which is used by commands like mktemp (set to /data/local/tmp in android
+  but vanilla linux uses /tmp per default)
+- define PS1 which was missing
+- remove android header-files and make adbd compile with yocto
+
 Co-authored-by: JJ Robertson <jrobertson@snap.com>
 Co-authored-by: Wejdene Smida <wsmida@snap.com>
 Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
+
 ---
  adb/daemon/file_sync_service.cpp               | 4 ++--
  adb/daemon/main.cpp                            | 4 ++--
  adb/daemon/reboot_service.cpp                  | 5 ++++-
  adb/daemon/set_verity_enable_state_service.cpp | 6 +++++-
- adb/daemon/shell_service.cpp                   | 4 ++++
+ adb/daemon/shell_service.cpp                   | 5 ++++-
  adb/types.h                                    | 1 +
- 6 files changed, 18 insertions(+), 6 deletions(-)
+ 6 files changed, 18 insertions(+), 7 deletions(-)
 
 diff --git a/adb/daemon/file_sync_service.cpp b/adb/daemon/file_sync_service.cpp
 index e82a51f2..ba112cbe 100644
@@ -130,11 +136,14 @@ index 889229fe..51e9be93 100644
  }
 +#endif
 diff --git a/adb/daemon/shell_service.cpp b/adb/daemon/shell_service.cpp
-index 3c8f3939..84f4f54d 100644
+index 3c8f3939..355c1a1c 100644
 --- a/adb/daemon/shell_service.cpp
 +++ b/adb/daemon/shell_service.cpp
-@@ -264,6 +264,10 @@ bool Subprocess::ForkAndExec(std::string* error) {
-         env["TMPDIR"] = "/data/local/tmp";
+@@ -261,9 +261,12 @@ bool Subprocess::ForkAndExec(std::string* error) {
+         env["HOSTNAME"] = GetHostName();
+         env["LOGNAME"] = pw->pw_name;
+         env["SHELL"] = pw->pw_shell;
+-        env["TMPDIR"] = "/data/local/tmp";
          env["USER"] = pw->pw_name;
      }
 +    if (env.find("PS1") == env.end()) {
