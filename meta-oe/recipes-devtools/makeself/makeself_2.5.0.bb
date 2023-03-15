@@ -12,7 +12,7 @@ SRC_URI = "\
     git://github.com/megastep/${BPN}.git;protocol=https;branch=master \
 "
 
-SRCREV = "5742be6410bfad2c619fb1e98bf795e8fa0913c7"
+SRCREV = "09488c50c6bdc40aec8e3a9b23a539c5054a634c"
 
 S = "${WORKDIR}/git"
 
