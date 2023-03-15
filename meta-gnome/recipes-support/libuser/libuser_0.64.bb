@@ -11,13 +11,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 
 SECTION = "base"
 
-SRC_URI = "https://releases.pagure.org/libuser/libuser-${PV}.tar.xz \
+SRC_URI = "https://releases.pagure.org/libuser/libuser-${PV}.tar.gz \
            file://0001-docs-Disable-building.patch \
            file://0002-remove-unused-execinfo.h.patch \
-           file://0003-python-Compilation-warnings-update.patch \
            "
 
-SRC_URI[sha256sum] = "8dc377255452a68e82c4837ba22c3ee4ae3658971bf0f2ef67ed0b77fc497f91"
+SRC_URI[sha256sum] = "ea6094c72cb9e60a42fb53509dc98d124a340f1c9222783b503208adc16a0a8f"
 
 DEPENDS = "bison-native popt libpam glib-2.0 python3"
 
