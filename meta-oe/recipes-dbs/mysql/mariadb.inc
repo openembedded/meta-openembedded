@@ -24,7 +24,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
           "
 SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
 
-SRC_URI[sha256sum] = "fd2f9fa3f135823c1626c9700e3bd736b829bfc09f61f5557d7313a7c9e02c29"
+SRC_URI[sha256sum] = "f8c69d9080d85eafb3e3a84837bfa566a7f5527a8af6f9a081429d4de0de4778"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
 
