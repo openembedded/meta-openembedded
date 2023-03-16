@@ -148,7 +148,7 @@ do_install () {
 
 pkg_postinst:${PN} () {
     if [ -z "$D" ]; then
-        if type systemd-tmpfiles >/dev/null; then
+        if type systemd-tmpfiles >/dev/null 2>&1; then
             systemd-tmpfiles --create
         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
             ${sysconfdir}/init.d/populate-volatile.sh update
