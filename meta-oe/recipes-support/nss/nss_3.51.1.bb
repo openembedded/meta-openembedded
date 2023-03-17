@@ -42,6 +42,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://CVE-2020-25648.patch \
            file://CVE-2021-43527.patch \
            file://CVE-2022-22747.patch \
+           file://CVE-2023-0767.patch \
            "
 
 SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
