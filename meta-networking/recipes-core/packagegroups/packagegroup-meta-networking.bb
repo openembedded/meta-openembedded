@@ -214,7 +214,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
     yp-tools \
     mtr \
     netsniff-ng \
-    ntp ntpdate sntp ntpdc ntpq ntp-tickadj ntp-utils \
+    ntp sntp ntpdc ntpq ntp-tickadj ntp-utils \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "ntpsec", "", d)} \
     nbd-client \
     nbd-server \
