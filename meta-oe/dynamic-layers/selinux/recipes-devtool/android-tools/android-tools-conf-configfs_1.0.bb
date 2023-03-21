@@ -1,4 +1,4 @@
-DESCRIPTION = "Different utilities from Android - corressponding configuration files for using ConfigFS"
+DESCRIPTION = "Various utilities from Android - corresponding configuration files for using ConfigFS"
 SECTION = "console/utils"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
