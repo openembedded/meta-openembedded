@@ -25,6 +25,9 @@ inherit autotools-brokensep update-rc.d systemd
 
 CACHED_CONFIGUREVARS += "${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'be', 'rpppoe_cv_pack_bitfields=normal', 'rpppoe_cv_pack_bitfields=rev', d)}"
 
+# Needed for strlcpy()
+CFLAGS += "-D_GNU_SOURCE"
+
 do_install:append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/pppoe-server.service ${D}${systemd_unitdir}/system
