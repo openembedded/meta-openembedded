@@ -8,6 +8,7 @@ DEPENDS = "zlib openssl"
 
 SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10 \
            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
+           file://0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch \
            file://run-ptest \
           "
 SRCREV = "e8322817a9e5aaef0698d779ddd467a209a85d85"
