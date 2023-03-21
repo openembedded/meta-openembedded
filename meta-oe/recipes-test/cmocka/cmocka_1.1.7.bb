@@ -6,9 +6,9 @@ HOMEPAGE = "https://cmocka.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "a4fc3dd7705c277e3a57432895e9852ea105dac9"
+SRCREV = "a01cc69ee9536f90e57c61a198f2d1944d3d4313"
 PV .= "+git${SRCPV}"
-SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=master \
+SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=stable-1.1 \
            file://run-ptest \
           "
 
