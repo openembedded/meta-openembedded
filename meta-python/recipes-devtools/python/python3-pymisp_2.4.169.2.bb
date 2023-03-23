@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
 SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
-SRCREV = "be755277b85cd6b06a1c2d6bb793f47ac891cc66"
+SRCREV = "9e2712bb1da00c7bd3559f978c6316ca0287d453"
 S = "${WORKDIR}/git"
 
 inherit python_poetry_core
