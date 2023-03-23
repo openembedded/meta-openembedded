@@ -14,7 +14,7 @@ TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/ettercap/0.8.3.1-r0/g
  ^
 1 error generated.
 
-Upstream-Status: Submitted [https://github.com/Ettercap/ettercap/pull/1221]
+Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/40534662043b7d831d1f6c70448afa9d374a9b63]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  plug-ins/sslstrip/sslstrip.c | 2 +-
