@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "file://README;md5=a3a94c615dc969a70525f1eebbacf235"
 
 inherit pypi setuptools3
 
-SRC_URI[md5sum] = "b7397fe73d516dc14921500a1245b41c"
-SRC_URI[sha256sum] = "3deeb808e72b6b89f98611889e11cc33754f5b2c1517ecfa1aaf25f402051fb5"
+SRC_URI[sha256sum] = "6c57452372f7eaff40934a1c03ad1826bf5e793558e87fef49131e6464b4dae5"
 
 PYPI_PACKAGE = "python-daemon"
