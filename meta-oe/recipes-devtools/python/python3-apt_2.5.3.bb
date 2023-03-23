@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3 \
 
 SRC_URI = "git://salsa.debian.org/apt-team/python-apt.git;protocol=https;branch=main"
 
-SRCREV = "e78d37eec72fe3afd28db17d5ea7a705bb4e3ce9"
+SRCREV = "3252935b6224b3bd2e2250894b9559b47c61b2e1"
 
 S = "${WORKDIR}/git"
 
