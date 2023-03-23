@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcprepl
            file://0001-libopts.m4-set-POSIX_SHELL-to-bin-sh.patch \
           "
 
-SRC_URI[sha256sum] = "5b272cd83b67d6288a234ea15f89ecd93b4fadda65eddc44e7b5fcb2f395b615"
+SRC_URI[sha256sum] = "216331692e10c12d7f257945e777928d79bd091117f3e4ffb5b312eb2ca0bf7c"
 
 UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
 
