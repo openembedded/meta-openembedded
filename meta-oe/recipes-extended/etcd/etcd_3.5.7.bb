@@ -4,7 +4,11 @@ HOMEPAGE = "https://etcd.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${S}/${GO_INSTALL}/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "git://github.com/etcd-io/etcd;branch=release-3.5;protocol=https"
+SRC_URI = " \
+    git://github.com/etcd-io/etcd;branch=release-3.5;protocol=https \
+    file://0001-xxhash-bump-to-v2.1.2.patch;patchdir=src/${GO_IMPORT} \
+"
+
 SRCREV = "215b53cf3b48ee761f4c40908b3874b2e5e95e9f"
 UPSTREAM_CHECK_COMMITS = "1"
 
