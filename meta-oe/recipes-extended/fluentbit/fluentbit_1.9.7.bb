@@ -22,6 +22,7 @@ SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-b
            file://0004-Use-correct-type-to-store-return-from-flb_kv_item_cr.patch \
            file://0005-stackdriver-Fix-return-type-mismatch.patch \
            file://0006-monkey-Fix-TLS-detection-testcase.patch \
+           file://0007-cmake-Do-not-check-for-upstart-on-build-host.patch \
            "
 SRC_URI:remove:x86 = "file://0002-mbedtls-Remove-unused-variable.patch"
 SRC_URI:append:libc-musl = "\
