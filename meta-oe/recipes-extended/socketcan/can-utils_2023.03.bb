@@ -6,9 +6,7 @@ DEPENDS = "libsocketcan"
 
 SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master"
 
-SRCREV = "3615bac17e539a06835dcb90855eae844ee18053"
-
-PV = "2021.08.0"
+SRCREV = "cfe41963f3425e9adb01a70cfaddedf5e5982720"
 
 S = "${WORKDIR}/git"
 
