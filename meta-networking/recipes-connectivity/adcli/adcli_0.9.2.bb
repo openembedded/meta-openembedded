@@ -4,12 +4,9 @@ DESCRIPTION = "A helper library and tools for Active Directory client operations
 HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
 SECTION = "net"
 
-SRCREV = "1b1528038e084a9f81ea108cffca9c2707623b9c"
+SRCREV = "8e88e3590a19006362ea8b8dfdc18bb88b3cb3b5"
 
-SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
-           file://Fixed-build-error-on-musl.patch \
-           file://0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch \
-	   "
+SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master"
 
 S = "${WORKDIR}/git"
 
