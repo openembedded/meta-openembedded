@@ -29,7 +29,6 @@ inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check
 GIR_MESON_OPTION = ""
 
 S = "${WORKDIR}/git"
-PV = "43.1"
-SRCREV = "95c7fb91daf36014fc1c2a7ec20b7400a21cd316"
+SRCREV = "de47d07ec6fc828b2668ca6ee59fe9bdfa9dc1d6"
 
 FILES:${PN} += "${datadir}"
