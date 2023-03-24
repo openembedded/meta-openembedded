@@ -7,11 +7,11 @@ nbdkit is a toolkit for creating NBD servers."
 
 HOMEPAGE = "https://github.com/libguestfs/nbdkit"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
 
 SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
 "
-SRCREV = "65fbd0cc87b38f4068c0d973947a82c2d4f9822c"
+SRCREV = "6c02c6a469d62a047f230b0ccf03f72328312d2b"
 
 S = "${WORKDIR}/git"
 
