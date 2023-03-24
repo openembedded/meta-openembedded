@@ -6,7 +6,7 @@ software include gpm and jamd."
 HOMEPAGE = "https://salsa.debian.org/consolation-team/consolation"
 SECTION = "console/utils"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=73ca626e1d9048abfc7d599370650827"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7df9eea2f4dfdda489c116099e6fc062"
 
 DEPENDS = " \
     libevdev \
@@ -15,7 +15,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master"
-SRCREV = "4581eaece6e49fa2b687efbdbe23b2de452e7902"
+SRCREV = "5ef08f0cd6ede62de14de477b74fc3611108c676"
 
 S = "${WORKDIR}/git"
 
