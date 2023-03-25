@@ -22,7 +22,7 @@ DEPENDS = " \
 
 SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1"
 SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
-SRCREV = "816edf80cd7bf7f253366099ea9fcaf361676139"
+SRCREV = "a85ecc959344ee2e0d345f7dd081dc781d95d364"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
