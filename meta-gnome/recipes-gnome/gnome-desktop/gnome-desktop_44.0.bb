@@ -18,7 +18,7 @@ GIR_MESON_OPTION = ""
 
 SRC_URI += "file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
             file://0001-meson-Add-riscv32-to-seccomp-unsupported-list.patch"
-SRC_URI[archive.sha256sum] = "3d6e153317486157596aa3802f87676414c570738f450a94a041fe8835420a69"
+SRC_URI[archive.sha256sum] = "42c773745d84ba14bc1cf1c4c6f4606148803a5cd337941c63964795f3c59d42"
 
 DEPENDS += " \
     fontconfig \
