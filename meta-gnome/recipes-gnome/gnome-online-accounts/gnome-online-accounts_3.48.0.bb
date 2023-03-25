@@ -6,22 +6,20 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gtk-icon-cache vala features_check
 
-DEPENDS = "gtk+3 gtk+3-native gdk-pixbuf dbus json-glib libxml2 webkitgtk glib-2.0 rest libsecret"
+DEPENDS = "gdk-pixbuf dbus glib-2.0"
 
-SRC_URI += "file://0001-build-Use-the-appropriate-dependency-object.patch"
-SRC_URI[archive.sha256sum] = "5e7859ce4858a6b99d3995ed70527d66e297bb90bbf75ec8780fe9da22c1fcaa"
+SRC_URI[archive.sha256sum] = "418bb9fcffdbd72a98205ad365137617fc1e3551a54de74f6a98d45d266175bf"
 
-PACKAGECONFIG_SOUP ?= "soup3"
-PACKAGECONFIG ?= "kerberos owncloud lastfm google windows_live ${PACKAGECONFIG_SOUP}"
+PACKAGECONFIG ?= "goabackend kerberos owncloud lastfm google windows_live"
 
+# goabackend requires webkitgtk to be built with gtk+3 and gcr3
+PACKAGECONFIG[goabackend] = "-Dgoabackend=true,-Dgoabackend=false,gtk+3 gtk+3-native json-glib libxml2 libsoup rest libsecret webkitgtk"
 PACKAGECONFIG[kerberos] = "-Dkerberos=true, -Dkerberos=false,krb5 gcr3"
 PACKAGECONFIG[exchange] = "-Dexchange=true, -Dexchange=false"
 PACKAGECONFIG[google] = "-Dgoogle=true, -Dgoogle=false"
 PACKAGECONFIG[owncloud] = "-Downcloud=true, -Downcloud=false"
 PACKAGECONFIG[windows_live] = "-Dwindows_live=true, -Dwindows_live=false"
 PACKAGECONFIG[lastfm] = "-Dlastfm=true, -Dlastfm=false"
-PACKAGECONFIG[soup2] = ",,libsoup-2.4,,,soup3"
-PACKAGECONFIG[soup3] = ",,libsoup-3.0,,,soup2"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
