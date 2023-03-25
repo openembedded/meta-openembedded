@@ -16,10 +16,9 @@ GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
 
 SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch \
-            file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
+	    file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
            "
-
-SRC_URI[archive.sha256sum] = "101e3608f1c28bfed8ae25522f7a720b559f889a76e280afbe50a4d8b064f92c"
+SRC_URI[archive.sha256sum] = "17966603dc432a98526b490586a48acd7f9f59935f7895dfc51729a46a6901a3"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
@@ -36,25 +35,31 @@ PACKAGECONFIG ??= " \
     pdf \
     png \
     tiff \
+    raw \
     xml \
     ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
+    battery \
+    networkmanager \
 "
 
 PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
-PACKAGECONFIG[ffmpeg]     = ",,ffmpeg"
+PACKAGECONFIG[cue]     = "-Dcue=enabled,-Dcue=disabled,libcue"
+PACKAGECONFIG[ffmpeg]     = "-Dgeneric_media_extractor=libav,,ffmpeg"
 PACKAGECONFIG[gexiv2]     = ",,gexiv2"
-PACKAGECONFIG[gstreamer]  = ",,gstreamer1.0 gstreamer1.0-plugins-base"
-PACKAGECONFIG[gupnp]      = ",,gupnp-dlna"
+PACKAGECONFIG[gstreamer]  = "-Dgeneric_media_extractor=gstreamer,,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[gupnp]      = "-Dgstreamer_backend=gupnp,,gupnp-dlna"
 PACKAGECONFIG[gif]        = "-Dgif=enabled,-Dgif=disabled,giflib"
-PACKAGECONFIG[icu]        = ",,icu"
+PACKAGECONFIG[icu]        = "-Dcharset_detection=icu,,icu"
+PACKAGECONFIG[iso]        = "-Diso=enabled,-Diso=disabled,libosinfo"
 PACKAGECONFIG[jpeg]       = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
 PACKAGECONFIG[libexif]    = "-Dexif=enabled,-Dexif=disabled,libexif"
 PACKAGECONFIG[libgsf]     = "-Dgsf=enabled,-Dgsf=disabled,libgsf"
 PACKAGECONFIG[pdf]        = "-Dpdf=enabled,-Dpdf=disabled,poppler"
 PACKAGECONFIG[png]        = "-Dpng=enabled,-Dpng=disabled,libpng"
 PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
+PACKAGECONFIG[raw]       = "-Draw=enabled,-Draw=disabled,libraw"
 PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
-PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanger"
+PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanager"
 
 # For security reasons it is strongly recommended to set add meta-security in
 # your layers and 'libseccomp' to PACKAGECONFIG".
