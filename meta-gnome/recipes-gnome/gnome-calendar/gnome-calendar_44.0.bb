@@ -23,7 +23,7 @@ inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-versi
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "afa5fc66e2f691553cc7d517db2363cff2d62cd1b5df455e5f4f7133139d21f2"
+SRC_URI[archive.sha256sum] = "96acd74cbf45652934515cc3447a3b895e933f86324ca92436f67ddd63c3a802"
 
 FILES:${PN} += " \
     ${datadir}/gnome-shell \
