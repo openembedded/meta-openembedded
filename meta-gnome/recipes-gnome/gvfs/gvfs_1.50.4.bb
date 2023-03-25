@@ -26,9 +26,6 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 EXTRA_OEMESON = " \
     -Dbluray=false \
-    -Dgoa=false \
-    -Dgoogle=false \
-    -Dnfs=false \
 "
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
@@ -62,11 +59,15 @@ PACKAGECONFIG[admin] = "-Dadmin=true, -Dadmin=false, libcap polkit"
 PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
 PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
 PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
-PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr3"
+PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr3, gnome-keyring"
+PACKAGECONFIG[gcrypt] = "-Dgcrypt=true, -Dgcrypt=false, libgcrypt"
+PACKAGECONFIG[goa] = "-Dgoa=true, -Dgoa=false, gnome-online-accounts"
+PACKAGECONFIG[google] = "-Dgoogle=true, -Dgoogle=false, libgdata"
 PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-3.0"
 PACKAGECONFIG[libmtp] = "-Dmtp=true, -Dmtp=false, libmtp"
 PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
 PACKAGECONFIG[libgphoto2] = "-Dgphoto2=true, -Dgphoto2=false, libgphoto2"
+PACKAGECONFIG[nfs] = "-Dnfs=true, -Dnfs=false,libnfs"
 PACKAGECONFIG[samba] = "-Dsmb=true, -Dsmb=false, samba"
 PACKAGECONFIG[systemd] = "-Dsystemduserunitdir=${systemd_user_unitdir} -Dtmpfilesdir=${libdir}/tmpfiles.d, -Dsystemduserunitdir=no -Dtmpfilesdir=no, systemd"
 
