@@ -22,7 +22,7 @@ inherit gnomebase gettext gsettings upstream-version-is-even features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "3fb9949501385c8c14618e78f178d952df98ad8c91080f4c5e1568c7393ae1f2"
+SRC_URI[archive.sha256sum] = "ccf829a96526135e9e9f917526515d36a5092bdfa316f3737dd8c5a524dbf2c6"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'consolekit',d)}"
 
