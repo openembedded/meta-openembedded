@@ -30,7 +30,7 @@ PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
 PACKAGECONFIG[x11] = ",,libcanberra"
 
 SRC_URI:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', '', d)}"
-SRC_URI[archive.sha256sum] = "7afca9805a6b92db6933dd7efcec4af8386c01bbc1f871e2dae4def7e192a2c5"
+SRC_URI[archive.sha256sum] = "02031097896cdb37d8717a5823f93e3723d4dfce7fdc4002c9dfcb16b7e7a3ef"
 
 EXTRA_OEMESON = "-Dman=false"
 
