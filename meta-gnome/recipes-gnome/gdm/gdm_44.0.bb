@@ -21,7 +21,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "94d70d6ed7df59fa7fde4fd02fed1168593a8adce10fcee113c148d52b392294"
+SRC_URI[archive.sha256sum] = "ce20b0a221dbf8cde0064b501fd8f38f73839152857c4535337eb09cc52f7f6c"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
