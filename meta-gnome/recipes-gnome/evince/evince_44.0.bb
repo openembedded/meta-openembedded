@@ -6,6 +6,7 @@ DEPENDS = " \
     adwaita-icon-theme \
     appstream-glib \
     cairo \
+    desktop-file-utils-native \
     dbus \
     gdk-pixbuf \
     glib-2.0 \
@@ -33,7 +34,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'open
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "6d75ca62b73bfbb600f718a098103dc6b813f9050b9594be929e29b4589d2335"
+SRC_URI[archive.sha256sum] = "339ee9e005dd7823a13fe21c71c2ec6d2c4cb74548026e4741eee7b2703e09da"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
