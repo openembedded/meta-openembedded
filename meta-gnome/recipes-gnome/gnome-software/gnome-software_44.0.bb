@@ -29,7 +29,7 @@ RDEPENDS:${PN} = "iso-codes"
 
 EXTRA_OEMESON += "-Dtests=false -Dsoup2=false"
 
-SRC_URI[archive.sha256sum] = "e9df060ebab59f49697d5ef2630ec36de60454169dc191af60d3483720aadb3e"
+SRC_URI[archive.sha256sum] = "619719f9529e0bb1dad30fadbb780d7b1d99940a6db1f71df51bc737341830af"
 
 PACKAGECONFIG ?= "flatpak"
 PACKAGECONFIG[flatpak] = "-Dflatpak=true,-Dflatpak=false,flatpak ostree"
