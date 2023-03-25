@@ -8,12 +8,9 @@ LIC_FILES_CHKSUM = "\
     file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
 "
 
-SRC_URI = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-file_sink.cpp-Avoid-dangling-reference.patch \
-"
+SRC_URI = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master"
 
-SRCREV = "a83aed77df1258e469c0eb42d9cb4f1938db53f2"
+SRCREV = "6cf637eb253a68edebe59505bea55435fafb00cd"
 
 PE = "1"
 
