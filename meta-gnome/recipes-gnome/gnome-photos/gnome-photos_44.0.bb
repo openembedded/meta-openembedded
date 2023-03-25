@@ -36,7 +36,7 @@ REQUIRED_DISTRO_FEATURES = "x11 opengl"
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[doc] = "-Dmanuals=true,-Dmanuals=false,libxslt-native docbook-xsl-stylesheets-native"
 
-SRC_URI[archive.sha256sum] = "c7ac7458d533f29d955011c74b76224d79ea31bcc12e9d6d0ce7b6c3704d08e1"
+SRC_URI[archive.sha256sum] = "e78e210397d3c62809c6cd5521da6eccb4a11ddea5bf2af8632a47f4da5c829e"
 
 do_install:append() {
     # make gnome-photos available on all desktops
