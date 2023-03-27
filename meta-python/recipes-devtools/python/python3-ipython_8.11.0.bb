@@ -23,6 +23,7 @@ RDEPENDS:${PN} = "\
     ${PYTHON_PN}-unixadmin \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-sqlite3 \
+    ${PYTHON_PN}-stack-data \
 "
 
 inherit setuptools3 pypi
