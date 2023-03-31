@@ -7,11 +7,15 @@ DEPENDS = "glib-2.0 zlib"
 
 inherit gnomebase gobject-introspection vala
 
-SRC_URI += "file://iconv-detect.h \
-            file://nodolt.patch"
-SRC_URI[archive.sha256sum] = "2aea96647a468ba2160a64e17c6dc6afe674ed9ac86070624a3f584c10737d44"
+SRC_URI = "https://github.com/jstedfast/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+    file://iconv-detect.h \
+"
+SRC_URI[sha256sum] = "2e10a54d4821daf8b16c019ad5d567e0fb8e766f8ffe5fec3d4c6a37373d6406"
+
+EXTRA_OECONF += "--enable-largefile"
 
 export ac_cv_have_iconv_detect_h="yes"
+export ac_cv_sys_file_offset_bits="64"
 
 do_configure:append () {
     cp ${WORKDIR}/iconv-detect.h ${S}
