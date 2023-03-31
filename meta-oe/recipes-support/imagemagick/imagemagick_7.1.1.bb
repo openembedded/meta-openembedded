@@ -4,23 +4,27 @@ HOMEPAGE = "https://www.imagemagick.org/"
 DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
 editing raster and vector image files. It can read and write over 200 image file formats."
 LICENSE = "ImageMagick"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b97c12a9213df1499565d69b92c73dd7 \
-                    file://NOTICE;md5=d8b9d2ccf273687ad12ebd06e5d8478f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ac58ac14f9d9d02cafd2d81ef38fb2cc \
+                    file://NOTICE;md5=bcbf1f1897b40ec8df39700cb560e9ed"
 # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 
 BASE_PV := "${PV}"
-PV .= "-62"
-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
-SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
+PV .= "-5"
+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+           file://0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch"
+SRCREV = "2d24be538f286962c355cf422bb525375ac77998"
 
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig update-alternatives
+export ac_cv_sys_file_offset_bits="64"
 
 # xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
 # if someone needs xml support then fix it first
-EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --disable-openmp --without-xml --disable-opencl"
+EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl \
+                --disable-openmp --without-xml --disable-opencl \
+                --enable-largefile"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[cxx] = "--with-magick-plus-plus,--without-magick-plus-plus"
