@@ -11,18 +11,14 @@ DEPENDS = " \
     libass \
 "
 
-DEPENDS += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' virtual/libx11 xsp libxv libxscrnsaver libxinerama', '', d)} \
-"
-
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV_mpv = "349e437466163cb52f7d0aa227d4606edd9db501"
-SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.34;protocol=https \
-           https://waf.io/waf-2.0.20;name=waf;subdir=git \
+SRCREV_mpv = "140ec21c89d671d392877a7f3b91d67e7d7b9239"
+SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.35;protocol=https \
+           https://waf.io/waf-2.0.25;name=waf;subdir=git \
            "
-SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
+SRC_URI[waf.sha256sum] = "21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5"
 
 S = "${WORKDIR}/git"
 
@@ -46,7 +42,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
 "
 
-PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11"
+PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11 xsp libxv libxscrnsaver libxinerama libxpresent libxext"
 PACKAGECONFIG[xv] = "--enable-xv,--disable-xv,libxv"
 PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
 PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,virtual/egl"
@@ -103,7 +99,7 @@ EXTRA_OECONF = " \
 "
 
 link_waf() {
-    ln -s waf-2.0.20 ${S}/waf
+    ln -s waf-2.0.25 ${S}/waf
 }
 do_unpack[postfuncs] += "link_waf"
 
@@ -111,5 +107,6 @@ FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/zsh \
     ${datadir}/bash-completion \
+    ${datadir}/metainfo \
     "
 EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
