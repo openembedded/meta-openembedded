@@ -1,6 +1,6 @@
 SUMMARY = "Python interface to PROJ (cartographic projections and coordinate transformations library)"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=dc4bb2668871655e24030dfe8d2a7ce7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=873757af01d2d221eedb422c4c1dd163"
 DEPENDS = "python3-cython proj"
 DEPENDS:append:class-target = " python3-cython-native proj-native"
 
@@ -8,7 +8,7 @@ PYPI_PACKAGE = "pyproj"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "261eb29b1d55b1eb7f336127344d9b31284d950a9446d1e0d1c2411f7dd8e3ac"
+SRC_URI[sha256sum] = "9859d1591c1863414d875ae0759e72c2cffc01ab989dc64137fbac572cc81bf6"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-certifi proj"
 
