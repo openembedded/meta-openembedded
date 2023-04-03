@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
 
-SRC_URI[sha256sum] = "beb0e67c5dc76eea4a6d00a6606d444d899589908362960769d0c4a1d32bca70"
+SRC_URI[sha256sum] = "fee5297fdb28f8e9efcb8142b5ee219e02375509cd77ea9d270b5af826358d5a"
 
 inherit pypi python_setuptools_build_meta ptest
 
