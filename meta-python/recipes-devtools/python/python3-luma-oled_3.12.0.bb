@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5ec447eb69733e20a55838de7e8cb991"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "81583e77ecb1d3ae04a641b3311082719b7a3149c15a5f2577d9b93b243e9331"
+SRC_URI[sha256sum] = "af97d79fa3481d2c48b7bccfb6de349219f6d814fdc9a3dd075c7b2c71206450"
 
 CLEANBROKEN = "1"
 
