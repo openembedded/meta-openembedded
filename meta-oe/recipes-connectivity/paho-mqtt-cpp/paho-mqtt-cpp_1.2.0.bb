@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
     file://epl-v10;md5=659c8e92a40b6df1d9e3dccf5ae45a08 \
 "
 
-SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=http;branch=master;protocol=https \
+SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=master \
            file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR-and-CMAKE_INSTALL_BIN.patch \
 "
 SRCREV = "33921c8b68b351828650c36816e7ecf936764379"
