@@ -36,6 +36,7 @@ PTESTS_FAST_META_OE = "\
     xmlsec1 \
     zeromq \
 "
+PTESTS_FAST_META_OE:remove:libc-musl = "minicoredumper"
 
 PTESTS_SLOW_META_OE = "\
     fftw \
