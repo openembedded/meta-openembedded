@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
     file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
 "
 
-SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http;branch=master;protocol=https"
+SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=https;branch=master"
 
 SRCREV = "4157a27d39f1dd5b95750ecb6acd1481432785d8"
 
