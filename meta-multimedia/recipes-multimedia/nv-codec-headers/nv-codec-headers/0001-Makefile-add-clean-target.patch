@@ -3,6 +3,8 @@ From: Markus Volk <f_L_K@t-online.de>
 Date: Sat, 1 Apr 2023 04:42:32 +0200
 Subject: [PATCH] Makefile: add clean target
 
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  Makefile | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
