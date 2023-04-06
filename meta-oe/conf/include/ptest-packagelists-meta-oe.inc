@@ -21,6 +21,7 @@ PTESTS_FAST_META_OE = "\
     libio-pty-perl \
     libmanette \
     libssh \
+    libtinyxml2 \
     libxml++-5.0 \
     libxmlb \
     libyang \
