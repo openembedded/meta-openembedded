@@ -3,6 +3,7 @@ From: Markus Volk <f_l_k@t-online.de>
 Date: Fri, 24 Feb 2023 17:29:24 +0100
 Subject: [PATCH] configure.ac: disable gnome-tools that are not provided
 
+Upstream-Status: Inappropriate [OE-specific]
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  configure.ac | 4 ++--

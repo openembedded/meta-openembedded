@@ -5,6 +5,8 @@ Subject: Select the current user to authenticate with by default
 
 Bug: http://bugzilla.gnome.org/show_bug.cgi?id=596188
 Bug-Ubuntu: https://launchpad.net/bugs/435227
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/polkitgnomeauthenticationdialog.c | 23 ++++++++++++++---------
  1 file changed, 14 insertions(+), 9 deletions(-)

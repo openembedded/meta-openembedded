@@ -4,6 +4,9 @@ Subject: Get user icon from accountsservice instead of looking in ~/.face
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=669857
 Bug-Ubuntu: https://launchpad.net/bugs/928249
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/polkitgnomeauthenticationdialog.c | 107 ++++++++++++++++++++++++++++++----
  1 file changed, 97 insertions(+), 10 deletions(-)
