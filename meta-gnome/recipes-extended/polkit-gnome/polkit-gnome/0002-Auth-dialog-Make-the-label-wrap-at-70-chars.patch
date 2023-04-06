@@ -6,6 +6,8 @@ Because GtkWindow doesn't have a default width anymore.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=738688
 Bug-Ubuntu: https://launchpad.net/bugs/1382566
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/polkitgnomeauthenticationdialog.c | 2 ++
  1 file changed, 2 insertions(+)

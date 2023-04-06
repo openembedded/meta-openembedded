@@ -7,6 +7,9 @@ This circumvents focus-stealing prevention.
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=676076
 Bug-Debian: https://bugs.debian.org/684300
 Bug-Ubuntu: https://launchpad.net/bugs/946171
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/polkitgnomeauthenticator.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
