@@ -10,6 +10,6 @@ FILES:${PN} += " \
     ${datadir}/gnome-control-center \
 "
 
-SRC_URI[sha256sum] = "593b6a7bd9b18851e51854e075990109b7896a22713b5dd8b913b23f21db6576"
+SRC_URI[sha256sum] = "78e55957af7c6fc1f283e90be33988661593a4da98383da1b0b54fdf6554baf4"
 
 RRECOMMENDS:${PN} += "vte-prompt"
