@@ -2,7 +2,7 @@ Hack in support for an "exclude" config option for the init module, so
 we can hide certain system services that shouldn't really be configurable
 via the web interface
 
-Upstream-status: Pending
+Upstream-Status: Pending
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
