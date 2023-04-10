@@ -5,9 +5,8 @@ BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "080da83cc51c4ef8b324a7e03146fe0bd7e0944b"
-SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https \
-           file://0001-Fix-build-with-gcc-13-by-including-cstdint.patch"
+SRCREV = "71af4542990adae6d9f31d6657068bc0139c6ec4"
+SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
