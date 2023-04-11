@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
 "
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
+
 SRC_URI[sha256sum] = "f74cbf82038b3cb98ebeb25bce55ee2553be28194002d2a9889b9268cce2dd07"
 
 # Enable all project features for ptest
