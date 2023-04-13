@@ -12,7 +12,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 # TODO: Check if 0001-... can go
 SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
-SRC_URI[sha256sum] = "532247c4387c17bb9ef94a73147039b8d013c3131c95cdbd2fa85fbcc848d06b"
+SRC_URI[sha256sum] = "afa3a46eeed3ab612d2f7e1308edaf5819f6c33ccc16c13080efabd58f010abd"
 
 EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 EXTRA_OECONF += "--disable-vala"
