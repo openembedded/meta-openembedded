@@ -6,4 +6,4 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
 
 inherit xfce gtk-doc gobject-introspection vala
 
-SRC_URI[sha256sum] = "1157ca717fd3dd1da7724a6432a4fb24af9cd922f738e971fd1fd36dfaeac3c9"
+SRC_URI[sha256sum] = "8a52063a5adc66252238cad9ee6997909b59983ed21c77eb83c5e67829d1b01f"
