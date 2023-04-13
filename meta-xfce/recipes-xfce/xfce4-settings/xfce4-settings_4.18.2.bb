@@ -9,7 +9,7 @@ inherit xfce features_check mime-xdg
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
-SRC_URI[sha256sum] = "ed3f75837cb33cd694610fc87cd569c4782b7ac4e099143a3dbe8fff1f1c6a9d"
+SRC_URI[sha256sum] = "4661361087faae57efb49741ffcf90bf9078760e163bbdef63b924083bdc4f22"
 
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
