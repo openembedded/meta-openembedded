@@ -6,12 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
-    file://0001-remove-tests-dep-on-gobject-intro.patch \
-    file://0002-fix-makefile-use-copy-rule-for-unmodified-files.patch \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "dde91a157ee8514112334653fa2775a99d71bd1b604067a48eaf7411114d19de"
+SRC_URI[sha256sum] = "3f8e369b21dbe9f5e05ac6ffd8c7a58ad5759065bea29b3b14c937a17f030eb5"
 
 inherit gettext pkgconfig autotools systemd features_check
 
@@ -92,7 +90,10 @@ FILES:${PN}-storaged = " \
     ${datadir}/metainfo/org.cockpit-project.cockpit-storaged.metainfo.xml \
 "
 
-FILES:${PN}-networkmanager = "${datadir}/cockpit/networkmanager"
+FILES:${PN}-networkmanager = " \
+    ${datadir}/cockpit/networkmanager \
+    ${datadir}/metainfo/org.cockpit-project.cockpit-networkmanager.metainfo.xml \
+"
 RDEPENDS:${PN}-networkmanager = "networkmanager"
 
 FILES:${PN}-machines = " \
@@ -130,6 +131,8 @@ FILES:${PN}-ws = " \
     ${systemd_system_unitdir}/cockpit.service \
     ${systemd_system_unitdir}/cockpit-motd.service \
     ${systemd_system_unitdir}/cockpit.socket \
+    ${systemd_system_unitdir}/cockpit-session.socket \
+    ${systemd_system_unitdir}/cockpit-session@.service \
     ${systemd_system_unitdir}/cockpit-wsinstance-http.socket \
     ${systemd_system_unitdir}/cockpit-wsinstance-http.service \
     ${systemd_system_unitdir}/cockpit-wsinstance-http-redirect.socket \
