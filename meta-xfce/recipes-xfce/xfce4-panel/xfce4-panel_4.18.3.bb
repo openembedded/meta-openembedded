@@ -14,7 +14,7 @@ SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
     file://0002-use-lxdm-to-replace-dm-tool.patch \
 "
-SRC_URI[sha256sum] = "be80023fd546587831bab25ded15ae4c9e346289a75744b6ba4cf4ee53794710"
+SRC_URI[sha256sum] = "4ae0b8615c9811194bbda0172a63567ed7fdb5519ea48f7a4637f4e6e5365e1b"
 
 EXTRA_OECONF += "--disable-vala"
 
