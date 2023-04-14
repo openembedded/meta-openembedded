@@ -1,11 +1,12 @@
 SUMMARY = "C library and tools for interacting with the linux GPIO character device"
 AUTHOR = "Bartosz Golaszewski <brgl@bgdev.pl>"
 
-require libgpiod-src.inc
-
 inherit autotools pkgconfig ptest
 
-SRC_URI += "file://run-ptest"
+SRC_URI += " \
+    https://www.kernel.org/pub/software/libs/libgpiod/libgpiod-${PV}.tar.xz \
+    file://run-ptest \
+"
 
 PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
 
