@@ -13,7 +13,7 @@ DEPENDS = "dbus-glib garcon gtk+3 libxklavier libxscrnsaver virtual/libx11 xfcon
 inherit xfce-app
 
 SRC_URI:append = " file://fix-cross-compile.patch"
-SRC_URI[sha256sum] = "6d4d143e3e62db679ce83ce7da97903390773ee0a8ceb05ff4c3dac36616268d"
+SRC_URI[sha256sum] = "b731e8abd68a18cc5d3b523351aa8f9f293c9f63290c1781c9155259deb04a5c"
 
 do_install:append() {
     install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sysconfdir}/pam.d/xfce4-screensaver
