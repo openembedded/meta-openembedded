@@ -5,9 +5,7 @@ LICENSE = "GPL-2.0-only"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4cc91856b08b094b4f406a29dc61db21"
 
-PV = "1.0+git${SRCPV}"
-
-SRCREV = "ae3a9162d6c5df0fa50abc34fc951dfd0e3d23c5"
+SRCREV = "a591ad885aa28f113cb45870b2fd5bce48378d6f"
 
 SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https"
 
