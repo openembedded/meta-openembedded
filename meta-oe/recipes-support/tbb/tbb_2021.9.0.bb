@@ -12,7 +12,7 @@ DEPENDS:append:libc-musl = " libucontext"
 PE = "1"
 
 BRANCH = "onetbb_2021"
-SRCREV = "c9497714821c3d443ee44c732609eb6850195ffb"
+SRCREV = "a00cc3b8b5fb4d8115e9de56bf713157073ed68c"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
             file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
 "
