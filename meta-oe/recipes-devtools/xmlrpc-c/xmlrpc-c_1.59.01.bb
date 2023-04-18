@@ -9,8 +9,8 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
            file://0002-fix-formatting-issues.patch \
            "
-#Release 1.54.06
-SRCREV = "00870af80021aa0a66cc72c9aeb00587cbfde560"
+#Release 1.59.01
+SRCREV = "352aeaa9ae49e90e55187cbda839f2113df06278"
 
 S = "${WORKDIR}/git/stable"
 
@@ -38,6 +38,10 @@ do_configure() {
         oe_runconf
         # license is incompatible with lib/util/getoptx.*
         rm -fv ${S}/tools/turbocharger/mod_gzip.c
+}
+
+do_install:append:class-target() {
+        sed -i 's,${WORKDIR},/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR},g' ${D}${bindir}/xmlrpc-c-config
 }
 
 BBCLASSEXTEND = "native"
