@@ -30,16 +30,17 @@ FILES:${PN}-tools += " \
     ${bindir}/gpioset \
     ${bindir}/gpiomon \
 "
-FILES:${PN}-ptest += " \
-    ${bindir}/gpiod-test \
-    ${bindir}/gpio-tools-test \
-    ${bindir}/gpio-tools-test.bats \
-    ${bindir}/gpiod-cxx-test \
-"
 FILES:libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
 
 RRECOMMENDS:${PN}-ptest += "coreutils"
 RDEPENDS:${PN}-ptest += "bats"
+
+do_install:append() {
+    rm -f ${D}${bindir}/gpiod-test
+    rm -f ${D}${bindir}/gpio-tools-test
+    rm -f ${D}${bindir}/gpio-tools-test.bats
+    rm -f ${D}${bindir}/gpiod-cxx-test
+}
 
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests/
