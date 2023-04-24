@@ -2,9 +2,9 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
 HOMEPAGE = "http://pythonhosted.org/python-periphery/"
 LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=fed1784a083509430580a913df680706"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=30fe6f023a80fb33989fb3b9d773fea0"
 
-SRC_URI[sha256sum] = "8a8ec019d9b330a6a6f69a7de61d14b4c98b102d76359047c5ce0263e12246a6"
+SRC_URI[sha256sum] = "61d461d736982a6f766e878720ab10a68151e2e8c1086600d9389ac47e40e88a"
 
 inherit pypi setuptools3
 
