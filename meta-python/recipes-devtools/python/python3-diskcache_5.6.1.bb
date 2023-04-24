@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.grantjenks.com/docs/diskcache/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c60ef82f0f40155453f6d5f2c94b6e8e"
 
-SRC_URI[sha256sum] = "8685515584cc110a463d0728d98beaba56c7e2803b60a19cb8983a4c9e341d91"
+SRC_URI[sha256sum] = "e4c978532feff5814c4cc00fe1e11e40501985946643d73220d41ee7737c72c3"
 
 PYPI_PACKAGE = "diskcache"
 
