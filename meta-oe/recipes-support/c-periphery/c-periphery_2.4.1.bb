@@ -6,10 +6,10 @@ HOMEPAGE = "https://github.com/vsergeev/c-periphery"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=4097ec544cf01e9c7cfc4bdf8e4ed887"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=be30d45bdc453f70a494c149c2168289"
 
 SRC_URI = "git://github.com/vsergeev/c-periphery;protocol=https;branch=master"
-SRCREV = "e9799b893ec77f97045544279f0cabd28323b0a3"
+SRCREV = "6c5302cf8255c9bb75e535c566a8f1d94cfded5d"
 
 S = "${WORKDIR}/git"
 
