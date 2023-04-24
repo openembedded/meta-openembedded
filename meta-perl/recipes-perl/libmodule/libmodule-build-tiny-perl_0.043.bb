@@ -10,13 +10,12 @@ SECTION = "libs"
 HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=57b8100f0b648cd37fbc3725fe3c111a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6374136f6774db2f51cc116f5efbf705"
 
 DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
-SRC_URI[md5sum] = "2332c90c17454107fea3f2614e11a3a9"
-SRC_URI[sha256sum] = "7d580ff6ace0cbe555bf36b86dc8ea232581530cbeaaea09bccb57b55797f11c"
+SRC_URI[sha256sum] = "68f4e4620e8a75124ce2dadee48d2ba5160b9167012924588d6fb242ff2d7206"
 
 S = "${WORKDIR}/Module-Build-Tiny-${PV}"
 
