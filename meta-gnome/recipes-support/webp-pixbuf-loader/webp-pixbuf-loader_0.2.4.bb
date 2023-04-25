@@ -15,7 +15,7 @@ EXTRA_OEMESON = "-Dupdate_cache=true"
 SRC_URI = "git://github.com/aruiz/webp-pixbuf-loader.git;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
-SRCREV = "eaa4ea02fd9d8ea8e0f4aac00dc6fa5b0eddd700"
+SRCREV = "a35014104a226265e44fe30fcdb4df9305af3466"
 
 FILES:${PN} = " \
     ${datadir}/thumbnailers/webp-pixbuf.thumbnailer \
