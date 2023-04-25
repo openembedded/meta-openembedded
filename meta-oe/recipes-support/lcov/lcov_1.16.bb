@@ -9,8 +9,6 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 RDEPENDS:${PN} += " \
-    libjson-perl \
-    libperlio-gzip-perl \
     perl \
     perl-module-filehandle \
     perl-module-getopt-std \
@@ -48,15 +46,9 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov \
     gcov-symlinks \
 "
-
-SRC_URI = " \
-           http://downloads.sourceforge.net/ltp/${BP}.tar.gz \
-           file://0001-geninfo-Add-intermediate-text-format-support.patch \
-           file://0002-geninfo-Add-intermediate-JSON-format-support.patch \
-	   "
-
-SRC_URI[md5sum] = "0220d01753469f83921f8f41ae5054c1"
-SRC_URI[sha256sum] = "14995699187440e0ae4da57fe3a64adc0a3c5cf14feab971f8db38fb7d8f071a"
+SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
+SRC_URI[md5sum] = "bfee0cef50d7b7bd1df03bfadf68dcef"
+SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
 
 do_install() {
     oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
