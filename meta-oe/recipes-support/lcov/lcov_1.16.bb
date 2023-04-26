@@ -1,5 +1,5 @@
 SUMMARY = "A graphical front-end for gcov"
-HOMEPAGE = "http://ltp.sourceforge.net/coverage/lcov.php"
+HOMEPAGE = "https://github.com/linux-test-project/lcov"
 DESCRIPTION = "LCOV is a graphical front-end for GCC's coverage testing \
 tool gcov. It collects gcov data for multiple source files and creates \
 HTML pages containing the source code annotated with coverage information. \
