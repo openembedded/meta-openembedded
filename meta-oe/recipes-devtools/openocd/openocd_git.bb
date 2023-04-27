@@ -24,7 +24,7 @@ inherit pkgconfig autotools-brokensep gettext
 
 BBCLASSEXTEND += "native nativesdk"
 
-EXTRA_OECONF = "--enable-ftdi --disable-doxygen-html --disable-werror"
+EXTRA_OECONF = "--enable-ftdi --enable-jtag_vpi --enable-buspirate --disable-doxygen-html --disable-werror"
 
 do_configure() {
     ./bootstrap nosubmodule
