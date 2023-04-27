@@ -1,6 +1,6 @@
 SUMMARY = "Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://COPYING;md5=599d2d1ee7fc84c0467b3d19801db870"
 DEPENDS = "libusb-compat libftdi"
 RDEPENDS:${PN} = "libusb1"
 
@@ -9,16 +9,15 @@ SRC_URI = " \
     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
     git://repo.or.cz/r/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl;branch=master \
     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
-    file://0001-autosetup-cc-check-tools-check-only-the-name.patch \
 "
 
 SRCREV_FORMAT = "openocd"
-SRCREV_openocd = "f342aac0845a69d591ad39a025d74e9c765f6420"
+SRCREV_openocd = "91bd4313444c5a949ce49d88ab487608df7d6c37"
 SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
 SRCREV_jimtcl = "0aa0fb4e3a38d38a49de9eb585d93d63a370dcf6"
 SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
 
-PV = "0.11+gitr${SRCPV}"
+PV = "0.12+gitr${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools-brokensep gettext
