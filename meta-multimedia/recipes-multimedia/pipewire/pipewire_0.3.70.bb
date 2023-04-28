@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "950c4487e96c7941f58311a066f4ba8289ca984a"
+SRCREV = "9f7d60c1e84cc0481afc3f6ccf76e127567943a8"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -284,6 +284,7 @@ RDEPENDS:libpipewire += " \
 FILES:${PN}-tools = " \
     ${bindir}/pw-cat \
     ${bindir}/pw-cli \
+    ${bindir}/pw-config \
     ${bindir}/pw-dot \
     ${bindir}/pw-dsdplay \
     ${bindir}/pw-dump \
