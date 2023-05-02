@@ -30,6 +30,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pyasn1-modules \
     python3-pyroute2 \
     python3-pyserial \
+    python3-pytest-mock \
     python3-pytoml \
     python3-requests-file \
     python3-requests-toolbelt \
@@ -39,6 +40,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-smpplib \
     python3-soupsieve \
     python3-sqlparse \
+    python3-tomlkit \
     python3-u-msgpack-python \
     python3-unidiff \
     python3-uritemplate \
