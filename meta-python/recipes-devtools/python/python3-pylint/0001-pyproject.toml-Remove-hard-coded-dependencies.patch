@@ -1,0 +1,30 @@
+From 843d050f1bf889b81fa8fc3e7a1350385c8348ec Mon Sep 17 00:00:00 2001
+From: Trevor Gamblin <tgamblin@baylibre.com>
+Date: Mon, 1 May 2023 11:32:24 -0400
+Subject: [PATCH] pyproject.toml: Remove hard-coded dependencies
+
+The upstream pyproject.toml has hard-coded dependencies on specific
+versions of wheel and setuptools. This breaks builds of pylint 
+2.17.3, so patch it to remove the pinned versions.
+
+Upstream-Status: Pending
+
+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index e4b63c660..0ee21e0eb 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools~=62.6", "wheel~=0.37.1"]
++requires = ["setuptools", "wheel"]
+ build-backend = "setuptools.build_meta"
+ 
+ [project]
+-- 
+2.40.0
+
