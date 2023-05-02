@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://${S}/${GO_INSTALL}/LICENSE;md5=3b83ef96387f14655fc854
 SRC_URI = " \
     git://github.com/etcd-io/etcd;branch=release-3.5;protocol=https \
     file://0001-xxhash-bump-to-v2.1.2.patch;patchdir=src/${GO_IMPORT} \
+    file://0001-test_lib.sh-remove-gobin-requirement-during-build.patch;patchdir=src/${GO_IMPORT} \
 "
 
 SRCREV = "215b53cf3b48ee761f4c40908b3874b2e5e95e9f"
@@ -39,14 +40,13 @@ go_do_compile:prepend() {
     cd ${GO_INSTALL}
     ./build.sh
 
+
     # Lots of discussion in go community about how it sets packages to
     # read-only by default -> https://github.com/golang/go/issues/31481
     # etcd is going to need some upstream work to support it.
     # For now, set the packages which are read-only back to
     # writeable so things like "bitbake -c cleanall etcd" will work.
-    chmod u+w -R ${S}/src/github.com/myitcv/gobin
     chmod u+w -R ${WORKDIR}/build/pkg/mod
-
 }
 
 do_install:append() {
