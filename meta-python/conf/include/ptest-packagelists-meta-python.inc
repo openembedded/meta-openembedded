@@ -23,6 +23,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-ipy \
     python3-iso3166 \
     python3-parse-type \
+    python3-platformdirs \
     python3-polyline \
     python3-precise-runner \
     python3-prettytable \
