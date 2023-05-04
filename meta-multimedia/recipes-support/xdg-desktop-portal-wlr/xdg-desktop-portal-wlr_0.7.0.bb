@@ -19,7 +19,7 @@ REQUIRED_DISTRO_FEATURES = "opengl wayland"
 SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
-SRCREV = "6737c209578e7f17536dbcb8fb2169dcf86ce528"
+SRCREV = "776113a4f014639c29d8de8fcb513493ef7b491f"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'basu', d)}"
 
