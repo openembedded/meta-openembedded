@@ -40,6 +40,8 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
 
 SRCREV = "79188bf710e92acf42fb5b9b0a2e9593a5ee9b05"
 
+CVE_PRODUCT = "frrouting"
+
 S = "${WORKDIR}/git"
 
 # Due to libyang not supported on these arches:
