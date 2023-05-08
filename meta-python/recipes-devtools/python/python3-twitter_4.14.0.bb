@@ -4,7 +4,7 @@ DESCRIPTION = "Python module to support twitter API"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=9;endline=9;md5=8227180126797a0148f94f483f3e1489"
 
-SRC_URI[sha256sum] = "097425335f9f6674826ba7e72b2247bbca39c9ca0a0bd82f30a38a5bef8c6c88"
+SRC_URI[sha256sum] = "1f9f1707d6972de6cff6c5fd90dfe6a449cd2e0d70bd40043ffab01e07a06c8c"
 
 PYPI_PACKAGE = "tweepy"
 
