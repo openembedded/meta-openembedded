@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
 
 SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
            "
-SRCREV = "b49431c48d40490ef979247d308af63345376cee"
+SRCREV = "0274bf17374df912ea834687c667bed33bd318db"
 
 S = "${WORKDIR}/git/c++"
 
