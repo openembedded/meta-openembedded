@@ -20,6 +20,7 @@ EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
 S = "${WORKDIR}/git"
 
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
+LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
 
 # Upstream does not support a default configuration
 # but propose a default "disabled" template, which is used as reference
@@ -27,6 +28,8 @@ LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 do_configure:prepend() {
     [ -r "${S}/lv_conf.h" ] \
         || sed -e 's|#if 0 .*Set it to "1" to enable .*|#if 1 // Enabled|g' \
+	    -e "s|\(#define LV_COLOR_DEPTH \).*|\1 ${LVGL_CONFIG_LV_COLOR_DEPTH}|g" \
+	    \
 	    -e "s|\(#define LV_MEM_CUSTOM .*\)0|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|g" \
 	    \
 	    -e "s|\(#define LV_TICK_CUSTOM \).*|\1 1|g" \
