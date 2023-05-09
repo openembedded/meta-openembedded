@@ -20,6 +20,7 @@ RDEPENDS:packagegroup-meta-filesystems = "\
     ifuse \
     libisofs \
     libburn \
+    libisoburn \
     logfsprogs \
     fuse-exfat \
     owfs \
