@@ -8,8 +8,8 @@ SUMMARY = "Light and Versatile Graphics Library"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
 
-SRC_URI = "gitsm://github.com/lvgl/lvgl;protocol=https;nobranch=1"
-SRCREV = "d38eb1e689fa5a64c25e677275172d9c8a4ab2f0"
+SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3"
+SRCREV = "2b56e04205481daa6575bd5f7ab5df59d11676eb"
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 

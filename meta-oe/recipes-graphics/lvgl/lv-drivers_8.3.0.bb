@@ -8,9 +8,8 @@ DESCRIPTION = "Collection of drivers: SDL, framebuffer, wayland and more..."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d6fc0df890c5270ef045981b516bb8f2"
 
-# TODO: Pin upstream release (current v7.11.0-80-g419a757)
-SRC_URI = "git://github.com/lvgl/lv_drivers;protocol=https;nobranch=1"
-SRCREV = "419a757c23aaa67c676fe3a2196d64808fcf2254"
+SRC_URI = "git://github.com/lvgl/lv_drivers;protocol=https;branch=release/v8.3"
+SRCREV = "71830257710f430b6d8d1c324f89f2eab52488f1"
 
 DEPENDS = "libxkbcommon lvgl wayland"
 
