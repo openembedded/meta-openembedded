@@ -6,10 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 inherit autotools pkgconfig systemd update-rc.d update-alternatives
 
 PV = "0.2.0+git${SRCPV}"
-SRCREV = "45c14ef4d5d7ced0fbf984208de44ced6d5ed898"
+SRCREV = "721e3a1cbd7e2b6361bb439d3959e7403e4f0092"
 SRCBRANCH = "master"
 SRC_URI = " \
     git://github.com/libusbgx/libusbgx.git;branch=${SRCBRANCH};protocol=https \
+    file://0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch \
+    file://0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch \
     file://gadget-start \
     file://usbgx.initd \
     file://usbgx.service \
