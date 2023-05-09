@@ -11,10 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
 SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3"
 SRCREV = "2b56e04205481daa6575bd5f7ab5df59d11676eb"
 
-REQUIRED_DISTRO_FEATURES = "wayland"
-
 inherit cmake
-inherit features_check
 
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
 S = "${WORKDIR}/git"
