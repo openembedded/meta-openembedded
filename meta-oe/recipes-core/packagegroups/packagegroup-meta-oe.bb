@@ -667,7 +667,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     jack-server \
     jack-utils \
     libass \
-    libburn \
     libcdio-paranoia \
     libcdio \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libmad", "", d)} \
