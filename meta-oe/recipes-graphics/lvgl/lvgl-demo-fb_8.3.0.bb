@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=802d3d83ae80ef5f343050bf96cce3a4 \
                     file://lvgl/LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
 
 SRC_URI = "gitsm://github.com/lvgl/lv_port_linux_frame_buffer.git;branch=master;protocol=https"
-SRCREV = "dd010430b959f40b8f25a51c76bc920cbc2550cc"
+SRCREV = "adf2c4490e17a1b9ec1902cc412a24b3b8235c8e"
 
 S = "${WORKDIR}/git"
 
