@@ -6,4 +6,4 @@ Type=oneshot
 ExecStart=/usr/bin/gadget-start
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=usb-gadget.target
