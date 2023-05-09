@@ -10,6 +10,8 @@ SRCREV = "adf2c4490e17a1b9ec1902cc412a24b3b8235c8e"
 
 S = "${WORKDIR}/git"
 
+REQUIRED_DISTRO_FEATURES = "fbdev"
+
 EXTRA_OEMAKE = "DESTDIR=${D}"
 
 do_install() {
