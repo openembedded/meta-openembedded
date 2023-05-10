@@ -13,11 +13,10 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.3 \
            file://0001-configure-Check-for-readline-function-instead-of-mai.patch \
            file://0001-ospfd-Adding-SUPPORT_OSPF_API-define-in-ospf_spf.c.patch \
            file://0001-bgpd-avoid-notify-race-between-io-and-main-pthreads.patch \
-           file://0001-bgpd-Make-sure-hdr-length-is-at-a-minimum-of-what-is.patch \
            file://frr.pam \
 	      "
 
-SRCREV = "a74f7a9ad9623e6f9654fe4a7177e5da0b194828"
+SRCREV = "e5bda76eb9d595e99f6c21ed0820a5eaf0ad584b"
 
 S = "${WORKDIR}/git"
 
