@@ -989,6 +989,7 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages:append:x86-64 = " mcelog-ptest"
 RDEPENDS:packagegroup-meta-oe-ptest-packages:remove:riscv64 = "oprofile-ptest"
 RDEPENDS:packagegroup-meta-oe-ptest-packages:remove:riscv32 = "oprofile-ptest"
 RDEPENDS:packagegroup-meta-oe-ptest-packages:remove:arm = "numactl-ptest"
+RDEPENDS:packagegroup-meta-oe-ptest-packages:remove:libc-musl = "minicoredumper-ptest"
 
 
 RDEPENDS:packagegroup-meta-oe-fortran-packages = "\
