@@ -30,6 +30,7 @@ SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-$
            file://0001-pppd-ippool.c-Fix-type-casting-issues-between-in_add.patch \
            file://0002-ippool_rpc_server.c-Add-missing-prototype-for-ippool.patch \
            file://0001-Use-unsigned-int-type-for-1-bit-integer-bitfield.patch \
+           file://0001-ippool-Port-to-ppp-2.5-APIs.patch \
            "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
