@@ -13,25 +13,32 @@ SRCREV ?= "389e14c36819cb87190fd412d3f366a3283f0078"
 inherit python_setuptools_build_meta ptest
 
 RDEPENDS:${PN} += "${PYTHON_PN}-astroid \
+                   ${PYTHON_PN}-dill \
                    ${PYTHON_PN}-isort \
+                   ${PYTHON_PN}-mccabe \
                    ${PYTHON_PN}-numbers \
+                   ${PYTHON_PN}-platformdirs \
                    ${PYTHON_PN}-shell \
                    ${PYTHON_PN}-json \
                    ${PYTHON_PN}-pkgutil \
                    ${PYTHON_PN}-difflib \
                    ${PYTHON_PN}-netserver \
+                   ${PYTHON_PN}-tomlkit \
                   "
 
 RDEPENDS:${PN}-ptest += " \
         ${PYTHON_PN}-core \
-        ${PYTHON_PN}-dill \
         ${PYTHON_PN}-git \
-        ${PYTHON_PN}-platformdirs \
+        ${PYTHON_PN}-py \
         ${PYTHON_PN}-pytest \
         ${PYTHON_PN}-pytest-benchmark \
+        ${PYTHON_PN}-pytest-runner \
+        ${PYTHON_PN}-pytest-timeout \
+        ${PYTHON_PN}-pytest-xdist \
+        ${PYTHON_PN}-requests \
         ${PYTHON_PN}-statistics \
-        ${PYTHON_PN}-tomlkit \
         ${PYTHON_PN}-tomllib \
+        ${PYTHON_PN}-typing-extensions \
         "
 
 S = "${WORKDIR}/git"
