@@ -50,8 +50,6 @@ EXTRA_OEMAKE += "IPPOOL_TEST=y"
 CPPFLAGS += "${SELECTED_OPTIMIZATION} -I${STAGING_INCDIR}/tirpc"
 
 SYSTEMD_SERVICE:${PN} = "ippool.service"
-SYSTEMD_AUTO_ENABLE = "disable"
-
 
 do_compile:prepend() {
     # fix the CFLAGS= and CPPFLAGS= in main Makefile, to have the extra CFLAGS in env
