@@ -26,7 +26,7 @@ RDEPENDS:${PN}-dev = " \
 
 export GO111MODULE="on"
 
-inherit go systemd pkgconfig
+inherit go systemd pkgconfig features_check
 
 # Go based binaries do not handle being stripped
 INHIBIT_PACKAGE_STRIP = "1"
