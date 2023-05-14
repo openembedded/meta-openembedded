@@ -12,6 +12,8 @@ S = "${WORKDIR}/git"
 
 REQUIRED_DISTRO_FEATURES = "fbdev"
 
+inherit features_check
+
 EXTRA_OEMAKE = "DESTDIR=${D}"
 
 do_install() {
