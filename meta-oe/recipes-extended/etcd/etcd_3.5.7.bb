@@ -59,9 +59,9 @@ SYSTEMD_SERVICE:${PN}:append = " etcd.service etcd-new.service etcd-new.path"
 
 do_install:append() {
     install -d ${D}${bindir}/
-    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcd ${D}${bindir}
-    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcdctl ${D}${bindir}
-    install -m 0755 ${D}/usr/lib/go/src/go.etcd.io/etcd/v3/bin/etcdutl ${D}${bindir}
+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcd ${D}${bindir}
+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcdctl ${D}${bindir}
+    install -m 0755 ${D}${libdir}/go/src/go.etcd.io/etcd/v3/bin/etcdutl ${D}${bindir}
     install -m 0644 ${WORKDIR}/etcd-existing.conf -D -t ${D}${sysconfdir}/etcd.d
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/etcd.service ${D}${systemd_system_unitdir}/
