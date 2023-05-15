@@ -7,7 +7,8 @@ DEPENDS = "pulseaudio gtkmm3 gtk+3 libsigc++-3 glibmm"
 
 inherit meson pkgconfig features_check
 
-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+# paprefs.cc includes gdk/gdkx.h and gdkx.h isn't provided by gtk3 without x11 in DISTRO_FEATURES
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://freedesktop.org/software/pulseaudio/paprefs/${BP}.tar.xz"
 
