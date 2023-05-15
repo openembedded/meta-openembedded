@@ -8,7 +8,7 @@ SRC_URI += " \
         file://run-ptest \
         file://0001-pyproject.toml-Remove-hard-coded-dependencies.patch \
         "
-SRCREV ?= "389e14c36819cb87190fd412d3f366a3283f0078"
+SRCREV ?= "fc34a4b6abe56f3ac07ca15d846b1c1955545f85"
 
 inherit python_setuptools_build_meta ptest
 
