@@ -7,6 +7,7 @@ SRC_URI += " \
         git://github.com/pylint-dev/pylint;branch=main;protocol=https \
         file://run-ptest \
         file://0001-pyproject.toml-Remove-hard-coded-dependencies.patch \
+        file://0001-pylint-remove-plugin-pickle-test.patch \
         "
 SRCREV ?= "fc34a4b6abe56f3ac07ca15d846b1c1955545f85"
 
