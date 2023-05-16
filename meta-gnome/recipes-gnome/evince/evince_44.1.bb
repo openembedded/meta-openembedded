@@ -34,7 +34,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'open
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "339ee9e005dd7823a13fe21c71c2ec6d2c4cb74548026e4741eee7b2703e09da"
+SRC_URI[archive.sha256sum] = "15afd3bb15ffb38fecab34c23350950ad270ab03a85b94e333d9dd7ee6a74314"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
@@ -45,6 +45,11 @@ RDEPENDS:${PN} += "glib-2.0-utils"
 RRECOMMENDS:${PN} = "adwaita-icon-theme"
 
 PACKAGES =+ "${PN}-nautilus-extension"
+
+do_install:prepend() {
+    sed -i -e 's|${B}/||g' ${B}/libview/ev-view-type-builtins.c
+    sed -i -e 's|${B}/||g' ${B}/libdocument/ev-document-type-builtins.c
+}
 
 FILES:${PN} += "${datadir}/dbus-1 \
                 ${datadir}/metainfo \
