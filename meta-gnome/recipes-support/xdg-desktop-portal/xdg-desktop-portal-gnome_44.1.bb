@@ -24,7 +24,7 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 SRC_URI = "git://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome.git;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
-SRCREV = "8e1c4fd928be500208ca1df62441a56e2569bfb8"
+SRCREV = "89203bf3522556965fc225782d1a635afdac611e"
 
 PACKAGECONFIG ?= "screenshot screencast ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
