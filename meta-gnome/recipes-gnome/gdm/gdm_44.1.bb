@@ -21,13 +21,20 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "ce20b0a221dbf8cde0064b501fd8f38f73839152857c4535337eb09cc52f7f6c"
+SRC_URI[archive.sha256sum] = "68266b3abe7d28fc469d0067aac9c5dabb0ca7952cc1f7c238a04951f3dc5b0d"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
     -Ddefault-pam-config=openembedded \
     -Dpam-mod-dir=${base_libdir}/security \
 "
+
+do_install:prepend() {
+    sed -i -e 's|${B}/||g' ${B}/daemon/gdm-session-worker-enum-types.c
+    sed -i -e 's|${B}/||g' ${B}/daemon/gdm-session-worker-enum-types.h
+    sed -i -e 's|${B}/||g' ${B}/daemon/gdm-session-enum-types.c
+    sed -i -e 's|${B}/||g' ${B}/daemon/gdm-session-enum-types.h
+}
 
 do_install:append() {
     rm -rf ${D}/run ${D}${localstatedir}/run
