@@ -1,0 +1,46 @@
+From e4d6f2e4091a4c7b6f3281be0e281b32ee6e5a33 Mon Sep 17 00:00:00 2001
+From: Christian Clauss <cclauss@me.com>
+Date: Thu, 26 Nov 2020 12:39:11 +0100
+Subject: [PATCH] Fix ValueError: invalid mode: 'rU' while trying to load
+ binding.gyp
+
+Fixes nodejs/node-gyp#2219
+File mode `U` is deprecated in Python 3 https://docs.python.org/3/library/functions.html#open
+https://github.com/asottile/pyupgrade#redundant-open-modes
+
+Upstream-Status: Backport [https://github.com/nodejs/gyp-next/commit/3f8cb33ea4d191df41f4fb7a1dfbd302507f7260]
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py | 2 +-
+ tools/gyp/pylib/gyp/input.py                          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
+index d174280..2f34bc0 100644
+--- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
++++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
+@@ -226,7 +226,7 @@ def LoadOneBuildFile(build_file_path, data, aux_data, includes,
+     # Open the build file for read ('r') with universal-newlines mode ('U')
+     # to make sure platform specific newlines ('\r\n' or '\r') are converted to '\n'
+     # which otherwise will fail eval()
+-    if sys.platform == 'zos':
++    if PY3 or sys.platform == 'zos':
+       # On z/OS, universal-newlines mode treats the file as an ascii file. But since
+       # node-gyp produces ebcdic files, do not use that mode.
+       build_file_contents = open(build_file_path, 'r').read()
+diff --git a/tools/gyp/pylib/gyp/input.py b/tools/gyp/pylib/gyp/input.py
+index 1f40abb..fd12e78 100644
+--- a/tools/gyp/pylib/gyp/input.py
++++ b/tools/gyp/pylib/gyp/input.py
+@@ -226,7 +226,7 @@ def LoadOneBuildFile(build_file_path, data, aux_data, includes,
+     # Open the build file for read ('r') with universal-newlines mode ('U')
+     # to make sure platform specific newlines ('\r\n' or '\r') are converted to '\n'
+     # which otherwise will fail eval()
+-    if sys.platform == 'zos':
++    if PY3 or sys.platform == 'zos':
+       # On z/OS, universal-newlines mode treats the file as an ascii file. But since
+       # node-gyp produces ebcdic files, do not use that mode.
+       build_file_contents = open(build_file_path, 'r').read()
+-- 
+2.38.1
+
