@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
            file://minor-fixup-for-libfmt10.patch \
            file://fix-build-error-when-fmt-updated.patch \
+           file://0001-SndfileDecoderPlugin-Fix-type-mismatch-for-std-span.patch \
            "
 SRCREV = "b1422fbda40a1831d397fb161e7a555443c2a072"
 S = "${WORKDIR}/git"
