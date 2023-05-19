@@ -25,3 +25,5 @@ FILES:${PN}-demo = " \
 
 RDEPENDS:${PN}-python3 = "python3-pygobject"
 FILES:${PN}-python3 = "${libdir}/libpeas-1.0/loaders/libpython3loader.so"
+
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
