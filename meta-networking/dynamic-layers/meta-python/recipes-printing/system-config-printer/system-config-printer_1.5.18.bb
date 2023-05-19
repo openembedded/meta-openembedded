@@ -11,10 +11,10 @@ inherit autotools gettext pkgconfig python3native features_check
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-DEPENDS = "cups glib-2.0 libusb xmlto-native intltool-native desktop-file-utils-native"
+DEPENDS = "cups glib-2.0 libusb xmlto-native desktop-file-utils-native autoconf-archive-native"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-PACKAGECONFIG[systemd] = ",,systemd"
+PACKAGECONFIG[systemd] = ",--without-systemdsystemunitdir,systemd"
 
 do_configure:prepend() {
     # This file is not provided if fetching from git but required for configure
