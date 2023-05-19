@@ -8,7 +8,7 @@ SECTION = "devel/lib"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
-inherit autotools gobject-introspection pkgconfig
+inherit autotools gobject-introspection pkgconfig lib_package
 
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https \
 "
@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
 
-PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath nvdimm"
+PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath nvdimm tools"
 PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
 PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python"
 PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
@@ -36,5 +36,6 @@ PACKAGECONFIG[crypto] = "--with-crypto,--without-crypto,cryptsetup nss volume-ke
 PACKAGECONFIG[mdraid] = "--with-mdraid,--without-mdraid,libbytesize"
 PACKAGECONFIG[kbd] = "--with-kbd,--without-kbd,libbytesize"
 PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath, multipath-tools, lvm2"
+PACKAGECONFIG[tools] = "--with-tools,--without-tools,libbytesize libdevmapper"
 
 export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
