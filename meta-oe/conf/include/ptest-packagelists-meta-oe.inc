@@ -38,6 +38,8 @@ PTESTS_FAST_META_OE = "\
     zeromq \
 "
 PTESTS_FAST_META_OE:remove:libc-musl = "minicoredumper"
+PTESTS_FAST_META_OE:remove:riscv64 = "nodejs"
+PTESTS_FAST_META_OE:remove:riscv32 = "nodejs"
 
 PTESTS_SLOW_META_OE = "\
     fftw \
