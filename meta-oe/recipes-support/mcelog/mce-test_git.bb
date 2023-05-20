@@ -23,6 +23,8 @@ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
 S ="${WORKDIR}/git"
 
+EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
+
 do_install:append(){
    install -d ${D}/opt/mce-test
    cp -rf ${S}/* ${D}/opt/mce-test/
