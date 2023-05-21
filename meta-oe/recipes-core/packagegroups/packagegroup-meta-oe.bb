@@ -982,6 +982,7 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
     poco-ptest \
     cmocka-ptest \
     minicoredumper-ptest \
+    hiredis-ptest \
 "
 RDEPENDS:packagegroup-meta-oe-ptest-packages:append:x86 = " mcelog-ptest"
 RDEPENDS:packagegroup-meta-oe-ptest-packages:append:x86-64 = " mcelog-ptest"
