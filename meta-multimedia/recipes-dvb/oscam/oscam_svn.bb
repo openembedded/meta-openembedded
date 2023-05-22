@@ -17,3 +17,6 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir} -DCMAKE_BUILD_TYPE=Debug"
 
+do_configure:append() {
+    sed -i -e '1 s|${TOPDIR}|<TOPDIR>|g' ${B}/config.c
+}
