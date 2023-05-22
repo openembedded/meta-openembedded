@@ -26,6 +26,7 @@ PTESTS_FAST_META_OE = "\
     libxmlb \
     libyang \
     lmdb \
+    mcelog \
     minicoredumper \
     neon \
     nodejs \
@@ -56,7 +57,6 @@ PTESTS_PROBLEMS_META_OE ="\
     libjcat \
     libteam \
     libxml++ \
-    mcelog \
     oprofile \
     ostree \
     psqlodbc \
