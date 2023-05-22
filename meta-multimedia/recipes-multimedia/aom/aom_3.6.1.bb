@@ -15,10 +15,13 @@ inherit cmake pkgconfig
 
 DEPENDS = " nasm-native"
 
-EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=1 -DENABLE_TESTS=0 \
-                  -DAOM_AS_FLAGS=--reproducible \
-                  -DPERL_EXECUTABLE=${HOSTTOOLS_DIR}/perl \
+EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=1 -DENABLE_TESTS=0 \
+                 -DPERL_EXECUTABLE=${HOSTTOOLS_DIR}/perl \
                 "
 CMAKE_VERBOSE = "VERBOSE=1"
 CFLAGS:append:libc-musl = " -D_GNU_SOURCE"
 EXTRA_OECMAKE:append:arm = " ${@bb.utils.contains("TUNE_FEATURES","neon","-DENABLE_NEON=ON","-DENABLE_NEON=OFF",d)}"
+
+do_generate_toolchain_file:append() {
+    echo "set(AOM_AS_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
+}
