@@ -7,9 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 DEPENDS += "hiredis"
 
 SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
-           file://0001-include-cstdint.patch \
            file://0001-CMakeLists.txt-fix-substitution-for-static-libs.patch"
-SRCREV = "f3b19a8a1f609d1a1b79002802e5cf8c336dc262"
+SRCREV = "4368319fb668204f345da05b9dd79762506c67b6"
 
 S = "${WORKDIR}/git"
 
