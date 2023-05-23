@@ -7,7 +7,7 @@ PROVIDES = "virtual/bpftool"
 
 inherit bash-completion kernelsrc kernel-arch
 
-do_populate_lic[depends] += "virtual/kernel:do_patch"
+do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
 
 EXTRA_OEMAKE = "\
     V=1 \
@@ -21,8 +21,6 @@ EXTRA_OEMAKE = "\
 "
 
 SECURITY_CFLAGS = ""
-
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 COMPATIBLE_HOST = "(x86_64|aarch64).*-linux"
 COMPATIBLE_HOST:libc-musl = 'null'
