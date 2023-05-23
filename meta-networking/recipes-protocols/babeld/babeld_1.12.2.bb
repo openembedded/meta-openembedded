@@ -13,11 +13,13 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
 
 SRC_URI = "gitsm://github.com/jech/babeld.git;protocol=https;branch=master"
-SRCREV = "916d3d9aa65683ddf8b96f7f0b466b24cb9d7087"
+SRCREV = "a9fba0e19ebde96cdc4edd35c5363f9e8139ab35"
 
 UPSTREAM_CHECK_GITTAGREGEX = "babeld-(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
+
+EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
 
 do_compile () {
 	oe_runmake babeld
