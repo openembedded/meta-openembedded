@@ -6,6 +6,7 @@ HOMEPAGE ="https://github.com/openzfs/zfs"
 
 SRC_URI = "https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
+           file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
 "
 SRC_URI[sha256sum] = "6b172cdf2eb54e17fcd68f900fab33c1430c5c59848fa46fab83614922fe50f6"
 
