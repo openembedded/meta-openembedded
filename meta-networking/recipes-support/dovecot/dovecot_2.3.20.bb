@@ -12,9 +12,7 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
            file://0001-not-check-pandoc.patch \
            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
            "
-
-SRC_URI[md5sum] = "2f03532cec3280ae45a101a7a55ccef5"
-SRC_URI[sha256sum] = "c8b3d7f3af1e558a3ff0f970309d4013a4d3ce136f8c02a53a3b05f345b9a34a"
+SRC_URI[sha256sum] = "caa832eb968148abdf35ee9d0f534b779fa732c0ce4a913d9ab8c3469b218552"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
@@ -22,9 +20,10 @@ LDFLAGS += "-ltirpc"
 
 inherit autotools pkgconfig systemd useradd gettext
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam systemd', d)}"
 
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
 PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
 PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
 
@@ -42,12 +41,7 @@ CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
 
 # hardcode epoll() to avoid running unsafe tests
 # BSD needs kqueue and uclibc poll()
-EXTRA_OECONF = " --with-ioloop=epoll \
-                 --with-systemdsystemunitdir=${systemd_unitdir}/system"
-
-# Uses hidden symbols
-# libssl_iostream_openssl.so: undefined reference to `ssl_iostream_handshake'
-LTO = ""
+EXTRA_OECONF = " --with-ioloop=epoll"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "dovecot.service dovecot.socket"
@@ -56,9 +50,11 @@ SYSTEMD_AUTO_ENABLE = "disable"
 do_install:append () {
     install -d 755 ${D}/etc/dovecot
     touch 644 ${D}/etc/dovecot/dovecot.conf
-    install -m 0644 ${WORKDIR}/dovecot.service ${D}${systemd_unitdir}/system
-    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
-    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/dovecot.service
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
+        install -m 0644 ${WORKDIR}/dovecot.service ${D}${systemd_unitdir}/system
+        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
+        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/dovecot.service
+    fi
 }
 
 USERADD_PACKAGES = "${PN}"
