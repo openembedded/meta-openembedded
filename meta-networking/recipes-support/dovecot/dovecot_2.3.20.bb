@@ -48,6 +48,7 @@ SYSTEMD_SERVICE:${PN} = "dovecot.service dovecot.socket"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install:append () {
+    rm -rf ${D}${libdir}/dovecot/dovecot-config
     install -d 755 ${D}/etc/dovecot
     touch 644 ${D}/etc/dovecot/dovecot.conf
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
