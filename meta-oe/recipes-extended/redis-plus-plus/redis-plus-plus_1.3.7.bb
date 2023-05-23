@@ -4,6 +4,8 @@ SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
+DEPENDS += "hiredis"
+
 SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
            file://0001-include-cstdint.patch"
 SRCREV = "f3b19a8a1f609d1a1b79002802e5cf8c336dc262"
@@ -12,13 +14,13 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-EXTRA_OECMAKE += "-DREDIS_PLUS_PLUS_USE_TLS=ON"
+# if ssl is enabled for redis-plus-plus it must also be enabled for hiredis
+PACKAGECONFIG ??= "ssl"
+PACKAGECONFIG[ssl] = "-DREDIS_PLUS_PLUS_USE_TLS=ON, -DREDIS_PLUS_PLUS_USE_TLS=OFF, openssl"
+PACKAGECONFIG[test] = "-DREDIS_PLUS_PLUS_BUILD_TEST=ON, -DREDIS_PLUS_PLUS_BUILD_TEST=OFF"
 
-DEPENDS += "hiredis openssl"
-
-RDEPENDS:${PN} += "hiredis"
-
-FILES_SOLIBSDEV = ""
-FILES:${PN} += " ${libdir}/libredis++.so*"
-
-INSANE_SKIP:${PN} += "dev-so"
+do_install:append() {
+    # To remove absolute path in .cmake found by QA warning [buildpaths]
+    sed -i -e 's|${STAGING_LIBDIR}/libcrypto.so|crypto|g' ${D}${datadir}/cmake/redis++/redis++-targets.cmake
+    sed -i -e 's|${STAGING_LIBDIR}/libssl.so|ssl|g' ${D}${datadir}/cmake/redis++/redis++-targets.cmake
+}
