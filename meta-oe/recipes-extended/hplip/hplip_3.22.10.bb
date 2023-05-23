@@ -74,12 +74,6 @@ RDEPENDS:${PN} += " \
 "
 RDEPENDS:${PN}-filter += "perl ghostscript"
 
-# need to snag the debug file or OE will fail on backend package
-FILES:${PN}-dbg += "\
-        ${libexecdir}/cups/backend/.debug \
-        ${PYTHON_SITEPACKAGES_DIR}/.debug \
-        ${libexecdir}/cups/filter/.debug "
-
 FILES:${PN} += "${datadir}/ipp-usb/quirks/HPLIP.conf"
 FILES:${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/*.la"
 FILES:${PN}-ppd = "${datadir}/ppd"
