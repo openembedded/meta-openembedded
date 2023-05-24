@@ -51,6 +51,8 @@ do_configure() {
 do_install:append() {
     # This file contains build paths and isn't very useful, remove it
     rm -f ${D}${libdir}/gutenprint/*/config.summary
+    # Match ownership to cups
+    chgrp lp ${D}${sysconfdir}/cups
 }
 
 do_compile:class-native() {
@@ -65,8 +67,8 @@ do_install:class-native() {
 FILES:${PN} += "${datadir}/cups/*"
 RDEPENDS:${PN} = "perl"
 
-# Install in /etc/cups when RPM needs DIRFILES to not conflict
-# https://stackoverflow.com/questions/44762430/why-do-i-get-etc-cups-conflicts-between-attempted-installs-in-yocto
-DIRFILES = "1"
-
 BBCLASSEXTEND = "native"
+
+# Pull in base-passwd for the lp user
+DEPENDS:append:class-target = " base-passwd"
+PACKAGE_WRITE_DEPS += "base-passwd"
