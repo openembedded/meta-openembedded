@@ -53,6 +53,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
            file://0001-Make-ts-module-external.patch \
            file://0001-core-vsx-update-vec_absd-workaround-condition.patch \
            file://CVE-2023-2617.patch;patchdir=../contrib \
+           file://CVE-2023-2618.patch;patchdir=../contrib \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
 
