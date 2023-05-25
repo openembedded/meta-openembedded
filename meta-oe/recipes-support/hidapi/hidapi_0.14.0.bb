@@ -12,5 +12,5 @@ RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-utf-16"
 inherit autotools pkgconfig
 
 SRC_URI = "git://github.com/libusb/hidapi.git;protocol=https;branch=master"
-SRCREV = "4ebce6b5059b086d05ca7e091ce04a5fd08ac3ac"
+SRCREV = "d3013f0af3f4029d82872c1a9487ea461a56dee4"
 S = "${WORKDIR}/git"
