@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
 
 SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https"
-SRCREV = "78ac8a737df56b5334354efe104ea8f99e2a2f00"
+SRCREV = "f7399c1a244982632671906d17f3ea77f3ccfc67"
 
 S = "${WORKDIR}/git"
 
