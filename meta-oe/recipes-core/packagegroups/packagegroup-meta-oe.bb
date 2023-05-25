@@ -464,7 +464,7 @@ RDEPENDS:packagegroup-meta-oe-gnome ="\
     gtk+ \
     gtkmm3 \
     gtkmm \
-    libpeas \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libpeas", "", d)} \
     pyxdg \
     vte9 \
     gnome-theme-adwaita \
