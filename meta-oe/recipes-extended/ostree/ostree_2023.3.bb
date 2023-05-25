@@ -23,7 +23,7 @@ SRC_URI = " \
     ${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "ceb0788755a0bff5738d44543552fbf883cf71df481baa3ca7288da7a402bb85"
+SRC_URI[sha256sum] = "9c575a094da2c307769f0aee15de95470c3b5550cbff211fbbc4f6fc75f333b1"
 
 S = "${WORKDIR}/libostree-${PV}"
 
