@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "c66b488a8b005b23ccb97b1198b6cece516c91869091ac5b7c267422db2733c7"
+SRC_URI[sha256sum] = "d7a3249027e7f464fbbfd7ee8319a08ad09d2eea51578575c4bd360ffa049ccb"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-asyncio \
