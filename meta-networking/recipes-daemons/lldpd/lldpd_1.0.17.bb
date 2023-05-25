@@ -12,7 +12,7 @@ SRC_URI = "\
     file://run-ptest \
     "
 
-SRC_URI[sha256sum] = "e3b391650c7ba67cea2fe84d67fdb4d7fc8aa1ec5cf86eb8bb984711df8465a9"
+SRC_URI[sha256sum] = "9343177f145d2bca66ef03d59528079d3f1663c624b1e2b9d08268efdc6127ce"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
 
