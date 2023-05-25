@@ -63,6 +63,6 @@ RRECOMMENDS:${PN} = " \
     xfce4-taskmanager \
     gigolo \
     mousepad \
-    catfish \
-    xfce4-panel-profiles \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "catfish", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "xfce4-panel-profiles", "", d)} \
 "
