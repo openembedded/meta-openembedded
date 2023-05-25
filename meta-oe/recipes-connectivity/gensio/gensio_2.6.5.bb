@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
                     "
 
-SRCREV = "a96805508864a46b8a7977aaf131c28742cddd11"
+SRCREV = "b5a275af5feac1ea15c19912715444f6e52e21f7"
 
 SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
 
