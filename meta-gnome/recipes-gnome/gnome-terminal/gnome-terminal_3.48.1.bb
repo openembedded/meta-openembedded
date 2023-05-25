@@ -20,9 +20,10 @@ DEPENDS = " \
     libpcre2 \
 "
 
-SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1"
-SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
-SRCREV = "a85ecc959344ee2e0d345f7dd081dc781d95d364"
+SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1 \
+           file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
+           "
+SRCREV = "1446ff0abc478bdd03c6665b718214d075729024"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
