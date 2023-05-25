@@ -18,8 +18,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dce08227d135cfda1f19d4c0c6689de"
 
 SRC_URI = "https://releases.pagure.org/${BPN}/${BP}.tar.xz"
 
-SRC_URI[md5sum] = "ee02da867389d290923cc138487176f9"
-SRC_URI[sha256sum] = "5eea2ef17b304977ba3ecb87afad4319fa0440f825e4f6fba6e8fa2ffeb88785"
+SRC_URI[sha256sum] = "9a4032202fc0d2b0858f41b167389a9cfe52ac24ec282e6479b90765319de113"
 
 inherit update-alternatives
 
