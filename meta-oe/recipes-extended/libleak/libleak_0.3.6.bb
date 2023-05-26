@@ -8,12 +8,11 @@ LIC_FILES_CHKSUM = "file://README.md;beginline=18;endline=21;md5=de4f705f12cdedb
 
 DEPENDS += "libbacktrace"
 
+PE = "1"
+SRCREV = "1c56b0a2ba643db976f589ec04b246e693b6c0ce"
 SRC_URI = "gitsm://github.com/WuBingzheng/libleak;protocol=https;branch=master \
            file://0001-respect-environment-variables.patch \
           "
-
-PV = "1.0+git${SRCPV}"
-SRCREV = "ea2bb608ae25701692269a37d39d77e966b887ac"
 
 S = "${WORKDIR}/git"
 
