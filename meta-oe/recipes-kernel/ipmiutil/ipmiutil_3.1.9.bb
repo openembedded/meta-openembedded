@@ -43,4 +43,5 @@ PACKAGECONFIG[standalone] = "--enable-standalone, --enable-standalone=no"
 CFLAGS += "-I${STAGING_INCDIR}"
 LDFLAGS += "-L${STAGING_LIBDIR}"
 
+EXTRA_OECONF += "--enable-useflags"
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
