@@ -26,14 +26,14 @@ PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
 PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
 
 SRC_URI = "\
-    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master \
+    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.24 \
     file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
     file://0002-original-patch-mediactl-pkgconfig.patch \
     file://0003-original-patch-export-mediactl-headers.patch \
     file://0004-Do-not-use-getsubopt.patch \
 "
 
-SRCREV = "9431e4b26b4842d1401e80ada9f14593dca3a94c"
+SRCREV = "8799081b143627c9c09dea0c60ad3d1cc17cc848"
 
 PV .= "+git${SRCPV}"
 
