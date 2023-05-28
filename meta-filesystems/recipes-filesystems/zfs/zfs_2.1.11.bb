@@ -4,11 +4,13 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE ="https://github.com/openzfs/zfs"
 
-SRC_URI = "https://github.com/openzfs/zfs/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
+SRCREV = "0f03a411615a797425de488eecfaaf63fc41acfe"
+SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=master \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
 "
-SRC_URI[sha256sum] = "a54fe4e854d0a207584f1799a80e165eae66bc30dc8e8c96a1f99ed9d4d8ceb2"
+
+S = "${WORKDIR}/git"
 
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.
