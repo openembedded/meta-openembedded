@@ -16,14 +16,14 @@ DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can be\
  by replacing malloc with GC_malloc calls, replacing realloc with GC_realloc\
  calls, and removing free calls."
 
-HOMEPAGE = "http://www.hboehm.info/gc/"
+HOMEPAGE = "https://www.hboehm.info/gc/"
 SECTION = "devel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://README.QUICK;md5=dd27361ad00943bb27bc3e0589037075"
 
 DEPENDS = "libatomic-ops"
 
-SRCREV = "cd1fbc1dbfd2cc888436944dd2784f39820698d7"
+SRCREV = "d1ff06cc503a74dca0150d5e988f2c93158b0cdf"
 SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_2;protocol=https"
 
 S = "${WORKDIR}/git"
