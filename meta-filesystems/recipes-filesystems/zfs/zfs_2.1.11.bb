@@ -8,6 +8,7 @@ SRCREV = "0f03a411615a797425de488eecfaaf63fc41acfe"
 SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=master \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
+           file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
 "
 
 S = "${WORKDIR}/git"
