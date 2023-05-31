@@ -13,5 +13,7 @@ SRC_URI[sha256sum] = "32d2dd0376772d01b6cb9fc996f3c8b57a357089dec328ed4b6553d037
 RDEPENDS:${PN} = " \
     python3-asttokens \
     python3-executing \
+    python3-html \
+    python3-logging \
     python3-pure-eval \
 "
