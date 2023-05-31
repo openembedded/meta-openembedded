@@ -12,6 +12,7 @@ inherit pypi setuptools3
 
 # Requires _compression which is currently located in misc
 RDEPENDS:${PN} += " \
+    python3-asyncio \
     python3-certifi \
     python3-compression \
     python3-ctypes \
@@ -19,9 +20,12 @@ RDEPENDS:${PN} += " \
     python3-html \
     python3-json \
     python3-misc \
+    python3-multiprocessing \
     python3-numbers \
     python3-pkgutil \
+    python3-pycurl \
     python3-threading \
+    python3-unittest \
 "
 
 RDEPENDS:${PN}-test += "python3-unittest"
