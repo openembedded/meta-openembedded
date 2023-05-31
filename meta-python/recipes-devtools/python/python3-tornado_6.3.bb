@@ -32,5 +32,4 @@ PACKAGES =+ "\
 
 FILES:${PN}-test = " \
     ${libdir}/${PYTHON_DIR}/site-packages/*/test \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/testing.py* \
 "
