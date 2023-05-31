@@ -10,6 +10,7 @@ inherit pypi setuptools3 ptest
 RDEPENDS:${PN} += "\
     python3-datetime \
     python3-logging \
+    python3-numbers \
 "
 
 SRC_URI += " \
