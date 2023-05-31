@@ -10,14 +10,14 @@ PYPI_PACKAGE = "SQLAlchemy"
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-json \
-    ${PYTHON_PN}-pickle \
-    ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-numbers \
-    ${PYTHON_PN}-threading \
-    ${PYTHON_PN}-compression \
-    ${PYTHON_PN}-profile \
+    python3-compression \
+    python3-json \
+    python3-logging \
+    python3-netclient \
+    python3-numbers \
+    python3-pickle \
+    python3-profile \
+    python3-threading \
 "
 
 BBCLASSEXTEND = "native nativesdk"
