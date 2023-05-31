@@ -17,7 +17,7 @@ DEPENDS = "intltool-native glib-2.0-native nftables"
 
 inherit gettext autotools-brokensep bash-completion pkgconfig python3native python3-dir gsettings systemd update-rc.d ptest features_check
 
-REQUIRED_DISTRO_FEATURES = "gobject-introspection"
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd"
