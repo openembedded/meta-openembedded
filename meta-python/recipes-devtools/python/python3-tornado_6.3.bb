@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-em
                    ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
                    ${PYTHON_PN}-ctypes ${PYTHON_PN}-misc"
 
-RDEPENDS:${PN}-test += "${PN} ${PYTHON_PN}-unittest"
+RDEPENDS:${PN}-test += "${PYTHON_PN}-unittest"
 
 PACKAGES =+ "\
     ${PN}-test \
