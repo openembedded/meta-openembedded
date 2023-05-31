@@ -12,6 +12,7 @@ RDEPENDS:${PN} += " \
     python3-distutils \
     python3-io \
     python3-json \
+    python3-fcntl \
     python3-logging \
     python3-multiprocessing \
     python3-pickle \
