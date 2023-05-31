@@ -13,6 +13,7 @@ RDEPENDS:${PN} += " \
     python3-prettytable \
     python3-pyflakes \
     python3-pyparsing \
+    python3-unittest \
 "
 
 SRC_URI[sha256sum] = "06f18d7d65b44428202b145a9a36e99c2ee00d1eb992df0caf881d4664377891"
