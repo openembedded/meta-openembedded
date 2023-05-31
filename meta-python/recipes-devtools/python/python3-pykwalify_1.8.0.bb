@@ -13,6 +13,7 @@ inherit setuptools3 pypi
 RDEPENDS:${PN} = "\
     python3-dateutil \
     python3-docopt \
+    python3-logging \
     python3-ruamel-yaml \
 "
 
