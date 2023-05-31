@@ -15,7 +15,7 @@ RDEPENDS:${PN} = " \
     python3-javaobj-py3 \
     python3-pyasn1 \
     python3-pyasn1-modules \
-    python3-pycryptodome \
+    python3-pycryptodomex \
     python3-twofish \
 "
 
