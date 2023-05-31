@@ -13,3 +13,9 @@ SRC_URI += " \
 "
 
 inherit pypi setuptools3
+
+RDEPENDS:${PN} += " \
+    python3-ctypes \
+    python3-fcntl \
+    python3-io \
+"
