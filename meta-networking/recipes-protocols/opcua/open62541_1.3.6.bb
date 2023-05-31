@@ -29,6 +29,7 @@ EXTRA_OECMAKE += "\
     -DBUILD_SHARED_LIBS=ON \
     -DUA_NAMESPACE_ZERO=FULL \
     -DUA_LOGLEVEL=600 \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
 
 PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth"
