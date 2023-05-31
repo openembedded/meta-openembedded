@@ -8,10 +8,10 @@ SRC_URI[sha256sum] = "a502aee54917cd394217b31c977a1ba3d9541a0120e0a045c49fd77b32
 
 inherit pypi setuptools3
 
-RDEPENDS:${PN} += "\
-    python3-pako \
-    python3-monotonic \
+RDEPENDS:${PN} += " \
     python3-appdirs \
+    python3-monotonic \
+    python3-pako \
 "
 
 do_install:append() {
