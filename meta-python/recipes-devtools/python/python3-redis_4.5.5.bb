@@ -10,7 +10,9 @@ inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
     python3-asyncio \
+    python3-compression \
     python3-cryptography \
     python3-datetime \
+    python3-json \
     python3-packaging \
 "
