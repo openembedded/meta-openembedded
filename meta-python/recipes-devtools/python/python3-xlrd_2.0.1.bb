@@ -23,6 +23,7 @@ PIP_INSTALL_DIST_PATH = "${S}/dist"
 RDEPENDS:${PN} += " \
     python3-compression \
     python3-io \
+    python3-mmap \
     python3-pprint \
     python3-shell \
 "
