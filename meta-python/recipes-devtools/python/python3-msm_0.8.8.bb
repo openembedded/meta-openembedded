@@ -10,8 +10,16 @@ inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
     python3-appdirs \
+    python3-git \
+    python3-fasteners \
+    python3-io \
+    python3-json \
+    python3-lazy \
     python3-monotonic \
+    python3-multiprocessing \
     python3-pako \
+    python3-pyyaml \
+    python3-requests \
 "
 
 do_install:append() {
