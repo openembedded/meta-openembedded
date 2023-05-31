@@ -12,4 +12,5 @@ BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS:${PN} = " \
     python3-asyncio \
+    python3-profile \
 "
