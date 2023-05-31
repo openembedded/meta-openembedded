@@ -8,7 +8,7 @@ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
            file://0001-Add-configure-time-check-for-setsid.patch \
           "
 
-SRC_URI[sha256sum] = "0c1dc1fa800fa64b5c58d16ddb905e700b27ca538a65be8c03b2ba5761106c38"
+SRC_URI[sha256sum] = "924dd6ab1471d486d219aba4edb881a03dd4129fd55ee556390f7a1648f523bd"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
