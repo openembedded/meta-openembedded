@@ -4,8 +4,8 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9d10a486ee04034fdef5162fd791f153"
 
-SRC_URI[sha256sum] = "878bc8ef4073e5cfb953dfc1cf4585db41e8b814c0106abde34d00ee0d0b3115"
+SRC_URI[sha256sum] = "13c56782f19d68ddf4d8db0170041192859616514c706b126d0df2ec72a11bd7"
 
 inherit pypi setuptools3
 
-SRC_URI += "file://0001-lru-Use-PyCFunction-instead-of-PyCFunctionWithKeywor.patch"
+SRC_URI += "${PYPI_SRC_URI}"
