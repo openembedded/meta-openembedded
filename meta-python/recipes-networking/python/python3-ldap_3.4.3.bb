@@ -26,4 +26,5 @@ RDEPENDS:${PN} = " \
     python3-pyasn1 \
     python3-pyasn1-modules \
     python3-threading \
+    python3-unittest \
 "
