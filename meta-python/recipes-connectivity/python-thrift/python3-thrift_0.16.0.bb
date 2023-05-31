@@ -11,6 +11,7 @@ PYPI_SRC_URI:append = ";downloadfilename=${BP}.${PYPI_PACKAGE_EXT}"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-scons \
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-stringold \
     ${PYTHON_PN}-threading \
