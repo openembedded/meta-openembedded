@@ -6,11 +6,11 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "\
-    https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
+    https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.bz2 \
     file://firewalld.init \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "28fd90e88bda0dfd460f370f353474811b2e295d7eb27f0d7d18ffa3d786eeb7"
+SRC_URI[sha256sum] = "aba0d8ce9617b906ea4866bf0bdfb2c2d5312f53b8e9e8e9e4d49bf330da5b5e"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native nftables"
