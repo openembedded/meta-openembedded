@@ -2,25 +2,22 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
 HOMEPAGE = "http://www.wireshark.org"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares"
+DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares"
 
 DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
 
-SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
-
-SRC_URI += " \
-    file://0001-wireshark-src-improve-reproducibility.patch \
-    file://0002-flex-Remove-line-directives.patch \
-    file://0003-bison-Remove-line-directives.patch \
-    file://0004-lemon-Remove-line-directives.patch \
-    file://CVE-2022-3190.patch \
-"
+SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
+           file://0001-CMake-Fix-a-try_run-test-when-cross-compiling.patch \
+           file://0001-wireshark-src-improve-reproducibility.patch \
+           file://0002-flex-Remove-line-directives.patch \
+           file://0004-lemon-Remove-line-directives.patch \
+           "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[sha256sum] = "881a13303e263b7dc7fe337534c8a541d4914552287879bed30bbe76c5bf68ca"
+SRC_URI[sha256sum] = "0079097a1b17ebc7250a73563f984c13327dac5016b7d53165810fbcca4bd884"
 
 PE = "1"
 
@@ -43,13 +40,12 @@ PACKAGECONFIG[zlib] = "-DENABLE_ZLIB=ON,-DENABLE_ZLIB=OFF, zlib"
 PACKAGECONFIG[geoip] = ",, geoip"
 PACKAGECONFIG[plugins] = "-DENABLE_PLUGINS=ON,-DENABLE_PLUGINS=OFF"
 PACKAGECONFIG[sbc] = "-DENABLE_SBC=ON,-DENABLE_SBC=OFF, sbc"
-PACKAGECONFIG[libssh] = ",,libssh2"
+PACKAGECONFIG[libssh] = "-DENABLE_LIBSSH=ON,-DENABLE_LIBSSH=OFF, libssh2"
 PACKAGECONFIG[lz4] = "-DENABLE_LZ4=ON,-DENABLE_LZ4=OFF, lz4"
 PACKAGECONFIG[zstd] = "-DENABLE_STTD=ON,-DENABLE_ZSTD=OFF, zstd"
 PACKAGECONFIG[nghttp2] = "-DENABLE_NGHTTP2=ON,-DENABLE_NGHTTP2=OFF, nghttp2"
 
 # these next two options require addional layers
-PACKAGECONFIG[c-ares] = "-DENABLE_CARES=ON,-DENABLE_CARES=OFF, c-ares"
 PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qttools-native qtmultimedia qtsvg"
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
@@ -64,6 +60,16 @@ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
                  "
 CFLAGS:append = " -lm"
 
+do_compile:append:class-target() {
+    # Fix TMPDIR, these are in the comments section
+    sed -i -e "s:** source file.*::g"  ${B}/wiretap/ascend_parser.c
+    sed -i -e "s:** source file.*::g"  ${B}/wiretap/candump_parser.c
+    sed -i -e "s:** source file.*::g"  ${B}/wiretap/busmaster_parser.c
+    sed -i -e "s:** source file.*::g"  ${B}/epan/protobuf_lang_parser.c
+    sed -i -e "s:** source file.*::g"  ${B}/epan/dtd_grammar.c
+    sed -i -e "s:** source file.*::g"  ${B}/epan/dfilter/grammar.c
+}
+
 do_install:append:class-native() {
 	install -d ${D}${bindir}
 	for f in lemon
@@ -77,6 +83,9 @@ do_install:append:class-target() {
 	do
 		chrpath --delete $f
 	done
+
+    # We don't need the cmake files installed
+    rm -fr ${D}${usrlib}/${BPN}/cmake
 }
 
 PACKAGE_BEFORE_PN += "tshark"
