@@ -17,6 +17,7 @@ SRC_URI += " \
     file://0004-lemon-Remove-line-directives.patch \
     file://CVE-2022-3190.patch \
     file://CVE-2023-2855.patch \
+    file://CVE-2023-2856.patch \
 "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
