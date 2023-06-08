@@ -13,6 +13,8 @@ SRCREV = "a290f2dbb813ce12ba407962655a5d8b57322221"
 
 S = "${WORKDIR}/git"
 
+inherit allarch
+
 do_install () {
     install -d ${D}${sbindir}
     install -m 0755 ${S}/cukinia ${D}${sbindir}
