@@ -18,6 +18,8 @@ SRC_URI += " \
     file://CVE-2022-3190.patch \
     file://CVE-2023-2855.patch \
     file://CVE-2023-2856.patch \
+    file://CVE-2023-2858.patch \
+    file://CVE-2023-2879.patch \
 "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
