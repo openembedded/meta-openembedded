@@ -15,6 +15,8 @@ S = "${WORKDIR}/git"
 
 inherit allarch
 
+RRECOMMENDS:${PN} = "libgpiod-tools"
+
 do_install () {
     install -d ${D}${sbindir}
     install -m 0755 ${S}/cukinia ${D}${sbindir}
