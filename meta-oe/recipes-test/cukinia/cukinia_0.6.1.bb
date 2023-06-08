@@ -1,6 +1,6 @@
-SUMMARY = "Linux firmware validation framework" 
+SUMMARY = "Linux firmware validation framework"
 DESCRIPTION = "Cukinia is designed to help Linux-based embedded firmware \
-developers run simple system-level validation tests on their firmware." 
+developers run simple system-level validation tests on their firmware."
 HOMEPAGE = "https://github.com/savoirfairelinux/cukinia"
 LICENSE = "GPL-3.0-only & Apache-2.0"
 
