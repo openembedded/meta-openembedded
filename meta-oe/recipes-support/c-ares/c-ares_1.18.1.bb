@@ -23,3 +23,7 @@ PACKAGES =+ "${PN}-utils"
 FILES:${PN}-utils = "${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# this vulneribility applies only when cross-compiling using autotools
+# yocto cross-compiles via cmake which is also listed as official workaround
+CVE_CHECK_IGNORE += "CVE-2023-31124"
