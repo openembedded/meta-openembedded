@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "44a70c52f537662c10d91eedbf51fd765c9961be6ba2508ed63bf7a26cdd3100"
+SRC_URI[sha256sum] = "5bfb2a35c67921bdcadd5c90cb290ad7537d24da113a5e8bc2d646b02de7488f"
 
 CVE_CHECK_IGNORE += "\
     CVE-2007-2728 \
