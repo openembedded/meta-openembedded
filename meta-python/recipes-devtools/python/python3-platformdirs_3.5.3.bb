@@ -8,7 +8,7 @@ SRC_URI = " \
     file://run-ptest \
 "
 
-SRCREV ?= "b8c42ddca4def1fba38b9815a7d94ec2ac630b29"
+SRCREV ?= "50e638eec6cadee0dfe47197464241be8a70718d"
 SRC_URI[sha256sum] = "7954a68d0ba23558d753f73437c55f89027cf8f5108c19844d4b82e5af396335"
 
 inherit python_setuptools_build_meta ptest
