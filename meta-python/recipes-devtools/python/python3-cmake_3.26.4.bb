@@ -11,7 +11,7 @@ PYPI_PACKAGE = "cmake"
 PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "b54cde1f1c0573321b22382bd2ffaf5d08f65188572d128cd4867fb9669723c5"
+SRC_URI[sha256sum] = "d45b30b9ce7280829888c78650177ab525df2b6785e1a5b3d82b4c147d828c0e"
 
 SRC_URI += " \
 	file://CMakeLists.txt \
