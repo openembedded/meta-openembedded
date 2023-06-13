@@ -27,7 +27,7 @@ def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
 SRC_URI += "file://0001-Replace-filename-with-basename.patch"
-SRC_URI[archive.sha256sum] = "274a065927596d8a8f09537adc91bae98297201dd47ec6ccd878111e0781d3e5"
+SRC_URI[archive.sha256sum] = "d9c62f024727f7a76fc6a5da788a2b0247df01a71c2a601143c62aac0ff41e4c"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
 
