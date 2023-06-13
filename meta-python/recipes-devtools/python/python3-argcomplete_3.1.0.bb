@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
 
-SRC_URI[sha256sum] = "b9ca96448e14fa459d7450a4ab5a22bbf9cee4ba7adddf03e65c398b5daeea28"
+SRC_URI[sha256sum] = "3a81445fa51c9875c36789ae5386d5e95c5c43d503963a0029a747aea74de1e3"
 
 PYPI_PACKAGE = "argcomplete"
 
