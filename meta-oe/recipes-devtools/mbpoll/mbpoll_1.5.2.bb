@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 DEPENDS = "libmodbus (>=3.1.4)"
 
 SRC_URI = "git://github.com/epsilonrt/mbpoll;protocol=https;branch=master"
-SRCREV = "ed00121bfa04afdef2d037aac4f574ad7b410601"
+SRCREV = "a0bd6c08d3d15b086f2104477295c0705aed366a"
 
 S = "${WORKDIR}/git"
 
