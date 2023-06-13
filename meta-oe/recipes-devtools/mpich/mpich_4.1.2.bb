@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f1804c45b8b4e816e53eb1f175d810f3"
 
 SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
-SRC_URI[sha256sum] = "ee30471b35ef87f4c88f871a5e2ad3811cd9c4df32fd4f138443072ff4284ca2"
+SRC_URI[sha256sum] = "3492e98adab62b597ef0d292fb2459b6123bc80070a8aa0a30be6962075a12f0"
 
 RDEPENDS:${PN} += "bash perl libxml2"
 
