@@ -7,7 +7,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0e1a95b7892d3015ecd6d0016f601f2c"
 
 SRC_URI = "git://github.com/tio/tio;protocol=https;nobranch=1"
-SRCREV = "a2bbab068428275febeea13906654b9e58400c95"
+SRCREV = "88ef473362c5a1ff0dcd389fd5b1d4d6bf202472"
 
 S = "${WORKDIR}/git"
 
