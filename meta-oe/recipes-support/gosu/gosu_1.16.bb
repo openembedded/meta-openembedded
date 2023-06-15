@@ -8,9 +8,12 @@ GO_IMPORT = "github.com/tianon/gosu"
 SRC_URI = "git://${GO_IMPORT}.git;branch=master;protocol=https \
            git://github.com/opencontainers/runc;name=runc;destsuffix=${S}/src/github.com/opencontainers/runc;branch=main;protocol=https \
 "
-SRCREV = "9f7cd138a1ebc0684d43ef6046bf723978e8741f"
-SRCREV_runc = "d7f7b22a85a2387557bdcda125710c2506f8d5c5"
+SRCREV = "0e7347714352cd7f2e5edc9d2cf838d9934e6036"
+#v1.1.0
+SRCREV_runc = "067aaf8548d78269dcb2c13b856775e27c410f9c"
 inherit go
+
+CGO_ENABLED = "1"
 
 do_compile:prepend() {
     # New Go versions has Go modules support enabled by default
