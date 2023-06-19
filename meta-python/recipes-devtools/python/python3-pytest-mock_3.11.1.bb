@@ -10,7 +10,7 @@ SRC_URI = " \
     file://run-ptest \
 "
 
-SRCREV ?= "6c03dfd4240de4a178bab67c0a32fba28d8bcf91"
+SRCREV ?= "d3e73f2e93f7b93eba0a36e17e43bafd969da4fe"
 
 SRC_URI[sha256sum] = "fbbdb085ef7c252a326fd8cdcac0aa3b1333d8811f131bdcc701002e1be7ed4f"
 
