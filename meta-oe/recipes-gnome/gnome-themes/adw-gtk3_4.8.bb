@@ -11,6 +11,6 @@ inherit meson
 SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
-SRCREV = "f5e0807a4572ef6d9ca27042b41211efb41936d2"
+SRCREV = "7ee024ed79f68875e5dea3616be24a703cf72cc5"
 
 FILES:${PN} = "${datadir}/themes"
