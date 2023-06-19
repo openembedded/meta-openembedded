@@ -1,0 +1,42 @@
+From 8c70e2680bec526012d96578160901e4c24e1c48 Mon Sep 17 00:00:00 2001
+From: Paul Groke <paul.groke@dynatrace.com>
+Date: Thu, 15 Sep 2022 13:36:49 +0200
+Subject: [PATCH] work around GCC 6~11 ADL bug
+
+see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=51577
+ADL seems to work properly when we do the SFINAE check via the return type, but not when using a dummy template parameter
+
+fix #3992
+Upstream-Status: Backport [https://github.com/google/googletest/pull/3993/commits/096014a45dc38dff993f5b7bb28a258d8323344b]
+Signed-off-by: Paul Groke <paul.groke@dynatrace.com>
+Signed-off-by: Sana Kazi <sana.kazi@kpit.com>
+---
+ googletest/include/gtest/gtest-printers.h | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/googletest/include/gtest/gtest-printers.h b/googletest/include/gtest/gtest-printers.h
+index 8e4d295344..19c3e0b69b 100644
+--- a/googletest/include/gtest/gtest-printers.h
++++ b/googletest/include/gtest/gtest-printers.h
+@@ -205,12 +205,13 @@ struct StreamPrinter {
+             // Don't accept member pointers here. We'd print them via implicit
+             // conversion to bool, which isn't useful.
+             typename = typename std::enable_if<
+-                !std::is_member_pointer<T>::value>::type,
+-            // Only accept types for which we can find a streaming operator via
+-            // ADL (possibly involving implicit conversions).
+-            typename = decltype(std::declval<std::ostream&>()
+-                                << std::declval<const T&>())>
+-  static void PrintValue(const T& value, ::std::ostream* os) {
++                !std::is_member_pointer<T>::value>::type>
++  // Only accept types for which we can find a streaming operator via
++  // ADL (possibly involving implicit conversions).
++  // (Use SFINAE via return type, because it seems GCC < 12 doesn't handle name
++  // lookup properly when we do it in the template parameter list.)
++  static auto PrintValue(const T& value, ::std::ostream* os) 
++  -> decltype((void)(*os << value)) {
+     // Call streaming operator found by ADL, possibly with implicit conversions
+     // of the arguments.
+     *os << value;
+-- 
+2.25.1
