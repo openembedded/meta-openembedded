@@ -163,7 +163,7 @@ python populate_packages:prepend () {
 
     metapkg =  pn
     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
-    blacklist = [ metapkg, "libopencv-ts" ]
+    blacklist = [ metapkg ]
     metapkg_rdepends = [ ]
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
