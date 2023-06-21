@@ -19,12 +19,11 @@ DEPENDS = " \
 "
 
 GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
-SRC_URI = " \
-    ${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
-    file://0001-libostree-Link-with-libgpg-error-for-gpg_strerror_r-.patch \
-    file://run-ptest \
-"
-SRC_URI[sha256sum] = "9c575a094da2c307769f0aee15de95470c3b5550cbff211fbbc4f6fc75f333b1"
+SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
+           file://run-ptest \
+           file://0001-lib-deploy-Use-off_t-not-__off_t.patch \
+           "
+SRC_URI[sha256sum] = "7cee8ace6aae3c778527927a85abefbfbd491c021f52ae229c51ca3077f9c5d1"
 
 S = "${WORKDIR}/libostree-${PV}"
 
