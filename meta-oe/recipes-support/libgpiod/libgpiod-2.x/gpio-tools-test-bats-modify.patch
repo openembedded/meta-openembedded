@@ -12,7 +12,7 @@ We wait for a transition up to 1.5 seconds.
 Signed-off-by: Joe Slater <joe.slater@windriver.com>
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Upstream-status: accepted
+Upstream-Status: Accepted
 
 Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
