@@ -15,8 +15,6 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
 ---
-Upstream-Status: Pending
-
  makedefs | 27 +++++++++++----------------
  1 file changed, 11 insertions(+), 16 deletions(-)
 
