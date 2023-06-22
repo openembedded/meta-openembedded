@@ -4,14 +4,14 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
 SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
-           file://0001-libtrace-Use-XSI-version-of-strerror_r-on-non-glibc-.patch \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "c2255178a49f62c53009a456bc37dd5e37332f09"
+SRCREV = "4e83b848e7961af25028f3a2cecf37a63279a2bf"
 
 S = "${WORKDIR}/git"
 
+DEPENDS = "libtraceevent"
 RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
 	perl-module-posix perl-module-file-glob libdbi-perl libdbd-sqlite-perl"
 
