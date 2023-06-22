@@ -10,6 +10,6 @@ inherit xfce-app mime-xdg
 
 RRECOMMENDS:${PN} += "tumbler"
 
-SRC_URI[sha256sum] = "0eee869922ec00a253dafa446c2aad2a2f98e07e1db7262e8337ce9ec2dad969"
+SRC_URI[sha256sum] = "d71affbf15245067124725b153c908a53208c4ca1ba2d4df1ec5a1308d53791e"
 
 FILES:${PN} += "${datadir}/metainfo"
