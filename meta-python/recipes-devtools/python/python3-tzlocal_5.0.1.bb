@@ -9,5 +9,6 @@ inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     python3-datetime \
+    python3-logging \
     python3-pytz-deprecation-shim \
 "
