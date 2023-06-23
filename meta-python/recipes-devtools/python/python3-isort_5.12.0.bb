@@ -9,8 +9,10 @@ SRC_URI[sha256sum] = "8bef7dde241278824a6d83f44a544709b065191b95b6e50894bdc722fc
 inherit pypi python_poetry_core
 
 RDEPENDS:${PN} += " \
+    python3-compression \
     python3-datetime \
     python3-difflib \
+    python3-email \
     python3-numbers \
     python3-pprint \
     python3-profile \
