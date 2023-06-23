@@ -31,6 +31,8 @@ RDEPENDS:${PN} += "\
     python3-datetime \
     python3-io \
     python3-netclient \
+    python3-nocasedict \
+    python3-nocaselist \
     python3-ply \
     python3-pyyaml \
     python3-six \
@@ -38,8 +40,6 @@ RDEPENDS:${PN} += "\
     python3-threading \
     python3-unixadmin \
     python3-xml \
-    python3-nocasedict \
-    python3-nocaselist \
     python3-yamlloader \
 "
 
