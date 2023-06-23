@@ -27,7 +27,7 @@ DEPENDS += " \
     ${PYTHON_PN}-wheel-native \
 "
 
-RDEPENDS:${PN}:class-target += "\
+RDEPENDS:${PN} += "\
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-netclient \
