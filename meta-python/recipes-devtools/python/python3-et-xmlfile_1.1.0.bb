@@ -15,6 +15,7 @@ RDEPENDS:${PN} += " \
     python3-io \
     python3-pprint \
     python3-shell \
+    python3-xml \
 "
 
 inherit setuptools3 pypi
