@@ -14,6 +14,7 @@ CLEANBROKEN = "1"
 RDEPENDS:${PN} += " \
     python3-bcrypt \
     python3-cryptography \
+    python3-logging \
     python3-pynacl \
     python3-unixadmin \
 "
