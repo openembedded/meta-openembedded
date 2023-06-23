@@ -13,6 +13,9 @@ CLEANBROKEN = "1"
 
 RDEPENDS:${PN} += " \
     python3-dateutil \
+    python3-logging \
+    python3-pytz \
+    python3-regex \
     python3-ruamel-yaml \
     python3-tzlocal \
 "
