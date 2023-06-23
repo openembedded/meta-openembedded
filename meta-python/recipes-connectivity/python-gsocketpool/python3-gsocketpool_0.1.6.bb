@@ -3,7 +3,7 @@ DESCRIPTION = "creates a pool of connections that can be used with gevent"
 HOMEPAGE = "https://github.com/studio-ousia/gsocketpool"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
-DEPENDS += "${PYTHON_PN}-gevent"
+
 RDEPENDS:${PN} += "${PYTHON_PN}-gevent"
 
 SRC_URI[md5sum] = "49f5f292ef1b60944ae92ca426a5e550"
