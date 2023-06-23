@@ -12,9 +12,9 @@ inherit pypi setuptools3
 CLEANBROKEN = "1"
 
 RDEPENDS:${PN} += " \
-        ${PYTHON_PN}-dateutil \
-        ${PYTHON_PN}-tzlocal \
-        ${PYTHON_PN}-ruamel-yaml \
+    python3-dateutil \
+    python3-ruamel-yaml \
+    python3-tzlocal \
 "
 
-# Ommitted ${PYTHON_PN}-convertdate, ${PYTHON_PN}-jdatetime ${PYTHON_PN}-umalqurra
+# Ommitted python3-convertdate, python3-jdatetime python3-umalqurra
