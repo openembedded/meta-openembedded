@@ -12,5 +12,6 @@ SRC_URI[sha256sum] = "702bf03b0eb84b8ef2d8dac5cb925e1e685dce98f77b125569bc6fd2b3
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
+    python3-asyncio \
     python3-pyserial \
 "
