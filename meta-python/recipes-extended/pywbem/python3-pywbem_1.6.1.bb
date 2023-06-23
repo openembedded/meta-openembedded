@@ -30,11 +30,13 @@ DEPENDS += " \
 RDEPENDS:${PN} += "\
     python3-datetime \
     python3-io \
+    python3-logging \
     python3-netclient \
     python3-nocasedict \
     python3-nocaselist \
     python3-ply \
     python3-pyyaml \
+    python3-requests \
     python3-six \
     python3-stringold \
     python3-threading \
