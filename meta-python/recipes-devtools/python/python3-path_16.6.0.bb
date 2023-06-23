@@ -14,6 +14,10 @@ DEPENDS += "python3-setuptools-scm-native"
 
 RDEPENDS:${PN} += " \
     python3-appdirs \
+    python3-crypt \
+    python3-io \
+    python3-numbers \
+    python3-shell \
 "
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
