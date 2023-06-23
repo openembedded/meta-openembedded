@@ -11,10 +11,12 @@ inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
     python3-aenum \
+    python3-asyncio \
     python3-codecs \
     python3-compression \
     python3-ctypes \
     python3-fcntl \
+    python3-json \
     python3-logging \
     python3-misc \
     python3-netserver \
