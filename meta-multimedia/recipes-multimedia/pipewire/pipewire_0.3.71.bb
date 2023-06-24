@@ -48,7 +48,7 @@ SYSTEMD_PACKAGES = "${PN}"
 # it just prevents this subproject feature.
 #
 # AptX and LDAC are not available in OE. Currently, neither
-# are lv2 and ROC.
+# are lv2, ROC, and libmysofa.
 #
 # The RTKit module is deprecated in favor of the newer RT module.
 # It still exists for legacy setups that still include it in
@@ -66,6 +66,7 @@ EXTRA_OEMESON += " \
     -Dbluez5-codec-aptx=disabled \
     -Dbluez5-codec-ldac=disabled \
     -Dlegacy-rtkit=false \
+    -Dlibmysofa=disabled \
 "
 
 # spa alsa plugin code uses typedef redefinition, which is officially a C11 feature.
