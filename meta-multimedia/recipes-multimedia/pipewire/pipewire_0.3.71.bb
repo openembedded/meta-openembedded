@@ -249,6 +249,7 @@ PACKAGES =+ "\
     ${PN}-modules-meta \
     ${PN}-alsa-card-profile \
     ${PN}-v4l2 \
+    ${PN}-aes67 \
     gstreamer1.0-pipewire \
 "
 
@@ -263,8 +264,6 @@ FILES:${PN} = " \
     ${systemd_user_unitdir} \
     ${bindir}/pipewire \
     ${bindir}/pipewire-avb \
-    ${bindir}/pipewire-aes67 \
-    ${sysconfdir}/security/limits.d \
 "
 
 RRECOMMENDS:${PN}:class-target += " \
@@ -358,6 +357,7 @@ RRECOMMENDS:${PN}-modules += "${PN}-modules-meta"
 CONFFILES:${PN}-modules-rt = "${datadir}/pipewire/client-rt.conf"
 FILES:${PN}-modules-rt += " \
     ${datadir}/pipewire/client-rt.conf \
+    ${sysconfdir}/security/limits.d/* \
     "
 
 CONFFILES:${PN}-modules-filter-chain = "${datadir}/pipewire/filter-chain/*"
@@ -374,6 +374,11 @@ FILES:${PN}-alsa-card-profile = " \
 FILES:${PN}-v4l2 += " \
     ${bindir}/pw-v4l2 \
     ${libdir}/${PW_MODULE_SUBDIR}/v4l2/libpw-v4l2.so \
+"
+
+# AES67 is a standard for audio over IP, from the Audio Engineering Society (AES).
+FILES:${PN}-aes67 += " \
+    ${bindir}/pipewire-aes67 \
 "
 
 FILES:gstreamer1.0-pipewire = " \
