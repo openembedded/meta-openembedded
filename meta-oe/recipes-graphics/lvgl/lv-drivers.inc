@@ -7,6 +7,7 @@ LVGL_CONFIG_USE_DRM = "${@bb.utils.contains('PACKAGECONFIG', 'drm', '1', '0', d)
 LVGL_CONFIG_DRM_CARD ?= "/dev/dri/card0"
 
 LVGL_CONFIG_USE_EVDEV = "${@bb.utils.contains_any('PACKAGECONFIG', 'drm fbdev', '1', '0', d)}"
+LVGL_CONFIG_EVDEV_INPUT ?= "/dev/input/touchscreen"
 
 LVGL_CONFIG_USE_FBDEV = "${@bb.utils.contains('PACKAGECONFIG', 'fbdev', '1', '0', d)}"
 
@@ -29,6 +30,7 @@ do_configure:append() {
         -e "s|\(^#  define DRM_CARD \).*|#  define DRM_CARD \"${LVGL_CONFIG_DRM_CARD}\"|g" \
 	\
         -e "s|\(^#  define USE_EVDEV \).*|#  define USE_EVDEV ${LVGL_CONFIG_USE_EVDEV}|g" \
+        -e "s|\(^#  define EVDEV_NAME \).*|#  define EVDEV_NAME \"${LVGL_CONFIG_EVDEV_INPUT}\"|g" \
         \
         -e "s|\(^#  define USE_FBDEV \).*|#  define USE_FBDEV ${LVGL_CONFIG_USE_FBDEV}|g" \
         \
