@@ -54,3 +54,7 @@ pkg_postinst:${PN} () {
 	setcap cap_net_admin+ep "$D/${sbindir}/conntrack"
 }
 PACKAGE_WRITE_DEPS += "libcap-native"
+
+RRECOMMENDS:${PN} = "kernel-module-nf-conntrack kernel-module-nfnetlink \
+                     kernel-module-nf-conntrack-netlink \
+                    "
