@@ -21,7 +21,7 @@ inherit cmake
 
 SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937"
+SRC_URI[sha256sum] = "cd2a7ac9f1fb5bfa6218272d9929955dc7237515bba6e14b5ad0e1d1e2212b43"
 
 # Patch for CVE-2017-12858 is applied in version 1.2.0.
 CVE_CHECK_IGNORE += "CVE-2017-12858"
