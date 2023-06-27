@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
 
-SRC_URI[sha256sum] = "6fead82f0c4000cf38d53f9c030780d81bfa0220218aee13b90b7701c937d95f"
+SRC_URI[sha256sum] = "e604db6521c1e367c6bd7fad239c847f53cc46646f2d2651372d05ae5e95f817"
 
 SRC_URI += "file://0001-setup_build.py-avoid-absolute-path.patch"
 
