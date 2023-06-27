@@ -14,6 +14,9 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
            file://CVE-2023-2856.patch \
            file://CVE-2023-2858.patch \
            file://CVE-2023-2952.patch \
+           file://CVE-2023-0667-pre1.patch \
+           file://CVE-2023-0667.patch \
+           file://CVE-2023-0668.patch \
            "
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
