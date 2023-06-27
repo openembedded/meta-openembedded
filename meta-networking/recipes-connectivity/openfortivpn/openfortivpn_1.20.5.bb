@@ -3,7 +3,7 @@ LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3d575262a651a6f1a17210ce41bf907d"
 
 SRC_URI = "git://github.com/adrienverge/openfortivpn.git;protocol=https;branch=master"
-SRCREV = "45cb8e0f9984f1d54b648e499bda637d96568908"
+SRCREV = "1ccb8ee682af255ae85fecd5fcbab6497ccb6b38"
 
 DEPENDS = "openssl"
 
