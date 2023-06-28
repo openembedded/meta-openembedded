@@ -66,3 +66,6 @@ FILES:${PN}-compiler += " \
     ${bindir} \
     ${libdir}/libgrpc_plugin_support${SOLIBS} \
     "
+
+# this CVE was introduced in v1.53.0 and not backported to v1.46.x branch
+CVE_CHECK_IGNORE += "CVE-2023-32732"
