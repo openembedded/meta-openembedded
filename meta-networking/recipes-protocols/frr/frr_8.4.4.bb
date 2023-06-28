@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.4 \
            file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not-py.patch \
            "
 
-SRCREV = "62ac43de9f3bc470586cf4f51fadf013bf542b32"
+SRCREV = "45e36c0c00a517ad1606135b18c5753e210cfc0d"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
