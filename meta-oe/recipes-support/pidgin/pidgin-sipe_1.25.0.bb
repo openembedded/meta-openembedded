@@ -35,3 +35,5 @@ FILES:${PN} += " \
     ${datadir}/appdata \
     ${datadir}/metainfo \
 "
+
+CFLAGS = "-Wno-error=deprecated-declarations"
