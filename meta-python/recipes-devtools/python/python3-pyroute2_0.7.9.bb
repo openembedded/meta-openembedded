@@ -1,9 +1,10 @@
 SUMMARY = "A pure Python netlink and Linux network configuration library"
-LICENSE = "GPL-2.0-only & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
+LICENSE = "GPL-2.0-or-later | Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
+                    file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
 
-SRC_URI[sha256sum] = "45460d12ed2a5caf272a357a3360b36d1e346f17afe1425b66fc21d70f462b29"
+SRC_URI[sha256sum] = "b69d82f140b0774317d7ba40f6c5fa1d755098ba3f3eb619982d16e750dc631a"
 
 inherit setuptools3 pypi ptest
 
