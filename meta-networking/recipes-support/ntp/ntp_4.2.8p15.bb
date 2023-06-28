@@ -24,6 +24,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://sntp.service \
            file://sntp \
            file://ntpd.list \
+           file://CVE-2023-2655x.patch;striplevel=0 \
 "
 
 SRC_URI[sha256sum] = "f65840deab68614d5d7ceb2d0bb9304ff70dcdedd09abb79754a87536b849c19"
@@ -91,6 +92,14 @@ PACKAGECONFIG[refclocks] = "--enable-all-clocks,--disable-all-clocks,pps-tools"
 PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
 PACKAGECONFIG[mdns] = "ac_cv_header_dns_sd_h=yes,ac_cv_header_dns_sd_h=no,mdns"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+
+do_configure:append() {
+    # tests are generated but also checked-in to source control
+    # when CVE-2023-2655x.patch changes timestamp of test source file, Makefile detects it and tries to regenerate it
+    # however it fails because of missing ruby interpretter; adding ruby-native as dependency fixes it
+    # since the regenerated file is identical to the one from source control, touch the generated file instead of adding heavy dependency
+    touch ${S}/tests/libntp/run-strtolfp.c
+}
 
 do_install:append() {
     install -d ${D}${sysconfdir}/init.d
