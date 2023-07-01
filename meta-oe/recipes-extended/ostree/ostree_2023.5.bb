@@ -21,9 +21,8 @@ DEPENDS = " \
 GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
            file://run-ptest \
-           file://0001-lib-deploy-Use-off_t-not-__off_t.patch \
            "
-SRC_URI[sha256sum] = "7cee8ace6aae3c778527927a85abefbfbd491c021f52ae229c51ca3077f9c5d1"
+SRC_URI[sha256sum] = "bc593afb31fe1ac3d50419f917fafe321a0a3561d7bb2ba498a83740fe3adb14"
 
 S = "${WORKDIR}/libostree-${PV}"
 
