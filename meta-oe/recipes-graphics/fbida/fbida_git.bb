@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master \
            file://0002-meson.build-add-features-options-for-png-gif-tiff-we.patch \
            file://0003-meson.build-do-not-require-xkbcommon.patch \
            file://0001-meson.build-make-fbpdf-build-optional.patch \
+           file://0001-fbida-Include-missing-sys-types.h.patch \
 "
 SRCREV = "eb769e3d7f4a073d4c37ed524ebd5017c6a578f5"
 S = "${WORKDIR}/git"
