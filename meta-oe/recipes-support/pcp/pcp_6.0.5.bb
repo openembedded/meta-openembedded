@@ -18,17 +18,26 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
 export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
 #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
 EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
-inherit useradd systemd features_check
+inherit useradd systemd features_check python3targetconfig
 
 # Needs libx11
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
-SYSTEMD_SERVICE:${PN} = "pmcd.service pmcd.service pmie_check.service pmie_farm_check.service \
-                         pmlogger_daily.service pmlogger_farm_check.service pmfind.service \
-                         pmie_daily.service  pmlogger.service pmlogger_daily_report.service \
-                         pmproxy.service pmie.service pmie_farm.service pmlogger_check.service \
-                         pmlogger_farm.service"
+SYSTEMD_SERVICE:${PN} = "\
+                        pmie_farm_check.service \
+                        pmie_farm.service \
+                        pmfind.service \
+                        pmlogger_farm_check.service \
+                        pmcd.service \
+                        pmie.service \
+                        pmlogger_daily.service \
+                        pmlogger.service \
+                        pmlogger_farm.service \
+                        pmie_check.service \
+                        pmproxy.service \
+                        pmlogger_check.service \
+                        pmie_daily.service"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --home ${localstatedir}/lib/pcp --no-create-home \
@@ -88,7 +97,7 @@ do_install () {
 
 PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
 	libpcp-gui2  libpcp-gui2-dev \
-	libpcp-import1 \
+	libpcp-import1 libpcp-archive1 \
 	libpcp-mmv1 libpcp-mmv1-dev \
 	libpcp-pmda3 libpcp-pmda3-dev \
 	libpcp-trace2 libpcp-trace2-dev \
@@ -96,6 +105,8 @@ PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
 	libpcp3 libpcp3-dev python3-${PN}\
 "
 FILES:libpcp-gui2 = "${libdir}/libpcp_gui.so.2 \
+"	
+FILES:libpcp-archive1 = "${libdir}/libpcp_archive.so.1 \
 "	
 FILES:libpcp-gui2-dev = " \
 	${libdir}/libpcp_gui.so \
@@ -166,6 +177,7 @@ FILES:${PN} = " \
 	${datadir}/zsh \
 	${systemd_system_unitdir}/ \
 	${libdir}/pcp/ \
+	${libdir}/sysusers.d/pcp.conf \
 	${datadir}/pcp \
 	${libdir}/*.sh \
 	${datadir}/man \
@@ -184,7 +196,7 @@ FILES:${PN}-export-zabbix-agent += " \
 	${mandir}/man3/zbxpcp.3.gz \
 	${libdir}/zabbix \
 "
-FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/"
+FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/ ${libdir}/sysusers.d/pcp-testsuite.conf"
 FILES:python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
 FILES:${PN}-dev += " \
         ${includedir}/pcp \
@@ -222,7 +234,3 @@ FILES:${PN}-dev += " \
         ${datadir}/man/man3/pms* \
         ${datadir}/man/man3/pmt* \
 "
-#| chkacc1.c:8:10: fatal error: localconfig.h: No such file or directory
-#|     8 | #include "localconfig.h"
-#|       |          ^~~~~~~~~~~~~~~
-PARALLEL_MAKE = ""
