@@ -5,9 +5,8 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2 \
-           file://0001-include-missing-cstdint.patch"
-SRC_URI[sha256sum] = "70dff2530d8cd2dfaeeb91a5014bd17afb1baee8f0e3eb18e44d5b4dbea47b14"
+SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2"
+SRC_URI[sha256sum] = "d96db96011259178a35555a0f6d6e75a739e52a495a6b2aa5efb3d75390fbc39"
 
 inherit autotools pkgconfig binconfig
 
