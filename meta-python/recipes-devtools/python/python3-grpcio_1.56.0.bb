@@ -8,13 +8,12 @@ DEPENDS += "${PYTHON_PN}-protobuf"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
 SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
-                                file://boring_ssl.patch \
                                 file://mips_bigendian.patch \
                                 file://0001-Include-missing-cstdint-header.patch \
                                 file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
                                 file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
 "
-SRC_URI[sha256sum] = "e6dfc2b6567b1c261739b43d9c59d201c1b89e017afd9e684d85aa7a186c9f7a"
+SRC_URI[sha256sum] = "4c08ee21b3d10315b8dc26f6c13917b20ed574cdbed2d2d80c53d5508fdcc0f2"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
@@ -30,11 +29,14 @@ export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
 
 BORING_SSL_PLATFORM:arm = "linux-arm"
 BORING_SSL_PLATFORM:x86-64 = "linux-x86_64"
+BORING_SSL_PLATFORM:aarch64 = "linux-aarch64"
 BORING_SSL_PLATFORM ?= "unsupported"
 export GRPC_BORING_SSL_PLATFORM = "${BORING_SSL_PLATFORM}"
+export GRPC_BUILD_OVERRIDE_BORING_SSL_ASM_PLATFORM = "${BORING_SSL_PLATFORM}"
 
-BORING_SSL:x86-64 = "1"
 BORING_SSL:arm = "1"
+BORING_SSL:x86-64 = "1"
+BORING_SSL:aarch64 = "1"
 BORING_SSL ?= "0"
 export GRPC_BUILD_WITH_BORING_SSL_ASM = "${BORING_SSL}"
 
