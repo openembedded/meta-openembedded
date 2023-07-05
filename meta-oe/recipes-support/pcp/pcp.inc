@@ -9,6 +9,7 @@ COMPATIBLE_HOST:libc-musl = "null"
 
 SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${BP}.src.tar.gz \
            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
+           file://0001-htop-Change-dependency-order-of-header-and-sourcefil.patch \
            file://config.linux \
 	   "
 SRC_URI[sha256sum] = "dacf92ba195f1f2ea8f40bf0c455d2cd2456273a1e30dcc3ee5b5bfd099a99ee"
