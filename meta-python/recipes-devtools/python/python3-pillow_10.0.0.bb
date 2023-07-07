@@ -62,4 +62,4 @@ do_install_ptest() {
 
 BBCLASSEXTEND = "native"
 
-SRCREV = "204590600c6a8c5246d0564d3312abd6e6b0ed70"
+SRCREV = "6e28ed1f36d0eb74053af54e1eddc9c29db698cd"
