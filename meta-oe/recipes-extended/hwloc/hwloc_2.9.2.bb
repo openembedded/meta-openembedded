@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=79179bb373cd55cbd834463a514fb714"
 
 SRC_URI = "https://www.open-mpi.org/software/${BPN}/v2.9/downloads/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "7cc4931a20fef457e0933af3f375be6eafa7703fde21e137bfb9685b1409599e"
+SRC_URI[sha256sum] = "0a87fdf677f8b00b567d229b6320bf6b25c693edaa43e0b85268d999d6b060cf"
 UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v2.9/"
 
 inherit autotools bash-completion pkgconfig
