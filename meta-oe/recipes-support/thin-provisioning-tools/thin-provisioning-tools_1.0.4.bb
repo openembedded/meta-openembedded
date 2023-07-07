@@ -10,6 +10,8 @@ S = "${WORKDIR}/git"
 SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
     "
+SRC_URI:append:libc-musl = " file://0001-Replace-LFS-functions.patch"
+
 SRCREV = "3baa3fa3a3e4f714e6170a4152b186f0fa1d76e1"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
