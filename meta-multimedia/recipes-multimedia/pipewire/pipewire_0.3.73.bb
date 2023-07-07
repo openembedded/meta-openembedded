@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "4cc22d60d2280fb3c771e6a246e79c90819fd485"
+SRCREV = "44deacbc670ccf6c02d66a48b756a16167d8048f"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
