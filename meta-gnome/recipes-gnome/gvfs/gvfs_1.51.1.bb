@@ -20,7 +20,7 @@ RDEPENDS:${PN} += "gsettings-desktop-schemas"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.sha256sum] = "ab9059a676a537edbea21388c2aafe1a7e2c8f1ac2dfdc6d64550233075457fd"
+SRC_URI[archive.sha256sum] = "5baaf0cc81e2c690a726f7d5eb59eed48a33ea220fd5378df93c556173a3c143"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
