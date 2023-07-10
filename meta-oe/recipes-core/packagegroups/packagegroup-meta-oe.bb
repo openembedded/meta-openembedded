@@ -569,7 +569,6 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     xclock \
     xfontsel \
     xkbprint \
-    xsetmode \
     xlsatoms \
     xlsclients \
     xlsfonts \
