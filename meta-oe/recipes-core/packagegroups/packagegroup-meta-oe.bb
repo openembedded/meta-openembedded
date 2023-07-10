@@ -595,7 +595,6 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     font-misc-misc \
     xorg-fonts-100dpi \
     libxaw6 \
-    libxkbui \
     libxpresent \
     xcb-util-cursor \
     xserver-common \
