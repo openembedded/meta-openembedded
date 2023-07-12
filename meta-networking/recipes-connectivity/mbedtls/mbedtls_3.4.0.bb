@@ -31,6 +31,9 @@ SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
 
 inherit cmake update-alternatives ptest
 
+# Build with the v2 LTS version by default
+DEFAULT_PREFERENCE = "-1"
+
 PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
 PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
 PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
