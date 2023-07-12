@@ -36,3 +36,5 @@ EXTRA_OECONF:append = "\
 PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
 
 PACKAGECONFIG ?= ""
+
+PARALLEL_MAKE = ""
