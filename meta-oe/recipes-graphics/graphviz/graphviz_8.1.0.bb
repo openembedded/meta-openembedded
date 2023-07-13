@@ -27,8 +27,7 @@ SRC_URI:append:class-target = "\
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
-
-SRC_URI[sha256sum] = "6b16bf990df114195be669773a1dae975dbbffada45e1de2849ddeb5851bb9a8"
+SRC_URI[sha256sum] = "d593695fdaa8a19297523b679ad13d3ef2027b0b7f14cc2bc23e77969ed81565"
 
 CVE_CHECK_IGNORE += "\
     CVE-2014-9157 \
@@ -37,7 +36,7 @@ CVE_CHECK_IGNORE += "\
 PACKAGECONFIG ??= "librsvg"
 PACKAGECONFIG[librsvg] = "--with-librsvg,--without-librsvg,librsvg"
 
-EXTRA_OECONF:append = " PS2PDF=/bin/echo"
+EXTRA_OECONF:append = " PS2PDF=/bin/echo --disable-man-pdfs"
 
 EXTRA_OECONF:class-target = "\
                 --with-expatincludedir=${STAGING_INCDIR} \
