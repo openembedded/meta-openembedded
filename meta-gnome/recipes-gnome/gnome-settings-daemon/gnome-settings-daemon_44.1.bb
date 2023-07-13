@@ -25,7 +25,7 @@ DEPENDS = " \
 REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "b417ada1c1342a8cf29837ecf2dec9bdcdb754235b1a161b6435c3d11f210999"
+SRC_URI[archive.sha256sum] = "12653b72d81f151300a47d700ac9410ac1bcce38e83f1bdd19cded2932943989"
 
 PACKAGECONFIG ??= " \
     cups nm \
