@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
            file://CVE-2022-40318.patch \
            file://CVE-2022-43681.patch \
            file://CVE-2023-31489.patch \
+           file://CVE-2023-31490.patch \
            file://frr.pam \
 	      "
 
