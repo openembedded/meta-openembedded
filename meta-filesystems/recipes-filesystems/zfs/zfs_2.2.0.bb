@@ -4,8 +4,8 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE ="https://github.com/openzfs/zfs"
 
-SRCREV = "0f03a411615a797425de488eecfaaf63fc41acfe"
-SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=master \
+SRCREV = "009d3288dea524c7ad373b04b65bee8bb6f0bfea"
+SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
            file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
