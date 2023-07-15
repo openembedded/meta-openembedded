@@ -8,6 +8,8 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 SRC_URI = "https://pagure.io/dlm/archive/dlm-${PV}/dlm-dlm-${PV}.tar.gz \
            file://0001-Include-sys-sysmacros.h-for-major-minor-macros-in-gl.patch \
            file://0001-make-Replace-cp-a-with-mode-preserving-options.patch \
+           file://0001-dlm_controld-remove-unnecessary-header-include.patch \
+           file://0001-Disable-annobin-plugin.patch \
            "
 
 SRC_URI[sha256sum] = "90237e18af7422ac15fc756899b3bb6932597b13342296de8e0e120e6d8729ab"
@@ -32,6 +34,8 @@ SYSTEMD_SERVICE:${PN} = "dlm.service"
 SYSTEMD_AUTO_ENABLE = "enable"
 
 export EXTRA_OEMAKE = ""
+
+PARALLEL_MAKE = ""
 
 DONTBUILD = "${@bb.utils.contains('PACKAGECONFIG', 'pacemaker', '', 'fence', d)}"
 
