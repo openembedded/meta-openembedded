@@ -73,3 +73,5 @@ FILES:${PN}-dev += "\
 COMPATIBLE_HOST:riscv32 = "null"
 # conflicting definition of ABS macro from asm/asm.h from kernel
 COMPATIBLE_HOST:mips = "null"
+# FTBFS on aarch64 with 6.2+ kernel see https://github.com/openzfs/zfs/issues/14555
+COMPATIBLE_HOST:aarch64 = "null"
