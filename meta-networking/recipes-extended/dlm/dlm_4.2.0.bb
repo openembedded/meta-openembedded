@@ -10,6 +10,7 @@ SRC_URI = "https://pagure.io/dlm/archive/dlm-${PV}/dlm-dlm-${PV}.tar.gz \
            file://0001-make-Replace-cp-a-with-mode-preserving-options.patch \
            file://0001-dlm_controld-remove-unnecessary-header-include.patch \
            file://0001-Disable-annobin-plugin.patch \
+           file://0001-Remove-fcf-protection-full.patch \
            "
 
 SRC_URI[sha256sum] = "90237e18af7422ac15fc756899b3bb6932597b13342296de8e0e120e6d8729ab"
@@ -35,13 +36,14 @@ SYSTEMD_AUTO_ENABLE = "enable"
 
 export EXTRA_OEMAKE = ""
 
+CFPROTECTION ?= "-fcf-protection=full"
+CFPROTECTION:riscv64 = ""
+
+CFLAGS += "${CFPROTECTION}"
+
 PARALLEL_MAKE = ""
 
 DONTBUILD = "${@bb.utils.contains('PACKAGECONFIG', 'pacemaker', '', 'fence', d)}"
-
-do_compile:prepend:toolchain-clang() {
-    sed -i -e "s/-fstack-clash-protection//g" ${S}/*/Makefile
-}
 
 do_compile() {
     sed -i "s/libsystemd-daemon/libsystemd/g" ${S}/dlm_controld/Makefile
@@ -59,4 +61,3 @@ do_install() {
         install -Dm 0644 ${S}/init/dlm.service ${D}${systemd_unitdir}/system/dlm.service
     fi
 }
-
