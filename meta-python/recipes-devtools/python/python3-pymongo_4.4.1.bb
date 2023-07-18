@@ -8,7 +8,7 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI[sha256sum] = "a1b5d286fee4b9b5a0312faede02f2ce2f56ac695685af1d25f428abdac9a22c"
+SRC_URI[sha256sum] = "a4df87dbbd03ac6372d24f2a8054b4dc33de497d5227b50ec649f436ad574284"
 
 inherit pypi setuptools3
 
