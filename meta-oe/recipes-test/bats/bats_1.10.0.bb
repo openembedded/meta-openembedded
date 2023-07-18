@@ -10,8 +10,8 @@ SRC_URI = "\
   git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
   "
 
-# v1.9.0
-SRCREV = "6636e2c2ef5ffe361535cb45fc61682c5ef46b71"
+# v1.10.0
+SRCREV = "f7defb94362f2053a3e73d13086a167448ea9133"
 
 S = "${WORKDIR}/git"
 
