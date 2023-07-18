@@ -8,7 +8,7 @@ SRC_URI = " \
     git://github.com/redis/hiredis;protocol=https;branch=master \
     file://run-ptest \
     "
-SRCREV = "c14775b4e48334e0262c9f168887578f4a368b5d"
+SRCREV = "60e5075d4ac77424809f855ba3e398df7aacefe8"
 
 S = "${WORKDIR}/git"
 
