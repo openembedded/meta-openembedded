@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=71baacc459522324ef3e2b9e052e8180"
 
 DEPENDS += "libtool-cross"
 
-SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master \
+   file://CVE-2019-17362.patch \
+"
 
 SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
 
