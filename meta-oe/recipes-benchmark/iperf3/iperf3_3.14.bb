@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
            file://0001-configure.ac-check-for-CPP-prog.patch \
            "
 
-SRCREV = "f48e7fa92b8932814f3d92f36986d51be9efe6e0"
+SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
 
 S = "${WORKDIR}/git"
 
