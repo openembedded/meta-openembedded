@@ -9,6 +9,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a7a95d2af90376e85a05318794e6f202"
 SRC_URI = "git://github.com/benhoyt/inih.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
-SRCREV = "5e1d9e2625842dddb3f9c086a50f22e4f45dfc2b"
+SRCREV = "9cecf0643da0846e77f64d10a126d9f48b9e05e8"
 
 inherit meson pkgconfig
