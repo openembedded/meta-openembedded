@@ -8,7 +8,7 @@ DEPENDS += "hiredis"
 
 SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
            file://0001-CMakeLists.txt-fix-substitution-for-static-libs.patch"
-SRCREV = "0c4ba0370e46c3d0d443c0368d02195faa791219"
+SRCREV = "8b9ce389099608cf9bae617d79d257d2cc05e12f"
 
 S = "${WORKDIR}/git"
 
