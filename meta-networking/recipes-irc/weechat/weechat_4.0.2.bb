@@ -10,7 +10,7 @@ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz \
            file://0001-use-pkg-config-for-gcrypt-instead.patch \
            "
 
-SRC_URI[sha256sum] = "1b9533123af427922b3d7fabede958dc85392d50881d97d0b7986d8f514556e9"
+SRC_URI[sha256sum] = "0e648ee0d024c8099425ee60d41b272924ec8e19800ee8f1441090708834023c"
 
 inherit cmake pkgconfig
 
