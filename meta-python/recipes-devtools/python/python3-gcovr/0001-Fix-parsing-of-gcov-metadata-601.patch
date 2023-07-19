@@ -1,0 +1,84 @@
+From c4f53f28c4c537b75b5912a44083c41262807504 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Michael=20F=C3=B6rderer?= <michael.foerderer@gmx.de>
+Date: Sun, 3 Apr 2022 22:58:33 +0200
+Subject: [PATCH] Fix parsing of gcov metadata (#601)
+
+gcc-11 has metadata line "-: 0:Source is newer than graph" which throws an error.
+
+Upstream-Status: Backport [https://github.com/gcovr/gcovr/commit/7b6947bd4b6fd28a477606313fff3c13fcea8d3d]
+
+Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
+---
+ gcovr/gcov.py        |  5 ++++-
+ gcovr/gcov_parser.py | 24 ++++++++++++++++++++----
+ 2 files changed, 24 insertions(+), 5 deletions(-)
+
+diff --git a/gcovr/gcov.py b/gcovr/gcov.py
+index cc7a9af4..ff4cdb0b 100644
+--- a/gcovr/gcov.py
++++ b/gcovr/gcov.py
+@@ -98,8 +98,11 @@ def process_gcov_data(data_fname, covdata, source_fname, options, currdir=None):
+     # Find the source file
+     # TODO: instead of heuristics, use "working directory" if available
+     metadata = parse_metadata(lines)
++    source = metadata.get("Source")
++    if source is None:
++        raise RuntimeError("Unexpected value 'None' for metadata 'Source'.")
+     fname = guess_source_file_name(
+-        metadata["Source"].strip(),
++        source,
+         data_fname,
+         source_fname,
+         root_dir=options.root_dir,
+diff --git a/gcovr/gcov_parser.py b/gcovr/gcov_parser.py
+index 391ecd78..523ea406 100644
+--- a/gcovr/gcov_parser.py
++++ b/gcovr/gcov_parser.py
+@@ -121,7 +121,7 @@ class _MetadataLine(NamedTuple):
+     """A gcov line with metadata: ``-: 0:KEY:VALUE``"""
+
+     key: str
+-    value: str
++    value: Optional[str]
+
+
+ class _BlockLine(NamedTuple):
+@@ -214,7 +214,19 @@ def parse_metadata(lines: List[str]) -> Dict[str, str]:
+     ...   -: 0:Foo:bar
+     ...   -: 0:Key:123
+     ... '''.splitlines())
+-    {'Foo': 'bar', 'Key': '123'}
++    Traceback (most recent call last):
++       ...
++    RuntimeError: Missing key 'Source' in metadata. GCOV data was >>
++      -: 0:Foo:bar
++      -: 0:Key:123<< End of GCOV data
++    >>> parse_metadata('-: 0:Source: file \n -: 0:Foo: bar \n -: 0:Key: 123 '.splitlines())
++    {'Source': 'file', 'Foo': 'bar', 'Key': '123'}
++    >>> parse_metadata('''
++    ...   -: 0:Source:file
++    ...   -: 0:Foo:bar
++    ...   -: 0:Key
++    ... '''.splitlines())
++    {'Source': 'file', 'Foo': 'bar', 'Key': None}
+     """
+     collected = {}
+     for line in lines:
+@@ -721,8 +733,12 @@ def _parse_line(line: str) -> _Line:
+
+         # METADATA (key, value)
+         if count_str == "-" and lineno == "0":
+-            key, value = source_code.split(":", 1)
+-            return _MetadataLine(key, value)
++            if ":" in source_code:
++                key, value = source_code.split(":", 1)
++                return _MetadataLine(key, value.strip())
++            else:
++                # Add a syntethic metadata with no value
++                return _MetadataLine(source_code, None)
+
+         if count_str == "-":
+             count = 0
+--
+2.41.0
+
