@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
            file://libyang-add-stdint-h.patch \
            file://run-ptest \
            file://CVE-2023-26916.patch \
+	    file://CVE-2023-26917.patch \
            "
 
 S = "${WORKDIR}/git"
