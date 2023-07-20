@@ -13,11 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://virtualbox-guest-additions-7.0.8-kernel-6.4-patch-1.patch \
-    file://virtualbox-guest-additions-7.0.8-kernel-6.4-patch-2.patch \
 "
 
-SRC_URI[sha256sum] = "c305fbe480f507eac7c36893ead66dffaacda944f19c3813a4533e9c39bae237"
+SRC_URI[sha256sum] = "0b1e6d8b7f87d017c7fae37f80586acff04f799ffc1d51e995954d6415dee371"
 
 S ?= "${WORKDIR}/vbox_module"
 S:task-patch = "${WORKDIR}/${VBOX_NAME}"
