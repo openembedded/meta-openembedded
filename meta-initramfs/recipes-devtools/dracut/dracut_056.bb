@@ -65,7 +65,6 @@ RDEPENDS:${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux b
 # This could be optimized a bit, but let's avoid non-booting systems :)
 RRECOMMENDS:${PN} = " \
                      kernel-modules \
-                     busybox \
                      coreutils \
                     "
 
