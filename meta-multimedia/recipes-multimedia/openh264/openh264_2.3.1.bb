@@ -1,3 +1,4 @@
+SUMMARY = "Open Source H.264 Codec"
 DESCRIPTION = "OpenH264 is a codec library which supports H.264 encoding and \
 decoding. It is suitable for use in real time applications such as WebRTC."
 HOMEPAGE = "http://www.openh264.org/"
@@ -11,8 +12,8 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
 
 S = "${WORKDIR}/git"
-SRCREV = "50a1fcf70fafe962c526749991cb4646406933ba"
-BRANCH = "openh264v2.1.1"
+SRCREV = "0a48f4d2e9be2abb4fb01b4c3be83cf44ce91a6e"
+BRANCH = "openh264v${PV}"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
            file://0001-Makefile-Use-cp-options-to-preserve-file-mode.patch \
            "
