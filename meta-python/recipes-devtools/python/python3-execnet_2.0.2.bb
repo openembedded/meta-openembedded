@@ -8,14 +8,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=772fcdaca14b378878d05c7d857e6c3e"
 
 DEPENDS += "\
     python3-pip-native \
-    python3-setuptools-scm-native \
+    python3-hatch-vcs-native \
 "
 
 SRC_URI += "file://run-ptest \
            "
-SRC_URI[sha256sum] = "8f694f3ba9cc92cab508b152dcfe322153975c29bda272e2fd7f3f00f36e47c5"
+SRC_URI[sha256sum] = "cc59bc4423742fd71ad227122eb0dd44db51efb3dc4095b45ac9a08c770096af"
 
-inherit ptest pypi setuptools3
+inherit ptest pypi python_hatchling
 
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
