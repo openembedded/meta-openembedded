@@ -12,8 +12,9 @@ inherit pypi python_poetry_core
 
 RDEPENDS:${PN} = "\
     ${PYTHON_PN}-core \
-    ${PYTHON_PN}-numbers \
+    ${PYTHON_PN}-io \
     ${PYTHON_PN}-mmap \
+    ${PYTHON_PN}-numbers \
 "
 
 BBCLASSEXTEND = "native nativesdk"
