@@ -8,6 +8,10 @@ inherit pypi python_setuptools_build_meta ptest
 
 SRC_URI += "file://run-ptest"
 
+RDEPENDS:${PN} += "\
+        ${PYTHON_PN}-asyncio \
+"
+
 RDEPENDS:${PN}-ptest += " \
 	${PYTHON_PN}-pytest \
 "
