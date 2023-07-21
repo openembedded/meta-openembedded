@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=65bbee055d3ea3bfc475f07aecf4de64"
 
 SRC_URI = "git://github.com/ReFirmLabs/binwalk;protocol=https;branch=master"
 
-SRCREV = "fa0c0bd59b8588814756942fe4cb5452e76c1dcd"
+SRCREV = "cddfede795971045d99422bd7a9676c8803ec5ee"
 
 S = "${WORKDIR}/git"
 
