@@ -15,9 +15,10 @@ inherit pypi python_setuptools_build_meta
 CLEANBROKEN = "1"
 
 RDEPENDS:${PN} = " \
-    ${PYTHON_PN}-werkzeug \
-    ${PYTHON_PN}-jinja2 \
-    ${PYTHON_PN}-itsdangerous \
+    ${PYTHON_PN}-blinker \
     ${PYTHON_PN}-click \
+    ${PYTHON_PN}-itsdangerous \
+    ${PYTHON_PN}-jinja2 \
     ${PYTHON_PN}-profile \
+    ${PYTHON_PN}-werkzeug \
 "
