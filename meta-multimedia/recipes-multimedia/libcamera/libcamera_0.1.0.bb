@@ -12,7 +12,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
 "
 
-SRCREV = "fb44403f1c5571549ac128c21daee9761eb9249c"
+SRCREV = "9e3a83c03bab65b745eea2482be78077b409a2b5"
 
 PE = "1"
 
@@ -47,7 +47,7 @@ do_configure:prepend() {
 
 do_install:append() {
     chrpath -d ${D}${libdir}/libcamera.so
-    chrpath -d ${D}${libdir}/v4l2-compat.so
+    chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
 }
 
 addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata
@@ -63,7 +63,7 @@ do_recalculate_ipa_signatures_package() {
     ${S}/src/ipa/ipa-sign-install.sh ${B}/src/ipa-priv-key.pem "${modules}"
 }
 
-FILES:${PN} += " ${libdir}/v4l2-compat.so"
+FILES:${PN} += " ${libexecdir}/libcamera/v4l2-compat.so"
 FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
 
 # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
