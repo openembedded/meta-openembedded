@@ -15,7 +15,7 @@ SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitw
            file://run-ptest \
            file://ptest.out.expected \
            "
-SRC_URI[sha256sum] = "f524f794188a10defc4df673d8cf0b3739f93e58e93aff0cdb8a99fbdcca2ffb"
+SRC_URI[sha256sum] = "806271fa5bf31de0600315e8720004a8f529954480e991ca84a9868dc1cae97e"
 
 UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
 
