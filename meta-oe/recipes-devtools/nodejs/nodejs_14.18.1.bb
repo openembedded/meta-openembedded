@@ -29,6 +29,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://CVE-2022-32212.patch \
            file://CVE-2022-35255.patch \
            file://CVE-2022-43548.patch \
+           file://gcc13.patch \
            "
 SRC_URI:append:class-target = " \
            file://0002-Using-native-binaries-nodejs14.patch \

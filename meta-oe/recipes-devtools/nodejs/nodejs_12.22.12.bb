@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://CVE-2022-43548.patch \
            file://CVE-llhttp.patch \
            file://python-3.11-invalid-mode-rU.patch \
+           file://gcc13.patch \
            "
 SRC_URI_append_class-target = " \
            file://0002-Using-native-binaries.patch \
