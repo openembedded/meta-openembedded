@@ -4,14 +4,16 @@ high-performance, easy-to-use data structures and data analysis tools for \
 the Python programming language."
 HOMEPAGE = "http://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c1cc9ab35a8b2aabf933cd6d245b5db3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
 
-SRC_URI[sha256sum] = "74a3fd7e5a7ec052f183273dc7b0acd3a863edf7520f5d3a1765c04ffdb3b0b1"
+SRC_URI[sha256sum] = "c02f372a88e0d17f36d3093a644c73cfc1788e876a7c4bcb4020a77512e2043c"
 
 inherit pypi setuptools3
 
 DEPENDS += " \
-    ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
+    ${PYTHON_PN}-cython-native \
+    ${PYTHON_PN}-numpy-native \
+    ${PYTHON_PN}-versioneer-native \
 "
 
 PACKAGESPLITFUNCS =+ "fix_cythonized_sources"
