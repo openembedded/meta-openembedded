@@ -7,7 +7,7 @@ DEPENDS = "boost"
 
 SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https"
 
-SRCREV = "0bd8896a4010f2d91b2340570c24fa08606ec406"
+SRCREV = "8a099e44b3d5f85b20f05828d919d2332a8de841"
 
 S = "${WORKDIR}/git"
 
