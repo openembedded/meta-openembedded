@@ -5,16 +5,15 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2b136f573f5386001ea3b7b9016222fc"
 
 SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
-            file://CVE-2023-30608.patch \
             file://run-ptest \
 	    "
 
-SRC_URI[sha256sum] = "69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268"
+SRC_URI[sha256sum] = "d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c"
 
 export BUILD_SYS
 export HOST_SYS
 
-inherit pypi ptest setuptools3
+inherit pypi ptest python_flit_core
 
 RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest \
