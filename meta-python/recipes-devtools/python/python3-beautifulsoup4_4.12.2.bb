@@ -1,11 +1,11 @@
 SUMMARY = "Screen-scraping library"
 HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=15a76c7c51ecfc5c094d04f3ccd41a09"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=96e0034f7c9443910c486773aa1ed9ac"
 
-SRC_URI[sha256sum] = "ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"
+SRC_URI[sha256sum] = "492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da"
 
-inherit pypi setuptools3
+inherit pypi python_hatchling
 
 RDEPENDS:${PN} = "\
     ${PYTHON_PN}-html5lib \
