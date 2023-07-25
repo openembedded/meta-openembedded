@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
 SECTION = "devel/python"
 LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "\
-    file://setup.py;beginline=283;endline=283;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+    file://setup.py;beginline=293;endline=293;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
 "
 
@@ -20,15 +20,16 @@ DEPENDS = "\
     python3-pytz-native \
     python3-certifi-native \
     python3-setuptools-scm-native \
+    python3-pybind11-native \
 "
-SRC_URI[sha256sum] = "1f4d69707b1677560cd952544ee4962f68ff07952fb9069ff8c12b56353cb8c9"
+SRC_URI[sha256sum] = "a8cdb91dddb04436bd2f098b8fdf4b81352e68cf4d2c6756fcc414791076569b"
 
 inherit pypi setuptools3 pkgconfig
 
 # Stop the component from attempting to download when it detects a missing
 # dependency
 SRC_URI += "file://matplotlib-disable-download.patch \
-            file://0001-removed-RandomNumberGenerator-class-included-random-.patch"
+"
 
 # This python module requires a full copy of freetype-2.6.1
 SRC_URI += "https://downloads.sourceforge.net/project/freetype/freetype2/2.6.1/freetype-2.6.1.tar.gz;name=freetype;subdir=matplotlib-${PV}/build"
