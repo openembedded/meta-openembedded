@@ -38,12 +38,7 @@ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.18(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d perl-version pkgconfig
 
-# CVE-2011-2411 is valnerble only on HP NonStop Servers.
-CVE_CHECK_IGNORE += "CVE-2011-2411" 
-# Patch for CVE-2018-1050 is applied in version 4.5.15, 4.6.13, 4.7.5.
-CVE_CHECK_IGNORE += "CVE-2018-1050"
-# Patch for CVE-2018-1057 is applied in version 4.3.13, 4.4.16.
-CVE_CHECK_IGNORE += "CVE-2018-1057"
+CVE_STATUS[CVE-2011-2411] = "not-applicable-platform: vulnerable only on HP NonStop Servers"
 
 # remove default added RDEPENDS on perl
 RDEPENDS:${PN}:remove = "perl"
