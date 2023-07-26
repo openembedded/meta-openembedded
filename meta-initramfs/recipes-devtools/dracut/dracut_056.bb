@@ -68,5 +68,4 @@ RRECOMMENDS:${PN} = " \
                      coreutils \
                     "
 
-# CVE-2010-4176 affects only Fedora
-CVE_CHECK_IGNORE += "CVE-2010-4176"
+CVE_STATUS[CVE-2010-4176] = "not-applicable-platform: Applies only to Fedora"
