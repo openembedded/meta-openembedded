@@ -2,22 +2,20 @@ SUMMARY = "NVMe management command line interface"
 AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
 HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
 SECTION = "console/utils"
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-DEPENDS = "util-linux"
-PV .= "+git${SRCPV}"
+LICENSE = "GPL-2.0-only & CC0-1.0 & MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
+                    file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
+                    file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+DEPENDS = "json-c libnvme"
+SRCREV = "d6c07e0de9be777009ebb9ab7475bee1ae3e0e95"
 
 SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
-SRCREV = "f0e9569df9289d6ee55ba2c23615cc7c73a9b088"
 
 S = "${WORKDIR}/git"
 
-inherit bash-completion systemd
+inherit bash-completion meson pkgconfig systemd
 
-do_install() {
-    oe_runmake install-spec DESTDIR=${D} PREFIX=${prefix} \
-        UDEVDIR=${nonarch_base_libdir}/udev SYSTEMDDIR=${systemd_unitdir}
-}
+EXTRA_OEMESON += "-Dsystemddir=${systemd_unitdir}/system"
 
 pkg_postinst_ontarget:${PN}() {
     ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
