@@ -26,7 +26,7 @@ DEPENDS = " \
     libstemmer \
     libxml2 \
     sqlite3 \
-    webkitgtk \
+    webkitgtk3 \
 "
 
 RDEPENDS:${PN} = "gnome-keyring"
