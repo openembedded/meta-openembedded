@@ -44,4 +44,9 @@ export SWIG_FEATURES
 
 export STAGING_DIR
 
+do_install:append() {
+    rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/SSL/__pycache__/*.cpython-*.pyc
+    rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/__pycache__/*.cpython-*.pyc
+}
+
 BBCLASSEXTEND = "native"
