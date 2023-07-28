@@ -36,12 +36,10 @@ inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala featu
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
 	file://0001-meson-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch \
-	file://0001-client-Add-missing-type-arguments-for-interfaces-to-.patch \
-	file://0001-vala-unit-Fix-non-null-build-with-newer-vala.patch \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "94d6bec861daffb27efea85a296f347db7a5af6d"
+SRCREV = "b72db2a5e87f2269e6359af434a4fc02fca9e9df"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
