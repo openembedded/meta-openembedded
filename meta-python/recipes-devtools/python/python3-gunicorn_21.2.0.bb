@@ -1,9 +1,9 @@
 SUMMARY = "WSGI HTTP Server for UNIX"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f75f3fb94cdeab1d607e2adaa6077752"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=302423eeae97079c633da81b6a5fe35e"
 
-SRC_URI[sha256sum] = "e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
+SRC_URI[sha256sum] = "88ec8bff1d634f98e61b9f65bc4bf3cd918a90806c6f5c48bc5603849ec81033"
 
 inherit pypi setuptools3 ptest
 
