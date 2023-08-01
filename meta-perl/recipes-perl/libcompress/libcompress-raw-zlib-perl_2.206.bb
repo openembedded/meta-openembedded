@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=17;md5=45bba5fa4937353fd4f
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Zlib-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "f161f4297efadbed79c8b096a75951784fc5ccd3170bd32866a19e5c6876d13f"
+SRC_URI[sha256sum] = "46785a6a383a1c843895b7f9f25d5d759e7c305159f9d1e04a3604eb74c77374"
 
 DEPENDS += "zlib"
 
