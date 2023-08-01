@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=b95311d4a7dbf3d0d36
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-Lzma-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "1e7a4c4f4e665434df59246b19d168b08af2f1aeebaa08937bd69ad3e5e319c8"
+SRC_URI[sha256sum] = "6c600f9bbb1a2d834b1decd0bd5863dcea52e0ac17de101b5085e0e3cb27285c"
 
 S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
 
