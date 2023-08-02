@@ -13,11 +13,9 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
            file://0001-FindGObjectIntrospection.cmake-prefix-variables-obta.patch \
            file://reproducibility.patch \
            file://0d3344e17d258106617b0e6d783d073b188a2548.patch \
-           file://4977290ab4ab35258a6da9b13795c9b0f7894bf4.patch \
-           file://0001-Source-JavaScriptCore-CMakeLists.txt-ensure-reproduc.patch \
            file://check-GST_GL_HAVE_PLATFORM_GLX.patch \
            "
-SRC_URI[sha256sum] = "96898870d994da406ee7a632816dcde9a3bb395ee5f344fcb3f3b8cc8a77e000"
+SRC_URI[sha256sum] = "7de051a263668621d91a61a5eb1c3771d1a7cec900043d4afef06c326c16037f"
 
 inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
 
