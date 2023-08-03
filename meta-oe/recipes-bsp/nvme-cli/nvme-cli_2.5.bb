@@ -1,5 +1,4 @@
 SUMMARY = "NVMe management command line interface"
-AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
 HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
 SECTION = "console/utils"
 LICENSE = "GPL-2.0-only & CC0-1.0 & MIT"
