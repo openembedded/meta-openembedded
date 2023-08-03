@@ -8,7 +8,6 @@ other parameters."
 HOMEPAGE = "http://software.es.net/iperf/"
 SECTION = "console/network"
 BUGTRACKER = "https://github.com/esnet/iperf/issues"
-AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dc6301c8256ceb8f71c9e3c2ae9096b9"
