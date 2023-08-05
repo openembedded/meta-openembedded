@@ -1,6 +1,5 @@
 SUMMARY = "IPython: Productive Interactive Computing"
 HOMEPAGE = "https://ipython.org"
-AUTHOR = "The IPython Development Team <ipython-dev@python.org>"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
 

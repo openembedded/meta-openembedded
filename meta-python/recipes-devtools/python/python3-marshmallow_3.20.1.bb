@@ -1,6 +1,5 @@
 SUMMARY = "Simplified object serialization in python"
 DESCRIPTION = "Marshmallow is an ORM/ODM/framework-agnostic library for converting complex datatypes, such as objects, to and from native Python datatypes."
-AUTHOR = "Marius Kriegerowski <mk@quakesaver.net>"
 HOMEPAGE = "https://github.com/marshmallow-code/marshmallow"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "\
