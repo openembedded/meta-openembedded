@@ -11,16 +11,19 @@ inherit pypi setuptools3
 
 RDEPENDS:${PN}:class-target += "\
     ${PYTHON_PN}-aenum \
-    ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-codecs \
     ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-fcntl \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-netserver \
-    ${PYTHON_PN}-sqlite3 \
-    ${PYTHON_PN}-wrapt \
+    ${PYTHON_PN}-packaging \
     ${PYTHON_PN}-pkg-resources \
+    ${PYTHON_PN}-setuptools \
+    ${PYTHON_PN}-sqlite3 \
+    ${PYTHON_PN}-typing-extensions \
+    ${PYTHON_PN}-wrapt \
 "
 
 BBCLASSEXTEND = "native nativesdk"
