@@ -36,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "83e03381e271f1a5619188e7aea9d85d9b7e12f5be2a28ceb78d7249ed22b7f1"
+SRC_URI[sha256sum] = "576f1a03c455e491a8d132b587eb6b3b84651fc8974bb3638433dd44d22c8f49"
 
 S = "${WORKDIR}/node-v${PV}"
 
