@@ -7,6 +7,6 @@ PYPI_PACKAGE = "mypy_extensions"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"
+SRC_URI[sha256sum] = "75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"
 
 BBCLASSEXTEND = "native"
