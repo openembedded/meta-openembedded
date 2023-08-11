@@ -14,6 +14,8 @@ include src_uri.inc
 
 SRCREV_mc = "01b87ecc02ffad47dfe13c2154ac31db3e3115df"
 
+SRCREV_FORMAT .= "_mc"
+
 GO_IMPORT = "import"
 
 LICENSE = "AGPL-3.0-only"
