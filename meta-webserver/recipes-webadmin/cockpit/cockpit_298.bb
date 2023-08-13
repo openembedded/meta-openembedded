@@ -9,7 +9,7 @@ SRC_URI += " \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "3f8e369b21dbe9f5e05ac6ffd8c7a58ad5759065bea29b3b14c937a17f030eb5"
+SRC_URI[sha256sum] = "c7da91824f7a72c82c1a3aaff1a57dbe0ce1e29e05e95d92b5118a324a3f4b39"
 
 inherit gettext pkgconfig autotools systemd features_check
 
