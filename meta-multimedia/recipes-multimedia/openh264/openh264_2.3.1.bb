@@ -45,7 +45,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake install DESTDIR=${D} PREFIX=${prefix}
+    oe_runmake install DESTDIR=${D} PREFIX=${prefix} LIBDIR_NAME=${baselib} SHAREDLIB_DIR=${libdir}
 }
 
 CLEANBROKEN = "1"
