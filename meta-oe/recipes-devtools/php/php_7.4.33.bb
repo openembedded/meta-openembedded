@@ -30,6 +30,8 @@ SRC_URI_append_class-target = " \
             file://phar-makefile.patch \
             file://0001-opcache-config.m4-enable-opcache.patch \
             file://xfail_two_bug_tests.patch \
+            file://CVE-2023-3247-1.patch \
+            file://CVE-2023-3247-2.patch \
           "
 
 S = "${WORKDIR}/php-${PV}"
