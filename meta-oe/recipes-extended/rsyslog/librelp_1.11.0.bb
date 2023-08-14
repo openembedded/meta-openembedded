@@ -8,10 +8,67 @@ DEPENDS = "gmp nettle libidn zlib gnutls openssl"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
            file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
+           file://run-ptest \
 "
 
 SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig ptest
+
+# For ptests, copy source tests/*.sh scripts, Makefile and 
+# executables and run them with make on target.
+TESTDIR = "tests"
+do_compile_ptest() {
+    echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
+    oe_runmake -C ${TESTDIR} buildtest-TESTS
+}
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/${TESTDIR}
+
+    # copy source tests/*.sh and python scripts
+    cp -f ${S}/${TESTDIR}/*.{sh,py} ${D}${PTEST_PATH}/${TESTDIR}
+    # install data files needed by the test scripts on the target
+    cp -f ${S}/${TESTDIR}/*.supp ${D}${PTEST_PATH}/${TESTDIR}
+    cp -rf ${S}/${TESTDIR}/tls-certs ${D}${PTEST_PATH}/${TESTDIR}
+
+    # copy executables
+    find ${B}/${TESTDIR} -type f -executable -exec cp {} ${D}${PTEST_PATH}/${TESTDIR} \;
+    cp -rf ${B}/${TESTDIR}/.libs ${D}${PTEST_PATH}/${TESTDIR}
+    # copy Makefile
+    # run-ptest will run make which runs the executables
+    cp -f ${B}/${TESTDIR}/Makefile ${D}${PTEST_PATH}/${TESTDIR}
+    cp -f ${B}/${TESTDIR}/set-envvars ${D}${PTEST_PATH}/${TESTDIR}
+
+    # give permissions to all users
+    # some tests need to write to this directory
+    chmod 777 -R ${D}${PTEST_PATH}/${TESTDIR}
+
+    # do NOT need to rebuild Makefile or $(check_PROGRAMS)
+    sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+    sed -i 's/^check-TESTS:.*$/check-TESTS:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # fix the srcdir, top_srcdir, abs_top_builddir
+    sed -i 's,^\(srcdir = \).*,\1${PTEST_PATH}/${TESTDIR},' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+    sed -i 's,^\(top_srcdir = \).*,\1${PTEST_PATH}/${TESTDIR},' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+    sed -i 's,^\(abs_top_builddir = \).*,\1${PTEST_PATH}/,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # install test-driver
+    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}
+
+    # fix the python3 path for tests/set-envar
+    sed -i -e s:${HOSTTOOLS_DIR}:${bindir}:g ${D}${PTEST_PATH}/${TESTDIR}/set-envvars
+
+    # these 2 scripts need help finding their /usr/lib/librelp/ptest/tests/.libs libraries
+    sed -i 's:${B}/src:${PTEST_PATH}/${TESTDIR}:' ${D}${PTEST_PATH}/${TESTDIR}/send
+    sed -i 's:${B}/src:${PTEST_PATH}/${TESTDIR}:' ${D}${PTEST_PATH}/${TESTDIR}/receive
+}
+
+RDEPENDS:${PN}-ptest += "\
+  make bash coreutils libgcc util-linux gawk grep \
+  python3-core python3-io \
+"
+
+RRECOMMENDS:${PN}-ptest += " valgrind"
