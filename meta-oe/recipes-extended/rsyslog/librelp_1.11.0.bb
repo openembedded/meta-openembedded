@@ -8,6 +8,7 @@ DEPENDS = "gmp nettle libidn zlib gnutls openssl"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
            file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
+           file://0001-tests-Fix-callback-prototype.patch \
            file://run-ptest \
 "
 
