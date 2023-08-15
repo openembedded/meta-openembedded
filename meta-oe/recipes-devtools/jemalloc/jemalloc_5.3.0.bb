@@ -16,10 +16,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ea061f8731d5e6a5761dfad951ef5f5f"
 SRC_URI = "git://github.com/jemalloc/jemalloc.git;branch=master;protocol=https \
            file://run-ptest \
            "
-
-# Workaround for https://github.com/llvm/llvm-project/issues/52765
-SRC_URI:append:libc-glibc:toolchain-clang = " file://0001-test-Disable-optimization-with-clang-for-aligned_all.patch "
-
 SRCREV = "54eaed1d8b56b1aa528be3bdd1877e59c56fa90c"
 
 S = "${WORKDIR}/git"
