@@ -5,11 +5,11 @@ extracting, and recreating UEFI firmware volumes. This includes parsing \
 modules for BIOS, OptionROM, Intel ME and other formats too."
 HOMEPAGE = "https://github.com/theopolis/uefi-firmware-parser"
 LICENSE = "BSD-2-Clause & BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://setup.py;md5=90fa5bae1547550f1c1993f651eda955"
+LIC_FILES_CHKSUM = "file://setup.py;md5=5a59066a8676f17262ef7e691f8ef253"
 
 SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master"
 
-SRCREV = "dfb15b068960b771e2e1536d34790dac9b5bfe32"
+SRCREV = "f289219b99eb525cbc58e4dc2b07df3811f92ef7"
 
 S = "${WORKDIR}/git"
 
