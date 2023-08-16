@@ -39,7 +39,7 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
 SRC_URI:append:libc-musl = " \
     file://0001-Fix-compilation-with-musl.patch \
 "
-SRC_URI[sha256sum] = "9d0da889a865f089a5a21610ffb6713e3c9438ce303a63b49c2fb6eaff5b8804"
+SRC_URI[sha256sum] = "eafb07e6daf92b142200f478856dfed6efc9ea2d146eeded5edcb09b93127088"
 
 DEPENDS = "pps-tools"
 
