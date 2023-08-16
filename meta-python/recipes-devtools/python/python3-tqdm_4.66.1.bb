@@ -3,9 +3,9 @@ HOMEPAGE = "http://tqdm.github.io/"
 SECTION = "devel/python"
 
 LICENSE = "MIT & MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=cfdbc9dcca7dc9fb600347958b7d5c4f"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=bb3c087935ebba37cad180364cb0850c"
 
-SRC_URI[sha256sum] = "1871fb68a86b8fb3b59ca4cdd3dcccbc7e6d613eeed31f4c332531977b89beb5"
+SRC_URI[sha256sum] = "d88e651f9db8d8551a62556d3cff9e3034274ca5d66e93197cf2490e2dcb69c7"
 
 inherit pypi python_setuptools_build_meta
 
