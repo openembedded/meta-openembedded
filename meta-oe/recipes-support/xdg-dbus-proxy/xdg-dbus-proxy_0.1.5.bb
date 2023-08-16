@@ -14,6 +14,6 @@ inherit meson pkgconfig
 SRC_URI = "git://github.com/flatpak/xdg-dbus-proxy.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
-SRCREV = "6bfe8c32ab23f8c1d80af7a70b3d318a79a17652"
+SRCREV = "7466c8137fc06f863fde8486521984e43a26cd10"
 
 BBCLASSEXTEND = "native"
