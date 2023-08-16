@@ -32,7 +32,7 @@ SRC_URI = " \
     file://enable-iwd.conf \
 "
 
-SRC_URI[sha256sum] = "0337e7583d2ec5ade2ba2e8c625d2f09eeccda1d22836ee29aa72925d399c353"
+SRC_URI[sha256sum] = "edca09637d182f806b3b12d8c5623d7badbd73ccca1ae63be20d2f298779fb9f"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
