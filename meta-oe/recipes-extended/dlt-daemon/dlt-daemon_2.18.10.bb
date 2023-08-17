@@ -17,11 +17,8 @@ DEPENDS = "zlib gzip-native json-c"
 SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
            file://0004-Modify-systemd-config-directory.patch \
-           file://481.patch \
-           file://482.patch \
-           file://504.patch \
            "
-SRCREV = "9a2312d3512a27620d41b9a325338b6e7b3d42de"
+SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
 
 S = "${WORKDIR}/git"
 
@@ -49,7 +46,7 @@ PACKAGECONFIG[dlt-console] = "-DWITH_DLT_CONSOLE=ON,-DWITH_DLT_CONSOLE=OFF,,dlt-
 
 inherit autotools gettext cmake pkgconfig systemd
 
-EXTRA_OECMAKE += "-DWITH_EXTENDED_FILTERING=ON -DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
+EXTRA_OECMAKE += "-DWITH_DLT_LOGSTORAGE_GZIP=ON -DWITH_EXTENDED_FILTERING=ON -DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
 
 PACKAGES += "${PN}-systemd"
 SYSTEMD_PACKAGES = "${PN} ${PN}-systemd"
