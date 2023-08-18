@@ -4,11 +4,12 @@ HOMEPAGE = "https://github.com/rsyslog/librelp"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
 
-DEPENDS = "gmp nettle libidn zlib gnutls openssl"
+DEPENDS = "gmp libidn zlib"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
            file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
            file://0001-tests-Fix-callback-prototype.patch \
+           file://0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch \
            file://run-ptest \
 "
 
@@ -17,6 +18,15 @@ SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig ptest
+
+PACKAGECONFIG ?= "tls-openssl valgrind"
+# Valgrind is not available for RISCV yet
+PACKAGECONFIG:remove:riscv64 = "valgrind"
+PACKAGECONFIG:remove:riscv32 = "valgrind"
+
+PACKAGECONFIG[tls] = "--enable-tls,--disable-tls,gnutls nettle"
+PACKAGECONFIG[tls-openssl] = "--enable-tls-openssl,--disable-tls-openssl,openssl"
+PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,"
 
 # For ptests, copy source tests/*.sh scripts, Makefile and 
 # executables and run them with make on target.
@@ -71,5 +81,5 @@ RDEPENDS:${PN}-ptest += "\
   make bash coreutils libgcc util-linux gawk grep \
   python3-core python3-io \
 "
+RRECOMMENDS:${PN}-ptest += "${@bb.utils.filter('PACKAGECONFIG', 'valgrind', d)}"
 
-RRECOMMENDS:${PN}-ptest += " valgrind"
