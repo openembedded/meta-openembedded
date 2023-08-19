@@ -41,7 +41,7 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/${TESTDIR}
 
     # copy source tests/*.sh and python scripts
-    cp -f ${S}/${TESTDIR}/*.{sh,py} ${D}${PTEST_PATH}/${TESTDIR}
+    cp -f ${S}/${TESTDIR}/*.sh ${S}/${TESTDIR}/*.py ${D}${PTEST_PATH}/${TESTDIR}
     # install data files needed by the test scripts on the target
     cp -f ${S}/${TESTDIR}/*.supp ${D}${PTEST_PATH}/${TESTDIR}
     cp -rf ${S}/${TESTDIR}/tls-certs ${D}${PTEST_PATH}/${TESTDIR}
