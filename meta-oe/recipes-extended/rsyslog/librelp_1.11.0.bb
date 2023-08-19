@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
            file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
            file://0001-tests-Fix-callback-prototype.patch \
            file://0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch \
+           file://0001-tests-Include-missing-sys-time.h.patch \
            file://run-ptest \
 "
 
