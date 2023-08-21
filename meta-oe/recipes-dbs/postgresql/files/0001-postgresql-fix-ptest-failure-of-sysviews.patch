@@ -1,4 +1,4 @@
-From 9f81377dddfe32d950844d7053020a36b40fce08 Mon Sep 17 00:00:00 2001
+From 5a17b7b88776cbbe5b37838baff71726b8a6e7dd Mon Sep 17 00:00:00 2001
 From: Manoj Saun <manojsingh.saun@windriver.com>
 Date: Wed, 22 Mar 2023 08:07:26 +0000
 Subject: [PATCH] postgresql: fix ptest failure of sysviews
@@ -13,14 +13,17 @@ to make the test output shown as pass.
 Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
+
 ---
  src/test/regress/expected/sysviews.out | 2 +-
  src/test/regress/sql/sysviews.sql      | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
+index 2088857..96a15cc 100644
 --- a/src/test/regress/expected/sysviews.out
 +++ b/src/test/regress/expected/sysviews.out
-@@ -29,7 +29,7 @@ select name, ident, parent, level, total
+@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
  (1 row)
  
  -- At introduction, pg_config had 23 entries; it may grow
@@ -29,9 +32,11 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
   ok 
  ----
   t
+diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
+index b24816e..72ff887 100644
 --- a/src/test/regress/sql/sysviews.sql
 +++ b/src/test/regress/sql/sysviews.sql
-@@ -18,7 +18,7 @@ select name, ident, parent, level, total
+@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
    from pg_backend_memory_contexts where level = 0;
  
  -- At introduction, pg_config had 23 entries; it may grow

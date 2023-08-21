@@ -1,4 +1,4 @@
-From 56b830edecff1cac5f8a8a956e7a7eeef2aa7c17 Mon Sep 17 00:00:00 2001
+From 09fad1883f3312965a8d066f8477166eaa4db2c7 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Tue, 27 Nov 2018 13:25:15 +0800
 Subject: [PATCH] not check libperl under cross compiling
@@ -15,15 +15,16 @@ Signed-off-by: Roy Li <rongqing.li@windriver.com>
 
 update patch to version 11.1
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+
 ---
  configure.ac | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index fba79ee..7170f26 100644
+index 159f2a2..d0f0b14 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2261,7 +2261,7 @@ Use --without-tcl to disable building PL/Tcl.])
+@@ -2332,7 +2332,7 @@ Use --without-tcl to disable building PL/Tcl.])
  fi
  
  # check for <perl.h>
@@ -32,6 +33,3 @@ index fba79ee..7170f26 100644
    ac_save_CPPFLAGS=$CPPFLAGS
    CPPFLAGS="$CPPFLAGS $perl_includespec"
    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
--- 
-2.34.1
-
