@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f969127d7b7ed0a8a63c2bbeae002588"
 
 CVE_PRODUCT = "json-for-modern-cpp"
 
-SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1;protocol=https \
+SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
            "
 
 SRCREV = "4f8fba14066156b73f1189a2b8bd568bde5284c5"
