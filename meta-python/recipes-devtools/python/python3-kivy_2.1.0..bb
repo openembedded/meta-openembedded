@@ -43,7 +43,9 @@ export KIVY_GRAPHICS
 KIVY_CROSS_SYSROOT="${RECIPE_SYSROOT}"
 export KIVY_CROSS_SYSROOT
 
-REQUIRED_DISTRO_FEATURES += "x11 opengl"
+REQUIRED_DISTRO_FEATURES += "opengl gobject-introspection-data"
+
+ANY_OF_DISTRO_FEATURES = "x11 wayland"
 
 DEPENDS += " \
     gstreamer1.0 \
