@@ -10,12 +10,11 @@ LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-examples-test-Remove-unused-linux-errqueue.h.patch"
+           file://0001-Fixes-build-failure-on-.-configure-make-shuffle-2836.patch"
 SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
 SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
-SRCREV = "f5cac78e621ab452d3035902085f66d2bf73243b"
+SRCREV = "298c083d75ecde5a8833366167b3b6abff0c8d39"
 
-PV .= "+2.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 DEPENDS:append:libc-musl = " libucontext"
