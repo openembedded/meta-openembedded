@@ -9,7 +9,7 @@ DEPENDS = "libmnl libnftnl bison-native \
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "c12ac941fff9adaedf17367d5ce213789b98a0d314277bc22b3d71e10891f412"
+SRC_URI[sha256sum] = "9373740de41a82dbc98818e0a46a073faeb8a8d0689fa4fa1a74399c32bf3d50"
 
 inherit autotools manpages pkgconfig ptest
 
