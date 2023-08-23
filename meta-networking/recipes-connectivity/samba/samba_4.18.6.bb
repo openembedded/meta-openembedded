@@ -32,7 +32,7 @@ SRC_URI:append:libc-musl = " \
            file://cmocka-uintptr_t.patch \
            "
 
-SRC_URI[sha256sum] = "095256ac332e1d9fbf9b7ff7823f92a3233d3ed658ce7fc9b33905c2243f447f"
+SRC_URI[sha256sum] = "284c8a994ce989c87cd6808c390fcb9d00c36b21a0dc1a8a75474b67c9e715e7"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.18(\.\d+)+).tar.gz"
 
