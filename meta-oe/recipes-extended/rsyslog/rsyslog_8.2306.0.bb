@@ -47,7 +47,7 @@ EXTRA_OECONF:remove:riscv32 = "ap_cv_atomic_builtins=yes"
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
     rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
-    fmhttp imdiag gnutls imfile \
+    fmhttp imdiag openssl imfile \
     ${@bb.utils.filter('DISTRO_FEATURES', 'snmp systemd', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
 "
@@ -70,6 +70,7 @@ PACKAGECONFIG[imdiag] = "--enable-imdiag,--disable-imdiag,,"
 PACKAGECONFIG[imfile] = "--enable-imfile,--disable-imfile,,"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
 PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
+PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
 PACKAGECONFIG[imjournal] = "--enable-imjournal,--disable-imjournal,"
 PACKAGECONFIG[mmjsonparse] = "--enable-mmjsonparse,--disable-mmjsonparse,"
