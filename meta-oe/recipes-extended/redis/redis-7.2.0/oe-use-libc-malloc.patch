@@ -1,4 +1,4 @@
-From 88da6b19ecd00747769663e913aba5e9569c489d Mon Sep 17 00:00:00 2001
+From 38a5f403b033d03cdac3ff814687d83f61527d8e Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Wed, 6 Feb 2013 20:51:02 -0600
 Subject: [PATCH] hack to force use of libc malloc
@@ -15,13 +15,11 @@ Update to work with 4.0.8
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
 ---
-Upstream-Status: Pending
-
  src/Makefile | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/src/Makefile b/src/Makefile
-index 2a0d74d..ddabd44 100644
+index ecbd275..39decee 100644
 --- a/src/Makefile
 +++ b/src/Makefile
 @@ -13,7 +13,8 @@
@@ -32,5 +30,5 @@ index 2a0d74d..ddabd44 100644
 +# use fake uname option to force use of generic libc
 +uname_S := "USE_LIBC_MALLOC"
  uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
- OPTIMIZATION?=-O2
- DEPENDENCY_TARGETS=hiredis linenoise lua hdr_histogram
+ CLANG := $(findstring clang,$(shell sh -c '$(CC) --version | head -1'))
+ OPTIMIZATION?=-O3
