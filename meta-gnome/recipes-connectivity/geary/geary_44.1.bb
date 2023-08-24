@@ -39,7 +39,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "b72db2a5e87f2269e6359af434a4fc02fca9e9df"
+SRCREV = "37c378a563d5b1c269d57c34671edc940d1cd180"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
