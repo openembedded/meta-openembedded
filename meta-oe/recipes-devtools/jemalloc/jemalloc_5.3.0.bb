@@ -25,6 +25,9 @@ inherit autotools ptest
 EXTRA_AUTORECONF += "--exclude=autoheader"
 
 EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
+# For some reason VERSION file populated only in tarball distribution.
+# Adding jemalloc version since this recipe is using source code from git tag
+EXTRA_OECONF:append = " --with-version=${PV}-0-g${SRCREV}"
 
 do_install:append() {
 	sed -i -e 's@${STAGING_DIR_HOST}@@g' \
