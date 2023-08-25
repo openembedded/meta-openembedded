@@ -21,7 +21,7 @@ RDEPENDS:${PN} += "\
 "
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
-SRC_URI[sha256sum] = "4cf83737a72b0970948b494bc9ddab7f725420a0ca0152d25c7e48ef8fa2b6a1"
+SRC_URI[sha256sum] = "904ef28765440a97d8a9a0df597f8c3d7f3cb0a053d1b082c10bed03bc802069"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
@@ -33,7 +33,7 @@ do_install:append () {
     cp ${S}/Changes ${D}${docdir}/${PN}/
     cp ${S}/README ${D}${docdir}/${PN}/
     cp -pRP ${S}/docs ${D}${docdir}/${PN}/
-    cp -pRP ${S}/certs ${D}${docdir}/${PN}/
+    cp -pRP ${S}/t/certs ${D}${docdir}/${PN}/
     cp -pRP ${S}/example ${D}${docdir}/${PN}/
 }
 
@@ -50,7 +50,7 @@ RDEPENDS:${PN}-ptest += "\
 "
 
 do_install_ptest:append () {
-    cp -r ${B}/certs ${D}${PTEST_PATH}
+    cp -r ${B}/t/certs ${D}${PTEST_PATH}
 }
 
 BBCLASSEXTEND = "native"
