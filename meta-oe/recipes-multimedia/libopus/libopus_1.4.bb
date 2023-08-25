@@ -52,3 +52,5 @@ python () {
 ARM_INSTRUCTION_SET:armv5 = "arm"
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_PRODUCT += "opus-codec:opus"
