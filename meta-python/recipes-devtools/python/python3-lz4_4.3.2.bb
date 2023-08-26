@@ -15,7 +15,14 @@ SRC_URI[sha256sum] = "e1431d84a9cfb23e6773e72078ce8e65cad6745816d4cbf9ae67da5ea4
 
 inherit pkgconfig pypi python_setuptools_build_meta ptest
 
-RDEPENDS:${PN}-ptest += "python3-pytest python3-multiprocessing python3-psutil"
+RDEPENDS:${PN}-ptest += "\
+    python3-coverage \
+    python3-pytest \
+    python3-pytest-cov \
+    python3-pytest-runner \
+    python3-multiprocessing \
+    python3-psutil \
+"
 
 do_install_ptest() {
     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
