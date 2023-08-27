@@ -11,6 +11,8 @@ SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;protocol=https 
 
 S = "${WORKDIR}/git"
 
+CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+
 do_configure[noexec] = "1"
 do_compile () {
     oe_runmake
