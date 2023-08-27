@@ -29,6 +29,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
 
 SRC_URI:append:libc-musl = " \
     file://0001-Include-sys-time-h.patch \
+    file://disable-omfile-outchannel.patch \
 "
 
 SRC_URI[sha256sum] = "f6283efaadc609540a56e6bec88a362c966e77f29fe48e6b734bd6c1123e0be5"
