@@ -35,6 +35,8 @@ EXTRA_OECMAKE = " \
     -DWITH_OPENSSL=ON \
     -DWITH_QT5=OFF \
     -DWITH_ZLIB=ON \
+    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
+    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
 "
 
 PACKAGECONFIG ??= "glib libevent"
@@ -46,6 +48,10 @@ PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python"
 
 do_install:append () {
     ln -sf thrift ${D}/${bindir}/thrift-compiler
+    # remove absolute paths
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/thrift/thriftnbTargets.cmake
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/thrift/thrift_c_glibTargets.cmake
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/thrift/thrift_c_glib_zlibTargets.cmake
 }
 
 LEAD_SONAME = "libthrift.so.${PV}"
