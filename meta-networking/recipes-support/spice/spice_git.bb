@@ -25,7 +25,7 @@ CVE_STATUS[CVE-2018-10893] = "fixed-version: patched already, caused by inaccura
 
 inherit meson gettext python3native python3-dir pkgconfig
 
-DEPENDS = "spice-protocol jpeg pixman alsa-lib glib-2.0 gdk-pixbuf lz4 python3-pyparsing-native python3-six-native glib-2.0-native zlib"
+DEPENDS = "spice-protocol jpeg pixman alsa-lib glib-2.0 gdk-pixbuf lz4 orc python3-pyparsing-native python3-six-native glib-2.0-native zlib"
 DEPENDS:append:class-nativesdk = " nativesdk-openssl"
 
 export PYTHON="${STAGING_BINDIR_NATIVE}/python3-native/python3"
