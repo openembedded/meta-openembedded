@@ -17,7 +17,9 @@ PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi"
 
 inherit pkgconfig gnomebase gettext gtk-doc
 
+EXTRA_OEMESON += "-Dsystemdsystemunitdir=${systemd_system_unitdir}"
+
 SRC_URI = "https://download.gnome.org/sources/phodav/3.0/phodav-${PV}.tar.xz;name=archive"
 SRC_URI[archive.sha256sum] = "392ec2d06d50300dcff1ef269a2a985304e29bce3520002fca29f2edc1d138d1"
 
-FILES:${PN} += "${libdir}"
+FILES:${PN} += "${libdir} ${systemd_system_unitdir}"
