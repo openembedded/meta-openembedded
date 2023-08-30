@@ -6,6 +6,7 @@ SRC_URI = "git://github.com/pboettch/json-schema-validator;branch=main;protocol=
            file://0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch \
            file://0002-Fix-assumed-signed-char.patch \
            file://0003-For-root-value-use-empty-pointer.patch \
+           file://0004-cmake-Use-GNUInstallDirs.patch \
            "
 
 SRCREV = "6b17782d6a5d1dee5d2c4fc5d25ffb1123913431"
