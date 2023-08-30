@@ -10,11 +10,11 @@ SRC_URI = "git://gitlab.freedesktop.org/spice/linux/vd_agent.git;protocol=https;
 S = "${WORKDIR}/git"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-REQUIRED_DISTRO_FEATURES = "opengl"
+REQUIRED_DISTRO_FEATURES = "opengl x11"
 
 inherit autotools pkgconfig features_check
 
-DEPENDS = "glib-2.0 alsa-lib gtk4 dbus libdrm spice-protocol"
+DEPENDS = "glib-2.0 alsa-lib gtk4 dbus libdrm spice-protocol libxfixes xrandr xinerama libx11"
 
 EXTRA_OECONF = " \
 	--with-gtk4 \
