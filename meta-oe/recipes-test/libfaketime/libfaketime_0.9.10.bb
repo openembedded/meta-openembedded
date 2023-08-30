@@ -24,10 +24,5 @@ do_install () {
     install -m 0755 src/faketime ${D}${bindir}
 }
 
-PACKAGES =+ "lib${PN}"
-
-FILES:${PN} = "${bindir}/faketime"
-FILES:lib${PN} = "${libdir}/faketime/*"
-
-INSANE_SKIP:${PN} += "dev-so"
-INSANE_SKIP:lib${PN} += "dev-so"
+FILES:${PN} = "${bindir}/faketime ${libdir}/faketime/lib*${SOLIBS}"
+FILES:${PN}-dev += "${libdir}/faketime/lib*${SOLIBSDEV}"
