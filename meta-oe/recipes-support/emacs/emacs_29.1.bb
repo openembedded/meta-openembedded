@@ -5,11 +5,13 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
-           file://0001-largefile.m4-Update-from-latest-gnulib.patch \
           "
-SRC_URI:append:class-target = " file://usemake-docfile-native.patch"
+SRC_URI:append:class-target = " \
+    file://use-emacs-native-tools-for-cross-compiling.patch \
+    file://avoid-running-host-binaries-for-sanity.patch \
+"
 
-SRC_URI[sha256sum] = "ee21182233ef3232dc97b486af2d86e14042dbb65bbc535df562c3a858232488"
+SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
 
 CVE_STATUS[CVE-2007-6109] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 
@@ -32,23 +34,41 @@ DEPENDS:append:class-target = " emacs-native"
 
 inherit autotools mime-xdg pkgconfig
 
+
+# Create the required native tools for the target build
+do_compile:class-native (){
+    cd ${B}/lib-src
+    oe_runmake make-docfile
+    oe_runmake make-fingerprint
+    cd ${B}/src
+    oe_runmake bootstrap-emacs
+}
+
+do_install:class-native(){
+    install -d ${D}${bindir}
+    install -m 755 ${B}/lib-src/make-docfile ${D}/${bindir}/
+    install -m 755 ${B}/lib-src/make-fingerprint ${D}/${bindir}/
+    install -m 755 ${B}/src/bootstrap-emacs ${D}/${bindir}/
+}
+
+do_compile:prepend:class-target () {
+   # export EMACS env variables for the native tools to use to allow calling bootstrap-emacs
+    export EMACSLOADPATH=${S}/lisp
+    export EMACSDATA=${S}/etc
+}
+
+
+do_install:prepend:class-target(){
+    # export EMACS env variables for the native tools to use to allow calling bootstrap-emacs
+    export EMACSLOADPATH=${S}/lisp
+    export EMACSDATA=${S}/etc
+}
+
 # Remove build host references to avoid target pollution
 do_compile:prepend () {
     sed -i -e 's|${TMPDIR}||g' ${B}/src/config.h
     sed -i -e 's|${B}||g' ${B}/src/epaths.h
 }
-
-do_compile:class-native (){
-    cd ${B}/lib-src
-    oe_runmake make-docfile
-    oe_runmake make-fingerprint
-}
-do_install:class-native(){
-    install -d ${D}${bindir}
-    install -m 755 ${B}/lib-src/make-docfile ${D}/${bindir}/
-    install -m 755 ${B}/lib-src/make-fingerprint ${D}/${bindir}/
-}
-
 
 do_install:append(){
     # Delete systemd stuff, extend using DISTRO_FEATURES?
@@ -96,18 +116,28 @@ FILES:${PN}-minimal = " \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/bytecomp.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cconv.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-generic.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-lib.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-macs.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-preloaded.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/cl-seq.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/debug-early.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/easy-mmode.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/easymenu.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/eldoc.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/float-sup.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/gv.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/inline.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/lisp-mode.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/lisp.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/macroexp.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/map-ynp.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/map.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/nadvice.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/oclosure.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/pcase.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/regexp-opt.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/rmc.elc \
+    ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/rx.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/seq.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/shorthands.elc \
     ${datadir}/${BPN}/${PV}/lisp/emacs-lisp/subr-x.elc \
@@ -141,6 +171,8 @@ FILES:${PN}-minimal = " \
     ${datadir}/${BPN}/${PV}/lisp/isearch.elc \
     ${datadir}/${BPN}/${PV}/lisp/jit-lock.elc \
     ${datadir}/${BPN}/${PV}/lisp/jka-cmpr-hook.elc \
+    ${datadir}/${BPN}/${PV}/lisp/jka-compr.elc \
+    ${datadir}/${BPN}/${PV}/lisp/keymap.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/burmese.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/cham.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/chinese.elc \
@@ -153,11 +185,13 @@ FILES:${PN}-minimal = " \
     ${datadir}/${BPN}/${PV}/lisp/language/greek.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/hebrew.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/indian.elc \
+    ${datadir}/${BPN}/${PV}/lisp/language/indonesian.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/japanese.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/khmer.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/korean.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/lao.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/misc-lang.elc \
+    ${datadir}/${BPN}/${PV}/lisp/language/philippine.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/romanian.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/sinhala.elc \
     ${datadir}/${BPN}/${PV}/lisp/language/slovak.elc \
@@ -182,7 +216,6 @@ FILES:${PN}-minimal = " \
     ${datadir}/${BPN}/${PV}/lisp/rfn-eshadow.elc \
     ${datadir}/${BPN}/${PV}/lisp/select.elc \
     ${datadir}/${BPN}/${PV}/lisp/simple.elc \
-    ${datadir}/${BPN}/${PV}/lisp/simple.elc \
     ${datadir}/${BPN}/${PV}/lisp/startup.elc \
     ${datadir}/${BPN}/${PV}/lisp/subr.elc \
     ${datadir}/${BPN}/${PV}/lisp/tab-bar.elc \
@@ -192,6 +225,7 @@ FILES:${PN}-minimal = " \
     ${datadir}/${BPN}/${PV}/lisp/textmodes/page.elc \
     ${datadir}/${BPN}/${PV}/lisp/textmodes/paragraphs.elc \
     ${datadir}/${BPN}/${PV}/lisp/textmodes/text-mode.elc \
+    ${datadir}/${BPN}/${PV}/lisp/thingatpt.elc \
     ${datadir}/${BPN}/${PV}/lisp/tooltip.elc \
     ${datadir}/${BPN}/${PV}/lisp/uniquify.elc \
     ${datadir}/${BPN}/${PV}/lisp/vc/ediff-hook.elc \
