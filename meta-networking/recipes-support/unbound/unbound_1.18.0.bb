@@ -9,10 +9,8 @@ SECTION = "net"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 
-SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
-	file://0001-contrib-add-yocto-compatible-init-script.patch \
-"
-SRCREV = "90831af981221bbce1cd7b15055562336760e484"
+SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master"
+SRCREV = "3795e374107ac7a5a977c516e144a3cd9b0da998"
 
 inherit autotools pkgconfig systemd update-rc.d
 
@@ -39,7 +37,7 @@ do_install:append() {
 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
 
 	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${S}/contrib/unbound.init ${D}${sysconfdir}/init.d/unbound
+	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
 }
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
