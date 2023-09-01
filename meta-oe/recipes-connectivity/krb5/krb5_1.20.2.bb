@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d31018dba5a0ef195eb426a1e61f02e"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=3c7414a99de5452b8f809ae2753b0855"
 
 inherit autotools-brokensep binconfig perlnative systemd update-rc.d pkgconfig
 
@@ -22,7 +22,6 @@ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
            file://crosscompile_nm.patch \
-           file://0001-Fix-aclocal.m4-syntax-error-for-autoconf-2.72.patch;striplevel=2 \
            file://etc/init.d/krb5-kdc \
            file://etc/init.d/krb5-admin-server \
            file://etc/default/krb5-kdc \
@@ -30,8 +29,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
 "
-SRC_URI[md5sum] = "73f5780e7b587ccd8b8cfc10c965a686"
-SRC_URI[sha256sum] = "704aed49b19eb5a7178b34b2873620ec299db08752d6a8574f95d41879ab8851"
+SRC_URI[md5sum] = "7ac456e97c4959ebe5c836dc2f5aab2c"
+SRC_URI[sha256sum] = "7d8d687d42aed350c2525cb69a4fc3aa791694da6761dccc1c42c2ee7796b5dd"
 
 CVE_PRODUCT = "kerberos"
 CVE_VERSION = "5-${PV}"
