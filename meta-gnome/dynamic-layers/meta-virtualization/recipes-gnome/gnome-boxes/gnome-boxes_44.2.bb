@@ -10,7 +10,6 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 DEPENDS = " \
   glib-2.0 \
   desktop-file-utils-native \
-  ovmf \
   libarchive \
   libgudev \
   libhandy \
@@ -27,7 +26,7 @@ DEPENDS = " \
   yelp-tools \
 "
 
-RDEPENDS:${PN} = "glib-2.0-dev libvirt-virsh qemu-common qemu-system-x86-64"
+RDEPENDS:${PN} = "glib-2.0-dev libvirt-virsh qemu-common qemu-system-x86-64 genisoimage"
 
 inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
 
