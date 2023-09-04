@@ -33,7 +33,7 @@ RDEPENDS:${PN} = "gnome-keyring"
 inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
 
 SRC_URI = " \
-	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
+	git://github.com/GNOME/geary.git;branch=main;protocol=https \
         file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
         file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
 "
