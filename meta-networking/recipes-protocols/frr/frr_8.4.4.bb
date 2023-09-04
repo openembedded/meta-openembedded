@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.4 \
            file://frr.pam \
            file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not-py.patch \
            file://CVE-2023-3748.patch \
+           file://CVE-2023-41358.patch \
+           file://CVE-2023-41360.patch \
            "
 
 SRCREV = "45e36c0c00a517ad1606135b18c5753e210cfc0d"
