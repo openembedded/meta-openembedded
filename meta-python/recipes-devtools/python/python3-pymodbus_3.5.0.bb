@@ -1,10 +1,10 @@
 SUMMARY = "A fully featured modbus protocol stack in python"
 HOMEPAGE = "https://github.com/riptideio/pymodbus/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=430604f78bee72425da231d42eac9cee"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6a146397c35e3d0953758ce8803de347"
 DEPENDS += "python3-six-native"
 
-SRC_URI[sha256sum] = "2a95a311669f6734f94535332984474e4b4815de1500c74e6b94432a8bd9820a"
+SRC_URI[sha256sum] = "4c6fb9af3a6c5a5cba59e4c62812d911f1d5c02dc3aedaaec858990574bc6b4c"
 S = "${WORKDIR}/pymodbus-${PV}"
 
 inherit pypi setuptools3
