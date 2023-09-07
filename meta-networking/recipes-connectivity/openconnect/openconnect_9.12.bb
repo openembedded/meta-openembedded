@@ -1,11 +1,11 @@
 SUMMARY = "Open client for Cisco AnyConnect VPN"
 LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=8c2e1ec1540fb3e0beb68361344cba7e"
+LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = " \
     git://git.infradead.org/users/dwmw2/openconnect.git;branch=master \
 "
-SRCREV = "5695cd6b0c7d42ca293ce0f00abcbe3d1ec4e609"
+SRCREV = "59f2e59eb3e436364ef82e630e5a2f88f32acd58"
 
 DEPENDS = "vpnc libxml2 krb5 gettext-native"
 RDEPENDS:${PN} = "bash python3-core vpnc-script"
