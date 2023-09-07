@@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "1873d3bfc2da771672bd8e7e8f41f57e0af77f33"
+SRCREV = "72718dd87e087215ce9155a826ee5a66cfbe9631"
 SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
 	file://0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch \
 	file://0002-aesce-use-correct-target-attribute-when-building-wit.patch \
