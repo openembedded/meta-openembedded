@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = " \
     git://git.infradead.org/users/dwmw2/openconnect.git;branch=master \
+    file://0001-Shim-for-renaming-of-GNUTLS_NO_EXTENSIONS-in-GnuTLS-.patch \
 "
 SRCREV = "59f2e59eb3e436364ef82e630e5a2f88f32acd58"
 
