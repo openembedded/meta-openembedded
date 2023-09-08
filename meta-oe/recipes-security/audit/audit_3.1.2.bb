@@ -8,15 +8,15 @@ LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
-           file://Fixed-swig-host-contamination-issue.patch \
-           file://0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch \
+           file://0001-Fixed-swig-host-contamination-issue.patch \
+           file://0002-Replace-__attribute_malloc__-with-__attribute__-__ma.patch \
            file://auditd \
            file://auditd.service \
            file://audit-volatile.conf \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "6e367585a899231da05797c6126f8bb01febb2f5"
+SRCREV = "572eb7d4fe926e7c1c52166d08e78af54877cbc5"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
