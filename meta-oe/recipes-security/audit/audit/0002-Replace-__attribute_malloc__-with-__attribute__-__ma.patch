@@ -1,8 +1,7 @@
-From 79c8d6a2755c9dfa00a5e86378e89a94eef0504d Mon Sep 17 00:00:00 2001
+From 679cb57fa93984fed345dd3890cdbcbaa24e8518 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Tue, 9 Aug 2022 23:57:03 -0700
-Subject: [PATCH] Replace __attribute_malloc__ with 
- __attribute__((__malloc__))
+Subject: [PATCH] Replace __attribute_malloc__ with __attribute__((__malloc__))
 
 __attribute_malloc__ is not available on musl
 
@@ -11,18 +10,18 @@ Fixes
 |         __attribute_malloc__ __attr_dealloc (auparse_destroy, 1);
 |         ^
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
 Upstream-Status: Pending
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
  auparse/auparse.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/auparse/auparse.h b/auparse/auparse.h
-index 95cf256d..c7dbe5ff 100644
+index 5cb7402e..39156eff 100644
 --- a/auparse/auparse.h
 +++ b/auparse/auparse.h
-@@ -51,7 +51,7 @@ typedef void (*auparse_callback_ptr)(auparse_state_t *au,
+@@ -54,7 +54,7 @@ typedef void (*auparse_callback_ptr)(auparse_state_t *au,
  void auparse_destroy(auparse_state_t *au);
  void auparse_destroy_ext(auparse_state_t *au, auparse_destroy_what_t what);
  auparse_state_t *auparse_init(ausource_t source, const void *b)
@@ -32,5 +31,5 @@ index 95cf256d..c7dbe5ff 100644
  	__attr_access ((__read_only__, 2, 3));
  int auparse_feed(auparse_state_t *au, const char *data, size_t data_len)
 -- 
-2.37.1
+2.25.1
 
