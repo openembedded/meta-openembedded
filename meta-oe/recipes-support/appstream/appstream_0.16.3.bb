@@ -25,7 +25,7 @@ GIR_MESON_OPTION = "gir"
 
 SRC_URI = "https://www.freedesktop.org/software/appstream/releases/AppStream-${PV}.tar.xz"
 SRC_URI:append:class-target = " file://0001-fix-crosscompile.patch"
-SRC_URI[sha256sum] = "f9cb80bd388fbf06be268afa7f2d65863c85d605ad874b905094f3982d03f232"
+SRC_URI[sha256sum] = "081c917646e94d7221c9e4aae54dacda95a27c607fa93cd8e6344a2b318b98b1"
 
 S = "${WORKDIR}/AppStream-${PV}"
 
