@@ -9,10 +9,10 @@ extending the existing aarch64 macro works.
  src/include/storage/s_lock.h | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
-index 3fe29ce..7cd578f 100644
---- a/src/include/storage/s_lock.h
-+++ b/src/include/storage/s_lock.h
+Index: postgresql-12.16/src/include/storage/s_lock.h
+===================================================================
+--- postgresql-12.16.orig/src/include/storage/s_lock.h
++++ postgresql-12.16/src/include/storage/s_lock.h
 @@ -317,11 +317,12 @@ tas(volatile slock_t *lock)
  
  /*
@@ -35,7 +35,4 @@ index 3fe29ce..7cd578f 100644
 +#endif	 /* __arm__ || __arm || __aarch64__ || __aarch64 || __riscv */
  
  
- /*
--- 
-2.9.3
-
+ /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
