@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "4735b1d32e3f91c7a8896741d88a3022e89730a1ee897946decfa0df27
 
 inherit systemd update-rc.d useradd cmake pkgconfig
 
-PACKAGECONFIG ??= "ssl dlt websockets \
+PACKAGECONFIG ??= "ssl websockets \
                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
                   "
 
