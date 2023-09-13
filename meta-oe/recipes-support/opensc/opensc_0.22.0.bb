@@ -16,6 +16,11 @@ SRCREV = "c902e1992195e00ada12d71beb1029287cd72037"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
            file://CVE-2023-2977.patch \
           "
+
+# CVE-2021-34193 is a duplicate CVE covering the 5 individual
+# https://github.com/OpenSC/OpenSC/pull/2855/commits/7a049fc3922060fb75cb9fea9e58eef9edc357ae
+CVE_CHECK_IGNORE += "CVE-2021-34193"
+
 DEPENDS = "virtual/libiconv openssl"
 
 S = "${WORKDIR}/git"
