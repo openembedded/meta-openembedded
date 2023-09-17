@@ -143,3 +143,5 @@ CONFFILES:${PN} = "${sysconfdir}/mongod.conf"
 SYSTEMD_SERVICE:${PN} = "mongod.service"
 
 FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
+
+RDEPENDS:${PN} += "tzdata-core"
