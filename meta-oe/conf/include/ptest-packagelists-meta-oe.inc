@@ -49,6 +49,7 @@ PTESTS_SLOW_META_OE = "\
     fftw \
     libusb-compat \
     rsyslog \
+    mariadb \
 "
 
 PTESTS_PROBLEMS_META_OE ="\
