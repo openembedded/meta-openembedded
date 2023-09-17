@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = " \
     intltool-native \
+    libseccomp \
     tracker \
     zlib \
 "
@@ -15,10 +16,11 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
 
-SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch \
-	    file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
-           "
-SRC_URI[archive.sha256sum] = "17966603dc432a98526b490586a48acd7f9f59935f7895dfc51729a46a6901a3"
+SRC_URI:append = " \
+	file://0001-fix-reproducibility.patch \
+	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
+"
+SRC_URI[archive.sha256sum] = "c2ed9f6b0410195863b84c7b5467c5bc1255e96d658741192b5e92568a3bebd0"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
