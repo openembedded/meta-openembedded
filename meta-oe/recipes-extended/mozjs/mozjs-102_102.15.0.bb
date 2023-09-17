@@ -16,7 +16,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://musl-disable-stackwalk.patch \
            file://0001-add-arm-to-list-of-mozinline.patch \
            "
-SRC_URI[sha256sum] = "31b074623f09ca821a8a7dee0b3d2df1a45f1164264d31c26b4969a4d6a21dd1"
+SRC_URI[sha256sum] = "81fa590408f5a3af8f004d839ac47fb4121e05fe717334445cec9ca55d8746af"
 
 S = "${WORKDIR}/firefox-${PV}"
 
