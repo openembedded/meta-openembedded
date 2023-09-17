@@ -24,8 +24,9 @@ inherit cmake ptest
 # By default the most commonly used poco components are built
 # Foundation is built anyway and doesn't need to be listed explicitly
 # these don't have dependencies outside oe-core
-PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto JWT Data DataSQLite Zip Encodings Redis Prometheus"
+PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataSQLite Zip Encodings Redis Prometheus"
 # MongoDB does not build for all architectures yet keep in sync with COMPATIBLE_HOST list in mongodb recipe
+# and mongodb needs meta-python enabled as well
 PACKAGECONFIG:remove:riscv32 = "MongoDB"
 PACKAGECONFIG:remove:riscv64 = "MongoDB"
 PACKAGECONFIG:remove:mipsarch = "MongoDB"
