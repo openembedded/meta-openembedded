@@ -16,7 +16,7 @@ DEPENDS = " \
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "c15582301ed90b9d42ce521dbccf99a989f22f12041bdd5279c6636da99ebf65"
+SRC_URI[archive.sha256sum] = "3fb5b8b1044d3d129262d3c54cf220eb7f76bc21bd5ac6d96ec115cd3518300e"
 SRC_URI += "file://0001-Harcode-shebang-to-avoid-pointing-to-build-system-s-.patch"
 
 PACKAGECONFIG ?= "webkitgtk"
