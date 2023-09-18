@@ -17,17 +17,14 @@ DEPENDS = " \
 
 RDEPENDS:${PN} = "xdg-desktop-portal xdg-desktop-portal-gtk"
 
-inherit meson pkgconfig gsettings features_check
+GNOMEBASEBUILDCLASS = "meson"
+inherit gnomebase pkgconfig gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
-SRC_URI = "git://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome.git;protocol=https;branch=main"
-
-S = "${WORKDIR}/git"
-SRCREV = "89203bf3522556965fc225782d1a635afdac611e"
+SRC_URI[archive.sha256sum] = "949598861c80000febf18cc12b3721c95c1bb1d19371fc2156dc4f33def5aff0"
 
 PACKAGECONFIG ?= "screenshot screencast ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
-
 PACKAGECONFIG[wayland] = ",,wayland-native"
 PACKAGECONFIG[screenshot] = ",,,gnome-shell"
 PACKAGECONFIG[screencast] = ",,,mutter"
