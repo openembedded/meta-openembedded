@@ -32,7 +32,7 @@ GIR_MESON_OPTION = ""
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "55694b71c2ee4eaef60d93428003f2eaa4cf00186848f5e36b45cfe506fc31bf"
+SRC_URI[archive.sha256sum] = "3cabe40bdd4e379c7082b39ffa45b8bef5c9cf86408fb0d836e1571c443217cd"
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
@@ -45,7 +45,6 @@ EXTRA_OEMESON = " \
     -Dextensions-app:gjs_path=${bindir}/gjs \
     -Dtests=false \
     -Dman=false \
-    -Dsoup2=false \
 "
 
 do_install:append() {
