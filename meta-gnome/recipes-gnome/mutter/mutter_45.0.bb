@@ -15,6 +15,7 @@ DEPENDS = " \
     json-glib \
     gnome-desktop \
     gnome-settings-daemon \
+    libei \
     libxtst \
     libxkbfile \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xinerama', '', d)} \
@@ -25,7 +26,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "185cbebf2150d3e450550e371bdb13a8b4db096978b14f99521e966eacc70551"
+SRC_URI[archive.sha256sum] = "8fbc963019eda9ba52fca2f6c4c477efbc6e36eb4fa93f23174f02ff6b907715"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
@@ -53,6 +54,7 @@ EXTRA_OEMESON += " \
 PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev"
 PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=true, virtual/libgl"
 PACKAGECONFIG[glx] = "-Dglx=true, -Dglx=false"
+PACKAGECONFIG[libdisplay-info] = "-Dlibdisplay_info=true, -Dlibdisplay_info=false, libdisplay-info"
 PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
 # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
 PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
@@ -60,7 +62,7 @@ PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-12"
+MUTTER_API_NAME = "mutter-13"
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/clutter/clutter/clutter-enum-types.c
