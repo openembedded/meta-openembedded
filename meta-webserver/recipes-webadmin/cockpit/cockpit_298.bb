@@ -60,6 +60,7 @@ PACKAGES =+ " \
     ${PN}-playground \
     ${PN}-docker \
     ${PN}-dashboard \
+    ${PN}-packagekit \
     ${PN}-bridge \
     ${PN}-ws \
     ${PN}-desktop \
@@ -111,6 +112,8 @@ FILES:${PN}-docker = " \
 "
 FILES:${PN}-dashboard = "${datadir}/cockpit/dashboard"
 ALLOW_EMPTY:${PN}-dashboard = "1"
+
+FILES:${PN}-packagekit = "${datadir}/cockpit/packagekit"
 
 FILES:${PN}-bridge = " \
     ${bindir}/cockpit-bridge \
