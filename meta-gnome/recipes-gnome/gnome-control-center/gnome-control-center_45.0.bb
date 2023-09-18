@@ -28,6 +28,8 @@ DEPENDS = " \
     polkit \
     pulseaudio \
     samba \
+    setxkbmap-native \
+    tecla \
     udisks2 \
     upower \
 "
@@ -37,16 +39,14 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
 
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-SRC_URI[archive.sha256sum] = "066a65052fc3ecfae860025e85f797e6ab2b87a58c4f8ab9c66ec20718a80c7a"
+SRC_URI[archive.sha256sum] = "83df6a90f98914f2c19a872ce06562acef40927637f679c383099265ccfa42cf"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
 PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
 
-EXTRA_OEMESON = " \
-    -Doe_sysroot=${STAGING_DIR_HOST} \
-"
+EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd"
@@ -66,4 +66,4 @@ FILES:${PN} += " \
 
 FILES:${PN}-dev += "${datadir}/gettext"
 
-RDEPENDS:${PN} += "gsettings-desktop-schemas"
+RDEPENDS:${PN} += "gsettings-desktop-schemas tecla"
