@@ -15,6 +15,7 @@ DEPENDS = "openssl"
 
 SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+           file://0001-Fix-memory-allocation-hazard-1542-.-1543.patch \
            "
 
 SRCREV = "dfcea9f6a09ead01089a3c9d20c7032f2c0af2c1"
