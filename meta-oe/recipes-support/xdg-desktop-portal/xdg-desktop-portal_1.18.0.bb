@@ -8,14 +8,12 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 DEPENDS = " \
     json-glib \
     glib-2.0 \
+    flatpak \
     libportal \
     geoclue \
     pipewire \
-    dbus-native \
     fuse3 \
     xmlto-native \
-    flatpak \
-    python3-dbus-native \
 "
 
 PORTAL_BACKENDS ?= " \
@@ -29,15 +27,19 @@ inherit meson pkgconfig python3native features_check
 
 SRC_URI = " \
 	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=main \
-	file://0001-xdg-desktop-portal-pc-in-add-pc_sysrootdir-dir.patch \
+	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "88af6c8ca4106fcf70925355350a669848e9fd5a"
+SRCREV = "a4b27063222b16652e73b422e5448d75335199ef"
 
 FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"
 
-EXTRA_OEMESON += "--cross-file=${WORKDIR}/meson-${PN}.cross"
+EXTRA_OEMESON += " \
+	--cross-file=${WORKDIR}/meson-${PN}.cross \
+	-Dflatpak-interfaces-dir=${STAGING_DATADIR}/dbus-1/interfaces \
+	-Ddbus-service-dir=${datadir}/dbus-1/services \
+"
 
 do_write_config:append() {
     cat >${WORKDIR}/meson-${PN}.cross <<EOF
