@@ -24,7 +24,6 @@ PTESTS_FAST_META_OE = "\
     libssh \
     libtinyxml2 \
     libxml++-5.0 \
-    libxmlb \
     libyang \
     lmdb \
     minicoredumper \
