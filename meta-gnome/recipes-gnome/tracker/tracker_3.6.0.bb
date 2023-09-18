@@ -20,14 +20,10 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check python3native
+inherit gettext gnomebase gsettings gobject-introspection vala gtk-doc  bash-completion python3native
 
-SRC_URI += "file://0001-meson-Do-not-define-TOP_SRCDIR.patch"
-SRC_URI[archive.sha256sum] = "f972d50ac7bafdccf113b1eb99dcae35404685a99e55bfef16f3ac83b4de974d"
-
-# gobject-introspection is mandatory and cannot be configured
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-GIR_MESON_OPTION = ""
+SRC_URI += "file://0001-fix-reproducibility.patch"
+SRC_URI[archive.sha256sum] = "52592cfe19baffd16dbe47475be7da750dbd0b6333fd7acb60faa9da5bc40df2"
 
 # text search is not an option anymore and requires sqlite3 build with
 # PACKAGECONFIG[fts5] set (default)
@@ -45,7 +41,16 @@ EXTRA_OEMESON = " \
     -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
     -Dsoup=soup3 \
+    ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dvapi=enabled', '-Dvapi=disabled', d)} \
 "
+
+do_install:prepend() {
+    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g' ${B}/src/libtracker-sparql/tracker-sparql-enum-types.c
+    sed -i -e 's|${B}/../${PN}-${PV}|/usr/src/debug/${PN}/${PV}-${PR}|g' ${B}/src/libtracker-sparql/core/tracker-data-enum-types.c
+}
+
+GIR_MESON_ENABLE_FLAG = 'enabled'
+GIR_MESON_DISABLE_FLAG = 'disabled'
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
