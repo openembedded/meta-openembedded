@@ -4,13 +4,13 @@ devices that are constrained their resources such as computing power, \
 RF range, memory, bandwith, or network packet sizes."
 HOMEPAGE ="https://libcoap.net/"
 
-LICENSE = "BSD-2-Clause & BSD-1-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0fbe4435d52b2d27a16f980ffc8ffc80"
+LICENSE = "BSD-2-Clause & BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
 
 SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
            file://run-ptest \
            "
-SRCREV = "02b76470ab9168947152c78ad50835bf043d7c84"
+SRCREV = "9cde7cdee171e3f47486c6e70d479fdf49f3d2d6"
 
 S = "${WORKDIR}/git"
 
