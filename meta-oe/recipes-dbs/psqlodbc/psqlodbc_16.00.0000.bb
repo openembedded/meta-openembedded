@@ -26,7 +26,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions/src/${BPN}-${PV}.tar.gz \
     file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "ca57d6349532ea7fb4fae17bbfc107abe5a155ca2f43446315f9e23764b3f8ec"
+SRC_URI[sha256sum] = "afd892f89d2ecee8d3f3b2314f1bd5bf2d02201872c6e3431e5c31096eca4c8b"
 
 DEPENDS += "postgresql unixodbc"
 
