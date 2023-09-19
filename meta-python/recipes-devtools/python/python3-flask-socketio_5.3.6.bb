@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "Flask-SocketIO"
 
-SRC_URI[sha256sum] = "5f01158d10db71aa78c969b631ce3b9148b47ab0de1995158f9577f85b004d25"
+SRC_URI[sha256sum] = "bb8f9f9123ef47632f5ce57a33514b0c0023ec3696b2384457f0fcaa5b70501c"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-flask \
