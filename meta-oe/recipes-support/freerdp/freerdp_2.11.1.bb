@@ -13,7 +13,7 @@ inherit pkgconfig cmake gitpkgv
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "1384b3c33b9bd7599633cc54bf20cf20ec6be83c"
+SRCREV = "9d3d40bf3e429c0cd6609f686c0e73ed0eff0a07"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
            file://winpr-makecert-Build-with-install-RPATH.patch \
            file://0001-Fix-const-qualifier-error.patch \
