@@ -20,8 +20,8 @@ GIR_MESON_OPTION = ""
 GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
-
-SRC_URI[archive.sha256sum] = "68266b3abe7d28fc469d0067aac9c5dabb0ca7952cc1f7c238a04951f3dc5b0d"
+SRC_URI = "https://download.gnome.org/sources/gdm/${@oe.utils.trim_version("${PV}", 1)}/gdm-${PV}.tar.xz"
+SRC_URI[sha256sum] = "6572578c05e3c6569d6ed269f7de2aaf3a035657654586d8243907bb7a6ffa85"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
