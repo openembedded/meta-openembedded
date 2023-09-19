@@ -9,7 +9,7 @@ DEPENDS += "gzip zlib"
 SRC_URI = "git://github.com/ebiggers/libdeflate.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
-SRCREV = "495fee110ebb48a5eb63b75fd67e42b2955871e2"
+SRCREV = "dd12ff2b36d603dbb7fa8838fe7e7176fcbd4f6f"
 
 inherit cmake pkgconfig
 
