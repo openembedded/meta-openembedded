@@ -8,7 +8,7 @@ DEPENDS = "libtool-cross"
 
 SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
 
-SRCREV = "6ca6898bf37f583c4cc9943441cd60dd69f4b8f2"
+SRCREV = "97e500351e653472b2ea00b37137ad0414165efe"
 
 S = "${WORKDIR}/git"
 
