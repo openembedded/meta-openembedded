@@ -8,6 +8,8 @@ binaries at various places. Avoid this to improve binary reproducibility.
 
 todo: Some of these paths may need to be adjusted to make the test environment work
 
+Upstream-Status: Inappropriate [oe-specific]
+
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  meson.build                       | 6 +++---
