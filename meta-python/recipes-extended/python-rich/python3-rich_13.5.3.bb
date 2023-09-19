@@ -8,7 +8,7 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b5f0b94fbc94f5ad9ae4efcf8a778303"
 
-SRC_URI[sha256sum] = "fb9d6c0a0f643c99eed3875b5377a184132ba9be4d61516a55273d3554d75a39"
+SRC_URI[sha256sum] = "87b43e0543149efa1253f485cd845bb7ee54df16c9617b8a893650ab84b4acb6"
 
 inherit pypi python_poetry_core
 
