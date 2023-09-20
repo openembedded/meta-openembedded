@@ -22,8 +22,6 @@ RDEPENDS:${PN} = "bash btrfs-tools"
 
 S = "${WORKDIR}/git"
 
-inherit allarch
-
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
