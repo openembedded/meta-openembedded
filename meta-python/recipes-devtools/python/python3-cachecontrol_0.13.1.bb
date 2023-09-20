@@ -3,13 +3,9 @@ HOMEPAGE = "https://pypi.org/project/CacheControl/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=12;endline=12;md5=e2fd6ddcf506e08972d5ba4b93c0022e"
 
-# On PyPi, this is "CacheControl", rather than "cachecontrol", so we need to
-# override PYPI_PACKAGE so fetch succeeds.
-PYPI_PACKAGE = "CacheControl"
+SRC_URI[sha256sum] = "f012366b79d2243a6118309ce73151bf52a38d4a5dac8ea57f09bd29087e506b"
 
-SRC_URI[sha256sum] = "fd3fd2cb0ca66b9a6c1d56cc9709e7e49c63dbd19b1b1bcbd8d3f94cedfe8ce5"
-
-inherit pypi setuptools3
+inherit pypi python_poetry_core
 
 RDEPENDS:${PN} += "\
     python3-crypt \
