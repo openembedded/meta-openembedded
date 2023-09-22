@@ -6,18 +6,15 @@ HOMEPAGE = "https://frrouting.org/"
 SECTION = "net"
 
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://COPYING-LGPLv2.1;md5=4fbd65380cdd255951079008b364516c"
+LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.4 \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.0 \
            file://frr.pam \
-           file://0001-m4-ax_python.m4-check-for-python-x.y-emded.pc-not-py.patch \
-           file://CVE-2023-3748.patch \
-           file://CVE-2023-41358.patch \
-           file://CVE-2023-41360.patch \
+           file://0001-tools-make-quiet-actually-suppress-output.patch \
            "
 
-SRCREV = "45e36c0c00a517ad1606135b18c5753e210cfc0d"
+SRCREV = "31ed3dd753d62b5d8916998bc32814007e91364b"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
@@ -28,7 +25,7 @@ S = "${WORKDIR}/git"
 inherit autotools-brokensep python3native pkgconfig useradd systemd
 
 DEPENDS:class-native = "bison-native elfutils-native"
-DEPENDS:class-target = "bison-native json-c readline c-ares libyang frr-native"
+DEPENDS:class-target = "bison-native json-c readline c-ares libyang frr-native protobuf-c-native protobuf-c"
 
 RDEPENDS:${PN}:class-target = "iproute2 python3-core bash"
 
@@ -63,6 +60,9 @@ EXTRA_OECONF:class-target = "--sbindir=${libdir}/frr \
                             "
 
 CACHED_CONFIGUREVARS += "ac_cv_path_PERL='/usr/bin/env perl'"
+
+# https://github.com/FRRouting/frr/issues/14469
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 
 LDFLAGS:append:mips = " -latomic"
 LDFLAGS:append:mipsel = " -latomic"
