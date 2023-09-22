@@ -1,0 +1,35 @@
+From 7f3cced1e140ed36c6f8f66d7f4098323b0463b2 Mon Sep 17 00:00:00 2001
+From: Katy Feng <fkaty@vmware.com>
+Date: Fri, 25 Aug 2023 11:58:48 -0700
+Subject: [PATCH] Allow only X509 certs to verify the SAML token signature.
+
+Upstream-Status: Backport from https://github.com/vmware/open-vm-tools/commit/74b6d0d9000eda1a2c8f31c40c725fb0b8520b16
+CVE:  CVE-2023-20900
+Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
+---
+ open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
+index 2906d29..57db3b8 100644
+--- a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
++++ b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
+@@ -1275,7 +1275,14 @@ VerifySignature(xmlDocPtr doc,
+     */
+    bRet = RegisterID(xmlDocGetRootElement(doc), "ID");
+    if (bRet == FALSE) {
+-      g_warning("failed to register ID\n");
++      g_warning("Failed to register ID\n");
++      goto done;
++   }
++
++   /* Use only X509 certs to validate the signature */
++   if (xmlSecPtrListAdd(&(dsigCtx->keyInfoReadCtx.enabledKeyData),
++                        BAD_CAST xmlSecKeyDataX509Id) < 0) {
++      g_warning("Failed to limit allowed key data\n");
+       goto done;
+    }
+ 
+-- 
+2.7.4
+
