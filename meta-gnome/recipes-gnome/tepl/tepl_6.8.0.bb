@@ -6,8 +6,8 @@ DEPENDS = " \
     gsettings-desktop-schemas \
     glib-2.0 \
     gtk+3 \
-    gtksourceview4 \
-    amtk \
+    libgedit-amtk \
+    libgedit-gtksourceview \
     libxml2 \
     uchardet \
     gtk-doc-native \
@@ -21,7 +21,7 @@ inherit meson gobject-introspection gettext features_check pkgconfig
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 SRC_URI = "git://gitlab.gnome.org/swilmet/tepl;protocol=https;branch=main"
-SRCREV = "d1e9cc2e4a0738f68d9002f13724b7239f075844"
+SRCREV = "16ab2567257a053bd957699f89080fafd0999035"
 S = "${WORKDIR}/git"
 
 # gobject-introspection is mandatory and cannot be configured
