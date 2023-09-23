@@ -23,11 +23,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
 
-def gnome_verdir(v):
-    return oe.utils.trim_version(v, 1)
-
-SRC_URI += "file://0001-Replace-filename-with-basename.patch"
-SRC_URI[archive.sha256sum] = "d9c62f024727f7a76fc6a5da788a2b0247df01a71c2a601143c62aac0ff41e4c"
+SRC_URI[archive.sha256sum] = "b311c465ce2ca7bc648f61b865187b4451388dec9358a169f3277e741718ab5d"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
 
@@ -42,6 +38,10 @@ EXTRA_OEMESON += " \
 PACKAGECONFIG = "extensions"
 PACKAGECONFIG[extensions] = "-Dextensions=true,-Dextensions=false, gexiv2 gstreamer1.0-plugins-base gdk-pixbuf"
 PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,packagekit"
+
+do_install:prepend() {
+    sed -i -e 's|${B}/||g' ${B}/src/nautilus-enum-types.c
+}
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
