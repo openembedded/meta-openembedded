@@ -17,8 +17,11 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 RDEPENDS:${PN} = "acl"
 
-SRC_URI = "git://github.com/storaged-project/udisks.git;branch=2.9.x-branch;protocol=https"
-SRCREV = "001c486e6d099ed33e2de4f5c73c03e3ee180f81"
+SRC_URI = " \
+	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
+	file://0001-Makefile.am-Dont-include-buildpath.patch \
+"
+SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
@@ -45,6 +48,7 @@ FILES:${PN} += " \
     ${datadir}/dbus-1/ \
     ${datadir}/polkit-1 \
     ${datadir}/bash-completion \
+    ${datadir}/zsh \
     ${libdir}/polkit-1/extensions/*.so \
     ${nonarch_base_libdir}/udev/* \
     ${exec_prefix}${nonarch_base_libdir}/udisks2/* \
