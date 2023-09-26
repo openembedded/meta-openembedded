@@ -14,7 +14,7 @@ LICENSE = "LGPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=3000208d539ec061b899bce1d9ce9404 \
                     file://README.rst;beginline=261;endline=275;md5=a8bf3475df7e0d575a53d04c83d5e090"
 
-SRC_URI[sha256sum] = "58e438ce9169aaa2e6de147e3ceb34ceacfe26556a2306f50e2d46f52779acb1"
+SRC_URI[sha256sum] = "695c0ae4534270cae2697841b4a56f434a990694a00264ea10ebbbcdc02c13f7"
 
 inherit pypi python_flit_core
 
