@@ -7,7 +7,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "APIFlask"
 
-SRC_URI[sha256sum] = "7ffe29e082c6cc76d8ae78ba2445b5fcd69092fac04f4f8cd23b1c887cb291cc"
+SRC_URI[sha256sum] = "c1ab81640a1ab252888e2cc7ae556272a169b449c582abae309a8fe295f9337d"
 
 RDEPENDS:${PN} += "\
     python3-flask \
