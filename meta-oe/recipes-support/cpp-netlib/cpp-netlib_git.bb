@@ -23,3 +23,8 @@ inherit cmake pkgconfig
 DEPENDS = "zlib boost openssl"
 
 EXTRA_OECMAKE:append = " -DCPP-NETLIB_BUILD_TESTS=OFF -DCPP-NETLIB_BUILD_EXAMPLES=OFF"
+
+do_install:append() {
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibConfig.cmake
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibTargets-noconfig.cmake
+}
