@@ -3,13 +3,15 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3a9dab7f159514231249aa3e108ab26b"
 
-SRC_URI[sha256sum] = "1afd47af8955c5db730f630ad53ae798cf7fae0acb64cebb3cf94d35c47dd088"
+DEPENDS += "python3-setuptools-scm-native"
+
+SRC_URI[sha256sum] = "c3f9e322b1ebeebd44e3d9d2d9b124e0c550c1ef41bd552afdcdd719516ee41a"
 
 SRC_URI += " \
     file://run-ptest \
 "
 
-inherit pypi setuptools3 ptest
+inherit pypi python_setuptools_build_meta ptest
 
 RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest \
