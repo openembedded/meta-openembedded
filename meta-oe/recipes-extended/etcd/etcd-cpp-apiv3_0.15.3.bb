@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eae7da6a2cd1788a5cf8a9f838cf6450"
 
 SRC_URI += "git://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3.git;branch=master;protocol=https"
-SRCREV = "5e2884f36276e44f683fa02fca39807716fdbc16"
+SRCREV = "e31ac4d4caa55fa662e207150ba40f8151b7ad96"
 
 inherit cmake
 
