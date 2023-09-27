@@ -8,7 +8,7 @@ PYPI_PACKAGE = "pyproj"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "a5b111865b3f0f8b77b3983f2fbe4dd6248fc09d3730295949977c8dcd988062"
+SRC_URI[sha256sum] = "44aa7c704c2b7d8fb3d483bbf75af6cb2350d30a63b144279a09b75fead501bf"
 
 RDEPENDS:${PN} = " \
     python3-certifi \
