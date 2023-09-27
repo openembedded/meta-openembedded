@@ -73,6 +73,8 @@ do_install:append() {
     sed -e 's@${STAGING_DIR_HOST}@@g' \
         -i ${D}${bindir}/js102-config
     rm -f ${D}${libdir}/libjs_static.ajs
+    # remove the build path
+    sed -i -e 's@${WORKDIR}@@g' `find ${B} -name Unified_c*.c*`
 }
 
 PACKAGES =+ "lib${BPN}"
