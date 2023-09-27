@@ -3,17 +3,17 @@ DESCRIPTION = "This package contains Python bindings for ZeroMQ. ZMQ is a lightw
 HOMEPAGE = "http://zeromq.org/bindings:python"
 LICENSE = "BSD-3-Clause & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "\
-    file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
-    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e \
+    file://LICENSE.BSD;md5=1787206f198344195a671b60326c59dc \
+    file://LICENSE.LESSER;md5=0e99bfbdd8b9d33b0221986fe3be89ed \
 "
 
-DEPENDS = "python3-packaging-native zeromq"
+DEPENDS = "python3-packaging-native python3-cython-native python3-setuptools-scm-native zeromq"
 
 SRC_URI:append = " \
     file://club-rpath-out.patch \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "f330a1a2c7f89fd4b0aa4dcb7bf50243bf1c8da9a2f1efc31daf57a2046b31f2"
+SRC_URI[sha256sum] = "259c22485b71abacdfa8bf79720cd7bcf4b9d128b30ea554f01ae71fdbfdaa23"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest
 
