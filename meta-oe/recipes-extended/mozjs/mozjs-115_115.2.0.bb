@@ -66,12 +66,13 @@ do_install() {
 
 inherit multilib_script multilib_header
 
-MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js115-config"
+MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
+MULTILIB_SCRIPTS += "${PN}-dev:${bindir}/js${MAJ_VER}-config"
 
 do_install:append() {
-    oe_multilib_header mozjs-115/js-config.h
+    oe_multilib_header mozjs-${MAJ_VER}/js-config.h
     sed -e 's@${STAGING_DIR_HOST}@@g' \
-        -i ${D}${bindir}/js115-config
+        -i ${D}${bindir}/js${MAJ_VER}-config
     rm -f ${D}${libdir}/libjs_static.ajs
 }
 
