@@ -66,7 +66,7 @@ do_install() {
 
 inherit multilib_script multilib_header
 
-MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js102-config"
+MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js115-config"
 
 do_install:append() {
     oe_multilib_header mozjs-115/js-config.h
