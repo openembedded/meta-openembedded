@@ -20,11 +20,9 @@ From python 3.8 changes:
 
 Fixes https://github.com/pybluez/pybluez/issues/426
 
-Upstream-Status: Accepted [https://github.com/pybluez/pybluez/pull/427]
+Upstream-Status: Backport [https://github.com/pybluez/pybluez/pull/427]
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
-
 ---
-
  bluez/btmodule.c | 23 ++++++++++++++---------
  msbt/_msbt.c     |  6 ++++--
  2 files changed, 18 insertions(+), 11 deletions(-)
