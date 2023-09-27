@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
 
 DEPENDS:append:libc-musl = " musl-nscd"
 
-SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=rel/mDNSResponder-1790 \
+SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=main \
            file://0001-dns-sd-Include-missing-headers.patch \
            file://0002-make-Set-libdns_sd.so-soname-correctly.patch \
-           file://0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch \
            file://0004-make-Separate-TLS-targets-from-libraries.patch \
            file://0005-mDNSCore-Fix-broken-debug-parameter.patch \
            file://0006-make-Add-top-level-Makefile.patch \
@@ -23,8 +22,10 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0008-Handle-errors-from-socket-calls.patch \
            file://0009-remove-unneeded-headers.patch \
            file://mdns.service \
+           file://0015-Add-missing-limits.h.patch \
+           file://0001-Handle-interface-without-ifa_addr.patch \
            "
-SRCREV = "8769ab51605e465425d33d757f602ce5905ca639"
+SRCREV = "d5029b5dff8aa59d1fc07ed796e994106ef58dee"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
