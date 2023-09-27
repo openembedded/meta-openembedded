@@ -13,4 +13,7 @@ SRC_URI[sha256sum] = "816927a350f38d56072aeca5dfb10221fe1dc653745853d30a216637f5
 PYPI_PACKAGE = "PyMySQL"
 inherit pypi setuptools3
 
+UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pymysql/"
+UPSTREAM_CHECK_REGEX = "/pymysql/(?P<pver>(\d+[\.\-_]*)+)"
+
 RDEPENDS:${PN} += "${PYTHON_PN}-cryptography"
