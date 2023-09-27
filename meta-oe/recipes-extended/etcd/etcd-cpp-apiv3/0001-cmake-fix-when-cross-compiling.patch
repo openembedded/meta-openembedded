@@ -17,6 +17,8 @@ CMake is cross compiling.
 
 Signed-off-by: Clément Péron <peron.clem@gmail.com>
 ---
+Upstream-Status: Pending
+
  CMakeLists.txt | 28 ++++++++++++++++++++++++++--
  1 file changed, 26 insertions(+), 2 deletions(-)
 
