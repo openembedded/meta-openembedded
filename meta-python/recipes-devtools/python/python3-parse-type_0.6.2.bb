@@ -1,15 +1,14 @@
 SUMMARY = "Simplifies building parse types based on the parse module"
 HOMEPAGE = "https://github.com/jenisys/parse_type"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=16374dbaeaca1890153edb3f41371222"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2e469278ace89c246d52505acc39c3da"
 
-SRC_URI[md5sum] = "b954062f14ab723a91fe1e2be15e859d"
-SRC_URI[sha256sum] = "7f690b18d35048c15438d6d0571f9045cffbec5907e0b1ccf006f889e3a38c0b"
+SRC_URI[sha256sum] = "79b1f2497060d0928bc46016793f1fca1057c4aacdf15ef876aa48d75a73a355"
 
 PYPI_PACKAGE = "parse_type"
 inherit pypi ptest setuptools3
 
-RDEPENDS:${PN} += "${PYTHON_PN}-parse ${PYTHON_PN}-six"
+RDEPENDS:${PN} += "${PYTHON_PN}-parse"
 
 SRC_URI += " \
 	file://run-ptest \
@@ -18,11 +17,6 @@ SRC_URI += " \
 RDEPENDS:${PN}-ptest += " \
 	${PYTHON_PN}-pytest \
 "
-
-do_configure:prepend() {
-	sed -i -e "/python_version >= 3.0/d" ${S}/setup.py
-	sed -i -e "/use_2to3/d" ${S}/setup.py
-}
 
 do_install_ptest() {
 	install -d ${D}${PTEST_PATH}/tests
