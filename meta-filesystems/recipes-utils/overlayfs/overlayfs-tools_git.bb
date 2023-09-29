@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
 
 SRC_URI = "\
     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master \
-    file://0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch \
-    file://0002-makefile-fix-linking-flags.patch \
 "
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
+SRCREV = "b5e5a829895ac98ccfe4629fbfbd8b819262bd00"
 
 S = "${WORKDIR}/git"
 B = "${S}"
