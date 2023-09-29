@@ -17,6 +17,7 @@ DEPENDS = "zlib gzip-native json-c"
 SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
            file://0004-Modify-systemd-config-directory.patch \
+           file://544.patch \
            "
 SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
 
@@ -47,6 +48,8 @@ PACKAGECONFIG[dlt-console] = "-DWITH_DLT_CONSOLE=ON,-DWITH_DLT_CONSOLE=OFF"
 
 inherit autotools gettext cmake pkgconfig systemd
 
+# -DWITH_DLT_COREDUMPHANDLER=ON this feature is too experimental, disable for now
+#FILES:${PN} += "${libdir}/sysctl.d"
 EXTRA_OECMAKE += "-DWITH_DLT_LOGSTORAGE_GZIP=ON -DWITH_EXTENDED_FILTERING=ON -DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
 
 PACKAGES += "${PN}-systemd"
