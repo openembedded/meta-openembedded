@@ -21,11 +21,8 @@ EXTRA_OEMAKE += "'CC=${CC} -O2'"
 EXTRA_OEMAKE:append:libc-musl = " LDLIBS=-lfts"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-do_compile () {
-    oe_runmake
-}
-
 do_install () {
     install -d ${D}${bindir}
     install -m 0755 ${B}/overlay ${D}${bindir}
+    install -m 0755 ${B}/fsck.overlay ${D}${bindir}
 }
