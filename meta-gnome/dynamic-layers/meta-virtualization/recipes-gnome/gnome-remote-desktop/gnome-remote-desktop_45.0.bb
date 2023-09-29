@@ -8,11 +8,12 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "7a9ffd341b5fcb636d26675e9f6269650952163fff5295327618cc2d5cc87b8e"
+SRC_URI[archive.sha256sum] = "cb993112d5a3ca21ec217df2d84068e4cad2a4aa6cab52f0e186fa1152f7a381"
 
 DEPENDS = " \
     asciidoc-native \
     libdrm \
+    libei \
     libepoxy \
     cairo \
     glib-2.0 \
@@ -30,6 +31,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
 "
 
+PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,pipewire-native wireplumber-native dbus-native"
 PACKAGECONFIG[vnc] = "-Dvnc=true,-Dvnc=false,libvncserver"
 PACKAGECONFIG[rdp] = "-Drdp=true,-Drdp=false,freerdp fuse3 libxkbcommon"
 PACKAGECONFIG[fdk_aac] = "-Dfdk_aac=true,-Dfdk_aac=false,fdk-aac"
