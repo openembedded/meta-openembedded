@@ -35,6 +35,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://CVE-2021-44758.patch;patchdir=source4/heimdal \
            file://CVE-2023-34966_0001.patch \
            file://CVE-2023-34966_0002.patch \
+           file://CVE-2022-2127.patch \
            "
 
 SRC_URI:append:libc-musl = " \
