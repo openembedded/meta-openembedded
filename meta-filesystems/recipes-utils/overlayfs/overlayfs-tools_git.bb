@@ -15,7 +15,6 @@ SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-DEPENDS += "attr"
 # Required to have the fts.h header for musl
 DEPENDS:append:libc-musl = " fts"
 
