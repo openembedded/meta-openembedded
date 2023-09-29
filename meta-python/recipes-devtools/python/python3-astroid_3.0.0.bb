@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
 
-SRC_URI[sha256sum] = "903f024859b7c7687d7a7f3a3f73b17301f8e42dfd9cc9df9d4418172d3e2dbd"
+SRC_URI[sha256sum] = "1defdbca052635dd29657ea674edfc45e4b5be9cd53630c5b084fcfed94344a8"
 
 inherit pypi python_setuptools_build_meta
 
@@ -27,6 +27,7 @@ RDEPENDS:${PN}:class-target += "\
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-wrapt \
     ${PYTHON_PN}-setuptools \
+    ${PYTHON_PN}-typing-extensions \
 "
 
 RDEPENDS:${PN}-tests:class-target += "\
