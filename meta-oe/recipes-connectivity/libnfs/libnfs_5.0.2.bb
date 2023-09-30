@@ -15,6 +15,3 @@ inherit cmake
 do_install:append() {
 	rm -f ${D}${libdir}/cmake/libnfs/libnfs-config.cmake
 }
-
-# Workaround for clang
-CFLAGS += "-Wno-implicit-function-declaration"
