@@ -15,3 +15,5 @@ UPSTREAM_CHECK_COMMITS = "1"
 S = "${WORKDIR}/git"
 
 inherit cmake
+
+CFLAGS:append:toolchain-clang = " -Wno-error=gnu-variable-sized-type-not-at-end"
