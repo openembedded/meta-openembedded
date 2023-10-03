@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 SRC_URI += " \
         git://github.com/pylint-dev/pylint;branch=main;protocol=https \
         file://run-ptest \
-        file://0001-pyproject.toml-Remove-hard-coded-dependencies.patch \
-        file://0001-pylint-remove-plugin-pickle-test.patch \
         "
-SRCREV ?= "fc34a4b6abe56f3ac07ca15d846b1c1955545f85"
+SRCREV ?= "4a7ad5ea9f1c5a98ccf736578a00554be0da6dc7"
 
 inherit python_setuptools_build_meta ptest
 
@@ -47,5 +45,6 @@ S = "${WORKDIR}/git"
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+    install -Dm 0644 ${S}/tests/.pylint_primer_tests/.gitkeep ${D}${PTEST_PATH}/tests/.pylint_primer_tests/.gitkeep
     sed -i 's#/usr/bin/python$#/usr/bin/python3#g' ${D}${PTEST_PATH}/tests/data/ascript
 }
