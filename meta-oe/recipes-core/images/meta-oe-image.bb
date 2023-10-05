@@ -1,4 +1,4 @@
-require  meta-oe-image-base.bb
+require recipes-core/images/core-image-base.bb
 
 SUMMARY = "meta-oe build test image"
 
