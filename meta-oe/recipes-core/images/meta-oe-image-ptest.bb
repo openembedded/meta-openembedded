@@ -1,7 +1,7 @@
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "ptest"
 
-require recipes-core/images/core-image-base.bb
+require recipes-core/images/core-image-minimal.bb
 require conf/include/ptest-packagelists-meta-oe.inc
 
 SUMMARY = "meta-oe ptest test image"
