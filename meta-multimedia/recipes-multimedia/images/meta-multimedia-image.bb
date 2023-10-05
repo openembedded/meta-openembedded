@@ -1,3 +1,3 @@
-require  meta-multimedia-image-base.bb
+require recipes-core/images/core-image-base.bb
 
 IMAGE_INSTALL += "packagegroup-meta-multimedia"
