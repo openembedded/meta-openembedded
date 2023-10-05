@@ -1,4 +1,4 @@
-require  meta-perl-base.bb
+require recipes-core/images/core-image-base.bb
 
 SUMMARY = "meta-perl build test image"
 
