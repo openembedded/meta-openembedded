@@ -1,4 +1,4 @@
-require  meta-python-image-base.bb
+require recipes-core/images/core-image-base.bb
 
 SUMMARY = "meta-python build test image"
 

@@ -1,10 +1,9 @@
 inherit features_check
 REQUIRED_DISTRO_FEATURES += "ptest"
 
-require  meta-perl-base.bb
-
 SUMMARY = "meta-perl build ptest image"
 
+require recipes-core/images/core-image-base.bb
 require conf/include/ptest-packagelists-meta-perl.inc
 
 DESCRIPTION += "Also including the ${MCNAME} ptest package."

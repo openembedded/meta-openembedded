@@ -1,9 +1,8 @@
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "ptest"
 
+require recipes-core/images/core-image-base.bb
 require conf/include/ptest-packagelists-meta-python.inc
-
-require  meta-python-image-base.bb
 
 SUMMARY = "meta-python ptest test image"
 
