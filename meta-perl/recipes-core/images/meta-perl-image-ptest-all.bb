@@ -12,9 +12,9 @@ require conf/include/ptest-packagelists-meta-perl.inc
 PTESTS_META_PERL = "${PTESTS_FAST_META_PERL} ${PTESTS_SLOW_META_PERL}"
 
 do_testimage[noexec] = "1"
-do_testimage[depends] = "${@' '.join(['meta-perl-ptest-image-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PERL').split()])}"
+do_testimage[depends] = "${@' '.join(['meta-perl-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PERL').split()])}"
 
-do_build[depends] = "${@' '.join(['meta-perl-ptest-image-'+x+':do_build' for x in d.getVar('PTESTS_META_PERL').split()])}"
+do_build[depends] = "${@' '.join(['meta-perl-image-ptest-'+x+':do_build' for x in d.getVar('PTESTS_META_PERL').split()])}"
 
 # normally image.bbclass would do this
 EXCLUDE_FROM_WORLD = "1"
