@@ -1,4 +1,4 @@
-require meta-perl-ptest-all-image.bb
+require meta-perl-image-ptest-all.bb
 
 DESCRIPTION = "Recipe to trigger execution of all fast meta-perl ptest images."
 
