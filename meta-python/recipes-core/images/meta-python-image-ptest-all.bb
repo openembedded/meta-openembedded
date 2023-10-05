@@ -12,9 +12,9 @@ require conf/include/ptest-packagelists-meta-python.inc
 PTESTS_META_PYTHON = "${PTESTS_FAST_META_PYTHON} ${PTESTS_SLOW_META_PYTHON}"
 
 do_testimage[noexec] = "1"
-do_testimage[depends] = "${@' '.join(['meta-python-ptest-image-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
+do_testimage[depends] = "${@' '.join(['meta-python-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
 
-do_build[depends] = "${@' '.join(['meta-python-ptest-image-'+x+':do_build' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
+do_build[depends] = "${@' '.join(['meta-python-image-ptest-'+x+':do_build' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
 
 # normally image.bbclass would do this
 EXCLUDE_FROM_WORLD = "1"
