@@ -3,7 +3,7 @@ REQUIRED_DISTRO_FEATURES += "ptest"
 
 SUMMARY = "meta-perl build ptest image"
 
-require recipes-core/images/core-image-base.bb
+require recipes-core/images/core-image-minimal.bb
 require conf/include/ptest-packagelists-meta-perl.inc
 
 DESCRIPTION += "Also including the ${MCNAME} ptest package."
