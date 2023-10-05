@@ -18,7 +18,7 @@ SRC_URI += "file://run-ptest \
 # we will append other kernel selftest in the future
 # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
 # if you have older kernel than that you need to remove it from PACKAGECONFIG
-PACKAGECONFIG ??= "firmware"
+PACKAGECONFIG ??= "firmware bpf"
 PACKAGECONFIG:remove:x86 = "bpf"
 PACKAGECONFIG:remove:arm = "bpf vm"
 # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
@@ -31,30 +31,39 @@ PACKAGECONFIG:remove:qemumips = "bpf vm"
 PACKAGECONFIG:remove:riscv64 = "vm"
 PACKAGECONFIG:remove:riscv32 = "vm"
 
-PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
+PACKAGECONFIG[bpf] = ",,elfutils elfutils-native libcap libcap-ng rsync-native python3-docutils-native,"
 PACKAGECONFIG[firmware] = ",,libcap, bash"
 PACKAGECONFIG[vm] = ",,libcap libhugetlbfs,libgcc bash"
 
 do_patch[depends] += "virtual/kernel:do_shared_workdir"
+do_compile[depends] += "virtual/kernel:do_install"
 
-inherit linux-kernel-base kernel-arch ptest
+inherit linux-kernel-base module-base kernel-arch ptest siteinfo
 
 S = "${WORKDIR}/${BP}"
+
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 
 TEST_LIST = "\
     ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
     rtc \
 "
-
 EXTRA_OEMAKE = '\
     CROSS_COMPILE=${TARGET_PREFIX} \
     ARCH=${ARCH} \
     CC="${CC}" \
-    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS}" \
     AR="${AR}" \
     LD="${LD}" \
+    LLVM=1 \
+    CONFIG_CC_IS_GCC= \
+    CONFIG_CC_IS_CLANG=y \
+    CONFIG_CC_IMPLICIT_FALLTHROUGH= \
+    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
+    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
+    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
     DESTDIR="${D}" \
     MACHINE="${ARCH}" \
+    V=1 \
 '
 
 KERNEL_SELFTEST_SRC ?= "Makefile \
@@ -66,7 +75,6 @@ KERNEL_SELFTEST_SRC ?= "Makefile \
                         arch \
                         LICENSES \
 "
-
 do_compile() {
     if [ ${@bb.utils.contains('PACKAGECONFIG', 'bpf', 'True', 'False', d)} = 'True' ]; then
     if [ ${@bb.utils.contains('DEPENDS', 'clang-native', 'True', 'False', d)} = 'False' ]; then
@@ -74,7 +82,17 @@ do_compile() {
 either install it and add it to HOSTTOOLS, or add clang-native from meta-clang to dependency"
     fi
     fi
+    mkdir -p ${S}/include/config ${S}/bits
+    touch ${S}/include/config/auto.conf
+    if [ "${SITEINFO_BITS}" != "32" ]; then
+        for f in long-double endianness floatn struct_rwlock; do
+            cp ${RECIPE_SYSROOT}${includedir}/bits/$f-64.h ${S}/bits/$f-32.h
+        done
+    fi
     oe_runmake -C ${S} headers
+    sed -i -e 's|^all: docs|all:|' ${S}/tools/testing/selftests/bpf/Makefile
+    sed -i -e '/mrecord-mcount/d' ${S}/Makefile
+    sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/Makefile
     for i in ${TEST_LIST}
     do
         oe_runmake -C ${S}/tools/testing/selftests/${i}
@@ -133,9 +151,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_PACKAGE_DEBUG_SPLIT="1"
 FILES:${PN} += "/usr/kernel-selftest"
 
-RDEPENDS:${PN} += "python3 perl"
+RDEPENDS:${PN} += "python3 perl perl-module-io-handle"
 # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
-INSANE_SKIP:${PN} += "ldflags"
+INSANE_SKIP:${PN} += "ldflags libdir"
 
 SECURITY_CFLAGS = ""
 COMPATIBLE_HOST:libc-musl = 'null'
