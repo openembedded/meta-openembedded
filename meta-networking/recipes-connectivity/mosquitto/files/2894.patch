@@ -5,6 +5,8 @@ Subject: [PATCH] Link correctly with shared websockets library if needed see:
 
 Patch contributed by Joachim Zobel <jz-2017@heute-morgen.de> and  Daniel Engberg <daniel.engberg.lists@pyret.net>
 ---
+Upstream-Status: Pending
+
  src/CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
