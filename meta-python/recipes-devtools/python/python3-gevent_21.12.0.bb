@@ -13,6 +13,8 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
 
 SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
 
+SRC_URI += "file://CVE-2023-41419.patch"
+
 inherit pypi setuptools3
 
 # Don't embed libraries, link to the system instead
