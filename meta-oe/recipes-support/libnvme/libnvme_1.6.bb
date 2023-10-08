@@ -13,7 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 DEPENDS = "json-c"
 SRCREV = "37a803cf77e224f66d86b1e1d9e74a15f55ea600"
 
-SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master"
+SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
+           file://0001-ioctl-Check-for-ioctl-signature-for-musl.patch \
+"
 
 S = "${WORKDIR}/git"
 
