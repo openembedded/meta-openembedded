@@ -1,0 +1,38 @@
+From ad1ac4215f051bd42b7ddf64dad63d8215cc3ac4 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 7 Oct 2023 17:50:54 -0700
+Subject: [PATCH] ioctl: Check for ioctl signature for musl
+
+Fixes
+../git/test/ioctl/mock.c:117:5: error: conflicting types for 'ioctl'
+  117 | int ioctl(int fd, unsigned long request, ...)
+      |     ^
+/mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-musleabi/libnvme/1.6/recipe-sysroot/usr/include/sys/ioctl.h:115:5: note: previous declaration is here
+  115 | int ioctl (int, int, ...);
+      |     ^
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ test/ioctl/mock.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/ioctl/mock.c b/test/ioctl/mock.c
+index e917244..7d5c983 100644
+--- a/test/ioctl/mock.c
++++ b/test/ioctl/mock.c
+@@ -114,7 +114,11 @@ void end_mock_cmds(void)
+ 	} \
+ })
+ 
++#if defined(__linux__) && !defined(__GLIBC__)
++int ioctl(int fd, int request, ...)
++#else
+ int ioctl(int fd, unsigned long request, ...)
++#endif
+ {
+ 	struct mock_cmds *mock_cmds;
+ 	bool result64;
+-- 
+2.42.0
+
