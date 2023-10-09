@@ -14,7 +14,7 @@ DEPENDS = "json-c"
 SRCREV = "37a803cf77e224f66d86b1e1d9e74a15f55ea600"
 
 SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
-           file://0001-ioctl-Check-for-ioctl-signature-for-musl.patch \
+           file://0001-test-handle-POSIX-ioctl-prototype.patch \
 "
 
 S = "${WORKDIR}/git"
