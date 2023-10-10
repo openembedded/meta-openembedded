@@ -83,7 +83,7 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
     fi
     fi
     mkdir -p ${S}/include/config ${S}/bits
-    touch ${S}/include/config/auto.conf
+    install -Dm 0644 ${STAGING_KERNEL_BUILDDIR}/.config ${S}/include/config/auto.conf
     if [ "${SITEINFO_BITS}" != "32" ]; then
         for f in long-double endianness floatn struct_rwlock; do
             cp ${RECIPE_SYSROOT}${includedir}/bits/$f-64.h ${S}/bits/$f-32.h
