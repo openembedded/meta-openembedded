@@ -18,7 +18,9 @@ SRC_URI += "file://run-ptest \
 # we will append other kernel selftest in the future
 # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
 # if you have older kernel than that you need to remove it from PACKAGECONFIG
-PACKAGECONFIG ??= "firmware bpf"
+PACKAGECONFIG ??= "firmware"
+# bpf needs working clang compiler anyway
+PACKAGECONFIG:append:toolchain-clang:x86-64 = " bpf"
 PACKAGECONFIG:remove:x86 = "bpf"
 PACKAGECONFIG:remove:arm = "bpf vm"
 # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
@@ -54,17 +56,15 @@ EXTRA_OEMAKE = '\
     CC="${CC}" \
     AR="${AR}" \
     LD="${LD}" \
-    LLVM=1 \
-    CONFIG_CC_IS_GCC= \
-    CONFIG_CC_IS_CLANG=y \
-    CONFIG_CC_IMPLICIT_FALLTHROUGH= \
     CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
-    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
-    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
     DESTDIR="${D}" \
-    MACHINE="${ARCH}" \
     V=1 \
 '
+EXTRA_OEMAKE:append:toolchain-clang = "\
+    LLVM=1 CONFIG_CC_IS_GCC= CONFIG_CC_IS_CLANG=y CONFIG_CC_IMPLICIT_FALLTHROUGH= \
+    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
+    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
+"
 
 KERNEL_SELFTEST_SRC ?= "Makefile \
                         include \
