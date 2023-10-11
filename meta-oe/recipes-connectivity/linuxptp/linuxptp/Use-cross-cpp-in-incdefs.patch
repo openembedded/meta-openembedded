@@ -1,4 +1,4 @@
-From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
+From be8808005772da48c052cf34a343a6d140541f6a Mon Sep 17 00:00:00 2001
 From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Date: Fri, 23 Dec 2016 18:12:29 +0100
 Subject: [PATCH] linuxptp: Use cross cpp in incdefs
@@ -8,11 +8,13 @@ we need to ensure we use correct setttings from toolchain
 
 Upstream-Status: Inappropriate [OE-Specific]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
 
- makefile | 2 +-
+---
+ incdefs.sh | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/incdefs.sh b/incdefs.sh
+index a9e94f7..dd1692f 100755
 --- a/incdefs.sh
 +++ b/incdefs.sh
 @@ -27,7 +27,7 @@ user_flags()
