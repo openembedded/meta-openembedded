@@ -48,3 +48,5 @@ do_install_ptest() {
     install -Dm 0644 ${S}/tests/.pylint_primer_tests/.gitkeep ${D}${PTEST_PATH}/tests/.pylint_primer_tests/.gitkeep
     sed -i 's#/usr/bin/python$#/usr/bin/python3#g' ${D}${PTEST_PATH}/tests/data/ascript
 }
+
+BBCLASSEXTEND = "native nativesdk"
