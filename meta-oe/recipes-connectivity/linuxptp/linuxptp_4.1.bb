@@ -30,6 +30,11 @@ do_install() {
     install -d ${D}${docdir}/${PN}
     cp -R --no-dereference --preserve=mode,links ${S}/configs \
         ${D}${docdir}/${PN}
+
+    # Install default configuration files
+    install -d ${D}/${sysconfdir}/linuxptp/
+    install -m 644 ${S}/configs/default.cfg \
+        ${D}${sysconfdir}/linuxptp/ptp4l.conf
 }
 
 PACKAGES =+ "${PN}-configs"
