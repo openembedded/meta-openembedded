@@ -15,7 +15,7 @@ DEPENDS = " \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "0d63d125f899dbb1b932468f2f3b911f9c121e58"
+SRCREV = "ad320fc0e0ec2cd75a87fed454a9c7d6d1921464"
 
 PACKAGECONFIG ?= "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', d)}"
 
