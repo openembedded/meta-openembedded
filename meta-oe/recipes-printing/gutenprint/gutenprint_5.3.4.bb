@@ -12,18 +12,14 @@
 DESCRIPTION = "Gutenprint printer drivers"
 HOMEPAGE = "http://gimp-print.sourceforge.net/"
 LICENSE = "GPL-2.0-or-later"
-
-SRC_URI = "git://git.code.sf.net/p/gimp-print/source;protocol=https;branch=master"
-SRCREV = "66b0a7bc3fd25659a3f295db0ebb39d04e413c01"
-PV = "5.3.3+git${SRCPV}"
-
-S = "${WORKDIR}/git"
-
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+
+SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz"
+SRC_URI[sha256sum] = "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
 
 inherit autotools gettext pkgconfig
 
-DEPENDS += "glib-2.0-native cups gutenprint-native"
+DEPENDS += "glib-2.0-native cups gutenprint-native tiff libusb libpng libjpeg-turbo ghostscript"
 # autogen.sh needs autopoint
 DEPENDS:class-native = "glib-2.0-native gettext-native"
 
@@ -36,16 +32,9 @@ do_configure:prepend:class-target() {
     # So we are using the xmli18n-tmp.h created by gutenprint-native
     sed -i 's/all-local: xmli18n-tmp.h xml-stamp/all-local: xml-stamp/'  ${S}/src/xml/Makefile.am
     sed -i 's/dist-hook: xmli18n-tmp.h xml-stamp/dist-hook: xml-stamp/'  ${S}/src/xml/Makefile.am
+    sed -i '/$(AM_TESTS_ENVIRONMENT) .\/check_duplicate_printers.test/d'  ${S}/src/xml/printers/Makefile.am
     # Despite being a generated file, this needs to be in S.
     cp ${STAGING_DATADIR_NATIVE}/gutenprint/xmli18n-tmp.h ${S}/src/xml/
-}
-
-do_configure() {
-    # Need to call autogen.sh as that creates m4/stp_release.m4
-    cd ${S}
-    NOCONFIGURE=1 ./autogen.sh
-    cd ${B}
-    oe_runconf
 }
 
 do_install:append() {
