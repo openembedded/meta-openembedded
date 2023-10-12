@@ -29,7 +29,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
 SRC_URI:append:libc-musl = " \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
-           file://cmocka-uintptr_t.patch \
            "
 
 SRC_URI[sha256sum] = "4fb87bceaeb01d832a59046c197a044b7e8e8000581548b5d577a6cda03344d1"
@@ -43,7 +42,7 @@ CVE_STATUS[CVE-2011-2411] = "not-applicable-platform: vulnerable only on HP NonS
 # remove default added RDEPENDS on perl
 RDEPENDS:${PN}:remove = "perl"
 
-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 jansson libparse-yapp-perl-native gnutls"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 libtasn1-native jansson libparse-yapp-perl-native gnutls cmocka"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
@@ -105,7 +104,7 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
 # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
 # when adding to this list.
 #
-SAMBA4_LIBS="heimdal,cmocka,NONE"
+SAMBA4_LIBS="heimdal,NONE"
 
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
