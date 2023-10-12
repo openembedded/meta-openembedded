@@ -11,7 +11,7 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
 "
 
-SRCREV = "6d0c7f7b7f484b3cd2aaf2e2b3cc902c095b4946"
+SRCREV = "d67b48e595cb4612fd7fd47f97df6b8883ef7f60"
 SRC_URI = " \
     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
     file://90-OE-disable-session-dbus-dependent-features.lua \
@@ -133,7 +133,7 @@ CONFFILES:${PN} += " \
 # itself to become a daemon, in practice, the PipeWire daemon is used.
 RRECOMMENDS:${PN} += "pipewire ${PN}-scripts ${PN}-modules-meta"
 
-FILES:${PN} += "${systemd_user_unitdir} ${systemd_system_unitdir}"
+FILES:${PN} += "${systemd_user_unitdir} ${systemd_system_unitdir} ${datadir}/zsh"
 
 FILES:libwireplumber = " \
     ${libdir}/libwireplumber-*.so.* \
