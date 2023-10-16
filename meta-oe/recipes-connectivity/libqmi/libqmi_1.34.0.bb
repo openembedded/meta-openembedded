@@ -13,7 +13,7 @@ DEPENDS = "glib-2.0 glib-2.0-native"
 inherit meson pkgconfig bash-completion gobject-introspection
 
 SRCREV = "6e248aceb66f53b467b343bca1c467a8211dd30d"
-SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-32"
+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-34"
 
 S = "${WORKDIR}/git"
 
