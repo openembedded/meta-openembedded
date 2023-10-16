@@ -36,6 +36,7 @@ PTESTS_FAST_META_OE = "\
     uthash \
     xmlsec1 \
     zeromq \
+    cjson \
 "
 PTESTS_FAST_META_OE:append:x86 = " mcelog"
 PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
