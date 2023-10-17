@@ -4,14 +4,13 @@ HOMEPAGE = "https://github.com/google/leveldb"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=92d1b128950b11ba8495b64938fc164d"
 
-SRC_URI = "git://github.com/google/${BPN}.git;branch=main;protocol=https \
+SRC_URI = "gitsm://github.com/google/${BPN}.git;branch=main;protocol=https \
            file://run-ptest"
 
-SRCREV = "78b39d68c15ba020c0d60a3906fb66dbf1697595"
+SRCREV = "068d5ee1a3ac40dabd00d211d5013af44be55bea"
 S = "${WORKDIR}/git"
 
 inherit cmake ptest
-
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[benchmarks] = "-DLEVELDB_BUILD_BENCHMARKS=ON,-DLEVELDB_BUILD_BENCHMARKS=OFF,sqlite"
 PACKAGECONFIG[snappy] = ",,snappy"
