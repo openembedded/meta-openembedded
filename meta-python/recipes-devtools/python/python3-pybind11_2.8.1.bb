@@ -8,6 +8,7 @@ DEPENDS = "boost"
 SRC_URI = "git://github.com/pybind/pybind11.git;branch=master;protocol=https \
            file://0001-Do-not-strip-binaries.patch \
            file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
+	   file://0001-feat-cmake-add-installation-support-for-pkg-config-d.patch \
 "
 SRCREV = "f7b499615e14d70ab098a20deb0cdb3889998a1a"
 
