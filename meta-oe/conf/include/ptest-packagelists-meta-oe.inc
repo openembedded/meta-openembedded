@@ -50,6 +50,7 @@ PTESTS_SLOW_META_OE = "\
     libusb-compat \
     rsyslog \
     mariadb \
+    re2 \
 "
 PTESTS_SLOW_META_OE:append:x86 = " kernel-selftest"
 PTESTS_SLOW_META_OE:append:x86-64 = " kernel-selftest"
