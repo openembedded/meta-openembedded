@@ -16,6 +16,8 @@ inherit cmake
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
 S = "${WORKDIR}/git"
 
+ALLOW_EMPTY:${PN} = "1"
+
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
 
