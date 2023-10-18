@@ -24,6 +24,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
+           file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch \
+           file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch \
            file://run-ptest \
            "
 
