@@ -7,7 +7,7 @@ Before=time-sync.target
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/phc2sys -w -s %I
+ExecStart=@SBINDIR@/phc2sys -w -s %I
 
 [Install]
 WantedBy=multi-user.target

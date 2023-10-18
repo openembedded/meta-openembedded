@@ -5,7 +5,7 @@ After=sys-subsystem-net-devices-%i.device
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/ptp4l -f /etc/linuxptp/ptp4l.conf -i %I
+ExecStart=@SBINDIR@/ptp4l -f @SYSCONFDIR@/linuxptp/ptp4l.conf -i %I
 
 [Install]
 WantedBy=multi-user.target

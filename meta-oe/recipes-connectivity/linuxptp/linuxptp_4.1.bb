@@ -10,8 +10,8 @@ LINUXPTP_SRC_URI = "http://sourceforge.net/projects/linuxptp"
 SRC_URI = "${LINUXPTP_SRC_URI}/files/v4.1/linuxptp-${PV}.tgz \
            file://0001-include-string.h-for-strncpy.patch \
            file://0002-linuxptp-Use-CC-in-incdefs.sh.patch \
-           file://systemd/phc2sys@.service \
-           file://systemd/ptp4l@.service \
+           file://systemd/phc2sys@.service.in \
+           file://systemd/ptp4l@.service.in \
            "
 
 SRC_URI[md5sum] = "1db8699fc155965341759be5e5aad938"
@@ -22,14 +22,15 @@ inherit systemd
 UPSTREAM_CHECK_URI = "${LINUXPTP_SRC_URI}/files/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
 
-EXTRA_OEMAKE = "CC='${CC}' EXTRA_CFLAGS='${CFLAGS}' mandir='${mandir}'"
+EXTRA_OEMAKE = "CC='${CC}' EXTRA_CFLAGS='${CFLAGS}' mandir='${mandir}' \
+    sbindir='${sbindir}'"
 
 export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
 
 LINUXPTP_SYSTEMD_SERVICES = "phc2sys@.service ptp4l@.service"
 
 do_install() {
-    oe_runmake install DESTDIR=${D} prefix=${prefix}
+    oe_runmake install DESTDIR=${D}
 
     # Install example configs from source tree
     install -d ${D}${docdir}/${PN}
@@ -44,7 +45,11 @@ do_install() {
     # Install systemd services
     install -d ${D}/${systemd_unitdir}/system/
     for service in ${LINUXPTP_SYSTEMD_SERVICES}; do
-        install -m 644 ${WORKDIR}/systemd/$service \
+        sed -i -e 's,@SBINDIR@,${sbindir},g' \
+            ${WORKDIR}/systemd/$service.in
+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+            ${WORKDIR}/systemd/$service.in
+        install -m 644 ${WORKDIR}/systemd/$service.in \
             ${D}/${systemd_unitdir}/system/$service
     done
 }
