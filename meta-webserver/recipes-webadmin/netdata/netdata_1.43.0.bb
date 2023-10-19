@@ -5,11 +5,11 @@ HOMEPAGE = "https://github.com/netdata/netdata/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-DEPENDS += "libuv util-linux zlib"
+DEPENDS += "libuv util-linux zlib libyaml json-c"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
 "
-SRC_URI[sha256sum] = "f4a1233112b55e07e2862ffda0416255f0aa4c8e2b16929b76fa7ad6b69fd931"
+SRC_URI[sha256sum] = "d3c66273d8eb62290d412c870dcde45ea214ad187df9d5350f682d9e6d19d426"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
@@ -41,10 +41,10 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
 
-PACKAGECONFIG ??= "https"
-PACKAGECONFIG[cloud] = "--enable-cloud, --disable-cloud, json-c"
-PACKAGECONFIG[compression] = "--enable-compression, --disable-compression, lz4"
-PACKAGECONFIG[https] = "--enable-https, --disable-https, openssl"
+PACKAGECONFIG ??= "openssl"
+PACKAGECONFIG[cloud] = "--enable-cloud, --disable-cloud,"
+PACKAGECONFIG[lz4] = "--enable-lz4, --disable-lz4, lz4"
+PACKAGECONFIG[openssl] = "--enable-openssl, --disable-openssl, openssl"
 
 # ebpf doesn't compile (or detect) the cross compilation well
 EXTRA_OECONF += "--disable-ebpf"
