@@ -74,7 +74,7 @@ export WAF_NO_PREFORK="yes"
 # Use krb5. Build active domain controller.
 #
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd zeroconf', d)} \
-                   acl cups ad-dc ldap mitkrb5 \
+                   acl cups ldap mitkrb5 \
 "
 
 PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
