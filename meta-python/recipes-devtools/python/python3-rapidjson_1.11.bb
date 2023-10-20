@@ -27,6 +27,7 @@ DEPENDS += " \
 RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest \
     ${PYTHON_PN}-unittest-automake-output \
+    ${PYTHON_PN}-pytz \
 "
 
 RDEPENDS:${PN} += " \
