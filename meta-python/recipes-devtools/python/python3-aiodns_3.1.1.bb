@@ -4,8 +4,7 @@ HOMEPAGE = "https://github.com/saghul/aiodns"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a565d8b5d06b9620968a135a2657b093"
 
-SRC_URI[md5sum] = "181e11935c78965de2b2b7b0e5efba8d"
-SRC_URI[sha256sum] = "946bdfabe743fceeeb093c8a010f5d1645f708a241be849e17edfb0e49e08cd6"
+SRC_URI[sha256sum] = "1073eac48185f7a4150cad7f96a5192d6911f12b4fb894de80a088508c9b3a99"
 
 PYPI_PACKAGE = "aiodns"
 
