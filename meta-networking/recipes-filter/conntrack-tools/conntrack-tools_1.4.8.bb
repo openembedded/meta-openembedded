@@ -8,12 +8,12 @@ DEPENDS = "libnfnetlink libnetfilter-conntrack libnetfilter-cttimeout \
 
 EXTRA_OECONF += "LIBS=-ltirpc CPPFLAGS=-I${STAGING_INCDIR}/tirpc"
 
-SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2 \
+SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.xz \
     file://conntrack-failover \
     file://init \
     file://conntrackd.service \
 "
-SRC_URI[sha256sum] = "099debcf57e81690ced57f516b493588a73518f48c14d656f823b29b4fc24b5d"
+SRC_URI[sha256sum] = "067677f4c5f6564819e78ed3a9d4a8980935ea9273f3abb22a420ea30ab5ded6"
 
 inherit autotools update-rc.d pkgconfig systemd
 
