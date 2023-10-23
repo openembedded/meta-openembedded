@@ -7,7 +7,7 @@ SRC_URI += " \
         git://github.com/pylint-dev/pylint;branch=main;protocol=https \
         file://run-ptest \
         "
-SRCREV ?= "4a7ad5ea9f1c5a98ccf736578a00554be0da6dc7"
+SRCREV ?= "f2cded41f7f3d4b45236cbe107b366b6caf84bde"
 
 inherit python_setuptools_build_meta ptest
 
