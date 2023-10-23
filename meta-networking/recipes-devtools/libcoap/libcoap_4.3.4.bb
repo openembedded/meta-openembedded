@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
 SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
            file://run-ptest \
            "
-SRCREV = "9cde7cdee171e3f47486c6e70d479fdf49f3d2d6"
+SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
 
 S = "${WORKDIR}/git"
 
