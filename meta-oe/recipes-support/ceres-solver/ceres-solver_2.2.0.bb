@@ -1,12 +1,12 @@
 DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
 HOMEPAGE = "http://ceres-solver.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=bb761279816b72be19d7ce646e4e2a14"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3585a26c9cd9ec0cb36a7d65542878ca"
 
 DEPENDS = "libeigen glog"
 
 SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https"
-SRCREV = "f68321e7de8929fbcdb95dd42877531e64f72f66"
+SRCREV = "85331393dc0dff09f6fb9903ab0c4bfa3e134b01"
 
 S = "${WORKDIR}/git"
 
