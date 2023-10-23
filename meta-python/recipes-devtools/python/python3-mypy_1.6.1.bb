@@ -1,11 +1,11 @@
 SUMMARY = "Optional static typing for Python 3 and 2 (PEP 484)"
 HOMEPAGE = "https://github.com/python/mypy"
 LICENSE = "MIT & Python-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6ba8ec528da02073b7e1f4124c0f836f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8d62fd8f8648cb018e52857347e340b9"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "b031b9601f1060bf1281feab89697324726ba0c0bae9d7cd7ab4b690940f0b92"
+SRC_URI[sha256sum] = "4d01c00d09a0be62a4ca3f933e315455bde83f37f892ba4b08ce92f3cf44bcc1"
 
 BBCLASSEXTEND = "native"
 
