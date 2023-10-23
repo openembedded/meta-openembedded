@@ -9,7 +9,7 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
 
 SRC_URI = "https://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
-SRC_URI[sha256sum] = "0c26282305264be2217f335f3798f48b1dce3cf12c5a076bf231cadf77a6d6a8"
+SRC_URI[sha256sum] = "315640ab0719225d5cbcab130585c05f0791fcf073072a5fe9479969aa2b833b"
 
 # hardcoded here for use in dialog-static recipe
 S = "${WORKDIR}/dialog-${PV}"
