@@ -7,7 +7,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "Flask-JWT-Extended"
 
-SRC_URI[sha256sum] = "ba56245ba43b71c8ae936784b867625dce8b9956faeedec2953222e57942fb0b"
+SRC_URI[sha256sum] = "061ef3d25ed5743babe4964ab38f36d870e6d2fd8a126bab5d77ddef8a01932b"
 
 RDEPENDS:${PN} += "\
     python3-werkzeug \
