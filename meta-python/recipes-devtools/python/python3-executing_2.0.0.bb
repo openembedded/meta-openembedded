@@ -6,4 +6,4 @@ DEPENDS = "python3-setuptools-scm-native"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "19da64c18d2d851112f09c287f8d3dbbdf725ab0e569077efb6cdcbd3497c107"
+SRC_URI[sha256sum] = "0ff053696fdeef426cda5bd18eacd94f82c91f49823a2e9090124212ceea9b08"
