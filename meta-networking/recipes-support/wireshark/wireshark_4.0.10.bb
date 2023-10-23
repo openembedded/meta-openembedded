@@ -17,7 +17,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[sha256sum] = "16663585c0ffefd5593a6628d4a20cc8241b9703b11283cfe71ead2b750888c8"
+SRC_URI[sha256sum] = "b2e3ff03fa2be9058a9ffbedd12b0a670433bd16c8cc6c432ab48dabc2df1898"
 
 PE = "1"
 
