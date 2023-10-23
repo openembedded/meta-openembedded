@@ -9,7 +9,7 @@ DEPENDS = "libmnl libnftnl bison-native \
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "9373740de41a82dbc98818e0a46a073faeb8a8d0689fa4fa1a74399c32bf3d50"
+SRC_URI[sha256sum] = "a3c304cd9ba061239ee0474f9afb938a9bb99d89b960246f66f0c3a0a85e14cd"
 
 inherit autotools manpages pkgconfig ptest
 
@@ -23,8 +23,7 @@ PACKAGECONFIG[python] = ",, python3-setuptools-native"
 PACKAGECONFIG[readline] = "--with-cli=readline, , readline, , , editline linenoise"
 PACKAGECONFIG[xtables] = "--with-xtables, --without-xtables, iptables"
 
-# Disable the python via autoconf so we can build it separately via setuptools3
-EXTRA_OECONF = "--disable-python \
+EXTRA_OECONF = " \
     ${@bb.utils.contains_any('PACKAGECONFIG', 'editline linenoise readline', '', '--without-cli', d)}"
 
 SETUPTOOLS_SETUP_PATH = "${S}/py"
