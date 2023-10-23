@@ -29,7 +29,7 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "e58df0b5646111baf93ec5309b225d27b7c7f45deeee484af7914331b8cd2822"
+SRC_URI[archive.sha256sum] = "7dcbf32384897171cbe5483ec664d994e5e755e912ae1df911624f03c90867c2"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
