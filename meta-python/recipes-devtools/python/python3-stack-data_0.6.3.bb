@@ -8,7 +8,7 @@ PYPI_PACKAGE = "stack_data"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "32d2dd0376772d01b6cb9fc996f3c8b57a357089dec328ed4b6553d037eaf815"
+SRC_URI[sha256sum] = "836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9"
 
 RDEPENDS:${PN} = " \
     python3-asttokens \
