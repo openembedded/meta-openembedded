@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
 
-SRC_URI[sha256sum] = "eb94b40e4218a23aa8f90406b836a9e6ed83e48b8d112ce3f96408463bd1b874"
+SRC_URI[sha256sum] = "91865b210a4bfa86817537c0d934fac97fe671717f08665dc134551cfed3be13"
 
 PYPI_PACKAGE = "bitstruct"
 
