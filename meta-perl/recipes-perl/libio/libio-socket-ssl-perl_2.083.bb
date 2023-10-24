@@ -52,5 +52,3 @@ RDEPENDS:${PN}-ptest += "\
 do_install_ptest:append () {
     cp -r ${B}/t/certs ${D}${PTEST_PATH}
 }
-
-BBCLASSEXTEND = "native"
