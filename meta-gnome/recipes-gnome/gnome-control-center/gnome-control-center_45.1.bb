@@ -39,7 +39,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
 
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-SRC_URI[archive.sha256sum] = "83df6a90f98914f2c19a872ce06562acef40927637f679c383099265ccfa42cf"
+SRC_URI[archive.sha256sum] = "d286c7627150e112aacbb4b7b91717fad8e89076061479dfc610b2dd744b577a"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups"
