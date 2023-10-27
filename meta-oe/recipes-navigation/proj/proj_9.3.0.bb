@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 DEPENDS = "sqlite3 sqlite3-native"
 
 SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "003cd4010e52bb5eb8f7de1c143753aa830c8902b6ed01209f294846e40e6d39"
+SRC_URI[sha256sum] = "91a3695a004ea28db0448a34460bed4cc3b130e5c7d74339ec999efdab0e547d"
 
 inherit cmake lib_package
 
