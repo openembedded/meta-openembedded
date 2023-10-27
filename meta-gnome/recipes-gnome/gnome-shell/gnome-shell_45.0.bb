@@ -14,6 +14,7 @@ DEPENDS = " \
     gjs \
     gnome-autoar \
     polkit \
+    pipewire \
     libcroco \
     libsoup-3.0 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'startup-notification', d)} \
