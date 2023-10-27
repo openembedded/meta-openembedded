@@ -90,7 +90,6 @@ PACKAGECONFIG[soup2] = "--with-soup, --without-soup, libsoup-2.4, , , soup3"
 PACKAGECONFIG[soup3] = "--with-soup3, --without-soup3, libsoup, , , soup2"
 PACKAGECONFIG[static] = ""
 PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_system_unitdir}, --without-libsystemd, systemd"
-PACKAGECONFIG[trivial-httpd-cmdline] = "--enable-trivial-httpd-cmdline, --disable-trivial-httpd-cmdline"
 
 EXTRA_OECONF = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'static', '--with-static-compiler=\'${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}\'', '', d)} \
@@ -138,7 +137,6 @@ PACKAGE_BEFORE_PN = " \
     ${PN}-grub \
     ${PN}-mkinitcpio \
     ${PN}-switchroot \
-    ${PN}-trivial-httpd \
 "
 
 FILES:${PN} += " \
@@ -163,13 +161,7 @@ FILES:${PN}-switchroot = " \
     ${nonarch_libdir}/${BPN}/ostree-prepare-root \
     ${systemd_system_unitdir}/ostree-prepare-root.service \
 "
-FILES:${PN}-trivial-httpd = " \
-    ${libexecdir}/libostree/ostree-trivial-httpd \
-"
 
-RDEPENDS:${PN} = " \
-    ${@bb.utils.contains('PACKAGECONFIG', 'trivial-httpd-cmdline', '${PN}-trivial-httpd', '', d)} \
-"
 RDEPENDS:${PN}-dracut = "bash"
 RDEPENDS:${PN}-mkinitcpio = "bash"
 RDEPENDS:${PN}:class-target = " \
@@ -182,7 +174,6 @@ RDEPENDS:${PN}:class-target = " \
 #
 #   xattr in DISTRO_FEATURES (default)
 #   static ostree-prepare-root
-#   ostree-trivial-httpd (requires soup - note soup and curl can coexist)
 #   overlayfs in your kernel
 #   busybox built statically
 #   C.UTF-8 locale available (default)
@@ -208,7 +199,6 @@ RDEPENDS:${PN}-ptest += " \
     tar \
     util-linux \
     xz \
-    ${PN}-trivial-httpd \
     python3-pyyaml \
     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
 "
