@@ -73,6 +73,7 @@ PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --withou
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
 PACKAGECONFIG[ed25519-libsodium] = "--with-ed25519-libsodium, --without-ed25519-libsodium, libsodium"
+PACKAGECONFIG[ed25519-openssl] = "--with-openssl, --without-openssl, openssl"
 PACKAGECONFIG[gjs] = "ac_cv_path_GJS=${bindir}/gjs"
 PACKAGECONFIG[glib] = "--with-crypto=glib, , , , , gnutls openssl"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls, , , glib openssl"
