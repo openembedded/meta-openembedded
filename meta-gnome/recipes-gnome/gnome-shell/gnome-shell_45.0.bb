@@ -13,9 +13,9 @@ DEPENDS = " \
     geocode-glib \
     gjs \
     gnome-autoar \
+    gnome-desktop \
     polkit \
     pipewire \
-    libcroco \
     libsoup-3.0 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'startup-notification', d)} \
     ibus \
@@ -38,7 +38,7 @@ SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.pat
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
-PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false,networkmanager,networkmanager"
+PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false,networkmanager libsecret,networkmanager"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
 
 EXTRA_OEMESON = " \
