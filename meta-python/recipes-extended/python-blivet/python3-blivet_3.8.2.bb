@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI += "\
            file://0002-run_program-support-timeout.patch \
            file://0003-support-infinit-timeout.patch \
-           file://0004-fix-new.roots-object-is-not-iterable.patch \
            file://0005-fix-incorrect-timeout-while-system-time-changed.patch \
            file://0006-tweak-btrfs-packages.patch \
            file://0007-invoking-mount-with-infinite-timeout.patch \
@@ -17,16 +16,16 @@ SRC_URI += "\
            file://0010-invoking-mkfs-with-infinite-timeout.patch \
            file://0011-invoking-dd-with-infinite-timeout.patch \
 "
-SRC_URI[sha256sum] = "1b05b77f3ee35d82c7a577a168c9ba0204d3e9a87eb1975e5f9af47700eeff48"
+SRC_URI[sha256sum] = "88d1500c76c4660aec7da9e9aa54f7f574546571b52c07a67e1417883c2cb25b"
 
 inherit pypi features_check systemd setuptools3_legacy
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
-                  parted python3-pyparted multipath-tools \
-                  lsof cryptsetup libblockdev \
-                  libbytesize \
+                   parted python3-pyparted multipath-tools \
+                   lsof cryptsetup libblockdev \
+                   libbytesize \
 "
 
 FILES:${PN} += " \
