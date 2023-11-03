@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
 
-SRC_URI[sha256sum] = "c3c923dc63b7b1b02639c9179c81e3d9febf0887bbaa59775990229cdbedb88b"
+SRC_URI[sha256sum] = "fa4024a080121c958502f9a46a5bda44bea85e7a4dd7fcb3dead463b6fc4261c"
 
 # Enable all project features for ptest
 PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
@@ -20,8 +20,13 @@ FILES:${PN}-tools += "${bindir}/gpionotify"
 FILES:${PN}-ptest += "${libdir}/libgpiosim.so.*"
 FILES:${PN}-ptest-dev += "${includedir}/gpiosim.h"
 
+RDEPENDS:${PN}-ptest += " \
+    bash \
+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'shunit2', '', d)} \
+"
 RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim"
 
 do_install_ptest:append() {
+    install -m 0755 ${S}/tools/gpio-tools-test.bash ${D}${PTEST_PATH}/tests/
     install -m 0644 ${S}/tests/gpiosim/gpiosim.h ${D}${includedir}/gpiosim.h
 }
