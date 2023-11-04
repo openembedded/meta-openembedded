@@ -1,0 +1,123 @@
+From efc75948253c1a8db482daabf45d9eabaaf4b099 Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Wed, 17 Jul 2019 19:41:04 +0200
+Subject: [PATCH] Close log files when reusing a name.
+
+---
+ src/torrent/utils/log.cc             | 20 ++++++++++++++++----
+ src/torrent/utils/log.h              |  7 +++++++
+ test/torrent/tracker_timeout_test.cc |  8 ++++----
+ test/torrent/utils/log_test.cc       | 12 ++++++------
+ 4 files changed, 33 insertions(+), 14 deletions(-)
+
+diff --git a/src/torrent/utils/log.cc b/src/torrent/utils/log.cc
+index 58b563a6..5169a730 100644
+--- a/src/torrent/utils/log.cc
++++ b/src/torrent/utils/log.cc
+@@ -294,12 +294,16 @@ log_open_output(const char* name, log_slot slot) {
+     throw input_error("Cannot open more than 64 log output handlers.");
+   }
+   
+-  if (log_find_output_name(name) != log_outputs.end()) {
+-    pthread_mutex_unlock(&log_mutex);
+-    throw input_error("Log name already used.");
++  log_output_list::iterator itr = log_find_output_name(name);
++
++  if (itr == log_outputs.end()) {
++    log_outputs.push_back(std::make_pair(name, slot));
++  } else {
++    // by replacing the "write" slot binding, the old file gets closed
++    // (handles are shared pointers)
++    itr->second = slot;
+   }
+ 
+-  log_outputs.push_back(std::make_pair(name, slot));
+   log_rebuild_cache();
+ 
+   pthread_mutex_unlock(&log_mutex);
+@@ -307,6 +311,14 @@ log_open_output(const char* name, log_slot slot) {
+ 
+ void
+ log_close_output(const char* name) {
++  pthread_mutex_lock(&log_mutex);
++
++  log_output_list::iterator itr = log_find_output_name(name);
++
++  if (itr != log_outputs.end())
++    log_outputs.erase(itr);
++
++  pthread_mutex_unlock(&log_mutex);
+ }
+ 
+ void
+diff --git a/src/torrent/utils/log.h b/src/torrent/utils/log.h
+index a053d6ec..430bda5e 100644
+--- a/src/torrent/utils/log.h
++++ b/src/torrent/utils/log.h
+@@ -229,6 +229,7 @@ void log_cleanup() LIBTORRENT_EXPORT;
+ 
+ void log_open_output(const char* name, log_slot slot) LIBTORRENT_EXPORT;
+ void log_close_output(const char* name) LIBTORRENT_EXPORT;
++void log_close_output_str(const std::string name) LIBTORRENT_EXPORT;
+ 
+ void log_add_group_output(int group, const char* name) LIBTORRENT_EXPORT;
+ void log_remove_group_output(int group, const char* name) LIBTORRENT_EXPORT;
+@@ -240,6 +241,12 @@ void        log_open_file_output(const char* name, const char* filename) LIBTORR
+ void        log_open_gz_file_output(const char* name, const char* filename) LIBTORRENT_EXPORT;
+ log_buffer* log_open_log_buffer(const char* name) LIBTORRENT_EXPORT;
+ 
++//
++// Implementation:
++//
++
++inline void log_close_output_str(const std::string name) { log_close_output(name.c_str()); }
++
+ }
+ 
+ #endif
+diff --git a/test/torrent/tracker_timeout_test.cc b/test/torrent/tracker_timeout_test.cc
+index 081b9301..cd060006 100644
+--- a/test/torrent/tracker_timeout_test.cc
++++ b/test/torrent/tracker_timeout_test.cc
+@@ -29,13 +29,13 @@ tracker_timeout_test::test_set_timeout() {
+ 
+   tracker.set_new_normal_interval(100);
+   CPPUNIT_ASSERT(tracker.normal_interval() == 600);
+-  tracker.set_new_normal_interval(4000);
+-  CPPUNIT_ASSERT(tracker.normal_interval() == 3600);
++  tracker.set_new_normal_interval(8 * 4000);
++  CPPUNIT_ASSERT(tracker.normal_interval() == 8 * 3600);
+ 
+   tracker.set_new_min_interval(100);
+   CPPUNIT_ASSERT(tracker.min_interval() == 300);
+-  tracker.set_new_min_interval(4000);
+-  CPPUNIT_ASSERT(tracker.min_interval() == 1800);
++  tracker.set_new_min_interval(4 * 4000);
++  CPPUNIT_ASSERT(tracker.min_interval() == 4 * 3600);
+ }
+ 
+ void
+diff --git a/test/torrent/utils/log_test.cc b/test/torrent/utils/log_test.cc
+index 9b99c245..24c22b59 100644
+--- a/test/torrent/utils/log_test.cc
++++ b/test/torrent/utils/log_test.cc
+@@ -75,13 +75,13 @@ utils_log_test::test_output_open() {
+   // Test inserting duplicate names, should catch.
+   // CPPUNIT_ASSERT_THROW(torrent::log_open_output("test_output_1", torrent::log_slot());, torrent::input_error);
+ 
+-  try {
+-    torrent::log_open_output("test_output_1", torrent::log_slot());
+-  } catch (torrent::input_error& e) {
+-    return;
+-  }
++  // try {
++  //   torrent::log_open_output("test_output_1", torrent::log_slot());
++  // } catch (torrent::input_error& e) {
++  //   return;
++  // }
+ 
+-  CPPUNIT_ASSERT(false);
++  // CPPUNIT_ASSERT(false);
+ 
+   // Test more than 64 entries.
+ }

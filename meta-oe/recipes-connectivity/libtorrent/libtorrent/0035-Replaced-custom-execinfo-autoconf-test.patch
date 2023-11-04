@@ -1,0 +1,48 @@
+From b4a3888bd891d804a83ae1cee623592725975895 Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Sat, 27 Feb 2021 22:11:55 +0900
+Subject: [PATCH] Replaced custom execinfo autoconf test.
+
+---
+ configure.ac            |  2 +-
+ scripts/rak_execinfo.m4 | 11 -----------
+ 2 files changed, 1 insertion(+), 12 deletions(-)
+ delete mode 100644 scripts/rak_execinfo.m4
+
+diff --git a/configure.ac b/configure.ac
+index 88a46edd..197bbc94 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -34,7 +34,6 @@ RAK_CHECK_CXXFLAGS
+ RAK_ENABLE_DEBUG
+ RAK_ENABLE_EXTRA_DEBUG
+ RAK_ENABLE_WERROR
+-RAK_DISABLE_BACKTRACE
+ 
+ RAK_CHECK_CXX11
+ 
+@@ -58,6 +57,7 @@ TORRENT_WITH_INOTIFY
+ CC_ATTRIBUTE_VISIBILITY
+ 
+ AX_CHECK_ZLIB
++AX_EXECINFO
+ AX_PTHREAD
+ 
+ PKG_CHECK_MODULES([CPPUNIT], [cppunit],, [no_cppunit="yes"])
+diff --git a/scripts/rak_execinfo.m4 b/scripts/rak_execinfo.m4
+deleted file mode 100644
+index c1d9b2f8..00000000
+--- a/scripts/rak_execinfo.m4
++++ /dev/null
+@@ -1,11 +0,0 @@
+-AC_DEFUN([RAK_DISABLE_BACKTRACE], [
+-  AC_ARG_ENABLE(backtrace,
+-    AC_HELP_STRING([--disable-backtrace], [disable backtrace information [[default=no]]]),
+-    [
+-        if test "$enableval" = "yes"; then
+-            AX_EXECINFO
+-        fi
+-    ],[
+-        AX_EXECINFO
+-    ])
+-])

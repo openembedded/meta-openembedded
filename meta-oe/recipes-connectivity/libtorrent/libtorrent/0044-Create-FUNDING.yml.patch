@@ -1,0 +1,29 @@
+From eca577e2a29d64251b5df1c69be53c5b1ffe6bde Mon Sep 17 00:00:00 2001
+From: Jari Sundell <sundell.software@gmail.com>
+Date: Thu, 8 Sep 2022 05:08:44 +0900
+Subject: [PATCH] Create FUNDING.yml
+
+---
+ .github/FUNDING.yml | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 .github/FUNDING.yml
+
+diff --git a/.github/FUNDING.yml b/.github/FUNDING.yml
+new file mode 100644
+index 00000000..ad5998e8
+--- /dev/null
++++ b/.github/FUNDING.yml
+@@ -0,0 +1,13 @@
++# These are supported funding model platforms
++
++github: [rakshasa]
++patreon: rtorrent
++open_collective: # Replace with a single Open Collective username
++ko_fi: # Replace with a single Ko-fi username
++tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
++community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
++liberapay: # Replace with a single Liberapay username
++issuehunt: # Replace with a single IssueHunt username
++otechie: # Replace with a single Otechie username
++lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
++custom: ['https://rakshasa.github.io/rtorrent/donate.html']

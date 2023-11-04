@@ -1,0 +1,101 @@
+From df54913c34c8b584d6d2072a65ad1590766780c5 Mon Sep 17 00:00:00 2001
+From: nicholi <nschell@gmail.com>
+Date: Fri, 26 Jul 2019 00:50:52 -0700
+Subject: [PATCH] Removed log append function. Added append parameter with
+ default value (false) to log_open_file functions.
+
+---
+ src/torrent/utils/log.cc       | 26 ++++++++------------------
+ src/torrent/utils/log.h        |  5 ++---
+ test/torrent/utils/log_test.cc |  4 ++--
+ 3 files changed, 12 insertions(+), 23 deletions(-)
+
+diff --git a/src/torrent/utils/log.cc b/src/torrent/utils/log.cc
+index a900c109..6c605474 100644
+--- a/src/torrent/utils/log.cc
++++ b/src/torrent/utils/log.cc
+@@ -73,7 +73,7 @@ struct log_cache_entry {
+ };
+ 
+ struct log_gz_output {
+-  log_gz_output(const char* filename) { gz_file = gzopen(filename, "w"); }
++  log_gz_output(const char* filename, bool append) { gz_file = gzopen(filename, append ? "a" : "w"); }
+   ~log_gz_output() { if (gz_file != NULL) gzclose(gz_file); }
+ 
+   bool is_valid() { return gz_file != Z_NULL; }
+@@ -416,8 +416,11 @@ log_gz_file_write(std::shared_ptr<log_gz_output>& outfile, const char* data, siz
+ }
+ 
+ void
+-log_open_file_output(const char* name, const char* filename) {
+-  std::shared_ptr<std::ofstream> outfile(new std::ofstream(filename));
++log_open_file_output(const char* name, const char* filename, bool append) {
++  std::ios_base::openmode mode = std::ofstream::out;
++  if (append)
++    mode |= std::ofstream::app;
++  std::shared_ptr<std::ofstream> outfile(new std::ofstream(filename, mode));
+ 
+   if (!outfile->good())
+     throw input_error("Could not open log file '" + std::string(filename) + "'.");
+@@ -429,21 +432,8 @@ log_open_file_output(const char* name, const char* filename) {
+ }
+ 
+ void
+-log_open_file_output_append(const char* name, const char* filename) {
+-  std::shared_ptr<std::ofstream> outfile(new std::ofstream(filename, std::ofstream::out | std::ofstream::app));
+-
+-  if (!outfile->good())
+-    throw input_error("Could not open log file '" + std::string(filename) + "'.");
+-
+-  log_open_output(name, std::bind(&log_file_write, outfile,
+-                                  std::placeholders::_1,
+-                                  std::placeholders::_2,
+-                                  std::placeholders::_3));
+-}
+-
+-void
+-log_open_gz_file_output(const char* name, const char* filename) {
+-  std::shared_ptr<log_gz_output> outfile(new log_gz_output(filename));
++log_open_gz_file_output(const char* name, const char* filename, bool append) {
++  std::shared_ptr<log_gz_output> outfile(new log_gz_output(filename, append));
+ 
+   if (!outfile->is_valid())
+     throw input_error("Could not open log gzip file '" + std::string(filename) + "'.");
+diff --git a/src/torrent/utils/log.h b/src/torrent/utils/log.h
+index 531c8565..0dfdc86b 100644
+--- a/src/torrent/utils/log.h
++++ b/src/torrent/utils/log.h
+@@ -237,9 +237,8 @@ void log_remove_group_output(int group, const char* name) LIBTORRENT_EXPORT;
+ void log_add_child(int group, int child) LIBTORRENT_EXPORT;
+ void log_remove_child(int group, int child) LIBTORRENT_EXPORT;
+ 
+-void        log_open_file_output(const char* name, const char* filename) LIBTORRENT_EXPORT;
+-void        log_open_file_output_append(const char* name, const char* filename) LIBTORRENT_EXPORT;
+-void        log_open_gz_file_output(const char* name, const char* filename) LIBTORRENT_EXPORT;
++void        log_open_file_output(const char* name, const char* filename, bool append = false) LIBTORRENT_EXPORT;
++void        log_open_gz_file_output(const char* name, const char* filename, bool append = false) LIBTORRENT_EXPORT;
+ log_buffer* log_open_log_buffer(const char* name) LIBTORRENT_EXPORT;
+ 
+ //
+diff --git a/test/torrent/utils/log_test.cc b/test/torrent/utils/log_test.cc
+index aa13fff8..9f975636 100644
+--- a/test/torrent/utils/log_test.cc
++++ b/test/torrent/utils/log_test.cc
+@@ -162,7 +162,7 @@ utils_log_test::test_file_output_append() {
+ 
+   mktemp(&*filename.begin());
+ 
+-  torrent::log_open_file_output_append("test_file", filename.c_str());
++  torrent::log_open_file_output("test_file", filename.c_str(), false);
+   torrent::log_add_group_output(GROUP_PARENT_1, "test_file");
+ 
+   lt_log_print(GROUP_PARENT_1, "test_line_1");
+@@ -170,7 +170,7 @@ utils_log_test::test_file_output_append() {
+   torrent::log_cleanup(); // To ensure we flush the buffers.
+ 
+   // re-open and write 2nd line
+-  torrent::log_open_file_output_append("test_file", filename.c_str());
++  torrent::log_open_file_output("test_file", filename.c_str(), true);
+   torrent::log_add_group_output(GROUP_PARENT_1, "test_file");
+ 
+   lt_log_print(GROUP_PARENT_1, "test_line_2");

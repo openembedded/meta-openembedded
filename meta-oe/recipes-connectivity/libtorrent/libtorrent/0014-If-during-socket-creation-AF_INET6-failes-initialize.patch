@@ -1,0 +1,27 @@
+From 1890bde5c051d932d1b2940e815d0c82964c474c Mon Sep 17 00:00:00 2001
+From: Gleb Smirnoff <glebius@FreeBSD.org>
+Date: Tue, 2 Oct 2018 18:57:43 -0700
+Subject: [PATCH] If during socket creation AF_INET6 failes initialize sockaddr
+ as AF_INET. Otherwise any bind(2) would fail due to sockaddr address family
+ not matching socket address family.
+
+---
+ src/net/listen.cc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/net/listen.cc b/src/net/listen.cc
+index da1c2e84..d424e94c 100644
+--- a/src/net/listen.cc
++++ b/src/net/listen.cc
+@@ -75,7 +75,10 @@ Listen::open(uint16_t first, uint16_t last, int backlog, const rak::socket_addre
+ 
+   // TODO: Temporary until we refactor:
+   if (bindAddress->family() == 0) {
+-    sa.sa_inet6()->clear();
++    if (m_ipv6_socket)
++      sa.sa_inet6()->clear();
++    else
++      sa.sa_inet()->clear();
+   } else {
+     sa.copy(*bindAddress, bindAddress->length());
+   }

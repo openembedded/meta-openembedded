@@ -1,0 +1,60 @@
+From 2f197be69057f793d29272b90300f74d0b588d51 Mon Sep 17 00:00:00 2001
+From: chros <chros@chrosGX620>
+Date: Mon, 15 May 2017 19:24:33 +0100
+Subject: [PATCH] Strip tags also when displaying info on failed tracker
+ bencode parsing (See #9)
+
+---
+ rak/string_manip.h          | 25 +++++++++++++++++++++++++
+ src/tracker/tracker_http.cc |  2 +-
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/rak/string_manip.h b/rak/string_manip.h
+index 68614d2a..ae867c98 100644
+--- a/rak/string_manip.h
++++ b/rak/string_manip.h
+@@ -391,6 +391,31 @@ sanitize(const Sequence& src) {
+     return trim(sanitize(src.begin(), src.end()));
+ }
+ 
++template <typename Iterator>
++std::string striptags(Iterator first, Iterator last) {
++  bool copychar = true;
++  std::string dest;
++
++  for (; first != last; ++first) {
++    if (std::isprint(*first) && *first == '<') {
++      copychar = false;
++    } else if (std::isprint(*first) && *first == '>') {
++      copychar = true;
++      continue;
++    }
++
++    if (copychar)
++      dest += *first;
++  }
++
++  return dest;
++}
++
++template <typename Sequence>
++std::string striptags(const Sequence& src) {
++    return striptags(src.begin(), src.end());
++}
++
+ }
+ 
+ #endif
+diff --git a/src/tracker/tracker_http.cc b/src/tracker/tracker_http.cc
+index b6d9e0ac..eefe5a17 100644
+--- a/src/tracker/tracker_http.cc
++++ b/src/tracker/tracker_http.cc
+@@ -290,7 +290,7 @@ TrackerHttp::receive_done() {
+ 
+   if (m_data->fail()) {
+     std::string dump = m_data->str();
+-    return receive_failed("Could not parse bencoded data: " + rak::sanitize(dump).substr(0,99));
++    return receive_failed("Could not parse bencoded data: " + rak::sanitize(rak::striptags(dump)).substr(0,99));
+   }
+ 
+   if (!b.is_map())

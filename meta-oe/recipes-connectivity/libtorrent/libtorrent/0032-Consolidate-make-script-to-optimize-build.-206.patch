@@ -1,0 +1,843 @@
+From 7b85e112ac2f59a39afa344148a946553c776142 Mon Sep 17 00:00:00 2001
+From: Jari Sundell <sundell.software@gmail.com>
+Date: Fri, 6 Dec 2019 00:35:21 +0900
+Subject: [PATCH] Consolidate make script to optimize build. (#206)
+
+---
+ configure.ac                     |  14 +--
+ src/Makefile.am                  | 147 ++++++++++++++++++++++++-----
+ src/data/Makefile.am             |  28 ------
+ src/dht/Makefile.am              |  18 ----
+ src/download/Makefile.am         |  19 ----
+ src/net/Makefile.am              |  30 ------
+ src/protocol/Makefile.am         |  28 ------
+ src/torrent/Makefile.am          | 154 ++++++++++++++++++++++++++++---
+ src/torrent/download/Makefile.am |  22 -----
+ src/torrent/net/Makefile.am      |  25 -----
+ src/torrent/peer/Makefile.am     |  28 ------
+ src/torrent/utils/Makefile.am    |  41 --------
+ src/tracker/Makefile.am          |  11 ---
+ src/utils/Makefile.am            |  14 ---
+ test/Makefile.am                 |  92 +++++++++++++-----
+ 15 files changed, 338 insertions(+), 333 deletions(-)
+ delete mode 100644 src/data/Makefile.am
+ delete mode 100644 src/dht/Makefile.am
+ delete mode 100644 src/download/Makefile.am
+ delete mode 100644 src/net/Makefile.am
+ delete mode 100644 src/protocol/Makefile.am
+ delete mode 100644 src/torrent/download/Makefile.am
+ delete mode 100644 src/torrent/net/Makefile.am
+ delete mode 100644 src/torrent/peer/Makefile.am
+ delete mode 100644 src/torrent/utils/Makefile.am
+ delete mode 100644 src/tracker/Makefile.am
+ delete mode 100644 src/utils/Makefile.am
+
+diff --git a/configure.ac b/configure.ac
+index b6708366..e83710cc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -17,7 +17,7 @@ AC_SUBST(LIBTORRENT_CURRENT)
+ AC_SUBST(LIBTORRENT_INTERFACE_VERSION_INFO)
+ AC_SUBST(LIBTORRENT_INTERFACE_VERSION_NO)
+ 
+-AM_INIT_AUTOMAKE([serial-tests])
++AM_INIT_AUTOMAKE([serial-tests subdir-objects])
+ AC_CONFIG_HEADERS(config.h)
+ 
+ AC_PROG_CXX
+@@ -98,18 +98,6 @@ AC_OUTPUT([
+ 	Makefile
+ 	src/Makefile
+ 	src/torrent/Makefile
+-	src/torrent/data/Makefile
+-	src/torrent/download/Makefile
+-	src/torrent/net/Makefile
+-	src/torrent/peer/Makefile
+-	src/torrent/utils/Makefile
+-	src/data/Makefile
+-	src/dht/Makefile
+-	src/download/Makefile
+-	src/net/Makefile
+-	src/protocol/Makefile
+-	src/tracker/Makefile
+-	src/utils/Makefile
+         test/Makefile
+         test/torrent/net/Makefile
+         test/net/Makefile
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 99aaace0..e96bd74b 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,30 +1,12 @@
+-SUBDIRS = \
+-	torrent \
+-	data \
+-	dht \
+-	download \
+-	net \
+-	protocol \
+-	tracker \
+-	utils
++SUBDIRS = torrent
+ 
+ lib_LTLIBRARIES = libtorrent.la
++noinst_LTLIBRARIES = libtorrent_other.la
+ 
+ libtorrent_la_LDFLAGS = -version-info $(LIBTORRENT_INTERFACE_VERSION_INFO)
+ libtorrent_la_LIBADD = \
+-	torrent/libsub_torrent.la \
+-	torrent/data/libsub_torrentdata.la \
+-	torrent/download/libsub_torrentdownload.la \
+-	torrent/net/libsub_torrentnet.la \
+-	torrent/peer/libsub_torrentpeer.la \
+-	torrent/utils/libsub_torrentutils.la \
+-	data/libsub_data.la \
+-	dht/libsub_dht.la \
+-	download/libsub_download.la \
+-	net/libsub_net.la \
+-	protocol/libsub_protocol.la \
+-	tracker/libsub_tracker.la \
+-	utils/libsub_utils.la
++	torrent/libtorrent_torrent.la \
++	libtorrent_other.la
+ 
+ libtorrent_la_SOURCES = \
+ 	globals.cc \
+@@ -36,4 +18,125 @@ libtorrent_la_SOURCES = \
+ 	thread_main.cc \
+ 	thread_main.h
+ 
++libtorrent_other_la_SOURCES = \
++	data/chunk.cc \
++	data/chunk.h \
++	data/chunk_handle.h \
++	data/chunk_iterator.h \
++	data/chunk_list.cc \
++	data/chunk_list.h \
++	data/chunk_list_node.h \
++	data/chunk_part.cc \
++	data/chunk_part.h \
++	data/hash_check_queue.cc \
++	data/hash_check_queue.h \
++	data/hash_chunk.cc \
++	data/hash_chunk.h \
++	data/hash_queue.cc \
++	data/hash_queue.h \
++	data/hash_queue_node.cc \
++	data/hash_queue_node.h \
++	data/hash_torrent.cc \
++	data/hash_torrent.h \
++	data/memory_chunk.cc \
++	data/memory_chunk.h \
++	data/socket_file.cc \
++	data/socket_file.h \
++	\
++	dht/dht_bucket.cc \
++	dht/dht_bucket.h \
++	dht/dht_hash_map.h \
++	dht/dht_node.cc \
++	dht/dht_node.h \
++	dht/dht_router.cc \
++	dht/dht_router.h \
++	dht/dht_server.cc \
++	dht/dht_server.h \
++	dht/dht_tracker.cc \
++	dht/dht_tracker.h \
++	dht/dht_transaction.cc \
++	dht/dht_transaction.h \
++	\
++	download/available_list.cc \
++	download/available_list.h \
++	download/chunk_selector.cc \
++	download/chunk_selector.h \
++	download/chunk_statistics.cc \
++	download/chunk_statistics.h \
++	download/delegator.cc \
++	download/delegator.h \
++	download/download_constructor.cc \
++	download/download_constructor.h \
++	download/download_main.cc \
++	download/download_main.h \
++	download/download_wrapper.cc \
++	download/download_wrapper.h \
++	\
++	net/address_list.cc \
++	net/address_list.h \
++	net/data_buffer.h \
++	net/local_addr.cc \
++	net/local_addr.h \
++	net/listen.cc \
++	net/listen.h \
++	net/protocol_buffer.h \
++	net/socket_base.cc \
++	net/socket_base.h \
++	net/socket_datagram.cc \
++	net/socket_datagram.h \
++	net/socket_fd.cc \
++	net/socket_fd.h \
++	net/socket_listen.cc \
++	net/socket_listen.h \
++	net/socket_set.cc \
++	net/socket_set.h \
++	net/socket_stream.cc \
++	net/socket_stream.h \
++	net/throttle_internal.cc \
++	net/throttle_internal.h \
++	net/throttle_list.cc \
++	net/throttle_list.h \
++	net/throttle_node.h \
++	\
++	protocol/encryption_info.h \
++	protocol/extensions.cc \
++	protocol/extensions.h \
++	protocol/handshake.cc \
++	protocol/handshake.h \
++	protocol/handshake_encryption.cc \
++	protocol/handshake_encryption.h \
++	protocol/handshake_manager.cc \
++	protocol/handshake_manager.h \
++	protocol/initial_seed.cc \
++	protocol/initial_seed.h \
++	protocol/peer_chunks.h \
++	protocol/peer_connection_base.cc \
++	protocol/peer_connection_base.h \
++	protocol/peer_connection_leech.cc \
++	protocol/peer_connection_leech.h \
++	protocol/peer_connection_metadata.cc \
++	protocol/peer_connection_metadata.h \
++	protocol/peer_factory.cc \
++	protocol/peer_factory.h \
++	protocol/protocol_base.h \
++	protocol/request_list.cc \
++	protocol/request_list.h \
++	\
++	tracker/tracker_dht.cc \
++	tracker/tracker_dht.h \
++	tracker/tracker_http.cc \
++	tracker/tracker_http.h \
++	tracker/tracker_udp.cc \
++	tracker/tracker_udp.h \
++	\
++	utils/diffie_hellman.cc \
++	utils/diffie_hellman.h \
++	utils/instrumentation.cc \
++	utils/instrumentation.h \
++	utils/rc4.h \
++	utils/sha1.h \
++	utils/sha_fast.cc \
++	utils/sha_fast.h \
++	utils/queue_buckets.h
++
+ AM_CPPFLAGS = -I$(srcdir) -I$(top_srcdir)
+diff --git a/src/data/Makefile.am b/src/data/Makefile.am
+deleted file mode 100644
+index ef41c9bd..00000000
+--- a/src/data/Makefile.am
++++ /dev/null
+@@ -1,28 +0,0 @@
+-noinst_LTLIBRARIES = libsub_data.la
+-
+-libsub_data_la_SOURCES = \
+-	chunk.cc \
+-	chunk.h \
+-	chunk_handle.h \
+-	chunk_iterator.h \
+-	chunk_list.cc \
+-	chunk_list.h \
+-	chunk_list_node.h \
+-	chunk_part.cc \
+-	chunk_part.h \
+-	hash_check_queue.cc \
+-	hash_check_queue.h \
+-	hash_chunk.cc \
+-	hash_chunk.h \
+-	hash_queue.cc \
+-	hash_queue.h \
+-	hash_queue_node.cc \
+-	hash_queue_node.h \
+-	hash_torrent.cc \
+-	hash_torrent.h \
+-	memory_chunk.cc \
+-	memory_chunk.h \
+-	socket_file.cc \
+-	socket_file.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/dht/Makefile.am b/src/dht/Makefile.am
+deleted file mode 100644
+index a87c57bc..00000000
+--- a/src/dht/Makefile.am
++++ /dev/null
+@@ -1,18 +0,0 @@
+-noinst_LTLIBRARIES = libsub_dht.la
+-
+-libsub_dht_la_SOURCES = \
+-	dht_bucket.cc \
+-	dht_bucket.h \
+-	dht_hash_map.h \
+-	dht_node.cc \
+-	dht_node.h \
+-	dht_router.cc \
+-	dht_router.h \
+-	dht_server.cc \
+-	dht_server.h \
+-	dht_tracker.cc \
+-	dht_tracker.h \
+-	dht_transaction.cc \
+-	dht_transaction.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/download/Makefile.am b/src/download/Makefile.am
+deleted file mode 100644
+index 65ceaf97..00000000
+--- a/src/download/Makefile.am
++++ /dev/null
+@@ -1,19 +0,0 @@
+-noinst_LTLIBRARIES = libsub_download.la
+-
+-libsub_download_la_SOURCES = \
+-	available_list.cc \
+-	available_list.h \
+-	chunk_selector.cc \
+-	chunk_selector.h \
+-	chunk_statistics.cc \
+-	chunk_statistics.h \
+-	delegator.cc \
+-	delegator.h \
+-	download_constructor.cc \
+-	download_constructor.h \
+-	download_main.cc \
+-	download_main.h \
+-	download_wrapper.cc \
+-	download_wrapper.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/net/Makefile.am b/src/net/Makefile.am
+deleted file mode 100644
+index e3a8c7e1..00000000
+--- a/src/net/Makefile.am
++++ /dev/null
+@@ -1,30 +0,0 @@
+-noinst_LTLIBRARIES = libsub_net.la
+-
+-libsub_net_la_SOURCES = \
+-	address_list.cc \
+-	address_list.h \
+-	data_buffer.h \
+-	local_addr.cc \
+-	local_addr.h \
+-	listen.cc \
+-	listen.h \
+-	protocol_buffer.h \
+-	socket_base.cc \
+-        socket_base.h \
+-	socket_datagram.cc \
+-	socket_datagram.h \
+-	socket_fd.cc \
+-	socket_fd.h \
+-	socket_listen.cc \
+-	socket_listen.h \
+-	socket_set.cc \
+-	socket_set.h \
+-	socket_stream.cc \
+-	socket_stream.h \
+-	throttle_internal.cc \
+-	throttle_internal.h \
+-	throttle_list.cc \
+-	throttle_list.h \
+-	throttle_node.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/protocol/Makefile.am b/src/protocol/Makefile.am
+deleted file mode 100644
+index 2e9aba7a..00000000
+--- a/src/protocol/Makefile.am
++++ /dev/null
+@@ -1,28 +0,0 @@
+-noinst_LTLIBRARIES = libsub_protocol.la
+-
+-libsub_protocol_la_SOURCES = \
+-        encryption_info.h \
+-        extensions.cc \
+-        extensions.h \
+-        handshake.cc \
+-        handshake.h \
+-	handshake_encryption.cc \
+-	handshake_encryption.h \
+-        handshake_manager.cc \
+-        handshake_manager.h \
+-	initial_seed.cc \
+-	initial_seed.h \
+-	peer_chunks.h \
+-	peer_connection_base.cc \
+-	peer_connection_base.h \
+-	peer_connection_leech.cc \
+-	peer_connection_leech.h \
+-	peer_connection_metadata.cc \
+-	peer_connection_metadata.h \
+-	peer_factory.cc \
+-	peer_factory.h \
+-	protocol_base.h \
+-	request_list.cc \
+-	request_list.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/torrent/Makefile.am b/src/torrent/Makefile.am
+index 8cd26ce7..30157b95 100644
+--- a/src/torrent/Makefile.am
++++ b/src/torrent/Makefile.am
+@@ -1,13 +1,89 @@
+-SUBDIRS = \
+-	data \
+-	download \
+-	net \
+-	peer \
+-	utils
++noinst_LTLIBRARIES = libtorrent_torrent.la
+ 
+-noinst_LTLIBRARIES = libsub_torrent.la
+-
+-libsub_torrent_la_SOURCES = \
++libtorrent_torrent_la_SOURCES = \
++	data/block.cc \
++	data/block.h \
++	data/block_failed.h \
++	data/block_list.cc \
++	data/block_list.h \
++	data/block_transfer.h \
++	data/chunk_utils.cc \
++	data/chunk_utils.h \
++	data/download_data.cc \
++	data/download_data.h \
++	data/file.cc \
++	data/file.h \
++	data/file_list.cc \
++	data/file_list.h \
++	data/file_list_iterator.cc \
++	data/file_list_iterator.h \
++	data/file_manager.cc \
++	data/file_manager.h \
++	data/file_utils.cc \
++	data/file_utils.h \
++	data/piece.h \
++	data/transfer_list.cc \
++	data/transfer_list.h \
++\
++	download/choke_group.cc \
++	download/choke_group.h \
++	download/choke_queue.cc \
++	download/choke_queue.h \
++	download/download_manager.cc \
++	download/download_manager.h \
++	download/group_entry.h \
++	download/resource_manager.cc \
++	download/resource_manager.h \
++\
++	net/address_info.cc \
++	net/address_info.h \
++	net/fd.cc \
++	net/fd.h \
++	net/socket_address.cc \
++	net/socket_address.h \
++	net/socket_address_key.cc \
++	net/socket_address_key.h \
++	net/socket_event.cc \
++	net/socket_event.h \
++	net/types.h \
++\
++	peer/choke_status.h \
++	peer/client_info.cc \
++	peer/client_info.h \
++	peer/client_list.cc \
++	peer/client_list.h \
++	peer/connection_list.cc \
++	peer/connection_list.h \
++	peer/peer.cc \
++	peer/peer.h \
++        peer/peer_info.cc \
++        peer/peer_info.h \
++	peer/peer_list.cc \
++	peer/peer_list.h \
++\
++	utils/directory_events.cc \
++	utils/directory_events.h \
++	utils/extents.h \
++	utils/log.cc \
++	utils/log.h \
++	utils/log_buffer.cc \
++	utils/log_buffer.h \
++	utils/option_strings.cc \
++	utils/option_strings.h \
++	utils/random.cc \
++	utils/random.h \
++	utils/ranges.h \
++	utils/resume.cc \
++	utils/resume.h \
++	utils/signal_bitfield.cc \
++	utils/signal_bitfield.h \
++	utils/thread_base.cc \
++	utils/thread_base.h \
++	utils/thread_interrupt.cc \
++	utils/thread_interrupt.h \
++	utils/uri_parser.cc \
++	utils/uri_parser.h \
++\
+ 	bitfield.cc \
+ 	bitfield.h \
+ 	chunk_manager.cc \
+@@ -61,8 +137,64 @@ libsub_torrent_la_SOURCES = \
+ 
+ AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+ 
+-libtorrentincludedir = $(includedir)/torrent
+-libtorrentinclude_HEADERS = \
++libtorrent_torrent_data_includedir = $(includedir)/torrent/data
++libtorrent_torrent_data_include_HEADERS = \
++	data/block.h \
++	data/block_list.h \
++	data/block_transfer.h \
++	data/chunk_utils.h \
++	data/download_data.h \
++	data/file.h \
++	data/file_list.h \
++	data/file_list_iterator.h \
++	data/file_manager.h \
++	data/file_utils.h \
++	data/piece.h \
++	data/transfer_list.h
++
++libtorrent_torrent_download_includedir = $(includedir)/torrent/download
++libtorrent_torrent_download_include_HEADERS = \
++	download/choke_group.h \
++	download/choke_queue.h \
++	download/download_manager.h \
++	download/group_entry.h \
++	download/resource_manager.h
++
++libtorrent_torrent_net_includedir = $(includedir)/torrent/net
++libtorrent_torrent_net_include_HEADERS = \
++	net/address_info.h \
++	net/fd.h \
++	net/socket_address.h \
++	net/socket_address_key.h \
++	net/socket_event.h \
++	net/types.h
++
++libtorrent_torrent_peer_includedir = $(includedir)/torrent/peer
++libtorrent_torrent_peer_include_HEADERS = \
++	peer/choke_status.h \
++	peer/client_info.h \
++	peer/client_list.h \
++	peer/connection_list.h \
++	peer/peer.h \
++        peer/peer_info.h \
++	peer/peer_list.h
++
++libtorrent_torrent_utils_includedir = $(includedir)/torrent/utils
++libtorrent_torrent_utils_include_HEADERS = \
++	utils/directory_events.h \
++	utils/extents.h \
++	utils/log.h \
++	utils/log_buffer.h \
++	utils/option_strings.h \
++	utils/ranges.h \
++	utils/resume.h \
++	utils/signal_bitfield.h \
++	utils/thread_base.h \
++	utils/thread_interrupt.h \
++	utils/uri_parser.h
++
++libtorrent_torrent_includedir = $(includedir)/torrent
++libtorrent_torrent_include_HEADERS = \
+ 	bitfield.h \
+ 	chunk_manager.h \
+ 	common.h \
+diff --git a/src/torrent/download/Makefile.am b/src/torrent/download/Makefile.am
+deleted file mode 100644
+index f92c7aa4..00000000
+--- a/src/torrent/download/Makefile.am
++++ /dev/null
+@@ -1,22 +0,0 @@
+-noinst_LTLIBRARIES = libsub_torrentdownload.la
+-
+-libsub_torrentdownload_la_SOURCES = \
+-	choke_group.cc \
+-	choke_group.h \
+-	choke_queue.cc \
+-	choke_queue.h \
+-	download_manager.cc \
+-	download_manager.h \
+-	group_entry.h \
+-	resource_manager.cc \
+-	resource_manager.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(srcdir)/../.. -I$(top_srcdir)
+-
+-libtorrentincludedir = $(includedir)/torrent/download
+-libtorrentinclude_HEADERS = \
+-	choke_group.h \
+-	choke_queue.h \
+-	download_manager.h \
+-	group_entry.h \
+-	resource_manager.h
+diff --git a/src/torrent/net/Makefile.am b/src/torrent/net/Makefile.am
+deleted file mode 100644
+index 35dd4774..00000000
+--- a/src/torrent/net/Makefile.am
++++ /dev/null
+@@ -1,25 +0,0 @@
+-noinst_LTLIBRARIES = libsub_torrentnet.la
+-
+-libsub_torrentnet_la_SOURCES = \
+-	address_info.cc \
+-	address_info.h \
+-	fd.cc \
+-	fd.h \
+-	socket_address.cc \
+-	socket_address.h \
+-	socket_address_key.cc \
+-	socket_address_key.h \
+-	socket_event.cc \
+-	socket_event.h \
+-	types.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(srcdir)/../.. -I$(top_srcdir)
+-
+-libtorrentincludedir = $(includedir)/torrent/net
+-libtorrentinclude_HEADERS = \
+-	address_info.h \
+-	fd.h \
+-	socket_address.h \
+-	socket_address_key.h \
+-	socket_event.h \
+-	types.h
+diff --git a/src/torrent/peer/Makefile.am b/src/torrent/peer/Makefile.am
+deleted file mode 100644
+index 1324e88a..00000000
+--- a/src/torrent/peer/Makefile.am
++++ /dev/null
+@@ -1,28 +0,0 @@
+-noinst_LTLIBRARIES = libsub_torrentpeer.la
+-
+-libsub_torrentpeer_la_SOURCES = \
+-	choke_status.h \
+-	client_info.cc \
+-	client_info.h \
+-	client_list.cc \
+-	client_list.h \
+-	connection_list.cc \
+-	connection_list.h \
+-	peer.cc \
+-	peer.h \
+-        peer_info.cc \
+-        peer_info.h \
+-	peer_list.cc \
+-	peer_list.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(srcdir)/../.. -I$(top_srcdir)
+-
+-libtorrentincludedir = $(includedir)/torrent/peer
+-libtorrentinclude_HEADERS = \
+-	choke_status.h \
+-	client_info.h \
+-	client_list.h \
+-	connection_list.h \
+-	peer.h \
+-        peer_info.h \
+-	peer_list.h
+diff --git a/src/torrent/utils/Makefile.am b/src/torrent/utils/Makefile.am
+deleted file mode 100644
+index a48786c6..00000000
+--- a/src/torrent/utils/Makefile.am
++++ /dev/null
+@@ -1,41 +0,0 @@
+-noinst_LTLIBRARIES = libsub_torrentutils.la
+-
+-libsub_torrentutils_la_SOURCES = \
+-	directory_events.cc \
+-	directory_events.h \
+-	extents.h \
+-	log.cc \
+-	log.h \
+-	log_buffer.cc \
+-	log_buffer.h \
+-	option_strings.cc \
+-	option_strings.h \
+-	random.cc \
+-	random.h \
+-	ranges.h \
+-	resume.cc \
+-	resume.h \
+-	signal_bitfield.cc \
+-	signal_bitfield.h \
+-	thread_base.cc \
+-	thread_base.h \
+-	thread_interrupt.cc \
+-	thread_interrupt.h \
+-	uri_parser.cc \
+-	uri_parser.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(srcdir)/../.. -I$(top_srcdir)
+-
+-libtorrentincludedir = $(includedir)/torrent/utils
+-libtorrentinclude_HEADERS = \
+-	directory_events.h \
+-	extents.h \
+-	log.h \
+-	log_buffer.h \
+-	option_strings.h \
+-	ranges.h \
+-	resume.h \
+-	signal_bitfield.h \
+-	thread_base.h \
+-	thread_interrupt.h \
+-	uri_parser.h
+diff --git a/src/tracker/Makefile.am b/src/tracker/Makefile.am
+deleted file mode 100644
+index 2f1ae5cf..00000000
+--- a/src/tracker/Makefile.am
++++ /dev/null
+@@ -1,11 +0,0 @@
+-noinst_LTLIBRARIES = libsub_tracker.la
+-
+-libsub_tracker_la_SOURCES = \
+-	tracker_dht.cc \
+-	tracker_dht.h \
+-	tracker_http.cc \
+-	tracker_http.h \
+-	tracker_udp.cc \
+-	tracker_udp.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/src/utils/Makefile.am b/src/utils/Makefile.am
+deleted file mode 100644
+index 27ce359b..00000000
+--- a/src/utils/Makefile.am
++++ /dev/null
+@@ -1,14 +0,0 @@
+-noinst_LTLIBRARIES = libsub_utils.la
+-
+-libsub_utils_la_SOURCES = \
+-	diffie_hellman.cc \
+-	diffie_hellman.h \
+-	instrumentation.cc \
+-	instrumentation.h \
+-	rc4.h \
+-	sha1.h \
+-	sha_fast.cc \
+-	sha_fast.h \
+-	queue_buckets.h
+-
+-AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+diff --git a/test/Makefile.am b/test/Makefile.am
+index 23b260e4..8b0291bb 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -1,25 +1,68 @@
+-SUBDIRS = torrent/net net
+-
+-TESTS = LibTorrentTest
+-AUTOMAKE_OPTIONS = subdir-objects
++TESTS = \
++	LibTorrent_Test_Torrent_Net \
++	LibTorrent_Test_Net \
++	LibTorrent_Test
+ 
+ check_PROGRAMS = $(TESTS)
+-LibTorrentTest_LDADD = \
++
++LibTorrent_Test_LDADD = \
+ 	../src/libtorrent.la \
+-	../src/torrent/libsub_torrent.la \
+-	../src/torrent/data/libsub_torrentdata.la \
+-	../src/torrent/download/libsub_torrentdownload.la \
+-	../src/torrent/peer/libsub_torrentpeer.la \
+-	../src/data/libsub_data.la \
+-	../src/dht/libsub_dht.la \
+-	../src/net/libsub_net.la \
+-	../src/protocol/libsub_protocol.la \
+-	../src/download/libsub_download.la \
+-	../src/tracker/libsub_tracker.la \
+-	../src/utils/libsub_utils.la \
+-	../src/torrent/utils/libsub_torrentutils.la
++	../src/libtorrent_other.la \
++	../src/torrent/libtorrent_torrent.la
++
++LibTorrent_Test_Net_LDADD = $(LibTorrent_Test_LDADD)
++LibTorrent_Test_Torrent_Net_LDADD = $(LibTorrent_Test_LDADD)
++
++# LibTorrent_Test_SOURCES = \
++# 	helpers/expect_fd.h \
++# 	helpers/expect_utils.h \
++# 	helpers/mock_compare.h \
++# 	helpers/mock_function.cc \
++# 	helpers/mock_function.h \
++# 	helpers/network.h \
++# 	helpers/progress_listener.cc \
++# 	helpers/progress_listener.h \
++# 	helpers/test_fixture.cc \
++# 	helpers/test_fixture.h
++
++LibTorrent_Test_Torrent_Net_SOURCES = \
++	main.cc \
++	helpers/expect_fd.h \
++	helpers/expect_utils.h \
++	helpers/mock_compare.h \
++	helpers/mock_function.cc \
++	helpers/mock_function.h \
++	helpers/network.h \
++	helpers/progress_listener.cc \
++	helpers/progress_listener.h \
++	helpers/test_fixture.cc \
++	helpers/test_fixture.h \
++	\
++	torrent/net/test_address_info.cc \
++	torrent/net/test_address_info.h \
++	torrent/net/test_fd.cc \
++	torrent/net/test_fd.h \
++	torrent/net/test_socket_address.cc \
++	torrent/net/test_socket_address.h
+ 
+-LibTorrentTest_SOURCES = \
++LibTorrent_Test_Net_SOURCES = \
++	main.cc \
++	helpers/expect_fd.h \
++	helpers/expect_utils.h \
++	helpers/mock_compare.h \
++	helpers/mock_function.cc \
++	helpers/mock_function.h \
++	helpers/network.h \
++	helpers/progress_listener.cc \
++	helpers/progress_listener.h \
++	helpers/test_fixture.cc \
++	helpers/test_fixture.h \
++	\
++	net/test_socket_listen.cc \
++	net/test_socket_listen.h
++
++LibTorrent_Test_SOURCES = \
++	main.cc \
+ 	helpers/expect_fd.h \
+ 	helpers/expect_utils.h \
+ 	helpers/mock_compare.h \
+@@ -87,12 +130,15 @@ LibTorrentTest_SOURCES = \
+ 	torrent/tracker_list_features_test.h \
+ 	torrent/tracker_timeout_test.cc \
+ 	torrent/tracker_timeout_test.h \
+-	tracker/tracker_http_test.cc \
+-	tracker/tracker_http_test.h \
+ 	\
+-	main.cc
++	tracker/tracker_http_test.cc \
++	tracker/tracker_http_test.h
+ 
+-LibTorrentTest_CXXFLAGS = $(CPPUNIT_CFLAGS)
+-LibTorrentTest_LDFLAGS = $(CPPUNIT_LIBS) -ldl
++LibTorrent_Test_Torrent_Net_CXXFLAGS = $(CPPUNIT_CFLAGS)
++LibTorrent_Test_Torrent_Net_LDFLAGS = $(CPPUNIT_LIBS) -ldl
++LibTorrent_Test_Net_CXXFLAGS = $(CPPUNIT_CFLAGS)
++LibTorrent_Test_Net_LDFLAGS = $(CPPUNIT_LIBS) -ldl
++LibTorrent_Test_CXXFLAGS = $(CPPUNIT_CFLAGS)
++LibTorrent_Test_LDFLAGS = $(CPPUNIT_LIBS) -ldl
+ 
+ AM_CPPFLAGS = -I$(srcdir) -I$(top_srcdir) -I$(top_srcdir)/src
