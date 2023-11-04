@@ -13,7 +13,7 @@ inherit setuptools3_legacy gtk-icon-cache features_check
 REQUIRED_DISTRO_FEATURES = "x11 gobject-introspection-data"
 
 SRC_URI = "git://github.com/bluesabre/menulibre.git;protocol=https;branch=master"
-SRCREV = "86ee9ad7568128fe9555e54799933b2d3762331a"
+SRCREV = "94bef4060714fa65c7246c25b87410b52a149f94"
 S = "${WORKDIR}/git"
 
 do_compile[noexec] = "1"
