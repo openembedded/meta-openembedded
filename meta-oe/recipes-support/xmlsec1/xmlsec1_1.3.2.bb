@@ -13,17 +13,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
 SECTION = "libs"
 
 SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-    file://fix-ltmain.sh.patch \
-    file://change-finding-path-of-nss.patch \
-    file://makefile-ptest.patch \
-    file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-    file://0001-nss-nspr-fix-for-multilib.patch \
-    file://run-ptest \
-    file://ensure-search-path-non-host.patch \
-    file://0001-xmldsigverify-Include-xmlsec-parser.h.patch \
-    "
+           file://fix-ltmain.sh.patch \
+           file://change-finding-path-of-nss.patch \
+           file://makefile-ptest.patch \
+           file://xmlsec1-examples-allow-build-in-separate-dir.patch \
+           file://0001-nss-nspr-fix-for-multilib.patch \
+           file://run-ptest \
+           file://ensure-search-path-non-host.patch \
+           "
 
-SRC_URI[sha256sum] = "5f8dfbcb6d1e56bddd0b5ec2e00a3d0ca5342a9f57c24dffde5c796b2be2871c"
+SRC_URI[sha256sum] = "4003c56b3d356d21b1db7775318540fad6bfedaf5f117e8f7c010811219be3cf"
 
 inherit autotools-brokensep ptest pkgconfig
 
