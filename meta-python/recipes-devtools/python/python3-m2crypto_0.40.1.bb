@@ -11,7 +11,7 @@ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
             file://avoid-host-contamination.patch \
             file://0001-setup.py-address-openssl-3.x-build-issue.patch \
             "
-SRC_URI[sha256sum] = "24c0f471358b8b19ad4c8aa9da12e868030b65c1fdb3279d006df60c9501338a"
+SRC_URI[sha256sum] = "bbfd113ec55708c05816252a4f09e4237df4f3bbfc8171cbbc33057d257bbb30"
 
 PYPI_PACKAGE = "M2Crypto"
 inherit pypi siteinfo setuptools3
