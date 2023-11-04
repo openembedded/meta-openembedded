@@ -9,7 +9,7 @@ SRC_URI = "\
     ${GNOME_MIRROR}/gcab/${PV}/gcab-${PV}.tar.xz \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "67a5fa9be6c923fbc9197de6332f36f69a33dadc9016a2b207859246711c048f"
+SRC_URI[sha256sum] = "2f0c9615577c4126909e251f9de0626c3ee7a152376c15b5544df10fc87e560b"
 
 inherit gobject-introspection gtk-doc manpages meson ptest-gnome vala
 
