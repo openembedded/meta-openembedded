@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2f1963e0bb88c93463af750daf9ba0c2"
 DEPENDS = "libusb jpeg"
 
 SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https"
-SRCREV = "ad6c72a4e390367f0d2be81aac00cfc0b6680d74"
-PV = "v0.0.6+git${SRCPV}"
+SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
+PV = "0.0.7"
 
 S = "${WORKDIR}/git"
 
