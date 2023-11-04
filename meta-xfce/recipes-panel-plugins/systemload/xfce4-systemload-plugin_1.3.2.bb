@@ -9,4 +9,4 @@ PACKAGECONFIG ?= "network power"
 PACKAGECONFIG[power] = ",,upower"
 PACKAGECONFIG[network] = ",,libgtop"
 
-SRC_URI[sha256sum] = "56d1007801d52d7c2b5a13bb54745f6d7f06fda28b49ce936145633068817652"
+SRC_URI[sha256sum] = "bb303fc3020e053ad1fa0b8fcbf0d7681c5563bb8f649357d6a95a577802b072"
