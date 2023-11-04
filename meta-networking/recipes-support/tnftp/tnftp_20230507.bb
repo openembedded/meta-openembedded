@@ -10,7 +10,7 @@ SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
 throttling."
 
 SECTION = "net"
-LICENSE = "BSD-4-Clause"
+LICENSE = "BSD-2-Clause"
 
 DEPENDS = "ncurses"
 
@@ -28,9 +28,8 @@ ALTERNATIVE_TARGET[ftp] = "${bindir}/tnftp"
 
 FILES:${PN} = "${bindir}/tnftp"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=b4248c6fb8ecff27f256ba97b25f1a21"
-SRC_URI[md5sum] = "fdb6dd1b53dca79148c395b77c6dba5a"
-SRC_URI[sha256sum] = "101901e90b656c223ec8106370dd0d783fb63d26aa6f0b2a75f40e86a9f06ea2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fbbb944979c7466ed5509b4bbc6c328b"
+SRC_URI[sha256sum] = "be0134394bd7d418a3b34892b0709eeb848557e86474e1786f0d1a887d3a6580"
 
 PACKAGECONFIG ?= "openssl \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
