@@ -1,0 +1,30 @@
+From 7faa9c58ce098bbdeff83b6add72f3075b47881d Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Fri, 19 Jul 2019 13:38:12 +0200
+Subject: [PATCH] Bumped to version 0.13.8.
+
+---
+ configure.ac | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index b885714d..4ed08124 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1,12 +1,12 @@
+-AC_INIT(libtorrent, 0.13.7, sundell.software@gmail.com)
++AC_INIT(libtorrent, 0.13.8, sundell.software@gmail.com)
+ 
+ LT_INIT([disable-static])
+ 
+ dnl Find a better way to do this
+-AC_DEFINE(PEER_NAME, "-lt0D70-", Identifier that is part of the default peer id)
+-AC_DEFINE(PEER_VERSION, "lt\x0D\x70", 4 byte client and version identifier for DHT)
++AC_DEFINE(PEER_NAME, "-lt0D80-", Identifier that is part of the default peer id)
++AC_DEFINE(PEER_VERSION, "lt\x0D\x80", 4 byte client and version identifier for DHT)
+ 
+-LIBTORRENT_CURRENT=20
++LIBTORRENT_CURRENT=21
+ LIBTORRENT_REVISION=0
+ LIBTORRENT_AGE=0
+ 

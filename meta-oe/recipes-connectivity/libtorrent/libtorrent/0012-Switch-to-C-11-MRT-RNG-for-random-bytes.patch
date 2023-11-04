@@ -1,0 +1,45 @@
+From 0e86289a8bb5672781e508683bb28aebf9995127 Mon Sep 17 00:00:00 2001
+From: lps-rocks <admin@lps.rocks>
+Date: Mon, 4 Mar 2019 05:03:47 -0500
+Subject: [PATCH] Switch to C++11 MRT RNG for random bytes
+
+Switching to a better RNG for generating strings will prevent the common peerID collisions the rTorrent client has been seeing for YEARS in #440 and #318.
+---
+ rak/string_manip.h | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/rak/string_manip.h b/rak/string_manip.h
+index ae867c98..1a09c377 100644
+--- a/rak/string_manip.h
++++ b/rak/string_manip.h
+@@ -39,9 +39,13 @@
+ 
+ #include <algorithm>
+ #include <cctype>
++#include <climits>
+ #include <cstdlib>
++#include <functional>
+ #include <iterator>
+ #include <locale>
++#include <random>
++
+ 
+ namespace rak {
+ 
+@@ -312,11 +316,13 @@ transform_hex_str(const Sequence& seq) {
+ template <typename Sequence>
+ Sequence
+ generate_random(size_t length) {
++  std::random_device rd;
++  std::mt19937 mt(rd());
++  using bytes_randomizer = std::independent_bits_engine<std::mt19937, CHAR_BIT, uint8_t>;
++  bytes_randomizer bytes(mt);
+   Sequence s;
+   s.reserve(length);
+-
+-  std::generate_n(std::back_inserter(s), length, &::random);
+-
++  std::generate_n(std::back_inserter(s), length, std::ref(bytes));
+   return s;
+ }
+ 

@@ -1,0 +1,22 @@
+From 03e1c95987917bf98534e50fdd718a948540ffb2 Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Thu, 25 Feb 2021 00:03:27 +0900
+Subject: [PATCH] Changes automake required files.
+
+---
+ autogen.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/autogen.sh b/autogen.sh
+index 79afab8e..6def96dd 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -36,7 +36,7 @@ echo automake...
+     exit 1
+ }
+ 
+-automake --add-missing --copy --gnu || exit 1
++automake --add-missing --copy --foreign || exit 1
+ 
+ echo autoconf...
+ (autoconf --version) < /dev/null > /dev/null 2>&1 || {

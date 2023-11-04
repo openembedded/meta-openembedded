@@ -1,0 +1,85 @@
+From e646ed5427b690b75208510d328457af66b208e8 Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Mon, 21 Jun 2021 21:12:56 +0900
+Subject: [PATCH] Added ipv6 options.
+
+---
+ src/torrent/connection_manager.cc |  6 +++++-
+ src/torrent/connection_manager.h  | 13 +++++++++++++
+ src/tracker/tracker_http.cc       | 13 +++++--------
+ 3 files changed, 23 insertions(+), 9 deletions(-)
+
+diff --git a/src/torrent/connection_manager.cc b/src/torrent/connection_manager.cc
+index 972dcbfc..ea5efc58 100644
+--- a/src/torrent/connection_manager.cc
++++ b/src/torrent/connection_manager.cc
+@@ -89,7 +89,11 @@ ConnectionManager::ConnectionManager() :
+ 
+   m_listen(new Listen),
+   m_listen_port(0),
+-  m_listen_backlog(SOMAXCONN) {
++  m_listen_backlog(SOMAXCONN),
++
++  m_block_ipv4(false),
++  m_block_ipv6(false),
++  m_prefer_ipv6(false) {
+ 
+   m_bindAddress = (new rak::socket_address())->c_sockaddr();
+   m_localAddress = (new rak::socket_address())->c_sockaddr();
+diff --git a/src/torrent/connection_manager.h b/src/torrent/connection_manager.h
+index cf43b0bf..09ccdd28 100644
+--- a/src/torrent/connection_manager.h
++++ b/src/torrent/connection_manager.h
+@@ -167,6 +167,15 @@ public:
+   // For internal usage.
+   Listen*             listen()            { return m_listen; }
+ 
++  bool                is_block_ipv4() const  { return m_block_ipv4; }
++  void                set_block_ipv4(bool v) { m_block_ipv4 = v; }
++
++  bool                is_block_ipv6() const  { return m_block_ipv6; }
++  void                set_block_ipv6(bool v) { m_block_ipv6 = v; }
++
++  bool                is_prefer_ipv6() const  { return m_prefer_ipv6; }
++  void                set_prefer_ipv6(bool v) { m_prefer_ipv6 = v; }
++
+ private:
+   ConnectionManager(const ConnectionManager&);
+   void operator = (const ConnectionManager&);
+@@ -190,6 +199,10 @@ private:
+   slot_filter_type    m_slot_filter;
+   slot_resolver_type  m_slot_resolver;
+   slot_throttle_type  m_slot_address_throttle;
++
++  bool                m_block_ipv4;
++  bool                m_block_ipv6;
++  bool                m_prefer_ipv6;
+ };
+ 
+ }
+diff --git a/src/tracker/tracker_http.cc b/src/tracker/tracker_http.cc
+index de3a39ab..fdbbd58a 100644
+--- a/src/tracker/tracker_http.cc
++++ b/src/tracker/tracker_http.cc
+@@ -109,16 +109,13 @@ TrackerHttp::send_state(int state) {
+   const rak::socket_address* localAddress = rak::socket_address::cast_from(manager->connection_manager()->local_address());
+ 
+   if (localAddress->is_address_any()) {
+-    auto ipv4_address = detect_local_sin_addr();
+-    auto ipv6_address = detect_local_sin6_addr();
++    if (manager->connection_manager()->is_prefer_ipv6()) {
++      auto ipv6_address = detect_local_sin6_addr();
+ 
+-    if (ipv4_address != nullptr) {
+-      s << "&ipv4=" << sin_addr_str(ipv4_address.get());
++      if (ipv6_address != nullptr) {
++        s << "&ip=" << sin6_addr_str(ipv6_address.get());
++      }
+     }
+-    if (ipv6_address != nullptr) {
+-      s << "&ipv6=" << sin6_addr_str(ipv6_address.get());
+-    }
+-
+   } else {
+     s << "&ip=" << localAddress->address_str();
+   }

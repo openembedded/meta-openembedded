@@ -1,0 +1,74 @@
+From 8934703edb5982661483eb8a29d76e6a726b5fe2 Mon Sep 17 00:00:00 2001
+From: rakshasa <sundell.software@gmail.com>
+Date: Mon, 8 Jul 2019 19:37:06 +0200
+Subject: [PATCH] Added _GNU_SOURCE to fallocate test. (neheb)
+
+---
+ scripts/checks.m4       | 10 ++++++----
+ src/data/socket_file.cc |  1 +
+ 2 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/scripts/checks.m4 b/scripts/checks.m4
+index c9333561..83be8461 100644
+--- a/scripts/checks.m4
++++ b/scripts/checks.m4
+@@ -88,7 +88,6 @@ AC_DEFUN([TORRENT_CHECK_KQUEUE], [
+     [
+       AC_DEFINE(USE_KQUEUE, 1, Use kqueue.)
+       AC_MSG_RESULT(yes)
+-      TORRENT_CHECK_KQUEUE_SOCKET_ONLY
+     ], [
+       AC_MSG_RESULT(no)
+     ])
+@@ -97,7 +96,7 @@ AC_DEFUN([TORRENT_CHECK_KQUEUE], [
+ AC_DEFUN([TORRENT_CHECK_KQUEUE_SOCKET_ONLY], [
+   AC_MSG_CHECKING(whether kqueue supports pipes and ptys)
+ 
+-  AC_RUN_IFELSE([AC_LANG_SOURCE([
++  AC_LINK_IFELSE([AC_LANG_SOURCE([
+       #include <fcntl.h>
+       #include <stdlib.h>
+       #include <unistd.h>
+@@ -138,6 +137,7 @@ AC_DEFUN([TORRENT_WITH_KQUEUE], [
+     [
+         if test "$withval" = "yes"; then
+           TORRENT_CHECK_KQUEUE
++          TORRENT_CHECK_KQUEUE_SOCKET_ONLY
+         fi
+     ])
+ ])
+@@ -149,9 +149,11 @@ AC_DEFUN([TORRENT_WITHOUT_KQUEUE], [
+     [
+       if test "$withval" = "yes"; then
+         TORRENT_CHECK_KQUEUE
++        TORRENT_CHECK_KQUEUE_SOCKET_ONLY
+       fi
+     ], [
+         TORRENT_CHECK_KQUEUE
++        TORRENT_CHECK_KQUEUE_SOCKET_ONLY
+     ])
+ ])
+ 
+@@ -172,8 +174,8 @@ AC_DEFUN([TORRENT_WITHOUT_VARIABLE_FDSET], [
+ AC_DEFUN([TORRENT_CHECK_FALLOCATE], [
+   AC_MSG_CHECKING(for fallocate)
+ 
+-  AC_TRY_LINK([#include <fcntl.h>
+-               #include <linux/falloc.h>
++  AC_TRY_LINK([#define _GNU_SOURCE
++               #include <fcntl.h>
+               ],[ fallocate(0, FALLOC_FL_KEEP_SIZE, 0, 0); return 0;
+               ],
+     [
+diff --git a/src/data/socket_file.cc b/src/data/socket_file.cc
+index 4b4519ed..b359ef8e 100644
+--- a/src/data/socket_file.cc
++++ b/src/data/socket_file.cc
+@@ -48,6 +48,7 @@
+ #include <sys/types.h>
+ 
+ #ifdef HAVE_FALLOCATE
++#define _GNU_SOURCE
+ #include <linux/falloc.h>
+ #endif
+ 
