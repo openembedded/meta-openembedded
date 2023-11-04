@@ -12,7 +12,7 @@ inherit gnomebase gsettings gobject-introspection gettext gi-docgen vala feature
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
-SRC_URI[archive.sha256sum] = "af8a812da0d8976a000e1d62572c256086a817323fbf35b066dbfdd8d2ca6203"
+SRC_URI[archive.sha256sum] = "366e866ff2a708b894cfea9475b8e8ff54cb3e2b477ea72a8ade0dabee5f48a4"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
