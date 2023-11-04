@@ -6,4 +6,4 @@ inherit xfce-app
 
 DEPENDS += "gtk+3 cairo libwnck libxfce4ui libxmu xfce4-dev-tools-native"
 
-SRC_URI[sha256sum] = "f64f01ba241a0b8bbf2ed3274e5decc2313c9f8b0e4d160db3ba69b331558ae5"
+SRC_URI[sha256sum] = "20979000761a41faed4f7f63f27bd18bb36fb27db4f7ecc8784a460701fb4abb"
