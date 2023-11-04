@@ -11,9 +11,8 @@ DEPENDS:append:libc-musl = " fts"
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/pmem/pmdk.git;branch=stable-1.12;protocol=https \
-           file://0001-pmempool-Match-function-prototypes-of-enum_to_str_fn.patch"
-SRCREV = "786098a024c6fe60e746f2cb1041bcfcd21386c9"
+SRC_URI = "git://github.com/pmem/pmdk.git;branch=master;protocol=https"
+SRCREV = "ba92d6b469d52d16f26279bebaf317bbdbb3822c"
 
 inherit autotools-brokensep pkgconfig
 
