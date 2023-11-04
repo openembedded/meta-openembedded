@@ -15,6 +15,6 @@ S = "${WORKDIR}/Config-Tiny-${PV}"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/R/RS/RSAVAGE/Config-Tiny-${PV}.tgz"
 
-SRC_URI[sha256sum] = "3de79b0ea03a8d6a93e9d9128fe845fb556222b14699a4f6f0d5ca057ae3333b"
+SRC_URI[sha256sum] = "b2f7345619b3b8e636dd39ea010731c9dc2bfb8f022bcbd86ae6ad17866e110d"
 
 inherit cpan
