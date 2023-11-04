@@ -6,16 +6,15 @@ flow model and lock-free programming techniques for graph access have \
 been used to have a more dynamic and robust system."
 SECTION = "libs/multimedia"
 
-LICENSE = "GPL-2.0-only & LGPL-2.1-only"
-LIC_FILES_CHKSUM = " \
-    file://common/jack/control.h;beginline=2;endline=21;md5=e6df0bf30cde8b3b825451459488195d \
-    file://common/jack/jack.h;beginline=1;endline=19;md5=6b736ed6b810592b135480a5e853392e \
-"
+LICENSE = "GPL-2.0-or-later | LGPL-2.1-or-later | MIT | AFL-2.1"
+LIC_FILES_CHKSUM = "file://common/jack/control.h;beginline=2;endline=21;md5=9edb8b99b7a0dcd49dbf8741444f123d \
+                    file://common/jack/jack.h;beginline=1;endline=19;md5=6b736ed6b810592b135480a5e853392e \
+                    "
 
 DEPENDS = "libsamplerate0 libsndfile1"
 
-SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https"
-SRCREV = "4f58969432339a250ce87fe855fb962c67d00ddb"
+SRC_URI = "git://github.com/jackaudio/jack2.git;branch=develop;protocol=https"
+SRCREV = "520dfa0ac5a72d292f5b9fc5835926f925129764"
 
 S = "${WORKDIR}/git"
 
