@@ -1,5 +1,4 @@
-PR = "r1"
-PV = "0.1+git${SRCPV}"
+PV = "0.05"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4325afd396febcb659c36b49533135d4"
 
