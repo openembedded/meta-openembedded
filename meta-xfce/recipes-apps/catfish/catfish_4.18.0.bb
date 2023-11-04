@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
 DEPENDS += "python3-distutils-extra-native"
 
-SRC_URI[sha256sum] = "e9a99a62d10981391508dd43f3cbfa2d50a69bd6b7d1eeef7d30ba4c673dcfda"
+SRC_URI[sha256sum] = "fdae9b73cc754a50716bb04b958aa31dbd7e94047068b7207f2ae313a7d58b99"
 
 FILES:${PN} += "${datadir}/metainfo"
 
