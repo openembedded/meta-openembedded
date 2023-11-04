@@ -32,9 +32,6 @@ PACKAGECONFIG[lyrics_screen] = "-Dlyrics_screen=true,-Dlyrics_screen=false"
 PACKAGECONFIG[outputs_screen] = "-Doutputs_screen=true,-Doutputs_screen=false"
 PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 
-SRC_URI = " \
-    git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https \
-    file://0001-SearchPage-use-regular-integer-to-fix-Wenum-constexp.patch \
-"
-SRCREV = "fc8de01c71acdf10ad07c7aae756dc522b848124"
+SRC_URI = "git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https"
+SRCREV = "f81f875fc5785383d24f54fb9bd3cf06efd915a4"
 S = "${WORKDIR}/git"
