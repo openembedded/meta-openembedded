@@ -12,9 +12,10 @@ tool; Argh just makes it easy to use."
 
 LICENSE = "LGPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=3000208d539ec061b899bce1d9ce9404 \
-                    file://README.rst;beginline=261;endline=275;md5=a8bf3475df7e0d575a53d04c83d5e090"
+                    file://README.rst;beginline=261;endline=275;md5=39ec83a704aed9f33618c5d04e478a08 \
+                    "
 
-SRC_URI[sha256sum] = "695c0ae4534270cae2697841b4a56f434a990694a00264ea10ebbbcdc02c13f7"
+SRC_URI[sha256sum] = "68a276bfe670c658a080eedb3f656cc2a1772a656818396d580dc752a18d31c9"
 
 inherit pypi python_flit_core
 
