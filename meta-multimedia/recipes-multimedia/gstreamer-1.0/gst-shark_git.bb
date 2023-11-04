@@ -10,8 +10,9 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
 
 SRCBRANCH ?= "master"
 
-PV = "0.7.3.1"
+PV = "0.8.1"
 
+SRCREV = "09ba05865dacd2824b5b40ab75a4b9545fcc1366"
 SRCREV_base = "5413ef5475e5b70476c2480a75ca3746d91d4caf"
 SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
 SRCREV_FORMAT = "base_common"
