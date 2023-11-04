@@ -2,13 +2,12 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
+SRCREV = "11914614784735c504f43b5b6baabaa713375984"
 SRCREV_FORMAT = "xfstests_unionmount"
 
-SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
+SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=for-next;name=xfstests \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
-           file://0001-Add-a-return-type-to-aio_rw.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-           file://0001-m4-Check-for-FTW_ACTIONRETVAL-along-with-nftw.patch \
            "
 
 SRCREV_xfstests = "f7765774a1b5cb98c2f21a892e82b3421f40e791"
