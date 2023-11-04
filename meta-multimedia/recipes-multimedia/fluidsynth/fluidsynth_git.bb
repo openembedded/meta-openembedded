@@ -5,9 +5,9 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
 
 SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https"
-SRCREV = "4d8fe638e1a48660a4c843d493f69a86579e12f0"
+SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
 S = "${WORKDIR}/git"
-PV = "2.3.2"
+PV = "2.3.4"
 
 inherit cmake pkgconfig lib_package
 
