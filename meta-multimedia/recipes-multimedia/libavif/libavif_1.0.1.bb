@@ -4,10 +4,10 @@ SECTION = "libs"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c528b75b07425b5c1d2e34de98c397b5"
 
-SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x"
 
 S = "${WORKDIR}/git"
-SRCREV = "6ab53189045e7a6fe0bd93d14977b2a4f8efa5e9"
+SRCREV = "d1c26facaf5a8a97919ceee06814d05d10e25622"
 
 DEPENDS = "dav1d"
 
