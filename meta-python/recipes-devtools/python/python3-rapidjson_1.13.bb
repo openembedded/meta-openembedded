@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4daf3929156304df67003c33274a98bd"
 
 SRC_URI = "git://github.com/python-rapidjson/python-rapidjson.git;protocol=https;branch=master"
-SRCREV = "5063cc63008b41e129344b012fc59b114cacd5c9"
+SRCREV = "a87053d9b97750afddb504da05bd1cd9f4b94654"
 
 S = "${WORKDIR}/git"
 
