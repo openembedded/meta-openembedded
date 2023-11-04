@@ -7,7 +7,7 @@ DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
 
 inherit xfce-app gsettings mime-xdg
 
-SRC_URI[sha256sum] = "f108a8c167ec5727266ab67666f10dbd60e972d56ea03944302fdabb2167f473"
+SRC_URI[sha256sum] = "560c5436c7bc7de33fbf3e9f6cc545280772ad898dfb73257d86533880ffff36"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[spell] = "--enable-plugin-gspell,--disable-plugin-gspell,gspell"
