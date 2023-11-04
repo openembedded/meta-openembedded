@@ -10,7 +10,7 @@ SRC_URI = " \
 	file://0001-meson.build-allow-crosscompiling-gir.patch \
 "
 
-SRCREV = "f503ff7a9e13963bcf396776bce0b209a819ba9b"
+SRCREV = "ca9dd5b810dc04ea38048ae9be491654c8596ef9"
 
 S = "${WORKDIR}/git"
 
