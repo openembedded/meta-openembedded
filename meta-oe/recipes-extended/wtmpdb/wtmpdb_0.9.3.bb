@@ -5,7 +5,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
 SECTION = "libs"
 
-SRCREV = "502b19a41c7a3b1b5e70969b18088683825f71f8"
+SRCREV = "8ef2677a13d19aee3a834500f9c8a4dac9d68ef7"
 
 SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https \
            file://0001-remove-lto-to-fix-link-error-of-clang.patch \
