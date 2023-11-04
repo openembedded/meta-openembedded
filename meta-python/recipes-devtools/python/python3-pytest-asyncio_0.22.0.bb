@@ -3,7 +3,7 @@ DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python,
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=136e4f49dbf29942c572a3a8f6e88a77"
 
-SRC_URI[sha256sum] = "40a7eae6dded22c7b604986855ea48400ab15b069ae38116e8c01238e9eeb64d"
+SRC_URI[sha256sum] = "01da1bf94ff0b969cc8d760104f7c1011903d0d658bdaef0bbae769660a7fbc4"
 
 inherit pypi python_setuptools_build_meta
 
