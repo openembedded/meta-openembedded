@@ -4,9 +4,9 @@
 SUMMARY = "Tools for testing processes."
 HOMEPAGE = "https://github.com/ionelmc/python-process-tests"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=37031056aff37e4b3310872a9a3d0b1e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=aea36d49429f53e06868d87cd9d62349"
 
-SRC_URI[sha256sum] = "a3747ad947bdfc93e5c986bdb17a6d718f3f26e8577a0807a00962f29e26deba"
+SRC_URI[sha256sum] = "e5d57dea7161251e91cadb84bf3ecc85275fb121fd478e579f800777b1d424bd"
 
 inherit pypi setuptools3
 
