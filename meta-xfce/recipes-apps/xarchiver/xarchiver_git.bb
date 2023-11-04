@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gtk+3 glib-2.0 xfce4-dev-tools-native intltool-native"
 
 SRC_URI = "git://github.com/ib/xarchiver.git;branch=master;protocol=https"
-SRCREV = "2f6c91e756678f0723305d8636e8e393c1eef32c"
-PV = "0.5.4.17"
+SRCREV = "55f923ebc623bcc8f53368543847350a23688189"
+PV = "0.5.4.21"
 S = "${WORKDIR}/git"
 
 inherit gettext pkgconfig autotools gtk-icon-cache features_check mime-xdg
