@@ -12,7 +12,7 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875"
 
 SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=https;branch=master"
-SRCREV = "d387d3b6ed79ff9a82c60440bdd86e6e5e324bec"
+SRCREV = "801f67f671929311e0c9952c5f92d6e147c7b003"
 
 S = "${WORKDIR}/git"
 
