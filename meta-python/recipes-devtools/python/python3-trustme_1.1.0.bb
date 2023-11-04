@@ -4,8 +4,7 @@ HOMEPAGE = "https://pypi.org/project/trustme"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d5a7af1a4b73e57431e25d15a2da745a"
 
-SRC_URI[md5sum] = "0e4d698e5aecaf8306cf440bf3dcbbe0"
-SRC_URI[sha256sum] = "5e07b23d70ceed64f3bb36ae4b9abc52354c16c98d45ab037bee2b5fbffe586c"
+SRC_URI[sha256sum] = "5375ad7fb427074bec956592e0d4ee2a4cf4da68934e1ba4bcf4217126bc45e6"
 
 inherit pypi setuptools3 ptest
 
