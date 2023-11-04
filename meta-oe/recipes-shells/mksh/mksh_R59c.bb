@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=6efc2c249328e4d2bd3
 
 SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59b.tgz"
 
-SRC_URI[md5sum] = "dce6abffc2036288540b9ba11dfb2ec8"
 SRC_URI[sha256sum] = "907ed1a9586e7f18bdefdd4a763aaa8397b755e15034aa54f4d753bfb272e0e6"
 
 inherit update-alternatives
