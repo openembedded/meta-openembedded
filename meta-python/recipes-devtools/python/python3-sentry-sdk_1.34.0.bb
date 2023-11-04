@@ -3,7 +3,7 @@ DESCRIPTION = "This is the next line of the Python SDK \
 for Sentry, intended to replace the raven package on PyPI."
 HOMEPAGE = "https://github.com/getsentry/sentry-python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7fcb29c83dd48cb7b112d0dd81111a89"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=03dc788d9a9486be5e6a1d99c2c1ce3a"
 
 RDEPENDS:${PN} += "\
 	${PYTHON_PN}-urllib3 \
@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
 	${PYTHON_PN}-datetime \
 "
 
-SRC_URI[sha256sum] = "760e4fb6d01c994110507133e08ecd4bdf4d75ee4be77f296a3579796cf73134"
+SRC_URI[sha256sum] = "e5d0d2b25931d88fa10986da59d941ac6037f742ab6ff2fce4143a27981d60c3"
 
 PYPI_PACKAGE = "sentry-sdk"
 
