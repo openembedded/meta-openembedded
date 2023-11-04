@@ -32,3 +32,5 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests ${D}${PTEST_PATH}/
 }
+
+SRCREV = "69adc6f76c1a7baf4e7a728da9eec38741d5783e"
