@@ -16,7 +16,7 @@ DEPENDS += " \
     taglib \
 "
 
-SRC_URI[sha256sum] = "0d305ad8ccd3974d6b632f74325b1b8a39304c905c6b405b70f52c4cfd55a7e7"
+SRC_URI[sha256sum] = "bbe52fbc4d3abe30f6c79fc7ac57bd9de9cf74ce1a79b508a1d7de83dc4f3771"
 
 RDEPENDS:${PN} += "gstreamer1.0-plugins-good"
 
