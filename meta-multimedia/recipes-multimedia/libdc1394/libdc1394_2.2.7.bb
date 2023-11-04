@@ -14,8 +14,7 @@ DEPENDS += "libusb1 libraw1394 libsdl \
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://install_examples.patch \
           "
-SRC_URI[md5sum] = "9fad67bbff08fe2818d5ec81802ec89f"
-SRC_URI[sha256sum] = "2b905fc9aa4eec6bdcf6a2ae5f5ba021232739f5be047dec8fe8dd6049c10fed"
+SRC_URI[sha256sum] = "537ceb78dd3cef271a183f4a176191d1cecf85f025520e6bd3758b0e19e6609f"
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
