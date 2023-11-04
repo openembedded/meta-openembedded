@@ -11,7 +11,7 @@ SRC_URI = "\
     file://run-ptest \
 "
 
-SRCREV = "8f33fdc47160edce09d75e1316b4d88129ca60a0"
+SRCREV = "edfe78a0dc54a940f4916a9bd681eab7b3f746d1"
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
