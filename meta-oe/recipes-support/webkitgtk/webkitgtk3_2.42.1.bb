@@ -15,7 +15,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
            file://0d3344e17d258106617b0e6d783d073b188a2548.patch \
            file://no-musttail-arm.patch \
            "
-SRC_URI[sha256sum] = "828f95935861fae583fb8f2ae58cf64c63c178ae2b7c2d6f73070813ad64ed1b"
+SRC_URI[sha256sum] = "6f41fac9989d3ee51c08c48de1d439cdeddecbc757e34b6180987d99b16d2499"
 
 inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
 
