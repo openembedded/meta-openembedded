@@ -5,7 +5,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
 SECTION = "libs"
 
-SRCREV = "585153a577788c590370d20e40263b61238dfab3"
+SRCREV = "6138dff6f2a5216065fa4833a223b56d98cb62f3"
 
 SRC_URI = "git://github.com/thkukuk/lastlog2.git;branch=main;protocol=https \
            file://0001-remove-lto-to-fix-link-error-of-clang.patch \
