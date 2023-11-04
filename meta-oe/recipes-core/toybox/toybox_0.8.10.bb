@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
 
 inherit cml1 update-alternatives
 
-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-           file://0001-portability-Fix-timer_settime_wrap-for-32bit-systems.patch \
-           "
-SRC_URI[sha256sum] = "dafd41978d40f02a61cf1be99a2b4a25812bbfb9c3157e679ee7611202d6ac58"
+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
+SRC_URI[sha256sum] = "d3afee05ca90bf425ced73f527e418fecd626c5340b5f58711a14531f8d7d108"
 
 SECTION = "base"
 
