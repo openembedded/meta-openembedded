@@ -15,6 +15,7 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
+       ${PYTHON_PN}-hypothesis \
        ${PYTHON_PN}-pytest \
        ${PYTHON_PN}-unixadmin \
 "
