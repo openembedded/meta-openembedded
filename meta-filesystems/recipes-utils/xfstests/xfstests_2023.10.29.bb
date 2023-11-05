@@ -7,6 +7,7 @@ SRCREV_FORMAT = "xfstests_unionmount"
 
 SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=for-next;name=xfstests \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
+           file://0001-ltp-fsx.h-Explicitly-use-int-for-return-type-for-aio.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
            "
 
