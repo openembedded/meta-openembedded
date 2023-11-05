@@ -6,6 +6,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
     dconf \
+    desktop-file-utils-native \
     gtk+3 \
     glib-2.0 \
     libhandy\
@@ -13,7 +14,8 @@ DEPENDS = " \
 
 inherit gnomebase vala gsettings bash-completion pkgconfig gtk-icon-cache
 
-SRC_URI[archive.sha256sum] = "935a3c2dd76cc2a93cd5aee9a54d3947fb111eb396f4b63dc5f0ba8f8d099136"
+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/45/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive"
+SRC_URI[archive.sha256sum] = "1180297678eedae6217cc514a2638c187d2f1d1ef2720cb9079b740c429941dd"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
