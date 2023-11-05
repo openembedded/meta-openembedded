@@ -9,6 +9,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=for-next;
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-ltp-fsx.h-Explicitly-use-int-for-return-type-for-aio.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+           file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
            "
 
 SRCREV_xfstests = "f7765774a1b5cb98c2f21a892e82b3421f40e791"
