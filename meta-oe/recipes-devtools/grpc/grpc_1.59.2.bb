@@ -20,8 +20,8 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
 # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "c0d1c393d9365664d47df41746e992ae97b651ef"
-BRANCH = "v1.56.x"
+SRCREV_grpc = "883e5f76976b86afee87415dc67bde58d9b295a4"
+BRANCH = "v1.59.x"
 SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
            "
