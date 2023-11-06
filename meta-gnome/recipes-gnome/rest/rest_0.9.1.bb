@@ -10,16 +10,13 @@ DEPENDS = " \
     gi-docgen-native \
     glib-2.0 \
     glib-2.0-native \
+    gtksourceview5 \
     json-glib \
+    libadwaita \
+    libsoup-3.0 \
     libxml2-native \
 "
 
 inherit gnomebase gobject-introspection vala pkgconfig
 
-PACKAGECONFIG_SOUP ?= "soup3"
-PACKAGECONFIG ??= "${PACKAGECONFIG_SOUP}"
-
-PACKAGECONFIG[soup2] = "-Dsoup2=true,,libsoup-2.4"
-PACKAGECONFIG[soup3] = "-Dsoup2=false,,libsoup-3.0"
-
-SRC_URI[archive.sha256sum] = "85b2bc9341128139539b53ee53f0533310bc96392fd645863a040410b81ebe66"
+SRC_URI[archive.sha256sum] = "9266a5c10ece383e193dfb7ffb07b509cc1f51521ab8dad76af96ed14212c2e3"
