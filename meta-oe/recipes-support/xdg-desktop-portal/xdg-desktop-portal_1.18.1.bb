@@ -31,13 +31,12 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "a4b27063222b16652e73b422e5448d75335199ef"
+SRCREV = "37a6f7c8b8e08b9861f05e172cd4e0d07a832c4d"
 
 FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"
 
 EXTRA_OEMESON += " \
 	--cross-file=${WORKDIR}/meson-${PN}.cross \
-	-Dflatpak-interfaces-dir=${STAGING_DATADIR}/dbus-1/interfaces \
 	-Ddbus-service-dir=${datadir}/dbus-1/services \
 "
 
