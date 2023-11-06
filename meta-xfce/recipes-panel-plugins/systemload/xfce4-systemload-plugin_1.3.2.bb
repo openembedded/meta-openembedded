@@ -9,4 +9,5 @@ PACKAGECONFIG ?= "network power"
 PACKAGECONFIG[power] = ",,upower"
 PACKAGECONFIG[network] = ",,libgtop"
 
+SRC_URI += "file://convert-gulong.patch"
 SRC_URI[sha256sum] = "bb303fc3020e053ad1fa0b8fcbf0d7681c5563bb8f649357d6a95a577802b072"
