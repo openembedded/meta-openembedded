@@ -7,7 +7,7 @@ SRC_URI = " \
     git://git.videolan.org/git/ffmpeg/nv-codec-headers.git;branch=master;protocol=https \
     file://0001-Makefile-add-clean-target.patch \
 "
-SRCREV = "c5e4af74850a616c42d39ed45b9b8568b71bf8bf"
+SRCREV = "1889e62e2d35ff7aa9baca2bceb14f053785e6f1"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} LIBDIR=${baselib}"
