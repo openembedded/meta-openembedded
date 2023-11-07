@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 SRC_URI += "git://github.com/pylint-dev/pylint;branch=maintenance/3.0.x;protocol=https \
            file://run-ptest \
            "
-SRCREV ?= "f2cded41f7f3d4b45236cbe107b366b6caf84bde"
+SRCREV = "efee9618894795cc8847727108522aa79431ee25"
 
 inherit python_setuptools_build_meta ptest
 
@@ -49,5 +49,3 @@ do_install_ptest() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-SRCREV = "efee9618894795cc8847727108522aa79431ee25"
