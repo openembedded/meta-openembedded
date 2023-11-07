@@ -4,19 +4,18 @@ SECTION = "libs/multimedia"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
 
-SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https"
-SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
-S = "${WORKDIR}/git"
-PV = "2.3.4"
-
-inherit cmake pkgconfig lib_package
-
 DEPENDS = "glib-2.0"
 
-SRC_URI += " \
+SRC_URI = " \
+    git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https \
     file://0002-fluid_synth_nwrite_float-Allow-zero-pointer-for-left.patch \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
+SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
+
+S = "${WORKDIR}/git"
+
+inherit cmake pkgconfig lib_package
 
 EXTRA_OECMAKE = "-Denable-floats=ON -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 
