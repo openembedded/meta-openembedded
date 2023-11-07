@@ -12,8 +12,8 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
 
 DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
 
-SRCREV = "29f8154ef762c173a14199c85ce0bbd4ce188abe"
-SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=main"
+SRCREV = "03f786ce66360d67c669f4f122f8aa458e6f01ea"
+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-22"
 
 S = "${WORKDIR}/git"
 
