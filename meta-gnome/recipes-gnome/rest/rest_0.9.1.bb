@@ -6,8 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
-    gi-docgen \
-    gi-docgen-native \
     glib-2.0 \
     glib-2.0-native \
     gtksourceview5 \
@@ -17,6 +15,12 @@ DEPENDS = " \
     libxml2-native \
 "
 
-inherit gnomebase gobject-introspection vala pkgconfig
+inherit gnomebase gobject-introspection vala pkgconfig gi-docgen
+
+EXTRA_OEMESON = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dvapi=true', '-Dvapi=false', d)}"
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
+PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"
 
 SRC_URI[archive.sha256sum] = "9266a5c10ece383e193dfb7ffb07b509cc1f51521ab8dad76af96ed14212c2e3"
