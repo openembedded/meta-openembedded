@@ -6,15 +6,20 @@ flow model and lock-free programming techniques for graph access have \
 been used to have a more dynamic and robust system."
 SECTION = "libs/multimedia"
 
-LICENSE = "GPL-2.0-or-later | LGPL-2.1-or-later | MIT | AFL-2.1"
-LIC_FILES_CHKSUM = "file://common/jack/control.h;beginline=2;endline=21;md5=9edb8b99b7a0dcd49dbf8741444f123d \
-                    file://common/jack/jack.h;beginline=1;endline=19;md5=6b736ed6b810592b135480a5e853392e \
-                    "
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.1-or-later"
+LIC_FILES_CHKSUM = " \
+    file://common/JackControlAPI.cpp;beginline=5;endline=19;md5=9d1921199e203163f160313243f853d6 \
+    file://common/JackControlAPI.h;beginline=4;endline=18;md5=9d1921199e203163f160313243f853d6 \
+    file://common/jack/jack.h;beginline=2;endline=17;md5=0a668d22ce661159cad28d1c3b8e66af \
+    file://common/JackServer.h;beginline=2;endline=17;md5=9bf0870727804a994ee2d19fd368d940 \
+"
 
 DEPENDS = "libsamplerate0 libsndfile1"
 
-SRC_URI = "git://github.com/jackaudio/jack2.git;branch=develop;protocol=https"
-SRCREV = "520dfa0ac5a72d292f5b9fc5835926f925129764"
+SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https"
+SRCREV = "4f58969432339a250ce87fe855fb962c67d00ddb"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
 
