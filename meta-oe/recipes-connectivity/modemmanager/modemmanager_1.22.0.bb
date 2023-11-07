@@ -37,7 +37,7 @@ PACKAGECONFIG[qmi] = "-Dqmi=true,-Dqmi=false,libqmi"
 PACKAGECONFIG[qrtr] = "-Dqrtr=true,-Dqrtr=false,libqrtr-glib"
 PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
 
-inherit ${@bb.utils.contains('PACKAGECONFIG', 'vala', 'vala', '', d)}
+inherit upstream-version-is-even ${@bb.utils.contains('PACKAGECONFIG', 'vala', 'vala', '', d)}
 
 EXTRA_OEMESON = " \
     -Dudevdir=${nonarch_base_libdir}/udev \
