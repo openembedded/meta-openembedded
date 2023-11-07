@@ -11,7 +11,7 @@ SRC_URI = " \
     file://0001-test_pytest_mock-skip-args-introspection-tests.patch \
 "
 
-SRCREV ?= "d3e73f2e93f7b93eba0a36e17e43bafd969da4fe"
+SRCREV = "69adc6f76c1a7baf4e7a728da9eec38741d5783e"
 
 SRC_URI[sha256sum] = "fbbdb085ef7c252a326fd8cdcac0aa3b1333d8811f131bdcc701002e1be7ed4f"
 
@@ -32,5 +32,3 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests ${D}${PTEST_PATH}/
 }
-
-SRCREV = "69adc6f76c1a7baf4e7a728da9eec38741d5783e"
