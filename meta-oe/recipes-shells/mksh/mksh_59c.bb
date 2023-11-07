@@ -7,9 +7,11 @@ LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=6efc2c249328e4d2bd3
                     file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
                    "
 
-SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R59b.tgz"
+SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/${BPN}/${BPN}-R${PV}.tgz"
 
-SRC_URI[sha256sum] = "907ed1a9586e7f18bdefdd4a763aaa8397b755e15034aa54f4d753bfb272e0e6"
+SRC_URI[sha256sum] = "77ae1665a337f1c48c61d6b961db3e52119b38e58884d1c89684af31f87bc506"
+
+UPSTREAM_CHECK_REGEX = "${BPN}-R(?P<pver>.*)\.tgz"
 
 inherit update-alternatives
 
