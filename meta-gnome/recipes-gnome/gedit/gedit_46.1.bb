@@ -19,7 +19,7 @@ DEPENDS = " \
     tepl \
 "
 
-inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext features_check mime-xdg gtk-icon-cache python3targetconfig
+inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc gettext features_check mime-xdg gtk-icon-cache python3targetconfig
 
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)

@@ -17,8 +17,6 @@ DEPENDS = " \
 
 inherit gnomebase gobject-introspection vala pkgconfig gi-docgen
 
-EXTRA_OEMESON = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dvapi=true', '-Dvapi=false', d)}"
-
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"

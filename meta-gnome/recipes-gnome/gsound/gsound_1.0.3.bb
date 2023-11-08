@@ -9,6 +9,8 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
+VALA_MESON_OPTION = "enable_vala"
+
 inherit gnomebase gettext gobject-introspection vala
 
 SRC_URI[archive.sha256sum] = "ca2d039e1ebd148647017a7f548862350bc9af01986d39f10cfdc8e95f07881a"

@@ -17,6 +17,8 @@ CFLAGS += "-D_GNU_SOURCE"
 
 GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
+VALA_MESON_OPTION ?= ''
+
 inherit gnomebase gtk-icon-cache gi-docgen features_check upstream-version-is-even vala gobject-introspection gettext mime mime-xdg
 UPSTREAM_CHECK_REGEX = "[^\d\.](?P<pver>3.(?!9\d+)\d+(\.\d+)+)\.tar"
 
@@ -39,6 +41,7 @@ PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/gcr-3 \
+    ${datadir}/vala \
     ${systemd_user_unitdir}/gcr-ssh-agent.socket \
     ${systemd_user_unitdir}/gcr-ssh-agent.service \
 "
