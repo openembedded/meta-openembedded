@@ -1,7 +1,6 @@
 SUMMARY    = "Session / policy manager implementation for PipeWire"
 HOMEPAGE   = "https://gitlab.freedesktop.org/pipewire/wireplumber"
 BUGTRACKER = "https://gitlab.freedesktop.org/pipewire/wireplumber/issues"
-AUTHOR     = "George Kiagiadakis <george.kiagiadakis@collabora.com>"
 SECTION    = "multimedia"
 
 LICENSE = "MIT"

@@ -2,7 +2,6 @@ SUMMARY     = "Multimedia processing server for Linux"
 DESCRIPTION = "Linux server for handling and routing audio and video streams between applications and multimedia I/O devices"
 HOMEPAGE    = "https://pipewire.org/"
 BUGTRACKER  = "https://gitlab.freedesktop.org/pipewire/pipewire/issues"
-AUTHOR      = "Wim Taymans <wtaymans@redhat.com>"
 SECTION     = "multimedia"
 
 LICENSE = "MIT & LGPL-2.1-or-later & GPL-2.0-only"
