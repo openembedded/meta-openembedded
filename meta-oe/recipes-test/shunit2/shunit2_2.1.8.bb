@@ -1,5 +1,4 @@
 SUMMARY = "shUnit2 is a xUnit based unit test framework for Bourne based shell scripts"
-AUTHOR = "Kate Ward <kate.ward@forestent.com>"
 HOMEPAGE = "https://github.com/kward/shunit2"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
