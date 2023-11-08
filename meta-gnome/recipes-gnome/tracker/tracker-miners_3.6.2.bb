@@ -25,6 +25,7 @@ SRC_URI[archive.sha256sum] = "0ad722f3d532c21d757cf488f942960679ea8f457925efa976
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 GIR_MESON_OPTION = ""
+VALA_MESON_OPTION = ""
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "ffmpeg", "", d)} \

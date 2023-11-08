@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = "mozjs-115 cairo"
 
-inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
+inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even pkgconfig
 
 SRC_URI[archive.sha256sum] = "fbaa20e0917668830800f92951688f9fc08f01296affd5cdb4b35f750be27dc9"
 SRC_URI += " \

@@ -18,6 +18,9 @@ inherit meson pkgconfig gtk-doc gobject-introspection vala
 
 DEPENDS = "glib-2.0 libsoup libxslt"
 
+VALA_MESON_OPTION = 'enable-vala'
+VALA_MESON_ENABLE_FLAG = 'enabled'
+VALA_MESON_DISABLE_FLAG = 'disabled'
 GIR_MESON_OPTION = "enable-introspection"
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
@@ -26,7 +29,6 @@ GTKDOC_MESON_OPTION = "enable-gtk-doc"
 EXTRA_OEMESON += " \
 	-Dwith-pci-ids-path=${datadir}/pci.ids \
 	-Dwith-usb-ids-path=${datadir}/usb.ids \
-	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Denable-vala=enabled', '-Denable-vala=disabled', d)} \
 "
 
 RDEPENDS:${PN} = "pciutils-ids usbids"
