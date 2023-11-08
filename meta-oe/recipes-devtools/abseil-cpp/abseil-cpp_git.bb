@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
            file://0002-Remove-maes-option-from-cross-compilation.patch \
            file://abseil-ppc-fixes.patch \
            file://0003-Remove-neon-option-from-cross-compilation.patch \
+           file://0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch \
           "
 
 S = "${WORKDIR}/git"
@@ -31,5 +32,7 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
                 "
 
 BBCLASSEXTEND = "native nativesdk"
+
+SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
 
 FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
