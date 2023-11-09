@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "c738ebc36b47bd94e4ca6dd17a9004c3cc74edad582ca1d60e0e5d5945a63cb9"
+SRC_URI[sha256sum] = "6b632581ea60dd1c133cd25a48ad187b4b91f526623c4b0fb5443ef805250505"
 
 PYPI_PACKAGE="jsbeautifier"
 
