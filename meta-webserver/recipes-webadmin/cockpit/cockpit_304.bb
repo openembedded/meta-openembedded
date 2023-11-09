@@ -9,11 +9,13 @@ SRC_URI += " \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "c7da91824f7a72c82c1a3aaff1a57dbe0ce1e29e05e95d92b5118a324a3f4b39"
+SRC_URI[sha256sum] = "a87d090c930e2058bb3e970ca7f2bafe678687966b5c0b8b42a802977e391ce9"
 
 inherit gettext pkgconfig autotools systemd features_check
+inherit ${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3targetconfig', d)}
 
 DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd"
+DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3-pip-native', d)}"
 
 COMPATIBLE_HOST:libc-musl = "null"
 
@@ -37,12 +39,14 @@ EXTRA_OECONF = " \
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+    old-bridge \
 "
 
 PACKAGECONFIG[pcp] = "--enable-pcp,--disable-pcp,pcp"
 PACKAGECONFIG[dashboard] = "--enable-ssh,--disable-ssh,libssh"
 PACKAGECONFIG[storaged] = ",,,udisks2"
 PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
+PACKAGECONFIG[old-bridge] = "--enable-old-bridge"
 
 PACKAGES =+ " \
     ${PN}-pcp \
@@ -120,8 +124,9 @@ FILES:${PN}-apps = "${datadir}/cockpit/apps"
 FILES:${PN}-bridge = " \
     ${bindir}/cockpit-bridge \
     ${libexecdir}/cockpit-askpass \
+    ${PYTHON_SITEPACKAGES_DIR} \
 "
-RDEPENDS:${PN}-bridge = ""
+RDEPENDS:${PN}-bridge = "${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3', d)}"
 
 FILES:${PN}-desktop = "${libexecdir}/cockpit-desktop"
 RDEPENDS:${PN}-desktop += "bash"
