@@ -645,11 +645,11 @@ RDEPENDS:packagegroup-meta-oe-kernel:append:powerpc64 = " libpfm4"
 RDEPENDS:packagegroup-meta-oe-kernel:remove = "kernel-selftest"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:libc-musl = "bpftool crash intel-speed-select kernel-selftest minicoredumper turbostat"
 
-RDEPENDS:packagegroup-meta-oe-kernel:remove:mipsarch = "makedumpfile"
+RDEPENDS:packagegroup-meta-oe-kernel:remove:mipsarcho32 = "makedumpfile"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:mips64 = "crash"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:mips64el = "crash"
 
-RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 = "crash makedumpfile oprofile"
+RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 = "crash oprofile"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 = "crash makedumpfile oprofile"
 
 RDEPENDS:packagegroup-meta-oe-multimedia ="\
