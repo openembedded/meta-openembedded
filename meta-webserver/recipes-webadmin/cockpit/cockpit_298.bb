@@ -119,7 +119,7 @@ FILES:${PN}-apps = "${datadir}/cockpit/apps"
 
 FILES:${PN}-bridge = " \
     ${bindir}/cockpit-bridge \
-    ${libexec}/cockpit-askpass \
+    ${libexecdir}/cockpit-askpass \
 "
 RDEPENDS:${PN}-bridge = ""
 
