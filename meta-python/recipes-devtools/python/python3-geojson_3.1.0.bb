@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/geojson/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=f77f2ed49768c8d4c79ba874c0f94d8a"
 
-SRC_URI[sha256sum] = "ff3d75acab60b1e66504a11f7ea12c104bad32ff3c410a807788663b966dee4a"
+SRC_URI[sha256sum] = "58a7fa40727ea058efc28b0e9ff0099eadf6d0965e04690830208d3ef571adac"
 
 inherit pypi setuptools3 ptest
 
