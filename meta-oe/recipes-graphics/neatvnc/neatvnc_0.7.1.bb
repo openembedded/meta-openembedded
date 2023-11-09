@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
 
 SRC_URI = "git://github.com/any1/neatvnc;branch=v0.7;protocol=https"
 
-SRCREV = "112391140a76f0b362fa0df92fc1183c4a48ef3d"
+SRCREV = "b5b330b22c6a0fdeb718a9e7ee0732cc406863fa"
 
 S = "${WORKDIR}/git"
 
