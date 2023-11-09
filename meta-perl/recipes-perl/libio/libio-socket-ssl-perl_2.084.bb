@@ -21,7 +21,7 @@ RDEPENDS:${PN} += "\
 "
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
-SRC_URI[sha256sum] = "904ef28765440a97d8a9a0df597f8c3d7f3cb0a053d1b082c10bed03bc802069"
+SRC_URI[sha256sum] = "a60d1e04e192363155329560498abd3412c3044295dae092d27fb6e445c71ce1"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
