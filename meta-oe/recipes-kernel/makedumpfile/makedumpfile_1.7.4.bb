@@ -16,8 +16,9 @@ SRCREV = "3bc3b3e3be33a9aa040e654f055912063e576c1b"
 DEPENDS = "bzip2 zlib elfutils xz"
 RDEPENDS:${PN}-tools = "perl ${PN}"
 
-# mips would not compile.
-COMPATIBLE_HOST = "(x86_64|i.86|powerpc|arm|aarch64).*-linux"
+# mips/rv32 would not compile.
+COMPATIBLE_HOST:mipsarcho32 = "null"
+COMPATIBLE_HOST:riscv32 = "null"
 
 PACKAGES =+ "${PN}-tools"
 FILES:${PN}-tools = "${bindir}/*.pl"
