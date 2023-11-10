@@ -1,0 +1,27 @@
+From 98c6edba4835b515d933542411d80879327eee16 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Jul 2016 18:34:39 +0000
+Subject: [PATCH] get_pid_from_inode: Include limit.h
+
+PATH_MAX and NAME_MAX are required by this file
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+---
+ agent/mibgroup/util_funcs/get_pid_from_inode.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/agent/mibgroup/util_funcs/get_pid_from_inode.c b/agent/mibgroup/util_funcs/get_pid_from_inode.c
+index aee907d..7abaec2 100644
+--- a/agent/mibgroup/util_funcs/get_pid_from_inode.c
++++ b/agent/mibgroup/util_funcs/get_pid_from_inode.c
+@@ -6,6 +6,7 @@
+ #include <net-snmp/output_api.h>
+ 
+ #include <ctype.h>
++#include <limits.h>
+ #include <stdio.h>
+ #if HAVE_STDLIB_H
+ #include <stdlib.h>

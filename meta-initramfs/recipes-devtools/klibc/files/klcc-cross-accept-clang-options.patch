@@ -1,0 +1,20 @@
+meta-clang passes this option to compiler defaults
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+--- a/klcc/klcc.in
++++ b/klcc/klcc.in
+@@ -207,6 +207,12 @@ while ( defined($a = shift(@ARGV)) ) {
+     } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+ 	# Override gcc encoded sysroot
+ 	push(@ccopt, $a);
++    } elsif ( $a eq '-no-integrated-as' ) {
++	# Allow clang options
++	push(@ccopt, $a);
++    } elsif ( $a =~ '--unwindlib=.*' ) {
++	# Allow clang options
++	push(@ccopt, $a);
+     } else {
+ 	die "$0: unknown option: $a\n";
+     }

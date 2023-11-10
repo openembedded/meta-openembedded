@@ -1,0 +1,56 @@
+From 1b2e24e14ee72e54e466be2512c78272f62d60b4 Mon Sep 17 00:00:00 2001
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Mon, 16 Sep 2019 13:21:44 +0200
+Subject: [PATCH 01/10] Tell scons to use build settings from environment
+ variables
+
+Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+---
+ SConstruct                | 8 ++++++--
+ 1 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 7ebbcbc..e63cf15 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -608,6 +608,7 @@ def variable_arch_converter(val):
+         'amd64':  'x86_64',
+         'emt64':   'x86_64',
+         'x86':    'i386',
++        'aarch64': 'arm64',
+     }
+     val = val.lower()
+ 
+@@ -695,7 +696,8 @@ env_vars.Add(
+ )
+ 
+ env_vars.Add('CC',
+-    help='Select the C compiler to use')
++    help='Select the C compiler to use',
++    default=os.getenv('CC'))
+ 
+ env_vars.Add('CCFLAGS',
+     help='Sets flags for the C and C++ compiler',
+@@ -715,7 +717,8 @@ env_vars.Add('CPPPATH',
+     converter=variable_shlex_converter)
+ 
+ env_vars.Add('CXX',
+-    help='Select the C++ compiler to use')
++    help='Select the C++ compiler to use',
++    default=os.getenv('CXX'))
+ 
+ env_vars.Add('CXXFLAGS',
+     help='Sets flags for the C++ compiler',
+@@ -1018,6 +1021,7 @@ envDict = dict(BUILD_ROOT=buildDir,
+                )
+ 
+ env = Environment(variables=env_vars, **envDict)
++env.PrependENVPath('PATH', os.getenv('PATH'))
+ del envDict
+ 
+ for var in ['CC', 'CXX']:
+ 
+-- 
+2.7.4
+

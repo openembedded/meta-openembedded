@@ -1,0 +1,37 @@
+From 9d5e7eff4ae906f1ea6e6527080fded0b595fbd4 Mon Sep 17 00:00:00 2001
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+Date: Tue, 9 Apr 2013 18:50:34 -0700
+Subject: [PATCH] aufs-util: don't strip executables
+
+By default, aufs-util strips its binaries. This produces QA warnings
+as follows:
+
+   WARNING: File '/sbin/mount.aufs' from aufs-util was already stripped, this will prevent future debugging!
+   WARNING: File '/sbin/auplink' from aufs-util was already stripped, this will prevent future debugging!
+   WARNING: File '/sbin/umount.aufs' from aufs-util was already stripped, this will prevent future debugging!
+   WARNING: File '/sbin/auibusy' from aufs-util was already stripped, this will prevent future debugging!
+   WARNING: File '/usr/lib/libau.so.2.6' from aufs-util was already stripped, this will prevent future debugging!
+
+To prevent this, we remove -s from LDFLAGS.
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 54f8d97..dbbe43d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -118,7 +118,7 @@ clean:
+ ver_test: ver
+ 	./ver
+ 
+-${Bin}: override LDFLAGS += -static -s
++${Bin}: override LDFLAGS += -static
+ ${Bin}: LDLIBS = -L. -lautil
+ ${BinObj}: %.o: %.c ${LibUtilHdr} ${LibUtil}
+ 

@@ -1,0 +1,60 @@
+From a70513ff59da3c593c76330afb445c21761c3268 Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Tue, 31 Jul 2018 17:14:24 +0800
+Subject: [PATCH 1/2] tweak install prefix
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ Makefile | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index c98cf35..7c5907f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -39,26 +39,26 @@ pyisomd5sum.so: $(PYOBJS)
+ install: all install-bin install-python install-devel
+ 
+ install-bin:
+-	install -d -m 0755 $(DESTDIR)/usr/bin
+-	install -d -m 0755 $(DESTDIR)/usr/share/man/man1
+-	install -m 0755 implantisomd5 $(DESTDIR)/usr/bin
+-	install -m 0755 checkisomd5 $(DESTDIR)/usr/bin
+-	install -m 0644 implantisomd5.1 $(DESTDIR)/usr/share/man/man1
+-	install -m 0644 checkisomd5.1 $(DESTDIR)/usr/share/man/man1
++	install -d -m 0755 $(DESTDIR)$(bindir)
++	install -d -m 0755 $(DESTDIR)$(mandir)/man1
++	install -m 0755 implantisomd5 $(DESTDIR)$(bindir)
++	install -m 0755 checkisomd5 $(DESTDIR)$(bindir)
++	install -m 0644 implantisomd5.1 $(DESTDIR)$(mandir)/man1
++	install -m 0644 checkisomd5.1 $(DESTDIR)$(mandir)/man1
+ 
+ install-python:
+ 	install -d -m 0755 $(DESTDIR)$(PYTHONSITEPACKAGES)
+ 	install -m 0755 pyisomd5sum.so $(DESTDIR)$(PYTHONSITEPACKAGES)
+ 
+ install-devel:
+-	install -d -m 0755 $(DESTDIR)/usr/include
+-	install -d -m 0755 $(DESTDIR)/usr/$(LIBDIR)
+-	install -d -m 0755 $(DESTDIR)/usr/share/pkgconfig
+-	install -m 0644 libimplantisomd5.h $(DESTDIR)/usr/include/
+-	install -m 0644 libcheckisomd5.h $(DESTDIR)/usr/include/
+-	install -m 0644 libimplantisomd5.a $(DESTDIR)/usr/$(LIBDIR)
+-	install -m 0644 libcheckisomd5.a $(DESTDIR)/usr/$(LIBDIR)
+-	sed "s#@VERSION@#${VERSION}#g; s#@includedir@#/usr/include#g; s#@libdir@#/usr/${LIBDIR}#g" isomd5sum.pc.in > ${DESTDIR}/usr/share/pkgconfig/isomd5sum.pc
++	install -d -m 0755 $(DESTDIR)$(includedir)
++	install -d -m 0755 $(DESTDIR)$(libdir)
++	install -d -m 0755 $(DESTDIR)${datadir}/pkgconfig
++	install -m 0644 libimplantisomd5.h $(DESTDIR)$(includedir)
++	install -m 0644 libcheckisomd5.h $(DESTDIR)$(includedir)
++	install -m 0644 libimplantisomd5.a $(DESTDIR)$(libdir)
++	install -m 0644 libcheckisomd5.a $(DESTDIR)$(libdir)
++	sed "s#@VERSION@#${VERSION}#g; s#@includedir@#$(includedir)#g; s#@libdir@#$(libdir)#g" isomd5sum.pc.in > ${DESTDIR}${datadir}/pkgconfig/isomd5sum.pc
+ 
+ clean:
+ 	rm -f *.o *.so *.pyc *.a .depend *~
+-- 
+2.7.4
+

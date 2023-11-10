@@ -1,0 +1,40 @@
+From 24e2b0edc2612acefcc48414bb6f0aeb086061a9 Mon Sep 17 00:00:00 2001
+From: Jackie Huang <jackie.huang@windriver.com>
+Date: Tue, 26 Feb 2019 23:57:06 -0800
+Subject: [PATCH] configure.cmake: fix valgrind
+
+Check valgrind headers only if WITH_VALGRIND is set.
+
+mariadb uses two macros for valgrind compilations:
+HAVE_valgrind - valgrind is installed and can be set by configure option -DWITH_VALGRIND
+HAVE_VALGRIND - valgrind debug libraries is installed, set by auto check
+
+We would like to set them both by the configure option so that we can use
+PACKAGECONFIG to decide if valgrind is needed or not.
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+
+---
+ configure.cmake | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+Index: mariadb-10.4.17/configure.cmake
+===================================================================
+--- mariadb-10.4.17.orig/configure.cmake
++++ mariadb-10.4.17/configure.cmake
+@@ -867,10 +867,9 @@ HAVE_GCC_C11_ATOMICS)
+ 
+ IF(WITH_VALGRIND)
+   SET(HAVE_valgrind 1)
+-ENDIF()
+-
+-CHECK_INCLUDE_FILES("valgrind/memcheck.h;valgrind/valgrind.h" 
++  CHECK_INCLUDE_FILES("valgrind/memcheck.h;valgrind/valgrind.h"
+   HAVE_VALGRIND_MEMCHECK_H)
++ENDIF()
+ 
+ #--------------------------------------------------------------------
+ # Check for IPv6 support

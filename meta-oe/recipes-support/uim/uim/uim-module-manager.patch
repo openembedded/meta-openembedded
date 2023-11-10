@@ -1,0 +1,19 @@
+From d61495d3fb039842b82df44184c67eb3c1256136 Mon Sep 17 00:00:00 2001
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+Date: Fri, 26 Jun 2015 12:57:48 +0900
+
+---
+ scm/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/scm/Makefile.am
++++ b/scm/Makefile.am
+@@ -115,7 +115,7 @@ if EXPAT
+   module_names += "yahoo-jp"
+ endif
+ 
+-UIM_MODULE_MANAGER = $(top_builddir)/uim/uim-module-manager
++UIM_MODULE_MANAGER = uim-module-manager
+ UIM_MODULE_MANAGER_ENV = \
+         LIBUIM_SYSTEM_SCM_FILES=$(abs_top_srcdir)/sigscheme/lib \
+         LIBUIM_SCM_FILES=$(abs_srcdir) \

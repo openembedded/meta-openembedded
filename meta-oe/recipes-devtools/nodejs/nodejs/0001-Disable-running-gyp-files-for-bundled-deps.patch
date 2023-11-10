@@ -1,0 +1,25 @@
+From c2aff16cc196a61f4ab1cdae4a91c7926123c239 Mon Sep 17 00:00:00 2001
+From: Zuzana Svetlikova <zsvetlik@redhat.com>
+Date: Thu, 27 Apr 2017 14:25:42 +0200
+Subject: [PATCH] Disable running gyp on shared deps
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 0947300f24..6c98691984 100644
+--- a/Makefile
++++ b/Makefile
+@@ -141,7 +141,7 @@ test-code-cache: with-code-cache
+ 	echo "'test-code-cache' target is a noop"
+ 
+ out/Makefile: config.gypi common.gypi node.gyp \
+-	deps/uv/uv.gyp deps/http_parser/http_parser.gyp deps/zlib/zlib.gyp \
++	deps/http_parser/http_parser.gyp \
+ 	tools/v8_gypfiles/toolchain.gypi tools/v8_gypfiles/features.gypi \
+ 	tools/v8_gypfiles/inspector.gypi tools/v8_gypfiles/v8.gyp
+ 	$(PYTHON) tools/gyp_node.py -f make
+-- 
+2.20.1
+

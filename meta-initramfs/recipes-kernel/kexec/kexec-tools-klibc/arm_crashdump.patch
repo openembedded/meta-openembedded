@@ -1,0 +1,31 @@
+From 8ee92bc915d650e188caaa3df0a798ac2002f64e Mon Sep 17 00:00:00 2001
+From: OpenEmbedded <oe.patch@oe>
+Date: Wed, 11 Apr 2018 22:51:00 +0200
+Subject: [PATCH] use our elf.h header
+
+Fix
+
+ kexec/arch/arm/crashdump-arm.c:70:13: error: 'EM_ARM' undeclared here
+ (not in a function); did you mean 'EM_860'?
+    .machine = EM_ARM,
+
+Upstream-Status: Inappropriate [klibc specific]
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+---
+ kexec/arch/arm/crashdump-arm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kexec/arch/arm/crashdump-arm.c b/kexec/arch/arm/crashdump-arm.c
+index 3f72b38..af2600d 100644
+--- a/kexec/arch/arm/crashdump-arm.c
++++ b/kexec/arch/arm/crashdump-arm.c
+@@ -21,7 +21,7 @@
+  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  */
+ #include <limits.h>
+-#include <elf.h>
++#include "../../../include/elf.h"
+ #include <errno.h>
+ #include <stdio.h>
+ #include <stdlib.h>

@@ -1,0 +1,46 @@
+Subject: [PATCH] syslog-ng.service: the syslog-ng service can not start 
+ successfully,so modify it.
+
+Upstream-Status: pending
+
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Updated-by: Andrej Valek <andrej.valek@siemens.com>
+
+Update for 3.24.1
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ contrib/systemd/syslog-ng@.service | 4 ++--
+ contrib/systemd/syslog-ng@default  | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/contrib/systemd/syslog-ng@.service b/contrib/systemd/syslog-ng@.service
+index a28640e..93aec94 100644
+--- a/contrib/systemd/syslog-ng@.service
++++ b/contrib/systemd/syslog-ng@.service
+@@ -7,8 +7,8 @@ Conflicts=emergency.service emergency.target
+ Type=notify
+ EnvironmentFile=-/etc/default/syslog-ng@%i
+ EnvironmentFile=-/etc/sysconfig/syslog-ng@%i
+-ExecStart=/usr/sbin/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+-ExecReload=/bin/kill -HUP $MAINPID
++ExecStart=@SBINDIR@/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
++ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+ StandardOutput=journal
+ StandardError=journal
+ Restart=on-failure
+diff --git a/contrib/systemd/syslog-ng@default b/contrib/systemd/syslog-ng@default
+index 0ccc2b9..7f08c0e 100644
+--- a/contrib/systemd/syslog-ng@default
++++ b/contrib/systemd/syslog-ng@default
+@@ -1,5 +1,5 @@
+ CONFIG_FILE=/etc/syslog-ng/syslog-ng.conf
+-PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
+-CONTROL_FILE=/var/run/syslog-ng.ctl
+-PID_FILE=/var/run/syslog-ng.pid
++PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
++CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
++PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
+ OTHER_OPTIONS="--enable-core"
+-- 
+2.7.4
+

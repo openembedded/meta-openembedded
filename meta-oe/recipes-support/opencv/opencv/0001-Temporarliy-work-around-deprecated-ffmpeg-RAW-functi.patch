@@ -1,0 +1,31 @@
+From 23425e45f6e26f2b1e387b88e104872b3a1ea5d1 Mon Sep 17 00:00:00 2001
+From: Jason Wessel <jason.wessel@windriver.com>
+Date: Wed, 9 May 2018 13:33:59 -0700
+Subject: [PATCH] Temporarliy work around deprecated ffmpeg RAW function
+ compile failure until next uprev
+
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+
+---
+ modules/videoio/src/cap_ffmpeg_impl.hpp | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/modules/videoio/src/cap_ffmpeg_impl.hpp b/modules/videoio/src/cap_ffmpeg_impl.hpp
+index 0d360ad5d9..566df6664b 100644
+--- a/modules/videoio/src/cap_ffmpeg_impl.hpp
++++ b/modules/videoio/src/cap_ffmpeg_impl.hpp
+@@ -736,6 +736,14 @@ struct ImplMutex::Impl
+ 
+ #endif
+ 
++/* NOTE This is deprecated in ffmpeg and the code should be removed */
++#ifndef AVFMT_RAWPICTURE
++#define AVFMT_RAWPICTURE	0x0020
++#endif /* AVFMT_RAWPICTURE */
++#ifndef CODEC_FLAG_GLOBAL_HEADER
++#define CODEC_FLAG_GLOBAL_HEADER	AV_CODEC_FLAG_GLOBAL_HEADER
++#endif
++
+ void ImplMutex::init()
+ {
+     impl = new Impl();

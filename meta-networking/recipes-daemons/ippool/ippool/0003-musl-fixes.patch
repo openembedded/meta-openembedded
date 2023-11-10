@@ -1,0 +1,80 @@
+From eb345047decba665e3f39908336a83f039e1ece2 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Jul 2017 16:01:32 -0700
+Subject: [PATCH 3/3] musl fixes
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ cli/cli_readline.c |   7 +-
+ ippool_api.c       |   9 ++-
+ net/ppp_defs.h     | 194 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ usl/usl.h          |   4 ++
+ 4 files changed, 208 insertions(+), 6 deletions(-)
+ create mode 100644 net/ppp_defs.h
+
+Index: ippool-1.3/cli/cli_readline.c
+===================================================================
+--- ippool-1.3.orig/cli/cli_readline.c
++++ ippool-1.3/cli/cli_readline.c
+@@ -17,13 +17,14 @@
+  *  Boston, MA 02110-1301 USA
+  *
+  *****************************************************************************/
+-
++#define _GNU_SOURCE
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <sys/types.h>
+ #include <sys/file.h>
+ #include <sys/stat.h>
+-#include <sys/errno.h>
++#include <fcntl.h>
++#include <errno.h>
+ #include <signal.h>
+ 
+ #include <readline/readline.h>
+@@ -630,7 +631,7 @@ static void cli_rl_uninstall_signal_hand
+ 
+ static int cli_rl_install_signal_handlers(void)
+ {
+-	__sighandler_t handler;
++	sighandler_t handler;
+ 
+ 	rl_catch_signals = 0;
+ 	rl_clear_signals();
+Index: ippool-1.3/ippool_api.c
+===================================================================
+--- ippool-1.3.orig/ippool_api.c
++++ ippool-1.3/ippool_api.c
+@@ -181,10 +181,13 @@ int ippool_api_rpc_check_request(SVCXPRT
+ 	 * non-loopback interface, reject the request.
+ 	 */
+ 	if ((!ippool_opt_remote_rpc) &&
+-	    ((xprt->xp_raddr.sin_addr.s_addr != htonl(INADDR_LOOPBACK)) &&
+-	     (xprt->xp_raddr.sin_addr.s_addr != htonl(INADDR_ANY)))) {
++	    ((xprt->xp_raddr.sin6_addr.s6_addr != htonl(INADDR_LOOPBACK)) &&
++	     (xprt->xp_raddr.sin6_addr.s6_addr != htonl(INADDR_ANY)))) {
++		char straddr[INET6_ADDRSTRLEN];
++		inet_ntop(AF_INET6, &xprt->xp_raddr.sin6_addr, straddr, sizeof(straddr));
++
+ 		if (ippool_opt_debug) {
+-			ippool_log(LOG_ERR, "Rejecting RPC request from %s", inet_ntoa(xprt->xp_raddr.sin_addr));
++			ippool_log(LOG_ERR, "Rejecting RPC request from %s", straddr);
+ 		}
+ 		svcerr_auth(xprt, AUTH_TOOWEAK);
+ 		return -EPERM;
+Index: ippool-1.3/usl/usl.h
+===================================================================
+--- ippool-1.3.orig/usl/usl.h
++++ ippool-1.3/usl/usl.h
+@@ -38,6 +38,10 @@
+ #include "usl_fsm.h"
+ #include "usl_list.h"
+ 
++#ifndef WAIT_ANY
++#define WAIT_ANY (-1)
++#endif
++
+ #define USL_VERSION	"0.6"
+ 
+ #ifdef DEBUG

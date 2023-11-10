@@ -1,0 +1,23 @@
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac
++++ git/configure.ac
+@@ -42,18 +42,6 @@ case $host in
+      ;;		 		     
+ esac
+ 
+-
+-# Bring additional directories where things might be found into our
+-# search path. I don't know why autoconf doesn't do this by default
+-if test x"${mingw}" == "xno" ; then
+-  for spfx in /usr/local /opt/local /sw ; do
+-    echo checking ${spfx}/include
+-    if test -d ${spfx}/include; then
+-        CPPFLAGS="-I${spfx}/include $CPPFLAGS"
+-        LDFLAGS="-L${spfx}/lib $LDFLAGS"
+-    fi
+-  done
+-fi
+ #
+ #
+ ################################################################

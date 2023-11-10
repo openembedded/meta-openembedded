@@ -1,0 +1,48 @@
+From dd90a690f95569b999b8ac9ab57e834b3421dcbb Mon Sep 17 00:00:00 2001
+From: Changqing Li <changqing.li@windriver.com>
+Date: Tue, 27 Nov 2018 15:19:07 +0800
+Subject: [PATCH] From dabcbdae38038a8e4ad2c4286112381c407c5ce7 Mon Sep 17
+ 00:00:00 2001 From: Roy Li <rongqing.li@windriver.com> Date: Tue, 19 Aug 2014
+ 11:31:35 +0800 Subject: [PATCH] using pkg-config to detect libxml-2.0 and
+ krb5
+
+Upstream-Status: Pending
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+
+update patch to 5.1.5
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ configure.in | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index f5fbb35..76ecb40 100644
+--- a/configure.in
++++ b/configure.in
+@@ -211,8 +211,20 @@ fi
+ AC_SUBST(ENABLE_FEDFS)
+ 
+ # LDAP SASL auth needs libxml and Kerberos
+-AF_CHECK_LIBXML()
+-AF_CHECK_KRB5()
++PKG_CHECK_MODULES(XML, [libxml-2.0],HAVE_LIBXML=1,HAVE_LIBXML=0)
++AC_SUBST([HAVE_LIBXML])
++XML_FLAGS=$XML_CFLAGS
++
++PKG_CHECK_MODULES(KRB5, [krb5],HAVE_KRB5=1,HAVE_KRB5=0)
++AC_SUBST([HAVE_KRB5])
++if test "x$HAVE_KRB5" = "x1"; then
++  SAVE_CFLAGS=$CFLAGS
++  SAVE_LIBS=$LIBS
++  CFLAGS="$CFLAGS $KRB5_FLAGS"
++  LIBS="$LIBS $KRB5_LIBS"
++
++  AC_CHECK_FUNCS([krb5_principal_get_realm])
++fi
+ 
+ AC_SEARCH_LIBS([versionsort],[])
+ if test "$ac_cv_search_versionsort" = "no"; then
+-- 
+2.7.4
+

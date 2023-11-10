@@ -1,0 +1,16 @@
+[Unit]
+Description=OSPF routing daemon
+BindTo=zebra.service
+After=zebra.service
+ConditionPathExists=@SYSCONFDIR@/quagga/ospfd.conf
+
+[Service]
+Type=forking
+EnvironmentFile=-@SYSCONFDIR@/default/quagga
+PIDFile=/run/quagga/ospfd.pid
+ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f @SYSCONFDIR@/quagga/ospfd.conf
+ExecStopPost=@base_bindir@/rm -rf /run/quagga/ospfd.pid
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

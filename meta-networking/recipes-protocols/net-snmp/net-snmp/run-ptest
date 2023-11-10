@@ -1,0 +1,5 @@
+#!/bin/sh
+
+workdir=$(dirname `realpath $0`)
+cd ${workdir}/testing
+./RUNTESTS

@@ -1,0 +1,37 @@
+From 862a981ce462cd83a99e3db9faeeda1f8c64983f Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Mon, 18 Mar 2019 23:23:55 -0400
+Subject: [PATCH] explicitly set compile options
+
+OE does not support to install egg package, so
+explicitly set build_ext options for oe-core's
+`setup.py install'
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+---
+ setup.cfg | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/setup.cfg b/setup.cfg
+index 1c6ebc84..1ccc3d69 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -13,3 +13,15 @@ multi_line_output = 3
+ 
+ [tool:pytest]
+ addopts = -rs
++
++[build_ext]
++disable-platform-guessing = 1
++enable-zlib = 1
++enable-jpeg = 1
++enable-tiff = 1
++enable-freetype = 1
++enable-lcms = 1
++enable-jpeg2000 = 1
++disable-webp = 1
++disable-webpmux = 1
++disable-imagequant = 1

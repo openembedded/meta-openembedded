@@ -1,0 +1,14 @@
+Index: libdc1394/examples/Makefile.am
+===================================================================
+--- libdc1394.orig/examples/Makefile.am
++++ libdc1394/examples/Makefile.am
+@@ -36,8 +36,7 @@ if HAVE_MACOSX
+ AM_LDFLAGS = -framework CoreFoundation $(FRAMEWORK_IOKIT)
+ endif
+ 
+-noinst_PROGRAMS = $(A)
+-bin_PROGRAMS = $(B)
++bin_PROGRAMS = $(A) $(B)
+ 
+ LDADD = ../dc1394/libdc1394.la
+ 

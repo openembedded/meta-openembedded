@@ -1,0 +1,57 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17
+00:00:00 2001 From:Benjamin Marzinski <bmarzins@redhat.com> Date: Wed, 2 Jul
+2014 12:49:53 -0500 Subject: [PATCH] RH: Remove the property blacklist
+exception builtin
+
+Multipath set the default property blacklist exceptions to
+(ID_SCSI_VPD|ID_WWN).  This has the effect of blacklisting some internal
+devices.  These devices may never have multiple paths, but it is nice
+to be able to set multipath up on them all the same.  This patch simply
+removes the default, and makes it so that if no property
+blacklist_exception is given, then devices aren't failed for not matching
+it.
+
+Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
+
+Upsteam-Status: Pending
+
+Update patch to 0.8.2
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ libmultipath/blacklist.c | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/libmultipath/blacklist.c b/libmultipath/blacklist.c
+index 00e8dbd..5204501 100644
+--- a/libmultipath/blacklist.c
++++ b/libmultipath/blacklist.c
+@@ -192,12 +192,6 @@ setup_default_blist (struct config * conf)
+ 	char * str;
+ 	int i;
+ 
+-	str = STRDUP("^(ram|zram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]");
+-	if (!str)
+-		return 1;
+-	if (store_ble(conf->blist_devnode, str, ORIGIN_DEFAULT))
+-		return 1;
+-
+ 	str = STRDUP("^(td|hd|vd)[a-z]");
+ 	if (!str)
+ 		return 1;
+@@ -437,8 +431,11 @@ filter_property(struct config *conf, struct udev_device *udev, int lvl,
+ 			r = MATCH_NOTHING;
+ 	}
+ 
+-	log_filter(devname, NULL, NULL, NULL, env, NULL, r, lvl);
+-	return r;
++       if (VECTOR_SIZE(conf->elist_property)) {
++               log_filter(devname, NULL, NULL, NULL, env, NULL, r, lvl);
++               return r;
++       }
++       return 0;
+ }
+ 
+ static void free_ble(struct blentry *ble)
+-- 
+2.7.4
+

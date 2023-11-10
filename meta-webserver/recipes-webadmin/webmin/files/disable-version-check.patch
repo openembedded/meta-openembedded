@@ -1,0 +1,64 @@
+Disable OS version check in status screen
+
+The code is not able to accurately detect the correct distro/version at
+the moment.
+
+Upstream-status: Inappropriate
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+Index: webmin-1.850/webmin/webmin-lib.pl
+===================================================================
+--- webmin-1.850.orig/webmin/webmin-lib.pl
++++ webmin-1.850/webmin/webmin-lib.pl
+@@ -1112,28 +1112,28 @@ my %miniserv;
+ &load_theme_library();	# So that UI functions work
+ 
+ # Need OS upgrade
+-my %realos = &detect_operating_system(undef, 1);
+-if (($realos{'os_version'} ne $gconfig{'os_version'} ||
+-     $realos{'os_type'} ne $gconfig{'os_type'}) &&
+-    $realos{'os_version'} && $realos{'os_type'} &&
+-    &foreign_available("webmin")) {
+-	my ($realminor) = split(/\./, $realos{'os_version'});
+-	my ($minor) = split(/\./, $gconfig{'os_version'});
+-	if ($realos{'os_type'} eq $gconfig{'os_type'} &&
+-	    $realminor == $minor) {
+-		# Only the minor version number changed - no need to apply
+-		&apply_new_os_version(\%realos);
+-		}
+-	else {
+-		# Large enough change to tell the user
+-		push(@notifs, 
+-		    &ui_form_start("$gconfig{'webprefix'}/webmin/fix_os.cgi").
+-		    &text('os_incorrect', $realos{'real_os_type'},
+-		    		          $realos{'real_os_version'})."<p>\n".
+-		    &ui_form_end([ [ undef, $text{'os_fix'} ] ])
+-		    );
+-		}
+-	}
++#my %realos = &detect_operating_system(undef, 1);
++#if (($realos{'os_version'} ne $gconfig{'os_version'} ||
++#     $realos{'os_type'} ne $gconfig{'os_type'}) &&
++#    $realos{'os_version'} && $realos{'os_type'} &&
++#    &foreign_available("webmin")) {
++#	my ($realminor) = split(/\./, $realos{'os_version'});
++#	my ($minor) = split(/\./, $gconfig{'os_version'});
++#	if ($realos{'os_type'} eq $gconfig{'os_type'} &&
++#	    $realminor == $minor) {
++#		# Only the minor version number changed - no need to apply
++#		&apply_new_os_version(\%realos);
++#		}
++#	else {
++#		# Large enough change to tell the user
++#		push(@notifs, 
++#		    &ui_form_start("$gconfig{'webprefix'}/webmin/fix_os.cgi").
++#		    &text('os_incorrect', $realos{'real_os_type'},
++#		    		          $realos{'real_os_version'})."<p>\n".
++#		    &ui_form_end([ [ undef, $text{'os_fix'} ] ])
++#		    );
++#		}
++#	}
+ 
+ # Password close to expiry
+ my $warn_days = $config{'warn_days'};
