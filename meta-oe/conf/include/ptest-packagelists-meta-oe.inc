@@ -28,6 +28,7 @@ PTESTS_FAST_META_OE = "\
     lmdb \
     minicoredumper \
     neon \
+    nlohmann-json \
     nodejs \
     onig \
     poco \
