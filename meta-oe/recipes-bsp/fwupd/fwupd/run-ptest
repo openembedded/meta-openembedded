@@ -1,6 +1,0 @@
-#! /bin/sh
-
-# Don't run all of the fwupd tests, as fwupd/fwupdmgr.test needs a custom
-# /etc/fwupd/daemon.conf with DisabledPlugins unset.
-
-gnome-desktop-testing-runner fwupd/fwupd.test

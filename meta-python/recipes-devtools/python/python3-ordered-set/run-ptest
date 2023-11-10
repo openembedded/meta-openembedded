@@ -1,3 +1,0 @@
-#!/bin/sh
-
-pytest test_ordered_set.py

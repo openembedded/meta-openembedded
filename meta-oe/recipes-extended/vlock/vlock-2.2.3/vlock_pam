@@ -1,3 +1,0 @@
-# Use the default auth and account policies for vlock
-auth       include      common-auth
-account    include      common-account

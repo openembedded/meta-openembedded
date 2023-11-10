@@ -1,5 +1,0 @@
-# Sweden - Junsele Hamptjärnsberget
-[CHANNEL]
-	DELIVERY_SYSTEM = DVBT
-	FREQUENCY = 506000000
-	BANDWIDTH_HZ = 8000000

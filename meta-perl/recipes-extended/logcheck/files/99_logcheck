@@ -1,2 +1,0 @@
-# <type> <owner> <group> <mode> <path> <linksource>
-d logcheck logcheck 0755 /var/lock/logcheck none

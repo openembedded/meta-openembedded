@@ -1,5 +1,0 @@
-#!/bin/sh
-
-sh v4test.sh
-sh v6test.sh
-

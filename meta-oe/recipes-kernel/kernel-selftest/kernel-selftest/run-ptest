@@ -1,7 +1,0 @@
-#!/bin/sh
-/usr/kernel-selftest/run_kselftest.sh -s
-if [ $? == 0 ]; then
-    echo "PASS: kernel-selftest"
-else
-    echo "[FAIL]: kernel-selftest"
-fi

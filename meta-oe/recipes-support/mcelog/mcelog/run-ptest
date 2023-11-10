@@ -1,9 +1,0 @@
-#!/bin/sh
-
-make -C tests test | sed -e '/\[PASS\]/ s/^/PASS: /g' \
-                         -e '/\[FAIL\]/ s/^/FAIL: /g' \
-                         -e '/\[IGNORE\]/ s/^/SKIP: /g' \
-                         -e 's/IGNORE:/SKIP:/' \
-                         -e 's/: \[PASS\]//' \
-                         -e 's/: \[FAIL\]//' \
-                         -e 's/: \[IGNORE\]//'
