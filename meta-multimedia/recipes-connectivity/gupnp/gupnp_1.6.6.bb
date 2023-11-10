@@ -3,15 +3,11 @@ DESCRIPTION = "GUPnP is an elegant, object-oriented open source framework for cr
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS = "e2fsprogs gssdp libsoup-2.4 libxml2"
+DEPENDS = "e2fsprogs gssdp libsoup-3.0 libxml2"
 
-inherit meson pkgconfig vala gobject-introspection
+inherit gnomebase pkgconfig vala gobject-introspection
 
-SRC_URI = "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
-    file://0001-all-Drop-xmlRecoverMemory.patch \
-    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
-"
-SRC_URI[sha256sum] = "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55345ab3281655dc0c"
+SRC_URI[archive.sha256sum] = "c9dc50e8c78b3792d1b0e6c5c5f52c93e9345d3dae2891e311a993a574f5a04f"
 
 SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
 
