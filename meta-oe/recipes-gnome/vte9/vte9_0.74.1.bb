@@ -11,10 +11,10 @@ S = "${WORKDIR}/vte-${PV}"
 
 SRC_URI[archive.sha256sum] = "2328c3f1c998350a18e0e513348e9fc581d57ea4e7b89aedf11e0e3c65042b4f"
 
-inherit gnomebase gtk-doc gobject-introspection features_check systemd upstream-version-is-even vala
+inherit gnomebase gi-docgen gobject-introspection features_check systemd upstream-version-is-even vala
 ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 GIR_MESON_OPTION = "gir"
-GTKDOC_MESON_OPTION = "docs"
+GIDOCGEN_MESON_OPTION = "docs"
 
 PACKAGECONFIG ?= "gnutls"
 PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
