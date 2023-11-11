@@ -7,7 +7,6 @@ DEPENDS = " \
     libcanberra \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 VALA_MESON_OPTION = "enable_vala"
 

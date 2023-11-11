@@ -2,7 +2,6 @@ SUMMARY = "GNOME Shell is the graphical shell of the GNOME desktop environment"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
     libxml2-native \

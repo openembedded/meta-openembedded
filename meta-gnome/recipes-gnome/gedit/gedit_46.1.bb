@@ -3,7 +3,6 @@ SECTION = "x11/gnome"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
-GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
     appstream-glib-native \

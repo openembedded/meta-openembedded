@@ -17,7 +17,6 @@ DEPENDS = " \
     geocode-glib \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 GTKIC_VERSION = '4'
 inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
 

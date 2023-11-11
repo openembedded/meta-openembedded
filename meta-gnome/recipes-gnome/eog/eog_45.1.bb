@@ -15,7 +15,6 @@ DEPENDS = " \
     lcms \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase pkgconfig gsettings gobject-introspection gettext mime-xdg features_check gtk-icon-cache
 

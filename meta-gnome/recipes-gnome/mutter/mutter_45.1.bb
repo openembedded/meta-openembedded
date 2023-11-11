@@ -22,7 +22,6 @@ DEPENDS = " \
     xwayland \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 

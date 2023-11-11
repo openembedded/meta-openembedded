@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
 
 DEPENDS = "glib-2.0 gdk-pixbuf"
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gobject-introspection vala features_check
 

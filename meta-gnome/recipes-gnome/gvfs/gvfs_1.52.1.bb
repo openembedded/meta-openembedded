@@ -2,7 +2,6 @@ DESCRIPTION = "gvfs is a userspace virtual filesystem"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
-GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check useradd
 
 DEPENDS += "\

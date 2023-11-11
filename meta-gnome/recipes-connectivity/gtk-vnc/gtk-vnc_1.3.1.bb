@@ -12,7 +12,6 @@ DEPENDS = " \
     zlib \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 GIR_MESON_OPTION = ""
 VALA_MESON_OPTION = "with-vala"

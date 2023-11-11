@@ -18,7 +18,6 @@ DEPENDS = " \
     libstemmer \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gettext gnomebase gsettings gobject-introspection vala gtk-doc  bash-completion python3native
 

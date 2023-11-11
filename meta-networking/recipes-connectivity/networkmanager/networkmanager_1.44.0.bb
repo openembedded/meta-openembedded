@@ -22,7 +22,6 @@ DEPENDS = " \
 "
 DEPENDS:append:class-target = " bash-completion"
 
-GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc update-alternatives upstream-version-is-even
 
 SRC_URI = " \

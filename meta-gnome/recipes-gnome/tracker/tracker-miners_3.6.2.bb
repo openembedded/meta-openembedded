@@ -12,7 +12,6 @@ DEPENDS = " \
     zlib \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
 
