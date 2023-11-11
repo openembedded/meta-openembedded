@@ -9,9 +9,10 @@ LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8a
 SRC_URI = "git://github.com/rpodgorny/${BPN}.git;branch=master;protocol=https \
            file://0001-support-cross-compiling.patch \
            "
-SRCREV = "b0e3805d3d84d44ddf3e4e5238ae0332145d8157"
+SRCREV = "773f1853b043eeb64b7459f903a2c65bd096f9d9"
 
-DEPENDS = "fuse"
+DEPENDS = "fuse3"
+RDEPENDS:${PN} = "bash"
 
 S = "${WORKDIR}/git"
 
