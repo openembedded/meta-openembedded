@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
 "
 
-
-inherit pkgconfig meson gsettings gnome-help gettext itstool upstream-version-is-even
+inherit gnomebase pkgconfig gsettings gnome-help gettext itstool upstream-version-is-even
 
 DEPENDS = " \
     glib-2.0 \
@@ -14,7 +13,7 @@ DEPENDS = " \
     desktop-file-utils-native \
     gtk+3 \
     gsettings-desktop-schemas \
-    vte \
+    vte9 \
     dconf \
     libpcre2 \
 "
@@ -22,7 +21,7 @@ DEPENDS = " \
 SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1 \
            file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
            "
-SRCREV = "1446ff0abc478bdd03c6665b718214d075729024"
+SRCREV = "5ac3b8e4bd6fa02651b3c23cedb0a7e1cd769655"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
