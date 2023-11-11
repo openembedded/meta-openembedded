@@ -16,7 +16,6 @@ DEPENDS = " \
     xz \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gtk-icon-cache gettext features_check mime-xdg
 

@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit pkgconfig meson gsettings gnome-help gettext itstool upstream-version-is-even
 

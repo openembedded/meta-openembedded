@@ -20,7 +20,6 @@ GIR_MESON_ENABLE_FLAG = 'false'
 GIR_MESON_DISABLE_FLAG = 'true'
 VALA_MESON_OPTION = ''
 
-GNOMEBASEBUILDCLASS = "meson"
 GTKIC_VERSION = '4'
 
 inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check

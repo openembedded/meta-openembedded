@@ -6,6 +6,7 @@ SECTION = "libs"
 
 DEPENDS= "libxml2 bzip2 glib-2.0 zlib gnome-common-native"
 
+GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gobject-introspection gettext gtk-doc
 
 SRC_URI[archive.sha256sum] = "f0b83251f98b0fd5592b11895910cc0e19f798110b389aba7da1cb7c474017f5"

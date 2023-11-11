@@ -10,7 +10,6 @@ DEPENDS = " \
     libadwaita \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
 

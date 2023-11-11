@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b52fb0a6df395efb7047cb6fc56bfd7e"
 
 SECTION = "x11/gnome"
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gettext allarch
 

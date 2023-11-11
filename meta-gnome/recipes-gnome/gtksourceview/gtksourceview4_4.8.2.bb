@@ -10,7 +10,6 @@ PNAME = "gtksourceview"
 
 S = "${WORKDIR}/${PNAME}-${PV}"
 
-GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection vala
 

@@ -2,7 +2,6 @@ SUMMARY = "GNOME Software allows users to easily find, discover and install apps
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION ?= "gtk_doc"
 
 inherit gnomebase gsettings itstool gnome-help gtk-icon-cache gtk-doc mime mime-xdg gettext upstream-version-is-even features_check

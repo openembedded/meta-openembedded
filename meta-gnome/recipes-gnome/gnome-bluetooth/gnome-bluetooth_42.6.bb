@@ -18,7 +18,6 @@ DEPENDS = " \
     libadwaita \
 "
 
-GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
 GTKIC_VERSION = "4"
 
