@@ -30,6 +30,8 @@ EXTRA_OECONF:class-native += " --with-pdftops=pdftops \
                                     --disable-ldap \
                                     --with-png --without-jpeg --without-tiff"
 
+CXXFLAGS += "-std=c++17"
+
 PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
 PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
 PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
