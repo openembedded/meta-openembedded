@@ -18,4 +18,4 @@ gupnp_sysroot_preprocess () {
 
 FILES:${PN}-dev += "${bindir}/gupnp-binding-tool*"
 
-RDEPENDS:${PN}-dev = "python3 python3-xml"
+RDEPENDS:${PN}-dev += "python3-core python3-xml"
