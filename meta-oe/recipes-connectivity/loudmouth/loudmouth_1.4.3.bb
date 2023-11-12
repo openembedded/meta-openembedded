@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c4f38aef94828f6b280e00d1173be689"
 
 DEPENDS = "glib-2.0 libcheck openssl libidn"
 
+GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gtk-doc
 
 PR = "r2"
