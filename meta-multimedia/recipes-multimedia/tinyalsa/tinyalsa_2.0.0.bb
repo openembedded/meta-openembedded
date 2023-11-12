@@ -4,13 +4,12 @@ HOMEPAGE = "https://github.com/tinyalsa/tinyalsa"
 SECTION = "libs/multimedia"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://NOTICE;md5=dbdefe400d894b510a9de14813181d0b"
+LIC_FILES_CHKSUM = "file://NOTICE;md5=e04cd6fa58488e016f7fb648ebea1db4"
 
-SRCREV = "8449529c7e50f432091539ba7b438e79b04059b5"
+SRCREV = "1c5fb68ced57d838f2b7ecd0c00bc1fefc9ab60d"
 SRC_URI = "git://github.com/tinyalsa/tinyalsa;branch=master;protocol=https \
-           file://0001-Use-CMAKE_INSTALL_-path-instead-of-hardcoding-bin-li.patch \
+	   	    file://0001-fixed-compilation-error-caused-by-strncpy.patch \
           "
-PV = "1.1.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
