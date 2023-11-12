@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mguentner/cannelloni"
 LICENSE = "GPL-2.0-only"
 
 SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
-SRCREV = "0bd7e27db35bdef361226882ae04205504f7b2f4"
+SRCREV = "3d4fb8c8b07f6d7c62b2bdad7e5a94de61c9a29b"
 
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
