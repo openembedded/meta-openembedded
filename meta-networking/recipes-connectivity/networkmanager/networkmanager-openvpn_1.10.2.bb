@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=100d5a599bead70ddcd70dcd73f2e29c"
 
 DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native glib-2.0-native"
 
+GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase useradd gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
