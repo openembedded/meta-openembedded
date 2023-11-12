@@ -34,4 +34,4 @@ FILES:${PN} += " \
     ${systemd_user_unitdir} \
 "
 
-RRECOMMENDS:${PN} += "vte-prompt gsettings-desktop-schemas"
+RRECOMMENDS:${PN} += "gsettings-desktop-schemas"
