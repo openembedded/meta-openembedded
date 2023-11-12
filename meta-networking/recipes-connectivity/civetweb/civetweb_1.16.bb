@@ -2,10 +2,10 @@ SUMMARY = "Civetweb embedded web server"
 HOMEPAGE = "https://github.com/civetweb/civetweb"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=50bd1d7f135b50d7e218996ba28d0d88"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ce6ce6eb1b2fd59ee6bab219470442a3"
 
-SRCREV = "4b440a339979852d5a51fb11a822952712231c23"
-PV = "1.12+git${SRCPV}"
+SRCREV = "d7ba35bbb649209c66e582d5a0244ba988a15159"
+
 SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
            "
@@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
     -DCIVETWEB_ENABLE_LUA=OFF \
     -DCIVETWEB_ENABLE_ASAN=OFF \
     -DCIVETWEB_BUILD_TESTING=OFF \
+    -DCIVETWEB_SSL_OPENSSL_API_3_0=ON \
 "
 
 # Building with ninja fails on missing third_party/lib/libcheck.a (which
