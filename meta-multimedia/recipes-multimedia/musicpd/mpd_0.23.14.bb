@@ -20,11 +20,8 @@ DEPENDS += " \
 
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
-           file://minor-fixup-for-libfmt10.patch \
-           file://fix-build-error-when-fmt-updated.patch \
-           file://0001-SndfileDecoderPlugin-Fix-type-mismatch-for-std-span.patch \
            "
-SRCREV = "b1422fbda40a1831d397fb161e7a555443c2a072"
+SRCREV = "feac1a3f56591ccfb00870aba66c9ac3abac4773"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
