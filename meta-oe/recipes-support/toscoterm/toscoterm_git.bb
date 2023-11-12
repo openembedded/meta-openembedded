@@ -27,3 +27,5 @@ do_install() {
 }
 
 RDEPENDS:${PN}:append:libc-glibc = " glibc-gconv-ibm437"
+
+SKIP_RECIPE[toscoterm] ?= "Needs porting to work with latest vte9 >= 0.74.1"
