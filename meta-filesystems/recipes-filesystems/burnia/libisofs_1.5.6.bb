@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
                     file://COPYRIGHT;md5=1c1e5a960562d65f6449bb1d21e1dffc"
 
 SRC_URI = "http://files.libburnia-project.org/releases/${BP}.tar.gz"
-SRC_URI[sha256sum] = "aaa0ed80a7501979316f505b0b017f29cba0ea5463b751143bad2c360215a88e"
+SRC_URI[sha256sum] = "0152d66a9d340b659fe9c880eb9190f3570fb477ac07cf52e8bcd134a1d30d70"
 
 DEPENDS = "acl zlib"
 
