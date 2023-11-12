@@ -16,9 +16,10 @@ ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 GIR_MESON_OPTION = "gir"
 GIDOCGEN_MESON_OPTION = "docs"
 
-PACKAGECONFIG ?= "gnutls"
+PACKAGECONFIG ?= "gnutls ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
 PACKAGECONFIG[fribidi] = "-Dfribidi=true,-Dfribidi=false,fribidi"
+PACKAGECONFIG[systemd] = "-D_systemd=true,-D_systemd=false,"
 
 CFLAGS += "-D_GNU_SOURCE"
 
