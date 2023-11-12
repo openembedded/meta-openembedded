@@ -891,7 +891,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     pcsc-lite \
     pcsc-tools \
     sharutils \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "toscoterm", "", d)} \
     sg3-utils \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "uim", "", d)} \
     uchardet \
