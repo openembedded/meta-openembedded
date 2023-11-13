@@ -15,6 +15,7 @@ DEPENDS = " \
     gsettings-desktop-schemas \
     vte9 \
     dconf \
+    libhandy \
     libpcre2 \
 "
 
