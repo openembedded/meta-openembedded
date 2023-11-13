@@ -7,9 +7,9 @@ inherit gnomebase gsettings pkgconfig gtk-icon-cache
 
 DEPENDS = " \
     desktop-file-utils-native \
+    gtk4-native \
     glib-2.0 \
     gsettings-desktop-schemas \
-    gtk4 \
     hicolor-icon-theme \
     libadwaita \
     libgtop \
