@@ -1,40 +1,31 @@
 DESCRIPTION = "PDF transformation/inspection software"
 HOMEPAGE = "http://qpdf.sourceforge.net"
-LICENSE = "Artistic-2.0"
-SECTION = "libs"
-DEPENDS = "libpcre zlib libjpeg-turbo openssl gnutls"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
-SRC_URI[sha256sum] = "c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40264b7fe67acd90bc"
+DEPENDS = "zlib jpeg ${@bb.utils.contains('PACKAGECONFIG', 'gnutls', 'gnutls', 'openssl', d)}"
 
-LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
+SRC_URI = "git://github.com/qpdf/qpdf.git;protocol=https;branch=main"
+SRCREV = "81823f4032caefd1050bccb207d315839c1c48db"
 
-inherit cmake gettext
+inherit cmake pkgconfig gettext
 
-# disable random file detection for cross-compile
-EXTRA_OECONF = "--without-random \
-                --disable-static \
-                --disable-check-autofiles \
-                "
-
-EXTRA_OECMAKE = '-DRANDOM_DEVICE="/dev/random"'
+EXTRA_OECMAKE = ' \
+	-DRANDOM_DEVICE="/dev/random" \
+	-DBUILD_STATIC_LIBS=OFF \
+	-DALLOW_CRYPTO_NATIVE=OFF \
+	-DUSE_IMPLICIT_CRYPTO=OFF \
+'
 
 LDFLAGS:append:mipsarch = " -latomic"
 LDFLAGS:append:riscv32 = " -latomic"
 
-S="${WORKDIR}/${BPN}-${PV}"
+S="${WORKDIR}/git"
+
+PACKAGECONFIG ?= "gnutls"
+PACKAGECONFIG[gnutls] = "-DREQUIRE_CRYPTO_GNUTLS=ON,-DREQUIRE_CRYPTO_OPENSSL=ON"
 
 do_install:append() {
     # Change the fully defined path on the target
     sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BPN}/libqpdfTargets.cmake
 }
-
-# avoid Makefile returning error on 'make clean' before configure was run
-CLEANBROKEN = "1"
-
-DEBIAN_NOAUTONAME:libqpdf = "1"
-
-PACKAGES =+ "libqpdf"
-FILES:libqpdf = "${libdir}/libqpdf.so.*"
-
-RDEPENDS:${PN} = "libqpdf"
