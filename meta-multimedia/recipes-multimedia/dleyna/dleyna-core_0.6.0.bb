@@ -18,3 +18,5 @@ SRCREV = "1c6853f5bc697dc0a8774fd70dbc915c4dbe7c5b"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
+
+SKIP_RECIPE[dleyna-core] ?= "Upstream is dead moreover needs porting to work with latest gupnp >= 1.2"
