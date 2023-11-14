@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=http;branch=master;protocol=https"
 SRCREV = "aee53e8dee862f35291242ba41b0ca88010f6c71"
-
+PV = "0.70+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
