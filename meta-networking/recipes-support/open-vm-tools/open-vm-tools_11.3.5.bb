@@ -47,6 +47,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
            file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
            file://CVE-2023-20867.patch;patchdir=.. \
            file://CVE-2023-20900.patch;patchdir=.. \
+           file://CVE-2023-34058.patch;patchdir=.. \
            "
 
 UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
