@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=10.0.x;protocol=http
            file://0001-explicitly-set-compile-options.patch \
            file://run-ptest \
            "
-SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+SRCREV ?= "da59ad000d1405eaecd557175e29083a87d19f7c"
 
 inherit setuptools3 ptest
 
