@@ -7,6 +7,7 @@ DEPENDS = "udev libusb1 libplist"
 inherit autotools pkgconfig gitpkgv
 
 PKGV = "${GITPKGVTAG}"
+PV = "1.0.10+git${SRCPV}"
 
 SRCREV = "78df9be5fc8222ed53846cb553de9b5d24c85c6c"
 SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
