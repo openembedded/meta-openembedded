@@ -13,7 +13,7 @@ DEPENDS = " \
     desktop-file-utils-native \
     gtk+3 \
     gsettings-desktop-schemas \
-    vte9 \
+    vte \
     dconf \
     libhandy \
     libpcre2 \
