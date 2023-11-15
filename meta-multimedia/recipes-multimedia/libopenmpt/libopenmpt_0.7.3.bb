@@ -14,7 +14,7 @@ DEPENDS = "virtual/libiconv"
 SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "ffd572d817a090554f55adf97c1997c2"
+
 SRC_URI[sha256sum] = "2cf8369b7916b09264f3f14b9fb6cef35a6e9bee0328dec4f49d98211ccfd722"
 
 S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
