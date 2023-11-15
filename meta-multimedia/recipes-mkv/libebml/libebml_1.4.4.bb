@@ -10,6 +10,5 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake dos2unix
 
-#Static library enabled by default. It has been added in case you want to use it dynamically.
-#EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON"
+EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON"
 
