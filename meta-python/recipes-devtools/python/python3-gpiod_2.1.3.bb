@@ -28,7 +28,8 @@ RDEPENDS:${PN}-ptest += " \
 export LINK_SYSTEM_LIBGPIOD = "1"
 
 do_compile_ptest() {
-    ${STAGING_BINDIR_NATIVE}/python3-native/python3 build_tests.py
+    setup_target_config
+    nativepython3 build_tests.py
 }
 
 do_install_ptest() {
