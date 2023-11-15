@@ -10,7 +10,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master"
-SRCREV = "3795e374107ac7a5a977c516e144a3cd9b0da998"
+SRCREV = "3352b1090ea1098883f6bf64236fa877e18e458b"
 
 inherit autotools pkgconfig systemd update-rc.d
 
