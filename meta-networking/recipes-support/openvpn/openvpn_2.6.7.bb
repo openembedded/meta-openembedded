@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 
-SRC_URI[sha256sum] = "3b074f392818b31aa529b84f76e8b5e4ad03fca764924f46d906bceaaf421034"
+SRC_URI[sha256sum] = "ee9877340b1d8de47eb5b52712c3366855fa6a4a1955bf950c68577bd2039913"
 
 CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
 
