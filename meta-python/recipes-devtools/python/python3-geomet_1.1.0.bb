@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "cb52411978ee01ff104ab48f108d7333b14423ae7a15a65fee25b7d29b
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/geomet/geomet.git;protocol=https;branch=master"
-SRCREV = "7fff4438510c30e592db858b2d519eddb5837a6c"
+SRCREV = "6ac73c312b52aca328db2e61d90c5e363b62639f"
 
 inherit setuptools3
 PIP_INSTALL_PACKAGE = "geomet"
