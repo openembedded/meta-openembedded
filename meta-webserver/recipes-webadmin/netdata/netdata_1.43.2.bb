@@ -9,7 +9,7 @@ DEPENDS += "libuv util-linux zlib libyaml json-c"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
 "
-SRC_URI[sha256sum] = "d3c66273d8eb62290d412c870dcde45ea214ad187df9d5350f682d9e6d19d426"
+SRC_URI[sha256sum] = "d4a7ea2717ac7c8f04865f18e13aeaa0a36784156059f1b5ced75a44f74afc4d"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
@@ -17,7 +17,8 @@ SRC_URI += "file://netdata.conf"
 # file for providing systemd service support
 SRC_URI += "file://netdata.service"
 
-UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
+UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
+UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
 
 S = "${WORKDIR}/${BPN}-v${PV}"
 
