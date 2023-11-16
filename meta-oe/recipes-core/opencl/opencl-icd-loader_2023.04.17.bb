@@ -12,8 +12,8 @@ PROVIDES = "virtual/opencl-icd"
 RPROVIDES:${PN} = "virtual/opencl-icd"
 
 S = "${WORKDIR}/git"
-PV = "v2022.01.04+git${SRCPV}"
-SRCREV = "169f05d026e65948b30cfe2200595fda92198cf7"
+
+SRCREV = "b1bce7c3c580a8345205cf65fc1a5f55ba9cdb01"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
 
 EXTRA_OECMAKE:append = " \
@@ -22,11 +22,11 @@ EXTRA_OECMAKE:append = " \
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${B}/test/loader_test/icd_loader_test ${D}${bindir}/
+    install -m 0755 ${B}/icd_loader_test ${D}${bindir}/
     chrpath -d ${D}${bindir}/icd_loader_test
     install -d ${D}${libdir}
-    install -m 0644 ${B}/test/log/libIcdLog.so ${D}${libdir}/
-    install -m 0644 ${B}/test/driver_stub/libOpenCLDriverStub.so ${D}${libdir}/
+    install -m 0644 ${B}/libIcdLog.so ${D}${libdir}/
+    install -m 0644 ${B}/libOpenCLDriverStub.so ${D}${libdir}/
     chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
     install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
     cd ${D}${libdir}
