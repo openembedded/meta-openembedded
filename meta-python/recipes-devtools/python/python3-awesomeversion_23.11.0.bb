@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
 
-SRC_URI[sha256sum] = "d788b2917a716adb912ba1c31b831aedd4c37858fcfe080105dc8da30c2e21c3"
+SRC_URI[sha256sum] = "9146329196f0f045887de6c195730750f8f7a9302d1c149378db73ab5dc468f0"
 
 RDEPENDS:${PN} += "python3-profile python3-logging"
 
