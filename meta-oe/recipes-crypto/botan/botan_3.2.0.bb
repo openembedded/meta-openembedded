@@ -1,11 +1,11 @@
 SUMMARY = "Crypto and TLS for C++11"
 HOMEPAGE = "https://botan.randombit.net"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://license.txt;md5=f4ce98476c07c34e1793daa036960fad"
+LIC_FILES_CHKSUM = "file://license.txt;md5=f5254d3abe90ec5bb82c5694ff751546"
 SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-SRC_URI[sha256sum] = "dae047f399c5a47f087db5d3d9d9e8f11ae4985d14c928d71da1aff801802d55"
+SRC_URI[sha256sum] = "049c847835fcf6ef3a9e206b33de05dd38999c325e247482772a5598d9e5ece3"
 
 S = "${WORKDIR}/Botan-${PV}"
 
@@ -40,7 +40,7 @@ do_compile() {
 }
 do_install() {
 	oe_runmake install
-	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-2.pc
+	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-3.pc
 }
 
 PACKAGES += "${PN}-python3"
