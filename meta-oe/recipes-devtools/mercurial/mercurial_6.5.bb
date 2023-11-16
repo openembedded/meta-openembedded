@@ -10,7 +10,7 @@ RDEPENDS:${PN} = "python3 python3-modules"
 inherit python3native python3targetconfig
 
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-SRC_URI[sha256sum] = "86f98645e4565a9256991dcde22b77b8e7d22ca6fbb60c1f4cdbd8469a38cc1f"
+SRC_URI[sha256sum] = "a5603d0d395ebf67fe5d27abbb3bd37fcc01871ecf394c793672d2c1e68be7e7"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
@@ -31,7 +31,6 @@ do_install () {
 }
 PACKAGES =+ "${PN}-python"
 
-FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
-
+FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR} ${datadir}"
 FILES:${PN}-python = "${nonarch_libdir}/${PYTHON_DIR}"
 
