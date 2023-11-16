@@ -2,8 +2,8 @@ SUMMARY = "Python bytes subclass that decodes hex, with a readable console outpu
 HOMEPAGE = "https://github.com/ethereum/hexbytes"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=287820ad3553117aa2f92bf84c219324"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=16ffc86adf4293d4cfb204e77d62cfe6"
 
-SRC_URI[sha256sum] = "a3fe35c6831ee8fafd048c4c086b986075fc14fd46258fa24ecb8d65745f9a9d"
+SRC_URI[sha256sum] = "18e6e3279a13878b93fb85da77822dc506b7048065a588e74141c2468a65ad8c"
 
 inherit pypi setuptools3
