@@ -25,8 +25,8 @@ REQUIRED_DISTRO_FEATURES = "x11 opengl"
 SRC_URI[archive.sha256sum] = "7fa8507543865aa7432bb5319830c87158b5447ca09cca45b607dc6796c71008"
 
 do_install:prepend() {
-    sed -i -e 's|${S}/src|/usr/src/debug/${PN}/${PV}-${PR}/src|g' ${B}/src/gcal-enum-types.h
-    sed -i -e 's|${S}/src|/usr/src/debug/${PN}/${PV}-${PR}/src|g' ${B}/src/gcal-enum-types.c
+    sed -i -e 's|${S}/src|${TARGET_DBGSRC_DIR}/src|g' ${B}/src/gcal-enum-types.h
+    sed -i -e 's|${S}/src|${TARGET_DBGSRC_DIR}/src|g' ${B}/src/gcal-enum-types.c
 }
 
 FILES:${PN} += " \
