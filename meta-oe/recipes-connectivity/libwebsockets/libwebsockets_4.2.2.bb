@@ -4,6 +4,7 @@ LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
 
 DEPENDS = "zlib"
+DEPENDS:append:class-native = " libcap-native"
 
 S = "${WORKDIR}/git"
 SRCREV = "8d605f0649ed1ab6d27a443c7688598ea21fdb75"
@@ -44,3 +45,5 @@ RDEPENDS:${PN}-dev += " ${@bb.utils.contains('PACKAGECONFIG', 'static', '${PN}-s
 
 # Avoid absolute paths to end up in the sysroot.
 SSTATE_SCAN_FILES += "*.cmake"
+
+BBCLASSEXTEND = "native"
