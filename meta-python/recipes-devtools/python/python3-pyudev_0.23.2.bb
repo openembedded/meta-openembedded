@@ -21,4 +21,4 @@ RDEPENDS:${PN} = "\
     libudev \
 "
 
-BBCLASSEXTEND = "native nativesdk"
+BBCLASSEXTEND = "native"

@@ -35,5 +35,3 @@ RDEPENDS:${PN}:class-target += "\
     ${PYTHON_PN}-nocaselist \
     ${PYTHON_PN}-custom-inherit \
 "
-
-BBCLASSEXTEND = "native"
