@@ -16,7 +16,7 @@ DEPENDS += " \
     python3-setuptools-native \
 "
 RDEPENDS:${PN} += " \
-    libgpiod (>= 2.0) \
+    libgpiod (>= 2.1) \
     python3-datetime \
     python3-profile \
 "
