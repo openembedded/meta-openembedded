@@ -13,7 +13,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
 
 DEPENDS += "libxaw libxkbfile"
 
-BBCLASSEXTEND = "native"
-
 SRC_URI[md5sum] = "502b14843f610af977dffc6cbf2102d5"
 SRC_URI[sha256sum] = "d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130"

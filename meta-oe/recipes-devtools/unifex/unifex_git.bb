@@ -20,5 +20,3 @@ EXTRA_OECMAKE += " \
     -DCMAKE_CXX_STANDARD=20 \
     -DUNIFEX_BUILD_EXAMPLES=OFF \
     "
-
-BBCLASSEXTEND = "native nativesdk"

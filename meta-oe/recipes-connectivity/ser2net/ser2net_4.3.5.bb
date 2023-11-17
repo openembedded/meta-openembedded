@@ -14,5 +14,3 @@ SRC_URI[sha256sum] = "848c4fe863806e506832f1ee85b8b68258f06eb19dad43dbeee16a2cfe
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
 
 inherit autotools pkgconfig
-
-BBCLASSEXTEND = "native nativesdk"
