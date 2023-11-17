@@ -61,5 +61,3 @@ python __anonymous () {
        raise bb.parse.SkipRecipe("incompatible with %s C library" %
                                    d.getVar('TCLIBC'))
 }
-
-BBCLASSEXTEND = "native"

@@ -42,5 +42,3 @@ do_install_ptest () {
     cp -r ${B}/t ${D}${PTEST_PATH}
     cp -r ${B}/certs ${D}${PTEST_PATH}
 }
-
-BBCLASSEXTEND = "native"
