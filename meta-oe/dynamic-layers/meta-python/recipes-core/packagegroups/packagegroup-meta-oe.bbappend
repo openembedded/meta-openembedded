@@ -11,7 +11,7 @@ RDEPENDS:packagegroup-meta-oe-connectivity += "\
 
 RDEPENDS:packagegroup-meta-oe-extended += "\
     lcdproc \
-    mozjs \
+    mozjs-91 \
 "
 RDEPENDS:packagegroup-meta-oe-support += "\
     smem \
