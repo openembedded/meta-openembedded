@@ -5,28 +5,26 @@ DESCRIPTION = "The utilities are designed primarily to be used on storage server
 "
 HOMEPAGE = "https://github.com/intel/ledmon"
 
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-"
+LICENSE = "LGPL-2.0-only"
+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS = "sg3-utils udev"
+DEPENDS = "sg3-utils udev pciutils"
 
-inherit autotools systemd
+inherit autotools systemd pkgconfig
 
 SYSTEMD_SERVICE:${PN} = "ledmon.service"
 
-# 0.93
 SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
-           file://0002-include-sys-select.h-and-sys-types.h.patch \
-           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patch \
-          "
+	   file://0002-include-sys-select.h-and-sys-types.h.patch \
+	   file://0001-fix-build-with-clang.patch"
 
-SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
+SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 COMPATIBLE_HOST:libc-musl = "null"
 
 S = "${WORKDIR}/git"
+
 EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
 
 # The ledmon sources include headers in ${S}/config to build but not in CFLAGS. 
