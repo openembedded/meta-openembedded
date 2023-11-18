@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 SRC_URI = " \
     gitsm://github.com/flatpak/flatpak;protocol=https;branch=main \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
+    file://0001-meson.build-require-for-native-wayland-scanner.patch \
 "
 
-SRCREV = "e936e3100d406c50ba49f3ad6a0ecae455345ec0"
+SRCREV = "27b11b93c2a80a91c9461bc6c7f5e9a201406041"
 
 S = "${WORKDIR}/git"
 
@@ -19,7 +20,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 DEPENDS = " \
     appstream \
     bison-native \
-    curl \
     dconf \
     fuse3 \
     gdk-pixbuf \
@@ -47,18 +47,26 @@ RDEPENDS:${PN} = " \
 
 EXTRA_OEMESON += "-Dsystem_dbus_proxy=${bindir}/xdg-dbus-proxy -Dsystem_bubblewrap=${bindir}/bwrap"
 
-GIR_MESON_OPTION = ""
+GIR_MESON_OPTION = "gir"
+GIR_MESON_ENABLE_FLAG = 'enabled'
+GIR_MESON_DISABLE_FLAG = 'disabled'
 GTKDOC_MESON_OPTION = 'gtkdoc'
 GTKDOC_MESON_ENABLE_FLAG = 'enabled'
 GTKDOC_MESON_DISABLE_FLAG = 'disabled'
 
+PACKAGECONFIG[curl] = "-Dhttp_backend=curl,,curl"
+PACKAGECONFIG[soup] = "-Dhttp_backend=soup,,libsoup-2.4"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,xauth socat-native"
 PACKAGECONFIG[xauth] = "-Dxauth=enabled,-Dxauth=disabled,xauth"
 PACKAGECONFIG[seccomp] = "-Dseccomp=enabled,-Dseccomp=disabled,libseccomp"
+PACKAGECONFIG[selinux] = "-Dselinux_module=enabled,-Dselinux_module=disabled,libselinux"
+PACKAGECONFIG[wayland-security-context] = "-Dwayland_security_context=enabled,-Dwayland_security_context=disabled,wayland wayland-native wayland-protocols"
 
 PACKAGECONFIG ?= " \
+    curl \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xauth', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'seccomp', 'seccomp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-security-context', '', d)} \
 "
 
 FILES:${PN} += "${libdir} ${datadir}"
