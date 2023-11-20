@@ -19,6 +19,7 @@ DEPENDS += " \
 "
 
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
+           file://0001-patch-src_decoder_plugins_FfmpegIo.cxx.patch \
            file://mpd.conf.in \
            "
 SRCREV = "feac1a3f56591ccfb00870aba66c9ac3abac4773"
