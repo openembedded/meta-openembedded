@@ -12,8 +12,7 @@ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN}_class-native = ""
-DEPENDS_append_class-native = " python-native "
+RDEPENDS_${PN} = "python3-json"
 
 inherit setuptools3
 
