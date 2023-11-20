@@ -25,6 +25,6 @@ RDEPENDS_${PN} += "\
    protobuf-compiler \
 "
 
-BBCLASSEXTEND = "native nativesdk"
+BBCLASSEXTEND = "nativesdk"
 
 PNBLACKLIST[nanopb] = "Needs forward porting to use python3"

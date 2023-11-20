@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=516215fd57564996d70327db19b368ff"
 SECTION = "console/utils"
 
 DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
-DEPENDS_class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
 
 SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
 
@@ -22,13 +21,6 @@ EXTRA_OECONF += " --enable-ghostscript --disable-ldap \
                        --localstatedir=${localstatedir}/var \
                        --with-rcdir=no \
                        --without-php"
-
-EXTRA_OECONF_class-native += " --with-pdftops=pdftops \
-                                    --disable-avahi --disable-ghostscript \
-                                    --disable-ldap \
-                                    --with-png --without-jpeg --without-tiff"
-
-BBCLASSEXTEND = "native"
 
 PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
 PACKAGECONFIG[png] = "--with-png,--without-png,libpng"

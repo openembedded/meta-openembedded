@@ -39,5 +39,3 @@ RRECOMMENDS_${PN} = "python3-matplotlib python3-numpy"
 PACKAGE_BEFORE_PN = "smemcap"
 
 FILES_smemcap = "${bindir}/smemcap"
-
-BBCLASSEXTEND = "native"
