@@ -14,8 +14,6 @@ SRC_URI[sha256sum] = "308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359
 
 DEPENDS += "python3-setuptools-scm-native"
 
-BBCLASSEXTEND = "native nativesdk"
-
 SRC_URI += " \
 	file://run-ptest \
 "

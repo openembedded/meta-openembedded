@@ -34,5 +34,3 @@ RDEPENDS_${PN} = "\
     python3-pytz \
     python3-pillow \
 "
-
-BBCLASSEXTEND = "native"

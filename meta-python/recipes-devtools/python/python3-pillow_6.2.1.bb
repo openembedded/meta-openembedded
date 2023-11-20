@@ -35,5 +35,3 @@ CVE_PRODUCT = "pillow"
 S = "${WORKDIR}/git"
 
 RPROVIDES_${PN} += "python3-imaging"
-
-BBCLASSEXTEND = "native"

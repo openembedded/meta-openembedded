@@ -16,5 +16,3 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-pyperclip \
     ${PYTHON_PN}-wcwidth \
 "
-
-BBCLASSEXTEND = "native nativesdk"

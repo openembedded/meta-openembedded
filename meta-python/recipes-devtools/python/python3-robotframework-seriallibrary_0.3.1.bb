@@ -16,5 +16,3 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pyserial \
     ${PYTHON_PN}-robotframework \
 "
-
-BBCLASSEXTEND = "native nativesdk"
