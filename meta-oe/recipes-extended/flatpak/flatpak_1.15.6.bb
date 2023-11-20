@@ -29,11 +29,9 @@ DEPENDS = " \
     libarchive \
     libcap \
     libxml2 \
-    libxslt-native \
     ostree \
     polkit \
     python3-pyparsing-native \
-    xmlto-native \
     zstd \
 "
 
@@ -55,6 +53,8 @@ GTKDOC_MESON_ENABLE_FLAG = 'enabled'
 GTKDOC_MESON_DISABLE_FLAG = 'disabled'
 
 PACKAGECONFIG[curl] = "-Dhttp_backend=curl,,curl"
+PACKAGECONFIG[docbook_docs] = "-Ddocbook_docs=enabled,-Ddocbook_docs=disabled,xmlto-native"
+PACKAGECONFIG[man] = "-Dman=enabled,-Dman=disabled,libxslt-native"
 PACKAGECONFIG[soup] = "-Dhttp_backend=soup,,libsoup-2.4"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,xauth socat-native"
 PACKAGECONFIG[xauth] = "-Dxauth=enabled,-Dxauth=disabled,xauth"
