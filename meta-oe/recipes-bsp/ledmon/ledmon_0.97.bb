@@ -25,15 +25,10 @@ COMPATIBLE_HOST:libc-musl = "null"
 
 S = "${WORKDIR}/git"
 
+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd', '', d)}"
+
 EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
 
 # The ledmon sources include headers in ${S}/config to build but not in CFLAGS. 
 # We need to add this include path in CFLAGS.
 CFLAGS += "-I${S}/config"
-
-do_install:append() {
-        if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-	        install -d ${D}${systemd_unitdir}/system
-	        install -m 0755 ${S}/systemd/ledmon.service ${D}${systemd_unitdir}/system
-        fi
-}
