@@ -39,6 +39,11 @@ do_install:append() {
     fi
 }
 
-PTEST_PATH = "${libdir}/${BPN}/tests"
+PTEST_PATH = "${libdir}/${BPN}/ptest"
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}
+    cp -r ${B}/tests/sdbus-c++-unit-tests  ${D}${PTEST_PATH}
+}
+
 FILES:${PN}-ptest =+ "${sysconfdir}/dbus-1/system.d/"
 FILES:${PN}-dev += "${bindir}/sdbus-c++-xml2cpp"
