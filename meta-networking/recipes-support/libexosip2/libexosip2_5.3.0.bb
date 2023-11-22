@@ -13,3 +13,7 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/exosip/${BPN}-${PV}.tar.gz"
 SRC_URI[sha256sum] = "5b7823986431ea5cedc9f095d6964ace966f093b2ae7d0b08404788bfcebc9c2"
 
 inherit autotools pkgconfig
+
+PACKAGECONFIG = "c-ares openssl"
+PACKAGECONFIG[c-ares] = ",,c-ares"
+PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl"
