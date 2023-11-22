@@ -17,3 +17,6 @@ inherit autotools pkgconfig
 PACKAGECONFIG = "c-ares openssl"
 PACKAGECONFIG[c-ares] = ",,c-ares"
 PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl"
+
+PACKAGES =+ "${PN}-tools"
+FILES:${PN}-tools += "${bindir}"
