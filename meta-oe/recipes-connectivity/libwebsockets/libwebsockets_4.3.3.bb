@@ -7,9 +7,8 @@ DEPENDS = "zlib"
 DEPENDS:append:class-native = " libcap-native"
 
 S = "${WORKDIR}/git"
-SRCREV = "b0a749c8e7a8294b68581ce4feac0e55045eb00b"
-SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
-           file://0001-Fix-Werror-enum-int-mismatch-in-lws_tls_server_abort.patch"
+SRCREV = "4415e84c095857629863804e941b9e1c2e9347ef"
+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable"
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
