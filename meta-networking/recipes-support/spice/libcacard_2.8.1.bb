@@ -6,7 +6,10 @@ DEPENDS = "glib-2.0 pcsc-lite nss"
 
 SRCREV = "7b07684ea6698d4885ff2062350ad8798a04de42"
 
-SRC_URI = "git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master"
+SRC_URI = " \
+	git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master \
+	file://0001-meson.build-set-hardcoded-version-string.patch \
+"
 
 S = "${WORKDIR}/git"
 
