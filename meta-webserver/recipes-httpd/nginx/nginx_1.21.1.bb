@@ -1,5 +1,7 @@
 require nginx.inc
 
+SRC_URI += "file://0001-HTTP-2-per-iteration-stream-handling-limit.patch"
+
 # 1.20.x branch is the current stable branch, the recommended default
 # 1.21.x is the current mainline branches containing all new features
 DEFAULT_PREFERENCE = "-1"
