@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/manatools/dnfdragora.git;branch=master;protocol=http
            file://0001-To-fix-error-when-do_package.patch \
            "
 
-SRCREV = "e38e1127e56f5c7cc38e22c6dd4c2728fc4f0b3c"
+SRCREV = "d808904fc6082578c02d7c8bf543380ed447e925"
 
 S = "${WORKDIR}/git"
 
