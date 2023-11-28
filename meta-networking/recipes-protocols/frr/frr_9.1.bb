@@ -11,16 +11,11 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
 
 PR = "r1"
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.0 \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.1 \
            file://frr.pam \
-           file://0001-tools-make-quiet-actually-suppress-output.patch \
-           file://CVE-2023-46752.patch \
-           file://CVE-2023-46753.patch \
-           file://CVE-2023-47235.patch \
-           file://CVE-2023-47234.patch \
            "
 
-SRCREV = "31ed3dd753d62b5d8916998bc32814007e91364b"
+SRCREV = "312faf8008bb4f3b9e84b8e2758cd2cbdf5742b5"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
