@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
 
 SRC_URI += "file://0001-FSM.py-change-shebang-from-python-to-python3.patch"
 
-SRC_URI[md5sum] = "153eb25184249d6a85fde9acf4804085"
-SRC_URI[sha256sum] = "fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"
+SRC_URI[sha256sum] = "ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f"
 
 inherit pypi setuptools3
 
