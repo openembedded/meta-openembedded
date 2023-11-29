@@ -6,10 +6,9 @@ BUGTRACKER = "https://github.com/google/brotli/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
 
-SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https \
-           file://838.patch "
-# tag 1.0.9
-SRCREV= "e61745a6b7add50d380cfd7d3883dd6c62fc2c71"
+SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https"
+SRCREV= "ed738e842d2fbdf2d6459e39267a633c4a9b2f5d"
+
 S = "${WORKDIR}/git"
 
 inherit cmake lib_package
