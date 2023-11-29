@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
            file://0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch \
+           file://CVE-2023-45802.patch \
           "
 
 SRC_URI:append:class-target = " \
