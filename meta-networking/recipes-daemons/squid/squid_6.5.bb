@@ -42,7 +42,7 @@ LDFLAGS:append:riscv32 = " -latomic"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
-PACKAGECONFIG ??= "auth \
+PACKAGECONFIG ??= "auth url-rewrite-helpers \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
 "
 
@@ -52,6 +52,7 @@ PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-c
 PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
 PACKAGECONFIG[auth] = "--enable-auth-basic='${BASIC_AUTH}',--disable-auth --disable-auth-basic,krb5 openldap db cyrus-sasl"
+PACKAGECONFIG[url-rewrite-helpers] = "--enable-url-rewrite-helpers,--disable-url-rewrite-helpers,"
 
 PACKAGES =+ " \
     ${PN}-conf \
