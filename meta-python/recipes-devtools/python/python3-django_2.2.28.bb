@@ -8,6 +8,8 @@ inherit setuptools3
 SRC_URI += "file://CVE-2023-31047.patch \
             file://CVE-2023-36053.patch \
             file://CVE-2023-41164.patch \
+            file://CVE-2023-43665.patch \
+            file://CVE-2023-46695.patch \
            "
 
 SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
