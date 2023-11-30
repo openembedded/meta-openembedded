@@ -15,21 +15,19 @@ MIN_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 \
            file://Set-up-for-cross-compilation.patch \
            file://Skip-AC_RUN_IFELSE-tests.patch \
-           file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
            file://run-ptest \
            file://volatiles.03_squid \
-           file://set_sysroot_patch.patch \
-           file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
+           file://0002-squid-make-squid-conf-tests-run-on-target-device.patch \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 
-SRC_URI[sha256sum] = "4c17e1eb324c4b7aa3c6889eba66eeca7ed98625d44076f7db7b027b2b093bd5"
+SRC_URI[sha256sum] = "99acd54ec9d68b2a9080d19fcc43eca1a245146cf162dbba689510d01e6d0f25"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://errors/COPYRIGHT;md5=0a7deb73d8fb7a9849af7145987829a4 \
+                    file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
                     "
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
@@ -81,22 +79,16 @@ do_install_ptest() {
     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
 
-    # Needed to generate file squid.conf.default
-    oe_runmake DESTDIR=${D}${PTEST_PATH} -C src install-data-local
-    install -d ${D}${sysconfdir}/squid
-    install -m 0644 ${D}${PTEST_PATH}/${sysconfdir}/squid/squid.conf.default ${D}${sysconfdir}/squid
+    # Install default config
+    install -d ${D}${PTEST_PATH}/src
+    install -m 0644 ${B}/src/squid.conf.default ${D}${PTEST_PATH}/src
 
-    # Don't need these directories
-    rm -rf ${D}${PTEST_PATH}/${sysconfdir}
-    rm -rf ${D}${PTEST_PATH}/usr
-    rm -rf ${D}${PTEST_PATH}/var
+    # autoconf.h is needed during squid-conf-tests
+    install -d ${D}${PTEST_PATH}/include
+    install -m 0644 ${B}/include/autoconf.h ${D}${PTEST_PATH}/include
 
     # do NOT need to rebuild Makefile itself
     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-
-    # Add squid-conf-tests for runtime tests
-    sed -e 's/^\(runtest-TESTS:\)/\1 squid-conf-tests/' \
-        -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
     # Ensure the path for command true is correct
     sed -i 's:^TRUE = .*$:TRUE = /bin/true:' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
@@ -122,7 +114,6 @@ do_install:append() {
 FILES:${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES:${PN}-dbg += "/usr/src/debug"
 FILES:${PN}-doc += "${datadir}/*.txt"
-FILES:${PN}-ptest += "${sysconfdir}/squid/squid.conf.default"
 
 RDEPENDS:${PN} += "perl"
 RDEPENDS:${PN}-ptest += "perl make"
