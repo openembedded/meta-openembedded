@@ -32,7 +32,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     "
 DEPENDS = "libtool"
 
-inherit autotools pkgconfig useradd ptest perlnative
+inherit autotools pkgconfig useradd ptest perlnative systemd
 
 LDFLAGS:append:mipsarch = " -latomic"
 LDFLAGS:append:powerpc = " -latomic"
@@ -44,6 +44,7 @@ USERADD_PARAM:${PN} = "--system --no-create-home --home-dir /var/run/squid --she
 
 PACKAGECONFIG ??= "auth url-rewrite-helpers \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
 "
 
 PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
@@ -53,6 +54,7 @@ PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
 PACKAGECONFIG[auth] = "--enable-auth-basic='${BASIC_AUTH}',--disable-auth --disable-auth-basic,krb5 openldap db cyrus-sasl"
 PACKAGECONFIG[url-rewrite-helpers] = "--enable-url-rewrite-helpers,--disable-url-rewrite-helpers,"
+PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
 
 PACKAGES =+ " \
     ${PN}-conf \
@@ -106,6 +108,12 @@ do_install_ptest() {
 
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        # Install service unit file
+        install -d ${D}/${systemd_unitdir}/system
+        install ${S}/tools/systemd/squid.service ${D}/${systemd_unitdir}/system
+        sed -i 's:/var/run/:/run/:g' ${D}/${systemd_unitdir}/system/squid.service
+
+        # Configure tmpfiles.d
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d ${localstatedir}/run/${BPN} 0755 squid squid -" >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
         echo "d ${localstatedir}/log/${BPN} 0750 squid squid -" >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
@@ -124,6 +132,9 @@ do_install:append() {
     install -d ${D}${libdir}/NetworkManager/dispatcher.d
     install -m 0755 ${WORKDIR}/squid.nm ${D}${libdir}/NetworkManager/dispatcher.d/20-squid
 }
+
+SYSTEMD_AUTO_ENABLE = "disable"
+SYSTEMD_SERVICE:${PN} = "squid.service"
 
 FILES:${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES:${PN}-dbg += "/usr/src/debug"
