@@ -30,6 +30,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
            file://CVE-2020-14318.patch \
            file://CVE-2020-14383.patch \
+           file://CVE-2023-42669.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://samba-pam.patch \
