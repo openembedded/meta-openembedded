@@ -24,7 +24,7 @@ SRCREV = "0858b450cd88c84a15b99dda9698d44e7f7e8c70"
 
 S = "${WORKDIR}/git"
 
-inherit waf pkgconfig features_check
+inherit waf pkgconfig features_check python3native
 
 ANY_OF_DISTRO_FEATURES = "opengl dispmanx"
 
