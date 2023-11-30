@@ -9,7 +9,7 @@ SRC_URI = "git://git.sr.ht/~emersion/basu;protocol=https;branch=master"
 DEPENDS += "gperf-native"
 
 S = "${WORKDIR}/git"
-PV = "0.2.1"
+PV = "0.2.1+git"
 SRCREV = "684a41d68cfbb05e38aacb60a8548e21ddfbecdb"
 
 inherit meson pkgconfig
