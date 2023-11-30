@@ -8,22 +8,25 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
 
 DEPENDS:append:libc-musl = " libucontext"
+DEPENDS:append:class-target = " hwloc"
 
 PE = "1"
 
 BRANCH = "onetbb_2021"
 SRCREV = "8b829acc65569019edb896c5150d427f288e8aba"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+            file://0001-hwloc_detection.cmake-remove-cross-compiation-check.patch \
 "
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
 
 # test build fails, error: 'mallinfo mallinfo()' is deprecated
 EXTRA_OECMAKE += " \
                     -DTBB_TEST=OFF \
                     -DCMAKE_BUILD_TYPE=Release \
                 "
+
 # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
 # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: /tmp/lto-llvm-264bc2.o: can't link soft-float modules with double-float modules
 # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: failed to merge target specific data of file /tmp/lto-llvm-264bc2.o
@@ -48,5 +51,12 @@ LDFLAGS:append:libc-musl = " -lucontext"
 
 # The latest version of oneTBB does not support PPC
 COMPATIBLE_MACHINE:powerpc = "(!.*ppc).*"
+
+
+do_install:append:class-target() {
+    # fix for qa check buildpaths
+    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/TBB/TBBTargets.cmake
+}
+
 
 BBCLASSEXTEND = "native nativesdk"
