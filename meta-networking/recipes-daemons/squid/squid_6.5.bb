@@ -20,6 +20,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://volatiles.03_squid \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0002-squid-make-squid-conf-tests-run-on-target-device.patch \
+           file://squid.nm \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
@@ -48,6 +49,8 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
 PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
+
+PACKAGES =+ "${PN}-networkmanager"
 
 BASIC_AUTH = "DB SASL LDAP"
 
@@ -109,11 +112,16 @@ do_install:append() {
 
     rmdir "${D}${localstatedir}/log/${BPN}"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}/log"
+
+    # Install NetworkManager dispatcher reload hooks
+    install -d ${D}${libdir}/NetworkManager/dispatcher.d
+    install -m 0755 ${WORKDIR}/squid.nm ${D}${libdir}/NetworkManager/dispatcher.d/20-squid
 }
 
 FILES:${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES:${PN}-dbg += "/usr/src/debug"
 FILES:${PN}-doc += "${datadir}/*.txt"
+FILES:${PN}-networkmanager = "${libdir}/NetworkManager/dispatcher.d"
 
 RDEPENDS:${PN} += "perl"
 RDEPENDS:${PN}-ptest += "perl make"
