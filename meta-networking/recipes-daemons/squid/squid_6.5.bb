@@ -53,7 +53,10 @@ PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
 PACKAGECONFIG[auth] = "--enable-auth-basic='${BASIC_AUTH}',--disable-auth --disable-auth-basic,krb5 openldap db cyrus-sasl"
 
-PACKAGES =+ "${PN}-networkmanager"
+PACKAGES =+ " \
+    ${PN}-conf \
+    ${PN}-networkmanager \
+"
 
 BASIC_AUTH = "DB SASL LDAP"
 
@@ -124,7 +127,8 @@ do_install:append() {
 FILES:${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES:${PN}-dbg += "/usr/src/debug"
 FILES:${PN}-doc += "${datadir}/*.txt"
+FILES:${PN}-conf += "${sysconfdir}/squid"
 FILES:${PN}-networkmanager = "${libdir}/NetworkManager/dispatcher.d"
 
-RDEPENDS:${PN} += "perl"
+RDEPENDS:${PN} += "perl ${PN}-conf"
 RDEPENDS:${PN}-ptest += "perl make"
