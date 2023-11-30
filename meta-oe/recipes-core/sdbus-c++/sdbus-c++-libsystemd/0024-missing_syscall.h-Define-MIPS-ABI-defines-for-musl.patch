@@ -1,4 +1,4 @@
-From 6f0dd2ba75b68036d7b4ebfe47ac5eaf44d26f06 Mon Sep 17 00:00:00 2001
+From a2f56a2a6cdd5137bb1e680aa9f6c40540107166 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 12 Apr 2021 23:44:53 -0700
 Subject: [PATCH] missing_syscall.h: Define MIPS ABI defines for musl
@@ -10,11 +10,13 @@ them here in case they are undefined
 Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
 ---
- src/basic/missing_syscall.h | 6 ++++++
- 1 file changed, 6 insertions(+)
+ src/basic/missing_syscall.h  | 6 ++++++
+ src/shared/base-filesystem.c | 1 +
+ 2 files changed, 7 insertions(+)
 
+diff --git a/src/basic/missing_syscall.h b/src/basic/missing_syscall.h
+index 98cd037962..ea6a76c2e2 100644
 --- a/src/basic/missing_syscall.h
 +++ b/src/basic/missing_syscall.h
 @@ -20,6 +20,12 @@
@@ -30,3 +32,18 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  #include "macro.h"
  #include "missing_keyctl.h"
  #include "missing_stat.h"
+diff --git a/src/shared/base-filesystem.c b/src/shared/base-filesystem.c
+index 2726dc946a..484f63e0b4 100644
+--- a/src/shared/base-filesystem.c
++++ b/src/shared/base-filesystem.c
+@@ -20,6 +20,7 @@
+ #include "string-util.h"
+ #include "umask-util.h"
+ #include "user-util.h"
++#include "missing_syscall.h"
+ 
+ typedef struct BaseFilesystem {
+         const char *dir;      /* directory or symlink to create */
+-- 
+2.39.2
+
