@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "99acd54ec9d68b2a9080d19fcc43eca1a245146cf162dbba689510d01e
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
                     "
-DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+DEPENDS = "libtool"
 
 inherit autotools pkgconfig useradd ptest perlnative
 
@@ -42,13 +42,16 @@ LDFLAGS:append:riscv32 = " -latomic"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
-                  "
+PACKAGECONFIG ??= "auth \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
+"
+
 PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
 PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
+PACKAGECONFIG[auth] = "--enable-auth-basic='${BASIC_AUTH}',--disable-auth --disable-auth-basic,krb5 openldap db cyrus-sasl"
 
 PACKAGES =+ "${PN}-networkmanager"
 
@@ -57,7 +60,7 @@ BASIC_AUTH = "DB SASL LDAP"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 BASIC_AUTH += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
 
-EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}' \
+EXTRA_OECONF += "--with-default-user=squid \
                  --sysconfdir=${sysconfdir}/${BPN} \
                  --with-logdir=${localstatedir}/log/${BPN} \
                  'PERL=${USRBINPATH}/env perl'"
