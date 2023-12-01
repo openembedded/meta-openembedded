@@ -1,27 +1,24 @@
 DESCRIPTION = "Library for password quality checking and generating random passwords"
 HOMEPAGE = "https://github.com/libpwquality/libpwquality"
 SECTION = "devel/lib"
-LICENSE = "GPL-2.0-only"
+
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bd2f1386df813a459a0c34fde676fc2"
 
-SRCNAME = "libpwquality"
-SRC_URI = "https://github.com/${SRCNAME}/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2 \
+DEPENDS = "cracklib"
+
+SRC_URI = "git://github.com/libpwquality/libpwquality;branch=master;protocol=https \
            file://add-missing-python-include-dir-for-cross.patch \
 "
-SRC_URI:append:libc-musl = " file://0001-fix-musl-build.patch "
+SRCREV = "5490e96a3dd6ed7371435ca5b3ccef98bdb48b5a"
 
-SRC_URI[md5sum] = "1fe43f6641dbf1e1766e2a02cf68a9c3"
-SRC_URI[sha256sum] = "d43baf23dc6887fe8f8e9b75cabaabc5f4bbbaa0f9eff44278d276141752a545"
+S = "${WORKDIR}/git"
 
-UPSTREAM_CHECK_URI = "https://github.com/libpwquality/libpwquality/releases"
+inherit autotools-brokensep gettext setuptools3-base
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-DEPENDS = "cracklib virtual/gettext"
-
-inherit autotools setuptools3-base gettext
-
-B = "${S}"
+do_configure:prepend() {
+    cp ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${AUTOTOOLS_AUXDIR}/
+}
 
 export PYTHON_DIR
 export BUILD_SYS
@@ -35,7 +32,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
 "
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
-PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
+PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 
 FILES:${PN} += "${base_libdir}/security/pam_pwquality.so"
 FILES:${PN}-dbg += "${base_libdir}/security/.debug"
