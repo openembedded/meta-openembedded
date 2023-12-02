@@ -29,11 +29,28 @@ do_configure:prepend() {
     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
     echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+    ${PYTHON} configure.py --configuration sip.cfg --destdir /${D}${libdir}/${PYTHON_DIR}/site-packages/ --sip-module PyQt5.sip --sysroot ${CONFIGURE_SYSROOT} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
 }
 
 do_install() {
     oe_runmake install
+
+    sed -i \
+         -e "s@[^ ]*-fdebug-prefix-map=[^ ']*@@g" \
+         -e "s@[^ ]*-fmacro-prefix-map=[^ ']*@@g" \
+         -e "s@[^ ]*-ffile-prefix-map=[^ ']*@@g" \
+         ${D}${libdir}/${PYTHON_DIR}/site-packages/sipconfig.py
+
+    # Remove the destination directory
+    sed -i -e "s@${D}/@@g" ${D}${libdir}/${PYTHON_DIR}/site-packages/sipconfig.py
+
+    if [ -n "${STAGING_DIR_NATIVE}" ]; then
+        sed -i -e "s@${STAGING_DIR_NATIVE}@@g" ${D}${libdir}/${PYTHON_DIR}/site-packages/sipconfig.py
+    fi
+
+    if [ -n "${STAGING_DIR_TARGET}" ]; then
+       sed -i -e "s@${STAGING_DIR_TARGET}@@g" ${D}${libdir}/${PYTHON_DIR}/site-packages/sipconfig.py
+    fi
 }
 
 FILES:python3-sip3 = "${libdir}/${PYTHON_DIR}/site-packages/"
