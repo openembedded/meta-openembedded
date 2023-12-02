@@ -5,7 +5,9 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
 
 SRC_URI = "https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz \
+    file://added-the-py_ssize_t_clean-argument-to-the-module-directive.patch \
 "
+
 SRC_URI[md5sum] = "70adc0c9734e2d9dcd241d3f931dfc74"
 SRC_URI[sha256sum] = "22ca9bcec5388114e40d4aafd7ccd0c4fe072297b628d0c5cdfa2f010c0bc7e7"
 
