@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/fontforge/libspiro"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "https://github.com/fontforge/libspiro/releases/download/20200505/libspiro-dist-20200505.tar.gz"
-SRC_URI[sha256sum] = "06c69a1e8dcbcabcf009fd96fd90b1a244d0257246e376c2c4d57c4ea4af0e49"
+SRC_URI = "https://github.com/fontforge/libspiro/releases/download/${PV}/libspiro-dist-${PV}.tar.gz"
+SRC_URI[sha256sum] = "5984fb5af3e4e1f927f3a74850b705a711fb86284802a5e6170b09786440e8be"
 
 inherit autotools
 
