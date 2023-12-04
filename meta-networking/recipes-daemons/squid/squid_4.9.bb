@@ -24,6 +24,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0001-tools.cc-fixed-unused-result-warning.patch \
            file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
+           file://CVE-2023-46847.patch \
            "
 
 SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
