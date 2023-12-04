@@ -10,7 +10,7 @@ DEPENDS += "gperf-native"
 
 S = "${WORKDIR}/git"
 PV = "0.2.1+git"
-SRCREV = "684a41d68cfbb05e38aacb60a8548e21ddfbecdb"
+SRCREV = "a08cf5a575325435040d35710dbac3d0c32b1676"
 
 inherit meson pkgconfig
 
