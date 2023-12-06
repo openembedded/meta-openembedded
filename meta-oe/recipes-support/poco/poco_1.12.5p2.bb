@@ -11,10 +11,10 @@ DEPENDS = "libpcre2 zlib"
 SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
            file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.patch \
            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
-           file://0001-Fix-data-race-when-create-POSIX-thread.patch \
            file://run-ptest \
+           file://0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch \
            "
-SRCREV = "1211613642269b7d53bea58b02de7fcd25ece3b9"
+SRCREV = "1d6fb3e1383e559cacbada5e3f861c0dafaf5d30"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
