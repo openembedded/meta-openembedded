@@ -23,3 +23,18 @@ PYPI_ARCHIVE_NAME = "pydantic_core-${PV}.${PYPI_PACKAGE_EXT}"
 RDEPENDS:${PN} += "python3-typing-extensions"
 
 INSANE_SKIP:${PN} = "already-stripped"
+
+inherit ptest
+SRC_URI += "file://run-ptest"
+RDEPENDS:${PN}-ptest += "\
+    python3-dirty-equals \
+    python3-hypothesis \
+    python3-pytest \
+    python3-pytest-mock \
+    python3-unittest-automake-output \
+"
+
+do_install_ptest() {
+    cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+    rm -rf ${D}${PTEST_PATH}/tests/benchmarks
+}
