@@ -29,3 +29,25 @@ RDEPENDS:${PN} += "\
     python3-pydantic-core \
     python3-typing-extensions \
 "
+
+inherit ptest
+SRC_URI += "file://run-ptest"
+RDEPENDS:${PN}-ptest += "\
+    python3-cloudpickle \
+    python3-dirty-equals \
+    python3-pytest \
+    python3-pytest-mock \
+    python3-unittest-automake-output \
+"
+
+do_install_ptest() {
+    cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+    # Requires 'ruff' (python3-ruff) which we cannot build
+    # until we have Rust 1.71+ in oe-core
+    rm -f ${D}${PTEST_PATH}/tests/test_docs.py
+    # We are not trying to support mypy
+    rm -f ${D}${PTEST_PATH}/tests/test_mypy.py
+    # We are not trying to run benchmarks
+    rm -rf ${D}${PTEST_PATH}/tests/benchmarks
+}
+
