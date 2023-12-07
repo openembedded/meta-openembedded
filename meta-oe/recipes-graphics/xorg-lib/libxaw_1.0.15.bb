@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
 PE = "1"
 
 XORG_PN = "libXaw"
-XORG_EXT = "tar.bz2"
 
-SRC_URI[md5sum] = "c1ce21c296bbf3da3e30cf651649563e"
-SRC_URI[sha256sum] = "76aef98ea3df92615faec28004b5ce4e5c6855e716fa16de40c32030722a6f8e"
+SRC_URI[sha256sum] = "ab35f70fde9fb02cc71b342f654846a74328b74cb3a0703c02d20eddb212754a"
 
 do_install:append () {
     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
