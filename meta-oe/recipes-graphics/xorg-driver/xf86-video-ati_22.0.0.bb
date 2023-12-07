@@ -9,18 +9,10 @@ DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
 DEPENDS += "virtual/libx11 libxvmc drm \
             virtual/libgl xorgproto libpciaccess"
 
-inherit features_check
-
 REQUIRED_DISTRO_FEATURES += "opengl"
 
-SRC_URI = "git://git@gitlab.freedesktop.org/xorg/driver/xf86-video-ati.git;branch=master"
-SRCREV = "7a6a34af026f0bef8080b91baf97a729380bca01"
-
-SRC_URI[sha256sum] = "659f5a1629eea5f5334d9b39b18e6807a63aa1efa33c1236d9cc53acbb223c49"
-
-PV = "19.1.0+git${SRCPV}"
-
-S = "${WORKDIR}/git"
+XORG_DRIVER_COMPRESSOR = ".tar.xz"
+SRC_URI[sha256sum] = "c8c8bb56d3f6227c97e59c3a3c85a25133584ceb82ab5bc05a902a743ab7bf6d"
 
 PACKAGECONFIG ??= "udev"
 PACKAGECONFIG[udev] = "--enable-udev,--disable-udev,udev"
