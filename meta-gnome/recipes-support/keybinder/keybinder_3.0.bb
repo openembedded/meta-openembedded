@@ -24,5 +24,3 @@ REQUIRED_DISTRO_FEATURES = "x11"
 do_configure:prepend() {
 	touch ${S}/ChangeLog
 }
-
-SRC_DISTRIBUTE_LICENSES += "X11"
