@@ -23,3 +23,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 do_configure:prepend() {
 	touch ${S}/ChangeLog
 }
+
+# gtk-doc generation doesn't work, so disable it:
+# ../keybinder-docs.sgml:26: element include: XInclude error : could not load ../xml/tree_index.sgml, and no fallback was found
+GTKDOC_ENABLED = "False"
