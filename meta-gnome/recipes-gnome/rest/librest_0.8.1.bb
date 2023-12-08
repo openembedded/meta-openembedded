@@ -4,13 +4,10 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 DEPENDS = " \
-    gi-docgen \
-    gi-docgen-native \
     glib-2.0 \
     glib-2.0-native \
-    json-glib \
     libsoup-2.4 \
-    libxml2-native \
+    libxml2 \
 "
 
 GNOMEBASEBUILDCLASS = "autotools"
