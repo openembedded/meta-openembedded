@@ -9,7 +9,6 @@ DEPENDS = "gtk+3 gobject-introspection-native \
 LIC_FILES_CHKSUM = "file://COPYING;md5=1f18f9c6d8b4cfcc7d7804a243a4c0b4"
 
 S = "${WORKDIR}/git"
-B = "${S}"
 
 SRCREV = "736ccef40d39603b8111c8a3a0bca0319bbafdc0"
 PV = "3.0+git${SRCPV}"
@@ -18,7 +17,7 @@ SRC_URI = "git://github.com/engla/keybinder.git;branch=keybinder-3.0;protocol=ht
 
 RDEPENDS:${PN} = "gtk+"
 
-inherit features_check autotools gtk-doc gobject-introspection
+inherit features_check autotools-brokensep gtk-doc gobject-introspection
 
 REQUIRED_DISTRO_FEATURES = "x11"
 do_configure:prepend() {
