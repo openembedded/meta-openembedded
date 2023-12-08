@@ -3,7 +3,7 @@ HOMEPAGE = "https://wiki.gnome.org/Projects/gspell"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8c2e1ec1540fb3e0beb68361344cba7e"
 
-DEPENDS = "gtk+3 iso-codes enchant2"
+DEPENDS = "gtk+3 icu enchant2"
 
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gettext gobject-introspection vala gtk-doc
