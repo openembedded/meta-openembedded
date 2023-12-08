@@ -11,7 +11,7 @@ DEPENDS = " \
 "
 
 GNOMEBASEBUILDCLASS = "autotools"
-inherit gnomebase gobject-introspection vala pkgconfig
+inherit gnomebase gobject-introspection vala pkgconfig gtk-doc
 
 GNOMEBN = "rest"
 
