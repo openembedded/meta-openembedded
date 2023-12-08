@@ -7,7 +7,7 @@ SECTION = "x11/app"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6ea29dbee22324787c061f039e0529de"
 
-DEPENDS += "xbitmaps libxcursor"
+DEPENDS += "xbitmaps libxcursor libxmu"
 
-SRC_URI[md5sum] = "5fe769c8777a6e873ed1305e4ce2c353"
-SRC_URI[sha256sum] = "10c442ba23591fb5470cea477a0aa5f679371f4f879c8387a1d9d05637ae417c"
+SRC_URI_EXT = "xz"
+SRC_URI[sha256sum] = "6081b45a9eb4426e045d259d1e144b32417fb635e5b96aa90647365ac96638d1"
