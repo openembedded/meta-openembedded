@@ -37,7 +37,7 @@ PACKAGECONFIG[media-export] = ""
 PACKAGECONFIG[gst-launch] = ""
 PACKAGECONFIG[lms] = ""
 PACKAGECONFIG[tracker3] = ""
-PACKAGECONFIG[gtk+3] = ",-Dgtk=false,gtk+3"
+PACKAGECONFIG[gtk+3] = ",-Dgtk=disabled,gtk+3"
 
 RYGEL_PLUGINS = ""
 RYGEL_PLUGINS:append ="${@bb.utils.contains('PACKAGECONFIG', 'external', ',external', '', d)}"
