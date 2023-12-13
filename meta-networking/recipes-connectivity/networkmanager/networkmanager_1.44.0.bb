@@ -1,4 +1,15 @@
-SUMMARY = "NetworkManager"
+SUMMARY = "NetworkManager is a program for providing detection and \
+configuration for systems to automatically connect to networks."
+
+DESCRIPTION = "NetworkManager is a program for providing detection and \
+configuration for systems to automatically connect to networks. \
+NetworkManager's functionality can be useful for both wireless and wired \
+networks. For wireless networks, NetworkManager prefers known wireless \
+networks and has the ability to switch to the most reliable network. \
+NetworkManager-aware applications can switch from online and offline mode. \
+NetworkManager also prefers wired connections over wireless ones, has support \
+for modem connections and certain types of VPN."
+
 HOMEPAGE = "https://wiki.gnome.org/Projects/NetworkManager"
 SECTION = "net/misc"
 
