@@ -7,7 +7,7 @@ SRC_URI += " \
     file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "cb633b2bcf10c51af60beb0ab06d2f1d69064b43abf4c185ca6b28865f3f9731"
+SRC_URI[sha256sum] = "906d548203468492d432bcb294d4bc2fff751bf84971fbb2c10918cc206ee420"
 
 inherit pypi python_hatchling ptest
 
