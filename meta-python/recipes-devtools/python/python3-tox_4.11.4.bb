@@ -6,7 +6,7 @@ HOMEPAGE = "http://tox.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
-SRC_URI[sha256sum] = "5039f68276461fae6a9452a3b2c7295798f00a0e92edcd9a3b78ba1a73577951"
+SRC_URI[sha256sum] = "73a7240778fabf305aeb05ab8ea26e575e042ab5a18d71d0ed13e343a51d6ce1"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
