@@ -5,7 +5,7 @@ LICENSE = "GPL-3.0-only"
 
 PYPI_PACKAGE = "ansi2html"
 
-SRC_URI[sha256sum] = "38b82a298482a1fa2613f0f9c9beb3db72a8f832eeac58eb2e47bf32cd37f6d5"
+SRC_URI[sha256sum] = "5c6837a13ecc1903aab7a545353312049dfedfe5105362ad3a8d9d207871ec71"
 
 inherit pypi python_setuptools_build_meta
 
