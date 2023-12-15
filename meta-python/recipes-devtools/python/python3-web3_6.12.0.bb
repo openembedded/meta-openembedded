@@ -10,7 +10,6 @@ inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
     python3-aiohttp \
-    python3-distutils \
     python3-eth-account \
     python3-idna \
     python3-jsonschema \
