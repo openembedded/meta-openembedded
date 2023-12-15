@@ -2,9 +2,9 @@ SUMMARY = "A library for handling the encrypted keyfiles used to store ethereum 
 HOMEPAGE = "https://github.com/ethereum/eth-keyfile"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2beaef1b1764f4d6b46084c885b4bcad"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6749008d847c14b9718949c2e24d5c0a"
 
-SRC_URI[sha256sum] = "471be6e5386fce7b22556b3d4bde5558dbce46d2674f00848027cb0a20abdc8c"
+SRC_URI[sha256sum] = "6bdb8110c3a50439deb68a04c93c9d5ddd5402353bfae1bf4cfca1d6dff14fcf"
 
 inherit pypi setuptools3
 
