@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 SRC_URI += "git://github.com/pylint-dev/pylint;branch=maintenance/3.0.x;protocol=https \
            file://run-ptest \
            "
-SRCREV = "efee9618894795cc8847727108522aa79431ee25"
+SRCREV = "1a5ffc1f447b77071ffe18a9c6836c09147ee2ed"
 
 inherit python_setuptools_build_meta ptest
 
