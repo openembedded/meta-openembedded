@@ -24,7 +24,6 @@ RDEPENDS:${PN} += "\
   ${PYTHON_PN}-netclient \
   ${PYTHON_PN}-netserver \
   ${PYTHON_PN}-numbers \
-  ${PYTHON_PN}-smtpd \
   ${PYTHON_PN}-xmlrpc \
 "
 
