@@ -19,7 +19,7 @@ inherit pypi siteinfo setuptools3
 DEPENDS += "openssl swig-native"
 RDEPENDS:${PN} += "\
   ${PYTHON_PN}-datetime \
-  ${PYTHON_PN}-distutils \
+  ${PYTHON_PN}-setuptools \
   ${PYTHON_PN}-logging \
   ${PYTHON_PN}-netclient \
   ${PYTHON_PN}-netserver \
