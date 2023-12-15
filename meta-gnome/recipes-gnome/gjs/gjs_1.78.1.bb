@@ -7,7 +7,7 @@ DEPENDS = "mozjs-115 cairo"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even pkgconfig
 
-SRC_URI[archive.sha256sum] = "fbaa20e0917668830800f92951688f9fc08f01296affd5cdb4b35f750be27dc9"
+SRC_URI[archive.sha256sum] = "7e90511c429127c39eac0068c4ac9a353df7e6fbbc646f5f18e8962882c18641"
 SRC_URI += " \
     file://0001-Support-cross-builds-a-bit-better.patch \
     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
