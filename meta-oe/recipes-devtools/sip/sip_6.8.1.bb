@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
 inherit pypi setuptools3 python3native
 
 PYPI_PACKAGE = "sip"
-SRC_URI[sha256sum] = "2ed1904820cb661b7207eb1dccfaebec1a5463dcad903ba448ad1945502d089c"
+SRC_URI[sha256sum] = "3002df415e168ac3ffe393942dbc7131cb82ade50000e1526f46a88ade26f598"
 
 RDEPENDS:${PN} = " \
     python3-core \
