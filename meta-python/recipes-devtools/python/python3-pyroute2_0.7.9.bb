@@ -10,7 +10,6 @@ inherit setuptools3 pypi ptest
 
 RDEPENDS:${PN} += " \
     python3-ctypes \
-    python3-distutils \
     python3-io \
     python3-json \
     python3-fcntl \
