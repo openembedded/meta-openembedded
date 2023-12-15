@@ -9,7 +9,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
 
 SRC_URI = "git://github.com/lvgl/lvgl;protocol=https;branch=release/v8.3"
-SRCREV = "06e229cc7679c01119ca5d905a1f9dad96f475f0"
+SRCREV = "74d0a816a440eea53e030c4f1af842a94f7ce3d3"
 
 inherit cmake
 
