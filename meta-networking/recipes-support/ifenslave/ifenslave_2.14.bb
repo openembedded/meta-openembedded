@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253
 inherit manpages
 MAN_PKG = "${PN}"
 
-SRCREV = "1bdfb472f2f8212056ed418d48387e8b36e61b34"
+SRCREV = "62e60904afbe58fda0c7104fdad1c4f618266ba6"
 SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
