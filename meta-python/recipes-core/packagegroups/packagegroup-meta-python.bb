@@ -321,7 +321,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pyflakes \
     python3-pyhamcrest \
     python3-pyiface \
-    python3-pyinotify \
     python3-pyjks \
     python3-pyjwt \
     python3-pykickstart \
