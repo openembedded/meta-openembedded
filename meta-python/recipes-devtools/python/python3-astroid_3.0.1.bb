@@ -21,7 +21,6 @@ FILES:${PN}-tests += " \
 "
 
 RDEPENDS:${PN}:class-target += "\
-    ${PYTHON_PN}-distutils \
     ${PYTHON_PN}-lazy-object-proxy \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-six \
