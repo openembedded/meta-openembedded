@@ -22,9 +22,8 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://0001-cross_add_configure_option.patch \
            file://donnot-extract-gdb-during-do-compile.patch \
            file://gdb_build_jobs_and_not_write_crash_target.patch \
-           file://0001-make-src-string-const-in-strlcpy.patch \
            "
-SRCREV = "f1cd581d1c4afa5b8ffdfaa6a3ea9f545fe4ec91"
+SRCREV = "a6832f608cb5d473739cf33bbf84ab1df8d98fd5"
 
 SRC_URI[gdb.sha256sum] = "b33ad58d687487a821ec8d878daab0f716be60d0936f2e3ac5cf08419ce70350"
 
