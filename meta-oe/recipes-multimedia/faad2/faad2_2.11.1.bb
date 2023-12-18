@@ -10,8 +10,8 @@ LICENSE_FLAGS = "commercial"
 PV .= "+git${SRCPV}"
 
 SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
-SRCREV = "df42c6fc018552519d140e3d8ffe7046ed48b0cf"
+SRCREV = "216f00e8ddba6f2c64caf481a04f1ddd78b93e78"
 
 S = "${WORKDIR}/git"
 
-inherit autotools lib_package
+inherit cmake
