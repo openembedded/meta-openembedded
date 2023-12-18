@@ -17,16 +17,17 @@ understand what the code does. It features:                          \
 
 HOMEPAGE = "https://tls.mbed.org/"
 
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LICENSE = "Apache-2.0 | GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
 
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "1ec69067fa1351427f904362c1221b31538c8b57"
-SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
+SRCREV = "edb8fec9882084344a314368ac7fd957a187519c"
+SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=master \
 	file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
 	file://run-ptest"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cmake update-alternatives ptest
 
