@@ -25,7 +25,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0015-Add-missing-limits.h.patch \
            file://0001-Handle-interface-without-ifa_addr.patch \
            "
-SRCREV = "a9f4049ab772ca57b5afc9804ae5004beb711d6e"
+SRCREV = "8acabead9ae56551011172d6835822a89c5298d6"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
