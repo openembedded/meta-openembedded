@@ -12,7 +12,7 @@ SRC_URI = " \
     "
 SRC_URI:append:libc-musl = " file://0001-Replace-LFS-functions.patch"
 
-SRCREV = "3baa3fa3a3e4f714e6170a4152b186f0fa1d76e1"
+SRCREV = "1d60839b0a920df6476712b80f933854fb32e160"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
