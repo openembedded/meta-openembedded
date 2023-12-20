@@ -6,10 +6,12 @@ PYPI_PACKAGE = "ninja"
 PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "c833a47d39b2d1eee3f9ca886fa1581efd5be6068b82734ac229961ee8748f90"
+SRC_URI[sha256sum] = "9d793b08dd857e38d0b6ffe9e6b7145d7c485a42dcfea04905ca0cdb6017cc3c"
 
 SRC_URI += "file://no-scikit-build.patch \
             file://run-ninja-from-path.patch"
+
+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 
 do_install:append () {
 	rm -rf ${D}${bindir}
