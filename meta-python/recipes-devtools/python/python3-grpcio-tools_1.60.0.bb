@@ -11,9 +11,8 @@ DEPENDS += "${PYTHON_PN}-grpcio"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
             file://0001-protobuf-Disable-musttail-attribute-on-mips.patch \
-            file://0001-direct_mmap-Use-off_t-on-linux.patch \
             "
-SRC_URI[sha256sum] = "39f5877cea514b3da9f2683dfb3ffb45ef47b05f4ff39c287d7d61c5057f48b8"
+SRC_URI[sha256sum] = "ed30499340228d733ff69fcf4a66590ed7921f94eb5a2bf692258b1280b9dac7"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
 
