@@ -391,7 +391,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-serpent \
     python3-service-identity \
     python3-setuptools-declarative-requirements \
-    python3-setuptools-scm-git-archive \
     python3-sh \
     python3-sijax \
     python3-simpleeval \
