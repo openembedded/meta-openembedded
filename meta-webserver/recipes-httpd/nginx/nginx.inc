@@ -23,6 +23,7 @@ SRC_URI = " \
     file://nginx.service \
     file://nginx-fix-pidfile.patch \
     file://0001-configure-libxslt-conf.patch \
+    file://CVE-2023-44487.patch \
 "
 
 inherit siteinfo update-rc.d useradd systemd
