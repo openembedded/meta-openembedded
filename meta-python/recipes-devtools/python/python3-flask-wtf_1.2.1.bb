@@ -2,11 +2,11 @@ DESCRIPTION = "Simple integration of Flask and WTForms."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d98d089889e14b227732d45dac3aacc4"
 
-SRC_URI[sha256sum] = "41c4244e9ae626d63bed42ae4785b90667b885b1535d5a4095e1f63060d12aa9"
+SRC_URI[sha256sum] = "8bb269eb9bb46b87e7c8233d7e7debdf1f8b74bf90cc1789988c29b37a97b695"
 
-PYPI_PACKAGE = "Flask-WTF"
+PYPI_PACKAGE = "flask_wtf"
 
-inherit pypi setuptools3
+inherit pypi python_hatchling
 
 RDEPENDS:${PN} = "\
     ${PYTHON_PN}-flask \
