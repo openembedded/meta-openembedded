@@ -1,5 +1,5 @@
 SUMMARY = "Cyaml library"
-DESCRIPTION = "LibCYAML is a C library for reading and writing structured YAML documents. It is written in ISO C11 and licensed under the ISC licence."
+DESCRIPTION = "LibCYAML is a library for reading and writing structured YAML documents."
 HOMEPAGE = "https://github.com/tlsa/libcyaml"
 SECTION = "libs"
 LICENSE = "ISC"
@@ -15,13 +15,13 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
-EXTRA_OEMAKE = "'PREFIX=""' 'DESTDIR=${D}' 'CFLAGS=${CFLAGS}' 'LIBDIR=${libdir}' 'INCLUDEDIR=${includedir}'"
+EXTRA_OEMAKE = "'PREFIX=""' 'DESTDIR=${D}' 'CFLAGS=${CFLAGS}' 'LIBDIR=${libdir}' 'INCLUDEDIR=${includedir}' 'VARIANT=release'"
 
 do_compile() {
-    oe_runmake VARIANT=release
+    oe_runmake
 }
 do_install() {
-    oe_runmake install VARIANT=release
+    oe_runmake install
 }
 
 CFLAGS += "-pedantic -Wall -Wextra -O3 -Iinclude"
