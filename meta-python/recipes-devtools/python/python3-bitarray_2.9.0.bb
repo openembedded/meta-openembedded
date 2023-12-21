@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
 LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
 
-SRC_URI[sha256sum] = "b7564fd218cc4479f7f0106d341e096f78907b47865aeeff702c807df1927c01"
+SRC_URI[sha256sum] = "41f6b46f01bc59abfc38653d203565113b6e7dd04d0ec688774ed28e6d9755db"
 
 inherit setuptools3 pypi
 
