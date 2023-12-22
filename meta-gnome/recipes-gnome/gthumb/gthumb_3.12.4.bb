@@ -23,9 +23,8 @@ DEPENDS = " \
     libsecret \
 "
 
-GNOMEBASEBUILDCLASS = "autotools"
 inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
 
-SRC_URI[archive.sha256sum] = "97f8afe522535216541ebbf1e3b546d12a6beb38a8f0eb85f26e676934aad425"
+SRC_URI[archive.sha256sum] = "add693ac0aeb9a30d829ba03a06208289d3f6868dc3b02573549e88190c794e8"
 
 FILES:${PN} += "${datadir}/metainfo"
