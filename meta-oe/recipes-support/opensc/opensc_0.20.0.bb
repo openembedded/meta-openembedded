@@ -15,6 +15,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 SRCREV = "45e29056ccde422e70ed3585084a7f150c632515"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
            file://CVE-2023-40660.patch \
+           file://CVE-2023-40661-1.patch \
+           file://CVE-2023-40661-2.patch \
+           file://CVE-2023-40661-3.patch \
+           file://CVE-2023-40661-4.patch \
+           file://CVE-2023-40661-5.patch \
+           file://CVE-2023-40661-6.patch \
+           file://CVE-2023-40661-7.patch \
           "
 DEPENDS = "virtual/libiconv openssl"
 
