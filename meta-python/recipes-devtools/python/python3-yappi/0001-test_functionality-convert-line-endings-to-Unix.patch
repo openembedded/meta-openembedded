@@ -1,44 +1,23 @@
-From 0dedc1c573ddc4e87475eb03c64555cd54a72e92 Mon Sep 17 00:00:00 2001
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-Date: Mon, 7 Jun 2021 09:40:20 -0400
-Subject: [PATCH] Fix imports for tests
+From 0136ca731cba8b056b3f2ff0e7df3953b94f1e87 Mon Sep 17 00:00:00 2001
+From: Tim Orling <tim.orling@konsulko.com>
+Date: Sun, 24 Dec 2023 09:41:57 -0800
+Subject: [PATCH 1/2] test_functionality: convert line endings to Unix
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Convert the Windows line endings with dos2unix to be like the
+other files in tests/*
+
+Upstream-Status: Submitted [https://github.com/sumerc/yappi/pull/164]
+
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
-Upstream-Status: Pending
+ tests/test_functionality.py | 3822 +++++++++++++++++------------------
+ 1 file changed, 1911 insertions(+), 1911 deletions(-)
 
- tests/test_asyncio.py              | 2 +-
- tests/test_asyncio_context_vars.py | 2 +-
- tests/test_functionality.py        | 2 +-
- tests/test_hooks.py                | 2 +-
- tests/test_tags.py                 | 2 +-
- 5 files changed, 6 insertions(+), 6 deletions(-)
-
---- a/tests/test_asyncio.py
-+++ b/tests/test_asyncio.py
-@@ -2,7 +2,7 @@ import unittest
- import yappi
- import asyncio
- import threading
--from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
-+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
- 
- 
- async def async_sleep(sec):
---- a/tests/test_asyncio_context_vars.py
-+++ b/tests/test_asyncio_context_vars.py
-@@ -5,7 +5,7 @@ import contextvars
- import functools
- import time
- import os
--import utils
-+import tests.utils as utils
- import yappi
- 
- async_context_id = contextvars.ContextVar('async_context_id')
+diff --git a/tests/test_functionality.py b/tests/test_functionality.py
+index 0e99c47..38bbe67 100644
 --- a/tests/test_functionality.py
 +++ b/tests/test_functionality.py
-@@ -1,1916 +1,1916 @@
+@@ -1,1911 +1,1911 @@
 -import os
 -import sys
 -import time
@@ -47,7 +26,7 @@ Upstream-Status: Pending
 -import yappi
 -import _yappi
 -import utils
--import multiprocessing  # added to fix http://bugs.python.org/issue15881 for > Py2.6
+-import multiprocessing
 -import subprocess
 -
 -_counter = 0
@@ -318,10 +297,10 @@ Upstream-Status: Pending
 -    def test_profile_decorator(self):
 -
 -        def aggregate(func, stats):
--            fname = "tests/%s.profile" % (func.__name__)
+-            fname = f"tests/{func.__name__}.profile"
 -            try:
 -                stats.add(fname)
--            except IOError:
+-            except OSError:
 -                pass
 -            stats.save(fname)
 -            raise Exception("messing around")
@@ -1232,7 +1211,7 @@ Upstream-Status: Pending
 -        # TODO: I put dummy() to fix below, remove the comments after a while.
 -        self.assertTrue( # FIX: I see this fails sometimes?
 -            tsm is not None,
--            'Could not find "_MainThread". Found: %s' % (', '.join(utils.get_stat_names(tstats))))
+-            f"Could not find \"_MainThread\". Found: {', '.join(utils.get_stat_names(tstats))}")
 -
 -    def test_ctx_stats(self):
 -        from threading import Thread
@@ -1312,7 +1291,7 @@ Upstream-Status: Pending
 -        # TODO: I put dummy() to fix below, remove the comments after a while.
 -        self.assertTrue( # FIX: I see this fails sometimes
 -            tsmain is not None,
--            'Could not find "_MainThread". Found: %s' % (', '.join(utils.get_stat_names(stats))))
+-            f"Could not find \"_MainThread\". Found: {', '.join(utils.get_stat_names(stats))}")
 -        self.assertTrue(1.0 > tst2.ttot >= 0.5)
 -        self.assertTrue(1.0 > tst1.ttot >= 0.5)
 -
@@ -1369,7 +1348,7 @@ Upstream-Status: Pending
 -            ts = []
 -            for i in (0.01, 0.05, 0.1):
 -                t = threading.Thread(target=burn_cpu, args=(i, ))
--                t.name = "burn_cpu-%s" % str(i)
+-                t.name = f"burn_cpu-{str(i)}"
 -                t.start()
 -                ts.append(t)
 -            for t in ts:
@@ -1396,10 +1375,7 @@ Upstream-Status: Pending
 -    def test_producer_consumer_with_queues(self):
 -        # we currently just stress yappi, no functionality test is done here.
 -        yappi.start()
--        if utils.is_py3x():
--            from queue import Queue
--        else:
--            from Queue import Queue
+-        from queue import Queue
 -        from threading import Thread
 -        WORKER_THREAD_COUNT = 50
 -        WORK_ITEM_COUNT = 2000
@@ -1458,7 +1434,6 @@ Upstream-Status: Pending
 -        fsh = utils.find_stat_by_name(stats, "handler")
 -        self.assertTrue(fsh is not None)
 -
--    @unittest.skipIf(not sys.version_info >= (3, 2), "requires Python 3.2")
 -    def test_concurrent_futures(self):
 -        yappi.start()
 -        from concurrent.futures import ThreadPoolExecutor
@@ -1468,7 +1443,6 @@ Upstream-Status: Pending
 -        time.sleep(1.0)
 -        yappi.stop()
 -
--    @unittest.skipIf(not sys.version_info >= (3, 2), "requires Python 3.2")
 -    def test_barrier(self):
 -        yappi.start()
 -        b = threading.Barrier(2, timeout=1)
@@ -1962,8 +1936,8 @@ Upstream-Status: Pending
 +import unittest
 +import yappi
 +import _yappi
-+import tests.utils as utils
-+import multiprocessing  # added to fix http://bugs.python.org/issue15881 for > Py2.6
++import utils
++import multiprocessing
 +import subprocess
 +
 +_counter = 0
@@ -2234,10 +2208,10 @@ Upstream-Status: Pending
 +    def test_profile_decorator(self):
 +
 +        def aggregate(func, stats):
-+            fname = "tests/%s.profile" % (func.__name__)
++            fname = f"tests/{func.__name__}.profile"
 +            try:
 +                stats.add(fname)
-+            except IOError:
++            except OSError:
 +                pass
 +            stats.save(fname)
 +            raise Exception("messing around")
@@ -3007,8 +2981,8 @@ Upstream-Status: Pending
 +
 +    def test_issue_32(self):
 +        '''
-+        Start yappi from different thread and we get Internal Error(15) as
-+        the current_ctx_id() called while enumerating the threads in start()
++        Start yappi from different thread and we get Internal Error(15) as 
++        the current_ctx_id() called while enumerating the threads in start() 
 +        and as it does not swap to the enumerated ThreadState* the THreadState_GetDict()
 +        returns wrong object and thus sets an invalid id for the _ctx structure.
 +
@@ -3148,7 +3122,7 @@ Upstream-Status: Pending
 +        # TODO: I put dummy() to fix below, remove the comments after a while.
 +        self.assertTrue( # FIX: I see this fails sometimes?
 +            tsm is not None,
-+            'Could not find "_MainThread". Found: %s' % (', '.join(utils.get_stat_names(tstats))))
++            f"Could not find \"_MainThread\". Found: {', '.join(utils.get_stat_names(tstats))}")
 +
 +    def test_ctx_stats(self):
 +        from threading import Thread
@@ -3228,7 +3202,7 @@ Upstream-Status: Pending
 +        # TODO: I put dummy() to fix below, remove the comments after a while.
 +        self.assertTrue( # FIX: I see this fails sometimes
 +            tsmain is not None,
-+            'Could not find "_MainThread". Found: %s' % (', '.join(utils.get_stat_names(stats))))
++            f"Could not find \"_MainThread\". Found: {', '.join(utils.get_stat_names(stats))}")
 +        self.assertTrue(1.0 > tst2.ttot >= 0.5)
 +        self.assertTrue(1.0 > tst1.ttot >= 0.5)
 +
@@ -3285,7 +3259,7 @@ Upstream-Status: Pending
 +            ts = []
 +            for i in (0.01, 0.05, 0.1):
 +                t = threading.Thread(target=burn_cpu, args=(i, ))
-+                t.name = "burn_cpu-%s" % str(i)
++                t.name = f"burn_cpu-{str(i)}"
 +                t.start()
 +                ts.append(t)
 +            for t in ts:
@@ -3312,10 +3286,7 @@ Upstream-Status: Pending
 +    def test_producer_consumer_with_queues(self):
 +        # we currently just stress yappi, no functionality test is done here.
 +        yappi.start()
-+        if utils.is_py3x():
-+            from queue import Queue
-+        else:
-+            from Queue import Queue
++        from queue import Queue
 +        from threading import Thread
 +        WORKER_THREAD_COUNT = 50
 +        WORK_ITEM_COUNT = 2000
@@ -3374,7 +3345,6 @@ Upstream-Status: Pending
 +        fsh = utils.find_stat_by_name(stats, "handler")
 +        self.assertTrue(fsh is not None)
 +
-+    @unittest.skipIf(not sys.version_info >= (3, 2), "requires Python 3.2")
 +    def test_concurrent_futures(self):
 +        yappi.start()
 +        from concurrent.futures import ThreadPoolExecutor
@@ -3384,7 +3354,6 @@ Upstream-Status: Pending
 +        time.sleep(1.0)
 +        yappi.stop()
 +
-+    @unittest.skipIf(not sys.version_info >= (3, 2), "requires Python 3.2")
 +    def test_barrier(self):
 +        yappi.start()
 +        b = threading.Barrier(2, timeout=1)
@@ -3871,25 +3840,6 @@ Upstream-Status: Pending
 +    #     import sys;sys.argv = ['', 'BasicUsage.test_run_as_script']
 +    #     import sys;sys.argv = ['', 'MultithreadedScenarios.test_subsequent_profile']
 +    unittest.main()
---- a/tests/test_hooks.py
-+++ b/tests/test_hooks.py
-@@ -5,7 +5,7 @@ import unittest
- import time
- 
- import yappi
--import utils
-+import tests.utils as utils
- 
- 
- def a():
---- a/tests/test_tags.py
-+++ b/tests/test_tags.py
-@@ -2,7 +2,7 @@ import unittest
- import yappi
- import threading
- import time
--from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
-+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
- 
- 
- class MultiThreadTests(YappiUnitTestCase):
+-- 
+2.34.1
+
