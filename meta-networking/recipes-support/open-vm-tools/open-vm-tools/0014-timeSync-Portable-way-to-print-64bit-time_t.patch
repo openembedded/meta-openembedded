@@ -1,4 +1,4 @@
-From dcb5d3e5d47b1e01fdcde575badc51825d4f4681 Mon Sep 17 00:00:00 2001
+From 09cc01b2fa15e319afafa13d7365b399a60f443c Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Tue, 3 Jan 2023 13:36:01 -0800
 Subject: [PATCH] timeSync: Portable way to print 64bit time_t
@@ -12,6 +12,7 @@ pllLinux.c:43:20: error: format specifies type 'long' but the argument has type 
 |                    ^~~~~~~~~~
 
 Upstream-Status: Submitted [https://github.com/vmware/open-vm-tools/pull/631]
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  open-vm-tools/services/plugins/timeSync/pllLinux.c  | 8 ++++----
@@ -50,5 +51,5 @@ index 1ab6e3584..0c304b5d7 100644
     return TRUE;
  }
 -- 
-2.39.0
+2.25.1
 
