@@ -10,7 +10,7 @@ CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't 
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake multilib_header
 
 do_configure:prepend() {
 	JAS_STDC_VERSION="$(echo __STDC_VERSION__ | ${CPP} -E -P -)"
@@ -29,5 +29,6 @@ do_install:append() {
     chrpath -d ${D}${bindir}/imginfo
     chrpath -d ${D}${bindir}/imgcmp
     chrpath -d ${D}${libdir}/libjasper.so.*
+    oe_multilib_header jasper/jas_config.h
 }
 
