@@ -13,7 +13,7 @@ RPROVIDES:${PN} = "virtual/opencl-icd"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "b1bce7c3c580a8345205cf65fc1a5f55ba9cdb01"
+SRCREV = "229410f86a8c8c9e0f86f195409e5481a2bae067"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
 
 EXTRA_OECMAKE:append = " \
