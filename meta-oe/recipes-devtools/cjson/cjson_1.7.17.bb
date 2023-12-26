@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
 SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
            file://run-ptest \
          "
-SRCREV = "cb8693b058ba302f4829ec6d03f609ac6f848546"
+SRCREV = "87d8f0961a01bf09bef98ff89bae9fdec42181ee"
 
 S = "${WORKDIR}/git"
 
