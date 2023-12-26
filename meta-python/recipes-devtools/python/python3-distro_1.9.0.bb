@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
 
 PYPI_PACKAGE = "distro"
 
-SRC_URI[sha256sum] = "02e111d1dc6a50abb8eed6bf31c3e48ed8b0830d1ea2a1b78c61765c2513fdd8"
+SRC_URI[sha256sum] = "2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed"
 
 inherit pypi python_setuptools_build_meta
 
