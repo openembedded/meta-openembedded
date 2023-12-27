@@ -27,7 +27,6 @@ DEPENDS = " \
     udev \
     util-linux \
     libndp \
-    libnewt \
     curl \
     dbus \
 "
