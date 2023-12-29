@@ -18,6 +18,9 @@ do_install () {
 	oe_runmake install DESTDIR=${D}
 }
 
-FILES:${PN} += "${libdir}"
-FILES:${PN} += "${datadir}"
+FILES:${PN} += " \
+    ${libdir} \
+    ${datadir} \
+    ${systemd_system_unitdir} \
+"
 
