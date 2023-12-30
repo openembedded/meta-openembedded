@@ -42,6 +42,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
     tearsofsteel-1080p \
     pipewire \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} \
+    libcamera \
     vorbis-tools \
     libopenmpt \
     mimic \
