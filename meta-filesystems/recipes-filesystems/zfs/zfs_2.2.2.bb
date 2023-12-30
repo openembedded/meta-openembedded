@@ -4,7 +4,7 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE ="https://github.com/openzfs/zfs"
 
-SRCREV = "229ca7d738ccbf4c55076977467ee93e20b6f01b"
+SRCREV = "494aaaed89cb9fe9f2da3b6c6f465a4bc9f6a7e1"
 SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.
 # That's why we opt for module-base, also this prevents module splitting.
-inherit module-base pkgconfig autotools
+inherit module-base pkgconfig autotools bash-completion
 
 DEPENDS = "virtual/kernel zlib util-linux libtirpc openssl curl"
 
