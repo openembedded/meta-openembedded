@@ -210,7 +210,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-jsonpath-rw \
     python3-jsonpointer \
     python3-jsonref \
-    python3-jsonrpcserver \
     python3-jsonschema \
     python3-jstyleson \
     python3-kconfiglib \
