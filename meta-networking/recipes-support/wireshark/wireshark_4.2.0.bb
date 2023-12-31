@@ -4,20 +4,20 @@ SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares"
+DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp"
 
 DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
 
 SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
-           file://0001-CMake-Fix-a-try_run-test-when-cross-compiling.patch \
            file://0001-wireshark-src-improve-reproducibility.patch \
            file://0002-flex-Remove-line-directives.patch \
            file://0004-lemon-Remove-line-directives.patch \
+           file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
            "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[sha256sum] = "b2e3ff03fa2be9058a9ffbedd12b0a670433bd16c8cc6c432ab48dabc2df1898"
+SRC_URI[sha256sum] = "0e428492f4c3625d61a7ccff008dc0e429d16ab8caccad4403157ea92b48a75b"
 
 PE = "1"
 
