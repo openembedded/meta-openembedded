@@ -217,7 +217,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-keras-preprocessing \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "python3-kivy", "", d)} \
     python3-kiwisolver \
-    python3-kmod \
     python3-langtable \
     python3-lazy-object-proxy \
     python3-libconf \
