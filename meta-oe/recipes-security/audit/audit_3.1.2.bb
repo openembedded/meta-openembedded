@@ -32,7 +32,7 @@ DEPENDS = "python3 tcp-wrappers libcap-ng linux-libc-headers swig-native"
 EXTRA_OECONF = " --with-libwrap \
         --enable-gssapi-krb5=no \
         --with-libcap-ng=yes \
-        --with-python3=yes \
+        --with-python3=no \
         --libdir=${base_libdir} \
         --sbindir=${base_sbindir} \
         --without-python \
