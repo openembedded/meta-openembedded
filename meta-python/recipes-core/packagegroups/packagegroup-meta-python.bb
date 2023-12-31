@@ -459,7 +459,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-wtforms \
     python3-xlrd \
     python3-xlsxwriter \
-    python3-xmlrunner \
     python3-xmltodict \
     python3-xmodem \
     python3-xstatic \
