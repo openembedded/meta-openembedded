@@ -11,9 +11,10 @@ export PYTHONHASHSEED="1"
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://0001-tdb-Add-configure-options-for-packages.patch \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "8434c9c857d13ce3fa8466f75601f25c3693676b36919f159e0ad6121baf5ce8"
+SRC_URI[sha256sum] = "0ac226073e3a2db8648da7af744cb95f50766a52feeb001d558b2b321b74a765"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
@@ -22,17 +23,16 @@ PACKAGECONFIG ??= "\
 
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
 PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
-PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
 PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
 PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 
 S = "${WORKDIR}/tdb-${PV}"
 
-inherit waf-samba
+inherit waf-samba pkgconfig ptest
 
-#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
-#to cross Popen
+# Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+# to cross Popen
 export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
@@ -41,6 +41,15 @@ EXTRA_OECONF += "--disable-rpath \
                  --builtin-libraries=replace \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/tests
+    install -m 0755 ${B}/bin/tdb1-* ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/bin/replace_testsuite ${D}${PTEST_PATH}/tests/
+    install -d ${D}${PTEST_PATH}/tests/test
+    install -m 0644 ${B}/test/*.tdb ${D}${PTEST_PATH}/tests/test/
+    install -m 0644 ${B}/test/*.corrupt ${D}${PTEST_PATH}/tests/test/
+}
 
 PACKAGES += "tdb-tools python3-tdb"
 
