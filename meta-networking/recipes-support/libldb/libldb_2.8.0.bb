@@ -22,7 +22,6 @@ PACKAGECONFIG ??= "\
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
 PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
 PACKAGECONFIG[ldap] = ",,openldap"
-PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
 PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
 PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
@@ -34,14 +33,14 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[sha256sum] = "26ee72d647854e662d99643eb2b2d341655abf31f4990838d6650fb5cf9209c8"
+SRC_URI[sha256sum] = "358dca10fcd27207ac857a0d7f435a46dbc6cd1f7c10dbb840c1931bf1965f08"
 
 inherit pkgconfig waf-samba ptest
 
 S = "${WORKDIR}/ldb-${PV}"
 
-#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
-#to cross Popen
+# Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+# to cross Popen
 export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
