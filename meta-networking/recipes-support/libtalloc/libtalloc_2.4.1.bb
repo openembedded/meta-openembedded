@@ -11,10 +11,11 @@ export PYTHONHASHSEED="1"
 SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
            file://0001-talloc-Add-configure-options-for-packages.patch \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://run-ptest \
 "
-SRC_URI[sha256sum] = "6df36862c42466ef88f360444513870ef46934f9016c84383cc4008a7d0c46ba"
+SRC_URI[sha256sum] = "410a547f08557007be0e88194f218868358edc0ab98c98ba8c167930db3d33f9"
 
-inherit waf-samba
+inherit waf-samba pkgconfig ptest
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
@@ -22,7 +23,6 @@ PACKAGECONFIG ??= "\
 "
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
 PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
-PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
 PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
 PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
@@ -31,8 +31,8 @@ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr
 
 S = "${WORKDIR}/talloc-${PV}"
 
-#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
-#to cross Popen
+# Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+# to cross Popen
 export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
@@ -42,6 +42,11 @@ EXTRA_OECONF += "--disable-rpath \
                  --disable-silent-rules \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/tests
+    install -m 0755 ${B}/bin/*_testsuite ${D}${PTEST_PATH}/tests/
+}
 
 PACKAGES += "pytalloc pytalloc-dev"
 
