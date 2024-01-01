@@ -12,9 +12,10 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=
            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
            file://0003-Do-not-build-external-gtest.patch \
            file://0004-Do-not-specify-PIE-flag-explicitly.patch \
+           file://0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch \
           "
 
-SRCREV = "07464840f503670bc75997b8e926b54734ffa410"
+SRCREV = "02c199dff8aba814beebe3ca417fd991058fe90c"
 
 COMPATIBLE_HOST:mips = "null"
 COMPATIBLE_HOST:mips64 = "null"
@@ -54,6 +55,8 @@ do_install:append() {
 
     install -d ${D}/opt/${PN}-test/test/test/common
     cp -rf ${S}/test/common/examples_policies \
+        ${D}/opt/${PN}-test/test/test/common/
+    install -m 0755 ${B}/test/common/libvsomeip_utilities.so \
         ${D}/opt/${PN}-test/test/test/common/
 
     for d in unit_tests network_tests; do
