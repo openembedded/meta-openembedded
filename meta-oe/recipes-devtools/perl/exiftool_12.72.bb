@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
 
 inherit cpan
 
-SRCREV = "7cefbaaa9057231b6e9b5765934f06e75994420d"
+SRCREV = "fc4f6614ff0c19bb5f332a9c464dcef7267931df"
 SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
