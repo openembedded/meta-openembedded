@@ -1,0 +1,49 @@
+From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001
+From: Leon Anavi <leon.anavi@konsulko.com>
+Date: Sat, 30 Dec 2023 13:23:31 +0000
+Subject: [PATCH] Use include "filename"
+
+Use include "filename" to include programmer-defined header files
+from the same directory as the file containing the directive.
+
+Upstream-Status: Submitted [https://github.com/armlabs/ssd1306_linux/pull/4]
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ main.c    | 2 +-
+ ssd1306.c | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/main.c b/main.c
+index c1ffc2f..18e2b84 100644
+--- a/main.c
++++ b/main.c
+@@ -6,7 +6,7 @@
+ #include <string.h>
+ #include <fcntl.h>
+ #include <sys/ioctl.h>
+-#include <ssd1306.h>
++#include "ssd1306.h"
+ 
+ void print_help()
+ {
+diff --git a/ssd1306.c b/ssd1306.c
+index a03674a..2e6ba97 100644
+--- a/ssd1306.c
++++ b/ssd1306.c
+@@ -8,9 +8,9 @@
+ #include <string.h>
+ #include <fcntl.h>
+ #include <sys/ioctl.h>
+-#include <linux_i2c.h>
+-#include <ssd1306.h>
+-#include <font.h>
++#include "linux_i2c.h"
++#include "ssd1306.h"
++#include "font.h"
+ 
+ const char init_oled_type_file[] = "/tmp/.ssd1306_oled_type";
+ 
+-- 
+2.39.2
+
