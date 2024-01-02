@@ -25,7 +25,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 
-SRC_URI[sha256sum] = "99acd54ec9d68b2a9080d19fcc43eca1a245146cf162dbba689510d01e6d0f25"
+SRC_URI[sha256sum] = "bc73ce506050334f51441f9054ffba4eb7cfd365a5e98a6d178b8263b9222f40"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
