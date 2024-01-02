@@ -11,7 +11,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
            file://0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch \
            file://run-ptest \
           "
-SRCREV = "479eca13aaaa46b43e68c52186e3783f06ae6f34"
+SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
 
 S = "${WORKDIR}/git"
 
