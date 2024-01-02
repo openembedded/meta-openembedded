@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/burnash/gspread"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9488e21983675fa56dc05af558b83e2f"
 
-SRC_URI[sha256sum] = "298ebab76e6ed6a998eabc81545ec58f5610f44e2ddb4858b539a0634093f8ce"
+SRC_URI[sha256sum] = "3fcef90183f15d3c9233b4caa021a83682f2b2ee678340c42d7ca7d8be98c6d1"
 
 S = "${WORKDIR}/gspread-${PV}"
 
