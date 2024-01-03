@@ -4,7 +4,7 @@ SECTION = "libs"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
 
-SRCREV = "1dee28e51f9175a31955b9791c74c430fe13dc82"
+SRCREV = "321ea883b7190d4e85cae5512a12e5eaa8f8731f"
 SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https \
            file://run-ptest"
 
@@ -19,7 +19,6 @@ CXXFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 do_install_ptest() {
     install -Dm 0755 ${B}/xmltest ${D}${PTEST_PATH}/xmltest
     install -d ${D}${PTEST_PATH}/resources/out
-    install -Dm 0644 ${B}/resources/*.xml ${D}${PTEST_PATH}/resources/
 }
 
 BBCLASSEXTEND = "native"
