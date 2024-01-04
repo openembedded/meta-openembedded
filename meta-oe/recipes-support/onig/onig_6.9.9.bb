@@ -14,7 +14,7 @@ SRC_URI = "\
     file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "28cd62c1464623c7910565fb1ccaaa0104b2fe8b12bcd646e81f73b47535213e"
+SRC_URI[sha256sum] = "60162bd3b9fc6f4886d4c7a07925ffd374167732f55dce8c491bfd9cd818a6cf"
 
 BINCONFIG = "${bindir}/onig-config"
 
