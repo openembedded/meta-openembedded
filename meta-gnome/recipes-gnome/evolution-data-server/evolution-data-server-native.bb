@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit native
+inherit_defer native
 
 DEPENDS = "glib-2.0-native"
 
