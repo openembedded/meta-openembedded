@@ -2,7 +2,7 @@ SUMMARY = "Open source Python library for rapid development of applications \
     that make use of innovative user interfaces, such as multi-touch apps."
 HOMEPAGE = "https://kivy.org/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ed5cd0f2cfda42852c332e3b88c85fea"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6d3bc49400e35d5a2279d14c40dcfb09"
 
 inherit setuptools3 pkgconfig features_check
 PIP_INSTALL_PACKAGE = "Kivy"
@@ -11,11 +11,11 @@ PIP_INSTALL_PACKAGE = "Kivy"
 # and mali-based OS's. We need to patch the setup file to tell Kivy setup
 # that our machine has GLES libaries installed as well
 # Also, if using SDL2 as backend, SDL2 needs to be configured with gles
-SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
+SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=master \
            file://0001-add-support-for-glesv2.patch \
            "
 
-SRCREV = "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
+SRCREV = "9ef218027178115a66b417ae34b21f488bdd3617"
 
 S = "${WORKDIR}/git"
 
