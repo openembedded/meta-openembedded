@@ -1,0 +1,32 @@
+From 8437cd1fa7dc1797d3290c121ca17b39a0d2fd6a Mon Sep 17 00:00:00 2001
+From: Markus Volk <f_l_k@t-online.de>
+Date: Tue, 5 Dec 2023 19:49:42 +0100
+Subject: [PATCH] frame_queue.h: add frame_duration
+
+This fixes:
+| [ 87/266] Compiling stream/cookies.c
+| ../git/video/out/vo_gpu_next.c: In function 'draw_frame':
+| ../git/video/out/vo_gpu_next.c:932:14: error: 'struct pl_queue_params' has no member named 'frame_duration'
+|   932 |             .frame_duration = frame->ideal_frame_duration,
+|       |              ^~~~~~~~~~~~~~
+
+---
+ src/include/libplacebo/utils/frame_queue.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/include/libplacebo/utils/frame_queue.h b/src/include/libplacebo/utils/frame_queue.h
+index 2a9c90c3..8afa4355 100644
+--- a/src/include/libplacebo/utils/frame_queue.h
++++ b/src/include/libplacebo/utils/frame_queue.h
+@@ -170,6 +170,8 @@ struct pl_queue_params {
+     // should instead be interpreted by the provided callback.
+     uint64_t timeout;
+ 
++    const float frame_duration;
++
+     // This callback will be used to pull new frames from the decoder. It may
+     // block if needed. The user is responsible for setting appropriate time
+     // limits and/or returning and interpreting QUEUE_MORE as sensible.
+-- 
+2.42.1
+

@@ -1,0 +1,30 @@
+From fbf74064bbb7133efe9234ef83976f06b3690e88 Mon Sep 17 00:00:00 2001
+From: Markus Volk <f_l_k@t-online.de>
+Date: Tue, 5 Dec 2023 19:35:51 +0100
+Subject: [PATCH] gpu.h: add stride_w
+
+this fixes:
+| [113/257] Compiling common/codecs.c
+| ../git/video/out/vo_gpu_next.c: In function 'update_overlays':
+| ../git/video/out/vo_gpu_next.c:268:14: error: 'struct pl_tex_transfer_params' has no member named 'stride_w'
+|   268 |             .stride_w   = item->packed->stride[0] / tex_fmt->texel_size,
+|       |              ^~~~~~~~
+---
+ src/include/libplacebo/gpu.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/include/libplacebo/gpu.h b/src/include/libplacebo/gpu.h
+index a63fdf7c..57b4f195 100644
+--- a/src/include/libplacebo/gpu.h
++++ b/src/include/libplacebo/gpu.h
+@@ -904,6 +904,7 @@ struct pl_tex_transfer_params {
+ 
+     // Note: The contents of the memory region / buffer must exactly match the
+     // texture format; i.e. there is no explicit conversion between formats.
++    size_t stride_w;    //
+ };
+ 
+ #define pl_tex_transfer_params(...) (&(struct pl_tex_transfer_params) { __VA_ARGS__ })
+-- 
+2.42.1
+
