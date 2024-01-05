@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd8857f774dfb0eefe1e80c8f9240a7e"
 
 SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https;branch=master"
 
-SRCREV = "d34bc1a3bdc148e2e1fe64998398e1a0552ab04c"
+SRCREV = "748c3930a9b9cb826e631d77439e2cb8f84f5bcf"
 
 S = "${WORKDIR}/git"
 
 DEPENDS += "opencl-headers virtual/opencl-icd"
 
 do_install() {
-        install -D -m 755 clinfo ${D}${bindir}/clinfo
+	oe_runmake install PREFIX=${D}${prefix} MANDIR=${D}${mandir}
 }
