@@ -12,11 +12,8 @@ LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
 #v0.21.0
-SRCREV = "5497519ea6b4af596628f8f8f2f904bacaa3148f"
+SRCREV = "f15d0c5295f3247ae56bf976cf411fec4b47b6ec"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
-           file://0001-pkcs11-tool-Fix-private-key-import.patch \
-           file://0002-pkcs11-tool-Log-more-information-on-OpenSSL-errors.patch \
-           file://CVE-2023-2977.patch \
           "
 DEPENDS = "virtual/libiconv openssl"
 
@@ -44,6 +41,7 @@ FILES:${PN} += "\
     ${libdir}/pkcs11-spy.so \
 "
 FILES:${PN}-dev += "\
+    ${libdir}/onepin-opensc-pkcs11.so \
     ${libdir}/pkcs11/opensc-pkcs11.so \
     ${libdir}/pkcs11/onepin-opensc-pkcs11.so \
     ${libdir}/pkcs11/pkcs11-spy.so \
