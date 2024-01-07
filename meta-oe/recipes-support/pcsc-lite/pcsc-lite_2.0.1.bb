@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
 DEPENDS = "autoconf-archive-native flex-native"
 
 SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "d6c3e2b64510e5ed6fcd3323febf2cc2a8e5fda5a6588c7671f2d77f9f189356"
+SRC_URI[sha256sum] = "5edcaf5d4544403bdab6ee2b5d6c02c6f97ea64eebf0825b8d0fa61ba417dada"
 
 inherit autotools systemd pkgconfig perlnative
 
@@ -23,11 +23,12 @@ EXTRA_OECONF = " \
 
 S = "${WORKDIR}/pcsc-lite-${PV}"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} udev"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} udev"
 PACKAGECONFIG:class-native ??= ""
 
 PACKAGECONFIG[systemd]  = ",--disable-libsystemd,systemd,"
 PACKAGECONFIG[udev] = "--enable-libudev,--disable-libudev,udev"
+PACKAGECONFIG[polkit] = ",--disable-polkit,polkit"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
 
@@ -35,7 +36,8 @@ RRECOMMENDS:${PN} = "ccid"
 RRECOMMENDS:${PN}:class-native = ""
 RPROVIDES:${PN}:class-native += "pcsc-lite-lib-native"
 
-FILES:${PN} = "${sbindir}/pcscd"
+FILES:${PN} = "${sbindir}/pcscd \
+               ${datadir}/polkit-1"
 FILES:${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
 FILES:${PN}-dev = "${includedir} \
                    ${libdir}/pkgconfig \
