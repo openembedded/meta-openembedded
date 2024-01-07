@@ -34,6 +34,17 @@ RDEPENDS:${PN}-ptest += "\
     python3-unittest-automake-output \
 "
 
+do_install:append() {
+    for f in ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/_pydantic_core.*.so
+    do
+        fname=`basename $f`
+        lname=`echo $fname | sed 's/musl/gnu/'`
+        if [ "$fname" != "$lname" ]; then
+            mv $f ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/$lname
+        fi
+    done
+}
+
 do_install_ptest() {
     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
     rm -rf ${D}${PTEST_PATH}/tests/benchmarks
