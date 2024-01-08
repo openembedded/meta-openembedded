@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
 SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https \
             "
 
-SRCREV = "4a537e969891dde542ad8b1a4a214955a83be29f"
+SRCREV = "08bcf77a687fb06e34138e9e9fa12a4ecbe12332"
 
 S = "${WORKDIR}/git"
 
