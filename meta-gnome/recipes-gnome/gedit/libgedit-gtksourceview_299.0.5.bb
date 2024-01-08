@@ -7,9 +7,9 @@ DEPENDS = "glib-2.0 gtk+3 libxml2"
 
 inherit meson pkgconfig gobject-introspection features_check gtk-doc
 
-SRC_URI = "git://github.com/gedit-technology/libgedit-gtksourceview.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/gedit-technology/libgedit-gtksourceview.git;protocol=https;branch=libgedit-gtksourceview-299-0"
 S = "${WORKDIR}/git"
-SRCREV = "7062264d635f6efe04d88217a893a97ff385b873"
+SRCREV = "7e2179a8ff3022edad27e2d57744876d125cb040"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
