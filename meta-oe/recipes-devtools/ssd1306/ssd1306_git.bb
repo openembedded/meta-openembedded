@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b694e603a996c3bfdc6093ed1f70c8f"
 
 SRC_URI = " \
     git://github.com/armlabs/ssd1306_linux.git;protocol=https;branch=master \
-    file://0001-Use-include-filename.patch \
 "
-SRCREV = "7375f1088732d243f7167c9a17725f1a860da587"
+SRCREV = "34b42992a43fda69c6ba2557b718601cafe16251"
 
 S = "${WORKDIR}/git"
 
