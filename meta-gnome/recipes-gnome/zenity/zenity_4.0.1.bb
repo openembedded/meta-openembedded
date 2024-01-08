@@ -17,7 +17,7 @@ DEPENDS = " \
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 GTKIC_VERSION = "4"
 
-SRC_URI[archive.sha256sum] = "0b8c8def18dab05cc49bd464b90ca7f945ae52ff5e09242da702a15d94d3e8dd"
+SRC_URI[archive.sha256sum] = "0c2f537813b10f728470d9d05d6c95713db2512f9c95096e1e85b1a6739605e6"
 
 PACKAGECONFIG ?= "webkitgtk"
 PACKAGECONFIG[webkitgtk] = "-Dwebkitgtk=true,-Dwebkitgtk=false,webkitgtk"
