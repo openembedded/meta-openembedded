@@ -11,7 +11,7 @@ SRC_URI = "\
     git://github.com/hughsie/libjcat.git;branch=main;protocol=https \
     file://run-ptest \
 "
-SRCREV = "d9cf9ebc4237252a82f88d9e99bea0c4b398c08a"
+SRCREV = "60bb85d53d5da74903ab1e227fbecfa3a3be1b05"
 S = "${WORKDIR}/git"
 
 inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
