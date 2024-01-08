@@ -1,7 +1,7 @@
 SUMMARY = "Linear Algebra PACKage"
 URL = "http://www.netlib.org/lapack"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a32c99f24d097c72d1857e533b55642b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d0e7a458f9fcbf0a3ba97cef3128b85d"
 
 # Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
 # Enabling FORTRAN
@@ -16,7 +16,7 @@ DEPENDS = "libgfortran \
           "
 RDEPENDS:${PN}-ptest += "cmake"
 
-SRCREV = "32b062a33352e05771dcc01b981ebe961bf2e42f"
+SRCREV = "04b044e020a3560ccfa9988c8a80a1fb7083fc2e"
 SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master \
            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
           "
