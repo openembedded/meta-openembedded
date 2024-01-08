@@ -15,7 +15,6 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
 
 inherit gnomebase gsettings gtk-icon-cache gnome-help gettext gobject-introspection vala gi-docgen
 
-SRC_URI += "file://0001-gtkhex-Local-variables-in-switch-statement-should-be.patch"
-SRC_URI[archive.sha256sum] = "05cecc4561ca40b257c5db31da9f68d696133efc0ae427ed82fb985a986e840e"
+SRC_URI[archive.sha256sum] = "fb2b0823cd16249edbeaee8302f9bd5005e0150368b35f1e47c26680cacac2fa"
 
 FILES:${PN} += "${libdir} ${datadir}/metainfo"
