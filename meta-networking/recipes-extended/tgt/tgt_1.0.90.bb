@@ -4,8 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils libaio"
 
-SRCREV = "a6bd1f0578bf85788a1563cbfb42a75e500d5318"
-PV = "1.0.83"
+SRCREV = "df991fa788e22cd8b8e3013cfae306988c19c3d0"
 
 SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
