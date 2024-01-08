@@ -19,6 +19,9 @@ CXXFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 do_install_ptest() {
     install -Dm 0755 ${B}/xmltest ${D}${PTEST_PATH}/xmltest
     install -d ${D}${PTEST_PATH}/resources/out
+    for f in ${S}/resources/*.xml; do
+        install -m 0644 $f ${D}${PTEST_PATH}/resources/
+    done
 }
 
 BBCLASSEXTEND = "native"
