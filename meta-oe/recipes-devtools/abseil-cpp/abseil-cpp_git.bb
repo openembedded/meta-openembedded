@@ -25,6 +25,8 @@ ASNEEDED:class-nativesdk = ""
 
 inherit cmake
 
+CXXFLAGS += "-std=c++14"
+
 EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
                  -DBUILD_TESTING=OFF    \
                  -DABSL_ENABLE_INSTALL=ON \
