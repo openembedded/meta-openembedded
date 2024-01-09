@@ -7,9 +7,10 @@ DEPENDS = "sg3-utils libaio"
 SRCREV = "df991fa788e22cd8b8e3013cfae306988c19c3d0"
 
 SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
-	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
+	      file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
         file://0001-usr-Makefile-WARNING-fix.patch \
         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
+        file://musl-__wordsize.patch \
 "
 SRC_URI += "file://tgtd.init \
             file://tgtd.service \
@@ -17,8 +18,6 @@ SRC_URI += "file://tgtd.init \
 "
 
 S = "${WORKDIR}/git"
-
-COMPATIBLE_HOST:libc-musl = "null"
 
 CONFFILES:${PN} += "${sysconfdir}/tgt/targets.conf"
 
@@ -29,6 +28,7 @@ SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
 CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
 
+CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 #do_compile() {
 #    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf scripts
 #}
