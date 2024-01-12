@@ -46,7 +46,7 @@ PACKAGECONFIG[ospfclient] = "--enable-ospfapi --enable-ospfclient,--disable-ospf
 
 EXTRA_OECONF:class-native = "--enable-clippy-only"
 
-EXTRA_OECONF:class-target = "--sbindir=${libdir}/frr \
+EXTRA_OECONF:class-target = "--sbindir=${libexecdir}/frr \
                              --sysconfdir=${sysconfdir}/frr \
                              --localstatedir=${localstatedir}/run/frr \
                              --enable-vtysh \
@@ -74,7 +74,7 @@ SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "frr.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-inherit update-alternatives
+inherit update-alternatives multilib_script multilib_header
 
 ALTERNATIVE_PRIORITY = "100"
 ALTERNATIVE:${PN} = " ietf-interfaces "
@@ -95,6 +95,7 @@ do_install:class-native () {
 
 do_install:append:class-target () {
     install -m 0755 -d ${D}${sysconfdir}/frr
+    install -m 0755 -d ${D}${libexecdir}/frr
     install -m 0640 ${S}/tools/etc/frr/* ${D}${sysconfdir}/frr/
     chown frr:frrvty ${D}${sysconfdir}/frr
     chown frr:frr ${D}${sysconfdir}/frr/*
@@ -123,6 +124,7 @@ do_install:append:class-target () {
         echo "d /run/frr 0755 frr frr -" \
             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
     fi
+    oe_multilib_header frr/version.h
 }
 
 USERADD_PACKAGES = "${PN}"
