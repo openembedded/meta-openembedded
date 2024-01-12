@@ -74,6 +74,11 @@ SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "frr.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
+inherit update-alternatives
+
+ALTERNATIVE_PRIORITY = "100"
+ALTERNATIVE:${PN} = " ietf-interfaces "
+ALTERNATIVE_LINK_NAME[ietf-interfaces] = "${datadir}/yang/ietf-interfaces.yang"
 do_compile:prepend () {
    sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
           -e 's#${RECIPE_SYSROOT}##g' ${S}/lib/version.h
