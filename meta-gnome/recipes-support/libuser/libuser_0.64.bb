@@ -27,11 +27,6 @@ REQUIRED_DISTRO_FEATURES = "pam"
 
 EXTRA_OEMAKE = "PYTHON_CPPFLAGS=-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}"
 
-GTKDOC_DOCDIR = "${S}/docs/reference"
-
-# run autopoint since it needs ABOUT-NLS and admin/config.rpath from gettext
-#EXTRA_AUTORECONF:remove = "--exclude=autopoint"
-
 do_configure:prepend() {
     install -d ${S}/admin -d ${S}/m4
     touch ${S}/ABOUT-NLS ${S}/admin/config.rpath
