@@ -3,16 +3,12 @@ DESCRIPTION = "Marshmallow is an ORM/ODM/framework-agnostic library for converti
 HOMEPAGE = "https://github.com/marshmallow-code/marshmallow"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "\
-                    file://LICENSE;md5=5bccd400dedfa74364481e56aacc0b4a \
+                    file://LICENSE;md5=653847350fed2e0e7b02791a35b98d59 \
                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
 
-SRC_URI = "git://github.com/marshmallow-code/marshmallow.git;protocol=https;branch=dev"
+SRC_URI[sha256sum] = "4c1daff273513dc5eb24b219a8035559dc573c8f322558ef85f5438ddd1236dd"
 
-SRCREV = "dda9a8014dfe1bcb35e21307cfd5a8e19615a284"
-
-S = "${WORKDIR}/git"
-
-inherit setuptools3
+inherit setuptools3 pypi
 
 PIP_INSTALL_PACKAGE = "marshmallow"
 
