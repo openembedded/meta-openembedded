@@ -18,34 +18,30 @@ LDFLAGS:append = " -pthread"
 # Needs further investigation
 GLIBC_64BIT_TIME_FLAGS = ""
 
-inherit autotools gettext pkgconfig
+inherit meson gettext pkgconfig
 
-PACKAGECONFIG ??= "media-ctl"
-PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
-PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
-PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
-PACKAGECONFIG[v4l2-tracer] = ",--disable-v4l2-tracer,json-c"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[qv4l2] = ",-Dqv4l2=disabled"
+PACKAGECONFIG[qvidcap] = ",-Dqvidcap=disabled"
+PACKAGECONFIG[v4l2-tracer] = ",-Dv4l2-tracer=disabled,json-c"
 
 SRC_URI = "\
-    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.24 \
-    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
-    file://0002-original-patch-mediactl-pkgconfig.patch \
-    file://0003-original-patch-export-mediactl-headers.patch \
+    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.26 \
+    file://0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch \
     file://0004-Do-not-use-getsubopt.patch \
 "
 
-SRCREV = "8799081b143627c9c09dea0c60ad3d1cc17cc848"
+SRCREV = "4aee01a027923cab1e40969f56f8ba58d3e6c0d1"
 
 PV .= "+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-do_configure:prepend() {
-    cd ${S}; ./bootstrap.sh; cd -
-}
+EXTRA_OEMESON = "-Dudevdir=${base_libdir}/udev -Dv4l2-compliance-32=false -Dv4l2-ctl-32=false"
 
-EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
-                --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
+# Disable the erroneous installation of gconv-modules that would break glib
+# like it is done in Debian and ArchLinux.
+EXTRA_OEMESON += "-Dgconv=disabled"
 
 VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
 
