@@ -6,7 +6,7 @@ SECTION = "net"
 
 SRCREV = "1b1528038e084a9f81ea108cffca9c2707623b9c"
 
-SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
+SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;protocol=https;branch=master \
            file://Fixed-build-error-on-musl.patch \
            file://0001-configure-check-for-ns_get16-and-ns_get32-as-well.patch \
 	   "
