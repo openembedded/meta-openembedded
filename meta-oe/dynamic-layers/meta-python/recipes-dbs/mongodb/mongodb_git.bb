@@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
 
 inherit scons dos2unix siteinfo python3native systemd useradd
 
-PV = "4.4.13"
-#v4.4.13
-SRCREV = "df25c71b8674a78e17468f48bcda5285decb9246"
+PV = "4.4.24"
+#v4.4.24
+SRCREV = "0b86b9b7b42ad9970c5f818c527dd86c0634243a"
 SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
            file://0001-Use-long-long-instead-of-int64_t.patch \
@@ -29,15 +29,19 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
            file://0001-include-needed-c-header.patch \
            file://disable_runtime_check.patch \
            file://ppc64_ARCH_BITS.patch \
-           file://PTHREAD_STACK_MIN.patch \
            file://0001-add-explict-static_cast-size_t-to-maxMemoryUsageByte.patch \
            file://0001-server-Adjust-the-cache-alignment-assumptions.patch \
            file://0001-The-std-lib-unary-binary_function-base-classes-are-d.patch \
+           file://0001-free_mon-Include-missing-cstdint.patch \
+           file://0001-apply-msvc-workaround-for-clang-16.patch \
+           file://0001-Fix-type-mismatch-on-32bit-arches.patch \
+           file://0001-Fix-build-on-32bit.patch \
            "
 SRC_URI:append:libc-musl ="\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
            file://0002-Fix-default-stack-size-to-256K.patch \
            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
+           file://0001-wiredtiger-Avoid-using-off64_t.patch \
            "
 
 SRC_URI:append:toolchain-clang = "\
@@ -46,11 +50,8 @@ SRC_URI:append:toolchain-clang = "\
 
 S = "${WORKDIR}/git"
 
-CVE_CHECK_IGNORE += "\
-    CVE-2014-8180 \
-    CVE-2017-18381 \
-    CVE-2017-2665 \
-"
+CVE_STATUS[CVE-2014-8180] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
+CVE_STATUS[CVE-2017-2665] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
 
 COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
 
@@ -72,8 +73,13 @@ WIREDTIGER ?= "off"
 WIREDTIGER:x86-64 = "on"
 WIREDTIGER:aarch64 = "on"
 
+# ld.gold: fatal error: build/59f4f0dd/mongo/mongod: Structure needs cleaning
+LDFLAGS:append:x86:libc-musl = " -fuse-ld=bfd"
+LDFLAGS:remove:toolchain-clang = "-fuse-ld=bfd"
+
 EXTRA_OESCONS = "PREFIX=${prefix} \
                  DESTDIR=${D} \
+                 MAXLINELENGTH='2097152' \
                  LIBPATH=${STAGING_LIBDIR} \
                  LINKFLAGS='${LDFLAGS}' \
                  CXXFLAGS='${CXXFLAGS}' \
@@ -85,6 +91,7 @@ EXTRA_OESCONS = "PREFIX=${prefix} \
                  --use-system-zlib \
                  --nostrip \
                  --endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+                 --use-hardware-crc32=${@bb.utils.contains('TUNE_FEATURES', 'crc', 'on', 'off', d)} \
                  --wiredtiger='${WIREDTIGER}' \
                  --separate-debug \
                  ${PACKAGECONFIG_CONFARGS}"
@@ -101,8 +108,8 @@ scons_do_install() {
     # install binaries
     install -d ${D}${bindir}
     for i in mongod mongos mongo; do
-        if [ -f ${B}/build/opt/mongo/$i ]; then
-            install -m 0755 ${B}/build/opt/mongo/$i ${D}${bindir}
+        if [ -f ${B}/build/*/mongo/$i ]; then
+            install -m 0755 ${B}/build/*/mongo/$i ${D}${bindir}
         else
             bbnote "$i does not exist"
         fi
@@ -118,7 +125,7 @@ scons_do_install() {
 
     # install mongo data folder
     install -m 755 -d ${D}${localstatedir}/lib/${BPN}
-    chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
+    chown ${BPN}:${BPN} ${D}${localstatedir}/lib/${BPN}
 
     # Create /var/log/mongodb in runtime.
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
@@ -136,3 +143,7 @@ CONFFILES:${PN} = "${sysconfdir}/mongod.conf"
 SYSTEMD_SERVICE:${PN} = "mongod.service"
 
 FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
+
+RDEPENDS:${PN} += "tzdata-core"
+
+SKIP_RECIPE[mongodb] ?= "Needs porting to python 3.12"

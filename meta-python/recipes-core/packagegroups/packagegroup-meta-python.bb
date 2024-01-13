@@ -137,7 +137,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-flask-nav \
     python3-flask-pymongo \
     python3-flask-restful \
-    python3-flask-script \
     python3-flask-sijax \
     python3-flask-socketio \
     python3-flask-sqlalchemy \
@@ -157,6 +156,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-gmqtt \
     python3-gnupg \
     python3-google-api-python-client \
+    python3-gpiod \
     python3-gpsd-py3 \
     python3-graphviz \
     python3-greenlet \
@@ -210,7 +210,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-jsonpath-rw \
     python3-jsonpointer \
     python3-jsonref \
-    python3-jsonrpcserver \
     python3-jsonschema \
     python3-jstyleson \
     python3-kconfiglib \
@@ -312,8 +311,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pycodestyle \
     python3-pyconnman \
     python3-pycurl \
-    python3-pydbus \
-    python3-pydbus-manager \
     python3-pydicti \
     python3-pyephem \
     python3-pyexpect \
@@ -322,7 +319,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pyflakes \
     python3-pyhamcrest \
     python3-pyiface \
-    python3-pyinotify \
     python3-pyjks \
     python3-pyjwt \
     python3-pykickstart \
@@ -361,7 +357,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-python-vlc \
     python3-pytoml \
     python3-pytun \
-    python3-pytz-deprecation-shim \
     python3-pyudev \
     python3-pyusb \
     python3-pywbem \
@@ -392,8 +387,8 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-send2trash \
     python3-sentry-sdk \
     python3-serpent \
+    python3-service-identity \
     python3-setuptools-declarative-requirements \
-    python3-setuptools-scm-git-archive \
     python3-sh \
     python3-sijax \
     python3-simpleeval \
@@ -413,7 +408,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-sqlparse \
     python3-sqlsoup \
     python3-stevedore \
-    python3-strict-rfc3339 \
     python3-supervisor \
     python3-sympy \
     python3-tabulate \
@@ -430,6 +424,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-trafaret-config \
     python3-traitlets \
     python3-transitions \
+    python3-trustme \
     python3-twine \
     python3-twisted \
     python3-twitter \
@@ -437,19 +432,19 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-txaio \
     python3-txdbus \
     python3-txws \
-    python3-typed-ast \
     python3-typeguard \
     python3-tzlocal \
     python3-u-msgpack-python \
-    python3-uinput \
     python3-ujson \
     python3-unidiff \
     python3-uritemplate \
     python3-vcversioner \
+    python3-versioneer \
     python3-versiontools \
     python3-visitor \
     python3-waitress \
     python3-watchdog \
+    python3-watchdogdev \
     python3-web3 \
     python3-webcolors \
     python3-webencodings \
@@ -462,7 +457,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-wtforms \
     python3-xlrd \
     python3-xlsxwriter \
-    python3-xmlrunner \
     python3-xmltodict \
     python3-xmodem \
     python3-xstatic \

@@ -57,7 +57,7 @@ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
                  -DOT_DHCP6_SERVER=ON \
                  "
 
-RDEPENDS:${PN} = "iproute2 avahi-daemon"
+RDEPENDS:${PN} = "iproute2 ipset avahi-daemon"
 
 RCONFLICTS:${PN} = "ot-daemon"
 

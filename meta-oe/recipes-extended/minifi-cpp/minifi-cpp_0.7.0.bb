@@ -31,9 +31,16 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;branch=master;protocol=ht
             file://0001-cxxopts-Add-limits-header.patch \
             file://0001-Fix-build-with-libc.patch \
             file://0001-civetweb-Disable-lto.patch \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+            file://0001-Do-not-use-LFS64-functions-on-linux-musl.patch \
+            file://0001-Fix-the-constness-issues-around-autovector-iterator_.patch \
+            file://0002-Fix-build-with-clang-17.patch \
+            file://0001-CMakeLists.txt-Pass-the-OPENSSLDIR.patch \
+            file://0001-BundledOSSPUUID.cmake-Pass-CFLAGS-to-compiler.patch \
             file://minifi.service \
             file://systemd-volatile.conf \
             file://sysvinit-volatile.conf \
+            file://0001-config.guess-Support-build-on-aarch64.patch \
             "
 
 SRC_URI[curl.md5sum] = "d0bcc586873cfef08b4b9594e5395a33"
@@ -59,7 +66,12 @@ EXTRA_OECMAKE += " \
     -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
     -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
     -DDISABLE_PYTHON_SCRIPTING=ON \
+    -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
+    -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines --file-prefix-map=${S}=${TARGET_DBGSRC_DIR}' \
+    -DOPENSSLDIR=${sysconfdir}/libressl \
     "
+
+CFLAGS:append = " -fPIC"
 EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
 LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
 
@@ -84,6 +96,10 @@ PSEUDO_CONSIDER_PATHS .= ",${WORKDIR}/minifi-install"
 do_configure:prepend:libc-musl() {
     sed -i -e 's/-DHAVE_GLIBC_STRERROR_R=1/-DHAVE_GLIBC_STRERROR_R=0/' ${S}/CMakeLists.txt
     sed -i -e 's/-DHAVE_POSIX_STRERROR_R=0/-DHAVE_POSIX_STRERROR_R=1/' ${S}/CMakeLists.txt
+}
+
+do_configure:append() {
+    sed -i -e 's|${WORKDIR}|<WORKDIR>|g' ${S}/libminifi/include/agent/agent_version.h
 }
 
 CFLAGS:append:libc-glibc = " -D_GNU_SOURCE"

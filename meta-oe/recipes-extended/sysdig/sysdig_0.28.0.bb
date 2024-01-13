@@ -24,10 +24,13 @@ RDEPENDS:${PN} = "bash"
 
 SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
            git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
+           file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
           "
 SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
 SRCREV_falco= "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
+
+SRCREV_FORMAT = "sysdig_falco"
 
 S = "${WORKDIR}/git"
 

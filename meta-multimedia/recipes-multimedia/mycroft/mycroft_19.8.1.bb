@@ -22,7 +22,7 @@ SRC_URI = "git://github.com/MycroftAI/mycroft-core.git;branch=master;protocol=ht
 
 S = "${WORKDIR}/git"
 
-inherit systemd
+inherit systemd features_check
 
 # Mycroft installs itself on the host
 # Just copy the setup files to the rootfs
@@ -61,7 +61,7 @@ RDEPENDS:${PN} += "python3-requests python3-pillow \
                    python3-xxhash python3-pako \
                    python3-six python3-cryptography \
                    python3-requests-futures \
-                   python3-xmlrunner python3-fasteners \
+                   python3-fasteners \
                    python3-python-vlc \
                    python3-padatious python3-padaos \
                    python3-petact python3-precise-runner \
@@ -91,3 +91,5 @@ RDEPENDS:${PN} += "procps"
 RDEPENDS:${PN} += "bash jq libnotify"
 
 SYSTEMD_SERVICE:${PN} = "mycroft-setup.service mycroft.service"
+
+REQUIRED_DISTRO_FEATURES += "pulseaudio"

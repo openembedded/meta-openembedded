@@ -11,7 +11,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SECTION = "net"
 
-SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV} \
+SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-bit-${PV};downloadfilename=${BPN}-${PV}.tar.gz \
            file://0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch \
            file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
            file://0003-mbedtls-Do-not-overwrite-CFLAGS.patch \
@@ -22,6 +22,7 @@ SRC_URI = "https://releases.fluentbit.io/1.9/source-${PV}.tar.gz;subdir=fluent-b
            file://0004-Use-correct-type-to-store-return-from-flb_kv_item_cr.patch \
            file://0005-stackdriver-Fix-return-type-mismatch.patch \
            file://0006-monkey-Fix-TLS-detection-testcase.patch \
+           file://0007-cmake-Do-not-check-for-upstart-on-build-host.patch \
            "
 SRC_URI:remove:x86 = "file://0002-mbedtls-Remove-unused-variable.patch"
 SRC_URI:append:libc-musl = "\
@@ -44,7 +45,7 @@ DEPENDS:append:libc-musl = " fts "
 
 # flex hardcodes the input file in #line directives leading to TMPDIR contamination of debug sources.
 do_compile:append() {
-    find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}/|g'
+    find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|${TARGET_DBGSRC_DIR}/|g'
 }
 
 PACKAGECONFIG ?= "yaml"
@@ -78,6 +79,7 @@ EXTRA_OECMAKE:append:libc-musl = ' -DFLB_JEMALLOC_OPTIONS="--with-jemalloc-prefi
 EXTRA_OECMAKE:append:riscv64 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:riscv32 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:mips = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+EXTRA_OECMAKE:append:powerpc = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 
 CFLAGS:append:x86 = " -DMBEDTLS_HAVE_SSE2"
@@ -86,5 +88,5 @@ inherit cmake systemd pkgconfig
 
 SYSTEMD_SERVICE:${PN} = "td-agent-bit.service"
 
-EXTRA_OECMAKE += "-DCMAKE_DEBUG_SRCDIR=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}/"
+EXTRA_OECMAKE += "-DCMAKE_DEBUG_SRCDIR=${TARGET_DBGSRC_DIR}/"
 TARGET_CC_ARCH += " ${SELECTED_OPTIMIZATION}"

@@ -1,6 +1,6 @@
 LICENSE = "GPL-2.0-only & GPL-3.0-only & BSD-3-Clause & LGPL-2.0-only & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5fa987762101f748a6cdd951b64ffc6b"
-SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branch=master \
+SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branch=stable \
            file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
            file://0002-Preserve-links-when-installing-libmetis.patch \
            file://0003-Add-version-information-to-libmetis.patch \
@@ -19,14 +19,14 @@ RPROVIDES:${PN} = "mongoose graphblas"
 # the command line. To get around this problem, set these variables to only the
 # program name and prepend the rest of the value onto the corresponding FLAGS
 # variable.
-CFLAGS:prepend := "${@" ".join(d.getVar('CC', True).split()[1:])} "
-export CC := "${@d.getVar('CC', True).split()[0]}"
+CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
+export CC := "${@d.getVar('CC').split()[0]}"
 
-CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX', True).split()[1:])} "
-export CXX := "${@d.getVar('CXX', True).split()[0]}"
+CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
+export CXX := "${@d.getVar('CXX').split()[0]}"
 
-LDFLAGS:prepend := "${@" ".join(d.getVar('LD', True).split()[1:])} "
-export LD := "${@d.getVar('LD', True).split()[0]}"
+LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
+export LD := "${@d.getVar('LD').split()[0]}"
 
 export CMAKE_OPTIONS = " \
     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \

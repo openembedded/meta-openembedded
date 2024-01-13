@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://nss/COPYING;md5=3b1e88e1b9c0b5a4b2881d46cce06a18 \
 
 VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '_RTM'}"
 
-SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
+SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
            file://nss.pc.in \
            file://0001-nss-fix-support-cross-compiling.patch \
            file://nss-no-rpath-for-cross-compiling.patch \
@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://system-pkcs11.txt \
            file://nss-fix-nsinstall-build.patch \
            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+           file://0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch \
            "
 SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
 
@@ -280,5 +281,10 @@ RDEPENDS:${PN}-smime = "perl"
 
 BBCLASSEXTEND = "native nativesdk"
 
-# CVE-2006-5201 affects only Sun Solaris
-CVE_CHECK_IGNORE += "CVE-2006-5201"
+CVE_PRODUCT += "network_security_services"
+
+CVE_STATUS_GROUPS += "CVE_STATUS_NSS"
+CVE_STATUS_NSS[status] = "not-applicable-config: This only affect the legacy db (libnssdbm), only compiled with --enable-legacy-db"
+CVE_STATUS_NSS = "CVE-2017-11695 CVE-2017-11696 CVE-2017-11697 CVE-2017-11698"
+
+CVE_STATUS[CVE-2022-3479] = "not-applicable-config: vulnerability was introduced in 3.77 and fixed in 3.87"

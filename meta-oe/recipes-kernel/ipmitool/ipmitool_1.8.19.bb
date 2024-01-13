@@ -14,28 +14,27 @@ Log (SEL), printing Field Replaceable Unit (FRU) information, reading and \
 setting LAN configuration, and chassis power control. \
 "
 
-HOMEPAGE = "http://ipmitool.sourceforge.net/"
+HOMEPAGE = "http://codeberg.org/IPMITool/ipmitool"
 SECTION = "kernel/userland"
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9aa91e13d644326bf281924212862184"
 
 DEPENDS = "openssl readline ncurses"
-SRCREV = "19d78782d795d0cf4ceefe655f616210c9143e62"
-SRC_URI = "git://github.com/ipmitool/ipmitool;protocol=https;branch=master \
+SRCREV = "ab5ce5baff097ebb6e2a17a171858be213ee68d3"
+SRC_URI = "git://codeberg.org/ipmitool/ipmitool;protocol=https;branch=master \
            ${IANA_ENTERPRISE_NUMBERS} \
-           file://0001-ipmi_fru.c-Provide-missing-function-declarations.patch \
-           file://0001-configure-Remove-the-logic-to-download-IANA-PEN-data.patch \
+           file://0001-csv-revision-Drop-the-git-revision-info.patch \
            "
 IANA_ENTERPRISE_NUMBERS ?= ""
 
 # Add these via bbappend if this database is needed by the system
-#IANA_ENTERPRISE_NUMBERS ?= "http://www.iana.org/assignments/enterprise-numbers;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
+#IANA_ENTERPRISE_NUMBERS = "http://www.iana.org/assignments/enterprise-numbers.txt;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
 #SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 do_install:append() {
         if [ -e ${WORKDIR}/iana-enterprise-numbers ]; then
@@ -51,5 +50,10 @@ FILES:${PN} += "${datadir}/misc"
 # --enable-file-security adds some security checks
 # --disable-intf-free disables FreeIPMI support - we don't want to depend on
 #   FreeIPMI libraries, FreeIPMI has its own ipmitoool-like utility.
+# --disable-registry-download prevents the IANA numbers from being fetched
+#   at build time, as it is not repeatable.
 #
-EXTRA_OECONF = "--disable-dependency-tracking --enable-file-security --disable-intf-free"
+EXTRA_OECONF = "--disable-dependency-tracking --enable-file-security --disable-intf-free \
+                --disable-registry-download \
+                "
+

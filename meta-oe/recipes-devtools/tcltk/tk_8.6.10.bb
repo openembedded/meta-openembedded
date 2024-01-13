@@ -28,13 +28,15 @@ SRC_URI[sha256sum] = "63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30
 
 S = "${WORKDIR}/${BPN}${PV}/unix"
 
+DEBUG_PREFIX_MAP += "-fdebug-prefix-map=${S}/../=${TARGET_DBGSRC_DIR}/.."
+
 PSEUDO_IGNORE_PATHS .= ",${WORKDIR}/${BPN}${PV}"
 
 # Short version format: "8.6"
 VER = "${@os.path.splitext(d.getVar('PV'))[0]}"
 
 LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
-inherit autotools features_check
+inherit autotools features_check pkgconfig
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
 

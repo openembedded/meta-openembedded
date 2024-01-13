@@ -2,7 +2,7 @@ SUMMARY = "Memory Efficient Serialization Library"
 HOMEPAGE = "https://github.com/google/flatbuffers"
 SECTION = "console/tools"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 require flatbuffers.inc
 
@@ -14,8 +14,6 @@ RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-
-CVE_CHECK_IGNORE += "CVE-2020-35864"
 
 EXTRA_OECMAKE += " \
     -DFLATBUFFERS_BUILD_TESTS=OFF \    

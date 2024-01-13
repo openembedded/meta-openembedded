@@ -12,11 +12,12 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = " \
     glib-2.0-native \
     gtk+3 \
-    gcr \
+    gcr3 \
     libgcrypt \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
 "
 
+GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gsettings features_check gettext
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"

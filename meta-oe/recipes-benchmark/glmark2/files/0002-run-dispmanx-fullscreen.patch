@@ -6,17 +6,17 @@ Subject: [PATCH] run dispmanx fullscreen
 The dispmanx flavour can only run fullscreen, therefore set the size to
 fullscreen when glmark2-es2-dispmanx is run.
 
-Upstream-status: submitted [https://github.com/glmark2/glmark2/pull/135]
+Upstream-Status: Submitted [https://github.com/glmark2/glmark2/pull/135]
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
  src/main.cpp | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/src/main.cpp b/src/main.cpp
-index 677962e..273a217 100644
+index d1077fe..d717cd4 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -164,6 +164,11 @@ main(int argc, char *argv[])
+@@ -202,6 +202,11 @@ main(int argc, char *argv[])
          Options::size = std::pair<int,int>(800, 600);
      }
  
@@ -26,5 +26,7 @@ index 677962e..273a217 100644
 +#endif
 +
      // Create the canvas
- #if GLMARK2_USE_X11
-     NativeStateX11 native_state;
+ #if GLMARK2_USE_EGL
+     GLStateEGL gl_state;
+--
+2.25.1

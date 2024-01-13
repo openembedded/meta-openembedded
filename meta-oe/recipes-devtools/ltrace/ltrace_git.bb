@@ -14,7 +14,7 @@ PV = "7.91+git${SRCPV}"
 SRCREV = "c22d359433b333937ee3d803450dc41998115685"
 
 DEPENDS = "elfutils"
-SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http;protocol=https \
+SRC_URI = "git://github.com/sparkleholic/ltrace.git;protocol=https;branch=master \
            file://configure-allow-to-disable-selinux-support.patch \
            file://0001-replace-readdir_r-with-readdir.patch \
            file://0001-Use-correct-enum-type.patch \
@@ -31,6 +31,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http;
            file://0001-ppc-Remove-unused-host_powerpc64-function.patch \
            file://0001-mips-Use-hardcodes-values-for-ABI-syscall-bases.patch \
            file://0001-ppc-plt-do-not-free-symbol-libsym.patch \
+           file://0001-Fix-type-of-single-bit-bitfields.patch \
            "
 SRC_URI:append:libc-musl = " file://add_ppc64le.patch"
 

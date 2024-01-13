@@ -5,7 +5,6 @@ Tslib is generally used on embedded devices to provide a common user \
 space interface to touchscreen functionality."
 HOMEPAGE = "http://tslib.org/"
 
-AUTHOR = "Martin Kepplinger <martink@posteo.de>"
 SECTION = "base"
 LICENSE = "LGPL-2.0-or-later & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "\
@@ -81,3 +80,5 @@ FILES:tslib-uinput += "${bindir}/ts_uinput"
 
 FILES:tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_print_mt \
                      ${bindir}/ts_test ${bindir}/ts_test_mt ${bindir}/ts_verify ${bindir}/ts_finddev ${bindir}/ts_conf"
+
+BBCLASSEXTEND = "native nativesdk"

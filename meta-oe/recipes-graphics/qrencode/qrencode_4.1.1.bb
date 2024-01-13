@@ -1,5 +1,4 @@
 SUMMARY = "C library for encoding data in a QR Code symbol"
-AUTHOR = "Kentaro Fukuchi"
 HOMEPAGE = "http://fukuchi.org/works/qrencode/"
 SECTION = "libs"
 LICENSE = "LGPL-2.1-only"
@@ -12,4 +11,9 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF += "--without-tools --without-tests"
+BBCLASSEXTEND = "native"
+
+EXTRA_OECONF += "--without-tests"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[tools] = "--with-tools,--without-tools,libpng"

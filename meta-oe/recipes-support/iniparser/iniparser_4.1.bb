@@ -10,7 +10,9 @@ PV .= "+git${SRCPV}"
 
 SRC_URI = "git://github.com/ndevilla/iniparser.git;protocol=https;branch=master \
            file://0001-iniparser.pc-Make-libpath-a-variable.patch \
-	   file://Add-CMake-support.patch"
+	   file://Add-CMake-support.patch \
+           file://CVE-2023-33461.patch \
+"
 
 SRCREV= "deb85ad4936d4ca32cc2260ce43323d47936410d"
 
@@ -22,3 +24,5 @@ do_install:append() {
     install -Dm 0644 ${S}/iniparser.pc ${D}${libdir}/pkgconfig/iniparser.pc
     sed -i -e 's,@baselib@,${baselib},g' ${D}${libdir}/pkgconfig/iniparser.pc
 }
+
+BBCLASSEXTEND += "native"
