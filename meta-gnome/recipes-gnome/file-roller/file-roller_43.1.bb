@@ -20,7 +20,7 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMESON += "-Dintrospection=enabled"
 
-SRC_URI[archive.sha256sum] = "298729fdbdb9da8132c0bbc60907517d65685b05618ae05167335e6484f573a1"
+SRC_URI[archive.sha256sum] = "84994023997293beb345d9793db8f5f0bbb41faa155c6ffb48328f203957ad08"
 
 PACKAGECONFIG ??= ""
 
