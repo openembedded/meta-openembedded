@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
            "
 
-SRC_URI[sha256sum] = "280553b90f131b1940580df293653c9e9bd8906201f5def6e5e8c160f0bfac96"
+SRC_URI[sha256sum] = "4026d93b866db198c8ca1685b0f5d52793f65c6e63cb364163af661fdff0968c"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
 
