@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://driver/xscreensaver.h;endline=10;md5=c3ce41cdff745eb1
 SRC_URI = "https://www.jwz.org/${BPN}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "085484665d91f60b4a1dedacd94bcf9b74b0fb096bcedc89ff1c245168e5473b"
 
+MIRRORS += "https://www.jwz.org/${BPN} https://ftp.osuosl.org/pub/blfs/conglomeration/${BPN}"
+
 SRC_URI += " \
     file://xscreensaver.service \
     file://0001-build-Do-not-build-po-files.patch \
