@@ -31,6 +31,9 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.4/${BPN}-${PV}.tar.gz 
     file://CVE-2023-29451.patch \
     file://CVE-2023-29449.patch \
     file://CVE-2023-29450.patch \
+    file://CVE-2023-32726.patch \
+    file://CVE-2023-32727_0001.patch \
+    file://CVE-2023-32727_0002.patch \
 "
 
 SRC_URI[md5sum] = "f295fd2df86143d72f6ff26e47d9e39e"
