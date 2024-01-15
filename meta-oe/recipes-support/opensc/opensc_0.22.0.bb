@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 SRCREV = "c902e1992195e00ada12d71beb1029287cd72037"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
            file://CVE-2023-2977.patch \
+           file://CVE-2023-40660.patch \
           "
 
 # CVE-2021-34193 is a duplicate CVE covering the 5 individual
