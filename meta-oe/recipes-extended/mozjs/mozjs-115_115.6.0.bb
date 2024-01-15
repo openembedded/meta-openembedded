@@ -17,7 +17,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-add-arm-to-list-of-mozinline.patch \
            file://py3.12.patch \
            "
-SRC_URI[sha256sum] = "51534dd2a158d955a2cb67cc1308f100f6c9def0788713ed8b4d743f3ad72457"
+SRC_URI[sha256sum] = "66d7e6e5129ac8e6fe83e24227dc7bb8dc42650bc53b21838e614de80d22bc66"
 
 S = "${WORKDIR}/firefox-${PV}"
 
