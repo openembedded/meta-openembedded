@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib abseil-cpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "2c5fa078d8e86e5f4bd34e6f4c9ea9e8d7d4d44a"
+SRCREV = "a9b006bddd52e289029f16aa77b77e8e0033d9ee"
 
-SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=23.x;protocol=https \
+SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=25.x;protocol=https \
            file://run-ptest \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
            "
