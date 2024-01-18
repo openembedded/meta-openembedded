@@ -1,10 +1,10 @@
 SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
 HOMEPAGE = "http://www.chronox.de/libkcapi.html"
 LICENSE = "BSD-3-Clause | GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a2562899bc38f1735868f0bf0c1dd1a5"
+LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
 
 S = "${WORKDIR}/git"
-SRCREV = "1429ab42d48123cc8f73b96c69a87fb9c6d8a7c9"
+SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
 SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
           "
 
