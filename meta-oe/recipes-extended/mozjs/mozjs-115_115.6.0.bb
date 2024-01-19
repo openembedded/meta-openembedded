@@ -16,6 +16,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://musl-disable-stackwalk.patch \
            file://0001-add-arm-to-list-of-mozinline.patch \
            file://py3.12.patch \
+           file://armv5.patch \
            "
 SRC_URI[sha256sum] = "66d7e6e5129ac8e6fe83e24227dc7bb8dc42650bc53b21838e614de80d22bc66"
 
@@ -75,6 +76,7 @@ do_configure() {
         ${JIT} \
         ${ICU}
 }
+do_configure[cleandirs] += "${B}"
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
