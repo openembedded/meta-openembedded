@@ -10,7 +10,6 @@ DEPENDS = "xmlrpc-c xmlrpc-c-native intltool-native \
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-
 SRC_URI = "git://github.com/abrt/libreport.git;protocol=https;branch=master"
 SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch \
@@ -18,8 +17,7 @@ SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0004-configure.ac-remove-prog-test-of-augparse.patch \
 "
 
-# 2.17.8
-SRCREV = "46a99a14adba7276e5697b7c613d918796792345"
+SRCREV = "d58110e1fc663c92ac3e36b166f114b6904796ff"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
