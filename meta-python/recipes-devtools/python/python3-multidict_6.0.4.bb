@@ -19,6 +19,7 @@ SRC_URI += " \
 
 RDEPENDS:${PN}-ptest += " \
 	${PYTHON_PN}-pytest \
+	${PYTHON_PN}-pytest-cov \
 "
 
 do_install_ptest() {
