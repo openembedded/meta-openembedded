@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitlab.com/Taywee/asyncinotify"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f75d2927d3c1ed2414ef72048f5ad640"
 
-SRC_URI[sha256sum] = "95840eec6804797f9e8ee6d65a9d2a1159e77c5395a468dcfa4f44338ed1f8b6"
+SRC_URI[sha256sum] = "c03fdb1a7dbb6bed8ede763e4e0ac224a2a3157bdc51e4ba3832588a3c29904d"
 
 inherit pypi python_setuptools_build_meta
 
