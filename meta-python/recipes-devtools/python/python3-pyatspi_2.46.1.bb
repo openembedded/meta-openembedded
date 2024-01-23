@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
 DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
 
 SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
-SRCREV = "c9cb2a2289a6eb1fb95b66c25d5351bfea54c47e"
+SRCREV = "8c69016b38d0e4caaf4c986938ea3410fb7351b6"
 
 S = "${WORKDIR}/git" 
 
