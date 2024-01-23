@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "ncurses"
 
 SRC_URI = "git://github.com/ColinIanKing/smemstat.git;protocol=https;branch=master"
-SRCREV = "72efeb08ccdb22f57054279d25e3c522e8e1d4c3"
+SRCREV = "1edc560602aa116b96408110b8b9d66a4edef60e"
 
 S = "${WORKDIR}/git"
 
