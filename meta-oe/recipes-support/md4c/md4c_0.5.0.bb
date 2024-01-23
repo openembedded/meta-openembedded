@@ -3,7 +3,7 @@ DESCRIPTION = "MD4C is Markdown parser implementation in C."
 HOMEPAGE = "http://github.com/mity/md4c"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7e0fbcf3701aad22f2d2e0624a703795"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=383f39920f391605af6e8e46e60e2378"
 
 
 S = "${WORKDIR}/git"
@@ -12,6 +12,6 @@ SRC_URI = " \
         git://github.com/mity/md4c.git;protocol=https;branch=master \
 "
 
-SRCREV = "c3340b480e5232711858108be07460a9836c8ab5"
+SRCREV = "481230f4180cb0e0aad56da06de9327d5bacd570"
 
 inherit cmake
