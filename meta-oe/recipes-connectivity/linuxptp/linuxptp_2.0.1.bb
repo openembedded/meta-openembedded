@@ -6,6 +6,7 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v2.0/linuxptp-${PV}.tg
            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
            file://Use-cross-cpp-in-incdefs.patch \
            file://time_t_maybe_long_long.patch \
+           file://0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch \
            "
 
 SRC_URI[sha256sum] = "6f4669db1733747427217a9e74c8b5ca25c4245947463e9cdb860ec8f5ec797a"
