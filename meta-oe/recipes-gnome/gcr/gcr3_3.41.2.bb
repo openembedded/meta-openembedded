@@ -23,7 +23,7 @@ UPSTREAM_CHECK_REGEX = "[^\d\.](?P<pver>3.(?!9\d+)\d+(\.\d+)+)\.tar"
 
 SRC_URI = "https://download.gnome.org/sources/gcr/3.41/gcr-${PV}.tar.xz;name=archive"
 SRC_URI += "file://0001-meson.build-correctly-handle-disabled-ssh_agent-opti.patch"
-SRC_URI[archive.sha256sum] = "bb7128a3c2febbfee9c03b90d77d498d0ceb237b0789802d60185c71c4bea24f"
+SRC_URI[archive.sha256sum] = "bad10f3c553a0e1854649ab59c5b2434da22ca1a54ae6138f1f53961567e1ab7"
 
 S = "${WORKDIR}/gcr-${PV}"
 
