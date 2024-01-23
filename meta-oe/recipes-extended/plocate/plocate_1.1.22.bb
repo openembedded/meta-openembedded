@@ -11,4 +11,4 @@ DEPENDS = "zstd liburing"
 
 SRC_URI = "https://plocate.sesse.net/download/${BP}.tar.gz"
 
-SRC_URI[sha256sum] = "9b3d2842a08e69633c0ffa480c139603514ce59f1d021c263e9301324976959f"
+SRC_URI[sha256sum] = "3b7e4741b4aa2ec044e53eff06474a32a3fb1e928b9382351fe79d4c27fb0049"
