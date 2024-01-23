@@ -9,7 +9,7 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
 
 inherit autotools pkgconfig ptest systemd update-rc.d
 
-SRCREV = "da62115c0fab3a4608e4b0ee0c8aa0cf134c14ca"
+SRCREV = "ca6e7ad62b4cf984de84aa081024c4e45632cecb"
 
 SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
            file://minicoredumper.service \
