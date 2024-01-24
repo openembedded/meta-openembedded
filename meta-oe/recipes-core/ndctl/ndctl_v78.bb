@@ -10,19 +10,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74a614eac8b2657a4b8e6607421a0883"
 
 inherit meson pkgconfig bash-completion systemd
 
-SRCREV = "dd58d43458943d20ff063850670bf54a5242c9c5"
-SRC_URI = "git://github.com/pmem/ndctl.git;branch=main;protocol=https \
-           file://0001-util-Correct-path-to-iniparser.h.patch \
-           file://0001-meson-Use-pkg-config-to-detect-iniparser.patch \
-           file://0001-build-set-HAVE_STATEMENT_EXPR-var.patch"
+SRCREV = "a871e6153b11fe63780b37cdcb1eb347b296095c"
+SRC_URI = "git://github.com/pmem/ndctl.git;branch=main;protocol=https"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>v\d+(\.\d+)*)"
 
-DEPENDS = "kmod udev json-c keyutils iniparser"
+DEPENDS = "kmod udev json-c keyutils iniparser libtraceevent libtracefs"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "-Ddestructive=enabled"
+EXTRA_OEMESON += "-Ddestructive=enabled -Diniparserdir=${STAGING_INCDIR}/iniparser"
 
 PACKAGECONFIG ??= "tests ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
@@ -33,4 +30,4 @@ SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${PN}','',
 SYSTEMD_SERVICE:${PN} = "ndctl-monitor.service daxdev-reconfigure@.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
-FILES:${PN} += "${datadir}/daxctl/daxctl.conf "
+FILES:${PN} += "${datadir}/daxctl/daxctl.conf ${nonarch_libdir}/systemd/system"
