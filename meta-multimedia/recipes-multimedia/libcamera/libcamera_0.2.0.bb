@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-mojom-Drop-using-imp-module.patch \
 "
 
-SRCREV = "960d0c1e19feaf310321c906e14bd5410c6be629"
+SRCREV = "89227a428a82e724548399d35c98ea89566f9045"
 
 PE = "1"
 
@@ -73,4 +72,3 @@ FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
 # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
 # both 32 and 64 bit file APIs.
 GLIBC_64BIT_TIME_FLAGS = ""
-
