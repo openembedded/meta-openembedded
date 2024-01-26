@@ -49,6 +49,8 @@ DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 TEST_LIST = "\
     ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
     rtc \
+    ptp \
+    timers \
 "
 EXTRA_OEMAKE = '\
     CROSS_COMPILE=${TARGET_PREFIX} \
