@@ -1,4 +1,4 @@
-SUMMARY = "Trace and analyze execution of a program written in C/C++"
+SUMMARY = "Trace and analyze execution of a program written in C/C++, Rust and Python"
 HOMEPAGE = "https://github.com/namhyung/uftrace"
 BUGTRACKER = "https://github.com/namhyung/uftrace/issues"
 SECTION = "devel"
