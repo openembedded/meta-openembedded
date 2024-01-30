@@ -4,12 +4,13 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3d7bdfe69b1ffbde073ca6e96f5c53f7"
 
-SRC_URI[sha256sum] = "a988d713a36452e7c6da71186798343f687eaf3aeb7f99266750dd9e1f754c7b"
+SRC_URI[sha256sum] = "d61dbda892ee1220f28fb3663c08f6383c305db9f1f5624dc585c9cd05115027"
 
 inherit pypi setuptools3
 
 RDEPENDS:${PN} = " \
-    python3-eth-utils \
-    python3-hexbytes \
-    python3-rlp \
+    ${PYTHON_PN}-eth-utils \
+    ${PYTHON_PN}-hexbytes \
+    ${PYTHON_PN}-rlp \
+    ${PYTHON_PN}-typing-extensions \
 "
