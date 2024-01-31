@@ -27,6 +27,9 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
            file://CVE-2023-46847.patch \
            file://CVE-2023-49285.patch \
+           file://CVE-2023-46728.patch \
+           file://CVE-2023-46846-pre1.patch \
+           file://CVE-2023-46846.patch \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
