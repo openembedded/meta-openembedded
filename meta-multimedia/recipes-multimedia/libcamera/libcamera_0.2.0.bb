@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
+        file://0001-media_device-Add-bool-return-type-to-unlock.patch \
+        file://0002-options-Replace-use-of-VLAs-in-C.patch \
 "
 
 SRCREV = "89227a428a82e724548399d35c98ea89566f9045"
