@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://mdns.service \
            file://0015-Add-missing-limits.h.patch \
            file://0001-Handle-interface-without-ifa_addr.patch \
+           file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
            "
 SRCREV = "8acabead9ae56551011172d6835822a89c5298d6"
 
