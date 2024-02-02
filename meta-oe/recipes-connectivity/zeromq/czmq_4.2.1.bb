@@ -37,4 +37,5 @@ PACKAGECONFIG[uuid] = "-DCZMQ_WITH_UUID=ON,-DCZMQ_WITH_UUID=OFF,util-linux"
 do_install:append() {
         mkdir -p ${D}/${includedir}/${BPN}
         mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${BPN}/.
+        sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/czmqTargets.cmake
 }
