@@ -15,9 +15,13 @@ inherit cmake pkgconfig
 
 PACKAGES = "lib${BPN} lib${BPN}-dev lib${BPN}-staticdev ${PN} ${PN}-dbg"
 
+EXTRA_OECMAKE = " \
+    -DCMAKECONFIG_INSTALL_DIR:PATH=${@os.path.relpath(d.getVar('libdir'), d.getVar('prefix') + '/') + "/cmake/"} \
+"
+
 FILES:${PN} = "${bindir}/*"
 FILES:lib${BPN} = "${libdir}/*.so.*"
-FILES:lib${BPN}-dev = "${libdir}/*.so ${libdir}/pkgconfig ${includedir} ${datadir}/cmake"
+FILES:lib${BPN}-dev = "${libdir}/*.so ${libdir}/pkgconfig ${includedir} ${libdir}/cmake"
 FILES:lib${BPN}-staticdev = "${libdir}/lib*.a"
 
 RDEPENDS:lib${BPN}-dev = "zeromq-dev"
