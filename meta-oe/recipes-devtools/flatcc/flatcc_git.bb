@@ -10,6 +10,7 @@ PV = "0.6.2+gitr${SRCPV}"
 
 SRC_URI = " \
            git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
+           file://0001-Check-for-C-standard-version-23-for-__fallthrough__.patch \
 "
 SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
 
@@ -22,6 +23,7 @@ inherit cmake
 EXTRA_OECMAKE += " \
     -DFLATCC_INSTALL=On \
     -DFLATCC_TEST=Off \
+    -DFLATCC_ALLOW_WERROR=Off \
 "
 
 BBCLASSEXTEND = "native nativesdk"
