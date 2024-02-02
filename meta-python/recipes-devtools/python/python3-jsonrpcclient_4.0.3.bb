@@ -3,9 +3,12 @@ HOMEPAGE = "https://github.com/explodinglabs/jsonrpcclient"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=10f3d7679914df805c98fb351172e677"
 
-SRC_URI[sha256sum] = "c0d475494b3e1b591ecdee7883739accaf5695edb673f16b7383b8c6bbdb1ca3"
+SRCREV = "e5dd11736925a9a8e463fc9420eab95235f181e3"
+SRC_URI = "git://github.com/explodinglabs/jsonrpcclient.git;branch=main;protocol=https"
 
-inherit pypi setuptools3
+inherit python_setuptools_build_meta
+
+S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += "\
     python3-json \
