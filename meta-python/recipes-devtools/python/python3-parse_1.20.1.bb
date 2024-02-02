@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
 
-SRC_URI[sha256sum] = "bd28bae37714b45d5894d77160a16e2be36b64a3b618c81168b3684676aa498b"
+SRC_URI[sha256sum] = "09002ca350ad42e76629995f71f7b518670bcf93548bdde3684fd55d2be51975"
 
 SRC_URI += " \
     file://run-ptest \
