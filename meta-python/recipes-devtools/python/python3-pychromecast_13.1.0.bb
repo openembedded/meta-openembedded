@@ -16,4 +16,5 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-requests \
     ${PYTHON_PN}-protobuf \
     ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-casttube \
 "
