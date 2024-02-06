@@ -1,11 +1,11 @@
 SUMMARY = "A top utility for I/O"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=72ad44c0841d1e759669d27744e39389"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=686f457fedcecd9b92d69e625291ffa2"
 
 DEPENDS = "ncurses"
 
 SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https"
-SRCREV = "9d60bb7e262e0d41b0aa3bcfaa806fa4f42e548a"
+SRCREV = "b15743b04bb04ff1fc6e197d21ba30365349edcb"
 
 S = "${WORKDIR}/git"
 
