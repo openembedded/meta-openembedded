@@ -6,7 +6,7 @@ SECTION = "devel/lib"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3d8fb7158bf7e2600ba3191428dc4ef"
 
-PV = "0.6.2+gitr${SRCPV}"
+PV = "0.6.2+git"
 
 SRC_URI = " \
            git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
