@@ -24,6 +24,7 @@ EXTRA_OECMAKE += " \
     -DFLATCC_INSTALL=On \
     -DFLATCC_TEST=Off \
     -DFLATCC_ALLOW_WERROR=Off \
+    -DFLATCC_INSTALL_LIB=${baselib} \
 "
 
 BBCLASSEXTEND = "native nativesdk"
