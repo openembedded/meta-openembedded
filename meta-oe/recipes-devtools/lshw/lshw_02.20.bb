@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64|riscv64).*-linux"
 
-PV .= "+git${SRCPV}"
+PV .= "+git"
 SRCREV = "4c6497c8b0a67cd9fa9693e9101a7cafd3297e81"
 SRC_URI = " \
     git://github.com/lyonel/lshw.git;protocol=https;branch=master \
