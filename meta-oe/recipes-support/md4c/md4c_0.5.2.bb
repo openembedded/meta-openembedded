@@ -12,6 +12,6 @@ SRC_URI = " \
         git://github.com/mity/md4c.git;protocol=https;branch=master \
 "
 
-SRCREV = "481230f4180cb0e0aad56da06de9327d5bacd570"
+SRCREV = "729e6b8b320caa96328968ab27d7db2235e4fb47"
 
 inherit cmake
