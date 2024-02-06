@@ -11,7 +11,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
            file://run-ptest \
            "
 
-SRC_URI[sha256sum] = "4872e12f802572dedd4b02f870065814b2d5141f7dbdaf708eedab826b51a58a"
+SRC_URI[sha256sum] = "659a5cc9cea05e6e7864094f1e13a77abbbdbab452f04d751a8c16a9447cf4b8"
 
 inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest
 
