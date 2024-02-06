@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 inherit autotools pkgconfig systemd update-rc.d update-alternatives
 
-PV = "0.2.0+git${SRCPV}"
+PV = "0.2.0+git"
 SRCREV = "721e3a1cbd7e2b6361bb439d3959e7403e4f0092"
 SRCBRANCH = "master"
 SRC_URI = " \
