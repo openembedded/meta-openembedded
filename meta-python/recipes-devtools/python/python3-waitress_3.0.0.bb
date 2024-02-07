@@ -10,6 +10,6 @@ RDEPENDS:${PN} += " \
         python3-logging \
 "
 
-SRC_URI[sha256sum] = "780a4082c5fbc0fde6a2fcfe5e26e6efc1e8f425730863c04085769781f51eba"
+SRC_URI[sha256sum] = "005da479b04134cdd9dd602d1ee7c49d79de0537610d653674cc6cbde222b8a1"
 
 inherit python_setuptools_build_meta pypi
