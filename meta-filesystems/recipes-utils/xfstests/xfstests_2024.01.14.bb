@@ -34,6 +34,7 @@ RDEPENDS:${PN} += "\
     python3-core \
     xfsprogs \
     acl \
+    gawk \
 "
 
 USERADD_PACKAGES = "${PN}"
