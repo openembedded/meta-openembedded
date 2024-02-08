@@ -7,8 +7,9 @@ SRCREV_FORMAT = "xfstests_unionmount"
 
 SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
-           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
+           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+           file://0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch \
            "
 
 SRCREV_xfstests = "c46ca4d1f6c0c45f9a3ea18bc31ba5ae89e02c70"
@@ -51,12 +52,7 @@ do_configure:prepend() {
     cp -a ${S}/include/install-sh .
 }
 
-# Not sure if this is needed, but with old install-sh it was sometimes failing with:
-# cp: cannot stat 'group.list': No such file or directory
-# http://errors.yoctoproject.org/Errors/Details/752404/
-# PARALLEL_MAKEINST = "-j1"
-
-do_install:prepend() {
+do_install() {
     # otherwise install-sh duplicates DESTDIR prefix
     export DIST_ROOT="/" DIST_MANIFEST="" DESTDIR="${D}"
     oe_runmake install
