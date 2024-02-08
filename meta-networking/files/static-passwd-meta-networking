@@ -3,7 +3,7 @@ dovecot:x:631:631::/:/bin/nologin
 dovenull:x:632:632::/:/bin/nologin
 postfix:x:633:633::/:/bin/nologin
 vmail:x:635:635::/:/bin/nologin
-radvd:x:636:636::/:/bin/nologin
+radvd:x:636:nogroup::${localstatedir}/run/radvd/:/bin/nologin
 frr:x:637:637::/:/bin/nologin
 ftp:x:640:640::/:/bin/nologin
 rwhod:x:641:641::/:/bin/nologin
