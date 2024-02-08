@@ -29,6 +29,8 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig ptest
 
+CXXFLAGS:append:toolchain-clang = " -Wno-error=c++11-narrowing-const-reference"
+
 LIBATOMIC:mips = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCEREAL_THREAD_LIBS="-latomic"', '', d)}"
 LIBATOMIC:riscv32 = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCEREAL_THREAD_LIBS="-latomic"', '', d)}"
 LIBATOMIC:powerpc = "${@bb.utils.contains('PTEST_ENABLED', '1', '-DCEREAL_THREAD_LIBS="-latomic"', '', d)}"
