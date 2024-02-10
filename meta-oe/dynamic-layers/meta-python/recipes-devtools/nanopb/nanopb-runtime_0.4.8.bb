@@ -2,6 +2,7 @@ require nanopb.inc
 
 EXTRA_OECMAKE += " \
   -Dnanopb_PROTOC_PATH=/bin/false \
+  -DBUILD_SHARED_LIBS=ON \
   -Dnanopb_BUILD_RUNTIME=ON \
   -Dnanopb_BUILD_GENERATOR=OFF \
   "
