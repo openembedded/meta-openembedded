@@ -26,7 +26,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  	add_compile_options(-Wno-error=nonnull-compare)
  endif()
  
-+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
++if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 18.1)
 +	add_compile_options(-Wno-error=vla-cxx-extension)
 +endif()
 +
