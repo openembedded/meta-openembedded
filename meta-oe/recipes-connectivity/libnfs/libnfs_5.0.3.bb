@@ -6,8 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=825301ba17efc9d188ee0abd4b924ada"
 SRC_URI = " \
 	git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
 	file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch \
+	file://0001-cmake-Test-for-sys-uio.h.patch \
 "
-SRCREV = "40348f45d6beb8a8f50b6b63414a98fc1a061b7d"
+SRCREV = "4379837536d9eac537810dc7b13071136049b22a"
 S = "${WORKDIR}/git"
 
 inherit cmake
