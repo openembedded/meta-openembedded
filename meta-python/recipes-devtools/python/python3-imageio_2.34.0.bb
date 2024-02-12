@@ -5,8 +5,8 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
 
-SRC_URI[sha256sum] = "78722d40b137bd98f5ec7312119f8aea9ad2049f76f434748eb306b6937cc1ce"
+SRC_URI[sha256sum] = "ae9732e10acf807a22c389aef193f42215718e16bd06eed0c5bb57e1034a4d53"
 
 inherit pypi setuptools3
 
-RDEPENDS:${PN} = "python3-numpy python3-pillow"
+RDEPENDS:${PN} = "${PYTHON_PN}-numpy ${PYTHON_PN}-pillow"
