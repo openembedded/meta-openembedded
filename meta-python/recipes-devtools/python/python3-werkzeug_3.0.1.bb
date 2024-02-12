@@ -16,4 +16,8 @@ inherit pypi python_flit_core
 
 RDEPENDS:${PN} += " \
     ${PYTHON_PN}-markupsafe \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-profile \
+    ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-json \
 "
