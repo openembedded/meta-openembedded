@@ -6,12 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3d6b07c89629cff2990d2e8e1f4c2382"
 
 DEPENDS = "ncurses openssl"
 
-SRCREV = "762ba441d2c02685f98e5f56e984db033bab279a"
-SRC_URI = " \
-    git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master \
-    file://0001-cli-Fix-format-security-warning.patch \
-"
-SRC_URI[sha256sum] = "f98c1fe23e1d7a11fb23e8bcf9b563929fc805ea669191a7fd525ad16519f655"
+SRCREV = "e7c351c6c722336b3c79b79cd002c7c2986eefb0"
+SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master"
+SRC_URI[sha256sum] = "a715e46d8498418dbb8a2519318ba0714ee148151d7e4a7fa5e27770a2f6888f"
 
 S = "${WORKDIR}/git"
 
