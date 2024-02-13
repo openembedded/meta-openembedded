@@ -15,7 +15,9 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git;branc
 SRCREV = "5750980cdbbc33ef75bfba6660295b932376ce15"
 
 BUILD_PATCHES = "file://0001-force-static-build.patch \
-                 file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
+                 file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch \
+                 file://Fix-building-on-x86_64-with-binutils-2.41.patch \
+                 "
 
 KLIBC_PATCHES += " \
             file://0003-kexec-elf-rel-use-our-elf.h.patch \
