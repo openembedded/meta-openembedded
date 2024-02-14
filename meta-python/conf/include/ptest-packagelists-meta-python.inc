@@ -38,6 +38,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pyserial \
     python3-pytest-mock \
     python3-pytoml \
+    python3-pyyaml-include \
     python3-rapidjson \
     python3-requests-file \
     python3-requests-toolbelt \
