@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=162595a4a2f3453a0534e60b0afe4e7b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=78ad16dab3c1d15d4878c81770be0be7"
 
 CVE_PRODUCT = "nodejs node.js"
 
@@ -27,8 +27,6 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch \
            file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch \
            file://run-ptest \
-           file://0001-build-fix-build-with-Python-3.12.patch \
-           file://0001-gyp-resolve-python-3.12-issues.patch \
            "
 
 SRC_URI:append:class-target = " \
@@ -40,7 +38,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "f799c66f6a6386bb8ac2c75a378f740c455e97f1fe964393dd39c9f9f6efbc70"
+SRC_URI[sha256sum] = "31807ebeeeb049c53f1765e4a95aed69476a4b696dd100cb539ab668d7950b40"
 
 S = "${WORKDIR}/node-v${PV}"
 
