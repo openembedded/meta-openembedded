@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE =  "-DPYBIND11_TEST=OFF"
 
-inherit cmake setuptools3 python3native
+inherit cmake setuptools3
 
 PIP_INSTALL_DIST_PATH = "${S}/dist"
 PIP_INSTALL_PACKAGE = "pybind11"
