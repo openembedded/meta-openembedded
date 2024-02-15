@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 inherit autotools pkgconfig systemd update-rc.d update-alternatives
 
 PV = "0.2.0+git"
-SRCREV = "721e3a1cbd7e2b6361bb439d3959e7403e4f0092"
+SRCREV = "ec0b01c03fdc7893997b7b32ec1c12c6103f62f3"
 SRCBRANCH = "master"
 SRC_URI = " \
     git://github.com/libusbgx/libusbgx.git;branch=${SRCBRANCH};protocol=https \
