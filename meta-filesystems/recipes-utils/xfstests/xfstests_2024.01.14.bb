@@ -2,18 +2,16 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
-SRCREV = "11914614784735c504f43b5b6baabaa713375984"
-SRCREV_FORMAT = "xfstests_unionmount"
+SRCREV = "c46ca4d1f6c0c45f9a3ea18bc31ba5ae89e02c70"
+SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
+SRCREV_FORMAT = "default_unionmount"
 
-SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
+SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
            file://0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch \
            "
-
-SRCREV_xfstests = "c46ca4d1f6c0c45f9a3ea18bc31ba5ae89e02c70"
-SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 
 S = "${WORKDIR}/git"
 
@@ -57,14 +55,12 @@ do_install() {
     export DIST_ROOT="/" DIST_MANIFEST="" DESTDIR="${D}"
     oe_runmake install
 
-    unionmount_target_dir=${D}/usr/xfstests/unionmount-testsuite
-    install -d ${D}/usr/xfstests/unionmount-testsuite/tests
-    install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_target_dir/tests
+    unionmount_target_dir=${D}${prefix}/xfstests/unionmount-testsuite
+    install -d $unionmount_target_dir/tests
+    install ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_target_dir/tests
     install ${WORKDIR}/unionmount-testsuite/*.py -t $unionmount_target_dir
     install ${WORKDIR}/unionmount-testsuite/run -t $unionmount_target_dir
     install ${WORKDIR}/unionmount-testsuite/README -t $unionmount_target_dir
 }
 
-FILES:${PN} += "\
-    /usr/xfstests \
-"
+FILES:${PN} += "${prefix}/xfstests"
