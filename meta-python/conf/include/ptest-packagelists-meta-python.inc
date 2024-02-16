@@ -55,6 +55,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-uritemplate \
     python3-xmltodict \
     python3-xxhash \
+    python3-yarl \
 "
 
 PTESTS_SLOW_META_PYTHON = "\
@@ -86,5 +87,4 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-whoosh \
     python3-ujson \
     python3-xlrd \
-    python3-yarl \
 "
