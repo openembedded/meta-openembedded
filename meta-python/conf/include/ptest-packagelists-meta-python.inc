@@ -7,6 +7,7 @@
 #
 # ptests which take less than ~30s each
 PTESTS_FAST_META_PYTHON = "\
+    python3-appdirs \
     python3-ansicolors \
     python3-asgiref \
     python3-aspectlib \
@@ -62,7 +63,6 @@ PTESTS_SLOW_META_PYTHON = "\
 "
 
 PTESTS_PROBLEMS_META_PYTHON ="\
-    python3-appdirs \
     python3-betamax \
     python3-dnspython \
     python3-fastjsonschema \
