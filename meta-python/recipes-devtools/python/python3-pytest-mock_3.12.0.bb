@@ -15,13 +15,14 @@ SRCREV = "69adc6f76c1a7baf4e7a728da9eec38741d5783e"
 
 inherit setuptools3 ptest
 
-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+DEPENDS += "python3-setuptools-scm-native"
 
 RDEPENDS:${PN} += " \
     python3-asyncio \
     python3-pytest \
     python3-pytest-asyncio \
     python3-unittest \
+    python3-unittest-automake-output \
 "
 
 S = "${WORKDIR}/git"
