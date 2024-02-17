@@ -1,5 +1,5 @@
 DESCRIPTION = "An implementation of RFC 7049 - Concise Binary Object Representation (CBOR)."
-DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
+DEPENDS +="python3-setuptools-scm-native"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
@@ -15,18 +15,19 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
-       ${PYTHON_PN}-hypothesis \
-       ${PYTHON_PN}-pytest \
-       ${PYTHON_PN}-unixadmin \
+    python3-hypothesis \
+    python3-pytest \
+    python3-unittest-automake-output \
+    python3-unixadmin \
 "
 
 do_install_ptest() {
-      install -d ${D}${PTEST_PATH}/tests
+	install -d ${D}${PTEST_PATH}/tests
         cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-datetime \
+    python3-datetime \
 "
 
 BBCLASSEXTEND = "native nativesdk"
