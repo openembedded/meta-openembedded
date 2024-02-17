@@ -11,3 +11,4 @@ ftp:x:640:
 rwhod:x:641:
 lldpd:x:642:
 opensaf:x:643:
+radiusd:x:651:
