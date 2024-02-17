@@ -12,15 +12,16 @@ SRC_URI[sha256sum] = "ef0cc731df711022c174543cb70a9b5bd22e5a9337c8624ef2c2ceb8dd
 inherit pypi python_hatchling ptest
 
 DEPENDS += " \
-    ${PYTHON_PN}-hatch-vcs-native \
+    python3-hatch-vcs-native \
 "
 
 RDEPENDS:${PN}-ptest += " \
-    ${PYTHON_PN}-appdirs \
-    ${PYTHON_PN}-covdefaults \
-    ${PYTHON_PN}-pytest \
-    ${PYTHON_PN}-pytest-mock \
-    ${PYTHON_PN}-pytest-cov \
+    python3-appdirs \
+    python3-covdefaults \
+    python3-pytest \
+    python3-pytest-cov \
+    python3-pytest-mock \
+    python3-unittest-automake-output \
 "
 
 do_install_ptest() {
