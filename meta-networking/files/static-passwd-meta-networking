@@ -12,7 +12,7 @@ opensaf:x:643:643::/:/bin/nologin
 tinyproxy:x:650:nogroup::/:/bin/nologin
 radiusd:x:651:radiusd::/:/bin/nologin
 nm-openconnect:x:652:nogroup::/:/bin/nologin
-ntp:x:653:nogroup::/:/bin/nologin
+ntp:x:653:ntp::/:/bin/nologin
 nm-fortisslvpn:x:654:nogroup::/:/bin/nologin
 nm-openvpn:x:655:nogroup::/:/bin/nologin
 squid:x:656:nogroup::/:/bin/nologin
