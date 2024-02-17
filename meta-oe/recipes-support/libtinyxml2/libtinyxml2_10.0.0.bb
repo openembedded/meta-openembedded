@@ -12,7 +12,10 @@ S = "${WORKDIR}/git"
 
 inherit meson ptest
 
-EXTRA_OEMESON += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtests=true', '', d)}"
+EXTRA_OEMESON += " \
+    ${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtests=true', '', d)} \
+    -Ddefault_library=both \
+"
 
 CXXFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
