@@ -12,7 +12,8 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
-	${PYTHON_PN}-pytest \
+    python3-pytest \
+    python3-unittest-automake-output \
 "
 
 do_install_ptest() {
@@ -21,15 +22,15 @@ do_install_ptest() {
 }
 
 DEPENDS += "\
-    ${PYTHON_PN}-wheel-native \
-    ${PYTHON_PN}-setuptools-scm-native \
+    python3-wheel-native \
+    python3-setuptools-scm-native \
 "
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-crypt \
-    ${PYTHON_PN}-io \
-    ${PYTHON_PN}-math \
-    ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-numbers \
-    ${PYTHON_PN}-threading \
+    python3-crypt \
+    python3-io \
+    python3-math \
+    python3-netclient \
+    python3-numbers \
+    python3-threading \
 "
