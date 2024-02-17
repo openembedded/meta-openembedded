@@ -1,5 +1,5 @@
 SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs"
-HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
+HOMEPAGE = "https://leethomason.github.io/tinyxml2"
 SECTION = "libs"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
