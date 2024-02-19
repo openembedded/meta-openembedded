@@ -17,13 +17,13 @@ understand what the code does. It features:                          \
 
 HOMEPAGE = "https://tls.mbed.org/"
 
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LICENSE = "Apache-2.0 | GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
 
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "47e8cc9db2e469d902b0e3093ae9e482c3d87188"
+SRCREV = "555f84735aecdbd76a566cf087ec8425dfb0c8ab"
 SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28"
 
 inherit cmake update-alternatives
