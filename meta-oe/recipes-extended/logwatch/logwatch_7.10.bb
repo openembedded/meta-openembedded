@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
 RDEPENDS:${PN} = "perl"
 
 SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "49d2f1e99c9770f56fc3e82a46880e8900b874dfba593e45f599c89fd255738e"
+SRC_URI[sha256sum] = "329df0991b879764ed7e50a869de5b6bfa70d241eb254397a5659d1ff5f2588f"
 
 do_install() {
     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
