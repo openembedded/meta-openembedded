@@ -18,6 +18,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-dominate \
     python3-execnet \
     python3-geojson \
+    python3-gunicorn \
     python3-html2text \
     python3-inflection \
     python3-intervals \
@@ -70,7 +71,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-dnspython \
     python3-fastjsonschema \
     python3-gpiod \
-    python3-gunicorn \
     python3-inotify \
     python3-jdcal \
     python3-jsmin \
