@@ -3,10 +3,10 @@ HOMEPAGE = "http://www.mpich.org/"
 SECTION = "devel"
 
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f1804c45b8b4e816e53eb1f175d810f3"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=7a88f0d96d0d7396a7c66bf353235b62"
 
 SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
-SRC_URI[sha256sum] = "3492e98adab62b597ef0d292fb2459b6123bc80070a8aa0a30be6962075a12f0"
+SRC_URI[sha256sum] = "a64a66781b9e5312ad052d32689e23252f745b27ee8818ac2ac0c8209bc0b90e"
 
 RDEPENDS:${PN} += "bash perl libxml2"
 
