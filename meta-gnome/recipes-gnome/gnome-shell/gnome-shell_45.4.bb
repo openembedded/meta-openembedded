@@ -50,7 +50,7 @@ EXTRA_OEMESON = " \
 do_install:append() {
     # fix shebangs
     for tool in `find ${D}${bindir} -name '*-tool'`; do
-        sed -i 's:#!${PYTHON}:#!${bindir}/${PYTHON_PN}:' $tool
+        sed -i 's:#!${PYTHON}:#!${bindir}/python3:' $tool
     done
 }
 
