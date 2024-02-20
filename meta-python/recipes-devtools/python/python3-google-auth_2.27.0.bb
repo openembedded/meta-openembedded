@@ -8,19 +8,19 @@ inherit pypi setuptools3
 SRC_URI[sha256sum] = "e863a56ccc2d8efa83df7a80272601e43487fa9a728a376205c86c26aaefa821"
 
 RDEPENDS:${PN} += "\
-    ${PYTHON_PN}-asyncio \
-    ${PYTHON_PN}-datetime \
-    ${PYTHON_PN}-io \
-    ${PYTHON_PN}-json \
-    ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-numbers \
+    python3-asyncio \
+    python3-datetime \
+    python3-io \
+    python3-json \
+    python3-logging \
+    python3-netclient \
+    python3-numbers \
 "
 
 RDEPENDS:${PN} += "\
-    ${PYTHON_PN}-aiohttp \
-    ${PYTHON_PN}-cachetools \
-    ${PYTHON_PN}-pyasn1-modules \
-    ${PYTHON_PN}-rsa \
-    ${PYTHON_PN}-six \
+    python3-aiohttp \
+    python3-cachetools \
+    python3-pyasn1-modules \
+    python3-rsa \
+    python3-six \
 "

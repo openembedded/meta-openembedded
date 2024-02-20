@@ -10,13 +10,13 @@ inherit python_poetry_core pypi
 PIP_INSTALL_PACKAGE = "pymisp"
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-dateutil \
-    ${PYTHON_PN}-json \
-    ${PYTHON_PN}-jsonschema \
-    ${PYTHON_PN}-requests \
-    ${PYTHON_PN}-six \
-    ${PYTHON_PN}-deprecated \
-    ${PYTHON_PN}-wrapt \
+    python3-dateutil \
+    python3-json \
+    python3-jsonschema \
+    python3-requests \
+    python3-six \
+    python3-deprecated \
+    python3-wrapt \
 "
 
 # Fixes: python3-pymisp requires /bin/bash, but no

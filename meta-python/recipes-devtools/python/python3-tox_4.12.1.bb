@@ -12,23 +12,23 @@ BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
 
 DEPENDS += "\
-    ${PYTHON_PN}-hatch-vcs-native \
+    python3-hatch-vcs-native \
 "
 
 RDEPENDS:${PN} += "\
-    ${PYTHON_PN}-cachetools \
-    ${PYTHON_PN}-chardet \
-    ${PYTHON_PN}-colorama \
-    ${PYTHON_PN}-filelock \
-    ${PYTHON_PN}-packaging \
-    ${PYTHON_PN}-platformdirs \
-    ${PYTHON_PN}-pluggy \
-    ${PYTHON_PN}-pyproject-api \
-    ${PYTHON_PN}-tomli \
-    ${PYTHON_PN}-virtualenv \
+    python3-cachetools \
+    python3-chardet \
+    python3-colorama \
+    python3-filelock \
+    python3-packaging \
+    python3-platformdirs \
+    python3-pluggy \
+    python3-pyproject-api \
+    python3-tomli \
+    python3-virtualenv \
 "
 
 # Install all built-in python3 modules, as the software tested with tox might
 # depend on it. Tox will attempt to install all required dependencies
 # in a virtualenv using pip, but this obviously does not include the built-in modules.
-RDEPENDS:${PN} += "${PYTHON_PN}-modules"
+RDEPENDS:${PN} += "python3-modules"

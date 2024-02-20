@@ -17,14 +17,14 @@ UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
 DEPENDS += "protobuf"
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-datetime \
-    ${PYTHON_PN}-json \
-    ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-numbers \
-    ${PYTHON_PN}-pkgutil \
-    ${PYTHON_PN}-six \
-    ${PYTHON_PN}-unittest \
+    python3-datetime \
+    python3-json \
+    python3-logging \
+    python3-netclient \
+    python3-numbers \
+    python3-pkgutil \
+    python3-six \
+    python3-unittest \
 "
 
 # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)

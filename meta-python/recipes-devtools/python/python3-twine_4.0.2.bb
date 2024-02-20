@@ -8,11 +8,11 @@ SRC_URI[sha256sum] = "9e102ef5fdd5a20661eb88fad46338806c3bd32cf1db729603fe3697b1
 inherit pypi python_setuptools_build_meta
 
 DEPENDS += "\
-	${PYTHON_PN}-setuptools-scm-native \
+	python3-setuptools-scm-native \
 "
 
 RDEPENDS:${PN} += " \
-	${PYTHON_PN}-importlib-metadata \
+	python3-importlib-metadata \
 "
 
 BBCLASSEXTEND = "native"
