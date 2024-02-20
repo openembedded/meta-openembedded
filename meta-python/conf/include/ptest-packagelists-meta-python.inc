@@ -82,7 +82,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-parse \
     python3-pillow \
     python3-pint \
-    python3-pytest-lazy-fixture \
     python3-pyzmq \
     python3-scrypt \
     python3-service-identity \
