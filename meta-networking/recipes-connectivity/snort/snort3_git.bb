@@ -7,10 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 PV = "3+git${SRCPV}"
 
-DEPENDS = "flex hwloc libdaq libdnet libpcap libpcre libtirpc libunwind luajit zlib"
+DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind luajit zlib"
 
 SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
-           file://0001-cmake-Check-for-HP-libunwind.patch"
+           file://0001-cmake-Check-for-HP-libunwind.patch \
+           file://0001-cmake-Pass-noline-flag-to-flex.patch"
 SRCREV = "e1760a8dbb829bb3fcf1a340ab6cc4bb80a47ecd"
 
 S = "${WORKDIR}/git"
@@ -18,6 +19,10 @@ S = "${WORKDIR}/git"
 PACKAGES =+ "${PN}-scripts"
 
 inherit cmake pkgconfig
+
+do_install:append() {
+    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/pkgconfig/snort.pc
+}
 
 FILES:${PN} += "${libdir}/snort/daq/*.so"
 
