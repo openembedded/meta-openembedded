@@ -11,9 +11,9 @@ SRC_URI[sha256sum] = "6b632581ea60dd1c133cd25a48ad187b4b91f526623c4b0fb5443ef805
 PYPI_PACKAGE="jsbeautifier"
 
 RDEPENDS:${PN} += "\
-    ${PYTHON_PN}-core \
-    ${PYTHON_PN}-stringold \
-    ${PYTHON_PN}-shell \
+    python3-core \
+    python3-stringold \
+    python3-shell \
 "
 
 BBCLASSEXTEND = "native nativesdk"

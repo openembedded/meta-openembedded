@@ -9,8 +9,8 @@ SRC_URI[sha256sum] = "29b5e5ae05938cac195b1969e70bd6ad4e4e2e105d0e565849803d2a99
 inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
-	${PYTHON_PN}-aiohttp \
-	${PYTHON_PN}-asyncio-throttle \
-	${PYTHON_PN}-profile \
-        ${PYTHON_PN}-awesomeversion \
+	python3-aiohttp \
+	python3-asyncio-throttle \
+	python3-profile \
+        python3-awesomeversion \
 "

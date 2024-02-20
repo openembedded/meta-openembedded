@@ -9,11 +9,11 @@ PYPI_PACKAGE = "elementpath"
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-xml \
-    ${PYTHON_PN}-core \
-    ${PYTHON_PN}-numbers \
-    ${PYTHON_PN}-datetime \
-    ${PYTHON_PN}-stringold \
+    python3-xml \
+    python3-core \
+    python3-numbers \
+    python3-datetime \
+    python3-stringold \
 "
 
 BBCLASSEXTEND = "native nativesdk"

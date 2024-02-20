@@ -16,8 +16,8 @@ DISTUTILS_INSTALL_ARGS += " \
 FILES:${PN} += "${datadir}/*"
 
 RDEPENDS:${PN} += " \
-    ${PYTHON_PN}-compression \
-    ${PYTHON_PN}-doctest \
-    ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-xml \
+    python3-compression \
+    python3-doctest \
+    python3-logging \
+    python3-xml \
 "

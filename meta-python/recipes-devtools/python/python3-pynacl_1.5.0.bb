@@ -11,7 +11,7 @@ PYPI_PACKAGE = "PyNaCl"
 inherit pypi python_setuptools_build_meta
 
 DEPENDS += "\
-    ${PYTHON_PN}-cffi-native \
+    python3-cffi-native \
     libsodium \
 "
 
@@ -24,8 +24,8 @@ do_install:prepend() {
 }
 
 RDEPENDS:${PN} = "\
-    ${PYTHON_PN}-six \
-    ${PYTHON_PN}-cffi \
+    python3-six \
+    python3-cffi \
     libsodium \
 "
 

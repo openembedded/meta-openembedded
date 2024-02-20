@@ -12,13 +12,13 @@ inherit pypi python_poetry_core
 DEPENDS += "python3-setuptools-scm-native"
 
 RDEPENDS:${PN} += "\
-    ${PYTHON_PN}-can \
-    ${PYTHON_PN}-bitstruct \
-    ${PYTHON_PN}-core \
-    ${PYTHON_PN}-textparser \
-    ${PYTHON_PN}-typing-extensions \
-    ${PYTHON_PN}-diskcache \
-    ${PYTHON_PN}-asyncio \
+    python3-can \
+    python3-bitstruct \
+    python3-core \
+    python3-textparser \
+    python3-typing-extensions \
+    python3-diskcache \
+    python3-asyncio \
 "
 
 CLEANBROKEN = "1"
