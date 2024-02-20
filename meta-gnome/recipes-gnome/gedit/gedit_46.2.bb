@@ -23,7 +23,8 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc get
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "a1a6e37f041765dff7227a1f5578b6f49faaf016b1e17e869caf5bfb94c6aa4e"
+SRC_URI += "file://0001-fix-for-clang-18.patch"
+SRC_URI[archive.sha256sum] = "c0866412bad147ebace2d282ffcbb5a0e9a304b20fd55640bee21c81e6d501ef"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
