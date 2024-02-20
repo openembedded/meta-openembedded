@@ -9,7 +9,8 @@ PV = "3+git${SRCPV}"
 
 DEPENDS = "flex hwloc libdaq libdnet libpcap libpcre libtirpc libunwind luajit zlib"
 
-SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
+           file://0001-cmake-Check-for-HP-libunwind.patch"
 SRCREV = "e1760a8dbb829bb3fcf1a340ab6cc4bb80a47ecd"
 
 S = "${WORKDIR}/git"
