@@ -25,11 +25,11 @@ do_install () {
     oe_runmake install
 }
 
-PACKAGES += "${PYTHON_PN}-${BPN}"
+PACKAGES += "python3-${BPN}"
 
-RPROVIDES:${BPN}-dbg += "${PYTHON_PN}-${BPN}-dbg"
+RPROVIDES:${BPN}-dbg += "python3-${BPN}-dbg"
 
-FILES:${PYTHON_PN}-${BPN} = "${PYTHON_SITEPACKAGES_DIR}/pyisomd5sum.so"
+FILES:python3-${BPN} = "${PYTHON_SITEPACKAGES_DIR}/pyisomd5sum.so"
 
 SRCREV = "3f4c9bd3f21ec9ac75a025dfa3fa30fe3f621831"
 
