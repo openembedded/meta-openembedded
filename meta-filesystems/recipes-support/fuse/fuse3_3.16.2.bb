@@ -29,7 +29,7 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
-        ${PYTHON_PN}-pytest \
+        python3-pytest \
 	bash \
 "
 
