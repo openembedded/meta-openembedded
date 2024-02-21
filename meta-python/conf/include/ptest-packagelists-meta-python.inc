@@ -76,7 +76,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-fastjsonschema \
     python3-gpiod \
     python3-jsmin \
-    python3-msgpack \
     python3-ordered-set \
     python3-parse \
     python3-pillow \
