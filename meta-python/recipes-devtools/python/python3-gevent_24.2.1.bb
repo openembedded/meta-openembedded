@@ -9,6 +9,8 @@ DEPENDS += "python3-greenlet libev libuv c-ares python3-cython-native"
 RDEPENDS:${PN} = "python3-greenlet \
 		  python3-mime \
 		  python3-pprint \
+		  python3-zopeevent \
+		  python3-zopeinterface \
 		 "
 
 SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
