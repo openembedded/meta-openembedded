@@ -14,4 +14,4 @@ S = "${WORKDIR}/git"
 DEPENDS:append:x86 = " nasm-native"
 DEPENDS:append:x86-64 = " nasm-native"
 
-inherit meson
+inherit meson pkgconfig
