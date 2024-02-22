@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "c0959a121ef94542e807a674142606f7e90214a2b3d1eb17300244bbb5
 BBCLASSEXTEND = "native nativesdk"
 
 SRC_URI += " \
+  file://7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch \
 	file://run-ptest \
 "
 
