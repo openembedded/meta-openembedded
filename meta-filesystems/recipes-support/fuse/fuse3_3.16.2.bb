@@ -29,8 +29,10 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
-        python3-pytest \
-	bash \
+    python3-pytest \
+    python3-looseversion \
+    kernel-module-cuse \
+    bash \
 "
 
 do_install_ptest() {
