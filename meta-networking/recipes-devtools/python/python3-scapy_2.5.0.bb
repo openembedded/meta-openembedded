@@ -40,3 +40,5 @@ RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netcl
                   python3-netserver python3-pydoc python3-pkgutil python3-shell \
                   python3-threading python3-numbers python3-fcntl python3-logging \
                   python3-difflib"
+RDEPENDS:${PN}-ptest += "python3-json python3-mock python3-multiprocessing \
+                         iproute2 tshark"
