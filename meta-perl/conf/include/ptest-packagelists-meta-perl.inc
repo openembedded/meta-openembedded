@@ -36,7 +36,6 @@ PTESTS_PROBLEMS_META_PERL ="\
     libnet-dns-perl \
     libnet-dns-sec-perl \
     libnet-ldap-perl \
-    libencode-perl \
     libextutils-installpaths-perl \
     libfile-slurper-perl \
     libhtml-parser-perl \
