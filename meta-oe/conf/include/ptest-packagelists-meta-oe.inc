@@ -72,5 +72,5 @@ PTESTS_PROBLEMS_META_OE ="\
     pv \
 "
 
-PTESTS_FAST_META_OE:remove:riscv64 = "oprofile"
-PTESTS_FAST_META_OE:remove:riscv32 = "oprofile"
+PTESTS_PROBLEMS_META_OE:remove:riscv64 = "oprofile"
+PTESTS_PROBLEMS_META_OE:remove:riscv32 = "oprofile"
