@@ -18,8 +18,9 @@ PTESTS_FAST_META_NETWORKING = "\
     tcpdump \
 "
 
+# firewalld currently hangs forever so disable it for now
+#    firewalld
 PTESTS_SLOW_META_NETWORKING = "\
-    firewalld \
     net-snmp \
 "
 
