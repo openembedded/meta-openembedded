@@ -58,6 +58,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-sqlparse \
     python3-tomlkit \
     python3-trustme \
+    python3-typeguard \
     python3-ujson \
     python3-u-msgpack-python \
     python3-unidiff \
@@ -82,7 +83,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-pyzmq \
     python3-scrypt \
     python3-service-identity \
-    python3-typeguard \
     python3-whoosh \
     python3-xlrd \
 "
