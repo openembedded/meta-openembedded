@@ -52,6 +52,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-requests-toolbelt \
     python3-semver \
     python3-serpent \
+    python3-service-identity \
     python3-simpleeval \
     python3-smpplib \
     python3-soupsieve \
@@ -82,7 +83,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-pint \
     python3-pyzmq \
     python3-scrypt \
-    python3-service-identity \
     python3-whoosh \
     python3-xlrd \
 "
