@@ -16,6 +16,7 @@ PTESTS_FAST_META_NETWORKING = "\
     lldpd \
     mbedtls \
     openhpi \
+    squid \
     tcpdump \
 "
 
@@ -33,5 +34,4 @@ PTESTS_PROBLEMS_META_NETWORKING = "\
     nftables \
     openl2tp \
     python3-scapy \
-    squid \
 "
