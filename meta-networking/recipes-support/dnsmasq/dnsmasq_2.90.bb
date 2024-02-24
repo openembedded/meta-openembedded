@@ -11,15 +11,13 @@ DEPENDS += "gettext-native"
 
 #at least versions 2.69 and prior are moved to the archive folder on the server
 SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 69]}dnsmasq-${PV}.tar.gz \
-           file://lua.patch \
            file://init \
            file://dnsmasq.conf \
            file://dnsmasq-resolvconf.service \
            file://dnsmasq-noresolvconf.service \
            file://dnsmasq-resolved.conf \
-           file://CVE-2023-28450.patch \
 "
-SRC_URI[sha256sum] = "8651373d000cae23776256e83dcaa6723dee72c06a39362700344e0c12c4e7e4"
+SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
 
 inherit pkgconfig update-rc.d systemd
 
