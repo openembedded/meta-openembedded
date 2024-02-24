@@ -15,6 +15,7 @@ PTESTS_FAST_META_NETWORKING = "\
     libtdb \
     lldpd \
     mbedtls \
+    openhpi \
     tcpdump \
 "
 
@@ -30,7 +31,6 @@ PTESTS_PROBLEMS_META_NETWORKING = "\
     libtevent \
     lksctp-tools \
     nftables \
-    openhpi \
     openl2tp \
     python3-scapy \
     squid \
