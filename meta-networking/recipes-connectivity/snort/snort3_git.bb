@@ -21,7 +21,7 @@ PACKAGES =+ "${PN}-scripts"
 inherit cmake pkgconfig
 
 do_install:append() {
-    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/pkgconfig/snort.pc
+    sed -i "s#${RECIPE_SYSROOT_NATIVE}##g; s#${RECIPE_SYSROOT}##g" ${D}${libdir}/pkgconfig/snort.pc
 }
 
 FILES:${PN} += "${libdir}/snort/daq/*.so"
