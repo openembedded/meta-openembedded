@@ -34,3 +34,5 @@ RPROVIDES:${PN} = "python3-nacl"
 # in meta-virtualization layer
 #
 RCONFLICTS:${PN} = "python3-nacl"
+
+BBCLASSEXTEND = "native nativesdk"
