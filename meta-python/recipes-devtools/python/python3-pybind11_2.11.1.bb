@@ -8,7 +8,10 @@ DEPENDS = "\
 "
 
 SRCREV = "8a099e44b3d5f85b20f05828d919d2332a8de841"
-SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https"
+SRC_URI = "\
+    git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
+    file://0001-Do-not-strip-binaries.patch \
+"
 
 S = "${WORKDIR}/git"
 
