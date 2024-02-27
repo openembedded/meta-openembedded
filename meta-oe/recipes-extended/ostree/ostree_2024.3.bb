@@ -28,8 +28,6 @@ S = "${WORKDIR}/libostree-${PV}"
 
 inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
 
-COMPATIBLE_HOST:riscv32 = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'null', 'riscv32', d)}"
-
 UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
 
 # Workaround compile failure:
@@ -203,6 +201,7 @@ RDEPENDS:${PN}-ptest += " \
     python3-pyyaml \
     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
 "
+RDEPENDS:${PN}-ptest:remove:riscv32 = "strace"
 RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-utils glibc-localedata-en-us"
 
 RRECOMMENDS:${PN}:append:class-target = " kernel-module-overlay"
