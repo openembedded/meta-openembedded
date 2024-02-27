@@ -9,6 +9,8 @@ DEPENDS += "${PYTHON_PN}-greenlet libev c-ares"
 RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
 		  ${PYTHON_PN}-mime \
 		  ${PYTHON_PN}-pprint \
+		  ${PYTHON_PN}-zopeevent \
+		  ${PYTHON_PN}-zopeinterface \
 		 "
 
 SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
