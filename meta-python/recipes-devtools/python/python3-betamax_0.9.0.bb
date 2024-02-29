@@ -7,9 +7,7 @@ SRC_URI += " \
         file://run-ptest \
         file://0001-Drop-ptests-fixtures-and-recorde_modes.patch \
 "
-
-SRC_URI[md5sum] = "b8182d43a200fc126a3bf7555626f964"
-SRC_URI[sha256sum] = "5bf004ceffccae881213fb722f34517166b84a34919b92ffc14d1dbd050b71c2"
+SRC_URI[sha256sum] = "82316e1679bc6879e3c83318d016b54b7c9225ff08c4462de4813e22038d5f94"
 
 inherit pypi setuptools3 ptest
 
