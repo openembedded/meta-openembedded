@@ -21,7 +21,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
 "
 
-SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
+SRC_URI[sha256sum] = "cd775f625c944ed78a3da18a03b03b08eea73c8aabc97b41bb336e9a10954930"
 
 DEPENDS = "util-linux groff-native"
 
@@ -62,7 +62,7 @@ EXTRA_OECONF += "--enable-crypt"
 # The backend must be set by the configuration.  This controls the
 # required database.
 #
-# Backends="asyncmeta dnssrv ldap mdb meta ndb null passwd perl relay sock sql wt"
+# Backends="asyncmeta dnssrv ldap mdb meta null passwd perl relay sock sql wt"
 #
 # Note that multiple backends can be built.  The ldbm backend requires a
 # build-time choice of database API. To use the gdbm (or other) API the 
@@ -84,9 +84,6 @@ PACKAGECONFIG[mdb] = "--enable-mdb=yes,--enable-mdb=no,"
 
 #--enable-meta         enable metadirectory backend no|yes|mod no
 PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
-
-#--enable-ndb          enable MySQL NDB Cluster backend no|yes|mod [no]
-PACKAGECONFIG[ndb] = "--enable-ndb=mod,--enable-ndb=no,"
 
 #--enable-null         enable null backend no|yes|mod no
 PACKAGECONFIG[null] = "--enable-null=mod,--enable-null=no,"
@@ -122,7 +119,7 @@ PACKAGECONFIG[dyngroup] = "--enable-dyngroup=mod,--enable-dyngroup=no,"
 
 #--enable-proxycache   Proxy Cache overlay no|yes|mod no
 PACKAGECONFIG[proxycache] = "--enable-proxycache=mod,--enable-proxycache=no,"
-FILES:${PN}-overlay-proxycache = "${md}/pcache-*.so.*"
+FILES:${PN}-overlay-proxycache = "${md}/pcache.so.*"
 PACKAGES += "${PN}-overlay-proxycache"
 
 # Append URANDOM_DEVICE='/dev/urandom' to CPPFLAGS:
@@ -215,7 +212,7 @@ INSANE_SKIP:${PN}-backend-passwd     += "dev-so"
 python populate_packages:prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
     do_split_packages(d, backend_dir, r'back_([a-z]*)\.so$', 'openldap-backend-%s', 'OpenLDAP %s backend', prepend=True, extra_depends='', allow_links=True)
-    do_split_packages(d, backend_dir, r'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
+    do_split_packages(d, backend_dir, r'back_([a-z]*)\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 
     metapkg = "${PN}-backends"
     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
