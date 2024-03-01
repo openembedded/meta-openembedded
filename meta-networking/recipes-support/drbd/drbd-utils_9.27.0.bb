@@ -11,12 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;protocol=https \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
-           file://0001-replace-off64_t-with-off_t.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
            "
-SRC_URI:append:libc-musl = " file://0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch "
-SRCREV_drbd-utils = "409097fe02187f83790b88ac3e0d94f3c167adab"
-SRCREV_drbd-headers = "9a0f151fa0085f57910a2dcbbd658d6069554f62"
+SRCREV_drbd-utils = "fdd9a4d603a9dc99d110d8bd0e288d7c0b6f586e"
+SRCREV_drbd-headers = "0349f00825b4198d4ec3248f43884114a187676a"
 
 SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
@@ -27,7 +25,7 @@ UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
 SYSTEMD_SERVICE:${PN} = "drbd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-DEPENDS = "flex-native"
+DEPENDS = "flex-native keyutils"
 
 inherit autotools-brokensep systemd
 
