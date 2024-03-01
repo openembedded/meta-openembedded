@@ -33,9 +33,9 @@ SRC_URI += " \
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
     python3-looseversion \
-    kernel-module-cuse \
     bash \
 "
+RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/test
