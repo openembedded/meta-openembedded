@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
 HOMEPAGE = "https://openvpn.net/"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d8d34ce6390552676e4ce8279f13c48a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4b34e946059f80dcfd811e8dd471b5ed"
 DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 inherit autotools systemd update-rc.d pkgconfig
@@ -14,7 +14,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 
-SRC_URI[sha256sum] = "ee9877340b1d8de47eb5b52712c3366855fa6a4a1955bf950c68577bd2039913"
+SRC_URI[sha256sum] = "e08d147e15b4508dfcd1d6618a1f21f1495f9817a8dadc1eddf0532fa116d7e3"
 
 CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
 
