@@ -29,6 +29,9 @@ DEPENDS = "flex-native keyutils"
 
 inherit autotools-brokensep systemd
 
+# -Wunused-but-set-variable -Wunused-const-variable -Winconsistent-missing-override
+CPPFLAGS:append = " -Wno-error"
+
 EXTRA_OECONF = " \
                 --with-initdir=/etc/init.d    \
                 --without-pacemaker           \
