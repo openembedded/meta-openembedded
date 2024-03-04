@@ -29,6 +29,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-jsmin \
     python3-msgpack \
     python3-multidict \
+    python3-netaddr \
     python3-ordered-set \
     python3-parse \
     python3-parse-type \
