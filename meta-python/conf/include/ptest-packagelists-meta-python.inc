@@ -65,6 +65,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-u-msgpack-python \
     python3-unidiff \
     python3-uritemplate \
+    python3-xlrd \
     python3-xmltodict \
     python3-xxhash \
     python3-yarl \
@@ -85,5 +86,4 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-pyzmq \
     python3-scrypt \
     python3-whoosh \
-    python3-xlrd \
 "
