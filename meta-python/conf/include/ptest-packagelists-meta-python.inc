@@ -65,6 +65,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-u-msgpack-python \
     python3-unidiff \
     python3-uritemplate \
+    python3-wrapt \
     python3-xlrd \
     python3-xmltodict \
     python3-xxhash \
