@@ -8,12 +8,10 @@ CVE_PRODUCT = "json-for-modern-cpp"
 
 SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
            git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
-           file://0001-custom-allocators-define-missing-rebind-type-3895.patch \
-           file://0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch \
            file://run-ptest \
 "
 
-SRCREV = "bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d"
+SRCREV = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03"
 SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
 
 SRCREV_FORMAT .= "_json-test-data"
