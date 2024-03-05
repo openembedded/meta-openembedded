@@ -1,4 +1,4 @@
-SUMMARY = "a language independent connection pool server for PostgreSQL."
+SUMMARY = "A language independent connection pool server for PostgreSQL."
 
 DESCRIPTION = "Pgpool-II is a middleware that works between PostgreSQL \
                servers and a PostgreSQL database client. It is distributed \
@@ -12,11 +12,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
 
 SRC_URI = "http://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
 	   file://0001-Fix-build-error-when-build-this-file.patch \
-	   file://0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch \
 	   file://pgpool.sysconfig \
 	   file://pgpool.service \
            "
-SRC_URI[sha256sum] = "4b379bbba8e178128a1cee4a5bd1ae116dedb3da6121b728c18f0f54c881f328"
+SRC_URI[sha256sum] = "8e14b0558a15dae8767c8e1acee3f2f6c7c08ebfffda66a359367eaaa56c3936"
 
 S = "${WORKDIR}/pgpool-II-${PV}"
 
@@ -34,9 +33,6 @@ PACKAGECONFIG[postgresql] = "--with-pgsql-includedir=${STAGING_INCDIR}/postgresq
 EXTRA_OECONF += "--disable-static \
 	         --disable-rpath \
 	        "
-
-CFLAGS:append = " -fcommon "
-
 FILES:${PN} += "${datadir}/pgpool-II/ "
 
 do_configure:append() {
