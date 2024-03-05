@@ -1,9 +1,7 @@
-From b0b4cca566e3e0c3a232b3754555c41d4e0c1273 Mon Sep 17 00:00:00 2001
+From 8f52504859704466667e042baf437c2b6272ffb9 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Mon, 26 Nov 2018 09:55:12 +0800
-Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
- 00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Thu, 16
- Oct 2014 15:49:01 -0500 Subject: [PATCH] RH: add mpathconf
+Subject: [PATCH 05/12] RH: add mpathconf
 
 mpathconf is a program (largely based on lvmcomf) to help users
 configure /etc/multipath.conf and enable or disable multipathing.  It
@@ -16,11 +14,11 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 
 Upstream-Status: Pending
 
-update this patch to new version
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 [OP: Rebase to 0.9.3]
 Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+
+Rebase to 0.9.8
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
  libmultipath/config.c |   1 +
  multipath/Makefile    |   4 +
@@ -31,10 +29,10 @@ Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
  create mode 100644 multipath/mpathconf.8
 
 diff --git a/libmultipath/config.c b/libmultipath/config.c
-index 31894810..af59dd3c 100644
+index 8a3a8f37..a40b41ab 100644
 --- a/libmultipath/config.c
 +++ b/libmultipath/config.c
-@@ -969,6 +969,7 @@ int _init_config (const char *file, struct config *conf)
+@@ -962,6 +962,7 @@ int _init_config (const char *file, struct config *conf)
  		validate_pctable(conf->overrides, 0, file);
  	} else {
  		condlog(0, "/etc/multipath.conf does not exist, blacklisting all devices.");
@@ -43,36 +41,36 @@ index 31894810..af59dd3c 100644
  			conf->blist_devnode = vector_alloc();
  			if (!conf->blist_devnode) {
 diff --git a/multipath/Makefile b/multipath/Makefile
-index 8482de6a..780b1b73 100644
+index 2ea9e528..6b1fa09e 100644
 --- a/multipath/Makefile
 +++ b/multipath/Makefile
-@@ -21,6 +21,7 @@ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
+@@ -24,6 +24,7 @@ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
  install:
- 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(bindir)
- 	$(INSTALL_PROGRAM) -m 755 $(EXEC) $(DESTDIR)$(bindir)/
-+	$(INSTALL_PROGRAM) -m 755 mpathconf $(DESTDIR)$(bindir)/
- 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(udevrulesdir)
- 	$(INSTALL_PROGRAM) -m 644 11-dm-mpath.rules $(DESTDIR)$(udevrulesdir)
- 	$(INSTALL_PROGRAM) -m 644 multipath.rules $(DESTDIR)$(udevrulesdir)/62-multipath.rules
-@@ -32,6 +33,7 @@ install:
- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).8 $(DESTDIR)$(man8dir)
- 	$(INSTALL_PROGRAM) -d $(DESTDIR)$(man5dir)
- 	$(INSTALL_PROGRAM) -m 644 $(EXEC).conf.5 $(DESTDIR)$(man5dir)
-+	$(INSTALL_PROGRAM) -m 644 mpathconf.8 $(DESTDIR)$(man8dir)
- ifneq ($(SCSI_DH_MODULES_PRELOAD),)
- 	$(INSTALL_PROGRAM) -m 644 scsi_dh.conf $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
- 	for _x in $(SCSI_DH_MODULES_PRELOAD); do echo "$$_x"; done \
-@@ -44,8 +46,10 @@ uninstall:
- 	$(RM) $(DESTDIR)$(modulesloaddir)/multipath.conf
- 	$(RM) $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
- 	$(RM) $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
-+	$(RM) $(DESTDIR)$(bindir)/mpathconf
- 	$(RM) $(DESTDIR)$(man8dir)/$(EXEC).8
- 	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5
-+	$(RM) $(DESTDIR)$(man8dir)/mpathconf.8
+ 	$(Q)$(INSTALL_PROGRAM) -d $(DESTDIR)$(bindir)
+ 	$(Q)$(INSTALL_PROGRAM) -m 755 $(EXEC) $(DESTDIR)$(bindir)/
++	$(Q)$(INSTALL_PROGRAM) -m 755 mpathconf $(DESTDIR)$(bindir)/
+ 	$(Q)$(INSTALL_PROGRAM) -d $(DESTDIR)$(udevrulesdir)
+ 	$(Q)$(INSTALL_PROGRAM) -m 644 11-dm-mpath.rules $(DESTDIR)$(udevrulesdir)
+ 	$(Q)$(INSTALL_PROGRAM) -m 644 99-z-dm-mpath-late.rules $(DESTDIR)$(udevrulesdir)
+@@ -34,6 +35,7 @@ install:
+ 	$(Q)$(INSTALL_PROGRAM) -m 644 $(EXEC).8 $(DESTDIR)$(mandir)/man8
+ 	$(Q)$(INSTALL_PROGRAM) -d $(DESTDIR)$(mandir)/man5
+ 	$(Q)$(INSTALL_PROGRAM) -m 644 $(EXEC).conf.5 $(DESTDIR)$(mandir)/man5
++	$(Q)$(INSTALL_PROGRAM) -m 644 mpathconf.8 $(DESTDIR)$(mandir)/man8
+ 	$(Q)$(INSTALL_PROGRAM) -d $(DESTDIR)$(modulesloaddir)
+ ifeq ($(MODPROBE_UNIT),)
+ 	$(Q)$(INSTALL_PROGRAM) -m 644 modules-load.conf $(DESTDIR)$(modulesloaddir)/multipath.conf
+@@ -51,8 +53,10 @@ uninstall:
+ 	$(Q)$(RM) $(DESTDIR)$(modulesloaddir)/multipath.conf
+ 	$(Q)$(RM) $(DESTDIR)$(modulesloaddir)/scsi_dh.conf
+ 	$(Q)$(RM) $(DESTDIR)$(libudevdir)/rules.d/62-multipath.rules
++	$(Q)$(RM) $(DESTDIR)$(bindir)/mpathconf
+ 	$(Q)$(RM) $(DESTDIR)$(mandir)/man8/$(EXEC).8
+ 	$(Q)$(RM) $(DESTDIR)$(mandir)/man5/$(EXEC).conf.5
++	$(Q)$(RM) $(DESTDIR)$(mandir)/man8/mpathconf.8
+ 	$(Q)$(RM) $(DESTDIR)$(tmpfilesdir)/multipath.conf
  
  clean: dep_clean
- 	$(RM) core *.o $(EXEC) multipath.rules tmpfiles.conf
 diff --git a/multipath/mpathconf b/multipath/mpathconf
 new file mode 100644
 index 00000000..e8391347
@@ -651,5 +649,5 @@ index 00000000..4cd32672
 +.SH AUTHOR
 +Benjamin Marzinski <bmarzins@redhat.com>
 -- 
-2.38.1
+2.25.1
 

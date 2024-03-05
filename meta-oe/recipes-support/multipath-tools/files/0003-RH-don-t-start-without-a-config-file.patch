@@ -1,10 +1,7 @@
-From 056fdaece0f1a3a5ca92e8c08912730faa89875d Mon Sep 17 00:00:00 2001
+From de8ee3480ec7479ed014c197a9d747403f6e0237 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Fri, 23 Nov 2018 17:25:15 +0800
-Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
- 00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Wed, 15
- Oct 2014 10:39:30 -0500 Subject: [PATCH] RH: don't start without a config
- file
+Subject: [PATCH 03/12] RH: don't start without a config file
 
 If /etc/multipath.conf doesn't exist, don't start multipathd and blacklist
 all devices when running multipath.  A completely blank configuration file
@@ -17,20 +14,21 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 
 Upstream-Status: Pending
 
-update this patch to new version
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 [OP: Rebase to 0.9.3]
 Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+
+Rebase to 0.9.8
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- libmultipath/config.c         | 18 ++++++++++++++++++
- libmultipath/config.h         |  1 +
- multipath/multipath.rules.in  |  1 +
- multipathd/multipathd.8       |  2 ++
- multipathd/multipathd.service |  1 +
+ libmultipath/config.c            | 18 ++++++++++++++++++
+ libmultipath/config.h            |  1 +
+ multipath/multipath.rules.in     |  1 +
+ multipathd/multipathd.8.in       |  2 ++
+ multipathd/multipathd.service.in |  1 +
  5 files changed, 23 insertions(+)
 
 diff --git a/libmultipath/config.c b/libmultipath/config.c
-index 5c5c0726..31894810 100644
+index 83fa7369..8a3a8f37 100644
 --- a/libmultipath/config.c
 +++ b/libmultipath/config.c
 @@ -26,6 +26,7 @@
@@ -41,7 +39,7 @@ index 5c5c0726..31894810 100644
  
  /*
   * We don't support re-initialization after
-@@ -966,6 +967,23 @@ int _init_config (const char *file, struct config *conf)
+@@ -959,6 +960,23 @@ int _init_config (const char *file, struct config *conf)
  		}
  		factorize_hwtable(conf->hwtable, builtin_hwtable_size, file);
  		validate_pctable(conf->overrides, 0, file);
@@ -66,7 +64,7 @@ index 5c5c0726..31894810 100644
  
  	conf->processed_main_config = 1;
 diff --git a/libmultipath/config.h b/libmultipath/config.h
-index 87947469..0dc89c16 100644
+index 384193ab..158cebf0 100644
 --- a/libmultipath/config.h
 +++ b/libmultipath/config.h
 @@ -10,6 +10,7 @@
@@ -78,7 +76,7 @@ index 87947469..0dc89c16 100644
  enum devtypes {
  	DEV_NONE,
 diff --git a/multipath/multipath.rules.in b/multipath/multipath.rules.in
-index 8d3cf33a..5c4447a2 100644
+index 780bf852..2c518378 100644
 --- a/multipath/multipath.rules.in
 +++ b/multipath/multipath.rules.in
 @@ -9,6 +9,7 @@ IMPORT{cmdline}="nompath"
@@ -89,11 +87,11 @@ index 8d3cf33a..5c4447a2 100644
  
  ENV{DEVTYPE}!="partition", GOTO="test_dev"
  IMPORT{parent}="DM_MULTIPATH_DEVICE_PATH"
-diff --git a/multipathd/multipathd.8 b/multipathd/multipathd.8
-index bdf102eb..a16a0bd5 100644
---- a/multipathd/multipathd.8
-+++ b/multipathd/multipathd.8
-@@ -48,6 +48,8 @@ map regains its maximum performance and redundancy.
+diff --git a/multipathd/multipathd.8.in b/multipathd/multipathd.8.in
+index f1cab3ff..5ae21db1 100644
+--- a/multipathd/multipathd.8.in
++++ b/multipathd/multipathd.8.in
+@@ -49,6 +49,8 @@ map regains its maximum performance and redundancy.
  With the \fB-k\fR option, \fBmultipathd\fR acts as a client utility that
  sends commands to a running instance of the multipathd daemon (see
  \fBCOMMANDS\fR below).
@@ -102,18 +100,18 @@ index bdf102eb..a16a0bd5 100644
  .
  .
  .\" ----------------------------------------------------------------------------
-diff --git a/multipathd/multipathd.service b/multipathd/multipathd.service
-index aec62dbb..ab7585de 100644
---- a/multipathd/multipathd.service
-+++ b/multipathd/multipathd.service
+diff --git a/multipathd/multipathd.service.in b/multipathd/multipathd.service.in
+index 6d03ff71..0cd85102 100644
+--- a/multipathd/multipathd.service.in
++++ b/multipathd/multipathd.service.in
 @@ -5,6 +5,7 @@ Before=local-fs-pre.target blk-availability.service shutdown.target
- Wants=systemd-udevd-kernel.socket
- After=systemd-udevd-kernel.socket
+ Wants=systemd-udevd-kernel.socket @MODPROBE_UNIT@
+ After=systemd-udevd-kernel.socket @MODPROBE_UNIT@
  After=multipathd.socket systemd-remount-fs.service
 +ConditionPathExists=/etc/multipath.conf
  Before=initrd-cleanup.service
  DefaultDependencies=no
  Conflicts=shutdown.target
 -- 
-2.38.1
+2.25.1
 
