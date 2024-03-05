@@ -10,10 +10,10 @@ ideal for firewalled environments. \
 HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging-system"
 
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=71d15c2fb22f43e1a380f3f799ebde30"
+LIC_FILES_CHKSUM = "file://COPYING;md5=924958cefc9f7de3e0b818832b8a1cec"
 
 # util-linux added to get libuuid
-DEPENDS = "libpcre flex glib-2.0 openssl util-linux bison-native"
+DEPENDS = "libpcre flex glib-2.0 openssl util-linux bison-native curl"
 
 SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
            file://syslog-ng.conf.systemd \
@@ -26,7 +26,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
 "
 SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
 
-SRC_URI[sha256sum] = "c16eafe447191c079f471846182876b7919d3d789af8c1f9fe55ab14521ceb2c"
+SRC_URI[sha256sum] = "b69e3360dfb96a754a4e1cbead4daef37128b1152a23572356db4ab64a475d4f"
 
 UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
 
