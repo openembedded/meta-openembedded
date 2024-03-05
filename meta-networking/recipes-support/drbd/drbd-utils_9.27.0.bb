@@ -1,6 +1,5 @@
 SUMMARY = "Distributed block device driver for Linux"
 DESCRIPTION = "DRBD mirrors a block device over the network to another machine.\
-DRBD mirrors a block device over the network to another machine.\
 Think of it as networked raid 1. It is a building block for\
 setting up high availability (HA) clusters."
 HOMEPAGE = "http://www.drbd.org/"
