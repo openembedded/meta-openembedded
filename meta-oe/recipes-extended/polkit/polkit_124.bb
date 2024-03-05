@@ -6,11 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
 
 SRC_URI = "git://gitlab.freedesktop.org/polkit/polkit.git;protocol=https;branch=master \
            file://0001-polkit.service.in-disable-MemoryDenyWriteExecute.patch \
-           file://0001-jsauthority-Bump-mozjs-to-115.patch \
            "
 
 S = "${WORKDIR}/git"
-SRCREV = "fc8b07e71d99f88a29258cde99b913b44da1846d"
+SRCREV = "82f0924dc0eb23b9df68e88dbaf9e07c81940a5a"
 
 DEPENDS = "expat glib-2.0"
 
@@ -51,4 +50,12 @@ do_install:append() {
 	chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
 }
 
-FILES:${PN} += "${libdir}/polkit-1 ${nonarch_libdir}/polkit-1 ${datadir}"
+FILES:${PN} += " \
+	${libdir}/pam.d/polkit-1 \
+	${libdir}/sysusers.d \
+	${libdir}/polkit-1 \
+	${nonarch_libdir}/pam.d/polkit-1 \
+	${nonarch_libdir}/sysusers.d \
+	${nonarch_libdir}/polkit-1 \
+	${datadir} \
+"
