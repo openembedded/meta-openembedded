@@ -15,10 +15,9 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-rewrite-cargo-host-linker-in-python3.patch  \
            file://musl-disable-stackwalk.patch \
            file://0001-add-arm-to-list-of-mozinline.patch \
-           file://py3.12.patch \
            file://armv5.patch \
            "
-SRC_URI[sha256sum] = "66d7e6e5129ac8e6fe83e24227dc7bb8dc42650bc53b21838e614de80d22bc66"
+SRC_URI[sha256sum] = "af8086f23efc8492d286671f6035b1a915de6f4ed5c7897e40be0e1cb6b895ea"
 
 S = "${WORKDIR}/firefox-${PV}"
 
