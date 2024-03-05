@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;prot
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+           file://0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch \
            "
 SRCREV_drbd-utils = "fdd9a4d603a9dc99d110d8bd0e288d7c0b6f586e"
 SRCREV_drbd-headers = "0349f00825b4198d4ec3248f43884114a187676a"
@@ -40,6 +41,7 @@ EXTRA_OECONF = " \
                 --with-initscripttype=both    \
                 --with-systemdunitdir=${systemd_unitdir}/system \
                 --without-manual \
+                --disable-udevchecks \
                "
 
 # If we have inherited reproducible_build, we want to use it.
