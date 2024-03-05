@@ -24,8 +24,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
-           file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch \
-           file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch \
+           file://0001-deps-disable-io_uring-support-in-libuv.patch \
            file://run-ptest \
            "
 
@@ -38,7 +37,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "31807ebeeeb049c53f1765e4a95aed69476a4b696dd100cb539ab668d7950b40"
+SRC_URI[sha256sum] = "77813edbf3f7f16d2d35d3353443dee4e61d5ee84d9e3138c7538a3c0ca5209e"
 
 S = "${WORKDIR}/node-v${PV}"
 
