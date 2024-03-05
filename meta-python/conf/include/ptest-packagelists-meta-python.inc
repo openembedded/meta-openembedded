@@ -17,6 +17,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-click \
     python3-dominate \
     python3-execnet \
+    python3-freezegun \
     python3-geojson \
     python3-gpiod \
     python3-gunicorn \
