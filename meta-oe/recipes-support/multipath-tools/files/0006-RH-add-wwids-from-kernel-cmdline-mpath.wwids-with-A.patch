@@ -1,14 +1,7 @@
-From 262de33671ede81e424344ea9125d9e546cf8612 Mon Sep 17 00:00:00 2001
+From f93248d8e3598ccdc42b6d639107917c9cda268c Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Thu, 26 Sep 2019 16:29:48 +0800
-Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep
-
-17
- 00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Fri,
-17
- Oct 2014 11:20:34 -0500 Subject: [PATCH] RH: add wwids from kernel
-cmdline
- mpath.wwids with -A
+Subject: [PATCH 06/12] RH: add wwids from kernel cmdline mpath.wwids with -A
 
 This patch adds another option to multipath, "-A", which reads
 /proc/cmdline for mpath.wwid=<WWID> options, and adds any wwids it finds
@@ -23,21 +16,21 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 
 Upstream-Status: Pending
 
-Update this patch to new version 0.8.2
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 [OP: Rebase to 0.9.3]
 Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+
+Rebase to 0.9.8
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
  libmultipath/wwids.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
  libmultipath/wwids.h |  1 +
  2 files changed, 45 insertions(+)
 
 diff --git a/libmultipath/wwids.c b/libmultipath/wwids.c
-index 89bb60ca..bab9aa85 100644
+index 591cd09b..b01f1b85 100644
 --- a/libmultipath/wwids.c
 +++ b/libmultipath/wwids.c
-@@ -451,3 +451,47 @@ int unmark_failed_wwid(const char *wwid)
+@@ -439,3 +439,47 @@ int unmark_failed_wwid(const char *wwid)
  	print_failed_wwid_result("unmark_failed", wwid, r);
  	return r;
  }
@@ -98,5 +91,5 @@ index 0c6ee54d..e32a0b0e 100644
  enum {
  	WWID_IS_NOT_FAILED = 0,
 -- 
-2.38.1
+2.25.1
 

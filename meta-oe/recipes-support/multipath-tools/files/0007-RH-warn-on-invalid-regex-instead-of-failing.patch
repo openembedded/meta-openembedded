@@ -1,7 +1,7 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17
-00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Mon, 6 Nov
-2017 21:39:28 -0600 Subject: [PATCH] RH: warn on invalid regex instead of
-failing
+From 49d0b0279f54ceb96878e8e72e828efbb84a534c Mon Sep 17 00:00:00 2001
+From: Changqing Li <changqing.li@windriver.com>
+Date: Fri, 1 Mar 2024 11:45:10 +0800
+Subject: [PATCH 07/12] RH: warn on invalid regex instead of failing
 
 multipath.conf used to allow "*" as a match everything regular expression,
 instead of requiring ".*". Instead of erroring when the old style
@@ -12,21 +12,21 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 
 Upstream-Status: Pending
 
-update this patch to 0.8.2
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 [OP: Rebase to 0.9.3]
 [OP: adjusted FREE() -> free(), made set_regex_value() static]
 Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+
+Rebase to 0.9.8
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- libmultipath/dict.c | 42 +++++++++++++++++++++++++++++++++++-------
- 1 file changed, 35 insertions(+), 7 deletions(-)
+ libmultipath/dict.c | 40 ++++++++++++++++++++++++++++++++++------
+ 1 file changed, 34 insertions(+), 6 deletions(-)
 
 diff --git a/libmultipath/dict.c b/libmultipath/dict.c
-index aa93fe43..55a22d32 100644
+index 5af036b7..e494419d 100644
 --- a/libmultipath/dict.c
 +++ b/libmultipath/dict.c
-@@ -155,6 +155,34 @@ set_str_noslash(vector strvec, void *ptr, const char *file, int line_nr)
+@@ -189,6 +189,34 @@ set_str_noslash(vector strvec, void *ptr, const char *file, int line_nr)
  	return 0;
  }
  
@@ -61,18 +61,7 @@ index aa93fe43..55a22d32 100644
  static int
  set_yes_no(vector strvec, void *ptr, const char *file, int line_nr)
  {
-@@ -1679,8 +1707,8 @@ ble_ ## option ## _handler (struct config *conf, vector strvec,		\
- 									\
- 	if (!conf->option)						\
- 		return 1;						\
--									\
--	buff = set_value(strvec);					\
-+									\	
-+	buff = set_regex_value(strvec);					\
- 	if (!buff)							\
- 		return 1;						\
- 									\
-@@ -1700,7 +1728,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec, \
+@@ -1798,7 +1826,7 @@ ble_ ## option ## _handler (struct config *conf, vector strvec,		\
  	if (!conf->option)						\
  		return 1;						\
  									\
@@ -81,7 +70,16 @@ index aa93fe43..55a22d32 100644
  	if (!buff)							\
  		return 1;						\
  									\
-@@ -1806,16 +1834,16 @@ device_handler(struct config *conf, vector strvec, const char *file,
+@@ -1818,7 +1846,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec, \
+ 	if (!conf->option)						\
+ 		return 1;						\
+ 									\
+-	buff = set_value(strvec);					\
++	buff = set_regex_value(strvec);					\
+ 	if (!buff)							\
+ 		return 1;						\
+ 									\
+@@ -1924,16 +1952,16 @@ device_handler(struct config *conf, vector strvec, const char *file,
  	return 0;
  }
  
@@ -101,7 +99,7 @@ index aa93fe43..55a22d32 100644
 +declare_hw_handler(bl_product, set_regex)
  declare_hw_snprint(bl_product, print_str)
  
- declare_hw_handler(hwhandler, set_str)
+ declare_hw_arg_str_handler(hwhandler, 0)
 -- 
-2.38.1
+2.25.1
 

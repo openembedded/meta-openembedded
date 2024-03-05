@@ -32,25 +32,23 @@ LICENSE = "GPL-2.0-only"
 SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=master \
            file://multipathd.oe \
            file://multipath.conf.example \
-           file://0021-RH-fixup-udev-rules-for-redhat.patch \
-           file://0022-RH-Remove-the-property-blacklist-exception-builtin.patch \
-           file://0023-RH-don-t-start-without-a-config-file.patch \
-           file://0024-RH-use-rpm-optflags-if-present.patch \
-           file://0025-RH-add-mpathconf.patch \
-           file://0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch \
-           file://0027-RH-warn-on-invalid-regex-instead-of-failing.patch \
-           file://0028-RH-reset-default-find_mutipaths-value-to-off.patch \
-           file://0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch \
-           file://0030-Always-use-devmapper.patch \
-           file://0031-Always-use-devmapper-for-kpartx.patch \
-           file://0032-libdmmp-Makefile-replace-perl-with-sed-in-install-ta.patch \
-           file://0001-fix-bug-of-do_compile-and-do_install.patch \
-           file://0001-add-explicit-dependency-on-libraries.patch \
+           file://0001-RH-fixup-udev-rules-for-redhat.patch \
+           file://0002-RH-Remove-the-property-blacklist-exception-builtin.patch \
+           file://0003-RH-don-t-start-without-a-config-file.patch \
+           file://0004-RH-use-rpm-optflags-if-present.patch \
+           file://0005-RH-add-mpathconf.patch \
+           file://0006-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch \
+           file://0007-RH-warn-on-invalid-regex-instead-of-failing.patch \
+           file://0008-RH-reset-default-find_mutipaths-value-to-off.patch \
+           file://0009-multipath-tools-modify-create-config.mk-for-cross-co.patch \
+           file://0010-Subject-PATCH-Always-use-devmapper.patch \
+           file://0011-fix-bug-of-do_compile-and-do_install.patch \
+           file://0012-add-explicit-dependency-on-libraries.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "1332947447133fdf26246012b836868a3d974f0e"
+SRCREV = "3daacfdfd110b24a3a7d5a276dcf8512b7039199"
 
 S = "${WORKDIR}/git"
 
@@ -103,6 +101,7 @@ do_install() {
     ${D}${sysconfdir}/multipath.conf.example
 }
 
+FILES:${PN} += "${systemd_system_unitdir}"
 FILES:${PN}-dbg += "${base_libdir}/multipath/.debug"
 
 PACKAGES =+ "${PN}-libs"
