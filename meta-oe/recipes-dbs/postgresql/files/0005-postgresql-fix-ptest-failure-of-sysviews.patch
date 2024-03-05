@@ -1,7 +1,7 @@
-From 9f81377dddfe32d950844d7053020a36b40fce08 Mon Sep 17 00:00:00 2001
+From 1a8b94140988d2ee5ff987b0bb3e7c3e936b8c01 Mon Sep 17 00:00:00 2001
 From: Manoj Saun <manojsingh.saun@windriver.com>
 Date: Wed, 22 Mar 2023 08:07:26 +0000
-Subject: [PATCH] postgresql: fix ptest failure of sysviews
+Subject: [PATCH 5/5] postgresql: fix ptest failure of sysviews
 
 The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
 in pg_config table which reduces the count of rows from pg_config and leads to
@@ -18,9 +18,11 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
  src/test/regress/sql/sysviews.sql      | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
+index 001c6e7..8256898 100644
 --- a/src/test/regress/expected/sysviews.out
 +++ b/src/test/regress/expected/sysviews.out
-@@ -29,7 +29,7 @@ select name, ident, parent, level, total
+@@ -29,7 +29,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
  (1 row)
  
  -- At introduction, pg_config had 23 entries; it may grow
@@ -29,9 +31,11 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
   ok 
  ----
   t
+diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
+index 351e469..84c113e 100644
 --- a/src/test/regress/sql/sysviews.sql
 +++ b/src/test/regress/sql/sysviews.sql
-@@ -18,7 +18,7 @@ select name, ident, parent, level, total
+@@ -18,7 +18,7 @@ select name, ident, parent, level, total_bytes >= free_bytes
    from pg_backend_memory_contexts where level = 0;
  
  -- At introduction, pg_config had 23 entries; it may grow
@@ -40,3 +44,6 @@ Signed-off-by: Manoj Saun <manojsingh.saun@windriver.com>
  
  -- We expect no cursors in this test; see also portals.sql
  select count(*) = 0 as ok from pg_cursors;
+-- 
+2.25.1
+
