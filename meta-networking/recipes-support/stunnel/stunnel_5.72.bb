@@ -3,7 +3,7 @@ DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-sta
 HOMEPAGE = "https://www.stunnel.org/"
 SECTION = "net"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING.md;md5=b4988f33f70b383b3011c4ede0a679ce"
+LIC_FILES_CHKSUM = "file://COPYING.md;md5=906ac034adaee9d093318e51b53453ca"
 
 DEPENDS = "autoconf-archive libnsl2 openssl"
 
@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
            file://fix-openssl-no-des.patch \
 "
 
-SRC_URI[sha256sum] = "1ff7d9f30884c75b98c8a0a4e1534fa79adcada2322635e6787337b4e38fdb81"
+SRC_URI[sha256sum] = "3d532941281ae353319735144e4adb9ae489a10b7e309c58a48157f08f42e949"
 
 inherit autotools bash-completion pkgconfig
 
