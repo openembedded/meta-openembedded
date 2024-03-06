@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c5a58ca91c1758a53f896ba89d8aaac2"
 
 SRC_URI = "git://github.com/gcovr/gcovr.git;branch=main;protocol=https"
-SRCREV = "fc190bcb85a25f5738315434a11f8e993edce515"
+SRCREV = "c4b74b0859611283be646d590c7915e787911b6f"
 
 S = "${WORKDIR}/git"
 
