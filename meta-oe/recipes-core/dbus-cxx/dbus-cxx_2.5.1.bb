@@ -6,7 +6,7 @@ LICENSE = "LGPL-3.0-or-later | BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=24594f493407a4cd401ce9794e0b9308"
 
 SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https"
-SRCREV = "2c3b3a767a5898ea8e51159e8122ddbb3aaeeb94"
+SRCREV = "732a5becb4349e02ffce407a3fd4d75cc3d82421"
 
 DEPENDS = "\
 	dbus \
