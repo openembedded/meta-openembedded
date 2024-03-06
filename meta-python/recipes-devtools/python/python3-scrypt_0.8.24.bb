@@ -5,7 +5,7 @@ HOMEPAGE="https://github.com/holgern/py-scrypt"
 
 SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
 
-SRC_URI[sha256sum] = "0d226c1c6744fb2e308b391410669b1df5cfe82637ffcb5ed489bf82b2d2eb78"
+SRC_URI[sha256sum] = "98ffde45e4a95461d73ded54ba7a26857679920d4f8ff320f6f7ade6e29531bd"
 
 inherit pypi ptest setuptools3 dos2unix
 
