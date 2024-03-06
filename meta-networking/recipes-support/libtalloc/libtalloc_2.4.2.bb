@@ -14,7 +14,7 @@ SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://run-ptest \
 "
-SRC_URI[sha256sum] = "410a547f08557007be0e88194f218868358edc0ab98c98ba8c167930db3d33f9"
+SRC_URI[sha256sum] = "85ecf9e465e20f98f9950a52e9a411e14320bc555fa257d87697b7e7a9b1d8a6"
 
 inherit waf-samba pkgconfig ptest
 
