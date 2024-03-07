@@ -21,8 +21,10 @@ CXXFLAGS:append = " -fPIC"
 ALLOW_EMPTY:${PN} = "1"
 ALLOW_EMPTY:${PN}-dbg = "1"
 
-ALLOW_EMPTY:${PN}-staticdev = "1"
-RDEPENDS:${PN}-dev += "${PN}-staticdev"
+# -staticdev will not be implicitly put into an SDK, so we add an rdepend
+# if we are not building shared libraries
+#
+RDEPENDS:${PN}-dev += "${@bb.utils.contains("PACKAGECONFIG","shared","","${PN}-staticdev",d)}"
 
 BBCLASSEXTEND = "native nativesdk"
 
