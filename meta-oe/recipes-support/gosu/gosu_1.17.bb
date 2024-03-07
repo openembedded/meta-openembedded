@@ -6,13 +6,16 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=3b83ef96387f14655fc854dd
 
 GO_IMPORT = "github.com/tianon/gosu"
 SRC_URI = "git://${GO_IMPORT}.git;branch=master;protocol=https \
-           git://github.com/opencontainers/runc;name=runc;destsuffix=${S}/src/github.com/opencontainers/runc;branch=main;protocol=https \
+           git://github.com/moby/sys;name=user;destsuffix=${S}/src/github.com/moby/sys;branch=main;protocol=https \
+           git://github.com/golang/sys;name=sys;destsuffix=${S}/src/golang.org/x/sys;branch=master;protocol=https \
 "
-SRCREV = "0e7347714352cd7f2e5edc9d2cf838d9934e6036"
-#v1.1.0
-SRCREV_runc = "067aaf8548d78269dcb2c13b856775e27c410f9c"
+SRCREV = "0d1847490b448a17eb347e5e357f2c0478df87ad"
+#v0.1.0
+SRCREV_user = "c0711cde08c8fa33857a2c28721659267f49b5e2"
+#v0.1.0
+SRCREV_sys = "95e765b1cc43ac521bd4fd501e00774e34401449"
 
-SRCREV_FORMAT .= "_runc"
+SRCREV_FORMAT .= "_user_sys"
 
 inherit go
 
