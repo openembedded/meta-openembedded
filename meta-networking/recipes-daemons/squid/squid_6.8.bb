@@ -12,20 +12,17 @@ LICENSE = "GPL-2.0-or-later"
 MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
 MIN_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 
-SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 \
+SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.xz \
            file://Set-up-for-cross-compilation.patch \
            file://Skip-AC_RUN_IFELSE-tests.patch \
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
            file://run-ptest \
            file://volatiles.03_squid \
-           file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0002-squid-make-squid-conf-tests-run-on-target-device.patch \
            file://squid.nm \
            "
 
-SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
-
-SRC_URI[sha256sum] = "7a09a0232026824c300b72c42cc5c0c431cbb65498f41d5dea48ef447ab8037e"
+SRC_URI[sha256sum] = "11cc5650b51809d99483ccfae24744a2e51cd16199f5ff0c917e84fce695870f"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
