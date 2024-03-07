@@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-execnet \
     python3-freezegun \
     python3-geojson \
+    python3-google-auth-oauthlib \
     python3-gpiod \
     python3-gunicorn \
     python3-html2text \
