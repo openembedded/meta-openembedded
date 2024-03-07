@@ -1,4 +1,4 @@
-From 8097734b27fd146f358a4edd0d1a0d28309bd9a4 Mon Sep 17 00:00:00 2001
+From 95868615a04b4a6f0dd5997c9726422828426116 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 22 Jul 2016 18:34:39 +0000
 Subject: [PATCH] get_pid_from_inode: Include limit.h
@@ -8,7 +8,6 @@ PATH_MAX and NAME_MAX are required by this file
 Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
 ---
  agent/mibgroup/util_funcs/get_pid_from_inode.c | 1 +
  1 file changed, 1 insertion(+)
@@ -25,3 +24,6 @@ index 5788e1d..ea380a6 100644
  #include <stdio.h>
  #ifdef HAVE_STDLIB_H
  #include <stdlib.h>
+-- 
+2.25.1
+

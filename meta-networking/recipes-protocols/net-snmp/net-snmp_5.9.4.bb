@@ -14,22 +14,21 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://snmptrapd.conf \
            file://snmpd.service \
            file://snmptrapd.service \
-           file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
-           file://fix-libtool-finish.patch \
-           file://net-snmp-testing-add-the-output-format-for-ptest.patch \
            file://run-ptest \
-           file://0001-config_os_headers-Error-Fix.patch \
-           file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
-           file://0001-get_pid_from_inode-Include-limit.h.patch \
-           file://0004-configure-fix-incorrect-variable.patch \
-           file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
-           file://net-snmp-fix-for-disable-des.patch \
-           file://reproducibility-have-printcap.patch \
-           file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
-           file://0001-Add-noreturn-attribute-to-netsnmp_pci_error.patch \
-           file://CVE-2022-44792-CVE-2022-44793.patch \
-           "
-SRC_URI[sha256sum] = "2097f29b7e1bf3f1300b4bae52fa2308d0bb8d5d3998dbe02f9462a413a2ef0a"
+           file://0001-net-snmp-add-knob-whether-nlist.h-are-checked.patch \
+           file://0002-net-snmp-fix-libtool-finish.patch \
+           file://0003-testing-add-the-output-format-for-ptest.patch \
+           file://0004-config_os_headers-Error-Fix.patch \
+           file://0005-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
+           file://0006-get_pid_from_inode-Include-limit.h.patch \
+           file://0007-configure-fix-incorrect-variable.patch \
+           file://0008-net-snmp-fix-engineBoots-value-on-SIGHUP.patch \
+           file://0009-net-snmp-fix-for-disable-des.patch \
+           file://0010-net-snmp-Reproducibility-Don-t-check-build-host-for.patch \
+           file://0011-ac_add_search_path.m4-keep-consistent-between-32bit-.patch \
+           file://0012-Fix-configuration-of-NETSNMP_FD_MASK_TYPE.patch \
+          "
+SRC_URI[sha256sum] = "8b4de01391e74e3c7014beb43961a2d6d6fa03acc34280b9585f4930745b0544"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
 UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
@@ -151,6 +150,8 @@ do_install:append() {
         -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
         -e "s@^NSC_LDFLAGS=\"-L.* @NSC_LDFLAGS=\"-L\$\{libdir\} @g" \
         -i ${D}${bindir}/net-snmp-config
+
+    sed -i -e 's:${HOSTTOOLS_DIR}/::g' ${D}${bindir}/net-snmp-create-v3-user
 
     oe_multilib_header net-snmp/net-snmp-config.h
 
