@@ -61,6 +61,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-smpplib \
     python3-soupsieve \
     python3-sqlparse \
+    python3-tomli-w \
     python3-tomlkit \
     python3-trustme \
     python3-typeguard \
