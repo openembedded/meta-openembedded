@@ -78,6 +78,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-arrow \
     python3-lz4 \
     python3-marshmallow \
+    python3-traitlets \
     python3-yappi \
 "
 
