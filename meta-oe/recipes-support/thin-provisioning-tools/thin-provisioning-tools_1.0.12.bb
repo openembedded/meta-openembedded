@@ -11,7 +11,7 @@ SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
     "
 
-SRCREV = "1d60839b0a920df6476712b80f933854fb32e160"
+SRCREV = "b2d57dad4c3378544d7b36f3fc61e60989c5c092"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
