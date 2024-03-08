@@ -42,6 +42,8 @@ PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland"
 def gnome_verdir(v):
    return oe.utils.trim_version(v, 1)
 
+PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+
 FILES:${PN} += " \
     ${systemd_user_unitdir} \
     ${libdir}/gnome-settings-daemon-${@gnome_verdir("${PV}")}/libgsd.so \
