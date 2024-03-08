@@ -33,6 +33,8 @@ SRC_URI[archive.sha256sum] = "3d8625faa99047bc4aefd29921ad728ab4d700cff86e0f2ec6
 
 EXTRA_OEMESON = "-Dman=false"
 
+PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+
 FILES:${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/dbus-1 \
