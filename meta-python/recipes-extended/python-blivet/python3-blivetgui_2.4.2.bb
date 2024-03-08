@@ -13,8 +13,6 @@ S = "${WORKDIR}/git"
 inherit features_check setuptools3
 REQUIRED_DISTRO_FEATURES = "x11 systemd gobject-introspection-data"
 
-PIP_INSTALL_PACKAGE = "blivet_gui"
-
 RDEPENDS:${PN} = "python3-pygobject python3 \
                   python3-blivet gtk+3  \
                   python3-pid libreport \

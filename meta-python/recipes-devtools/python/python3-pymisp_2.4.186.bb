@@ -7,8 +7,6 @@ SRC_URI[sha256sum] = "bdf2d54b297ad890418179b044dd4ea79821fccef723823919d12262e9
 
 inherit python_poetry_core pypi
 
-PIP_INSTALL_PACKAGE = "pymisp"
-
 RDEPENDS:${PN} += " \
     python3-dateutil \
     python3-json \

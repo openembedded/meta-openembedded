@@ -10,7 +10,6 @@ SRCREV = "c4b74b0859611283be646d590c7915e787911b6f"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
-PIP_INSTALL_PACKAGE = "gcovr"
 
 RDEPENDS:${PN} += "python3-jinja2 python3-lxml python3-setuptools python3-pygments python3-multiprocessing"
 
