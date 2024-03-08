@@ -7,6 +7,7 @@
 #
 # ptests which take less than ~30s each
 PTESTS_FAST_META_PYTHON = "\
+    python3-a2wsgi \
     python3-appdirs \
     python3-ansicolors \
     python3-asgiref \
