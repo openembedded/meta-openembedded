@@ -16,17 +16,16 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native bison-nat
 LDFLAGS:append:riscv64 = " -latomic"
 LDFLAGS:append:riscv32 = " -latomic"
 
-SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;branch=3.0.x \
+SRC_URI = "https://get.videolan.org/${BPN}/${PV}/${BP}.tar.xz \
            file://0001-make-opencv-configurable.patch \
            file://0002-use-vorbisidec.patch \
            file://0003-fix-luaL-checkint.patch \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
            file://0005-ioctl-does-not-have-same-signature-between-glibc-and.patch \
            file://0006-configure-Disable-incompatible-function-pointer-type.patch \
-           file://0001-po-Fix-invalid-.oc-translation-format-string.patch \
+           file://taglib-2.patch \
 "
-SRCREV = "e9eceaed4d838dbd84638bfb2e4bdd08294163b1"
-S = "${WORKDIR}/git"
+SRC_URI[sha256sum] = "adc7285b4d2721cddf40eb5270cada2aaa10a334cb546fd55a06353447ba29b5"
 
 inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
 
