@@ -24,6 +24,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-gpiod \
     python3-gunicorn \
     python3-html2text \
+    python3-httptools \
     python3-inflection \
     python3-inotify \
     python3-intervals \
