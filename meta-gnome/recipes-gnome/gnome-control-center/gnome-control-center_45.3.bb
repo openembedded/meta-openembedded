@@ -59,6 +59,8 @@ do_install:append() {
     fi
 }
 
+PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/gnome-shell \
