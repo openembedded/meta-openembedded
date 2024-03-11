@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
            "
 
-SRC_URI[sha256sum] = "4026d93b866db198c8ca1685b0f5d52793f65c6e63cb364163af661fdff0968c"
+SRC_URI[sha256sum] = "0e2405b4cec29d0459621f4340a1a74af771ec7cffedff43250cad7f1f87605e"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
 
@@ -122,6 +122,7 @@ EXTRA_OECONF += "--enable-fhs \
                  --with-profiling-data \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix} \
                  --with-pam --with-pammodulesdir=${base_libdir}/security \
+                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
                 "
 
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
