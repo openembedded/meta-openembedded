@@ -1,7 +1,7 @@
 SUMMARY = "Abseil is a cpp library like STL"
 DESCRIPTION = "Abseil provides pieces missing from the C++ standard. Contains \
 additional useful libraries like algorithm, container, debugging, hash, memory, \
-meta, numeric, strings, synchronization, time, types and utility"
+meta, numeric, strings, synchronization, time, types and utility."
 HOMEPAGE = "https://abseil.io/"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
@@ -18,9 +18,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
 
 S = "${WORKDIR}/git"
 
-ASNEEDED:class-native = ""
-ASNEEDED:class-nativesdk = ""
-
 inherit cmake
 
 EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
@@ -28,8 +25,6 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
                  -DABSL_ENABLE_INSTALL=ON \
                 "
 
-BBCLASSEXTEND = "native nativesdk"
-
 SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
 
-FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
+BBCLASSEXTEND = "native nativesdk"
