@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
            file://CVE-2023-31130.patch \
            file://CVE-2023-31147.patch \
            file://CVE-2023-32067.patch \
+           file://CVE-2024-25629.patch \
           "
 SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
 
