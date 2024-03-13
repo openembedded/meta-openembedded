@@ -17,7 +17,7 @@ EXTRA_OEMAKE = "DESTDIR=${D}"
 
 PACKAGECONFIG ??= "drm"
 LVGL_CONFIG_DRM_CARD ?= "/dev/dri/card0"
-require lv-drivers.inc
+require lv-conf.inc
 
 inherit cmake
 
