@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 ALLOW_EMPTY:${PN} = "1"
 
 PACKAGECONFIG ??= "drm"
-require lv-drivers.inc
+require lv-conf.inc
 
 FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
