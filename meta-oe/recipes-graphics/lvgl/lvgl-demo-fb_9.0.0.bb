@@ -26,6 +26,9 @@ S = "${WORKDIR}/git"
 TARGET_CFLAGS += "-I${STAGING_INCDIR}/libdrm"
 
 do_configure:prepend() {
+	# Fix ARGB8888 base plane format misuse again
+	sed -i 's@ARGB8888@XRGB8888@g' "${S}/lvgl/src/drivers/display/drm/lv_linux_drm.c"
+
 	if [ "${LVGL_CONFIG_USE_DRM}" -eq 1 ] ; then
 		# Add libdrm build dependency
 		sed -i '/^target_link_libraries/ s@pthread@& drm@' "${S}/CMakeLists.txt"
