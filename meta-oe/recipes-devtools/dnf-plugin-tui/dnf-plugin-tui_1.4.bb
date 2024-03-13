@@ -4,8 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
-SRCREV = "baac322a8a6d57e62c703f6ed523152baec18b4f"
-PV = "1.3"
+SRCREV = "ad48d934c54ab01026634c90f47f151f148b8147"
 
 SRC_URI:append:class-target = " file://oe-remote.repo.sample"
 
