@@ -7,6 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=802d3d83ae80ef5f343050bf96cce3a4 \
 SRC_URI = "\
 	git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=master;name=demo \
 	git://github.com/lvgl/lvgl;protocol=https;branch=master;name=lvgl;subdir=git/lvgl \
+	file://0001-fix-drm-Default-to-XRGB8888-framebuffer.patch;patchdir=lvgl \
+	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch;patchdir=lvgl \
+	file://0003-Make-fbdev-device-node-runtime-configurable-via-envi.patch \
+	file://0004-Factor-out-fbdev-initialization-code.patch \
+	file://0005-Add-DRM-KMS-example-support.patch \
+	file://0006-Add-SDL2-example-support.patch \
 	"
 SRCREV_demo = "dccc6a1ca48372aa993dbea7a8e17dec6f42df6a"
 SRCREV_lvgl = "e29d35b43c509b6d7189f5dac87139441669ae66"
@@ -26,23 +32,9 @@ S = "${WORKDIR}/git"
 TARGET_CFLAGS += "-I${STAGING_INCDIR}/libdrm"
 
 do_configure:prepend() {
-	# Fix ARGB8888 base plane format misuse again
-	sed -i 's@ARGB8888@XRGB8888@g' "${S}/lvgl/src/drivers/display/drm/lv_linux_drm.c"
-
-	if [ "${LVGL_CONFIG_USE_DRM}" -eq 1 ] ; then
-		# Add libdrm build dependency
-		sed -i '/^target_link_libraries/ s@pthread@& drm@' "${S}/CMakeLists.txt"
-		# Switch from fbdev to drm usage
-		sed -i "s@lv_linux_fbdev_set_file.*@lv_linux_drm_set_file(disp, \"${LVGL_CONFIG_DRM_CARD}\", -1);@g" "${S}/main.c"
-		sed -i 's@fbdev@drm@g' "${S}/main.c"
-	fi
-
 	if [ "${LVGL_CONFIG_USE_SDL}" -eq 1 ] ; then
-		# Add libsdl build dependency
-		sed -i '/^target_link_libraries/ s@pthread@& SDL2 SDL2_image@' "${S}/CMakeLists.txt"
-		# Switch from fbdev to sdl usage
-		sed -i 's@lv_linux_fbdev_create()@lv_sdl_window_create(atoi(getenv("LV_VIDEO_WIDTH") ? : "800"), atoi(getenv("LV_VIDEO_HEIGHT") ? : "480"))@g' "${S}/main.c"
-		sed -i '/lv_linux_fbdev_set_file/ d' "${S}/main.c"
+		# Add libsdl build dependency, SDL2_image has no cmake file
+		sed -i '/^target_link_libraries/ s@pthread@& SDL2_image@' "${S}/CMakeLists.txt"
 	fi
 }
 
