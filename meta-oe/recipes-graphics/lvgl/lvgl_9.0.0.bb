@@ -30,3 +30,5 @@ FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
     ${includedir}/${PN}/lvgl/ \
     "
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
