@@ -22,6 +22,11 @@ ALLOW_EMPTY:${PN} = "1"
 PACKAGECONFIG ??= "drm"
 require lv-conf.inc
 
+do_configure:prepend() {
+    # Fix ARGB8888 base plane format misuse again
+    sed -i 's@ARGB8888@XRGB8888@g' "${S}/src/drivers/display/drm/lv_linux_drm.c"
+}
+
 FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
     ${includedir}/${PN}/lvgl/ \
