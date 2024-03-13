@@ -14,6 +14,8 @@ LVGL_CONFIG_SDL_FULLSCREEN ?= "0"
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
 
+DEBUG_BUILD ??= "0"
+
 ALLOW_EMPTY:${PN} = "1"
 
 EXTRA_OECMAKE += "-Dinstall:BOOL=ON -DLIB_INSTALL_DIR=${baselib}"
@@ -41,6 +43,12 @@ do_configure:append() {
         -e "s|\(#define LV_TICK_CUSTOM_SYS_TIME_EXPR \).*|extern uint32_t custom_tick_get(void);\n\1 (custom_tick_get())|g" \
         \
         -e "s|\(^#define LV_USE_EVDEV \).*|#define LV_USE_EVDEV ${LVGL_CONFIG_USE_EVDEV}|g" \
+        \
+        -e "s|\(^#define LV_USE_ASSERT_NULL \).*|#define LV_USE_ASSERT_NULL ${DEBUG_BUILD}|g" \
+        -e "s|\(^#define LV_USE_ASSERT_MALLOC \).*|#define LV_USE_ASSERT_MALLOC ${DEBUG_BUILD}|g" \
+        -e "s|\(^#define LV_USE_ASSERT_STYLE \).*|#define LV_USE_ASSERT_STYLE ${DEBUG_BUILD}|g" \
+        -e "s|\(^#define LV_USE_ASSERT_MEM_INTEGRITY \).*|#define LV_USE_ASSERT_MEM_INTEGRITY ${DEBUG_BUILD}|g" \
+        -e "s|\(^#define LV_USE_ASSERT_OBJ \).*|#define LV_USE_ASSERT_OBJ ${DEBUG_BUILD}|g" \
         \
         -i "${S}/lv_conf.h"
 }
