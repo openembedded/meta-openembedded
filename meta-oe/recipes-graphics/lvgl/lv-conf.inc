@@ -9,6 +9,7 @@ LVGL_CONFIG_USE_EVDEV = "${@bb.utils.contains_any('PACKAGECONFIG', 'drm fbdev', 
 LVGL_CONFIG_USE_FBDEV = "${@bb.utils.contains('PACKAGECONFIG', 'fbdev', '1', '0', d)}"
 
 LVGL_CONFIG_USE_SDL = "${@bb.utils.contains('PACKAGECONFIG', 'sdl', '1', '0', d)}"
+LVGL_CONFIG_SDL_FULLSCREEN ?= "0"
 
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
@@ -30,6 +31,7 @@ do_configure:append() {
         -e "s|\(^#define LV_USE_SDL \).*|#define LV_USE_SDL ${LVGL_CONFIG_USE_SDL}|g" \
         -e "s|\(^#define LV_USE_DRAW_SDL \).*|#define LV_USE_DRAW_SDL ${LVGL_CONFIG_USE_SDL}|g" \
         -e "s|\(^    #define LV_SDL_BUF_COUNT \).*|    #define LV_SDL_BUF_COUNT 2|g" \
+        -e "s|\(^    #define LV_SDL_FULLSCREEN \).*|    #define LV_SDL_FULLSCREEN ${LVGL_CONFIG_SDL_FULLSCREEN}|g" \
         \
         -e "s|\(^#define LV_COLOR_DEPTH \).*|#define LV_COLOR_DEPTH ${LVGL_CONFIG_LV_COLOR_DEPTH}|g" \
         -e "s|\(#define LV_MEM_CUSTOM .*\)0|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|g" \
