@@ -14,7 +14,7 @@ PV .= "+git${SRCPV}"
 
 inherit cmake
 
-EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib}"
+EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
 
 ALLOW_EMPTY:${PN} = "1"
