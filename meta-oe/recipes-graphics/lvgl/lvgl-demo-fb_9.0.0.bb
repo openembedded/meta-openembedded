@@ -13,6 +13,7 @@ SRC_URI = "\
 	file://0004-Factor-out-fbdev-initialization-code.patch \
 	file://0005-Add-DRM-KMS-example-support.patch \
 	file://0006-Add-SDL2-example-support.patch \
+	file://0007-fix-cmake-generate-versioned-shared-libraries.patch;patchdir=lvgl \
 	"
 SRCREV_demo = "dccc6a1ca48372aa993dbea7a8e17dec6f42df6a"
 SRCREV_lvgl = "e29d35b43c509b6d7189f5dac87139441669ae66"
