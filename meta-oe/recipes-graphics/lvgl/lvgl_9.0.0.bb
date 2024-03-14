@@ -12,6 +12,7 @@ SRC_URI = "\
 	git://github.com/lvgl/lvgl;protocol=https;branch=master \
 	file://0001-fix-drm-Default-to-XRGB8888-framebuffer.patch \
 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch \
+	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
 	"
 SRCREV = "e29d35b43c509b6d7189f5dac87139441669ae66"
 PV .= "+git${SRCPV}"
@@ -30,5 +31,3 @@ FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
     ${includedir}/${PN}/lvgl/ \
     "
-SOLIBS = ".so"
-FILES_SOLIBSDEV = ""
