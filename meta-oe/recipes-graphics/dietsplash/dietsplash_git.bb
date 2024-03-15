@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 # Really, no depends besides a C library
 
 PV = "0.3"
-PR = "r1"
 
 SRCREV = "ef2e1a390e768e21e6a6268977580ee129a96633"
 SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git;branch=master;protocol=https \
