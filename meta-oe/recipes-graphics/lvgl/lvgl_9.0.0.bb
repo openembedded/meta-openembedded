@@ -34,5 +34,4 @@ do_install:append() {
 
 FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
-    ${includedir}/${PN}/lvgl/ \
     "
