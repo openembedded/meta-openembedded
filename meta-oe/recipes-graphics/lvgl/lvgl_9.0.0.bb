@@ -22,6 +22,8 @@ inherit cmake
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
 
+TARGET_CFLAGS += "-I${STAGING_INCDIR}/libdrm"
+
 ALLOW_EMPTY:${PN} = "1"
 
 PACKAGECONFIG ??= "drm"
