@@ -27,6 +27,11 @@ ALLOW_EMPTY:${PN} = "1"
 PACKAGECONFIG ??= "drm"
 require lv-conf.inc
 
+do_install:append() {
+    install -d "${D}${includedir}/${PN}"
+    install -m 0644 "${S}/lv_conf.h" "${D}${includedir}/${PN}/lv_conf.h"
+}
+
 FILES:${PN}-dev += "\
     ${includedir}/${PN}/ \
     ${includedir}/${PN}/lvgl/ \
