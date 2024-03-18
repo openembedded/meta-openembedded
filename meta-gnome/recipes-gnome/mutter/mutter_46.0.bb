@@ -24,7 +24,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "91140837be15582f2c753be661ab8e42dad55d4a1b0f0650bd0b2c93f02bd7ab"
+SRC_URI[archive.sha256sum] = "bb3f7d77aebdea9d317d3f5ef03868e4e7969da423ac495e33a16d61db2c9373"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
@@ -63,9 +63,10 @@ PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcan
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-13"
+MUTTER_API_NAME = "mutter-14"
 
 do_install:prepend() {
+    sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
     sed -i -e 's|${B}/||g' ${B}/clutter/clutter/clutter-enum-types.c
     sed -i -e 's|${B}/||g' ${B}/src/meta-private-enum-types.c
     sed -i -e 's|${B}/||g' ${B}/src/meta/meta-enum-types.c
