@@ -36,39 +36,39 @@ do_configure:append() {
     # If there is a configuration template, start from that
     [ -r "${S}/lv_conf_template.h" ] && cp -Lv "${S}/lv_conf_template.h" "${S}/lv_conf.h"
 
-    sed -e "s|#if 0 .*Set it to \"1\" to enable content.*|#if 1 // Enabled by ${PN}|g" \
+    sed -r -e "s|#if 0 .*Set it to \"1\" to enable content.*|#if 1 // Enabled by ${PN}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_LINUX_DRM[ \t]\).*|\1${LVGL_CONFIG_USE_DRM}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_LINUX_DRM[[:space:]]).*|\1${LVGL_CONFIG_USE_DRM}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_LINUX_FBDEV[ \t]\).*|\1${LVGL_CONFIG_USE_FBDEV}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_LINUX_FBDEV[[:space:]]).*|\1${LVGL_CONFIG_USE_FBDEV}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_SDL[ \t]\).*|\1${LVGL_CONFIG_USE_SDL}|g" \
-        -e "s|\(^[ \t]*#define LV_USE_DRAW_SDL[ \t]\).*|\1${LVGL_CONFIG_USE_SDL}|g" \
-        -e "s|\(^[ \t]*#define LV_SDL_BUF_COUNT[ \t]\).*|\1 2|g" \
-        -e "s|\(^[ \t]*#define LV_SDL_FULLSCREEN[ \t]\).*|\1${LVGL_CONFIG_SDL_FULLSCREEN}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_SDL[[:space:]]).*|\1${LVGL_CONFIG_USE_SDL}|" \
+        -e "s|^([[:space:]]*#define LV_USE_DRAW_SDL[[:space:]]).*|\1${LVGL_CONFIG_USE_SDL}|" \
+        -e "s|^([[:space:]]*#define LV_SDL_BUF_COUNT[[:space:]]).*|\1 2|" \
+        -e "s|^([[:space:]]*#define LV_SDL_FULLSCREEN[[:space:]]).*|\1${LVGL_CONFIG_SDL_FULLSCREEN}|" \
         \
-        -e "s|\(^[ \t]*#define LV_COLOR_DEPTH[ \t]\).*|\1${LVGL_CONFIG_LV_COLOR_DEPTH}|g" \
-        -e "s|\(^[ \t]*#define LV_MEM_CUSTOM[ \t].*\).*|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|g" \
-        -e "s|\(^[ \t]*#define LV_MEM_SIZE[ \t]\).*|\1${LVGL_CONFIG_LV_MEM_SIZE}|g" \
+        -e "s|^([[:space:]]*#define LV_COLOR_DEPTH[[:space:]]).*|\1${LVGL_CONFIG_LV_COLOR_DEPTH}|" \
+        -e "s|^([[:space:]]*#define LV_MEM_CUSTOM[[:space:]]).*|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|" \
+        -e "s|^([[:space:]]*#define LV_MEM_SIZE[[:space:]]).*|\1${LVGL_CONFIG_LV_MEM_SIZE}|" \
         \
-        -e "s|\(^[ \t]*#define LV_TICK_CUSTOM[ \t]\).*|\1 1|g" \
-        -e "s|\(^[ \t]*#define LV_TICK_CUSTOM_INCLUDE[ \t]\).*|\1 <stdint.h>|g" \
-        -e "s|\(^[ \t]*#define LV_TICK_CUSTOM_SYS_TIME_EXPR[ \t]\).*|extern uint32_t custom_tick_get(void);\n\1 (custom_tick_get())|g" \
+        -e "s|^([[:space:]]*#define LV_TICK_CUSTOM[[:space:]]).*|\1 1|" \
+        -e "s|^([[:space:]]*#define LV_TICK_CUSTOM_INCLUDE[[:space:]]).*|\1 <stdint.h>|" \
+        -e "s|^([[:space:]]*#define LV_TICK_CUSTOM_SYS_TIME_EXPR[[:space:]]).*|extern uint32_t custom_tick_get(void);\n\1 (custom_tick_get())|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_EVDEV[ \t]\).*|\1${LVGL_CONFIG_USE_EVDEV}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_EVDEV[[:space:]]).*|\1${LVGL_CONFIG_USE_EVDEV}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_ASSERT_NULL[ \t]\).*|\1${DEBUG_BUILD}|g" \
-        -e "s|\(^[ \t]*#define LV_USE_ASSERT_MALLOC[ \t]\).*|\1${DEBUG_BUILD}|g" \
-        -e "s|\(^[ \t]*#define LV_USE_ASSERT_STYLE[ \t]\).*|\1${DEBUG_BUILD}|g" \
-        -e "s|\(^[ \t]*#define LV_USE_ASSERT_MEM_INTEGRITY[ \t]\).*|\1${DEBUG_BUILD}|g" \
-        -e "s|\(^[ \t]*#define LV_USE_ASSERT_OBJ[ \t]\).*|\1${DEBUG_BUILD}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_ASSERT_NULL[[:space:]]).*|\1${DEBUG_BUILD}|" \
+        -e "s|^([[:space:]]*#define LV_USE_ASSERT_MALLOC[[:space:]]).*|\1${DEBUG_BUILD}|" \
+        -e "s|^([[:space:]]*#define LV_USE_ASSERT_STYLE[[:space:]]).*|\1${DEBUG_BUILD}|" \
+        -e "s|^([[:space:]]*#define LV_USE_ASSERT_MEM_INTEGRITY[[:space:]]).*|\1${DEBUG_BUILD}|" \
+        -e "s|^([[:space:]]*#define LV_USE_ASSERT_OBJ[[:space:]]).*|\1${DEBUG_BUILD}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_LOG[ \t]\).*|\1${LVGL_CONFIG_LV_USE_LOG}|g" \
-        -e "s|\(^[ \t]*#define LV_LOG_LEVEL[ \t]\).*|\1${LVGL_CONFIG_LV_LOG_LEVEL}|g" \
-        -e "s|\(^[ \t]*#define LV_LOG_PRINTF[ \t]\).*|\1${LVGL_CONFIG_LV_LOG_PRINTF}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_LOG[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_LOG}|" \
+        -e "s|^([[:space:]]*#define LV_LOG_LEVEL[[:space:]]).*|\1${LVGL_CONFIG_LV_LOG_LEVEL}|" \
+        -e "s|^([[:space:]]*#define LV_LOG_PRINTF[[:space:]]).*|\1${LVGL_CONFIG_LV_LOG_PRINTF}|" \
         \
-        -e "s|\(^[ \t]*#define LV_USE_FONT_COMPRESSED[ \t]\).*|\1${LVGL_CONFIG_LV_USE_FONT_COMPRESSED}|g" \
-        -e "s|\(^[ \t]*#define LV_THEME_DEFAULT_DARK[ \t]\).*|\1${LVGL_CONFIG_LV_THEME_DEFAULT_DARK}|g" \
+        -e "s|^([[:space:]]*#define LV_USE_FONT_COMPRESSED[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_FONT_COMPRESSED}|" \
+        -e "s|^([[:space:]]*#define LV_THEME_DEFAULT_DARK[[:space:]]).*|\1${LVGL_CONFIG_LV_THEME_DEFAULT_DARK}|" \
         \
         -i "${S}/lv_conf.h"
 }
