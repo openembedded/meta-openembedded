@@ -25,4 +25,4 @@ PACKAGECONFIG ??= ""
 
 inherit pkgconfig gnomebase gettext gobject-introspection vala features_check
 
-SRC_URI[archive.sha256sum] = "120f219ef63212caa95ae7f6aeb64e29928b0b1a8b9452054304a00d0f347871"
+SRC_URI[archive.sha256sum] = "954a6afb3e378f01d310fd443790f235cb0eb71e2139cff4f05f09ab725e49c2"
