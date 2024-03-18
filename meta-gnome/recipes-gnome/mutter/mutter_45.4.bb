@@ -104,5 +104,5 @@ FILES:${PN}-dev += " \
     ${libdir}/${MUTTER_API_NAME}/lib*.so \
 "
 
-RDEPENDS:${PN} += "zenity ${PN}-gsettings gsettings-desktop-schemas"
+RDEPENDS:${PN} += "${PN}-gsettings gsettings-desktop-schemas"
 
