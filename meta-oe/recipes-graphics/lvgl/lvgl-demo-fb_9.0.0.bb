@@ -30,8 +30,6 @@ inherit cmake
 
 S = "${WORKDIR}/git"
 
-TARGET_CFLAGS += "-I${STAGING_INCDIR}/libdrm"
-
 do_configure:prepend() {
 	if [ "${LVGL_CONFIG_USE_SDL}" -eq 1 ] ; then
 		# Add libsdl build dependency, SDL2_image has no cmake file
