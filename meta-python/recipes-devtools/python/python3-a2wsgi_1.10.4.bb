@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e10d05d29ec6d8be8bfc503683f1bc9a"
 
 inherit pypi python_setuptools_build_meta ptest
 
-SRC_URI[sha256sum] = "46b2ca427cf9ad538c145e32eb36857e1cbf477b72fe1ed0e3d35e98c06061b9"
+SRC_URI[sha256sum] = "50e81ac55aa609fa2c666e42bacc25c424c8884ce6072f1a7e902114b7ee5d63"
 
 DEPENDS += " \
         python3-pdm-native \
