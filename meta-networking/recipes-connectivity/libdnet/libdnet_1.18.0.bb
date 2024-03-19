@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
 
 SRC_URI = "git://github.com/ofalk/libdnet.git;nobranch=1;protocol=https"
 
-SRCREV = "912f7848bfff4ebc6d610f802a3144f84880cbe4"
+SRCREV = "3dfbe889b1f65077efe579da34fc1d6819fcb7f3"
 
 UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
 
