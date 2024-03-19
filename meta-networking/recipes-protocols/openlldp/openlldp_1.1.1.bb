@@ -12,7 +12,7 @@ inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
 
 DEPENDS = "libnl libconfig readline"
 
-SRCREV = "85e55837a81d710e5baa7da47f7ed0d205c8ede5"
+SRCREV = "f1dd9eb961fab06723d2bedb2f7e2b81e45ee9ab"
 PV .= "+git"
 SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=branch-1.1 \
            file://0001-Fix-musl-libc-build-issue.patch \
