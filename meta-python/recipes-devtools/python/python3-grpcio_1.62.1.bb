@@ -10,7 +10,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
            file://abseil-ppc-fixes.patch \
            file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
            "
-SRC_URI[sha256sum] = "748496af9238ac78dcd98cce65421f1adce28c3979393e3609683fcd7f3880d7"
+SRC_URI[sha256sum] = "6c455e008fa86d9e9a9d85bb76da4277c0d7d9668a3bfa70dbe86e9f3c759947"
 
 RDEPENDS:${PN} = "python3-protobuf \
                   python3-setuptools \
