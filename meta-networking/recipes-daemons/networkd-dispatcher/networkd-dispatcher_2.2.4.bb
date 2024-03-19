@@ -11,7 +11,7 @@ inherit features_check systemd
 RDEPENDS:${PN} = "python3-pygobject python3-dbus"
 REQUIRED_DISTRO_FEATURES = "systemd gobject-introspection-data"
 
-SRCREV = "30e278e50749a60a930ceaa0971207c6436b8a0c"
+SRCREV = "dfd26d72793914eb3da910ef8c71de6d7c8942a2"
 SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
