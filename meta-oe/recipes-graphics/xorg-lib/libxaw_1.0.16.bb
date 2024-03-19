@@ -8,7 +8,7 @@ PE = "1"
 
 XORG_PN = "libXaw"
 
-SRC_URI[sha256sum] = "ab35f70fde9fb02cc71b342f654846a74328b74cb3a0703c02d20eddb212754a"
+SRC_URI[sha256sum] = "731d572b54c708f81e197a6afa8016918e2e06dfd3025e066ca642a5b8c39c8f"
 
 do_install:append () {
     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
