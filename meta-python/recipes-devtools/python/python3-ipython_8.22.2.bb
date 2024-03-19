@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
 
 PYPI_PACKAGE = "ipython"
 
-SRC_URI[sha256sum] = "39c6f9efc079fb19bfb0f17eee903978fe9a290b1b82d68196c641cecb76ea22"
+SRC_URI[sha256sum] = "2dcaad9049f9056f1fef63514f176c7d41f930daa78d05b82a176202818f2c14"
 
 RDEPENDS:${PN} = "\
     python3-setuptools \
