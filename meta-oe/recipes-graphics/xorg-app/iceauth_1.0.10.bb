@@ -12,5 +12,5 @@ BBCLASSEXTEND = "native"
 DEPENDS += "libice"
 
 SRC_URI_EXT = "xz"
-SRC_URI[sha256sum] = "2cb9dfcb545683af77fb1029bea3fc52dcc8a0666f7b8b2d7373b6ed4c408c05"
+SRC_URI[sha256sum] = "3deefb7da26af9dc799b5628d929d91c9af68c78575639944db3b955f29aa029"
 
