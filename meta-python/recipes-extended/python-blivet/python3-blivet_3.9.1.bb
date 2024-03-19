@@ -16,7 +16,7 @@ SRC_URI += "\
            file://0010-invoking-mkfs-with-infinite-timeout.patch \
            file://0011-invoking-dd-with-infinite-timeout.patch \
 "
-SRC_URI[sha256sum] = "88d1500c76c4660aec7da9e9aa54f7f574546571b52c07a67e1417883c2cb25b"
+SRC_URI[sha256sum] = "fda09ac9ddbbacbb0c00e867006cf36b213b8f5707accdfaaebfd27378f362d8"
 
 inherit pypi features_check systemd setuptools3_legacy
 
