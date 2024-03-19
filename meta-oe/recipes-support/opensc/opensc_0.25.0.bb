@@ -12,7 +12,7 @@ LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
 #v0.21.0
-SRCREV = "f15d0c5295f3247ae56bf976cf411fec4b47b6ec"
+SRCREV = "67986eda93a3a359a897f0b0be97f4315dde8d42"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
           "
 DEPENDS = "virtual/libiconv openssl"
