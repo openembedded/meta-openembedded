@@ -19,7 +19,7 @@ SRC_URI:append = " \
 	file://0001-fix-reproducibility.patch \
 	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
 "
-SRC_URI[archive.sha256sum] = "0ad722f3d532c21d757cf488f942960679ea8f457925efa97656ed4c9e9ba4ff"
+SRC_URI[archive.sha256sum] = "74e796c1625094a8a2175993c7907281e97ab6e002578e846b8f4ca44e36bf61"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
@@ -62,6 +62,7 @@ PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
 PACKAGECONFIG[raw]       = "-Draw=enabled,-Draw=disabled,libraw"
 PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
 PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanager"
+PACKAGECONFIG[landlock]        = "-Dlandlock=enabled,-Dlandlock=disabled"
 
 # For security reasons it is strongly recommended to set add meta-security in
 # your layers and 'libseccomp' to PACKAGECONFIG".
@@ -75,9 +76,14 @@ EXTRA_OEMESON += " \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
 "
 
+do_install:append() {
+    sed -i -e 's|${B}||g' ${D}${libexecdir}/tracker-miner-fs-3
+}
+
 FILES:${PN} += " \
-    ${datadir}/dbus-1 \
-    ${datadir}/tracker3-miners \
+    ${datadir} \
     ${libdir}/tracker-miners-3.0 \
     ${systemd_user_unitdir} \
 "
+
+INSANE_SKIP:${PN} = "already-stripped"
