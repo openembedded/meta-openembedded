@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=802d3d83ae80ef5f343050bf96cce3a4 \
 SRC_URI = "\
 	git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=master;name=demo \
 	git://github.com/lvgl/lvgl;protocol=https;branch=master;name=lvgl;subdir=git/lvgl \
-	file://0001-fix-drm-Default-to-XRGB8888-framebuffer.patch;patchdir=lvgl \
 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch;patchdir=lvgl \
 	file://0003-Make-fbdev-device-node-runtime-configurable-via-envi.patch \
 	file://0004-Factor-out-fbdev-initialization-code.patch \
@@ -16,7 +15,7 @@ SRC_URI = "\
 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch;patchdir=lvgl \
 	"
 SRCREV_demo = "dccc6a1ca48372aa993dbea7a8e17dec6f42df6a"
-SRCREV_lvgl = "e29d35b43c509b6d7189f5dac87139441669ae66"
+SRCREV_lvgl = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
 SRCREV_FORMAT = "demo_lvgl"
 PV .= "+git${SRCPV}"
 

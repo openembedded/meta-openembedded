@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=bf1198c89ae87f043108cea62460b03a"
 
 SRC_URI = "\
 	git://github.com/lvgl/lvgl;protocol=https;branch=master \
-	file://0001-fix-drm-Default-to-XRGB8888-framebuffer.patch \
 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch \
 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
 	"
-SRCREV = "e29d35b43c509b6d7189f5dac87139441669ae66"
+SRCREV = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
 PV .= "+git${SRCPV}"
 
 inherit cmake
