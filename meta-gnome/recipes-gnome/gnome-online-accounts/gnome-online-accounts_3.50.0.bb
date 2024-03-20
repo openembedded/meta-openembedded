@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=34c88b124db5fb2762c1676be7dadd36"
 
 GTKIC_VERSION = "4"
 inherit gnomebase gsettings gobject-introspection gtk-icon-cache mime-xdg vala features_check
+REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'goabackend', 'opengl', '', d)}"
 
 DEPENDS += "gdk-pixbuf dbus glib-2.0 gcr"
 

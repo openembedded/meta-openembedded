@@ -17,4 +17,6 @@ inherit gnomebase gsettings gtk-icon-cache gnome-help gettext gobject-introspect
 
 SRC_URI[archive.sha256sum] = "fb2b0823cd16249edbeaee8302f9bd5005e0150368b35f1e47c26680cacac2fa"
 
+REQUIRED_DISTRO_FEATURES = "opengl"
+
 FILES:${PN} += "${libdir} ${datadir}/metainfo"
