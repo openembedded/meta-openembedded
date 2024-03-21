@@ -1,11 +1,20 @@
+From c6accd34e8169d7a6b92fc89dce5d4309978e39e Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 21 Mar 2024 14:11:09 +0800
+Subject: [PATCH] Implement support for musl/ppc64
+
 Upstream-Status: Pending
 
-implement support for musl/ppc64
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../lock/range/range_tree/lib/portability/toku_time.h     | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
+index 9b83c53511..0a7488c397 100644
 --- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
 +++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
-@@ -58,7 +58,7 @@ Copyright (c) 2006, 2015, Percona and/or
+@@ -58,7 +58,7 @@ Copyright (c) 2006, 2015, Percona and/or its affiliates. All rights reserved.
  #include <stdint.h>
  #include <sys/time.h>
  #include <time.h>
@@ -14,7 +23,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  #include <sys/platform/ppc.h>
  #endif
  
-@@ -131,8 +131,12 @@ static inline tokutime_t toku_time_now(v
+@@ -131,8 +131,12 @@ static inline tokutime_t toku_time_now(void) {
    uint64_t result;
    __asm __volatile__("mrs %[rt], cntvct_el0" : [rt] "=r"(result));
    return result;
@@ -28,3 +37,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  #elif defined(__s390x__)
    uint64_t result;
    asm volatile("stckf %0" : "=Q"(result) : : "cc");
+-- 
+2.25.1
+

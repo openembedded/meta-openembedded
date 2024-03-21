@@ -6,17 +6,16 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "444b3f4845dd01b0d127c4b420fdd3b50ad56682"
-SRCBRANCH = "7.9.fb"
+SRCREV = "f4441966592636253fd5ab0bb9ed44fc2697fc53"
+SRCBRANCH = "9.0.fb"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
            file://0001-cmake-Add-check-for-atomic-support.patch \
-           file://0001-cmake-Use-exported-target-for-bz2.patch \
-           file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-           file://0001-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
-           file://ppc64.patch \
-           file://mips.patch \
-           file://arm.patch \
+           file://0002-cmake-Use-exported-target-for-bz2.patch \
+           file://0003-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
+           file://0004-Implement-support-for-musl-ppc64.patch \
+           file://0005-Implement-timer-implementation-for-mips-platform.patch \
+           file://0006-Implement-timer-for-arm-v6.patch \
           "
 
 SRC_URI:append:riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
@@ -46,11 +45,9 @@ EXTRA_OECMAKE = "\
 "
 
 do_install:append() {
-    # fix for qa check buildpaths
+    # Fix for qa check buildpaths
     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/rocksdb/RocksDBTargets.cmake
 }
-
-LDFLAGS:append:riscv64 = " -pthread"
 
 # Need toku_time_now() implemented for ppc/musl
 # see utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h

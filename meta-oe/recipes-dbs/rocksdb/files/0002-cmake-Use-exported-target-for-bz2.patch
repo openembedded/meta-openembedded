@@ -1,4 +1,4 @@
-From 46a4e585175cac8d76bd0b64f0fc27c9e22f04a1 Mon Sep 17 00:00:00 2001
+From bb3fc86f87a9acc64628e1cb32f5c8a1cfbeb880 Mon Sep 17 00:00:00 2001
 From: Pascal Bach <pascal.bach@nextrem.ch>
 Date: Mon, 12 Oct 2020 21:22:46 +0200
 Subject: [PATCH] cmake: Use exported target for bz2
@@ -8,12 +8,14 @@ This is not portable and makes it fail in environment like Yocto.
 
 Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/7541]
 ---
- CMakeLists.txt | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ CMakeLists.txt | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0a7f820a22..be80edb955 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -154,12 +154,7 @@ else()
+@@ -149,12 +149,7 @@ else()
    if(WITH_BZ2)
      find_package(BZip2 REQUIRED)
      add_definitions(-DBZIP2)
@@ -27,3 +29,6 @@ Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/7541]
    endif()
  
    if(WITH_LZ4)
+-- 
+2.25.1
+
