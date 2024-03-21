@@ -10,13 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "bf8b714bf5075d0a6f2f28504b43095e2b1e11c5"
+SRCREV = "365060c4213a48adb27f63d5dfad41b3dfbdd62e"
 SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https \
-           file://0001-Support-Atomic-ops-on-clang.patch \
            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
            file://disable_libunwind_aarch64.patch \
-           file://sgidef.patch \
-           file://0001-Define-off64_t-as-off_t-on-musl.patch \
+           file://0001-src-mmap_hook.cc-Fix-build-for-32bit-machine.patch \
            "
 
 SRC_URI:append:libc-musl = " file://ppc-musl.patch"
