@@ -37,11 +37,16 @@ RDEPENDS:${PN} = "python3-core python3-netifaces python3-pyyaml \
                   util-linux-libuuid libnetplan \
                  "
 
+do_install:append() {
+    install -d -m 755 ${D}${sysconfdir}/netplan
+}
+
 PACKAGES += "${PN}-dbus libnetplan"
 
 FILES:libnetplan = "${libdir}/libnetplan.so.*"
 FILES:${PN} = "${sbindir} ${libexecdir}/netplan/generate \
                ${datadir}/netplan ${datadir}/bash-completion \
                ${systemd_unitdir} ${PYTHON_SITEPACKAGES_DIR} \
+               ${sysconfdir}/netplan \
               "
 FILES:${PN}-dbus = "${libexecdir}/netplan/netplan-dbus ${datadir}/dbus-1"
