@@ -10,7 +10,7 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
 "
 
-SRCREV = "d3eb77b292655cef333a8f4cab4e861415bc37c2"
+SRCREV = "59d190a2bd400f3b093f99b16fc0fb06f6cb2cfe"
 SRC_URI = " \
     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
     file://90-OE-disable-session-dbus-dependent-features.lua \
@@ -50,7 +50,7 @@ PACKAGECONFIG[dbus] = ""
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
 
-WP_MODULE_SUBDIR = "wireplumber-0.4"
+WP_MODULE_SUBDIR = "wireplumber-0.5"
 
 do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'false', 'true', d)}; then
