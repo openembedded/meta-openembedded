@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
            file://0001-Fixed-swig-host-contamination-issue.patch \
-           file://0002-Add-attribute-declarations.patch \
            file://auditd \
            file://audit-volatile.conf \
           "
@@ -17,7 +16,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
 SRC_URI:append:libc-musl = " file://0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch"
 
 S = "${WORKDIR}/git"
-SRCREV = "ae7d2830391c1115cebff6340ef3130b1b03ce45"
+SRCREV = "22ccbd984e493524050ac445f796e9a7e90e1149"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
@@ -40,6 +39,7 @@ EXTRA_OECONF = " \
         --disable-gssapi-krb5 \
         --disable-zos-remote \
         --sbindir=${base_sbindir} \
+        --runstatedir=/run \
         "
 
 EXTRA_OEMAKE = " \
