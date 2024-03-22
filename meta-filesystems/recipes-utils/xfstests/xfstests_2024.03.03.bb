@@ -2,7 +2,7 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
-SRCREV = "c46ca4d1f6c0c45f9a3ea18bc31ba5ae89e02c70"
+SRCREV = "088e5bd4cb6d7295612430a56ae84ff5c8f54730"
 SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
 SRCREV_FORMAT = "default_unionmount"
 
@@ -10,7 +10,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
-           file://0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch \
            "
 
 S = "${WORKDIR}/git"
