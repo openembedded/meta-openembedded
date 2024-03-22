@@ -76,14 +76,9 @@ EXTRA_OEMESON += " \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
 "
 
-do_install:append() {
-    sed -i -e 's|${B}||g' ${D}${libexecdir}/tracker-miner-fs-3
-}
 
 FILES:${PN} += " \
     ${datadir} \
     ${libdir}/tracker-miners-3.0 \
     ${systemd_user_unitdir} \
 "
-
-INSANE_SKIP:${PN} = "already-stripped"
