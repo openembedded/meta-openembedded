@@ -14,7 +14,6 @@ SRC_URI = "\
 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
 	"
 SRCREV = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
-PV .= "+git${SRCPV}"
 
 inherit cmake
 

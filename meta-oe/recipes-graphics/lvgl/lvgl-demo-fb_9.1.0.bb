@@ -17,7 +17,6 @@ SRC_URI = "\
 SRCREV_demo = "dccc6a1ca48372aa993dbea7a8e17dec6f42df6a"
 SRCREV_lvgl = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
 SRCREV_FORMAT = "demo_lvgl"
-PV .= "+git${SRCPV}"
 
 EXTRA_OEMAKE = "DESTDIR=${D}"
 
