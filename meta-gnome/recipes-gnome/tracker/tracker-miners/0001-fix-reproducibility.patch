@@ -76,6 +76,22 @@ index e131b85ad..59e509fa6 100644
  
  libtracker_miner_test_deps = [tracker_miners_common_dep, tracker_miner_dep, tracker_sparql]
  
+ 
+diff --git a/src/miners/fs/meson.build b/src/miners/fs/meson.build
+index 6e5883288..04750f82b 100644
+--- a/src/miners/fs/meson.build
++++ b/src/miners/fs/meson.build
+@@ -67,8 +67,8 @@ executable('tracker-miner-fs-@0@'.format(tracker_api_major),
+     dependencies: tracker_miner_fs_deps,
+     c_args: [
+         tracker_c_args,
+-        '-DBUILDROOT="@0@"'.format(meson.global_build_root()),
+-        '-DBUILD_EXTRACTDIR="@0@"'.format(meson.build_root() / 'src' / 'tracker-extract'),
++        '-DBUILDROOT="@0@"'.format(get_option('prefix') / 'src'),
++        '-DBUILD_EXTRACTDIR="@0@"'.format(get_option('prefix') / 'src' / 'tracker-extract'),
+         '-DLIBEXECDIR="@0@"'.format(get_option('prefix') / get_option('libexecdir')),
+     ],
+     install: true,
 -- 
 2.41.0
 
