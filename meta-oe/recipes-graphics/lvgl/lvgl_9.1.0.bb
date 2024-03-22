@@ -20,7 +20,6 @@ inherit cmake
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
 S = "${WORKDIR}/git"
 
-PACKAGECONFIG ??= "drm"
 require lv-conf.inc
 
 do_install:append() {
