@@ -8,7 +8,7 @@ GTKIC_VERSION = "4"
 DEPENDS = " \
     accountsservice \
     colord-gtk \
-    gcr3 \
+    gcr \
     gdk-pixbuf \
     glib-2.0 \
     gnome-bluetooth \
