@@ -7,6 +7,6 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "43ea9ad13f7caf98303e64172b191be9b96bab340b019deeec72251ee140fe3b"
+SRC_URI[archive.sha256sum] = "775676df958e2ea2452f7568f28b2ea581063d312773dd5c0b7624c1b9b2da8c"
 
 DEPENDS = "glib-2.0 libxau"
