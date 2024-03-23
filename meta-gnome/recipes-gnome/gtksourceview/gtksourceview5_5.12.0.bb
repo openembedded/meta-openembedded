@@ -23,12 +23,12 @@ inherit gnomebase lib_package gettext features_check gi-docgen gtk-icon-cache go
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI = "https://download.gnome.org/sources/gtksourceview/5.10/${PNAME}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "b38a3010c34f59e13b05175e9d20ca02a3110443fec2b1e5747413801bc9c23f"
+SRC_URI = "https://download.gnome.org/sources/gtksourceview/5.12/${PNAME}-${PV}.tar.xz"
+SRC_URI[sha256sum] = "daf32ff5d3150d6385917d3503a85b9e047ba158b2b03079314c9c00813fa01f"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
-GTKDOC_MESON_OPTION = "gtk_doc"
+GIDOCGEN_MESON_OPTION = "documentation"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)}"
 PACKAGECONFIG[vulkan] = ",,vulkan-loader vulkan-headers"
