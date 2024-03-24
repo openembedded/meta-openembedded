@@ -9,11 +9,8 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-Fixes-build-failure-on-.-configure-make-shuffle-2836.patch"
-SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
-SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
-SRCREV = "298c083d75ecde5a8833366167b3b6abff0c8d39"
+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
+SRCREV = "f4e42a515cd78c8c9cac2be14222834be5f8df2b"
 
 S = "${WORKDIR}/git"
 
