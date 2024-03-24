@@ -35,6 +35,9 @@ EXTRA_OECONF += " \
                  ${@bb.utils.contains('PACKAGECONFIG', 'openssl', 'SSL_LIBS="-lssl -lcrypto"', '', d)} \
                 "
 
+DEPENDS:append:libc-musl = " libexecinfo"
+LDFLAGS:append:libc-musl = " -lexecinfo"
+
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
