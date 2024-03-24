@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = " \
     intltool-native \
-    libseccomp \
     tracker \
     zlib \
 "
@@ -43,6 +42,9 @@ PACKAGECONFIG ??= " \
     battery \
     networkmanager \
 "
+# Needs tgkill API which musl does not support
+# see https://www.openwall.com/lists/musl/2019/08/02/1
+PACKAGECONFIG:remove:libc-musl = "seccomp"
 
 PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
 PACKAGECONFIG[cue]     = "-Dcue=enabled,-Dcue=disabled,libcue"
