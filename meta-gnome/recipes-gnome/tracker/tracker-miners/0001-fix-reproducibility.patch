@@ -92,6 +92,27 @@ index 6e5883288..04750f82b 100644
          '-DLIBEXECDIR="@0@"'.format(get_option('prefix') / get_option('libexecdir')),
      ],
      install: true,
+diff --git a/src/libtracker-miners-common/tracker-landlock.c b/src/libtracker-miners-common/tracker-landlock.c
+index 27e7db65b..3021343eb 100644
+--- a/src/libtracker-miners-common/tracker-landlock.c
++++ b/src/libtracker-miners-common/tracker-landlock.c
+@@ -276,7 +276,7 @@
+ 			          LANDLOCK_ACCESS_FS_READ_DIR);
+ 		}
+ 	}
+-
++#if 0
+ 	current_dir = g_get_current_dir ();
+ 
+ 	/* Detect running in-tree */
+@@ -296,7 +296,7 @@
+ 			          in_tree_rules[i].flags);
+ 		}
+ 	}
+-
++#endif
+ 	/* Add user cache for readonly databases */
+ #ifdef MINER_FS_CACHE_LOCATION
+ 	add_rule (landlock_fd, MINER_FS_CACHE_LOCATION,
 -- 
 2.41.0
-
