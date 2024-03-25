@@ -8,7 +8,8 @@ DEPENDS = " \
     glib-2.0-native \
     glib-2.0 \
     json-glib \
-    gtk+3 \
+    gtk4 \
+    libadwaita \
     libarchive \
     libhandy \
     libportal \
@@ -20,7 +21,9 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMESON += "-Dintrospection=enabled"
 
-SRC_URI[archive.sha256sum] = "84994023997293beb345d9793db8f5f0bbb41faa155c6ffb48328f203957ad08"
+SRC_URI = "git://gitlab.gnome.org/GNOME/file-roller.git;protocol=https;branch=master"
+SRCREV = "f1c7714cf4c8989b9f3fa4c611887c29cf6df343"
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= ""
 
