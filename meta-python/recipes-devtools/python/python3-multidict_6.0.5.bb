@@ -8,12 +8,11 @@ inherit pypi setuptools3 ptest
 
 PV .= "+git"
 
-SRCREV = "82b559cdd0b41548f3dadc5561a9aaaa7f93ae14"
+SRCREV = "a9b281b2ef4ab25d95d6b268aa88c428e75c3696"
 PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
 S = "${WORKDIR}/git"
 
 SRC_URI += " \
-  file://0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch \
 	file://run-ptest \
 "
 
