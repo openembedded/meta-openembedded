@@ -32,7 +32,7 @@ SRC_URI:append:libc-musl = " \
     file://disable-omfile-outchannel.patch \
 "
 
-SRC_URI[sha256sum] = "f6283efaadc609540a56e6bec88a362c966e77f29fe48e6b734bd6c1123e0be5"
+SRC_URI[sha256sum] = "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7ea85ba"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -47,7 +47,7 @@ EXTRA_OECONF:remove:riscv32 = "ap_cv_atomic_builtins=yes"
 
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
-    rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
+    rsyslogd rsyslogrt klog inet regexp uuid libcap-ng libgcrypt \
     fmhttp imdiag openssl imfile \
     ${@bb.utils.filter('DISTRO_FEATURES', 'snmp systemd', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
@@ -60,6 +60,7 @@ PACKAGECONFIG[rsyslogrt] = "--enable-rsyslogrt,--disable-rsyslogrt,,"
 PACKAGECONFIG[fmhttp] = "--enable-fmhttp,--disable-fmhttp,curl,"
 PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,,"
 PACKAGECONFIG[klog] = "--enable-klog,--disable-klog,,"
+PACKAGECONFIG[libcap-ng] = "--enable-libcap-ng,--disable-libcap-ng,libcap-ng,"
 PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
 PACKAGECONFIG[uuid] = "--enable-uuid,--disable-uuid,util-linux,"
 PACKAGECONFIG[libgcrypt] = "--enable-libgcrypt,--disable-libgcrypt,libgcrypt,"
@@ -72,14 +73,12 @@ PACKAGECONFIG[imfile] = "--enable-imfile,--disable-imfile,,"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
 PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
 PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
-PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
+PACKAGECONFIG[systemd] = "--enable-libsystemd,--disable-libsystemd,systemd,"
 PACKAGECONFIG[imjournal] = "--enable-imjournal,--disable-imjournal,"
 PACKAGECONFIG[mmjsonparse] = "--enable-mmjsonparse,--disable-mmjsonparse,"
 PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
 PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
 PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
-# For libcap-ng, see commit log and  https://github.com/rsyslog/rsyslog/issues/5091
-PACKAGECONFIG[libcap-ng] = "--enable-libcap-ng,--disable-libcap-ng,libcap-ng,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
 PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
 PACKAGECONFIG[imhttp] = "--enable-imhttp,--disable-imhttp,civetweb,"
