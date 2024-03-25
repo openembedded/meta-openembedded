@@ -5,9 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e5f264c6988aec56808a3a11e77b913 \
 "
 SRCNAME = "paho-mqtt"
 
-inherit pypi setuptools3
+inherit pypi python_hatchling python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "2a8291c81623aec00372b5a85558a372c747cbca8e9934dfe218638b8eefc26f"
+SRC_URI[sha256sum] = "13b205f29251e4f2c66a6c923c31fc4fd780561e03b2d775cff8e4f2915cf947"
+
+PYPI_SRC_URI = "https://files.pythonhosted.org/packages/73/b7/a4df0f93bbdae237e16ba402752151eceee576cbe80c235a2475fbf81eea/paho_mqtt-${PV}.tar.gz"
+
+S = "${WORKDIR}/paho_mqtt-${PV}"
 
 DEPENDS += "python3-pytest-runner-native"
 
