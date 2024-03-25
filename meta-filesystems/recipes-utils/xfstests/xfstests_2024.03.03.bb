@@ -10,6 +10,8 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
            file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+           file://0001-include-libgen.h-for-basename-API-prototype.patch \
+           file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch \
            "
 
 S = "${WORKDIR}/git"
