@@ -1,7 +1,7 @@
-From 60f7d2c62bc3718023df93c01688d3ee1625d64d Mon Sep 17 00:00:00 2001
+From 96e975a2412a20e5f80bd3ab144057d275eb8597 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Mon, 25 Feb 2019 15:12:41 +0800
-Subject: [PATCH] Use uintmax_t for handling rlim_t
+Subject: [PATCH 06/22] Use uintmax_t for handling rlim_t
 
 PRIu{32,64} is not right format to represent rlim_t type
 therefore use %ju and typecast the rlim_t variables to
@@ -26,9 +26,11 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  src/core/execute.c      |  4 ++--
  3 files changed, 9 insertions(+), 15 deletions(-)
 
+diff --git a/src/basic/format-util.h b/src/basic/format-util.h
+index 8719df3e29..9becc96066 100644
 --- a/src/basic/format-util.h
 +++ b/src/basic/format-util.h
-@@ -34,13 +34,7 @@ assert_cc(sizeof(gid_t) == sizeof(uint32
+@@ -34,13 +34,7 @@ assert_cc(sizeof(gid_t) == sizeof(uint32_t));
  #  error Unknown timex member size
  #endif
  
@@ -43,9 +45,11 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  
  #if SIZEOF_DEV_T == 8
  #  define DEV_FMT "%" PRIu64
+diff --git a/src/basic/rlimit-util.c b/src/basic/rlimit-util.c
+index c1f0b2b974..61c5412582 100644
 --- a/src/basic/rlimit-util.c
 +++ b/src/basic/rlimit-util.c
-@@ -44,7 +44,7 @@ int setrlimit_closest(int resource, cons
+@@ -44,7 +44,7 @@ int setrlimit_closest(int resource, const struct rlimit *rlim) {
              fixed.rlim_max == highest.rlim_max)
                  return 0;
  
@@ -54,7 +58,7 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  
          return RET_NERRNO(setrlimit(resource, &fixed));
  }
-@@ -307,13 +307,13 @@ int rlimit_format(const struct rlimit *r
+@@ -307,13 +307,13 @@ int rlimit_format(const struct rlimit *rl, char **ret) {
          if (rl->rlim_cur >= RLIM_INFINITY && rl->rlim_max >= RLIM_INFINITY)
                  r = free_and_strdup(&s, "infinity");
          else if (rl->rlim_cur >= RLIM_INFINITY)
@@ -72,7 +76,7 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
          if (r < 0)
                  return -ENOMEM;
  
-@@ -407,7 +407,7 @@ int rlimit_nofile_safe(void) {
+@@ -422,7 +422,7 @@ int rlimit_nofile_safe(void) {
          rl.rlim_max = MIN(rl.rlim_max, (rlim_t) read_nr_open());
          rl.rlim_cur = MIN((rlim_t) FD_SETSIZE, rl.rlim_max);
          if (setrlimit(RLIMIT_NOFILE, &rl) < 0)
@@ -81,9 +85,11 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  
          return 1;
  }
+diff --git a/src/core/execute.c b/src/core/execute.c
+index bd3da0c401..df1870fd2f 100644
 --- a/src/core/execute.c
 +++ b/src/core/execute.c
-@@ -6707,9 +6707,9 @@ void exec_context_dump(const ExecContext
+@@ -1045,9 +1045,9 @@ void exec_context_dump(const ExecContext *c, FILE* f, const char *prefix) {
          for (unsigned i = 0; i < RLIM_NLIMITS; i++)
                  if (c->rlimit[i]) {
                          fprintf(f, "%sLimit%s: " RLIM_FMT "\n",
@@ -95,3 +101,6 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
                  }
  
          if (c->ioprio_set) {
+-- 
+2.34.1
+

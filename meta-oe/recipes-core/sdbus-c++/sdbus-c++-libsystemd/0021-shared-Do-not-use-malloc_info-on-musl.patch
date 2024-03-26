@@ -1,7 +1,7 @@
-From 9430646e72ea5d260ade300038a6d976fecf7da5 Mon Sep 17 00:00:00 2001
+From 502597b9ddd6b145541b23fadca0b1d3ca9f6367 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 2 Aug 2023 12:20:40 -0700
-Subject: [PATCH 4/4] shared: Do not use malloc_info on musl
+Subject: [PATCH 21/22] shared: Do not use malloc_info on musl
 
 Upstream-Status: Inappropriate [musl-specific]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
@@ -10,9 +10,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  src/shared/common-signal.c | 4 ++--
  2 files changed, 5 insertions(+), 4 deletions(-)
 
+diff --git a/src/shared/bus-util.c b/src/shared/bus-util.c
+index 74f148c8b4..2d862a123d 100644
 --- a/src/shared/bus-util.c
 +++ b/src/shared/bus-util.c
-@@ -617,15 +617,16 @@ static int method_dump_memory_state_by_f
+@@ -611,15 +611,16 @@ static int method_dump_memory_state_by_fd(sd_bus_message *message, void *userdat
          _cleanup_close_ int fd = -EBADF;
          size_t dump_size;
          FILE *f;
@@ -31,9 +33,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
          if (r < 0)
                  return r;
  
+diff --git a/src/shared/common-signal.c b/src/shared/common-signal.c
+index 8e70e365dd..9e782caec9 100644
 --- a/src/shared/common-signal.c
 +++ b/src/shared/common-signal.c
-@@ -65,12 +65,12 @@ int sigrtmin18_handler(sd_event_source *
+@@ -65,12 +65,12 @@ int sigrtmin18_handler(sd_event_source *s, const struct signalfd_siginfo *si, vo
                          log_oom();
                          break;
                  }
@@ -48,3 +52,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
                  (void) memstream_dump(LOG_INFO, &m);
                  break;
          }
+-- 
+2.34.1
+
