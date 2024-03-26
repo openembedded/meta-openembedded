@@ -1,7 +1,7 @@
-From efd7b41cf270c7b07ee3b9aec0fedd8e52dd422f Mon Sep 17 00:00:00 2001
+From dad7f897c0de654fa5592fda3e90f874639849f9 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Mon, 25 Feb 2019 15:00:06 +0800
-Subject: [PATCH] add missing FTW_ macros for musl
+Subject: [PATCH 05/22] add missing FTW_ macros for musl
 
 This is to avoid build failures like below for musl.
 
@@ -28,10 +28,10 @@ index 6c0456349d..73a5b90e3c 100644
 +#define FTW_CONTINUE 0
 +#endif
 diff --git a/src/test/test-recurse-dir.c b/src/test/test-recurse-dir.c
-index 2c2120b136..bc60a178a2 100644
+index 8684d064ec..70fc2b5376 100644
 --- a/src/test/test-recurse-dir.c
 +++ b/src/test/test-recurse-dir.c
-@@ -6,6 +6,7 @@
+@@ -8,6 +8,7 @@
  #include "recurse-dir.h"
  #include "strv.h"
  #include "tests.h"
@@ -40,5 +40,5 @@ index 2c2120b136..bc60a178a2 100644
  static char **list_nftw = NULL;
  
 -- 
-2.39.2
+2.34.1
 

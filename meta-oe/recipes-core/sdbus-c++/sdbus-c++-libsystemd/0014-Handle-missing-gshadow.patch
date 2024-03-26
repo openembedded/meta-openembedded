@@ -1,7 +1,7 @@
-From ebf0f69d8614b8d86a971b97ff0d847d1e5d47c9 Mon Sep 17 00:00:00 2001
+From b7c827bb44edbb6251c9fcdb80aa03982c0e7bf3 Mon Sep 17 00:00:00 2001
 From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Tue, 10 Mar 2020 11:05:20 +0000
-Subject: [PATCH] Handle missing gshadow
+Subject: [PATCH 14/22] Handle missing gshadow
 
 gshadow usage is now present in the userdb code. Mask all uses of it to
 allow compilation on musl
@@ -17,7 +17,7 @@ Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
  3 files changed, 30 insertions(+), 1 deletion(-)
 
 diff --git a/src/shared/user-record-nss.c b/src/shared/user-record-nss.c
-index 88b8fc2f8f..a819d41bac 100644
+index 414a49331b..1a4e1b628c 100644
 --- a/src/shared/user-record-nss.c
 +++ b/src/shared/user-record-nss.c
 @@ -329,8 +329,10 @@ int nss_group_to_group_record(
@@ -138,7 +138,7 @@ index 22ab04d6ee..4e52e7a911 100644
  #include <shadow.h>
  
 diff --git a/src/shared/userdb.c b/src/shared/userdb.c
-index a77eff4407..955e361d3a 100644
+index f60d48ace4..e878199a28 100644
 --- a/src/shared/userdb.c
 +++ b/src/shared/userdb.c
 @@ -1038,13 +1038,15 @@ int groupdb_iterator_get(UserDBIterator *iterator, GroupRecord **ret) {
@@ -169,5 +169,5 @@ index a77eff4407..955e361d3a 100644
                                  return r;
  
 -- 
-2.39.2
+2.34.1
 

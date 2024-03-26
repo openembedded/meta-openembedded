@@ -1,7 +1,7 @@
-From ed46afcbc6bc1f6277a0a54c3db8cf1b056bca1e Mon Sep 17 00:00:00 2001
+From 2adbe9773cd65c48eec9df96868d4a738927c8d9 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Tue, 10 Jul 2018 15:40:17 +0800
-Subject: [PATCH] distinguish XSI-compliant strerror_r from GNU-specifi
+Subject: [PATCH 10/22] distinguish XSI-compliant strerror_r from GNU-specifi
  strerror_r
 
 XSI-compliant strerror_r and GNU-specifi strerror_r are different.
@@ -24,7 +24,7 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  2 files changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/src/libsystemd/sd-bus/bus-error.c b/src/libsystemd/sd-bus/bus-error.c
-index 413e2dd43f..805e5da0c0 100644
+index 77b2e1a0fd..fdba0e0142 100644
 --- a/src/libsystemd/sd-bus/bus-error.c
 +++ b/src/libsystemd/sd-bus/bus-error.c
 @@ -408,7 +408,12 @@ static void bus_error_strerror(sd_bus_error *e, int error) {
@@ -55,10 +55,10 @@ index 413e2dd43f..805e5da0c0 100644
  
  static bool map_ok(const sd_bus_error_map *map) {
 diff --git a/src/libsystemd/sd-journal/journal-send.c b/src/libsystemd/sd-journal/journal-send.c
-index 136ebcb153..8a75ba4ecd 100644
+index 69a2eb6404..1561859650 100644
 --- a/src/libsystemd/sd-journal/journal-send.c
 +++ b/src/libsystemd/sd-journal/journal-send.c
-@@ -360,7 +360,12 @@ static int fill_iovec_perror_and_send(const char *message, int skip, struct iove
+@@ -361,7 +361,12 @@ static int fill_iovec_perror_and_send(const char *message, int skip, struct iove
                  char* j;
  
                  errno = 0;
@@ -72,5 +72,5 @@ index 136ebcb153..8a75ba4ecd 100644
                          char error[STRLEN("ERRNO=") + DECIMAL_STR_MAX(int) + 1];
  
 -- 
-2.39.2
+2.34.1
 
