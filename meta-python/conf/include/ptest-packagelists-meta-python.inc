@@ -40,6 +40,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-parse-type \
     python3-platformdirs \
     python3-polyline \
+    python3-portalocker \
     python3-precise-runner \
     python3-prettytable \
     python3-pydantic \
