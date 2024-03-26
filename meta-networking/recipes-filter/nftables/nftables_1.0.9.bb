@@ -1,4 +1,9 @@
 SUMMARY = "Netfilter Tables userspace utillites"
+DESCRIPTION = "nftables replaces the popular {ip,ip6,arp,eb}tables. \
+               This software provides an in-kernel packet classification framework \
+               that is based on a network-specific Virtual Machine (VM), \
+               nft, a userspace command line tool and libnftables, a high-level userspace library."
+HOMEPAGE = "https://netfilter.org/projects/nftables"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=81ec33bb3e47b460fc993ac768c74b62"
