@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0005-Pass-noline-flag-to-flex.patch \
            file://0006-OsUtils.h-add-missing-header-cstdint-for-int64_t.patch \
            file://0007-CMakeLists.txt-do-not-use-ccache.patch \
+           file://0008-libsodium-aarch64_crypto.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
