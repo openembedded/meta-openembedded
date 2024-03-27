@@ -20,6 +20,10 @@ require ${BPN}-crates.inc
 require ${BPN}-git-crates.inc
 
 do_install:append() {
+	install -d ${D}${sbindir}
+	mv ${D}${bindir}/pdata_tools ${D}${sbindir}/pdata_tools
+	rmdir --ignore-fail-on-non-empty ${D}${bindir}
+
 	for tool in cache_check \
 	    cache_dump \
 	    cache_metadata_size \
@@ -41,6 +45,6 @@ do_install:append() {
 	    era_dump \
 	    era_invalidate \
 	    era_restore; do
-                ln -sf pdata_tools ${D}${bindir}/$tool
+                ln -sf pdata_tools ${D}${sbindir}/$tool
             done
 }
