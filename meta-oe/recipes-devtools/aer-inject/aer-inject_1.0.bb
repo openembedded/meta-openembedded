@@ -24,7 +24,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr/' install
+    oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
 }
-FILES:${PN} += "/usr/aer-inject"
+FILES:${PN} += "${prefix}/aer-inject"
 BBCLASSEXTEND = "native nativesdk"
