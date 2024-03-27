@@ -2,11 +2,10 @@ SUMMARY = "Extending PyYAML with a custom constructor for including YAML files w
 HOMEPAGE = "https://github.com/tanbro/pyyaml-include"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
-DEPENDS += "python3-setuptools-scm-native"
-SRCREV = "36b6975aa8fc7a6cbf37de40aa2ed6d996b2f7be"
+SRCREV = "0f86bf16343d2ad52b53b793e0b35bb7ed7cd85b"
 
 SRC_URI = " \
-            git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
+            git://github.com/tanbro/pyyaml-include;protocol=https;branch=1.x \
             file://run-ptest \
           "
 
@@ -21,6 +20,7 @@ do_install_ptest() {
 
 RDEPENDS:${PN} += " \
     python3-pyyaml \
+    python3-toml \
 "
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
