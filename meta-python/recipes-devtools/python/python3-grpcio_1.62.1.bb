@@ -12,10 +12,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
            "
 SRC_URI[sha256sum] = "6c455e008fa86d9e9a9d85bb76da4277c0d7d9668a3bfa70dbe86e9f3c759947"
 
-RDEPENDS:${PN} = "python3-protobuf \
-                  python3-setuptools \
-                  python3-six \
-"
+RDEPENDS:${PN} = "python3-protobuf"
 
 inherit setuptools3
 inherit pypi
