@@ -69,4 +69,4 @@ FILES:${PN} += " \
 
 FILES:${PN}-dev += "${datadir}/gettext"
 
-RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper"
+RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gnome-user-share', '' , d)}"
