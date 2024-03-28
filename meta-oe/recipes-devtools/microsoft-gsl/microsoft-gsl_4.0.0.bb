@@ -28,6 +28,8 @@ PACKAGECONFIG[ptest] = "-DGSL_TEST=ON,-DGSL_TEST=OFF,googletest"
 
 # clang disagrees with https://github.com/google/googletest/pull/3457
 CXXFLAGS:append:toolchain-clang = " -Wno-error=switch-default"
+# Disable disabled-macro-expansion warning as error as its seen on musl
+CXXFLAGS:append:toolchain-clang:libc-musl = " -Wno-error=disabled-macro-expansion"
 
 do_install_ptest() {
     install -d ${D}${bindir}
