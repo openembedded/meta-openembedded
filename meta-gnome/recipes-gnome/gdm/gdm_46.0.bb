@@ -19,8 +19,8 @@ GIR_MESON_OPTION = ""
 
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
-SRC_URI = "https://download.gnome.org/sources/gdm/${@oe.utils.trim_version("${PV}", 1)}/gdm-${PV}.tar.xz"
-SRC_URI[sha256sum] = "6572578c05e3c6569d6ed269f7de2aaf3a035657654586d8243907bb7a6ffa85"
+
+SRC_URI[archive.sha256sum] = "8d6cb52176eca48b6bbf1cfe2fdae08d9677b5a0f2bca600dee4604de0dd1efc"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
