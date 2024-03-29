@@ -12,7 +12,7 @@ BPN = "gtkmm"
 
 inherit gnomebase features_check
 
-REQUIRED_DISTRO_FEATURES = "opengl"
+REQUIRED_DISTRO_FEATURES = "opengl x11"
 
 SRC_URI[archive.sha256sum] = "9350a0444b744ca3dc69586ebd1b6707520922b6d9f4f232103ce603a271ecda"
 
