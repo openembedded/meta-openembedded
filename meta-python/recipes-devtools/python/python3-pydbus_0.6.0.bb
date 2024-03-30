@@ -16,9 +16,9 @@ inherit ptest setuptools3
 
 S = "${WORKDIR}/git"
 
-RDEPENDS:${PN} = "${PYTHON_PN}-pygobject \
-                  ${PYTHON_PN}-io \
-                  ${PYTHON_PN}-logging"
+RDEPENDS:${PN} = "python3-pygobject \
+                  python3-io \
+                  python3-logging"
 
 do_install_ptest() {
         install -d ${D}${PTEST_PATH}/tests
