@@ -18,7 +18,7 @@ SRCREV = "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "modules"
-PACKAGECONFIG[httpd] = "-Dhttpd=/usr/sbin/httpd,,,apache2 mod-dnssd"
-PACKAGECONFIG[modules] = "-Dmodules_path=/usr/libexec/apache2/modules"
+PACKAGECONFIG[httpd] = "-Dhttpd=${sbindir}/httpd,,,apache2 mod-dnssd"
+PACKAGECONFIG[modules] = "-Dmodules_path=${libexecdir}/apache2/modules"
 
 FILES:${PN} += "${systemd_user_unitdir}"
