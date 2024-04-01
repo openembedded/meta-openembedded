@@ -7,7 +7,7 @@ HOMEPAGE = "https://thingsboard.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-SRC_URI[sha256sum] = "673596b4f358cf7cca77bc5743bc1e50a2958dca5ccd815c0979d46fd43c9200"
+SRC_URI[sha256sum] = "fc24bb674308f05d963a1dbed8d0b38ead77424ad7cf032a2652732af48f1336"
 
 inherit pypi setuptools3
 
