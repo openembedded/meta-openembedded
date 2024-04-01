@@ -7,7 +7,7 @@ SECTION = "x11/gnome"
 
 inherit gnomebase gettext allarch
 
-SRC_URI[archive.sha256sum] = "cee0e688fbae5ef7a75f335ada2d10779e08ebca9445f1586de32c5a9b6dee2d"
+SRC_URI[archive.sha256sum] = "4ddd3ac439a4a067876805921bb75f4d3c8b85a218d47c276dddde8928443c2e"
 
 FILES:${PN} += " \
     ${datadir}/backgrounds \
