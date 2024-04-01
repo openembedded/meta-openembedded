@@ -7,7 +7,7 @@ inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "flask_marshmallow"
 
-SRC_URI[sha256sum] = "d0f79eb9743f0c530a3d9e848503e1f2228e6b35a819c91e913af02e68421805"
+SRC_URI[sha256sum] = "00ee96399ed664963afff3b5d6ee518640b0f91dbc2aace2b5abcf32f40ef23a"
 
 RDEPENDS:${PN} += "\
     python3-flask \
