@@ -13,7 +13,7 @@ LICENSE = "GPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
 DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 
-SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0;;protocol=https \
+SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0;;protocol=https \
     file://freeradius \
     file://volatiles.58_radiusd \
     file://radiusd.service \
@@ -34,12 +34,12 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
     file://0014-Workaround-error-with-autoconf-2.7.patch \
     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
     file://0016-version.c-don-t-print-build-flags.patch \
-    file://0017-add-python.m4-for-detecting-python-3.10.patch \
+    file://0017-Add-acinclude.m4-to-include-required-macros.patch \
 "
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "d956f683d37ea40e7977cc5907361f3e6988a439"
+SRCREV = "db3d1924d9a2e8d37c43872932621f69cfdbb099"
 
 UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
 
@@ -69,6 +69,7 @@ EXTRA_OECONF = " --enable-strict-dependencies \
         --without-rlm_opendirectory \
         --without-rlm_redis \
         --without-rlm_rediswho \
+        --without-rlm_cache_redis \
         --without-rlm_sql_db2 \
         --without-rlm_sql_firebird \
         --without-rlm_sql_freetds \
@@ -103,7 +104,7 @@ PACKAGECONFIG[postgresql] = "--with-rlm_sql_postgresql,--without-rlm_sql_postgre
 PACKAGECONFIG[pcre] = "--with-pcre,--without-pcre,libpcre"
 PACKAGECONFIG[perl] = "--with-perl=${STAGING_BINDIR_NATIVE}/perl-native/perl --with-rlm_perl,--without-rlm_perl,perl-native perl,perl"
 PACKAGECONFIG[python3] = "--with-rlm_python3 --with-rlm-python3-bin=${STAGING_BINDIR_NATIVE}/python3-native/python3 --with-rlm-python3-include-dir=${STAGING_INCDIR}/${PYTHON_DIR},--without-rlm_python3,python3-native python3"
-PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest,curl json-c"
+PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest --without-rlm_json,curl json-c"
 PACKAGECONFIG[ruby] = "--with-rlm_ruby,--without-rlm_ruby,ruby"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl"
 PACKAGECONFIG[rlm-eap-fast] = "--with-rlm_eap_fast, --without-rlm_eap_fast"
