@@ -12,6 +12,7 @@ SRC_URI = "\
 	git://github.com/lvgl/lvgl;protocol=https;branch=master \
 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch \
 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
+	file://0008-fix-fbdev-set-resolution-prior-to-buffer.patch \
 	"
 SRCREV = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
 
