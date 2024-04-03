@@ -13,3 +13,5 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=0 -DCMAKE_BUILD_TYPE=Release"
 CXXFLAGS:append:arm = " -mfp16-format=ieee"
+# Option not supported with clang and its default format for __fp16 anyway with clang
+CXXFLAGS:remove:toolchain-clang = "-mfp16-format=ieee"
