@@ -4,6 +4,8 @@ Date: Mon, 18 Mar 2024 05:50:21 +0100
 Subject: [PATCH] Add meson option to pass sysroot
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
+
+Upstream-Status: Inappropriate [OE specific]
 ---
  meson_options.txt             | 1 +
  panels/background/meson.build | 2 +-
