@@ -30,6 +30,8 @@ RDEPENDS:${PN}-ptest += "\
     python3-hypothesis \
     python3-pytest \
     python3-pytest-mock \
+    python3-pytest-timeout \
+    python3-pytest-benchmark \
     python3-unittest-automake-output \
 "
 
@@ -46,5 +48,4 @@ do_install:append() {
 
 do_install_ptest() {
     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
-    rm -rf ${D}${PTEST_PATH}/tests/benchmarks
 }
