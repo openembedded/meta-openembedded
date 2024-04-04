@@ -44,6 +44,8 @@ EXTRA_OECMAKE = "\
     -DFAIL_ON_WARNINGS=OFF \
 "
 
+CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+
 do_install:append() {
     # Fix for qa check buildpaths
     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/rocksdb/RocksDBTargets.cmake
