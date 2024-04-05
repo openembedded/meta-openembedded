@@ -180,3 +180,7 @@ PACKAGES =+ "${PN}-systemtap"
 FILES:${PN}-systemtap = "${datadir}/systemtap"
 
 BBCLASSEXTEND = "native"
+
+# http://errors.yoctoproject.org/Errors/Details/766923/
+# TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/node-v20.12.2/out/Release/v8-qemu-wrapper.sh: line 7: 252447 Illegal instruction     (core dumped) PSEUDO_UNLOAD=1 qemu-x86_64 -r 5.15 -cpu Nehalem,check=false -L TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/recipe-sysroot -E LD_LIBRARY_PATH=TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/recipe-sysroot/usr/lib:TOPDIR/tmp-glibc/work/core2-64-oe-linux/nodejs/20.12.2/recipe-sysroot/usr/lib "$@"
+# TODO: Fix with gcc-14
