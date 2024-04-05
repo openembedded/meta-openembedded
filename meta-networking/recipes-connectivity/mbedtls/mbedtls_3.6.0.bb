@@ -23,10 +23,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "daca7a3979c22da155ec9dce49ab1abf3b65d3a9"
 SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=master \
-	file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
+	git://github.com/Mbed-TLS/mbedtls-framework.git;protocol=https;branch=main;destsuffix=git/framework;name=framework \
 	file://run-ptest"
+
+SRCREV = "2ca6c285a0dd3f33982dd57299012dacab1ff206"
+SRCREV_framework = "750634d3a51eb9d61b59fd5d801546927c946588"
+SRCREV_FORMAT .= "_framework"
+
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cmake update-alternatives ptest
