@@ -36,3 +36,8 @@ do_configure:append() {
 do_compile:append() {
         sed -i -e 's#${WORKDIR}##g' ${S}/src/gevent/*.c ${S}/src/gevent/libev/*.c ${S}/src/gevent/resolver/*.c
 }
+
+# http://errors.yoctoproject.org/Errors/Details/766918/
+# src/gevent/queue.c:11894:83: error: passing argument 1 of '__pyx_vtabptr_6gevent_14_gevent_cqueue_UnboundQueue->__pyx_base.put' from incompatible pointer type [-Wincompatible-pointer-types]
+# src/gevent/queue.c:11894:114: error: passing argument 4 of '__pyx_vtabptr_6gevent_14_gevent_cqueue_UnboundQueue->__pyx_base.put' from incompatible pointer type [-Wincompatible-pointer-types]
+CFLAGS += "-Wno-error=incompatible-pointer-types"
