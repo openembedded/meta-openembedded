@@ -26,7 +26,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0001-Handle-interface-without-ifa_addr.patch \
            file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
            "
-SRCREV = "5fdc65a52db5c31fdf4b872d912590235b36a4dc"
+SRCREV = "8f70f98fc1d0cf439ca3a6470be6ad8ac2bcc019"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
