@@ -88,6 +88,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-google-auth \
     python3-lz4 \
     python3-marshmallow \
+    python3-pillow \
     python3-pytest-localserver \
     python3-traitlets \
     python3-yappi \
@@ -97,7 +98,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-betamax \
     python3-dnspython \
     python3-fastjsonschema \
-    python3-pillow \
     python3-pint \
     python3-pyzmq \
     python3-scrypt \
