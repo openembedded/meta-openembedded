@@ -3,16 +3,28 @@ Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
 Contributors."
 HOMEPAGE = "https://pillow.readthedocs.io"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b22dc6b663b9175820e5e03337c7596b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c349a4b4b9ec2377a8fd6a7df87dbffe"
 
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
            file://0001-support-cross-compiling.patch \
-           file://0001-explicitly-set-compile-options.patch \
            file://run-ptest \
            "
-SRCREV ?= "da59ad000d1405eaecd557175e29083a87d19f7c"
+SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
 
-inherit setuptools3 ptest
+inherit python_setuptools_build_meta ptest
+
+PEP517_BUILD_OPTS += " \
+    -C platform-guessing=disable \
+    -C zlib=enable \
+    -C jpeg=enable \
+    -C tiff=enable \
+    -C freetype=enable \
+    -C lcms=enable \
+    -C jpeg2000=enable \
+    -C webp=disable \
+    -C webpmux=disable \
+    -C imagequant=disable \
+"
 
 DEPENDS += " \
     zlib \
@@ -53,8 +65,8 @@ S = "${WORKDIR}/git"
 RPROVIDES:${PN} += "python3-imaging"
 
 do_install_ptest() {
-        install -d ${D}${PTEST_PATH}/Tests
-        cp -rf ${S}/Tests ${D}${PTEST_PATH}/
+    install -d ${D}${PTEST_PATH}/Tests
+    cp -rf ${S}/Tests ${D}${PTEST_PATH}/
 }
 
 BBCLASSEXTEND = "native"
