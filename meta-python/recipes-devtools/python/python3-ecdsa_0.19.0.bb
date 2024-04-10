@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d"
 
 PYPI_PACKAGE = "ecdsa"
-SRC_URI[sha256sum] = "190348041559e21b22a1d65cee485282ca11a6f81d503fddb84d5017e9ed1e49"
+SRC_URI[sha256sum] = "60eaad1199659900dd0af521ed462b793bbdf867432b3948e87416ae4caf6bf8"
 
 inherit pypi setuptools3 python3native
 
