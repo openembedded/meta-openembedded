@@ -22,4 +22,10 @@ do_install_ptest() {
         cp -rf ${S}/flexcache/testsuite/* ${D}${PTEST_PATH}/testsuite/
 }
 
-RDEPENDS:${PN} = "python3-typing-extensions"
+RDEPENDS:${PN} += " \
+	python3-compression \
+	python3-email \
+	python3-json \
+	python3-pickle \
+	python3-typing-extensions \
+"
