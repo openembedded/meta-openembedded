@@ -20,6 +20,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-dominate \
     python3-execnet \
     python3-flexcache \
+    python3-flexparser \
     python3-freezegun \
     python3-geojson \
     python3-google-auth-oauthlib \
