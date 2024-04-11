@@ -37,3 +37,5 @@ PACKAGES =+ "\
 FILES:${PN}-test = " \
     ${libdir}/${PYTHON_DIR}/site-packages/*/test \
 "
+
+BBCLASSEXTEND  += "native nativesdk"
