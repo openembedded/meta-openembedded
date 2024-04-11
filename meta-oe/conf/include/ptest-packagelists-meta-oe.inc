@@ -65,7 +65,6 @@ PTESTS_PROBLEMS_META_OE ="\
     libdbi-perl \
     libjcat \
     libteam \
-    libxml++ \
     oprofile \
     ostree \
     psqlodbc \
