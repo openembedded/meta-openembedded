@@ -87,6 +87,7 @@ PTESTS_FAST_META_PYTHON = "\
 
 PTESTS_SLOW_META_PYTHON = "\
     python3-arrow \
+    python3-ecdsa \
     python3-google-auth \
     python3-lz4 \
     python3-marshmallow \
