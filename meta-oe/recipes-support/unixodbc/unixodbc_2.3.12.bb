@@ -12,7 +12,7 @@ SRC_URI = "https://www.unixodbc.org/unixODBC-${PV}.tar.gz \
            file://do-not-use-libltdl-source-directory.patch \
            file://0001-exe-Makefile.am-add-CROSS_LAUNCHER-to-run-odbc_confi.patch \
 "
-SRC_URI[sha256sum] = "d9e55c8e7118347e3c66c87338856dad1516b490fb7c756c1562a2c267c73b5c"
+SRC_URI[sha256sum] = "f210501445ce21bf607ba51ef8c125e10e22dffdffec377646462df5f01915ec"
 
 UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
 
@@ -44,5 +44,5 @@ do_install:prepend() {
 }
 
 do_install:append() {
-    oe_multilib_header unixodbc.h unixODBC/config.h unixODBC/unixodbc_conf.h
+    oe_multilib_header unixodbc.h unixODBC/unixodbc_conf.h
 }
