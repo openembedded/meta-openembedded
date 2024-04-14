@@ -13,22 +13,22 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 fd_pkgname = "freeDiameter"
 
-SRC_URI = "\
-    http://www.freediameter.net/hg/${fd_pkgname}/archive/${PV}.tar.gz;downloadfilename=${fd_pkgname}-${PV}.tar.gz \
+PV .= "+git"
+SRCREV = "f9f1e464e6c675d222b3be4cab9c13408d544c83"
+SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=master \
     file://Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch \
+    file://run-ptest \
     file://freediameter.service \
     file://freediameter.init \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'file://install_test.patch file://run-ptest file://0001-tests-use-EXTENSIONS_DIR.patch', '', d)} \
     file://freeDiameter.conf \
-    file://0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch \
+    file://install_test.patch \
+    file://0001-tests-use-EXTENSIONS_DIR.patch \
     "
 
-SRC_URI[sha256sum] = "7a537401bd110c606594b7c6be71b993f0ccc73ae151ad68040979286ba4e50e"
-
-S = "${WORKDIR}/${fd_pkgname}-${PV}"
+S = "${WORKDIR}/git"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=69bdc1d97648a2d35914563fcbbb361a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=868c059b6147748b1d621e500feeac4f"
 
 PTEST_PATH = "${libdir}/${fd_pkgname}/ptest"
 
