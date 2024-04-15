@@ -26,3 +26,5 @@ inherit cmake
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[boost] = "-DUSE_BOOST_REGEX=ON,-DUSE_BOOST_REGEX=OFF,boost"
+
+BBCLASSEXTEND = "native nativesdk"
