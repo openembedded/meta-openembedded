@@ -16,7 +16,7 @@ DEPENDS = "\
 "
 
 SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master"
-SRCREV = "f7b36df3b79617892958b67cb4ad9313c6ce72d2"
+SRCREV = "373abb90804ba71f980c7120e62f90d3a5c81213"
 
 S = "${WORKDIR}/git"
 
