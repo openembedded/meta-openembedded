@@ -17,6 +17,8 @@ CVE_STATUS[CVE-2009-1760] = "backported-patch: patched in our product"
 
 S = "${WORKDIR}/git"
 
+CVE_PRODUCT = ""
+
 PACKAGECONFIG ??= "instrumentation aligned"
 
 PACKAGECONFIG:remove:mipsarch = "instrumentation"
