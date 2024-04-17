@@ -8,7 +8,7 @@ DEPENDS = "fuse"
 RDEPENDS:${PN} = "fuse"
 
 SRC_URI = "git://github.com/mpartel/bindfs;protocol=https;branch=master"
-SRCREV = "b982aee1161307cdd0e90f7f9597b11872440efc"
+SRCREV = "3f5e3cb1fcac5fb8034fa4712764317fab51ebe0"
 
 S = "${WORKDIR}/git"
 
