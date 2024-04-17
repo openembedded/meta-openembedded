@@ -6,7 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
 
 SRC_URI = "git://github.com/nanomsg/nng.git;branch=master;protocol=https"
-SRCREV = "169221da8d53b2ca4fda76f894bee8505887a7c6"
+SRCREV = "85fbe7f9e4642b554d0d97f2e3ff2aa12978691a"
 
 S = "${WORKDIR}/git"
 
