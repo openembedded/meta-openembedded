@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
 
-SRC_URI[sha256sum] = "e911d398eaf0539cf3c63b4217357b51a3d1b7e4a50607d1591cf2b49f5d2c6a"
+SRC_URI[sha256sum] = "697ed50e7d452e78678ae38e2ab935843008bec448955283cd0fb362867e3165"
 
 RDEPENDS:${PN} += " \
 	libpulse \
