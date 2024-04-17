@@ -2,7 +2,7 @@ SUMMARY = "A module wrapper for os.path"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=141643e11c48898150daa83802dbc65f"
 
-SRC_URI[sha256sum] = "b32b22b76fe810a8ded6d136268cc8b6698ae7c47c29b94a9ea12623f3051e46"
+SRC_URI[sha256sum] = "dbaaa7efd4602fd6ba8d82890dc7823d69e5de740a6e842d9919b0faaf2b6a8e"
 
 SRC_URI += "\
     file://run-ptest \
