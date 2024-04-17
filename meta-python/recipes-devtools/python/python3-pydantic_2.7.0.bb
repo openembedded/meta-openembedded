@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
 inherit pypi python_hatchling
 
-SRC_URI[sha256sum] = "b1704e0847db01817624a6b86766967f552dd9dbf3afba4004409f908dcc84e6"
+SRC_URI[sha256sum] = "b5ecdd42262ca2462e2624793551e80911a1e989f462910bb81aef974b4bb383"
 
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
