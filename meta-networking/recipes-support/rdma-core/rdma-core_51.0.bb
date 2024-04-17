@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=http
            file://0001-cmake-Allow-SYSTEMCTL_BIN-to-be-overridden-from-envi.patch \
            file://0001-include-libgen.h-for-basename.patch \
 "
-SRCREV = "bc6b4bc134532e952fe7f8efc251e1f89b912098"
+SRCREV = "6cd09097ad2eebde9a7fa3d3bb09a2cea6e3c2d6"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
