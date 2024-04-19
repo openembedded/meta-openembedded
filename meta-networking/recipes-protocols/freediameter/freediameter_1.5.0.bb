@@ -7,7 +7,7 @@ Accounting needs."
 
 HOMEPAGE = "http://www.freediameter.net"
 
-DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn lksctp-tools virtual/kernel bison-native"
+DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn2 lksctp-tools virtual/kernel bison-native"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
