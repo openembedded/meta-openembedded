@@ -16,5 +16,11 @@ EXTRA_OECMAKE = "\
     -DBUILD_DOCS=OFF \
 "
 
+do_install:append() {
+    if ! ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        rm -rf ${D}${systemd_user_unitdir}
+        rmdir ${D}${nonarch_libdir}/systemd ${D}${nonarch_libdir}
+    fi
+}
 SYSTEMD_SERVICE:${PN} = "ydotoold.service"
 SYSTEMD_AUTO_ENABLE = "disable"
