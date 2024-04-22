@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
-SRC_URI[archive.sha256sum] = "5d2d533597d280b7370b8f74faa40097b292b0036dbd59166e1312230500bb8b"
+SRC_URI[archive.sha256sum] = "7e8d9623e9d96a89c0897616827cd441dcf2832927d38f135c722552b1172aa1"
 
 PACKAGECONFIG ?= "screenshot screencast ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[wayland] = ",,wayland-native"
