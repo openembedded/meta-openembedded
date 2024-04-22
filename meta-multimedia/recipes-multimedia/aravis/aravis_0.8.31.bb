@@ -6,7 +6,7 @@ DESCRIPTION = "\
 "
 AUTHOR = "Emmanuel Pacaud"
 HOMEPAGE = "https://github.com/AravisProject/aravis"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS += "\
@@ -29,7 +29,7 @@ GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
 
 inherit meson pkgconfig gi-docgen gobject-introspection
 
-PACKAGECONFIG ?= "gstreamer usb viewer"
+PACKAGECONFIG ?= "gstreamer usb ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'viewer', '', d)}"
 PACKAGECONFIG[gstreamer] = "-Dgst-plugin=enabled, -Dgst-plugin=disabled,gstreamer1.0 gstreamer1.0-plugins-base,"
 PACKAGECONFIG[usb] = "-Dusb=enabled, -Dusb=disabled, libusb1,"
 PACKAGECONFIG[viewer] = "-Dviewer=enabled, -Dviewer=disabled, gtk+3 gstreamer1.0-plugins-base,"
