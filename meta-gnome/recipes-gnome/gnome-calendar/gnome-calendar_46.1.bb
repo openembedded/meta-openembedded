@@ -22,7 +22,7 @@ inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-versi
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "5e21960c174bd8606d9089bf79c70f31070ab4837919878b00db2f14af9fe718"
+SRC_URI[archive.sha256sum] = "9861ff7b8abd5b7b20690ba55eb7542c7ec534b566269e29b5b1e858c1610897"
 
 do_install:prepend() {
     sed -i -e 's|${S}/src|${TARGET_DBGSRC_DIR}/src|g' ${B}/src/gcal-enum-types.h
