@@ -59,6 +59,7 @@ do_configure:prepend() {
 PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d)} smartcard"
 PACKAGECONFIG[vapi] = "-Dvapi=enabled,-Dvapi=disabled"
 PACKAGECONFIG[smartcard] = "-Dsmartcard=enabled,-Dsmartcard=disabled,libcacard"
+PACKAGECONFIG[webdav] = "-Dwebdav=enabled,-Dwebdav=disabled,phodav libsoup"
 
 EXTRA_OEMESON = "-Dpie=true -Dusb-ids-path=${datadir}/hwdata/usb.ids "
 EXTRA_OEMESON:append:libc-musl = " -Dcoroutine=libucontext"
