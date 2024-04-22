@@ -1,16 +1,14 @@
 DESCRIPTION = "Twisted is an event-driven networking framework written in Python and licensed under the LGPL. \
 Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
 (including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
-HOMEPAGE = "http://www.twistedmatrix.com"
+HOMEPAGE = "https://twisted.org"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0f8d67f84b6e178c92d471011b2245fc"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
 
-SRC_URI[sha256sum] = "32acbd40a94f5f46e7b42c109bfae2b302250945561783a8b7a059048f2d4d31"
+SRC_URI[sha256sum] = "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b4fd4ae"
 
-PYPI_PACKAGE = "Twisted"
-
-inherit pypi python_setuptools_build_meta
+inherit pypi python_hatchling
 
 do_install:append() {
     # remove some useless files before packaging
@@ -34,6 +32,7 @@ PACKAGES += "\
 "
 
 DEPENDS += " \
+    python3-hatch-fancy-pypi-readme-native \
     python3-incremental-native \
 "
 
@@ -58,14 +57,13 @@ RDEPENDS:${PN}-core = "python3-appdirs \
                        python3-debugger \
                        python3-hyperlink \
                        python3-incremental \
-                       python3-pyhamcrest \
                        python3-pyserial \
                        python3-typing-extensions \
                        python3-unixadmin \
                        python3-zopeinterface \
 "
-RDEPENDS:${PN}-test = "${PN}"
-RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-bcrypt python3-cryptography python3-pyasn1 python3-pickle"
+RDEPENDS:${PN}-test = "${PN} python3-pyhamcrest"
+RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-bcrypt python3-cryptography python3-pickle"
 RDEPENDS:${PN}-mail = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-names = "${PN}-core"
 RDEPENDS:${PN}-news = "${PN}-core ${PN}-protocols"
@@ -75,8 +73,6 @@ RDEPENDS:${PN}-words += "${PN}-core"
 RDEPENDS:${PN}-flow += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
 
-FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
-
 FILES:${PN}-test = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/test \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/*/test \
@@ -85,8 +81,6 @@ FILES:${PN}-test = " \
 
 FILES:${PN}-protocols = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/*.py* \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/gps/ \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/mice/ \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/haproxy \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/__pycache__/*pyc \
 "
@@ -124,7 +118,6 @@ FILES:${PN}-core = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/*.py* \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/python/*.py* \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/*.py* \
-    ${PYTHON_SITEPACKAGES_DIR}/Twisted*egg-info \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/logger \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/_threads \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/positioning \
