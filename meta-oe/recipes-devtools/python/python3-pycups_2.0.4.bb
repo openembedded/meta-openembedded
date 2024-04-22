@@ -14,6 +14,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS += "cups"
 
 # See https://pypi.org/project/pycups/ for data
-SRC_URI[sha256sum] = "57434ce5f62548eb12949ca8217f066f4eeb21a5d6ab8b13471dce350e380c90"
+SRC_URI[sha256sum] = "843e385c1dbf694996ca84ef02a7f30c28376035588f5fbeacd6bae005cf7c8d"
 
 inherit pypi python_setuptools_build_meta
