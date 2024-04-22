@@ -8,18 +8,15 @@ LICENSE = "BSL-1.0"
 
 DEPENDS = "openssl"
 
-SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2 \
-    file://0001-Add-the-pkgconfigdir-location.patch \
-"
+SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
 
 inherit autotools
 
 ALLOW_EMPTY:${PN} = "1"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=ff668366bbdb687b6029d33a5fe4b999"
+LIC_FILES_CHKSUM = "file://COPYING;md5=2bfc909e030aeafefa72f764165b8d07"
 
-SRC_URI[sha256sum] = "d0ddc2361abd2f4c823e970aaf8e28b4b31ab21b1a68af16b114fc093661e232"
+SRC_URI[sha256sum] = "9f12cef05c0477eace9c68ccabd19f9e3a04b875d4768c323714cbd3a5fa3c2b"
 
 PACKAGECONFIG ??= "boost"
 
