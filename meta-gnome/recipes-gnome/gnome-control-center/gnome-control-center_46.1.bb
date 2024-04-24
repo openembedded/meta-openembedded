@@ -37,16 +37,15 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is
 
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
 
-SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;protocol=https;nobranch=1"
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-
-S = "${WORKDIR}/git"
-SRCREV = "005f40dcfa464f113a1c95f97673bc5505fc15ad"
+SRC_URI[archive.sha256sum] = "81792423019deda1d2a074c1ecf6a7e6ef3172c09cbe6f4d7995a4b5dea28312"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
 PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
+PACKAGECONFIG[file-share] = ",,,gnome-user-share"
+PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
 
 EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
 
@@ -72,4 +71,4 @@ FILES:${PN} += " \
 
 FILES:${PN}-dev += "${datadir}/gettext"
 
-RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gnome-user-share', '' , d)}"
+RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper"
