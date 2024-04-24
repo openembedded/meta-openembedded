@@ -12,18 +12,18 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'with-exte
                    ${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
 PACKAGECONFIG[with-builtin-libsystemd] = ",,sdbus-c++-libsystemd,libcap,basu"
 PACKAGECONFIG[with-external-libsystemd] = ",,systemd,libsystemd"
-PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DTESTS_INSTALL_PATH=${PTEST_PATH},-DBUILD_TESTS=OFF,googletest gmock"
+PACKAGECONFIG[with-tests] = "-DSDBUSCPP_BUILD_TESTS=ON -DSDBUSCPP_INSTALL_TESTS=ON -DSDBUSCPP_TESTS_INSTALL_PATH=${PTEST_PATH},-DSDBUSCPP_BUILD_TESTS=OFF,googletest gmock"
 
 DEPENDS += "expat"
 
 PV .= "+git"
-SRCREV = "334fcb8833afb298270531dde369135e4b5b88fd"
+SRCREV = "e62472b210d9e7f06a5e611c23471d414c99a99c"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master \
            file://run-ptest"
 
-EXTRA_OECMAKE = "-DBUILD_CODE_GEN=OFF \
-                 -DBUILD_DOC=ON \
-                 -DBUILD_DOXYGEN_DOC=OFF"
+EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
+                 -DSDBUSCPP_BUILD_DOCS=ON \
+                 -DSDBUSCPP_BUILD_DOXYGEN_DOCS=OFF"
 
 S = "${WORKDIR}/git"
 
