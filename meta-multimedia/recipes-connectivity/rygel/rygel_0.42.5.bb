@@ -20,7 +20,7 @@ inherit gnomebase features_check vala gobject-introspection gettext systemd
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
-SRC_URI[archive.sha256sum] = "6310dfaa2d332b66119b9b020fad6a4bd27d9bc61faf780ca5ca0b62813303f7"
+SRC_URI[archive.sha256sum] = "1133602d2e6710aade6b22aa98d93384c8d56396f344763413e96e0110b7d89f"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
@@ -28,7 +28,7 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
 EXTRA_OEMESON = "-Dengines=gstreamer -Dplugins=${@strip_comma('${RYGEL_PLUGINS}')}"
 PACKAGECONFIG:append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk+3", "", d)}"
 
-PACKAGECONFIG ?= "external mpris ruih gst-launch"
+PACKAGECONFIG ?= "external mpris ruih gst-launch media-export"
 
 PACKAGECONFIG[external] = ""
 PACKAGECONFIG[mpris] = ""
@@ -60,24 +60,15 @@ do_install:append() {
        # Remove .la files for loadable modules
        rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
        rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
-       if [ -e ${D}${nonarch_libdir}/systemd/user/rygel.service ]; then
-               mkdir -p ${D}${systemd_unitdir}/system
-               mv ${D}${nonarch_libdir}/systemd/user/rygel.service ${D}${systemd_unitdir}/system
-               rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/user \
-               ${D}${nonarch_libdir}/systemd \
-               ${D}${nonarch_libdir}
-       fi
 }
 
-FILES:${PN} += "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 ${datadir}/icons"
+FILES:${PN} += "${libdir}/rygel-${LIBV}/engines ${systemd_user_unitdir} ${datadir}/dbus-1 ${datadir}/icons"
 FILES:${PN}-dbg += "${libdir}/rygel-${LIBV}/engines/.debug ${libdir}/rygel-${LIBV}/plugins/.debug"
 
 PACKAGES += "${PN}-meta"
 ALLOW_EMPTY:${PN}-meta = "1"
 
 PACKAGES_DYNAMIC = "${PN}-plugin-*"
-
-SYSTEMD_SERVICE:${PN} = "rygel.service"
 
 python populate_packages:prepend () {
     rygel_libdir = d.expand('${libdir}/rygel-${LIBV}')
