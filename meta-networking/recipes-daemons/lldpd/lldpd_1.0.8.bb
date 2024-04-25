@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
 
 DEPENDS = "libbsd libevent"
 
-SRC_URI = "\
-    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
-    file://lldpd.init.d \
-    file://lldpd.default \
-    "
+SRC_URI = "http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+           file://lldpd.init.d \
+           file://lldpd.default \
+           file://CVE-2023-41910.patch \
+           "
 
 SRC_URI[md5sum] = "000042dbf5b445f750b5ba01ab25c8ba"
 SRC_URI[sha256sum] = "98d200e76e30f6262c4a4493148c1840827898329146a57a34f8f0f928ca3def"
