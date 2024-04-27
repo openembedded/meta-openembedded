@@ -147,3 +147,11 @@ SYSTEMD_SERVICE:${PN} = "${BPN}@.service"
 
 INITSCRIPT_NAME = "syslog"
 INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
+
+# Fails only with 32bit MACHINEs
+# http://errors.yoctoproject.org/Errors/Details/766956/
+# syslog-ng-4.6.0/modules/secure-logging/slog.c:937:63: error: passing argument 4 of 'g_io_channel_write_chars' from incompatible pointer type [-Wincompatible-pointer-types]
+# syslog-ng-4.6.0/modules/secure-logging/slog.c:955:99: error: passing argument 5 of 'cmac' from incompatible pointer type [-Wincompatible-pointer-types]
+# syslog-ng-4.6.0/modules/secure-logging/slog.c:959:74: error: passing argument 4 of 'g_io_channel_write_chars' from incompatible pointer type [-Wincompatible-pointer-types]
+# syslog-ng-4.6.0/modules/secure-logging/slog.c:975:107: error: passing argument 4 of 'g_io_channel_write_chars' from incompatible pointer type [-Wincompatible-pointer-types]
+CFLAGS += "-Wno-error=incompatible-pointer-types"
