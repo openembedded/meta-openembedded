@@ -1,0 +1,17 @@
+From 65cd176f67eedfd1ad18425f4ca3e3a078a45bf0 Mon Sep 17 00:00:00 2001
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
+Date: Mon, 29 Apr 2024 12:16:30 +0200
+Subject: [PATCH 0/1] open-vm-tools: Update status for CVE-2014-4199 and CVE-2014-4200
+
+Current version 12.3.5 is not affected by the issue.
+Affected versions: Up to (incl) 10.0.3
+
+Ninette Adhikari (1):
+  m2: update cve status
+
+ .../recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb       | 2 ++
+ 1 file changed, 2 insertions(+)
+
+-- 
+2.44.0
+
