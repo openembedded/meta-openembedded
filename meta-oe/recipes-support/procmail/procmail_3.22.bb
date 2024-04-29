@@ -43,3 +43,6 @@ do_install() {
     oe_runmake -i BASENAME=${D}/usr MANDIR=${D}${mandir} install
     install -m 0644 debian/mailstat.1 ${D}${mandir}/man1
 }
+
+#fixed-version: No action required. The current version (3.22) is not affected by the CVE.
+CVE_CHECK_IGNORE += "CVE-1999-0475"
