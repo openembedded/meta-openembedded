@@ -7,7 +7,9 @@ CVE_PRODUCT = "giflib_project:giflib"
 
 DEPENDS = "xmlto-native"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
+           file://CVE-2022-28506.patch"
+
 SRC_URI[sha256sum] = "31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd"
 
 do_install() {
