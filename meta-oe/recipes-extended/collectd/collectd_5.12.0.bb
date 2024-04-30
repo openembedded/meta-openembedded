@@ -37,6 +37,7 @@ PACKAGECONFIG[mysql] = "--enable-mysql --with-libmysql=yes, \
         --disable-mysql --with-libmysql=no,mysql5"
 PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
 PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
+PACKAGECONFIG[mqtt] = "--enable-mqtt,--disable-mqtt,libmosquitto"
 PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
 PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
         --disable-sensors --with-libsensors=no,lmsensors"
