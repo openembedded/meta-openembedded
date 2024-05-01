@@ -22,11 +22,9 @@ PACKAGES += "\
     ${PN}-conch \
     ${PN}-mail \
     ${PN}-names \
-    ${PN}-news \
     ${PN}-runner \
     ${PN}-web \
     ${PN}-words \
-    ${PN}-flow \
     ${PN}-pair \
     ${PN}-core \
 "
@@ -66,11 +64,9 @@ RDEPENDS:${PN}-test = "${PN} python3-pyhamcrest"
 RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-bcrypt python3-cryptography python3-pickle"
 RDEPENDS:${PN}-mail = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-names = "${PN}-core"
-RDEPENDS:${PN}-news = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-runner = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-web += "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-words += "${PN}-core"
-RDEPENDS:${PN}-flow += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
 
 FILES:${PN}-test = " \
@@ -152,12 +148,6 @@ FILES:${PN}-names = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/names \
 "
 
-FILES:${PN}-news = " \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_news.py* \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_news*.pyc \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/news \
-"
-
 FILES:${PN}-runner = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_runner.py* \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_runner*.pyc \
@@ -176,15 +166,7 @@ FILES:${PN}-words = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/words \
 "
 
-FILES:${PN}-flow = " \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_flow.py* \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_flow*.pyc \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/flow \
-"
-
 FILES:${PN}-pair = " \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_pair.py* \
-    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_pair*.pyc \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/pair \
 "
 
