@@ -41,7 +41,7 @@ SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
 SRC_URI[archive.sha256sum] = "81792423019deda1d2a074c1ecf6a7e6ef3172c09cbe6f4d7995a4b5dea28312"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
-PACKAGECONFIG[cups] = ",,cups,cups"
+PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
 PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
 PACKAGECONFIG[file-share] = ",,,gnome-user-share"
@@ -71,4 +71,4 @@ FILES:${PN} += " \
 
 FILES:${PN}-dev += "${datadir}/gettext"
 
-RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper"
+RDEPENDS:${PN} += "gsettings-desktop-schemas tecla"
