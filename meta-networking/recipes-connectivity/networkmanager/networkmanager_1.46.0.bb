@@ -19,6 +19,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
 DEPENDS = " \
+    glib-2.0 \
     python3-pygobject-native \
     coreutils-native \
     intltool-native \
@@ -77,6 +78,7 @@ CFLAGS:append:libc-musl = " \
     -DRTLD_DEEPBIND=0 \
 "
 do_configure:prepend() {
+    cp -f ${STAGING_LIBDIR}/girepository-1.0/GLib*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
     cp -f ${STAGING_LIBDIR}/girepository-1.0/GObject*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
     cp -f ${STAGING_LIBDIR}/girepository-1.0/Gio*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
     cp -f ${STAGING_LIBDIR}/girepository-1.0/GModule*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
