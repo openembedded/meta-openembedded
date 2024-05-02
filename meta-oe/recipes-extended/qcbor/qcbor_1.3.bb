@@ -6,13 +6,11 @@ DESCRIPTION = " \
 HOMEPAGE = "https://github.com/laurencelundblade/QCBOR"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://README.md;beginline=442;endline=463;md5=b55643261d6d221dac2b7a395105af62"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=498c298542365dfcfe29948c72a5849b"
 
 SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master"
 
-SRCREV = "44754f738c6534a4304a83d4c6e97b3d3193d887"
-
-PV = "1.2+git"
+SRCREV = "1eba85dbbe78fc1938f8aba2112ba1b228caed30"
 
 S = "${WORKDIR}/git"
 
