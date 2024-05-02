@@ -9,7 +9,7 @@ inherit meson pkgconfig gobject-introspection features_check gtk-doc
 
 SRC_URI = "git://github.com/gedit-technology/libgedit-gtksourceview.git;protocol=https;branch=main"
 S = "${WORKDIR}/git"
-SRCREV = "b271a625ca057cc3fa7d5ac83285c5d4e038202e"
+SRCREV = "eaafc892d033713c7c823d8ad602061e456b3c88"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
