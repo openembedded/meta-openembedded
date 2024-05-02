@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/spulec/freezegun"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=acf1d209bb6eddae4cbe6ffd6a0144fe"
 
-SRC_URI[sha256sum] = "10939b0ba0ff5adaecf3b06a5c2f73071d9678e507c5eaedb23c761d56ac774b"
+SRC_URI[sha256sum] = "200a64359b363aa3653d8aac289584078386c7c3da77339d257e46a01fb5c77c"
 
 inherit pypi python_setuptools_build_meta ptest
 
