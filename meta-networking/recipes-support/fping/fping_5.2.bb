@@ -14,10 +14,8 @@ LICENSE = "fping"
 NO_GENERIC_LICENSE[fping] = "COPYING"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 
-SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz \
-           file://0001-fping-Initialize-msghdr-struct-in-a-portable-way.patch \
-           "
-SRC_URI[sha256sum] = "1ee5268c063d76646af2b4426052e7d81a42b657e6a77d8e7d3d2e60fd7409fe"
+SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
+SRC_URI[sha256sum] = "a7692d10d73fb0bb76e1f7459aa7f19bbcdbfc5adbedef02f468974b18b0e42f"
 
 S = "${WORKDIR}/fping-${PV}"
 
