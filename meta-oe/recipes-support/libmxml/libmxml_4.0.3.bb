@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
 BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
 
 SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https"
-SRCREV = "fd47c7d115191c8a6bce2c781ffee41e179530f2"
+SRCREV = "804c4f4d922e4ca240ce2cad3ec7bc5d00c08691"
 S = "${WORKDIR}/git"
 
 # Package does not support out of tree builds.
