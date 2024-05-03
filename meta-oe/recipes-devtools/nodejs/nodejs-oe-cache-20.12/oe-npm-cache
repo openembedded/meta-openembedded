@@ -30,7 +30,7 @@ const xlate = {
 		time: Date.now(),
 		url:  key,
 		reqHeaders: {
-		    'accept': 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*',
+		    'accept': 'application/json',
 		},
 		resHeaders: {
 		    "content-type": "application/json",
