@@ -1,0 +1,40 @@
+From 2e75513a13e3cf4a16626ef654242b3b07cc8f29 Mon Sep 17 00:00:00 2001
+From: John Schanck <jschanck@mozilla.com>
+Date: Mon, 11 Dec 2023 19:24:14 +0000
+Subject: [PATCH] Bug 1867408 - add a defensive check for large ssl_DefSend
+ return values. r=nkulatova
+
+Differential Revision: https://phabricator.services.mozilla.com/D195054
+
+--HG--
+extra : moz-landing-system : lando
+
+CVE: CVE-2024-0743
+Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/2e75513a13e3cf4a16626ef654242b3b07cc8f29]
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ lib/ssl/sslsecur.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/lib/ssl/sslsecur.c b/lib/ssl/sslsecur.c
+index 59ef064c9..9e994f4b5 100644
+--- a/lib/ssl/sslsecur.c
++++ b/lib/ssl/sslsecur.c
+@@ -453,7 +453,12 @@ ssl_SendSavedWriteData(sslSocket *ss)
+         if (rv < 0) {
+             return rv;
+         }
+-        ss->pendingBuf.len -= rv;
++        if (rv > ss->pendingBuf.len) {
++            PORT_Assert(0); /* This shouldn't happen */
++            ss->pendingBuf.len = 0;
++        } else {
++            ss->pendingBuf.len -= rv;
++        }
+         if (ss->pendingBuf.len > 0 && rv > 0) {
+             /* UGH !! This shifts the whole buffer down by copying it */
+             PORT_Memmove(ss->pendingBuf.buf, ss->pendingBuf.buf + rv,
+-- 
+2.30.2
+
