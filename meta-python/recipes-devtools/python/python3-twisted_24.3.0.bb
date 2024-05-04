@@ -22,6 +22,7 @@ PACKAGES += "\
     ${PN}-conch \
     ${PN}-mail \
     ${PN}-names \
+    ${PN}-newsfragments \
     ${PN}-runner \
     ${PN}-web \
     ${PN}-words \
@@ -64,10 +65,13 @@ RDEPENDS:${PN}-test = "${PN} python3-pyhamcrest"
 RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-bcrypt python3-cryptography python3-pickle"
 RDEPENDS:${PN}-mail = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-names = "${PN}-core"
+RDEPENDS:${PN}-newsfragements = "${PN}-core"
 RDEPENDS:${PN}-runner = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-web += "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-words += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
+
+FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
 
 FILES:${PN}-test = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/test \
@@ -174,3 +178,6 @@ FILES:${PN}-doc += " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/python/_pydoctortemplates \
 "
 
+FILES:${PN}-newsfragments = " \
+    ${PYTHON_SITEPACKAGES_DIR}/twisted/newsfragments \
+"
