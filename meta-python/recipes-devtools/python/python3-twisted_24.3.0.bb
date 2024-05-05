@@ -15,7 +15,7 @@ do_install:append() {
     find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
 }
 
-PACKAGES += "\
+PACKAGES =+ "\
     ${PN}-zsh \
     ${PN}-test \
     ${PN}-protocols \
