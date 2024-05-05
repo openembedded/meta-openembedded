@@ -11,8 +11,9 @@ SRC_URI[sha256sum] = "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b
 inherit pypi python_hatchling
 
 do_install:append() {
-    # remove some useless files before packaging
+    # remove some useless files and newsfragments before packaging
     find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
+    rm -rf ${D}${PYTHON_SITEPACKAGES_DIR}/twisted/newsfragments
 }
 
 PACKAGES += "\
@@ -68,6 +69,8 @@ RDEPENDS:${PN}-runner = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-web += "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-words += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
+
+FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
 
 FILES:${PN}-test = " \
     ${PYTHON_SITEPACKAGES_DIR}/twisted/test \
