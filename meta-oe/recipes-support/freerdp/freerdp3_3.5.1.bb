@@ -7,7 +7,7 @@ DEPENDS = "openssl libusb1 uriparser cairo icu pkcs11-helper zlib jpeg"
 
 inherit pkgconfig cmake
 
-SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
+SRCREV = "eda5c99686e15327f2f37b9cadf307e852b96adf"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
