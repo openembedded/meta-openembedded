@@ -13,11 +13,9 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
 "
 
-SRCREV = "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
-SRC_URI = "\
-    git://github.com/containers/composefs.git;protocol=https;branch=main \
-    file://0001-musl-basename-use-portable-implementation-for-basena.patch \
-"
+PV .= "+git${SRCPV}"
+SRCREV = "ecef20c18c81943bd17b489ad1484f361b99c792"
+SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
 
