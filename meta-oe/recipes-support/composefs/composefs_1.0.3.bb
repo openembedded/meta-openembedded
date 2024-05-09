@@ -1,4 +1,7 @@
 SUMMARY = "Tools to handle creating and mounting composefs images"
+DESCRIPTION = "The composefs project combines several underlying Linux \
+features to provide a very flexible mechanism to support read-only mountable \
+filesystem trees, stacking on top of an underlying "lower" Linux filesystem."
 HOMEPAGE = "https://github.com/containers/composefs"
 LICENSE = "GPL-3.0-or-later & LGPL-2.0-or-later & Apache-2.0"
 LIC_FILES_CHKSUM = "\
@@ -9,10 +12,8 @@ LIC_FILES_CHKSUM = "\
     file://COPYINGv3;md5=d32239bcb673463ab874e80d47fae504 \
     file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
 "
-DEPENDS = "openssl"
-SRCREV = "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
-PV = "1.0.3"
 
+SRCREV = "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
 SRC_URI = "\
     git://github.com/containers/composefs.git;protocol=https;branch=main \
     file://0001-musl-basename-use-portable-implementation-for-basena.patch \
@@ -21,3 +22,10 @@ SRC_URI = "\
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
+
+DEPENDS = "openssl"
+
+EXTRA_OECONF += " \
+    --disable-man \
+    --without-fuse \
+"
