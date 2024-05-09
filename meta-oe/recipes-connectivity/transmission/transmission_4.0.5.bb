@@ -1,49 +1,34 @@
 DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
 SECTION = "network"
 HOMEPAGE = "https://transmissionbt.com/"
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=73f535ddffcf2a0d3af4f381f84f9b33"
+LICENSE = "MIT & GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
 
 DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
 RDEPENDS:${PN}-web = "${PN}"
 
 SRC_URI = " \
-	gitsm://github.com/transmission/transmission;branch=master;protocol=https \
+	gitsm://github.com/transmission/transmission;branch=4.0.x;protocol=https \
 	file://transmission-daemon \
 "
 
-# Transmission release 3.00
-SRCREV = "bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd"
-PV = "3.00"
+# Transmission release 4.0.5
+SRCREV = "a6fe2a64aa7eca089f96006cf082a12f0cde937f"
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep gettext update-rc.d pkgconfig systemd mime-xdg
+inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
 
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
 
-PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+3,"
-PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
+PACKAGECONFIG[gtk] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF,gtk4 gtkmm4,"
+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd,"
 
 # Weak default values for transmission user and group
 # Change them in bbappend if needed
 TRANSMISSION_USER ??= "root"
 TRANSMISSION_GROUP ??= "root"
-
-# Configure aborts with:
-# config.status: error: po/Makefile.in.in was not created by intltoolize.
-do_configure() {
-	sed -i /AM_GLIB_GNU_GETTEXT/d ${S}/configure.ac
-	cd ${S}
-	./update-version-h.sh
-	intltoolize --copy --force --automake
-        aclocal
-        libtoolize --automake --copy --force
-        autoconf
-        automake -a
-        oe_runconf
-}
 
 do_install:append() {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -63,8 +48,8 @@ do_install:append() {
 PACKAGES += "${PN}-gtk ${PN}-client ${PN}-web"
 
 FILES:${PN}-client = "${bindir}/transmission-remote ${bindir}/transmission-cli ${bindir}/transmission-create ${bindir}/transmission-show ${bindir}/transmission-edit"
-FILES:${PN}-gtk += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps"
-FILES:${PN}-web = "${datadir}/transmission/web"
+FILES:${PN}-gtk += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps ${datadir}/metainfo"
+FILES:${PN}-web = "${datadir}/transmission/web ${datadir}/transmission/public_html"
 FILES:${PN} = "${bindir}/transmission-daemon ${sysconfdir}/init.d/transmission-daemon ${datadir}/appdata"
 
 SYSTEMD_SERVICE:${PN} = "transmission-daemon.service"
