@@ -27,3 +27,7 @@ EXTRA_OECONF += " \
     --disable-man \
     --without-fuse \
 "
+
+LDFLAGS:append:class-native = " -pthread"
+
+BBCLASSEXTEND = "native"
