@@ -9,9 +9,9 @@ It includes: \
     xkbvleds - display the state of LEDs on an XKB keyboard in a window \
     xkbwatch - reports changes in the XKB keyboard state \
 "
-LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6767a97a97e21260134637b657b922ae"
 
 DEPENDS += "libxaw libxkbfile"
 
 SRC_URI_EXT = "xz"
-SRC_URI[sha256sum] = "f6a4a8e9c54582beb3787b1faa8168caab125c1fee0ca9cfa5b6c9c1df25eea4"
+SRC_URI[sha256sum] = "31a2bbee1e09ccba01de92897b8f540b545de812f318d31de07bd3a5a75ee25e"
