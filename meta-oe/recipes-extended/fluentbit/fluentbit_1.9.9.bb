@@ -29,7 +29,7 @@ SRC_URI:append:libc-musl = "\
            file://0001-Use-posix-strerror_r-with-musl.patch \
            file://0002-chunkio-Link-with-fts-library-with-musl.patch \
            "
-SRC_URI[sha256sum] = "8ca2ac081d7eee717483c06608adcb5e3d5373e182ad87dba21a23f8278c6540"
+SRC_URI[sha256sum] = "3f6cd4bd1894cda16b465aef6ffec7e920d54c4209b3e2320fcffe7ae345700e"
 S = "${WORKDIR}/fluent-bit-${PV}"
 
 DEPENDS = "zlib bison-native flex-native openssl"
@@ -83,6 +83,9 @@ EXTRA_OECMAKE:append:powerpc = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 
 CFLAGS:append:x86 = " -DMBEDTLS_HAVE_SSE2"
+
+# Fixes build with GCC-14
+CFLAGS += "-Wno-error=incompatible-pointer-types"
 
 inherit cmake systemd pkgconfig
 
