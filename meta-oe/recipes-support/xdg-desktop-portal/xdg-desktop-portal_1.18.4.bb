@@ -22,7 +22,7 @@ PORTAL_BACKENDS ?= " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'gtk4', 'xdg-desktop-portal-gtk', '', d)} \
 "
 
-RDEPENDS:${PN} = "bubblewrap rtkit ${PORTAL_BACKENDS}"
+RDEPENDS:${PN} = "bubblewrap rtkit ${PORTAL_BACKENDS} fuse3-utils"
 
 inherit meson pkgconfig python3native features_check
 
