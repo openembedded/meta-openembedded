@@ -6,11 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 SRC_URI = " \
     gitsm://github.com/flatpak/flatpak;protocol=https;branch=main \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
-    file://0001-meson.build-require-for-native-wayland-scanner.patch \
-    file://0001-meson.build-require-native-gtkdoc.patch \
 "
 
-SRCREV = "27b11b93c2a80a91c9461bc6c7f5e9a201406041"
+SRCREV = "925c80f913d69e7ca424428823e1431c4ffb0deb"
 
 S = "${WORKDIR}/git"
 
@@ -65,6 +63,8 @@ PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'seccomp', 'seccomp', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-security-context', '', d)} \
 "
+
+EXTRA_OEMESON = "-Dsystem_fusermount=${bindir}/fusermount3"
 
 FILES:${PN} += "${libdir} ${datadir}"
 
