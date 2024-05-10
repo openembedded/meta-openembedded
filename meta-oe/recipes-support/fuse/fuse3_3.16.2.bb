@@ -13,8 +13,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=a55c12a2d7d742ecb41ca9ae0a6ddc66 \
 "
 
-SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz \
-"
+SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz"
 SRC_URI[sha256sum] = "f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87"
 
 S = "${WORKDIR}/fuse-${PV}"
