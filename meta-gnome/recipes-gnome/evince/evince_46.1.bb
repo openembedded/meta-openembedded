@@ -33,7 +33,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'open
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "aff6af69392c04956bfad976dec5d1583b41d5a334e937995f7c3ca0740de221"
+SRC_URI[archive.sha256sum] = "94bb525365b060a28c2f6017d22cbf2af5115507254aa42e9bfc000bbc18ab62"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
