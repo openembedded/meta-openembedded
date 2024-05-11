@@ -22,7 +22,7 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 EXTRA_OEMESON += "-Dintrospection=enabled"
 
 SRC_URI = "git://gitlab.gnome.org/GNOME/file-roller.git;protocol=https;branch=master"
-SRCREV = "299e86c77d8fe600ee6658357e209b15c674397e"
+SRCREV = "5b21d887e087155b008f9293ca054d6ac3116a2b"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= ""
