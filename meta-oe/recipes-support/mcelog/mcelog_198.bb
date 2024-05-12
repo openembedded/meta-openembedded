@@ -8,6 +8,7 @@ SECTION = "System Environment/Base"
 SRC_URI = "\
     git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
     file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
+    file://0001-server-Correct-prameter-type-for-connect-API.patch \
     file://run-ptest \
 "
 
