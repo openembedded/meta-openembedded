@@ -688,7 +688,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
 RDEPENDS:packagegroup-meta-oe-navigation ="\
     geos \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluz4", "gpsd-machine-conf gpsd", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "orrery", "", d)} \
     geoclue \
     libspatialite \
     proj \
