@@ -67,7 +67,7 @@ do_configure:prepend() {
 do_install:append:class-nativesdk() {
     # graphviz-setup.sh must be executed at SDK installation
     install -d ${D}${SDKPATHNATIVE}/post-relocate-setup.d
-    install -m 0755 ${WORKDIR}/graphviz-setup.sh ${D}${SDKPATHNATIVE}/post-relocate-setup.d
+    install -m 0755 ${UNPACKDIR}/graphviz-setup.sh ${D}${SDKPATHNATIVE}/post-relocate-setup.d
 }
 FILES:${PN}:class-nativesdk += "${SDKPATHNATIVE}"
 

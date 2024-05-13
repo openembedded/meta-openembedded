@@ -54,7 +54,7 @@ WP_MODULE_SUBDIR = "wireplumber-0.5"
 
 do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'false', 'true', d)}; then
-        install -m 0644 ${WORKDIR}/90-OE-disable-session-dbus-dependent-features.lua ${D}${datadir}/wireplumber/main.lua.d
+        install -m 0644 ${UNPACKDIR}/90-OE-disable-session-dbus-dependent-features.lua ${D}${datadir}/wireplumber/main.lua.d
     fi
 }
 

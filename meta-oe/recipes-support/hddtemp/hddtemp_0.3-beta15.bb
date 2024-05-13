@@ -25,9 +25,9 @@ FILES:${PN} += "/usr/share/misc/hddtemp.db"
 
 do_install:append() {
     install -d ${D}/usr/share/misc/
-    install -m 0644 ${WORKDIR}/hddtemp.db ${D}/usr/share/misc/hddtemp.db
+    install -m 0644 ${UNPACKDIR}/hddtemp.db ${D}/usr/share/misc/hddtemp.db
     install -d ${D}${sysconfdir}/init.d
-    install -m 0644 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hddtemp
+    install -m 0644 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/hddtemp
 }
 
 INITSCRIPT_NAME = "hddtemp"

@@ -137,9 +137,9 @@ do_install_ptest() {
 do_install:append() {
     install -d "${D}${sysconfdir}/init.d"
     install -d "${D}${sysconfdir}/logrotate.d"
-    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
-    install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-    install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
+    install -m 755 ${UNPACKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
+    install -m 644 ${UNPACKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+    install -m 644 ${UNPACKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
     sed -i -e "s#@BINDIR@#${bindir}#g" ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'imjournal', 'true', 'false', d)}; then
@@ -152,7 +152,7 @@ do_install:append() {
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_system_unitdir}
-        install -m 644 ${WORKDIR}/rsyslog.service ${D}${systemd_system_unitdir}
+        install -m 644 ${UNPACKDIR}/rsyslog.service ${D}${systemd_system_unitdir}
         sed -i -e "s,@sbindir@,${sbindir},g" ${D}${systemd_system_unitdir}/rsyslog.service
     fi
 }

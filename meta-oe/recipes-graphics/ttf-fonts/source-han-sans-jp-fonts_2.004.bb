@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf98027
 
 do_install() {
     install -d ${D}${sysconfdir}/fonts/conf.d/
-    install -m 0644 ${WORKDIR}/44-source-han-sans-jp.conf ${D}${sysconfdir}/fonts/conf.d/
+    install -m 0644 ${UNPACKDIR}/44-source-han-sans-jp.conf ${D}${sysconfdir}/fonts/conf.d/
 
     install -d ${D}${datadir}/fonts/truetype/
     find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;

@@ -90,8 +90,8 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/init.d
-    install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
-    install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
+    install -m 644 ${UNPACKDIR}/ntp.conf ${D}${sysconfdir}
+    install -m 755 ${UNPACKDIR}/ntpd ${D}${sysconfdir}/init.d
 
     install -m 755 -d ${D}${NTP_USER_HOME}
     chown ntp:ntp ${D}${NTP_USER_HOME}
@@ -109,14 +109,14 @@ do_install:append() {
     sed -i '/use/i use warnings;' ${D}${sbindir}/calc_tickadj
 
     install -d ${D}/${sysconfdir}/default
-    install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
+    install -m 0644 ${UNPACKDIR}/sntp ${D}${sysconfdir}/default/
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-    install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${UNPACKDIR}/sntp.service ${D}${systemd_unitdir}/system/
 
     install -d ${D}${systemd_unitdir}/ntp-units.d
-    install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
+    install -m 0644 ${UNPACKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
 
     # Remove the empty libexecdir and bindir.
     rmdir --ignore-fail-on-non-empty ${D}${libexecdir}

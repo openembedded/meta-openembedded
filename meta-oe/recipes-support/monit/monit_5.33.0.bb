@@ -45,12 +45,12 @@ do_configure:prepend() {
 do_install:append() {
 
     # Configuration file
-    install -Dm 0600 ${WORKDIR}/monitrc ${D}${sysconfdir}/monitrc
+    install -Dm 0600 ${UNPACKDIR}/monitrc ${D}${sysconfdir}/monitrc
 
     # SystemD
     install -Dm 0644 ${S}/system/startup/monit.service.in ${D}${systemd_system_unitdir}/monit.service
     sed -i -e 's,@prefix@,${exec_prefix},g' ${D}${systemd_unitdir}/system/monit.service
 
     # SysV
-    install -Dm 0755 ${WORKDIR}/monit ${D}${sysconfdir}/init.d/monit
+    install -Dm 0755 ${UNPACKDIR}/monit ${D}${sysconfdir}/init.d/monit
 }

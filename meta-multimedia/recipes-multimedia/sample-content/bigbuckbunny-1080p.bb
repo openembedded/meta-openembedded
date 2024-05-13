@@ -11,7 +11,7 @@ inherit allarch
 
 do_install() {
     install -d ${D}${datadir}/movies
-    install -m 0644 ${WORKDIR}/big_buck_bunny_1080p_surround.avi ${D}${datadir}/movies/
+    install -m 0644 ${UNPACKDIR}/big_buck_bunny_1080p_surround.avi ${D}${datadir}/movies/
 }
 
 FILES:${PN} += "${datadir}/movies"

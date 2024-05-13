@@ -224,7 +224,7 @@ do_install:append() {
     done
 
     install -d ${D}${libdir}/pkgconfig/
-    sed 's/%NSS_VERSION%/${PV}/' ${WORKDIR}/nss.pc.in | sed 's/%NSPR_VERSION%/4.9.2/' > ${D}${libdir}/pkgconfig/nss.pc
+    sed 's/%NSS_VERSION%/${PV}/' ${UNPACKDIR}/nss.pc.in | sed 's/%NSPR_VERSION%/4.9.2/' > ${D}${libdir}/pkgconfig/nss.pc
     sed -i s:OEPREFIX:${prefix}:g ${D}${libdir}/pkgconfig/nss.pc
     sed -i s:OEEXECPREFIX:${exec_prefix}:g ${D}${libdir}/pkgconfig/nss.pc
     sed -i s:OELIBDIR:${libdir}:g ${D}${libdir}/pkgconfig/nss.pc
@@ -239,9 +239,9 @@ do_install:append:class-target() {
     # databases by:
     # certutil -N -d sql:/database/path/ --empty-password
     install -d ${D}${sysconfdir}/pki/nssdb/
-    install -m 0644 ${WORKDIR}/blank-cert9.db ${D}${sysconfdir}/pki/nssdb/cert9.db
-    install -m 0644 ${WORKDIR}/blank-key4.db ${D}${sysconfdir}/pki/nssdb/key4.db
-    install -m 0644 ${WORKDIR}/system-pkcs11.txt ${D}${sysconfdir}/pki/nssdb/pkcs11.txt
+    install -m 0644 ${UNPACKDIR}/blank-cert9.db ${D}${sysconfdir}/pki/nssdb/cert9.db
+    install -m 0644 ${UNPACKDIR}/blank-key4.db ${D}${sysconfdir}/pki/nssdb/key4.db
+    install -m 0644 ${UNPACKDIR}/system-pkcs11.txt ${D}${sysconfdir}/pki/nssdb/pkcs11.txt
 }
 
 PACKAGE_WRITE_DEPS += "nss-native"

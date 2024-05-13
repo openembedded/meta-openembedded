@@ -104,7 +104,7 @@ do_install () {
 	install -m 0644 libnss_mdns.8 ${D}${mandir}/man8
 
 	install -d ${D}${systemd_system_unitdir}
-	install -m 0644 ${WORKDIR}/mdns.service ${D}${systemd_system_unitdir}
+	install -m 0644 ${UNPACKDIR}/mdns.service ${D}${systemd_system_unitdir}
 
 	install -d ${D}${INIT_D_DIR}
 	install mdnsd.sh ${D}${INIT_D_DIR}/mdns

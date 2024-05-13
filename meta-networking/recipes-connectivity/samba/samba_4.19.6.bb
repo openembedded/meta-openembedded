@@ -173,8 +173,8 @@ do_install:append() {
 
     install -d ${D}${sysconfdir}/samba
     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
-    install -m644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
-    install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
+    install -m644 ${UNPACKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
+    install -D -m 644 ${UNPACKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
 
     install -d ${D}${sysconfdir}/default
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/default/samba

@@ -29,7 +29,7 @@ SYSTEMD_SERVICE:${PN} = "hostapd.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
 do_configure:append() {
-    install -m 0644 ${WORKDIR}/defconfig ${B}/.config
+    install -m 0644 ${UNPACKDIR}/defconfig ${B}/.config
 }
 
 do_compile() {
@@ -43,8 +43,8 @@ do_install() {
     install -m 0644 ${B}/hostapd.conf ${D}${sysconfdir}
     install -m 0755 ${B}/hostapd ${D}${sbindir}
     install -m 0755 ${B}/hostapd_cli ${D}${sbindir}
-    install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
-    install -m 0644 ${WORKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
+    install -m 755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/hostapd
+    install -m 0644 ${UNPACKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
     sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/hostapd.service
 }
 

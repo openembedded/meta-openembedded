@@ -78,7 +78,7 @@ do_install () {
     cp -dR ${S}/libopeniscsiusr/libopeniscsiusr.so* ${D}${libdir}
     install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8 ${D}/${mandir}/man8
     install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
-    install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
+    install -p -m 755 ${UNPACKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
 
     sed -i -e "s:= /sbin/iscsid:= ${sbindir}/iscsid:" ${D}${sysconfdir}/iscsi/iscsid.conf
 
@@ -87,17 +87,17 @@ do_install () {
         echo "d /run/${BPN}/lock - - - -" \
                      > ${D}${sysconfdir}/tmpfiles.d/iscsi.conf
         install -d ${D}/etc/default/
-        install -p -m 755 ${WORKDIR}/iscsi-initiator ${D}${sysconfdir}/default/
+        install -p -m 755 ${UNPACKDIR}/iscsi-initiator ${D}${sysconfdir}/default/
 
         install -d ${D}${systemd_unitdir}/system/
-        install -m 0644 ${WORKDIR}/iscsi-initiator.service \
-                        ${WORKDIR}/iscsi-initiator-targets.service \
+        install -m 0644 ${UNPACKDIR}/iscsi-initiator.service \
+                        ${UNPACKDIR}/iscsi-initiator-targets.service \
                         ${D}${systemd_unitdir}/system/
         install -d ${D}${nonarch_libdir}/iscsi
-        install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
+        install -m 0755 ${UNPACKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
     else
         install -d ${D}/etc/default/volatiles
-        install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
+        install -m 0644 ${UNPACKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
     fi
 }
 

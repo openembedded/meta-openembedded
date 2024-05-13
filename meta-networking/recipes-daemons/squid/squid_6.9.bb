@@ -122,7 +122,7 @@ do_install:append() {
     fi
 
     install -d ${D}${sysconfdir}/default/volatiles
-    install -m 0644 ${WORKDIR}/volatiles.03_squid ${D}${sysconfdir}/default/volatiles/03_squid
+    install -m 0644 ${UNPACKDIR}/volatiles.03_squid ${D}${sysconfdir}/default/volatiles/03_squid
 
     rmdir "${D}${localstatedir}/run/${BPN}"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}/run"
@@ -132,7 +132,7 @@ do_install:append() {
 
     # Install NetworkManager dispatcher reload hooks
     install -d ${D}${libdir}/NetworkManager/dispatcher.d
-    install -m 0755 ${WORKDIR}/squid.nm ${D}${libdir}/NetworkManager/dispatcher.d/20-squid
+    install -m 0755 ${UNPACKDIR}/squid.nm ${D}${libdir}/NetworkManager/dispatcher.d/20-squid
 }
 
 SYSTEMD_AUTO_ENABLE = "disable"

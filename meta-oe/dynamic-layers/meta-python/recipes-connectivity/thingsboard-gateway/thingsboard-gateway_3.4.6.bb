@@ -55,13 +55,13 @@ do_install:append(){
 
     install -d ${D}${sysconfdir}/thingsboard-gateway/config
 
-    for file in $(find ${WORKDIR} -maxdepth 1 -type f -name *.json); do
+    for file in $(find ${UNPACKDIR} -maxdepth 1 -type f -name *.json); do
         install -m 0644 "$file" ${D}${sysconfdir}/thingsboard-gateway/config
     done
 
-    install -m 0644 ${WORKDIR}/tb_gateway.yaml ${D}${sysconfdir}/thingsboard-gateway/config
-    install -m 0644 ${WORKDIR}/logs.conf ${D}${sysconfdir}/thingsboard-gateway/config
+    install -m 0644 ${UNPACKDIR}/tb_gateway.yaml ${D}${sysconfdir}/thingsboard-gateway/config
+    install -m 0644 ${UNPACKDIR}/logs.conf ${D}${sysconfdir}/thingsboard-gateway/config
 
     install -d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${WORKDIR}/thingsboard-gateway.service     ${D}${systemd_system_unitdir}/thingsboard-gateway.service
+    install -m 0644 ${UNPACKDIR}/thingsboard-gateway.service ${D}${systemd_system_unitdir}/thingsboard-gateway.service
 }

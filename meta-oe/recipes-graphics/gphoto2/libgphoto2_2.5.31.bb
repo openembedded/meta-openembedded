@@ -38,7 +38,7 @@ do_configure:append() {
 
 do_install:append() {
     install -d ${D}${sysconfdir}/udev/rules.d/
-    install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
+    install -m 0644 ${UNPACKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
 }
 
 PACKAGES =+ "libgphotoport libgphoto2-camlibs"

@@ -34,7 +34,7 @@ inherit autotools-brokensep gettext pkgconfig systemd
 
 do_install:append() {
     install -d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${WORKDIR}/ntopng.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/ntopng.service ${D}${systemd_unitdir}/system
 }
 
 FILES:${PN} += "\
