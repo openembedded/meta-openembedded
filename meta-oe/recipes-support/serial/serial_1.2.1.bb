@@ -17,7 +17,7 @@ inherit cmake
 
 # Work-around for https://github.com/wjwwood/serial/issues/135
 EXTRA_OECMAKE = " \
-    -DCMAKE_MODULE_PATH=${WORKDIR} \
+    -DCMAKE_MODULE_PATH=${UNPACKDIR} \
     -DCATKIN_PACKAGE_LIB_DESTINATION=${libdir} \
     -DCATKIN_PACKAGE_BIN_DESTINATION=${bindir} \
     -DCATKIN_GLOBAL_INCLUDE_DESTINATION=${includedir} \

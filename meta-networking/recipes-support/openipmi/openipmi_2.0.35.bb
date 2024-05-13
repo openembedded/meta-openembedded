@@ -102,10 +102,10 @@ do_install:append () {
  
     # for systemd
     install -d ${D}${systemd_unitdir}/system
-    install -m 0664 ${WORKDIR}/ipmi.service ${D}${systemd_unitdir}/system
+    install -m 0664 ${UNPACKDIR}/ipmi.service ${D}${systemd_unitdir}/system
     sed -i -e "s,@LIBEXECDIR@,${libexecdir},g" ${D}${systemd_unitdir}/system/ipmi.service
     install -d ${D}${libexecdir}
-    install -m 0755 ${WORKDIR}/openipmi-helper ${D}${libexecdir}
+    install -m 0755 ${UNPACKDIR}/openipmi-helper ${D}${libexecdir}
 }
 
 INITSCRIPT_NAME = "ipmi"

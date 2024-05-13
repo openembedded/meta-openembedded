@@ -86,7 +86,7 @@ do_configure:prepend() {
 do_install:append:class-target() {
     install -d ${D}/${sysconfdir}/init.d
 
-    cat ${WORKDIR}/init | \
+    cat ${UNPACKDIR}/init | \
         sed -e 's,/usr/sbin/,${sbindir}/,g' \
             -e 's,/usr/bin/,${bindir}/,g' \
             -e 's,/usr/lib/,${libdir}/,g' \
@@ -130,15 +130,15 @@ do_install:append:class-target() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d/
-        install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${UNPACKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
 
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/apache2.service ${D}${systemd_unitdir}/system
         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
         sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
     elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/default/volatiles
-        install -m 0644 ${WORKDIR}/volatiles.04_apache2 ${D}${sysconfdir}/default/volatiles/04_apache2
+        install -m 0644 ${UNPACKDIR}/volatiles.04_apache2 ${D}${sysconfdir}/default/volatiles/04_apache2
     fi
 
     rm -rf ${D}${localstatedir} ${D}${sbindir}/envvars*

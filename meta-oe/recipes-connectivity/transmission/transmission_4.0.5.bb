@@ -32,9 +32,9 @@ TRANSMISSION_GROUP ??= "root"
 
 do_install:append() {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-		sed -i '/USERNAME=/c\USERNAME=${TRANSMISSION_USER}' ${WORKDIR}/transmission-daemon
+		sed -i '/USERNAME=/c\USERNAME=${TRANSMISSION_USER}' ${UNPACKDIR}/transmission-daemon
 		install -d ${D}${sysconfdir}/init.d
-		install -m 0744 ${WORKDIR}/transmission-daemon ${D}${sysconfdir}/init.d/
+		install -m 0744 ${UNPACKDIR}/transmission-daemon ${D}${sysconfdir}/init.d/
 		chown ${TRANSMISSION_USER}:${TRANSMISSION_GROUP} ${D}${sysconfdir}/init.d/transmission-daemon
 	fi
 

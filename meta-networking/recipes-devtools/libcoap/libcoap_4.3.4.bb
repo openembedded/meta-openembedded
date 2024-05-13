@@ -51,7 +51,7 @@ do_compile:prepend() {
 
 do_install_ptest () {
 	install -d ${D}${PTEST_PATH}
-	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}/run-ptest
+	install -m 0755 ${UNPACKDIR}/run-ptest ${D}${PTEST_PATH}/run-ptest
 	install -m 0755 ${B}/tests/testdriver ${D}${PTEST_PATH}/testdriver
 }
 

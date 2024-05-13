@@ -38,7 +38,7 @@ CONFIGUREOPTS:remove = "--disable-silent-rules --disable-dependency-tracking ${@
 EXTRA_OECONF:remove = "--disable-static"
 
 do_install:append() {
-    install -D ${WORKDIR}/xscreensaver.service ${D}${systemd_unitdir}/system/xscreensaver.service
+    install -D ${UNPACKDIR}/xscreensaver.service ${D}${systemd_unitdir}/system/xscreensaver.service
     for f in xscreensaver-getimage-file xscreensaver-getimage-video webcollage xscreensaver-text vidwhacker
     do
         sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" ${D}/${libexecdir}/${PN}/$f

@@ -37,14 +37,14 @@ do_configure:prepend () {
 
 do_install:append () {
     install -d ${D}${sysconfdir}/init.d
-    install -c -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/thttpd
-    install -c -m 755 ${WORKDIR}/thttpd.conf ${D}${sysconfdir}
+    install -c -m 755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/thttpd
+    install -c -m 755 ${UNPACKDIR}/thttpd.conf ${D}${sysconfdir}
     sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${sysconfdir}/init.d/thttpd
     sed -i -e 's,@@SRVDIR,${SRV_DIR},g' ${D}${sysconfdir}/thttpd.conf
     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/thttpd
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/thttpd.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/thttpd.service ${D}${systemd_unitdir}/system
     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
     sed -i 's!/var/!${localstatedir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
     sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${systemd_unitdir}/system/thttpd.service

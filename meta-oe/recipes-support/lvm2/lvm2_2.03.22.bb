@@ -17,7 +17,7 @@ CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
 do_install:append() {
     # Install machine specific configuration file
     install -d ${D}${sysconfdir}/lvm
-    install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
+    install -m 0644 ${UNPACKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
     # We don't want init scripts/systemd units for native SDK utilities
     if [ "${PN}" != "nativesdk-lvm2" ]; then

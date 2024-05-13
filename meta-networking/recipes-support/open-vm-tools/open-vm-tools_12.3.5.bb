@@ -97,12 +97,12 @@ do_install:append() {
     install -d ${D}${sysconfdir}/vmware-tools
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system
+        install -m 644 ${UNPACKDIR}/*.service ${D}${systemd_unitdir}/system
     else
         install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${WORKDIR}/vmtoolsd.init ${D}${sysconfdir}/init.d/vmtoolsd
+        install -m 0755 ${UNPACKDIR}/vmtoolsd.init ${D}${sysconfdir}/init.d/vmtoolsd
     fi
-    install -m 0644 ${WORKDIR}/tools.conf ${D}${sysconfdir}/vmware-tools/tools.conf
+    install -m 0644 ${UNPACKDIR}/tools.conf ${D}${sysconfdir}/vmware-tools/tools.conf
 }
 
 do_configure:prepend() {

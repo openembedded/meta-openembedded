@@ -78,18 +78,18 @@ do_install:append() {
     mv ${D}${sysconfdir}/${fd_pkgname}/freediameter.conf.sample \
        ${D}${sysconfdir}/${fd_pkgname}/freeDiameter.conf.sample
     install -d ${D}${sysconfdir}/freeDiameter
-	 install ${WORKDIR}/freeDiameter.conf ${D}${sysconfdir}/${fd_pkgname}/freeDiameter.conf
+	 install ${UNPACKDIR}/freeDiameter.conf ${D}${sysconfdir}/${fd_pkgname}/freeDiameter.conf
 
     # install daemon init related files
     install -d -m 0755 ${D}${sysconfdir}/default
     install -d -m 0755 ${D}${sysconfdir}/init.d
     install -m 0644 ${S}/contrib/debian/freediameter-daemon.default \
       ${D}${sysconfdir}/default/${BPN}
-    install -m 0755 ${WORKDIR}/freediameter.init ${D}${sysconfdir}/init.d/${BPN}
+    install -m 0755 ${UNPACKDIR}/freediameter.init ${D}${sysconfdir}/init.d/${BPN}
 
     # install for systemd
     install -d ${D}${systemd_system_unitdir}
-    install -m 0644 ${WORKDIR}/freediameter.service ${D}${systemd_system_unitdir}
+    install -m 0644 ${UNPACKDIR}/freediameter.service ${D}${systemd_system_unitdir}
     sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/*.service
 
     cat >> ${D}${sysconfdir}/freeDiameter/freeDiameter.conf <<EOF
@@ -108,14 +108,14 @@ EOF
     openssl req -x509 -config ${STAGING_DIR_NATIVE}/etc/ssl/openssl.cnf -newkey rsa:4096 -sha256 -nodes -out ${D}${sysconfdir}/freeDiameter/${FD_PEM} -keyout ${D}${sysconfdir}/freeDiameter/${FD_KEY} -days 3650 -subj '/CN=${FD_HOSTNAME}.${FD_REALM}'
     openssl dhparam -out ${D}${sysconfdir}/freeDiameter/${FD_DH_PEM} 1024
 
-    find ${B} \( -name "*.c" -o -name "*.h" \) -exec sed -i -e 's#${WORKDIR}##g' {} \;
+    find ${B} \( -name "*.c" -o -name "*.h" \) -exec sed -i -e 's#${UNPACKDIR}##g' {} \;
 }
 
 do_install_ptest() {
     mv ${D}${PTEST_PATH}-tests/* ${D}${PTEST_PATH}/
     rmdir ${D}${PTEST_PATH}-tests
     install -m 0644 ${B}/tests/CTestTestfile.cmake ${D}${PTEST_PATH}/
-    sed -i -e 's#${WORKDIR}##g' ${D}${PTEST_PATH}/CTestTestfile.cmake
+    sed -i -e 's#${UNPACKDIR}##g' ${D}${PTEST_PATH}/CTestTestfile.cmake
     sed -i "/^set_tests_properties/d" ${D}${PTEST_PATH}/CTestTestfile.cmake
 }
 

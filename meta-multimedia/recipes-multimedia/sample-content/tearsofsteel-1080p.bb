@@ -10,7 +10,7 @@ inherit allarch
 
 do_install() {
     install -d ${D}${datadir}/movies
-    install -m 0644 ${WORKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/
+    install -m 0644 ${UNPACKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/
 }
 
 FILES:${PN} += "${datadir}/movies"

@@ -20,7 +20,7 @@ EXTRA_OECMAKE = "-DCARES_STATIC=${@ 'ON' if d.getVar('DISABLE_STATIC') == '' els
 do_install_ptest () {
 	install -d ${D}${PTEST_PATH}
 	install -m 0755 ${B}/bin/arestest ${D}${PTEST_PATH}
-	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}
+	install -m 0755 ${UNPACKDIR}/run-ptest ${D}${PTEST_PATH}
 }
 
 PACKAGE_BEFORE_PN = "${PN}-utils"

@@ -26,7 +26,7 @@ EXTRA_OECONF:class-target = "ac_cv_path_SH=/bin/sh ac_cv_path_WGET=${bindir}/wge
 
 do_install:append () {
     install -d ${D}${sysconfdir}
-    install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
+    install -m 0644 ${UNPACKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
 }
 
 PACKAGES += "${PN}-mibs ${PN}-pibs ${PN}-yang"

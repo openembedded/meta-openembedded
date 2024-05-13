@@ -24,7 +24,7 @@ CONFFILES:${PN} += "${sysconfdir}/ser2net/ser2net.yaml"
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/ser2net.service ${D}${systemd_unitdir}/system/
+        install -m 0644 ${UNPACKDIR}/ser2net.service ${D}${systemd_unitdir}/system/
         sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/ser2net.service
     fi
 }
