@@ -10,7 +10,7 @@ LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
-SRCREV = "f4e42a515cd78c8c9cac2be14222834be5f8df2b"
+SRCREV = "f7dcc1ea60819475dffd3a45059e16f04381bee7"
 
 S = "${WORKDIR}/git"
 
