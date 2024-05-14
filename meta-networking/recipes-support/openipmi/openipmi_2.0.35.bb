@@ -34,7 +34,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
 
-SRC_URI[sha256sum] = "93227e43c72b5c3bd5949323e0669aa5527d1a971473a3a365af03fb8284a95f"
+SRC_URI[sha256sum] = "b059114f6299d73f04ff6e76a0857a0ab81aa362dee99644d256b223872437ad"
 
 inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig
 
