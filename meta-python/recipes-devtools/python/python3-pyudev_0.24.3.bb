@@ -3,7 +3,7 @@ SUMMARY = "A libudev binding"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
 
-SRC_URI[sha256sum] = "75e54d37218f5ac45b0da1f0fd9cc5e526a3cac3ef1cfad410cf7ab338b01471"
+SRC_URI[sha256sum] = "2e945427a21674893bb97632401db62139d91cea1ee96137cc7b07ad22198fc7"
 
 inherit pypi setuptools3
 
