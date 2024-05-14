@@ -1,10 +1,10 @@
 SUMMARY = "A pure-python library for embedding CoSWID data"
 HOMEPAGE = "https://github.com/hughsie/python-uswid"
 SECTION = "devel/python"
-LICENSE = "LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=40d2542b8c43a3ec2b7f5da31a697b88"
+LICENSE = "BSD-2-Clause-Patent"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f3636dfe71e94cc72918423cec0d1971"
 
-SRC_URI[sha256sum] = "de15c2421bedaa5f54606558700c1f628f07d73da49ec69d1888214ac52c49e6"
+SRC_URI[sha256sum] = "bdcd7ee5afac1da60ee688c357aa12f5f8d74bc28012446b10e2b4a9cf52fc6d"
 
 inherit setuptools3 python3native pypi
 
