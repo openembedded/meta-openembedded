@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c78b979ae6c20775a28a287d32092cbb"
 
-SRC_URI[sha256sum] = "bd9566b8e58cabd700bc367b60e90d9349cd16f0984973f98a9a09f9c64e86f0"
+SRC_URI[sha256sum] = "2b1708916730f4830bc69d6f49d37f7698b5bd7530aca7f04f785f8849e95255"
 
 PYPI_PACKAGE = "SQLAlchemy"
 inherit pypi setuptools3
