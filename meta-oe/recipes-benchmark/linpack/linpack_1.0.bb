@@ -10,7 +10,8 @@ SRC_URI = "http://www.netlib.org/benchmark/linpackc.new;downloadfilename=linpack
 SRC_URI[md5sum] = "1c5d0b6a31264685d2e651c920e3cdf4"
 SRC_URI[sha256sum] = "a63f2ec86512959f1fd926bfafb85905b2d7b7402942ffae3af374d48745e97e"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
 do_compile () {
 	${CC} ${CFLAGS} ${LDFLAGS} -DDP -o linpack_dp linpacknew.c -lm
