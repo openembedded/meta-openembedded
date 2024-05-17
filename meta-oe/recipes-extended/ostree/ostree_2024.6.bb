@@ -22,7 +22,7 @@ GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
            file://run-ptest \
            "
-SRC_URI[sha256sum] = "bc12d8493db64152093ee5be77cf62a29cc67a4a9e430dc987103e78aada4a6f"
+SRC_URI[sha256sum] = "8b61c856697aa412f2f1724322ada40bdd7b1bf9e7783e2c594faa7a594f868f"
 
 S = "${WORKDIR}/libostree-${PV}"
 
@@ -69,6 +69,7 @@ PACKAGECONFIG:class-nativesdk ??= " \
 
 PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
 PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
+PACKAGECONFIG[composefs] = "--with-composefs, --without-composefs, composefs"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
 PACKAGECONFIG[ed25519-libsodium] = "--with-ed25519-libsodium, --without-ed25519-libsodium, libsodium"
