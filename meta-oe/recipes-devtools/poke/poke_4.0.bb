@@ -6,14 +6,12 @@ LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
-          file://0001-build-do-not-check-for-Tcl-Tk-if-disable-gui-is-spec.patch \
-          file://0002-jitter-jitter-config.in-avoit-host-poisoning-while-c.patch \
           file://0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch \
           "
 
 DEPENDS = "flex-native bison-native bdwgc readline"
 
-SRC_URI[sha256sum] = "f61cf8da5b64c01a1359373725aad1ca257f35c1c9269e4d50dd0664183ddf62"
+SRC_URI[sha256sum] = "02bab22cb1fa6153a1b6a927c8bb3cd58d508543c144842a6d7ee74f19973a77"
 
 # poke does not support using out-of-tree builds
 inherit autotools-brokensep gettext pkgconfig
@@ -29,4 +27,7 @@ EXTRA_OECONF = "--disable-gui \
 
 PACKAGECONFIG[mi] = "--enable-mi,--disable-mi,json-c"
 
-FILES:${PN} += "${datadir}/emacs/site-lisp"
+PACKAGES =+ "${PN}-emacs ${PN}-vim"
+
+FILES:${PN}-emacs += "${datadir}/emacs/site-lisp"
+FILES:${PN}-vim += "${datadir}/vim/vimfiles"
