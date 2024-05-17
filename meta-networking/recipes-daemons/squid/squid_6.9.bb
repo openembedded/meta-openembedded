@@ -68,6 +68,11 @@ EXTRA_OECONF += "--with-default-user=squid \
                  --with-logdir=${localstatedir}/log/${BPN} \
                  'PERL=${USRBINPATH}/env perl'"
 
+# Workaround a build failure when using a native compiler that need -std=c++17
+# with a cross-compiler that doesn't.
+# Upstream issue closed as invalid : https://bugs.squid-cache.org/show_bug.cgi?id=5376
+BUILD_CXXFLAGS += "-std=c++17"
+
 export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
 
 TESTDIR = "test-suite"
