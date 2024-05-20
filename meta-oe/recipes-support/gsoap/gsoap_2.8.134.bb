@@ -5,9 +5,9 @@ LICENSE = "GPL-2.0-with-OpenSSL-exception"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
                     file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
 
-SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip"
-SRC_URI:append:libc-musl = " file://0001-Simplify-check-for-gethostbyname_r.patch"
-SRC_URI[sha256sum] = "b65190ebf8c2517d6fafbdc2000bc7bc650d921a02f4aa53eb1e3df267592c4a"
+SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
+           file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
+SRC_URI[sha256sum] = "63478e555c0ccde0164f055ff605b02805db0abc6712a04bcb14cb617b047218"
 
 inherit autotools
 
