@@ -35,9 +35,9 @@ do_install() {
 	install -d ${D}${datadir}/polkit-1/actions ${D}${datadir}/metainfo ${D}${datadir}/applications
 	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.gir ${D}${datadir}/gir-1.0
 	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.typelib ${D}${libdir}/girepository-1.0
-	ln -sf libmalcontent-ui-1.so.1 ${D}${libdir}/libmalcontent-ui-1.so
-	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.1 ${D}${libdir}
-	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.0.12.0 ${D}${libdir}
+	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.${PV} ${D}${libdir}
+	ln -sf libmalcontent-ui-1.so.${PV} ${D}${libdir}/libmalcontent-ui-1.so
+	ln -sf libmalcontent-ui-1.so.${PV} ${D}${libdir}/libmalcontent-ui-1.so.1
 	install -m 0755 ${B}/malcontent-control/malcontent-control ${D}${bindir}
 	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentControl.policy ${D}${datadir}/polkit-1/actions
 	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentControl.appdata.xml ${D}${datadir}/metainfo
