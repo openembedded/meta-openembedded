@@ -8,7 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
 DEPENDS = "json-c libnvme"
 SRCREV = "b340fd7dcf1aef76f8d46ab28bef3c170d310887"
 
-SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https \
+           file://0001-nvme-Use-C99-types-for-uint32_t.patch \
+           file://0001-plugins-ssstc-Replace-__uint16_t-with-uint16_t.patch \
+           "
 
 S = "${WORKDIR}/git"
 
