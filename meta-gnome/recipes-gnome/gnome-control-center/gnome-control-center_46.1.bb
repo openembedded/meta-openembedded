@@ -46,6 +46,7 @@ PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
 PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
 PACKAGECONFIG[file-share] = ",,,gnome-user-share"
 PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
+PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
 
 EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
 
