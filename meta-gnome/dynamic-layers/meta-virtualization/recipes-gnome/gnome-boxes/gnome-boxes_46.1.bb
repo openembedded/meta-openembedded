@@ -36,6 +36,8 @@ SRC_URI[archive.sha256sum] = "900c177f6762640370a6634cf9e7d3cd8207e498367a8a667a
 GIR_MESON_OPTION = ""
 VALA_MESON_OPTION = ""
 
+CFLAGS += "-Wno-int-conversion"
+
 FILES:${PN} += "${datadir}"
 
 INSANE_SKIP:${PN} = "dev-deps"
