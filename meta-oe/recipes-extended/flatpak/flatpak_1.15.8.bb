@@ -55,6 +55,7 @@ PACKAGECONFIG[soup] = "-Dhttp_backend=soup,,libsoup-2.4"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,xauth socat-native"
 PACKAGECONFIG[xauth] = "-Dxauth=enabled,-Dxauth=disabled,xauth"
 PACKAGECONFIG[seccomp] = "-Dseccomp=enabled,-Dseccomp=disabled,libseccomp"
+PACKAGECONFIG[malcontent] = "-Dmalcontent=enabled,-Dmalcontent=disabled,malcontent"
 PACKAGECONFIG[selinux] = "-Dselinux_module=enabled,-Dselinux_module=disabled,libselinux"
 PACKAGECONFIG[wayland-security-context] = "-Dwayland_security_context=enabled,-Dwayland_security_context=disabled,wayland wayland-native wayland-protocols"
 
