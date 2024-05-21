@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eae7da6a2cd1788a5cf8a9f838cf6450"
 SRC_URI = " \
     git://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3.git;branch=master;protocol=https \
     file://0001-cmake-fix-when-cross-compiling.patch \
+    file://0001-include-stdint.h-for-int64_t-types.patch \
 "
 
 SRCREV = "e31ac4d4caa55fa662e207150ba40f8151b7ad96"
