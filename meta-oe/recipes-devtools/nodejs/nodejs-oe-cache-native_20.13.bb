@@ -8,10 +8,13 @@ SRC_URI = "\
 
 inherit native
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 B = "${WORKDIR}/build"
 
 do_configure() {
-    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
+    sed -e 's!@@libdir@@!${libdir}!g' < '${UNPACKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
 }
 
 do_install() {
