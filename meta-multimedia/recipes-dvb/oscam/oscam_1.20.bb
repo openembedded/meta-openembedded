@@ -6,12 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "libusb1 openssl pcsc-lite"
 
-SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http \
-           "
-SRCREV = "11718"
-PV = "1.10+"
+SRCREV = "190d6dee96ca70f8b614932b1498332b1504632b"
+SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;nobranch=1"
 
-S = "${UNPACKDIR}/trunk"
+S = "${UNPACKDIR}/git"
 
 inherit cmake
 
