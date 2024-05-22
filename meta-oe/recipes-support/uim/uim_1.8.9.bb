@@ -4,15 +4,11 @@ LICENSE = "BSD-3-Clause & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ab2826b41ca0ff4030d38cc39791d1c8"
 SECTION = "inputmethods"
 
-SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2 \
-    file://0001-Fix-to-set-libedit-path-from-configure-option-proper.patch \
-    file://JMP_BUF_GC_jmp_buf.patch \
-"
+SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
 SRC_URI:append:class-target = "\
     file://uim-module-manager.patch \
 "
-SRC_URI[md5sum] = "01c7bd5d0d4f3a9f6f5befe6f57a470b"
-SRC_URI[sha256sum] = "34599bbcc4e5ab87832370763e38be5100984a64237555e9234a1ea225a0fadc"
+SRC_URI[sha256sum] = "dbbd983768bf748449551644f330dbebe859bfeb6f024fea6697ac75131c7aa4"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
