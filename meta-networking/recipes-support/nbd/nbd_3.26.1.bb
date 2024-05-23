@@ -12,7 +12,7 @@ SRC_URI = "https://github.com/NetworkBlockDevice/${BPN}/releases/download/${BP}/
            "
 SRC_URI[sha256sum] = "f0cf509fa5b20b1a07f7904eb637e9b47d3e30b6ed6f00075af5d8b701c78fef"
 
-inherit autotools pkgconfig systemd
+inherit autotools pkgconfig
 
 EXTRA_OECONF += "--enable-syslog --enable-lfs --disable-manpages"
 
