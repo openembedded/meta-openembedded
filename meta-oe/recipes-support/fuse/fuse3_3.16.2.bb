@@ -27,6 +27,7 @@ inherit meson pkgconfig ptest
 
 SRC_URI += " \
     file://run-ptest \
+    file://fuse3.conf \
 "
 
 RDEPENDS:${PN}-ptest += " \
@@ -78,6 +79,20 @@ FILES:fuse3-utils = "${bindir} ${base_sbindir}"
 DEBIAN_NOAUTONAME:fuse3-utils = "1"
 DEBIAN_NOAUTONAME:${PN}-dbg = "1"
 
+SYSTEMD_SERVICE:${PN} = ""
+
 do_install:append() {
     rm -rf ${D}${base_prefix}/dev
+
+    # systemd class remove the sysv_initddir only if systemd_system_unitdir
+    # contains anything, but it's not needed if sysvinit is not in DISTRO_FEATURES
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
+        rm -rf ${D}${sysconfdir}/init.d/
+    fi
+
+    # Install systemd related configuration file
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/modules-load.d
+        install -m 0644 ${UNPACKDIR}/fuse3.conf ${D}${sysconfdir}/modules-load.d
+    fi
 }
