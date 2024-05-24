@@ -52,6 +52,7 @@ SRC_URI += " \
     file://0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch \
     file://0004-adb-Fix-build-on-big-endian-systems.patch \
     file://0005-adb-Allow-adbd-to-be-run-as-root.patch \
+    file://0001-liblp-fix-building-with-GCC-14.patch \
 "
 
 S = "${WORKDIR}/git"
