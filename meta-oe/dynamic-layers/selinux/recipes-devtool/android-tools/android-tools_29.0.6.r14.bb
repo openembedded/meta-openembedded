@@ -139,7 +139,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}${base_sbindir}
-    install -m 0755 ${S}/../remount -D ${D}${base_sbindir}/remount
+    install -m 0755 ${UNPACKDIR}/remount -D ${D}${base_sbindir}/remount
 
     for tool in img2simg simg2img fastboot adbd; do
         if echo ${TOOLS_TO_BUILD} | grep -q "$tool" ; then
