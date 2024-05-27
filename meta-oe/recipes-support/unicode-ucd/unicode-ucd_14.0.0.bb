@@ -12,6 +12,9 @@ SRC_URI[ucd-license.sha256sum] = "f7830d126f59d83842565d3dddedc79db4ca978ed52aee
 
 inherit allarch
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 do_configure[noexec] = "1"
 
 do_install() {
