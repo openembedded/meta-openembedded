@@ -2,13 +2,12 @@ SUMMARY = "Simple DirectMedia Layer image library v2"
 SECTION = "libs"
 
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=822edb694b20ff16ceef85b27f61c11f"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2f6d9e01c97958aa851954ed5acf82ee"
 
 DEPENDS = "tiff zlib libpng jpeg libsdl2 libwebp"
 
 SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
-SRC_URI[md5sum] = "f26f3a153360a8f09ed5220ef7b07aea"
-SRC_URI[sha256sum] = "bdd5f6e026682f7d7e1be0b6051b209da2f402a2dd8bd1c4bd9c25ad263108d0"
+SRC_URI[sha256sum] = "8f486bbfbcf8464dd58c9e5d93394ab0255ce68b51c5a966a918244820a76ddc"
 
 S = "${WORKDIR}/SDL2_image-${PV}"
 
