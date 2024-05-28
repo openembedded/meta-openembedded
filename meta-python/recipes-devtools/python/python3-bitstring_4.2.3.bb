@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/scott-griffiths/bitstring"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=661f450e2c0aef39b4b15597333444a7"
 
-SRC_URI[sha256sum] = "b40b01d911eebaea6efff40d826580806dced5e04b9d3cbad6aebf9422f4b643"
+SRC_URI[sha256sum] = "e0c447af3fda0d114f77b88c2d199f02f97ee7e957e6d719f40f41cf15fbb897"
 
 PYPI_PACKAGE = "bitstring"
 
