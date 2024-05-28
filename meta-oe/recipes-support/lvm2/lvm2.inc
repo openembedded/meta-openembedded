@@ -21,6 +21,7 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
 
 SRCREV = "90ec2cd92f6367c431dd8dae55d0cbe7e196734f"
 S = "${WORKDIR}/git"
+PV = "2.03.24"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
 
