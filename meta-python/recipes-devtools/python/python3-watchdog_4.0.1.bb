@@ -4,7 +4,7 @@ DEPENDS = "python3-argh"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "e3e7065cbdabe6183ab82199d7a4f6b3ba0a438c5a512a68559846ccb76a78ec"
+SRC_URI[sha256sum] = "eebaacf674fa25511e8867028d281e602ee6500045b57f43b08778082f7f8b44"
 
 inherit pypi setuptools3
 
