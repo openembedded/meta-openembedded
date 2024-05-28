@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/python-rapidjson/python-rapidjson"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4daf3929156304df67003c33274a98bd"
 
-SRC_URI[sha256sum] = "26806f0a658c34b48d2951d8d3f846ca9deb93a34e664ef436db632a188b6779"
+SRC_URI[sha256sum] = "95a111da29d996af8549f8b32ec701dab3af2ab7c6cd9c79540391ecb05f20c8"
 
 # Inheriting ptest provides functionality for packaging and installing runtime tests for this recipe
 inherit setuptools3 pypi ptest
