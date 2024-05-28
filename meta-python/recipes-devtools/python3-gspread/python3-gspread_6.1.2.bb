@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/burnash/gspread"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9488e21983675fa56dc05af558b83e2f"
 
-SRC_URI[sha256sum] = "576b72b628b251d2ee41e02b982d3c714d511d2a5aa3a88e587ed9efc4d6e752"
+SRC_URI[sha256sum] = "b147688b8c7a18c9835d5f998997ec17c97c0470babcab17f65ac2b3a32402b7"
 
 RDEPENDS:${PN} = " \
 	python3-google-auth \
