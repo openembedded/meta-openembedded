@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-validators.github.io/validators"
 LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b3fb4b9e6db86c69a33d5e3ee013ab59"
-SRC_URI[sha256sum] = "5ac88e7916c3405f0ce38ac2ac82a477fcf4d90dbbeddd04c8193171fc17f7dc"
+SRC_URI[sha256sum] = "c6c79840bcde9ba77b19f6218f7738188115e27830cbaff43264bc4ed24c429d"
 
 inherit pypi python_setuptools_build_meta ptest
 
