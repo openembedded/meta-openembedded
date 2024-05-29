@@ -27,6 +27,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0006-OsUtils.h-add-missing-header-cstdint-for-int64_t.patch \
            file://0007-CMakeLists.txt-do-not-use-ccache.patch \
            file://0008-libsodium-aarch64_crypto.patch \
+           file://0001-libminifi-Rename-mutex_-to-mtx_-member-of-Concurrent.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
@@ -54,6 +55,8 @@ inherit pkgconfig cmake systemd
 DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp"
 
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
+
+LDFLAGS:append:riscv32 = " -latomic"
 
 EXTRA_OECMAKE = " \
                  -DCMAKE_BUILD_TYPE=Release \
