@@ -7,7 +7,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c8055cfe7548dfdaa3a6dc45d8793669"
 
 SRC_URI = "git://code.videolan.org/videolan/dav1d.git;protocol=https;branch=master"
-SRCREV = "872e470ebf3e65b0b956f3a70329e885a2df1c2a"
+SRCREV = "805d9e5a8ffce3ef78cebde4bfedf3642907b2d3"
 
 S = "${WORKDIR}/git"
 
