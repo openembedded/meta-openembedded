@@ -2,7 +2,7 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://hostapd/README;md5=c905478466c90f1cefc0df987c40e172"
+LIC_FILES_CHKSUM = "file://hostapd/README;beginline=5;endline=47;md5=aa03b8bd6216d1a7ca01fd4b89863073"
 
 DEPENDS = "libnl openssl"
 
