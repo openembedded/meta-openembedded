@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
 
+SRC_URI += "file://0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch"
 SRC_URI[sha256sum] = "7a148a5a7d1c97a1abb40474b9a392b6edd7a42fe077dfd7ff42cfba24308548"
 
 # Enable all project features for ptest
