@@ -28,7 +28,7 @@ S = "${WORKDIR}/libostree-${PV}"
 
 inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
 
-UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
+UNKNOWN_CONFIGURE_OPT_IGNORE += "--disable-introspection --enable-introspection"
 
 # Workaround compile failure:
 # |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
