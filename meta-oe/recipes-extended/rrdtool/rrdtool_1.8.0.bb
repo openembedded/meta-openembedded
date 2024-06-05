@@ -11,6 +11,7 @@ PV = "1.8.0"
 
 SRC_URI = "\
     git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
+    file://b76e3c578f1e9f582e9c28f50d82b1f569602075.patch \
 "
 
 S = "${WORKDIR}/git"
