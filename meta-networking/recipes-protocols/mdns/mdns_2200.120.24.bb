@@ -22,11 +22,10 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0008-Handle-errors-from-socket-calls.patch \
            file://0009-remove-unneeded-headers.patch \
            file://mdns.service \
-           file://0015-Add-missing-limits.h.patch \
            file://0001-Handle-interface-without-ifa_addr.patch \
            file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
            "
-SRCREV = "8f70f98fc1d0cf439ca3a6470be6ad8ac2bcc019"
+SRCREV = "51a7148a21362285f8013648c4bfa91247ff598a"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
