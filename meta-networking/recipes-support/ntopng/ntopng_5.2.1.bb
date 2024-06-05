@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/ntop/ntopng.git;protocol=https;branch=5.2-stable \
            file://0001-autogen.sh-generate-configure.ac-only.patch \
            file://0001-configure.ac.in-not-check-clang-on-host.patch \
            file://0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch \
+           file://0001-Follow-rrd-post-1.8-change.patch \
            file://ntopng.service \
            "
 
