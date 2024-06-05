@@ -34,7 +34,7 @@ PACKAGECONFIG = "png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd',
 PACKAGECONFIG[systemd] = "--with-systemd=yes,--with-systemd=no,systemd"
 PACKAGECONFIG[png] = "--with-png=yes,--with-png=no,libpng"
 
-CONFIGUREOPTS:remove = "--disable-silent-rules --disable-dependency-tracking ${@append_libtool_sysroot(d)}"
+CONFIGUREOPTS:remove = "--disable-silent-rules --disable-dependency-tracking"
 EXTRA_OECONF:remove = "--disable-static"
 
 do_install:append() {
