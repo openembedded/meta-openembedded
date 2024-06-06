@@ -5,14 +5,12 @@ and should run on all Linux systems that need error handling."
 HOMEPAGE = "https://mcelog.org/"
 SECTION = "System Environment/Base"
 
-SRC_URI = "\
-    git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
-    file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
-    file://0001-server-Correct-prameter-type-for-connect-API.patch \
-    file://run-ptest \
-"
+SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
+           file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
+           file://run-ptest \
+           "
 
-SRCREV = "ab58f07b9b1a4456fca0f5f41639d5cbecc80e36"
+SRCREV = "c17897deb52daab300c585a6a6c2456d062d80cf"
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
