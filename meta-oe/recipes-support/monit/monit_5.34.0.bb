@@ -15,7 +15,7 @@ SRC_URI = " \
 	file://monitrc \
 "
 
-SRC_URI[sha256sum] = "1ace889c0183473a9d70160df6533bb6e1338dc1354f5928507803e1e2a863b5"
+SRC_URI[sha256sum] = "37f514cd8973bbce104cb8517ff3fc504052a083703eee0d0e873db26b919820"
 
 DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
 
