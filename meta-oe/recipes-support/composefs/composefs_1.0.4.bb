@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 PV .= "+git${SRCPV}"
-SRCREV = "ecef20c18c81943bd17b489ad1484f361b99c792"
+SRCREV = "7623e4dc89f62ada5724d4e41d0a16d2671312f5"
 SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
