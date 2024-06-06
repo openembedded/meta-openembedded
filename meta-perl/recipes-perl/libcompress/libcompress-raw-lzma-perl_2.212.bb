@@ -5,11 +5,11 @@ HOMEPAGE = "https://metacpan.org/release/Compress-Raw-Lzma"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=b95311d4a7dbf3d0d3663edc094aced6"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=2a0fd6d30eaf88289587b776f74c2886"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Lzma-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "e01a7040b84bdc67592d13eec0c788590e1f696d1d4f07c7097bd72a4f886eb4"
+SRC_URI[sha256sum] = "4ba7ab803bdba2d7be7d55d4a2668369d794eb8d8d6bb0db6b74fd9b4ce18cac"
 
 DEPENDS += "xz"
 
