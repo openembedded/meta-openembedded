@@ -9,10 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97
 SECTION = "libs"
 DEPENDS = "libtraceevent bison-native flex-native"
 
-SRCREV = "aebab37379d0fbadc702d64aca0fe5cf18676404"
+SRCREV = "67f3b2ab9f836e6c9c70c94db7aac3251119a263"
 SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
-           file://0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch \
            "
 S = "${WORKDIR}/git"
 
