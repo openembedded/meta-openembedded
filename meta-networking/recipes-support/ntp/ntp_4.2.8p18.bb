@@ -6,7 +6,7 @@ or satellite receiver or modem."
 HOMEPAGE = "http://support.ntp.org"
 SECTION = "net"
 LICENSE = "NTP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3a8ffebbcad335abf2c39fec38671eec"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=2311915f6d5142b06395231b0ffeaf29"
 
 DEPENDS = "libevent"
 
@@ -24,7 +24,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpd.list \
 "
 
-SRC_URI[sha256sum] = "103dd272e6a66c5b8df07dce5e9a02555fcd6f1397bdfb782237328e89d3a866"
+SRC_URI[sha256sum] = "cf84c5f3fb1a295284942624d823fffa634144e096cfc4f9969ac98ef5f468e5"
 
 CVE_STATUS[CVE-2016-9312] = "not-applicable-platform: Issue only applies on Windows"
 CVE_STATUS[CVE-2019-11331] = "upstream-wontfix: inherent to RFC 5905 and cannot be fixed without breaking compatibility"
