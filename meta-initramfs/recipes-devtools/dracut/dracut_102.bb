@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "631d5f72a223288aa1f48bb8e8d0313e75947400"
-SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http;branch=master \
+SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
+SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
-           file://0001-Guard-against-__GLIBC_PREREQ-for-musl-libc.patch \
-           file://0001-install-Do-not-undef-_FILE_OFFSET_BITS.patch \
+           file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
            "
 
 DEPENDS += "kmod"
