@@ -40,6 +40,7 @@ SRC_URI = " \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
+    file://0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
