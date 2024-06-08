@@ -60,7 +60,7 @@ export STAGING_LIBDIR
 export STAGING_INCDIR
 
 # emulate cpan_do_configure
-EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
+EXTRA_OEMAKE = ' CC="${CC} -Wno-incompatible-pointer-types" PERL5LIB="${PERL_ARCHLIB}" '
 # Avoid do_configure error on some hosts
 
 do_configure() {

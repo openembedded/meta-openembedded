@@ -20,3 +20,5 @@ SRC_URI = "git://github.com/perl5-dbi/DBD-mysql.git;protocol=https;branch=master
 S = "${WORKDIR}/git"
 
 inherit cpan
+
+EXTRA_OEMAKE = ' CC="${CC} -Wno-incompatible-pointer-types"'
