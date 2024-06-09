@@ -17,7 +17,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-add-arm-to-list-of-mozinline.patch \
            file://armv5.patch \
            "
-SRC_URI[sha256sum] = "af8086f23efc8492d286671f6035b1a915de6f4ed5c7897e40be0e1cb6b895ea"
+SRC_URI[sha256sum] = "16be46f16a356a2b8bd3541805a24c8a2acf6f077cf8a65859689685c26025e0"
 
 S = "${WORKDIR}/firefox-${PV}"
 
