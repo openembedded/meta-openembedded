@@ -36,6 +36,7 @@ PTESTS_FAST_META_OE = "\
     oprofile \
     protobuf \
     pv \
+    python3-pefile \
     sdbus-c++ \
     uthash \
     xmlsec1 \
