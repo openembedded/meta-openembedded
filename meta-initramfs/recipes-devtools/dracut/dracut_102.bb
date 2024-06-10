@@ -9,7 +9,6 @@ PE = "1"
 
 SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
-           file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
            "
 
