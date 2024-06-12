@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 DEPENDS = "libusb1 glib-2.0"
 
-SRCREV = "5fc0e1c43194d948545941d408f4c10d084eb6ed"
+SRCREV = "2d373432e604960c1dcc14fb97098febe4d64025"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
 
