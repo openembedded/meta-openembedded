@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/tanbro/pyyaml-include"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS += "python3-setuptools-scm-native"
-SRCREV = "36b6975aa8fc7a6cbf37de40aa2ed6d996b2f7be"
+SRCREV = "dc16153b28f5cab997814c0ce9b43dc4c58507e7"
 
 SRC_URI = " \
             git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
