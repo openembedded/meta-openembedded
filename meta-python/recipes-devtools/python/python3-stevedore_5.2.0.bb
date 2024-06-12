@@ -3,7 +3,7 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "a54534acf9b89bc7ed264807013b505bf07f74dbe4bcfa37d32bd063870b087c"
+SRC_URI[sha256sum] = "46b93ca40e1114cea93d738a6c1e365396981bb6bb78c27045b7587c9473544d"
 
 DEPENDS += "python3-pbr-native"
 
