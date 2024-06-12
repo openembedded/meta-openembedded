@@ -25,7 +25,7 @@ DEPENDS = " \
 DEPENDS:append:libc-musl = " libexecinfo"
 LDFLAGS:append:libc-musl = " -lexecinfo"
 
-SRCREV = "75a0bdb795d99e052690178ae0d81ebdbd2cbdd3"
+SRCREV = "2a455eadd6462457d08c2d066c5c245e0dee3bf9"
 SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 
