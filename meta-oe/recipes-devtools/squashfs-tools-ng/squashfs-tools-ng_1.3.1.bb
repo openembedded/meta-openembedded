@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=a709b68f1ce8a9f10aeea6401446c1f4 \
                     file://licenses/zstd.txt;md5=8df8137b630239cbdd4c0674124cb0c8 \
                     "
 
-SRCREV = "f2a3ad56e40c9711b23371238f9fa07dd24245f1"
-SRC_URI = "git://github.com/AgentD/squashfs-tools-ng.git;protocol=https;branch=master"
+SRCREV = "8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb"
+SRC_URI = "git://github.com/AgentD/squashfs-tools-ng.git;protocol=https;branch=fixes-1.3.0"
 
 S = "${WORKDIR}/git"
 
