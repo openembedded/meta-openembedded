@@ -3,7 +3,7 @@ HOMEPAGE = "https://python-sdbus.readthedocs.io/en/latest/"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e77986dc8e2ee22d44a7c863e96852ae"
 
-SRC_URI[sha256sum] = "adb97718ce996bb308520682c50b1a13e606d65a6edb1c1967a15d2e570cb3b7"
+SRC_URI[sha256sum] = "c3692d75704438a78adc1439350bc32f30d6b38ad344cfc94773db89c6ce4a89"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 DEPENDS += "systemd"
