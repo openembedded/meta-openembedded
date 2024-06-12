@@ -2,7 +2,7 @@ SUMMARY = "A network address manipulation library for Python."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=8afa43eca873b71d5d85dd0be1f707fa"
 
-SRC_URI[sha256sum] = "6eb8fedf0412c6d294d06885c110de945cf4d22d2b510d0404f4e06950857987"
+SRC_URI[sha256sum] = "5c3c3d9895b551b763779ba7db7a03487dc1f8e3b385af819af341ae9ef6e48a"
 
 inherit pypi python_setuptools_build_meta ptest
 
