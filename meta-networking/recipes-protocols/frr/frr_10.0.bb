@@ -77,8 +77,11 @@ SYSTEMD_AUTO_ENABLE = "disable"
 inherit update-alternatives multilib_script multilib_header
 
 ALTERNATIVE_PRIORITY = "100"
-ALTERNATIVE:${PN} = " ietf-interfaces "
+ALTERNATIVE:${PN} = " ietf-interfaces ietf-netconf-acm ietf-netconf-with-defaults ietf-netconf"
 ALTERNATIVE_LINK_NAME[ietf-interfaces] = "${datadir}/yang/ietf-interfaces.yang"
+ALTERNATIVE_LINK_NAME[ietf-netconf-acm] = "${datadir}/yang/ietf-netconf-acm.yang"
+ALTERNATIVE_LINK_NAME[ietf-netconf-with-defaults] = "${datadir}/yang/ietf-netconf-with-defaults.yang"
+ALTERNATIVE_LINK_NAME[ietf-netconf] = "${datadir}/yang/ietf-netconf.yang"
 do_compile:prepend () {
    sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
           -e 's#${RECIPE_SYSROOT}##g' ${S}/lib/version.h
