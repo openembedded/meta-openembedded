@@ -4,7 +4,6 @@ DESCRIPTION = "\
     It currently implements the gigabit ethernet and USB3 protocols used by industrial cameras.\
     It also provides a basic ethernet camera simulator and a simple video viewer.\
 "
-AUTHOR = "Emmanuel Pacaud"
 HOMEPAGE = "https://github.com/AravisProject/aravis"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
