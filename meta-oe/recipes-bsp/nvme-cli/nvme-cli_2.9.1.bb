@@ -19,15 +19,16 @@ inherit bash-completion meson pkgconfig systemd
 
 EXTRA_OEMESON += "-Dsystemddir=${systemd_unitdir}/system"
 
-pkg_postinst_ontarget:${PN}() {
+pkg_postinst_ontarget:${PN}-user () {
     ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
     ${bindir}/uuidgen > ${sysconfdir}/nvme/hostid
 }
 
-PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion"
+PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion ${PN}-user"
 
 FILES:${PN} += "${systemd_system_unitdir}"
 FILES:${PN}-dracut = "${nonarch_libdir}/dracut/dracut.conf.d"
 FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
+ALLOW_EMPTY:${PN}-user = "1"
 
-RDEPENDS:${PN} = "util-linux-uuidgen"
+RDEPENDS:${PN}-user = "util-linux-uuidgen"
