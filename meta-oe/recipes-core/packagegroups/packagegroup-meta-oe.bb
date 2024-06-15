@@ -742,7 +742,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     exiv2 \
     libnice \
     c-periphery \
-    fmt \
     function2 \
     gd \
     gflags \
