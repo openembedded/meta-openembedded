@@ -38,4 +38,12 @@ RDEPENDS:${PN} += "\
     libcompress-raw-zlib-perl \
 "
 
+inherit update-alternatives
+
+ALTERNATIVE_PRIORITY = "39"
+
+ALTERNATIVE:${PN} = "streamzip zipdetails"
+ALTERNATIVE_LINK_NAME[streamzip] = "${bindir}/streamzip"
+ALTERNATIVE_LINK_NAME[zipdetails] = "${bindir}/zipdetails"
+
 BBCLASSEXTEND = "native"
