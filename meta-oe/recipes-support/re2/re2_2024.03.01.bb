@@ -32,7 +32,8 @@ do_install_ptest () {
 }
 
 # ignore .so in /usr/lib64
-FILES:${PN} = "${libdir}"
+SOLIBS = ".so*"
+FILES_SOLIBSDEV = ""
 INSANE_SKIP:${PN} += "dev-so"
 
 # Don't include so files in dev package
