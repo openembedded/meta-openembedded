@@ -16,9 +16,6 @@ DEPENDS = "abseil-cpp ${@bb.utils.contains('PTEST_ENABLED', '1', 'gtest googlebe
 
 inherit cmake ptest
 RDEPENDS:${PN}-ptest += "cmake sed"
-RDEPENDS:${PN} += "abseil-cpp-dev"
-
-INSANE_SKIP:${PN} += "dev-deps"
 
 EXTRA_OECMAKE += " \
 	-DBUILD_SHARED_LIBS=ON \
@@ -39,6 +36,6 @@ FILES:${PN} = "${libdir}"
 INSANE_SKIP:${PN} += "dev-so"
 
 # Don't include so files in dev package
-FILES:${PN}-dev = "${includedir} ${libdir}/cmake"
+FILES:${PN}-dev = "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
 
 BBCLASSEXTEND = "native nativesdk"
