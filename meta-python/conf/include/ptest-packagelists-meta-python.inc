@@ -97,6 +97,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-pytest-localserver \
     python3-scrypt \
     python3-traitlets \
+    python3-typer \
     python3-yappi \
 "
 
