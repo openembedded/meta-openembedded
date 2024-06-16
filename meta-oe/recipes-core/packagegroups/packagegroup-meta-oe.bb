@@ -243,6 +243,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     cloc \
     icon-slicer \
     cscope \
+    dbd-mariadb \
     dmalloc \
     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnf-plugin-tui", "", d)} \
     doxygen \
@@ -287,7 +288,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     openocd \
     pax-utils \
     ipc-run \
-    libdbd-mysql-perl \
     libdbi-perl \
     libdev-checklib-perl \
     libio-pty-perl \
