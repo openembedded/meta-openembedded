@@ -12,7 +12,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "fe7eb48d9a655b4fae9b08ef22c7dd20694a92fdbe9ae768e0af03c8be5c27ed"
+SRC_URI[sha256sum] = "ad38126dfd9f74f8c6ecb35ddfd34d2582601d6c3ff26756610b8418360c8ee2"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
