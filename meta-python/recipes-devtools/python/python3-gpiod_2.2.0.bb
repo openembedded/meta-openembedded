@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=237;endline=237;md5=f5ddb56912b7f2
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "a33193d6cab79d252329f71666a35a3668e04f1f82bf9b93ee2c9ae852398b20"
+SRC_URI[sha256sum] = "4447f05ab42a9ea596e548a9a65389aa84bf61c95dc7a78074bb9c5f8f6a6b35"
 
 inherit setuptools3-base python_pep517 ptest pypi
 
