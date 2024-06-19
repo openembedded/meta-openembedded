@@ -7,9 +7,9 @@ SRCNAME = "paho-mqtt"
 
 inherit pypi python_hatchling python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "13b205f29251e4f2c66a6c923c31fc4fd780561e03b2d775cff8e4f2915cf947"
+SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
 
-PYPI_SRC_URI = "https://files.pythonhosted.org/packages/73/b7/a4df0f93bbdae237e16ba402752151eceee576cbe80c235a2475fbf81eea/paho_mqtt-${PV}.tar.gz"
+PYPI_SRC_URI = "https://files.pythonhosted.org/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-${PV}.tar.gz"
 
 S = "${WORKDIR}/paho_mqtt-${PV}"
 
