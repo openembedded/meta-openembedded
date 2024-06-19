@@ -25,4 +25,4 @@ RDEPENDS:${PN} += " \
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
 "
-
+BBCLASSEXTEND = "native nativesdk"
