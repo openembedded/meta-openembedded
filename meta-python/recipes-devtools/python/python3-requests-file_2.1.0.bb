@@ -3,14 +3,17 @@ HOMEPAGE = "http://github.com/dashea/requests-file"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b"
 
-SRC_URI[md5sum] = "c96daf6b0c56687556e8a52748fd896c"
-SRC_URI[sha256sum] = "07d74208d3389d01c38ab89ef403af0cfec63957d53a0081d8eca738d0247d8e"
+SRC_URI[sha256sum] = "0f549a3f3b0699415ac04d167e9cb39bccfb730cb832b4d20be3d9867356e658"
 
-inherit pypi setuptools3 ptest
+PYPI_PACKAGE = "requests_file"
+
+inherit pypi python_setuptools_build_meta ptest
 
 SRC_URI += " \
         file://run-ptest \
 "
+
+DEPENDS += "python3-setuptools-scm-native"
 
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
