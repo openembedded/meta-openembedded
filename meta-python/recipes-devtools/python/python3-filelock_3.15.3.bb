@@ -6,11 +6,17 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
 LICENSE = "Unlicense"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
 
-SRC_URI[sha256sum] = "6ea72da3be9b8c82afd3edcf99f2fffbb5076335a5ae4d03248bb5b6c3eae78a"
+SRC_URI[sha256sum] = "e1199bf5194a2277273dacd50269f0d87d0682088a3c561c15674ea9005d8635"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
 
 DEPENDS += "\
     python3-hatch-vcs-native \
+"
+
+RDEPENDS:${PN} += " \
+    python3-core \
+    python3-logging \
+    python3-asyncio \
 "
