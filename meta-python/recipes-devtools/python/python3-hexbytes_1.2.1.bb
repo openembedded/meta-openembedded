@@ -4,6 +4,12 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=16ffc86adf4293d4cfb204e77d62cfe6"
 
-SRC_URI[sha256sum] = "965f1cc712e7b263c41fdf3fb36cf671ba6f59b895937cf33941a5c996ec3a5c"
+SRC_URI[sha256sum] = "515f00dddf31053db4d0d7636dd16061c1d896c3109b8e751005db4ca46bcca7"
 
 inherit pypi setuptools3
+
+RDEPENDS:${PN} += " \
+    python3-core \
+    python3-email \
+    python3-compression \
+"
