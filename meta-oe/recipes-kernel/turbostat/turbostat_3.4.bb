@@ -20,6 +20,9 @@ SRC_URI += "\
             file://COPYING \
             "
 
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "libcap"
 
@@ -50,7 +53,6 @@ do_configure:prepend() {
 		cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
 	fi
 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
-	cp -r ${UNPACKDIR}/COPYING ${S}
 }
 
 
