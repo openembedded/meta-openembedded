@@ -10,7 +10,11 @@ inherit autotools systemd update-rc.d
 SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://openvpn \
            file://openvpn@.service \
-           file://openvpn-volatile.conf"
+           file://openvpn-volatile.conf \
+           file://CVE-2024-24974.patch \
+           file://CVE-2024-27459.patch \
+           file://CVE-2024-27903.patch \
+           "
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 
