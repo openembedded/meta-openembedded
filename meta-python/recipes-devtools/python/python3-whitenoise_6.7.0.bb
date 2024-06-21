@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aba4901cc64e401cea5a267eac2a2e1e"
 
 PYPI_PACKAGE = "whitenoise"
 
-SRC_URI[sha256sum] = "8998f7370973447fac1e8ef6e8ded2c5209a7b1f67c1012866dbcd09681c3251"
+SRC_URI[sha256sum] = "58c7a6cd811e275a6c91af22e96e87da0b1109e9a53bb7464116ef4c963bf636"
 
 inherit pypi python_setuptools_build_meta
 
