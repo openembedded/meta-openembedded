@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI[sha256sum] = "92d3ab53183d8c50f8204a51e6f91d18a15d5ef261e84d452800d4ff6fc504e9"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 # Requires _compression which is currently located in misc
 RDEPENDS:${PN} += " \
