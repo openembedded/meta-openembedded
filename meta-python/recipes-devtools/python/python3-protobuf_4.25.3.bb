@@ -17,6 +17,7 @@ UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
 DEPENDS += "protobuf"
 
 RDEPENDS:${PN} += " \
+    python3-ctypes \
     python3-datetime \
     python3-json \
     python3-logging \
