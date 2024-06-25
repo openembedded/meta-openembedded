@@ -6,7 +6,7 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
 LICENSE = "Unlicense"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
 
-SRC_URI[sha256sum] = "e1199bf5194a2277273dacd50269f0d87d0682088a3c561c15674ea9005d8635"
+SRC_URI[sha256sum] = "2207938cbc1844345cb01a5a95524dae30f0ce089eba5b00378295a17e3e90cb"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
