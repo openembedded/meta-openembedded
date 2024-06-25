@@ -7,10 +7,10 @@ LICENSE = "BSD-2-Clause"
 SECTION = "libs/network"
 DEPENDS = "libcbor openssl zlib udev"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5f14cb32bdf2b87063e0a2d20c4178d0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=20be19aaa222f71738712b26f7f8717b"
 
 SRC_URI = "https://developers.yubico.com/${BPN}/Releases/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "3601792e320032d428002c4cce8499a4c7b803319051a25a0c9f1f138ffee45a"
+SRC_URI[sha256sum] = "abaab1318d21d262ece416fb8a7132fa9374bda89f6fa52b86a98a2f5712b61e"
 
 inherit cmake pkgconfig manpages
 
