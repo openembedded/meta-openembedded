@@ -811,7 +811,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     libcanberra \
     libssh \
     libssh2 \
-    libee \
     libusbgx-config \
     libusbgx \
     lockdev \
@@ -972,7 +971,6 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
     oprofile-ptest \
     libteam-ptest \
     uthash-ptest \
-    libee-ptest \
     poco-ptest \
     cmocka-ptest \
     minicoredumper-ptest \

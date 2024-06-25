@@ -17,7 +17,6 @@ PTESTS_FAST_META_OE = "\
     jq \
     leveldb \
     libcereal \
-    libee \
     libgpiod \
     libio-pty-perl \
     libmanette \
