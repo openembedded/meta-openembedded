@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
 inherit gnomebase gobject-introspection gi-docgen features_check
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "12cc954f750bb137ace8500fe9355d26e6e00ef6ccaab2950e9d360e92758335"
+SRC_URI[archive.sha256sum] = "ed42e800cb7f0a07477cd9e3e744cdc1a240a6ad7ab96b8a875806267a9fddb0"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
