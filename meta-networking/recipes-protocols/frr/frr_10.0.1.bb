@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.0 
            file://0001-zebra-Mimic-GNU-basename-API-for-non-glibc-library-e.patch \
            "
 
-SRCREV = "03a143cd49ed1b190cb38f48a31ef4d71fa01a02"
+SRCREV = "8fb5f22bd89fa6bedcb922b908b955d8a650566f"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
