@@ -25,6 +25,7 @@ inherit cmake pkgconfig
 EXTRA_OECMAKE += " \
                     -DTBB_TEST=OFF \
                     -DCMAKE_BUILD_TYPE=Release \
+                    -DTBB_STRICT=OFF \
                 "
 
 # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
