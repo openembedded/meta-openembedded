@@ -6,7 +6,7 @@ HOMEPAGE = "https://pyproject-api.readthedocs.io"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
-SRC_URI[sha256sum] = "1817dc018adc0d1ff9ca1ed8c60e1623d5aaca40814b953af14a9cf9a5cae538"
+SRC_URI[sha256sum] = "7ebc6cd10710f89f4cf2a2731710a98abce37ebff19427116ff2174c9236a827"
 
 PYPI_PACKAGE = "pyproject_api"
 
