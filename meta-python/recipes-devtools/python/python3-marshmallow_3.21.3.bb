@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
                     file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
 
-SRC_URI[sha256sum] = "82408deadd8b33d56338d2182d455db632c6313aa2af61916672146bb32edc56"
+SRC_URI[sha256sum] = "4f57c5e050a54d66361e826f94fba213eb10b67b2fdb02c3e0343ce207ba1662"
 
 inherit python_flit_core pypi ptest
 
