@@ -7,10 +7,9 @@ DEPENDS = "\
     python3-ninja-native \
 "
 
-SRCREV = "8a099e44b3d5f85b20f05828d919d2332a8de841"
+SRCREV = "3e9dfa2866941655c56877882565e7577de6fc7b"
 SRC_URI = "\
     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
-    file://0001-Do-not-strip-binaries.patch \
 "
 
 S = "${WORKDIR}/git"
