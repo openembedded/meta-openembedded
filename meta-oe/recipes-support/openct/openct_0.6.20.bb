@@ -18,6 +18,7 @@ SRC_URI = " \
     file://openct.init \
     file://openct.sysconfig \
     file://openct.service \
+    file://0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch \
 "
 
 SRC_URI[md5sum] = "a1da3358ab798f1cb9232f1dbababc21"
