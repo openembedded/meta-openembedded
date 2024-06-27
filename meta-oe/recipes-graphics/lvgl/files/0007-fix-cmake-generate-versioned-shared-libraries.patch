@@ -10,7 +10,7 @@ to make cmake add the version suffix to generated shared libraries. That
 changes the filename to liblvgl.so.9.1.0 and includes symlink with major
 ABI version, i.e. liblvgl.so.9 .
 
-Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/5865]
+Upstream-Status: Backport [2c469279f53f9dee63d71295c6058749bc87ce73]
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
  env_support/cmake/custom.cmake | 11 +++++++++++
