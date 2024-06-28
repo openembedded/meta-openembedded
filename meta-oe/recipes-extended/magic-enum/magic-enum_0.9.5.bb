@@ -30,6 +30,9 @@ do_install_ptest () {
     install -m 0755 ${B}/test/test_* ${D}${PTEST_PATH}/tests
 }
 
+# Workaround for bug 114970 reported for gcc 14.1.0
+CXXFLAGS += "-Wno-error=unused-value"
+
 # Add catkin and colcon (ROS build system) support
 FILES:${PN}-dev += "\
     ${datadir}/magic_enum/package.xml \
