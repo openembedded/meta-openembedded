@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "d41c5c4d6614a8eae2ed4e4d7ada6b6d3afcc9fb65a4ed9b8711344bef
 
 inherit autotools-brokensep pkgconfig
 
-CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall"
+CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall -Wno-error=incompatible-pointer-types"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[ccdv] = "--enable-ccdv,--disable-ccdv,,"
