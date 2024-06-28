@@ -12,7 +12,7 @@ SRC_URI = "http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-${PV}.tar.gz \
            file://0001-testtyp.c-Use-proper-prototype-for-main-function.patch \
            "
 
-SRC_URI[sha256sum] = "fb9efea8c7b5ed5f8ea5dee49d35252accfc05ee6e75cb9a37ab7c847cd261d7"
+SRC_URI[sha256sum] = "84221e0013a2d64a0bae6a32bb44b1ae5734d2cb0465fb89af3e3abd6e05aeb2"
 
 S = "${WORKDIR}/Curses-${PV}"
 
