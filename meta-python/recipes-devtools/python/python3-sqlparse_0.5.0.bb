@@ -4,18 +4,18 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2b136f573f5386001ea3b7b9016222fc"
 
-SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
-            file://run-ptest \
-	    "
+SRC_URI:append = " \
+    file://run-ptest \
+"
 
-SRC_URI[sha256sum] = "d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c"
+SRC_URI[sha256sum] = "714d0a4932c059d16189f58ef5411ec2287a4360f17cdd0edd2d09d4c5087c93"
 
 export BUILD_SYS
 export HOST_SYS
 
-inherit pypi ptest python_flit_core
+inherit pypi ptest python_hatchling
 
-RDEPENDS:${PN}-ptest += " \
+RDEPENDS:${PN}-ptest += "\
     python3-pytest \
     python3-unittest-automake-output \
     python3-unixadmin \
