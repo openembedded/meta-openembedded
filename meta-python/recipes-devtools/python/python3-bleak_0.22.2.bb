@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
 
-SRCREV = "054b092e19c7a45d5ea07d8948022f54117fe5e8"
+SRCREV = "c746071a3fcc3b5e69db6d6b23445ec3505d7730"
 PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop"
 
 inherit pypi python_poetry_core ptest
@@ -26,8 +26,7 @@ do_install_ptest() {
 }
 
 RDEPENDS:${PN} += " \
-	python3-core (>3.7) \
-	python3-async-timeout \
+	python3-core (>3.8) \
 	python3-dbus-fast \
 	python3-xml \
 "
