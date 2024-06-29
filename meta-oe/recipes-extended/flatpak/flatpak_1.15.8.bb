@@ -19,7 +19,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 DEPENDS = " \
     appstream \
     bison-native \
-    dconf \
     fuse3 \
     gdk-pixbuf \
     glib-2.0 \
@@ -36,7 +35,6 @@ DEPENDS = " \
 
 RDEPENDS:${PN} = " \
     ca-certificates \
-    dconf \
     flatpak-xdg-utils \
     fuse3-utils \
 "
@@ -49,6 +47,7 @@ GTKDOC_MESON_ENABLE_FLAG = 'enabled'
 GTKDOC_MESON_DISABLE_FLAG = 'disabled'
 
 PACKAGECONFIG[curl] = "-Dhttp_backend=curl,,curl"
+PACKAGECONFIG[dconf] = "-Ddconf=enabled,-Ddconf=disabled,dconf"
 PACKAGECONFIG[docbook_docs] = "-Ddocbook_docs=enabled,-Ddocbook_docs=disabled,xmlto-native"
 PACKAGECONFIG[man] = "-Dman=enabled,-Dman=disabled,libxslt-native"
 PACKAGECONFIG[soup] = "-Dhttp_backend=soup,,libsoup-2.4"
