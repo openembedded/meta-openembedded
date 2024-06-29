@@ -10,7 +10,7 @@ PYPI_PACKAGE := "Pint"
 
 inherit ptest python_setuptools_build_meta
 
-SRCREV = "7b47d6b7b0f7655efca810a90f2781c0d1cc7fb9"
+SRCREV = "4c2caccfc6cdac1f80a9bfa15ebea1ca49836881"
 SRC_URI = "git://github.com/hgrecco/pint;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 #SRC_URI[sha256sum] = "e1509b91606dbc52527c600a4ef74ffac12fff70688aff20e9072409346ec9b4"
