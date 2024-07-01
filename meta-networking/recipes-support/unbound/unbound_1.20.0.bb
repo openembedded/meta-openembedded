@@ -9,10 +9,12 @@ SECTION = "net"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 
-SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0"
+SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0 \
+           file://run-ptest \
+          "
 SRCREV = "b9525c5fd47ba481a29b90109017d2253beb105d"
 
-inherit autotools pkgconfig systemd update-rc.d
+inherit autotools pkgconfig systemd update-rc.d ptest
 
 DEPENDS = "openssl libtool-native bison-native expat"
 RDEPENDS:${PN} = "bash openssl-bin daemonize"
@@ -32,12 +34,29 @@ do_configure:append() {
 	sed -i -e 's#${RECIPE_SYSROOT}##g' ${B}/config.h
 }
 
+do_compile:append() {
+        oe_runmake tests
+}
+
 do_install:append() {
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
 
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
+}
+
+do_install_ptest() {
+        install -d ${D}${PTEST_PATH}/tests
+        install -d ${D}${PTEST_PATH}/tests/testdata
+
+        install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
+        install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/test_signatures* ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/
+        install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
 }
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
