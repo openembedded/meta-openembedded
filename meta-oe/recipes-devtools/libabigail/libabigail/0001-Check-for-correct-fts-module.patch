@@ -1,0 +1,33 @@
+From b6af55e8ae120488abc83312fcd184d8352175eb Mon Sep 17 00:00:00 2001
+From: Ross Burton <ross.burton@arm.com>
+Date: Mon, 1 Jul 2024 10:53:45 +0000
+Subject: [PATCH] Check for correct fts module
+
+fts-standalone is a gentoo-specific name[1], every other distribution that
+uses this library has named it musl-fts.
+
+[1] https://gitweb.gentoo.org/repo/gentoo.git/tree/sys-libs/fts-standalone/fts-standalone-1.2.7.ebuild#n34
+
+Upstream-Status: Pending [discussing with libabigail and gentoo]
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index d329490..5bad2ae 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -295,10 +295,10 @@ AS_IF([test "x$ac_cv_bad_fts" = "xyes"],
+       [CFLAGS="$CFLAGS -DBAD_FTS=1",
+        CXXFLAGS="$CXXFLAGS -DBAD_FTS=1"])
+ 
+-dnl On musl, we need to find fts-standalone
++dnl On musl, we need to find the standalone fts library
+ AS_CASE(
+   [${host_os}], [*-musl*], [
+-    PKG_CHECK_MODULES([FTS], [fts-standalone])
++    PKG_CHECK_MODULES([FTS], [musl-fts])
+ ])
+ 
+ dnl Check for dependency: libelf, libdw, libebl (elfutils)
