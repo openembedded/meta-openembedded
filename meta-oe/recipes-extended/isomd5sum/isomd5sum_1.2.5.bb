@@ -31,6 +31,6 @@ RPROVIDES:${BPN}-dbg += "python3-${BPN}-dbg"
 
 FILES:python3-${BPN} = "${PYTHON_SITEPACKAGES_DIR}/pyisomd5sum.so"
 
-SRCREV = "3f4c9bd3f21ec9ac75a025dfa3fa30fe3f621831"
+SRCREV = "ed1f54de86b5d507c4cfa552923e9ddfddd9b893"
 
 BBCLASSEXTEND = "native"
