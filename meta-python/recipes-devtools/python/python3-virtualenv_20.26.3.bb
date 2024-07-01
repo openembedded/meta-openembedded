@@ -16,7 +16,11 @@ DEPENDS += "\
 "
 
 RDEPENDS:${PN} += " \
+    python3-compression  \
     python3-distlib \
     python3-filelock \
+    python3-json \
+    python3-misc \
+    python3-modules \
     python3-platformdirs \
 "
