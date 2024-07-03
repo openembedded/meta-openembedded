@@ -1,0 +1,17 @@
+From 2971f8b570529dbac05d8300cd4c0ca82d16fa6e Mon Sep 17 00:00:00 2001
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
+Date: Wed, 3 Jul 2024 09:27:31 -0700
+Subject: [PATCH 0/1] apache2:apache2-native: CVE status update for
+ CVE-1999-0289
+
+CVE only applies for Windows
+
+Ninette Adhikari (1):
+  apache2:apache2-native: CVE status update for CVE-1999-0289
+
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+--
+2.44.0
+
