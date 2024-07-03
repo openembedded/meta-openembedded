@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5536c2b72eeed14bafaf4d2a6c032b87"
 SRCREV = "cae289323847ce0a84a0deca4958183567eee17e"
 SRC_URI = " \
     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
+    file://0001-jpeg-compressor-Reorder-stdio.h-include-location.patch \
 "
 S = "${WORKDIR}/git"
 
