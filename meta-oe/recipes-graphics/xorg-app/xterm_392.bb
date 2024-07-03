@@ -47,3 +47,5 @@ ALTERNATIVE:${PN} = "resize x-terminal-emulator"
 ALTERNATIVE_TARGET[x-terminal-emulator] = "${bindir}/xterm"
 # rxvt-unicode defaults to priority 10. Let's be one point lower to let it override xterm.
 ALTERNATIVE_PRIORITY[x-terminal-emulator] = "9"
+
+CVE_STATUS[CVE-1999-0965] = "cpe-incorrect: Current version (392) not affected. This was fixed in version X11R5-fix-26 (R11R6 from 1994)"
