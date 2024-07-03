@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 inherit setuptools3 pypi
 
+SRC_URI += "file://0001-Do-not-override-const-qualifier.patch"
 SRC_URI[sha256sum] = "3278827b803cf006a1df251f3e13374c7d26db779e5a33329cc11789b804bc2d"
 
 PYPI_PACKAGE = "inflate64"
