@@ -10,18 +10,14 @@ HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
-DEPENDS = "\
-    autoconf-archive \
-    openssl \
-    p11-kit \
-"
+DEPENDS = "openssl"
 
-SRCREV = "58040b4e32975cc1d7f39e424ee7b0097cd11311"
+SRCREV = "3a4fdd2a2e5643af2a0f857b66a19b9fa109d40f"
 
 SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit meson pkgconfig
 
 FILES:${PN} += "${libdir}/ossl-modules/pkcs11.so"
