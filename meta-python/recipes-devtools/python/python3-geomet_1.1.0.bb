@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/geomet/geomet.git;protocol=https;branch=master"
 SRCREV = "6ac73c312b52aca328db2e61d90c5e363b62639f"
 
-inherit setuptools3
+inherit python_flit_core
 
 RDEPENDS:${PN} += "\
     python3-click \
