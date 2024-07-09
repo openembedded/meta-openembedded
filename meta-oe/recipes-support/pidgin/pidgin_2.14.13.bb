@@ -10,10 +10,10 @@ inherit autotools gettext pkgconfig gconf perlnative python3native
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
-    file://purple-OE-branding-25.patch \
+    file://fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch \
 "
 
-SRC_URI[sha256sum] = "19654ad276b149646371fbdac21bc7620742f2975f7399fed0ffc1a18fbaf603"
+SRC_URI[sha256sum] = "120049dc8e17e09a2a7d256aff2191ff8491abb840c8c7eb319a161e2df16ba8"
 
 CVE_STATUS[CVE-2010-1624] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 CVE_STATUS[CVE-2011-3594] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
@@ -21,7 +21,6 @@ CVE_STATUS[CVE-2011-3594] = "fixed-version: The CPE in the NVD database doesn't 
 PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
 "
-PACKAGECONFIG[farsight2] = "--enable-farstream,--disable-farstream,farsight2"
 #  --disable-gstreamer     compile without GStreamer audio support
 #  --disable-gstreamer-video
 #                          compile without GStreamer 1.0 Video Overlay support
@@ -29,8 +28,7 @@ PACKAGECONFIG[farsight2] = "--enable-farstream,--disable-farstream,farsight2"
 #                          compile without GStreamer 0.10 interface support
 #  --with-gstreamer=<version>
 #                          compile with GStreamer 0.10 or 1.0 interface
-PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
-PACKAGECONFIG[vv] = "--enable-vv,--disable-vv,gstreamer"
+PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer1.0"
 PACKAGECONFIG[idn] = "--enable-idn,--disable-idn,libidn"
 PACKAGECONFIG[gtk] = "--enable-gtkui,--disable-gtkui,gtk+"
 PACKAGECONFIG[x11] = "--with-x=yes --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--with-x=no,virtual/libx11"
@@ -51,7 +49,16 @@ EXTRA_OECONF = " \
     --disable-meanwhile \
     --disable-nm \
     --disable-screensaver \
+    --disable-farstream \
+    --disable-vv \
 "
+
+# CONFIG_ARGS is used to display build info. Replace full paths by reproducible
+# variables ($S, $WORKDIR)
+do_configure:append() {
+    sed -i -e "/CONFIG_ARGS/s|${S}|\$S|g" ${B}/config.h
+    sed -i -e "/CONFIG_ARGS/s|${WORKDIR}|\$WORKDIR|g" ${B}/config.h
+}
 
 OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
 OE_LT_RPATH_ALLOW[export]="1"
@@ -73,7 +80,7 @@ FILES:finch          = "${bindir}/finch"
 FILES:finch-dev      = "${libdir}/finch/*.la"
 
 FILES:${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
-           ${datadir}/applications"
+           ${datadir}/applications ${datadir}/metainfo"
 RRECOMMENDS:${PN} = "${PN}-data libpurple-protocol-irc libpurple-protocol-xmpp"
 
 FILES:${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
