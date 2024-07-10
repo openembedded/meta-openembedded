@@ -118,7 +118,3 @@ python populate_packages:prepend () {
         description='Finch plugin %s',
         prepend=True, extra_depends='')
 }
-
-# http://errors.yoctoproject.org/Errors/Details/766946/
-# pidgin-2.14.2/libpurple/protocols/bonjour/parser.c:200:9: error: initialization of 'void (*)(void *, const xmlError *)' {aka 'void (*)(void *, const struct _xmlError *)'} from incompatible pointer type 'void (*)(void *, xmlError *)' {aka 'void (*)(void *, struct _xmlError *)'} [-Wincompatible-pointer-types]
-CFLAGS += "-Wno-error=incompatible-pointer-types"
