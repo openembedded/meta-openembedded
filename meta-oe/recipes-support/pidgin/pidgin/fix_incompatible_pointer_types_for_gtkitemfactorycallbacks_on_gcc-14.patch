@@ -32,7 +32,7 @@ Built with gcc-14, started and clicked on some affected menus
 
 [0]: https://gcc.gnu.org/gcc-14/porting_to.html#incompatible-pointer-types
 
-Upstream-Status: Submitted [https://reviews.imfreedom.org/r/3282/]
+Upstream-Status: Backport [https://keep.imfreedom.org/pidgin/pidgin/rev/210f318db492]
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 
 diff --git a/pidgin/gtkblist.c b/pidgin/gtkblist.c
