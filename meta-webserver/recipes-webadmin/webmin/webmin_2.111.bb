@@ -1,7 +1,7 @@
 SUMMARY = "Web-based administration interface"
 HOMEPAGE = "http://www.webmin.com"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=0373ac9f611e542ddebe1ec6394afc3c"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=0a6446108c96d0819d21e40b48109507"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://setup.sh \
@@ -16,14 +16,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://proftpd-config-fix.patch \
            file://net-lib.pl.patch \
            file://media-tomb.patch \
-           file://remove-python2.3.patch \
            file://mysql-config-fix.patch \
            file://webmin.service \
             "
-
-SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
-SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
-
+SRC_URI[sha256sum] = "9000ce55275494802ec433e2de634289989f5d99ea2970716d7d9c97e38f2f5e"
 UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
 UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
 
