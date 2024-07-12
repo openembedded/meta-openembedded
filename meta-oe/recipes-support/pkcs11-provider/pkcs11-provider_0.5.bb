@@ -14,7 +14,9 @@ DEPENDS = "openssl"
 
 SRCREV = "3a4fdd2a2e5643af2a0f857b66a19b9fa109d40f"
 
-SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https \
+    file://0001-Fix-types-for-old-32-bit-systems.patch \
+"
 
 S = "${WORKDIR}/git"
 
