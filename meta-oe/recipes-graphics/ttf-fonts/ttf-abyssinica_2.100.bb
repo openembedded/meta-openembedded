@@ -9,6 +9,8 @@ SRCNAME = "AbyssinicaSIL"
 SRC_URI = "http://software.sil.org/downloads/r/abyssinica/${SRCNAME}-${PV}.zip"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
+UPSTREAM_CHECK_URI = "https://software.sil.org/abyssinica/download/"
+
 SRC_URI[sha256sum] = "1a1fc8e82f0c0f2e824f42bff05c1f4a0356330a89dc7ba798c1a20bc3e333e0"
 
 FONT_PACKAGES = "${PN}"
