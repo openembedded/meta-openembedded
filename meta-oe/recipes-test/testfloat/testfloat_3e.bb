@@ -20,6 +20,7 @@ SRC_URI[SoftFloat.md5sum] = "7dac954ea4aed0697cbfee800ba4f492"
 SRC_URI[SoftFloat.sha256sum] = "21130ce885d35c1fe73fc1e1bf2244178167e05c6747cad5f450cc991714c746"
 
 S = "${WORKDIR}"
+UPSTREAM_CHECK_URI = "http://www.jhauser.us/arithmetic/TestFloat.html"
 
 do_compile(){
     oe_runmake -C SoftFloat-${PV}/build/Linux-Cross-Compile/
