@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=498c298542365dfcfe29948c72a5849b"
 
 SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master"
 
-SRCREV = "1eba85dbbe78fc1938f8aba2112ba1b228caed30"
+SRCREV = "6837bbf14b70b169724ef895565abb03cf254a65"
 
 S = "${WORKDIR}/git"
 
