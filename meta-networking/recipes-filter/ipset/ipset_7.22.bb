@@ -11,7 +11,7 @@ DEPENDS = "libtool libmnl"
 
 SRC_URI = "http://ftp.netfilter.org/pub/ipset/${BP}.tar.bz2 \
            file://0001-ipset-Define-portable-basename-function.patch"
-SRC_URI[sha256sum] = "e2c6ce4fcf3acb3893ca5d35c86935f80ad76fc5ccae601185842df760e0bc69"
+SRC_URI[sha256sum] = "f6ac5a47c3ef9f4c67fcbdf55e791cbfe38eb0a4aa1baacd12646a140abacdd9"
 
 inherit autotools pkgconfig module-base
 
