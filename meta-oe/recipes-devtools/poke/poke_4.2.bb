@@ -11,7 +11,7 @@ SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
 
 DEPENDS = "flex-native bison-native bdwgc readline"
 
-SRC_URI[sha256sum] = "08ecaea41f7374acd4238e12bbf97e8cd5e572d5917e956b73b9d43026e9d740"
+SRC_URI[sha256sum] = "8aaf36e61e367a53140ea40e2559e9ec512e779c42bee34e7ac24b34ba119bde"
 
 # poke does not support using out-of-tree builds
 inherit autotools-brokensep gettext pkgconfig
