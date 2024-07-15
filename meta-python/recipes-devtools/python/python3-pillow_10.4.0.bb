@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https 
            file://0001-support-cross-compiling.patch \
            file://run-ptest \
            "
-SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
+SRCREV = "9b4fae77178e827ab17118fbc89c739ffd6a0fab"
 
 inherit python_setuptools_build_meta ptest
 
