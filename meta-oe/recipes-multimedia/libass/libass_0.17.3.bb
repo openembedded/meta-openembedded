@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a42532a0684420bdb15556c3cdd49a75"
 DEPENDS = "fontconfig freetype fribidi harfbuzz"
 
 SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
-SRCREV = "cbb48cc4f2f076300004b8b06a86bec55281d0c2"
+SRCREV = "e46aedea0a0d17da4c4ef49d84b94a7994664ab5"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
