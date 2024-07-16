@@ -68,7 +68,7 @@ FILES:libdevmapper = " \
 
 FILES:${PN} += " \
     ${libdir}/device-mapper/*.so \
-    ${systemd_system_unitdir}/lvm2-pvscan@.service \
+    ${systemd_system_unitdir} \
     ${PYTHON_SITEPACKAGES_DIR}/lvmdbusd \
     ${datadir}/dbus-1/system-services/com.redhat.lvmdbus1.service \
 "
