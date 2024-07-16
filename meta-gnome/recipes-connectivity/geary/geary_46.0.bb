@@ -23,6 +23,7 @@ DEPENDS = " \
     libical \
     libpeas \
     libsecret \
+    libsoup \
     libstemmer \
     libxml2 \
     sqlite3 \
@@ -31,15 +32,15 @@ DEPENDS = " \
 
 RDEPENDS:${PN} = "gnome-keyring"
 
-inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
+inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-introspection vala features_check
 
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
-	file://0001-meson-Use-PKG_CONFIG_SYSROOT_DIR-when-using-pkg-conf.patch \
+	file://0001-application-client.vala-hardcode-some-paths.patch \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "37c378a563d5b1c269d57c34671edc940d1cd180"
+SRCREV = "46e93c0c0dafc381e8a308b1befb07e908121722"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
@@ -52,10 +53,6 @@ PACKAGECONFIG[tnef] = "-Dtnef=enabled,-Dtnef=disabled,libytnef"
 PACKAGECONFIG[valadoc] = "-Dvaladoc=enabled,-Dvaladoc=disabled"
 
 PACKAGECONFIG ??= ""
-# rfc822/rfc822-message.c:2097:12: error: incompatible pointer to integer conversion returning 'void *' from a function with result type 'gboolean' (aka 'int') [-Wint-conversion]
-#|                                 return NULL;
-#|                                        ^~~~
-CFLAGS:append:toolchain-clang = " -Wno-error=int-conversion"
 
 FILES:${PN} += "${datadir}"
 
