@@ -12,11 +12,9 @@ DEPENDS = "libmnl libnftnl bison-native \
            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
-           file://0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch \
-           file://0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "a3c304cd9ba061239ee0474f9afb938a9bb99d89b960246f66f0c3a0a85e14cd"
+SRC_URI[sha256sum] = "ef3373294886c5b607ee7be82c56a25bc04e75f802f8e8adcd55aac91eb0aa24"
 
 inherit autotools manpages pkgconfig ptest
 
