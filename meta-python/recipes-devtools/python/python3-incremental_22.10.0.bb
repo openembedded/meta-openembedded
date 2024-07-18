@@ -7,13 +7,28 @@ SRC_URI[sha256sum] = "912feeb5e0f7e0188e6f42241d2f450002e11bbc0937c65865045854c2
 
 inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += " \
-    python3-twisted-core \
-    python3-click \
+PACKAGE_BEFORE_PN = "\
+    ${PN}-scripts \
+    ${PN}-tests \
 "
 
-# -native is needed to build python[3]-twisted, however, we need to take steps to
-# prevent a circular dependency. The build apparently does not use the part of
-# python-incremental which uses python-twisted, so this hack is OK.
-RDEPENDS:python3-incremental-native:remove = "python3-twisted-core-native"
+FILES:${PN}-scripts = "\
+    ${PYTHON_SITEPACKAGES_DIR}/incremental/update.py \
+    ${PYTHON_SITEPACKAGES_DIR}/incremental/__pycache__/update*.pyc \
+"
+
+RDEPENDS:${PN}-scripts = "\
+    python3-click \
+    python3-twisted-core \
+"
+
+FILES:${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/incremental/tests"
+
+# The tests require unit testing tool 'trial' from the twisted package
+RDEPENDS:${PN}-tests = "\
+    ${PN}-scripts \
+    python3-twisted \
+"
+
 BBCLASSEXTEND = "native"
+
