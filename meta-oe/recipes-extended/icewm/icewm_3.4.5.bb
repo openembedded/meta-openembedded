@@ -8,6 +8,7 @@ SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}
 SRC_URI[sha256sum] = "8d1afe9a2d5e28e88261b68906337449307e53f06c08218e1a6409083998a5f1"
 
 UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 inherit autotools pkgconfig gettext perlnative features_check qemu update-alternatives
 REQUIRED_DISTRO_FEATURES = "x11"
