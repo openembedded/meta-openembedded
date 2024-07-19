@@ -190,6 +190,10 @@ INITSCRIPT_PARAMS = "defaults 91 20"
 SYSTEMD_SERVICE:${PN} = "apache2.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
+ALTERNATIVE:${PN} = "httpd"
+ALTERNATIVE_LINK_NAME[httpd] = "${sbindir}/httpd"
+ALTERNATIVE_PRIORITY[httpd] = "60"
+
 ALTERNATIVE:${PN}-doc = "htpasswd.1"
 ALTERNATIVE_LINK_NAME[htpasswd.1] = "${mandir}/man1/htpasswd.1"
 
