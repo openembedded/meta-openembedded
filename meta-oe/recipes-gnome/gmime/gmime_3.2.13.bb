@@ -13,6 +13,9 @@ SRC_URI = "https://github.com/jstedfast/${BPN}/releases/download/${PV}/${BP}.tar
 "
 SRC_URI[sha256sum] = "2e10a54d4821daf8b16c019ad5d567e0fb8e766f8ffe5fec3d4c6a37373d6406"
 
+UPSTREAM_CHECK_URI = "https://github.com/jstedfast/gmime/releases"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
 EXTRA_OECONF += "--enable-largefile"
 
 export ac_cv_have_iconv_detect_h="yes"
