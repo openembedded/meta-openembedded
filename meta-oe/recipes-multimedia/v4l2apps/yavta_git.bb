@@ -9,6 +9,9 @@ SRCREV = "65f740aa1758531fd810339bc1b7d1d33666e28a"
 PV = "0.0"
 S = "${WORKDIR}/git"
 
+# Upstream repo does not tag
+UPSTREAM_CHECK_COMMITS = "1"
+
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 
 # The yavta sources include copies of the headers required to build in the
