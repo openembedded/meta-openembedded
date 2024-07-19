@@ -25,6 +25,9 @@ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz
 #SRC_URI[md5sum] = "5df2f85c75efc351ffadebcc11046a98"
 SRC_URI[sha256sum] = "013ebe68599915cedb4bf753b471713d91901a991623358b9a967d9a779bcc16"
 
+UPSTREAM_CHECK_URI = "https://github.com/cfengine/masterfiles/releases"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools
 
 export EXPLICIT_VERSION="${PV}"
