@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.
 SRC_URI[sha256sum] = "fba956f27c6ae56ce6dfd52fbf9d20254aad42821f74fa52f83957625294afb9"
 
 UPSTREAM_CHECK_URI = "https://github.com/akheron/${BPN}/releases"
-UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 inherit cmake pkgconfig
 
