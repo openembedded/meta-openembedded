@@ -1,4 +1,4 @@
-From d3aa30f5cd7ba375e006a755752acbcfcd619452 Mon Sep 17 00:00:00 2001
+From 6a1a24eb0f30002a4b0049d6cf38d3f2bc3c0209 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 6 Mar 2024 19:27:15 +0800
 Subject: [PATCH] meson.build: drop unnecessary build dependencies
@@ -15,7 +15,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index 9556836a..30f33fe2 100644
+index b29174de..09421d99 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -25,8 +25,8 @@ bash_completions_dir = completions.get_variable(pkgconfig: 'completionsdir', def
@@ -39,7 +39,7 @@ index 9556836a..30f33fe2 100644
       timeout: 100,
 @@ -91,7 +92,9 @@ test('legacy-tests',
       find_program('tests/cli_legacy.py'),
-      timeout: 600,
+      timeout: 900,
       env: test_env)
 +endif
  #TODO: split out dbus tests into own test() instance, to run in parallel
