@@ -9,6 +9,8 @@ SRC_URI = "http://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-${PV}.tar.gz"
 SRC_URI[md5sum] = "ea24ed4b82ff1304809c363494fa8e16"
 SRC_URI[sha256sum] = "556eedc06b6cf29eb495b6d27f2dcc51bf909ad82389ba2fa7bdc4dec89059c0"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sdlgfx/files/"
+
 S = "${WORKDIR}/SDL_gfx-${PV}"
 
 inherit autotools pkgconfig
