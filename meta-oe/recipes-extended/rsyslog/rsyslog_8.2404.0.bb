@@ -34,7 +34,7 @@ SRC_URI:append:libc-musl = " \
 "
 SRC_URI[sha256sum] = "30528d140ec1b1f079224081fa37df6e06587ff42b02e3e61f2daa0526c54d33"
 
-UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
