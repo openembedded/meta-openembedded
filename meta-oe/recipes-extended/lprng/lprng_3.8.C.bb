@@ -9,6 +9,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
 SRC_URI[md5sum] = "5901bed95e61d2bea3ba3056056af432"
 SRC_URI[sha256sum] = "694a1747a96385b89e93f43343bf35cee5c8c73353a83814106911c99f09de10"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/lprng/files/lprng/"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.tar"
+
 inherit autotools gettext
 
 EXTRA_OECONF = "--disable-ssl --disable-kerberos --enable-force_localhost"
