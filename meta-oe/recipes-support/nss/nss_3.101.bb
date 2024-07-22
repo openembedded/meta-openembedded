@@ -35,8 +35,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
            "
 SRC_URI[sha256sum] = "859748f0b4b7bb51e7e600ae5a88ef4d71f93e6964b1beed2727784dd9ed85e7"
 
-UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
-UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
+UPSTREAM_CHECK_URI = "https://ftp.mozilla.org/pub/security/nss/releases/"
+UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>\d+(\_\d+)+)"
 
 inherit siteinfo
 
