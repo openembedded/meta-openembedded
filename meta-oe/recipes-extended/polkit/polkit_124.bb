@@ -28,6 +28,7 @@ PACKAGECONFIG[pam] = "-Dauthfw=pam,-Dauthfw=shadow,libpam,libpam"
 PACKAGECONFIG[systemd] = "-Dsession_tracking=libsystemd-login,,systemd,,,consolekit elogind"
 PACKAGECONFIG[consolekit] = "-Dsession_tracking=ConsoleKit,,,consolekit,,systemd elogind"
 PACKAGECONFIG[elogind] = "-Dsession_tracking=libelogin,,elogind,,,systemd consolekit"
+PACKAGECONFIG[libs-only] = "-Dlibs-only=true,-Dlibs-only=false"
 
 # Default to mozjs javascript library
 PACKAGECONFIG[mozjs] = "-Djs_engine=mozjs,,mozjs-115,,,duktape"
@@ -44,10 +45,12 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install:append() {
 	#Fix up permissions on polkit rules.d to work with rpm4 constraints
-	chmod 700 ${D}/${datadir}/polkit-1/rules.d
-	chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
-	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-	chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+	if ${@bb.utils.contains('PACKAGECONFIG', 'libs-only', 'false', 'true', d)}; then
+		chmod 700 ${D}/${datadir}/polkit-1/rules.d
+		chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
+		chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+		chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+	fi
 }
 
 FILES:${PN} += " \
