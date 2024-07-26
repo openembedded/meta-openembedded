@@ -141,3 +141,5 @@ FILES:${PN} += "${libdir}/fwupd-plugins-* \
 FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
                       ${datadir}/installed-tests/"
 RDEPENDS:${PN}-ptest += "gnome-desktop-testing"
+
+INSANE_SKIP:${PN}-ptest += "buildpaths"
