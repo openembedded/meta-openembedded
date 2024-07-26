@@ -15,7 +15,9 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch \
-            file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch "
+            file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch \
+            file://0001-libsysprof-Check-for-unw_set_caching_policy-before-u.patch \
+            "
 SRC_URI[archive.sha256sum] = "07d9081a66cf2fb52753f48ff2b85ada75c60ff1bc1af1bd14d8aeb627972168"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd', '', d)} \
