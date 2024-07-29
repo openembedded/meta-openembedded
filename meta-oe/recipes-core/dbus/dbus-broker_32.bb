@@ -10,6 +10,7 @@ SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-bro
 SRC_URI[sha256sum] = "bea7f653e7251063c5f427e9e3f93562d38a0d8667ae6d49fb56f113605985de"
 
 UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+)"
 
 inherit meson pkgconfig systemd features_check
 

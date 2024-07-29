@@ -37,8 +37,3 @@ RDEPENDS:${PN} = "python3-numpy \
                  "
 
 export HDF5_VERSION="1.14.0"
-
-# http://errors.yoctoproject.org/Errors/Details/766919/
-# h5py/h5l.c:8163:107: error: passing argument 4 of '__pyx_f_4h5py_4defs_H5Lunpack_elink_val' from incompatible pointer type [-Wincompatible-pointer-types]
-# h5py/h5l.c:8163:133: error: passing argument 5 of '__pyx_f_4h5py_4defs_H5Lunpack_elink_val' from incompatible pointer type [-Wincompatible-pointer-types]
-CFLAGS += "-Wno-error=incompatible-pointer-types"

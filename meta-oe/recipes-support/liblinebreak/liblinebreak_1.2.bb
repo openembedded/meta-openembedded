@@ -8,4 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebr
 SRC_URI[md5sum] = "d18039259001ccb24b5dd4648c49c5ad"
 SRC_URI[sha256sum] = "9efcb0cb1afc75ad1e92d2b2dbf4d9c77b072d6656c5f1a150af8b718d0c7b76"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/vimgadgets/files/liblinebreak/"
+UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools

@@ -15,6 +15,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=8c0138a8701f0e1282f5c8b2c7d39114 \
 SRC_URI = "https://github.com/openlink/iODBC/releases/download/v${PV}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "c74541e3327fc9a1c7ccf103645471c67bc014542d70f572476eb07c0b2dd43c"
 
+UPSTREAM_CHECK_URI = "https://github.com/openlink/iODBC/releases"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools
 
 EXTRA_OECONF += " --prefix=/usr/local \

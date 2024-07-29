@@ -14,6 +14,9 @@ SRC_URI = "https://s3.amazonaws.com/archie-public/${BPN}/${BP}.tar.gz"
 SRC_URI[md5sum] = "e544a6230673ea54f7430bf817bb39d8"
 SRC_URI[sha256sum] = "8dbfcf9b28c782ab3bddd6a620d4fb95d1b0ffcbe93276996cdc4800aa9aebd1"
 
+UPSTREAM_CHECK_URI = "https://github.com/archiecobbs/logwarn/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools-brokensep
 
 # This directory is NOT volatile.
