@@ -8,7 +8,7 @@ SRC_URI = " \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "925c80f913d69e7ca424428823e1431c4ffb0deb"
+SRCREV = "b026910d1c18900e9daf07c429f7e901eb1c3f20"
 
 S = "${WORKDIR}/git"
 
@@ -19,6 +19,7 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 DEPENDS = " \
     appstream \
     bison-native \
+    bubblewrap-native \
     fuse3 \
     gdk-pixbuf \
     glib-2.0 \
@@ -30,6 +31,7 @@ DEPENDS = " \
     ostree \
     polkit \
     python3-pyparsing-native \
+    xdg-dbus-proxy-native \
     zstd \
 "
 
@@ -37,6 +39,8 @@ RDEPENDS:${PN} = " \
     ca-certificates \
     flatpak-xdg-utils \
     fuse3-utils \
+    bubblewrap \
+    xdg-dbus-proxy \
 "
 
 GIR_MESON_OPTION = "gir"
@@ -65,7 +69,11 @@ PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-security-context', '', d)} \
 "
 
-EXTRA_OEMESON = "-Dsystem_fusermount=${bindir}/fusermount3"
+EXTRA_OEMESON = " \
+    -Dsystem_fusermount=fusermount3 \
+    -Dsystem_bubblewrap=bwrap \
+    -Dsystem_dbus_proxy=xdg-dbus-proxy \
+"
 
 FILES:${PN} += "${libdir} ${datadir}"
 
