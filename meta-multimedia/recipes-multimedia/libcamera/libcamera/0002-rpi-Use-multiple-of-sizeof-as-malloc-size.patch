@@ -1,0 +1,31 @@
+From b99bda9c33c8880c65d54ffaf57f49daed640b9c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Hubert=20Wi=C5=9Bniewski?=
+ <hubert.wisniewski.25632@gmail.com>
+Date: Thu, 1 Aug 2024 08:44:57 +0200
+Subject: [PATCH] rpi: Use multiple of sizeof as malloc size
+
+These mallocs replace VLAs, so they should allocate memory in blocks
+whose sizes are multiples of the respective types' sizes.
+---
+ src/ipa/rpi/controller/rpi/alsc.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/ipa/rpi/controller/rpi/alsc.cpp b/src/ipa/rpi/controller/rpi/alsc.cpp
+index 961209ea..b71bb5ff 100644
+--- a/src/ipa/rpi/controller/rpi/alsc.cpp
++++ b/src/ipa/rpi/controller/rpi/alsc.cpp
+@@ -496,8 +496,9 @@ void resampleCalTable(const Array2D<double> &calTableIn,
+ 	 * Precalculate and cache the x sampling locations and phases to save
+ 	 * recomputing them on every row.
+ 	 */
+-	int *xLo = (int*)malloc(X), *xHi = (int*)malloc(X);
+-	double *xf = (double*)malloc(X);
++	int *xLo = (int*)malloc(X * sizeof(int)),
++	    *xHi = (int*)malloc(X * sizeof(int));
++	double *xf = (double*)malloc(X * sizeof(double));
+ 	double scaleX = cameraMode.sensorWidth /
+ 			(cameraMode.width * cameraMode.scaleX);
+ 	double xOff = cameraMode.cropX / (double)cameraMode.sensorWidth;
+-- 
+2.39.2
+

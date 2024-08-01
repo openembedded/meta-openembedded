@@ -13,6 +13,7 @@ SRC_URI = " \
         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
         file://0002-options-Replace-use-of-VLAs-in-C.patch \
         file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch \
+        file://0002-rpi-Use-multiple-of-sizeof-as-malloc-size.patch \
 "
 
 SRCREV = "aee16c06913422a0ac84ee3217f87a9795e3c2d9"
