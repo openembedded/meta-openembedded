@@ -11,7 +11,8 @@ inherit autotools pkgconfig
 
 SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master \
            file://0001-example-Use-lm-for-the-fst-module.patch"
-SRCREV = "1b20345a3a714d2d0ffb71578ff75bcb207ae92d"
+
+SRCREV = "2ffe084d4d4ccf4ebc5c23ef119aa1ae223ce2ae"
 
 S = "${WORKDIR}/git"
 
