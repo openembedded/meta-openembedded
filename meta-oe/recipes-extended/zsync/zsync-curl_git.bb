@@ -12,6 +12,9 @@ SRCREV = "00141c2806ccc4ddf2ff6263ee1612d19c0b713f"
 
 PV = "0.6.2+git"
 
+# Upstream repo does not tag
+UPSTREAM_CHECK_COMMITS = "1"
+
 inherit autotools
 
 S = "${WORKDIR}/git"
