@@ -44,7 +44,7 @@ SRC_URI = " \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "f25f35fe2ea1a473f7d184ccc72c8d4adc9705926fe4f3a7a3c8549941f56b03"
+SRC_URI[sha256sum] = "e65c496e06631a4977c795c0f248598c39c340e5635d7cf54ec3072acc998995"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
