@@ -1,4 +1,4 @@
-From d0852006bf3d305e8984b85b41997d43d4476937 Mon Sep 17 00:00:00 2001
+From 5d200bd8ccb6acb8636dadc47eefc6763c0001d0 Mon Sep 17 00:00:00 2001
 From: Roy Li <rongqing.li@windriver.com>
 Date: Wed, 18 Jun 2014 13:46:52 +0800
 Subject: [PATCH] use pkgconfig to check libgcrypt
@@ -10,16 +10,15 @@ libgcrypt does no longer provide libgcrypt-config, and provide
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-
 ---
  configure.ac | 15 +--------------
  1 file changed, 1 insertion(+), 14 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 62178c3..b56c9c7 100644
+index a4506ec..46013cc 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -889,20 +889,7 @@ AC_ARG_ENABLE(libgcrypt,
+@@ -1181,20 +1181,7 @@ AC_ARG_ENABLE(libgcrypt,
          [enable_libgcrypt=yes]
  )
  if test "x$enable_libgcrypt" = "xyes"; then
