@@ -7,7 +7,7 @@ UPSTREAM_CHECK_URI = "https://github.com/DanBloomberg/leptonica/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 SRC_URI = "http://www.leptonica.org/source/leptonica-${PV}.tar.gz"
-SRC_URI[sha256sum] = "155302ee914668c27b6fe3ca9ff2da63b245f6d62f3061c8f27563774b8ae2d6"
+SRC_URI[sha256sum] = "2b3e1254b1cca381e77c819b59ca99774ff43530209b9aeb511e1d46588a64f6"
 
 EXTRA_OECONF += " \
     --without-libwebp \
