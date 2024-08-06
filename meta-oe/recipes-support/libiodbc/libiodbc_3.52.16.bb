@@ -9,11 +9,11 @@ HOMEPAGE = "http://www.iodbc.org/"
 
 LICENSE = "LGPL-2.0-only | BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=8c0138a8701f0e1282f5c8b2c7d39114 \
-                    file://LICENSE.BSD;md5=ff3a66a194e500df485da930da7f2c62 \
+                    file://LICENSE.BSD;md5=5b36348a404e1d65b57df8d33fd6e414 \
                     "
 
 SRC_URI = "https://github.com/openlink/iODBC/releases/download/v${PV}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "c74541e3327fc9a1c7ccf103645471c67bc014542d70f572476eb07c0b2dd43c"
+SRC_URI[sha256sum] = "3898b32d07961360f6f2cf36db36036b719a230e476469258a80f32243e845fa"
 
 UPSTREAM_CHECK_URI = "https://github.com/openlink/iODBC/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
