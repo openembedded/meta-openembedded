@@ -25,7 +25,7 @@ inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "13fe1e75f317acdbdf5e80c9029d2e0632d60a9ccf72a43ae36eb7545021fbef"
+SRC_URI[archive.sha256sum] = "56c44a17034598e9607458afae1be75f3de5efdf0e62355f09ba58fc7bc312ac"
 
 BT_PULSE_PACKS = " \
     pulseaudio-lib-bluez5-util \
