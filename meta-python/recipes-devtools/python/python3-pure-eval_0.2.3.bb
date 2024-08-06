@@ -8,7 +8,7 @@ PYPI_PACKAGE = "pure_eval"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "2b45320af6dfaa1750f543d714b6d1c520a1688dec6fd24d339063ce0aaa9ac3"
+SRC_URI[sha256sum] = "5f4e983f40564c576c7c8635ae88db5956bb2229d7e9237d03b3c0b0190eaf42"
 
 RDEPENDS:${PN} += " \
     python3-datetime \
