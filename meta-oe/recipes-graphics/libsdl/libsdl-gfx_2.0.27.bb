@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d1de21f0b70830e299905eac3419084"
 DEPENDS = "libsdl"
 
 SRC_URI = "http://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-${PV}.tar.gz"
-SRC_URI[md5sum] = "ea24ed4b82ff1304809c363494fa8e16"
-SRC_URI[sha256sum] = "556eedc06b6cf29eb495b6d27f2dcc51bf909ad82389ba2fa7bdc4dec89059c0"
+SRC_URI[sha256sum] = "dfb15ac5f8ce7a4952dc12d2aed9747518c5e6b335c0e31636d23f93c630f419"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sdlgfx/files/"
 
