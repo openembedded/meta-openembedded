@@ -2,11 +2,10 @@ DESCRIPTION = "Liblinebreak is an implementation of the line breaking algorithm 
 HOMEPAGE = "http://vimgadgets.sourceforge.net/liblinebreak/"
 SECTION = "libs"
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=f89a1ce02e2dba48c1c0a8e6038464c2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebreak-${PV}.tar.gz"
-SRC_URI[md5sum] = "d18039259001ccb24b5dd4648c49c5ad"
-SRC_URI[sha256sum] = "9efcb0cb1afc75ad1e92d2b2dbf4d9c77b072d6656c5f1a150af8b718d0c7b76"
+SRC_URI[sha256sum] = "dd8cba554d260cf686865cc53d0c6be98102a80f56f8152ca5e7307bf06a66b8"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/vimgadgets/files/liblinebreak/"
 UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
