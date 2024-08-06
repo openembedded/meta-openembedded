@@ -8,16 +8,11 @@ inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache u
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-SRC_URI = " \
-    git://github.com/blueman-project/blueman.git;protocol=https;branch=2-3-stable \
-    file://0001-Search-for-cython3.patch \
-    file://0002-fix-fail-to-enable-bluetooth.patch \
-    file://0001-meson-add-pythoninstalldir-option.patch \
-"
+SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable"
 S = "${WORKDIR}/git"
-SRCREV = "c85e7afb8d6547d4c35b7b639124de8e999c3650"
+SRCREV = "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
 
-EXTRA_OEMESON = "-Druntime_deps_check=false -Dpythoninstalldir=${@noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
+EXTRA_OEMESON = "-Druntime_deps_check=false"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}-mechanism.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
@@ -59,23 +54,6 @@ do_install:append() {
                                               ${D}${bindir}/blueman-sendto \
                                               ${D}${bindir}/blueman-services \
                                               ${D}${bindir}/blueman-tray
-}
-
-do_install:append() {
-    install -d ${D}${datadir}/polkit-1/rules.d
-    cat >${D}${datadir}/polkit-1/rules.d/51-blueman.rules <<EOF
-/* Allow users in wheel group to use blueman feature requiring root without authentication */
-polkit.addRule(function(action, subject) {
-    if ((action.id == "org.blueman.network.setup" ||
-         action.id == "org.blueman.dhcp.client" ||
-         action.id == "org.blueman.rfkill.setstate" ||
-         action.id == "org.blueman.pppd.pppconnect") &&
-        subject.isInGroup("wheel")) {
-
-        return polkit.Result.YES;
-    }
-});
-EOF
 }
 
 USERADD_PACKAGES = "${PN}"
