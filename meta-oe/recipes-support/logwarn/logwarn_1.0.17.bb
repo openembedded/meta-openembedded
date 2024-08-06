@@ -11,8 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "https://s3.amazonaws.com/archie-public/${BPN}/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "e544a6230673ea54f7430bf817bb39d8"
-SRC_URI[sha256sum] = "8dbfcf9b28c782ab3bddd6a620d4fb95d1b0ffcbe93276996cdc4800aa9aebd1"
+SRC_URI[sha256sum] = "062d197349f4a43d8f69887fc642cb58b59a8e2cc54cc951d5c1c6abc4809a9a"
 
 UPSTREAM_CHECK_URI = "https://github.com/archiecobbs/logwarn/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
