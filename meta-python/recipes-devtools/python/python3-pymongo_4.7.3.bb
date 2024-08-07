@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI[sha256sum] = "6354a66b228f2cd399be7429685fb68e07f19110a3679782ecb4fdb68da03831"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 PACKAGES =+ "python3-bson"
 
