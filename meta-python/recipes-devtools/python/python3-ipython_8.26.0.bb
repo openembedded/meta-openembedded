@@ -3,8 +3,6 @@ HOMEPAGE = "https://ipython.org"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
 
-PYPI_PACKAGE = "ipython"
-
 SRC_URI[sha256sum] = "1cec0fbba8404af13facebe83d04436a7434c7400e59f47acf467c64abd0956c"
 
 RDEPENDS:${PN} = "\
@@ -25,4 +23,4 @@ RDEPENDS:${PN} = "\
     python3-stack-data \
 "
 
-inherit setuptools3 pypi
+inherit python_setuptools_build_meta pypi
