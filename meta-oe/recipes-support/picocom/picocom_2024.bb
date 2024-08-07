@@ -4,17 +4,14 @@ LICENSE = "GPL-2.0-or-later"
 HOMEPAGE = "https://gitlab.com/wsakernel/picocom"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3000e4830620e310fe65c0eb69df9e8a"
 
-BASEPV = "2023-04"
-PV = "${BASEPV}+git"
-
-SRCREV = "12537df0314767d5af35bddddbbca3694e6a0342"
+SRCREV = "7b6acbd421a2d4ca99376b7b427828dc1bcba4d8"
 
 SRC_URI = "git://gitlab.com/wsakernel/picocom;branch=master;protocol=https \
            "
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "'CC=${CC}' 'LD=${CC}' 'VERSION=${BASEPV}' \
+EXTRA_OEMAKE = "'CC=${CC}' 'LD=${CC}' 'VERSION=${PV}' \
 		'CFLAGS=${CFLAGS}' 'LDFLAGS=${LDFLAGS}' "
 
 do_install () {
