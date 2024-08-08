@@ -37,6 +37,8 @@ RDEPENDS:${PN}-ptest += "\
     python3-pytest-timeout \
     python3-pytest-benchmark \
     python3-unittest-automake-output \
+	python3-zoneinfo \
+	tzdata \
 "
 
 do_install:append() {
