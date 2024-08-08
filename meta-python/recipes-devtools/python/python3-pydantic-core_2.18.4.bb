@@ -8,7 +8,8 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 
-SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch"
+SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch \
+            file://0002-Dont-embed-RUSTFLAGS-in-final-binary.patch"
 SRC_URI[sha256sum] = "ec3beeada09ff865c344ff3bc2f427f5e6c26401cc6113d77e372c3fdac73864"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
@@ -25,7 +26,6 @@ RDEPENDS:${PN} += " \
 "
 
 INSANE_SKIP:${PN} = "already-stripped"
-INSANE_SKIP:${PN} += "buildpaths"
 
 inherit ptest
 SRC_URI += "file://run-ptest"
