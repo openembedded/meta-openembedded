@@ -8,12 +8,13 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 
-SRC_URI += "file://0001-Set-rust-version-from-1.76-to-1.75-in-Cargo.toml.patch"
-SRC_URI[sha256sum] = "ec3beeada09ff865c344ff3bc2f427f5e6c26401cc6113d77e372c3fdac73864"
+require ${BPN}-crates.inc
+
+SRC_URI += "file://run-ptest"
+
+SRC_URI[sha256sum] = "79c747f9916e5b6cb588dfd994d9ac15a93e43eb07467d9e6f24d892c176bbf5"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
-
-require ${BPN}-crates.inc
 
 inherit pypi cargo-update-recipe-crates python_maturin
 
@@ -27,16 +28,20 @@ RDEPENDS:${PN} += " \
 INSANE_SKIP:${PN} = "already-stripped"
 INSANE_SKIP:${PN} += "buildpaths"
 
+# python3-misc is for Lib/timeit.py which is not split out elsewhere
 inherit ptest
-SRC_URI += "file://run-ptest"
 RDEPENDS:${PN}-ptest += "\
+	python3-dateutil \
     python3-dirty-equals \
     python3-hypothesis \
+    python3-misc \
     python3-pytest \
     python3-pytest-mock \
     python3-pytest-timeout \
     python3-pytest-benchmark \
+	python3-tzdata \
     python3-unittest-automake-output \
+	python3-zoneinfo \
 "
 
 do_install_ptest() {
