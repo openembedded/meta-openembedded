@@ -40,6 +40,7 @@ FILES:${PN} += " \
     ${datadir} \
     ${systemd_user_unitdir} \
     ${PYTHON_SITEPACKAGES_DIR} \
+    ${prefix}${systemd_system_unitdir} \
 "
 
 # In code, path to python is a variable that is replaced with path to native version of it
