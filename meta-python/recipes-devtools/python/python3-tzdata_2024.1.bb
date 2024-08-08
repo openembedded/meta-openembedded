@@ -8,3 +8,17 @@ SRC_URI[sha256sum] = "2674120f8d891909751c38abcdfd386ac0a5a1127954fbc332af6b5cea
 
 inherit pypi python_setuptools_build_meta
 
+inherit ptest
+
+SRC_URI += "file://run-ptest"
+
+RDEPENDS:${PN}-ptest += "\
+    python3-pytest \
+    python3-pytest-subtests \
+    python3-unittest-automake-output \
+"
+
+do_install_ptest() {
+    cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+	install ${S}/VERSION ${D}${PTEST_PATH}/
+}

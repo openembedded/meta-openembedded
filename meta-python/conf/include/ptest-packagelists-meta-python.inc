@@ -74,6 +74,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-tomlkit \
     python3-trustme \
     python3-typeguard \
+    python3-tzdata \
     python3-ujson \
     python3-u-msgpack-python \
     python3-unidiff \
