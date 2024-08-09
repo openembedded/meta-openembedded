@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "831dbcea1b177b28c9baddf4c6d1013c24c3accd14a1873fffaa6a2e90
 
 PYPI_PACKAGE = "pyasn1_modules"
 
-inherit pypi ptest setuptools3
+inherit pypi ptest python_setuptools_build_meta
 
 RDEPENDS:${PN} = "python3-pyasn1"
 
