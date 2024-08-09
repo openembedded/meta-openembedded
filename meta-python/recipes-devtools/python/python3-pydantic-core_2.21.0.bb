@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 require ${BPN}-crates.inc
 
 SRC_URI += "file://run-ptest"
+SRC_URI += "file://0001-dont-embed-RUSTFLAGS-in-final-binary-1396.patch"
 
 SRC_URI[sha256sum] = "79c747f9916e5b6cb588dfd994d9ac15a93e43eb07467d9e6f24d892c176bbf5"
 
