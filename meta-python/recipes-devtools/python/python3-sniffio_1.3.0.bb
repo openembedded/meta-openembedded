@@ -7,6 +7,6 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.APACHE2;md5=3b83ef96387f14655fc854ddc3c6bd57 \
 "
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 SRC_URI[sha256sum] = "e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"
