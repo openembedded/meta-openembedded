@@ -9,4 +9,13 @@ LIC_FILES_CHKSUM = "\
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"
+SRC_URI[sha256sum] = "f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"
+
+DEPENDS += "\
+    python3-setuptools-scm-native \
+"
+
+RDEPENDS:${PN} += " \
+    python3-numbers \
+    python3-core \
+"
