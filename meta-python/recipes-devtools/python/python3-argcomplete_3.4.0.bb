@@ -7,7 +7,11 @@ SRC_URI[sha256sum] = "c2abcdfe1be8ace47ba777d4fce319eb13bf8ad9dace8d085dcad6eded
 
 PYPI_PACKAGE = "argcomplete"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
+
+DEPENDS += " \
+    python3-setuptools-scm-native \
+"
 
 RDEPENDS:${PN} += "\
     python3-core \
