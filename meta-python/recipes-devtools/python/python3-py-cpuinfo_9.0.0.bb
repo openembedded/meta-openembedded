@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2379ecb0d7a8299101b1e4c160cd1f7"
 
 SRC_URI[sha256sum] = "3cdbbf3fac90dc6f118bfd64384f309edeadd902d7c8fb17f02ffa1fc3f49690"
 
-inherit ptest pypi setuptools3
+inherit ptest pypi python_setuptools_build_meta
 
 SRC_URI += "file://run-ptest \
             file://0001-test_cli.py-disable.patch \
