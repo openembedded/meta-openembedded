@@ -4,7 +4,7 @@ a high-level synchronous API on top of the libevent event loop."
 HOMEPAGE = "http://www.gevent.org"
 LICENSE = "MIT & Python-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65"
-DEPENDS += "python3-greenlet libev libuv c-ares python3-cython-native"
+DEPENDS += "python3-greenlet-native python3-greenlet libev libuv python3-cython-native python3-cffi-native"
 
 RDEPENDS:${PN} = "python3-greenlet \
 		  python3-mime \
@@ -18,7 +18,7 @@ SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch \
 
 SRC_URI[sha256sum] = "432fc76f680acf7cf188c2ee0f5d3ab73b63c1f03114c7cd8a34cebbe5aa2056"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 # Don't embed libraries, link to the system provided libs instead
 export GEVENTSETUP_EMBED_CARES = "0"
