@@ -6,7 +6,7 @@ HOMEPAGE = "https://twisted.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
 
-SRC_URI[sha256sum] = "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b4fd4ae"
+SRC_URI[sha256sum] = "5a60147f044187a127ec7da96d170d49bcce50c6fd36f594e60f4587eff4d394"
 
 inherit pypi python_hatchling
 
