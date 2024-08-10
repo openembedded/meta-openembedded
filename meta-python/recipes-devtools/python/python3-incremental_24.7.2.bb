@@ -19,7 +19,6 @@ FILES:${PN}-scripts = "\
 
 RDEPENDS:${PN}-scripts = "\
     python3-click \
-    python3-twisted-core \
 "
 
 FILES:${PN}-tests = "${PYTHON_SITEPACKAGES_DIR}/incremental/tests"
