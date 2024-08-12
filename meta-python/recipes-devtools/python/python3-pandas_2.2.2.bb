@@ -6,9 +6,13 @@ HOMEPAGE = "http://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
 
-SRC_URI[sha256sum] = "c02f372a88e0d17f36d3093a644c73cfc1788e876a7c4bcb4020a77512e2043c"
+SRC_URI += " \
+            file://0001-pyproject.toml-don-t-pin-dependency-versions.patch \
+            "
 
-inherit pypi setuptools3
+SRC_URI[sha256sum] = "9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54"
+
+inherit pypi python_mesonpy
 
 DEPENDS += " \
     python3-cython-native \
