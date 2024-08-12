@@ -8,7 +8,7 @@ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
 SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
-SRCREV = "82f0924dc0eb23b9df68e88dbaf9e07c81940a5a"
+SRCREV = "112752c12da812a163dac67d7f675b60de8f7d7b"
 
 DEPENDS = "expat glib-2.0"
 
@@ -25,7 +25,7 @@ PACKAGECONFIG = " \
 PACKAGECONFIG[dbus] = ",,dbus"
 PACKAGECONFIG[gtk-doc] = "-Dgtk_doc=true,-Dgtk_doc=false,gtk-doc-native"
 PACKAGECONFIG[pam] = "-Dauthfw=pam,-Dauthfw=shadow,libpam,libpam"
-PACKAGECONFIG[systemd] = "-Dsession_tracking=libsystemd-login,,systemd,,,consolekit elogind"
+PACKAGECONFIG[systemd] = "-Dsession_tracking=logind,,systemd,,,consolekit elogind"
 PACKAGECONFIG[consolekit] = "-Dsession_tracking=ConsoleKit,,,consolekit,,systemd elogind"
 PACKAGECONFIG[elogind] = "-Dsession_tracking=libelogin,,elogind,,,systemd consolekit"
 PACKAGECONFIG[libs-only] = "-Dlibs-only=true,-Dlibs-only=false"
@@ -54,9 +54,11 @@ do_install:append() {
 FILES:${PN} += " \
 	${libdir}/pam.d/polkit-1 \
 	${libdir}/sysusers.d \
+	${libdir}/tmpfiles.d \
 	${libdir}/polkit-1 \
 	${nonarch_libdir}/pam.d/polkit-1 \
 	${nonarch_libdir}/sysusers.d \
+	${nonarch_libdir}/tmpfiles.d \
 	${nonarch_libdir}/polkit-1 \
 	${datadir} \
 "
