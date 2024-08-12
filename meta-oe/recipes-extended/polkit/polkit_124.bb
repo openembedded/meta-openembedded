@@ -46,9 +46,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 do_install:append() {
 	#Fix up permissions on polkit rules.d to work with rpm4 constraints
 	if ${@bb.utils.contains('PACKAGECONFIG', 'libs-only', 'false', 'true', d)}; then
-		chmod 700 ${D}/${datadir}/polkit-1/rules.d
 		chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
-		chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
 		chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
 	fi
 }
