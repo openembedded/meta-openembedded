@@ -816,7 +816,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     lockdev \
     logwarn \
     libjs-sizzle \
-    liblinebreak \
     mailcap \
     liboauth \
     mg \
