@@ -34,6 +34,7 @@ EXTRA_OEMESON = "-Dunit_testing=false"
 
 RDEPENDS:${PN} = "python3-core python3-netifaces python3-pyyaml \
                   python3-dbus python3-rich python3-cffi \
+                  python3-json python3-fcntl \
                   util-linux-libuuid libnetplan \
                  "
 
