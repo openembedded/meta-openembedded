@@ -1,10 +1,10 @@
 SUMMARY = "A pluggable API specification generator. Currently supports the OpenAPI Specification (f.k.a. the Swagger specification)."
 HOMEPAGE = "https://github.com/marshmallow-code/apispec"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3d9c303644a2e62578f0347748a80358"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a75956865b40c80a37c1e864716592b4"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "42b8a6833cf154c9dbd22d006b56bf9c49c972d32d24fe716fd734e0f6b739b8"
+SRC_URI[sha256sum] = "f5caa47cee75fe03b9c50b5594048b4c052eeca2c212e0dac12dbb6175d9a659"
 
 RDEPENDS:${PN} += "python3-packaging"
