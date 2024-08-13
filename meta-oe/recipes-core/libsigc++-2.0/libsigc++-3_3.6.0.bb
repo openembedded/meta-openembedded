@@ -18,5 +18,5 @@ inherit setuptools3 meson
 FILES:${PN}-dev += "${libdir}/sigc++-*/"
 FILES:${PN}-doc += "${datadir}/devhelp"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
