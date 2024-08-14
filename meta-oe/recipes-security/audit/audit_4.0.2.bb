@@ -13,10 +13,8 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
            file://audit-volatile.conf \
           "
 
-SRC_URI:append:libc-musl = " file://0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch"
-
 S = "${WORKDIR}/git"
-SRCREV = "22ccbd984e493524050ac445f796e9a7e90e1149"
+SRCREV = "4e6deae41d4646d28bb3ba9524a8a227a38ccd0b"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
