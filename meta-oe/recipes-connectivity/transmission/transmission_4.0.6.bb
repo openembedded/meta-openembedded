@@ -4,7 +4,7 @@ HOMEPAGE = "https://transmissionbt.com/"
 LICENSE = "MIT & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
 
-DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
+DEPENDS = "curl libevent libpsl gnutls openssl libtool intltool-native glib-2.0-native"
 RDEPENDS:${PN}-web = "${PN}"
 
 SRC_URI = " \
@@ -12,8 +12,8 @@ SRC_URI = " \
 	file://transmission-daemon \
 "
 
-# Transmission release 4.0.5
-SRCREV = "a6fe2a64aa7eca089f96006cf082a12f0cde937f"
+# Transmission release 4.0.6
+SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
 
 S = "${WORKDIR}/git"
 
