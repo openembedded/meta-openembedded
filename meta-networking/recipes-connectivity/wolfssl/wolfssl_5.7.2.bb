@@ -22,6 +22,9 @@ S = "${WORKDIR}/git"
 
 inherit autotools ptest
 
+PACKAGECONFIG ?= "reproducible-build"
+
+PACKAGECONFIG[reproducible-build] = "--enable-reproducible-build,--disable-reproducible-build,"
 BBCLASSEXTEND += "native nativesdk"
 
 RDEPENDS:${PN}-ptest += " bash"
