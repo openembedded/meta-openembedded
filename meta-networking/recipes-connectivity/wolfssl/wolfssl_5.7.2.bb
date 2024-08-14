@@ -19,4 +19,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
+PACKAGECONFIG ?= "reproducible-build"
+
+PACKAGECONFIG[reproducible-build] = "--enable-reproducible-build,--disable-reproducible-build,"
 BBCLASSEXTEND += "native nativesdk"
