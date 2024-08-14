@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bdfdd4986a0853eb84eeba85f9d0c4d6"
 
 DEPENDS = "glib-2.0 dbus json-glib libsoup-3.0 intltool-native"
 
-inherit meson pkgconfig gtk-doc gobject-introspection vala useradd
+inherit meson pkgconfig gtk-doc gobject-introspection vala
 
 SRCREV = "8a24f60969d4c235d9918796c38a6a9c42e10131"
 SRC_URI = "git://gitlab.freedesktop.org/geoclue/geoclue.git;protocol=https;branch=master \
@@ -35,17 +35,6 @@ GTKDOC_MESON_OPTION = "gtk-doc"
 EXTRA_OEMESON += " \
     -Ddbus-sys-dir=${sysconfdir}/dbus-1/system.d \
 "
-
-USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
-
-do_install:append() {
-    if ${@bb.utils.contains('PACKAGECONFIG', 'modem-gps', 'true', 'false', d)}; then
-        # Fix up permissions on polkit rules.d to work with rpm4 constraints
-        chmod 700 ${D}/${datadir}/polkit-1/rules.d
-        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-    fi
-}
 
 FILES:${PN} += " \
     ${datadir}/dbus-1/system-services \

@@ -12,7 +12,7 @@ SRCREV = "8b4f523c4f8287d57f1a84a3a8216efe200c5fbf"
 
 S = "${WORKDIR}/git"
 
-inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native useradd mime features_check
+inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
@@ -76,12 +76,3 @@ EXTRA_OEMESON = " \
 "
 
 FILES:${PN} += "${libdir} ${datadir}"
-
-USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd"
-
-do_install:append() {
-    chmod 0700 ${D}/${datadir}/polkit-1/rules.d
-    chown polkitd ${D}/${datadir}/polkit-1/rules.d
-    chgrp root ${D}/${datadir}/polkit-1/rules.d
-}
