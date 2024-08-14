@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-native"
 
-inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache useradd features_check python3targetconfig
+inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache features_check python3targetconfig
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
@@ -59,13 +59,4 @@ do_install:append() {
                                               ${D}${bindir}/blueman-sendto \
                                               ${D}${bindir}/blueman-services \
                                               ${D}${bindir}/blueman-tray
-}
-
-USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
-
-do_install:append() {
-        # Fix up permissions on polkit rules.d to work with rpm4 constraints
-        chmod 700 ${D}/${datadir}/polkit-1/rules.d
-        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
 }
