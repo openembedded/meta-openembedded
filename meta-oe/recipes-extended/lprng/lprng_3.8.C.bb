@@ -14,7 +14,9 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.tar"
 
 inherit autotools gettext
 
-EXTRA_OECONF = "--disable-ssl --disable-kerberos --enable-force_localhost"
+EXTRA_OECONF = "--disable-ssl --disable-kerberos --enable-force_localhost \
+				CHOWN=${base_bindir}/chown CHGRP=${base_bindir}/chgrp \
+				OPENSSL=${bindir}/openssl PRUTIL=${bindir}/pr"
 FILES:${PN}-dbg += "${libdir}/lprng/filters/.debug"
 
 # configure: WARNING: Program 'clear' is not found. Set environment CLEAR=no if you do not want to use it
