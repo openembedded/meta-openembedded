@@ -4,8 +4,8 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-SRCREV = "75aa739805a6e05eeb31189934a3d324e7862962"
-BRANCH = "1.3.7"
+SRCREV = "0a7ea9b0ba9fcdf368374a226370d08f10397d99"
+BRANCH = "1.3.8"
 
 SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https \
            file://basic.conf.patch \
@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep useradd update-rc.d systemd multilib_script
 
-EXTRA_OECONF += "--enable-largefile"
+EXTRA_OECONF += "--enable-largefile INSTALL=install"
 
 PACKAGECONFIG ??= "shadow \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
@@ -70,6 +70,12 @@ do_configure () {
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
     oe_runconf
+    sed -e 's|--sysroot=${STAGING_DIR_HOST}||g' \
+        -e 's|${STAGING_DIR_NATIVE}||g' \
+        -e 's|-ffile-prefix-map=[^ ]*||g' \
+        -e 's|-fdebug-prefix-map=[^ ]*||g' \
+        -e 's|-fmacro-prefix-map=[^ ]*||g' \
+        -i ${B}/config.h
 }
 
 FTPUSER = "ftp"
@@ -116,7 +122,7 @@ do_install () {
         -e 's|-ffile-prefix-map=[^ ]*||g' \
         -e 's|-fdebug-prefix-map=[^ ]*||g' \
         -e 's|-fmacro-prefix-map=[^ ]*||g' \
-        -i ${D}/${bindir}/prxs
+        -i ${D}/${bindir}/prxs ${D}${includedir}/proftpd/Make.rules ${D}${includedir}/proftpd/config.h 
 
     # ftpmail perl script, which reads the proftpd log file and sends
     # automatic email notifications once an upload finishs,
