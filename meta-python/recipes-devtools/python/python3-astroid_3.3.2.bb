@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
 
-SRC_URI[sha256sum] = "0e14202810b30da1b735827f78f5157be2bbd4a7a59b7707ca0bfc2fb4c0063a"
+SRC_URI[sha256sum] = "99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd"
 
 inherit pypi python_setuptools_build_meta
 
