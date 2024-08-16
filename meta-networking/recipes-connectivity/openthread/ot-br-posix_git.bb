@@ -34,6 +34,8 @@ EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
                  -DOTBR_REST=ON \
                  -DOTBR_WEB=OFF \
                  -DCMAKE_LIBRARY_PATH=${libdir} \
+                 -DOT_POSIX_PRODUCT_CONFIG=${sysconfdir}/openthread.conf.example \
+                 -DOT_POSIX_FACTORY_CONFIG=${sysconfdir}/openthread.conf.example \
                  -DOTBR_MDNS=avahi \
                  -DOTBR_BACKBONE_ROUTER=ON \
                  -DOTBR_BORDER_ROUTING=ON \
