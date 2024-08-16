@@ -24,8 +24,13 @@ INITSCRIPT_NAME = "dnsmasq"
 INITSCRIPT_PARAMS = "defaults"
 
 # dnsmasq defaults
-PACKAGECONFIG ?= "auth dhcp dhcp6 dumpfile inotify ipset loop script tftp"
+PACKAGECONFIG ?= "\
+    auth dhcp dumpfile inotify ipset loop script tftp \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'dhcp6', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'rtc', '', 'broken-rtc', d)} \
+"
 
+# see src/config.h
 PACKAGECONFIG[auth] = "-DHAVE_AUTH,-DNO_AUTH"
 PACKAGECONFIG[broken-rtc] = "-DHAVE_BROKEN_RTC,"
 PACKAGECONFIG[conntrack] = "-DHAVE_CONNTRACK,,libnetfilter-conntrack"
