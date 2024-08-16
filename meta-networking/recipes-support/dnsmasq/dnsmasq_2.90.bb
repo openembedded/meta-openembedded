@@ -12,7 +12,6 @@ DEPENDS += "gettext-native"
 #at least versions 2.69 and prior are moved to the archive folder on the server
 SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 69]}dnsmasq-${PV}.tar.gz \
            file://init \
-           file://dnsmasq.conf \
            file://dnsmasq-resolvconf.service \
            file://dnsmasq-noresolvconf.service \
            file://dnsmasq-resolved.conf \
@@ -81,7 +80,7 @@ do_install () {
                "MANDIR=${D}${mandir}" \
                install-i18n
     install -d ${D}${sysconfdir}/ ${D}${sysconfdir}/init.d ${D}${sysconfdir}/dnsmasq.d
-    install -m 644 ${UNPACKDIR}/dnsmasq.conf ${D}${sysconfdir}/
+    install -m 644 ${S}/dnsmasq.conf.example ${D}${sysconfdir}/dnsmasq.conf
     install -m 755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/dnsmasq
 
     install -d ${D}${systemd_unitdir}/system
