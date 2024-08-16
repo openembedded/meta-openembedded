@@ -27,6 +27,10 @@ do_configure:prepend() {
     ${S}/autogen.sh
 }
 
+do_configure:append() {
+    sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${B}/config.h
+}
+
 do_install:append () {
     rm -rf ${D}${localstatedir}
     # Enable SUID bit for applications that need it
