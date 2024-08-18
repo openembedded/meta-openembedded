@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
            file://0001-cmake-Check-for-HP-libunwind.patch \
            file://0001-cmake-Pass-noline-flag-to-flex.patch"
 
-SRCREV = "1c574793564fd1256c08be1177b2e595d3592547"
+SRCREV = "276ee7604f84f393033324b624421bef1622af66"
 
 S = "${WORKDIR}/git"
 
