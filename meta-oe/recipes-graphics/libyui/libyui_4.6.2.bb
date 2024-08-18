@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
            file://0001-Use-relative-install-paths-for-CMake.patch \
            "
 
-SRCREV = "dabdcd9cc6a0058fd6966d7d2e19d508debcc0ac"
+SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
 
 S = "${WORKDIR}/git/libyui"
 
@@ -20,6 +20,7 @@ DEPENDS += "boost"
 
 EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DWERROR=OFF"
 
+LDFLAGS += "-L${B}/src"
 BBCLASSEXTEND = "native nativesdk"
 
 do_install:append () {

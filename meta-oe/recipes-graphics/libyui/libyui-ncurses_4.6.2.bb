@@ -5,12 +5,11 @@ LIC_FILES_CHKSUM = "file://../COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad0
 "
 
 SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
-           file://0001-libyui-ncurses-Replace-off64_t-with-off_t-and-stat64.patch \
           "
 
 SRC_URI:append:class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
-SRCREV = "dabdcd9cc6a0058fd6966d7d2e19d508debcc0ac"
+SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
 
 S = "${WORKDIR}/git/libyui-ncurses"
 
@@ -20,9 +19,10 @@ DEPENDS += "boost libyui ncurses"
 
 BBCLASSEXTEND = "nativesdk"
 
-EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DWERROR=OFF"
+EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DWERROR=OFF -DCMAKE_SKIP_RPATH=1"
 
 CXXFLAGS += "-DNCURSES_WIDECHAR"
+LDFLAGS += "-L${B}/src"
 
 do_configure:prepend () {
     cd ${S}
@@ -48,3 +48,5 @@ do_install:append:class-nativesdk () {
 FILES:${PN} += "${datadir}/*"
 
 FILES:${PN}-dev += "${libdir}/*"
+
+CMAKE_VERBOSE = "VERBOSE=1" 
