@@ -1,0 +1,41 @@
+From 067790f733ad55a53e8218015710885da9484304 Mon Sep 17 00:00:00 2001
+From: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+Date: Tue, 25 Jun 2024 06:45:20 +0000
+Subject: [PATCH] include standard header <cstdint>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gcc 13 moved some includes around and as a result <cstdint> is no longer
+transitively included [1]. Explicitly include it for uint64_t.
+
+Fixes errors like below
+
+In file included from ../rdfind-1.4.1/Fileinfo.cc:22:
+../rdfind-1.4.1/Fileinfo.hh:68:8: error: 'int64_t' in namespace 'std' does not name a type
+   68 |   std::int64_t getidentity() const { return m_identity; }
+      |        ^~~~~~~
+
+[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
+
+Upstream-Status: Backport [1.6.0 https://github.com/pauldreik/rdfind/commit/f6c3f698dd680931b5c2f05688319290bdf0d930]
+Signed-off-by: Jiaqing Zhao <jiaqing.zhao@linux.intel.com>
+---
+ Fileinfo.hh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Fileinfo.hh b/Fileinfo.hh
+index 69a1b2a..f1eb748 100644
+--- a/Fileinfo.hh
++++ b/Fileinfo.hh
+@@ -8,6 +8,7 @@
+ #define Fileinfo_hh
+ 
+ #include <array>
++#include <cstdint>
+ #include <string>
+ 
+ // os specific headers
+-- 
+2.43.0
+

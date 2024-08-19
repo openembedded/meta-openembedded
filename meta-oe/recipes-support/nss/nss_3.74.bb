@@ -32,6 +32,11 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://system-pkcs11.txt \
            file://nss-fix-nsinstall-build.patch \
            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+           file://0001-Bug-1780432-CVE-2023-5388-Timing-attack-against-RSA-.patch;patchdir=nss \
+           file://0001-Bug-1867408-add-a-defensive-check-for-large-ssl_DefS.patch;patchdir=nss \
+           file://CVE-2023-0767.patch \
+           file://0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch \
+           file://regenerate_NameConstrain_test_certificates.tar.gz \
            "
 SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
 

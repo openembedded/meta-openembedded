@@ -1,0 +1,69 @@
+From 7cee69298857e2393799780ee472dfe0a378ee2d Mon Sep 17 00:00:00 2001
+From: Howard Chu <hyc@openldap.org>
+Date: Thu, 12 Oct 2023 17:22:48 +0100
+Subject: [PATCH] ITS#10094 libldap/OpenSSL: fix setting ciphersuites
+
+Don't try old-style ciphersuite list if only v1.3 or newer ciphers were specified
+
+Upstream-Status: Backport from https://git.openldap.org/openldap/openldap/-/merge_requests/654/diffs?commit_id=8c482cec9a68e74b3609b1e44738bee352f6577a
+
+Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
+---
+ libraries/libldap/tls_o.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/libraries/libldap/tls_o.c b/libraries/libldap/tls_o.c
+index d6405bc..4123a9b 100644
+--- a/libraries/libldap/tls_o.c
++++ b/libraries/libldap/tls_o.c
+@@ -294,7 +294,7 @@ tlso_stecpy( char *dst, const char *src, const char *end )
+  * Try to find any TLS1.3 ciphers in the given list of suites.
+  */
+ static void
+-tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
++tlso_ctx_cipher13( tlso_ctx *ctx, char *suites, char **oldsuites )
+ {
+ 	char tls13_suites[1024], *ts = tls13_suites, *te = tls13_suites + sizeof(tls13_suites);
+ 	char *ptr, *colon, *nptr;
+@@ -303,6 +303,8 @@ tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
+ 	SSL *s = SSL_new( ctx );
+ 	int ret;
+ 
++	*oldsuites = NULL;
++
+ 	if ( !s )
+ 		return;
+ 
+@@ -334,8 +336,15 @@ tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
+ 					if ( tls13_suites[0] )
+ 						ts = tlso_stecpy( ts, ":", te );
+ 					ts = tlso_stecpy( ts, nptr, te );
++				} else if (! *oldsuites) {
++					/* should never happen, set_ciphersuites should
++					 * only succeed for TLSv1.3 and above
++					 */
++					*oldsuites = ptr;
+ 				}
+ 			}
++		} else if (! *oldsuites) {
++			*oldsuites = ptr;
+ 		}
+ 		if ( !colon || ts >= te )
+ 			break;
+@@ -415,10 +424,11 @@ tlso_ctx_init( struct ldapoptions *lo, struct ldaptls *lt, int is_server )
+ 	}
+ 
+ 	if ( lo->ldo_tls_ciphersuite ) {
++		char *oldsuites = lt->lt_ciphersuite;
+ #if OPENSSL_VERSION_NUMBER >= 0x10101000
+-		tlso_ctx_cipher13( ctx, lt->lt_ciphersuite );
++		tlso_ctx_cipher13( ctx, lt->lt_ciphersuite, &oldsuites );
+ #endif
+-		if ( !SSL_CTX_set_cipher_list( ctx, lt->lt_ciphersuite ) )
++		if ( oldsuites && !SSL_CTX_set_cipher_list( ctx, oldsuites ) )
+ 		{
+ 			Debug1( LDAP_DEBUG_ANY,
+ 				   "TLS: could not set cipher list %s.\n",
+-- 
+2.34.1
+

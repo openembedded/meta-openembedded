@@ -1,0 +1,30 @@
+Upstream-Status: Backport [https://gitlab.xfce.org/apps/xfce4-panel-profiles/-/commit/1b853cf]
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
+From 1b853cf45b63c67ef52fc1288afb19b18542bb21 Mon Sep 17 00:00:00 2001
+From: Akbarkhon Variskhanov <akbarkhon.variskhanov@gmail.com>
+Date: Thu, 3 Nov 2022 10:29:52 +0500
+Subject: [PATCH] Makefile.in.in: Pass arguments to tar to make build
+ reproducible regardless of user or umask
+
+---
+ Makefile.in.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile.in.in b/Makefile.in.in
+index 84b12cb..cdb05c6 100644
+--- a/Makefile.in.in
++++ b/Makefile.in.in
+@@ -31,6 +31,8 @@ pot:
+ 
+ ifeq ($(shell tar --help|grep -o sort=),sort=)
+   TAROPTS := --sort=name --format ustar
++  TAROPTS += --owner=0 --group=0 --numeric-owner
++  TAROPTS += --mode=u=wrX,og=
+ endif
+ layouts:
+ 	cd data/layouts/cupertino; tar $(TAROPTS) -cvjf "../Cupertino.tar.bz2" *
+-- 
+GitLab
+

@@ -15,7 +15,7 @@ inherit python3-dir python3native
 
 S = "${WORKDIR}/sip-${PV}"
 
-DEPENDS = "python3"
+DEPENDS = "python3 flex-native bison-native"
 
 PACKAGES += "python3-sip3"
 
@@ -25,6 +25,11 @@ CONFIGURE_SYSROOT = "${STAGING_DIR_HOST}"
 CONFIGURE_SYSROOT:class-native = "${STAGING_DIR_NATIVE}"
 
 do_configure:prepend() {
+    # Re-generate the lexical analyzer and parser
+    # Required for the py_ssize_t_clean patch
+    flex --outfile=sipgen/lexer.c sipgen/metasrc/lexer.l
+    bison --yacc -Wcounterexamples --defines=sipgen/parser.h --output=sipgen/parser.c sipgen/metasrc/parser.y
+
     echo "py_platform = linux" > sip.cfg
     echo "py_inc_dir = ${STAGING_INCDIR}/python%(py_major).%(py_minor)${PYTHON_ABI}" >> sip.cfg
     echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
