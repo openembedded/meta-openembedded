@@ -13,20 +13,18 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
 "
 
-SRCREV = "7623e4dc89f62ada5724d4e41d0a16d2671312f5"
+SRCREV = "098d985a1b9a15ac828d7b2382297a6955e31e40"
 SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit meson
 
 DEPENDS = "openssl"
 
-EXTRA_OECONF += " \
-    --disable-man \
-    --without-fuse \
+EXTRA_OEMESON += " \
+    -Dman=disabled \
+    -Dfuse=disabled \
 "
-
-LDFLAGS:append:class-native = " -pthread"
 
 BBCLASSEXTEND = "native"
