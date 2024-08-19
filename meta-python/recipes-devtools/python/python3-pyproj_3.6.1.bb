@@ -6,6 +6,8 @@ DEPENDS:append:class-target = " python3-cython-native proj-native"
 
 inherit pypi python_setuptools_build_meta
 
+SRC_URI += "file://rpath.patch"
+
 SRC_URI[sha256sum] = "44aa7c704c2b7d8fb3d483bbf75af6cb2350d30a63b144279a09b75fead501bf"
 
 RDEPENDS:${PN} = " \
