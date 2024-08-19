@@ -353,7 +353,6 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     figlet \
     libcec \
     libdivecomputer \
-    fluentbit \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libgxim", "", d)} \
     liblognorm \
     libmodbus \
