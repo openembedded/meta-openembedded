@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-native"
 
-inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache useradd features_check
+inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache useradd features_check python3targetconfig
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
@@ -13,7 +13,10 @@ SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-
 S = "${WORKDIR}/git"
 SRCREV = "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
 
-EXTRA_OEMESON = "-Druntime_deps_check=false"
+EXTRA_OEMESON = "-Druntime_deps_check=false \
+    -Dsystemdsystemunitdir=${systemd_system_unitdir} \
+    -Dsystemduserunitdir=${systemd_user_unitdir} \
+"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}-mechanism.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
@@ -40,8 +43,8 @@ PACKAGECONFIG[polkit] = "-Dpolicykit=true,-Dpolicykit=false"
 FILES:${PN} += " \
     ${datadir} \
     ${systemd_user_unitdir} \
+    ${systemd_system_unitdir} \
     ${PYTHON_SITEPACKAGES_DIR} \
-    ${prefix}${systemd_system_unitdir} \
 "
 
 # In code, path to python is a variable that is replaced with path to native version of it
