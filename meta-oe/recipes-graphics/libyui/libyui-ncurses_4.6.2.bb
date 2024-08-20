@@ -19,7 +19,13 @@ DEPENDS += "boost libyui ncurses"
 
 BBCLASSEXTEND = "nativesdk"
 
-EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DWERROR=OFF -DCMAKE_SKIP_RPATH=1"
+EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release -DWERROR=OFF -DCMAKE_SKIP_RPATH=1"
+
+# TODO: Check with newer GCC, it works ok with GCC
+# GCC-14 causes buildpaths QA error
+# WARNING: libyui-ncurses-4.6.2-r0 do_package_qa: QA Issue: File /usr/lib/yui/.debug/libyui-ncurses.so.16.0.0 in package libyui-ncurses-dbg contains reference to TMPDIR [buildpaths
+
+DEBUG_LEVELFLAG = ""
 
 CXXFLAGS += "-DNCURSES_WIDECHAR"
 LDFLAGS += "-L${B}/src"
@@ -48,5 +54,3 @@ do_install:append:class-nativesdk () {
 FILES:${PN} += "${datadir}/*"
 
 FILES:${PN}-dev += "${libdir}/*"
-
-CMAKE_VERBOSE = "VERBOSE=1" 
