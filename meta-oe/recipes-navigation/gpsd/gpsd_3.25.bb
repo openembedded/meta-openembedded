@@ -8,7 +8,7 @@ PROVIDES = "virtual/gpsd"
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
            file://gpsd.init \
            "
-SRC_URI[sha256sum] = "00ee13f615655284874a661be13553abe66128e6deb5cd648af9bc0cb345fe5c"
+SRC_URI[sha256sum] = "b368b6a305e3f7a6382d23a0cbfc1d78923060b6b7f54cf7987a73c7b4a9afc2"
 
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
 
@@ -79,7 +79,7 @@ do_install:append() {
     fi
 }
 
-PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils gps-utils-python"
+PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gpsd-snmp gps-utils gps-utils-python"
 
 RPROVIDES:${PN}-dbg += "python-pygps-dbg"
 
@@ -103,6 +103,9 @@ CONFFILES:gpsd-conf = "${sysconfdir}/default/gpsd.default"
 
 SUMMARY:gpsd-gpsctl = "Tool for tweaking GPS modes"
 FILES:gpsd-gpsctl = "${bindir}/gpsctl"
+
+SUMMARY:gpsd-snmp = "MIB for using SNMP with gpsd"
+FILES:gpsd-snmp = "${datadir}/snmp"
 
 SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
 FILES:gps-utils = "\
