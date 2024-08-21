@@ -21,3 +21,11 @@ RDEPENDS:${PN} = " \
 export PROJ_INCDIR = "${STAGING_INCDIR}"
 export PROJ_LIBDIR = "${STAGING_LIBDIR}"
 export PROJ_DIR = "${STAGING_BINDIR_NATIVE}/.."
+
+do_compile:append() {
+    for f in `find ${B} -name *.c`
+    do
+        sed -i -e "/BEGIN: Cython Metadata/,/END: Cython Metadata/d" $f
+    done
+    python_pep517_do_compile
+}
