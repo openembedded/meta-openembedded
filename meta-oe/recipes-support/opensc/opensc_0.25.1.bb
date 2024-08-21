@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 #v0.21.0
 SRCREV = "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https"
-DEPENDS = "virtual/libiconv openssl"
+DEPENDS = "openssl"
 
 S = "${WORKDIR}/git"
 inherit autotools pkgconfig bash-completion
