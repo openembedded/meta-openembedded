@@ -31,8 +31,7 @@ PACKAGECONFIG ??= "pcsc"
 
 PACKAGECONFIG[openct] = "--enable-openct,--disable-openct,openct"
 PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite,pcsc-lite pcsc-lite-lib"
-
-RDEPENDS:${PN} = "readline"
+PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 
 FILES:${PN} += "\
     ${libdir}/opensc-pkcs11.so \
