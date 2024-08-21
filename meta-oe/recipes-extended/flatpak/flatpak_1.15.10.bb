@@ -4,11 +4,11 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = " \
-    gitsm://github.com/flatpak/flatpak;protocol=https;branch=main \
+    git://github.com/flatpak/flatpak;protocol=https;branch=main \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "b026910d1c18900e9daf07c429f7e901eb1c3f20"
+SRCREV = "8b4f523c4f8287d57f1a84a3a8216efe200c5fbf"
 
 S = "${WORKDIR}/git"
 
