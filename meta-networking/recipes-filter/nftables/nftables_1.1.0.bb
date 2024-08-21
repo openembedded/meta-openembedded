@@ -24,16 +24,16 @@ PACKAGECONFIG[json] = "--with-json, --without-json, jansson"
 PACKAGECONFIG[linenoise] = "--with-cli=linenoise, , linenoise, , , editline readline"
 PACKAGECONFIG[manpages] = "--enable-man-doc, --disable-man-doc, asciidoc-native"
 PACKAGECONFIG[mini-gmp] = "--with-mini-gmp, --without-mini-gmp"
-PACKAGECONFIG[python] = ",, python3-setuptools-native"
+PACKAGECONFIG[python] = ""
 PACKAGECONFIG[readline] = "--with-cli=readline, , readline, , , editline linenoise"
 PACKAGECONFIG[xtables] = "--with-xtables, --without-xtables, iptables"
 
 EXTRA_OECONF = " \
     ${@bb.utils.contains_any('PACKAGECONFIG', 'editline linenoise readline', '', '--without-cli', d)}"
 
-SETUPTOOLS_SETUP_PATH = "${S}/py"
+PEP517_SOURCE_PATH = "${S}/py"
 
-inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'python', 'setuptools3', '', d)}
+inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python_setuptools_build_meta', '', d)}
 
 PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', '${PN}-python', '', d)}"
 FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
@@ -44,21 +44,21 @@ RDEPENDS:${PN}-python = "python3-core python3-json ${PN}"
 do_configure() {
     autotools_do_configure
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
-        setuptools3_do_configure
+        python_pep517_do_configure
     fi
 }
 
 do_compile() {
     autotools_do_compile
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
-        setuptools3_do_compile
+        python_pep517_do_compile
     fi
 }
 
 do_install() {
     autotools_do_install
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
-        setuptools3_do_install
+        python_pep517_do_install
     fi
 }
 
