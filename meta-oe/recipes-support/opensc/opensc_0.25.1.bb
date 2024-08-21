@@ -36,7 +36,6 @@ RDEPENDS:${PN} = "readline"
 
 FILES:${PN} += "\
     ${libdir}/opensc-pkcs11.so \
-    ${libdir}/onepin-opensc-pkcs11.so \
     ${libdir}/pkcs11-spy.so \
 "
 FILES:${PN}-dev += "\
