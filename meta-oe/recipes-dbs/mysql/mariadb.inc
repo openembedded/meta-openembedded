@@ -33,10 +33,12 @@ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
 
 BINCONFIG_GLOB = "mysql_config"
 
-inherit cmake gettext binconfig update-rc.d systemd multilib_script pkgconfig
+inherit cmake gettext binconfig update-rc.d systemd multilib_script multilib_header pkgconfig
 
 MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
-                    ${PN}-setupdb:${bindir}/mariadb-install-db"
+                    ${PN}-setupdb:${bindir}/mariadb-install-db \
+                    libmysqlclient-dev:${bindir}/mysql_config \
+                    "
 
 INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
 INITSCRIPT_NAME:${PN}-server = "mysqld"
@@ -160,6 +162,7 @@ mariadb_sysroot_preprocess () {
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
+    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
 
     install -d ${D}/${sysconfdir}/init.d
     install -m 0644 ${UNPACKDIR}/my.cnf ${D}/${sysconfdir}/
