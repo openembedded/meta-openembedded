@@ -49,6 +49,7 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-core = "python3-appdirs \
                        python3-asyncio \
+                       python3-attrs \
                        python3-automat \
                        python3-constantly \
                        python3-core \
