@@ -12,7 +12,7 @@ Fixes
 
 [1] https://gitlab.freedesktop.org/freetype/freetype/-/commit/044d142be7b6a93b6940367a1bc5847451ff4775
 
-Upstream-Status: Submitted [https://github.com/frankheckenbach/ftgl/pull/19]
+Upstream-Status: Submitted [https://github.com/HamzaM3/ftgl/pull/1]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/FTVectoriser.cpp | 2 +-
