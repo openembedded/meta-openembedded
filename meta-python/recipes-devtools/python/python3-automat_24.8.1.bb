@@ -3,14 +3,9 @@ HOMEPAGE = "https://github.com/glyph/Automat"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
 
-SRC_URI[sha256sum] = "e56beb84edad19dcc11d30e8d9b895f75deeb5ef5e96b84a467066b3b84bb04e"
+SRC_URI[sha256sum] = "b34227cf63f6325b8ad2399ede780675083e439b20c323d376373d8ee6306d88"
 
 DEPENDS += "python3-setuptools-scm-native"
 
-PYPI_PACKAGE = "Automat"
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += "\
-   python3-attrs \
-   python3-six \
-"
