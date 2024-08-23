@@ -10,12 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 
 DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/5.8/${BP}.tar.xz \
-	file://CVE-2021-45444_1.patch \
-	file://CVE-2021-45444_2.patch \
-	file://CVE-2021-45444_3.patch \
-	"
-SRC_URI[sha256sum] = "dcc4b54cc5565670a65581760261c163d720991f0d06486da61f8d839b52de27"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.xz"
+SRC_URI[sha256sum] = "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba10ab863842d45acd5"
 
 inherit autotools-brokensep gettext update-alternatives manpages
 
@@ -50,13 +46,17 @@ do_configure () {
     oe_runconf
 }
 
-pkg_postinst:${PN} () {
-    touch $D${sysconfdir}/shells
-    grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
-    grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
+do_install:append() {
+    sed -i -e '1!b; s:^#!.*[ /]zsh:#!${bindir}/zsh:; s#/usr/local/bin#${bindir}#;' \
+        `find ${D}/usr/share/zsh/${PV}/functions -type f`
 }
 
-# work around QA failures with usrmerge installing zsh in /usr/bin/zsh instead of /bin/zsh
-# ERROR: QA Issue: /usr/share/zsh/5.8/functions/zed contained in package zsh requires /bin/zsh, but no providers found in RDEPENDS:zsh? [file-rdeps]
-# like bash does since https://git.openembedded.org/openembedded-core/commit/?id=4759408677a4e60c5fa7131afcb5bc184cf2f90a
-RPROVIDES:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/zsh', '', d)}"
+pkg_postinst:${PN} () {
+    touch $D${sysconfdir}/shells
+    for i in zsh sh
+    do
+        grep -q "bin/$i" $D${sysconfdir}/shells || \
+            printf >> $D${sysconfdir}/shells \
+            "${bindir}/$i\n${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/$i\n', '', d)}"
+    done
+}
