@@ -11,10 +11,10 @@ DEPENDS += " \
     freetype \
     freeglut \
 "
-SRCREV = "ddc77166651a71ae037ef3129a285440aa559b2d"
+SRCREV = "b787042cc1d1e4861337d5f9a6727e4c6900a4f2"
 PV .= "+git"
 
-SRC_URI = "git://github.com/frankheckenbach/ftgl;protocol=https;branch=master \
+SRC_URI = "git://github.com/HamzaM3/ftgl;protocol=https;branch=master \
            file://0001-Fix-type-mismatch-with-latest-FreeType.patch"
 
 S = "${WORKDIR}/git"
