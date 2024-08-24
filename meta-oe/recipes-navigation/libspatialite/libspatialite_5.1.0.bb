@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
 
 SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz \
            file://libspatialite_geos.patch \
-           file://libspatialite_macros.patch \
            file://libspatialite_pkgconfig.patch \
+           file://0001-wfs-Cover-xmlNanoHTTPCleanup-with-LIBXML_HTTP_ENABLE.patch \
 "
-
-SRC_URI[sha256sum] = "eecbc94311c78012d059ebc0fae86ea5ef6eecb13303e6e82b3753c1b3409e98"
+SRC_URI[sha256sum] = "43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080"
 
 inherit autotools-brokensep pkgconfig
 
