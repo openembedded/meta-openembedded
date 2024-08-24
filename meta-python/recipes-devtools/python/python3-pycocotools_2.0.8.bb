@@ -11,3 +11,7 @@ SRC_URI[sha256sum] = "8f2bcedb786ba26c367a3680f9c4eb5b2ad9dccb2b34eaeb205e0a021e
 
 DEPENDS = "python3-cython-native python3-numpy-native virtual/crypt"
 RDEPENDS:${PN} = "python3-matplotlib python3-pillow python3-profile"
+
+do_compile:append() {
+    sed -i -e "/BEGIN: Cython Metadata/,/END: Cython Metadata/d" ${B}/pycocotools/_mask.c
+}
