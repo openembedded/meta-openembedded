@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib abseil-cpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "4a2aef570deb2bfb8927426558701e8bfc26f2a4"
+SRCREV = "e915ce24b3d43c0fffcbf847354288c07dda1de0"
 
 SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=25.x;protocol=https \
            file://run-ptest \
@@ -18,6 +18,8 @@ SRC_URI = "gitsm://github.com/protocolbuffers/protobuf.git;branch=25.x;protocol=
            "
 SRC_URI:append:mips:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 SRC_URI:append:mipsel:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>.(25\.(\d+)))"
 
 S = "${WORKDIR}/git"
 
