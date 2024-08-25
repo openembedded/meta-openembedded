@@ -16,7 +16,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=143bc4e73f39cc5e89d6e096ac0315ba"
 
 DEPENDS += "alsa-lib bluez5 dbus glib-2.0-native python3-packaging-native sbc"
 
-SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
+           file://0001-Use-basename-implementation-from-glib-2.0.patch"
 
 SRCREV = "959573c2cccef5cf074f5b2fa7941abbd699c5f4"
 
