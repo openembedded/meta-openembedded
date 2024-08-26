@@ -1,7 +1,7 @@
-From 18af739fd96960bbc8c5db5dd290d2f9134cd347 Mon Sep 17 00:00:00 2001
+From 4947abc5ede2dc356f011b7c45f6760c9c2ce9f1 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 14 Aug 2024 21:26:24 -0700
-Subject: [PATCH] meson: DO not emit absolute path when S != B
+Subject: [PATCH] meson: Do not emit absolute path when S != B
 
 build systems like OE build outside sourcetree in such cases it works
 ok but cython resolves the input file to absolute path and that gets
@@ -17,14 +17,14 @@ See cython discussion on [1]
 
 [1] https://github.com/cython/cython/issues/5949
 
-Upstream-Status: Submitted [https://github.com/blueman-project/blueman/pull/2461]
+Upstream-Status: Submitted [https://github.com/blueman-project/blueman/pull/2461] 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  module/meson.build | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/module/meson.build b/module/meson.build
-index 096ad7c8..e3d96f17 100644
+index 096ad7c8..fddef547 100644
 --- a/module/meson.build
 +++ b/module/meson.build
 @@ -4,7 +4,7 @@ blueman_c = custom_target(
@@ -32,7 +32,7 @@ index 096ad7c8..e3d96f17 100644
      output: '_blueman.c',
      input: '_blueman.pyx',
 -    command: [cython, '--output-file', '@OUTPUT@', '@INPUT@'])
-+    command: [cython, '-w', meson.source_root(), '--output-file', meson.build_root() + '/' + '@OUTPUT@', '@INPUT@'])
++    command: [cython, '-w', meson.source_root(), '--output-file', join_paths(meson.build_root(), '@OUTPUT@'), join_paths(meson.build_root(), '@INPUT@')])
  
  sources = [
      blueman_c,
