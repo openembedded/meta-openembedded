@@ -41,14 +41,14 @@ BINCONFIG = "${bindir}/directfb-config"
 inherit autotools binconfig-disabled pkgconfig
 
 PACKAGECONFIG ??= "linuxinput"
-PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
 PACKAGECONFIG[drmkms] = "--enable-drmkms,--disable-drmkms,libdrm"
-PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
-PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
-PACKAGECONFIG[tslib] = "--with-inputdrivers=tslib,,tslib"
+PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
+PACKAGECONFIG[mesa] = "--enable-mesa,--disable-mesa,virtual/mesa,"
 PACKAGECONFIG[linuxinput] = "--with-inputdrivers=linuxinput,,"
 PACKAGECONFIG[noinput] = "--with-inputdrivers=none,,"
-PACKAGECONFIG[mesa] = "--enable-mesa,--disable-mesa,virtual/mesa,"
+PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
+PACKAGECONFIG[tslib] = "--with-inputdrivers=tslib,,tslib"
+PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
 PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,xserver-xorg,"
 
 EXTRA_OECONF = "\
