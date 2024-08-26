@@ -9,7 +9,7 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dcf3c825659e82539645da41a7908589"
 
 HOMEPAGE = "http://directfb.org"
-DEPENDS = "jpeg libpng zlib sysfsutils"
+DEPENDS = "jpeg libpng sysfsutils"
 
 SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.gz \
            file://configurefix.patch \
@@ -40,7 +40,7 @@ BINCONFIG = "${bindir}/directfb-config"
 
 inherit autotools binconfig-disabled pkgconfig
 
-PACKAGECONFIG ??= "freetype linuxinput"
+PACKAGECONFIG ??= "freetype linuxinput zlib"
 PACKAGECONFIG[drmkms] = "--enable-drmkms,--disable-drmkms,libdrm"
 PACKAGECONFIG[freetype] = "--enable-freetype,--disable-freetype,freetype"
 PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
@@ -51,10 +51,10 @@ PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
 PACKAGECONFIG[tslib] = "--with-inputdrivers=tslib,,tslib"
 PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
 PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,xserver-xorg,"
+PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
 
 EXTRA_OECONF = "\
   --with-gfxdrivers=none \
-  --enable-zlib \
   --disable-imlib2 \
   --disable-sdl \
   --disable-vnc \
