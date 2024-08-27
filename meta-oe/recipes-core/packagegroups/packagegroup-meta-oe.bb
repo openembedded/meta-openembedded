@@ -612,6 +612,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     yad \
     ydotool \
     parallel-deqp-runner \
+    deqp-runner \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl vulkan", "vulkan-cts", "", d)} \
 "
