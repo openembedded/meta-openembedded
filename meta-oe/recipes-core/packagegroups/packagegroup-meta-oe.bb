@@ -606,7 +606,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "tigervnc", "", d)} \
     tslib \
     unclutter-xfixes \
-    libvdpau \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libvdpau vdpauinfo", "", d)} \
     xcursorgen \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "", d)} \
     yad \
