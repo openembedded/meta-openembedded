@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "6e83cc6f6dff4f126fc79284e0c3c1c50123380d"
+SRCREV = "9da72b2732508b0ba0ceed27f5e50bc276ef31f2"
 SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https"
 
 inherit gettext autotools pkgconfig python3native
