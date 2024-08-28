@@ -10,7 +10,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "http://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "b9466656d66d9a6ffbc2dd04fa91c8f6af516bf9efaacb69744eec0f56f3c1d0"
+SRC_URI[sha256sum] = "c176b889b75630a17f4e3d7ef24c09a3e12368e633496087459c8b53ac3a122d"
 
 PACKAGECONFIG ??= "gtk3 gtk4"
 PACKAGECONFIG[gtk3] = "-Dgtk3=true, -Dgtk3=false, gtk+3"
