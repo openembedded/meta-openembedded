@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aedb5a2679cd1552fb61c181ef974b9e"
 
 PYPI_PACKAGE = "pyzstd"
 
-SRC_URI[sha256sum] = "fd43a0ae38ae15223fb1057729001829c3336e90f4acf04cf12ebdec33346658"
+SRC_URI[sha256sum] = "ed50c08233878c155c73ab2622e115cd9e46c0f1c2e2ddd76f2e7ca24933f195"
 
 inherit pypi setuptools3
 
