@@ -25,11 +25,8 @@ SRC_URI = "https://get.videolan.org/${BPN}/${PV}/${BP}.tar.xz \
            file://0006-configure-Disable-incompatible-function-pointer-type.patch \
            file://taglib-2.patch \
            file://0001-taglib-Fix-build-on-x86-32-bit.patch \
-           file://4645.patch \
-           file://4665.patch \
 "
-SRC_URI[sha256sum] = "adc7285b4d2721cddf40eb5270cada2aaa10a334cb546fd55a06353447ba29b5"
-
+SRC_URI[sha256sum] = "24dbbe1d7dfaeea0994d5def0bbde200177347136dbfe573f5b6a4cee25afbb0"
 inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
