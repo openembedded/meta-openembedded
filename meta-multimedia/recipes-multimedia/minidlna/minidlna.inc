@@ -11,9 +11,8 @@ inherit gettext autotools-brokensep update-rc.d systemd
 SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git \
            file://minidlna-daemon.init.d \
            file://minidlna.service \
-           file://0001-Update-Gettext-version.patch \
            file://0001-configure-Check-for-clock_gettime-seprately-from-__N.patch \
-           file://0001-configure.ac-drop-non-standard-checks.patch \
+           file://0001-Add-compatibility-with-FFMPEG-7.0.patch \
            "
 
 S = "${WORKDIR}/git"
