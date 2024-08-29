@@ -18,14 +18,19 @@ DEPENDS += " \
     fmt \
 "
 
+PV .= "+git"
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
-           file://0001-patch-src_decoder_plugins_FfmpegIo.cxx.patch \
            file://mpd.conf.in \
            "
-SRCREV = "feac1a3f56591ccfb00870aba66c9ac3abac4773"
+SRCREV = "965c466e9bda262790e76edd5272e9e74b407ff3"
 S = "${WORKDIR}/git"
 
-EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
+EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
+    -Dadplug=disabled \
+    -Dsndio=disabled \
+    -Dshine=disabled \
+    -Dtremor=disabled \
+"
 
 PACKAGECONFIG ??= "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "aac", "", d)} \
                    alsa ao bzip2 daemon \
