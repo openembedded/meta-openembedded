@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
 
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
-SRCREV = "2f26e656b16fb86132f27d1f8d47c6055041430d"
+SRCREV = "821d364d611dc30b3ef8a5e9beb0bf3e71b25199"
 
 S = "${WORKDIR}/git"
 
