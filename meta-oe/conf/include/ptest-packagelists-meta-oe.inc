@@ -33,6 +33,7 @@ PTESTS_FAST_META_OE = "\
     nodejs \
     onig \
     oprofile \
+    pegtl \
     protobuf \
     pv \
     python3-pefile \
