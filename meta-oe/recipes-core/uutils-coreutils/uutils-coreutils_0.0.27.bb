@@ -71,3 +71,6 @@ python __anonymous() {
     for prog in d.getVar('sbindir_progs').split():
         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('sbindir'), prog))
 }
+
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
