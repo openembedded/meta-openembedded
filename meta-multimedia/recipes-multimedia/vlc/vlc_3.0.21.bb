@@ -132,3 +132,5 @@ FILES:${PN}-staticdev += "\
 INSANE_SKIP:${PN} = "dev-so"
 
 EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
+
+SKIP_RECIPE[vlc] = "requires porting to ffmpeg >= 7 as of ffmpeg >= 5 it requires extensive changes disabling VAAPI (only supported with vlc >= 4)"
