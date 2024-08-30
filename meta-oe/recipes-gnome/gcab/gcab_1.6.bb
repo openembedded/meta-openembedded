@@ -24,4 +24,6 @@ PACKAGECONFIG[tests] = "-Dtests=true -Dinstalled_tests=true,-Dtests=false -Dinst
 BBCLASSEXTEND = "native"
 
 # meson embeds absolute paths to generated files on purpose
-INSANE_SKIP:gcab-src += "buildpaths"
+# ERROR: QA Issue: File /usr/src/debug/gcab/1.6/libgcab/gcab-enums.c in package gcab-src contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
