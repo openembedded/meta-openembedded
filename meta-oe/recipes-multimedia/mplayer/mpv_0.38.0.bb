@@ -42,7 +42,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
 "
 
-PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=diabled,virtual/libx11 xsp libxv libxscrnsaver libxinerama libxpresent libxext"
+PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=disabled,virtual/libx11 xsp libxv libxscrnsaver libxinerama libxpresent libxext"
 PACKAGECONFIG[xv] = "-Dxv=enabled,-Dxv=disabled,libxv"
 PACKAGECONFIG[opengl] = "-Dgl=enabled,-Dgl=disabled,virtual/libgl"
 PACKAGECONFIG[egl] = "-Degl=enabled,-Degl-disabled,virtual/egl"
