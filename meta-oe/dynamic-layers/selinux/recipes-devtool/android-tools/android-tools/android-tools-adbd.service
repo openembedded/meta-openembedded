@@ -1,6 +1,6 @@
 [Unit]
 Description=Android Debug Bridge
-ConditionPathExists=/etc/usb-debugging-enabled
+ConditionPathExists=/var/usb-debugging-enabled
 Before=android-system.service
 
 [Service]
