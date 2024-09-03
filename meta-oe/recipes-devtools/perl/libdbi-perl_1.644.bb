@@ -7,13 +7,12 @@ database interface independent of the actual database being used. \
 HOMEPAGE = "http://search.cpan.org/dist/DBI/"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8097b88c6165f0d43949441e6ea581cd"
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
-           file://CVE-2014-10402.patch \
+SRC_URI = "https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-${PV}.tar.gz \
+           file://0001-Fix-building-on-Fedora-40-with-GCC-14.2.1.patch \
            "
-SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
-SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
+SRC_URI[sha256sum] = "2297b99de09e67086640b590699e0e982fb469da63a93fe28dc14782db7a53c8"
 
 S = "${WORKDIR}/DBI-${PV}"
 
