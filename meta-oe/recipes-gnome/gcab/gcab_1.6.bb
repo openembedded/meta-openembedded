@@ -22,6 +22,3 @@ PACKAGECONFIG[nls] = "-Dnls=true,-Dnls=false"
 PACKAGECONFIG[tests] = "-Dtests=true -Dinstalled_tests=true,-Dtests=false -Dinstalled_tests=false"
 
 BBCLASSEXTEND = "native"
-
-# meson embeds absolute paths to generated files on purpose
-INSANE_SKIP:gcab-src += "buildpaths"
