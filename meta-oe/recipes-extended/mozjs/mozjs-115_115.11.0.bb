@@ -16,6 +16,8 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://musl-disable-stackwalk.patch \
            file://0001-add-arm-to-list-of-mozinline.patch \
            file://armv5.patch \
+           file://1849070.patch \ 
+           file://1894423.patch \
            "
 SRC_URI[sha256sum] = "16be46f16a356a2b8bd3541805a24c8a2acf6f077cf8a65859689685c26025e0"
 
