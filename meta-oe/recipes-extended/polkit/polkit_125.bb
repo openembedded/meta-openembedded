@@ -55,6 +55,12 @@ do_install:append() {
 		chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
 		chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
 	fi
+
+	# Polkit unconditionally installs a systemd service, remove it on SysVinit
+	# systems to avoid "installed but not packaged file" error.
+	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+		rm -r ${D}${libdir}/systemd
+	fi
 }
 
 FILES:${PN} += " \
