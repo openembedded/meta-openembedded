@@ -7,12 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-Do-not-overwrite-all-our-build-flags.patch \
            file://basename-include.patch \
            file://0001-cmake-Do-not-use-isystem.patch \
-           file://jpeg-stdio.patch \
-           file://CVE-2023-34872.patch \
-           file://CVE-2024-6239-0001.patch \
-           file://CVE-2024-6239-0002.patch \
            "
-SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
+SRC_URI[sha256sum] = "ebd857987e2395608c69fdc44009692d5906f13b612c5280beff65a0b75dc255"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
 
@@ -27,6 +23,8 @@ PACKAGECONFIG[openjpeg] = "-DENABLE_LIBOPENJPEG=openjpeg2,-DENABLE_LIBOPENJPEG=n
 PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF,qtbase qttools-native"
 PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
 PACKAGECONFIG[splash] = "-DENABLE_SPLASH=ON -DENABLE_BOOST=ON,-DENABLE_SPLASH=OFF -DENABLE_BOOST=OFF,boost"
+PACKAGECONFIG[gpgme] = "-DENABLE_GPGME=ON,-DENABLE_GPGME=OFF,gpgme"
+PACKAGECONFIG[qt6] = "-DENABLE_QT6=ON,-DENABLE_QT6=OFF,qtbase"
 
 # surprise - did not expect this to work :)
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
