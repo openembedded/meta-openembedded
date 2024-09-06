@@ -25,6 +25,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
            file://libatomic.patch \
+           file://182d9c05e78.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
