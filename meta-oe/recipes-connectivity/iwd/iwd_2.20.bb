@@ -3,7 +3,7 @@ HOMEPAGE = "https://iwd.wiki.kernel.org/"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
-DEPENDS = "ell"
+DEPENDS = "dbus"
 
 SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
@@ -23,8 +23,6 @@ PACKAGECONFIG[manpages] = "--enable-manual-pages,--disable-manual-pages,python3-
 PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
 PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
 PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
-
-EXTRA_OECONF = "--enable-external-ell"
 
 SYSTEMD_SERVICE:${PN} = " \
     iwd.service \
