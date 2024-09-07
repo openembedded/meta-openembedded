@@ -12,3 +12,5 @@ S = "${WORKDIR}/git"
 do_configure:prepend(){
     (cd ${S} && ${S}/autogen.sh)
 }
+
+BBCLASSEXTEND = "native nativesdk"
