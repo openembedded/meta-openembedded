@@ -1,8 +1,8 @@
-SUMMARY = "Python Imaging Library (Fork). Pillow is the friendly PIL fork by Alex \
+DESCRIPTION = "Python Imaging Library (Fork). Pillow is the friendly PIL fork by Alex \
 Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
 Contributors."
 HOMEPAGE = "https://pillow.readthedocs.io"
-LICENSE = "MIT"
+LICENSE = "HPND"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bc416d18f294943285560364be7cbec1"
 
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
