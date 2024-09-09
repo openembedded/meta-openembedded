@@ -5,15 +5,15 @@ HOMEPAGE = "https://github.com/netdata/netdata/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-DEPENDS += "json-c libuv libyaml util-linux zlib "
+DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
 
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
     file://netdata.conf \
     file://netdata.service \
+    file://netdata-volatiles.conf \
 "
-
-SRC_URI[sha256sum] = "50df30a9aaf60d550eb8e607230d982827e04194f7df3eba0e83ff7919270ad2"
+SRC_URI[sha256sum] = "6735222ffcff941508b92c8edddc26fbcd719b15880be4911d77fbfd9dbd9a1d"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
 UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
@@ -23,7 +23,9 @@ S = "${WORKDIR}/${BPN}-v${PV}"
 # Stop sending anonymous statistics to Google Analytics
 NETDATA_ANONYMOUS ??= "enabled"
 
-inherit pkgconfig autotools-brokensep useradd systemd
+inherit pkgconfig cmake useradd systemd
+
+TARGET_CC_ARCH:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
 LIBS:toolchain-clang:x86 = "-latomic"
 LIBS:riscv64 = "-latomic"
@@ -40,23 +42,32 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
 
-PACKAGECONFIG ??= "openssl"
-PACKAGECONFIG[cloud] = "--enable-cloud, --disable-cloud,"
-PACKAGECONFIG[lz4] = "--enable-lz4, --disable-lz4, lz4"
-PACKAGECONFIG[openssl] = "--enable-openssl, --disable-openssl, openssl"
+PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG[brotli] = ",,brotli"
+PACKAGECONFIG[cloud] = "-DENABLE_CLOUD=ON,-DENABLE_CLOUD=OFF,"
+PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
+PACKAGECONFIG[freeipmi] = "-DENABLE_PLUGIN_FREEIPMI=ON,-DENABLE_PLUGIN_FREEIPMI=OFF,freeipmi"
+PACKAGECONFIG[nfacct] = "-DENABLE_PLUGIN_NFACCT=ON,-DENABLE_PLUGIN_NFACCT=OFF,libmnl"
+# needs meta-virtualization
+PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF,xen-tools"
+PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
+PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
 
 # ebpf doesn't compile (or detect) the cross compilation well
-EXTRA_OECONF += "--disable-ebpf"
+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF \
+                  -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
 
 do_install:append() {
     #set S UID for plugins
     chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
+    rm -rf ${D}/${localstatedir}/
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Install systemd unit files
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${UNPACKDIR}/netdata.service ${D}${systemd_unitdir}/system
         sed -i -e 's,@@datadir,${datadir_native},g' ${D}${systemd_unitdir}/system/netdata.service
+        install -Dm 0644 ${UNPACKDIR}/netdata-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/netdata.conf
     fi
 
     # Install default netdata.conf
