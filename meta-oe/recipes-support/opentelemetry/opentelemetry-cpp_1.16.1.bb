@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 DEPENDS = "nlohmann-json"
 
-SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;"
+SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
+           file://0001-Fix-build-with-clang-19.patch"
 SRCREV = "baecbb95bd63df53e0af16e87bc683967962c5f8"
 
 S = "${WORKDIR}/git"
