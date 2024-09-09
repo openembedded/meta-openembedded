@@ -10,10 +10,11 @@ LIC_FILES_CHKSUM = " \
     file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
 "
 
-SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=v1.4.x \
+SRC_URI = "gitsm://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=v1.4.x \
            file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR-and-CMAKE_INSTALL_BIN.patch \
            "
-SRCREV = "c310578ee68d38cd53e79d7107fb41dc68dbafe0"
+SRCREV = "ac1b023eab789e829656144f12b248602c40e37b"
+PV .= "+git"
 
 DEPENDS = "openssl paho-mqtt-c"
 
@@ -21,4 +22,4 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-EXTRA_OECMAKE += "-DPAHO_WITH_SSL=ON"
+EXTRA_OECMAKE += "-DPAHO_WITH_SSL=ON -DPAHO_WITH_MQTT_C=ON -DPAHO_BUILD_EXAMPLES=OFF"
