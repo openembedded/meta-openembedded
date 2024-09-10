@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/flatpak/flatpak-xdg-utils.git;protocol=https;branch=main"
 
-SRCREV = "5ba39872f81bf8d98d58c5f8acb86604645be468"
+SRCREV = "05abdd7421688be5835a6b12f2b068086c38d4aa"
 
 S = "${WORKDIR}/git"
 
