@@ -19,7 +19,7 @@ DESCRIPTION = "\
 "
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "0BSD"
-DEPENDS = "libnsl2 readline tzcode-native perl"
+DEPENDS = "libnsl2 tzcode-native perl"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -55,7 +55,7 @@ pkg_postinst:${PN} () {
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd', d)} \
-    openssl python uuid libxml tcl perl zlib icu \
+    openssl python uuid libxml tcl perl zlib icu readline \
 "
 PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
 PACKAGECONFIG[perl] = "--with-perl,--without-perl,perl,perl"
@@ -71,6 +71,7 @@ PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
 PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4"
 PACKAGECONFIG[openssl] = "--with-ssl=openssl,ac_cv_file__dev_urandom=yes,openssl"
 PACKAGECONFIG[icu] = "--with-icu,--without-icu,icu,icu"
+PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
 
 EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
     --datadir=${datadir}/${BPN} \
