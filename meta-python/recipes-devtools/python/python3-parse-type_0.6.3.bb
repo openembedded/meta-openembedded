@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jenisys/parse_type"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2e469278ace89c246d52505acc39c3da"
 
-SRC_URI[sha256sum] = "79b1f2497060d0928bc46016793f1fca1057c4aacdf15ef876aa48d75a73a355"
+SRC_URI[sha256sum] = "8e99d2f52fab2f0f1f3d68ba9d026060140bf0e53680aada0111fb27b2f0e93a"
 SRC_URI += " \
     file://run-ptest \
 "
