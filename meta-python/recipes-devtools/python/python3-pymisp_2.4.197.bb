@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
-SRC_URI[sha256sum] = "86620b0b77b51eb5d08dcb2c1705ab0ce36813e35f48a488067266f565005dc9"
+SRC_URI[sha256sum] = "840881779d1762803e9329ae5129a88abb0e6110afb43c9e3e6e3877e5931a6c"
 
 inherit python_poetry_core pypi
 
