@@ -15,7 +15,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
            file://0001-include-libgen.h-for-basename-API-prototype.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-xfsdump-support-usrmerge.patch','',d)} \
            "
-SRC_URI[sha256sum] = "f39c4c1b306b2dd7ec979c0e94d60fe69083d2ecf9af051cac5ef3bed772c74a"
+SRC_URI[sha256sum] = "2914dbbe1ebc88c7d93ad88e220aa57dabc43d216e11f06221c01edf3cc10732"
 
 inherit autotools-brokensep
 
