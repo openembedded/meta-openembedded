@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings gobject-introspection gettext mime-xdg fea
 # FIXME: whilst eog uses libpeas <2, g-i is needed. This can be removed when libpeas2 is used.
 REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "b50f321c70ac64af7bcaa5b4460dc675b3ca60fdad385616f3ac7b770e0666fe"
+SRC_URI[archive.sha256sum] = "db5edbf5224d75126a7b7d8ee4e9272a2f30a953331d5baf6d3f3c0ce0cbde66"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
