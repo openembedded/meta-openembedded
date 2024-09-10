@@ -29,6 +29,7 @@ SRC_URI = "\
     git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.26 \
     file://0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch \
     file://0001-media-ctl-Install-media-ctl-header-and-library-files.patch \
+    file://0002-media-ctl-Install-media-ctl-pkg-config-files.patch \
 "
 
 SRCREV = "4aee01a027923cab1e40969f56f8ba58d3e6c0d1"
