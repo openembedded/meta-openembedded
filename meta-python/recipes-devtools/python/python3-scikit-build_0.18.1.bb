@@ -8,7 +8,7 @@ PYPI_PACKAGE = "scikit_build"
 
 inherit pypi python_hatchling
 
-SRC_URI[sha256sum] = "71a13af467d1a38510c3494786e2edb73ead53ea922bde6e519dc5372aa65096"
+SRC_URI[sha256sum] = "a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7"
 
 RDEPENDS:${PN} = " \
 	python3-distro \
