@@ -10,7 +10,7 @@ DEPENDS = "highway brotli"
 
 SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1"
 
-SRCREV = "e1489592a770b989303b0edc5cc1dc447bbe0515"
+SRCREV = "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " \
