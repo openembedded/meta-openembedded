@@ -1,4 +1,4 @@
-From 1651e7a35be8b3e2fa90ca57b073f6944664fa62 Mon Sep 17 00:00:00 2001
+From c754222ce955c893e8e3ad75d8c73835950d1931 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 25 Mar 2024 12:04:03 -0700
 Subject: [PATCH] include libgen.h for basename
@@ -10,6 +10,7 @@ include libgen.h for providing it.
 [1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
 
 Upstream-Status: Pending
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  daemon/automount.c    | 1 +
@@ -18,7 +19,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  3 files changed, 3 insertions(+)
 
 diff --git a/daemon/automount.c b/daemon/automount.c
-index 3d9461d..61b3478 100644
+index 6cb3b1b..efc2680 100644
 --- a/daemon/automount.c
 +++ b/daemon/automount.c
 @@ -21,6 +21,7 @@
@@ -30,7 +31,7 @@ index 3d9461d..61b3478 100644
  #include <stdio.h>
  #include <stdlib.h>
 diff --git a/daemon/master.c b/daemon/master.c
-index f99359c..3f56499 100644
+index f2c11e9..1455e40 100644
 --- a/daemon/master.c
 +++ b/daemon/master.c
 @@ -21,6 +21,7 @@
@@ -42,7 +43,7 @@ index f99359c..3f56499 100644
  #include <sys/types.h>
  #include <sys/stat.h>
 diff --git a/modules/lookup_file.c b/modules/lookup_file.c
-index 6afc558..82b1f28 100644
+index 99f2e21..4914395 100644
 --- a/modules/lookup_file.c
 +++ b/modules/lookup_file.c
 @@ -15,6 +15,7 @@
@@ -54,5 +55,5 @@ index 6afc558..82b1f28 100644
  #include <string.h>
  #include <time.h>
 -- 
-2.44.0
+2.25.1
 
