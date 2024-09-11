@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "1a8ee6e00bbe017717a5ef9e9bcfefb3b88f629e"
+SRCREV = "3fce598fb45aa5618cdf885eb48cf327104ffcb8"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
            "
