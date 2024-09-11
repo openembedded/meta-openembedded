@@ -3,55 +3,44 @@ SECTION = "utils"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ee9324a6f564bb2376b63878ac396798"
 
-DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl libnsl2"
+DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl util-linux libnsl2"
 
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 
 inherit autotools-brokensep systemd update-rc.d pkgconfig
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-           file://no-bash.patch \
-           file://cross.patch \
-           file://fix_disable_ldap.patch \
-           file://autofs-5.0.7-fix-lib-deps.patch \
-           file://add-the-needed-stdarg.h.patch \
-           file://using-pkg-config-to-detect-libxml-2.0-and-krb5.patch \
-           file://force-STRIP-to-emtpy.patch \
-           file://remove-bashism.patch \
-           file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
-           file://0001-Define-__SWORD_TYPE-and-_PATH_NSSWITCH_CONF.patch \
-           file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
-           file://pkgconfig-libnsl.patch \
-           file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
-           file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
-           file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
-           file://0001-Define-__SWORD_TYPE-if-undefined.patch \
-           file://mount_conflict.patch \
-           file://0001-autofs-5.1.8-add-autofs_strerror_r-helper-for-musl.patch \
-           file://0002-autofs-5.1.8-handle-innetgr-not-present-in-musl.patch \
-           file://0001-include-libgen.h-for-basename.patch \
+           file://0001-no-bash.patch \
+           file://0002-using-pkg-config-to-detect-krb5.patch \
+           file://0003-force-STRIP-to-emtpy.patch \
+           file://0004-autofs.init.in-remove-bashism.patch \
+           file://0005-fix-the-YACC-rule-to-fix-a-building-failure.patch \
+           file://0006-Do-not-hardcode-path-for-pkg.m4.patch \
+           file://0007-Avoid-conflicts-between-sys-mount.h-and-linux-mount..patch \
+           file://0008-include-libgen.h-for-basename.patch \
+           file://0009-hash.h-include-sys-reg.h-instead-of-bits-reg.h.patch \
+           file://0010-autofs-5.1.9-Fix-incompatible-function-pointer-types.patch \
            "
-SRC_URI[sha256sum] = "0bd401c56f0eb1ca6251344c3a3d70bface3eccf9c67117cd184422c4cace30c"
+SRC_URI[sha256sum] = "46c30b763ef896f4c4a6df6d62aaaef7afc410e0b7f50d52dbfc6cf728cacd4f"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
 INITSCRIPT_NAME = "autofs"
 INITSCRIPT_PARAMS = "defaults"
 
-# FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
-#CFLAGS += "${LDFLAGS}"
-
 PACKAGECONFIG[systemd] = "--with-systemd=${systemd_unitdir}/system,--without-systemd,systemd"
+PACKAGECONFIG[openldap] = "--with-openldap=yes,--with-openldap=no,libxml2 openldap"
+PACKAGECONFIG[sasl] = "--with-sasl=yes,--with-sasl=no,cyrus-sasl krb5"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 EXTRA_OEMAKE = "DONTSTRIP=1"
 EXTRA_OECONF += "--disable-mount-locking \
-                --enable-ignore-busy --with-openldap=no \
+                --enable-ignore-busy \
                 --with-confdir=${sysconfdir}/default \
                 --with-fifodir=/run \
                 --with-flagdir=/run \
-                --with-sasl=no --with-libtirpc \
+                --with-libtirpc \
                 --with-mapdir=${sysconfdir} \
                 --with-path=${STAGING_BINDIR_NATIVE} \
                 --with-fifodir=${localstatedir}/run \
