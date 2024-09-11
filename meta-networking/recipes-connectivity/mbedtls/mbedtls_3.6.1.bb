@@ -23,12 +23,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6 \
 	git://github.com/Mbed-TLS/mbedtls-framework.git;protocol=https;branch=main;destsuffix=git/framework;name=framework \
 	file://run-ptest"
 
-SRCREV = "2ca6c285a0dd3f33982dd57299012dacab1ff206"
-SRCREV_framework = "750634d3a51eb9d61b59fd5d801546927c946588"
+SRCREV = "71c569d44bf3a8bd53d874c81ee8ac644dd6e9e3"
+SRCREV_framework = "94599c0e3b5036e086446a51a3f79640f70f22f6"
 SRCREV_FORMAT .= "_framework"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
@@ -74,7 +74,8 @@ sysroot_stage_all:append() {
 
 do_install_ptest () {
 	install -d ${D}${PTEST_PATH}/tests
+	install -d ${D}${PTEST_PATH}/framework
 	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
 	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
+	cp -fR ${S}/framework/data_files ${D}${PTEST_PATH}/framework/
 }
