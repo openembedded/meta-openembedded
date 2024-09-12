@@ -20,5 +20,6 @@ do_install_ptest() {
 RDEPENDS:${PN} += "python3-parse"
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
+    python3-six \
     python3-unittest-automake-output \
 "
