@@ -8,8 +8,7 @@ inherit gnomebase
 # All the recipe does is stage python and shell script, some autotools files; nothing is compiled.
 inherit allarch
 
-SRC_URI[archive.sha256sum] = "e954c09b4309a7ef93e13b69260acdc5738c907477eb381b78bb1e414ee6dbd8"
-SRC_URI += "file://0001-meson.build-do-not-ask-for-python-installation-versi.patch"
+SRC_URI[archive.sha256sum] = "b55c46037dbcdabc5cee3b389ea11cc3910adb68ebe883e9477847aa660862e7"
 
 BBCLASSEXTEND = "native nativesdk"
 
