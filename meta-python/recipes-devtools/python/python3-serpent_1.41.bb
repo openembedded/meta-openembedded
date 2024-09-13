@@ -11,7 +11,7 @@ SRC_URI += " \
 "
 # python3-misc for timeit.py
 RDEPENDS:${PN}-ptest += " \
-    python3-attr \
+    python3-attrs \
     python3-misc \
     python3-pytest \
     python3-pytz \
