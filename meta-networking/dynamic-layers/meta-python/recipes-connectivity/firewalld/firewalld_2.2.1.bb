@@ -10,7 +10,7 @@ SRC_URI = "\
     file://firewalld.init \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "aba0d8ce9617b906ea4866bf0bdfb2c2d5312f53b8e9e8e9e4d49bf330da5b5e"
+SRC_URI[sha256sum] = "5215ba30236ee1e3df2c2292465a9ff605b9c445dcab2e37da4961cb27c7f36e"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native nftables"
@@ -159,10 +159,10 @@ do_install:append() {
     # This hack is also in distutils.bbclass, but firewalld doesn't use distutils/setuptools.
     if [ ${PN} != "${BPN}-native" ]; then
         sed -i -e s:${STAGING_BINDIR_NATIVE}/python3-native/python3:${bindir}/python3:g \
-            ${D}${bindir}/* ${D}${sbindir}/* ${D}${sysconfdir}/firewalld/*.xml
+            ${D}${bindir}/* ${D}${sbindir}/*
     fi
     sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g \
-        ${D}${bindir}/* ${D}${sbindir}/* ${D}${sysconfdir}/firewalld/*.xml
+        ${D}${bindir}/* ${D}${sbindir}/*
 
     # This file contains Red Hat-isms. Modules get loaded without it.
     rm -f ${D}${sysconfdir}/modprobe.d/firewalld-sysctls.conf
@@ -274,6 +274,7 @@ FILES:${PN} += "\
     ${datadir}/glib-2.0/schemas/org.fedoraproject.FirewallConfig.gschema.xml \
 "
 RDEPENDS:${PN} += "\
+    bash \
     python3-firewall \
     iptables \
     python3-core \
