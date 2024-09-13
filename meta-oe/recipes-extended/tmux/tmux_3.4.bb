@@ -5,11 +5,11 @@ SECTION = "console/utils"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=f256b76d52e7b4d02bf19144bdaca107"
 
-DEPENDS = "ncurses libevent"
+DEPENDS = "ncurses libevent bison-native"
 
 SRC_URI = "https://github.com/tmux/tmux/releases/download/${PV}/tmux-${PV}.tar.gz"
-SRC_URI[md5sum] = "8eee5883b9f6550fa4efaad0c9ec38f3"
-SRC_URI[sha256sum] = "e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f"
+SRC_URI[md5sum] = "f6e35f957f91af5bb07cb8449228f5cd"
+SRC_URI[sha256sum] = "551ab8dea0bf505c0ad6b7bb35ef567cdde0ccb84357df142c254f35a23e19aa"
 
 UPSTREAM_CHECK_URI = "https://github.com/tmux/tmux/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
