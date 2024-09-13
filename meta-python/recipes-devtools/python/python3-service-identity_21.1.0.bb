@@ -20,7 +20,9 @@ RDEPENDS:${PN} += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
+    python3-attrs \
     python3-pytest \
+    python3-six \
     python3-unittest-automake-output \
     python3-pyopenssl \
 "
