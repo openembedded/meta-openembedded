@@ -13,6 +13,7 @@ inherit ptest
 SRC_URI += "file://run-ptest"
 
 RDEPENDS:${PN}-ptest += "\
+    python3-attrs \
     python3-pytest \
     python3-pytest-subtests \
     python3-unittest-automake-output \
