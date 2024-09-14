@@ -13,7 +13,7 @@ SRC_URI = "\
     file://netdata.service \
     file://netdata-volatiles.conf \
 "
-SRC_URI[sha256sum] = "6735222ffcff941508b92c8edddc26fbcd719b15880be4911d77fbfd9dbd9a1d"
+SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
 UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
