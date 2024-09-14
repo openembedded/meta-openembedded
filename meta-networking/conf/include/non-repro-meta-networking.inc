@@ -47,9 +47,12 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
     proftpd-dev \
     rdist \
     rdist-dbg \
+    rp-pppoe \
     samba-dbg \
     tayga \
     tayga-dbg \
+    udpcast-doc \
+    unbound-doc \
     wolfssl \
     wolfssl-dbg \
     znc \
