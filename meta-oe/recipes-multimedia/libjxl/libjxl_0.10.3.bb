@@ -8,7 +8,9 @@ inherit cmake pkgconfig mime
 
 DEPENDS = "highway brotli"
 
-SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1"
+SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
+           file://0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch \
+           "
 
 SRCREV = "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
 S = "${WORKDIR}/git"
