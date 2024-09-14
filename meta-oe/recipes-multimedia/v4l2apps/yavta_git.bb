@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master;protocol=https \
           "
-SRCREV = "323facd1d5bd6251eec70dd5c1484a12ce01202a"
+SRCREV = "52c975e5542504ac10bed8b1d68df5c75951d202"
 
 PV = "0.0"
 S = "${WORKDIR}/git"
