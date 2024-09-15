@@ -17,9 +17,11 @@ do_install_ptest() {
 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
 
+# python3-misc for timeit.py
 RDEPENDS:${PN}-ptest += "\
     python3-colorama \
     python3-jsonschema \
+    python3-misc \
     python3-pylint \
     python3-pytest \
     python3-pytest-benchmark \
