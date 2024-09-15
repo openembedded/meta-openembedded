@@ -41,12 +41,13 @@ RDEPENDS:${PN} += " \
     python3-numbers \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcb', '', d)} \
 "
-
+# python3-compile for filecmp module
 RDEPENDS:${PN}-ptest += " \
     bash \
     ghostscript \
     jpeg-tools \
     libwebp \
+    python3-compile \
     python3-core \
     python3-image \
     python3-mmap \
