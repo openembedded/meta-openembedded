@@ -16,6 +16,7 @@ Content-Transfer-Encoding: 8bit
 |                                     ^
 | src/CMakeFiles/fltk.dir/build.make:1217: recipe for target 'src/CMakeFiles/fltk.dir/Fl_Preferences.cxx.o' failed
 
+Upstream-Status: Pending
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  src/Fl_Preferences.cxx | 2 +-
