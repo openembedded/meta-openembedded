@@ -6,12 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
 
 DEPENDS = "zlib openssl"
 
-SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10 \
+SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11 \
            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
-           file://0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch \
            file://run-ptest \
           "
-SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
+
+SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
+
+SRCREV = "854795c654eda518ed6de6c1ebb4e2107fcb2e73"
 
 S = "${WORKDIR}/git"
 
