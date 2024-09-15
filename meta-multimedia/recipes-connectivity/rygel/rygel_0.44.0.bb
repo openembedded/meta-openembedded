@@ -20,7 +20,7 @@ inherit gnomebase features_check vala gobject-introspection gettext systemd
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
-SRC_URI[archive.sha256sum] = "1133602d2e6710aade6b22aa98d93384c8d56396f344763413e96e0110b7d89f"
+SRC_URI[archive.sha256sum] = "5e1a76507209290530e6ce0141fc76946009edfb0fac3ed9432130821e5e4e72"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
