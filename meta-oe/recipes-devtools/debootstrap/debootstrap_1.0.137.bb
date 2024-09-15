@@ -2,16 +2,16 @@ SUMMARY = "Install a Debian system into a subdirectory"
 HOMEPAGE = "https://wiki.debian.org/Debootstrap"
 SECTION = "devel"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
+LIC_FILES_CHKSUM = "file://debian/copyright;md5=e7b45429ef05610abf91ac199fdb3a6e"
 
 SRC_URI  = "\
     ${DEBIAN_MIRROR}/main/d/debootstrap/debootstrap_${PV}.tar.gz \
     file://0001-support-to-override-usr-sbin-and-usr-share.patch \
     file://0002-support-to-override-usr-bin-arch-test.patch \
-    file://0001-do-not-hardcode-the-full-path-of-dpkg.patch \
+    file://0003-do-not-hardcode-the-full-path-of-dpkg.patch \
 "
 
-SRC_URI[sha256sum] = "d963a465314ac0e8fd5392573def042e6663e8edf3d08ace4bbd0d27ee8431f7"
+SRC_URI[sha256sum] = "666927457ee4b0b3e68e55a0efbf3fb69189610b7abbd534017d7032cb3ae833"
 
 S = "${WORKDIR}/debootstrap"
 
