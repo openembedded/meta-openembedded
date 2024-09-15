@@ -8,12 +8,14 @@ SRC_URI[sha256sum] = "b3cd8f3c5d8c7738257f1018880444f7b7d9b66232c64649f562d7ba86
 
 inherit pypi ptest setuptools3
 
-SRC_URI += " \
-    file://run-ptest \
-    file://0001-setup.py-Do-not-strip-debugging-symbols.patch \
-"
+# let OE do the strip operation
+export UJSON_BUILD_NO_STRIP = "1"
 
 DEPENDS += "python3-setuptools-scm-native"
+
+SRC_URI += " \
+    file://run-ptest \
+"
 
 RDEPENDS:${PN} += "\
     python3-datetime \
