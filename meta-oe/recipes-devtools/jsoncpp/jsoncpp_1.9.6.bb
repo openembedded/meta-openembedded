@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
 
 PE = "1"
 
-SRCREV = "5defb4ed1a4293b8e2bf641e16b156fb9de498cc"
+SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
 SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
