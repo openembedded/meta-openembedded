@@ -15,3 +15,6 @@ DEPENDS:append:x86 = " nasm-native"
 DEPENDS:append:x86-64 = " nasm-native"
 
 inherit meson pkgconfig
+
+# RVV assembler routines are not yet available for RISCV32
+EXTRA_OEMESON:append:riscv32 = " -Denable_asm=false"
