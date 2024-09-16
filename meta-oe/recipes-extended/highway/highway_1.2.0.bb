@@ -12,6 +12,9 @@ SRCREV = "457c891775a7397bdb0376bb1031e6e027af1c48"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=0 -DCMAKE_BUILD_TYPE=Release"
+# RVV is enabled by default and highway cmake system assumes that RISCV64 = RISCV
+EXTRA_OECMAKE:append:riscv32 = " -DHWY_CMAKE_RVV=OFF"
+
 CXXFLAGS:append:arm = " -mfp16-format=ieee"
 # Option not supported with clang and its default format for __fp16 anyway with clang
 CXXFLAGS:remove:toolchain-clang = "-mfp16-format=ieee"
