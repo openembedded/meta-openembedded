@@ -29,6 +29,8 @@ inherit pkgconfig cmake systemd
 #    for (uint8_t i = 0;; i++)
 CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare -Wno-error=unused-but-set-variable"
 
+LDFLAGS:append:riscv32 = " -latomic"
+
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
                  -DOTBR_DBUS=ON \
                  -DOTBR_REST=ON \
