@@ -9,6 +9,7 @@ DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
 
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
+    file://0001-cmake-Add-check-for-64bit-builtin-atomics.patch \
     file://netdata.conf \
     file://netdata.service \
     file://netdata-volatiles.conf \
