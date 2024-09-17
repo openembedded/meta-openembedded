@@ -67,6 +67,8 @@ ICU ?= "--with-system-icu"
 ICU:mipsarch = ""
 ICU:powerpc:toolchain-clang = ""
 
+LDFLAGS:append:riscv32 = " -latomic"
+
 do_configure() {
     cd ${B}
     python3 ${S}/configure.py \
