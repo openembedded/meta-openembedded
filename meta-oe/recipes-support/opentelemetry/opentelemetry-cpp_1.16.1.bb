@@ -15,6 +15,8 @@ SRCREV = "baecbb95bd63df53e0af16e87bc683967962c5f8"
 S = "${WORKDIR}/git"
 inherit cmake pkgconfig lib_package
 
+LDFLAGS:append:riscv32 = " -latomic"
+
 PACKAGECONFIG ?= "opentelemety_install otlp_api"
 
 PACKAGECONFIG[opentelemety_install]="-DOPENTELEMETRY_INSTALL=ON,-DOPENTELEMETRY_INSTALL=OFF"
