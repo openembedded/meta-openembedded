@@ -13,10 +13,10 @@ DEPENDS:append:class-target = " hwloc"
 PE = "1"
 
 BRANCH = "onetbb_2021"
-SRCREV = "8b829acc65569019edb896c5150d427f288e8aba"
+SRCREV = "1c4c93fc5398c4a1acb3492c02db4699f3048dea"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-            file://0001-hwloc_detection.cmake-remove-cross-compiation-check.patch \
-"
+          "
+
 S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
