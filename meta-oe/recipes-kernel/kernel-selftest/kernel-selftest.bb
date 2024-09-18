@@ -12,6 +12,7 @@ SRC_URI:append:libc-musl = "\
                       "
 SRC_URI += "file://run-ptest \
             file://COPYING \
+            file://0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch \
             "
 
 # now we just test bpf and vm
@@ -148,6 +149,8 @@ remove_unrelated() {
             bberror "Your kernel is probably older than 4.10 and doesn't have tools/testing/selftests/bpf/Makefile file from https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d, disable bpf PACKAGECONFIG"
     fi
 }
+
+do_configure[dirs] = "${S}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
