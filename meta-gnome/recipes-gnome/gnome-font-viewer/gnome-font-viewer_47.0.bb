@@ -15,8 +15,7 @@ inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI += "file://0001-window-Fix-function-callback-definition.patch"
-SRC_URI[archive.sha256sum] = "592f401e485d02cc044d487bb5c8e04c961da6856216768a59f1ff98bd2d537c"
+SRC_URI[archive.sha256sum] = "b8e5a042e0b241b0c7cae43f74da0d5f88e6423017a91feb86e7617edb4080ed"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
