@@ -13,4 +13,4 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 inherit gnomebase pkgconfig  features_check
 
-SRC_URI[archive.sha256sum] = "4a081eab867a5a8b09758991cad7645920f323aabca954408290fb6f44591b0f"
+SRC_URI[archive.sha256sum] = "0790b99ec29137a54b546c510661a99aa6f039c8d75f10c08e928682c0804fe5"
