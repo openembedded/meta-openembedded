@@ -13,7 +13,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE_EXT = "zip"
 
-SRC_URI[sha256sum] = "58d01b84cd7eccea69f2dbe13cbcbff1299e551168d3b88c25617b0c9d6ddc75"
+SRC_URI[sha256sum] = "34796d387e182b36f05d82f3bbc802bd6a30192ebf1e03c76d2086d0d04faaff"
 
 RDEPENDS:${PN} += " \
     python3-shell \
