@@ -10,4 +10,7 @@ inherit gnomebase pkgconfig gettext gi-docgen vala gobject-introspection
 GIR_MESON_OPTION = ''
 GIDOCGEN_MESON_OPTION = 'docs'
 
-SRC_URI[archive.sha256sum] = "7a787b467bd493f6baffb44138dbc4bef78aaab60efb76a7db88b243bf0f6343"
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[sysprof] = "-Dsysprof=true,-Dsysprof=false,sysprof"
+
+SRC_URI[archive.sha256sum] = "00c63970d708a0ef3bcba40e708a06d7030114cb9f210c74583ffad56d36e3dd"
