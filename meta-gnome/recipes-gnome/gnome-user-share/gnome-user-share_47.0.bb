@@ -14,7 +14,7 @@ inherit gnomebase gsettings features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=https;branch=master"
-SRCREV = "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
+SRCREV = "77ecbaddab0ed2121859926acbfccc9cecdee0db"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "modules"
