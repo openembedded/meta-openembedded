@@ -22,10 +22,7 @@ inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_check get
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "polkit"
 
-def gnome_verdir(v):
-    return oe.utils.trim_version(v, 1)
-
-SRC_URI[archive.sha256sum] = "5376248158c686c308255472e8c2a9e4c17255642c149fc7198c6d034e547599"
+SRC_URI[archive.sha256sum] = "ede7b925eb714d8b3c2bfbf7405a1b714494fe47e02f0af08f5837b3e256547f"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
