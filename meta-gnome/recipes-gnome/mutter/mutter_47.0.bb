@@ -24,7 +24,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "611bd9cf982adb56597ce2b34224272fda619bb3bb912a684d75c6f2c37502e4"
+SRC_URI[archive.sha256sum] = "2d0ea90150ac6cd0219d0078db05d6e1514d6ae21bf9f3f740d4fb039129016b"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
@@ -44,16 +44,15 @@ PACKAGECONFIG ??= " \
 "
 
 EXTRA_OEMESON += " \
-    -Dtests=false \
-    -Dnative_tests=false \
+    -Dtests=disabled \
     -Dxwayland_path=${bindir}/Xwayland \
 "
 
 # combi-config - see meson_options.txt for more details
 PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev"
-PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=true, virtual/libgl"
+PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, virtual/libgl"
 PACKAGECONFIG[glx] = "-Dglx=true, -Dglx=false"
-PACKAGECONFIG[libdisplay-info] = "-Dlibdisplay_info=true, -Dlibdisplay_info=false, libdisplay-info"
+PACKAGECONFIG[libdisplay-info] = "-Dlibdisplay_info=enabled, -Dlibdisplay_info=disabled, libdisplay-info"
 PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
 # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
 PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
@@ -63,7 +62,7 @@ PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcan
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-14"
+MUTTER_API_NAME = "mutter-15"
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
