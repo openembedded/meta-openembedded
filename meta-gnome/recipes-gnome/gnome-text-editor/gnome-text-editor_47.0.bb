@@ -9,7 +9,7 @@ DEPENDS = " \
     gtk4 \
     gtksourceview5 \
     editorconfig-core-c \
-    enchant2 \
+    libspelling \
 "
 
 GTKIC_VERSION = "4"
@@ -18,7 +18,7 @@ inherit gnomebase gtk-icon-cache itstool gnome-help mime-xdg features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "005b48104a909be66ae07448d2bc5706c7d113781057a24ff6da55bdf324c73d"
+SRC_URI[archive.sha256sum] = "0304961974bdacc7e6e8d146dadc949527df99b2823582c8d1ba8b33d25d4217"
 
 FILES:${PN} += " \
     ${datadir}/metainfo \
