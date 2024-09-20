@@ -7,22 +7,20 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = " \
     dbus-native \
-    python3-pygobject-native \
     glib-2.0 \
     sqlite3 \
-    libarchive \
     dbus \
     icu \
     json-glib \
-    libsoup-3.0 \
+    libsoup \
     libstemmer \
 "
 
-
-inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion python3native
+inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion
 
 SRC_URI += "file://0001-fix-reproducibility.patch"
-SRC_URI[archive.sha256sum] = "ab3d4a50937e04c5ed7846f6dbb999e2909819402f389ca592ee6b77dd28d1f9"
+SRC_URI += "file://0001-src-libtracker-sparql-meson.build-dont-create-compat.patch"
+SRC_URI[archive.sha256sum] = "c0fcda77520f531548b2395137dcd193ee9cde5e222d3c9d273f030d1762a504"
 
 # text search is not an option anymore and requires sqlite3 build with
 # PACKAGECONFIG[fts5] set (default)
@@ -39,21 +37,23 @@ EXTRA_OEMESON = " \
     -Dman=false \
     -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
-    -Dsoup=soup3 \
+    -Dtests=false \
     ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dvapi=enabled', '-Dvapi=disabled', d)} \
 "
-
-do_install:prepend() {
-    sed -i -e 's|${B}/../${PN}-${PV}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/tracker-sparql-enum-types.c
-    sed -i -e 's|${B}/../${PN}-${PV}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/core/tracker-data-enum-types.c
-}
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
 
+PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "zeroconf", "avahi", "", d)}"
+PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi,"
+
+do_install:prepend() {
+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/tracker-sparql-enum-types.c
+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/core/tracker-data-enum-types.c
+}
+
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
-    ${datadir}/tracker3 \
-    ${libdir}/tracker-3.0 \
+    ${libdir}/tinysparql-3.0 \
     ${systemd_user_unitdir} \
 "
