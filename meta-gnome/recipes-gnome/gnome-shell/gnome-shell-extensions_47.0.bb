@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "d442e9d26925125ff215a5c134290495655380741daafbb37a3a99d6f0c7d86f"
+SRC_URI[archive.sha256sum] = "50f04f7ba50eded10cea07a4705fb3363e86926d10011be5b25037566770834f"
 
 EXTRA_OEMESON += " \
     -Dextension_set=all \
