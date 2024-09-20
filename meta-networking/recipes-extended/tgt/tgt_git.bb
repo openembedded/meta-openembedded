@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
 	file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
         file://0001-usr-Makefile-WARNING-fix.patch \
         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
+        file://CVE-2024-45751.patch \
 "
 SRC_URI += "file://tgtd.init \
             file://tgtd.service \
