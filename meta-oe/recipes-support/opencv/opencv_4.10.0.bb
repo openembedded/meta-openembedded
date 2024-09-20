@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "dad8af6b17f8e60d7b95a1203a1b4d22f56574cf"
-SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
+SRCREV_opencv = "a7d942b681c5edd0cc27407d8e4d3dbf36c7a40e"
+SRCREV_contrib = "1aab1f34815a58a5a63aee6d510fe234129754a2"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
