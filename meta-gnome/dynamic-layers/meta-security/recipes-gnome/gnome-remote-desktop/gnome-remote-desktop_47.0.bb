@@ -8,7 +8,7 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI[archive.sha256sum] = "97443eaffe4b1a69626886a41d25cbeb2c148d3fed43d92115c1b7d20d5238ab"
+SRC_URI[archive.sha256sum] = "8aa55775757b299debe417e169e6e28fecbf18ce611ed176fa0d650ab5344776"
 
 DEPENDS = " \
     asciidoc-native \
