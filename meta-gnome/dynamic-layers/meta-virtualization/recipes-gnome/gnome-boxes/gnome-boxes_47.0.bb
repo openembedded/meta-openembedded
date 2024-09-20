@@ -20,7 +20,7 @@ DEPENDS = " \
   libvirt-glib \
   mtools \
   spice-gtk \
-  tracker \
+  tinysparql \
   webkitgtk3 \
   appstream-glib-native \
   spice-protocol \
@@ -31,7 +31,7 @@ RDEPENDS:${PN} = "glib-2.0-dev libvirt-virsh qemu-common qemu-system-x86-64 geni
 
 inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
 
-SRC_URI[archive.sha256sum] = "900c177f6762640370a6634cf9e7d3cd8207e498367a8a667a6b731b04116036"
+SRC_URI[archive.sha256sum] = "65bf6c2de1bf4d51695c9192c5b1e6285cb32c98a18aa948a376ea32038bc78f"
 
 GIR_MESON_OPTION = ""
 VALA_MESON_OPTION = ""
