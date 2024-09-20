@@ -31,14 +31,17 @@ DEPENDS = " \
     tecla \
     udisks2 \
     upower \
+    ${@' libxslt-native docbook-xsl-stylesheets-native' if d.getVar('GIDOCGEN_ENABLED') == 'True' else ''} \
 "
 
-inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is-even bash-completion features_check
+inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-version-is-even bash-completion features_check
 
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
+SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;protocol=https;nobranch=1"
 
+S = "${WORKDIR}/git"
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-SRC_URI[archive.sha256sum] = "6335c6cb8164e574db521fff61cfa3dfaa55f1db66ae3bca02750a193e1c4f3d"
+SRCREV = "adb035fa5c61cdcff622536fde9456e3859211fd"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
@@ -49,10 +52,9 @@ PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
 PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
 
 EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
+GIDOCGEN_MESON_OPTION = 'documentation'
 
 export XDG_DATA_DIRS = "${STAGING_DATADIR}"
-
-PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
