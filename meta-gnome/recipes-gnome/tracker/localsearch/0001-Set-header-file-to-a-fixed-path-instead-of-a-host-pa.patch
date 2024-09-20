@@ -1,4 +1,4 @@
-From 6f6d7e3995c370b8121206a7f9cc0d234553bbfe Mon Sep 17 00:00:00 2001
+From bad93f7aec96b1819f4027dbc06b337d2e2227f2 Mon Sep 17 00:00:00 2001
 From: Lei Maohui <leimaohui@fujitsu.com>
 Date: Thu, 15 Sep 2022 16:35:39 +0900
 Subject: [PATCH] Set header file to a fixed path instead of a host path.
@@ -23,6 +23,3 @@ index 4db7ef1..7c44c13 100644
  /*** END file-production ***/
  
  
--- 
-2.34.1
-
