@@ -17,12 +17,14 @@ DEPENDS = " \
     libhandy \
     libportal \
     libxml2 \
-    tracker \
+    tinysparql \
+    wayland \
+    wayland-native \
 "
 
 inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
 
-SRC_URI[archive.sha256sum] = "6ee8c99019b9e3447f6918d68232a20deca89e5525c05805432b7d8840ca71fa"
+SRC_URI[archive.sha256sum] = "334264cdd9edbfd95ee7bcaafe442ebed31acca3f2d9b90f3eda30eacfd0387a"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
 
@@ -46,9 +48,9 @@ FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/metainfo \
     ${datadir}/gnome-shell \
-    ${datadir}/tracker3 \
+    ${datadir}/localsearch3 \
 "
 
 # mandatory - not checked during configuration:
 # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
-RDEPENDS:${PN} += "tracker-miners bubblewrap"
+RDEPENDS:${PN} += "localsearch bubblewrap"
