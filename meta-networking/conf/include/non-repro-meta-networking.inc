@@ -1,34 +1,19 @@
 # List of known non-reproducible package of the meta-networking layer
 # Please keep this list sorted
 KNOWN_NON_REPRO_META_NETWORKING = " \
-    blueman \
-    blueman-dbg \
-    blueman-src \
-    civetweb-dev \
+    babeld \
+    babeld-dbg \
     dhcp-relay-staticdev \
     ettercap-src \
-    fetchmail \
-    fetchmail-dbg \
     freediameter \
-    freediameter-src \
     freeradius \
     htpdate-doc \
-    keepalived \
-    keepalived-dbg \
     libbearssl-staticdev \
-    libfko3 \
-    libfko-client \
-    libfko-daemon \
-    libfko-dbg \
     libmosquitto1 \
     libowfat-staticdev \
     libruli-staticdev \
-    libsamba-util0 \
     mosquitto \
-    mosquitto-dbg \
     ncftp \
-    ncftp-dbg \
-    ncftp-src \
     ndisc6-dbg \
     ndisc6-misc \
     ndisc6-ndisc6 \
@@ -38,23 +23,9 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
     netsniff-ng-doc \
     ntpsec-src \
     openl2tp \
-    openl2tp-dbg \
-    ot-br-posix \
-    ot-br-posix-dbg \
     postfix-cfg \
-    proftpd \
-    proftpd-dbg \
-    proftpd-dev \
-    rdist \
-    rdist-dbg \
     rp-pppoe \
-    samba-dbg \
-    tayga \
-    tayga-dbg \
     udpcast-doc \
     unbound-doc \
-    wolfssl \
-    wolfssl-dbg \
     znc \
-    znc-doc \
 "
