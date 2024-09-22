@@ -7,7 +7,6 @@ DEPENDS = " \
     glib-2.0 \
 "
 
-
 inherit gnomebase gobject-introspection gtk-doc gettext vala
 
 SRC_URI[archive.sha256sum] = "884580e8c5ece280df23aa63ff5234b7d48988a404df7d6bfccd1e77b473bd96"
@@ -37,3 +36,5 @@ do_compile:append() {
             ${B}/src/grl-type-builtins.c
     done
 }
+
+FILES:${PN} += "${libdir}/girepository-1.0"
