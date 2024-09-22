@@ -7,17 +7,16 @@ DEPENDS = " \
     gperf-native \
     itstool-native \
     grilo \
-    lua \
     liboauth \
 "
-
 
 inherit gnomebase gnome-help vala
 
 SRC_URI += "file://0001-Avoid-running-trackertestutils.patch"
 SRC_URI[archive.sha256sum] = "fe6f4dbe586c6b8ba2406394e202f22d009d642a96eb3a54f32f6a21d084cdcb"
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection-data', 'tracker', '', d)}"
-PACKAGECONFIG[tracker] = "-Denable-tracker3=yes,-Denable-tracker3=no,tinysparql"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection-data', 'tracker', '', d)} lua-factory"
+PACKAGECONFIG[tracker] = "-Denable-tracker3=yes,-Denable-tracker3=no,tinysparql,localsearch"
+PACKAGECONFIG[lua-factory] = "-Denable-lua-factory=yes,-Denable-lua-factory=no,lua libarchive json-glib gnome-online-accounts"
 
 FILES:${PN} += "${libdir}/grilo-0.3"
