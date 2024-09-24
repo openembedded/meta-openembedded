@@ -17,7 +17,7 @@ DEPENDS = " \
     pcre2 \
     vte \
 "
-
+SRC_URI += "file://0001-include-locale.h-for-setlocale.patch"
 SRC_URI[archive.sha256sum] = "487ec0de0a24f12ef6f778e4aee98d744a9dcc921c9e7df98b2d9f410b00ef52"
 
 PACKAGECONFIG ?= ""
