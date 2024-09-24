@@ -67,6 +67,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-semver \
     python3-serpent \
     python3-service-identity \
+    python3-setproctitle \
     python3-simpleeval \
     python3-smpplib \
     python3-soupsieve \
