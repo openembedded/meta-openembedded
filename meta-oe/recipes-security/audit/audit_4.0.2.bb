@@ -99,3 +99,5 @@ do_install:append() {
     # Create /var/spool/audit directory for audisp-remote
     install -d -m 0700 ${D}${localstatedir}/spool/audit
 }
+
+CVE_PRODUCT = "linux:audit"
