@@ -11,9 +11,11 @@ SRC_URI += " \
 	file://run-ptest \
 "
 
+# python-misc for wsgiref
 RDEPENDS:${PN}-ptest += " \
     python3-eventlet \
     python3-gevent \
+    python3-misc \
     python3-pytest \
     python3-unittest-automake-output \
 "
