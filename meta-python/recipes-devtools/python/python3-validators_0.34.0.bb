@@ -12,6 +12,10 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += " \
+	python3-decorator \
+	python3-eth-hash \
+	python3-isort \
+	python3-pycryptodome \
 	python3-pytest \
 	python3-unittest-automake-output \
 "
