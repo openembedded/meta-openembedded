@@ -20,6 +20,7 @@ RDEPENDS:${PN}-ptest += " \
         python3-httpx \
         python3-pytest \
         python3-pytest-asyncio \
+        python3-starlette \
         python3-unittest-automake-output \
 "
 
