@@ -16,6 +16,10 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += "\
+    packagegroup-core-buildessential \
+    procps-ps \
+    python3-dev \
+    python3-multiprocessing \
     python3-pytest \
     python3-unittest-automake-output \
 "
@@ -26,3 +30,5 @@ do_install_ptest() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+INSANE_SKIP:${PN}-ptest = "dev-deps"
