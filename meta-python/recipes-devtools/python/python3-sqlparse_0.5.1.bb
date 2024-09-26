@@ -16,6 +16,7 @@ export HOST_SYS
 inherit pypi ptest python_hatchling
 
 RDEPENDS:${PN}-ptest += "\
+    python3-mypy \
     python3-pytest \
     python3-unittest-automake-output \
     python3-unixadmin \
