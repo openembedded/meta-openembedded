@@ -14,7 +14,7 @@ NB: This is also the same config as Debian but its not mentioned in the
 code.
 
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Upstream-Status: Submitted [https://github.com/polkit-org/polkit/pull/497]
+Upstream-Status: Backport [https://github.com/polkit-org/polkit/commit/1d4f7f4d9f3d74fb2649c96faa8677416c1aefc2]
 ---
  meson.build       | 2 +-
  meson_options.txt | 2 +-
