@@ -1,0 +1,41 @@
+From a6d8d98845754b015e2e155c396091b0791a23c9 Mon Sep 17 00:00:00 2001
+From: Markus Volk <f_l_k@t-online.de>
+Date: Sat, 28 Sep 2024 18:39:43 +0200
+Subject: [PATCH] fix zero initialization
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Upstream-Status: Submitted [https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/4325]
+---
+ spa/include/spa/pod/builder.h | 2 +-
+ spa/include/spa/pod/parser.h  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/spa/include/spa/pod/builder.h b/spa/include/spa/pod/builder.h
+index 0564d94ea..b0487bf48 100644
+--- a/spa/include/spa/pod/builder.h
++++ b/spa/include/spa/pod/builder.h
+@@ -49,7 +49,7 @@ struct spa_pod_builder {
+ 	struct spa_callbacks callbacks;
+ };
+ 
+-#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (buffer), (size), 0, {0}, {0} })
++#define SPA_POD_BUILDER_INIT(buffer,size)  ((struct spa_pod_builder){ (buffer), (size), 0, {}, {} })
+ 
+ static inline void
+ spa_pod_builder_get_state(struct spa_pod_builder *builder, struct spa_pod_builder_state *state)
+diff --git a/spa/include/spa/pod/parser.h b/spa/include/spa/pod/parser.h
+index 083f91171..387298927 100644
+--- a/spa/include/spa/pod/parser.h
++++ b/spa/include/spa/pod/parser.h
+@@ -33,7 +33,7 @@ struct spa_pod_parser {
+ 	struct spa_pod_parser_state state;
+ };
+ 
+-#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (buffer), (size), 0, {0} })
++#define SPA_POD_PARSER_INIT(buffer,size)  ((struct spa_pod_parser){ (buffer), (size), 0, {} })
+ 
+ static inline void spa_pod_parser_init(struct spa_pod_parser *parser,
+ 				       const void *data, uint32_t size)
+-- 
+2.46.0
+
