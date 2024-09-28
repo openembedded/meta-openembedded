@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
 "
 
-SRCREV = "311fcdeb5cb41612d4be66b16f0f2ad6675a6af8"
+SRCREV = "37d5f1225573b91d706a5e547d081f79963a9deb"
 
 SRC_URI = " \
     git://github.com/sctp/lksctp-tools.git;branch=master;protocol=https \
