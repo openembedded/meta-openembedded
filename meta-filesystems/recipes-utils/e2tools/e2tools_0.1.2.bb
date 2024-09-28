@@ -11,15 +11,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS += "coreutils e2fsprogs"
 
-PV = "0.1.0+git"
-
 SRC_URI = " \
            git://github.com/e2tools/e2tools;protocol=https;branch=master \
-           file://0001-Disable-portability-warning-as-error.patch \
            file://run-ptest \
 "
 
-SRCREV = "fd092754a6b65c3a769f74f888668c066f09c36d"
+SRCREV = "46da6c398e70635a296245851fcedbc56c35e824"
 
 S = "${WORKDIR}/git"
 
