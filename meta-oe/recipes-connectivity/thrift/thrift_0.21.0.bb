@@ -10,7 +10,7 @@ DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
 
 SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch"
-SRC_URI[sha256sum] = "b5d8311a779470e1502c027f428a1db542f5c051c8e1280ccd2163fa935ff2d6"
+SRC_URI[sha256sum] = "9a24f3eba9a4ca493602226c16d8c228037db3b9291c6fc4019bfe3bd39fc67c"
 
 BBCLASSEXTEND = "native nativesdk"
 
