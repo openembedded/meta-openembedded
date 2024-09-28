@@ -14,6 +14,7 @@ DEPENDS = "dbus ncurses"
 
 SRCREV = "71fac7fa818f21234da4c356de0b44e47e1a2ef2"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=1.2;protocol=https"
+SRC_URI += "file://0001-parser.h-avoid-missing-field-intializers.patch"
 
 S = "${WORKDIR}/git"
 
