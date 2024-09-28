@@ -26,6 +26,9 @@ SRC_URI = "git://codeberg.org/ipmitool/ipmitool;protocol=https;branch=master \
            ${IANA_ENTERPRISE_NUMBERS} \
            file://0001-csv-revision-Drop-the-git-revision-info.patch \
            "
+
+UPSTREAM_CHECK_GITTAGREGEX = "IPMITOOL_(?P<pver>\d+(_\d+)+)"
+
 IANA_ENTERPRISE_NUMBERS ?= ""
 
 # Add these via bbappend if this database is needed by the system
