@@ -5,22 +5,14 @@ HOMEPAGE = "http://linuxptp.sourceforge.net/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-LINUXPTP_SRC_URI = "http://sourceforge.net/projects/linuxptp"
-
-SRC_URI = "${LINUXPTP_SRC_URI}/files/v4.1/linuxptp-${PV}.tgz \
-           file://0001-include-string.h-for-strncpy.patch \
-           file://0002-linuxptp-Use-CC-in-incdefs.sh.patch \
+SRC_URI = "https://downloads.nwtime.org/linuxptp/linuxptp-${PV}.tgz \
            file://systemd/phc2sys@.service.in \
            file://systemd/ptp4l@.service.in \
            "
 
-SRC_URI[md5sum] = "1db8699fc155965341759be5e5aad938"
-SRC_URI[sha256sum] = "e1743d44f8208897e30895da3579e670ff919b914feb4b5a949f3e421ddde535"
+SRC_URI[sha256sum] = "61757bc0a58d789b8fcbdddf56c88a0230597184a70dcb2ac05b4c6b619f7d5c"
 
 inherit systemd
-
-UPSTREAM_CHECK_URI = "${LINUXPTP_SRC_URI}/files/"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
 
 EXTRA_OEMAKE = "CC='${CC}' EXTRA_CFLAGS='${CFLAGS}' mandir='${mandir}' \
     sbindir='${sbindir}'"
