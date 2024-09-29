@@ -7,9 +7,8 @@ Patch by Sergei Golovan allows to find tclConfig.sh in /usr/share/tcltk/tcl8.5
 and tkConfig.sh in /usr/share/tcltk/tk8.5 where they are located in Debian
 installation.
 
----
 Upstream-Status: Pending
-
+---
  unix/configure | 1 +
  unix/tcl.m4    | 2 ++
  2 files changed, 3 insertions(+)
