@@ -55,6 +55,7 @@ PTESTS_SLOW_META_OE = "\
     fftw \
     libusb-compat \
     rsyslog \
+    rocksdb \
     mariadb \
     poco \
     re2 \
