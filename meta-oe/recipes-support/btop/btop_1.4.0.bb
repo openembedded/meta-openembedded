@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "console/utils"
 
 SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main"
-SRCREV = "fd2a2acdad6fbaad76846cb5e802cf2ae022d670"
+SRCREV = "6c0cedd8912785f0f353af389e72a0ffc69984a2"
 
 S = "${WORKDIR}/git"
 
