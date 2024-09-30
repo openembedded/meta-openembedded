@@ -2,9 +2,9 @@ SUMMARY = "A Python library for interacting with Ethereum."
 HOMEPAGE = "https://github.com/ethereum/web3.py"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=373fede350846fdffd23648fba504635"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c8694da5a97575618474d9caf8c812da"
 
-SRC_URI[sha256sum] = "a29bc1863734e1c05f128ddbc56878f299ea71776806e667b581a83b5d5be0ed"
+SRC_URI[sha256sum] = "74d52cfcc23b8e99c837190128b932923f38fca290ae2cf2d690edbf622252a0"
 
 inherit pypi setuptools3
 
