@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dabe659eadd6d97325b1582e41cfc11"
 
 PYPI_PACKAGE = "python-gnupg"
-SRC_URI[sha256sum] = "01d8013931c9fa3f45824bbea7054c03d6e11f258a72e7e086e168dbcb91854c"
+SRC_URI[sha256sum] = "290d8ddb9cd63df96cfe9284b9b265f19fd6e145e5582dc58fd7271f026d0a47"
 
 inherit pypi python_setuptools_build_meta
 
