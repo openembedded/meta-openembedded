@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
 
-SRC_URI[sha256sum] = "f071854b47d39591ce9a17981c46790acb30518e2f83dfca8db2dfa091178691"
+SRC_URI[sha256sum] = "21f8225f7dc187018e8433c9326be01477fb2810721e048b33ac49091b19fb4a"
 
 PYPI_PACKAGE = "aiohttp"
 inherit python_setuptools_build_meta pypi
