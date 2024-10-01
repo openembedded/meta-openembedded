@@ -41,7 +41,8 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 #User specific
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata \
+    ${@bb.utils.contains('PACKAGECONFIG','docker','--groups docker','',d)} --user-group netdata"
 
 PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[brotli] = ",,brotli"
@@ -53,6 +54,7 @@ PACKAGECONFIG[nfacct] = "-DENABLE_PLUGIN_NFACCT=ON,-DENABLE_PLUGIN_NFACCT=OFF,li
 PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF,xen-tools"
 PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
+PACKAGECONFIG[docker] = ",,virtual/docker,"
 
 # ebpf doesn't compile (or detect) the cross compilation well
 EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF \
