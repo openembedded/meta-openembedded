@@ -22,7 +22,6 @@ PACKAGES = "\
     packagegroup-meta-oe-shells \
     packagegroup-meta-oe-security \
     packagegroup-meta-oe-support \
-    packagegroup-meta-oe-support-python2 \
     packagegroup-meta-oe-test \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
@@ -47,7 +46,6 @@ RDEPENDS:packagegroup-meta-oe = "\
     packagegroup-meta-oe-security \
     packagegroup-meta-oe-shells \
     packagegroup-meta-oe-support \
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-support-python2", "", d)} \
     packagegroup-meta-oe-test \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
@@ -913,10 +911,6 @@ RDEPENDS:packagegroup-meta-oe-support:append:armv7ve = "${@bb.utils.contains("TU
 RDEPENDS:packagegroup-meta-oe-support:append:aarch64 = " ne10"
 RDEPENDS:packagegroup-meta-oe-support:append:x86 = " mcelog mce-inject mce-test vboxguestdrivers"
 RDEPENDS:packagegroup-meta-oe-support:append:x86-64 = " mcelog mce-inject mce-test vboxguestdrivers"
-
-RDEPENDS:packagegroup-meta-oe-support-python2 ="\
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'lio-utils', '', d), "", d)} \
-"
 
 RDEPENDS:packagegroup-meta-oe-support:remove:arm ="numactl"
 RDEPENDS:packagegroup-meta-oe-support:remove:mipsarch = "gperftools"
