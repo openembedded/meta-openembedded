@@ -8,7 +8,6 @@ PACKAGES = "\
     packagegroup-meta-oe \
     packagegroup-meta-oe-benchmarks \
     packagegroup-meta-oe-connectivity \
-    packagegroup-meta-oe-connectivity-python2 \
     packagegroup-meta-oe-core \
     packagegroup-meta-oe-crypto \
     packagegroup-meta-oe-bsp \
@@ -35,7 +34,6 @@ RDEPENDS:packagegroup-meta-oe = "\
     packagegroup-meta-oe-benchmarks \
     packagegroup-meta-oe-bsp \
     packagegroup-meta-oe-connectivity \
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "packagegroup-meta-oe-connectivity-python2", "", d)} \
     packagegroup-meta-oe-core \
     packagegroup-meta-oe-crypto \
     packagegroup-meta-oe-dbs \
@@ -166,10 +164,6 @@ RDEPENDS:packagegroup-meta-oe-connectivity ="\
 "
 
 RDEPENDS:packagegroup-meta-oe-connectivity:append:libc-glibc = " wvstreams wvdial"
-
-RDEPENDS:packagegroup-meta-oe-connectivity-python2 = "\
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "telepathy-idle", "", d)} \
-"
 
 # dracut needs dracut
 RDEPENDS:packagegroup-meta-oe-core = "\
