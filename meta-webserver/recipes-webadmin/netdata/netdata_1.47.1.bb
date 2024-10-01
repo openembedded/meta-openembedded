@@ -13,6 +13,7 @@ SRC_URI = " \
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
+    ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
     "
 SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
 
@@ -24,7 +25,9 @@ S = "${WORKDIR}/${BPN}-v${PV}"
 # Stop sending anonymous statistics to Google Analytics
 NETDATA_ANONYMOUS ??= "enabled"
 
-inherit pkgconfig cmake useradd systemd
+inherit pkgconfig useradd systemd
+# Inherit cmake last to use its do_compile task (and not go's)
+inherit_defer ${@bb.utils.filter("PACKAGECONFIG", "go", d)} cmake
 
 TARGET_CC_ARCH:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
@@ -33,6 +36,15 @@ LIBS:riscv64 = "-latomic"
 LIBS:riscv32 = "-latomic"
 LIBS:mips = "-latomic"
 export LIBS
+
+# Skip go.d plugins QA issues
+CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'go', \
+    '-Wno-aggressive-loop-optimizations -Wno-nonnull -Wno-stringop-overflow' \
+    , '', d)}"
+INSANE_SKIP:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'go', 'already-stripped buildpaths', '', d)}"
+
+# network is required by go to get dependent packages
+do_compile[network] = "1"
 
 #systemd
 SYSTEMD_PACKAGES = "${PN}"
@@ -56,10 +68,18 @@ PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF
 PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
 PACKAGECONFIG[docker] = ",,virtual/docker,"
+PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
 
 # ebpf doesn't compile (or detect) the cross compilation well
-EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
                   -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
+
+do_compile:append() {
+    # Go dependencies are protected with read-only permissions, but would prevent cleaning
+    if ${@bb.utils.contains('PACKAGECONFIG', 'go', 'true', 'false', d)}; then
+        chmod -R a+w ${B}/pkg
+    fi
+}
 
 do_install:append() {
     #set S UID for plugins
@@ -74,6 +94,9 @@ do_install:append() {
     # Install default netdata.conf
     install -d ${D}${sysconfdir}/netdata
     install -m 0644 ${UNPACKDIR}/netdata.conf ${D}${sysconfdir}/netdata/
+    if ${@bb.utils.contains('PACKAGECONFIG', 'go', 'true', 'false', d)}; then
+        install -m 0644 ${UNPACKDIR}/go.d.conf ${D}${sysconfdir}/netdata/
+    fi
     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@libdir,${libdir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@libexecdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
