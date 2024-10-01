@@ -74,9 +74,11 @@ do_install:append() {
     # Install default netdata.conf
     install -d ${D}${sysconfdir}/netdata
     install -m 0644 ${UNPACKDIR}/netdata.conf ${D}${sysconfdir}/netdata/
-    sed -i -e 's,@@sysconfdir,${sysconfdir},g' ${D}${sysconfdir}/netdata/netdata.conf
-    sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
+    sed -i -e 's,@@libdir,${libdir},g' ${D}${sysconfdir}/netdata/netdata.conf
+    sed -i -e 's,@@libexecdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
+    sed -i -e 's,@@localstatedir,${localstatedir},g' ${D}${sysconfdir}/netdata/netdata.conf
+    sed -i -e 's,@@sysconfdir,${sysconfdir},g' ${D}${sysconfdir}/netdata/netdata.conf
 
     if [ "${NETDATA_ANONYMOUS}" = "enabled" ]; then
         touch ${D}${sysconfdir}/netdata/.opt-out-from-anonymous-statistics
