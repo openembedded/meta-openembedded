@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
 DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
 
-SRC_URI = "\
+SRC_URI = " \
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
     file://0001-cmake-Add-check-for-64bit-builtin-atomics.patch \
+    file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://netdata.conf \
-    file://netdata.service \
     file://netdata-volatiles.conf \
-"
+    "
 SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
@@ -36,7 +36,8 @@ export LIBS
 
 #systemd
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE:${PN} = "netdata.service"
+export SERVICE_FILES = "netdata.service netdata-updater.service netdata-updater.timer"
+SYSTEMD_SERVICE:${PN} = "${SERVICE_FILES}"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 #User specific
@@ -57,7 +58,7 @@ PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYS
 PACKAGECONFIG[docker] = ",,virtual/docker,"
 
 # ebpf doesn't compile (or detect) the cross compilation well
-EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF \
+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DENABLE_PLUGIN_GO=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
                   -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
 
 do_install:append() {
@@ -67,9 +68,6 @@ do_install:append() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Install systemd unit files
-        install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${UNPACKDIR}/netdata.service ${D}${systemd_unitdir}/system
-        sed -i -e 's,@@datadir,${datadir_native},g' ${D}${systemd_unitdir}/system/netdata.service
         install -Dm 0644 ${UNPACKDIR}/netdata-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/netdata.conf
     fi
 
@@ -90,6 +88,10 @@ do_install:append() {
     chown -R netdata:netdata ${D}${datadir}/netdata/web
 }
 
-FILES:${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
+FILES:${PN} += " \
+    ${localstatedir}/cache/netdata/ \
+    ${localstatedir}/lib/netdata/ \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/journald@netdata.conf.d', '', d)} \
+    "
 
 RDEPENDS:${PN} = "bash python3-core zlib"
