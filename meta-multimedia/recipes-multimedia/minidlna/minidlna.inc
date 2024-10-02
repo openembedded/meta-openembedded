@@ -21,6 +21,10 @@ S = "${WORKDIR}/git"
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
 
+# Reproducibility: force os-name and os-version to constants to avoid host
+# related build differences
+EXTRA_OECONF = "--with-os-name='${DISTRO_NAME}' --with-os-version=''"
+
 do_install:append(){
     install -d ${D}${sysconfdir}
     install -m 0755 minidlna.conf ${D}${sysconfdir}
