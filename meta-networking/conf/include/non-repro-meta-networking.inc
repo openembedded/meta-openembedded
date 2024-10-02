@@ -21,8 +21,11 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
     ndisc6-rdnssd \
     ndisc6-rltraceroute6 \
     netsniff-ng-doc \
+    ntopng \
+    ntopng-dbg \
     ntpsec-src \
     openl2tp \
+    opensaf \
     postfix-cfg \
     rp-pppoe \
     udpcast-doc \
