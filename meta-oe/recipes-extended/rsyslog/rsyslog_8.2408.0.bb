@@ -39,11 +39,12 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
-EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
-EXTRA_OECONF += "--enable-imfile-tests"
-EXTRA_OECONF:remove:mipsarch = "ap_cv_atomic_builtins=yes"
-EXTRA_OECONF:remove:powerpc = "ap_cv_atomic_builtins=yes"
-EXTRA_OECONF:remove:riscv32 = "ap_cv_atomic_builtins=yes"
+EXTRA_OECONF += "--enable-imfile-tests ${ATOMICS}"
+ATOMICS = "ap_cv_atomic_builtins_64=yes ap_cv_atomic_builtins=yes"
+ATOMICS:mipsarch = ""
+ATOMICS:powerpc = ""
+ATOMICS:riscv32 = ""
+ATOMICS:armv5 = ""
 
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
