@@ -86,7 +86,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks:remove:mips64el = "tinymembench"
 RDEPENDS:packagegroup-meta-oe-benchmarks:remove:riscv64 = "libhugetlbfs"
 RDEPENDS:packagegroup-meta-oe-benchmarks:remove:riscv32 = "libhugetlbfs"
 
-RDEPENDS:packagegroup-meta-oe-bsp ="\
+RDEPENDS:packagegroup-meta-oe-bsp = "\
     acpitool \
     cpufrequtils \
     edac-utils \
@@ -115,7 +115,7 @@ RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64le = "efivar efibootmgr fwupd 
 RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv64 = "efivar efibootmgr fwupd fwupd-efi"
 RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv32 = "efivar efibootmgr fwupd fwupd-efi"
 
-RDEPENDS:packagegroup-meta-oe-connectivity ="\
+RDEPENDS:packagegroup-meta-oe-connectivity = "\
     cyrus-sasl \
     gammu \
     gattlib \
@@ -189,7 +189,7 @@ RDEPENDS:packagegroup-meta-oe-core:append:libc-glibc = " ${@bb.utils.contains("D
 RDEPENDS:packagegroup-meta-oe-core:remove:riscv64 = "safec"
 RDEPENDS:packagegroup-meta-oe-core:remove:riscv32 = "safec"
 
-RDEPENDS:packagegroup-meta-oe-crypto ="\
+RDEPENDS:packagegroup-meta-oe-crypto = "\
     botan \
     cryptsetup \
     fsverity-utils \
@@ -200,7 +200,7 @@ RDEPENDS:packagegroup-meta-oe-crypto ="\
 "
 RDEPENDS:packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
 
-RDEPENDS:packagegroup-meta-oe-dbs ="\
+RDEPENDS:packagegroup-meta-oe-dbs = "\
     influxdb \
     leveldb \
     libdbi \
@@ -213,7 +213,7 @@ RDEPENDS:packagegroup-meta-oe-dbs ="\
 "
 RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc = "rocksdb"
 
-RDEPENDS:packagegroup-meta-oe-devtools ="\
+RDEPENDS:packagegroup-meta-oe-devtools = "\
     abseil-cpp \
     apitrace \
     breakpad \
@@ -315,7 +315,7 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:libc-musl:riscv32 = "php"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:aarch64 = "concurrencykit"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 = "ply"
 
-RDEPENDS:packagegroup-meta-oe-extended ="\
+RDEPENDS:packagegroup-meta-oe-extended = "\
     bitwise \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
     brotli \
@@ -433,7 +433,7 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa sysdig"
 RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 = "upm libleak mraa sysdig tiptop"
 RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 = "upm libleak mraa sysdig tiptop"
 
-RDEPENDS:packagegroup-meta-oe-gnome ="\
+RDEPENDS:packagegroup-meta-oe-gnome = "\
     atkmm \
     gcab \
     gnome-common \
@@ -447,7 +447,7 @@ RDEPENDS:packagegroup-meta-oe-gnome ="\
     gnome-theme-adwaita \
 "
 
-RDEPENDS:packagegroup-meta-oe-graphics ="\
+RDEPENDS:packagegroup-meta-oe-graphics = "\
     cairomm \
     directfb-examples \
     directfb \
@@ -602,7 +602,7 @@ RDEPENDS:packagegroup-meta-oe-graphics:append:aarch64 = " renderdoc"
 
 RDEPENDS:packagegroup-meta-oe-graphics:remove:libc-musl = "renderdoc"
 
-RDEPENDS:packagegroup-meta-oe-kernel ="\
+RDEPENDS:packagegroup-meta-oe-kernel = "\
     agent-proxy \
     crash \
     cpupower \
@@ -631,7 +631,7 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:mips64el = "crash"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv64 = "crash oprofile"
 RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 = "crash makedumpfile oprofile"
 
-RDEPENDS:packagegroup-meta-oe-multimedia ="\
+RDEPENDS:packagegroup-meta-oe-multimedia = "\
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", "", d)} \
     dirsplit \
     genisoimage \
@@ -664,7 +664,7 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     libopusenc \
 "
 
-RDEPENDS:packagegroup-meta-oe-navigation ="\
+RDEPENDS:packagegroup-meta-oe-navigation = "\
     geos \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluz4", "gpsd-machine-conf gpsd", "", d)} \
     geoclue \
@@ -672,13 +672,13 @@ RDEPENDS:packagegroup-meta-oe-navigation ="\
     proj \
 "
 
-RDEPENDS:packagegroup-meta-oe-printing ="\
+RDEPENDS:packagegroup-meta-oe-printing = "\
     cups-filters \
     gutenprint \
     qpdf \
 "
 
-RDEPENDS:packagegroup-meta-oe-security ="\
+RDEPENDS:packagegroup-meta-oe-security = "\
     keyutils \
     nmap \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "passwdqc", "", d)} \
@@ -687,14 +687,14 @@ RDEPENDS:packagegroup-meta-oe-security ="\
     auditd \
 "
 
-RDEPENDS:packagegroup-meta-oe-shells ="\
+RDEPENDS:packagegroup-meta-oe-shells = "\
     dash \
     mksh \
     tcsh \
     zsh \
 "
 
-RDEPENDS:packagegroup-meta-oe-support ="\
+RDEPENDS:packagegroup-meta-oe-support = "\
     anthy \
     atop \
     ace-cloud-editor \
@@ -905,7 +905,7 @@ RDEPENDS:packagegroup-meta-oe-support:append:aarch64 = " ne10"
 RDEPENDS:packagegroup-meta-oe-support:append:x86 = " mcelog mce-inject mce-test vboxguestdrivers"
 RDEPENDS:packagegroup-meta-oe-support:append:x86-64 = " mcelog mce-inject mce-test vboxguestdrivers"
 
-RDEPENDS:packagegroup-meta-oe-support:remove:arm ="numactl"
+RDEPENDS:packagegroup-meta-oe-support:remove:arm = "numactl"
 RDEPENDS:packagegroup-meta-oe-support:remove:mipsarch = "gperftools"
 RDEPENDS:packagegroup-meta-oe-support:remove:riscv64 = "gperftools uim"
 RDEPENDS:packagegroup-meta-oe-support:remove:riscv32 = "gperftools uim"
@@ -914,7 +914,7 @@ RDEPENDS:packagegroup-meta-oe-support:remove:powerpc64le = "libcereal ssiapi"
 RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl = "pcp"
 RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl:powerpc = "gsl"
 
-RDEPENDS:packagegroup-meta-oe-test ="\
+RDEPENDS:packagegroup-meta-oe-test = "\
     bats \
     cmocka \
     cppunit \
