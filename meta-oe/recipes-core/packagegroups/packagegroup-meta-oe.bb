@@ -257,7 +257,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     jsoncpp \
     jsonrpc \
     yajl \
-    yajl \
     kconfig-frontends \
     libgee \
     libsombok3 \
