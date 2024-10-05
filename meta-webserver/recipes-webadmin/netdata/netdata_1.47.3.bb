@@ -9,13 +9,13 @@ DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
 
 SRC_URI = " \
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-    file://0001-cmake-Add-check-for-64bit-builtin-atomics.patch \
+    file://0001-Add-check-for-64bit-builtin-atomics.patch \
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
     "
-SRC_URI[sha256sum] = "fb970a4b571ffd542b7d24220ef806a4c1b56c535e0f549a9978860a9f1dcc9c"
+SRC_URI[sha256sum] = "cf906c304ac49ca335bef8f085664efe4c567d47877a91e0744a7942ba351053"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
 UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
