@@ -7,15 +7,14 @@ HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
 SECTION = "libs"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=59f6e21f42e49919617267ff13a0b232"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=829270a66f67187a1d08640df673249a"
 
 DEPENDS = "virtual/libiconv"
 
 SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
            file://run-ptest \
           "
-
-SRC_URI[sha256sum] = "2cf8369b7916b09264f3f14b9fb6cef35a6e9bee0328dec4f49d98211ccfd722"
+SRC_URI[sha256sum] = "093713c1c1024f4f10c4779a66ceb2af51fb7c908a9e99feb892d04019220ba1"
 
 S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
 
