@@ -9,11 +9,11 @@ Signed-off-by: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelin
  CMakeLists.txt | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 622bf88..ef3a771 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -2533,7 +2533,7 @@ if(BUILD_FOR_PACKAGING)
+Index: netdata-v1.47.3/CMakeLists.txt
+===================================================================
+--- netdata-v1.47.3.orig/CMakeLists.txt
++++ netdata-v1.47.3/CMakeLists.txt
+@@ -2531,7 +2531,7 @@ if(BUILD_FOR_PACKAGING)
          install(FILES
                  ${CMAKE_BINARY_DIR}/system/systemd/netdata.service
                  COMPONENT netdata
@@ -22,7 +22,7 @@ index 622bf88..ef3a771 100644
          install(DIRECTORY
                  COMPONENT netdata
                  DESTINATION usr/lib/systemd/journald@netdata.conf.d)
-@@ -2622,11 +2622,11 @@ if(NOT OS_WINDOWS)
+@@ -2620,11 +2620,11 @@ if(NOT OS_WINDOWS)
      install(FILES
              ${CMAKE_BINARY_DIR}/system/systemd/netdata-updater.service
              COMPONENT netdata

@@ -1,7 +1,7 @@
-From 1e8fbb6da4e5ee44fe24c078aae1930d759f0ba3 Mon Sep 17 00:00:00 2001
+From 555cfa9c4d5b1114d975be5208ab066c7924a171 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Tue, 17 Sep 2024 05:29:13 +0000
-Subject: [PATCH] cmake: Add check for 64bit builtin atomics
+Subject: [PATCH] Add check for 64bit builtin atomics
 
 Compilers for some architectures e.g. RISCV32 do not have 64bit atomics
 therefore, its important to deduce that and use it to pass right flags to
@@ -15,13 +15,13 @@ nection.c.o): in function `h2o_create_connection':
 Upstream-Status: Submitted [https://github.com/netdata/netdata/pull/18565]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- CMakeLists.txt | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ CMakeLists.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-Index: netdata-v1.47.1/CMakeLists.txt
+Index: netdata-v1.47.3/CMakeLists.txt
 ===================================================================
---- netdata-v1.47.1.orig/CMakeLists.txt
-+++ netdata-v1.47.1/CMakeLists.txt
+--- netdata-v1.47.3.orig/CMakeLists.txt
++++ netdata-v1.47.3/CMakeLists.txt
 @@ -448,6 +448,15 @@ int main() {
  }
  " HAVE_BUILTIN_ATOMICS)
@@ -38,14 +38,12 @@ Index: netdata-v1.47.1/CMakeLists.txt
  check_c_source_compiles("
  void my_printf(char const *s, ...) __attribute__((format(gnu_printf, 1, 2)));
  int main() { return 0; }
-@@ -523,6 +532,10 @@ if(OS_FREEBSD OR OS_MACOS)
-         set(HAVE_BUILTIN_ATOMICS True)
+@@ -1528,6 +1537,8 @@ if(ENABLE_H2O)
+ 
+         target_compile_options(h2o PUBLIC -DH2O_USE_LIBUV=0)
+         target_link_libraries(h2o PRIVATE PkgConfig::TLS)
++        target_compile_definitions(h2o PRIVATE
++                "$<$<NOT:$<BOOL:${ARCH_SUPPORTS_64BIT_ATOMICS}>>:H2O_NO_64BIT_ATOMICS>")
  endif()
  
-+if (ENABLE_H2O AND NOT ARCH_SUPPORTS_64BIT_ATOMICS)
-+       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DH2O_NO_64BIT_ATOMICS")
-+endif (NOT ARCH_SUPPORTS_64BIT_ATOMICS)
-+
- # openssl/crypto
- set(ENABLE_OPENSSL True)
- pkg_check_modules(TLS IMPORTED_TARGET openssl)
+ #
