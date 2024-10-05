@@ -17,8 +17,9 @@ inherit meson pkgconfig ptest
 SRC_URI += " \
 	file://run-ptest \
 "
-
+#python3-compile for filecmp module
 RDEPENDS:${PN}-ptest += " \
+        python3-compile \
         python3-pytest \
         python3-unittest-automake-output \
         bash \
