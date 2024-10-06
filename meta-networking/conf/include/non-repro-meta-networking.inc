@@ -14,6 +14,8 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
     libruli-staticdev \
     mosquitto \
     ncftp \
+    ncp \
+    ncp-dbg \
     ndisc6-dbg \
     ndisc6-misc \
     ndisc6-ndisc6 \
