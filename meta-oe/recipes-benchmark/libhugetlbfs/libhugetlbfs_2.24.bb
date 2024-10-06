@@ -5,28 +5,26 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 DEPENDS = "sysfsutils"
 RDEPENDS:${PN} += "bash python3-core"
-RDEPENDS:${PN}-tests += "bash python3-core"
+RDEPENDS:${PN}-tests += "bash python3-core python3-resource"
 
-PV = "2.23"
 PE = "1"
 
-SRCREV = "6b126a4d7da9490fa40fe7e1b962edcb939feddc"
+SRCREV = "1322884fb0d55dc55f53563c1aa6328d118997e7"
 SRC_URI = " \
     git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https;branch=master \
-    file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
-    file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
-    file://tests-Makefile-install-static-4G-edge-testcases.patch \
-    file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
-    file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
-    file://0001-include-stddef.h-for-ptrdiff_t.patch \
-    file://0002-Mark-glibc-specific-code-so.patch \
-    file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
-    file://0004-shm.c-Mark-glibc-specific-changes-so.patch \
-    file://0005-Include-dirent.h-for-ino_t.patch \
-    file://0006-include-limits.h-for-PATH_MAX.patch \
-    file://0001-huge_page_setup_helper-use-python3-interpreter.patch \
-    file://0001-Revert-ld.hugetlbfs-fix-Ttext-segment-argument-on-AA.patch \
-    file://0001-tests-makefile-Append-CPPFLAGS-rather-then-override.patch \
+    file://0001-skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+    file://0002-libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+    file://0003-tests-Makefile-install-static-4G-edge-testcases.patch \
+    file://0004-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+    file://0005-libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+    file://0006-include-stddef.h-for-ptrdiff_t.patch \
+    file://0007-Mark-glibc-specific-code-so.patch \
+    file://0008-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
+    file://0009-shm.c-Mark-glibc-specific-changes-so.patch \
+    file://0010-Include-dirent.h-for-ino_t.patch \
+    file://0011-include-limits.h-for-PATH_MAX.patch \
+    file://0012-huge_page_setup_helper-use-python3-interpreter.patch \
+    file://0013-elflink.c-include-libgen.h-for-basename.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -48,21 +46,25 @@ export HUGETLB_LDSCRIPT_PATH="${S}/ldscripts"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+inherit autotools-brokensep cpan-base
+
 #The CUSTOM_LDSCRIPTS doesn't work with the gold linker
-inherit cpan-base
-do_configure() {
+do_configure:prepend() {
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; then
-      sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
+        sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile.in
     fi
 }
 
 do_install() {
-        oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
-          INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
-          INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
-          install-tests
-}
+    oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
+        INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
+        INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
+        install-tests
 
+    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' \
+        -e 's|${RECIPE_SYSROOT}||g' \
+        `find ${D}${libdir}/libhugetlbfs/tests -name dummy.ldscript`
+}
 
 PACKAGES =+ "${PN}-tests "
 FILES:${PN} += "${libdir}/*.so"
@@ -74,6 +76,3 @@ INSANE_SKIP:${PN} = "dev-so"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-
-# see https://github.com/libhugetlbfs/libhugetlbfs/issues/52
-SKIP_RECIPE[libhugetlbfs] ?= "Needs porting to glibc 2.34+"

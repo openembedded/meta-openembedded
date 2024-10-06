@@ -1,4 +1,4 @@
-From 0077532b07e268347cb8557be6d70148d5f0e840 Mon Sep 17 00:00:00 2001
+From 86d3ebfc4da5ccbc82fdee4abaf2cbf758d82403 Mon Sep 17 00:00:00 2001
 From: Ting Liu <b28495@freescale.com>
 Date: Wed, 21 Aug 2013 15:44:57 +0800
 Subject: [PATCH] run_test.py: not use hard coded path ../obj/hugeadm
@@ -20,10 +20,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
  1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/tests/run_tests.py b/tests/run_tests.py
-index 018264d..0aabcd1 100755
+index 4793262..6cd0241 100755
 --- a/tests/run_tests.py
 +++ b/tests/run_tests.py
-@@ -245,9 +245,19 @@ def get_pagesizes():
+@@ -250,9 +250,19 @@ def get_pagesizes():
      Use libhugetlbfs' hugeadm utility to get a list of page sizes that have
      active mount points and at least one huge page allocated to the pool.
      """
@@ -45,5 +45,5 @@ index 018264d..0aabcd1 100755
          return sizes
  
 -- 
-2.7.4
+2.25.1
 
