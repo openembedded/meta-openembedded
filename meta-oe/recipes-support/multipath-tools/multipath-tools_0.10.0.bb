@@ -41,15 +41,14 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=ma
            file://0007-RH-warn-on-invalid-regex-instead-of-failing.patch \
            file://0008-RH-reset-default-find_mutipaths-value-to-off.patch \
            file://0009-multipath-tools-modify-create-config.mk-for-cross-co.patch \
-           file://0010-Subject-PATCH-Always-use-devmapper.patch \
+           file://0010-Always-use-devmapper.patch \
            file://0011-fix-bug-of-do_compile-and-do_install.patch \
            file://0012-add-explicit-dependency-on-libraries.patch \
-           file://0001-libmultipath-always-use-glibc-basename.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "3daacfdfd110b24a3a7d5a276dcf8512b7039199"
+SRCREV = "ee3a70175a8a9045e5c309d5392300922e2a0625"
 
 S = "${WORKDIR}/git"
 
