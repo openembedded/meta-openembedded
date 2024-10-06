@@ -1,4 +1,4 @@
-From 82a4f60ab24dff121f5f9d3bbcd9a8a28bb7caef Mon Sep 17 00:00:00 2001
+From d3903cbe348c6ecb2f38b37f20dafa6b0ca3b114 Mon Sep 17 00:00:00 2001
 From: Chunrong Guo <B40290@freescale.com>
 Date: Sun, 8 Sep 2013 23:21:49 -0500
 Subject: [PATCH] libhugetlbfs: avoid search host library path for cross
@@ -7,7 +7,6 @@ Subject: [PATCH] libhugetlbfs: avoid search host library path for cross
 Upstream-Status: Inappropriate [oe-core specific]
 
 Signed-off-by: Chunrong Guo <B40290@freescale.com>
-
 ---
  ldscripts/elf32ppclinux.xB   | 2 +-
  ldscripts/elf32ppclinux.xBDT | 2 +-
@@ -95,3 +94,6 @@ index 1855202..c62d245 100644
  INPUT(-lhugetlbfs);
  /* Do we need any of these for elf?
     __DYNAMIC = 0;    */
+-- 
+2.25.1
+

@@ -1,4 +1,4 @@
-From bb8c370aaaf25b1fe1fbf984e73177018026cb91 Mon Sep 17 00:00:00 2001
+From ec9163c0436d1c77cecc941aca2e524b26001b15 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 21 Jun 2018 19:51:02 -0700
 Subject: [PATCH] Include dirent.h for ino_t
@@ -6,13 +6,13 @@ Subject: [PATCH] Include dirent.h for ino_t
 Fixes
 error: unknown type name 'ino_t'; did you mean 'int'?
 
+Upstream-Status: Pending
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Update for 2.22.
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
-Upstream-Status: Pending
-
  tests/hugetests.h | 1 +
  1 file changed, 1 insertion(+)
 
@@ -29,5 +29,5 @@ index bc4e16a..fbe4dc0 100644
  
  #include "libhugetlbfs_privutils.h"
 -- 
-2.7.4
+2.25.1
 
