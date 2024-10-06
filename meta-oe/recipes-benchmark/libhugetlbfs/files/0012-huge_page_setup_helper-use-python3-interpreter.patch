@@ -1,4 +1,4 @@
-From b77c61de4d88d2c6e5d31f4f5a5877cc4c61272e Mon Sep 17 00:00:00 2001
+From e5580e392b8764e1e6509c5a4ed13fb2ce7566b9 Mon Sep 17 00:00:00 2001
 From: Andrey Zhizhikin <andrey.z@gmail.com>
 Date: Mon, 27 Jan 2020 17:27:55 +0000
 Subject: [PATCH] huge_page_setup_helper: use python3 interpreter
@@ -15,7 +15,7 @@ Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/huge_page_setup_helper.py b/huge_page_setup_helper.py
-index a9ba2bf..7ba0c92 100755
+index 01fc8dc..79a88ca 100755
 --- a/huge_page_setup_helper.py
 +++ b/huge_page_setup_helper.py
 @@ -1,4 +1,4 @@
@@ -25,5 +25,5 @@ index a9ba2bf..7ba0c92 100755
  #
  # Tool to set up Linux large page support with minimal effort
 -- 
-2.17.1
+2.25.1
 

@@ -1,20 +1,20 @@
-From 183a4dafe141197de5840f2e48c266ef209307aa Mon Sep 17 00:00:00 2001
+From b448672f1bc08dcef2ae07727ae6f124a3032a35 Mon Sep 17 00:00:00 2001
 From: Ting Liu <b28495@freescale.com>
 Date: Mon, 18 Jun 2012 16:37:05 +0800
 Subject: [PATCH] skip checking LIB32 and LIB64 if they point to the same place
 
 Upstream-Status: Inappropriate [oe-core specific]
-Signed-off-by: Ting Liu <b28495@freescale.com>
 
+Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- Makefile | 1 -
+ Makefile.in | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 51e41f0..373df3c 100644
---- a/Makefile
-+++ b/Makefile
-@@ -177,7 +177,6 @@ REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
+diff --git a/Makefile.in b/Makefile.in
+index 65ae5a4..25be577 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -196,7 +196,6 @@ REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
  REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
  ifneq ($(realpath $(PREFIX)),)
  ifeq ($(REALLIB32),$(REALLIB64))
@@ -22,3 +22,6 @@ index 51e41f0..373df3c 100644
  endif
  endif
  
+-- 
+2.25.1
+
