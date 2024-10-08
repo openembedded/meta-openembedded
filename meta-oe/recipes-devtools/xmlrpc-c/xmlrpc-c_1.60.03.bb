@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
 
 SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
-           file://0002-fix-formatting-issues.patch \
            "
-#Release 1.59.01
-SRCREV = "352aeaa9ae49e90e55187cbda839f2113df06278"
+# one more commit after Release 1.60.03 in the Stable series
+SRCREV = "a823b0bb5cf0a4dbd34f929cbfdfb0439c5d9b0e"
 
 S = "${WORKDIR}/git/stable"
 
