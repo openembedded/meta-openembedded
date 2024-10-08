@@ -20,3 +20,5 @@ RDEPENDS:${PN}-ptest += "\
 	python3-numpy \
 	python3-requests \
 "
+
+BBCLASSEXTEND = "native nativesdk"
