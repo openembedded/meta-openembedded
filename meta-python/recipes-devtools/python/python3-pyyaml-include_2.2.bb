@@ -21,6 +21,7 @@ do_install_ptest() {
 
 RDEPENDS:${PN} += " \
     python3-pyyaml \
+    python3-fsspec \
 "
 RDEPENDS:${PN}-ptest += " \
     python3-fsspec \
