@@ -5,7 +5,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
 
-SRC_URI[sha256sum] = "06b6eb0293e4b85e8d385397c5868926820db32b9b654b932f57fa41c23c9978"
+SRC_URI[sha256sum] = "e66f36020a2d5a974c504bd2555cf770621dbdbb6d82f94a6857c0b1ea2608be"
 
 inherit pypi python_hatchling
 
