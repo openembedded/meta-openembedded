@@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta ptest
 
 PV .= "+git"
 
-SRCREV = "a9b281b2ef4ab25d95d6b268aa88c428e75c3696"
+SRCREV = "4140e63780dc6dd600a1837cb9b4c5198c3dcd68"
 PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
 S = "${WORKDIR}/git"
 
