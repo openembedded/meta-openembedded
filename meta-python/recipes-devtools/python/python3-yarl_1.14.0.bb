@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "ec8cfe2295f3e5e44c51f57272afbd69414ae629ec7c6b27f5a410efc78b70a0"
+SRC_URI[sha256sum] = "88c7d9d58aab0724b979ab5617330acb1c7030b79379c8138c1c8c94e121d1b3"
 
 SRC_URI += "file://run-ptest"
 
@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "\
     python3-multidict \
     python3-idna \
     python3-io \
+    python3-propcache \
 "
 
 RDEPENDS:${PN}-ptest += " \
