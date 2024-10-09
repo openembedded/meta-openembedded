@@ -50,7 +50,7 @@ SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
 PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
-PACKAGECONFIG[zlib] = "--enable-deflate,,zlib,zlib"
+PACKAGECONFIG[zlib] = "--enable-deflate --with-zlib=${STAGING_LIBDIR}/../,,zlib,zlib"
 
 CFLAGS:append = " -DPATH_MAX=4096"
 
