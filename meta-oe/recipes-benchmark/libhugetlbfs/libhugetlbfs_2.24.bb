@@ -71,6 +71,7 @@ do_install() {
     sed -i \
         -e 's|${RECIPE_SYSROOT_NATIVE}||g' \
         -e 's|${RECIPE_SYSROOT}||g' \
+        -e 's|${S}||g' \
         `find ${D}${libdir}/libhugetlbfs/tests -name dummy.ldscript`
 }
 
