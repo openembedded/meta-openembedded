@@ -15,21 +15,20 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 B = "${S}"
 
-SRCREV = "540bfc3278e396321124d4b18a798ac2bc18b6ca"
+SRCREV = "4a09a96661624dff14662d6e9849e06a6c70ae03"
 
-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch;protocol=https \
-           file://0002-do-not-build-tests-sub-directory.patch \
-           file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
-           file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.14-branch;protocol=https \
+           file://0001-do-not-build-tests-sub-directory.patch \
+           file://0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
+           file://0003-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
 "
 
 # Keep sync with xorg-server in oe-core
 XORG_PN ?= "xorg-server"
-XORG_PV ?= "1.20.6"
-SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.bz2;name=xorg"
+XORG_PV ?= "21.1.13"
+SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
 XORG_S = "${UNPACKDIR}/${XORG_PN}-${XORG_PV}"
-SRC_URI[xorg.md5sum] = "a98170084f2c8fed480d2ff601f8a14b"
-SRC_URI[xorg.sha256sum] = "6316146304e6e8a36d5904987ae2917b5d5b195dc9fc63d67f7aca137e5a51d1"
+SRC_URI[xorg.sha256sum] = "b45a02d5943f72236a360d3cc97e75134aa4f63039ff88c04686b508a3dc740c"
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
@@ -37,16 +36,13 @@ XSERVER_SOURCE_DIR="${S}/unix/xserver"
 
 do_patch[postfuncs] += "do_patch_xserver"
 do_patch_xserver () {
-    for subdir in Xext xkb GL hw/xquartz/bundle hw/xfree86/common; do
-        install -d ${XSERVER_SOURCE_DIR}/$subdir
-    done
-
-    for subdir in hw/dmx/doc man doc hw/dmx/doxygen; do
-        install -d ${XSERVER_SOURCE_DIR}/$subdir
+    subdirs="Xext xkb GL hw/xquartz/bundle hw/xfree86/common man doc"
+    for i in ${subdirs}; do
+        install -d ${XSERVER_SOURCE_DIR}/$i
     done
 
     sources="hw/xquartz/bundle/cpprules.in man/Xserver.man doc/smartsched \
-             hw/dmx/doxygen/doxygen.conf.in xserver.ent.in xkb/README.compiled \
+             xserver.ent.in xkb/README.compiled \
              hw/xfree86/xorgconf.cpp hw/xfree86/Xorg.sh.in"
     for i in ${sources}; do
         install -m 0644 ${XORG_S}/$i ${XSERVER_SOURCE_DIR}/$i;
@@ -57,7 +53,7 @@ do_patch_xserver () {
     xargs tar cf - | (cd ${XSERVER_SOURCE_DIR} && tar xf -)
 
     cd ${XSERVER_SOURCE_DIR}
-    xserverpatch="${S}/unix/xserver120.patch"
+    xserverpatch="${S}/unix/xserver21.patch"
     echo "Apply $xserverpatch"
     patch -p1 -b --suffix .vnc < $xserverpatch
 }
@@ -127,6 +123,7 @@ do_install:append() {
 FILES:${PN} += " \
     ${libdir}/xorg/modules/extensions \
     ${datadir}/icons \
+    ${datadir}/metainfo \
     ${systemd_unitdir} \
 "
 
