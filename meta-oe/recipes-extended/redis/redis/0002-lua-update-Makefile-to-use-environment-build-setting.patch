@@ -1,10 +1,12 @@
-From 097a2b259cb266c2c861dc74fa6f80712d6138c5 Mon Sep 17 00:00:00 2001
+From ef989aab052510bfda32b2b325a5f80b76c42677 Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Fri, 8 Feb 2013 20:22:19 -0600
 Subject: [PATCH] lua: update Makefile to use environment build settings
 
 OE-specific parameters, instead of overriding all of these simply use
 the ones that are already passed in. Also configure for only Linux...
+
+Upstream-Status: Pending
 
 Signed-off-by: Venture Research <tech@ventureresearch.com>
 
@@ -15,18 +17,16 @@ Signed-off-by: Armin Kuster <akust808@gmail.com>
 updated to work wtih 6.2.1
 Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
 ---
-Upstream-Status: Pending
-
  deps/Makefile         |  1 -
  deps/lua/Makefile     |  1 -
  deps/lua/src/Makefile | 16 ++++++----------
  3 files changed, 6 insertions(+), 12 deletions(-)
 
 diff --git a/deps/Makefile b/deps/Makefile
-index ff16ee9..d8d64aa 100644
+index cbe3aef..76bc222 100644
 --- a/deps/Makefile
 +++ b/deps/Makefile
-@@ -74,7 +74,6 @@ LUA_LDFLAGS+= $(LDFLAGS)
+@@ -81,7 +81,6 @@ endif
  # lua's Makefile defines AR="ar rcu", which is unusual, and makes it more
  # challenging to cross-compile lua (and redis).  These defines make it easier
  # to fit redis into cross-compilation environments, which typically set AR.

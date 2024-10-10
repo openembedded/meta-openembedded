@@ -1,10 +1,15 @@
-From dc745a33f3875cc72d41bd34ed490b352e546352 Mon Sep 17 00:00:00 2001
+From 67990f216f2fbbc8a6699c700dfc089aa617905f Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Fri, 8 Feb 2013 17:39:52 -0600
 Subject: [PATCH] hiredis: use default CC if it is set
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 Instead of trying to automagically figure out CC, which breaks with OE
 as CC has spaces in it, just skip it if one was already passed in.
+
+Upstream-Status: Pending
 
 Signed-off-by: Venture Research <tech@ventureresearch.com>
 
@@ -14,13 +19,11 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reworked for 6.0.4
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
-Upstream-Status: Pending
-
  deps/hiredis/Makefile | 2 --
  1 file changed, 2 deletions(-)
 
 diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
-index 25ac154..569f82b 100644
+index 7e41c97..54717e3 100644
 --- a/deps/hiredis/Makefile
 +++ b/deps/hiredis/Makefile
 @@ -42,8 +42,6 @@ endef
@@ -32,6 +35,3 @@ index 25ac154..569f82b 100644
  OPTIMIZATION?=-O3
  WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
  DEBUG_FLAGS?= -g -ggdb
--- 
-2.21.3
-
