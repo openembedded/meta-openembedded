@@ -333,6 +333,7 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     dumb-init \
     enscript \
     figlet \
+    fluentbit \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
     haveged \
     hexedit \

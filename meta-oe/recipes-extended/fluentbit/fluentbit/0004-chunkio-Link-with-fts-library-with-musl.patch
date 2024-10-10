@@ -1,7 +1,7 @@
 From 63dbbad5978e5f5b0e7d42614999cb6b4ebcce10 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 10 Aug 2022 01:27:16 -0700
-Subject: [PATCH 2/2] chunkio: Link with fts library with musl
+Subject: [PATCH] chunkio: Link with fts library with musl
 
 Fixes
 cio_utils.c:(.text+0x64): undefined reference to `fts_read'
@@ -27,4 +27,3 @@ index a4fc2d3..4244eb8 100644
    set(src
 -- 
 2.37.1
-
