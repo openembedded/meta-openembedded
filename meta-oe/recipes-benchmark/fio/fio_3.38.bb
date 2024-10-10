@@ -22,7 +22,7 @@ PACKAGECONFIG_NUMA:armeb = ""
 PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
-SRCREV = "9213e16d98b0e9d2f8d4f7e760ed0fd45c8960f6"
+SRCREV = "5af800ca20ea18193d2262a8191ae32e14d623f8"
 SRC_URI = "git://git.kernel.dk/fio.git;branch=master"
 
 UPSTREAM_CHECK_GITTAGREGEX = "fio-(?P<pver>\d+(\.\d+)+)"
