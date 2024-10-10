@@ -1,4 +1,4 @@
-From a22512ac1cbd6de1f5646219722e49752d1f60ac Mon Sep 17 00:00:00 2001
+From acd832d76002a1916b3128ac05bc0296425aea6d Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 21 Dec 2019 12:09:51 -0800
 Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
@@ -9,14 +9,14 @@ Fixes
 |       |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
 
 Upstream-Status: Pending
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/zmalloc.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/src/zmalloc.c b/src/zmalloc.c
-index ba03685..322304f 100644
+index bbfa386..93e07ff 100644
 --- a/src/zmalloc.c
 +++ b/src/zmalloc.c
 @@ -32,6 +32,7 @@
