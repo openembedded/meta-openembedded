@@ -1,4 +1,4 @@
-From 076d0e12a7be6cd2108e4ca0dcde1cb658918fa5 Mon Sep 17 00:00:00 2001
+From e117ccc2b4ebb116ab63a3aa6097104964ee223b Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Mon, 19 Apr 2021 23:02:45 -0700
 Subject: [PATCH] do not build tests sub directory
@@ -12,19 +12,19 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  1 file changed, 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7bf99441..bda80598 100644
+index 468f4b54..c47c9c0e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -304,9 +304,6 @@ if(BUILD_VIEWER)
+@@ -351,9 +351,6 @@ if(BUILD_VIEWER)
    add_subdirectory(media)
  endif()
  
 -add_subdirectory(tests)
 -
 -
- add_subdirectory(release)
- 
- # uninstall
+ if(BUILD_VIEWER)
+   add_subdirectory(release)
+ endif()
 -- 
-2.30.2
+2.25.1
 

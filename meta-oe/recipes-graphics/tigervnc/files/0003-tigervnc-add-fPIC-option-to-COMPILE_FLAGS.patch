@@ -1,4 +1,4 @@
-From 7f8acd59bb2e54f9be25a98dd71534700a9e355a Mon Sep 17 00:00:00 2001
+From 36bf37cb638cd87d7f8eb96afaf69c2d95177614 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Mon, 19 Apr 2021 23:14:28 -0700
 Subject: [PATCH] tigervnc: add fPIC option to COMPILE_FLAGS
@@ -18,35 +18,35 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  3 files changed, 3 insertions(+)
 
 diff --git a/common/network/CMakeLists.txt b/common/network/CMakeLists.txt
-index d00ca452..e84e0290 100644
+index f08eaa31..85c05951 100644
 --- a/common/network/CMakeLists.txt
 +++ b/common/network/CMakeLists.txt
-@@ -16,4 +16,5 @@ endif()
+@@ -15,4 +15,5 @@ endif()
  
  if(UNIX)
    libtool_create_control_file(network)
 +  set_target_properties(network PROPERTIES COMPILE_FLAGS -fPIC)
  endif()
 diff --git a/common/rdr/CMakeLists.txt b/common/rdr/CMakeLists.txt
-index 989ba2f4..20f6489d 100644
+index 30c2403a..94e1ff98 100644
 --- a/common/rdr/CMakeLists.txt
 +++ b/common/rdr/CMakeLists.txt
-@@ -27,4 +27,5 @@ target_link_libraries(rdr ${RDR_LIBRARIES})
+@@ -35,4 +35,5 @@ endif()
  
  if(UNIX)
    libtool_create_control_file(rdr)
 +  set_target_properties(rdr PROPERTIES COMPILE_FLAGS -fPIC)
  endif()
 diff --git a/common/rfb/CMakeLists.txt b/common/rfb/CMakeLists.txt
-index fc5a37bf..7f5ce131 100644
+index 360434a9..28566e90 100644
 --- a/common/rfb/CMakeLists.txt
 +++ b/common/rfb/CMakeLists.txt
-@@ -99,4 +99,5 @@ target_link_libraries(rfb ${RFB_LIBRARIES})
+@@ -116,4 +116,5 @@ endif()
  
  if(UNIX)
    libtool_create_control_file(rfb)
 +  set_target_properties(rfb PROPERTIES COMPILE_FLAGS -fPIC)
  endif()
 -- 
-2.30.2
+2.25.1
 
