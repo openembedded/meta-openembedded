@@ -1,10 +1,12 @@
-From aa3d31355f3cc140b1dc2f4fcff8e3c0aa261549 Mon Sep 17 00:00:00 2001
+From 45ae5eb5c3482054073e06ab1a78e0aa9b96447f Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Fri, 8 Feb 2013 20:22:19 -0600
 Subject: [PATCH] lua: update Makefile to use environment build settings
 
 OE-specific parameters, instead of overriding all of these simply use
 the ones that are already passed in. Also configure for only Linux...
+
+Upstream-Status: Pending
 
 Signed-off-by: Venture Research <tech@ventureresearch.com>
 
@@ -14,8 +16,6 @@ Signed-off-by: Armin Kuster <akust808@gmail.com>
 
 updated to work wtih 6.2.1
 Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-
-Upstream-Status: Pending
 ---
  deps/Makefile         |  1 -
  deps/lua/Makefile     |  1 -

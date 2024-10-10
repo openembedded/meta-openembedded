@@ -1,4 +1,4 @@
-From d9d1f9a501ef7caa80d1e6595218898e9989ec2b Mon Sep 17 00:00:00 2001
+From 50fc46a12f6cf97e7b927d3ea29eecc9ebdea34d Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Tue, 10 Sep 2019 20:04:26 -0700
 Subject: [PATCH] src: Do not reset FINAL_LIBS
@@ -9,8 +9,8 @@ environment to get it going
 e.g. -latomic is needed on clang/x86 to provide for 64bit atomics
 
 Upstream-Status: Pending
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

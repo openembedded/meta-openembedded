@@ -1,14 +1,14 @@
-From 634f62be6c135ece93cb4e44a69ce3cb66f394ca Mon Sep 17 00:00:00 2001
+From dd3ecb07bbf80b986b8f2c656ea11d1346e212f6 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 26 Oct 2020 21:32:22 -0700
 Subject: [PATCH] Define correct gregs for RISCV32
 
 Upstream-Status: Pending
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Updated patch for 6.2.8
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
-
 ---
  src/debug.c | 26 ++++++++++++++++++++++++--
  1 file changed, 24 insertions(+), 2 deletions(-)
