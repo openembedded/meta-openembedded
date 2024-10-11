@@ -6,8 +6,6 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
 
-PYPI_PACKAGE = "pint"
-
 inherit pypi ptest python_setuptools_build_meta
 
 SRC_URI[sha256sum] = "d54771093e8b94c4e0a35ac638c2444ddf3ef685652bab7675ffecfa0c5c5cdf"
@@ -21,8 +19,8 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN} += " \
-    python3-setuptools \
-    python3-packaging \
+	python3-setuptools \
+	python3-packaging \
 "
 # python3-misc for timeit.py 
 RDEPENDS:${PN}-ptest += " \
