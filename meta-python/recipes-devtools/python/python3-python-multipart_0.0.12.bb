@@ -12,7 +12,7 @@ SRC_URI += " \
 	file://run-ptest \
 "
 
-RDEPENDS:${PN}-ptest = " \
+RDEPENDS:${PN}-ptest += " \
 	python3-pytest \
 	python3-pyyaml \
 	python3-unittest-automake-output \
