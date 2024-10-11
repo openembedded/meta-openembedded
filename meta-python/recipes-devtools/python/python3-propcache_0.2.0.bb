@@ -16,7 +16,7 @@ DEPENDS += " \
 	python3-cython-native \
 "
 
-RDEPENDS:${PN}-ptest = " \
+RDEPENDS:${PN}-ptest += " \
 	python3-pytest \
 	python3-pytest-xdist \
 	python3-unittest-automake-output \
