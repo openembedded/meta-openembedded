@@ -42,6 +42,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-multidict \
     python3-netaddr \
     python3-ordered-set \
+    python3-outcome \
     python3-parse \
     python3-parse-type \
     python3-platformdirs \
