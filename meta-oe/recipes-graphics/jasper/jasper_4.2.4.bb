@@ -3,12 +3,10 @@ HOMEPAGE = "https://jasper-software.github.io/jasper/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
 
-SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master"
-SRCREV = "917f7708b755d8434f70618108c1a76f1b6a0a82"
+SRC_URI = "https://github.com/jasper-software/${BPN}/releases/download/version-${PV}/${BP}.tar.gz"
+SRC_URI[sha256sum] = "6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7"
 
 CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
-
-S = "${WORKDIR}/git"
 
 inherit cmake multilib_header
 
@@ -31,4 +29,3 @@ do_install:append() {
     chrpath -d ${D}${libdir}/libjasper.so.*
     oe_multilib_header jasper/jas_config.h
 }
-
