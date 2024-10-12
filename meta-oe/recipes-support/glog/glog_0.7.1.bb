@@ -4,15 +4,13 @@ macros."
 HOMEPAGE = "https://github.com/google/glog"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=583a6ead531ca3cd5a2ea593a2888800"
 
 SRC_URI = " \
     git://github.com/google/glog.git;branch=master;protocol=https \
-    file://libexecinfo.patch \
-    file://0001-Change-SleepForMilliseconds-parameter-from-unsigned-.patch \
 "
 
-SRCREV = "b33e3bad4c46c8a6345525fd822af355e5ef9446"
+SRCREV = "7b134a5c82c0c0b5698bb6bf7a835b230c5638e4"
 
 S = "${WORKDIR}/git"
 
@@ -24,6 +22,7 @@ PACKAGECONFIG:remove:riscv32 = "unwind 64bit-atomics"
 PACKAGECONFIG:remove:mipsarch = "64bit-atomics"
 PACKAGECONFIG:remove:armv5 = "64bit-atomics"
 PACKAGECONFIG:remove:armv6 = "64bit-atomics"
+PACKAGECONFIG:remove:powerpc = "64bit-atomics"
 
 PACKAGECONFIG:append:libc-musl:riscv64 = " execinfo"
 PACKAGECONFIG:append:libc-musl:riscv32 = " execinfo"
