@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
            file://run-ptest \
            "
-SRCREV = "79e4c578518886a32475cfbb0de383ff3a905033"
+SRCREV = "b7c61d7cc256d6a174e6179622c7fa968272c259"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
@@ -22,7 +22,7 @@ RDEPENDS:${PN} = "bash openssl-bin daemonize"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
-		--with-ssl=${STAGING_EXECPREFIXDIR} \
+                --disable-rpath --with-ssl=${STAGING_EXECPREFIXDIR} \
                 --enable-largefile"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
