@@ -13,4 +13,4 @@ GIDOCGEN_MESON_OPTION = 'docs'
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[sysprof] = "-Dsysprof=true,-Dsysprof=false,sysprof"
 
-SRC_URI[archive.sha256sum] = "00c63970d708a0ef3bcba40e708a06d7030114cb9f210c74583ffad56d36e3dd"
+SRC_URI[archive.sha256sum] = "b3e609b1a247e71bc097e262564f33f51fd7db566eeb0cd74ae5021536b878b5"
