@@ -40,6 +40,7 @@ PTESTS_FAST_META_OE = "\
     protobuf \
     pv \
     sdbus-c++ \
+    tomlplusplus \
     uthash \
     xmlsec1 \
     zeromq \
