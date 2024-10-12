@@ -5,12 +5,9 @@ HOMEPAGE = "https://01.org/pm-graph"
 LICENSE  = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
-SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
+SRCREV = "0987732b013936ad771334f51cba31c453c8a9c9"
 SRC_URI = "git://github.com/intel/pm-graph.git;branch=master;protocol=https \
            file://0001-Makefile-fix-multilib-build-failure.patch \
-           file://0001-sleepgraph.py-use-python3.patch \
-           file://0001-sleepgraph-add-support-for-RT-kernel-ftrace-flags.patch \
-           file://0001-sleepgraph.py-parse-unfished-cpu-exec-line.patch \
 "
 S = "${WORKDIR}/git"
 
@@ -23,11 +20,13 @@ S = "${WORKDIR}/git"
 #   - CONFIG_FUNCTION_GRAPH_TRACER=y
 
 COMPATIBLE_HOST='(i.86|x86_64).*'
-EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} BASELIB=${baselib}"
+EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} LIBDIR=${libdir} BASELIB=${baselib}"
 
 do_install() {
-        oe_runmake install
-        install -Dm 0755 ${S}/analyze_suspend.py ${D}${bindir}/analyze_suspend.py
+    oe_runmake install
+    install -Dm 0755 ${S}/analyze_suspend.py ${D}${bindir}/analyze_suspend.py
+
+    rm -rf ${D}${libdir}/pm-graph/__pycache__
 }
 
 RDEPENDS:${PN} += "python3-core python3-threading python3-datetime python3-compression"
