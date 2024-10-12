@@ -25,6 +25,7 @@ PTESTS_FAST_META_OE = "\
     librelp \
     libssh \
     libtinyxml2 \
+    libtoml11 \
     libxml++-5.0 \
     libyang \
     lmdb \
