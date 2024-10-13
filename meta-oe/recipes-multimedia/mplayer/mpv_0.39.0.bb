@@ -15,11 +15,11 @@ DEPENDS = " \
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV_mpv = "02254b92dd237f03aa0a151c2a68778c4ea848f9"
-SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.38;protocol=https \
-           file://0001-file2string-Avoid-emitting-absolute-filepaths-into-g.patch \
-           "
-
+SRCREV = "a0fba7be57f3822d967b04f0f6b6d6341e7516e7"
+SRC_URI = " \
+	git://github.com/mpv-player/mpv;name=mpv;branch=release/0.39;protocol=https \
+	file://a7efb3e62bbd0af86737f5ecb72d3a8e2a8c3b54.patch \
+"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig mime-xdg
@@ -37,21 +37,25 @@ LUA:powerpc  = ""
 # Note: lua is required to get on-screen-display (controls)
 PACKAGECONFIG ??= " \
     ${LUA} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland egl', '', d)} \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'x11 wayland opengl pipewire pulseaudio vulkan', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl wayland', 'egl', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'drm gbm', '', d)} \
 "
 
 PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=disabled,virtual/libx11 xsp libxv libxscrnsaver libxinerama libxpresent libxext"
 PACKAGECONFIG[xv] = "-Dxv=enabled,-Dxv=disabled,libxv"
 PACKAGECONFIG[opengl] = "-Dgl=enabled,-Dgl=disabled,virtual/libgl"
-PACKAGECONFIG[egl] = "-Degl=enabled,-Degl-disabled,virtual/egl"
+PACKAGECONFIG[egl] = "-Degl=enabled,-Degl=disabled,virtual/egl"
 PACKAGECONFIG[drm] = "-Ddrm=enabled,-Ddrm=disabled,libdrm"
 PACKAGECONFIG[gbm] = "-Dgbm=enabled,-Dgbm=disabled,virtual/libgbm"
-PACKAGECONFIG[lua] = "-Dlua=luajit,-Dlua=disabled,lua luajit"
+PACKAGECONFIG[lua] = "-Dlua=luajit,-Dlua=disabled,luajit"
 PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive"
+PACKAGECONFIG[libmpv] = "-Dlibmpv=true,-Dlibmpv=false"
 PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack"
+PACKAGECONFIG[pipewire] = "-Dpipewire=enabled,-Dpipewire=disabled,pipewire"
+PACKAGECONFIG[pulseaudio] = "-Dpulse=enabled,-Dpulse=disabled,pulseaudio"
 PACKAGECONFIG[vaapi] = "-Dvaapi=enabled,-Dvaapi=disabled,libva"
+PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,shaderc"
 PACKAGECONFIG[vdpau] = "-Dvdpau=enabled,-Dvdpau=disabled,libvdpau"
 PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland wayland-native libxkbcommon"
 
@@ -82,7 +86,7 @@ python __anonymous() {
 
 #SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
 
-EXTRA_OECONF = " \
+EXTRA_OEMESON = " \
     -Dmanpage-build=disabled \
     -Dlibbluray=disabled \
     -Ddvdnav=disabled \
@@ -91,17 +95,11 @@ EXTRA_OECONF = " \
     -Drubberband=disabled \
     -Dlcms2=disabled \
     -Dvapoursynth=disabled \
-    ${PACKAGECONFIG_CONFARGS} \
 "
 
 do_configure:append() {
     sed -i -e 's#${WORKDIR}#<WORKDIR>#g' ${B}/config.h
 }
 
-FILES:${PN} += " \
-    ${datadir}/icons \
-    ${datadir}/zsh \
-    ${datadir}/bash-completion \
-    ${datadir}/metainfo \
-    "
+FILES:${PN} += "${datadir}"
 EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
