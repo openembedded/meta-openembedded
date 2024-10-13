@@ -45,7 +45,7 @@ BUILD_OPTIMIZATION:append = " -O2"
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'soup3', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'soup3 static', '', d)} \
     glib \
     gpgme \
     curl \
