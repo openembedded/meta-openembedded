@@ -93,7 +93,13 @@ do_install:append() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -D -m 0755 ${UNPACKDIR}/auditd ${D}/etc/init.d/auditd
+    fi
+
+    if ! ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         rm -rf ${D}${libdir}/systemd
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${B}/init.d/auditd.service      ${D}${systemd_unitdir}/system/
+        install -m 0644 ${B}/init.d/audit-rules.service ${D}${systemd_unitdir}/system/
     fi
 
     # Create /var/spool/audit directory for audisp-remote
