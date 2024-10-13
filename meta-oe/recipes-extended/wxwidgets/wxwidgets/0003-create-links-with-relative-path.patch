@@ -1,18 +1,23 @@
+From b86806ef34d4c9171165c1533064bf34ad822e20 Mon Sep 17 00:00:00 2001
+From: Kai Kang <kai.kang@windriver.com>
+Date: Sat, 12 Oct 2024 18:43:25 +0800
+Subject: [PATCH] create links with relative path
+
 It fails to build python3-wxgtk4 which depends on wxwidgets:
 
 | ERROR: wxwidgets-native-3.2.1-r0 do_populate_sysroot: sstate found an
     absolute path symlink /path/to/build/tmp-glibc/work/x86_64-linux
-	/wxwidgets-native/3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work
-	/x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wx-config
+    /wxwidgets-native/3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work
+    /x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wx-config
     pointing at /path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native/3.2.1-r0
-	/recipe-sysroot-native/usr/lib/wx/config/gtk3-unicode-3.2.
+    /recipe-sysroot-native/usr/lib/wx/config/gtk3-unicode-3.2.
   Please replace this with a relative link.
 | ERROR: wxwidgets-native-3.2.1-r0 do_populate_sysroot: sstate found an
     absolute path symlink /path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native
-	/3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native
-	/3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc pointing at /path/to/build/tmp-glibc
-	/work/x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc-3.2.
-  Please replace this with a relative link.
+    /3.2.1-r0/sysroot-destdir/path/to/build/tmp-glibc/work/x86_64-linux/wxwidgets-native
+    /3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc pointing at /path/to/build/tmp-glibc
+    /work/x86_64-linux/wxwidgets-native/3.2.1-r0/recipe-sysroot-native/usr/bin/wxrc-3.2.
+   Please replace this with a relative link.
 
 Create symlink with relative path to fix the issues.
 
@@ -50,3 +55,6 @@ index dbed8cc9b3..1dbc3261d3 100644
              \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/wxrc${EXE_SUFFIX}\" \
              )"
          )
+-- 
+2.25.1
+

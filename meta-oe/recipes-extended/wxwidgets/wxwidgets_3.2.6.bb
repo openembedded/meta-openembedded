@@ -20,16 +20,17 @@ DEPENDS += " \
 
 SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https \
            file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
-           file://fix-libdir-for-multilib.patch \
-           file://create-links-with-relative-path.patch \
-           file://not-append-system-name-to-lib-name.patch \
-           file://wx-config-fix-libdir-for-multilib.patch \
-           file://0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch \
-           file://musl-locale-l.patch \
-           file://0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
+           file://0002-fix-libdir-for-multilib.patch \
+           file://0003-create-links-with-relative-path.patch \
+           file://0004-don-not-append-system-name-to-lib-name.patch \
+           file://0005-wx-config-fix-libdir-for-multilib.patch \
+           file://0006-Fix-locale-on-musl.patch \
+           file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
            "
-SRCREV= "97e99707c5d2271a70cb686720b48dbf34ced496"
+SRCREV= "5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a"
 S = "${WORKDIR}/git"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 # These can be either 'builtin' or 'sys' and builtin means cloned soures are
 # build. So these cannot be PACKAGECONFIGs and let's use libs where we can (see

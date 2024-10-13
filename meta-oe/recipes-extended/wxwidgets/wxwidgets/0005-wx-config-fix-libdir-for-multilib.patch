@@ -1,8 +1,14 @@
-It sets 'libdir' with path element 'lib' directly which is not suitable for
-multilib. Add an option '--baselib' for wx-config to support multilib when
-cross compile. And set default value of baselib with "lib${wxPLATFORM_LIB_DIR}".
+From 4230cd84f156f9eb5c9b80ffbc69dd55fa7c7ca7 Mon Sep 17 00:00:00 2001
+From: Kai Kang <kai.kang@windriver.com>
+Date: Sat, 12 Oct 2024 18:43:25 +0800
+Subject: [PATCH] wx-config: fix libdir for multilib
 
-Upstream-Status: Pending [oe specific]
+It sets 'libdir' with path element 'lib' directly which is not suitable
+for multilib. Add an option '--baselib' for wx-config to support
+multilib when cross compile. And set default value of baselib with
+"lib${wxPLATFORM_LIB_DIR}".
+
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 
@@ -15,10 +21,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
  2 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/build/cmake/config.cmake b/build/cmake/config.cmake
-index 52ae69d3f6..28aa733eb0 100644
+index 9ec677534b..ee61cf7572 100644
 --- a/build/cmake/config.cmake
 +++ b/build/cmake/config.cmake
-@@ -86,7 +86,7 @@ function(wx_write_config)
+@@ -110,7 +110,7 @@ function(wx_write_config)
      set(prefix ${CMAKE_INSTALL_PREFIX})
      set(exec_prefix "\${prefix}")
      set(includedir "\${prefix}/include")
@@ -26,9 +32,9 @@ index 52ae69d3f6..28aa733eb0 100644
 +    set(libdir "\${exec_prefix}/\${baselib}")
      set(bindir "\${exec_prefix}/bin")
  
-     find_program(EGREP egrep)
+     if(wxBUILD_MONOLITHIC)
 diff --git a/wx-config.in b/wx-config.in
-index e3f7d115bb..0e78af03c7 100755
+index 1173d89685..8364a33e9d 100755
 --- a/wx-config.in
 +++ b/wx-config.in
 @@ -42,7 +42,8 @@ usage()
@@ -41,7 +47,7 @@ index e3f7d115bb..0e78af03c7 100755
             [--list] [--selected-config] [--host=HOST] [--toolkit=TOOLKIT]
             [--universal[=yes|no]] [--unicode[=yes|no]] [--static[=yes|no]]
             [--debug[=yes|no]] [--version[=VERSION]] [--flavour=FLAVOUR]
-@@ -137,7 +138,7 @@ wxconfig_output_options="prefix exec_prefix
+@@ -133,7 +134,7 @@ wxconfig_output_options="prefix exec_prefix
  
  # Options that permit the user to supply hints that may affect the output.
  # These options all accept arbitrary values, to interpret as they please.
@@ -50,7 +56,7 @@ index e3f7d115bb..0e78af03c7 100755
  
  # Input options that accept only a yes or no argument.
  #
-@@ -404,6 +405,7 @@ is_cross()  { [ "x@cross_compiling@" = "xyes" ]; }
+@@ -400,6 +401,7 @@ is_cross()  { [ "xno" = "xyes" ]; }
  # Determine the base directories we require.
  prefix=${input_option_prefix-${this_prefix:-@prefix@}}
  exec_prefix=${input_option_exec_prefix-${input_option_prefix-${this_exec_prefix:-@exec_prefix@}}}
@@ -58,3 +64,6 @@ index e3f7d115bb..0e78af03c7 100755
  wxconfdir="@libdir@/wx/config"
  
  installed_configs=`cd "$wxconfdir" 2> /dev/null && ls | grep -v "^inplace-"`
+-- 
+2.25.1
+
