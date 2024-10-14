@@ -1,9 +1,9 @@
 SUMMARY = "A simple, safe single expression evaluator library"
 HOMEPAGE = "https://pypi.org/project/simpleeval/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=dc9277482effe59b734b004cbcc1fee7"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=83843c8f0f3beb18af2f282faecbdebe"
 
-SRC_URI[sha256sum] = "4a30f9cc01825fe4c719c785e3762623e350c4840d5e6855c2a8496baaa65fac"
+SRC_URI[sha256sum] = "f3d259deeb751d34c63e56747bab384efad63a2dbdb4f130281c42279788ac3c"
 
 inherit pypi python_setuptools_build_meta ptest
 
