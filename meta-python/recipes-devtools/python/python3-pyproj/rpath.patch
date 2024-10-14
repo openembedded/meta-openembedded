@@ -6,7 +6,7 @@ Upstream-Status: Inappropriate [OE-Specific]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 --- a/setup.py
 +++ b/setup.py
-@@ -194,9 +194,6 @@ def get_extension_modules():
+@@ -193,9 +193,6 @@ def get_extension_modules():
      ext_options = {
          "include_dirs": include_dirs,
          "library_dirs": library_dirs,
