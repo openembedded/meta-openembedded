@@ -10,7 +10,7 @@ DEPENDS = "nlohmann-json"
 
 SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
            file://0001-Fix-build-with-clang-19.patch"
-SRCREV = "baecbb95bd63df53e0af16e87bc683967962c5f8"
+SRCREV = "fa0a5200ddbe9ae6f487a228e658aedc102dab56"
 
 S = "${WORKDIR}/git"
 inherit cmake pkgconfig lib_package
