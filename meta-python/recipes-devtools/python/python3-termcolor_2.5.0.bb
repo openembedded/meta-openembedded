@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "aab9e56047c8ac41ed798fa36d892a37aca6b3e9159f3e0c24bc64a9b3ac7b7a"
+SRC_URI[sha256sum] = "998d8d27da6d48442e8e1f016119076b690d962507531df4890fcd2db2ef8a6f"
 
 DEPENDS += " \
 	python3-toml-native \
