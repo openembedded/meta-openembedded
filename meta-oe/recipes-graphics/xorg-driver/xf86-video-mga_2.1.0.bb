@@ -11,7 +11,7 @@ DEPENDS += "virtual/libx11 libpciaccess"
 COMPATIBLE_HOST = '(i.86.*-linux|x86_64.*-linux)'
 
 XORG_DRIVER_COMPRESSOR = ".tar.xz"
-SRC_URI[sha256sum] = "27a33b70837965bb4a5f27fd260be085ca5bba837a4e62907f093c2f205603ab"
+SRC_URI[sha256sum] = "7bf85dbf4efa17b7cdd483be8f61cf11fd73d0310514b6ae10d89358de63ab73"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'dri', '', d)}"
 PACKAGECONFIG[dri] = "--enable-dri,--disable-dri,drm xorgproto,xserver-xorg-extension-dri"
