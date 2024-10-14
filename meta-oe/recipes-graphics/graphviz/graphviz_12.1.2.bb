@@ -19,7 +19,6 @@ DEPENDS:append:class-nativesdk = " ${BPN}-native"
 inherit autotools-brokensep pkgconfig gettext qemu
 
 SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
-           file://0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch \
            "
 # Use native mkdefs
 SRC_URI:append:class-target = "\
@@ -28,7 +27,7 @@ SRC_URI:append:class-target = "\
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
-SRC_URI[sha256sum] = "d593695fdaa8a19297523b679ad13d3ef2027b0b7f14cc2bc23e77969ed81565"
+SRC_URI[sha256sum] = "cf9e6de9d5949dffbc4dd46f833085ff8e7e55482ffb84641819bbf0d18c5f02"
 
 UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
