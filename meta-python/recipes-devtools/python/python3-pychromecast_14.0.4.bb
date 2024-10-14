@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
 
 SRC_URI += "file://0001-Allow-newer-version-of-wheel-and-setuptools.patch"
-SRC_URI[sha256sum] = "092c65f421991bca565338bc61a0c14861c47e0f5c0a65919a5e93f02dfd071a"
+SRC_URI[sha256sum] = "1fc05d63db152fe6f71efdee77d14228dc4c55e99d734de4757455800b1f3ba4"
 
 PYPI_PACKAGE = "PyChromecast"
 
