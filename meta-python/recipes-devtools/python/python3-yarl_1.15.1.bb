@@ -26,6 +26,7 @@ RDEPENDS:${PN} = "\
 RDEPENDS:${PN}-ptest += " \
     python3-hypothesis \
     python3-pytest \
+    python3-pytest-codspeed \
     python3-unittest-automake-output \
 "
 
