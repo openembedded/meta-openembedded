@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
     file://0001-version.c-don-t-print-build-flags.patch \
     file://CVE-2022-41860.patch \
     file://CVE-2022-41861.patch \
+    file://CVE-2024-3596.patch \
 "
 
 raddbdir="${sysconfdir}/${MLPREFIX}raddb"
