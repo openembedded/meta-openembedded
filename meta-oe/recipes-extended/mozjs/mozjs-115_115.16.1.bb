@@ -19,7 +19,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://1849070.patch \ 
            file://1894423.patch \
            "
-SRC_URI[sha256sum] = "16be46f16a356a2b8bd3541805a24c8a2acf6f077cf8a65859689685c26025e0"
+SRC_URI[sha256sum] = "c3bb5a210738ca0f8cd26aa53fc4a07560db079c06cd0421cf35af4035029367"
 
 UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs115"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
