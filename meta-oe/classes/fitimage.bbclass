@@ -302,7 +302,7 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
     if bootscriptid:
          conf_desc += ", u-boot script"
     if dtbcount == 1:
-        conf_default = d.getVar('FITIMAGE_DEFAULT_CONFIG', True) or dtb
+        conf_default = d.getVar('FITIMAGE_DEFAULT_CONFIG', True) or f'{conf_prefix}{dtb}'
 
     if conf_default:
         fd.write(f'\t\tdefault = "{conf_default}";\n')
