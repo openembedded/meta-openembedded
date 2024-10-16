@@ -6,15 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/python-m2crypto:"
 
-SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
-            file://cross-compile-platform.patch \
-            file://avoid-host-contamination.patch \
-            file://0001-setup.py-address-openssl-3.x-build-issue.patch \
-            "
-SRC_URI[sha256sum] = "bbfd113ec55708c05816252a4f09e4237df4f3bbfc8171cbbc33057d257bbb30"
+SRC_URI[sha256sum] = "42b62df2caf623161b1d643a7235464c2fe2a3105049ebc498a6d47dc08f64b4"
 
-PYPI_PACKAGE = "M2Crypto"
-inherit pypi siteinfo setuptools3
+inherit pypi siteinfo python_setuptools_build_meta
 
 DEPENDS += "openssl swig-native"
 RDEPENDS:${PN} += "\
