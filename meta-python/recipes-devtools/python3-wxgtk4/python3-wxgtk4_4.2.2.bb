@@ -1,8 +1,8 @@
 DESCRIPTION = "Python3 interface to the wxWidgets Cross-platform C++ GUI toolkit."
 HOMEPAGE = "http://www.wxpython.org"
 
-LICENSE = "LGPL-2.0-only & WXwindows"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bdabf9e11191e2b9d3b6aef5f338ec00"
+LICENSE = "LGPL-2.0-only & WXwindows & BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"
 
 DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
            wxwidgets \
@@ -14,9 +14,8 @@ SRC_URI += "file://add-back-option-build-base.patch \
            file://wxgtk-fixup-build-scripts.patch \
            file://not-overwrite-cflags-cxxflags.patch \
            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
-           file://0001-sip-Fix-build-with-gcc-14.patch \
            "
-SRC_URI[sha256sum] = "e48de211a6606bf072ec3fa778771d6b746c00b7f4b970eb58728ddf56d13d5c"
+SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
 
 S = "${WORKDIR}/wxPython-${PV}"
 
