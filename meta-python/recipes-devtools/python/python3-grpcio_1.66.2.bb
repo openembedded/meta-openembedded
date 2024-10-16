@@ -13,7 +13,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
            file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
            file://0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch \
            "
-SRC_URI[sha256sum] = "35334f9c9745add3e357e3372756fd32d925bd52c41da97f4dfdafbde0bf0ee2"
+SRC_URI[sha256sum] = "563588c587b75c34b928bc428548e5b00ea38c46972181a4d8b75ba7e3f24231"
 
 RDEPENDS:${PN} = "python3-protobuf"
 
