@@ -10,6 +10,7 @@ SRC_URI += " \
     file://run-ptest \
     file://0001-test_functionality-convert-line-endings-to-Unix.patch \
     file://0002-Fix-import-of-tests.utils-to-enable-pytest.patch \
+    file://py3.13.patch \
 "
 
 inherit pypi python_setuptools_build_meta ptest
