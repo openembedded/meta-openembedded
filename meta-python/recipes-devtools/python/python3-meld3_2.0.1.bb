@@ -14,6 +14,5 @@ SRC_URI[sha256sum] = "3ea266994f1aa83507679a67b493b852c232a7905e29440a6b868558ca
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
-    python3-cgitb \
     python3-xml \
 "
