@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62
 inherit pypi setuptools3
 
 DEPENDS += "python3-grpcio"
+PYPI_PACKAGE = "grpcio_reflection"
 
-SRC_URI[sha256sum] = "2dd44806d68d0006636529bda573012b19a42281478c2d051cdaaebb91e2516c"
+SRC_URI[sha256sum] = "add827e2deb56e96803c82ace1d4e77fa0c8ec3747d6398e9951f739d71067d4"
 
 RDEPENDS:${PN} = "python3-grpcio"
 
