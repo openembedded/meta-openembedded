@@ -16,12 +16,10 @@ DEPENDS = "uthash cjson"
 
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://mosquitto.init \
-           file://1571.patch \
-           file://2894.patch \
            file://2895.patch \
 "
 
-SRC_URI[sha256sum] = "d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4c083822823f4448a"
+SRC_URI[sha256sum] = "33af3637f119a61c509c01d2f8f6cc3d8be76f49e850132f2860af142abf82a9"
 
 inherit systemd update-rc.d useradd cmake pkgconfig
 
