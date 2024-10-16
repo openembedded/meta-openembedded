@@ -21,7 +21,7 @@ inherit cmake python3targetconfig
 EXTRA_OECMAKE = "-DLIB='${baselib}' \
                  -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION} \
                  -DPYTHON_ABI=${PYTHON_ABI} \
-                 -DBUILD_PYTHON3=YES \
+                 -DBUILD_PYTHON3=NO \
                  -DPython3_SITE_DIR=${PYTHON_SITEPACKAGES_DIR} \
                  "
 
