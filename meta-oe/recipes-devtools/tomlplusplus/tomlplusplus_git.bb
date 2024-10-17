@@ -1,4 +1,4 @@
-SUMMARY = "toml config parser and seriaizer for c++."
+SUMMARY = "toml config parser and serializer for c++."
 HOMEPAGE = "https://github.com/marzer/tomlplusplus"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=90960f22c10049c117d56ed2ee5ee167"
@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "cmake-native"
 
-inherit meson ptest
+inherit meson ptest pkgconfig
 
 EXTRA_OEMESON += "-Dbuild_tests=${@bb.utils.contains("DISTRO_FEATURES", "ptest", "true", "false", d)} \
 "
