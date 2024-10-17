@@ -1,0 +1,46 @@
+From c9bd05e8f0ad805b81625cfa717d06071cfd9b48 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Oct 2024 22:52:38 -0700
+Subject: [PATCH] unix-common.mk: Ensuring Sequential Execution of rm and ln commands
+
+With high parallel execution, it results in race condition where
+its trying to create symlink while the original symlink while rm is
+not done deleting the existing file yet.
+
+force sequential execution by adding dependencies between the steps
+or combining them into a single shell command
+
+Here, && ensures that the ln -s command only runs after rm -f target
+successfully completes.
+
+Similar error reported here [1]
+
+[1] https://bugs.gentoo.org/932835
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ unix-common.mk | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/unix-common.mk b/unix-common.mk
+index 6954faf5..983c48cd 100644
+--- a/unix-common.mk
++++ b/unix-common.mk
+@@ -62,14 +62,12 @@ SHLIB_CMD = $(CCLD) $(LADD) $(LDFLAGS_SHLIB) -o $@ $^
+ SHLIB_LE_TARGETS = $(call shliblefn, $(SHARED_LIBS_TO_BUILD))
+ 
+ $(SHLIB_LE_TARGETS):%:%.$(MAJ)
+-	rm -f $@
+-	$(LN_S) $< $@
++	rm -f $@ && $(LN_S) $< $@
+ 
+ SONAME_TARGETS = $(SHLIB_LE_TARGETS:%=%.$(MAJ))
+ 
+ $(SONAME_TARGETS):%:%.$(MIN)
+-	rm -f $@
+-	$(LN_S) $< $@
++	rm -f $@ && $(LN_S) $< $@
+ 
+ .PHONY: $(SHLIB_INSTALL_TARGETS)
+ .PHONY: install-shared-libraries
