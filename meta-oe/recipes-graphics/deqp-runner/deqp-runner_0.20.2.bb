@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = " \
 inherit cargo cargo-update-recipe-crates
 
 SRC_URI += " \
-    crate://crates.io/deqp-runner/0.20.0 \
+    crate://crates.io/deqp-runner/${PV} \
     file://0001-deqp-runner-drop-zstd-support.patch \
 "
 
-SRC_URI[deqp-runner-0.20.0.sha256sum] = "a3f4fab1179a01cbbdbe4b93e0a040f74de7b9086498d91976d93844a31439dd"
+SRC_URI[deqp-runner-0.20.2.sha256sum] = "600ea527945ea2d0c5d2987d6adb4d2944731ea95906de2c94eb419148cc398b"
 
 require deqp-runner-crates.inc
