@@ -5,13 +5,17 @@ LICENSE = "GPL-2.0-only"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4cc91856b08b094b4f406a29dc61db21"
 
-SRCREV = "a591ad885aa28f113cb45870b2fd5bce48378d6f"
+SRCREV = "f110926b082731b25720b444378ad55d7a9d451d"
 
 SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig systemd
+
+EXTRA_OEMESON = " \
+    -Dtests=false \
+"
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
