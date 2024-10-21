@@ -22,7 +22,7 @@ SRC_URI = "\
     git://github.com/fluent/fluent-bit.git;branch=3.1;protocol=https \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', 'file://0003-Disable-installing-systemd-service-file.patch', d)} \
+    file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
 "
 SRC_URI:append:libc-musl = "\
     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
@@ -115,6 +115,13 @@ EXTRA_OECMAKE:append:powerpc = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:riscv32 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:riscv64 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
+
+do_configure:prepend() {
+    sed -i \
+        -e 's#@INIT_MANAGER_IS_SYSTEMD@#'${@'TRUE' if d.getVar('INIT_MANAGER') == 'systemd' else 'FALSE'}'#' \
+        -e 's#@INIT_MANAGER_IS_UPSTART@#'${@'TRUE' if d.getVar('INIT_MANAGER') == 'upstart' else 'FALSE'}'#' \
+        ${S}/src/CMakeLists.txt
+}
 
 # flex hardcodes the input file in #line directives leading to TMPDIR contamination of debug sources.
 do_compile:append() {
