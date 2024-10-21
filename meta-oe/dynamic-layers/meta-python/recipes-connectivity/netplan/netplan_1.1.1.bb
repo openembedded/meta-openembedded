@@ -14,13 +14,13 @@ inherit meson pkgconfig systemd python3targetconfig features_check
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
-SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=stable/1.1;protocol=https \
            file://0001-meson.build-do-not-use-Werror.patch \
           "
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
-SRCREV = "d27f32305f7f06de449b32239a89969e6ff2be31"
+SRCREV = "731d3c9e7e88d3f27ed6cf77edba7a2f5890a778"
 
 S = "${WORKDIR}/git"
 
