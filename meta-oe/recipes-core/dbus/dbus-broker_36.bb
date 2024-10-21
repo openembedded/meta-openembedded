@@ -25,6 +25,11 @@ EXTRA_OEMESON += "-Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', '
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
+do_install:append() {
+    install -d ${D}${sysconfdir}/systemd/user
+    ln -s ${systemd_user_unitdir}/dbus-broker.service ${D}${sysconfdir}/systemd/user/dbus.service
+}
+
 RDEPENDS:${PN} += "dbus-common"
 
 FILES:${PN} += "${nonarch_libdir}/systemd/catalog"
