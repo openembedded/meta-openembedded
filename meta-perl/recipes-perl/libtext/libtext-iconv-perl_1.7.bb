@@ -14,7 +14,6 @@ RRECOMMENDS:${PN}:append:libc-glibc = " glibc-gconvs"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MP/MPIOTR/Text-Iconv-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "81b26e069eaebb084e91ea3c009b67ae"
 SRC_URI[sha256sum] = "5b80b7d5e709d34393bcba88971864a17b44a5bf0f9e4bcee383d029e7d2d5c3"
 
 S = "${WORKDIR}/Text-Iconv-${PV}"
