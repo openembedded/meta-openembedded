@@ -72,6 +72,7 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
                 OPTFLAGS="${CFLAGS}" \
                 prefix=${prefix} \
+                etc_prefix=${sysconfdir} \
                 bindir=${base_sbindir} \
                 LIB=${base_libdir} libdir=${base_libdir}/multipath \
                 usrlibdir=${libdir} \
