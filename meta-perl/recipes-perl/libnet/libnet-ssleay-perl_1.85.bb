@@ -27,7 +27,6 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.ta
            file://no-exec-on-configure.patch \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
 SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
 
 S = "${WORKDIR}/Net-SSLeay-${PV}"
