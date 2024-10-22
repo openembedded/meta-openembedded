@@ -11,7 +11,6 @@ RDEPENDS:${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-HMAC-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "e6a5d6f552da16eacb5157ea4369ff9d"
 SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96da4a59"
 
 S = "${WORKDIR}/Digest-HMAC-${PV}"
