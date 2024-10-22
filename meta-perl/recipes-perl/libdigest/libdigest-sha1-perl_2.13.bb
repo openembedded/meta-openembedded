@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
 SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
 
 S = "${WORKDIR}/Digest-SHA1-${PV}"
