@@ -13,7 +13,6 @@ S = "${WORKDIR}/File-Slurp-${PV}"
 
 inherit cpan
 
-SRC_URI[md5sum] = "7d584cd15c4f8b9547765eff8c4ef078"
 SRC_URI[sha256sum] = "ce29ebe995097ebd6e9bc03284714cdfa0c46dc94f6b14a56980747ea3253643"
 
 BBCLASSEXTEND="native"
