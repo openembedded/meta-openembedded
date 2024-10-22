@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://README;md5=d028249c2d08dca6ca6c5bb43b56d926"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PV/PVANDRY/Locale-gettext-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "bc652758af65c24500f1d06a77415019"
 SRC_URI[sha256sum] = "909d47954697e7c04218f972915b787bd1244d75e3bd01620bc167d5bbc49c15"
 
 S = "${WORKDIR}/Locale-gettext-${PV}"
