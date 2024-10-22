@@ -21,7 +21,6 @@ LIC_FILES_CHKSUM = "file://README;beginline=36;endline=44;md5=9416434672a57853d6
 
 SRCNAME = "Module-Runtime"
 SRC_URI = "${CPAN_MIRROR}/authors/id/Z/ZE/ZEFRAM/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[md5sum] = "d3d47222fa2e3dfcb4526f6cc8437b20"
 SRC_URI[sha256sum] = "68302ec646833547d410be28e09676db75006f4aa58a11f3bdb44ffe99f0f024"
 
 UPSTREAM_CHECK_REGEX = "Module\-Runtime\-(?P<pver>(\d+\.\d+)).tar"
