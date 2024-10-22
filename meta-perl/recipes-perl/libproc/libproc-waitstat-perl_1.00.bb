@@ -14,7 +14,6 @@ S = "${WORKDIR}/Proc-WaitStat-${PV}"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b911bd579b6b142391b21de1efa30c95"
 SRC_URI[sha256sum] = "d07563f5e787909d16e7390241e877f49ab739b1de9d0e2ea1a41bd0bf4474bc"
 
 inherit cpan
