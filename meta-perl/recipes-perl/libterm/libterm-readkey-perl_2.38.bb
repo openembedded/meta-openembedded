@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://README;md5=c275db663c8489a5709ebb22b185add5"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/J/JS/JSTOWE/TermReadKey-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b2b4aab7a0e6bddb7ac3b21ba637482c"
 SRC_URI[sha256sum] = "5a645878dc570ac33661581fbb090ff24ebce17d43ea53fd22e105a856a47290"
 
 S = "${WORKDIR}/TermReadKey-${PV}"
