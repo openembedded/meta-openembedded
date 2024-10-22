@@ -16,7 +16,6 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MANOWAR/RadiusPerl-${PV}.
            file://test.pl-adjust-for-ptest.patch \
            file://run-ptest \
 "
-SRC_URI[md5sum] = "d1fe2d6ecf7ea99299e4e3a8f945aad8"
 SRC_URI[sha256sum] = "3b276506986ccaa4949d92b13ce053a0017ad11562a991cc753364923fe81ca7"
 
 S = "${WORKDIR}/Authen-Radius-${PV}"
