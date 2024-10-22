@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
 SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "30d56e6dd5551ca16b8e16cc7299dc21"
 SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
 
 S = "${WORKDIR}/Text-Diff-${PV}"
