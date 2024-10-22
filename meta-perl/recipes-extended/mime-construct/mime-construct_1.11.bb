@@ -12,7 +12,6 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/mime-construct-${PV}.tar.gz \
     file://fix-mime-construct-help-return-value.patch \
 "
 
-SRC_URI[md5sum] = "73834ea780fbea81b89dbd9b2fb54f58"
 SRC_URI[sha256sum] = "4cd7bb61b51d41192d1498c1051aa6a4ccd75aeb09b71d2ec706a7084a4a9303"
 
 inherit cpan
