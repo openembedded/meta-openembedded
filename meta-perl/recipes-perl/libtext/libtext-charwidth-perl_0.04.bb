@@ -17,7 +17,6 @@ LIC_FILES_CHKSUM = "file://README;md5=d8d54c8c500cbdd57a4c15911d9d96db"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-CharWidth-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "37a723df0580c0758c0ee67b37336c15"
 SRC_URI[sha256sum] = "abded5f4fdd9338e89fd2f1d8271c44989dae5bf50aece41b6179d8e230704f8"
 
 S = "${WORKDIR}/Text-CharWidth-${PV}"
