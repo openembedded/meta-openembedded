@@ -87,6 +87,12 @@ do_install:append() {
     chmod 4750 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
     rm -rf ${D}/${localstatedir}/
 
+    if ${@bb.utils.contains('PACKAGECONFIG', 'xenstat', 'true', 'false', d)}; then
+        # Set S UID for xenstat plugin
+        chown root:netdata ${D}${libexecdir}/netdata/plugins.d/xenstat.plugin
+        chmod 4750 ${D}${libexecdir}/netdata/plugins.d/xenstat.plugin
+    fi
+
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Install systemd unit files
         install -Dm 0644 ${UNPACKDIR}/netdata-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/netdata.conf
