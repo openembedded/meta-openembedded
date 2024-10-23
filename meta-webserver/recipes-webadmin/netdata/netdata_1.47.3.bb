@@ -83,7 +83,8 @@ do_compile:append() {
 
 do_install:append() {
     #set S UID for plugins
-    chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
+    chown root:netdata ${D}${libexecdir}/netdata/plugins.d/apps.plugin
+    chmod 4750 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
     rm -rf ${D}/${localstatedir}/
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
