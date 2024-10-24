@@ -3,7 +3,7 @@ DESCRIPTION = "Constructs and (by default) mails MIME messages. \
                It is entirely driven from the command line, it is \
                designed to be used by other programs, or people who act \
                like programs."
-HOMEPAGE = "http://search.cpan.org/~rosch/mime-construct/mime-construct"
+HOMEPAGE = "https://metacpan.org/release/ROSCH/mime-construct-1.11/view/mime-construct"
 SECTION = "mail"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=5e2e5da619ac8ef8c84767ccc4656e96"
