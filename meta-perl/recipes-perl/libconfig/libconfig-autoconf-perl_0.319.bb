@@ -6,7 +6,7 @@ DESCRIPTION = "Config::AutoConf is intended to provide the same opportunities to
 developers as GNU Autoconf <http://www.gnu.org/software/autoconf/> does for \
 Shell developers."
 
-HOMEPAGE=       "https://metacpan.org/release/Config-AutoConf"
+HOMEPAGE = "https://metacpan.org/release/Config-AutoConf"
 
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
