@@ -6,7 +6,7 @@ needs to write a full-featured SSL client or server application: \
 multiple SSL contexts, cipher selection, certificate verification, and \
 SSL version selection. As an extra bonus, it works perfectly with \
 mod_perl."
-HOMEPAGE = "http://search.cpan.org/dist/IO-Socket-SSL/"
+HOMEPAGE = "https://metacpan.org/dist/IO-Socket-SSL"
 SECTION = "libs"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
