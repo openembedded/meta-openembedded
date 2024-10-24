@@ -2,7 +2,7 @@ SUMMARY = "ExtUtils::Helpers - Various portability utilities for module builders
 DESCRIPTION = "This module provides various portable helper function for module building modules."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
+HOMEPAGE = "https://metacpan.org/pod/ExtUtils::Helpers"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c0280160e4f26faafef507664884bf63"
