@@ -1,7 +1,7 @@
 Upstream-Status: Pending
 
---- /tmp/configure.in	2010-05-19 13:29:03.000000000 +0200
-+++ unix/configure.in	2010-05-19 13:42:05.000000000 +0200
+--- a/unix/configure.in	2010-05-19 13:29:03.000000000 +0200
++++ b/unix/configure.in	2010-05-19 13:42:05.000000000 +0200
 @@ -526,13 +526,9 @@
  	found_xft="yes"
  	dnl make sure package configurator (xft-config or pkg-config
