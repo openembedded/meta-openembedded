@@ -6,7 +6,7 @@ faster than shelling out to a system's diff executable for small files, \
 and generally slower on larger files."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~ovid/Text-Diff/"
+HOMEPAGE = "https://metacpan.org/release/OVID/Text-Diff-1.41"
 
 LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
