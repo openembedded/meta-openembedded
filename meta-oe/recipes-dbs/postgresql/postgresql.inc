@@ -242,7 +242,7 @@ postgresql_fix_sources () {
 	for f in ${PKGD}${TARGET_DBGSRC_DIR}/src/pl/plperl/Util.c \
 			${PKGD}${TARGET_DBGSRC_DIR}/src/pl/plperl/SPI.c; do
 		if [ -e $f ]; then
-			sed -i -e 's#${B}/../${P}#${TARGET_DBGSRC_DIR}#g' $f
+			sed -i -e 's#${B}/../${BP}#${TARGET_DBGSRC_DIR}#g' $f
 		fi
 	done
 }
