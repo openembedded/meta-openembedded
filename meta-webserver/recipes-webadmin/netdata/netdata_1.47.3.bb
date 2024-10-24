@@ -67,7 +67,7 @@ PACKAGECONFIG[nfacct] = "-DENABLE_PLUGIN_NFACCT=ON,-DENABLE_PLUGIN_NFACCT=OFF,li
 PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF,xen-tools"
 PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
-PACKAGECONFIG[docker] = ",,virtual/docker,"
+PACKAGECONFIG[docker] = ",,virtual/docker, virtual/docker"
 PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
 
 # ebpf doesn't compile (or detect) the cross compilation well
@@ -83,8 +83,15 @@ do_compile:append() {
 
 do_install:append() {
     #set S UID for plugins
-    chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
+    chown root:netdata ${D}${libexecdir}/netdata/plugins.d/apps.plugin
+    chmod 4750 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
     rm -rf ${D}/${localstatedir}/
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'xenstat', 'true', 'false', d)}; then
+        # Set S UID for xenstat plugin
+        chown root:netdata ${D}${libexecdir}/netdata/plugins.d/xenstat.plugin
+        chmod 4750 ${D}${libexecdir}/netdata/plugins.d/xenstat.plugin
+    fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Install systemd unit files
