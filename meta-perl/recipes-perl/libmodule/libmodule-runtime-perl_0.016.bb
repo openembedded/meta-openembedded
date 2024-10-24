@@ -14,7 +14,7 @@ are applied on any Perl version where the bugs exist, except for a case where \
 one of the bugs cannot be adequately worked around in pure Perl."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
+HOMEPAGE = "https://metacpan.org/dist/Module-Runtime"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;beginline=36;endline=44;md5=9416434672a57853d6181f3da9094963"
