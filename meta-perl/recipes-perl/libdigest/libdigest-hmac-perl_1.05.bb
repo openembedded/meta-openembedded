@@ -1,17 +1,17 @@
 SUMMARY = "Keyed-Hashing for Message Authentication"
 DESCRIPTION = "Keyed-Hashing for Message Authentication"
-HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
+HOMEPAGE = "https://metacpan.org/pod/Digest::HMAC"
 SECTION = "libs"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://README;beginline=13;endline=17;md5=da980cdc026faa065e5d5004115334e6"
+LIC_FILES_CHKSUM = "file://README;beginline=6;endline=9;md5=6321739e9ccbf74ee5dd2eb82c42d609"
 
 RDEPENDS:${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-HMAC-${PV}.tar.gz \
+SRC_URI = "https://cpan.metacpan.org/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96da4a59"
+SRC_URI[sha256sum] = "215cb59cba610745cfb2d4b3f8ef756d590e57e3ad7986a992e87c4969fcdc7a"
 
 S = "${WORKDIR}/Digest-HMAC-${PV}"
 
