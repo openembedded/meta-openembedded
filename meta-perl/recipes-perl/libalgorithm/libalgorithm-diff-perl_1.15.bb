@@ -7,7 +7,7 @@ program.   It is guaranteed to find the *smallest possible* set of \
 differences. \
 "
 SECTION = "libs"
-HOMEPAGE = "http://search.cpan.org/~nedkonz/Algorithm-Diff/"
+HOMEPAGE = "https://metacpan.org/release/NEDKONZ/Algorithm-Diff-1.15"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=406;endline=409;md5=d393b8ad3b8994b9d0ae9299b8a8a1ee"
