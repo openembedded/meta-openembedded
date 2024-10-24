@@ -2,7 +2,7 @@ SUMMARY = "SASL Authentication framework for Perl"
 DESCRIPTION = "SASL is a generic mechanism for authentication used by several network \
 protocols. Authen::SASL provides an implementation framework that all \
 protocols should be able to share."
-HOMEPAGE = "http://search.cpan.org/dist/Authen-SASL/"
+HOMEPAGE = "https://metacpan.org/dist/Authen-SASL/"
 SECTION = "libs"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
