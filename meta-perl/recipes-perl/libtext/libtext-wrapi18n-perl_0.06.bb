@@ -11,7 +11,7 @@ characters). Also, minimal handling of languages which doesn't use \
 whitespaces between words (like Chinese and Japanese) is supported."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~kubota/Text-WrapI18N-${PV}/"
+HOMEPAGE = "https://metacpan.org/release/KUBOTA/Text-WrapI18N-0.06"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;md5=080862e1e40cdcddef4393e137285858"
