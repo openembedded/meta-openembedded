@@ -10,7 +10,7 @@ width of the first character of the given string and mbswidth() gives the \
 width of the whole given string."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~kubota/Text-CharWidth-${PV}/"
+HOMEPAGE = "https://metacpan.org/release/KUBOTA/Text-CharWidth-0.04"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;md5=d8d54c8c500cbdd57a4c15911d9d96db"
