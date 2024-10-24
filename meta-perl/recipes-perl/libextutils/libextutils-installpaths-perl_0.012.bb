@@ -3,7 +3,7 @@ DESCRIPTION = "This module tries to make install path resolution as easy \
 as possible."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-InstallPaths/"
+HOMEPAGE = "https://metacpan.org/pod/ExtUtils::InstallPaths"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b6fa54d873ce6bcf4809ea88bdf97769"
