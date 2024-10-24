@@ -2,7 +2,7 @@ SUMMARY = "ExtUtils::Config - A wrapper for perl's configuration"
 DESCRIPTION = "ExtUtils::Config is an abstraction around the %Config hash."
 SECTION = "libs"
 
-HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Config/"
+HOMEPAGE = "https://metacpan.org/dist/ExtUtils-Config"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
