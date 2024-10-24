@@ -4,23 +4,23 @@ SECTION = "devel/tcltk"
 
 # http://www.tcl.tk/software/tcltk/license.html
 LICENSE = "TCL"
-LIC_FILES_CHKSUM = "file://${S}/../license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://${S}/../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
 "
 
 DEPENDS = "tcl virtual/libx11 libxt"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
-    file://confsearch.diff;striplevel=2 \
-    file://tkprivate.diff;striplevel=2 \
+    file://confsearch.diff \
+    file://tkprivate.diff \
     file://fix-xft.diff \
 "
 
@@ -29,17 +29,17 @@ SRC_URI[sha256sum] = "550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
 UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
 
-S = "${WORKDIR}/${BPN}${PV}/unix"
-
-DEBUG_PREFIX_MAP += "-fdebug-prefix-map=${S}/../=${TARGET_DBGSRC_DIR}/.."
-
-PSEUDO_IGNORE_PATHS .= ",${WORKDIR}/${BPN}${PV}"
+S = "${WORKDIR}/${BPN}${PV}"
 
 # Short version format: "8.6"
 VER = "${@os.path.splitext(d.getVar('PV'))[0]}"
 
 LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
+
 inherit autotools features_check pkgconfig
+
+AUTOTOOLS_SCRIPT_PATH = "${S}/unix"
+
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -49,7 +49,9 @@ EXTRA_OECONF = "\
     --with-tcl=${STAGING_BINDIR}/crossscripts \
     --libdir=${libdir} \
 "
+
 export TK_LIBRARY='${libdir}/tk${VER}'
+
 do_install:append() {
     ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
     oe_libinstall -so libtk${VER} ${D}${libdir}
