@@ -6,7 +6,7 @@ handy functions for working with terminals. One of the main goals is to \
 have the functions as portable as possible, so you can just plug in 'use \
 Term::ReadKey' on any architecture and have a good likelihood of it \
 working."
-HOMEPAGE = "http://search.cpan.org/~jstowe/TermReadKey-${PV}"
+HOMEPAGE = "https://metacpan.org/release/JSTOWE/TermReadKey-2.38"
 SECTION = "libraries"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
