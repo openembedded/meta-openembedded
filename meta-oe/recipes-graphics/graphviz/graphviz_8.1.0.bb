@@ -24,10 +24,6 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
            file://CVE-2023-46045-0002.patch \
            file://CVE-2023-46045-0003.patch \
            "
-# Use native mkdefs
-SRC_URI:append:class-target = "\
-           file://0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch \
-"
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
