@@ -20,10 +20,6 @@ inherit autotools-brokensep pkgconfig gettext qemu
 
 SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
            "
-# Use native mkdefs
-SRC_URI:append:class-target = "\
-           file://0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch \
-"
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
