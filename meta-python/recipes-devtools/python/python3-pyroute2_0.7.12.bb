@@ -28,6 +28,8 @@ SRC_URI += " \
 
 RDEPENDS:${PN}-ptest += " \
     python3-fcntl \
+    python3-html \
+    python3-netclient \
     python3-pytest \
     python3-sqlite3 \
     python3-unittest-automake-output \
