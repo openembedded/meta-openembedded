@@ -11,10 +11,10 @@ LIC_FILES_CHKSUM = "file://lib/Authen/SASL/Perl.pm;beginline=1;endline=3;md5=171
 DEPENDS = "perl"
 RDEPENDS:${PN} = "libdigest-hmac-perl"
 
-SRC_URI = "http://www.cpan.org/authors/id/G/GB/GBARR/Authen-SASL-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/E/EH/EHUELS/Authen-SASL-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "6614fa7518f094f853741b63c73f3627168c5d3aca89b1d02b1016dc32854e09"
+SRC_URI[sha256sum] = "b86d5a576b8d387aee24f39f47a54afd14bb66b09003db5065001f1de03a8ece"
 
 S = "${WORKDIR}/Authen-SASL-${PV}"
 
