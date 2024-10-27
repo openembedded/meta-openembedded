@@ -41,7 +41,7 @@ SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;protocol=http
 
 S = "${WORKDIR}/git"
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-SRCREV = "adb035fa5c61cdcff622536fde9456e3859211fd"
+SRCREV = "7985fc671ad43f5925b9012e6c51231ad73a628d"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
