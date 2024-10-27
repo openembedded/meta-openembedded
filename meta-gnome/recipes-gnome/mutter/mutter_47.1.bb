@@ -24,7 +24,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "2d0ea90150ac6cd0219d0078db05d6e1514d6ae21bf9f3f740d4fb039129016b"
+SRC_URI[archive.sha256sum] = "905474a32cd99b34342cd69e74bb01971b387e2fa22361b6d99add109409ddc9"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
