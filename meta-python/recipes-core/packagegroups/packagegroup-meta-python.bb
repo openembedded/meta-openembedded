@@ -452,7 +452,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-websocket-client \
     python3-werkzeug \
     python3-werkzeug \
-    python3-whoosh \
     python3-wrapt \
     python3-wtforms \
     python3-xlrd \
@@ -524,7 +523,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-unidiff-ptest \
     python3-uritemplate-ptest \
     python3-webcolors-ptest \
-    python3-whoosh-ptest \
     python3-wpa-supplicant \
     python3-xlrd-ptest \
     python3-xmltodict-ptest \

@@ -116,5 +116,4 @@ PTESTS_PROBLEMS_META_PYTHON ="\
     python3-dnspython \
     python3-fastjsonschema \
     python3-pyzmq \
-    python3-whoosh \
 "
