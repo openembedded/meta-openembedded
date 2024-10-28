@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78ab6ea0cba1f1ec1680ebb149e3bc11"
 
 DEPENDS = "perl"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/M/MA/MANOWAR/RadiusPerl-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MANOWAR/RadiusPerl-${PV}.tar.gz \
            file://test.pl-adjust-for-ptest.patch \
            file://run-ptest \
 "
