@@ -23,7 +23,7 @@ RDEPENDS:${PN} += "\
     zlib \
 "
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
            file://no-exec-on-configure.patch \
            file://run-ptest \
           "
