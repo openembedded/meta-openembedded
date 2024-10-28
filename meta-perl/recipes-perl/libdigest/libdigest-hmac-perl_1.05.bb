@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=6;endline=9;md5=6321739e9ccbf74ee5dd
 
 RDEPENDS:${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
            file://run-ptest \
           "
 SRC_URI[sha256sum] = "215cb59cba610745cfb2d4b3f8ef756d590e57e3ad7986a992e87c4969fcdc7a"
