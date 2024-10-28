@@ -13,7 +13,7 @@ RDEPENDS:${PN} += "perl"
 
 S = "${WORKDIR}/Config-Tiny-${PV}"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/R/RS/RSAVAGE/Config-Tiny-${PV}.tgz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RS/RSAVAGE/Config-Tiny-${PV}.tgz"
 
 SRC_URI[sha256sum] = "b2f7345619b3b8e636dd39ea010731c9dc2bfb8f022bcbd86ae6ad17866e110d"
 
