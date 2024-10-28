@@ -38,6 +38,7 @@ EXTRA_OECONF:class-target = "\
                 --with-expatlibdir=${STAGING_LIBDIR} \
                 --without-included-ltdl \
                 --disable-java \
+                --disable-perl \
                 --disable-tcl \
                 --disable-r \
                 --disable-sharp \
