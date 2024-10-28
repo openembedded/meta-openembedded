@@ -12,7 +12,7 @@ RDEPENDS:${PN} += "perl libipc-signal-perl"
 
 S = "${WORKDIR}/Proc-WaitStat-${PV}"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "d07563f5e787909d16e7390241e877f49ab739b1de9d0e2ea1a41bd0bf4474bc"
 
