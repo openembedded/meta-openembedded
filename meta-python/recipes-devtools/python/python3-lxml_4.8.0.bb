@@ -41,3 +41,5 @@ BBCLASSEXTEND = "native nativesdk"
 RDEPENDS:${PN} += "libxml2 libxslt ${PYTHON_PN}-compression"
 
 CLEANBROKEN = "1"
+
+BUILD_CFLAGS += "-Wno-error=incompatible-pointer-types"
