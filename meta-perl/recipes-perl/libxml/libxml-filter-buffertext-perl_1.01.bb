@@ -12,7 +12,7 @@ HOMEPAGE = "https://metacpan.org/dist/XML-Filter-BufferText"
 DEPENDS += "libxml-sax-perl-native"
 RDEPENDS:${PN} += "libxml-sax-perl"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/R/RB/RBERJON/XML-Filter-BufferText-${PV}.tar.gz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RB/RBERJON/XML-Filter-BufferText-${PV}.tar.gz"
 SRC_URI[sha256sum] = "8fd2126d3beec554df852919f4739e689202cbba6a17506e9b66ea165841a75c"
 
 LIC_FILES_CHKSUM = "file://BufferText.pm;beginline=88;endline=90;md5=497aa6d79cc84c3d769a2a0016bee928"
