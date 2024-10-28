@@ -12,6 +12,8 @@ SRC_URI += " \
 	file://run-ptest \
 "
 
+RDEPENDS:${PN} += "python3-html"
+
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
     python3-unittest-automake-output \
