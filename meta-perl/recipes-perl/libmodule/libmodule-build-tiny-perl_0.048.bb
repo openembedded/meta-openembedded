@@ -21,6 +21,13 @@ S = "${WORKDIR}/Module-Build-Tiny-${PV}"
 
 inherit cpan_build ptest-perl
 
+do_install:append() {
+  sed -i \
+    -e 's|${TMPDIR}||g' \
+    `find ${D}/usr/lib/perl5 -type f -name .packlist`
+}
+
+
 RDEPENDS:${PN} += " \
     libextutils-config-perl \
     libextutils-helpers-perl \
