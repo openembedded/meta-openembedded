@@ -12,7 +12,7 @@ DEPENDS += "libidn"
 # such as Net::LibIDN::idn_to_ascii().
 RDEPENDS:${PN}:append:libc-glibc = " glibc-gconvs"
 
-SRC_URI = "https://cpan.metacpan.org/authors/id/T/TH/THOR/Net-LibIDN-${PV}.tar.gz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/T/TH/THOR/Net-LibIDN-${PV}.tar.gz"
 SRC_URI[sha256sum] = "2f8acc9442b3866ec7dc63cd449fc693ae3e930d5d3e5e9430fbb6f393bdbb17"
 
 SRC_URI += "file://libidn-wr-cross-compile.patch"
