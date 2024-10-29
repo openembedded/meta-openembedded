@@ -38,6 +38,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://0001-Bug-1750624-Pin-validation-date-for-PayPalEE-test-ce.patch \
            file://regenerate_NameConstrain_test_certificates.tar.gz \
            file://CVE-2024-6602.patch \
+           file://CVE-2024-6609.patch \
            "
 SRC_URI[sha256sum] = "88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056"
 
