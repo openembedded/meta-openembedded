@@ -16,6 +16,7 @@ BBCLASSEXTEND = "native nativesdk"
 
 SRC_URI += " \
 	file://run-ptest \
+	file://0001-dataclass-frozen-True-for-Python-3.13-compatibility.patch \
 "
 
 RDEPENDS:${PN} += " \
