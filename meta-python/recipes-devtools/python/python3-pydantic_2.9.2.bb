@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
 inherit pypi python_hatchling
 
-SRC_URI[sha256sum] = "6f62c13d067b0755ad1c21a34bdd06c0c12625a22b0fc09c6b149816604f7c2a"
+SRC_URI[sha256sum] = "d155cef71265d1e9807ed1c32b4c8deec042a44a50a4188b25ac67ecd81a9c0f" 
 
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
@@ -24,12 +24,15 @@ RDEPENDS:${PN} += "\
     python3-image \
     python3-io \
     python3-json \
+    python3-jsonschema \
     python3-logging \
     python3-netclient \
     python3-numbers \
     python3-profile \
     python3-pydantic-core \
     python3-typing-extensions \
+    python3-tzdata \
+    python3-zoneinfo \
 "
 
 inherit ptest
@@ -38,6 +41,8 @@ RDEPENDS:${PN}-ptest += "\
     python3-cloudpickle \
     python3-dirty-equals \
     python3-email-validator \
+    python3-html \
+    python3-hypothesis \
     python3-pydoc \
     python3-pytest \
     python3-pytest-mock \
