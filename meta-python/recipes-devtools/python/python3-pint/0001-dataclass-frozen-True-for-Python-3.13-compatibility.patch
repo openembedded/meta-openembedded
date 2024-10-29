@@ -1,0 +1,116 @@
+From dc729d5b6574e1c44ec12e13b68c2b900e4a7ba1 Mon Sep 17 00:00:00 2001
+From: Simon Willison <swillison@gmail.com>
+Date: Fri, 12 Jul 2024 17:23:21 -0700
+Subject: [PATCH] @dataclass(frozen=True) for Python 3.13 compatibility
+
+Upstream-Status: Submitted [https://github.com/hgrecco/pint/pull/2037]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ pint/errors.py | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/pint/errors.py b/pint/errors.py
+index 59d3b45..f080f52 100644
+--- a/pint/errors.py
++++ b/pint/errors.py
+@@ -81,12 +81,12 @@ class WithDefErr:
+         return DefinitionError(self.name, self.__class__, msg)
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class PintError(Exception):
+     """Base exception for all Pint errors."""
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class DefinitionError(ValueError, PintError):
+     """Raised when a definition is not properly constructed."""
+ 
+@@ -102,7 +102,7 @@ class DefinitionError(ValueError, PintError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class DefinitionSyntaxError(ValueError, PintError):
+     """Raised when a textual definition has a syntax error."""
+ 
+@@ -115,7 +115,7 @@ class DefinitionSyntaxError(ValueError, PintError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class RedefinitionError(ValueError, PintError):
+     """Raised when a unit or prefix is redefined."""
+ 
+@@ -130,7 +130,7 @@ class RedefinitionError(ValueError, PintError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class UndefinedUnitError(AttributeError, PintError):
+     """Raised when the units are not defined in the unit registry."""
+ 
+@@ -150,13 +150,13 @@ class UndefinedUnitError(AttributeError, PintError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class PintTypeError(TypeError, PintError):
+     def __reduce__(self):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class DimensionalityError(PintTypeError):
+     """Raised when trying to convert between incompatible units."""
+ 
+@@ -183,7 +183,7 @@ class DimensionalityError(PintTypeError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class OffsetUnitCalculusError(PintTypeError):
+     """Raised on ambiguous operations with offset units."""
+ 
+@@ -208,7 +208,7 @@ class OffsetUnitCalculusError(PintTypeError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class LogarithmicUnitCalculusError(PintTypeError):
+     """Raised on inappropriate operations with logarithmic units."""
+ 
+@@ -233,7 +233,7 @@ class LogarithmicUnitCalculusError(PintTypeError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class UnitStrippedWarning(UserWarning, PintError):
+     msg: str
+ 
+@@ -241,13 +241,13 @@ class UnitStrippedWarning(UserWarning, PintError):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class UnexpectedScaleInContainer(Exception):
+     def __reduce__(self):
+         return self.__class__, tuple(getattr(self, f.name) for f in fields(self))
+ 
+ 
+-@dataclass(frozen=False)
++@dataclass(frozen=True)
+ class UndefinedBehavior(UserWarning, PintError):
+     msg: str
+ 
