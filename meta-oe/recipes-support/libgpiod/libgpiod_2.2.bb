@@ -17,8 +17,6 @@ SRC_URI += "file://gpio-manager.init"
 
 SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
 
-S = "${UNPACKDIR}/${PN}-2.2"
-
 # Enable all project features for ptest
 PACKAGECONFIG[tests] = " \
     --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
