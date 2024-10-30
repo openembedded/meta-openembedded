@@ -9,8 +9,6 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
 "
 
-DEPENDS += "glib-2.0"
-
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
 
 SRC_URI += "file://gpio-manager.init"
@@ -59,6 +57,10 @@ python __anonymous() {
         d.setVar("SYSTEMD_SERVICE:{}-manager".format(pn), "gpio-manager.service")
     else:
         d.appendVar("EXTRA_OECONF", " --disable-systemd")
+
+    # Disable gobject introspection set by the bbclass if we don't want it.
+    if not any(cfg in ["glib", "dbus", "ptest"] for cfg in packageconfig):
+        d.setVar("GI_DATA_ENABLED", "False")
 }
 
 UPDATERCPN = "${PN}-manager"
