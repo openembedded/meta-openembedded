@@ -3,8 +3,6 @@ HOMEPAGE = "https://github.com/naimetti/rfc3986-validator"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/python-rfc3986-validator:"
-
 SRC_URI[sha256sum] = "3d44bde7921b3b9ec3ae4e3adca370438eccebc676456449b145d533b240d055"
 
 PYPI_PACKAGE = "rfc3986_validator"
