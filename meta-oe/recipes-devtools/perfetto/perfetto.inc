@@ -1,8 +1,6 @@
 SUMMARY = "Perfetto - System profiling, app tracing and trace analysis."
 HOMEPAGE = "https://github.com/google/perfetto"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/common:"
-
 # Add only patches here which are used by both perfetto and libperfetto
 SRC_URI = "git://github.com/google/perfetto.git;protocol=https;name=perfetto;nobranch=1 \
 	   file://0001-fix-musl-build.patch \
