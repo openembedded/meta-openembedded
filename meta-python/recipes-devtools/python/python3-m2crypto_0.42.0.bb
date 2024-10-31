@@ -4,8 +4,6 @@ HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/python-m2crypto:"
-
 SRC_URI[sha256sum] = "42b62df2caf623161b1d643a7235464c2fe2a3105049ebc498a6d47dc08f64b4"
 
 inherit pypi siteinfo python_setuptools_build_meta
