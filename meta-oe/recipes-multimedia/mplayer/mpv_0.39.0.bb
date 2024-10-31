@@ -50,13 +50,14 @@ PACKAGECONFIG[drm] = "-Ddrm=enabled,-Ddrm=disabled,libdrm"
 PACKAGECONFIG[gbm] = "-Dgbm=enabled,-Dgbm=disabled,virtual/libgbm"
 PACKAGECONFIG[lua] = "-Dlua=luajit,-Dlua=disabled,luajit"
 PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive"
+PACKAGECONFIG[lcms2] = "-Dlcms2=enabled,-Dlcms2=disabled,lcms"
 PACKAGECONFIG[libmpv] = "-Dlibmpv=true,-Dlibmpv=false"
 PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack"
 PACKAGECONFIG[pipewire] = "-Dpipewire=enabled,-Dpipewire=disabled,pipewire"
 PACKAGECONFIG[pulseaudio] = "-Dpulse=enabled,-Dpulse=disabled,pulseaudio"
 PACKAGECONFIG[vaapi] = "-Dvaapi=enabled,-Dvaapi=disabled,libva"
-PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,shaderc"
-PACKAGECONFIG[vdpau] = "-Dvdpau=enabled,-Dvdpau=disabled,libvdpau"
+PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers"
+PACKAGECONFIG[vdpau] = "-Dvdpau=enabled,-Dvdpau=disabled,libvdpau nv-codec-headers"
 PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland wayland-native libxkbcommon"
 
 python __anonymous() {
@@ -72,16 +73,14 @@ python __anonymous() {
         extras.append(" -Dvaapi-x11=enabled")
     if "vaapi" in packageconfig and "drm" in packageconfig:
         extras.append(" -Dvaapi-drm=enabled")
-    if "vaapi" in packageconfig and "x11" in packageconfig and "egl" in packageconfig:
-        extras.append(" -Dvaapi-x-egl=enabled")
     if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" in packageconfig:
         extras.append(" -Dvdpau-gl-x11=enabled")
     if "wayland" in packageconfig and "opengl" in packageconfig:
-        extras.append(" -Dgl-wayland=enabled")
+        extras.append(" -Degl-wayland=enabled")
     if "wayland" in packageconfig and "vaapi" in packageconfig:
         extras.append(" -Dvaapi-wayland=enabled")
     if extras:
-        d.appendVar("EXTRA_OECONF", "".join(extras))
+        d.appendVar("EXTRA_OEMESON", "".join(extras))
 }
 
 #SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
@@ -93,8 +92,8 @@ EXTRA_OEMESON = " \
     -Dcdda=disabled \
     -Duchardet=disabled \
     -Drubberband=disabled \
-    -Dlcms2=disabled \
     -Dvapoursynth=disabled \
+    -Dshaderc=disabled \
 "
 
 do_configure:append() {
