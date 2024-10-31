@@ -38,6 +38,12 @@ EXTRA_OECONF:append = " \
     --without-dracutdir \
 "
 
+# Reproducibility: Force target distribution ("vendor") to Debian to match
+# default values for things like: NFS server service name, bash completion
+# path, configuration files, ...
+# The Debian values do match the OpenEmbedded ones.
+EXTRA_OECONF:append = " --with-vendor=debian"
+
 EXTRA_OEMAKE:append = " \
     INSTALL_MOD_PATH=${D}${root_prefix} \
 "
