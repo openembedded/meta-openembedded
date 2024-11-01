@@ -92,6 +92,11 @@ signing_pkcs11_tool() {
 }
 
 signing_import_prepare() {
+    # the $PN is used as 'label' in the softhsm, which is a "CK_UTF8CHAR
+    # paddedLabel[32]" in softhsm2-util.cpp, so it must not be longer.
+    LEN=$(echo -n ${PN} | wc -c)
+    test $LEN -le 32 || bbfatal "PN must not have a length greater than 32 chars."
+
     export _SIGNING_ENV_FILE_="${B}/meta-signing.env"
     rm -f "$_SIGNING_ENV_FILE_"
 
