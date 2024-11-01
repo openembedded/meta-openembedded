@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c83fcdcd43ab352be6429ee1fd8827a0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=25e89142a2f4b075904a9986c45fbdb2"
 
 CVE_PRODUCT = "nodejs node.js"
 
@@ -25,7 +25,9 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
            file://libatomic.patch \
-           file://182d9c05e78.patch \
+           file://0001-deps-disable-io_uring-support-in-libuv.patch \
+           file://0001-positional-args.patch \
+           file://0001-custom-env.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
@@ -34,7 +36,7 @@ SRC_URI:append:class-target = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "7d9433e91fd88d82ba8de86e711ec41907638e227993d22e95126b02f6cd714a"
+SRC_URI[sha256sum] = "bbf0297761d53aefda9d7855c57c7d2c272b83a7b5bad4fea9cb29006d8e1d35"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -98,7 +100,7 @@ do_unpack[postfuncs] += "prune_sources"
 # 1. If host and target have the different bit width, run those
 #    binaries for the target and run them on the host with QEMU.
 # 2. If host and target have the same bit width, enable upstream
-#    cross crompile support and no QEMU
+#    cross compile support and no QEMU
 python do_create_v8_qemu_wrapper () {
     """Creates a small wrapper that invokes QEMU to run some target V8 binaries
     on the host."""
@@ -192,7 +194,7 @@ python set_gyp_variables () {
         d.setVar("LDFLAGS_host", d.getVar("LDFLAGS"))
         d.setVar("AR_host", d.getVar("AR"))
     elif d.getVar("HOST_AND_TARGET_SAME_WIDTH") == "1":
-        # Enable upstream cross crompile support
+        # Enable upstream cross compile support
         d.setVar("CC_host", d.getVar("BUILD_CC"))
         d.setVar("CFLAGS_host", d.getVar("BUILD_CFLAGS"))
         d.setVar("CXX_host", d.getVar("BUILD_CXX"))
