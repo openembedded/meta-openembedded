@@ -5,22 +5,28 @@ HOMEPAGE = "https://github.com/netdata/netdata/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-DEPENDS += "json-c libuv libyaml util-linux zlib lz4"
+DEPENDS += "\
+    json-c \
+    libuv \
+    libyaml \
+    lz4 \
+    util-linux \
+    zlib \
+    "
 
-SRC_URI = " \
+SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-    file://0001-Add-check-for-64bit-builtin-atomics.patch \
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
     "
-SRC_URI[sha256sum] = "cf906c304ac49ca335bef8f085664efe4c567d47877a91e0744a7942ba351053"
+SRC_URI[sha256sum] = "8073eee2392f92daa1f8bb5cf13fb988b8c3b52ff9574b50706ff69bdbdb51ce"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
-UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
+UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>(?!1\.99)\d+(?:\.\d+)*)"
 
-S = "${WORKDIR}/${BPN}-v${PV}"
+S = "${UNPACKDIR}/${BPN}-v${PV}"
 
 # Stop sending anonymous statistics to Google Analytics
 NETDATA_ANONYMOUS ??= "enabled"
@@ -120,7 +126,7 @@ do_install:append() {
     chown -R netdata:netdata ${D}${datadir}/netdata/web
 }
 
-FILES:${PN} += " \
+FILES:${PN} += "\
     ${localstatedir}/cache/netdata/ \
     ${localstatedir}/lib/netdata/ \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/journald@netdata.conf.d', '', d)} \
