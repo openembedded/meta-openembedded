@@ -75,6 +75,10 @@ PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
 PACKAGECONFIG[docker] = ",,virtual/docker, virtual/docker"
 PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
+# WebUI (packageconfig not set: v0, v1 & v2)
+PACKAGECONFIG[webui_v0] = ",,,,,webui_v1 webui_v2"
+PACKAGECONFIG[webui_v1] = ",,,,,webui_v0 webui_v2"
+PACKAGECONFIG[webui_v2] = ",,,,,webui_v0 webui_v1"
 
 # ebpf doesn't compile (or detect) the cross compilation well
 EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
@@ -123,6 +127,22 @@ do_install:append() {
     install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
     install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
 
+    # webUI
+    if  "${@bb.utils.contains('PACKAGECONFIG', 'webui_v0', 'true', 'false', d)}"; then
+        rm -rf ${D}${datadir}/netdata/web/v1
+        rm -rf ${D}${datadir}/netdata/web/v2
+        install -m 0644 ${D}${datadir}/netdata/web/v0/index.html ${D}${datadir}/netdata/web/
+    fi
+    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v1', 'true', 'false', d)}"; then
+        rm -rf ${D}${datadir}/netdata/web/v0
+        rm -rf ${D}${datadir}/netdata/web/v2
+        install -m 0644 ${D}${datadir}/netdata/web/v1/index.html ${D}${datadir}/netdata/web/
+    fi
+    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v2', 'true', 'false', d)}"; then
+        rm -rf ${D}${datadir}/netdata/web/v0
+        rm -rf ${D}${datadir}/netdata/web/v1
+        install -m 0644 ${D}${datadir}/netdata/web/v2/index.html ${D}${datadir}/netdata/web/
+    fi
     chown -R netdata:netdata ${D}${datadir}/netdata/web
 }
 
