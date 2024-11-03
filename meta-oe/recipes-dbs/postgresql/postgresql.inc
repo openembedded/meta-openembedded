@@ -39,7 +39,7 @@ export LDFLAGS_EX_BE = "-Wl,--export-dynamic"
 
 inherit autotools pkgconfig perlnative python3native python3targetconfig useradd update-rc.d systemd gettext perl-version multilib_header
 
-CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.6"
+CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR}"
 
 SYSTEMD_SERVICE:${PN} = "postgresql.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
