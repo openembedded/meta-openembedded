@@ -30,12 +30,12 @@ export RMBIN = "${bindir}/rm"
 export TOUCHBIN = "${bindir}/touch"
 export CPBIN = "${bindir}/cp"
 
-
 do_install:append() {
 	install -d ${D}${sysconfdir}/sysconfig
 	install -m0644 ${S}/data/default-config ${D}${sysconfdir}/sysconfig/snapper
 }
 
-FILES:${PN} += "${libdir}/pam_snapper ${libdir}/systemd ${libdir}/security ${datadir}"
+FILES:${PN} += "${nonarch_libdir} ${systemd_system_unitdir} ${datadir}"
+
 # bash is needed for the testsuite
 RDEPENDS:${PN} = "bash diffutils util-linux util-linux-mount"
