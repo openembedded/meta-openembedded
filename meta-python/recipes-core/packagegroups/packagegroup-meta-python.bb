@@ -465,6 +465,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-yappi \
     python3-yarl \
     python3-zopeinterface \
+    python3-zstandard \
     telepathy-python3 \
     unattended-upgrades \
 "
