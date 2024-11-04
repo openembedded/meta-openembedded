@@ -33,11 +33,14 @@ REQUIRED_DISTRO_FEATURES = "wayland x11"
 
 EXTRA_OECONF = " \
     --enable-gtk3 \
-    --with-tcl=${STAGING_BINDIR_CROSS} \
-    --with-tk=${STAGING_BINDIR_CROSS} \
     --with-tirpc \
     --disable-mime-update \
 "
+
+PACKAGECONFIG = ""
+
+PACKAGECONFIG[tcl] = "--with-tcl=${STAGING_BINDIR_CROSS},--disable-tcl,tcl"
+PACKAGECONFIG[tk] = "--with-tk=${STAGING_BINDIR_CROSS},--disable-tcl,tk"
 
 FILES:${PN} = "${bindir} ${datadir}"
 
