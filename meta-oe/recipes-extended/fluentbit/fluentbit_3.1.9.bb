@@ -39,6 +39,7 @@ PACKAGECONFIG ??= "\
     custom-calyptia \
     http-server \
     inotify \
+    ipo \
     metrics \
     parser \
     proxy-go \
@@ -51,6 +52,8 @@ PACKAGECONFIG ??= "\
     tls \
     utf8-encoder \
 "
+# See https://github.com/fluent/fluent-bit/issues/7248#issuecomment-1631280496
+PACKAGECONFIG:remove:toolchain-clang = "ipo"
 
 PACKAGECONFIG[all] = "-DFLB_ALL=Yes,-DFLB_ALL=No"
 PACKAGECONFIG[arrow] = "-DFLB_ARROW=Yes,-DFLB_ARROW=No"
@@ -69,6 +72,7 @@ PACKAGECONFIG[examples] = "-DFLB_EXAMPLES=Yes,-DFLB_EXAMPLES=No"
 PACKAGECONFIG[http-client-debug] = "-DFLB_HTTP_CLIENT_DEBUG=Yes,-DFLB_HTTP_CLIENT_DEBUG=No"
 PACKAGECONFIG[http-server] = "-DFLB_HTTP_SERVER=Yes,-DFLB_HTTP_SERVER=No"
 PACKAGECONFIG[inotify] = "-DFLB_INOTIFY=Yes,-DFLB_INOTIFY=No"
+PACKAGECONFIG[ipo] = "-DFLB_IPO=Yes,-DFLB_IPO=no"
 PACKAGECONFIG[jemalloc] = "-DFLB_JEMALLOC=Yes,-DFLB_JEMALLOC=No,jemalloc"
 PACKAGECONFIG[luajit] = "-DFLB_LUAJIT=Yes,-DFLB_LUAJIT=No"
 PACKAGECONFIG[metrics] = "-DFLB_METRICS=Yes,-DFLB_METRICS=No"
