@@ -12,7 +12,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
            file://run-ptest \
            "
-SRCREV = "b7c61d7cc256d6a174e6179622c7fa968272c259"
+
+# 17 commits after 1.22.0 tag:
+# https://github.com/NLnetLabs/unbound/compare/release-1.22.0...7985d17b57d25be262de56c29a43ae4b61c1b896
+# to include fix for occasional build failure:
+# https://github.com/NLnetLabs/unbound/commit/46cfbf313d812a6e50614a691e162b171dc91d7b
+PV .= "+git"
+SRCREV = "7985d17b57d25be262de56c29a43ae4b61c1b896"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
