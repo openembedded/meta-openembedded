@@ -15,16 +15,12 @@ LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe \
     file://xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
 "
 
-DEPENDS = "tcl virtual/libx11 libxt"
+DEPENDS = "tcl virtual/libx11 libxt zip-native"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
-    file://confsearch.diff \
-    file://tkprivate.diff \
-    file://fix-xft.diff \
 "
-
-SRC_URI[sha256sum] = "550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca793fec"
+SRC_URI[sha256sum] = "f166e3c20773c82243f753cef4b091d05267cb7f87da64be88cb2ca5a2ba027e"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
 UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
@@ -44,7 +40,6 @@ AUTOTOOLS_SCRIPT_PATH = "${S}/unix"
 REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OECONF = "\
-    --enable-threads \
     --with-x \
     --with-tcl=${STAGING_BINDIR}/crossscripts \
     --libdir=${libdir} \
@@ -53,8 +48,6 @@ EXTRA_OECONF = "\
 export TK_LIBRARY='${libdir}/tk${VER}'
 
 do_install:append() {
-    ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
-    oe_libinstall -so libtk${VER} ${D}${libdir}
     ln -sf wish${VER} ${D}${bindir}/wish
 
     sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tkConfig.sh
@@ -69,7 +62,10 @@ PACKAGECONFIG[xss] = "--enable-xss,--disable-xss,libxscrnsaver libxext"
 
 PACKAGES =+ "${PN}-lib"
 
-FILES:${PN}-lib = "${libdir}/libtk${VER}.so*"
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+
+FILES:${PN}-lib = "${libdir}/libtcl9tk${VER}.so*"
 FILES:${PN} += "${libdir}/tk*"
 
 # isn't getting picked up by shlibs code
@@ -96,6 +92,8 @@ tcl_package_preprocess() {
                -e "s;-L${STAGING_LIBDIR};-L${libdir};g" \
                -e "s;${STAGING_INCDIR};${includedir};g" \
                -e "s;--sysroot=${RECIPE_SYSROOT};;g" \
+               -e "s;${B};${libdir};g" \
+               -e "s;${WORKDIR};${TARGET_DBGSRC_DIR};g" \
                ${PKGD}${libdir}/tkConfig.sh
 
         rm -f ${PKGD}${bindir_crossscripts}/tkConfig.sh
