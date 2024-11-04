@@ -24,7 +24,7 @@ EXTRA_OEMESON += "--cross-file=${WORKDIR}/meson-${PN}.cross -Dmaintainer-mode=fa
 do_write_config:append() {
     cat >${WORKDIR}/meson-${PN}.cross <<EOF
 [binaries]
-m4 = '${bindir}/m4'
-perl = '${bindir}/perl'
+m4 = '${bindir_native}/m4'
+perl = '${bindir_native}/perl'
 EOF
 }
