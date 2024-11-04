@@ -26,26 +26,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://fix-symlink-install-error-in-cmdlang.patch \
            file://openipmi-no-openipmigui-man.patch \
-           file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
            file://ipmi-init-fix-the-arguments.patch \
            file://include_sys_types.patch \
            file://openipmi-helper \
            file://ipmi.service \
-           file://0001-m4-ax_python_devel.m4-do-not-check-for-distutils.patch \
-           "
+"
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
 
-SRC_URI[md5sum] = "532404c9df7d0e8bde975b95b9e6775b"
-SRC_URI[sha256sum] = "f6d0fd4c0a74b05f80907229d0b270f54ca23294bcc11979f8b8d12766786945"
+SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
 
-inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base python3targetconfig
+inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig
 
 EXTRA_OECONF = "--disable-static \
                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
-                --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
-                --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
-                --with-glibver=2.0"
+                --with-glibver=2.0 \
+                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}' \
+		"
 
 PACKAGECONFIG ??= "gdbm"
 PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
