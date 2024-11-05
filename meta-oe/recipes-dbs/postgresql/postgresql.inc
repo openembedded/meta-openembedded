@@ -55,7 +55,7 @@ pkg_postinst:${PN} () {
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd', d)} \
-    openssl python uuid libxml tcl perl zlib icu readline \
+    openssl python uuid libxml perl zlib icu readline \
 "
 PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
 PACKAGECONFIG[perl] = "--with-perl,--without-perl,perl,perl"
