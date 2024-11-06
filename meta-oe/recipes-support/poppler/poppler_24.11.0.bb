@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://basename-include.patch \
            file://0001-cmake-Do-not-use-isystem.patch \
            "
-SRC_URI[sha256sum] = "ebd857987e2395608c69fdc44009692d5906f13b612c5280beff65a0b75dc255"
+SRC_URI[sha256sum] = "7723d880565211740c13649d24a300257b86ddd7fa2d208187ff7e5cc8dfbd58"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
 
