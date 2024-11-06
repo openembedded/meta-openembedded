@@ -8,7 +8,6 @@ SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV
            file://0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch \
            "
 
-SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
 SRC_URI[sha256sum] = "1b8f187583bc6c6b0a63aae0165ca37892a2a3bd4bb0682cd76b56268b42c3d6"
 
 UPSTREAM_CHECK_URI="https://sourceforge.net/projects/sblim/files/sblim-sfcc/"

@@ -21,7 +21,6 @@ SRC_URI = " \
     file://0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch \
 "
 
-SRC_URI[md5sum] = "a1da3358ab798f1cb9232f1dbababc21"
 SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d181a68"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/opensc/files/openct/"

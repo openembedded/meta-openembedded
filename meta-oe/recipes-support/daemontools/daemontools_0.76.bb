@@ -26,7 +26,6 @@ SRC_URI = "http://cr.yp.to/daemontools/${BPN}-${PV}.tar.gz \
     file://0001-Fix-signature-of-main-function.patch \
 "
 
-SRC_URI[md5sum] = "1871af2453d6e464034968a0fbcb2bfc"
 SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710df4c1f"
 
 UPSTREAM_CHECK_URI = "http://cr.yp.to/daemontools/install.html"

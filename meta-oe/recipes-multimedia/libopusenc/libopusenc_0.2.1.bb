@@ -12,7 +12,6 @@ UPSTREAM_CHECK_URI = "https://github.com/xiph/libopusenc/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
 SRC_URI = "https://ftp.osuosl.org/pub/xiph/releases/opus/libopusenc-${PV}.tar.gz"
-SRC_URI[md5sum] = "f038ea0f4168d184c76b42d293697c57"
 SRC_URI[sha256sum] = "8298db61a8d3d63e41c1a80705baa8ce9ff3f50452ea7ec1c19a564fe106cbb9"
 
 S = "${WORKDIR}/libopusenc-${PV}"

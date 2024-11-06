@@ -11,7 +11,6 @@ SRC_URI = " \
     file://0001-Fix-list-traversal-issue-in-client_calc_layer.patch \
 "
 
-SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
 SRC_URI[sha256sum] = "8b4ac0760018c77c0044fab06a4f0c510ba87eae934d9983b10878483bde7ef7"
 
 UPSTREAM_CHECK_URI = "https://github.com/Mikachu/openbox/tags"
