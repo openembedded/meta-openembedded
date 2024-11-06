@@ -8,7 +8,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
 
-SRC_URI[sha256sum] = "8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"
+SRC_URI[sha256sum] = "dab3f4764309081ce75662649be815c4c9081e88f0837825f90fd28317d4da54"
 
 RDEPENDS:${PN} += " \
     python3-compression \
