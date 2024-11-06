@@ -53,7 +53,7 @@ diff --git a/crypto/internal.h b/crypto/internal.h
 index f93c2e5..2fca2fb 100644
 --- a/crypto/internal.h
 +++ b/crypto/internal.h
-@@ -1193,7 +1193,7 @@ static inline uint64_t CRYPTO_rotr_u64(uint64_t value, int shift) {
+@@ -1206,7 +1206,7 @@ static inline uint64_t CRYPTO_rotr_u64(uint64_t value, int shift) {
  
  // CRYPTO_addc_* returns |x + y + carry|, and sets |*out_carry| to the carry
  // bit. |carry| must be zero or one.
@@ -62,7 +62,7 @@ index f93c2e5..2fca2fb 100644
  
  #define CRYPTO_GENERIC_ADDC(x, y, carry, out_carry) \
    (_Generic((x),                                    \
-@@ -1245,7 +1245,7 @@ static inline uint64_t CRYPTO_addc_u64(uint64_t x, uint64_t y, uint64_t carry,
+@@ -1258,7 +1258,7 @@ static inline uint64_t CRYPTO_addc_u64(uint64_t x, uint64_t y, uint64_t carry,
  
  // CRYPTO_subc_* returns |x - y - borrow|, and sets |*out_borrow| to the borrow
  // bit. |borrow| must be zero or one.
