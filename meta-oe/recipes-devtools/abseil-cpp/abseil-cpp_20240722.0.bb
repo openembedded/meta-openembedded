@@ -28,7 +28,7 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
 
 SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
 
-PACKAGES_DYNAMIC = "^libabsl-*"
+PACKAGES_DYNAMIC += "^libabsl-*"
 PACKAGES_DYNAMIC:class-native = ""
 
 PACKAGESPLITFUNCS =+ "split_dynamic_packages"
