@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = "git://github.com/fastfloat/fast_float.git;protocol=https;branch=main"
 
-SRCREV = "2b2395f9ac836ffca6404424bcc252bff7aa80e4"
+SRCREV = "00c8c7b0d5c722d2212568d915a39ea73b08b973"
 S = "${WORKDIR}/git"
 
 inherit cmake
