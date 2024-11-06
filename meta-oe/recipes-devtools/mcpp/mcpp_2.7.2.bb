@@ -7,7 +7,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
            file://ice-mcpp.patch \
            file://0001-configure-Fix-checks-for-system-headers.patch \
            file://CVE-2019-14274.patch"
-SRC_URI[md5sum] = "512de48c87ab023a69250edc7a0c7b05"
 SRC_URI[sha256sum] = "3b9b4421888519876c4fc68ade324a3bbd81ceeb7092ecdbbc2055099fcb8864"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mcpp/files/mcpp/"

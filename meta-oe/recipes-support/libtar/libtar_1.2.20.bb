@@ -24,7 +24,6 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libt/${BPN}/${BPN}_${PV}.orig.tar.gz \
 
 S = "${WORKDIR}/${BPN}"
 
-SRC_URI[md5sum] = "6ced95ab3a4b33fbfe2dfb231d156cdb"
 SRC_URI[sha256sum] = "50f24c857a7ef1cb092e6508758b86d06f1188508f897f3e6b40c573e8879109"
 
 inherit autotools-brokensep

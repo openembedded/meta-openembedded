@@ -14,7 +14,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
            file://0001-Migrate-to-use-g_memdup2.patch \
 "
 
-SRC_URI[md5sum] = "0e742f021dc8c3f17435aea05c3e0314"
 SRC_URI[sha256sum] = "738b121b11f2b3f1744150c00cb381222eb6cf67161a7742797eb4f03e64a2ba"
 
 PACKAGECONFIG ??= "nss krb5"

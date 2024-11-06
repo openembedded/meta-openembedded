@@ -23,5 +23,4 @@ do_install:append() {
     install -m 0644 ${UNPACKDIR}/OFL.txt ${D}${datadir}/doc/ttf-inconsolata/
 }
 
-SRC_URI[md5sum] = "0fbe014c1f0fb5e3c71140ff0dc63edf"
 SRC_URI[sha256sum] = "1561e616c414a1b82d6e6dfbd18e5726fd65028913ade191e5fa38b6ec375a1a"

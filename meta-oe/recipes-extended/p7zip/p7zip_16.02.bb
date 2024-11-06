@@ -14,7 +14,6 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
            file://CVE-2016-9296.patch \
            "
 
-SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
 SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
 
 UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/p7zip"
