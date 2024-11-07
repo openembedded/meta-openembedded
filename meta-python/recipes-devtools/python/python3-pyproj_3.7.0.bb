@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3f3574263859ef2dc9bd7817d51adbaa"
 DEPENDS = "python3-cython proj"
 DEPENDS:append:class-target = " python3-cython-native proj-native"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_setuptools_build_meta cython
 
 SRC_URI += "file://rpath.patch"
 
@@ -21,11 +21,3 @@ RDEPENDS:${PN} = " \
 export PROJ_INCDIR = "${STAGING_INCDIR}"
 export PROJ_LIBDIR = "${STAGING_LIBDIR}"
 export PROJ_DIR = "${STAGING_BINDIR_NATIVE}/.."
-
-do_compile:append() {
-    for f in `find ${B} -name *.c`
-    do
-        sed -i -e "/BEGIN: Cython Metadata/,/END: Cython Metadata/d" $f
-    done
-    python_pep517_do_compile
-}
