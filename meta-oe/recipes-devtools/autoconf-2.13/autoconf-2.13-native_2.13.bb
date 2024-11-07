@@ -24,8 +24,11 @@ DEPENDS += "m4-native gnu-config-native"
 RDEPENDS:${PN} = "m4-native gnu-config-native"
 
 PERL = "${USRBINPATH}/perl"
+PERL:class-native = "/usr/bin/env perl"
 
-CACHED_CONFIGUREVARS += "ac_cv_path_PERL='${PERL}'"
+CACHED_CONFIGUREVARS += "ac_cv_path_PERL='${PERL}' \
+                         ac_cv_path_M4=m4 \
+                        "
 
 CONFIGUREOPTS = " \
     --build=${BUILD_SYS} \
@@ -48,10 +51,8 @@ CONFIGUREOPTS = " \
     --disable-silent-rules \
 "
 
-EXTRA_OECONF += "ac_cv_path_M4=m4 ac_cv_prog_TEST_EMACS=no"
-
 do_configure() {
-    ./configure ${CONFIGUREOPTS}
+    ${CACHED_CONFIGUREVARS} ./configure ${CONFIGUREOPTS}
 }
 
 do_install() {
