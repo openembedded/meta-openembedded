@@ -48,7 +48,6 @@ PACKAGECONFIG ??= "auth url-rewrite-helpers \
 PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
-PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
 PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
 PACKAGECONFIG[auth] = "--enable-auth-basic='${BASIC_AUTH}',--disable-auth --disable-auth-basic,krb5 openldap db cyrus-sasl"
 PACKAGECONFIG[url-rewrite-helpers] = "--enable-url-rewrite-helpers,--disable-url-rewrite-helpers,"
@@ -67,7 +66,9 @@ BASIC_AUTH += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
 EXTRA_OECONF += "--with-default-user=squid \
                  --sysconfdir=${sysconfdir}/${BPN} \
                  --with-logdir=${localstatedir}/log/${BPN} \
-                 'PERL=${USRBINPATH}/env perl'"
+                 'PERL=${USRBINPATH}/env perl' \
+                 --disable-esi \
+"
 
 # Workaround a build failure when using a native compiler that need -std=c++17
 # with a cross-compiler that doesn't.
