@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://copyright;md5=a65e9b0c9f78617732f09f68fc4ef79a"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
+# reason for opengl: spice-gtk requires opengl
+REQUIRED_DISTRO_FEATURES += "gobject-introspection-data opengl"
 
 DEPENDS = " \
   glib-2.0 \
