@@ -147,3 +147,9 @@ FILES:${PN}-networkmanager = "${libdir}/NetworkManager/dispatcher.d"
 
 RDEPENDS:${PN} += "perl ${PN}-conf"
 RDEPENDS:${PN}-ptest += "perl make bash"
+
+python() {
+    # Only ESI feature is vulnerable
+    if not bb.utils.filter('PACKAGECONFIG', 'esi', d):
+        d.setVarFlag("CVE_STATUS", "CVE-2024-45802", "not-applicable-config: esi is disabled")
+}
