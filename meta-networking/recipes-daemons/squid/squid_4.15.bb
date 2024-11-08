@@ -123,3 +123,6 @@ FILES:${PN}-doc += "${datadir}/*.txt"
 
 RDEPENDS:${PN} += "perl"
 RDEPENDS:${PN}-ptest += "make"
+
+# Only ESI feature is vulnerable
+CVE_CHECK_IGNORE += "${@'' if bb.utils.filter('PACKAGECONFIG', 'esi', d) else 'CVE-2024-45802'}"
