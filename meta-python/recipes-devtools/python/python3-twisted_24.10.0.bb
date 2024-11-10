@@ -42,8 +42,7 @@ RDEPENDS:${PN} = "\
     ${PN}-zsh \
 "
 
-RDEPENDS:${PN}-core = "python3-appdirs \
-                       python3-asyncio \
+RDEPENDS:${PN}-core = "python3-asyncio \
                        python3-attrs \
                        python3-automat \
                        python3-constantly \
@@ -57,7 +56,7 @@ RDEPENDS:${PN}-core = "python3-appdirs \
                        python3-zopeinterface \
 "
 RDEPENDS:${PN}-test = "${PN} python3-pyhamcrest"
-RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-bcrypt python3-cryptography python3-pickle"
+RDEPENDS:${PN}-conch = "${PN}-core ${PN}-protocols python3-appdirs python3-bcrypt python3-cryptography python3-pickle"
 RDEPENDS:${PN}-mail = "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-names = "${PN}-core"
 RDEPENDS:${PN}-runner = "${PN}-core ${PN}-protocols"
