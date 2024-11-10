@@ -10,11 +10,6 @@ SRC_URI[sha256sum] = "02951299672595fea0f70fa2d5f7b5e3d56836157eda68859a6ad6492d
 
 inherit pypi python_hatchling
 
-do_install:append() {
-    # remove some useless files before packaging
-    find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
-}
-
 PACKAGES =+ "\
     ${PN}-zsh \
     ${PN}-test \
