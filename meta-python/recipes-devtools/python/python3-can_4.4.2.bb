@@ -1,15 +1,16 @@
 SUMMARY = "Controller Area Network (CAN) interface module for Python"
+HOMEPAGE = "https://github.com/hardbyte/python-can"
 SECTION = "devel/python"
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
-SRC_URI[sha256sum] = "6ad50f4613289f3c4d276b6d2ac8901d776dcb929994cce93f55a69e858c595f"
+SRC_URI[sha256sum] = "1c46c0935f39f7a9c3e76b03249af0580689ebf7a1844195e92f87257f009df5"
 
-PYPI_PACKAGE = "python-can"
+PYPI_PACKAGE = "python_can"
 
 inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += " \
+RDEPENDS:${PN} += "\
     python3-aenum \
     python3-asyncio \
     python3-codecs \
