@@ -100,16 +100,18 @@ do_install_ptest() {
     # some tests need to write to this directory as user 'daemon'
     chmod 777 -R ${D}${PTEST_PATH}/tests
 
-    # do NOT need to rebuild Makefile itself
-    sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-    # do NOT need to rebuild $(check_PROGRAMS)
-    sed -i 's/^check-TESTS:.*$/check-TESTS:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-
-    # fix the srcdir, top_srcdir
-    sed -i 's,^\(srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-    sed -i 's,^\(top_srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
-    # fix the abs_top_builddir
-    sed -i 's,^\(abs_top_builddir = \).*,\1${PTEST_PATH}/,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+	sed -e '# do NOT need to rebuild Makefile itself' \
+	    -e 's/^Makefile:.*$/Makefile:/' \
+	    -e '# do NOT need to rebuild $(check_PROGRAMS)' \
+	    -e 's/^check-TESTS:.*$/check-TESTS:/' \
+	    -e '# fix the srcdir, top_srcdir' \
+	    -e 's,^\(srcdir = \).*,\1${PTEST_PATH}/tests,' \
+	    -e 's,^\(top_srcdir = \).*,\1${PTEST_PATH}/tests,' \
+	    -e '# fix the abs_top_builddir' \
+	    -e 's,^\(abs_top_builddir = \).*,\1${PTEST_PATH}/,' \
+	    -e '# fix the path to test-driver' \
+	    -e '/^\(SH_\)\?LOG_DRIVER/s/(top_srcdir)/(top_builddir)/' \
+	    -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
     # install test-driver
     install -m 644 ${S}/test-driver ${D}${PTEST_PATH}
