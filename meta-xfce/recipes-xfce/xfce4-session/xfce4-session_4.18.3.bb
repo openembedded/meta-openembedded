@@ -8,7 +8,7 @@ DEPENDS = "libwnck3 libsm libxfce4ui virtual/libx11"
 inherit xfce update-alternatives features_check
 
 SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
-SRC_URI[sha256sum] = "01ff7fe8d4c2091adefc2925c6b7bb93152ba0732e95c9b9e64d8207fdbdeb8a"
+SRC_URI[sha256sum] = "382f93e096ec6493098719cab8cc31b93ad9bb469c0715c0c5117d75fe7394ec"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
