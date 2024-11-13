@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 "
 
-
 inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspection features_check gtk-doc
 
-REQUIRED_DISTRO_FEATURES = "x11 opengl"
+REQUIRED_DISTRO_FEATURES = "opengl"
 
 GIR_MESON_OPTION = ""
 
@@ -25,11 +24,9 @@ DEPENDS += " \
     gtk+3 \
     gtk4 \
     iso-codes \
-    xext \
     libseccomp \
     libxkbcommon \
     xkeyboard-config \
-    xrandr \
 "
 
 DEPENDS:remove:riscv32 = "libseccomp"
