@@ -21,8 +21,6 @@ DEPENDS += " \
     gdk-pixbuf \
     glib-2.0 \
     gsettings-desktop-schemas \
-    gtk+3 \
-    gtk4 \
     iso-codes \
     libseccomp \
     libxkbcommon \
@@ -33,6 +31,10 @@ DEPENDS:remove:riscv32 = "libseccomp"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 EXTRA_OEMESON = "-Ddesktop_docs=false"
+
+PACKAGECONFIG ??= "gtk4 legacy"
+PACKAGECONFIG[gtk4] = "-Dbuild_gtk4=true,-Dbuild_gtk4=false,gtk4"
+PACKAGECONFIG[legacy] = "-Dlegacy_library=true,-Dlegacy_library=false,gtk+3"
 
 PACKAGES =+ "libgnome-desktop"
 RDEPENDS:${PN} += "libgnome-desktop"
