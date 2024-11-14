@@ -7,13 +7,7 @@ SRC_URI[sha256sum] = "9042a1b565ecac4f8e04df79376de1d1d31e4c82eddb6e71e8b8d82d0c
 
 PYPI_PACKAGE = "dbus_fast"
 
-inherit pypi python_poetry_core
-
-DEPENDS += " \
-	python3-setuptools-native \
-	python3-wheel-native \
-	python3-cython-native \
-	"
+inherit pypi python_poetry_core cython
 
 RDEPENDS:${PN} += " \
     python3-core (>=3.7) \
