@@ -9,11 +9,10 @@ SRC_URI += "file://run-ptest"
 
 PYPI_PACKAGE = "yarl"
 
-inherit pypi ptest python_setuptools_build_meta
+inherit pypi ptest python_setuptools_build_meta cython
 
 DEPENDS += " \
     python3-expandvars-native \
-    python3-cython-native \
 "
 
 RDEPENDS:${PN} = "\
