@@ -2,9 +2,9 @@ DESCRIPTION = "Blueman is a GTK+ Bluetooth Manager"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-native"
+DEPENDS = "gtk+3 glib-2.0 bluez5 python3-pygobject"
 
-inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache features_check python3targetconfig
+inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache features_check python3targetconfig cython
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
