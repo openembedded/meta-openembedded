@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cf056e8e7a0a5477451af18b7b5aa98c"
 
 SRC_URI[sha256sum] = "c037a86e8513059a2613aaba4d817bb90b9d9b6b69aace3ce9c877e8c8ed402b"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_setuptools_build_meta cython
 
 DEPENDS += " \
     python3-expandvars-native \
-    python3-cython-native \
 "
 
 BBCLASSEXTEND = "native nativesdk"
