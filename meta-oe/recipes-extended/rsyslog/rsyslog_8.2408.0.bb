@@ -37,6 +37,8 @@ SRC_URI[sha256sum] = "8bb2f15f9bf9bb7e635182e3d3e370bfc39d08bf35a367dce9714e186f
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
+CVE_PRODUCT = "rsyslog:rsyslog"
+
 inherit autotools pkgconfig systemd update-rc.d ptest
 
 EXTRA_OECONF += "--enable-imfile-tests ${ATOMICS}"
