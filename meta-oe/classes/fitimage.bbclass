@@ -455,6 +455,8 @@ python write_manifest() {
                 imgpath = d.getVar("DEPLOY_DIR_IMAGE")
                 bootscriptid = imgsource
                 fitimage_emit_section_bootscript(d, fd, imgpath, imgsource)
+            else:
+                bb.fatal(f"Unsupported image type: '{imgtype}'")
         fitimage_emit_section_end(d, fd)
         #
         # Step 5: Prepare a configurations section
