@@ -19,6 +19,8 @@ SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
 
 S = "${WORKDIR}/git"
 
+CVE_PRODUCT = "rsyslog:librelp"
+
 inherit autotools pkgconfig ptest
 
 PACKAGECONFIG ?= "tls-openssl valgrind"
