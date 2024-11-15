@@ -9,4 +9,6 @@ SRC_URI[sha256sum] = "46632b2785ff4a231dcf241eeb0dcb5fc0c7d4da8ee49cf5687722cdbe
 
 UPSTREAM_CHECK_URI = "http://libestr.adiscon.com/download/"
 
+CVE_PRODUCT = "adiscon:libestr"
+
 inherit autotools
