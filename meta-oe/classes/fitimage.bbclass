@@ -106,7 +106,7 @@ python __anonymous() {
         recipe = d.getVar('FITIMAGE_IMAGE_%s' % image)
 
         if not recipe:
-            bb.error("No recipe set for image '%s'. Specify via 'FITIMAGE_IMAGE_%s = \"<recipe-name>\"'" % (recipe, image))
+            bb.fatal(f"No recipe set for image '{image}'. Specify via 'FITIMAGE_IMAGE_{image} = \"<recipe-name>\"'")
             return
 
         d.appendVarFlag('do_unpack', 'vardeps', ' FITIMAGE_IMAGE_%s' % image)
