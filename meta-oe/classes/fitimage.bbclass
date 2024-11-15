@@ -388,7 +388,7 @@ python write_manifest() {
 
         for image in (images or "").split():
             imageflags = d.getVarFlags('FITIMAGE_IMAGE_%s' % image, expand=['file', 'fstype', 'type', 'comp']) or {}
-            imgtype = imageflags.get('type', '')
+            imgtype = imageflags.get('type', 'kernel')
             if imgtype == 'kernel':
                 default = "%s-%s%s" % (d.getVar('KERNEL_IMAGETYPE'), machine, d.getVar('KERNEL_IMAGE_BIN_EXT'))
                 imgsource = imageflags.get('file', default)
