@@ -15,7 +15,7 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
 
 inherit gnomebase gsettings gtk-icon-cache gnome-help gettext gobject-introspection vala gi-docgen
 
-SRC_URI[archive.sha256sum] = "a1c46f3020cb358b8323025db3a539c97d994a4c46f701f48edc6357f7fbcbd1"
+SRC_URI[archive.sha256sum] = "8a13975474eee27719b29ad763f1b24760a1aede6d7da4b623703070bc26e9fd"
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
