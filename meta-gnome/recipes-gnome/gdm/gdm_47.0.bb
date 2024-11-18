@@ -43,7 +43,7 @@ do_install:append() {
 }
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
+USERADD_PARAM:${PN} = "--system --no-create-home --groups video gdm"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
