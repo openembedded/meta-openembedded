@@ -10,12 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 RDEPENDS:${PN} += " \
     perl \
-    perl-module-filehandle \
-    perl-module-getopt-std \
-    perl-module-digest-md5 \
-    perl-module-digest-sha \
     perl-module-constant \
     perl-module-cwd \
+    perl-module-digest-md5 \
+    perl-module-digest-sha \
     perl-module-errno \
     perl-module-file-basename \
     perl-module-file-copy \
@@ -25,12 +23,14 @@ RDEPENDS:${PN} += " \
     perl-module-file-spec-functions \
     perl-module-file-spec-unix \
     perl-module-file-temp \
+    perl-module-filehandle \
     perl-module-getopt-long \
+    perl-module-getopt-std \
     perl-module-list-util \
     perl-module-mro \
     perl-module-overload \
-    perl-module-overloading \
     perl-module-overload-numbers \
+    perl-module-overloading \
     perl-module-parent \
     perl-module-pod-usage \
     perl-module-posix \
