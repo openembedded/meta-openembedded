@@ -290,7 +290,7 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
     conf_default = None
     conf_prefix = d.getVar('FITIMAGE_CONFIG_PREFIX') or ""
 
-    bb.note(f"Adding {dtb} section to ITS file")
+    bb.note(f"Adding {conf_prefix}{dtb} section to ITS file")
 
     conf_desc="Linux kernel"
     if dtb:
