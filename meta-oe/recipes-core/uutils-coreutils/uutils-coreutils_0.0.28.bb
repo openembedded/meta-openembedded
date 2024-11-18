@@ -13,7 +13,7 @@ SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main"
 # so src/uucore/src/lib/features.rs disables utmpx when targetting musl.
 COMPATIBLE_HOST:libc-musl = "null"
 
-SRCREV = "9b11753e7cb06b0f76f4221fc237019c0a86f8f5"
+SRCREV = "1d9e1626377cbaea3b21842a3525a62ba60f905f"
 S = "${WORKDIR}/git"
 
 require ${BPN}-crates.inc
