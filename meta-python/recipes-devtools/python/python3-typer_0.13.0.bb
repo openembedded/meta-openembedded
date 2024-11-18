@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/tiangolo/typer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
 
-SRC_URI[sha256sum] = "f592f089bedcc8ec1b974125d64851029c3b1af145f04aca64d69410f0c9b722"
+SRC_URI[sha256sum] = "f1c7198347939361eec90139ffa0fd8b3df3a2259d5852a0f7400e476d95985c"
 
 inherit pypi python_setuptools_build_meta ptest
 
