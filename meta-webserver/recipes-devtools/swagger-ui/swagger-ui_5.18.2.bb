@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https"
 
-SRCREV = "74ed0adebfc9c8dd0de2bf8e81495b022a66c083"
+SRCREV = "3c7e281d97fd3e70b25f7ff4a001eabd56e375d7"
 
 S = "${WORKDIR}/git"
 
