@@ -16,31 +16,31 @@ DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0;;protocol=https \
     file://freeradius \
     file://volatiles.58_radiusd \
-    file://freeradius-enble-user-in-conf.patch \
-    file://freeradius-configure.ac-allow-cross-compilation.patch \
-    file://freeradius-libtool-detection.patch \
-    file://freeradius-configure.ac-add-option-for-libcap.patch \
-    file://freeradius-avoid-searching-host-dirs.patch \
-    file://freeradius-rlm_python-add-PY_INC_DIR.patch \
-    file://freeradius-libtool-do-not-use-jlibtool.patch \
-    file://freeradius-fix-quoting-for-BUILT_WITH.patch \
-    file://freeradius-fix-error-for-expansion-of-macro.patch \
-    file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-    file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
-    file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
-    file://0001-workaround-error-with-autoconf-2.7.patch \
     file://radiusd.service \
     file://radiusd-volatiles.conf \
-    file://check-openssl-cmds-in-script-bootstrap.patch \
-    file://0001-version.c-don-t-print-build-flags.patch \
-    file://CVE-2022-41860.patch \
-    file://CVE-2022-41861.patch \
-    file://CVE-2024-3596.patch \
+    file://0001-Add-autogen.sh.patch \
+    file://0002-Enable-and-change-user-and-group-of-freeradius-serve.patch \
+    file://0003-configure.ac-allow-cross-compilation.patch \
+    file://0004-Fix-libtool-detection.patch \
+    file://0005-configure.ac-add-option-for-libcap.patch \
+    file://0006-Avoid-searching-host-dirs.patch \
+    file://0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch \
+    file://0008-libtool-do-not-use-jlibtool.patch \
+    file://0009-Fix-quoting-for-BUILD_WITH.patch \
+    file://0010-fix-error-for-expansion-of-macro-in-thread.h.patch \
+    file://0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
+    file://0012-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
+    file://0013-raddb-certs-Makefile-fix-the-occasional-verification.patch \
+    file://0014-Workaround-error-with-autoconf-2.7.patch \
+    file://0015-bootstrap-check-commands-of-openssl-exist.patch \
+    file://0016-version.c-don-t-print-build-flags.patch \
 "
 
 raddbdir="${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
+SRCREV = "f317c5b2668a4de7065df46b31267cd6ff32ddf1"
+
+UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
 
 CVE_CHECK_IGNORE = "\
     CVE-2002-0318 \

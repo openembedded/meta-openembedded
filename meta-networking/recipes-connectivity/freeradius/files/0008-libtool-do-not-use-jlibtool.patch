@@ -1,4 +1,4 @@
-From 16bf899447fc1524ffc3c79e1d35380e5285a552 Mon Sep 17 00:00:00 2001
+From d0fa5b259c2dc942d0a43a9cf1bfc32f40c184f9 Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Thu, 7 Jan 2016 22:37:30 -0800
 Subject: [PATCH] libtool: do not use jlibtool
@@ -7,7 +7,7 @@ jlibtool is hardcoded to be used but we need to use
 our libtool, so fix the makfiles to make it compatible
 with our libtool.
 
-Upstream-Status: Inappropriate [oe specific]
+Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
@@ -19,7 +19,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  4 files changed, 27 insertions(+), 15 deletions(-)
 
 diff --git a/Make.inc.in b/Make.inc.in
-index 7a77625..fd8aa3e 100644
+index 05f82776ff..e78f3fe9dc 100644
 --- a/Make.inc.in
 +++ b/Make.inc.in
 @@ -57,7 +57,7 @@ CPPFLAGS	= @CPPFLAGS@
@@ -31,7 +31,7 @@ index 7a77625..fd8aa3e 100644
  ACLOCAL		= @ACLOCAL@
  AUTOCONF	= @AUTOCONF@
  AUTOHEADER	= @AUTOHEADER@
-@@ -163,7 +163,7 @@ ANALYZE.c       := @clang_path@
+@@ -168,7 +168,7 @@ ANALYZE.c       := @clang_path@
  #
  ifeq "$(USE_SHARED_LIBS)" "yes"
  	TESTBINDIR = ./$(BUILD_DIR)/bin/local
@@ -41,10 +41,10 @@ index 7a77625..fd8aa3e 100644
  	TESTBINDIR = ./$(BUILD_DIR)/bin
  	TESTBIN    = ./$(BUILD_DIR)/bin
 diff --git a/scripts/boiler.mk b/scripts/boiler.mk
-index bccec5e..926a13e 100644
+index 2ce0c18f34..567cc0f22f 100644
 --- a/scripts/boiler.mk
 +++ b/scripts/boiler.mk
-@@ -266,6 +266,7 @@ define COMPILE_C_CMDS
+@@ -272,6 +272,7 @@ define COMPILE_C_CMDS
  	$(Q)$(ECHO) CC $<
  	$(Q)$(strip ${COMPILE.c} -o $@ -c -MD ${CPPFLAGS} ${CFLAGS} ${SRC_CFLAGS} ${INCDIRS} \
  	    $(addprefix -I, ${SRC_INCDIRS}) ${SRC_DEFS} ${DEFS} $<)
@@ -52,7 +52,7 @@ index bccec5e..926a13e 100644
  endef
  else
  #
-@@ -281,6 +282,7 @@ define COMPILE_C_CMDS
+@@ -287,6 +288,7 @@ define COMPILE_C_CMDS
  	$(Q)cppcheck --enable=style -q ${CHECKFLAGS} $(filter -isystem%,${SRC_CFLAGS}) \
  	     $(filter -I%,${SRC_CFLAGS}) $(filter -D%,${SRC_CFLAGS}) ${INCDIRS} \
  	     $(addprefix -I,${SRC_INCDIRS}) ${SRC_DEFS} ${DEFS} --suppress=variableScope --suppress=invalidscanf $<
@@ -61,7 +61,7 @@ index bccec5e..926a13e 100644
  endif
  
 diff --git a/scripts/install.mk b/scripts/install.mk
-index 9164115..e38c1ed 100644
+index 916411563b..e38c1ed697 100644
 --- a/scripts/install.mk
 +++ b/scripts/install.mk
 @@ -46,7 +46,7 @@ define ADD_INSTALL_RULE.exe
@@ -116,10 +116,10 @@ index 9164115..e38c1ed 100644
  
  
 diff --git a/scripts/libtool.mk b/scripts/libtool.mk
-index 57915e1..2cb2f7d 100644
+index 381127ec2d..e83d7e6ad7 100644
 --- a/scripts/libtool.mk
 +++ b/scripts/libtool.mk
-@@ -55,7 +55,9 @@ ifeq "${LIBTOOL}" "JLIBTOOL"
+@@ -60,7 +60,9 @@ ifeq "${LIBTOOL}" "JLIBTOOL"
      # Tell GNU Make to use this value, rather than anything specified
      # on the command line.
      override LIBTOOL := ${JLIBTOOL}
@@ -130,7 +130,7 @@ index 57915e1..2cb2f7d 100644
  
  # When using libtool, it produces a '.libs' directory.  Ensure that it
  # is removed on "make clean", too.
-@@ -69,11 +71,19 @@ clean: .libs_clean
+@@ -74,11 +76,19 @@ clean: .libs_clean
  # Re-define compilers and linkers
  #
  OBJ_EXT = lo
@@ -156,5 +156,5 @@ index 57915e1..2cb2f7d 100644
  
  # LIBTOOL_ENDINGS - Given a library ending in ".a" or ".so", replace that
 -- 
-2.10.2
+2.25.1
 

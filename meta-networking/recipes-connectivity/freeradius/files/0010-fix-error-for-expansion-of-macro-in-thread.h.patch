@@ -1,4 +1,4 @@
-From 5b6d8b14f2696fcf1dca119212f9d0a0fa04defd Mon Sep 17 00:00:00 2001
+From 30ce5ccd62446349d432ff65d3fe8d46872423c8 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 18 Jan 2017 14:59:39 +0800
 Subject: [PATCH] fix error for expansion of macro in thread.h
@@ -22,7 +22,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/src/include/threads.h b/src/include/threads.h
-index e36d81d..2bcb6aa 100644
+index e36d81dac0..2bcb6aadcb 100644
 --- a/src/include/threads.h
 +++ b/src/include/threads.h
 @@ -89,7 +89,7 @@ static _t __fr_thread_local_init_##_n(pthread_destructor_t func)\
@@ -57,5 +57,5 @@ index e36d81d..2bcb6aa 100644
  #endif
  #endif
 -- 
-2.10.2
+2.25.1
 
