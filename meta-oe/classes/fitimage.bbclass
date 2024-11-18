@@ -462,6 +462,7 @@ python write_manifest() {
         # Step 5: Prepare a configurations section
         #
         fitimage_emit_section_start(d, fd, 'configurations')
+        confcount = 0
         dtbcount = 1
         for dtb in (DTBS or "").split():
             import subprocess
@@ -474,6 +475,7 @@ python write_manifest() {
             dtb_path, dtb_file = os.path.split(dtb)
             fitimage_emit_section_config(d, fd, dtb_file, kernelcount, ramdiskcount, setupcount, bootscriptid, compatible, dtbcount)
             dtbcount += 1
+            confcount += 1
         for dtb in (DTBOS or "").split():
             import subprocess
             try:
@@ -485,8 +487,13 @@ python write_manifest() {
 
             dtb_path, dtb_file = os.path.split(dtb)
             fitimage_emit_section_config_fdto(d, fd, dtb_file, compatible)
+            confcount += 1
 
         fitimage_emit_section_end(d, fd)
+
+        if confcount == 0:
+            bb.fatal("Empty 'configurations' node generated! At least one 'fdt' or 'fdto' type is required.")
+
         fitimage_emit_fit_footer(d, fd)
 }
 
