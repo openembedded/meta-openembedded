@@ -9,7 +9,9 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 RDEPENDS:${PN} += " \
+    libjson-perl \
     perl \
+    perl-module-compress-zlib \
     perl-module-constant \
     perl-module-cwd \
     perl-module-digest-md5 \
@@ -27,6 +29,8 @@ RDEPENDS:${PN} += " \
     perl-module-getopt-long \
     perl-module-getopt-std \
     perl-module-list-util \
+    perl-module-load \
+    perl-module-metadata \    
     perl-module-mro \
     perl-module-overload \
     perl-module-overload-numbers \
