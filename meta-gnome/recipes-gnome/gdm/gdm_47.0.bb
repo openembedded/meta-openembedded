@@ -23,8 +23,10 @@ inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd user
 
 SRC_URI[archive.sha256sum] = "c5858326bfbcc8ace581352e2be44622dc0e9e5c2801c8690fd2eed502607f84"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
+
 EXTRA_OEMESON = " \
-    -Dplymouth=disabled \
     -Ddefault-pam-config=openembedded \
     -Dpam-mod-dir=${base_libdir}/security \
 "
