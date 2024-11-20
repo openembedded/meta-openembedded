@@ -24,3 +24,5 @@ do_install() {
 
 FILES:${PN} = "${libdir}/* \
                ${datadir}/* "
+
+BBCLASSEXTEND += "native"
