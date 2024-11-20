@@ -381,6 +381,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-rlp \
     python3-robotframework \
     python3-robotframework-seriallibrary \
+    python3-rouge-score \
     python3-rsa \
     python3-ruamel-yaml \
     python3-scrypt \
