@@ -3,13 +3,14 @@ HOMEPAGE = "https://openvpn.net/"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=89196bacc47ed37a5b242a535661a049"
-DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} ${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)} "
 
-inherit autotools systemd update-rc.d pkgconfig
+inherit autotools systemd update-rc.d pkgconfig ptest
 
 SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
            file://openvpn \
+           file://run-ptest \
           "
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
@@ -42,6 +43,8 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 
+RDEPENDS:${PN}-ptest:append = " make bash"
+
 do_install:append() {
     install -d ${D}/${sysconfdir}/init.d
     install -m 755 ${UNPACKDIR}/openvpn ${D}/${sysconfdir}/init.d
@@ -61,6 +64,47 @@ do_install:append() {
     install -m 644 ${S}/sample/sample-scripts/* ${D}${sysconfdir}/openvpn/sample/sample-scripts
 
     install -d -m 710 ${D}/${localstatedir}/lib/openvpn
+}
+
+do_compile_ptest () {
+    for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;`; do
+        dir=`dirname ${x}`
+        case $dir in
+            *example*)   
+                echo "Skipping directory: $dir"
+                ;;
+            *)           
+                oe_runmake -C ${dir} buildtest-TESTS
+                ;;
+        esac
+    done
+}
+
+do_install_ptest() {
+    for x in $(find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;); do
+        dir=$(dirname ${x})
+
+        if [[ "$dir" == *example* ]]; then
+            continue
+        fi
+
+        target_dir="${D}/${PTEST_PATH}/unit_tests/$(basename ${dir})"
+        mkdir -p ${target_dir}
+        cp -f ${dir}/Makefile ${target_dir}/        
+        sed -i "s/^Makefile:/MM:/g" ${target_dir}/Makefile
+        sed -i 's/^#TESTS = $(am__EXEEXT_4)/TESTS = $(am__EXEEXT_4)/' ${target_dir}/Makefile
+
+        for testfile in $(find ${dir} -name "*testdriver"); do
+            cp -rf ${testfile} ${target_dir}/
+        done
+    done
+    sed -i 's|find ./|find ${PTEST_PATH}|g' ${D}${PTEST_PATH}/run-ptest
+    sed -i 's|${top_builddir}/src/openvpn|${sbindir}|g' ${S}/tests/t_lpback.sh
+    cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}
+    cp -f ${B}/tests/Makefile ${D}/${PTEST_PATH}
+    sed -i "s/^Makefile:/MM:/g" ${D}/${PTEST_PATH}/Makefile
+    sed -i "s/^test_scripts = t_client.sh t_lpback.sh t_cltsrv.sh/test_scripts = t_lpback.sh/g" ${D}/${PTEST_PATH}/Makefile
+    
 }
 
 PACKAGES =+ " ${PN}-sample "
