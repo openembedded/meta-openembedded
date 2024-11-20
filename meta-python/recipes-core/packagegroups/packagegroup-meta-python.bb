@@ -249,6 +249,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-netaddr \
     python3-netifaces \
     python3-networkx \
+    python3-nltk \
     python3-nmap \
     python3-nocasedict \
     python3-nocaselist \
