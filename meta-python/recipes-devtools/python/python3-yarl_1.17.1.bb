@@ -24,8 +24,10 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-ptest += " \
     python3-hypothesis \
+    python3-image \
     python3-pytest \
     python3-pytest-codspeed \
+    python3-rich \
     python3-unittest-automake-output \
 "
 
