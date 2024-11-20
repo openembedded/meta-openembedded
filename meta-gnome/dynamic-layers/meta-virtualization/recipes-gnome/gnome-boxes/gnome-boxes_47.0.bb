@@ -9,8 +9,10 @@ GNOMEBASEBUILDCLASS = "meson"
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data opengl"
 
 DEPENDS = " \
+  appstream-native \
   glib-2.0 \
   desktop-file-utils-native \
+  itstool-native \
   libarchive \
   libgudev \
   libhandy \
