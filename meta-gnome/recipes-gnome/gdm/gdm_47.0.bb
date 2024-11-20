@@ -40,6 +40,8 @@ do_install:prepend() {
 
 do_install:append() {
     rm -rf ${D}/run ${D}${localstatedir}/run
+    echo "auth       optional     pam_gnome_keyring.so" >> ${D}${sysconfdir}/pam.d/gdm-password
+    echo "session    optional     pam_gnome_keyring.so auto_start" >> ${D}${sysconfdir}/pam.d/gdm-password
 }
 
 USERADD_PACKAGES = "${PN}"
