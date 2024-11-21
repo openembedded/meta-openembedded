@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/tiangolo/typer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
 
-SRC_URI[sha256sum] = "f1c7198347939361eec90139ffa0fd8b3df3a2259d5852a0f7400e476d95985c"
+SRC_URI[sha256sum] = "9d444cb96cc268ce6f8b94e13b4335084cef4c079998a9f4851a90229a3bd25c"
 
 inherit pypi python_setuptools_build_meta ptest
 
@@ -24,13 +24,19 @@ PYPI_PACKAGE = "typer"
 
 RDEPENDS:${PN} += "\
     python3-click \
+    python3-rich \
     python3-shellingham \
+    python3-typing-extensions \
 "
-
+# python3-misc for webbrowser module
 RDEPENDS:${PN}-ptest += "\
     python3-coverage \
+    python3-misc \
+    python3-mypy \
     python3-pytest \
-    python3-typing-extensions \
+    python3-pytest-cov \
+    python3-pytest-xdist \
+    python3-toml \
     python3-unittest-automake-output \
 "
 
@@ -38,4 +44,3 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
-
