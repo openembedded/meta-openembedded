@@ -12,7 +12,7 @@ require ${BPN}-crates.inc
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "f19d3a1d8998cc2bdab9190cead6becbb3c88d10bdfad947266132f077ce349e"
+SRC_URI[sha256sum] = "f57783fbaf648205ac50ae7d646f27582fc706be3977e87c3c124e7a92407b10"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
@@ -34,6 +34,7 @@ RDEPENDS:${PN}-ptest += "\
 	python3-dateutil \
     python3-dirty-equals \
     python3-hypothesis \
+    python3-inline-snapshot \
     python3-misc \
     python3-pytest \
     python3-pytest-mock \
