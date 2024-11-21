@@ -30,6 +30,8 @@ SRC_URI[sha256sum] = "d76395ab82d659d526291b013eee200201380930793531515abfc6e77b
 
 UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
 
+CVE_PRODUCT = "tcpdump:tcpdump"
+
 inherit autotools-brokensep pkgconfig ptest
 
 PACKAGECONFIG ?= "openssl"
