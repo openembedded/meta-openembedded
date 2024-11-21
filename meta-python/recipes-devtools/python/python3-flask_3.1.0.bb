@@ -22,13 +22,14 @@ CLEANBROKEN = "1"
 RDEPENDS:${PN} = " \
     python3-blinker \
     python3-click \
+    python3-importlib-metadata \
     python3-itsdangerous \
     python3-jinja2 \
-    python3-profile \
     python3-werkzeug \
 "
 
 RDEPENDS:${PN}-ptest += "\
+    python3-asgiref \
     python3-pytest \
     python3-unittest-automake-output \
 "
