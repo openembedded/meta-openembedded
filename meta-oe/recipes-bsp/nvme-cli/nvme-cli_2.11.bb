@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
 DEPENDS = "json-c libnvme"
 SRCREV = "9f34fcb12e3ab098e9b30e0f31e92cefb497cc42"
 
-SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https \
+           file://0001-nvme-print-add-fallback-for-non-standard-locale-cate.patch \
+           file://0002-plugins-netapp-add-include-of-libgen.h-for-basename-.patch"
 
 S = "${WORKDIR}/git"
 
