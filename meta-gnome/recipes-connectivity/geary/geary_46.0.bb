@@ -46,7 +46,10 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
 
 GIR_MESON_OPTION = ""
-EXTRA_OEMESON = "-Dprofile=release"
+EXTRA_OEMESON = "-Dprofile=release \
+                 -Diso_639_xml=${STAGING_DATADIR}/xml/iso-codes/iso_639.xml \
+                 -Diso_3166_xml=${STAGING_DATADIR}/xml/iso-codes/iso_3166.xml \
+                 "
 
 PACKAGECONFIG[libunwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
 PACKAGECONFIG[tnef] = "-Dtnef=enabled,-Dtnef=disabled,libytnef"
