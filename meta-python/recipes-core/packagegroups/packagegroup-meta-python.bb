@@ -236,6 +236,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-mccabe \
     python3-meh \
     python3-meld3 \
+    python3-mlcommons-loadgen \
     python3-mock \
     python3-monotonic \
     python3-mpmath \
