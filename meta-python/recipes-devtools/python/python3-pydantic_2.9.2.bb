@@ -38,15 +38,24 @@ RDEPENDS:${PN} += "\
 inherit ptest
 SRC_URI += "file://run-ptest"
 RDEPENDS:${PN}-ptest += "\
+    python3-ansi2html \
+    python3-coverage \
     python3-cloudpickle \
     python3-dirty-equals \
     python3-email-validator \
+    python3-fastjsonschema \
+    python3-greenlet \
     python3-html \
     python3-hypothesis \
+    python3-mypy \
+    python3-packaging \
     python3-pydoc \
     python3-pytest \
+    python3-pytest-codspeed \
     python3-pytest-mock \
+    python3-pytz \
     python3-rich \
+    python3-sqlalchemy \
     python3-unittest-automake-output \
     python3-unixadmin \
 "
