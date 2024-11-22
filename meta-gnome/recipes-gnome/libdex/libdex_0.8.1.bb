@@ -7,6 +7,9 @@ inherit features_check gnomebase upstream-version-is-even gobject-introspection
 DEPENDS += " \
     glib-2.0 \
 "
+DEPENDS:append:libc-musl = " libucontext"
+
+LDFLAGS:append:libc-musl = " -lucontext"
 
 SRC_URI[archive.sha256sum] = "955475ad3e43aabd6f6f70435264b5ee77bd265bd95545211fee026b08d378a0"
 
