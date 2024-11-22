@@ -15,7 +15,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=10e84ea70e8c3a1fbc462f5424806474"
 
 DEPENDS = "libinih libsdl2 lua libsocketcan pocketpy"
 
-SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main \
+           file://0001-can_linux-initialize-msghdr-in-a-portable-way.patch \
+           "
 SRCREV = "5bc04e09351f68e889381e1912b0445c4f18ee32"
 
 S = "${WORKDIR}/git"
