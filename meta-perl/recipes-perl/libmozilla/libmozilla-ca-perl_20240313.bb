@@ -10,7 +10,7 @@ LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://README;beginline=32;endline=39;md5=51e666dce556490a1132e937ad3f8729"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LW/LWP/Mozilla-CA-${PV}.tar.gz"
-SRC_URI[sha256sum] = "421a12ba7cef443bd368671cee9c9b46a8b55c2ccf7ac76c42f99e23a06115df"
+SRC_URI[sha256sum] = "624873939e309833894f881464a95dfe74ab77cab5d557308c010487161698e7"
 
 S = "${WORKDIR}/Mozilla-CA-${PV}"
 
