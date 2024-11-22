@@ -2,7 +2,7 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 GNOMEBASEBUILDCLASS = "meson"
-inherit gnomebase upstream-version-is-even gobject-introspection
+inherit features_check gnomebase upstream-version-is-even gobject-introspection
 
 DEPENDS += " \
     glib-2.0 \
