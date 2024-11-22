@@ -20,6 +20,7 @@ RDEPENDS:${PN}-ptest += " \
         python3-simplejson \
         python3-unittest-automake-output \
         python3-zoneinfo \
+        python3-tzdata \
 "
 
 do_install_ptest() {
