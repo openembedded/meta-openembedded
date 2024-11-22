@@ -31,6 +31,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https \
+           file://0001-util-consideredharmful-Use-overloadable-func-attribu.patch \
            file://0001-Remove-strip-option-from-executable-build.patch"
 
 SRCREV = "c098579d4fa0f004ccc204c5bc46eac3717cba28"
