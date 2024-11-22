@@ -38,6 +38,7 @@ inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-introspection 
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
 	file://0001-application-client.vala-hardcode-some-paths.patch \
+	file://0001-meson-Do-not-check-for-iso-xml-files-during-build.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -48,8 +49,8 @@ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
 
 GIR_MESON_OPTION = ""
 EXTRA_OEMESON = "-Dprofile=release \
-                 -Diso_639_xml=${STAGING_DATADIR}/xml/iso-codes/iso_639.xml \
-                 -Diso_3166_xml=${STAGING_DATADIR}/xml/iso-codes/iso_3166.xml \
+                 -Diso_639_xml=${datadir}/xml/iso-codes/iso_639.xml \
+                 -Diso_3166_xml=${datadir}/xml/iso-codes/iso_3166.xml \
                  "
 
 PACKAGECONFIG[libunwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
