@@ -20,21 +20,39 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  src/util/consideredharmful.h | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/src/util/consideredharmful.h b/src/util/consideredharmful.h
-index 3fe1f047..c6771956 100644
 --- a/src/util/consideredharmful.h
 +++ b/src/util/consideredharmful.h
-@@ -30,11 +30,11 @@ FILE* fopen();
+@@ -8,6 +8,7 @@
+ 
+ #pragma once
+ #include "taisei.h"
++#include "util/compat.h"
+ 
+ #include <stdio.h>
+ 
+@@ -24,17 +25,23 @@ PRAGMA(GCC diagnostic ignored "-Wstrict-
+ // clang generates lots of these warnings with _FORTIFY_SOURCE
+ PRAGMA(GCC diagnostic ignored "-Wignored-attributes")
+ 
++#ifdef __GLIBC__
++#define OVERLOADABLE __attribute__((overloadable))
++#else
++#define OVERLOADABLE
++#endif
++
+ #undef fopen
+ attr_deprecated("Use vfs_open or SDL_RWFromFile instead")
+ FILE* fopen();
  
  #undef strncat
  attr_deprecated("This function likely doesn't do what you expect, use strlcat")
 -char* strncat();
-+char* __attribute__((overloadable)) strncat();
++char* OVERLOADABLE strncat();
  
  #undef strncpy
  attr_deprecated("This function likely doesn't do what you expect, use strlcpy")
 -char* strncpy();
-+char* __attribute__((overloadable)) strncpy();
++char* OVERLOADABLE strncpy();
  
  #undef errx
  attr_deprecated("Use log_fatal instead")
