@@ -42,10 +42,12 @@ do_install:append() {
     rm -rf ${D}/run ${D}${localstatedir}/run
     echo "auth       optional     pam_gnome_keyring.so" >> ${D}${sysconfdir}/pam.d/gdm-password
     echo "session    optional     pam_gnome_keyring.so auto_start" >> ${D}${sysconfdir}/pam.d/gdm-password
+    install -d ${D}${sysconfdir}/tmpfiles.d
+    echo "d ${localstatedir}/lib/gdm 700 gdm gdm - -" > ${D}${sysconfdir}/tmpfiles.d/gdm.conf
 }
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --groups video gdm"
+USERADD_PARAM:${PN} = "--system --groups video --home ${localstatedir}/lib/gdm  gdm"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
@@ -64,7 +66,6 @@ CONFFILES:${PN} += "${sysconfdir}/gdm/custom.conf"
 FILES:${PN} += " \
     ${datadir}/dconf \
     ${base_libdir}/security/pam_gdm.so \
-    ${localstatedir} \
     ${systemd_unitdir} ${systemd_user_unitdir} \
 "
 
