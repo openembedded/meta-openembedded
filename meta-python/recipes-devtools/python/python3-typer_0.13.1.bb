@@ -24,18 +24,17 @@ PYPI_PACKAGE = "typer"
 
 RDEPENDS:${PN} += "\
     python3-click \
-    python3-rich \
-    python3-shellingham \
     python3-typing-extensions \
 "
 # python3-misc for webbrowser module
 RDEPENDS:${PN}-ptest += "\
-    python3-coverage \
     python3-misc \
     python3-mypy \
     python3-pytest \
     python3-pytest-cov \
     python3-pytest-xdist \
+    python3-rich \
+    python3-shellingham \
     python3-toml \
     python3-unittest-automake-output \
 "
