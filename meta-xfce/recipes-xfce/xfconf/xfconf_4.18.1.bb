@@ -8,7 +8,7 @@ inherit xfce gtk-doc gobject-introspection bash-completion vala
 
 EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
 
-SRC_URI[sha256sum] = "2e8c50160bf800a807aea094fc9dad81f9f361f42db56607508ed5b4855d2906"
+SRC_URI[sha256sum] = "d9714751bbcfdc5a59340da6ef8ddfc0807221587b962d907f97dc0a8a002257"
 
 FILES:${PN} += "${libdir}/xfce4/xfconf/xfconfd \
                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
