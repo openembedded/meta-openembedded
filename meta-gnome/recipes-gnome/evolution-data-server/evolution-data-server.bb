@@ -18,6 +18,7 @@ SRC_URI += " \
     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
     file://0004-call-native-helpers.patch \
     file://0001-data-CMakeLists.txt-dont-create-automatic-google-log.patch \
+    file://0001-I-574-Fails-to-build-link-against-icu-76.1.patch \
     file://iconv-detect.h \
 "
 
