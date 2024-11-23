@@ -21,6 +21,7 @@ DEPENDS += " \
 PV .= "+git"
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
+           file://0001-meson.build-support-building-with-ICU-76.patch \
            "
 SRCREV = "965c466e9bda262790e76edd5272e9e74b407ff3"
 S = "${WORKDIR}/git"
