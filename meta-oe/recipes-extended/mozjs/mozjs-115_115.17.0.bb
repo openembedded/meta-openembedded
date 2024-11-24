@@ -20,7 +20,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://1894423.patch \
            file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
            "
-SRC_URI[sha256sum] = "c3bb5a210738ca0f8cd26aa53fc4a07560db079c06cd0421cf35af4035029367"
+SRC_URI[sha256sum] = "80f184a102a743ee75401e86dd86af0be5f1e5ebf07c81119d9ca77422d716c3"
 
 UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs115"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
