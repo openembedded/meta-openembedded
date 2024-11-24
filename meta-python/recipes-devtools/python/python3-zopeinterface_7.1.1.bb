@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423
 PYPI_PACKAGE = "zope.interface"
 
 inherit pypi python_setuptools_build_meta
+SRC_URI += "file://0001-Allow-using-setuptools-74.patch"
 SRC_URI[sha256sum] = "4284d664ef0ff7b709836d4de7b13d80873dc5faeffc073abdb280058bfac5e3"
 PACKAGES =. "${PN}-test "
 
