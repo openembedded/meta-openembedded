@@ -17,6 +17,8 @@ DEPENDS = "\
     opusfile \
     zstd \
 "
+DEPENDS:append:libc-musl = " libucontext"
+LDFLAGS:append:libc-musl = " -lucontext"
 
 RDEPENDS_${PN} = "\
     cglm (>= 0.7.8) \
@@ -47,7 +49,5 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[a_null] = "-Da_null=true,-Da_null=false"
 PACKAGECONFIG[developer] = "-Ddeveloper=true,-Ddeveloper=false"
 PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,python3-docutils-native"
-
-
 
 FILES:${PN} += "${datadir}"
