@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://xfwm4-fix-incompatible-pointer-type-error.patch"
 
-SRC_URI[sha256sum] = "92cd1b889bb25cb4bc06c1c6736c238d96e79c1e706b9f77fad0a89d6e5fc13f"
+SRC_URI[sha256sum] = "73546c60c348bcbe088fd990f7d5d1d6a6eca4226f956c109d3655c00583b9cf"
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
