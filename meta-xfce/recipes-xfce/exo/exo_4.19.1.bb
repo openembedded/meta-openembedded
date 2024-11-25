@@ -15,7 +15,7 @@ SRC_URI += " \
     file://exo-no-tests-0.8.patch \
 "
 
-SRC_URI[sha256sum] = "a0124108c197efcc576a6deeface381416dc7137b6a7e7dfa3060fad62509fb7"
+SRC_URI[sha256sum] = "4c3721d47126b1a3143f00a4e4dff5eea364c02c3fa141b09c0b1af16b1f0794"
 
 # Note: python bindings did not work in oe-dev and are about to be moved to
 # pyxfce see http://comments.gmane.org/gmane.comp.desktop.xfce.devel.version4/19560
