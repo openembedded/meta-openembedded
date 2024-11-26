@@ -1,4 +1,8 @@
 SUMMARY = "WebKit web rendering engine for the GTK+ platform"
+DESCRIPTION = "\
+    This recipe builds with Gtk3 (instead of Gtk4) which results in API version 4.1 \
+    (having javascriptcoregtk-4.1.pc instead of 6.0). \
+"
 HOMEPAGE = "https://www.webkitgtk.org/"
 BUGTRACKER = "https://bugs.webkit.org/"
 
@@ -49,6 +53,8 @@ DEPENDS += " \
           gettext-native \
           "
 
+# using soup2 builds (JavaScript) API version 4.0
+# using soup3 builds (JavaScript) API version 4.1
 PACKAGECONFIG_SOUP ?= "soup3"
 PACKAGECONFIG ??= " \
 	   ${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
