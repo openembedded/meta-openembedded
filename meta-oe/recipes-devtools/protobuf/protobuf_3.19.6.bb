@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.19.x;protocol=
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
            file://0001-Fix-linking-error-with-ld-gold.patch \
            file://0001-Lower-init-prio-for-extension-attributes.patch \
+           file://0001-Add-recursion-check-when-parsing-unknown-fields-in-J.patch \
            "
 SRC_URI:append:mips:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 SRC_URI:append:mipsel:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
