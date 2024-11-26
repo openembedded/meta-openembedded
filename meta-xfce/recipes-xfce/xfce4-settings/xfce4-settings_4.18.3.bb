@@ -11,6 +11,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
 SRC_URI[sha256sum] = "2db9e99be503280739a08779503bdf11db8b9db9851c3a981deb449002f3f1a1"
 
+CFLAGS += " -Wno-deprecated-declarations -Wno-implicit-function-declaration"
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
 PACKAGECONFIG ??= " \
