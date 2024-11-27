@@ -763,7 +763,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     htop \
     hunspell \
     hunspell-dictionaries \
-    hwdata \
     icyque \
     iksemel \
     imagemagick \
