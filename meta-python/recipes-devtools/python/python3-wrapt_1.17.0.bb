@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "5f370f952971e7d17c7d1ead40e49f32345a7f7a5373571ef44d800d06
 
 inherit setuptools3 ptest
 
-SRCREV = "75f291f8bf1fe6535b13b0b3dfedca012ca6c8a5"
+SRCREV = "e663d4910a81d666786ac773ad7c16199b01d31b"
 SRC_URI += "git://github.com/GrahamDumpleton/wrapt;protocol=https;branch=develop \
 	file://run-ptest \
 "
