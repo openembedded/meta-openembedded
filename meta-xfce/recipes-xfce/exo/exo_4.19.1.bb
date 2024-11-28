@@ -2,7 +2,7 @@ DESCRIPTION = "Application library for the Xfce desktop environment"
 SECTION = "x11"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "gtk+3 libxfce4ui liburi-perl-native cairo"
+DEPENDS = "gtk+3 libxfce4ui cairo"
 
 inherit xfce perlnative gtk-doc features_check mime-xdg
 
