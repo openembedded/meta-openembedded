@@ -196,7 +196,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-ipython \
     python3-ipython-genutils \
     python3-iso3166 \
-    python3-isodate \
     python3-isort \
     python3-itsdangerous \
     python3-javaobj-py3 \
