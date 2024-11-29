@@ -11,14 +11,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=87109e44b2fda96a8991f27684a7349c \
                     file://third_party/openthread/repo/LICENSE;md5=543b6fe90ec5901a683320a36390c65f \
                     "
 DEPENDS = "autoconf-archive dbus readline avahi jsoncpp boost libnetfilter-queue protobuf protobuf-native"
-SRCREV = "a35cc682305bb2201c314472adf06a4960536750"
+SRCREV = "b041fa52daaa4dfbf6aa4665d8925c1be0350ca5"
 PV = "0.3.0+git"
 
 SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
            file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
            file://default-cxx-std.patch \
-           file://musl-fixes.patch \
+           file://0001-fix-build-on-GCC-14-for-yocto.patch;patchdir=third_party/openthread/repo \
            "
 
 S = "${WORKDIR}/git"
@@ -67,7 +67,3 @@ RCONFLICTS:${PN} = "ot-daemon"
 
 FILES:${PN} += "${systemd_unitdir}/*"
 FILES:${PN} += "${datadir}/*"
-
-# http://errors.yoctoproject.org/Errors/Details/766903/
-# git/third_party/openthread/repo/src/core/border_router/routing_manager.hpp:615:11: error: 'ot::BorderRouter::RoutingManager::DiscoveredPrefixTable' declared with greater visibility than the type of its field 'ot::BorderRouter::RoutingManager::DiscoveredPrefixTable::mEntryTimer' [-Werror=attributes]
-CXXFLAGS += "-Wno-error=attributes"
