@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "067a63fcfda82da6b198fa73079b1ca40b7c9b7994995b6ee38acda728b64d47"
+SRC_URI[sha256sum] = "20d95535e7d833889982bfe7cc321b7f63bf8879788fee982c76ae2b24cfb715"
 
 SRC_URI += "file://run-ptest"
 
