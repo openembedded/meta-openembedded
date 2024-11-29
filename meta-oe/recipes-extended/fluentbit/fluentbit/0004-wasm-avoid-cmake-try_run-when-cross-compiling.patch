@@ -1,4 +1,4 @@
-From 5b6d274664f92a6c6083f4d27a1b1604a326f22c Mon Sep 17 00:00:00 2001
+From 5f3bfd51851c6700b4dfd2ac25e83e5306b923f8 Mon Sep 17 00:00:00 2001
 From: Patrick Wicki <patrick.wicki@siemens.com>
 Date: Sat, 5 Oct 2024 21:36:12 +0200
 Subject: [PATCH] wasm: avoid cmake try_run when cross-compiling for x86

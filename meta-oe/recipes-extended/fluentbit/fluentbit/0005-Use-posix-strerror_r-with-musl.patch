@@ -1,4 +1,4 @@
-From f645128082117a0152a95b3dccd869a184b7513f Mon Sep 17 00:00:00 2001
+From 0c4310483875509f464883fa345f54e0d3ae25a5 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 10 Aug 2022 01:23:48 -0700
 Subject: [PATCH] Use posix strerror_r with musl
@@ -12,12 +12,15 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Resolved conflicts while upgrading recipe from v1.9.9 to v3.1.9.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+---
+ src/flb_network.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/flb_network.c b/src/flb_network.c
-index d183209fd..41e0281b5 100644
+index 8f8ca33f6..dd098a2ea 100644
 --- a/src/flb_network.c
 +++ b/src/flb_network.c
-@@ -553,7 +553,7 @@ static int net_connect_async(int fd,
+@@ -605,7 +605,7 @@ static int net_connect_async(int fd,
              /* Connection is broken, not much to do here */
  #if ((defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L) ||    \
       (defined(_XOPEN_SOURCE) || _XOPEN_SOURCE - 0L >= 600L)) &&     \
