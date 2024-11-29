@@ -17,13 +17,14 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "431fa79ae27edaef8d050a7af6f038f4400193a1"
+SRCREV = "600b5a955b5ef7b9d025e0c128432260d0c6a5f1"
 SRC_URI = "\
-    git://github.com/fluent/fluent-bit.git;branch=3.1;protocol=https \
+    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
     file://0004-wasm-avoid-cmake-try_run-when-cross-compiling.patch \
+    file://0005-cprof_encode_text.c-fix-wrong-pointer-assignment.patch \
 "
 SRC_URI:append:libc-musl = "\
     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
