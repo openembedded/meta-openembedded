@@ -2,15 +2,19 @@ DESCRIPTION = "The tools for verifying whether a certificate is valid for the in
 HOMEPAGE = "https://pypi.org/project/service-identity"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8a0f079f4e6a215d6bd6f9d97cab4d5f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=76edce6a3fa1b82b0bf2b6ce174c19e2"
 
-SRC_URI[sha256sum] = "6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34"
+SRC_URI[sha256sum] = "b8683ba13f0d39c6cd5d625d2c5f65421d6d707b013b375c355751557cbe8e09"
 
-inherit pypi python_setuptools_build_meta ptest
+inherit pypi python_hatchling ptest
+
+PYPI_PACKAGE = "service_identity"
 
 SRC_URI += " \
 	file://run-ptest \
 "
+
+DEPENDS += "python3-hatch-vcs-native python3-hatch-fancy-pypi-readme-native"
 
 RDEPENDS:${PN} += " \
     python3-attr \
@@ -29,5 +33,4 @@ RDEPENDS:${PN}-ptest += " \
 do_install_ptest() {
 	install -d ${D}${PTEST_PATH}/tests
 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-	cp -rf ${S}/setup.py ${D}${PTEST_PATH}
 }
