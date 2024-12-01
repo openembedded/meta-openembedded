@@ -35,6 +35,11 @@ export SWIG_FEATURES
 
 export STAGING_DIR
 
+do_configure:prepend() {
+    # workaround for https://github.com/swiftlang/swift/issues/69311
+    sed -i "/sys\/types.h/d" ${RECIPE_SYSROOT}${includedir}/openssl/e_os2.h
+}
+
 do_install:append() {
     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/SSL/__pycache__/*.cpython-*.pyc
     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/__pycache__/*.cpython-*.pyc
