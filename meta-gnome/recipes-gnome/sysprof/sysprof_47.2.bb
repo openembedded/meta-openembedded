@@ -21,7 +21,7 @@ SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.pat
             file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch \
             file://0003-libsysprof-Check-for-unw_set_caching_policy-before-u.patch \
            "
-SRC_URI[archive.sha256sum] = "d3baba814be0cdaef28704c8004ff3110e99525422060f2a993a22a47b9334eb"
+SRC_URI[archive.sha256sum] = "e4b5ede9fd978ec3f0d5a0d44d0429a6d201c362bf6cb4527319031ae462c54f"
 
 # reason: gtk4 requires opengl distro feature
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'gtk', 'opengl', '', d)}"
