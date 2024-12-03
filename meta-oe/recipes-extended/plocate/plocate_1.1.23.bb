@@ -12,4 +12,4 @@ DEPENDS = "zstd liburing"
 SRC_URI = "https://plocate.sesse.net/download/${BP}.tar.gz \
            file://0001-Include-linux-stat.h-only-when-sys-stat.h-is-not-inc.patch"
 
-SRC_URI[sha256sum] = "3b7e4741b4aa2ec044e53eff06474a32a3fb1e928b9382351fe79d4c27fb0049"
+SRC_URI[sha256sum] = "06bd3b284d5d077b441bef74edb0cc6f8e3f0a6f58b4c15ef865d3c460733783"
