@@ -3,7 +3,7 @@ HOMEPAGE = "https://cppy.readthedocs.io/en/latest/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0bfb3e39b13587f0028f17baf0e42371"
 
-SRC_URI[sha256sum] = "83b43bf17b1085ac15c5debdb42154f138b928234b21447358981f69d0d6fe1b"
+SRC_URI[sha256sum] = "da7413a286d5d31626ba35ed2c70ddfb033520cc81310088ba5a57d34039f604"
 
 RDEPENDS:${PN} += "python3-setuptools"
 
