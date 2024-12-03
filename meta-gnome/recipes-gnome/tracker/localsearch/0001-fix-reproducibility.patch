@@ -1,4 +1,4 @@
-From db5149a0c9297d1053c2d0c01ed116cdcf5d14f0 Mon Sep 17 00:00:00 2001
+From 57f4279008394831826ea2ff449b06b29c08ce68 Mon Sep 17 00:00:00 2001
 From: Markus Volk <f_l_k@t-online.de>
 Date: Tue, 12 Sep 2023 17:00:41 +0200
 Subject: [PATCH] meson: fix reproducibility
@@ -20,7 +20,7 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
  5 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index 4a2994a..31b1798 100644
+index 7ae103c..cc61e84 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -371,7 +371,7 @@ conf.set('PACKAGE_VERSION', '"@0@"'.format(meson.project_version()))
@@ -53,10 +53,10 @@ index 4a2994a..31b1798 100644
  
  if get_option('tests_tap_protocol')
 diff --git a/src/libtracker-miners-common/tracker-landlock.c b/src/libtracker-miners-common/tracker-landlock.c
-index 0aca8ed..e6c28b6 100644
+index 0ad90d0..354f5d1 100644
 --- a/src/libtracker-miners-common/tracker-landlock.c
 +++ b/src/libtracker-miners-common/tracker-landlock.c
-@@ -282,7 +282,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
+@@ -283,7 +283,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
  			          LANDLOCK_ACCESS_FS_READ_DIR);
  		}
  	}
@@ -65,7 +65,7 @@ index 0aca8ed..e6c28b6 100644
  	current_dir = g_get_current_dir ();
  
  	/* Detect running in-tree */
-@@ -302,7 +302,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
+@@ -303,7 +303,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
  			          in_tree_rules[i].flags);
  		}
  	}
@@ -75,7 +75,7 @@ index 0aca8ed..e6c28b6 100644
  #ifdef MINER_FS_CACHE_LOCATION
  	add_rule (landlock_fd, MINER_FS_CACHE_LOCATION,
 diff --git a/src/miners/fs/meson.build b/src/miners/fs/meson.build
-index 42c4573..73577c3 100644
+index 1e16618..286580a 100644
 --- a/src/miners/fs/meson.build
 +++ b/src/miners/fs/meson.build
 @@ -68,8 +68,8 @@ executable('localsearch-@0@'.format(tracker_api_major),
