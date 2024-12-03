@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=152634da660a374ca18c0734ed07c63c"
 
-SRC_URI[sha256sum] = "ef1bf844e878ab08aee7e40184156e1151f228f103aa5c6bd0724cc330960f8f"
+SRC_URI[sha256sum] = "21f535de2e7a82c94c130c054adb5c7421d480d5619d61073996e2f89bcb879b"
 
 DEPENDS += "python3-setuptools-scm-native"
 
