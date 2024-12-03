@@ -19,15 +19,13 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
            file://default-cxx-std.patch \
            file://0001-fix-build-on-GCC-14-for-yocto.patch;patchdir=third_party/openthread/repo \
+           file://0001-Musl-build-fix.patch;patchdir=third_party/openthread/repo \
            "
 
 S = "${WORKDIR}/git"
 SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
 
 inherit pkgconfig cmake systemd
-# openthread/repo/src/cli/cli.cpp:1786:18: fatal error: variable 'i' set but not used [-Wunused-but-set-variable]
-#    for (uint8_t i = 0;; i++)
-CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare -Wno-error=unused-but-set-variable"
 
 LDFLAGS:append:riscv32 = " -latomic"
 
