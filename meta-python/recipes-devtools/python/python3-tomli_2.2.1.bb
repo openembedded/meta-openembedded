@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aaaaf0879d17df0110d1aa8c8c9f46f5"
 
 inherit pypi python_flit_core
 
-SRC_URI[sha256sum] = "3f646cae2aec94e17d04973e4249548320197cfabdf130015d023de4b74d8ab8"
+SRC_URI[sha256sum] = "cd45e1dc79c835ce60f7404ec8119f2eb06d38b1deba146f07ced3bbc44505ff"
 
 BBCLASSEXTEND = "native nativesdk"
 
