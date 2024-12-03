@@ -11,7 +11,7 @@ SRC_URI  = "\
     file://0003-do-not-hardcode-the-full-path-of-dpkg.patch \
 "
 
-SRC_URI[sha256sum] = "666927457ee4b0b3e68e55a0efbf3fb69189610b7abbd534017d7032cb3ae833"
+SRC_URI[sha256sum] = "e8e8b72388b6e5ced65d1b5e69ce0b9e13f4813da0c328a52add57ee5f79430a"
 
 S = "${WORKDIR}/debootstrap"
 
