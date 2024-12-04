@@ -9,7 +9,7 @@ SRC_URI += "file://run-ptest"
 
 SRC_URI[sha256sum] = "aa4571f64e1070d38e4c14c491f69637ee73e23c801d3a418dde4d5410e5d53f"
 
-inherit setuptools3-base python_pep517 ptest pypi
+inherit python_setuptools_build_meta python_pep517 ptest pypi
 
 DEPENDS += " \
     libgpiod \
