@@ -597,7 +597,6 @@ RDEPENDS:packagegroup-meta-oe-graphics = "\
     xrdb \
     xrefresh \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "", d)} \
-    xserver-common \
     xsetroot \
     xstdcmap \
     xterm \
