@@ -24,7 +24,6 @@ RDEPENDS:${PN}-ptest += " \
     libgpiod-gpiosim \
     python3-setuptools \
 "
-RRECOMMENDS:${PN}-ptest += "kernel-module-configfs"
 
 export LINK_SYSTEM_LIBGPIOD = "1"
 
