@@ -21,7 +21,7 @@ RDEPENDS:${PN} += " \
     python3-profile \
 "
 RDEPENDS:${PN}-ptest += " \
-    libgpiod-ptest \
+    libgpiod-gpiosim \
     python3-setuptools \
 "
 RRECOMMENDS:${PN}-ptest += "kernel-module-configfs"
