@@ -20,27 +20,30 @@ PACKAGECONFIG[tests] = " \
     --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
     --disable-tests, \
     kmod util-linux glib-2.0 catch2 libedit glib-2.0-native libgudev, \
-    bash dbus glib-2.0-utils libgpiod-manager shunit2 \
+    bash dbus glib-2.0-utils libgpiod-manager-cfg shunit2 \
 "
 PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
 PACKAGECONFIG[glib] = "--enable-bindings-glib,--disable-bindings-glib,glib-2.0 glib-2.0-native"
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,glib-2.0 glib-2.0-native libgudev,dbus"
 
-PACKAGES =+ "${PN}-ptest-dev ${PN}-glib ${PN}-manager ${PN}-cli"
+PACKAGES =+ "${PN}-gpiosim ${PN}-glib ${PN}-manager ${PN}-manager-cfg ${PN}-cli"
 FILES:${PN}-tools += "${bindir}/gpionotify"
-FILES:${PN}-ptest += "${libdir}/libgpiosim.so.*"
-FILES:${PN}-ptest-dev += "${includedir}/gpiosim.h"
+FILES:${PN}-gpiosim += "${libdir}/libgpiosim.so.*"
+FILES:${PN}-gpiosim-dev += "${includedir}/gpiosim.h"
 FILES:${PN}-glib += "${libdir}/libgpiod-glib.so.*"
 FILES:${PN}-manager += " \
     ${bindir}/gpio-manager \
-    ${sysconfdir}/dbus-1/system.d/io.gpiod1.conf \
-    ${datadir}/dbus-1/interfaces/io.gpiod1.xml \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_system_unitdir}/gpio-manager.service', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${sysconfdir}/init.d/gpio-manager', '', d)} \
 "
+FILES:${PN}-manager-cfg += " \
+    ${sysconfdir}/dbus-1/system.d/io.gpiod1.conf \
+    ${datadir}/dbus-1/interfaces/io.gpiod1.xml \
+    ${nonarch_base_libdir}/udev/rules.d/90-gpio.rules \
+"
 FILES:${PN}-cli += "${bindir}/gpiocli"
 
-RDEPENDS:${PN}-manager += "dbus"
+RDEPENDS:${PN}-manager += "dbus ${PN}-manager-cfg"
 RDEPENDS:${PN}-cli += "${PN}-manager"
 
 SYSTEMD_PACKAGES = "${PN}-manager"
@@ -74,7 +77,7 @@ USERADD_PARAM:${PN}-manager = "--system -M -s /bin/nologin -g gpio gpio-manager"
 RDEPENDS:${PN}-ptest += " \
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'shunit2 bash', '', d)} \
 "
-RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim kernel-module-configfs"
+RRECOMMENDS:${PN}-gpiosim += "kernel-module-gpio-sim kernel-module-configfs"
 INSANE_SKIP:${PN}-ptest += "buildpaths"
 
 do_compile:prepend() {
