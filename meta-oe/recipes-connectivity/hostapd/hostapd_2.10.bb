@@ -12,6 +12,14 @@ SRC_URI = " \
     file://init \
     file://hostapd.service \
     file://CVE-2023-52160.patch \
+    file://CVE-2024-3596_00.patch \
+    file://CVE-2024-3596_01.patch \
+    file://CVE-2024-3596_02.patch \
+    file://CVE-2024-3596_04.patch \
+    file://CVE-2024-3596_05.patch \
+    file://CVE-2024-3596_06.patch \
+    file://CVE-2024-3596_07.patch \
+    file://CVE-2024-3596_08.patch \
 "
 
 
