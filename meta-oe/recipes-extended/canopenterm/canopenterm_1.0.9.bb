@@ -13,19 +13,18 @@ BUGTRACKER = "https://github.com/CANopenTerm/CANopenTerm/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=10e84ea70e8c3a1fbc462f5424806474"
 
-DEPENDS = "libinih libsdl2 lua libsocketcan pocketpy"
+DEPENDS = "cjson libinih libsdl2 lua libsocketcan pocketpy"
 
-SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main \
-           file://0001-can_linux-initialize-msghdr-in-a-portable-way.patch \
-           "
-SRCREV = "5bc04e09351f68e889381e1912b0445c4f18ee32"
+SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
+
+SRCREV  = "fcf2a49eb1ef3ac5f5d17ac1865be6dfbd9e33d5"
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake ptest
 
 EXTRA_OECMAKE += "-DBUILD_YOCTO=ON"
 
-FILES:${PN} += "${bindir}/CANopenTerm ${datadir}"
+FILES:${PN} += "${bindir}/CANopenTerm ${bindir}/codb2json ${datadir}"
 
-RDEPENDS:${PN} = "libinih libsdl2 lua libsocketcan pocketpy"
+RDEPENDS:${PN} = "cjson libinih libsdl2 lua libsocketcan pocketpy"
