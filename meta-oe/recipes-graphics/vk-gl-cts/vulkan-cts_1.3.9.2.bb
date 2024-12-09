@@ -24,6 +24,8 @@ inherit features_check
 
 DEPENDS += " vulkan-loader"
 
+EXTRA_OECMAKE += "-DSELECTED_BUILD_TARGETS="deqp-vk deqp-vksc""
+
 do_install() {
 	install -d ${D}/${CTSDIR}
 	cp -r ${B}/external/vulkancts/modules/vulkan/* ${D}/${CTSDIR}/
