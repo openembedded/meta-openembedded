@@ -19,7 +19,7 @@ SRCREV_FORMAT = "vk-gl-cts_amber_glslang_spirv-headers_spirv-tools_jsoncpp_video
 
 S = "${WORKDIR}/git"
 
-inherit pkgconfig cmake features_check python3native qemu
+inherit pkgconfig cmake cmake-qemu features_check python3native
 
 UPSTREAM_CHECK_GITTAGREGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
 
@@ -42,7 +42,6 @@ SRC_URI:append:toolchain-clang = "\
 "
 
 EXTRA_OECMAKE += "-DAMBER_DISABLE_WERROR=ON \
-                  -DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper \
                   -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
                   -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols"
 
@@ -57,17 +56,6 @@ PACKAGECONFIG[wayland] = "-DDEQP_TARGET=wayland,,wayland-native wayland wayland-
 PACKAGECONFIG[x11_egl] = "-DDEQP_TARGET=x11_egl,,virtual/libx11 virtual/egl,,,surfaceless wayland x11_glx x11_egl_glx"
 PACKAGECONFIG[x11_glx] = "-DDEQP_TARGET=x11_glx,,virtual/libx11,,,surfaceless wayland x11_egl x11_egl_glx"
 PACKAGECONFIG[x11_egl_glx] = "-DDEQP_TARGET=x11_glx,,virtual/libx11 virtual/egl,,,surfaceless wayland x11_egl x11_glx"
-
-do_configure:append() {
-        # Write out a qemu wrapper that will be used by cmake
-        # so that it can run target helper binaries through that.
-        qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_DIR_HOST}${base_libdir}')])}"
-        cat > ${WORKDIR}/qemuwrapper << EOF
-#!/bin/sh
-$qemu_binary "\$@"
-EOF
-        chmod +x ${WORKDIR}/qemuwrapper
-}
 
 python __anonymous() {
     # if the user doesn't specify any PACKAGECONFIG then the cts build system
