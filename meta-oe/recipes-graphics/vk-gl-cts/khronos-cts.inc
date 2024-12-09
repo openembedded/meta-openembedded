@@ -1,21 +1,16 @@
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "\
-	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
-	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;nobranch=1 \
-	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;nobranch=1 \
-	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;nobranch=1 \
-	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;nobranch=1 \
-	git://github.com/open-source-parsers/jsoncpp.git;protocol=https;destsuffix=git/external/jsoncpp/src;name=jsoncpp;nobranch=1 \
-	git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;nobranch=1 \
-	git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;destsuffix=git/external/vulkan-validationlayers/src;name=vulkan-validationlayers;nobranch=1 \
-	git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=git/external/ESExtractor/src;name=ESExtractor;nobranch=1 \
-	git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=git/external/nvidia-video-samples/src;name=video-parser;nobranch=1 \
-	https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
-"
+SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
+           file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+           file://0001-use-library-sonames-for-linking.patch \
+           file://generate-srcuri.py \
+           "
 
-SRCREV_FORMAT = "vk-gl-cts_amber_glslang_spirv-headers_spirv-tools_jsoncpp_video-parser_vulkan-docs_vulkan-validationlayers"
+SRC_URI:append:libc-musl = "file://fix-musl.patch"
+SRC_URI:append:toolchain-clang = "file://fix-clang-private-operator.patch"
+
+SRCREV_FORMAT = "vk-gl-cts"
 
 S = "${WORKDIR}/git"
 
@@ -26,22 +21,10 @@ UPSTREAM_CHECK_GITTAGREGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
 ANY_OF_DISTRO_FEATURES += "opengl vulkan"
 
 DEPENDS += "python3-lxml-native libpng zlib virtual/libgles2 qemu-native"
-
-SRC_URI += " \
-            file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
-            file://0001-use-library-sonames-for-linking.patch \
-"
-
-SRC_URI:append:libc-musl = "\
-	file://fix-musl.patch \
-"
 DEPENDS:append:libc-musl = " libexecinfo"
 
-SRC_URI:append:toolchain-clang = "\
-	file://fix-clang-private-operator.patch \
-"
-
 EXTRA_OECMAKE += "-DAMBER_DISABLE_WERROR=ON \
+                  -DUPDATE_DEPS_DIR=${S}/external/validation/ \
                   -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
                   -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols"
 
@@ -78,6 +61,15 @@ FILES:${PN} += "${CTSDIR}"
 # error: implicit instantiation of undefined template 'std::char_traits<unsigned int>'
 TOOLCHAIN = "gcc"
 
-# Validation-layers requires access during configure as it fetches validation-headers
-# and bunch of other packages from khronos github
-do_configure[network] = "1"
+# Prototype task to refresh the generated SRC_URI entries by parsing
+# the files in the source tree and writing a BPN-sources.inc file.
+do_refresh_srcuri() {
+    ${UNPACKDIR}/generate-srcuri.py ${PV} ${S}/external/ \
+        > ${THISDIR}/${BPN}-sources.inc
+    # Don't convert ${S}/external/vulkan-validationlayers/src/scripts/known_good.json as we
+    # currently build without validation
+}
+
+addtask refresh_srcuri after do_patch
+do_refresh_srcuri[network] = "1"
+do_refresh_srcuri[nostamp] = "1"
