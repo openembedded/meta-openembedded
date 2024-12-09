@@ -17,10 +17,6 @@ SRCREV = "25905f5d0a2a7883bd33491997556193582c6059"
 UPSTREAM_CHECK_COMMITS = "1"
 
 export GOPROXY = "https://proxy.golang.org,direct"
-# Workaround for network access issue during compile step.
-# This needs to be fixed in the recipes buildsystem so that
-# it can be accomplished during do_fetch task.
-do_compile[network] = "1"
 
 COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64).*-linux"
 
