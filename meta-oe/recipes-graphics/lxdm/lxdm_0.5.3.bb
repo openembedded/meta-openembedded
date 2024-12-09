@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}%20${PV}/${BPN}-${PV}.tar.xz \
            file://lxdm.conf \
            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'file://lxdm-pam file://lxdm-pam-debug', '', d)} \
-           ${@bb.utils.contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
+           ${@bb.utils.contains("IMAGE_FEATURES", "allow-root-login", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
            file://0002-let-autotools-create-lxdm.conf.patch \
            file://0003-check-for-libexecinfo-providing-backtrace-APIs.patch \
            file://0004-fix-css-under-gtk-3.20.patch \
@@ -28,9 +28,6 @@ PE = "1"
 DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+3 virtual/libx11 libxcb pango iso-codes"
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
 DEPENDS:append:libc-musl = " libexecinfo"
-
-# combine oe-core way with angstrom DISTRO_TYPE
-DISTRO_TYPE ?= "${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
 
 inherit autotools pkgconfig gettext systemd features_check
 # depends on virtual/libx11
@@ -65,7 +62,8 @@ do_install:append() {
         # ArchLinux version of pam config has the following advantages:
         # * simple setup of passwordless login
         # * in XFCE powerdown/restart enabled in logoff dialog
-        install -m 644 ${UNPACKDIR}/${@bb.utils.contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)} ${D}${sysconfdir}/pam.d/lxdm
+        install -m 644 ${UNPACKDIR}/${@bb.utils.contains_any("IMAGE_FEATURES", [ "allow-empty-password", "empty-root-password" ], "lxdm-pam-debug", "lxdm-pam",d)} \
+            ${D}${sysconfdir}/pam.d/lxdm
     fi
 }
 
