@@ -15,6 +15,8 @@ SRCREV_vulkan-validationlayers = "a92629196a4fed15e59c74aa965dd47bd5ece3b7"
 SRCREV_video-parser = "6821adf11eb4f84a2168264b954c170d03237699"
 SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
 
+EXTRA_OECMAKE += "-DSELECTED_BUILD_TARGETS="cts-runner deqp-egl deqp-gles2 deqp-gles3 deqp-gles31 deqp-gl-shared de-internal-tests glcts""
+
 do_install() {
 	install -d ${D}/${CTSDIR}
 	cp -r ${B}/external/openglcts/modules/* ${D}/${CTSDIR}
