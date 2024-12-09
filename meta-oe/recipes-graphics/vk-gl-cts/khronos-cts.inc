@@ -38,8 +38,11 @@ DEPENDS:append:libc-musl = " libexecinfo"
 SRC_URI:append:toolchain-clang = "\
 	file://fix-clang-private-operator.patch \
 "
-EXTRA_OECMAKE += "-DUPDATE_DEPS=OFF"
-EXTRA_OECMAKE:prepend:class-target = "-DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols -DAMBER_DISABLE_WERROR=ON"
+
+EXTRA_OECMAKE += "-DAMBER_DISABLE_WERROR=ON \
+                  -DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper \
+                  -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
+                  -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols"
 
 # The best thing for the user to do is to not specify any of the following
 # PACKAGECONFIGs (i.e. leave it blank) which tells the project to do its own
