@@ -17,7 +17,7 @@ DEPENDS = "cjson libinih libsdl2 lua libsocketcan pocketpy"
 
 SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
 
-SRCREV  = "fcf2a49eb1ef3ac5f5d17ac1865be6dfbd9e33d5"
+SRCREV  = "e0760b2e9657907e691be4df384ca7617109635d"
 
 S = "${WORKDIR}/git"
 
