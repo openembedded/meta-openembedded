@@ -17,13 +17,11 @@ DEPENDS = " \
 
 inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache features_check
 
+SRC_URI[archive.sha256sum] = "b8c309da3aa784c719558c3466402378f4a3d6cae8ed77cf6849aacd56ceb9ec"
+
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 EXTRA_OEMESON += "-Dintrospection=enabled"
-
-SRC_URI = "git://gitlab.gnome.org/GNOME/file-roller.git;protocol=https;branch=master"
-SRCREV = "d4f3b970bd7dd07d8f539433628eba10551aa629"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= ""
 
