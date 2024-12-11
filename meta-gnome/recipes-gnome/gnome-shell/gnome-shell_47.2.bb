@@ -33,20 +33,25 @@ GIR_MESON_OPTION = ""
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "b467575f8c159d20557258517f0dd68dfd0147d11b48d97ab8e1f709bc522a63"
-SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
+SRC_URI[archive.sha256sum] = "4184d01a1ab82cb421d1ca2e2bcce0292ceb46c4c749e61b0bde4b75004d2e00"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
 PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false,networkmanager libsecret,networkmanager"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
 
-EXTRA_OEMESON = " \
-    -Dgjs_path=${bindir}/gjs \
-    -Dextensions-app:gjs_path=${bindir}/gjs \
+EXTRA_OEMESON += " \
     -Dtests=false \
     -Dman=false \
+    --cross-file=${WORKDIR}/meson-${PN}.cross \
 "
+
+do_write_config:append() {
+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
+[binaries]
+gjs = '${bindir}/gjs'
+EOF
+}
 
 do_install:append() {
     # fix shebangs
