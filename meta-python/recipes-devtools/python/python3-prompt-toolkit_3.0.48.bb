@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "d6623ab0477a80df74e646bdbc93621143f5caf104206aa29294d53de1
 inherit pypi setuptools3
 
 PYPI_PACKAGE = "prompt_toolkit"
+UPSTREAM_CHECK_PYPI_PACKAGE = "prompt_toolkit"
 
 RDEPENDS:${PN} += " \
     python3-core \
