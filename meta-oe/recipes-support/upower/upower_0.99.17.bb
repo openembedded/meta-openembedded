@@ -11,11 +11,12 @@ DEPENDS = " \
     dbus-glib \
 "
 
-SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https;branch=master"
-SRCREV = "c889154ec8e3e2239db9260d48b2e198d72ba002"
-S = "${WORKDIR}/git"
+SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
+SRC_URI[sha256sum] = "de7177deb2ee23d9c505046c74a856564acab8fd1d39aa1541d123af5a99ca8d"
+S = "${WORKDIR}/${BPN}-v${PV}"
 
-UPSTREAM_CHECK_GITTAGREGEX = "UPOWER_(?P<pver>\d+(\_\d+)+)"
+UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
+UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 GIR_MESON_ENABLE_FLAG = "enabled"
 GIR_MESON_DISABLE_FLAG = "disabled"
