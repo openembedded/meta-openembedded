@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE_Apache_20;md5=19cbd64715b51267a47bf3750cc6a8a5 \
 "
 
-DEPENDS = "ninja-native cmake-native python3-scikit-build-native"
+DEPENDS = "ninja-native cmake-native python3-scikit-build-native python3-scikit-build-core-native"
 
 PYPI_PACKAGE = "cmake"
 PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "a8092815c739da7d6775c26ec30c2645f0fca9527a29e36a682faec7d39cde89"
+SRC_URI[sha256sum] = "45e09ef6fc5a0d3d4cac11bfee43ba3f9925f301660630d3d1e5457fbe12ecdf"
 
 SRC_URI += " \
 	file://CMakeLists.txt \
@@ -32,6 +32,7 @@ do_install:append () {
 RDEPENDS:${PN} = " \
 	cmake \
 	python3-scikit-build \
+	python3-scikit-build-core \
 "
 
 BBCLASSEXTEND = "native nativesdk"
