@@ -15,8 +15,9 @@ DEPENDS = "python3-pybind11-native"
 inherit setuptools3 pypi
 
 PYPI_PACKAGE = "mlcommons_loadgen"
+UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
 
-SRC_URI[sha256sum] = "99d404bbaa6dc3106db608a1c28b6fdcb317b12994aac8a85d81a13bb644802a"
+SRC_URI[sha256sum] = "a90fc0a3775acbeea64b43251d3baa743228c44b3742eb99b4f927548b527328"
 
 # Because the pyproject.toml contains invalid requirements.
 INSANE_SKIP += "pep517-backend"
