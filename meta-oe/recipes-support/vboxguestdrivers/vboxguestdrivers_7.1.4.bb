@@ -7,7 +7,7 @@ DEPENDS = "virtual/kernel"
 
 inherit module kernel-module-split
 
-COMPATIBLE_MACHINE = "(qemux86|qemux86-64)"
+COMPATIBLE_MACHINE = "(qemux86|qemux86-64|qemuarm64)"
 
 VBOX_NAME = "VirtualBox-${PV}"
 
@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://Makefile.utils \
 "
 
-SRC_URI[sha256sum] = "cf3ddf633ca410f1b087b0722413e83247cda4f14d33323dc122a4a42ff61981"
+SRC_URI[sha256sum] = "872e7a42b41f8558abbf887f1bdc7aac932bb88b2764d07cbce270cab57e3b5e"
 
 S ?= "${WORKDIR}/vbox_module"
 S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
