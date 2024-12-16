@@ -9,6 +9,7 @@ SRC_URI[sha256sum] = "54fdf7831055d06a2423054875d640102865a164cc8291a8086e44dd9b
 inherit pypi python_hatchling
 
 PYPI_PACKAGE = "inline_snapshot"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} = "python3-asttokens \
                   python3-black \
