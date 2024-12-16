@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https \
     file://0001-detect-correct-openssl-3.x.patch \
 "
 
-SRCREV = "53d65dc48cf436694f7edcfc805414e608e8a2bf"
+SRCREV = "f2c785dfe933934b86eae771e3ddfc56d37e371c"
 
 UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
 
