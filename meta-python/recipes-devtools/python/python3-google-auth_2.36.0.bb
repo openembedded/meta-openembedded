@@ -11,6 +11,7 @@ SRC_URI += " \
 "
 
 PYPI_PACKAGE = "google_auth"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN}-ptest += " \
         python3-aioresponses \

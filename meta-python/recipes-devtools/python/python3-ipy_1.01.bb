@@ -28,5 +28,6 @@ do_install_ptest() {
 }
 
 PYPI_PACKAGE = "IPy"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 BBCLASSEXTEND = "native"

@@ -9,6 +9,7 @@ inherit pypi setuptools3
 
 DEPENDS += "python3-grpcio"
 PYPI_PACKAGE = "grpcio_channelz"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI[sha256sum] = "a4ae742c9ca04327ae0eec43d7e5b96c9686b8fc24200ae0816a67ab18342710"
 

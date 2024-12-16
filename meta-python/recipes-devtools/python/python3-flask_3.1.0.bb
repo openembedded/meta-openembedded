@@ -12,9 +12,6 @@ SRC_URI += " \
         file://run-ptest \
 "
 
-UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/Flask"
-UPSTREAM_CHECK_REGEX = "/Flask/(?P<pver>(\d+[\.\-_]*)+)"
-
 inherit pypi python_setuptools_build_meta ptest
 
 CLEANBROKEN = "1"
