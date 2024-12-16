@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "223217c3d4f82c3ac5e29032b3f1c2eb0fb591b72161f86d93f5719079
 inherit pypi setuptools3
 
 PYPI_PACKAGE = "charset_normalizer"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} += " \
 	python3-core \

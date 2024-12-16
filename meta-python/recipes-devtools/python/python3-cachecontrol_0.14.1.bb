@@ -7,9 +7,6 @@ SRC_URI[sha256sum] = "06ef916a1e4eb7dba9948cdfc9c76e749db2e02104a9a1277e8b642591
 
 inherit pypi python_poetry_core
 
-UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/CacheControl/"
-UPSTREAM_CHECK_REGEX = "/CacheControl/(?P<pver>(\d+[\.\-_]*)+)"
-
 RDEPENDS:${PN} += "\
     python3-crypt \
     python3-datetime \

@@ -9,6 +9,7 @@ SRC_URI[sha256sum] = "b8683ba13f0d39c6cd5d625d2c5f65421d6d707b013b375c355751557c
 inherit pypi python_hatchling ptest
 
 PYPI_PACKAGE = "service_identity"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI += " \
 	file://run-ptest \
