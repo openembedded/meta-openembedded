@@ -3,11 +3,11 @@ LICENSE = "MIT & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
 
 
-DEPENDS = "mozjs-115 cairo"
+DEPENDS = "mozjs-128 cairo"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even pkgconfig
 
-SRC_URI[archive.sha256sum] = "135e39c5ac591096233e557cfe577d64093f5054411d47cb2e214bad7d4199bd"
+SRC_URI[archive.sha256sum] = "fb39aa5636576de0e5a1171f56a1a5825e2bd1a69972fb120ba78bd109b5693c"
 SRC_URI += " \
     file://0001-Support-cross-builds-a-bit-better.patch \
     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
