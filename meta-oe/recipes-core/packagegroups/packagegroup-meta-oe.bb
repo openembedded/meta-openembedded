@@ -444,7 +444,7 @@ RDEPENDS:packagegroup-meta-oe-gnome = "\
     gtkmm \
     gtkmm3 \
     libjcat \
-    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libpeas", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libpeas-1", "", d)} \
     pyxdg \
 "
 
