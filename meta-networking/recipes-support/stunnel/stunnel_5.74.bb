@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
            file://fix-openssl-no-des.patch \
 "
 
-SRC_URI[sha256sum] = "bc917c3bcd943a4d632360c067977a31e85e385f5f4845f69749bce88183cb38"
+SRC_URI[sha256sum] = "9bef235ab5d24a2a8dff6485dfd782ed235f4407e9bc8716deb383fc80cd6230"
 
 inherit autotools bash-completion pkgconfig
 
