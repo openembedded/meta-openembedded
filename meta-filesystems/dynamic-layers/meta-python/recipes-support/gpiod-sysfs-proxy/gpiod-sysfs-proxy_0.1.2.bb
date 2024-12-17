@@ -15,7 +15,7 @@ SRC_URI += " \
     file://run-ptest.in \
 "
 
-SRC_URI[sha256sum] = "c7830cb6a2c01914df2bc0549aef2dcfcb955520d400f65b3b50fb7a6f77f1b4"
+SRC_URI[sha256sum] = "4bdd4b8a7042f63a40507ae0f16b360011e67cbb2f0276289636487a54849530"
 
 # For full backward compatibility with the kernel sysfs interface, this option
 # must be selected. However, we don't make it the default as - with kernel sysfs
