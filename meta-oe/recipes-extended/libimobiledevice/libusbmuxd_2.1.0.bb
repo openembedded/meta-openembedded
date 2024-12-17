@@ -2,13 +2,13 @@ DESCRIPTION = "This daemon is in charge of multiplexing connections over USB to 
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6ab17b41640564434dda85c06b7124f7"
 
-DEPENDS = "udev libusb1 libplist"
+DEPENDS = "udev libusb1 libplist libimobiledevice-glue"
 
 inherit autotools pkgconfig gitpkgv
 
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "ce98c346b7c1dc2a21faea4fd3f32c88e27ca2af"
+SRCREV = "36ffb7ab6e2a7e33bd1b56398a88895b7b8c615a"
 SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
