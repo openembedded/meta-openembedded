@@ -22,3 +22,9 @@ inherit meson pkgconfig
 EXTRA_OEMESON += "--buildtype release -Dtests=false"
 
 FILES:${PN} = "${libdir} ${datadir}"
+
+# ppc64/riscv64/riscv32 is not supported on luajit
+COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST:riscv64 = "null"
+COMPATIBLE_HOST:powerpc64 = "null"
+COMPATIBLE_HOST:powerpc64le = "null"
