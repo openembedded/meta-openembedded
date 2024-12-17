@@ -6,12 +6,14 @@ DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgs
 
 inherit xfce gtk-doc systemd
 
-SRC_URI[sha256sum] = "4087f3af4ef31271d3f315421a2f1fe67e4fda7ad60bbab1f073627914dfcf00"
+SRC_URI[sha256sum] = "74b1647d55926547e98bfac70838ff63c5a84299a5e10c81c38d1fab90e25880"
 
 INSANE_SKIP:${PN} = "dev-so"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gstreamer-thumbnailer] = "--enable-gstreamer-thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
+
+EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
 
 do_install:append() {
     # Makefile seems to race on creation of symlink. So ensure creation here
