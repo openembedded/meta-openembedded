@@ -8,7 +8,7 @@ DEPENDS = "libxml2 glib-2.0 swig python3"
 
 inherit autotools pkgconfig python3native python3targetconfig
 
-SRCREV = "b8fcc89b74c9128a13b07cc15a0ce25dca0cd97e"
+SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
 SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
