@@ -18,7 +18,7 @@ SRC_URI:append = " \
 	file://0001-fix-reproducibility.patch \
 	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
 "
-SRC_URI[archive.sha256sum] = "a7b24a4f07805df7543a4dd023684fcde5ee699ca00eb5b09123a049d3aeccd8"
+SRC_URI[archive.sha256sum] = "cda69195f6845357a8d91c023670efe92238f4d138a1ef7a1401f45a2a8403ce"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
