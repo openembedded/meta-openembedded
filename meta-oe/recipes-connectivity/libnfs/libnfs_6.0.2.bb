@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
 SRCREV = "18c5c73ee88bb7dc8da0d55dc95164bb77e49dc6"
 S = "${WORKDIR}/git"
 
+DEPENDS += "gnutls"
+
 inherit cmake
 
 do_install:append() {
