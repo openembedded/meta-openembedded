@@ -13,7 +13,7 @@ inherit pypi
 PYPI_PACKAGE="rarfile"
 
 RDEPENDS:${PN} += "\
-    p7zip \
+    7zip \
     python3-core \
     python3-datetime \
     python3-crypt \
