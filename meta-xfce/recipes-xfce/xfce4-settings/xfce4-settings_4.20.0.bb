@@ -8,21 +8,26 @@ inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
-SRC_URI[sha256sum] = "2db9e99be503280739a08779503bdf11db8b9db9851c3a981deb449002f3f1a1"
+SRC_URI[sha256sum] = "23548da3429a296501fbfdbc98a861ee241b9fdd47e8d5de1781f57c6bbce5a9"
 
 CFLAGS += " -Wno-deprecated-declarations -Wno-implicit-function-declaration"
-EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
+EXTRA_OECONF += " \
+    GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
+    --enable-maintainer-mode --disable-debug \
+"
 
 PACKAGECONFIG ??= " \
     notify \
     ${@bb.utils.contains('DISTRO_FEATURES','alsa','sound-setter', bb.utils.contains('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
 "
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
+PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native"
 
 FILES:${PN} += " \
     ${libdir}/xfce4 \
+    ${libdir}/gtk-3.0/modules/libxfsettingsd-gtk-settings-sync.so \
     ${datadir}/xfce4 \
 "
 
