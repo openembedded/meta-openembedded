@@ -6,13 +6,15 @@ DEPENDS = "libxfce4util perl intltool-native xfce4-dev-tools-native"
 
 inherit xfce gtk-doc gobject-introspection bash-completion vala
 
-EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+EXTRA_OECONF += "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
 
-SRC_URI[sha256sum] = "dce24fb0555e9718d139c10e714759e03ab4e40a7ffcf3c990f046f7a17213cc"
+SRC_URI[sha256sum] = "8bc43c60f1716b13cf35fc899e2a36ea9c6cdc3478a8f051220eef0f53567efd"
 
 FILES:${PN} += "${libdir}/xfce4/xfconf/xfconfd \
                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
-                ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+                ${datadir}/dbus-1/services/org.xfce.Xfconf.service \
+                ${systemd_user_unitdir}/xfconfd.service \
+                "
 
 FILES:${PN}-dev += "${libdir}/gio/modules/libxfconfgsettingsbackend.la"
 
