@@ -14,6 +14,8 @@ DEPENDS = "openssl"
 SRCREV = "fe857cc4c68da4873071f168c9aaf9860040ff4e"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https"
 
+CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
+
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig bash-completion
