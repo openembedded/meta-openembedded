@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "e22c0bb032fde08f53de9ffbc5a128233041d9f33b5de022c0978a2149
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/libmemcached"
 
+CVE_STATUS[CVE-2023-27478] = "fixed-version: this problem was not yet introduced in 1.0.18"
+
 TARGET_LDFLAGS += "-luuid"
 TARGET_CFLAGS += "-D__USE_GNU -D_GNU_SOURCE"
 
