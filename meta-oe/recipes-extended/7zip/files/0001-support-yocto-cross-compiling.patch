@@ -21,8 +21,6 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  CPP/7zip/var_gcc.mak  | 2 --
  2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/CPP/7zip/7zip_gcc.mak b/CPP/7zip/7zip_gcc.mak
-index bcb06a0..297f0a8 100644
 --- a/CPP/7zip/7zip_gcc.mak
 +++ b/CPP/7zip/7zip_gcc.mak
 @@ -45,7 +45,7 @@ CFLAGS_DEBUG = -g
@@ -30,12 +28,10 @@ index bcb06a0..297f0a8 100644
  CFLAGS_DEBUG = -DNDEBUG
  ifneq ($(CC), $(CROSS_COMPILE)clang)
 -LFLAGS_STRIP = -s
-+LFLAGS_STRIP = 
++LFLAGS_STRIP =
  endif
  endif
  
-diff --git a/CPP/7zip/var_gcc.mak b/CPP/7zip/var_gcc.mak
-index 664491c..6d0f485 100644
 --- a/CPP/7zip/var_gcc.mak
 +++ b/CPP/7zip/var_gcc.mak
 @@ -6,7 +6,5 @@ IS_ARM64=
@@ -46,6 +42,12 @@ index 664491c..6d0f485 100644
 -CXX=$(CROSS_COMPILE)g++
  
  # -march=armv8-a+crc+crypto
--- 
-2.34.1
-
+--- a/CPP/7zip/var_clang.mak
++++ b/CPP/7zip/var_clang.mak
+@@ -6,6 +6,4 @@ IS_ARM64=
+ CROSS_COMPILE=
+ MY_ARCH=
+ USE_ASM=
+-CC=$(CROSS_COMPILE)clang
+-CXX=$(CROSS_COMPILE)clang++
+ USE_CLANG=1

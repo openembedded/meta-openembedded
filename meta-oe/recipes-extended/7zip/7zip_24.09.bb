@@ -17,19 +17,28 @@ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
 S = "${WORKDIR}/git"
 
 # Support Yocto cross compiling
+CXXFLAGS:append:toolchain-clang = " -Wno-error=cast-qual -Wno-error=sign-conversion \
+                                    -Wno-error=disabled-macro-expansion \
+                                    -Wno-error=shorten-64-to-32 \
+                                    -Wno-error=cast-function-type-strict"
+
 EXTRA_OEMAKE += " \
     CXXFLAGS_EXTRA='${CXXFLAGS}' \
     CFLAGS_BASE2='${CFLAGS}' \
     LDFLAGS_STATIC_3='${LDFLAGS}' \
 "
 
+# Support clang
+MAKEFILE ?= "../../cmpl_gcc.mak"
+MAKEFILE:class-target:toolchain-clang = "../../cmpl_clang.mak"
+
 do_compile() {
-    oe_runmake -C CPP/7zip/Bundles/Alone2    -f ../../cmpl_gcc.mak
-    oe_runmake -C CPP/7zip/Bundles/Format7zF -f ../../cmpl_gcc.mak
-    oe_runmake -C CPP/7zip/UI/Console        -f ../../cmpl_gcc.mak
-    oe_runmake -C CPP/7zip/Bundles/SFXCon    -f ../../cmpl_gcc.mak
-    oe_runmake -C CPP/7zip/Bundles/Alone     -f ../../cmpl_gcc.mak
-    oe_runmake -C CPP/7zip/Bundles/Alone7z   -f ../../cmpl_gcc.mak
+    oe_runmake -C CPP/7zip/Bundles/Alone2    -f ${MAKEFILE}
+    oe_runmake -C CPP/7zip/Bundles/Format7zF -f ${MAKEFILE}
+    oe_runmake -C CPP/7zip/UI/Console        -f ${MAKEFILE}
+    oe_runmake -C CPP/7zip/Bundles/SFXCon    -f ${MAKEFILE}
+    oe_runmake -C CPP/7zip/Bundles/Alone     -f ${MAKEFILE}
+    oe_runmake -C CPP/7zip/Bundles/Alone7z   -f ${MAKEFILE}
 }
 
 FILES:${PN} += "${libdir}/*"
@@ -37,15 +46,18 @@ FILES:${PN} += "${libdir}/*"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP:${PN} += "dev-so"
 
+INSTALLDIR ?= "g"
+INSTALLDIR:class-target:toolchain-clang = "c"
+
 do_install() {
 	install -d ${D}${bindir}
-	install -m 0755 ${S}/CPP/7zip/Bundles/Alone/b/g/7za ${D}${bindir}
-	install -m 0755 ${S}/CPP/7zip/Bundles/Alone7z/b/g/7zr ${D}${bindir}
-	install -m 0755 ${S}/CPP/7zip/UI/Console/b/g/7z ${D}${bindir}/7z.real
+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone/b/${INSTALLDIR}/7za ${D}${bindir}
+	install -m 0755 ${S}/CPP/7zip/Bundles/Alone7z/b/${INSTALLDIR}/7zr ${D}${bindir}
+	install -m 0755 ${S}/CPP/7zip/UI/Console/b/${INSTALLDIR}/7z ${D}${bindir}/7z.real
 	install -m 0755 ${UNPACKDIR}/7z_wrapper.sh ${D}${bindir}/7z
 
 	install -d ${D}${libdir}
-	install -m 0755 ${S}/CPP/7zip/Bundles/Format7zF/b/g/7z.so ${D}${libdir}/lib7z.so
+	install -m 0755 ${S}/CPP/7zip/Bundles/Format7zF/b/${INSTALLDIR}/7z.so ${D}${libdir}/lib7z.so
 	ln -rsn ${D}${libdir}/lib7z.so ${D}${bindir}/7z.so
 }
 
