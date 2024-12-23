@@ -51,8 +51,6 @@ DEPENDS += " \
     libsdl2-image \
     libsdl2-mixer \
     pango \
-    python3 \
-    python3-cython-native \
 "
 
 RDEPENDS:${PN} = " \
