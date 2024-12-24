@@ -12,7 +12,7 @@ require ${BPN}-crates.inc
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "62a763352879b84aa31058fc931884055fd75089cccbd9d58bb6afd01141b235"
+SRC_URI[sha256sum] = "eb026e5a4c1fee05726072337ff51d1efb6f59090b7da90d30ea58625b1ffb39"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
