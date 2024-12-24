@@ -14,6 +14,10 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
+CVE_STATUS_GROUPS += "CVES_2015"
+CVES_2015 = "CVE-2015-8270 CVE-2015-8271 CVE-2015-8272"
+CVES_2015[status] = "fixed-version: patched in current git hash"
+
 inherit autotools-brokensep
 
 EXTRA_OEMAKE = " \
