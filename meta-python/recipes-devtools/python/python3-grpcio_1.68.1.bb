@@ -11,9 +11,8 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
            file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
            file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
-           file://0001-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch \
            "
-SRC_URI[sha256sum] = "3dc2ed4cabea4dc14d5e708c2b426205956077cc5de419b4d4079315017e9732"
+SRC_URI[sha256sum] = "44a8502dd5de653ae6a73e2de50a401d84184f0331d0ac3daeb044e66d5c5054"
 
 RDEPENDS:${PN} = "python3-protobuf"
 
