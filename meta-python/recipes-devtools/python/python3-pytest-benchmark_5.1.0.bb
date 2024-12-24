@@ -1,9 +1,9 @@
 SUMMARY = "A ``pytest`` fixture for benchmarking code. It will group the tests into rounds that are calibrated to the chosen timer."
 HOMEPAGE = "https://github.com/ionelmc/pytest-benchmark"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c7d2e9d24c2b5bad57ca894da972e22e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d606e94f56c21c8e0cdde0b622dcdf57"
 
-SRC_URI[sha256sum] = "fb0785b83efe599a6a956361c0691ae1dbb5318018561af10f3e915caa0048d1"
+SRC_URI[sha256sum] = "9ea661cdc292e8231f7cd4c10b0319e56a2118e2c09d9f50e1b3d150d2aca105"
 
 inherit pypi setuptools3
 
