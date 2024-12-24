@@ -11,11 +11,11 @@ SECTION = "libs"
 HOMEPAGE = "https://metacpan.org/dist/Capture-Tiny"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dc7698cd2954eda44d2b50be647784f8"
 
 SRCNAME = "Capture-Tiny"
 SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "6c23113e87bad393308c90a207013e505f659274736638d8c79bac9c67cc3e19"
+SRC_URI[sha256sum] = "ca6e8d7ce7471c2be54e1009f64c367d7ee233a2894cacf52ebe6f53b04e81e5"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
