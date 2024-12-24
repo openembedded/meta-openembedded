@@ -39,6 +39,7 @@ CVE_PRODUCT = "apache:http_server"
 
 CVE_STATUS[CVE-1999-0289] = "not-applicable-platform: The current version is not affected. It only applies for Windows"
 CVE_STATUS[CVE-1999-0678] = "not-applicable-platform: this CVE is for Debian packaging configuration"
+CVE_STATUS[CVE-1999-1237] = "cpe-incorrect: This is vulnerability of Apache AuthenSmb module, fixed in 0.9"
 CVE_STATUS[CVE-1999-1412] = "not-applicable-platform: this CVE is for MAC OS X specific problem"
 CVE_STATUS[CVE-2007-0086] = "disputed: this CVE is officially disputed by Redhat"
 CVE_STATUS[CVE-2007-0450] = "not-applicable-platform: The current version is not affected. It only applies for Windows."
