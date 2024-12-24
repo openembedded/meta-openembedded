@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a75956865b40c80a37c1e864716592b4"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "c01b8b6ff40ffedf55b79a67f9dd920e9b2fc3909aae116facf6c8372a08b933"
+SRC_URI[sha256sum] = "861cca82bbc0652ca9acea896921b254944580342fde849f86f6dac1acc6ca96"
 
 RDEPENDS:${PN} += "python3-packaging"
