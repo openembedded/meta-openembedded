@@ -17,7 +17,7 @@ inherit setuptools3 pypi
 PYPI_PACKAGE = "mlcommons_loadgen"
 UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
 
-SRC_URI[sha256sum] = "a90fc0a3775acbeea64b43251d3baa743228c44b3742eb99b4f927548b527328"
+SRC_URI[sha256sum] = "f70fe2ff95732942254f8f5a754769337a9130a5d3e6920513db2c28af5631d0"
 
 # Because the pyproject.toml contains invalid requirements.
 INSANE_SKIP += "pep517-backend"
