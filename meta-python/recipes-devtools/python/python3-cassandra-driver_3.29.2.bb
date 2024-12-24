@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SRCNAME = "cassandra-driver"
 
-SRC_URI[sha256sum] = "38e9c2a2f2a9664bb03f1f852d5fccaeff2163942b5db35dffcf8bf32a51cfe5"
+SRC_URI[sha256sum] = "c4310a7d0457f51a63fb019d8ef501588c491141362b53097fbc62fa06559b7c"
 
 inherit pypi setuptools3
 
