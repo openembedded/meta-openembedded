@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5f89d1b0dec37448d4f4163dc3c40e64"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "9c7573fedbb75524396c5733d4b0c150d1839a5d52b905c15b6a36e030c44908"
+SRC_URI[sha256sum] = "4b18ccdcc335a9ae8cd85701662d92c879339bf439b45fa7c85fca76c9588619"
 
 RDEPENDS:${PN} += "\
     python3-apispec \
