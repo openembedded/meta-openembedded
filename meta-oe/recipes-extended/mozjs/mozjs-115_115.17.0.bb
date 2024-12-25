@@ -70,11 +70,14 @@ ICU:powerpc:toolchain-clang = ""
 
 LDFLAGS:append:riscv32 = " -latomic"
 
+TARGETSYS ?= "${RUST_HOST_SYS}"
+TARGETSYS:riscv32 = "${HOST_SYS}"
+
 do_configure() {
     cd ${B}
     python3 ${S}/configure.py \
         --enable-project=js \
-        --target=${RUST_HOST_SYS} \
+        --target=${TARGETSYS} \
         --host=${BUILD_SYS} \
         --prefix=${prefix} \
         --libdir=${libdir} \
