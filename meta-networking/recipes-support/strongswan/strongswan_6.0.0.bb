@@ -11,7 +11,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', 
 SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
           "
 
-SRC_URI[sha256sum] = "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e74693b54fc33678"
+SRC_URI[sha256sum] = "72fe58b7523155703b65b08c3cc559c2c9a5c96da54afebd8136f6623e7dda82"
 
 UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
 
@@ -22,24 +22,33 @@ EXTRA_OECONF = " \
 
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
-PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl curve25519\
+PACKAGECONFIG ?= "curl openssl sqlite3 swanctl \
         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', 'tpm2', '', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'ima', 'tnc-imc imc-hcd imc-os imc-scanner imc-attestation', '', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'ima', 'tnc-imv imv-hcd imv-os imv-scanner imv-attestation', '', d)} \
 "
 
+PACKAGECONFIG[aes] = "--enable-aes,--disable-aes,,${PN}-plugin-aes"
 PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
 PACKAGECONFIG[bfd] = "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
 PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
 PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,${PN}-plugin-curl"
+PACKAGECONFIG[des] = "--enable-des,--disable-des,,${PN}-plugin-des"
 PACKAGECONFIG[eap-identity] = "--enable-eap-identity,--disable-eap-identity,,${PN}-plugin-eap-identity"
 PACKAGECONFIG[eap-mschapv2] = "--enable-eap-mschapv2,--disable-eap-mschapv2,,${PN}-plugin-eap-mschapv2"
+PACKAGECONFIG[fips-prf] = "--enable-fips-prf,--disable-fips-prf,,${PN}-plugin-fips-prf"
 PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
+PACKAGECONFIG[hmac] = "--enable-hmac,--disable-hmac,,${PN}-plugin-hmac"
 PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,${PN}-plugin-ldap"
+PACKAGECONFIG[md5] = "--enable-md5,--disable-md5,,${PN}-plugin-md5"
 PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,${PN}-plugin-mysql"
 PACKAGECONFIG[nm] = "--enable-nm,--disable-nm,networkmanager,${PN}-nm"
 PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,${PN}-plugin-openssl"
+PACKAGECONFIG[pkcs12] = "--enable-pkcs12,--disable-pkcs12,,${PN}-plugin-pkcs12"
+PACKAGECONFIG[rc2] = "--enable-rc2,--disable-rc2,,${PN}-plugin-rc2"
+PACKAGECONFIG[sha1] = "--enable-sha1,--disable-sha1,,${PN}-plugin-sha1"
+PACKAGECONFIG[sha2] = "--enable-sha2,--disable-sha2,,${PN}-plugin-sha2"
 PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,${PN}-plugin-soup"
 PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,${PN}-plugin-sqlite"
 PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,,${PN}-plugin-stroke"
@@ -144,34 +153,23 @@ PACKAGESPLITFUNCS:prepend = "split_strongswan_plugins "
 # Install some default plugins based on default strongSwan ./configure options
 # See https://wiki.strongswan.org/projects/strongswan/wiki/Pluginlist
 RDEPENDS:${PN} += "\
-    ${PN}-plugin-aes \
     ${PN}-plugin-attr \
     ${PN}-plugin-cmac \
     ${PN}-plugin-constraints \
-    ${PN}-plugin-des \
     ${PN}-plugin-dnskey \
     ${PN}-plugin-drbg \
-    ${PN}-plugin-fips-prf \
-    ${PN}-plugin-gcm \
-    ${PN}-plugin-hmac \
     ${PN}-plugin-kdf \
     ${PN}-plugin-kernel-netlink \
-    ${PN}-plugin-md5 \
-    ${PN}-plugin-mgf1 \
     ${PN}-plugin-nonce \
     ${PN}-plugin-pem \
     ${PN}-plugin-pgp \
     ${PN}-plugin-pkcs1 \
     ${PN}-plugin-pkcs7 \
     ${PN}-plugin-pkcs8 \
-    ${PN}-plugin-pkcs12 \
     ${PN}-plugin-pubkey \
     ${PN}-plugin-random \
-    ${PN}-plugin-rc2 \
     ${PN}-plugin-resolve \
     ${PN}-plugin-revocation \
-    ${PN}-plugin-sha1 \
-    ${PN}-plugin-sha2 \
     ${PN}-plugin-socket-default \
     ${PN}-plugin-sshkey \
     ${PN}-plugin-updown \
