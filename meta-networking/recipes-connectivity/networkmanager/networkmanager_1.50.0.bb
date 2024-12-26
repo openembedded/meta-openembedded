@@ -40,11 +40,10 @@ SRC_URI = " \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
-    file://0001-libnm-systemd-core-Disable-sd_dhcp6_client_set_duid_.patch \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "5dc188fdffcf2d23c89d34b1e6319a6b20203e12eaec24b30037b7ea8ac8c613"
+SRC_URI[sha256sum] = "fc03e7388a656cebc454c5d89481626122b1975d7c26babc64dc7e488faa66e3"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
