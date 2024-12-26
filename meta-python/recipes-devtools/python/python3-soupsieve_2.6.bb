@@ -14,6 +14,8 @@ SRC_URI += " \
 RDEPENDS:${PN} += " \
     python3-core \
     python3-datetime \
+"
+RDEPENDS:${PN}:append:class-target = " \
     python3-beautifulsoup4 \
 "
 
