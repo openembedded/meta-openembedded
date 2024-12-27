@@ -15,7 +15,8 @@ PYPI_PACKAGE = "Werkzeug"
 SRC_URI += "file://CVE-2023-25577.patch \
             file://CVE-2023-23934.patch \
             file://CVE-2024-34069-0001.patch \
-            file://CVE-2024-34069-0002.patch"
+            file://CVE-2024-34069-0002.patch \
+            file://CVE-2024-49767.patch"
 
 SRC_URI[sha256sum] = "f8e89a20aeabbe8a893c24a461d3ee5dad2123b05cc6abd73ceed01d39c3ae74"
 
