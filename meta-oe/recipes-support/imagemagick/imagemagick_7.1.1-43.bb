@@ -13,7 +13,7 @@ BASE_PV = "${@d.getVar('PV').split('-')[0]}"
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
 
 SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
-SRCREV = "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
+SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
 
 S = "${WORKDIR}/git"
 
