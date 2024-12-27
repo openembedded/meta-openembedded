@@ -9,8 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2f9de66264141265b203cde9902819ea \
 # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 
-BASE_PV := "${PV}"
-PV .= "-26"
+BASE_PV = "${@d.getVar('PV').split('-')[0]}"
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
+
 SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
 SRCREV = "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
 
