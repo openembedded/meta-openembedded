@@ -7,8 +7,7 @@ DEPENDS = "elfutils zlib libbpf"
 
 # Depends on MACHINE_ARCH libbpf
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_HOST:mips = "null"
-COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
 
 SRCREV = "3e265dac5ec85b956c664464072196c37d2af4f3"
 SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master \
