@@ -14,7 +14,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8cdfa87bc5e09bc07f8cf64135026d91"
 
 SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main"
-SRCREV = "3be557f95dbc706716b9a9947e41c1f2db92e251"
+SRCREV = "416ee069fdd275b141e3b292fcfe913c8abfa194"
 
 S = "${WORKDIR}/git"
 
