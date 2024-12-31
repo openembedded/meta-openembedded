@@ -1,14 +1,14 @@
-From 2ce67b1f4b1f582d556ae058da10698bbaa0edc1 Mon Sep 17 00:00:00 2001
+From 6aec640342088498cb1b0a2e395eb3da297a48b4 Mon Sep 17 00:00:00 2001
 From: Ovidiu Panait <ovidiu.panait@windriver.com>
 Date: Mon, 13 Jul 2020 12:12:31 +0300
 Subject: [PATCH] nss: fix incorrect shebang of perl
 
 Replace incorrect shebang of perl with `#!/usr/bin/env perl'.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 Upstream-Status: Pending
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 ---
  nss/cmd/signver/examples/1/form.pl       | 2 +-
  nss/cmd/signver/examples/1/signedForm.pl | 2 +-
@@ -89,3 +89,6 @@ index f29f60a..850332a 100755
  
  ########################################################################
  #
+-- 
+2.25.1
+
