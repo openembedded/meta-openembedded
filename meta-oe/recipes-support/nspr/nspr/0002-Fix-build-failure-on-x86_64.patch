@@ -1,21 +1,24 @@
-Fix build failure on x86_64
+From f68f2535e98231ab362b6bbbe7cc4718b2c72aa9 Mon Sep 17 00:00:00 2001
+From: Robert Yang <liezhi.yang@windriver.com>
+Date: Tue, 31 Dec 2024 10:25:15 +0800
+Subject: [PATCH] Fix build failure on x86_64
 
 When the target_cpu is x86_64, we should assume that the pkg uses 64bit,
 only if USE_N32 is set, we can assume that the pkg uses 32bit. It used a
 opposite logic before.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-
 Upstream-Status: Pending
----
- configure.in |   12 ++++++------
- 1 files changed, 6 insertions(+), 6 deletions(-)
 
-Index: nspr/configure.in
-===================================================================
---- nspr.orig/configure.in
-+++ nspr/configure.in
-@@ -1875,28 +1875,24 @@ tools are selected during the Xcode/Deve
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ configure.in | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index 1a3e489..04419d9 100644
+--- a/configure.in
++++ b/configure.in
+@@ -1590,28 +1590,24 @@ tools are selected during the Xcode/Developer Tools installation.])
          PR_MD_ASFILES=os_Linux_ia64.s
          ;;
      x86_64)
@@ -49,4 +52,7 @@ Index: nspr/configure.in
 -            PR_MD_ASFILES=os_Linux_ppc.s
          fi
          ;;
-     esac    
+     esac
+-- 
+2.25.1
+

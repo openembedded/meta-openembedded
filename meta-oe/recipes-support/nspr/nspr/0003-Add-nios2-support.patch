@@ -1,21 +1,23 @@
-From 4760065a58153e4dae24e4e437a5136592c624bc Mon Sep 17 00:00:00 2001
+From 09a67d3945f1fde8372532ef2e19af20db2112cd Mon Sep 17 00:00:00 2001
 From: Marek Vasut <marex@denx.de>
 Date: Sat, 30 Jan 2016 07:18:02 +0100
 Subject: [PATCH] Add nios2 support
 
 Add support for the nios2 CPU.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
 Upstream-Status: Submitted [ https://bugzilla.mozilla.org/show_bug.cgi?id=1244421 ]
 
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- pr/include/md/_linux.cfg | 45 +++++++++++++++++++++++++++++++++++
+ pr/include/md/_linux.cfg | 45 ++++++++++++++++++++++++++++++++++++++++
  pr/include/md/_linux.h   |  4 +++-
  2 files changed, 48 insertions(+), 1 deletion(-)
 
+diff --git a/pr/include/md/_linux.cfg b/pr/include/md/_linux.cfg
+index 009d5e5..77c13df 100644
 --- a/pr/include/md/_linux.cfg
 +++ b/pr/include/md/_linux.cfg
-@@ -975,6 +975,51 @@
+@@ -979,6 +979,51 @@
  #define PR_BYTES_PER_WORD_LOG2   2
  #define PR_BYTES_PER_DWORD_LOG2  3
  
@@ -67,6 +69,8 @@ Upstream-Status: Submitted [ https://bugzilla.mozilla.org/show_bug.cgi?id=124442
  #elif defined(__or1k__)
  
  #undef  IS_LITTLE_ENDIAN
+diff --git a/pr/include/md/_linux.h b/pr/include/md/_linux.h
+index ad57d08..45a2231 100644
 --- a/pr/include/md/_linux.h
 +++ b/pr/include/md/_linux.h
 @@ -55,6 +55,8 @@
@@ -78,7 +82,7 @@ Upstream-Status: Submitted [ https://bugzilla.mozilla.org/show_bug.cgi?id=124442
  #elif defined(__or1k__)
  #define _PR_SI_ARCHITECTURE "or1k"
  #elif defined(__riscv) && (__riscv_xlen == 32)
-@@ -143,7 +145,7 @@ extern PRInt32 _PR_x86_64_AtomicSet(PRIn
+@@ -143,7 +145,7 @@ extern PRInt32 _PR_x86_64_AtomicSet(PRInt32 *val, PRInt32 newval);
  #define _MD_ATOMIC_SET                _PR_x86_64_AtomicSet
  #endif
  
@@ -87,3 +91,6 @@ Upstream-Status: Submitted [ https://bugzilla.mozilla.org/show_bug.cgi?id=124442
  #if defined(__GNUC__)
  /* Use GCC built-in functions */
  #define _PR_HAVE_ATOMIC_OPS
+-- 
+2.25.1
+

@@ -1,4 +1,4 @@
-From 8a592e4ead4ed6befe6044da3dd2dc7523c33905 Mon Sep 17 00:00:00 2001
+From 161c955f32dd350413de076b7cad588fa4bdc4de Mon Sep 17 00:00:00 2001
 From: Mingli Yu <Mingli.Yu@windriver.com>
 Date: Fri, 16 Nov 2018 13:52:49 +0800
 Subject: [PATCH] Makefile.in: remove _BUILD_STRING and _BUILD_TIME
@@ -23,10 +23,10 @@ Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
  4 files changed, 4 insertions(+), 28 deletions(-)
 
 diff --git a/lib/ds/Makefile.in b/lib/ds/Makefile.in
-index e737791..b578476 100644
+index fa8c783..74b4bdd 100644
 --- a/lib/ds/Makefile.in
 +++ b/lib/ds/Makefile.in
-@@ -114,13 +114,7 @@ GARBAGE += $(TINC)
+@@ -104,13 +104,7 @@ GARBAGE += $(TINC)
  
  $(TINC):
  	@$(MAKE_OBJDIR)
@@ -42,10 +42,10 @@ index e737791..b578476 100644
  
  $(OBJDIR)/plvrsion.$(OBJ_SUFFIX): plvrsion.c $(TINC)
 diff --git a/lib/libc/src/Makefile.in b/lib/libc/src/Makefile.in
-index e8a6d9f..978ed28 100644
+index 9ef2007..21abd6f 100644
 --- a/lib/libc/src/Makefile.in
 +++ b/lib/libc/src/Makefile.in
-@@ -116,13 +116,7 @@ GARBAGE += $(TINC)
+@@ -106,13 +106,7 @@ GARBAGE += $(TINC)
  
  $(TINC):
  	@$(MAKE_OBJDIR)
@@ -61,10 +61,10 @@ index e8a6d9f..978ed28 100644
  
  $(OBJDIR)/plvrsion.$(OBJ_SUFFIX): plvrsion.c $(TINC)
 diff --git a/lib/prstreams/Makefile.in b/lib/prstreams/Makefile.in
-index aeb2944..f318097 100644
+index 5865ab8..a00d20c 100644
 --- a/lib/prstreams/Makefile.in
 +++ b/lib/prstreams/Makefile.in
-@@ -116,13 +116,7 @@ endif
+@@ -102,13 +102,7 @@ endif
  
  $(TINC):
  	@$(MAKE_OBJDIR)
@@ -80,10 +80,10 @@ index aeb2944..f318097 100644
  
  $(OBJDIR)/plvrsion.$(OBJ_SUFFIX): plvrsion.c $(TINC)
 diff --git a/pr/src/Makefile.in b/pr/src/Makefile.in
-index 19c5a69..b4ac31c 100644
+index a9e86f5..bbcbb67 100644
 --- a/pr/src/Makefile.in
 +++ b/pr/src/Makefile.in
-@@ -326,13 +326,7 @@ GARBAGE += $(TINC)
+@@ -291,13 +291,7 @@ GARBAGE += $(TINC)
  
  $(TINC):
  	@$(MAKE_OBJDIR)
@@ -99,5 +99,5 @@ index 19c5a69..b4ac31c 100644
  
  $(OBJDIR)/prvrsion.$(OBJ_SUFFIX): prvrsion.c $(TINC)
 -- 
-2.7.4
+2.25.1
 
