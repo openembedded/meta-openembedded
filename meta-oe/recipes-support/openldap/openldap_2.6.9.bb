@@ -19,10 +19,9 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://slapd.service \
     file://remove-user-host-pwd-from-version.patch \
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
-    file://0001-fix-incompatible-pointer-type-error.patch \
 "
 
-SRC_URI[sha256sum] = "48969323e94e3be3b03c6a132942dcba7ef8d545f2ad35401709019f696c3c4e"
+SRC_URI[sha256sum] = "2cb7dc73e9c8340dff0d99357fbaa578abf30cc6619f0521972c555681e6b2ff"
 
 DEPENDS = "util-linux groff-native"
 
@@ -230,8 +229,3 @@ python populate_packages:prepend () {
 }
 
 BBCLASSEXTEND = "native"
-
-# This one is reproducible only on 32bit MACHINEs
-# http://errors.yoctoproject.org/Errors/Details/766968/
-# tls_g.c:971:57: error: passing argument 4 of 'gnutls_fingerprint' from incompatible pointer type [-Wincompatible-pointer-types]
-CFLAGS += "-Wno-error=incompatible-pointer-types"
