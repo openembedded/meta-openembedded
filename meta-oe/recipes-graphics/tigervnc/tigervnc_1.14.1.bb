@@ -15,7 +15,7 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 B = "${S}"
 
-SRCREV = "4a09a96661624dff14662d6e9849e06a6c70ae03"
+SRCREV = "1b4af5c586eb7a30a38c82fd088c1fa47a83e72f"
 
 SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.14-branch;protocol=https \
            file://0001-do-not-build-tests-sub-directory.patch \
@@ -25,10 +25,10 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.14-branch;protocol=ht
 
 # Keep sync with xorg-server in oe-core
 XORG_PN ?= "xorg-server"
-XORG_PV ?= "21.1.13"
+XORG_PV ?= "21.1.15"
 SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
 XORG_S = "${UNPACKDIR}/${XORG_PN}-${XORG_PV}"
-SRC_URI[xorg.sha256sum] = "b45a02d5943f72236a360d3cc97e75134aa4f63039ff88c04686b508a3dc740c"
+SRC_URI[xorg.sha256sum] = "841c82901282902725762df03adbbcd68153d4cdfb0d61df0cfd73ad677ae089"
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
