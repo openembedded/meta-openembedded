@@ -1,4 +1,4 @@
-From 13e9d66c24d1dce5179805ae5e1bf940409b4914 Mon Sep 17 00:00:00 2001
+From 88bf2abc07ae56ed1bcc9e915add0b3d9ed66c7b Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Wed, 10 Aug 2022 15:21:07 +0800
 Subject: [PATCH] config/nspr-config.in: don't pass LDFLAGS

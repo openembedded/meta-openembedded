@@ -6,13 +6,12 @@ LIC_FILES_CHKSUM = "file://configure.in;beginline=3;endline=6;md5=90c2fdee38e45d
 SECTION = "libs/network"
 
 SRC_URI = "http://ftp.mozilla.org/pub/nspr/releases/v${PV}/src/nspr-${PV}.tar.gz \
-           file://remove-rpath-from-tests.patch \
-           file://fix-build-on-x86_64.patch \
-           file://0002-Add-nios2-support.patch \
-           file://0001-md-Fix-build-with-musl.patch \
-           file://Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
-           file://0001-config-nspr-config.in-don-t-pass-LDFLAGS.patch \
-           file://0001-Fix-Wincompatible-function-pointer-types.patch \
+           file://0001-remove-rpath-from-tests.patch \
+           file://0002-Fix-build-failure-on-x86_64.patch \
+           file://0003-Add-nios2-support.patch \
+           file://0004-md-Fix-build-with-musl.patch  \
+           file://0005-Makefile.in-remove-_BUILD_STRING-and-_BUILD_TIME.patch \
+           file://0006-config-nspr-config.in-don-t-pass-LDFLAGS.patch \
            file://nspr.pc.in \
            "
 
@@ -24,7 +23,7 @@ CACHED_CONFIGUREVARS:append:libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE
 UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
 UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
 
-SRC_URI[sha256sum] = "7ea3297ea5969b5d25a5dd8d47f2443cda88e9ee746301f6e1e1426f8a6abc8f"
+SRC_URI[sha256sum] = "55dec317f1401cd2e5dba844d340b930ab7547f818179a4002bce62e6f1c6895"
 
 CVE_PRODUCT = "netscape_portable_runtime"
 
