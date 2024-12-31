@@ -1,11 +1,11 @@
-From 73edfbdf33fe4e41724e7e947033d8caeec8f3d0 Mon Sep 17 00:00:00 2001
+From 621023bc696d3d26a4179dbbafb42d79bef1faf9 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Sat, 7 Mar 2020 08:34:02 -0800
 Subject: [PATCH] nss:no rpath for cross compiling
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-Upstream-Status: Inappropriate [configuration]
+Upstream-Status: Inappropriate [oe specific]
 
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
  nss/cmd/platlibs.mk | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
@@ -26,3 +26,6 @@ index 6401778..e5c4e16 100644
  endif
  endif
  
+-- 
+2.25.1
+

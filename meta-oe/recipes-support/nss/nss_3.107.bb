@@ -22,18 +22,18 @@ VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '
 
 SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
            file://nss.pc.in \
-           file://0001-nss-fix-support-cross-compiling.patch \
-           file://nss-no-rpath-for-cross-compiling.patch \
-           file://nss-fix-incorrect-shebang-of-perl.patch \
-           file://disable-Wvarargs-with-clang.patch \
-           file://pqg.c-ULL_addend.patch \
            file://blank-cert9.db \
            file://blank-key4.db \
            file://system-pkcs11.txt \
-           file://nss-fix-nsinstall-build.patch \
-           file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+           file://0001-nss-fix-support-cross-compiling.patch \
+           file://0002-nss-no-rpath-for-cross-compiling.patch \
+           file://0003-nss-fix-incorrect-shebang-of-perl.patch \
+           file://0004-nss-disable-Wvarargs-with-clang.patch \
+           file://0005-nss-does-not-build-on-mips-with-clang-because-wrong-.patch  \
+           file://0006-Fix-nss-multilib-build-on-openSUSE-11.x-32bit.patch \
+           file://0007-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
            "
-SRC_URI[sha256sum] = "7b4ab657f772dc7520c46e8d481940b292dcfc6a4c90150a7c26672384cee962"
+SRC_URI[sha256sum] = "7f7e96473e38150771a615f5d40e8c41ba3a19385301ae0c525091f2fc9d6729"
 
 UPSTREAM_CHECK_URI = "https://ftp.mozilla.org/pub/security/nss/releases/"
 UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>\d+(\_\d+)+)"
