@@ -17,7 +17,10 @@ DEPENDS += " \
 
 RDEPENDS:${PN}-ptest += " \
 	python3-pytest \
+	python3-pytest-codspeed \
 	python3-pytest-xdist \
+	python3-rich \
+	python3-statistics \
 	python3-unittest-automake-output \
 "
 
