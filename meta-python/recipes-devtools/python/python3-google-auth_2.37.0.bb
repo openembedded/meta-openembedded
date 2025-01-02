@@ -20,6 +20,7 @@ RDEPENDS:${PN}-ptest += " \
         python3-freezegun \
         python3-grpcio \
         python3-mock \
+        python3-pyjwt \
         python3-pyopenssl \
         python3-pytest \
         python3-pytest-asyncio \
