@@ -9,10 +9,10 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
 
 SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https"
-SRCREV = "06cf5263082ec3e9d54e8409f268240fc767b5d4"
+SRCREV = "fcc14ed4fc9083a4e7fc25045b99cb7323bae4fe"
 S = "${WORKDIR}/git"
 
-DEPENDS= "openssl libxml2 xz zlib zstd"
+DEPENDS = "libxml2 libarchive"
 inherit cmake pkgconfig
 
 EXTRA_OEMAKE += 'LIBXML2_HEADER_PATH="${STAGING_INCDIR}/libxml2"'
