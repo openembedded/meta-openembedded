@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://license.txt;md5=573e74513ae3057b04757df65b537de0"
 SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-SRC_URI[sha256sum] = "67e8dae1ca2468d90de4e601c87d5f31ff492b38e8ab8bcbd02ddf7104ed8a9f"
+SRC_URI[sha256sum] = "7cb8575d88d232c77174769d7f9e24bb44444160585986eebd66e749cb9a9089"
 
 S = "${WORKDIR}/Botan-${PV}"
 
@@ -41,12 +41,25 @@ do_compile() {
 do_install() {
 	oe_runmake DESTDIR=${D} install
 	sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${D}${includedir}/botan-3/botan/build.h
+	
+	# Add botan binary and test tool
+	install -d ${D}${bindir}
+	install -d ${D}${datadir}/${PN}/tests/data
+	install -m 0755 ${B}/botan-test  ${D}${bindir}
+	cp -R --no-dereference --preserve=mode,links -v ${B}/src/tests/data/*  ${D}${datadir}/${PN}/tests/data/
 }
 
-PACKAGES += "${PN}-python3"
+PACKAGES += "${PN}-test ${PN}-python3"
 
 FILES:${PN}-python3 = "${libdir}/python3"
 
 RDEPENDS:${PN}-python3 += "python3"
-
+RDEPENDS:${PN}-bin  += "${PN}"
+RDEPENDS:${PN}-test += "${PN}"
+FILES:${PN}:remove   = "${bindir}/*"
+FILES:${PN}-bin:remove   = "${bindir}/*"
+FILES:${PN}-bin   = "${bindir}/botan"
+FILES:${PN}-test = "${bindir}/botan-test  ${datadir}/${PN}/tests/data"
 COMPATIBLE_HOST:riscv32 = "null"
+
+BBCLASSEXTEND = "native nativesdk"
