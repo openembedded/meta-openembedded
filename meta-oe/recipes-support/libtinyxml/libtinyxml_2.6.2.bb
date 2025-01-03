@@ -5,6 +5,7 @@ HOMEPAGE = "http://www.sourceforge.net/projects/tinyxml"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://readme.txt;md5=f8f366f3370dda889f60faa7db162cf4"
 SECTION = "libs"
+CVE_PRODUCT = "tinyxml"
 
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.tar.gz \
