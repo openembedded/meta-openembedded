@@ -192,7 +192,7 @@ do_install() {
         pam_so=$(find ${D} -name pam_user_map.so)
         if [ x"${pam_so}" != x ]; then
             pam_dir=$(dirname ${pam_so})
-            mv ${pam_dir} ${D}/${libdir}
+            mv ${pam_dir} ${D}/${base_libdir}
             rmdir --ignore-fail-on-non-empty ${pam_dir%security}
         fi
     fi
@@ -346,7 +346,7 @@ FILES:${PN}-server = "\
     ${sbindir}/mysqld \
     ${sbindir}/mariadbd \
     ${libdir}/plugin/*.so \
-    ${libdir}/security/*.so \
+    ${base_libdir}/security/*.so \
     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
     ${datadir}/mysql/ \
     ${localstatedir}/mysql/ \
