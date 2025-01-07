@@ -2,14 +2,14 @@ DESCRIPTION = "Python Imaging Library (Fork). Pillow is the friendly PIL fork by
 Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and \
 Contributors."
 HOMEPAGE = "https://pillow.readthedocs.io"
-LICENSE = "HPND"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c349a4b4b9ec2377a8fd6a7df87dbffe"
+LICENSE = "MIT-CMU"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
            file://0001-support-cross-compiling.patch \
            file://run-ptest \
            "
-SRCREV = "204aae6682fc936f5350b3fe70335776f81480a7"
+SRCREV = "4c1aed801e43c6b307e7135279ca1dbc02bbf052"
 
 inherit python_setuptools_build_meta ptest
 
