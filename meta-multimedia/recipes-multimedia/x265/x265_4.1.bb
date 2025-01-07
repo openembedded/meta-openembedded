@@ -14,7 +14,7 @@ S = "${WORKDIR}/x265_${PV}/source"
 
 inherit lib_package cmake pkgconfig
 
-EXTRA_OECMAKE += "-DENABLE_SHARED=ON -DENABLE_CLI=ON"
+EXTRA_OECMAKE += "-DENABLE_PIC=ON -DENABLE_SHARED=ON -DENABLE_CLI=ON"
 
 do_generate_toolchain_file:append() {
    echo "set(CMAKE_ASM_NASM_FLAGS --debug-prefix-map ${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR})" >> ${WORKDIR}/toolchain.cmake
