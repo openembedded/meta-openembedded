@@ -4,7 +4,7 @@
 # Setting to PD as this is what the upstream has it as.
 
 LICENSE = "PD"
-LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=b56b7454f5f865de2e6e35ee2185b461"
+LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=6a728308869d7a7901618a5bcb970f7e"
 require byacc.inc
 
-SRC_URI[sha256sum] = "36b972a6d4ae97584dd186925fbbc397d26cb20632a76c2f52ac7653cd081b58"
+SRC_URI[sha256sum] = "192c2fae048d4e7f514ba451627f9c4e612765099f819c19191f9fde3e609673"
