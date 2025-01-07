@@ -9,7 +9,7 @@ RDEPENDS:${PN} += " \
 	python3-logging \
 "
 
-SRC_URI[sha256sum] = "a4cc7404a203144754164b8b40994e2849fde1cfff06b08492f12fff9d9de7b9"
+SRC_URI[sha256sum] = "7e6de8ef79e164ced020d8131cd17d45a3cdeefb7afdaf41d7a2cbf2378828c3"
 
 inherit pypi setuptools3
 
