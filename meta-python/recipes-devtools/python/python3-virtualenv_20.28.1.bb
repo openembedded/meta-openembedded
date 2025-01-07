@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
 
-SRC_URI[sha256sum] = "2c9c3262bb8e7b87ea801d715fae4495e6032450c71d2309be9550e7364049aa"
+SRC_URI[sha256sum] = "5d34ab240fdb5d21549b76f9e8ff3af28252f5499fb6d6f031adac4e5a8c5329"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
