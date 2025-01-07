@@ -2,9 +2,9 @@ DESCRIPTION = "A utility provides a fake certificate authority (CA)"
 HOMEPAGE = "https://pypi.org/project/trustme"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d5a7af1a4b73e57431e25d15a2da745a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=fb59582a4d7ecbb79dfeefa0f69932e1"
 
-SRC_URI[sha256sum] = "ed2264fb46c35459e6de9e454ed4bab73be44b6a2a26ad417f9b6854aebb644a"
+SRC_URI[sha256sum] = "6528ba2bbc7f2db41f33825c8dd13e3e3eb9d334ba0f909713c8c3139f4ae47f"
 
 inherit pypi python_hatchling python_setuptools_build_meta ptest
 
