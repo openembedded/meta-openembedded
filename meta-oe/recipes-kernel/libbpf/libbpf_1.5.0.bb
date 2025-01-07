@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
 
 DEPENDS = "zlib elfutils"
 
-SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=libbpf-1.4.7"
-SRCREV = "ca72d0731f8c693bd98caba70d951fc0bfe20788"
+SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
+SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
