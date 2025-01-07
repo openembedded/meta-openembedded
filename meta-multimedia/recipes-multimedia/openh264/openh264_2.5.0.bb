@@ -17,4 +17,5 @@ BRANCH = "openh264v${PV}"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH}"
 
 COMPATIBLE_MACHINE:powerpc64le = "null"
+COMPATIBLE_MACHINE:riscv32 = "null"
 
