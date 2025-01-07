@@ -12,7 +12,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
            file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
            "
-SRC_URI[sha256sum] = "44a8502dd5de653ae6a73e2de50a401d84184f0331d0ac3daeb044e66d5c5054"
+SRC_URI[sha256sum] = "936fa44241b5379c5afc344e1260d467bee495747eaf478de825bab2791da6f5"
 
 RDEPENDS:${PN} = "python3-protobuf"
 
