@@ -15,6 +15,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-add-arm-to-list-of-mozinline.patch \
            file://armv5.patch \
            file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
+           file://riscv.patch \
            "
 SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d68358f"
 
