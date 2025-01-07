@@ -1,4 +1,4 @@
-From de7cb754410dfff23746a74fb788d99462ab6ae6 Mon Sep 17 00:00:00 2001
+From 2e59ade9de405e4cdea07bfc7432c76f1e8cb64b Mon Sep 17 00:00:00 2001
 From: Leon Anavi <leon.anavi@konsulko.com>
 Date: Mon, 11 Jan 2021 13:25:12 +0000
 Subject: [PATCH] support cross compiling
@@ -12,7 +12,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 60707083f..2f614d826 100644
+index a85731db9..d55eb5324 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -131,7 +131,7 @@ _LIB_IMAGING = (
@@ -24,7 +24,7 @@ index 60707083f..2f614d826 100644
  
  
  class DependencyException(Exception):
-@@ -534,12 +534,12 @@ class pil_build_ext(build_ext):
+@@ -537,12 +537,12 @@ class pil_build_ext(build_ext):
                      _add_directory(library_dirs, match.group(1))
  
          # include, rpath, if set as environment variables:
