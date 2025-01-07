@@ -11,7 +11,7 @@ DEPENDS += "python3-grpcio"
 PYPI_PACKAGE = "grpcio_reflection"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "cffcb33c4cbdde771a06fd55ca6fe149c6f89ec330c9a4010730bb2998597982"
+SRC_URI[sha256sum] = "3474aaedfb10d8da5503135a2fb9fbb4e1f72044ad7ee2d0bf22090934e80908"
 
 RDEPENDS:${PN} = "python3-grpcio"
 
