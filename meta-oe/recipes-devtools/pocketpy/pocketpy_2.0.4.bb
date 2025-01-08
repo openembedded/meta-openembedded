@@ -20,6 +20,8 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
+CFLAGS += "-fPIC"
+
 do_install() {
     install -d ${D}${libdir}
     install -m 0644 ${B}/libpocketpy.so ${D}${libdir}/
