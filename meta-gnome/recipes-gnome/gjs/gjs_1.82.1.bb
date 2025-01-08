@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
 
 DEPENDS = "mozjs-128 cairo"
 
-inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even pkgconfig
+inherit gnomebase gobject-introspection gettext features_check upstream-version-is-even pkgconfig
 
 SRC_URI[archive.sha256sum] = "fb39aa5636576de0e5a1171f56a1a5825e2bd1a69972fb120ba78bd109b5693c"
 SRC_URI += " \
