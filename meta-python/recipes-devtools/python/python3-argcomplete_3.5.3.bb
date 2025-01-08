@@ -3,15 +3,13 @@ HOMEPAGE = "https://github.com/kislyuk/argcomplete"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
 
-SRC_URI[sha256sum] = "eb1ee355aa2557bd3d0145de7b06b2a45b0ce461e1e7813f5d066039ab4177b4"
+SRC_URI[sha256sum] = "c12bf50eded8aebb298c7b7da7a5ff3ee24dffd9f5281867dfe1424b58c55392"
 
 PYPI_PACKAGE = "argcomplete"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_hatchling
 
-DEPENDS += " \
-    python3-setuptools-scm-native \
-"
+DEPENDS += "python3-hatch-vcs-native"
 
 RDEPENDS:${PN} += "\
     python3-core \
