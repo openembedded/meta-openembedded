@@ -14,7 +14,7 @@ SRC_URI = "\
     file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "60162bd3b9fc6f4886d4c7a07925ffd374167732f55dce8c491bfd9cd818a6cf"
+SRC_URI[sha256sum] = "2a5cfc5ae259e4e97f86b68dfffc152cdaffe94e2060b770cb827238d769fc05"
 
 UPSTREAM_CHECK_URI = "https://github.com/kkos/oniguruma/releases/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
