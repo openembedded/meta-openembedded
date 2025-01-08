@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
            file://0001-add-support-for-glesv2.patch \
            "
 
-SRCREV = "9ef218027178115a66b417ae34b21f488bdd3617"
+SRCREV = "20d74dcd30f143abbd1aa94c76bafc5bd934d5bd"
 
 S = "${WORKDIR}/git"
 
