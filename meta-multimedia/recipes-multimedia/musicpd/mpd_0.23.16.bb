@@ -21,9 +21,8 @@ DEPENDS += " \
 PV .= "+git"
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
-           file://0001-meson.build-support-building-with-ICU-76.patch \
            "
-SRCREV = "965c466e9bda262790e76edd5272e9e74b407ff3"
+SRCREV = "b5bd294e5c88c062b1a9c0c4c60397fbf7f3f1c5"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
