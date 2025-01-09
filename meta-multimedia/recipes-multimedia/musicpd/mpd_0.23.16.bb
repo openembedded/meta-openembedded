@@ -15,14 +15,18 @@ DEPENDS += " \
     icu \
     dbus \
     expat \
-    fmt \
 "
 
 PV .= "+git"
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
+           https://github.com/mesonbuild/wrapdb/releases/download/fmt_11.0.2-1/fmt-11.0.2.tar.gz;name=fmt;subdir=git/subprojects \
+           https://wrapdb.mesonbuild.com/v2/fmt_11.0.2-1/get_patch;downloadfilename=fmt_11.0.2-1_patch.zip;name=fmt-meson;subdir=git/subprojects \
            file://mpd.conf.in \
            "
 SRCREV = "b5bd294e5c88c062b1a9c0c4c60397fbf7f3f1c5"
+SRC_URI[fmt.sha256sum] = "6cb1e6d37bdcb756dbbe59be438790db409cdb4868c66e888d5df9f13f7c027f"
+SRC_URI[fmt-meson.sha256sum] = "90c9e3b8e8f29713d40ca949f6f93ad115d78d7fb921064112bc6179e6427c5e"
+
 S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
