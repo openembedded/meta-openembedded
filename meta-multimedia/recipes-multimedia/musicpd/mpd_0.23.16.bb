@@ -17,7 +17,6 @@ DEPENDS += " \
     expat \
 "
 
-PV .= "+git"
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            https://github.com/mesonbuild/wrapdb/releases/download/fmt_11.0.2-1/fmt-11.0.2.tar.gz;name=fmt;subdir=git/subprojects \
            https://wrapdb.mesonbuild.com/v2/fmt_11.0.2-1/get_patch;downloadfilename=fmt_11.0.2-1_patch.zip;name=fmt-meson;subdir=git/subprojects \
