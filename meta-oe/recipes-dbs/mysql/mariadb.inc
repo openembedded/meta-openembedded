@@ -23,11 +23,9 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
            file://lfs64.patch \
            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-           file://0001-Use-a-lambda-function-as-deleter-prototype-in-unique.patch \
            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
           "
-SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
-SRC_URI[sha256sum] = "0a00180864cd016187c986faab8010de23a117b9a75f91d6456421f894e48d20"
+SRC_URI[sha256sum] = "b06a74650b83a16aa9ab098984482b028e75b000674b11ff288772c619a6f022"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
 
