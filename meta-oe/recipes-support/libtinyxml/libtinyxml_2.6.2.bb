@@ -10,7 +10,9 @@ CVE_PRODUCT = "tinyxml"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.tar.gz \
            file://enforce-use-stl.patch \
-           file://entity-encoding.patch"
+           file://entity-encoding.patch \
+           file://CVE-2021-42260.patch \
+"
 SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
 
 S = "${WORKDIR}/tinyxml"
