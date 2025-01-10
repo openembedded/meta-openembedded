@@ -53,7 +53,7 @@ RDEPENDS:packagegroup-meta-multimedia = "\
     opus-tools \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "sox streamripper", "", d)} \
     tinyalsa \
-    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "x265 openh264 libde265", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "x265", "", d)} \
 "
 RDEPENDS:packagegroup-meta-multimedia:remove:libc-musl = "projucer"
 
