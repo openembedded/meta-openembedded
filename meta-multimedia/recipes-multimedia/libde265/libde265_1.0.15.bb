@@ -9,13 +9,16 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
 SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
-SRCREV = "a267c84707ab264928fa9b86de2ee749c48c318c"
+SRCREV = "17bb8d9fcea62db8cdeb0fc7ef8d15dbd19a22e4"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF = "--disable-sherlock265 --disable-dec265"
+EXTRA_OECONF = "--disable-sherlock265"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools pkgconfig
+
+PACKAGECONFIG ?= "dec265"
+PACKAGECONFIG[dec265] = "--enable-dec265,--disable-dec265,libsdl2"
 
 PACKAGES =+ "${PN}-tools"
 FILES:${PN}-tools = "${bindir}/*"
