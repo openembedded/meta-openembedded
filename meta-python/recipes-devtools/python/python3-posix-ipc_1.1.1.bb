@@ -10,3 +10,7 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 SRC_URI[sha256sum] = "e2456ba0cfb2ee5ba14121450e8d825b3c4a1461fca0761220aab66d4111cbb7"
 
 inherit setuptools3 pypi
+
+# Ensure posix message queue support in python package for prober.py script
+DEPENDS += "glibc"
+RDEPENDS:${PN} += "glibc"
