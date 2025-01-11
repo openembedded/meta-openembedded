@@ -7,17 +7,17 @@ SECTION = "net"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
 
+GTEST_VER = "1.15.2"
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
+           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=git/ \
            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
-           file://0003-Do-not-build-external-gtest.patch \
            file://0004-Do-not-specify-PIE-flag-explicitly.patch \
            file://0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch \
-           file://0001-Update-to-C-17-560.patch \
-           file://0002-network_tests-Include-iomanip-system-header.patch \
           "
 
-SRCREV = "02c199dff8aba814beebe3ca417fd991058fe90c"
+SRCREV = "6461369b3874c844642c9adaac9d1b7406794ab8"
+SRC_URI[gtest.sha256sum] = "7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926"
 
 COMPATIBLE_HOST:mips = "null"
 COMPATIBLE_HOST:mips64 = "null"
@@ -32,6 +32,7 @@ inherit cmake pkgconfig
 
 EXTRA_OECMAKE = "-DINSTALL_LIB_DIR:PATH=${baselib} \
                  -DINSTALL_CMAKE_DIR:PATH=${baselib}/cmake/vsomeip3 \
+                 -DGTEST_ROOT=${S}/googletest-${GTEST_VER} \
                 "
 
 # For vsomeip-test
@@ -63,7 +64,7 @@ do_install:append() {
 
     for d in unit_tests network_tests; do
         install -d ${D}/opt/${PN}-test/test/$d
-        cp -f ${B}/test/$d/*test* ${D}/opt/${PN}-test/test/$d
+        cp -rf ${B}/test/$d/*_tests ${D}/opt/${PN}-test/test/$d
     done
 }
 
