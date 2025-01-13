@@ -37,3 +37,5 @@ do_install:append() {
 	install -d ${D}${docdir}/${BPN}
 	cp -R ${S}/examples ${D}${docdir}/${BPN}
 }
+
+SKIP_RECIPE[websocketpp] ?= "Does not work with boost >= 1.87"
