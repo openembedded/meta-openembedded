@@ -76,3 +76,4 @@ FILES:${PN}-dbg += " \
 FILES:${PN}-test = " \
    /opt/${PN}-test \
    "
+SKIP_RECIPE[vsomeip] ?= "Does not work with boost >= 1.87"
