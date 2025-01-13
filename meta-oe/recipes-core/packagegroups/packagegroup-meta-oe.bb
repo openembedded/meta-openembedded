@@ -718,7 +718,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit gobject-introspection-data", "colord", "", d)} \
     consolation \
     c-periphery \
-    cpprest \
     ctapi-common \
     daemonize \
     daemontools \
