@@ -6,12 +6,12 @@ HOMEPAGE = "http://www.gnu.org/software/ddrescue/ddrescue.html"
 SECTION = "console"
 LICENSE = "GPL-2.0-or-later"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+LIC_FILES_CHKSUM = "file://COPYING;md5=cca7f74ec83b7a9ce7ccd195aad471bd \
                     file://main_common.cc;beginline=5;endline=16;md5=ad099df052bdd8297f490712285069da \
                     "
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
-SRC_URI[sha256sum] = "6626c07a7ca1cc1d03cad0958522c5279b156222d32c342e81117cfefaeb10c1"
+SRC_URI[sha256sum] = "01a414327853b39fba2fd0ece30f7bee2e9d8c8e8eb314318524adf5a60039a3"
 
 # This isn't already added by base.bbclass
 do_unpack[depends] += "lzip-native:do_populate_sysroot"
