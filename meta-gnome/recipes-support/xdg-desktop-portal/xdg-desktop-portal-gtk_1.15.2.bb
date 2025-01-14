@@ -18,7 +18,7 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 SRC_URI = "git://github.com/flatpak/xdg-desktop-portal-gtk.git;protocol=https;branch=main"
 
 S = "${WORKDIR}/git"
-SRCREV = "54003825481c2b48fd0c42355b484469dea12020"
+SRCREV = "de133a5def77cca7de650ce331bd07488ee91e6c"
 
 PACKAGECONFIG ?= "wallpaper appchooser lockdown settings"
 
