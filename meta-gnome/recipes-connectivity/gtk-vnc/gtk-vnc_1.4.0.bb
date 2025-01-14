@@ -27,4 +27,4 @@ inherit pkgconfig gnomebase gettext gobject-introspection vala features_check
 
 PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 
-SRC_URI[archive.sha256sum] = "512763ac4e0559d0158b6682ca5dd1a3bd633f082f5e4349d7158e6b5f80f1ce"
+SRC_URI[archive.sha256sum] = "1be64c4e4760c52b3ec33067290d1efa40ad4cecab6c673813804e3c559d9683"
