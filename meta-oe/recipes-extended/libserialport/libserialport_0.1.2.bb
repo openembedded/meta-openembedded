@@ -8,4 +8,4 @@ inherit autotools
 
 SRC_URI = "http://sigrok.org/download/source/libserialport/libserialport-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "4a2af9d9c3ff488e92fb75b4ba38b35bcf9b8a66df04773eba2a7bbf1fa7529d"
+SRC_URI[sha256sum] = "5deb92b5ca72c0347b07b786848350deca2dcfd975ce613b8e0e1d947a4b4ca9"
