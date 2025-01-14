@@ -1,0 +1,33 @@
+From b343d72eb4c4b776b4925b441d18abf6a20b42a7 Mon Sep 17 00:00:00 2001
+From: Even Rouault <even.rouault@spatialys.com>
+Date: Mon, 25 Nov 2024 22:02:54 +0100
+Subject: [PATCH] opj_j2k_add_tlmarker(): validate that current tile-part
+ number if smaller that total number of tile-parts
+
+Fixes #1564
+
+CVE: CVE-2024-56827
+Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/e492644fbded4c820ca55b5e50e598d346e850e8]
+
+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+---
+ src/lib/openjp2/j2k.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/lib/openjp2/j2k.c b/src/lib/openjp2/j2k.c
+index 8e343ab2..08f771a5 100644
+--- a/src/lib/openjp2/j2k.c
++++ b/src/lib/openjp2/j2k.c
+@@ -8227,7 +8227,8 @@ static OPJ_BOOL opj_j2k_add_tlmarker(OPJ_UINT32 tileno,
+     if (type == J2K_MS_SOT) {
+         OPJ_UINT32 l_current_tile_part = cstr_index->tile_index[tileno].current_tpsno;
+ 
+-        if (cstr_index->tile_index[tileno].tp_index) {
++        if (cstr_index->tile_index[tileno].tp_index &&
++                l_current_tile_part < cstr_index->tile_index[tileno].nb_tps) {
+             cstr_index->tile_index[tileno].tp_index[l_current_tile_part].start_pos = pos;
+         }
+ 
+-- 
+2.39.4
+
