@@ -33,6 +33,37 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 inherit cmake pkgconfig ptest
 EXCLUDE_FROM_WORLD = "1"
 
+# The `xerbla.o` file contains an absolute path in `xerbla.f.o`, but the options
+# `-fdebug-prefix-map` and `-ffile-prefix-map` cannot be used because gfortran does not support them.
+# To address this issue, we manually replace the absolute path with a relative path
+# in the generated `build.make` file.
+#
+# An issue has been reported: https://github.com/Reference-LAPACK/lapack/issues/1087,
+# requesting a fix in the source code.
+#
+# This workaround resolves the TMPDIR [buildpaths] issue by converting the absolute path
+# of `xerbla.f` to a relative path. The steps are as follows:
+#
+# 1. Locate all `build.make` files after the `do_configure` step is completed.
+# 2. Compute the relative path for `xerbla.f` based on the current build directory.
+# 3. Replace the absolute path with the calculated relative path in the `build.make` files
+#
+# Additionally, when ptests are enabled, apply a simpler workaround for ptest code:
+# - Replace occurrences of `${WORKDIR}` in all `build.make` files under the TESTING directory, excluding
+#   the MATGEN subdirectory, with a relative path prefix of `"../../.."`.
+do_configure:append(){
+    for file in `find ${B} -name build.make`; do
+        sed -i -e "s#\(.*-c \).*\(/xerbla\.f \)#\1$(grep '\-c .*xerbla\.f' $file | awk -F'cd ' '{print $2}'| \
+            awk '{src=$1; sub(/.*-c /, ""); sub(/xerbla\.f.*/, ""); obj=$0; print src, obj}' | \
+            while read src obj; do echo "$(realpath --relative-to="$src" "$obj")"; done)\2#g" $file
+    done
+    if (${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)});then
+        for file in `find . -name build.make -path '*TESTING*' -not -path '*MATGEN*'`; do
+            sed -i -e "s#\(.*-c \)\(${WORKDIR}\)\(.*.[f|F] \)#\1../../..\3#g" $file
+        done
+    fi
+}
+
 do_install_ptest () {
     rsync -a ${B}/TESTING ${D}${PTEST_PATH} \
           --exclude CMakeFiles \
