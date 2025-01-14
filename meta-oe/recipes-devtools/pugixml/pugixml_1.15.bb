@@ -7,10 +7,10 @@ data-driven tree queries."
 HOMEPAGE = "https://pugixml.org/"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=ad370df61d83846cf9e4726244671201"
+LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=5dbb98bbc2e5051c26ce32508b4f703e"
 
 SRC_URI = "https://github.com/zeux/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "2f10e276870c64b1db6809050a75e11a897a8d7456c4be5c6b2e35a11168a015"
+SRC_URI[sha256sum] = "655ade57fa703fb421c2eb9a0113b5064bddb145d415dd1f88c79353d90d511a"
 
 UPSTREAM_CHECK_URI = "https://github.com/zeux/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
