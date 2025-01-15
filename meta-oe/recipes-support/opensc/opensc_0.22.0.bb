@@ -31,6 +31,16 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
            file://CVE-2024-45615-0003.patch \
            file://CVE-2024-45615-0004.patch \
            file://CVE-2024-45615-0005.patch \
+           file://CVE-2024-45616-0001.patch \
+           file://CVE-2024-45616-0002.patch \
+           file://CVE-2024-45616-0003.patch \
+           file://CVE-2024-45616-0004.patch \
+           file://CVE-2024-45616-0005.patch \
+           file://CVE-2024-45616-0006.patch \
+           file://CVE-2024-45616-0007.patch \
+           file://CVE-2024-45616-0008.patch \
+           file://CVE-2024-45616-0009.patch \
+           file://CVE-2024-45616-0010.patch \
           "
 
 # CVE-2021-34193 is a duplicate CVE covering the 5 individual
