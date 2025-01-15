@@ -25,7 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
           "
-SRC_URI[sha256sum] = "b06a74650b83a16aa9ab098984482b028e75b000674b11ff288772c619a6f022"
+SRC_URI[sha256sum] = "96fbd2e6e93fb7e8b373eea75d85b6fea57c0e111a02090cbbefed52599dc77b"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
 
@@ -98,6 +98,9 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DCAT_EXECUTABLE=`which cat` \
                  -DSTACK_DIRECTION=1 \
                  -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
+                 -DLSTAT_FOLLOWS_SLASHED_SYMLINK_EXITCODE=0 \
+                 -DSTAT_EMPTY_STRING_BUG_EXITCODE=0 \
+                 -DMASK_LONGDOUBLE_EXITCODE=0 \
                  -DCMAKE_AR:FILEPATH=${AR}"
 
 
