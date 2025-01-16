@@ -13,12 +13,10 @@ SRCREV = "17bb8d9fcea62db8cdeb0fc7ef8d15dbd19a22e4"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF = "--disable-sherlock265"
+inherit cmake pkgconfig
 
-inherit autotools pkgconfig
+PACKAGECONFIG ?= "libsdl"
+PACKAGECONFIG[libsdl] = "-DENABLE_SDL=ON,-DENABLE_SDL=OFF,libsdl2"
 
-PACKAGECONFIG ?= "dec265"
-PACKAGECONFIG[dec265] = "--enable-dec265,--disable-dec265,libsdl2"
-
-PACKAGES =+ "${PN}-tools"
-FILES:${PN}-tools = "${bindir}/*"
+FILES:${PN} += "${libdir}/libde265.so"
+FILES:${PN}-dev = "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
