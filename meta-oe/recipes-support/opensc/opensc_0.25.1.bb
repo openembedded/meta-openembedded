@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 SRCREV = "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https \
            file://0001-PR-Fixes-for-uninitialized-memory-issues.patch \
+           file://CVE-2024-8443-0001.patch \
+           file://CVE-2024-8443-0002.patch \
          "
 DEPENDS = "virtual/libiconv openssl"
 
