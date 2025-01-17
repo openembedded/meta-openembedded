@@ -17,6 +17,7 @@ CVE: CVE-2017-6832
 CVE: CVE-2017-6833
 CVE: CVE-2017-6835
 CVE: CVE-2017-6837
+CVE: CVE-2020-18781
 Upstream-Status: Inactive-Upstream [lastrelease: 2013]
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
