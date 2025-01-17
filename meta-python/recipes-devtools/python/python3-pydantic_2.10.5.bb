@@ -9,7 +9,7 @@ HOMEPAGE = "https://github.com/samuelcolvin/pydantic"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
-inherit pypi python_hatchling
+inherit pypi python_hatchling ptest-python-pytest
 
 SRC_URI[sha256sum] = "278b38dbbaec562011d659ee05f63346951b3a248a6f3642e1bc68894ea2b4ff" 
 
@@ -35,8 +35,6 @@ RDEPENDS:${PN} += "\
     python3-zoneinfo \
 "
 
-inherit ptest
-SRC_URI += "file://run-ptest"
 RDEPENDS:${PN}-ptest += "\
     python3-ansi2html \
     python3-coverage \
@@ -50,17 +48,15 @@ RDEPENDS:${PN}-ptest += "\
     python3-mypy \
     python3-packaging \
     python3-pydoc \
-    python3-pytest \
     python3-pytest-codspeed \
     python3-pytest-mock \
     python3-pytz \
     python3-rich \
     python3-sqlalchemy \
-    python3-unittest-automake-output \
     python3-unixadmin \
 "
 
-do_install_ptest() {
+do_install_ptest:append() {
     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
     # Requires 'ruff' (python3-ruff) which we cannot build
     # until we have Rust 1.71+ in oe-core
