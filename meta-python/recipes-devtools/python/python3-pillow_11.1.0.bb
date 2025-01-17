@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
            file://0001-support-cross-compiling.patch \
-           file://run-ptest \
            "
 SRCREV = "4c1aed801e43c6b307e7135279ca1dbc02bbf052"
 
-inherit python_setuptools_build_meta ptest
+inherit python_setuptools_build_meta ptest-python-pytest
+
+PTEST_PYTEST_DIR = "Tests"
 
 PEP517_BUILD_OPTS += " \
     -C platform-guessing=disable \
@@ -51,10 +52,8 @@ RDEPENDS:${PN}-ptest += " \
     python3-core \
     python3-image \
     python3-mmap \
-    python3-pytest \
     python3-pytest-timeout \
     python3-resource \
-    python3-unittest-automake-output \
     python3-unixadmin\
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
 "
@@ -64,10 +63,5 @@ CVE_PRODUCT = "pillow"
 S = "${WORKDIR}/git"
 
 RPROVIDES:${PN} += "python3-imaging"
-
-do_install_ptest() {
-    install -d ${D}${PTEST_PATH}/Tests
-    cp -rf ${S}/Tests ${D}${PTEST_PATH}/
-}
 
 BBCLASSEXTEND = "native"
