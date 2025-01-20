@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8de00431559a76a1b43f6fd44f8f6689"
 
 SRC_URI = "git://github.com/jarro2783/cxxopts.git;protocol=https;branch=master"
-SRCREV = "3bf268481da8208d171d8908e6491459de3651d7"
+SRCREV = "4bf61f08697b110d9e3991864650a405b3dd515d"
 
 S = "${WORKDIR}/git"
 
