@@ -2,9 +2,9 @@ SUMMARY = "Python utilities for working with Ethereum ABI definitions, especiall
 HOMEPAGE = "https://github.com/ethereum/eth-abi"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=731f4de9c79bfeba6d8d55f83d0d2423"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2b6a85414b7d058ab1c58e11611c21b2"
 
-SRC_URI[sha256sum] = "33ddd756206e90f7ddff1330cc8cac4aa411a824fe779314a0a52abea2c8fc14"
+SRC_URI[sha256sum] = "178703fa98c07d8eecd5ae569e7e8d159e493ebb6eeb534a8fe973fbc4e40ef0"
 
 PYPI_PACKAGE = "eth_abi"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
