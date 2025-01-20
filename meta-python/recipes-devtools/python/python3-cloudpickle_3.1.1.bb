@@ -14,5 +14,5 @@ inherit pypi python_flit_core
 
 SRC_URI += "https://raw.githubusercontent.com/cloudpipe/cloudpickle/v${PV}/LICENSE;downloadfilename=LICENSE.cloudpickle;name=license"
 
-SRC_URI[sha256sum] = "81a929b6e3c7335c863c771d673d105f02efdb89dfaba0c90495d1c64796601b"
+SRC_URI[sha256sum] = "b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64"
 SRC_URI[license.sha256sum] = "3029ea34173e9fdc233ad315dc6b100bd1ea71f529b1c1af97664a272fdc55f5"
