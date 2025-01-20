@@ -1,4 +1,4 @@
-From a52b50cf47e4b7fc2a1a27d6e35a26d03e2abed6 Mon Sep 17 00:00:00 2001
+From 53a879b5a285722f0cb0ee42607c1cd1102b79be Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Tue, 31 Jul 2018 15:04:29 +0800
 Subject: [PATCH] tweak MODPROBE_CMD for cross compile
@@ -21,10 +21,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  1 file changed, 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 3604fca06..167587d09 100644
+index e5e5e71ce..3af73c781 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1707,8 +1707,6 @@ AS_IF([test "$BUILD_DMFILEMAPD" = "yes"], [
+@@ -1742,8 +1742,6 @@ AS_IF([test "$BUILD_DMFILEMAPD" = "yes"], [
  ])
  
  ################################################################################
