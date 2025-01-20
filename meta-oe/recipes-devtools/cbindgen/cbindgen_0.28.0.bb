@@ -4,7 +4,7 @@ LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
 
 SRC_URI += "git://github.com/mozilla/cbindgen.git;protocol=https;branch=master"
-SRCREV = "58c6156b0d91e82abb03c26187b8d18fa4345ce0"
+SRCREV = "bd78bbe59b10eda6ef1255e4acda95c56c6d0279"
 S = "${WORKDIR}/git"
 
 inherit cargo pkgconfig
@@ -56,7 +56,7 @@ SRC_URI += " \
     crate://crates.io/serial_test_derive/2.0.0 \
     crate://crates.io/smallvec/1.13.2 \
     crate://crates.io/strsim/0.11.1 \
-    crate://crates.io/syn/2.0.72 \
+    crate://crates.io/syn/2.0.85 \
     crate://crates.io/tempfile/3.12.0 \
     crate://crates.io/toml/0.8.19 \
     crate://crates.io/toml_datetime/0.6.8 \
@@ -124,7 +124,7 @@ SRC_URI[serial_test-2.0.0.sha256sum] = "0e56dd856803e253c8f298af3f4d7eb0ae5e23a7
 SRC_URI[serial_test_derive-2.0.0.sha256sum] = "91d129178576168c589c9ec973feedf7d3126c01ac2bf08795109aa35b69fb8f"
 SRC_URI[smallvec-1.13.2.sha256sum] = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 SRC_URI[strsim-0.11.1.sha256sum] = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
-SRC_URI[syn-2.0.72.sha256sum] = "dc4b9b9bf2add8093d3f2c0204471e951b2285580335de42f9d2534f3ae7a8af"
+SRC_URI[syn-2.0.85.sha256sum] = "5023162dfcd14ef8f32034d8bcd4cc5ddc61ef7a247c024a33e24e1f24d21b56"
 SRC_URI[tempfile-3.12.0.sha256sum] = "04cbcdd0c794ebb0d4cf35e88edd2f7d2c4c3e9a5a6dab322839b321c6a87a64"
 SRC_URI[toml-0.8.19.sha256sum] = "a1ed1f98e3fdc28d6d910e6737ae6ab1a93bf1985935a1193e68f93eeb68d24e"
 SRC_URI[toml_datetime-0.6.8.sha256sum] = "0dd7358ecb8fc2f8d014bf86f6f638ce72ba252a2c3a2572f2a795f1d23efb41"
