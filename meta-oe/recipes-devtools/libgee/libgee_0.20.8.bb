@@ -20,7 +20,7 @@ do_configure:prepend() {
     done
 }
 
-SRC_URI[archive.sha256sum] = "1bf834f5e10d60cc6124d74ed3c1dd38da646787fbf7872220b8b4068e476d4d"
+SRC_URI[archive.sha256sum] = "189815ac143d89867193b0c52b7dc31f3aa108a15f04d6b5dca2b6adfad0b0ee"
 
 # http://errors.yoctoproject.org/Errors/Details/766884/
 # libgee-0.20.6/gee/concurrentlist.c:1169:177: error: passing argument 4 of 'gee_hazard_pointer_get_pointer' from incompatible pointer type [-Wincompatible-pointer-types]
