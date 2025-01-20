@@ -1,4 +1,4 @@
-From 0c02c24208afec03aa34839cb3e102fb1c15a9c9 Mon Sep 17 00:00:00 2001
+From 8657541b91b4f2bd05ce14ec9899ff5f9f3b7d4c Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Mon, 26 Nov 2018 14:59:55 +0800
 Subject: [PATCH] do not build manual
@@ -57,10 +57,10 @@ index 06c4b1823..90df7b09c 100644
  
  ifeq ("@INTL@", "yes")
 diff --git a/configure.ac b/configure.ac
-index 167587d09..557738497 100644
+index 3af73c781..f32d1f376 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2041,7 +2041,6 @@ libdaemon/server/Makefile
+@@ -2076,7 +2076,6 @@ libdaemon/server/Makefile
  libdm/Makefile
  libdm/dm-tools/Makefile
  libdm/libdevmapper.pc
