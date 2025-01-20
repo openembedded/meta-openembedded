@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
 inherit cml1 update-alternatives
 
 SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "15aa3f832f4ec1874db761b9950617f99e1e38144c22da39a71311093bfe67dc"
+SRC_URI[sha256sum] = "ad88a921133ae2231d9f2df875ec0bd42af4429145caea7d7db9e02208a6fd2e"
 
 SECTION = "base"
 
