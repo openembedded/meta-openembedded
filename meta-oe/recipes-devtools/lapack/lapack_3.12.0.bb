@@ -24,6 +24,7 @@ S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[lapacke] = "-DLAPACKE=ON,-DLAPACKE=OFF"
+PACKAGECONFIG[cblas] = "-DCBLAS=ON,-DCBLAS=OFF"
 
 EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON \
                   ${@bb.utils.contains('PTEST_ENABLED', '1', ' -DBUILD_TESTING=ON', '', d)} \
