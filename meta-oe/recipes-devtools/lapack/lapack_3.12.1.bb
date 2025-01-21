@@ -16,7 +16,7 @@ DEPENDS = "libgfortran \
           "
 RDEPENDS:${PN}-ptest += "cmake"
 
-SRCREV = "04b044e020a3560ccfa9988c8a80a1fb7083fc2e"
+SRCREV = "5ebe92156143a341ab7b14bf76560d30093cfc54"
 SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master \
            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
           "
@@ -63,9 +63,9 @@ do_configure:append(){
         # for f in $(find ${S} -name \*.f -printf " %f" | sort -u); do
         # would be more reliable with other optional PACKAGECONFIGs, but also very slow as there are
         # ~ 3500 of them and this loop takes around 20 minutes
-        for f in xerbla c_cblat1 c_cblat2 c_cblat3 c_dblat1 c_dblat2 c_dblat3 c_sblat1 c_sblat2 c_sblat3 c_zblat1 c_zblat2 c_zblat3; do
-            sed -i -e "s#\(.*-c \).*\(/$f\.f \)#\1$(grep "\-c .*$f\.f" $file | awk -F'cd ' '{print $2}'| \
-                awk "{src=\$1; sub(/.*-c /, \"\"); sub(/$f\.f.*/, \"\"); obj=\$0; print src, obj}" | \
+        for f in xerbla.f c_cblat1.f c_cblat2.f c_cblat3.f c_dblat1.f c_dblat2.f c_dblat3.f c_sblat1.f c_sblat2.f c_sblat3.f c_zblat1.f c_zblat2.f c_zblat3.f cchkdmd.f90 dchkdmd.f90 schkdmd.f90 zchkdmd.f90; do
+            sed -i -e "s#\(.*-c \).*\(/$f \)#\1$(grep "\-c .*$f" $file | awk -F'cd ' '{print $2}'| \
+                awk "{src=\$1; sub(/.*-c /, \"\"); sub(/$f.*/, \"\"); obj=\$0; print src, obj}" | \
                 while read src obj; do echo "$(realpath --relative-to="$src" "$obj")"; done)\2#g" $file
          done
     done
