@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pnuckowski/aioresponses"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b22b40d5974300051216633098387c57"
 
-SRC_URI[sha256sum] = "66292f1d5c94a3cb984f3336d806446042adb17347d3089f2d3962dd6e5ba55a"
+SRC_URI[sha256sum] = "b861cdfe5dc58f3b8afac7b0a6973d5d7b2cb608dd0f6253d16b8ee8eaf6df11"
 
 DEPENDS += "python3-pbr-native"
 
