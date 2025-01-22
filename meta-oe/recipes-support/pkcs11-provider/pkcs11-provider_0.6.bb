@@ -10,16 +10,22 @@ HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
-DEPENDS = "openssl"
+DEPENDS = "\
+    openssl \
+    p11-kit \
+"
 
-SRCREV = "3a4fdd2a2e5643af2a0f857b66a19b9fa109d40f"
+SRCREV = "93bd41c505cf54dc1ecef6c963df347b9f4abf6d"
 
 SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https \
-    file://0001-Fix-types-for-old-32-bit-systems.patch \
+    file://0001-meson-add-option-to-allow-override-default-default_p.patch \
 "
 
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
+
+# Overwrite default pkcs11 module path
+#EXTRA_OEMESON += "-Ddefault_pkcs11_module=/path/to/mymodule.so"
 
 FILES:${PN} += "${libdir}/ossl-modules/pkcs11.so"

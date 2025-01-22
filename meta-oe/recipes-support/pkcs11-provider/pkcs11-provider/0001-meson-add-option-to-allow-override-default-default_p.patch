@@ -1,0 +1,47 @@
+From 127ab5212e1f151d6d13099f2ad3f40d31624ee0 Mon Sep 17 00:00:00 2001
+From: Ayoub Zaki <ayoub.zaki@embetrix.com>
+Date: Thu, 23 Jan 2025 18:40:35 +0100
+Subject: [PATCH] meson: add option to allow override default
+ default_pkcs11_module
+
+Upstream-Status: Backport [https://github.com/latchset/pkcs11-provider/commit/d7f5de2e07611fdb114dc6701f2bf68b735382a8]
+Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
+---
+ meson.build       | 6 +++++-
+ meson_options.txt | 5 +++++
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index b3912cb..1132172 100644
+--- a/meson.build
++++ b/meson.build
+@@ -67,8 +67,12 @@ if host_machine.endian() == 'big'
+ endif
+ 
+ p11_kit = dependency('p11-kit-1', required: false)
+-if p11_kit.found()
++default_pkcs11_module = get_option('default_pkcs11_module')
++if default_pkcs11_module == '' and p11_kit.found()
+   default_pkcs11_module = p11_kit.get_variable(pkgconfig: 'proxy_module')
++endif
++
++if default_pkcs11_module != ''
+   conf.set_quoted('DEFAULT_PKCS11_MODULE', default_pkcs11_module)
+ endif
+ 
+diff --git a/meson_options.txt b/meson_options.txt
+index 7e7b9be..7ee6a6b 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -2,3 +2,8 @@ option('preload_libasan',
+        type: 'string',
+        value: 'no',
+        description: 'Path to libasan.so to preload')
++
++option('default_pkcs11_module',
++    type : 'string',
++    value : '',
++    description : 'Path to the default PKCS11 module')
+-- 
+2.43.0
+
