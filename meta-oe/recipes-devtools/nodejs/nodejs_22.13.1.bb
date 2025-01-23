@@ -20,6 +20,7 @@ COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:powerpc = "null"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+           file://0001-Do-not-use-glob-in-deps.patch \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://system-c-ares.patch \
@@ -36,7 +37,7 @@ SRC_URI:append:class-target = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "fe1bc4be004dc12721ea2cb671b08a21de01c6976960ef8a1248798589679e16"
+SRC_URI[sha256sum] = "cfce282119390f7e0c2220410924428e90dadcb2df1744c0c4a0e7baae387cc2"
 
 S = "${WORKDIR}/node-v${PV}"
 
