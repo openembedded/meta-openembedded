@@ -1,11 +1,11 @@
 DESCRIPTION = "Python package for creating and manipulating graphs and networks"
 HOMEPAGE = "http://networkx.github.io/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4266362445d56549f7b8973d02e5f22a"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=810f34d8853910e36388f63c0e87f0ed"
 
-SRC_URI[sha256sum] = "de346335408f84de0eada6ff9fafafff9bcda11f0a0dfaa931133debb146ab61"
+SRC_URI[sha256sum] = "307c3669428c5362aab27c8a1260aa8f47c4e91d3891f48be0141738d8d053e1"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "\
                    python3-decorator \
