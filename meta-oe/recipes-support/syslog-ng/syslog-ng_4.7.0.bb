@@ -68,7 +68,7 @@ do_configure:prepend() {
 	olddir=$(pwd)
 	cd ${AUTOTOOLS_SCRIPT_PATH}
 
-	ACLOCAL="$ACLOCAL" autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} -I ${S}/m4 ${ACLOCALEXTRAPATH} || die "extra autoreconf execution failed."
+	ACLOCAL="$ACLOCAL" autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} -I ${S}/m4 || die "extra autoreconf execution failed."
 
 	cd $olddir
 }
