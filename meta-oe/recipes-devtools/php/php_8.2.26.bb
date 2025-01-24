@@ -163,8 +163,11 @@ do_install:append:class-native() {
 }
 
 do_install:prepend() {
-    cat ${ACLOCALDIR}/libtool.m4 ${ACLOCALDIR}/lt~obsolete.m4 ${ACLOCALDIR}/ltoptions.m4 \
-        ${ACLOCALDIR}/ltsugar.m4 ${ACLOCALDIR}/ltversion.m4 > ${S}/build/libtool.m4
+    cat ${STAGING_DATADIR}/aclocal/libtool.m4 \
+    ${STAGING_DATADIR}/aclocal/lt~obsolete.m4 \
+    ${STAGING_DATADIR}/aclocal/ltoptions.m4 \
+    ${STAGING_DATADIR}/aclocal/ltsugar.m4 \
+    ${STAGING_DATADIR}/aclocal/ltversion.m4 > ${S}/build/libtool.m4
 }
 
 do_install:prepend:class-target() {
