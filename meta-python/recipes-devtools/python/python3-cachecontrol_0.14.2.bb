@@ -1,7 +1,7 @@
 SUMMARY = "httplib2 caching for requests"
 HOMEPAGE = "https://pypi.org/project/CacheControl/"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=12;endline=12;md5=e2fd6ddcf506e08972d5ba4b93c0022e"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6572692148079ebbbd800be4b9f36c6d"
 
 SRC_URI[sha256sum] = "7d47d19f866409b98ff6025b6a0fca8e4c791fb31abbd95f622093894ce903a2"
 
