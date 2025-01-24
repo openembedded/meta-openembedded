@@ -14,8 +14,8 @@ RDEPENDS:${PN} += "\
 "
 
 do_install_ptest:append () {
-	# This file tests README.md and deleted as redundant.
-	rm -f ${D}/tests/test_doc.py
+	# test_doc.py tests README.md.
+	install -Dm 0644 ${S}/README.md ${D}${PTEST_PATH}/README.md
 }
 
 BBCLASSEXTEND = "native"
