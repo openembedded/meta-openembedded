@@ -14,6 +14,7 @@ SRC_URI = "https://www.ncftp.com/public_ftp/ncftp/${BP}-src.tar.xz \
            "
 SRC_URI[sha256sum] = "d41c5c4d6614a8eae2ed4e4d7ada6b6d3afcc9fb65a4ed9b8711344bef24f7e8"
 
+# Doesn't use automake
 inherit autotools-brokensep pkgconfig
 
 CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall"
@@ -21,8 +22,8 @@ CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[ccdv] = "--enable-ccdv,--disable-ccdv,,"
 
+EXTRA_AUTORECONF += "--exclude=aclocal -I ${S}/autoconf_local"
 EXTRA_OECONF = "--disable-precomp --disable-universal ac_cv_path_TAR=tar"
-EXTRA_AUTORECONF += "-I ${S}/autoconf_local"
 
 do_install () {
     install -d ${D}${bindir} ${D}${sysconfdir} ${D}${mandir}
