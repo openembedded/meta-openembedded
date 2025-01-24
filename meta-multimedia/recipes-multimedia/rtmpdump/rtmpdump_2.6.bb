@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "gnutls zlib"
 
 PV .= "+git"
-SRCREV = "fa8646daeb19dfd12c181f7d19de708d623704c0"
+SRCREV = "6f6bb1353fc84f4cc37138baa99f586750028a01"
 SRC_URI = " \
     git://git.ffmpeg.org/rtmpdump;branch=master \
-    file://fix-racing-build-issue.patch"
+"
 
 S = "${WORKDIR}/git"
 
