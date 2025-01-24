@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "5f370f952971e7d17c7d1ead40e49f32345a7f7a5373571ef44d800d06
 
 inherit setuptools3 ptest-python-pytest
 
-SRCREV = "c41e6eadb39f45ce96f488cecb250e417926b49d"
+SRCREV = "bcc1f26b2fe8fc962f5033c3a3a773425500789a"
 SRC_URI += "git://github.com/GrahamDumpleton/wrapt;protocol=https;branch=master \
 "
 
