@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
            file://0001-Fixed-swig-host-contamination-issue.patch \
            file://auditd \
-           file://audit-volatile.conf \
           "
 
 S = "${WORKDIR}/git"
-SRCREV = "4e6deae41d4646d28bb3ba9524a8a227a38ccd0b"
+SRCREV = "51d154c5b7ec91831cbb89fe6ca54d8eb7ba344c"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
@@ -33,6 +32,7 @@ EXTRA_OECONF = " \
         --with-python3 \
         --with-arm \
         --with-aarch64 \
+        --with-riscv \
         --without-golang \
         --disable-gssapi-krb5 \
         --disable-zos-remote \
@@ -57,7 +57,9 @@ PACKAGES =+ "audispd-plugins"
 PACKAGES += "auditd ${PN}-python"
 
 FILES:${PN} = "${sysconfdir}/libaudit.conf ${libdir}/libau*.so.*"
-FILES:auditd = "${bindir}/* ${base_sbindir}/* ${sysconfdir}/* ${datadir}/audit-rules/* ${libexecdir}/*"
+FILES:auditd = "${bindir}/* ${base_sbindir}/* ${sysconfdir}/* \
+                ${datadir}/audit-rules/* ${libexecdir}/* \
+                ${nonarch_libdir}/tmpfiles.d/*.conf"
 FILES:audispd-plugins = "${sysconfdir}/audit/audisp-remote.conf \
         ${sysconfdir}/audit/plugins.d/au-remote.conf \
         ${sysconfdir}/audit/plugins.d/syslog.conf \
@@ -87,19 +89,13 @@ do_install:append() {
     # Based on the audit.spec "Copy default rules into place on new installation"
     install -m 0640 ${D}/etc/audit/rules.d/audit.rules ${D}/etc/audit/audit.rules
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -D -m 0644 ${UNPACKDIR}/audit-volatile.conf ${D}${sysconfdir}/tmpfiles.d/audit.conf
-    fi
-
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -D -m 0755 ${UNPACKDIR}/auditd ${D}/etc/init.d/auditd
     fi
 
     if ! ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        rm -rf ${D}${libdir}/systemd
-        install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${B}/init.d/auditd.service      ${D}${systemd_unitdir}/system/
-        install -m 0644 ${B}/init.d/audit-rules.service ${D}${systemd_unitdir}/system/
+        rm -rf ${D}${nonarch_libdir}/systemd
+        rm -rf ${D}${nonarch_libdir}/tmpfiles.d
     fi
 
     # Create /var/spool/audit directory for audisp-remote
