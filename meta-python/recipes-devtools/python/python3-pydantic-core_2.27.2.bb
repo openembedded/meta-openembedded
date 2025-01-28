@@ -25,7 +25,6 @@ RDEPENDS:${PN} += " \
 "
 
 INSANE_SKIP:${PN} = "already-stripped"
-INSANE_SKIP:${PN} += "buildpaths"
 
 # python3-misc is for Lib/timeit.py which is not split out elsewhere
 RDEPENDS:${PN}-ptest += "\
