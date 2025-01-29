@@ -14,3 +14,5 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 inherit pypi python_hatchling
 
 RDEPENDS:${PN} = "python3-typing-extensions"
+
+BBCLASSEXTEND = "native nativesdk"
