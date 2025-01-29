@@ -16,3 +16,5 @@ RDEPENDS:${PN}-ptest += "\
 do_install_ptest:append() {
 	install ${S}/VERSION ${D}${PTEST_PATH}/
 }
+
+BBCLASSEXTEND = "native nativesdk"
