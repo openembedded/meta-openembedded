@@ -8,14 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"
 
 SRC_URI[sha256sum] = "794d4f0a58f848961ba16af7b9c85a3e88cd360df008c59aac6fc5ae9323b5d4"
 
-SRC_URI += "file://run-ptest"
-
-inherit ptest pypi setuptools3
-
-do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/tests
-	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-}
+inherit ptest-python-pytest pypi setuptools3
 
 # python3-misc for timeit.py
 RDEPENDS:${PN}-ptest += "\
@@ -23,11 +16,9 @@ RDEPENDS:${PN}-ptest += "\
     python3-jsonschema \
     python3-misc \
     python3-pylint \
-    python3-pytest \
     python3-pytest-benchmark \
     python3-pytest-cache \
     python3-statistics \
-    python3-unittest-automake-output \
 "
 RDEPENDS:${PN} += "\
     python3-core \
