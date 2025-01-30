@@ -26,3 +26,6 @@ do_install() {
 	 find "${D}${bindir}/opencl_test_conformance" -name cmake_install.cmake -type f -delete
         find "${D}${bindir}/opencl_test_conformance" -name CMakeFiles -type d -exec rm -rf "{}" \; -depth
 }
+
+COMPATIBLE_HOST:riscv64 = "null"
+COMPATIBLE_HOST:riscv32 = "null"
