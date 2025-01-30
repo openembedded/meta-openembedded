@@ -8,25 +8,17 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI[sha256sum] = "eb36762a1cc76d7abf831e18a3a1b26d3d481bbc74581b8e532a3d3a8115e1cb"
 
-inherit python_flit_core pypi ptest
-
-SRC_URI += " \
-        file://run-ptest \
-"
+inherit python_flit_core pypi ptest-python-pytest
 
 RDEPENDS:${PN}-ptest += " \
-        python3-pytest \
         python3-pytz \
         python3-simplejson \
-        python3-unittest-automake-output \
         python3-zoneinfo \
         python3-tzdata \
 "
 
-do_install_ptest() {
-        install -d ${D}${PTEST_PATH}/tests
-        rm -rf ${S}/tests/mypy_test_cases
-        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+do_install_ptest:append () {
+        rm -rf ${D}${PTEST_PATH}/tests/mypy_test_cases
 }
 
 RDEPENDS:${PN} += " \
