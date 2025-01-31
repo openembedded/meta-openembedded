@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "dbd9047a7ac10d11a5227e97163b617ad5d665050476ff63867d971758
 
 inherit pypi python_setuptools_build_meta
 
-PYPI_PACKAGE= "pdm_backend"
+PYPI_PACKAGE = "pdm_backend"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 BBCLASSEXTEND = "native nativesdk"
