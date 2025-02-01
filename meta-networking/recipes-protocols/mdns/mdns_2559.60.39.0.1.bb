@@ -134,4 +134,4 @@ INITSCRIPT_NAME = "mdns"
 FILES_SOLIBSDEV = "${libdir}/libdns_sd.so"
 FILES:${PN} += "${libdir}/libnss_mdns-0.2.so"
 
-RPROVIDES:${PN} += "libdns_sd.so"
+RPROVIDES:${PN} += "libdns-sd"
