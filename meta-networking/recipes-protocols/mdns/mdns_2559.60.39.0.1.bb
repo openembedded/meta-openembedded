@@ -112,7 +112,7 @@ do_install () {
 	install mdnsd.sh ${D}${INIT_D_DIR}/mdns
 }
 
-pkg_postinst:${PN} () {
+pkg_postinst:${PN}-libnss-mdns () {
 	if [ -r $D${sysconfdir}/nsswitch.conf ]; then
 		sed -e '/^hosts:/s/\s*\<mdns\>//' \
 			-e 's/\(^hosts:.*\)\(\<files\>\)\(.*\)\(\<dns\>\)\(.*\)/\1\2 mdns\3\4\5/' \
@@ -120,7 +120,7 @@ pkg_postinst:${PN} () {
 	fi
 }
 
-pkg_prerm:${PN} () {
+pkg_prerm:${PN}-libnss-mdns () {
 	if [ -r $D${sysconfdir}/nsswitch.conf ]; then
 		sed -e '/^hosts:/s/\s*\<mdns\>//' \
 			-e '/^hosts:/s/\s*mdns//' \
@@ -131,7 +131,12 @@ pkg_prerm:${PN} () {
 SYSTEMD_SERVICE:${PN} = "mdns.service"
 INITSCRIPT_NAME = "mdns"
 
+PACKAGE_BEFORE_PN = "${PN}-libnss-mdns"
+
+RRECOMMENDS:${PN}:append:libc-glibc = " ${PN}-libnss-mdns"
+
 FILES_SOLIBSDEV = "${libdir}/libdns_sd.so"
-FILES:${PN} += "${libdir}/libnss_mdns-0.2.so"
+FILES:${PN}-libnss-mdns = "${sysconfdir}/nss_mdns.conf ${libdir}/libnss_mdns*.so*"
+RPROVIDES:${PN}-libnss-mdns = "libnss-mdns"
 
 RPROVIDES:${PN} += "libdns-sd"
