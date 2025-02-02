@@ -10,7 +10,8 @@ SRC_URI = " \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
     file://0002-api-python-config-default.toml-Debug.patch \
 "
-SRCREV = "d3ad812008fd286322b7085e84136e422b3afea4"
+SRCREV = "e2ef1ea6594738d4461e75717a61ae05fb0541d6"
+PV .= "+git"
 
 S = "${WORKDIR}/git"
 PEP517_SOURCE_PATH = "${S}/api/python"
