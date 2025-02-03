@@ -27,6 +27,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>.(25\.(\d+)))"
 
 S = "${WORKDIR}/git"
 
+CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
+
 inherit cmake pkgconfig ptest
 
 PACKAGECONFIG ??= ""
