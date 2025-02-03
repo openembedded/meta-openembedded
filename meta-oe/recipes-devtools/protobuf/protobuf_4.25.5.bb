@@ -7,7 +7,7 @@ SECTION = "console/tools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 
-DEPENDS = "zlib abseil-cpp"
+DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
 SRCREV = "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
@@ -37,6 +37,7 @@ EXTRA_OECMAKE += "\
     -Dprotobuf_BUILD_TESTS=OFF \
     -Dprotobuf_BUILD_EXAMPLES=OFF \
     -Dprotobuf_ABSL_PROVIDER="package" \
+    -Dprotobuf_JSONCPP_PROVIDER="package" \
 "
 
 TEST_SRC_DIR = "examples"
