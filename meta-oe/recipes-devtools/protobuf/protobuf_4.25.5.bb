@@ -106,8 +106,6 @@ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 # CMake requires protoc binary to exist in sysroot, even if it has wrong architecture.
 SYSROOT_DIRS += "${bindir}"
 
-RDEPENDS:${PN} = "abseil-cpp"
-RDEPENDS:${PN}-lite = "abseil-cpp"
 RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-dev += "${@bb.utils.contains('PACKAGECONFIG', 'compiler', '${PN}-compiler', '', d)}"
 RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
