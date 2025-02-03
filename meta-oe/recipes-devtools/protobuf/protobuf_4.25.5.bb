@@ -115,9 +115,3 @@ RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'py
 MIPS_INSTRUCTION_SET = "mips"
 
 BBCLASSEXTEND = "native nativesdk"
-
-LDFLAGS:append:arm = " -latomic"
-LDFLAGS:append:mips = " -latomic"
-LDFLAGS:append:powerpc = " -latomic"
-LDFLAGS:append:mipsel = " -latomic"
-LDFLAGS:append:riscv32 = " -latomic"
