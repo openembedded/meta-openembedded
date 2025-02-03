@@ -4,8 +4,12 @@ efficient yet extensible format. Google uses Protocol Buffers for almost \
 all of its internal RPC protocols and file formats."
 HOMEPAGE = "https://github.com/google/protobuf"
 SECTION = "console/tools"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+LICENSE = "BSD-3-Clause & MIT"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b \
+    file://third_party/lunit/LICENSE;md5=99f08e72434dfa34fe0581d3dfb2d7f4 \
+    file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
+"
 
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
