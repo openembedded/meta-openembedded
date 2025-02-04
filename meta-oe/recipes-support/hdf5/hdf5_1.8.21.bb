@@ -58,3 +58,9 @@ do_install:append() {
 BBCLASSEXTEND = "native"
 
 SRC_DISTRIBUTE_LICENSES += "HDF5"
+
+# work/x86_64-linux/hdf5-native/1.8.21-r0/hdf5-1.8.21/src/H5Eprivate.h:76:40: error: assignment to ?H5A_t *? from ?int? makes pointer from integer without a cast [-Wint-conversion]
+# work/x86_64-linux/hdf5-native/1.8.21-r0/hdf5-1.8.21/src/H5Dio.c:475:5: error: implicit declaration of function ?H5T_patch_vlen_file?; did you mean ?H5T_patch_file?? [-Wimplicit-function-declaration]
+# work/x86_64-linux/hdf5-native/1.8.21-r0/hdf5-1.8.21/test/dsets.c:9151:8: error: implicit declaration of function ?H5D__layout_compact_dirty_test? [-Wimplicit-function-declaration]
+# work/x86_64-linux/hdf5-native/1.8.21-r0/hdf5-1.8.21/test/testframe.c:616:31: error: passing argument 2 of ?H5Eset_auto2? from incompatible pointer type [-Wincompatible-pointer-types]
+BUILD_CFLAGS += "-Wno-error=int-conversion -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
