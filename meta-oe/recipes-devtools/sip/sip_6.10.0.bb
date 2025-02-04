@@ -3,15 +3,15 @@
 
 SUMMARY = "A Python bindings generator for C/C++ libraries"
 
-HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
-LICENSE = "GPL-2.0-or-later"
+HOMEPAGE = "https://github.com/Python-SIP/sip"
+LICENSE = "BSD-2-Clause"
 SECTION = "devel"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1d69a33480ebf4ff8a7a760826d84e"
 
 inherit pypi python_setuptools_build_meta python3native
 
 PYPI_PACKAGE = "sip"
-SRC_URI[sha256sum] = "7904be5190d7879952563b78a3af0e58fa27d9525af7f53f93eac7a83b433e7b"
+SRC_URI[sha256sum] = "fa0515697d4c98dbe04d9e898d816de1427e5b9ae5d0e152169109fd21f5d29c"
 
 DEPENDS += "python3-setuptools-scm-native"
 
