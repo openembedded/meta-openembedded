@@ -29,3 +29,7 @@ RDEPENDS:${PN} = "python3-numpy \
                  "
 
 export HDF5_VERSION="1.8.21"
+
+# h5py/_errors.c:2115:64: error: passing argument 3 of ?H5Ewalk2? from incompatible pointer type [-Wincompatible-pointer-types]
+# h5py/_errors.c:2365:66: error: passing argument 3 of ?H5Ewalk2? from incompatible pointer type [-Wincompatible-pointer-types]
+BUILD_CFLAGS += "-Wno-error=incompatible-pointer-types"
