@@ -1,0 +1,49 @@
+From ad91b034e7575074998b3e480b592e3ae6d00def Mon Sep 17 00:00:00 2001
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Date: Tue, 4 Feb 2025 09:36:13 +0100
+Subject: [PATCH] bindings: python: tests: disable device before releasing the
+ bank
+
+Linux kernel commit 8bd76b3d3f3a ("gpio: sim: lock up configfs that an
+instantiated device depends on") uncovered an issue in Python bindings
+tests where the GPIO simulator device is not disabled before removing its
+configfs entries. Reorder the operations in chip_finalize() in order to
+disable the device first (if needed) before releasing any other
+resources.
+
+Upstream-Status: Submitted [https://lore.kernel.org/all/20250203-fix-gpiosim-in-bindings-v1-2-d2c9e0f3a29d@linaro.org/]
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ tests/gpiosim/ext.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/tests/gpiosim/ext.c b/tests/gpiosim/ext.c
+index 272e6f7..cb5611a 100644
+--- a/tests/gpiosim/ext.c
++++ b/tests/gpiosim/ext.c
+@@ -96,15 +96,16 @@ static int chip_init(chip_object *self,
+ 
+ static void chip_finalize(chip_object *self)
+ {
+-	if (self->bank)
+-		gpiosim_bank_unref(self->bank);
+-
+ 	if (self->dev) {
+ 		if (gpiosim_dev_is_live(self->dev))
+ 			gpiosim_dev_disable(self->dev);
+-
+-		gpiosim_dev_unref(self->dev);
+ 	}
++
++	if (self->bank)
++		gpiosim_bank_unref(self->bank);
++
++	if (self->dev)
++		gpiosim_dev_unref(self->dev);
+ }
+ 
+ static void chip_dealloc(PyObject *self)
+-- 
+2.45.2
+

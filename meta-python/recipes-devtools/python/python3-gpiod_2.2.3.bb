@@ -5,7 +5,10 @@ LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
 # package is spun out.
 LIC_FILES_CHKSUM = "file://setup.py;beginline=241;endline=241;md5=f5ddb56912b7f20bf94aa4d1bdcd3533"
 
-SRC_URI += "file://run-ptest"
+SRC_URI += " \
+    file://run-ptest \
+    file://0001-bindings-python-tests-disable-device-before-releasin.patch \
+"
 
 SRC_URI[sha256sum] = "b916c3741dfc4dbcf6224b39e50765f672b137896287715709d49e9f063304c5"
 
