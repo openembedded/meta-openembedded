@@ -26,5 +26,7 @@ DEPENDS += "\
     ninja-native \
     ccache-native \
 "
+# https://github.com/lief-project/LIEF/commit/3def579f75965aa19c021d840a759bce2afc0a31#r152197203
+COMPATIBLE_HOST:x86 = "null"
 
 BBCLASSEXTEND = "native nativesdk"
