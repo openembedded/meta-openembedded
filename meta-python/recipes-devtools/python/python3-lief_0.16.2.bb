@@ -16,6 +16,8 @@ PV .= "+git"
 S = "${WORKDIR}/git"
 PEP517_SOURCE_PATH = "${S}/api/python"
 
+export LIEF_BUILD_DIR = "${B}"
+
 inherit python_setuptools_build_meta
 
 DEPENDS += "\
