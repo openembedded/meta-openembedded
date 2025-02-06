@@ -3,8 +3,8 @@
 
 SUMMARY = "A Python bindings generator for C/C++ libraries"
 
-HOMEPAGE = "https://www.riverbankcomputing.com/software/sip/"
-LICENSE = "GPL-2.0-or-later"
+HOMEPAGE = "https://github.com/Python-SIP/sip"
+LICENSE = "BSD-2-Clause"
 SECTION = "devel"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1d69a33480ebf4ff8a7a760826d84e"
 
