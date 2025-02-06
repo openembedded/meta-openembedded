@@ -1,8 +1,12 @@
 DESCRIPTION = "Google gRPC"
 HOMEPAGE = "http://www.grpc.io/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
+LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
+    file://third_party/utf8_range/utf8_validity.h;beginline=1;endline=5;md5=db08ddb5817e660489678e7c3653805a \
+    file://third_party/xxhash/xxhash.h;beginline=1;endline=34;md5=d41d564db2353fc80a713956d85b1690 \
+"
 
 DEPENDS += "abseil-cpp c-ares openssl python3-protobuf re2 zlib"
 
