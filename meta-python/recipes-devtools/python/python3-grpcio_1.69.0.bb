@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
 
 DEPENDS += "python3-protobuf"
 
-SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
+SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
+           file://0001-Include-missing-cstdint-header.patch \
            file://abseil-ppc-fixes.patch \
            file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
