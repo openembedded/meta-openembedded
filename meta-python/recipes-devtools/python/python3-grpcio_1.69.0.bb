@@ -21,8 +21,6 @@ inherit pypi
 
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
-export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
-
 BORING_SSL_PLATFORM:arm = "linux-arm"
 BORING_SSL_PLATFORM:x86-64 = "linux-x86_64"
 BORING_SSL_PLATFORM:aarch64 = "linux-aarch64"
