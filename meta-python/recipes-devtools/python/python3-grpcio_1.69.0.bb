@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
 
-DEPENDS += "openssl python3-protobuf zlib"
+DEPENDS += "c-ares openssl python3-protobuf zlib"
 
 SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            file://0001-Include-missing-cstdint-header.patch \
@@ -19,6 +19,7 @@ inherit pypi
 
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
+export GRPC_PYTHON_BUILD_SYSTEM_CARES = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_ZLIB = "1"
 
