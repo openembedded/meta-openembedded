@@ -75,5 +75,6 @@ FILES:${PN} += "${includedir}/${BPN}/os_stub/spdm_crypt_ext_lib/*.h"
 COMPATIBLE_HOST:powerpc = "null"
 COMPATIBLE_HOST:powerpc64 = "null"
 COMPATIBLE_HOST:mipsarchn32 = "null"
+COMPATIBLE_HOST:mipsarcho32 = "null"
 
 BBCLASSEXTEND = "native nativesdk"
