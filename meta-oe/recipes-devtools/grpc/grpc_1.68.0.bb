@@ -3,8 +3,12 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
 (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)"
 HOMEPAGE = "https://github.com/grpc/grpc"
 SECTION = "libs"
-LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906"
+LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
+    file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
+    file://third_party/xxhash/LICENSE;md5=cdfe7764d5685d8e08b3df302885d7f3 \
+"
 
 DEPENDS = "abseil-cpp c-ares openssl protobuf protobuf-native re2 zlib"
 DEPENDS:append:class-target = " grpc-native"
