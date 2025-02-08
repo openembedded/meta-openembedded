@@ -22,3 +22,4 @@ S = "${WORKDIR}/git"
 DEPENDS += "libspdm udev bindgen-cli-native pciutils"
 
 COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST:mipsarcho32 = "null"
