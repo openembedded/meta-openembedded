@@ -11,6 +11,8 @@ DEPENDS = " \
     zlib \
     \
     json-glib \
+    libpng \
+    jpeg \
 "
 
 DEPENDS:append:toolchain-clang  = " openmp"
@@ -28,16 +30,14 @@ SHPV = "${@gnome_verdir("${PV}")}"
 SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
 SRC_URI[sha256sum] = "ca212a0fc3e0448c5058c51ca6a0d30fdfb02971f21f28820da2b4901396000a"
 
-PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg pango poppler sdl2"
-PACKAGECONFIG:class-native = "libpng librsvg"
+PACKAGECONFIG ??= "gexiv2 libraw librsvg pango poppler sdl2"
+PACKAGECONFIG:class-native = "librsvg"
 
 PACKAGECONFIG[jasper] = "-Djasper=enabled,-Djasper=disabled,jasper"
 PACKAGECONFIG[gexiv2] = "-Dgexiv2=enabled,-Dgexiv2=disabled,gexiv2"
 PACKAGECONFIG[graphviz] = "-Dgraphviz=enabled,-Dgraphviz=disabled,graphviz"
-PACKAGECONFIG[jpeg] = "-Dlibjpeg=enabled,-Dlibjpeg=disabled,jpeg"
 PACKAGECONFIG[lcms] = "-Dlcms=enabled,-Dlcms=disabled,lcms"
 PACKAGECONFIG[libav] = "-Dlibav=enabled,-Dlibav=disabled,libav"
-PACKAGECONFIG[libpng] = "-Dlibpng=enabled,-Dlibpng=disabled,libpng"
 PACKAGECONFIG[libraw] = "-Dlibraw=enabled,-Dlibraw=disabled,libraw"
 PACKAGECONFIG[librsvg] = "-Dlibrsvg=enabled,-Dlibrsvg=disabled,librsvg"
 PACKAGECONFIG[pango] = "-Dpango=enabled -Dpangocairo=enabled,-Dpango=disabled -Dpangocairo=disabled,pango"
@@ -45,7 +45,7 @@ PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
 PACKAGECONFIG[sdl] = "-Dsdl1=enabled,-Dsdl1=disabled,libsdl"
 PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,libsdl2"
 PACKAGECONFIG[tiff] = "-Dlibtiff=enabled,-Dlibtiff=disabled,tiff"
-PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,webp"
+PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,libwebp"
 
 # There are a couple of non-symlink .so files installed into libdir, which need to go into main package
 FILES:${PN} += " \
