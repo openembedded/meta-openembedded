@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c9a6829fcd174d9535b46211917c7671"
 
 
-SRC_URI[sha256sum] = "f04b3e1ba35747ac86e96ec33e3bb9748ce08e254dc2a1c6253945901beec804"
+SRC_URI[sha256sum] = "b804b8d51db23959b96b329094debdbbdf10c8c3aa75958c5988cfd7f78501dd"
 
 inherit pypi ptest-python-pytest  python_hatchling
 
