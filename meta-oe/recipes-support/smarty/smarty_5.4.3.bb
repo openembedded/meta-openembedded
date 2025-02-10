@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
 
 SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
 
-SRCREV = "642a97adcc2bf6c1b2458d6afeeb36ae001c1c2f"
+SRCREV = "c6bff5795081ca5e60aabda59fb87daa511acd1e"
 
 S = "${UNPACKDIR}/git"
 
