@@ -12,7 +12,7 @@ RDEPENDS:${PN} += "python3-core python3-misc python3-resource python3-shell pyth
 SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=master;protocol=https \
           "
 
-SRCREV = "e42e8c73043127283762eb52a2e31b7ab0aac177"
+SRCREV = "5068abef0a960c173a91e84a45e7fea1b0a802c0"
 
 S = "${WORKDIR}/git"
 
