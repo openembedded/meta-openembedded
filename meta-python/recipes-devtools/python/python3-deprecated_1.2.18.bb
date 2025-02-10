@@ -3,7 +3,7 @@ HOMEPAGE = "https://deprecated.readthedocs.io/en/latest/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=44288e26f4896bdab14072d4fa35ff01"
 
-SRC_URI[sha256sum] = "683e561a90de76239796e6b6feac66b99030d2dd3fcf61ef996330f14bbb9b0d"
+SRC_URI[sha256sum] = "422b6f6d859da6f2ef57857761bfb392480502a64c3028ca9bbe86085d72115d"
 
 inherit pypi setuptools3
 
