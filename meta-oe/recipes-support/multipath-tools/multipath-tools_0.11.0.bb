@@ -46,9 +46,9 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=ma
            file://0012-add-explicit-dependency-on-libraries.patch \
            "
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRCREV = "ee3a70175a8a9045e5c309d5392300922e2a0625"
+SRCREV = "de16cf82c5263fc148118be56ebf44c8f0ee60b8"
 
 S = "${WORKDIR}/git"
 
