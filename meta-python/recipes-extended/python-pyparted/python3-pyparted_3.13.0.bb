@@ -5,11 +5,11 @@ SUMMARY = "Python bindings for libparted"
 HOMEPAGE = "https://github.com/rhinstaller/pyparted"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "\
-    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-    file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
+    file://LICENSE;md5=8ca43cbc842c2336e835926c2166c28b \
+    file://src/_pedmodule.c;beginline=10;endline=22;md5=c4b9f810cd53b16ff269447fb8af6c3d \
 "
 
-SRC_URI[sha256sum] = "da985e116beb733371feb605b174db9eec8bd0eedffc8f739f8e603f51b521e7"
+SRC_URI[sha256sum] = "443b59eb9ac63b8ca87094e02376646e172c7ea075f955f105889ca3485b06fd"
 
 inherit pkgconfig pypi setuptools3
 
