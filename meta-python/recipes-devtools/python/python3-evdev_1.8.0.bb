@@ -1,9 +1,9 @@
 SUMMARY = "Python evdev lib"
 HOMEPAGE = "https://github.com/gvalkov/python-evdev"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0ff275b442f45fc06287544cf713016f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d7bd1cc4c71b706c7e2d4053aef50f2a"
 
-SRC_URI[sha256sum] = "0c72c370bda29d857e188d931019c32651a9c1ea977c08c8d939b1ced1637fde"
+SRC_URI[sha256sum] = "45598eee1ae3876a3122ca1dc0ec8049c01931672d12478b5c610afc24e47d75"
 
 inherit pypi python_setuptools_build_meta
 
