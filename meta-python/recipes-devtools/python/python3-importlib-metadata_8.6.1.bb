@@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta
 PYPI_PACKAGE = "importlib_metadata"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "71522656f0abace1d072b9e5481a48f07c138e00f079c38c8f883823f9c26bd7"
+SRC_URI[sha256sum] = "310b41d755445d74569f993ccfc22838295d9fe005425094fad953d7f15c8580"
 
 S = "${WORKDIR}/importlib_metadata-${PV}"
 
