@@ -31,6 +31,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
+           file://0001-core-fixed-VSX-intrinsics-implementation.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 
@@ -208,4 +209,10 @@ do_install:append() {
     if [ -f ${D}${bindir}/setup_vars_opencv4.sh ]; then
         rm -rf ${D}${bindir}/setup_vars_opencv4.sh
     fi
+
+    for fn in arithm.vsx3.cpp convert.vsx3.cpp; do
+        if [ -f ${B}/modules/core/$fn ]; then
+            sed -i -e 's,${S},/usr/src/debug/${PN}/${PV},g' ${B}/modules/core/$fn
+        fi
+    done
 }
