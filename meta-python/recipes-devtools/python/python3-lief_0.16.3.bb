@@ -10,7 +10,7 @@ SRC_URI = " \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
     file://0002-api-python-config-default.toml-Debug.patch \
 "
-SRCREV = "e2ef1ea6594738d4461e75717a61ae05fb0541d6"
+SRCREV = "646af9f6ced8e827916648f26617998de834db78"
 PV .= "+git"
 
 S = "${WORKDIR}/git"
