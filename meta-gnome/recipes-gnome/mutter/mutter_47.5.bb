@@ -26,6 +26,8 @@ inherit gnomebase gsettings gobject-introspection gettext features_check
 
 SRC_URI[archive.sha256sum] = "6551a33ce887e68415b13952af6d6b430e95306f9297adc8c111953e995c515b"
 
+SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
+
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
 
