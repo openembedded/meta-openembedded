@@ -26,6 +26,7 @@ EXTRA_OECMAKE += " \
                     -DTBB_TEST=OFF \
                     -DCMAKE_BUILD_TYPE=Release \
                     -DTBB_STRICT=OFF \
+                    -DTBB_DISABLE_HWLOC_AUTOMATIC_SEARCH=OFF \
                 "
 
 # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
