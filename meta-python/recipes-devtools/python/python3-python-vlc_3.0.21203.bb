@@ -3,9 +3,11 @@ HOMEPAGE = "wiki.videolan.org/PythonBinding"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI[sha256sum] = "244fbb9e392a0326841fca926d6d12a2a36c546982191f493f148fa19e66b1d4"
+SRC_URI[sha256sum] = "52d0544b276b11e58b6c0b748c3e0518f94f74b1b4cd328c83a59eacabead1ec"
 
-inherit pypi setuptools3
+PYPI_PACKAGE = "python_vlc"
+
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     python3-ctypes \
