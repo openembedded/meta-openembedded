@@ -38,7 +38,7 @@ do_install:append() {
     || true
 }
 
-PACKAGE_BEFORE_PN = "${PN}-scripts ${PN}-udevrules"
+PACKAGE_BEFORE_PN = "${PN}-scripts"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
