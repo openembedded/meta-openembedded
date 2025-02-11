@@ -89,6 +89,14 @@ index 9769b68ab793..58c9a63bd225 100644
    -Iexternal/boringssl/include \
    -Isystem/core/adb \
    -Isystem/core/base/include \
+@@ -28,7 +27,6 @@ CPPFLAGS += \
+ LDFLAGS += \
+   -Ldebian/out/system/core \
+   -Wl,-rpath=/usr/lib/$(DEB_HOST_MULTIARCH)/android \
+-  -fuse-ld=gold \
+   -lbase \
+   -lcutils \
+   -lpthread \
 diff --git a/debian/system/core/append2simg.mk b/debian/system/core/append2simg.mk
 index 1599bdb8..598c751d 100644
 --- a/debian/system/core/append2simg.mk
@@ -114,15 +122,16 @@ index d5c9a285..a59ba1a4 100644
     -Iexternal/boringssl/include \
     -Iexternal/avb \
     -Isystem/core/adb \
-@@ -49,7 +49,7 @@ CPPFLAGS += \
+@@ -49,8 +48,7 @@ CPPFLAGS += \
  
  LDFLAGS += \
    -Ldebian/out/system/core \
 -  -Wl,-rpath=/usr/lib/$(DEB_HOST_MULTIARCH)/android \
+-  -fuse-ld=gold \
 +  -Wl,-rpath='$$ORIGIN/../lib/android' \
-   -fuse-ld=gold \
    -lbase \
    -lcutils \
+   -lpthread \
 diff --git a/debian/system/core/img2simg.mk b/debian/system/core/img2simg.mk
 index 11adf014..8baf5ba5 100644
 --- a/debian/system/core/img2simg.mk
