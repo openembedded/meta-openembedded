@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/getpatchwork/git-pw"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=26e1a171d943c64f00c51f90c256b9d4"
 
-SRC_URI[sha256sum] = "99cb0b4a603386127c8205358d9780428a0468f8b1cb73ace804a5a466a28ef4"
+SRC_URI[sha256sum] = "f69c57aafd13d21d6fa604dff680c4f9113a8f31bf3f65dd663bad0e1839b0e1"
 PYPI_PACKAGE = "git_pw"
 
 inherit pypi python_setuptools_build_meta
