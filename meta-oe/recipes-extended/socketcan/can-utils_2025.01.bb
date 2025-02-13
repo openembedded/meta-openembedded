@@ -6,13 +6,22 @@ DEPENDS = "libsocketcan"
 
 SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master"
 
-SRCREV = "cfe41963f3425e9adb01a70cfaddedf5e5982720"
+SRCREV = "01083a64ebf28cc716efe2d2fd51c141042ae34b"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig update-alternatives
+inherit cmake pkgconfig update-alternatives
 
-PACKAGES =+ "${PN}-access ${PN}-isotp ${PN}-j1939 ${PN}-cantest ${PN}-slcan ${PN}-log"
+PACKAGES =+ " \
+    ${PN}-access \
+    ${PN}-cantest \
+    ${PN}-isobusfs \
+    ${PN}-isobusfs-dev \
+    ${PN}-isotp \
+    ${PN}-j1939 \
+    ${PN}-log \
+    ${PN}-slcan \
+"
 
 FILES:${PN}-access = " \
     ${bindir}/cangw \
@@ -22,6 +31,22 @@ FILES:${PN}-access = " \
     ${bindir}/cannelloni \
 "
 
+FILES:${PN}-cantest = " \
+    ${bindir}/canbusload \
+    ${bindir}/can-calc-bit-timing \
+    ${bindir}/canfdtest \
+"
+
+FILES:${PN}-isobusfs = " \
+    ${bindir}/isobusfs-cli \
+    ${bindir}/isobusfs-srv \
+    ${libdir}/libisobusfs.so \
+"
+
+FILES:${PN}-isobusfs-dev = " \
+    ${includedir}/isobusfs* \
+"
+
 FILES:${PN}-isotp = "${bindir}/isotp*"
 
 FILES:${PN}-j1939 = " \
@@ -29,15 +54,9 @@ FILES:${PN}-j1939 = " \
     ${bindir}/testj1939 \
 "
 
-FILES:${PN}-cantest = " \
-    ${bindir}/canbusload \
-    ${bindir}/can-calc-bit-timing \
-    ${bindir}/canfdtest \
-"
+FILES:${PN}-log = "${bindir}/*log*"
 
 FILES:${PN}-slcan = "${bindir}/slcan*"
-
-FILES:${PN}-log = "${bindir}/*log*"
 
 ALTERNATIVE:${PN} = "candump cansend cansequence"
 ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
@@ -47,4 +66,3 @@ ALTERNATIVE_LINK_NAME[cansequence] = "${bindir}/cansequence"
 # busybox ip fails to configure can interfaces, so we need iproute2 to do so.
 # See details in http://www.armadeus.com/wiki/index.php?title=CAN_bus_Linux_driver.
 RRECOMMENDS:${PN} += "iproute2-ip"
-
