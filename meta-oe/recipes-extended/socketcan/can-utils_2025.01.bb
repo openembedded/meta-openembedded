@@ -20,6 +20,7 @@ PACKAGES =+ " \
     ${PN}-isotp \
     ${PN}-j1939 \
     ${PN}-log \
+    ${PN}-mcp251xfd \
     ${PN}-slcan \
 "
 
@@ -55,6 +56,10 @@ FILES:${PN}-j1939 = " \
 "
 
 FILES:${PN}-log = "${bindir}/*log*"
+
+FILES:${PN}-mcp251xfd = " \
+    ${bindir}/mcp251xfd* \
+"
 
 FILES:${PN}-slcan = "${bindir}/slcan*"
 
