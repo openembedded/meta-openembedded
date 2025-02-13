@@ -2,18 +2,17 @@ DESCRIPTION = "Library to implement a well-behaved Unix daemon process"
 HOMEPAGE = "https://pagure.io/python-daemon/"
 SECTION = "devel/python"
 
-DEPENDS += "python3-docutils-native"
+DEPENDS += "python3-docutils-native python3-changelog-chug-native"
 RDEPENDS:${PN} = "python3-docutils \
                   python3-lockfile (>= 0.10) \
                   python3-resource \
 "
 
 LICENSE = "Apache-2.0 & GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://README;md5=a3a94c615dc969a70525f1eebbacf235"
+LIC_FILES_CHKSUM = "file://COPYING;md5=55f76b1b31719284caf4bc3ecbb70d6f"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI += "file://0001-Use-version-from-packaging-module-instead-of-setupto.patch"
-SRC_URI[sha256sum] = "6c57452372f7eaff40934a1c03ad1826bf5e793558e87fef49131e6464b4dae5"
+SRC_URI[sha256sum] = "f7b04335adc473de877f5117e26d5f1142f4c9f7cd765408f0877757be5afbf4"
 
-PYPI_PACKAGE = "python-daemon"
+PYPI_PACKAGE = "python_daemon"
