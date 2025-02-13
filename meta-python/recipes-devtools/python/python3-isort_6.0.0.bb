@@ -2,11 +2,13 @@ SUMMARY = "A Python utility / library to sort Python imports."
 HOMEPAGE = "https://pypi.python.org/pypi/isort"
 LICENSE = "MIT"
 SECTION = "devel/python"
-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=197c46995787b46a2dbf0d519c1754cf"
 
-SRC_URI[sha256sum] = "48fdfcb9face5d58a4f6dde2e72a1fb8dcaf8ab26f95ab49fab84c2ddefb0109"
+SRC_URI[sha256sum] = "75d9d8a1438a9432a7d7b54f2d3b45cad9a4a0fdba43617d9873379704a8bdf1"
 
-inherit pypi python_poetry_core
+inherit pypi python_hatchling
+
+DEPENDS += "python3-hatch-vcs-native python3-hatchling-native"
 
 RDEPENDS:${PN} += " \
     python3-compression \
