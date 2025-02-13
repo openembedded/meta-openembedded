@@ -20,7 +20,7 @@ do_configure:prepend() {
 PACKAGECONFIG ??= "libnotify"
 PACKAGECONFIG[libsensors] = "--enable-libsensors,--disable-libsensors, lmsensors"
 PACKAGECONFIG[hddtemp]    = "--enable-hddtemp,--disable-hddtemp, hddtemp"
-PACKAGECONFIG[netcat]     = "--enable-netcat,--disable-netcat, netcat"
+PACKAGECONFIG[netcat]     = "--enable-netcat --disable-pathchecks,--disable-netcat, netcat"
 PACKAGECONFIG[libnotify]  = "--enable-notification,--disable-notification, libnotify"
 
 FILES_SOLIBSDEV = "${libdir}/xfce4/modules/lib*${SOLIBSDEV}"
