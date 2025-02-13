@@ -186,8 +186,8 @@ do_install() {
     # mini-benchmark used for Gitlab-CI to run on every commit to catch
     # if there are severe performance regressions.
     # remove it to avoid introducing bash dependency
-    if [ -f ${D}${datadir}/mysql/mini-benchmark ]; then
-        rm -rf ${D}${datadir}/mysql/mini-benchmark
+    if [ -f ${D}${datadir}/mariadb/mini-benchmark ]; then
+        rm -rf ${D}${datadir}/mariadb/mini-benchmark
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
         pam_so=$(find ${D} -name pam_user_map.so)
@@ -349,7 +349,7 @@ FILES:${PN}-server = "\
     ${libdir}/plugin/*.so \
     ${base_libdir}/security/*.so \
     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
-    ${datadir}/mysql/ \
+    ${datadir}/mariadb/ \
     ${localstatedir}/mysql/ \
     ${sysconfdir}/init.d/mysqld \
     ${sysconfdir}/my.cnf \
