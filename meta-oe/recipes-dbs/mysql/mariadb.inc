@@ -96,7 +96,6 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
                  -DMYSQL_DATADIR:PATH=/var/mysql \
                  -DCAT_EXECUTABLE=`which cat` \
-                 -DSTACK_DIRECTION=1 \
                  -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
                  -DLSTAT_FOLLOWS_SLASHED_SYMLINK_EXITCODE=0 \
                  -DSTAT_EMPTY_STRING_BUG_EXITCODE=0 \
