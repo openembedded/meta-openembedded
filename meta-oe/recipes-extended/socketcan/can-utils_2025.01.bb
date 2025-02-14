@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61
 
 DEPENDS = "libsocketcan"
 
-SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master \
+           file://0001-Include-time.h-for-timespec-struct-definition.patch"
 
 SRCREV = "01083a64ebf28cc716efe2d2fd51c141042ae34b"
 
