@@ -391,3 +391,9 @@ FILES:gstreamer1.0-pipewire = " \
 "
 
 BBCLASSEXTEND = "native nativesdk"
+
+do_install:append() {
+  if ls ${D}${datadir}/doc/pipewire/html/dir_*html; then
+    sed -i "s,${WORKDIR},,g" ${D}${datadir}/doc/pipewire/html/dir_*html
+  fi
+}
