@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
-PACKAGECONFIG[python3] = ",,python3-core,python3-core"
+PACKAGECONFIG[python3] = ",,python3,python3-core"
 
 EXTRA_OECMAKE = "-D__LIB=${@os.path.relpath(d.getVar('libdir'), d.getVar('prefix') + '/')} -DCMAKE_BUILD_TYPE=Release -DLIBBPF_EMBEDDED=OFF"
 
