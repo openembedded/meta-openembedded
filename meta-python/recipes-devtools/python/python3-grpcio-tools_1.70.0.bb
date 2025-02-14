@@ -20,3 +20,5 @@ SRC_URI[sha256sum] = "e578fee7c1c213c8e471750d92631d00f178a15479fb2cb3b939a07fc1
 RDEPENDS:${PN} = "python3-grpcio"
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_PRODUCT += "grpc:grpc"
