@@ -15,11 +15,9 @@ DEPENDS = "\
     p11-kit \
 "
 
-SRCREV = "93bd41c505cf54dc1ecef6c963df347b9f4abf6d"
+SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
 
-SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https \
-    file://0001-meson-add-option-to-allow-override-default-default_p.patch \
-"
+SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
