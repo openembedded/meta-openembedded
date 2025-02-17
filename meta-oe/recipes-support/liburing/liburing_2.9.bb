@@ -10,10 +10,8 @@ LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-test-Compile-nolibc.c-only-when-CONFIG_NOLIBC-is-set.patch \
-           file://0001-test-Drop-including-error.h-header.patch \
-           file://0002-ooo-file-unreg.c-Include-poll.h-instead-of-sys-poll..patch"
-SRCREV = "5227d48b28ad8671e61d444b72678da584d2e6c3"
+           file://0001-test-Including-missing-string.h-for-memcpy.patch"
+SRCREV = "08468cc3830185c75f9e7edefd88aa01e5c2f8ab"
 
 S = "${WORKDIR}/git"
 
