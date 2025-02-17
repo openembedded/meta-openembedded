@@ -44,6 +44,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=ma
            file://0010-Always-use-devmapper.patch \
            file://0011-fix-bug-of-do_compile-and-do_install.patch \
            file://0012-add-explicit-dependency-on-libraries.patch \
+           file://0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
