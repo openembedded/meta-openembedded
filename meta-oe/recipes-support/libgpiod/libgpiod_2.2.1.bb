@@ -11,12 +11,9 @@ LIC_FILES_CHKSUM = " \
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
 
-SRC_URI += " \
-    file://gpio-manager.init \
-    file://0001-bindings-cxx-tests-disable-GPIO-simulator-before-rel.patch \
-"
+SRC_URI += "file://gpio-manager.init"
 
-SRC_URI[sha256sum] = "ee29735890eb1cc0e4b494001da5163d1a9c4735343201d22485db313601ca07"
+SRC_URI[sha256sum] = "0e948049c309b87c220fb24ee0d605d7cd5b72f22376e608470903fffa2d4b18"
 
 # Enable all project features for ptest
 PACKAGECONFIG[tests] = " \
