@@ -15,9 +15,9 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/wireshark-${PV}.tar.xz \
            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
            "
 
-UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
 
-SRC_URI[sha256sum] = "3fc5f88ae420bc5856d056324efb023abc4654eed4742140b0d0d36cb032b894"
+SRC_URI[sha256sum] = "dd80f30e9853105dacb5357e5832d960437160bbb4b147e8f1a7ead168afaa18"
 
 PE = "1"
 
