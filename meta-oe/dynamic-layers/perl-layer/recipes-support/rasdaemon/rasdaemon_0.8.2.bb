@@ -1,5 +1,5 @@
 DESCRIPTION = "Tools to provide a way to get Platform Reliability, Availability and Serviceability (RAS) reports made via the Kernel tracing events"
-HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
+HOMEPAGE = "https://github.com/mchehab/rasdaemon"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "4e83b848e7961af25028f3a2cecf37a63279a2bf"
+SRCREV = "e6cc13e37a17843a2a82313928cd6deed9918649"
 
 S = "${WORKDIR}/git"
 
