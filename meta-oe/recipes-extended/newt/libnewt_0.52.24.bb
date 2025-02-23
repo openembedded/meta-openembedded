@@ -20,7 +20,6 @@ DEPENDS = "slang popt python3"
 SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
            file://cross_ar.patch \
            file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
-           file://0001-detect-gold-as-GNU-linker-too.patch \
            "
 
 SRC_URI[sha256sum] = "5ded7e221f85f642521c49b1826c8de19845aa372baf5d630a51774b544fbdbb"
