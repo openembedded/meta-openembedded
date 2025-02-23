@@ -8,9 +8,11 @@ LIC_FILES_CHKSUM = " \
     file://third_party/xxhash/xxhash.h;beginline=1;endline=34;md5=d41d564db2353fc80a713956d85b1690 \
 "
 
-DEPENDS += "abseil-cpp c-ares openssl python3-protobuf re2 zlib"
+DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
 
-SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch"
+SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
+           file://abseil-ppc-fixes.patch \
+           "
 SRC_URI[sha256sum] = "8d1584a68d5922330025881e63a6c1b54cc8117291d382e4fa69339b6d914c56"
 
 RDEPENDS:${PN} = "python3-protobuf"
@@ -20,7 +22,8 @@ inherit pypi
 
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
-export GRPC_PYTHON_BUILD_SYSTEM_ABSL = "1"
+# unbundling abseil-cpp needs work on dynamic linker issue
+#export GRPC_PYTHON_BUILD_SYSTEM_ABSL = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_CARES = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_RE2 = "1"
