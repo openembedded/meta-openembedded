@@ -69,13 +69,7 @@ PACKAGECONFIG[krb5] = ", ,krb5"
 PACKAGECONFIG[lz4] = ", ,lz4"
 PACKAGECONFIG[openssl] = "-DWITH_SSL='system',-DWITH_SSL='bundled',openssl"
 
-# MariaDB doesn't link properly with gold
-# https://mariadb.atlassian.net/browse/MDEV-5982
-TARGET_CFLAGS += "-fuse-ld=bfd"
 LDFLAGS += " -pthread"
-
-BUILD_CFLAGS += "-fuse-ld=bfd"
-BUILD_CXXFLAGS += "-fuse-ld=bfd"
 
 LDFLAGS:x86:toolchain-clang = "-latomic"
 LDFLAGS:riscv32:toolchain-clang = "-latomic"
