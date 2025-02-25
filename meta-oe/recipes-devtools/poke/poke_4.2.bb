@@ -15,10 +15,6 @@ SRC_URI[sha256sum] = "8aaf36e61e367a53140ea40e2559e9ec512e779c42bee34e7ac24b34ba
 
 inherit autotools gettext pkgconfig
 
-# The automatic m4 path detection gets confused, so force the right value from
-# the poke bootstrap script.
-acpaths = "-I ./m4"
-
 EXTRA_OECONF = "--disable-gui \
                 --disable-libnbd \
                 --with-libreadline-prefix=${STAGING_INCDIR} \
