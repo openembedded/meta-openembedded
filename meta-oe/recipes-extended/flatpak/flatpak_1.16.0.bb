@@ -8,7 +8,7 @@ SRC_URI = " \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "8b4f523c4f8287d57f1a84a3a8216efe200c5fbf"
+SRCREV = "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
 
 S = "${WORKDIR}/git"
 
