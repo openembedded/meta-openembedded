@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
 
 S = "${WORKDIR}/git"
 
-inherit autotools cmake features_check pkgconfig
+inherit autotools cmake features_check pkgconfig systemd
 
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
@@ -79,7 +79,7 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
         --disable-xwayland \
 "
 
-EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=${systemd_unitdir}', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=${systemd_system_unitdir}', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
 
 do_configure:append () {
     olddir=`pwd`
@@ -124,7 +124,8 @@ FILES:${PN} += " \
     ${libdir}/xorg/modules/extensions \
     ${datadir}/icons \
     ${datadir}/metainfo \
-    ${systemd_unitdir} \
 "
 
 FILES:${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
+
+SYSTEMD_SERVICE:${PN} = "vncserver@.service"
