@@ -6,6 +6,7 @@ LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
 
 SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
+           file://no-automake.patch \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
            file://0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch \
            "
@@ -18,6 +19,7 @@ inherit autotools-brokensep binconfig pkgconfig
 
 TARGET_CFLAGS += "-Wno-narrowing"
 
+# These are needed for the integrated expat
 EXTRA_OEMAKE += "CC_FOR_BUILD='${BUILD_CC}' \
                  LD_FOR_BUILD='${BUILD_LD}' \
                  CFLAGS_FOR_BUILD='${BUILD_CFLAGS}' \
@@ -32,10 +34,7 @@ PACKAGECONFIG[abyss] = "--enable-abyss-server --enable-abyss-threads --enable-ab
 PACKAGECONFIG[cplusplus] = "--enable-cplusplus,--disable-cplusplus"
 PACKAGECONFIG[curl] = "--enable-curl-client,--disable-curl-client,curl"
 
-do_configure() {
-        gnu-configize --verbose --force ${S}
-        autoconf
-        oe_runconf
+do_configure:prepend() {
         # license is incompatible with lib/util/getoptx.*
         rm -fv ${S}/tools/turbocharger/mod_gzip.c
 }
