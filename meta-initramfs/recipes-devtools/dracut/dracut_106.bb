@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "3fce598fb45aa5618cdf885eb48cf327104ffcb8"
+SRCREV = "956c08774074ddc45b2f975e13d5c13d1fc36eff"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
            "
@@ -20,21 +20,21 @@ inherit bash-completion pkgconfig
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--prefix=${prefix} \
-                --libdir=${prefix}/lib \
+                --libdir=${nonarch_libdir} \
                 --datadir=${datadir} \
                 --sysconfdir=${sysconfdir} \
                 --sbindir=${sbindir} \
-                --disable-documentation \
                 --bindir=${bindir} \
                 --includedir=${includedir} \
                 --localstatedir=${localstatedir} \
+                --disable-documentation \
                "
 
 # RDEPEND on systemd optionally
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
 
-EXTRA_OEMAKE += 'libdir=${prefix}/lib LDLIBS="${LDLIBS}"'
+EXTRA_OEMAKE += 'libdir=${nonarch_libdir} LDLIBS="${LDLIBS}" enable_test=no'
 
 CFLAGS:append = " -fPIC"
 LDLIBS:append:libc-musl = " -lfts"
@@ -47,22 +47,26 @@ do_install() {
     oe_runmake install DESTDIR=${D}
     # Its Makefile uses cp -arx to install modules.d, so fix the owner
     # to root:root
-    chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
+    chown -R root:root ${D}/${nonarch_libdir}/dracut/modules.d \
+        ${D}/${nonarch_libdir}/dracut/dracut.conf.d
+
+    if ! ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        rm -rf ${D}${nonarch_libdir}/systemd
+    fi
 }
 
-FILES:${PN} += "${prefix}/lib/kernel \
-                ${prefix}/lib/dracut \
+FILES:${PN} += "${nonarch_libdir}/kernel \
+                ${nonarch_libdir}/dracut \
                 ${systemd_unitdir} \
                "
-FILES:${PN}-dbg += "${prefix}/lib/dracut/.debug"
+FILES:${PN}-dbg += "${nonarch_libdir}/dracut/.debug"
 
 CONFFILES:${PN} += "${sysconfdir}/dracut.conf"
 
 RDEPENDS:${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
 
 # This could be optimized a bit, but let's avoid non-booting systems :)
-RRECOMMENDS:${PN} = " \
-                     kernel-modules \
+RRECOMMENDS:${PN} = "kernel-modules \
                      coreutils \
                     "
 
