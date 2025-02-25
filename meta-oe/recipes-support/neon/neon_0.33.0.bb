@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "659a5cc9cea05e6e7864094f1e13a77abbbdbab452f04d751a8c16a944
 
 inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest
 
+EXTRA_AUTORECONF += "-I macros"
+
 # Enable gnutls or openssl, not both
 PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib nls"
 PACKAGECONFIG:class-native = "expat gnutls webdav zlib nls"
