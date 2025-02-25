@@ -3,7 +3,7 @@ DESCRIPTION = "Persistent Memory Development Kit"
 HOMEPAGE = "http://pmem.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b44ee63f162f9cdb18fff1224877aafd"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3e2f50552a27ca99772f3d884f98560b"
 DEPENDS = "ndctl cmake-native"
 
 # Required to have the fts.h header for musl
@@ -12,7 +12,7 @@ DEPENDS:append:libc-musl = " fts"
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/pmem/pmdk.git;branch=master;protocol=https"
-SRCREV = "5705fdffa755d00b4dbb4d6c30eb49671436f961"
+SRCREV = "0f0ab391d8e3db52f745f33c92b9d9a462bb3695"
 
 inherit autotools-brokensep pkgconfig
 
