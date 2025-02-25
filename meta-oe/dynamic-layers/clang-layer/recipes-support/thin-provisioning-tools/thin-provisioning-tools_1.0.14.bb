@@ -4,17 +4,23 @@ HOMEPAGE = "https://github.com/jthornber/thin-provisioning-tools"
 LICENSE = "GPL-3.0-only"
 SECTION = "devel"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
     "
 
-SRCREV = "116c05345bed5fe727992c3458311606d5443ff6"
+# v1.0.14
+SRCREV = "6be3e0937800cb947f1be7c0150825f155cfca14"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
+inherit pkgconfig
+
+DEPENDS += "udev clang-native"
+
+export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
 
 require ${BPN}-crates.inc
 require ${BPN}-git-crates.inc
