@@ -2,7 +2,7 @@ DESCRIPTION = "TigerVNC remote display system"
 HOMEPAGE = "http://www.tigervnc.com/"
 LICENSE = "GPL-2.0-or-later"
 SECTION = "x11/utils"
-DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk libpam"
+DEPENDS = "gettext-native xserver-xorg gnutls nettle jpeg pixman libxtst fltk libpam libx11 libxdamage libxfixes libxrandr"
 RDEPENDS:${PN} = "coreutils hicolor-icon-theme perl bash xkbcomp"
 
 LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
@@ -13,6 +13,8 @@ inherit autotools cmake features_check pkgconfig systemd
 
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
+# For ease we do in-tree builds right now. It should be possible to do
+# out-of-tree builds.
 B = "${S}"
 
 SRCREV = "1b4af5c586eb7a30a38c82fd088c1fa47a83e72f"
@@ -82,7 +84,5 @@ FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/metainfo \
 "
-
-FILES:${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
 
 SYSTEMD_SERVICE:${PN} = "vncserver@.service"
