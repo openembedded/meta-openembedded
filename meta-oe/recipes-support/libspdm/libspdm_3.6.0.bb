@@ -77,5 +77,6 @@ COMPATIBLE_HOST:powerpc = "null"
 COMPATIBLE_HOST:powerpc64 = "null"
 COMPATIBLE_HOST:mipsarchn32 = "null"
 COMPATIBLE_HOST:mipsarcho32 = "null"
+COMPATIBLE_HOST:mipsarchn64 = "null"
 
 BBCLASSEXTEND = "native nativesdk"
