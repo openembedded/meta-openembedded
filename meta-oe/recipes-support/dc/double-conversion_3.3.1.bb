@@ -12,7 +12,7 @@ SRC_URI = " \
         git://github.com/google/double-conversion.git;protocol=https;branch=master \
         file://run-ptest \
 "
-SRCREV = "4f7a25d8ced8c7cf6eee6fd09d6788eaa23c9afe"
+SRCREV = "ae0dbfeb9744efd216c95b30555049d75d47116a"
 
 inherit cmake ptest
 
