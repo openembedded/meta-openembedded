@@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/CESNET/libyang"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f3916d7d8d42a6508d0ea418cfff10ad"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9bb3d334294e8719f41c531e28a9a697"
 
-SRCREV = "fc4dbd923e044006c93df020590a1e5a8656c09e"
+SRCREV = "03e294d83b610f89e8ba7b2156a80dc0ad534443"
 
 SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
            file://0001-test_context-skip-test-case-test_searchdirs.patch \
@@ -31,7 +31,7 @@ do_compile:prepend () {
 }
 
 do_install:append () {
-        oe_multilib_header  libyang/config.h
+        oe_multilib_header  libyang/ly_config.h
 }
 
 do_install_ptest () {
