@@ -28,9 +28,9 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
            "
 
-SRC_URI[sha256sum] = "d0205a11e36d57b640daaa17a7e7166b8abc730d93b1db7e92e32dfb24bbfde1"
+SRC_URI[sha256sum] = "75868db7a8ed252cd3a14c13a3ce383ddd42563160c02027d061202ee36799bf"
 
-UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.8(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.10(\.\d+)+).tar.gz"
 
 S = "${WORKDIR}/postfix-${PV}"
 
@@ -135,20 +135,25 @@ do_install () {
     rm -rf ${D}${localstatedir}/spool/postfix
     mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/${MLPREFIX}sample-main.cf
     install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
-    install -d ${D}${sysconfdir}/init.d
     install -m 644 ${UNPACKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
     sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
 
     install -m 755 ${UNPACKDIR}/check_hostname.sh ${D}${sbindir}/
 
-    install -m 755 ${UNPACKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
     install -m 644 ${UNPACKDIR}/internal_recipient ${D}${sysconfdir}/postfix/internal_recipient
 
-    install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${UNPACKDIR}/postfix.service ${D}${systemd_unitdir}/system
-    sed -i -e 's#@LIBEXECDIR@#${libexecdir}#g' ${D}${systemd_unitdir}/system/postfix.service
-    sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/postfix.service
-    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/postfix.service
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 755 ${UNPACKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
+    fi
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/postfix.service ${D}${systemd_unitdir}/system
+        sed -i -e 's#@LIBEXECDIR@#${libexecdir}#g' ${D}${systemd_unitdir}/system/postfix.service
+        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/postfix.service
+        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/postfix.service
+    fi
 
     install -m 0755 ${UNPACKDIR}/aliasesdb ${D}${libexecdir}/postfix
 
