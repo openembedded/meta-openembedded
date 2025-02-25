@@ -14,9 +14,12 @@ DEPENDS = " \
     pango \
     gsettings-desktop-schemas \
     json-glib \
+    libdisplay-info \
     libei \
     libxtst \
     libxkbfile \
+    python3-argcomplete-native \
+    python3-docutils-native \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xinerama', '', d)} \
     xwayland \
 "
@@ -24,7 +27,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "6551a33ce887e68415b13952af6d6b430e95306f9297adc8c111953e995c515b"
+SRC_URI[archive.sha256sum] = "2e2fd6a024d4a5b0fed9a34f4ca25fc9505fe84f04da0cd5dc901b70d868ba31"
 
 SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
 
@@ -54,7 +57,6 @@ EXTRA_OEMESON += " \
 PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev"
 PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, virtual/libgl"
 PACKAGECONFIG[glx] = "-Dglx=true, -Dglx=false"
-PACKAGECONFIG[libdisplay-info] = "-Dlibdisplay_info=enabled, -Dlibdisplay_info=disabled, libdisplay-info"
 PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
 # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
 PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
@@ -64,7 +66,7 @@ PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcan
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-15"
+MUTTER_API_NAME = "mutter-16"
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
@@ -88,6 +90,7 @@ GSETTINGS_PACKAGE = "${PN}-gsettings"
 PACKAGES =+ "${PN}-tests ${PN}-gsettings"
 
 FILES:${PN} += " \
+    ${datadir}/bash-completion \
     ${datadir}/gnome-control-center \
     ${datadir}/gir-1.0 \
     ${libdir}/${MUTTER_API_NAME}/lib*${SOLIBS} \
