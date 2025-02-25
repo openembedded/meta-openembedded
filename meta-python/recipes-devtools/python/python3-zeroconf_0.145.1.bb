@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9fe712b1bc27c5c4e9ecd7f31d208900"
 
-SRC_URI[sha256sum] = "35f9390e4b862789f2d62da864bbf6ac26ad1d6dc8cf1e64a4d3554c85a05002"
+SRC_URI[sha256sum] = "3acb6146595597cfe6e314f8a4d530e659fcd9f9028cc9603a00518c98e57dd2"
 
 inherit pypi python_poetry_core cython
 
