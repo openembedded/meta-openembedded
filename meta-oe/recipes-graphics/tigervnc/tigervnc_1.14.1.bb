@@ -33,32 +33,17 @@ SRC_URI[xorg.sha256sum] = "841c82901282902725762df03adbbcd68153d4cdfb0d61df0cfd7
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
 XSERVER_SOURCE_DIR="${S}/unix/xserver"
+AUTOTOOLS_SCRIPT_PATH = "${XSERVER_SOURCE_DIR}"
 
 do_patch[postfuncs] += "do_patch_xserver"
 do_patch_xserver () {
-    subdirs="Xext xkb GL hw/xquartz/bundle hw/xfree86/common man doc"
-    for i in ${subdirs}; do
-        install -d ${XSERVER_SOURCE_DIR}/$i
-    done
-
-    sources="hw/xquartz/bundle/cpprules.in man/Xserver.man doc/smartsched \
-             xserver.ent.in xkb/README.compiled \
-             hw/xfree86/xorgconf.cpp hw/xfree86/Xorg.sh.in"
-    for i in ${sources}; do
-        install -m 0644 ${XORG_S}/$i ${XSERVER_SOURCE_DIR}/$i;
-    done
-
-    cd ${XORG_S}
-    find . -type f | egrep '.*\.(c|h|am|ac|inc|m4|h.in|pc.in|man.pre|pl|txt)$' | \
-    xargs tar cf - | (cd ${XSERVER_SOURCE_DIR} && tar xf -)
-
-    cd ${XSERVER_SOURCE_DIR}
-    xserverpatch="${S}/unix/xserver21.patch"
-    echo "Apply $xserverpatch"
-    patch -p1 -b --suffix .vnc < $xserverpatch
+    # Put the xserver source in the right place in the tigervnc source tree
+    cp -rfl ${XORG_S}/* ${XSERVER_SOURCE_DIR}
+    # Apply the patch to integrate the vnc server
+    patch -p1 -b --suffix .vnc --directory ${XSERVER_SOURCE_DIR} <${S}/unix/xserver21.patch
 }
 
-EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
+EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb \
         --disable-xwin --disable-xephyr --disable-kdrive --with-pic \
         --disable-static --disable-xinerama \
         --with-xkb-output=${localstatedir}/lib/xkb \
@@ -76,48 +61,20 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
         --without-xmlto \
         --enable-systemd-logind=no \
         --disable-xinerama \
-        --disable-xwayland \
 "
 
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=${systemd_system_unitdir}', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
 
 do_configure:append () {
-    olddir=`pwd`
-    cd ${XSERVER_SOURCE_DIR}
-
-    rm -rf aclocal-copy/
-    rm -f aclocal.m4
-
-    export ACLOCALDIR="${XSERVER_SOURCE_DIR}/aclocal-copy"
-    mkdir -p ${ACLOCALDIR}/
-    if [ -d ${STAGING_DATADIR_NATIVE}/aclocal ]; then
-        cp-noerror ${STAGING_DATADIR_NATIVE}/aclocal/ ${ACLOCALDIR}/
-    fi
-    if [ -d ${STAGING_DATADIR}/aclocal -a "${STAGING_DATADIR_NATIVE}/aclocal" != "${STAGING_DATADIR}/aclocal" ]; then
-        cp-noerror ${STAGING_DATADIR}/aclocal/ ${ACLOCALDIR}/
-    fi
-    ACLOCAL="aclocal --aclocal-path=${ACLOCALDIR}/" autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths || bbfatal "autoreconf execution failed."
-    chmod +x ./configure
-    ${CACHED_CONFIGUREVARS} ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-    cd $olddir
+    autotools_do_configure
 }
 
 do_compile:append () {
-    olddir=`pwd`
-    cd ${XSERVER_SOURCE_DIR}
-
     oe_runmake
-
-    cd $olddir
 }
 
 do_install:append() {
-    olddir=`pwd`
-    cd ${XSERVER_SOURCE_DIR}/hw/vnc
-
-    oe_runmake 'DESTDIR=${D}' install
-
-    cd $olddir
+    oe_runmake -C ${B}/hw/vnc 'DESTDIR=${D}' install
 }
 
 FILES:${PN} += " \
