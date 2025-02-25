@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 inherit autotools-brokensep pkgconfig manpages
 
-SRCREV = "ba8960c3b26ca92f710d9dbbf45802cdd2a3fbd9"
+SRCREV = "e7db33bb545bf69c83a0501e3cd2f6b558edf7c5"
 SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
