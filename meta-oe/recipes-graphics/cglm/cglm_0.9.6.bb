@@ -9,8 +9,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8dc95c4110ba741c43832734b51b7de7"
 
 SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
-# Tag v0.9.1
-SRCREV = "1796cc5ce298235b615dc7a4750b8c3ba56a05dd"
+# Tag v0.9.6
+SRCREV = "144d1e7c29b3b0c6dede7917a0476cc95248559c"
 
 S = "${WORKDIR}/git"
 
