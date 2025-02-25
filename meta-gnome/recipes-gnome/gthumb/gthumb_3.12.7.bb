@@ -28,7 +28,6 @@ EXTRA_OEMESON += "-Dwebservices=false -Dlibsecret=false"
 
 inherit gnomebase gnome-help gsettings itstool mime-xdg
 
-SRC_URI += "file://283c9483afd1215378c8b9871f51cd61770e53e7.patch"
-SRC_URI[archive.sha256sum] = "608770c6c8e73073a1d404b65bd1b761e1ac5dc25e70130ff072488fa92f5c33"
+SRC_URI[archive.sha256sum] = "ee12d24cf231010241f758d6c95b9d53a7381278fa76b6a518b3d09b371efaec"
 
 FILES:${PN} += "${datadir}/metainfo"
