@@ -33,7 +33,7 @@ GIR_MESON_OPTION = ""
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "783deb9a086511e4a53db10574bfbba695576f698078218ca6c80cb1efec293e"
+SRC_URI[archive.sha256sum] = "e0c2bee1a1674c622847f353cae59ec36bfb122d2c117834aff120445d7c5b2b"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
@@ -67,6 +67,7 @@ FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/gnome-control-center \
     ${datadir}/xdg-desktop-portal \
+    ${datadir}/desktop-directories \
     ${systemd_user_unitdir} \
 "
 
