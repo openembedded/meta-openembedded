@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "9fc77d40283c26690bbc1563fb7fcadac789afe8695d332ced3fa4696df39eb9"
+SRC_URI[sha256sum] = "9c420f6d35e9c8cd4b75b77cc78e36407604534ec4ab0cbddf699d7c0b2fc435"
 
 RDEPENDS:${PN} += " \
     python3-shell \
