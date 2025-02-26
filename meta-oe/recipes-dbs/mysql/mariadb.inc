@@ -87,6 +87,7 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
                  -DINSTALL_LIBDIR:PATH=${baselib} \
                  -DINSTALL_PLUGINDIR:PATH=${baselib}/plugin \
+                 -DINSTALL_PCDIR:PATH=${baselib}/pkgconfig \
                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
                  -DMYSQL_DATADIR:PATH=/var/mysql \
                  -DCAT_EXECUTABLE=`which cat` \
