@@ -41,6 +41,9 @@ ALTERNATIVE_PRIORITY = "90"
 
 export AUTOHEADER = "true"
 
+# Needed for manpages.bbclass, but they're always installed
+PACKAGECONFIG[manpages] = ""
+
 do_configure () {
     gnu-configize --force ${S}
     oe_runconf
