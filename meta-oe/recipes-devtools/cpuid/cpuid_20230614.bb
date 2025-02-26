@@ -17,9 +17,7 @@ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 inherit perlnative
 
 do_install () {
-    oe_runmake DESTDIR=${D} bindir=${bindir} mandir=${mandir} install
+    oe_runmake DESTDIR=${D} bindir=${bindir} mandir=${mandir} INSTALL_STRIP="" install
 }
 
 RDEPENDS:${PN} = "perl"
-
-INSANE_SKIP:${PN} += "already-stripped"
