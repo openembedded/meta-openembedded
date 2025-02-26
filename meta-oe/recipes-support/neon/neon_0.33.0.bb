@@ -32,9 +32,6 @@ PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
 
 EXTRA_OECONF += "--enable-shared --enable-threadsafe-ssl=posix"
 
-# Do not install into /usr/local
-EXTRA_OEMAKE:append:class-native = " prefix=${prefix_native}"
-
 do_configure:prepend() {
     echo "${PV}" > ${S}/.version
 }
