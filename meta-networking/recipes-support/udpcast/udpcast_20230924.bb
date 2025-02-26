@@ -18,5 +18,7 @@ SRC_URI[sha256sum] = "17b5cd8b1e54f7e2e53357ac02ee86e4198bf704096987a03a3b5c402a
 # Installation of rateGovernor.h fails without brokensep
 inherit autotools-brokensep manpages
 
+PACKAGECONFIG[manpages] = ""
+
 # pod2man required to build manpages
 DEPENDS += "perl-native"
