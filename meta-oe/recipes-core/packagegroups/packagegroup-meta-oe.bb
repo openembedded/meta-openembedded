@@ -761,7 +761,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     hunspell \
     hunspell-dictionaries \
     icyque \
-    iksemel \
     imagemagick \
     imapfilter \
     iniparser \
