@@ -133,6 +133,8 @@ def is_target(d):
 export PERLCONFIGTARGET = "${@is_target(d)}"
 export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl5/${@get_perl_version(d)}/${@get_perl_arch(d)}"
 
+EXTRA_AUTORECONF += "-I config"
+
 do_configure() {
     # do_configure
     autotools_do_configure
