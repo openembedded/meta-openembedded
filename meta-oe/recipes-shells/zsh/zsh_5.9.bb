@@ -13,7 +13,7 @@ DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.xz"
 SRC_URI[sha256sum] = "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba10ab863842d45acd5"
 
-inherit autotools-brokensep gettext update-alternatives manpages
+inherit autotools gettext update-alternatives manpages
 
 EXTRA_OECONF = " \
     --bindir=${base_bindir} \
