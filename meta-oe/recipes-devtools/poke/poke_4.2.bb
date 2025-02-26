@@ -13,8 +13,7 @@ DEPENDS = "flex-native bison-native bdwgc readline"
 
 SRC_URI[sha256sum] = "8aaf36e61e367a53140ea40e2559e9ec512e779c42bee34e7ac24b34ba119bde"
 
-# poke does not support using out-of-tree builds
-inherit autotools-brokensep gettext pkgconfig
+inherit autotools gettext pkgconfig
 
 # The automatic m4 path detection gets confused, so force the right value from
 # the poke bootstrap script.
