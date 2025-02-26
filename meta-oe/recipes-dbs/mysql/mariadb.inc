@@ -63,7 +63,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} lz4 openssl"
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 
 PACKAGECONFIG:class-native = ""
-PACKAGECONFIG[pam] = "-DPLUGIN_AUTH_PAM=YES,-DPLUGIN_AUTH_PAM=NO,libpam"
+PACKAGECONFIG[pam] = "-DPLUGIN_AUTH_PAM=YES -DINSTALL_PAMDIR=${base_libdir}/security,-DPLUGIN_AUTH_PAM=NO,libpam"
 PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITH_VALGRIND=FALSE,valgrind"
 PACKAGECONFIG[krb5] = ", ,krb5"
 PACKAGECONFIG[lz4] = ", ,lz4"
@@ -181,14 +181,6 @@ do_install() {
     # remove it to avoid introducing bash dependency
     if [ -f ${D}${datadir}/mariadb/mini-benchmark ]; then
         rm -rf ${D}${datadir}/mariadb/mini-benchmark
-    fi
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-        pam_so=$(find ${D} -name pam_user_map.so)
-        if [ x"${pam_so}" != x ]; then
-            pam_dir=$(dirname ${pam_so})
-            mv ${pam_dir} ${D}/${base_libdir}
-            rmdir --ignore-fail-on-non-empty ${pam_dir%security}
-        fi
     fi
 }
 
