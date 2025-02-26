@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba10ab863842d
 
 inherit autotools gettext update-alternatives manpages
 
+EXTRA_AUTORECONF += "--exclude=aclocal"
+
 EXTRA_OECONF = " \
     --bindir=${base_bindir} \
     --enable-etcdir=${sysconfdir} \
@@ -39,15 +41,8 @@ ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
 ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
 ALTERNATIVE_PRIORITY = "90"
 
-export AUTOHEADER = "true"
-
 # Needed for manpages.bbclass, but they're always installed
 PACKAGECONFIG[manpages] = ""
-
-do_configure () {
-    gnu-configize --force ${S}
-    oe_runconf
-}
 
 do_install:append() {
     sed -i -e '1!b; s:^#!.*[ /]zsh:#!${bindir}/zsh:; s#/usr/local/bin#${bindir}#;' \
