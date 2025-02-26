@@ -35,6 +35,7 @@ LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
 inherit autotools features_check pkgconfig
 
 AUTOTOOLS_SCRIPT_PATH = "${S}/unix"
+EXTRA_AUTORECONF += "--exclude=aclocal"
 
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
