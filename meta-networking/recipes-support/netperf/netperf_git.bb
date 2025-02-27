@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git;branch=master;protocol=ht
            file://0001-netlib.c-Move-including-sched.h-out-og-function.patch \
            file://0001-nettest_omni-Remove-duplicate-variable-definitions.patch \
            file://netserver_permissions.patch \
+           file://0001-Makefile.am-add-ACLOCAL_AMFLAGS.patch \
            "
 
 SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
@@ -34,12 +35,6 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
 PACKAGECONFIG[intervals] = "--enable-intervals,--disable-intervals,,"
 PACKAGECONFIG[histogram] = "--enable-histogram,--disable-histogram,,"
-
-# autotools.bbclass attends to include m4 files with path depth <= 2 by
-# "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
-do_configure:prepend() {
-    test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
-}
 
 do_install() {
     sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${UNPACKDIR}/init
