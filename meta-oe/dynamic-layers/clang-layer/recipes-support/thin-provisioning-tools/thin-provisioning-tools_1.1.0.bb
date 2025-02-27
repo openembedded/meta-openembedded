@@ -21,7 +21,7 @@ inherit pkgconfig
 DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
 
 export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
-export BINDGEN_EXTRA_CLANG_ARGS = "${BUILD_CFLAGS}"
+export BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
 
 require ${BPN}-crates.inc
 require ${BPN}-git-crates.inc
