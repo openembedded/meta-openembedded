@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
            file://0002-Remove-maes-option-from-cross-compilation.patch \
            file://abseil-ppc-fixes.patch \
            file://0001-absl-strings-internal-str_format-extension.h-add-mis.patch \
+           file://CVE-2025-0838.patch \
           "
 
 S = "${WORKDIR}/git"
