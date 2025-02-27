@@ -11,16 +11,17 @@ SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
     "
 
-# v1.0.14
-SRCREV = "6be3e0937800cb947f1be7c0150825f155cfca14"
+# v1.1.0
+SRCREV = "b745ab35057bdd0a4f1406938916621dcf2b7ef6"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
 inherit pkgconfig
 
-DEPENDS += "udev clang-native"
+DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
 
 export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
+export BINDGEN_EXTRA_CLANG_ARGS = "${BUILD_CFLAGS}"
 
 require ${BPN}-crates.inc
 require ${BPN}-git-crates.inc
