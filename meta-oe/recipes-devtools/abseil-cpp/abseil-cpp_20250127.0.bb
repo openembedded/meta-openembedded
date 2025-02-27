@@ -7,14 +7,13 @@ SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
 
-SRCREV = "4447c7562e3bc702ade25105912dce503f0c4010"
-BRANCH = "lts_2024_07_22"
+SRCREV = "9ac7062b1860d895fb5a8cbf58c3e9ef8f674b5f"
+BRANCH = "lts_2025_01_27"
 SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
            file://0001-absl-always-use-asm-sgidefs.h.patch             \
            file://0002-Remove-maes-option-from-cross-compilation.patch \
            file://0003-Remove-neon-option-from-cross-compilation.patch \
            file://0004-abseil-ppc-fixes.patch \
-           file://0005-Don-t-match-Wnon-virtual-dtor-in-the-flags-are-neede.patch \
           "
 
 S = "${WORKDIR}/git"
