@@ -10,14 +10,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "365060c4213a48adb27f63d5dfad41b3dfbdd62e"
-SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https \
-           file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
-           file://disable_libunwind_aarch64.patch \
-           file://0001-src-mmap_hook.cc-Fix-build-for-32bit-machine.patch \
-           "
+SRCREV = "e1014dead2029b341d06027b4f2b5562d799d5b1"
+SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https"
 
-SRC_URI:append:libc-musl = " file://ppc-musl.patch"
+SRC_URI:append:libc-musl = " \
+        file://ppc-musl.patch \
+        file://0002-src-base-elf_mem_image.cc-fix-build-for-musl.patch \
+        file://0003-Makefile.am-disable-building-noinst-tests-for-musl.patch \
+        "
 
 inherit autotools
 
