@@ -1,0 +1,32 @@
+From 5852b47a81e5334a667d1e12dbfa55c0f8111100 Mon Sep 17 00:00:00 2001
+From: Derek Mauro <dmauro@google.com>
+Date: Fri, 7 Feb 2025 08:49:06 -0800
+Subject: [PATCH] Actually use the hint space instruction to strip PAC bits for
+ return addresses in stack traces as the comment says
+
+https://android.googlesource.com/platform/libcore/+/71f2c75111e87091616f0f3b86bea6c4d345dad1/src/hotspot/os_cpu/linux_aarch64/pauth_linux_aarch64.inline.hpp
+
+PiperOrigin-RevId: 724360415
+Change-Id: I691160e43354131a04919765ce283e07c3c933a9
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Alex Kiernan <alexk@a-squared-projects.uk>
+Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/5852b47a81e5334a667d1e12dbfa55c0f8111100]
+---
+ absl/debugging/internal/stacktrace_aarch64-inl.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/absl/debugging/internal/stacktrace_aarch64-inl.inc b/absl/debugging/internal/stacktrace_aarch64-inl.inc
+index 4490c4e13cae..dccadaeb7c24 100644
+--- a/absl/debugging/internal/stacktrace_aarch64-inl.inc
++++ b/absl/debugging/internal/stacktrace_aarch64-inl.inc
+@@ -188,7 +188,9 @@ inline void* ClearPacBits(void* ptr) {
+   // compatibility with ARM platforms that do not support pointer
+   // authentication, we use the hint space instruction XPACLRI instead. Hint
+   // space instructions behave as NOPs on unsupported platforms.
+-  asm("xpaclri" : "+r"(x30));
++#define ABSL_XPACLRI_HINT "hint #0x7;"
++  asm(ABSL_XPACLRI_HINT : "+r"(x30));  // asm("xpaclri" : "+r"(x30));
++#undef ABSL_XPACLRI_HINT
+   return x30;
+ }
+ 
