@@ -10,6 +10,9 @@ inherit clutter features_check upstream-version-is-even gobject-introspection
 # depends on clutter-1.0 which depends on cogl-1.0
 REQUIRED_DISTRO_FEATURES ?= "opengl"
 
+# Needed for introspection.m4
+EXTRA_AUTORECONF += "-I m4"
+
 export GST_PLUGIN_SCANNER_1_0="${S}/gst-plugin-scanner-dummy"
 
 SRC_URI += "file://0001-Install-example-binary-needed-for-core-image-clutter.patch"
