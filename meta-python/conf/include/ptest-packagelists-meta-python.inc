@@ -53,6 +53,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-precise-runner \
     python3-prettytable \
     python3-propcache \
+    python3-pyasyncore \
     python3-pydantic \
     python3-pydantic-core \
     python3-pylint \
