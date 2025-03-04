@@ -3,10 +3,9 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c9a6829fcd174d9535b46211917c7671"
 
+SRC_URI[sha256sum] = "f0edb38060cb9161b2417939bfd5cd9877da73388fb19d1e8bf7987e8558896e"
 
-SRC_URI[sha256sum] = "b804b8d51db23959b96b329094debdbbdf10c8c3aa75958c5988cfd7f78501dd"
-
-inherit pypi ptest-python-pytest  python_hatchling
+inherit pypi ptest-python-pytest python_hatchling
 
 do_install:append() {
     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
