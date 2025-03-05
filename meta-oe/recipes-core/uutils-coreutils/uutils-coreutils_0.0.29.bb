@@ -30,9 +30,9 @@ CARGO_BUILD_FLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', '--featur
 
 DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'clang-native libselinux-native', '', d)}"
 
-export LIBCLANG_PATH = "${WORKDIR}/recipe-sysroot-native${libdir}"
-export SELINUX_LIB_DIR = "${WORKDIR}/recipe-sysroot-native${libdir}"
-export SELINUX_INCLUDE_DIR = "${WORKDIR}/recipe-sysroot-native${includedir}"
+export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
+export SELINUX_LIB_DIR = "${STAGING_LIBDIR_NATIVE}"
+export SELINUX_INCLUDE_DIR = "${STAGING_INCDIR_NATIVE}"
 
 # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
 
