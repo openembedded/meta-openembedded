@@ -3,9 +3,7 @@ HOMEPAGE = "https://github.com/amoffat/sh"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
 
-SRC_URI[sha256sum] = "287021ae84183dea49787985e33797dda7fe769e4f95f2c94dff8e245ab4cb00"
-
-PYPI_PACKAGE = "sh"
+SRC_URI[sha256sum] = "653227a7c41a284ec5302173fbc044ee817c7bad5e6e4d8d55741b9aeb9eb65b"
 
 inherit pypi python_poetry_core
 
