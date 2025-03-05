@@ -16,4 +16,4 @@ RDEPENDS:${PN} += " \
     python3-unittest \
 "
 
-SRC_URI[sha256sum] = "5e96aad5ccda4718e0a229ed94b2024df75cc2d55575ba5762d31f5767b8767d"
+SRC_URI[sha256sum] = "4e460e818629b4b173f32d08bf30d3af8123afbb8e04bb5707a1fd4799e503f0"
