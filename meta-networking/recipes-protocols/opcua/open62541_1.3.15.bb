@@ -31,6 +31,12 @@ EXTRA_OECMAKE += "\
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
 
+FILES:${PN} = "${libdir}/lib*${SOLIBS}"
+
+# The tools package contains scripts to generate certificates and OPC UA schema definitions + nodeset descriptions.
+PACKAGES += "${PN}-tools"
+FILES:${PN}-tools = "${datadir}/${BPN}/tools/*"
+
 PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth subscriptions subscriptions-events namespace-full"
 PACKAGECONFIG[encryption-mbedtls] = "-DUA_ENABLE_ENCRYPTION=MBEDTLS, , mbedtls, , , encryption-openssl"
 PACKAGECONFIG[encryption-openssl] = "-DUA_ENABLE_ENCRYPTION=OPENSSL, , openssl, , , encryption-mbedtls"
