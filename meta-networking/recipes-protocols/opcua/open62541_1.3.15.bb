@@ -27,15 +27,16 @@ inherit cmake python3native
 
 EXTRA_OECMAKE += "\
     -DBUILD_SHARED_LIBS=ON \
-    -DUA_NAMESPACE_ZERO=FULL \
     -DUA_LOGLEVEL=600 \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
 
-PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth subscriptions subscriptions-events"
+PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth subscriptions subscriptions-events namespace-full"
 PACKAGECONFIG[encryption-mbedtls] = "-DUA_ENABLE_ENCRYPTION=MBEDTLS, , mbedtls, , , encryption-openssl"
 PACKAGECONFIG[encryption-openssl] = "-DUA_ENABLE_ENCRYPTION=OPENSSL, , openssl, , , encryption-mbedtls"
 PACKAGECONFIG[multithreading] = "-DUA_MULTITHREADING=100, -DUA_MULTITHREADING=0"
+PACKAGECONFIG[namespace-full] = "-DUA_NAMESPACE_ZERO=FULL, , , , , namespace-reduced"
+PACKAGECONFIG[namespace-reduced] = "-DUA_NAMESPACE_ZERO=REDUCED, , , , , namespace-full"
 PACKAGECONFIG[pubsub] = "-DUA_ENABLE_PUBSUB=ON, -DUA_ENABLE_PUBSUB=OFF"
 PACKAGECONFIG[pubsub-eth] = "-DUA_ENABLE_PUBSUB_ETH_UADP=ON, -DUA_ENABLE_PUBSUB_ETH_UADP=OFF"
 PACKAGECONFIG[subscriptions] = "-DUA_ENABLE_SUBSCRIPTIONS=ON, -DUA_ENABLE_SUBSCRIPTIONS=OFF"
