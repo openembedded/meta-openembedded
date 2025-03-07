@@ -8,10 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
 DEPENDS = "libpcap"
 
 SRC_URI = "git://github.com/seladb/PcapPlusPlus.git;protocol=https;branch=master \
-           file://0001-packet-Initialize-m_ExternalRawData-in-IDnsResource-.patch \
-           file://0001-initialize-timespec-variable.patch"
-
-SRCREV = "4cf8ed44f9dd145f874dc1dd747dfefcfcab75be"
+           file://0001-Remove-whitespace-in-operator-_json.patch \
+          "
+SRCREV = "4af4b8b04e6d5dd40b8e69cc30c5c1f62e7fe368"
 
 S = "${WORKDIR}/git"
 
