@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
 
 inherit cargo cargo-update-recipe-crates
 
-SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main"
+SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main \
+    file://0001-do-not-compile-stdbuf.patch"
 
 # musl not supported because the libc crate does not support functions like "endutxent" at the moment,
 # so src/uucore/src/lib/features.rs disables utmpx when targetting musl.
@@ -71,6 +72,3 @@ python __anonymous() {
     for prog in d.getVar('sbindir_progs').split():
         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('sbindir'), prog))
 }
-
-ERROR_QA:remove = "buildpaths"
-WARN_QA:append = " buildpaths"
