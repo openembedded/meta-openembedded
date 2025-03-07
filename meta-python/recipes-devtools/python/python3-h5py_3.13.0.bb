@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "1870e46518720023da85d0895a1960ff2ce398c5671eac3b1a41ec696b
 
 SRC_URI += "file://0001-setup_build.py-avoid-absolute-path.patch"
 
-inherit pkgconfig pypi setuptools3 cython
+inherit pkgconfig pypi python_setuptools_build_meta cython
 
 BBCLASSEXTEND = "native"
 
