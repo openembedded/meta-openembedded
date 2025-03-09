@@ -12,9 +12,8 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "cc7439187f61dd73b81ca69f5dbccbb52ce970b2"
-SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=1.2;protocol=https"
-SRC_URI += "file://0ca64277b317b4836beccaa3248ab9055526811c.patch"
+SRCREV = "df1c36aec2aaf9e2eb1596b6b55e72c15fb2088a"
+SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -283,6 +282,7 @@ CONFFILES:libpipewire += "${datadir}/pipewire/client.conf"
 FILES:libpipewire = " \
     ${datadir}/pipewire/client.conf \
     ${libdir}/libpipewire-*.so.* \
+    ${libdir}/${SPA_SUBDIR}/libspa.so \
 "
 # Add the bare minimum modules and plugins required to be able
 # to use libpipewire. Without these, it is essentially unusable.
