@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https"
-SRCREV = "fa43b77429ba76c462b1898d6cd2f2d7a9416b14"
+SRCREV = "914aeecfe23b1e16af6ea675a4fb5dbd5a5b8d0a"
 
 S = "${WORKDIR}/git"
 
