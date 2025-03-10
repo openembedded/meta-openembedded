@@ -16,7 +16,7 @@ SRC_URI = " \
     git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
     file://run-ptest \
 "
-SRCREV = "8970ff4c34034dbb3594943d11f8c9d4c5512bd5"
+SRCREV = "00e42151ca061463ba6a95adb2290f678cbca472"
 
 S = "${WORKDIR}/git"
 
