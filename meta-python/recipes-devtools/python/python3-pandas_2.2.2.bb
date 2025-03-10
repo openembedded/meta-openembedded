@@ -11,12 +11,14 @@ SRC_URI += " \
             file://0001-pyproject.toml-Downgrade-numpy-version-needs-to-1.x.patch \
             "
 
+SRC_URI:append:class-target = " file://0001-BLD-add-option-to-specify-numpy-header-location.patch "
+
 SRC_URI[sha256sum] = "9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54"
 
 inherit pkgconfig pypi python_mesonpy cython
 
 DEPENDS += " \
-    python3-numpy-native \
+    python3-numpy \
     python3-versioneer-native \
 "
 
@@ -30,3 +32,8 @@ RDEPENDS:${PN} += " \
     python3-pytz \
     python3-profile \
 "
+
+PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
+export PYTHONPATH
+
+EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
