@@ -10,7 +10,7 @@ LICENSE_FLAGS = "commercial"
 PV .= "+git"
 
 SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
-SRCREV = "216f00e8ddba6f2c64caf481a04f1ddd78b93e78"
+SRCREV = "673a22a3c7c33e96e2ff7aae7c4d2bc190dfbf92"
 
 S = "${WORKDIR}/git"
 
