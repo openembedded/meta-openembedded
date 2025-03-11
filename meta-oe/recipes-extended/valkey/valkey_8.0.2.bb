@@ -21,6 +21,8 @@ SRCREV = "d6a2f561e2751d4ab246ad084e4fa185526fa479"
 
 S = "${WORKDIR}/git"
 
+RPROVIDES:${PN} = "virtual-redis"
+
 inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
