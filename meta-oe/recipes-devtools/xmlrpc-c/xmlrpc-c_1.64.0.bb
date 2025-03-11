@@ -10,8 +10,8 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
            file://0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch \
            "
-# one more commit after Release 1.60.03 in the Stable series
-SRCREV = "a823b0bb5cf0a4dbd34f929cbfdfb0439c5d9b0e"
+# one more commit after Release 1.64.0 in the Stable series
+SRCREV = "8ce36bce2438df9b02fcaafd19efa90a56426601"
 
 S = "${WORKDIR}/git/stable"
 
