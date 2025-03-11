@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e3cf524a29c8476be354bb329d36ff80"
 SRC_URI = "http://www.udpcast.linux.lu/download/${BP}.tar.gz \
            file://0001-include-stddef.h-for-ptrdiff_t.patch \
            "
-SRC_URI[sha256sum] = "17b5cd8b1e54f7e2e53357ac02ee86e4198bf704096987a03a3b5c402a0ecea1"
+SRC_URI[sha256sum] = "cefd7554c877e1bc76987d2b96b23f7699a2e5340c254454f61b6e0dae370aa7"
 
 # Installation of rateGovernor.h fails without brokensep
 inherit autotools-brokensep manpages
