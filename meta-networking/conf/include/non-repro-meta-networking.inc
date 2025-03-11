@@ -30,6 +30,8 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
     opensaf \
     postfix-cfg \
     rp-pppoe \
+    traceroute \
+    traceroute-dbg \
     udpcast-doc \
     unbound-doc \
     znc \
