@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "f4441966592636253fd5ab0bb9ed44fc2697fc53"
-SRCBRANCH = "9.0.fb"
+SRCREV = "ae8fb3e5000e46d8d4c9dbf3a36019c0aaceebff"
+SRCBRANCH = "9.10.fb"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
            file://0001-cmake-Add-check-for-atomic-support.patch \
