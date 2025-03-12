@@ -8,14 +8,16 @@ has been split out into the protobuf-c-rpc project."
 HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
 SECTION = "console/tools"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d11077c6a2b5d2e64b9f32b61a9b78ba"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bd8de4f63e06b1ccc06e9f8dc5b1aa97"
 
 DEPENDS = "protobuf-native protobuf"
 
-SRC_URI = "git://github.com/protobuf-c/protobuf-c.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git;branch=master;protocol=https \
+           file://protobuf-30.patch \
+"
 SRC_URI:append:class-native = " file://0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch"
 
-SRCREV = "8c201f6e47a53feaab773922a743091eb6c8972a"
+SRCREV = "185beed28e65494be7505b30c1afeaf199e19b23"
 
 S = "${WORKDIR}/git"
 
