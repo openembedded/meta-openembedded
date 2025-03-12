@@ -17,17 +17,17 @@ organisations with a few servers and for large companies with a \
 multitude of servers."
 HOMEPAGE = "http://www.zabbix.com/"
 SECTION = "Applications/Internet"
-LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=300e938ad303147fede2294ed78fe02e"
+LICENSE = "AGPL-3.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=eb1e647870add0502f8f010b19de32af"
 DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.4/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/7.0/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
     file://zabbix-agent.service \
 "
-SRC_URI[sha256sum] = "527010dbd45cf204dcd3b38e82df696b908b74f38e8d1ab9bbbb1292e784f394"
+SRC_URI[sha256sum] = "8d7755576f30b5d6099ff5e3574549fc248229c017f9753828565174125069f6"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
