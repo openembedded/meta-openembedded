@@ -12,10 +12,9 @@ DEPENDS = " nasm-native"
 inherit meson pkgconfig
 
 S = "${WORKDIR}/git"
-SRCREV = "8c7008aeb6335e7d36ab0d9a023a63f82a8eaac0"
+SRCREV = "19120fcb8f89b16126e9cfee096b2f0751554fdc"
 BRANCH = "openh264v${PV}"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
-           file://0001-meson.build-Enable-PIC-in-x86-assembly-code.patch \
            "
 
 COMPATIBLE_MACHINE:powerpc64le = "null"
