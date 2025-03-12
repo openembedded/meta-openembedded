@@ -878,7 +878,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     syslog-ng \
     system-config-keyboard \
     tbb \
-    thin-provisioning-tools \
     tokyocabinet \
     tree \
     uchardet \
