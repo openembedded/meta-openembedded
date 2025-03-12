@@ -8,7 +8,9 @@ DEPENDS:append:class-native = " libcap-native"
 
 S = "${WORKDIR}/git"
 SRCREV = "ab9df9cfc39de7a49967f18387b6b76310947442"
-SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable"
+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
+           file://0001-sll_protocol-may-be-be16.patch \
+           "
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
