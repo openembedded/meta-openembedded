@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
 
 DEPENDS = "libpng zlib glib-2.0 libxml2 groff-native python3-setuptools-native"
 
-SRCREV = "3af04acd38bbc61bbdcdd931dcf234c971aa5336"
-PV = "1.8.0"
+SRCREV = "522b228d74da7054594b6ed9c289058acd6cd3e7"
+PV = "1.9.0"
 
 SRC_URI = "\
     git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
-    file://b76e3c578f1e9f582e9c28f50d82b1f569602075.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -22,6 +21,8 @@ BBCLASSEXTEND = "native"
 
 SYSTEMD_PACKAGES = "rrdcached"
 SYSTEMD_SERVICE:rrdcached = "rrdcached.socket rrdcached.service"
+
+AUTOTOOLS_AUXDIR = "${S}/conftools"
 
 EXTRA_AUTORECONF = "-I m4 --exclude=autopoint"
 
@@ -62,6 +63,10 @@ export STAGING_INCDIR
 # emulate cpan_do_configure
 EXTRA_OEMAKE = ' CC="${CC} -Wno-incompatible-pointer-types" PERL5LIB="${PERL_ARCHLIB}" '
 # Avoid do_configure error on some hosts
+
+do_configure:prepend () {
+        mkdir -p ${AUTOTOOLS_AUXDIR}
+}
 
 do_configure() {
     unset PERLHOSTLIB
