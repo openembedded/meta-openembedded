@@ -1,0 +1,39 @@
+From 615fae91dafdb89f0f8418129918dbb7ff879cf6 Mon Sep 17 00:00:00 2001
+From: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+Date: Thu, 24 Oct 2024 17:51:29 +0200
+Subject: [PATCH] linux_mtd: fix build with clang >= 19
+
+Starting with version 19, clang issues a warning when using `strlen()`
+for initializing a static array's size. This causes the build to fail as
+the project also sets `-Werror`.
+
+This is fixed by using `sizeof()` instead, which is guaranteed to be
+evaluated at compilation time and therefore not triggering the
+problematic warning.
+
+Upstream-Status: Backport [https://github.com/flashrom/flashrom/commit/34b1a6aa57e910c0b5a518e8a0cab6841c7efaee]
+
+Change-Id: If470a65702e9ae08e4303123a0014e53a1fee56e
+Signed-off-by: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+Reviewed-on: https://review.coreboot.org/c/flashrom/+/84856
+Tested-by: build bot (Jenkins) <no-reply@coreboot.org>
+Reviewed-by: Maximilian Brune <maximilian.brune@9elements.com>
+Reviewed-by: Anastasia Klimchuk <aklm@chromium.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ linux_mtd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/linux_mtd.c b/linux_mtd.c
+index eea0cf2..0cb2330 100644
+--- a/linux_mtd.c
++++ b/linux_mtd.c
+@@ -49,7 +49,7 @@ static int read_sysfs_string(const char *sysfs_path, const char *filename, char
+ 	int i;
+ 	size_t bytes_read;
+ 	FILE *fp;
+-	char path[strlen(LINUX_MTD_SYSFS_ROOT) + 32];
++	char path[sizeof(LINUX_MTD_SYSFS_ROOT) + 31];
+ 
+ 	snprintf(path, sizeof(path), "%s/%s", sysfs_path, filename);
+ 
