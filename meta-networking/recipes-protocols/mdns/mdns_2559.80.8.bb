@@ -28,7 +28,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0004-Add-definition-for-MAX.patch \
            "
 BRANCH = "rel/mDNSResponder-2559"
-SRCREV = "e8a63bd04dda3f83a80f1dbc6db03e7806d87c11"
+SRCREV = "ecc02274878b0a70dba229de642b081cd1c30927"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
