@@ -3,17 +3,19 @@ SECTION = "x11"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "libwnck3 libsm libxfce4ui virtual/libx11"
+DEPENDS = "libwnck3 libsm libxfce4ui libxfce4windowing virtual/libx11"
 
 inherit xfce update-alternatives features_check
 
 SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
-SRC_URI[sha256sum] = "9a9c5074c7338b881a5259d3b643619bf84901360c03478e1a697938ece06516"
+SRC_URI[sha256sum] = "5229233fe6ee692361cc28724886c5b08e0216d89f09c42d273191d38fd64f85"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
 PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
+
+EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
 
 ALTERNATIVE:${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
@@ -22,6 +24,7 @@ ALTERNATIVE_PRIORITY_${PN} = "150"
 FILES:${PN} += " \
     ${libdir}/xfce4/*/*/*.so \
     ${libdir}/xfce4/session/*-*-* \
+    ${datadir}/wayland-sessions \
     ${datadir}/xsessions \
     ${datadir}/themes/Default/balou/* \
     ${datadir}/polkit-1 \
