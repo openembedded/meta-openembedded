@@ -48,7 +48,6 @@ PACKAGECONFIG ??= "\
     proxy-go \
     record-accessor \
     regex \
-    release \
     signv4 \
     sqldb \
     stream-processor \
@@ -73,9 +72,7 @@ PACKAGECONFIG[backtrace] = "-DFLB_BACKTRACE=Yes,-DFLB_BACKTRACE=No"
 PACKAGECONFIG[binary] = "-DFLB_BINARY=Yes,-DFLB_BINARY=No"
 PACKAGECONFIG[chunk-trace] = "-DFLB_CHUNK_TRACE=Yes,-DFLB_CHUNK_TRACE=No"
 PACKAGECONFIG[config-yaml] = "-DFLB_CONFIG_YAML=Yes,-DFLB_CONFIG_YAML=No,libyaml"
-PACKAGECONFIG[coverage] = "-DFLB_COVERAGE=Yes,-DFLB_COVERAGE=No"
 PACKAGECONFIG[custom-calyptia] = "-DFLB_CUSTOM_CALYPTIA=Yes,-DFLB_CUSTOM_CALYPTIA=No"
-PACKAGECONFIG[debug] = "-DFLB_DEBUG=Yes,-DFLB_DEBUG=No"
 PACKAGECONFIG[enforce-alignment] = "-DFLB_ENFORCE_ALIGNMENT=Yes,-DFLB_ENFORCE_ALIGNMENT=No"
 PACKAGECONFIG[examples] = "-DFLB_EXAMPLES=Yes,-DFLB_EXAMPLES=No"
 PACKAGECONFIG[http-client-debug] = "-DFLB_HTTP_CLIENT_DEBUG=Yes,-DFLB_HTTP_CLIENT_DEBUG=No"
@@ -91,11 +88,9 @@ PACKAGECONFIG[posix-tls] = "-DFLB_POSIX_TLS=Yes,-DFLB_POSIX_TLS=No"
 PACKAGECONFIG[proxy-go] = "-DFLB_PROXY_GO=Yes,-DFLB_PROXY_GO=No"
 PACKAGECONFIG[record-accessor] = "-DFLB_RECORD_ACCESSOR=Yes,-DFLB_RECORD_ACCESSOR=No"
 PACKAGECONFIG[regex] = "-DFLB_REGEX=Yes,-DFLB_REGEX=No"
-PACKAGECONFIG[release] = "-DFLB_RELEASE=Yes,-DFLB_RELEASE=No"
 PACKAGECONFIG[run-ldconfig] = "-DFLB_RUN_LDCONFIG=Yes,-DFLB_RUN_LDCONFIG=No"
 PACKAGECONFIG[shared-lib] = "-DFLB_SHARED_LIB=Yes,-DFLB_SHARED_LIB=No"
 PACKAGECONFIG[signv4] = "-DFLB_SIGNV4=Yes,-DFLB_SIGNV4=No"
-PACKAGECONFIG[small] = "-DFLB_SMALL=Yes,-DFLB_SMALL=No"
 PACKAGECONFIG[sqldb] = "-DFLB_SQLDB=Yes,-DFLB_SQLDB=No"
 PACKAGECONFIG[stream-processor] = "-DFLB_STREAM_PROCESSOR=Yes,-DFLB_STREAM_PROCESSOR=No"
 PACKAGECONFIG[tests-runtime] = "-DFLB_TESTS_RUNTIME=Yes,-DFLB_TESTS_RUNTIME=No"
@@ -118,6 +113,10 @@ PACKAGECONFIG[out-kafka] = "-DFLB_OUT_KAFKA=ON,-DFLB_OUT_KAFKA=OFF,librdkafka cu
 SYSTEMD_SERVICE:${PN} = "fluent-bit.service"
 
 inherit cmake systemd pkgconfig
+
+# disable manipulation of compiler flags and CMAKE_BUILD_TYPE
+# release and coverage are off by default, disable also debug
+EXTRA_OECMAKE += "-DFLB_DEBUG=No"
 
 FULL_OPTIMIZATION:remove = "${@'-O2' if bb.data.inherits_class('clang', d) else ''}"
 TARGET_CC_ARCH += "${SELECTED_OPTIMIZATION}"
