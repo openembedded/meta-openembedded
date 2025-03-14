@@ -13,11 +13,8 @@ DEPENDS:class-native = "zlib-native libxml2-native"
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-           file://0002-build-php.m4-don-t-unset-cache-variables.patch \
-           file://0003-php-remove-host-specific-info-from-header-file.patch \
            file://0004-configure.ac-don-t-include-build-libtool.m4.patch \
            file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
-           file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
            file://0010-iconv-fix-detection.patch \
            file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
           "
@@ -34,6 +31,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
+
 SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
@@ -51,6 +49,8 @@ inherit autotools pkgconfig python3native gettext multilib_header multilib_scrip
 #
 SSTATE_SCAN_FILES += "phpize"
 SSTATE_SCAN_FILES += "build-defs.h"
+
+export PHP_UNAME = "Linux"
 
 PHP_LIBDIR = "${libdir}/php${PHP_MAJOR_VERSION}"
 
@@ -71,7 +71,6 @@ EXTRA_OECONF = "--enable-mbstring \
                 --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
                 --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
-                ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
                 ${COMMON_EXTRA_OECONF} \
 "
 
@@ -81,8 +80,6 @@ EXTRA_OECONF:append:riscv32 = " --with-pcre-jit=no"
 # for example rv64 implementation is below
 # see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
 EXTRA_OECONF:append:riscv32:libc-musl = " --disable-fiber-asm"
-
-CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
 
 EXTRA_OECONF:class-native = " \
                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
