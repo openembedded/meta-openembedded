@@ -139,3 +139,6 @@ do_configure:prepend() {
 do_compile:append() {
     find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|${TARGET_DBGSRC_DIR}/|g'
 }
+
+# needed for shared-lib package config
+FILES:${PN} += "${libdir}/fluent-bit"
