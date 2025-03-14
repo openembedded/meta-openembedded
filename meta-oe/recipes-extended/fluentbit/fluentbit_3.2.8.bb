@@ -45,6 +45,7 @@ PACKAGECONFIG ??= "\
     metrics \
     parser \
     prefer-system-libs \
+    profiles \
     proxy-go \
     record-accessor \
     regex \
@@ -85,6 +86,7 @@ PACKAGECONFIG[metrics] = "-DFLB_METRICS=Yes,-DFLB_METRICS=No"
 PACKAGECONFIG[mtrace] = "-DFLB_MTRACE=Yes,-DFLB_MTRACE=No"
 PACKAGECONFIG[parser] = "-DFLB_PARSER=Yes,-DFLB_PARSER=No"
 PACKAGECONFIG[posix-tls] = "-DFLB_POSIX_TLS=Yes,-DFLB_POSIX_TLS=No"
+PACKAGECONFIG[profiles] = "-DFLB_PROFILES=Yes,-DFLB_PROFILES=No"
 PACKAGECONFIG[proxy-go] = "-DFLB_PROXY_GO=Yes,-DFLB_PROXY_GO=No"
 PACKAGECONFIG[record-accessor] = "-DFLB_RECORD_ACCESSOR=Yes,-DFLB_RECORD_ACCESSOR=No"
 PACKAGECONFIG[regex] = "-DFLB_REGEX=Yes,-DFLB_REGEX=No"
