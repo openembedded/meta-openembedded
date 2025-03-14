@@ -12,3 +12,7 @@ SRC_URI[sha256sum] = "e2456ba0cfb2ee5ba14121450e8d825b3c4a1461fca0761220aab66d41
 SRC_URI += "file://0001-Use-default-cc-from-environment-variable.patch"
 
 inherit setuptools3 pypi
+
+# Ensure posix message queue support in python package for prober.py script
+DEPENDS += "glibc"
+RDEPENDS:${PN} += "glibc"
