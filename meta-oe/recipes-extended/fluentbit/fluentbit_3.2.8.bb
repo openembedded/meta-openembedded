@@ -17,14 +17,12 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "600b5a955b5ef7b9d025e0c128432260d0c6a5f1"
+SRCREV = "d13e8e4ab2029fa92600b7d1d0da28f8dcc350eb"
 SRC_URI = "\
-    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https \
+    git://github.com/fluent/fluent-bit.git;branch=3.2;protocol=https \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
-    file://0004-wasm-avoid-cmake-try_run-when-cross-compiling.patch \
-    file://0005-cprof_encode_text.c-fix-wrong-pointer-assignment.patch \
 "
 SRC_URI:append:libc-musl = "\
     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
@@ -114,9 +112,8 @@ PACKAGECONFIG[windows-defaults] = "-DFLB_WINDOWS_DEFAULTS=Yes,-DFLB_WINDOWS_DEFA
 # individual plugins then to enable (e.g. using EXTRA_OECMAKE:append = " -DFLB_FOOBAR=ON")
 PACKAGECONFIG[minimal] = "-DFLB_MINIMAL=Yes,-DFLB_MINIMAL=No"
 
-# Without zstd dependency, kafka plugin build fails at link attempt against native libzstd.so
-PACKAGECONFIG[in-kafka] = "-DFLB_IN_KAFKA=ON,-DFLB_IN_KAFKA=OFF,librdkafka zstd curl"
-PACKAGECONFIG[out-kafka] = "-DFLB_OUT_KAFKA=ON,-DFLB_OUT_KAFKA=OFF,librdkafka zstd curl"
+PACKAGECONFIG[in-kafka] = "-DFLB_IN_KAFKA=ON,-DFLB_IN_KAFKA=OFF,librdkafka curl"
+PACKAGECONFIG[out-kafka] = "-DFLB_OUT_KAFKA=ON,-DFLB_OUT_KAFKA=OFF,librdkafka curl"
 
 SYSTEMD_SERVICE:${PN} = "fluent-bit.service"
 
