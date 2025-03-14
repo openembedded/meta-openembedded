@@ -1,7 +1,7 @@
-From a04aabc5b80371e579fbaffdd417627390d22722 Mon Sep 17 00:00:00 2001
+From 35ac74fce1a60025f8d126783b8aa7014eefdf53 Mon Sep 17 00:00:00 2001
 From: Claude Bing <cbing@cybernetics.com>
 Date: Tue, 9 Nov 2021 13:10:33 -0500
-Subject: [PATCH 10/11] iconv: fix detection
+Subject: [PATCH 3/5] iconv: fix detection
 
 Upstream-Status: Pending
 
@@ -12,23 +12,26 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
 
 update patch to version 8.0.12
 Signed-off-by: Claude Bing <cbing@cybernetics.com>
+
+update patch to version 8.4.4
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
  build/php.m4 | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/build/php.m4 b/build/php.m4
-index 93551d9ca7..dba50825fb 100644
+index e45b22b76..1bd3ccceb 100644
 --- a/build/php.m4
 +++ b/build/php.m4
-@@ -1945,7 +1945,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
-   unset ICONV_DIR
+@@ -1820,7 +1820,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+     [Define to 1 if you have the 'libiconv' function.])
  
    dnl Check libc first if no path is provided in --with-iconv.
--  if test "$PHP_ICONV" = "yes"; then
+-  AS_VAR_IF([PHP_ICONV], [yes], [
 +  dnl must check against no, not against yes as PHP_ICONV can also include a path, which implies yes
-+  if test "$PHP_ICONV" != "no"; then
++  AS_VAR_IF([PHP_ICONV], [no], [], [
      dnl Reset LIBS temporarily as it may have already been included -liconv in.
-     LIBS_save="$LIBS"
+     LIBS_save=$LIBS
      LIBS=
 -- 
 2.25.1

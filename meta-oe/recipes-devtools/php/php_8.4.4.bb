@@ -13,17 +13,14 @@ DEPENDS:class-native = "zlib-native libxml2-native"
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-           file://0004-configure.ac-don-t-include-build-libtool.m4.patch \
-           file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
-           file://0010-iconv-fix-detection.patch \
-           file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
+           file://0001-configure.ac-don-t-include-build-libtool.m4.patch \
+           file://0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
           "
 
 SRC_URI:append:class-target = " \
-            file://0001-ext-opcache-config.m4-enable-opcache.patch \
-            file://0005-pear-fix-Makefile.frag-for-Yocto.patch \
-            file://0007-sapi-cli-config.m4-fix-build-directory.patch \
-            file://0008-ext-imap-config.m4-fix-include-paths.patch \
+            file://0003-iconv-fix-detection.patch \
+            file://0004-pear-fix-Makefile.frag-for-Yocto.patch \
+            file://0005-sapi-cli-config.m4-fix-build-directory.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
@@ -32,7 +29,7 @@ SRC_URI:append:class-target = " \
 
 S = "${WORKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "be57c347d451c905bcb4336832a864d9928dd0e20989b872705fea0ba6476c6b"
+SRC_URI[sha256sum] = "192a325fd3ca09b6c528dd6014ee07d803c3162514d4bb0d3e0981d00ac700ec"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
@@ -74,6 +71,9 @@ EXTRA_OECONF = "--enable-mbstring \
                 ${COMMON_EXTRA_OECONF} \
 "
 
+# Set these values directly to avoid AC_RUN_IFELSE which does not work in cross compilation environment
+CACHED_CONFIGUREVARS += "ac_cv_php_cv_shm_ipc=yes ac_cv_php_cv_shm_mmap_anon=yes ac_cv_php_cv_shm_mmap_posix=yes"
+
 EXTRA_OECONF:append:riscv64 = " --with-pcre-jit=no"
 EXTRA_OECONF:append:riscv32 = " --with-pcre-jit=no"
 # Needs fibers assembly implemented for rv32
@@ -87,7 +87,7 @@ EXTRA_OECONF:class-native = " \
                 ${COMMON_EXTRA_OECONF} \
 "
 
-PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
+PACKAGECONFIG ??= "mysql sqlite3 opcache openssl \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
 "
 PACKAGECONFIG:class-native = ""
@@ -107,10 +107,6 @@ PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--witho
 PACKAGECONFIG[soap] = "--enable-soap, --disable-soap, libxml2"
 PACKAGECONFIG[apache2] = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs,,apache2-native apache2"
 PACKAGECONFIG[pam] = ",,libpam"
-PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
-                       --with-imap-ssl=${STAGING_DIR_HOST} \
-                       ,--without-imap --without-imap-ssl \
-                       ,uw-imap"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
 PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
