@@ -1,20 +1,20 @@
-From f22958b4c1348eec3bb4c0f2cbe2d22676e0ad23 Mon Sep 17 00:00:00 2001
+From 35d7d40ac49c96b7a9a19b2f6593abb9f18ade2b Mon Sep 17 00:00:00 2001
 From: Claude Bing <cbing@cybernetics.com>
 Date: Tue, 9 Nov 2021 13:04:29 -0500
-Subject: [PATCH 05/11] pear: fix Makefile.frag for Yocto
+Subject: [PATCH 4/5] pear: fix Makefile.frag for Yocto
+
+Upstream-Status: Pending
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 update patch to 8.0.12
 Signed-off-by: Claude Bing <cbing@cybernetics.com>
 ---
-Upstream-Status: Pending
-
  pear/Makefile.frag | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/pear/Makefile.frag b/pear/Makefile.frag
-index 9408757a3a..69072f39e0 100644
+index 9408757a3..69072f39e 100644
 --- a/pear/Makefile.frag
 +++ b/pear/Makefile.frag
 @@ -10,7 +10,7 @@ PEAR_SUFFIX = -ds a$(program_suffix)

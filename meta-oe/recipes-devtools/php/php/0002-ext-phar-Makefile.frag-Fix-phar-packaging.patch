@@ -1,7 +1,7 @@
-From eab5babdadea487bbbef025068c553f5ba741774 Mon Sep 17 00:00:00 2001
+From f7724d7ccd157058630e6a887798ab6d3e34c6b7 Mon Sep 17 00:00:00 2001
 From: Claude Bing <cbing@cybernetics.com>
 Date: Tue, 9 Nov 2021 13:07:25 -0500
-Subject: [PATCH 06/11] ext/phar/Makefile.frag: Fix phar packaging
+Subject: [PATCH 2/5] ext/phar/Makefile.frag: Fix phar packaging
 
 Inherited from OE-Classic, with some additions to fix host paths leaking
 into the target package.
@@ -19,7 +19,7 @@ Signed-off-by: Claude Bing <cbing@cybernetics.com>
  1 file changed, 3 insertions(+), 14 deletions(-)
 
 diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
-index 7a867dd7..4dbcafd4 100644
+index cedde76df..09d577d73 100644
 --- a/ext/phar/Makefile.frag
 +++ b/ext/phar/Makefile.frag
 @@ -10,20 +10,9 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
@@ -46,3 +46,6 @@ index 7a867dd7..4dbcafd4 100644
  
  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
  	-@test -d $(builddir)/phar || mkdir $(builddir)/phar
+-- 
+2.25.1
+
