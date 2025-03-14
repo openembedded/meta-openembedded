@@ -31,6 +31,9 @@ SRC_URI:append:libc-musl = "\
     file://0005-Use-posix-strerror_r-with-musl.patch \
 "
 
+# prefix tag with "v" to avoid upgrade to random tags like "20220215"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>(\d+(\.\d+)+))"
+
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "\
