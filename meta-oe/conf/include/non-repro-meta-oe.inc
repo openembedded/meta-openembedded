@@ -24,6 +24,8 @@ KNOWN_NON_REPRO_META_OE = " \
     evemu-tools-python \
     fbgrab-doc \
     fluentbit-src \
+    fsverity-utils-dbg \
+    fsverity-utils-staticdev \
     fvwm-dbg \
     fvwm-doc \
     fvwm-extra \
@@ -59,12 +61,15 @@ KNOWN_NON_REPRO_META_OE = " \
     libck-doc \
     libdbus-cxx-dev \
     libforms \
+    libfsverity0 \
     libhugetlbfs-doc \
     libiio-src \
     libjcat-dbg \
     libjcat-ptest \
     librelp-dbg \
     librelp-ptest \
+    libsdl2-compat \
+    libsdl2-compat-dbg \
     libthrift-c-glib-zlib-src \
     libvncserver-dev \
     libwebsockets-testapps \
