@@ -32,6 +32,7 @@ SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
            file://CVE-2021-3643_CVE-2021-23210.patch \
            file://CVE-2021-23159_CVE-2021-2317.patch \
            file://CVE-2021-33844.patch \
+           file://CVE-2021-40426.patch \
            "
 
 # last release was in 2015, use latest hash from 2024-05-30
