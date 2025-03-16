@@ -4,24 +4,24 @@ and can apply different effects and filters to the audio data."
 HOMEPAGE = "http://sox.sourceforge.net"
 SECTION = "audio"
 
-DEPENDS = "libpng libsndfile1 libtool"
+DEPENDS = "autoconf-archive-native libpng libsndfile1 libtool"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)} \
                    magic \
 "
-PACKAGECONFIG[pulseaudio] = "--with-pulseaudio=dyn,--with-pulseaudio=no,pulseaudio,"
-PACKAGECONFIG[alsa] = "--with-alsa=dyn,--with-alsa=no,alsa-lib,"
-PACKAGECONFIG[wavpack] = "--with-wavpack=dyn,--with-wavpack=no,wavpack,"
-PACKAGECONFIG[flac] = "--with-flac=dyn,--with-flac=no,flac,"
-PACKAGECONFIG[amrwb] = "--with-amrwb=dyn,--with-amrwb=no,opencore-amr,"
-PACKAGECONFIG[amrnb] = "--with-amrnb=dyn,--with-amrnb=no,opencore-amr,"
-PACKAGECONFIG[oggvorbis] = "--with-oggvorbis=dyn,--with-oggvorbis=no,libvorbis"
-PACKAGECONFIG[opus] = "--with-opus=dyn,--with-opus=no,opusfile"
+PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio=dyn,--disable-pulseaudio,pulseaudio,"
+PACKAGECONFIG[alsa] = "--enable-alsa=dyn,--disable-alsa,alsa-lib,"
+PACKAGECONFIG[wavpack] = "--enable-wavpack=dyn,--disable-wavpack,wavpack,"
+PACKAGECONFIG[flac] = "--enable-flac=dyn,--disable-flac,flac,"
+PACKAGECONFIG[amrwb] = "--enable-amrwb=dyn,--disable-amrwb,opencore-amr,"
+PACKAGECONFIG[amrnb] = "--enable-amrnb=dyn,--disable-amrnb,opencore-amr,"
+PACKAGECONFIG[oggvorbis] = "--enable-oggvorbis=dyn,--disable-oggvorbis,libvorbis"
+PACKAGECONFIG[opus] = "--enable-opus=dyn,--disable-opus,opusfile"
 PACKAGECONFIG[magic] = "--with-magic,--without-magic,file,"
 PACKAGECONFIG[mad] = "--with-mad,--without-mad,libmad,"
 PACKAGECONFIG[id3tag] = "--with-id3tag,--without-id3tag,libid3tag,"
 PACKAGECONFIG[lame] = "--with-lame,--without-lame,lame,"
-PACKAGECONFIG[ao] = "--with-ao,--without-ao,libao,"
+PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao,"
 
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
@@ -29,11 +29,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
 
 SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
-           file://0001-Update-exported-symbol-list.patch \
-           file://0001-tests-Include-math.h-for-fabs-definition.patch \
            "
 
-SRCREV = "45b161d73ec087a8e003747b1aed07cd33589bca"
+# last release was in 2015, use latest hash from 2024-05-30
+PV .= "+git"
+SRCREV = "f3094754a7c2a7e55c35621d20fa9945736e72df"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
