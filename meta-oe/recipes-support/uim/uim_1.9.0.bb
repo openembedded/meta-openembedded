@@ -8,7 +8,7 @@ SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
 SRC_URI:append:class-target = "\
     file://uim-module-manager.patch \
 "
-SRC_URI[sha256sum] = "dbbd983768bf748449551644f330dbebe859bfeb6f024fea6697ac75131c7aa4"
+SRC_URI[sha256sum] = "271f0ed5f455e5bffa859f01b2d0f7fb966554ebd4822657afb67a0431dd85a8"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
