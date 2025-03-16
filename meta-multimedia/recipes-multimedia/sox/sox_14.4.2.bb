@@ -29,6 +29,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
 
 SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
+           file://CVE-2021-3643_CVE-2021-23210.patch \
            "
 
 # last release was in 2015, use latest hash from 2024-05-30
