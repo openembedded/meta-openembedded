@@ -27,13 +27,14 @@ LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
                     file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
+SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
            file://0001-Update-exported-symbol-list.patch \
            file://0001-tests-Include-math.h-for-fabs-definition.patch \
            "
-SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
-SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
+
+SRCREV = "45b161d73ec087a8e003747b1aed07cd33589bca"
+S = "${WORKDIR}/git"
 
 CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
 
