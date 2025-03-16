@@ -38,6 +38,14 @@ S = "${WORKDIR}/git"
 
 CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
 
+CVE_STATUS_GROUPS += "CVE_STATUS_HASH_UPDATE"
+CVE_STATUS_HASH_UPDATE = " \
+    CVE-2017-11332 CVE-2017-11358 CVE-2017-11359 CVE-2017-15370 CVE-2017-15371 \
+    CVE-2017-15372 CVE-2017-15642 CVE-2017-18189 CVE-2019-13590 CVE-2019-8354 \
+    CVE-2019-8355 CVE-2019-8356 CVE-2019-8357 CVE-2019-1010004 \
+"
+CVE_STATUS_HASH_UPDATE[status] = "fixed-version: patched in current git hash"
+
 inherit autotools pkgconfig
 
 # Enable largefile support
