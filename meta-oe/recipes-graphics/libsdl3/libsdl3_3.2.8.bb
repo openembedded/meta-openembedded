@@ -55,9 +55,11 @@ PACKAGECONFIG ??= " \
 	${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio pipewire x11 vulkan', d)} \
 	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland gles2', '', d)} \
 	${@bb.utils.contains("TUNE_FEATURES", "neon","arm-neon","",d)} \
+	${@bb.utils.contains_any("DISTRO_FEATURES", "x11 wayland","","console-build",d)} \
 "
 PACKAGECONFIG[alsa]       = "-DSDL_ALSA=ON,-DSDL_ALSA=OFF,alsa-lib,"
 PACKAGECONFIG[arm-neon]   = "-DSDL_ARMNEON=ON,-DSDL_ARMNEON=OFF"
+PACKAGECONFIG[console-build] = "-DSDL_UNIX_CONSOLE_BUILD=ON"
 PACKAGECONFIG[gles2]      = "-DSDL_OPENGLES=ON,-DSDL_OPENGLES=OFF,virtual/libgles2"
 PACKAGECONFIG[jack]       = "-DSDL_JACK=ON,-DSDL_JACK=OFF,jack"
 PACKAGECONFIG[kmsdrm]     = "-DSDL_KMSDRM=ON,-DSDL_KMSDRM=OFF,libdrm virtual/libgbm"
