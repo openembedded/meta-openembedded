@@ -16,6 +16,8 @@ S = "${WORKDIR}/sdl2-compat-${PV}"
 
 DEPENDS += "libsdl3"
 
-inherit cmake pkgconfig upstream-version-is-even
+inherit cmake pkgconfig upstream-version-is-even features_check
+
+REQUIRED_DISTRO_FEATURES = "opengl x11"
 
 FILES:${PN} += "${datadir}/licenses"
