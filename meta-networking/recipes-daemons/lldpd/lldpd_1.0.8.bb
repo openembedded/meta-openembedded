@@ -11,6 +11,7 @@ SRC_URI = "\
     file://lldpd.init.d \
     file://lldpd.default \
     file://CVE-2023-41910.patch \
+    file://CVE-2021-43612.patch \
     "
 
 SRC_URI[md5sum] = "000042dbf5b445f750b5ba01ab25c8ba"
