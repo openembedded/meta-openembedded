@@ -46,10 +46,10 @@ SRCREV_gsl-lite = "755ba124b54914e672737acace6a9314f59e8d6f"
 SRCREV_date = "5bdb7e6f31fac909c090a46dbd9fea27b6e609a4"
 # asio: 1.29.0
 SRCREV_asio = "814f67e730e154547aea3f4d99f709cbdf1ea4a0"
-# fmt: 11.0.2
-SRCREV_fmt = "0c9fce2ffefecfdce794e1859584e25877b7b592"
-# spdlog: 1.14.1
-SRCREV_spdlog = "27cb4c76708608465c413f6d0e6b8d99a4d84302"
+# fmt: 11.1.4
+SRCREV_fmt = "123913715afeb8a437e6388b4473fcc4753e1c9a"
+# spdlog: 1.15.1
+SRCREV_spdlog = "f355b3d58f7067eee1706ff3c801c2361011f3d5"
 
 SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog"
 
