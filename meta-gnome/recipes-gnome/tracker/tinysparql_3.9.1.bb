@@ -16,11 +16,11 @@ DEPENDS = " \
     libstemmer \
 "
 
-inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion
+inherit gettext gnomebase gobject-introspection vala gi-docgen bash-completion
 
 SRC_URI += "file://0001-fix-reproducibility.patch"
 SRC_URI += "file://0001-src-libtracker-sparql-meson.build-dont-create-compat.patch"
-SRC_URI[archive.sha256sum] = "bb8643386c8edc591a03205d4a0eda661dcdd2094473bffb9bbdb94e93589cb2"
+SRC_URI[archive.sha256sum] = "98e8933b946d8c54a77eadabd7f1d14cddd88fa43eef0d0ace3c0fcce646722b"
 
 # text search is not an option anymore and requires sqlite3 build with
 # PACKAGECONFIG[fts5] set (default)
@@ -43,13 +43,18 @@ EXTRA_OEMESON = " \
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
+GIDOCGEN_MESON_OPTION = "docs"
 
-PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "zeroconf", "avahi", "", d)}"
+PACKAGECONFIG ??= " \
+	${@bb.utils.contains("DISTRO_FEATURES", "zeroconf", "avahi", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "api-documentation", "docs", "", d)} \
+"
 PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi,"
+PACKAGECONFIG[docs] = ",,graphviz-native"
 
 do_install:prepend() {
-    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/tracker-sparql-enum-types.c
-    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtracker-sparql/core/tracker-data-enum-types.c
+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtinysparql/tracker-sparql-enum-types.c
+    sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g' ${B}/src/libtinysparql/core/tracker-data-enum-types.c
 }
 
 FILES:${PN} += " \
