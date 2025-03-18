@@ -18,7 +18,7 @@ SRC_URI:append = " \
 	file://0001-fix-reproducibility.patch \
 	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
 "
-SRC_URI[archive.sha256sum] = "cda69195f6845357a8d91c023670efe92238f4d138a1ef7a1401f45a2a8403ce"
+SRC_URI[archive.sha256sum] = "d42f408dc3fb28fe54f5a9abbf5f1decf5818db9c2e9ec51c09464bdfd0c14b9"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
@@ -40,7 +40,6 @@ PACKAGECONFIG ??= " \
     xml \
     ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
     battery \
-    networkmanager \
 "
 # Needs tgkill API which musl does not support
 # see https://www.openwall.com/lists/musl/2019/08/02/1
@@ -48,9 +47,9 @@ PACKAGECONFIG:remove:libc-musl = "seccomp"
 
 PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
 PACKAGECONFIG[cue]     = "-Dcue=enabled,-Dcue=disabled,libcue"
-PACKAGECONFIG[ffmpeg]     = "-Dgeneric_media_extractor=libav,,ffmpeg"
+PACKAGECONFIG[ffmpeg]     = "-Dlibav=enabled,-Dlibav=disabled,ffmpeg"
 PACKAGECONFIG[gexiv2]     = ",,gexiv2"
-PACKAGECONFIG[gstreamer]  = "-Dgeneric_media_extractor=gstreamer,,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[gstreamer]  = ",,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[gupnp]      = "-Dgstreamer_backend=gupnp,,gupnp-dlna"
 PACKAGECONFIG[gif]        = "-Dgif=enabled,-Dgif=disabled,giflib"
 PACKAGECONFIG[icu]        = "-Dcharset_detection=icu,,icu"
@@ -63,14 +62,11 @@ PACKAGECONFIG[png]        = "-Dpng=enabled,-Dpng=disabled,libpng"
 PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
 PACKAGECONFIG[raw]       = "-Draw=enabled,-Draw=disabled,libraw"
 PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
-PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanager"
 PACKAGECONFIG[landlock]        = "-Dlandlock=enabled,-Dlandlock=disabled"
 
 # For security reasons it is strongly recommended to set add meta-security in
-# your layers and 'libseccomp' to PACKAGECONFIG".
+# your layers and 'libseccomp + landlock' to PACKAGECONFIG".
 PACKAGECONFIG[seccomp] = "-Dseccomp=true,-Dseccomp=false,libseccomp"
-# not yet in meta-gnome
-PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
 
 EXTRA_OEMESON += " \
     -Dman=false \
