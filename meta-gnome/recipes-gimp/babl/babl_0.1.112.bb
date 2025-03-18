@@ -10,7 +10,7 @@ inherit setuptools3 gnomebase gobject-introspection vala
 DEPENDS += "lcms"
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
-SRC_URI[sha256sum] = "bf47be7540d6275389f66431ef03064df5376315e243d0bab448c6aa713f5743"
+SRC_URI[sha256sum] = "fb696682421787c8fecc83e8aab48121dec8ee38d119b65291cfcbe315028a79"
 
 FILES:${PN} += "${libdir}/${BPN}-${@gnome_verdir("${PV}")}"
 
