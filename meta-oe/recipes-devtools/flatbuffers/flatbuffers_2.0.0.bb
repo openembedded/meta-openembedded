@@ -14,7 +14,9 @@ RDEPENDS:${PN}-dev += "${PN}-compiler"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCREV = "a9a295fecf3fbd5a4f571f53b01f63202a3e2113"
-SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https \
+    file://0001-C-stl_emulation-span-count_-is-not-const-anymore-722.patch \
+"
 S = "${WORKDIR}/git"
 
 CVE_CHECK_IGNORE += "CVE-2020-35864"

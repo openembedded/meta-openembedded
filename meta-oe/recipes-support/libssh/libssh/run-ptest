@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# Valid tests to run
+tests="torture_buffer \
+       torture_callbacks \
+       torture_channel \
+       torture_config \
+       torture_crypto \
+       torture_hashes \
+       torture_init \
+       torture_isipaddr \
+       torture_keyfiles \
+       torture_knownhosts_parsing \
+       torture_list \
+       torture_misc \
+       torture_options \
+       torture_packet \
+       torture_packet_filter \
+       torture_pki \
+       torture_pki_ecdsa \
+       torture_pki_ed25519 \
+       torture_pki_rsa \
+       torture_rand \
+       torture_threads_buffer \
+       torture_threads_crypto \
+       torture_threads_init \
+       torture_threads_pki_rsa \
+       "
+
+ptestdir=$(dirname "$(readlink -f "$0")")
+cd "$ptestdir"/tests || exit
+
+# Run specified tests
+for f in $tests
+do
+    if test -e ./"$f"; then
+        if ./"$f" > ./"$f".out 2> ./"$f".err; then
+            echo "PASS: $f"
+        else
+            echo "FAIL: $f"
+        fi
+    else
+        echo "SKIP: $f"
+    fi
+done

@@ -16,6 +16,13 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           file://CVE-2023-41056.patch \
+           file://CVE-2023-45145.patch \
+           file://CVE-2024-31227.patch \
+           file://CVE-2024-31228.patch \
+           file://CVE-2024-31449.patch \
+           file://CVE-2024-46981.patch \
+           file://CVE-2024-51741.patch \
            "
 SRC_URI[sha256sum] = "97065774d5fb8388eb0d8913458decfcb167d356e40d31dd01cd30c1cc391673"
 

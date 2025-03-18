@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 DEPENDS = "libpcre zlib"
 
 SRC_URI = " \
-    git://github.com/pocoproject/poco.git;branch=master;protocol=https \
+    git://github.com/pocoproject/poco.git;branch=main;protocol=https \
     file://run-ptest \
    "
 SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"

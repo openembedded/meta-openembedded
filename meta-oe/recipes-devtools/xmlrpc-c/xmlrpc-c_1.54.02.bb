@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            "
 
 #Release 1.54.02
-SRCREV = "86405c7e1bd4f70287204a28d242a1054daab520"
+SRCREV = "36b142d6179514989a44c1087f6c46182dafd21f"
 
 S = "${WORKDIR}/git/stable"
 

@@ -1,7 +1,7 @@
 SUMMARY = "Python 2 and 3 compatibility library"
 HOMEPAGE = "https://xlsxwriter.readthedocs.io"
 SECTION = "devel/python"
-LICENSE = "MIT"
+LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2b9a26d1a52d2c66df334bbdad23896a"
 
 inherit pypi setuptools3

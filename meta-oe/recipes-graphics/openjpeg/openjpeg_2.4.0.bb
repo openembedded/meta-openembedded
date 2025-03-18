@@ -12,6 +12,9 @@ SRC_URI = " \
     file://CVE-2021-29338.patch \
     file://CVE-2022-1122.patch \
     file://CVE-2021-3575.patch \
+    file://0001-sycc422_to_rgb-fix-out-of-bounds-read-accesses-when-.patch \
+    file://0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch \
+    file://CVE-2023-39327.patch \
 "
 SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
 S = "${WORKDIR}/git"

@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.GPL;md5=5f6e72824f5da505c1f4a7197f004b45 \
 
 inherit siteinfo autotools-brokensep ptest
 
-SRC_URI = "http://people.redhat.com/dhowells/keyutils/${BP}.tar.bz2 \
+SRC_URI = "https://people.redhat.com/dhowells/keyutils/${BP}.tar.bz2 \
            file://keyutils-test-fix-output-format.patch \
            file://keyutils-fix-error-report-by-adding-default-message.patch \
            file://run-ptest \

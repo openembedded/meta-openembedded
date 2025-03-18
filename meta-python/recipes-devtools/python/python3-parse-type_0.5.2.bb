@@ -1,6 +1,6 @@
 SUMMARY = "Simplifies building parse types based on the parse module"
 HOMEPAGE = "https://github.com/jenisys/parse_type"
-LICENSE = "BSD-3-Clause"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=16374dbaeaca1890153edb3f41371222"
 
 SRC_URI[md5sum] = "b954062f14ab723a91fe1e2be15e859d"

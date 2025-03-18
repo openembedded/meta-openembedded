@@ -1,8 +1,8 @@
 DESCRIPTION = "An implementation of RFC 7049 - Concise Binary Object Representation (CBOR)."
 DEPENDS +="${PYTHON_PN}-setuptools-scm-native"
 
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
 
 SRC_URI[sha256sum] = "e283e70b55a049ff364cc5e648fde587e4d9b0e87e4b2664c69e639135e6b3b8"
 

@@ -8,7 +8,7 @@ eID cards have also been confirmed to work."
 
 HOMEPAGE = "http://www.opensc-project.org/opensc/"
 SECTION = "System Environment/Libraries"
-LICENSE = "LGPL-2.0-or-later"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
 #v0.21.0
@@ -23,6 +23,38 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
            file://CVE-2023-40661-5.patch \
            file://CVE-2023-40661-6.patch \
            file://CVE-2023-40661-7.patch \
+           file://CVE-2024-1454.patch \
+           file://CVE-2024-8443-0001.patch \
+           file://CVE-2024-8443-0002.patch \
+           file://CVE-2024-45615-0001.patch \
+           file://CVE-2024-45615-0002.patch \
+           file://CVE-2024-45615-0003.patch \
+           file://CVE-2024-45615-0004.patch \
+           file://CVE-2024-45615-0005.patch \
+           file://CVE-2024-45616-0001.patch \
+           file://CVE-2024-45616-0002.patch \
+           file://CVE-2024-45616-0003.patch \
+           file://CVE-2024-45616-0004.patch \
+           file://CVE-2024-45616-0005.patch \
+           file://CVE-2024-45616-0006.patch \
+           file://CVE-2024-45616-0007.patch \
+           file://CVE-2024-45616-0008.patch \
+           file://CVE-2024-45616-0009.patch \
+           file://CVE-2024-45616-0010.patch \
+           file://CVE-2024-45617-0001.patch \
+           file://CVE-2024-45617-0002.patch \
+           file://CVE-2024-45617-0003.patch \
+           file://CVE-2024-45618-0001.patch \
+           file://CVE-2024-45618-0002.patch \
+           file://CVE-2024-45619-0001.patch \
+           file://CVE-2024-45619-0002.patch \
+           file://CVE-2024-45619-0003.patch \
+           file://CVE-2024-45619-0004.patch \
+           file://CVE-2024-45619-0005.patch \
+           file://CVE-2024-45619-0006.patch \
+           file://CVE-2024-45620-0001.patch \
+           file://CVE-2024-45620-0002.patch \
+           file://CVE-2024-45620-0003.patch \
           "
 
 # CVE-2021-34193 is a duplicate CVE covering the 5 individual

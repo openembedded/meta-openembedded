@@ -1,0 +1,27 @@
+From 659def02b6432b62220ed41d7c137dcfd9dfe024 Mon Sep 17 00:00:00 2001
+From: avaliente-bc <56400759+avaliente-bc@users.noreply.github.com>
+Date: Wed, 6 Apr 2022 21:27:37 +0200
+Subject: [PATCH] [C++] stl_emulation span::count_ is not const anymore (#7226)
+ (#7227)
+
+In C++ we cannot have both assignment operator and const member. Since
+span::operator= is defined, span::count_ constness must be removed.
+---
+Upstream-Status: Backport [https://github.com/google/flatbuffers/commit/20aad0c41e1252b04c72111c3eb221280a9c2009]
+
+ include/flatbuffers/stl_emulation.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/flatbuffers/stl_emulation.h b/include/flatbuffers/stl_emulation.h
+index 44e9ccbfa..cac87db65 100644
+--- a/include/flatbuffers/stl_emulation.h
++++ b/include/flatbuffers/stl_emulation.h
+@@ -629,7 +629,7 @@ class span FLATBUFFERS_FINAL_CLASS {
+  private:
+   // This is a naive implementation with 'count_' member even if (Extent != dynamic_extent).
+   pointer const data_;
+-  const size_type count_;
++  size_type count_;
+ };
+ 
+  #if !defined(FLATBUFFERS_SPAN_MINIMAL)

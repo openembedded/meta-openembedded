@@ -19,6 +19,8 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https;branch=master \
            file://0004-Modify-systemd-config-directory.patch \
            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
            file://0001-Fix-memory-leak.patch \
+           file://CVE-2022-39836-CVE-2022-39837.patch \
+           file://CVE-2023-36321.patch \
            "
 SRCREV = "6a3bd901d825c7206797e36ea98e10a218f5aad2"
 

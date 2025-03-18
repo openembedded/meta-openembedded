@@ -32,6 +32,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://CVE-2023-46846.patch \
            file://CVE-2023-49286.patch \
            file://CVE-2023-50269.patch \
+           file://CVE-2023-5824.patch \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
@@ -122,3 +123,6 @@ FILES:${PN}-doc += "${datadir}/*.txt"
 
 RDEPENDS:${PN} += "perl"
 RDEPENDS:${PN}-ptest += "make"
+
+# Only ESI feature is vulnerable
+CVE_CHECK_IGNORE += "${@'' if bb.utils.filter('PACKAGECONFIG', 'esi', d) else 'CVE-2024-45802'}"

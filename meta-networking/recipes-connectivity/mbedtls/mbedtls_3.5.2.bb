@@ -25,8 +25,10 @@ SECTION = "libs"
 S = "${WORKDIR}/git"
 SRCREV = "daca7a3979c22da155ec9dce49ab1abf3b65d3a9"
 SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
-	file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
-	file://run-ptest"
+           file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
+           file://run-ptest \
+           file://CVE-2024-28755-and-CVE-2024-28836.patch \
+          "
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cmake update-alternatives ptest
