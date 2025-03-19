@@ -48,7 +48,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 DEPENDS += "libtirpc"
 CPPFLAGS += "-I${STAGING_INCDIR}/tirpc"
-CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+CFLAGS += "-I${STAGING_INCDIR}/tirpc -std=gnu17"
 LDFLAGS += "-ltirpc"
 
 PARALLEL_MAKE = ""
