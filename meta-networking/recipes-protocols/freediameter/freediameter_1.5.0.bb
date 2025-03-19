@@ -65,7 +65,7 @@ EXTRA_OECMAKE = " \
 
 # -DALL_EXTENSIONS=ON will enable all
 
-FD_KEY ?="${BPN}.key"
+FD_KEY ?= "${BPN}.key"
 FD_PEM ?= "${BPN}.pem"
 FD_CA ?= "${BPN}.pem"
 FD_DH_PEM ?= "${BPN}-dh.pem"

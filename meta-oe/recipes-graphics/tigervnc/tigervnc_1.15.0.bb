@@ -34,7 +34,7 @@ SRC_URI[xorg.sha256sum] = "b14a116d2d805debc5b5b2aac505a279e69b217dae2fae2dfcb62
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
-XSERVER_SOURCE_DIR="${S}/unix/xserver"
+XSERVER_SOURCE_DIR = "${S}/unix/xserver"
 AUTOTOOLS_SCRIPT_PATH = "${XSERVER_SOURCE_DIR}"
 
 do_patch[postfuncs] += "do_patch_xserver"

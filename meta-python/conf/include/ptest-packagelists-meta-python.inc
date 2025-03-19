@@ -112,7 +112,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-yappi \
 "
 
-PTESTS_PROBLEMS_META_PYTHON ="\
+PTESTS_PROBLEMS_META_PYTHON = "\
     python3-betamax \
     python3-dnspython \
     python3-fastjsonschema \

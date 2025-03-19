@@ -46,7 +46,7 @@ EXTRA_OECONF = "\
     --libdir=${libdir} \
 "
 
-export TK_LIBRARY='${libdir}/tk${VER}'
+export TK_LIBRARY = '${libdir}/tk${VER}'
 
 do_install:append() {
     ln -sf wish${VER} ${D}${bindir}/wish

@@ -4,7 +4,7 @@ including the popular bitbang mode."
 HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
 SECTION = "libs"
 LICENSE = "LGPL-2.1-only & GPL-2.0-only"
-LIC_FILES_CHKSUM= "\
+LIC_FILES_CHKSUM = "\
     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 "
