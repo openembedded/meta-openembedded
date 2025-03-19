@@ -17,6 +17,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
            file://0001-meson.build-drop-unnecessary-build-dependencies.patch \
            file://0002-meson.build-do-not-use-Werror.patch \
+           file://CVE-2022-4968.patch \
           "
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
