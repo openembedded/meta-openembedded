@@ -60,8 +60,8 @@ do_configure:append() {
     sed -i -e "/CONFIG_ARGS/s|${WORKDIR}|\$WORKDIR|g" ${B}/config.h
 }
 
-OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
-OE_LT_RPATH_ALLOW[export]="1"
+OE_LT_RPATH_ALLOW = ":${libdir}/purple-2:"
+OE_LT_RPATH_ALLOW[export] = "1"
 
 PACKAGES =+ "libpurple-dev libpurple finch finch-dev ${PN}-data"
 

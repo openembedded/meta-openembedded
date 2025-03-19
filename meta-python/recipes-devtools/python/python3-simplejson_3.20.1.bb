@@ -16,7 +16,7 @@ RDEPENDS:${PN} += "\
 
 PACKAGES =+ "${PN}-tests"
 RDEPENDS:${PN}-tests = "${PN} python3-unittest"
-FILES:${PN}-tests+= " \
+FILES:${PN}-tests += " \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
 "

@@ -17,5 +17,5 @@ inherit autotools
 
 EXTRA_AUTORECONF += "-I m4"
 
-PACKAGECONFIG[libsodium] ="ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
-                           ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
+PACKAGECONFIG[libsodium] = "ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
+                            ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"

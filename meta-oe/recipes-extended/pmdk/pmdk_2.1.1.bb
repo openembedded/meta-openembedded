@@ -45,4 +45,4 @@ FILES:${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/* /usr/*/i
 FILES:${PN} += "/usr/etc"
 FILES:${PN} += "/usr/share"
 
-COMPATIBLE_HOST='(x86_64).*'
+COMPATIBLE_HOST = '(x86_64).*'

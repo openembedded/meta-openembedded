@@ -51,7 +51,7 @@ EXTRA_OECONF = "\
     --libdir=${libdir} \
 "
 
-export TK_LIBRARY='${libdir}/tk${VER}'
+export TK_LIBRARY = '${libdir}/tk${VER}'
 
 do_install:append() {
     ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0

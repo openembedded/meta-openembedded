@@ -6,7 +6,7 @@ LICENSE = "LGPL-3.0-or-later & GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c98f48018c4 \
                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
 
-export PYTHONHASHSEED="1"
+export PYTHONHASHSEED = "1"
 export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
 
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
@@ -34,7 +34,7 @@ inherit waf-samba pkgconfig ptest
 
 # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
 # to cross Popen
-export WAF_NO_PREFORK="yes"
+export WAF_NO_PREFORK = "yes"
 
 EXTRA_OECONF += "--disable-rpath \
                  --disable-rpath-install \

@@ -20,7 +20,7 @@ EXTRA_OECMAKE = ' \
 LDFLAGS:append:mipsarch = " -latomic"
 LDFLAGS:append:riscv32 = " -latomic"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= "gnutls"
 PACKAGECONFIG[gnutls] = "-DREQUIRE_CRYPTO_GNUTLS=ON,-DREQUIRE_CRYPTO_OPENSSL=ON"

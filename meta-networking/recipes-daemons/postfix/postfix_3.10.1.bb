@@ -4,7 +4,7 @@ IBM research as an alternative to the widely-used Sendmail program. \
 Postfix attempts to be fast, easy to administer, and secure. The outsidei \
 has a definite Sendmail-ish flavor, but the inside is completely different."
 
-HOMEPAGE= "http://www.postfix.org"
+HOMEPAGE = "http://www.postfix.org"
 SECTION = "mail"
 DEPENDS = "db icu libpcre libnsl2 m4-native openssl postfix-native \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \

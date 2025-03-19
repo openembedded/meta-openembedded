@@ -46,7 +46,7 @@ bindir_progs += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'chcon runcon'
 base_bindir_progs = "cat chgrp chmod chown cp date dd echo false hostname kill ln ls mkdir \
                      mknod mv pwd rm rmdir sleep stty sync touch true uname stat"
 
-sbindir_progs= "chroot"
+sbindir_progs = "chroot"
 
 inherit update-alternatives
 

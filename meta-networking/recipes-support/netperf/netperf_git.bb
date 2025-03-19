@@ -64,6 +64,6 @@ do_install() {
 
 RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
-INITSCRIPT_NAME="netperf"
-INITSCRIPT_PARAMS="defaults"
+INITSCRIPT_NAME = "netperf"
+INITSCRIPT_PARAMS = "defaults"
 SYSTEMD_SERVICE:${PN} = "netserver.service"
