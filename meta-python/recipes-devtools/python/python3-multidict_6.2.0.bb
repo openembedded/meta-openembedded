@@ -14,6 +14,7 @@ S = "${WORKDIR}/git"
 
 RDEPENDS:${PN}-ptest += " \
     python3-pytest-cov \
+    python3-pytest-codspeed \
 "
 
 BBCLASSEXTEND = "native nativesdk"
