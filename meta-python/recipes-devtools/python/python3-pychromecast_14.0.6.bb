@@ -3,11 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
 
-SRC_URI += "file://0001-Allow-newer-version-of-wheel-and-setuptools.patch"
-SRC_URI[sha256sum] = "a8671ee4ea4a7095e2e0670e2215145ec1e3e0aa0737ff74d648ae4dc268b2b1"
-
-PYPI_PACKAGE = "PyChromecast"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+#SRC_URI += "file://0001-Allow-newer-version-of-wheel-and-setuptools.patch"
+SRC_URI[sha256sum] = "8af91af4fb62d9d6e4df1832c6503dda74afb14c7726ede1ff863e178deb3f9a"
 
 inherit pypi python_setuptools_build_meta
 
