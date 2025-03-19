@@ -17,7 +17,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache features_check
 
-SRC_URI[archive.sha256sum] = "b8c309da3aa784c719558c3466402378f4a3d6cae8ed77cf6849aacd56ceb9ec"
+SRC_URI[archive.sha256sum] = "dfaf4bb989c0b8986be8bdae9fffeab8d0f30669ae3a627e8c3df94f23888339"
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
