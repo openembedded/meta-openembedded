@@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
 
 RPROVIDES:${PN} = "virtual-redis"
 
-inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
+inherit pkgconfig update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32:toolchain-clang = "-latomic"
@@ -42,8 +42,9 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
 
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
-do_compile:prepend() {
-    (cd deps && oe_runmake hiredis lua linenoise)
+do_compile() {
+    oe_runmake -C deps hiredis lua linenoise
+    oe_runmake
 }
 
 do_install() {
