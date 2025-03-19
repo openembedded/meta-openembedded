@@ -1,0 +1,77 @@
+From 7d159a631ae55c10a0b7a92cf031200a11629736 Mon Sep 17 00:00:00 2001
+From: Fujii Hironori <Hironori.Fujii@sony.com>
+Date: Tue, 18 Mar 2025 10:25:47 +0900
+Subject: [PATCH] EnumTraits.h: error: no matching function for call to
+ 'enumName' with Clang 20 https://bugs.webkit.org/show_bug.cgi?id=289669
+
+Reviewed by NOBODY (OOPS!).
+
+Clang 20 couldn't compile EnumTraits.h.
+
+> wtf/EnumTraits.h:212:33: note: candidate template ignored: invalid explicitly-specified argument for template parameter 'V'
+
+An invalid enum value can't be specifed to the template parameter `V`.
+
+> template<auto V> constexpr std::span<const char> enumName()
+
+The upstream Magic Enum C++ has a template variable `is_enum_constexpr_static_cast_valid<E, V>` to check a enum value is valid.
+<https://github.com/Neargye/magic_enum/blob/a413fcc9c46a020a746907136a384c227f3cd095/include/magic_enum/magic_enum.hpp#L624-L634>
+
+Imported the template variable.
+
+* Source/WTF/wtf/EnumTraits.h:
+(WTF::enumName):
+(WTF::makeEnumNames):
+
+Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/42597]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Source/WTF/wtf/EnumTraits.h | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/Source/WTF/wtf/EnumTraits.h b/Source/WTF/wtf/EnumTraits.h
+index 0d33e39a..95e6318b 100644
+--- a/Source/WTF/wtf/EnumTraits.h
++++ b/Source/WTF/wtf/EnumTraits.h
+@@ -152,6 +152,16 @@ constexpr bool isZeroBasedContiguousEnum()
+ #pragma clang diagnostic ignored "-Wenum-constexpr-conversion"
+ #endif
+ 
++#if COMPILER(CLANG) && __clang_major__ >= 16
++template <typename E, auto V, typename = void>
++inline constexpr bool isEnumConstexprStaticCastValid = false;
++template <typename E, auto V>
++inline constexpr bool isEnumConstexprStaticCastValid<E, V, std::void_t<std::integral_constant<E, static_cast<E>(V)>>> = true;
++#else
++template <typename, auto>
++inline constexpr bool isEnumConstexprStaticCastValid = true;
++#endif
++
+ template<typename E>
+ constexpr std::span<const char> enumTypeNameImpl()
+ {
+@@ -215,6 +225,15 @@ constexpr std::span<const char> enumName()
+     return result;
+ }
+ 
++template<typename E, auto V>
++constexpr std::span<const char> enumName()
++{
++    if constexpr (isEnumConstexprStaticCastValid<E, V>)
++        return enumName<static_cast<E>(V)>();
++    else
++        return { };
++}
++
+ template<typename E>
+ constexpr std::underlying_type_t<E> enumNamesMin()
+ {
+@@ -264,7 +283,7 @@ constexpr auto makeEnumNames(std::index_sequence<Is...>)
+ {
+     constexpr auto min = enumNamesMin<E>();
+     return std::array<std::span<const char>, sizeof...(Is)> {
+-        enumName<static_cast<E>(static_cast<std::underlying_type_t<E>>(Is) + min)>()...
++        enumName<E, static_cast<std::underlying_type_t<E>>(Is) + min>()...
+     };
+ }
+ 
