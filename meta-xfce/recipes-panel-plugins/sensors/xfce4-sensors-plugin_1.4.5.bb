@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 inherit xfce-panel-plugin
 
 SRC_URI += "file://0001-Do-not-check-for-sys-class-power_supply-we-are-cross.patch"
-SRC_URI[sha256sum] = "6c1605a738e5df40e084d08ac93f962cd445093396de1e9bfadc7ab4588c36b6"
+SRC_URI[sha256sum] = "f69fdf79b7f76d2a81724828124a6fce76803a9122a4c82de8f3dfa3efbb179a"
 
 EXTRA_OECONF = " \
     --disable-procacpi \
