@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "72c081e3b8cfae7144273d26d76736f08319000af46c01515cad5d2976
 
 RPROVIDES:${PN} = "virtual-redis"
 
-inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
+inherit pkgconfig update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32 = "-latomic"
@@ -42,7 +42,7 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 do_compile:prepend() {
-    (cd deps && oe_runmake hiredis lua linenoise)
+    oe_runmake -C deps hiredis lua linenoise
 }
 
 do_install() {
