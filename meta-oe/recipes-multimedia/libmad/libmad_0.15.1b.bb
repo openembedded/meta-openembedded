@@ -17,6 +17,7 @@ SRC_URI = "https://downloads.sourceforge.net/mad/libmad-${PV}.tar.gz \
     file://obsolete_automake_macros.patch \
     file://automake-foreign.patch \
     file://CVE-2017-8372_CVE-2017-8373.patch \
+    file://CVE-2017-8374.patch \
 "
 SRC_URI:append:toolchain-clang = " file://0004-Remove-clang-unsupported-compiler-flags.patch "
 
