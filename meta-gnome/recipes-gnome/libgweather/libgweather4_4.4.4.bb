@@ -11,10 +11,12 @@ inherit gnomebase gsettings gobject-introspection gettext gi-docgen vala feature
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
-SRC_URI[archive.sha256sum] = "a6e427b4770ada48945f3aa906af710fc833cff0d42df91f1828302740d794ec"
+SRC_URI[archive.sha256sum] = "7017677753cdf7d1fdc355e4bfcdb1eba8369793a8df24d241427a939cbf4283"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 VALA_MESON_OPTION = "enable_vala"
+
+export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
 DEPENDS = " \
     geocode-glib \
@@ -28,7 +30,3 @@ FILES:${PN} += " \
     ${datadir}/libgweather-4 \
     ${libdir}/libgweather-4 \
 "
-
-do_configure:prepend() {
-    cp -f ${STAGING_LIBDIR}/girepository-1.0/GLib*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
-}
