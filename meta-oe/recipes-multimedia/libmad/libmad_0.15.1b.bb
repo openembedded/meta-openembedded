@@ -34,3 +34,6 @@ do_configure:prepend () {
 }
 
 ARM_INSTRUCTION_SET = "arm"
+
+# cpe-incorrect: this CVE is for mpg321, not libmad
+CVE_CHECK_IGNORE += "CVE-2017-11552 CVE-2018-7263"
