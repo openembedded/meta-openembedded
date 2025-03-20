@@ -21,6 +21,8 @@ SRC_URI:append:toolchain-clang = " file://0004-Remove-clang-unsupported-compiler
 
 SRC_URI[sha256sum] = "bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690"
 
+CVE_PRODUCT:append = " mad_libmad"
+
 S = "${WORKDIR}/libmad-${PV}"
 
 inherit autotools pkgconfig
