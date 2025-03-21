@@ -13,6 +13,7 @@ SRC_URI = "\
 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch \
 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
 	file://0008-fix-fbdev-set-resolution-prior-to-buffer.patch \
+        file://0001-thorvg-fix-build-with-gcc-15.patch \
 	"
 SRCREV = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
 
