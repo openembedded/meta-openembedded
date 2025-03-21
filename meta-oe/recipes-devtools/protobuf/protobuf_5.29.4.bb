@@ -14,11 +14,13 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "9d0ec0f92b5b5fdeeda11f9dcecc1872ff378014"
+SRCREV = "1be1c9d0ea6efa2a25bd7b76186844d1669be78a"
 
-SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=25.x;protocol=https \
+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=https \
            file://run-ptest \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+           file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
+           file://0001-utf8_range-add-version-marker-to-library-19009.patch \
            "
 SRC_URI:append:mips:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 SRC_URI:append:mipsel:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
