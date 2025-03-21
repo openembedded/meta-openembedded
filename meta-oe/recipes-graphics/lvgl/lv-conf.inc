@@ -3,6 +3,7 @@ PACKAGECONFIG ??= "drm"
 PACKAGECONFIG[drm] = ",,libdrm"
 PACKAGECONFIG[fbdev] = ",,"
 PACKAGECONFIG[gridnav] = ",,"
+PACKAGECONFIG[thorvg] = ",,"
 PACKAGECONFIG[sdl] = ",,virtual/libsdl2 libsdl2-image"
 
 # Add libdrm include if drm is selected in PACKAGECONFIG
@@ -31,6 +32,10 @@ LVGL_CONFIG_LV_USE_FONT_COMPRESSED ?= "0"
 LVGL_CONFIG_LV_USE_GRIDNAV = "${@bb.utils.contains('PACKAGECONFIG', 'gridnav', '1', '0', d)}"
 
 LVGL_CONFIG_LV_THEME_DEFAULT_DARK ?= "0"
+
+LVGL_CONFIG_USE_VECTOR_GRAPHICS = "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0', d)}"
+
+LVGL_CONFIG_USE_THORVG_INTERNAL = "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0', d)}"
 
 DEBUG_BUILD ??= "0"
 
@@ -76,6 +81,9 @@ do_configure:append() {
         -e "s|^([[:space:]]*#define LV_USE_FONT_COMPRESSED[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_FONT_COMPRESSED}|" \
         -e "s|^([[:space:]]*#define LV_USE_GRIDNAV[[:space:]]).*|\1${LVGL_CONFIG_LV_USE_GRIDNAV}|" \
         -e "s|^([[:space:]]*#define LV_THEME_DEFAULT_DARK[[:space:]]).*|\1${LVGL_CONFIG_LV_THEME_DEFAULT_DARK}|" \
+        \
+        -e "s|^([[:space:]]*#define LV_USE_VECTOR_GRAPHIC[[:space:]]).*|\1${LVGL_CONFIG_USE_VECTOR_GRAPHICS}|" \
+        -e "s|^([[:space:]]*#define LV_USE_THORVG_INTERNAL[[:space:]]).*|\1${LVGL_CONFIG_USE_THORVG_INTERNAL}|" \
         \
         -i "${S}/lv_conf.h"
 }
