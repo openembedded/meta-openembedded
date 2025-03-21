@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/GunnarMonell/fbgrab.git;protocol=https;branch=master
 SRCREV = "f43ce6d5ce48fb01360eaa7c4a92c2573a1d02f8"
 S = "${WORKDIR}/git"
 
-do_configure() {
+do_configure:prepend() {
     sed \
         -e 's|$(DESTDIR)/usr/bin/|$(DESTDIR)${bindir}/|g' \
         -e 's|$(DESTDIR)/usr/man/|$(DESTDIR)${mandir}/|g' \
