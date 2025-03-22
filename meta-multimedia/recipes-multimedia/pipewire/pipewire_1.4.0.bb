@@ -160,7 +160,7 @@ remove_unused_installed_files() {
     rm -f "${D}${datadir}/pipewire/minimal.conf"
 }
 
-do_install:append() {
+do_install:append:class-target() {
     # The pipewire-alsa plugin needs the following files in /etc/alsa/conf.d/ to
     # be picked up by alsa.
     install -d ${D}${sysconfdir}/alsa/conf.d
