@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake python_setuptools_build_meta
 
-EXTRA_OECMAKE = "-DPYBIND11_TEST=OFF"
+EXTRA_OECMAKE = "-DPYBIND11_TEST=OFF -DPYBIND11_USE_CROSSCOMPILING=ON"
 
 do_configure:append() {
     cmake_do_configure
