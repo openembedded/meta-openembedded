@@ -7,10 +7,11 @@ DEPENDS = "dbus"
 
 SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
+           file://iwd \ 
            "
 SRC_URI[sha256sum] = "8189e15e701112f871fb5f5e9351f007c9098754b4168ed43cc5422a3adc0255"
 
-inherit autotools manpages pkgconfig python3native systemd
+inherit autotools manpages pkgconfig python3native systemd update-rc.d
 
 PACKAGECONFIG ??= " \
     client \
@@ -24,6 +25,9 @@ PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
 PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
 PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
 
+INITSCRIPT_NAME = "iwd"
+INITSCRIPT_PARAMS = "start 04 5 2 3 . stop 23 0 1 6 ."
+
 SYSTEMD_SERVICE:${PN} = " \
     iwd.service \
     ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)} \
@@ -36,6 +40,11 @@ do_configure:prepend() {
 do_install:append() {
     # If client and monitor are disabled, bindir is empty, causing a QA error
     rmdir --ignore-fail-on-non-empty ${D}/${bindir}
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${UNPACKDIR}/iwd ${D}${sysconfdir}/init.d/iwd
+    fi
 }
 
 FILES:${PN} += " \
