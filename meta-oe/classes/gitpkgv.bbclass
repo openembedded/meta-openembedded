@@ -70,7 +70,7 @@ def get_git_pkgv(d, use_tags):
         names = []
         for url in ud.values():
             if url.type == 'git' or url.type == 'gitsm':
-                names.extend(url.revision)
+                names.extend([url.revision[:5]])
         if len(names) > 0:
             format = '_'.join(names)
         else:
