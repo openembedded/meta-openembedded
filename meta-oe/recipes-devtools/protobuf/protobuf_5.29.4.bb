@@ -52,6 +52,7 @@ TEST_SRC_DIR = "examples"
 LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
 
 LDFLAGS:append:riscv32 = " -latomic"
+CXXFLAGS:append:mipsarch = " -latomic"
 
 do_compile_ptest() {
 	mkdir -p "${B}/${TEST_SRC_DIR}"
