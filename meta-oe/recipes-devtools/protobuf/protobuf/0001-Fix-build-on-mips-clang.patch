@@ -3,10 +3,10 @@ From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 10 Mar 2025 19:59:19 -0700
 Subject: [PATCH] Fix build on mips/clang
 
-clang13 crashes on mips, until its fixed upstream disable tailcall on
+clang20 crashes on mips, until its fixed upstream disable tailcall on
 mips
 
-https://bugs.llvm.org/show_bug.cgi?id=52367
+https://github.com/llvm/llvm-project/issues/51709
 
 Upstream-Status: Inappropriate [Clang workaround]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
