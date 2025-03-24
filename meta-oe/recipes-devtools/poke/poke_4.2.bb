@@ -24,5 +24,8 @@ PACKAGECONFIG[mi] = "--enable-mi,--disable-mi,json-c"
 
 PACKAGES =+ "${PN}-emacs ${PN}-vim"
 
+# Disable parallel install as it is not supported upstream
+PARALLEL_MAKEINST = "-j1"
+
 FILES:${PN}-emacs += "${datadir}/emacs/site-lisp"
 FILES:${PN}-vim += "${datadir}/vim/vimfiles"
