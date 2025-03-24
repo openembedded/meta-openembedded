@@ -22,8 +22,7 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=ht
            file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
            file://0001-utf8_range-add-version-marker-to-library-19009.patch \
            "
-SRC_URI:append:mips:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
-SRC_URI:append:mipsel:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
+SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>.(25\.(\d+)))"
 
@@ -51,7 +50,8 @@ EXTRA_OECMAKE += "\
 TEST_SRC_DIR = "examples"
 LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
 
-LDFLAGS:append:riscv32 = " -latomic"
+CXXFLAGS:append:mipsarcho32 = " -latomic"
+CXXFLAGS:append:riscv32 = " -latomic"
 
 do_compile_ptest() {
 	mkdir -p "${B}/${TEST_SRC_DIR}"
