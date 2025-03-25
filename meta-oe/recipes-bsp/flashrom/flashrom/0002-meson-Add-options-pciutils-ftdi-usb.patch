@@ -16,10 +16,10 @@ Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
  2 files changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index ae56b26c..21093a7f 100644
+index 6c8d3d3..61b794d 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -151,9 +151,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
+@@ -150,9 +150,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
  
  cpus_port_io = [ 'x86', 'x86_64' ]
  
@@ -33,16 +33,17 @@ index ae56b26c..21093a7f 100644
  group_serial = get_option('programmer').contains('group_serial')
  group_jlink  = get_option('programmer').contains('group_jlink')
 diff --git a/meson_options.txt b/meson_options.txt
-index 8a04114d..ae722509 100644
+index 87456a9..570b152 100644
 --- a/meson_options.txt
 +++ b/meson_options.txt
-@@ -25,3 +25,6 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
- option('delay_minimum_sleep_us', type : 'integer', min : 0, value : 100000,
+@@ -24,4 +24,7 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
+ option('delay_minimum_sleep_us', type : 'integer', min : 0, value : 100,
         description : 'Minimum time in microseconds to suspend execution for (rather than polling) when a delay is required.'
                     + ' Larger values may perform better on machines with low timer resolution, at the cost of increased power.')
 +option('pciutils', type : 'boolean', value : false, description : 'Select programmer group pci')
 +option('usb', type : 'boolean', value : false, description : 'Select programmer group usb')
 +option('ftdi', type : 'boolean', value : false, description : 'Select programmer group ftdi')
+ option('rpmc', type : 'feature', value : 'auto', description : 'Support for Replay Protected Monotonic Counter (RPMC) commands as specified by JESD260')
 -- 
-2.46.2
+2.43.0
 
