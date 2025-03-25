@@ -15,7 +15,7 @@ inherit gnomebase gtk-icon-cache gettext features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "b8e5a042e0b241b0c7cae43f74da0d5f88e6423017a91feb86e7617edb4080ed"
+SRC_URI[archive.sha256sum] = "732624231b624ff5c7ac03a8ce71be12393daa53551d11550b20d7b0a3a872a7"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
