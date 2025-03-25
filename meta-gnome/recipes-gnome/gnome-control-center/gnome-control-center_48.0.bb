@@ -48,6 +48,7 @@ PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
 PACKAGECONFIG[file-share] = ",,,gnome-user-share"
 PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
 PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
+PACKAGECONFIG[power-profiles] = ",,,power-profiles-daemon"
 
 EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
 GIDOCGEN_MESON_OPTION = 'documentation'
