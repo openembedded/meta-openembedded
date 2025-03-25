@@ -8,7 +8,7 @@ DEPENDS = "glib-2.0"
 inherit gnomebase gobject-introspection vala gi-docgen
 
 SRC_URI += "file://disable-lgi-check.patch"
-SRC_URI[archive.sha256sum] = "376f2f73d731b54e13ddbab1d91b6382cf6a980524def44df62add15489de6dd"
+SRC_URI[archive.sha256sum] = "1e9a9d69761d2109eff5b7c11d8c96b4867ccfaca2b921eded49401192769ec9"
 
 PACKAGECONFIG ?= "python3 gjs lua51 ${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection', 'vala', '', d)}"
 PACKAGECONFIG:remove:riscv32 = "lua51"
