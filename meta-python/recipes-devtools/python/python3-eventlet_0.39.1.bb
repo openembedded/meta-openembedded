@@ -1,5 +1,5 @@
 DESCRIPTION = "Highly concurrent networking library"
-HOMEPAGE = "http://pypi.python.org/pypi/eventlet"
+HOMEPAGE = "https://pypi.python.org/pypi/eventlet"
 SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"

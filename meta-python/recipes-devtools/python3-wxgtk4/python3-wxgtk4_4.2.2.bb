@@ -1,5 +1,5 @@
 DESCRIPTION = "Python3 interface to the wxWidgets Cross-platform C++ GUI toolkit."
-HOMEPAGE = "http://www.wxpython.org"
+HOMEPAGE = "https://www.wxpython.org"
 
 LICENSE = "LGPL-2.0-only & WXwindows & BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"

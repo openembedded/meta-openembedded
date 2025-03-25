@@ -1,5 +1,5 @@
 DESCRIPTION = "Google gRPC"
-HOMEPAGE = "http://www.grpc.io/"
+HOMEPAGE = "https://www.grpc.io/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
 LIC_FILES_CHKSUM = " \

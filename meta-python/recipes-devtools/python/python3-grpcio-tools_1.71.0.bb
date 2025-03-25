@@ -1,5 +1,5 @@
 DESCRIPTION = "Google gRPC tools"
-HOMEPAGE = "http://www.grpc.io/"
+HOMEPAGE = "https://www.grpc.io/"
 SECTION = "devel/python"
 
 LICENSE = "Apache-2.0"

@@ -2,7 +2,7 @@ SUMMARY  = "pandas library for high-performance data analysis tools"
 DESCRIPTION = "pandas is an open source, BSD-licensed library providing \
 high-performance, easy-to-use data structures and data analysis tools for \
 the Python programming language."
-HOMEPAGE = "http://pandas.pydata.org/"
+HOMEPAGE = "https://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
 

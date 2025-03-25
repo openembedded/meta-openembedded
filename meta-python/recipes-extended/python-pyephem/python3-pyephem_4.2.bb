@@ -1,5 +1,5 @@
 SUMMARY = "PyEphem astronomical calculations"
-HOMEPAGE = "http://rhodesmill.org/pyephem/"
+HOMEPAGE = "https://rhodesmill.org/pyephem/"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c930b395b435b00bb13ec83b0c99f40"

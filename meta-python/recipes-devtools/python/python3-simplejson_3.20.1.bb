@@ -1,5 +1,5 @@
 SUMMARY = "Simple, fast, extensible JSON encoder/decoder for Python"
-HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
+HOMEPAGE = "https://cheeseshop.python.org/pypi/simplejson"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"

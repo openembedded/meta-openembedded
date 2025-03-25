@@ -2,7 +2,7 @@
 # Copyright (C) 2023 iris-GmbH infrared & intelligent sensors
 
 SUMMARY = "Automate and standardize testing in Python. It is part of a larger vision of easing the packaging, testing and release process of Python software (alongside pytest and devpi)."
-HOMEPAGE = "http://tox.readthedocs.org/"
+HOMEPAGE = "https://tox.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
