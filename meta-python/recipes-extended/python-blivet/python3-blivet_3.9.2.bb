@@ -1,5 +1,5 @@
 DESCRIPTION = "A python module for system storage configuration"
-HOMEPAGE = "http://fedoraproject.org/wiki/blivet"
+HOMEPAGE = "https://fedoraproject.org/wiki/blivet"
 LICENSE = "LGPL-2.0-or-later"
 SECTION = "devel/python"
 

@@ -1,5 +1,5 @@
 SUMMARY = "FTP Transport Adapter for Requests"
-HOMEPAGE = "http://github.com/Lukasa/requests-ftp"
+HOMEPAGE = "https://github.com/Lukasa/requests-ftp"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6683a23c9968b97709441dc884d46df6"
 

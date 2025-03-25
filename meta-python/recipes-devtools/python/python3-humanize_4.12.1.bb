@@ -1,5 +1,5 @@
 SUMMARY = "Python humanize utilities"
-HOMEPAGE = "http://github.com/jmoiron/humanize"
+HOMEPAGE = "https://github.com/jmoiron/humanize"
 SECTION = "devel/python"
 
 LICENSE = "MIT"
