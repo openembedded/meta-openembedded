@@ -22,7 +22,7 @@ SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
            file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
            "
 
-SRC_URI[sha256sum] = "5ded7e221f85f642521c49b1826c8de19845aa372baf5d630a51774b544fbdbb"
+SRC_URI[sha256sum] = "ef0ca9ee27850d1a5c863bb7ff9aa08096c9ed312ece9087b30f3a426828de82"
 
 S = "${WORKDIR}/newt-${PV}"
 
