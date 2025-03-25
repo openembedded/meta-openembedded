@@ -10,10 +10,9 @@ inherit autotools gettext pkgconfig gconf perlnative python3native
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
-    file://fix_incompatible_pointer_types_for_gtkitemfactorycallbacks_on_gcc-14.patch \
 "
 
-SRC_URI[sha256sum] = "120049dc8e17e09a2a7d256aff2191ff8491abb840c8c7eb319a161e2df16ba8"
+SRC_URI[sha256sum] = "0ffc9994def10260f98a55cd132deefa8dc4a9835451cc0e982747bd458e2356"
 
 CVE_STATUS[CVE-2010-1624] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 CVE_STATUS[CVE-2011-3594] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
