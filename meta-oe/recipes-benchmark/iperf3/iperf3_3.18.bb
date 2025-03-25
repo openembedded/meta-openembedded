@@ -15,11 +15,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9873a72f714e240530e759e103ac7b2"
 SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
            file://0001-configure.ac-check-for-CPP-prog.patch \
-           file://do-not-listen-to-old-udp-prot-listener.patch \
            file://0001-fix-build-with-gcc-15.patch \
            "
 
-SRCREV = "2acfcfe94e928e74542c9f107e02aa6dd4748a79"
+SRCREV = "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
 
 S = "${WORKDIR}/git"
 
