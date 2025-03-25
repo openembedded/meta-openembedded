@@ -10,6 +10,6 @@ DEPENDS = "python3-hatch-vcs-native"
 inherit pypi python_hatchling
 
 SRC_URI += "file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch"
-SRC_URI[sha256sum] = "423d8b0885bf1942816c851f8ec7c1efc0a7ecad4f38ff43d5ba869a894b107b"
+SRC_URI[sha256sum] = "4e5988df5cd33f0bdb9967b72663ca99f50383c9bc21d8b24fa40c0661ae72b7"
 
 BBCLASSEXTEND = "native nativesdk"
