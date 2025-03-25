@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=924546dab2bef90e370d7c0c090ddcf0"
 DEPENDS += "libpng zlib"
 
 SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https"
-SRCREV = "0c598becaadaef8e3d12b883f9fc2864a118c12d"
+SRCREV = "8fe5a738541a04642885fb7a75b2b5b9c5b416fa"
 
 S = "${WORKDIR}/git"
 
