@@ -66,6 +66,7 @@ DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip
 
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 
+CXXFLAGS:append:toolchain-clang = " -Wno-error=c++11-narrowing-const-reference"
 LDFLAGS:append:riscv32 = " -latomic"
 
 EXTRA_OECMAKE = " \
