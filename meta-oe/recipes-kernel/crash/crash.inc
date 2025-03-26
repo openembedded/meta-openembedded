@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://0002-arm64-add-pac-mask-to-better-support-gdb-stack-unwin.patch \
            file://0003-Fix-build-failure-in-readline-lib.patch \
            file://0004-tools.c-do-not-use-keywords-nullptr-as-a-variable-in.patch \
+           file://0005-Fix-build-failure-on-32bit-machine-i686.patch \
            "
 SRCREV = "f13853cef53f5c5463a51021edbc81977e2b1405"
 
