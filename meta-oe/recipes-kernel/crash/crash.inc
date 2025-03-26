@@ -23,6 +23,9 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://donnot-extract-gdb-during-do-compile.patch \
            file://gdb_build_jobs_and_not_write_crash_target.patch \
            file://0001-symbol-fix-S-cannot-work-with-kaslr-detection.patch \
+           file://0002-arm64-add-pac-mask-to-better-support-gdb-stack-unwin.patch \
+           file://0003-Fix-build-failure-in-readline-lib.patch \
+           file://0004-tools.c-do-not-use-keywords-nullptr-as-a-variable-in.patch \
            "
 SRCREV = "f13853cef53f5c5463a51021edbc81977e2b1405"
 
