@@ -11,6 +11,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://openvpn \
            file://openvpn@.service \
            file://openvpn-volatile.conf \
+           file://sample-keys-renew-for-the-next-10-years.tar.gz \
            "
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
