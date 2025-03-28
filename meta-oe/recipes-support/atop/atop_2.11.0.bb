@@ -13,20 +13,23 @@ SECTION = "console/utils"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-DEPENDS = "ncurses zlib"
+inherit pkgconfig
+
+DEPENDS = "ncurses zlib glib-2.0"
 
 SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
            ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
            file://fix-permissions.patch \
            file://sysvinit-implement-status.patch \
-           file://0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch \
+           file://0001-Redefine-function-prototypes-solves-issue-322.patch \
            "
-SRC_URI[sha256sum] = "be1c010a77086b7d98376fce96514afcd73c3f20a8d1fe01520899ff69a73d69"
+SRC_URI[sha256sum] = "9b94c666602efff7bf402ecce706c347f38c39cb63498f9d39626861e5646e20"
 
 UPSTREAM_CHECK_URI = "https://atoptool.nl/downloadatop.php"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+).tar"
 
 CVE_STATUS[CVE-2011-3618] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile() {
     oe_runmake all
@@ -35,7 +38,7 @@ do_compile() {
 do_install() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         make DESTDIR=${D} VERS=${PV} SYSDPATH=${systemd_system_unitdir} \
-            PMPATHD=${systemd_unitdir}/system-sleep systemdinstall
+            PMPATHD=${systemd_unitdir}/system-sleep install
         install -d ${D}${sysconfdir}/tmpfiles.d
         install -m 644 ${UNPACKDIR}/volatiles.atop.conf ${D}${sysconfdir}/tmpfiles.d/atop.conf
         rm -f ${D}${systemd_system_unitdir}/atopacct.service
@@ -56,9 +59,9 @@ do_install() {
 
 inherit systemd
 
-SYSTEMD_SERVICE:${PN} = "atop.service atopgpu.service"
+SYSTEMD_SERVICE:${PN} = "atop.service atopgpu.service atop-rotate.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-FILES:${PN} += "${systemd_unitdir}/system-sleep"
+FILES:${PN} += "${systemd_unitdir}/system-sleep ${systemd_system_unitdir}/atop-rotate.timer"
 
 RDEPENDS:${PN} = "procps"
