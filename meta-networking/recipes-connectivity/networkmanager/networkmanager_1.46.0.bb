@@ -76,11 +76,6 @@ EXTRA_OEMESON = "\
 CFLAGS:append:libc-musl = " \
     -DRTLD_DEEPBIND=0 \
 "
-do_configure:prepend() {
-    cp -f ${STAGING_LIBDIR}/girepository-1.0/GObject*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
-    cp -f ${STAGING_LIBDIR}/girepository-1.0/Gio*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
-    cp -f ${STAGING_LIBDIR}/girepository-1.0/GModule*typelib ${STAGING_LIBDIR_NATIVE}/girepository-1.0/
-}
 
 PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli vala \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
