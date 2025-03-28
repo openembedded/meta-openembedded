@@ -44,6 +44,8 @@ DEPENDS = " \
 
 DEPENDS:append:libc-musl = " libexecinfo"
 
+LDFLAGS:append:libc-musl = " -lexecinfo"
+
 inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspection vala
 
 GIR_MESON_OPTION = 'can-crosscompile-gir'
