@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "\
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
+        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
 "
 
 SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
