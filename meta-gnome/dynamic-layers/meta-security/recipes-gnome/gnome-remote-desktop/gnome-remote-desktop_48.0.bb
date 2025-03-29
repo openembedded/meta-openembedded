@@ -8,7 +8,7 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI[archive.sha256sum] = "8aa55775757b299debe417e169e6e28fecbf18ce611ed176fa0d650ab5344776"
+SRC_URI[archive.sha256sum] = "038c42e48fe1d890849bec5d567566c152bd6d7f463eadeec59b1eae8fbb32a0"
 
 DEPENDS = " \
     asciidoc-native \
@@ -33,7 +33,7 @@ PACKAGECONFIG ??= " \
 
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,pipewire-native wireplumber-native dbus-native"
 PACKAGECONFIG[vnc] = "-Dvnc=true,-Dvnc=false,libvncserver"
-PACKAGECONFIG[rdp] = "-Drdp=true,-Drdp=false,freerdp3 fuse3 libxkbcommon"
+PACKAGECONFIG[rdp] = "-Drdp=true,-Drdp=false,freerdp3 fuse3 libxkbcommon shaderc-native"
 PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
 
 PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
