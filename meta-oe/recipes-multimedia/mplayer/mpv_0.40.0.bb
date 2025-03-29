@@ -9,17 +9,15 @@ DEPENDS = " \
     jpeg \
     libv4l \
     libass \
+    libdisplay-info \
     libplacebo \
 "
 
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=570a9b3749dd0463a1778803b12a6dce"
 
-SRCREV = "a0fba7be57f3822d967b04f0f6b6d6341e7516e7"
-SRC_URI = " \
-	git://github.com/mpv-player/mpv;name=mpv;branch=release/0.39;protocol=https \
-	file://a7efb3e62bbd0af86737f5ecb72d3a8e2a8c3b54.patch \
-"
+SRCREV = "e48ac7ce08462f5e33af6ef9deeac6fa87eef01e"
+SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig mime-xdg
