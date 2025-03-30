@@ -13,7 +13,7 @@ DEPENDS:append:class-target = " hwloc"
 PE = "1"
 
 BRANCH = "onetbb_2022"
-SRCREV = "0c0ff192a2304e114bc9e6557582dfba101360ff"
+SRCREV = "45587e94dfb6dfe00220c5f520020a5bc745e92f"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
           "
 
