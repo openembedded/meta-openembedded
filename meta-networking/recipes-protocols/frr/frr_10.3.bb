@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
 
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.2 \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.3 \
            file://frr.pam \
            "
 
-SRCREV = "5f0beaa0fdd00b7a60c1765067d1b6fa65ce96c0"
+SRCREV = "85cf1ed576deed121751e16a64970f8a652a9e1e"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
