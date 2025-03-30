@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=stable/1.1;protocol=
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
-SRCREV = "731d3c9e7e88d3f27ed6cf77edba7a2f5890a778"
+SRCREV = "01045f683b9419beb90119497cd1b2be44e83b8e"
 
 S = "${WORKDIR}/git"
 
