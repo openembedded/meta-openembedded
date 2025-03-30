@@ -14,6 +14,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-aspectlib \
     python3-bleak \
     python3-blinker \
+    python3-breathe \
     python3-cachetools \
     python3-cbor2 \
     python3-configobj \
