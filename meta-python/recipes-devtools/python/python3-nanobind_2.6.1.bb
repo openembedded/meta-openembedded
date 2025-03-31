@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/wjakob/nanobind"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7646f9ee25e49eaf53f89a10665c568c"
 
-SRC_URI[sha256sum] = "cc8412e94acffa20a369191382bcdbb6fbfb302e475e87cacff9516d51023a15"
+SRC_URI[sha256sum] = "e05c6816a844aa699e46408add3bff8c743af9fd3d38eafa307a73633fddf94e"
 
 inherit pypi python_setuptools_build_meta cmake lib_package
 
