@@ -7,7 +7,7 @@ inherit cmake pkgconfig
 
 DEPENDS = "zlib libsndfile1"
 
-SRCREV = "d3875f333fb6abe2f39d82caca329414871ae53b"
+SRCREV = "dc7d7054a5b4f3bec1dc23a42fd616a0847af948"
 SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
