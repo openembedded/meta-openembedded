@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
 "
 
-SRC_URI[sha256sum] = "b642aa518689f8e053f61955cba274e72bc8d0794c65d7990745aaae90dfc8a1"
+SRC_URI[sha256sum] = "3951d360f2daf0e0eacf839e15d2d1d2f4f5e7830231eb3188eeffef2dd17bad"
 
 RDEPENDS:${PN} = "libusb1"
 
