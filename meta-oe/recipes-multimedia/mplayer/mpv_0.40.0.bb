@@ -34,6 +34,7 @@ LUA:powerpc  = ""
 
 # Note: lua is required to get on-screen-display (controls)
 PACKAGECONFIG ??= " \
+    libmpv \
     ${LUA} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'x11 wayland opengl pipewire pulseaudio vulkan', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl wayland', 'egl', '', d)} \
