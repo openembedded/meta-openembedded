@@ -9,8 +9,10 @@ SRC_URI = " \
     git://github.com/lief-project/LIEF.git;protocol=https;branch=main \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
     file://0002-api-python-config-default.toml-Debug.patch \
+    file://0001-Add-cstdio-include.patch \
 "
-SRCREV = "646af9f6ced8e827916648f26617998de834db78"
+SRCREV = "1e9b12bd14cbe087d52355b8b9af578f1b04d8ca"
+
 PV .= "+git"
 
 S = "${WORKDIR}/git"
@@ -27,6 +29,7 @@ DEPENDS += "\
     python3-pydantic-native \
     ninja-native \
     ccache-native \
+    python3-typing-inspection \
 "
 # https://github.com/lief-project/LIEF/commit/3def579f75965aa19c021d840a759bce2afc0a31#r152197203
 COMPATIBLE_HOST:x86 = "null"
