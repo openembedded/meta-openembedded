@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            file://no-automake.patch \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
            file://0001-unix-common.mk-Ensuring-Sequential-Execution-of-rm-a.patch \
+           file://0001-fix-bool-reserved-word-error-in-gcc-15.patch;striplevel=2 \
            "
 # one more commit after Release 1.64.0 in the Stable series
 SRCREV = "8ce36bce2438df9b02fcaafd19efa90a56426601"
