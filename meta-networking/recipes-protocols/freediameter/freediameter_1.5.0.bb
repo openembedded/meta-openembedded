@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=mast
     file://install_test.patch \
     file://0001-tests-use-EXTENSIONS_DIR.patch \
     file://0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch \
+    file://0001-fixes-for-gcc-15.patch \
     "
 
 S = "${WORKDIR}/git"
