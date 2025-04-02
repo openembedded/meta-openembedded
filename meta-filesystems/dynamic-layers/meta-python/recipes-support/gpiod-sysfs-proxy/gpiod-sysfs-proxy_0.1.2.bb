@@ -24,7 +24,7 @@ SRC_URI[sha256sum] = "4bdd4b8a7042f63a40507ae0f16b360011e67cbb2f0276289636487a54
 # non-standard behavior so make sure the user actually wants it.
 PACKAGECONFIG[sys-class-mount] = ""
 
-export MOUNTPOINT="${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '/sys/class/gpio', '/run/gpio', d)}"
+export MOUNTPOINT = "${@bb.utils.contains('PACKAGECONFIG', 'sys-class-mount', '/sys/class/gpio', '/run/gpio', d)}"
 
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
