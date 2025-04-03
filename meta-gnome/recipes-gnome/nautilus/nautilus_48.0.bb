@@ -1,7 +1,7 @@
 SUMMARY = "File manager for GNOME"
 SECTION = "x11/gnome"
 
-LICENSE="GPL-3.0-only"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 
