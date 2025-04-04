@@ -163,7 +163,7 @@ RDEPENDS:packagegroup-meta-oe-connectivity:append:libc-glibc = " wvstreams wvdia
 
 # dracut needs dracut
 RDEPENDS:packagegroup-meta-oe-core = "\
-    ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "dbus-broker", "", d)} \
+    ${@bb.utils.filter('VIRTUAL-RUNTIME_dbus', 'dbus-broker', d)} \
     dbus-cxx \
     dbus-daemon-proxy \
     distro-feed-configs \
