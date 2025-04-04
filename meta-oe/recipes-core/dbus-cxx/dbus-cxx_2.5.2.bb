@@ -8,10 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24594f493407a4cd401ce9794e0b9308"
 SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https"
 SRCREV = "f2637e726207ecfbdaaf02744e1b36e54f929c9d"
 
-DEPENDS = "\
-	dbus \
-	libsigc++-3 \
-"
+DEPENDS = "libsigc++-3"
 
 RDEPENDS:${PN} = "\
 	dbus \
@@ -29,7 +26,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG:class-native ?= "tools"
 PACKAGECONFIG:class-nativesdk ?= "tools"
 
-PACKAGECONFIG[tools] = "-DENABLE_TOOLS=ON,-DENABLE_TOOLS=OFF,popt cppgenerate"
+PACKAGECONFIG[tools] = "-DENABLE_TOOLS=ON,-DENABLE_TOOLS=OFF,popt cppgenerate dbus"
 PACKAGECONFIG[glib] = "-DENABLE_GLIB_SUPPORT=ON,-DENABLE_GLIB_SUPPORT=OFF,glib-2.0"
 PACKAGECONFIG[uv] = "-DENABLE_UV_SUPPORT=ON,-DENABLE_UV_SUPPORT=OFF,libuv"
 
