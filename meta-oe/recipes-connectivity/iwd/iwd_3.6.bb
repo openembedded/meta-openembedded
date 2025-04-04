@@ -53,7 +53,7 @@ FILES:${PN} += " \
     ${systemd_unitdir}/network \
 "
 
-RDEPENDS:${PN} = "dbus"
+RDEPENDS:${PN} = "${VIRTUAL-RUNTIME_dbus}"
 
 RRECOMMENDS:${PN} = "\
     kernel-module-pkcs7-message \
