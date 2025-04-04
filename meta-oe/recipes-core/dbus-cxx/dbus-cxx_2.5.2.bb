@@ -10,7 +10,7 @@ SRCREV = "f2637e726207ecfbdaaf02744e1b36e54f929c9d"
 
 DEPENDS = "libsigc++-3"
 
-RDEPENDS:${PN} = "dbus"
+RDEPENDS:${PN}:class-target = "${VIRTUAL-RUNTIME_dbus}"
 
 S = "${WORKDIR}/git"
 
