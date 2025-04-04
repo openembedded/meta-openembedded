@@ -10,10 +10,7 @@ SRCREV = "f2637e726207ecfbdaaf02744e1b36e54f929c9d"
 
 DEPENDS = "libsigc++-3"
 
-RDEPENDS:${PN} = "\
-	dbus \
-	libsigc++-3 \
-"
+RDEPENDS:${PN} = "dbus"
 
 S = "${WORKDIR}/git"
 
