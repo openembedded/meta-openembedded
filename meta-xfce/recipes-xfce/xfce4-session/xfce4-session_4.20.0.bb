@@ -32,7 +32,7 @@ FILES:${PN} += " \
 "
 
 RDEPENDS:${PN} = " \
-    dbus-x11 \
+    ${VIRTUAL-RUNTIME_dbus} \
     iceauth \
     netbase \
     upower \
