@@ -38,7 +38,7 @@ FILES:${PN} += "${libdir} ${datadir}"
 
 RDEPENDS:${PN} = " \
     cups \
-    dbus-x11 \
+    ${VIRTUAL-RUNTIME_dbus} \
     gtk+3 \
     libnotify \
     python3-core \
