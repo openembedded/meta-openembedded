@@ -20,11 +20,11 @@ PACKAGECONFIG[tests] = " \
     --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
     --disable-tests, \
     kmod util-linux glib-2.0 catch2 libedit glib-2.0-native libgudev, \
-    bash dbus glib-2.0-utils libgpiod-manager-cfg shunit2 \
+    bash ${VIRTUAL-RUNTIME_dbus} glib-2.0-utils libgpiod-manager-cfg shunit2 \
 "
 PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
 PACKAGECONFIG[glib] = "--enable-bindings-glib,--disable-bindings-glib,glib-2.0 glib-2.0-native"
-PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,glib-2.0 glib-2.0-native libgudev,dbus"
+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,glib-2.0 glib-2.0-native libgudev,${VIRTUAL-RUNTIME_dbus}"
 
 PACKAGES =+ "${PN}-gpiosim ${PN}-glib ${PN}-manager ${PN}-manager-cfg ${PN}-cli"
 FILES:${PN}-tools += "${bindir}/gpionotify"
@@ -43,7 +43,7 @@ FILES:${PN}-manager-cfg += " \
 "
 FILES:${PN}-cli += "${bindir}/gpiocli"
 
-RDEPENDS:${PN}-manager += "dbus ${PN}-manager-cfg"
+RDEPENDS:${PN}-manager += "${VIRTUAL-RUNTIME_dbus} ${PN}-manager-cfg"
 RDEPENDS:${PN}-cli += "${PN}-manager"
 
 SYSTEMD_PACKAGES = "${PN}-manager"
