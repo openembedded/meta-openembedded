@@ -9,6 +9,8 @@ S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
+    file://0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/libc-0.2.155 \
+    file://0001-Use-portable-atomics-crate.patch \
     "
 
 # v1.1.0
