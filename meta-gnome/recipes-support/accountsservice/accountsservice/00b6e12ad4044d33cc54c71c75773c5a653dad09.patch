@@ -5,7 +5,7 @@ Subject: [PATCH] build: Disable tests when cross compiling and allow
 
  specifying path_wtmp
  
- Upstream-Status: Backport [https://gitlab.freedesktop.org/accountsservice/accountsservice/-/commit/00b6e12ad4044d33cc54c71c75773c5a653dad09]
+Upstream-Status: Backport [https://gitlab.freedesktop.org/accountsservice/accountsservice/-/commit/00b6e12ad4044d33cc54c71c75773c5a653dad09]
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
