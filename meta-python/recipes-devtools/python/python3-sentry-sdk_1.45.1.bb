@@ -15,8 +15,8 @@ RDEPENDS:${PN} += "\
 	python3-datetime \
 "
 
-SRC_URI[sha256sum] = "509aa9678c0512344ca886281766c2e538682f8acfa50fd8d405f8c417ad0625"
+SRC_URI[sha256sum] = "a16c997c0f4e3df63c0fc5e4207ccb1ab37900433e0f72fef88315d317829a26"
 
-PYPI_PACKAGE = "sentry-sdk"
+PYPI_PACKAGE = "sentry_sdk"
 
 inherit pypi setuptools3
