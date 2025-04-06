@@ -876,7 +876,6 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     stm32flash \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "synergy", "", d)} \
     syslog-ng \
-    system-config-keyboard \
     tbb \
     tokyocabinet \
     tree \
