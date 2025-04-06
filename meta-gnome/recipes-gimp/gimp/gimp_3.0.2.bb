@@ -96,7 +96,6 @@ PACKAGECONFIG ?= " \
     mng \
     webp \
     ${@oe.utils.conditional('SITEINFO_BITS', '32', '', 'vector-icons', d)} \
-    ${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'heif', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 xcursor', '', d)} \
 "
 
