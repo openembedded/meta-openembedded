@@ -11,9 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
 DEPENDS = "json-c"
-SRCREV = "cec9feaeb03da8046d14bb395f592c601cf2ae5f"
+SRCREV = "5ec1f5284ecb0eda481f3d2d61236fbc5b46164f"
 
-SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master"
+SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
+           file://0001-mock.c-fix-checking-of-HAVE_GLIBC_IOCTL.patch"
 
 S = "${WORKDIR}/git"
 
