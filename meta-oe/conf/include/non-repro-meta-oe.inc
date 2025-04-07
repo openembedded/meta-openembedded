@@ -98,8 +98,6 @@ KNOWN_NON_REPRO_META_OE = " \
     nbench-byte-src \
     nspr-staticdev \
     obconf-locale-es \
-    openocd \
-    openocd-dbg \
     pcp \
     pcp-dev \
     pcp-doc \
