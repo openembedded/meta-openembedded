@@ -46,3 +46,6 @@ do_install_ptest:append () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+# It needs bitvec to adopt radum 1.x see https://github.com/ferrilab/bitvec/pull/220
+COMPATIBLE_HOST:riscv32 = "null"

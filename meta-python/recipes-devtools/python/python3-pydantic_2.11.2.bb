@@ -70,3 +70,6 @@ do_install_ptest:append() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+# Needs pydantic-core to be buildable
+COMPATIBLE_HOST:riscv32 = "null"
