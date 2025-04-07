@@ -9,7 +9,7 @@ DEPENDS += " \
     python3-pkgconfig-native \
 "
 
-SRC_URI[sha256sum] = "91ed5b71f9179bf3dbfe85d92b52d4b53de2e559aa4daa3b7de18e0dd24ad77d"
+SRC_URI[sha256sum] = "070fd0627ec4393011251a094e08ed9fdcc78cb4e7ab28f507638eee4e39abda"
 
 inherit pkgconfig pypi python_setuptools_build_meta ptest-python-pytest
 
