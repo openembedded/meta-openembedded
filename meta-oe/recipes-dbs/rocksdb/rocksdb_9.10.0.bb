@@ -20,6 +20,8 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=htt
            file://static_library_as_option.patch \
            file://0001-CMakeLists.txt-Make-the-test-discovery-occur-on-targ.patch \
            file://run-ptest \
+           file://0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch \
+           file://0001-checkpoint.h-Add-missing-includes-cstdint.patch \
           "
 
 SRC_URI:append:riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
