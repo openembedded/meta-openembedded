@@ -15,7 +15,7 @@ Co-developed-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Sofiane HAMAM <sofiane.hamam@smile.fr>
 
-Upstream-Status: Submitted [https://review.openocd.org/c/openocd/+/8619]
+Upstream-Status: Backport [https://repo.or.cz/openocd.git?a=commit;h=6834f022b96fb1c7f5829166578e01a0ac223cb0]
 ---
  src/Makefile.am | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
