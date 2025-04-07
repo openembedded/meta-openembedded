@@ -33,5 +33,7 @@ DEPENDS += "\
 "
 # https://github.com/lief-project/LIEF/commit/3def579f75965aa19c021d840a759bce2afc0a31#r152197203
 COMPATIBLE_HOST:x86 = "null"
+# Needs pydantic and pydantic-core
+COMPATIBLE_HOST:riscv32 = "null"
 
 BBCLASSEXTEND = "native nativesdk"
