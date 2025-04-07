@@ -17,3 +17,5 @@ SRC_URI += " \
 SRC_URI[deqp-runner-0.20.3.sha256sum] = "2de4b135ed68a7f821deeedebb4084d33058b0307f1f9935e2c960430f7532e8"
 
 require deqp-runner-crates.inc
+
+RUSTFLAGS:append:riscv32 = " --cfg getrandom_backend=\"linux_raw\""
