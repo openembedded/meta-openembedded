@@ -2,7 +2,7 @@ DESCRIPTION = "OpenGL CTS"
 
 require khronos-cts.inc
 
-SRCREV_vk-gl-cts = "66956d195169596472e956e3aebf2df8e3bd960d"
+SRCREV_vk-gl-cts = "42e61858e862e153cd0fe36593a8c3f7c16c3275"
 
 require opengl-es-cts-sources.inc
 
