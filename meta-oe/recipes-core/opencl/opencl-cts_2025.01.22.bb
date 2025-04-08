@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
 	   file://0001-Ignore-Compiler-Warnings.patch"
 
-SRCREV = "a406b340913f622da089b00f284a597656c10239"
+SRCREV = "5b3518096ca7b82854daadb2b2fae704fe2d9cb5"
 
 EXTRA_OECMAKE:append = " -DENABLE_WERROR=OFF -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
 
