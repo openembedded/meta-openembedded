@@ -7,10 +7,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 DEPENDS = "nlohmann-json"
-
-SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main \
-           file://0001-Fix-build-with-clang-19.patch"
-SRCREV = "fa0a5200ddbe9ae6f487a228e658aedc102dab56"
+SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main"
+SRCREV = "ced79860f8c8a091a2eabfee6d47783f828a9b59"
 
 S = "${WORKDIR}/git"
 inherit cmake pkgconfig lib_package
