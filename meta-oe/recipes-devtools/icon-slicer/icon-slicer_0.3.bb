@@ -9,6 +9,8 @@ SRC_URI = "http://freedesktop.org/software/${BPN}/releases/${BPN}-${PV}.tar.gz \
            "
 SRC_URI[sha256sum] = "05f0216dd0c25a17859de66357f64da5033375b6fbf5f31ca54867311160b64d"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig features_check
+# because of xcursorgen dependency
+REQUIRED_DISTRO_FEATURES = "x11"
 
 BBCLASSEXTEND = "native"

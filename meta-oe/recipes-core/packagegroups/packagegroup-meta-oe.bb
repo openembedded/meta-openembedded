@@ -238,7 +238,7 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
     grpc \
     guider \
     heaptrack \
-    icon-slicer \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icon-slicer", "", d)} \
     ipc-run \
     iptraf-ng \
     jemalloc \
