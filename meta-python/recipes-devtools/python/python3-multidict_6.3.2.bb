@@ -13,6 +13,7 @@ PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https
 S = "${WORKDIR}/git"
 
 RDEPENDS:${PN}-ptest += " \
+    python3-objgraph \
     python3-pytest-cov \
     python3-pytest-codspeed \
 "
