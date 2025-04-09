@@ -8,10 +8,9 @@ inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache f
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable \
-           file://0001-meson-DO-not-emit-absolute-path-when-S-B.patch"
+SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable"
 S = "${WORKDIR}/git"
-SRCREV = "7bcf919ad6ac0ee9a8c66b18b0ca98af877d4c8f"
+SRCREV = "bdacba8afe53066bc3a338997e26fee416af2261"
 
 EXTRA_OEMESON = "-Druntime_deps_check=false \
     -Dsystemdsystemunitdir=${systemd_system_unitdir} \
