@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
 SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
 
-SRCREV = "7963233faf69eb9c80ffca8dfc1f31940f75999f"
+# April 1, 2025
+SRCREV = "635738b64eb52d376c5d1756c265de67236c8934"
 
 S = "${WORKDIR}/git"
 
