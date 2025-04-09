@@ -18,7 +18,31 @@ inherit autotools gettext ptest
 LDEMULATION:mipsarchn32 = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'elf32btsmipn32', 'elf32ltsmipn32', d)}"
 export LDEMULATION
 
-RDEPENDS:${PN}-ptest += "bash coreutils tmux valgrind"
+# for ptests
+VALGRIND = "valgrind"
+
+# valgrind supports armv7 and above
+VALGRIND:armv4 = ''
+VALGRIND:armv5 = ''
+VALGRIND:armv6 = ''
+
+# X32 isn't supported by valgrind at this time
+VALGRIND:linux-gnux32 = ''
+VALGRIND:linux-muslx32 = ''
+
+# Disable for some MIPS variants
+VALGRIND:mipsarchr6 = ''
+VALGRIND:linux-gnun32 = ''
+
+# Disable for powerpc64 with musl
+VALGRIND:libc-musl:powerpc64 = ''
+VALGRIND:libc-musl:powerpc64le = ''
+
+# RISC-V support for valgrind is not there yet
+VALGRIND:riscv64 = ""
+VALGRIND:riscv32 = ""
+
+RDEPENDS:${PN}-ptest += "bash coreutils tmux ${VALGRIND}"
 RDEPENDS:${PN}-ptest:append:libc-musl = " musl-locales"
 RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-binary-localedata-c"
 
