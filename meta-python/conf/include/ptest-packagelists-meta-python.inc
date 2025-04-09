@@ -70,6 +70,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pytoml \
     python3-pyyaml-include \
     python3-pydbus \
+    python3-pyzstd \
     python3-rapidjson \
     python3-requests-file \
     python3-requests-toolbelt \
