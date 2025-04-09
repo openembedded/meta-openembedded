@@ -31,6 +31,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-geojson \
     python3-google-auth-oauthlib \
     python3-gpiod \
+    python3-gpt-image \
     python3-gunicorn \
     python3-html2text \
     python3-httptools \
