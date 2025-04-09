@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
            file://0005-Fix-missing-limit-declarations.patch \
            file://0004-Add-definition-for-MAX.patch \
+           file://0001-Fix-build-with-gcc-15.patch \
            "
 BRANCH = "rel/mDNSResponder-2559"
 SRCREV = "ecc02274878b0a70dba229de642b081cd1c30927"
