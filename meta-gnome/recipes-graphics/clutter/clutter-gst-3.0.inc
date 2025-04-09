@@ -13,7 +13,7 @@ REQUIRED_DISTRO_FEATURES ?= "opengl"
 # Needed for introspection.m4
 EXTRA_AUTORECONF += "-I m4"
 
-export GST_PLUGIN_SCANNER_1_0="${S}/gst-plugin-scanner-dummy"
+export GST_PLUGIN_SCANNER_1_0 = "${S}/gst-plugin-scanner-dummy"
 
 SRC_URI += "file://0001-Install-example-binary-needed-for-core-image-clutter.patch"
 
