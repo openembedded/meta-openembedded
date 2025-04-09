@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;prot
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+           file://0001-Fix-build-with-gcc-15.patch \
            "
 SRCREV_drbd-utils = "36ea199f38b543b2da92219109c2832e122e5bf9"
 SRCREV_drbd-headers = "94f4472513f351efba5788f783feba6ac6efe9fc"
