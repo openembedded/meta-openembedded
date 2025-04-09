@@ -22,6 +22,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-dasbus \
     python3-dominate \
     python3-execnet \
+    python3-fastnumbers \
     python3-flask \
     python3-flexcache \
     python3-flexparser \
