@@ -9,7 +9,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
            file://iwd \ 
            "
-SRC_URI[sha256sum] = "8189e15e701112f871fb5f5e9351f007c9098754b4168ed43cc5422a3adc0255"
+SRC_URI[sha256sum] = "cc5e02068d7407b9dac000429d667af32e9d91c7bff3183a241d8fdb0f75734b"
 
 inherit autotools manpages pkgconfig python3native systemd update-rc.d
 
