@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "e248e299616f417f5051423ea65a15668b71c1fdc9b5e477b47b1e80db
 UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-inherit autotools pkgconfig gettext perlnative features_check qemu update-alternatives
+inherit autotools pkgconfig gettext perlnative features_check update-alternatives
 REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
@@ -31,7 +31,7 @@ do_compile:prepend:class-target() {
     cd ${B}
     oe_runmake -C src genpref
 
-    qemu_binary="${@qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}',['${B}/src/.libs','${STAGING_DIR_TARGET}/${libdir}','${STAGING_DIR_TARGET}/${base_libdir}'])}"
+    qemu_binary="${@oe.qemu.qemu_wrapper_cmdline(d, '${STAGING_DIR_TARGET}',['${B}/src/.libs','${STAGING_DIR_TARGET}/${libdir}','${STAGING_DIR_TARGET}/${base_libdir}'])}"
     cat >qemuwrapper <<EOF
 #!/bin/sh
 ${qemu_binary} src/genpref "\$@"
