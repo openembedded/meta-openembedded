@@ -19,7 +19,8 @@ inherit gnomebase gettext gsettings upstream-version-is-even features_check
 
 REQUIRED_DISTRO_FEATURES = "polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "c6e1624af6090bc4e1a191fe2268abfa7a8de07831ca7a57f217e679bf7b9a54"
+SRC_URI = "https://download.gnome.org/sources/gnome-session/${@oe.utils.trim_version('${PV}', 1)}/gnome-session-${PV}.tar.xz"
+SRC_URI[sha256sum] = "56ae9c68e49995793eb2096bcdc4533b111669e1e54c8b6e0b1d952f6a5e8a70"
 
 PACKAGECONFIG ??= ""
 
