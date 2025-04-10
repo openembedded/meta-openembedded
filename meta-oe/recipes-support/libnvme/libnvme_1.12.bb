@@ -20,4 +20,8 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-EXTRA_OEMESON += "-Dkeyutils=disabled -Dopenssl=disabled -Dpython=disabled"
+PACKAGECONFIG ??= "keyutils openssl"
+
+PACKAGECONFIG[keyutils] = "-Dkeyutils=enabled,-Dkeyutils=disabled,keyutils"
+PACKAGECONFIG[openssl] = "-Dopenssl=enabled,-Dopenssl=disabled,openssl"
+PACKAGECONFIG[python] = "-Dpython=enabled,-Dpython=disabled,python"
