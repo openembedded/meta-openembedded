@@ -1,4 +1,4 @@
-From f0a48c4e42819604063e6eacb7cdb4fa22331c77 Mon Sep 17 00:00:00 2001
+From 0a49ed8e949adda11c6268f36a10ac12074cd377 Mon Sep 17 00:00:00 2001
 From: Yoann Congal <yoann.congal@smile.fr>
 Date: Tue, 1 Apr 2025 23:42:39 +0200
 Subject: [PATCH] reproducibility: Prevent configuration from reading host
@@ -17,7 +17,7 @@ Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
  1 file changed, 2 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c5548b3..c9af31c 100644
+index c5548b3..a2f8b4d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -7,8 +7,8 @@ set(VERSION "2.0")
@@ -26,8 +26,8 @@ index c5548b3..c9af31c 100644
  # which by default is "/usr/local"
 -set(CONSOLE_FONTS_DIRS "share/consolefonts" "lib/kbd/consolefonts")
 -set(X_FONTS_DIRS "lib/X11/fonts/misc" "X11R6/lib/X11/fonts/misc" "share/fonts/X11/misc")
-+set(CONSOLE_FONTS_DIRS "share/consolefonts")
-+set(X_FONTS_DIRS "lib/X11/fonts/misc" "share/fonts/X11/misc")
++set(CONSOLE_FONTS_DIRS "${CMAKE_INSTALL_DATAROOTDIR}/consolefonts")
++set(X_FONTS_DIRS "${CMAKE_INSTALL_LIBDIR}/X11/fonts/misc" "${CMAKE_INSTALL_DATAROOTDIR}/fonts/X11/misc")
  
  set(MKFONTDIR "/usr/bin/mkfontdir")
  
