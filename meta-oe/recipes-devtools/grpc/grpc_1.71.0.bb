@@ -32,6 +32,8 @@ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BR
 
 inherit cmake pkgconfig
 
+CXXFLAGS:append:class-target = " -gdwarf-4"
+
 EXTRA_OECMAKE = " \
     -DgRPC_CARES_PROVIDER=package \
     -DgRPC_ZLIB_PROVIDER=package \
