@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 DEPENDS = "\
+    python3-setuptools-scm-native \
     freetype \
     libpng \
     python3-pybind11 \
