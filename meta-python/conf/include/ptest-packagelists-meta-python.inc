@@ -12,6 +12,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-ansicolors \
     python3-asgiref \
     python3-aspectlib \
+    python3-betamax \
     python3-bleak \
     python3-blinker \
     python3-breathe \
@@ -21,7 +22,9 @@ PTESTS_FAST_META_PYTHON = "\
     python3-click \
     python3-dasbus \
     python3-dominate \
+    python3-dnspython \
     python3-execnet \
+    python3-fastjsonschema \
     python3-fastnumbers \
     python3-flask \
     python3-flexcache \
@@ -71,6 +74,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pytoml \
     python3-pyyaml-include \
     python3-pydbus \
+    python3-pyzmq \
     python3-pyzstd \
     python3-rapidjson \
     python3-requests-file \
@@ -121,9 +125,6 @@ PTESTS_SLOW_META_PYTHON = "\
 "
 
 PTESTS_PROBLEMS_META_PYTHON = "\
-    python3-betamax \
-    python3-dnspython \
-    python3-fastjsonschema \
     python3-pyasyncore \
-    python3-pyzmq \
+    tftpy \
 "
