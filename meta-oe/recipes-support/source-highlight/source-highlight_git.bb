@@ -16,7 +16,7 @@ DEPENDS:append = " bison-native boost"
 
 DEPENDS:append:class-target = " ${PN}-native"
 
-EXTRA_OECONF="--with-boost-regex=boost_regex"
+EXTRA_OECONF = "--with-boost-regex=boost_regex"
 
 BBCLASSEXTEND = "native nativesdk"
 
