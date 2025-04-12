@@ -24,7 +24,7 @@ RPROVIDES:${PN} = "coreutils"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
 
-PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
+PACKAGECONFIG[selinux] = ",,libselinux"
 
 CARGO_BUILD_FLAGS += "--features unix"
 CARGO_BUILD_FLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', '--features feat_selinux', '', d)}"
