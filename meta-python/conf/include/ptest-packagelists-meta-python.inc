@@ -58,7 +58,6 @@ PTESTS_FAST_META_PYTHON = "\
     python3-prettytable \
     python3-propcache \
     python3-pyais \
-    python3-pyasyncore \
     python3-pydantic \
     python3-pydantic-core \
     python3-pylint \
@@ -125,5 +124,6 @@ PTESTS_PROBLEMS_META_PYTHON = "\
     python3-betamax \
     python3-dnspython \
     python3-fastjsonschema \
+    python3-pyasyncore \
     python3-pyzmq \
 "
