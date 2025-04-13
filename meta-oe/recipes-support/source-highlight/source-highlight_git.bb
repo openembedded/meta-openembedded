@@ -3,7 +3,7 @@ DESCRIPTION = "Source-highlight converts source code to formatted text with synt
 HOMEPAGE = "https://www.gnu.org/software/src-highlite/"
 LICENSE = "GPL-3.0-only"
 SECTION = "libs"
-LIC_FILES_CHKSUM = "file://COPYING;;md5=ff95bfe019feaf92f524b73dd79e76eb"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
 
 SRCREV = "894cacd0799ca60afa359a63782729dec76cbb79"
 PV = "3.1.9+git"
