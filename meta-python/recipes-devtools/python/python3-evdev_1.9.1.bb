@@ -11,7 +11,8 @@ do_compile:prepend() {
     rm -rf ${S}/evdev/ecodes.c
 }
 
-SETUPTOOLS_BUILD_ARGS = "build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h"
+PEP517_BUILD_OPTS = "--config-setting=--build-option='build_ecodes \
+    --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h'"
 
 RDEPENDS:${PN} += "\
     python3-ctypes \
@@ -20,3 +21,4 @@ RDEPENDS:${PN} += "\
     python3-shell \
     python3-stringold \
     "
+INSANE_SKIP:${PN}-src = "buildpaths"
