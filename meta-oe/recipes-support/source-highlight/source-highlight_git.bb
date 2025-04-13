@@ -14,7 +14,7 @@ inherit autotools pkgconfig
 
 DEPENDS:append = " bison-native boost"
 
-DEPENDS:append:class-target = " ${PN}-native"
+DEPENDS:append:class-target = " ${BPN}-native"
 
 EXTRA_OECONF = "--with-boost-regex=boost_regex"
 
