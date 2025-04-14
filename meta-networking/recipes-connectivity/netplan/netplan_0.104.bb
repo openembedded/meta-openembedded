@@ -17,6 +17,7 @@ PV = "0.104"
 SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
            file://0001-Makefile-do-not-use-Werror.patch \
            file://0001-Makefile-fix-parallel-build-failure.patch \
+           file://CVE-2022-4968.patch \
            "
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
