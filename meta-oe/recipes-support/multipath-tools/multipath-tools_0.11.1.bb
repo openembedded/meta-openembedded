@@ -45,6 +45,8 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
            file://0011-fix-bug-of-do_compile-and-do_install.patch \
            file://0012-add-explicit-dependency-on-libraries.patch \
            file://0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch \
+           file://0013-libdmmp-Makefile-Fix-KBUILD_BUILD_TIMESTAMP-usage.patch \
+           file://0014-libdmmp-Makefile-Add-target-docs-man-dmmp_strerror.3.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
@@ -83,6 +85,7 @@ EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
                 modulesloaddir=${sysconfdir}/modules-load.d \
                 tmpfilesdir=${sysconfdir}/tmpfiles.d \
                 ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "SYSTEMD=216", "", d)} \
+                KBUILD_BUILD_TIMESTAMP="$(date -u -d "@$SOURCE_DATE_EPOCH" +"%Y-%m-%d %H:%M:%S +0000")" \
                '
 
 do_install() {
