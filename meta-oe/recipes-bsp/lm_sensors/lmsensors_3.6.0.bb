@@ -50,8 +50,11 @@ EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
         LIBDIR=${libdir} \
         CC="${CC}" AR="${AR}"'
 
+do_configure:prepend() {
+    sed -i -e 's:^#\(PROG_EXTRA\):\1:' ${S}/Makefile
+}
+
 do_compile() {
-    sed -i -e 's:^# \(PROG_EXTRA\):\1:' ${S}/Makefile
     # Respect LDFLAGS
     sed -i -e 's/\$(LIBDIR)$/\$(LIBDIR) \$(LDFLAGS)/g' ${S}/Makefile
     sed -i -e 's/\$(LIBSHSONAME) -o/$(LIBSHSONAME) \$(LDFLAGS) -o/g' \
