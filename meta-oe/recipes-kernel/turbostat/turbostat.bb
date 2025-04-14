@@ -16,6 +16,9 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/COPYING;md5=bbea815ee2795b2f4230826c0c6b
 COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
 COMPATIBLE_HOST:libc-musl = "null"
 
+KERNEL_VERSION = "${@get_kernelversion_file("${STAGING_KERNEL_BUILDDIR}")}"
+inherit linux-kernel-base
+
 SRC_URI += "\
             file://COPYING \
             "
@@ -90,4 +93,8 @@ do_compile() {
 
 do_install() {
 	oe_runmake DESTDIR="${D}" install
+}
+
+python do_package:prepend() {
+    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
 }
