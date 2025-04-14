@@ -1,0 +1,74 @@
+From 8a9e16384720f1837f4676baf62807a441c1e7f1 Mon Sep 17 00:00:00 2001
+From: Jan Friesse <jfriesse@redhat.com>
+Date: Mon, 24 Mar 2025 12:05:08 +0100
+Subject: [PATCH] totemsrp: Check size of orf_token msg
+
+orf_token message is stored into preallocated array on endian convert
+so carefully crafted malicious message can lead to crash of corosync.
+
+Solution is to check message size beforehand.
+
+Upstream-Status: Backport
+[https://github.com/corosync/corosync/commit/7839990f9cdf34e55435ed90109e82709032466a]
+
+CVE: CVE-2025-30472
+
+Signed-off-by: Jan Friesse <jfriesse@redhat.com>
+Reviewed-by: Christine Caulfield <ccaulfie@redhat.com>
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+---
+ exec/totemsrp.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/exec/totemsrp.c b/exec/totemsrp.c
+index d8e960a..1e417e5 100644
+--- a/exec/totemsrp.c
++++ b/exec/totemsrp.c
+@@ -3637,12 +3637,20 @@ static int check_orf_token_sanity(
+ 	const struct totemsrp_instance *instance,
+ 	const void *msg,
+ 	size_t msg_len,
++	size_t max_msg_len,
+ 	int endian_conversion_needed)
+ {
+ 	int rtr_entries;
+ 	const struct orf_token *token = (const struct orf_token *)msg;
+ 	size_t required_len;
+ 
++	if (msg_len > max_msg_len) {
++		log_printf (instance->totemsrp_log_level_security,
++		    "Received orf_token message is too long...  ignoring.");
++
++		return (-1);
++	}
++
+ 	if (msg_len < sizeof(struct orf_token)) {
+ 		log_printf (instance->totemsrp_log_level_security,
+ 		    "Received orf_token message is too short...  ignoring.");
+@@ -3656,6 +3664,13 @@ static int check_orf_token_sanity(
+ 		rtr_entries = token->rtr_list_entries;
+ 	}
+ 
++	if (rtr_entries > RETRANSMIT_ENTRIES_MAX) {
++		log_printf (instance->totemsrp_log_level_security,
++		    "Received orf_token message rtr_entries is corrupted...  ignoring.");
++
++		return (-1);
++	}
++
+ 	required_len = sizeof(struct orf_token) + rtr_entries * sizeof(struct rtr_item);
+ 	if (msg_len < required_len) {
+ 		log_printf (instance->totemsrp_log_level_security,
+@@ -3824,7 +3839,8 @@ static int message_handler_orf_token (
+ 	"Time since last token %0.4f ms", ((float)tv_diff) / 1000000.0);
+ #endif
+ 
+-	if (check_orf_token_sanity(instance, msg, msg_len, endian_conversion_needed) == -1) {
++	if (check_orf_token_sanity(instance, msg, msg_len, sizeof(token_storage),
++	    endian_conversion_needed) == -1) {
+ 		return (0);
+ 	}
+ 
+-- 
+2.34.1
+
