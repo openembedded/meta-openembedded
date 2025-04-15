@@ -390,6 +390,8 @@ python write_manifest() {
             imageflags = d.getVarFlags('FITIMAGE_IMAGE_%s' % image, expand=['file', 'fstype', 'type', 'comp']) or {}
             imgtype = imageflags.get('type', 'kernel')
             if imgtype == 'kernel':
+                if d.getVar('KERNEL_IMAGETYPE') not in ('zImage', 'Image') and not imageflags.get('comp'):
+                    bb.warn(f"KERNEL_IMAGETYPE is '{d.getVar('KERNEL_IMAGETYPE')}' but FITIMAGE_IMAGE_kernel[comp] is not set.")
                 default = "%s-%s%s" % (d.getVar('KERNEL_IMAGETYPE'), machine, d.getVar('KERNEL_IMAGE_BIN_EXT'))
                 imgsource = imageflags.get('file', default)
                 imgcomp = imageflags.get('comp', 'none')
