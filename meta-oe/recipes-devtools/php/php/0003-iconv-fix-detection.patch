@@ -1,7 +1,7 @@
-From 35ac74fce1a60025f8d126783b8aa7014eefdf53 Mon Sep 17 00:00:00 2001
+From d9fc6b314cefe010a0deb6e591719cfb0ff226a5 Mon Sep 17 00:00:00 2001
 From: Claude Bing <cbing@cybernetics.com>
 Date: Tue, 9 Nov 2021 13:10:33 -0500
-Subject: [PATCH 3/5] iconv: fix detection
+Subject: [PATCH] iconv: fix detection
 
 Upstream-Status: Pending
 
@@ -20,10 +20,10 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/build/php.m4 b/build/php.m4
-index e45b22b76..1bd3ccceb 100644
+index d8a5cbf0..aee21924 100644
 --- a/build/php.m4
 +++ b/build/php.m4
-@@ -1820,7 +1820,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+@@ -1829,7 +1829,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
      [Define to 1 if you have the 'libiconv' function.])
  
    dnl Check libc first if no path is provided in --with-iconv.
@@ -33,6 +33,3 @@ index e45b22b76..1bd3ccceb 100644
      dnl Reset LIBS temporarily as it may have already been included -liconv in.
      LIBS_save=$LIBS
      LIBS=
--- 
-2.25.1
-
