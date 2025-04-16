@@ -8,9 +8,9 @@ DEPENDS = "sassc-native"
 
 inherit meson
 
-SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main;tag=v${PV}"
 
 S = "${WORKDIR}/git"
-SRCREV = "88577252bb7a18f445a108d9a4d2dd046e7abb27"
+SRCREV = "72b805550d6245f18021e1530f329ce81999445e"
 
 FILES:${PN} = "${datadir}/themes"
