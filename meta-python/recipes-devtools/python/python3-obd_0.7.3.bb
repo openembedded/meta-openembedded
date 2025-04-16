@@ -2,8 +2,8 @@ DESCRIPTION = "A python module for handling realtime sensor data from OBD-II veh
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://README.md;md5=176d0f9ad45c10895296260d426fa862"
 
-SRC_URI[sha256sum] = "20d38c9ded3daad1e8affab3ff367a70788d4f29ac77ab7aacddc6a6d2a43d61"
+SRC_URI[sha256sum] = "27b8f043376ca700edb98bf5216e2912295ecde0e735b260999f2d9ddf342522"
 
-inherit setuptools3 pypi
+inherit python_setuptools_build_meta pypi
 
 RDEPENDS:${PN} += "python3-pyserial python3-pint python3-setuptools python3-packaging"
