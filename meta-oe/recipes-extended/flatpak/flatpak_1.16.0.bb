@@ -12,7 +12,7 @@ SRCREV = "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
 
 S = "${WORKDIR}/git"
 
-inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check
+inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
@@ -74,5 +74,8 @@ EXTRA_OEMESON = " \
     -Dsystem_bubblewrap=bwrap \
     -Dsystem_dbus_proxy=xdg-dbus-proxy \
 "
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --shell /bin/nologin flatpak"
 
 FILES:${PN} += "${libdir} ${datadir}"
