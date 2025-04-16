@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/riptideio/pymodbus/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eba8057aa82c058d2042b4b0a0e9cc63"
 
-SRC_URI[sha256sum] = "7689b56cc3ad05a594e1486e772abb9d9646c01737935df492db04455680baf6"
+SRC_URI[sha256sum] = "ec6216f218dd7e370fa43692535ee5268adb6b1cf7037dda6c78ac92c9a43a84"
 
 inherit pypi python_setuptools_build_meta
 
