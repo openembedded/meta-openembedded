@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'goabackend', 
 
 DEPENDS += "gdk-pixbuf dbus glib-2.0 gcr keyutils"
 
-SRC_URI[archive.sha256sum] = "9d058b3aac8b2d8b6b2ae7cb57c8a8abe539e73c88220c315b5b99f87ce6efd8"
+SRC_URI[archive.sha256sum] = "0f7f3d29c0666ffbcc503f3e0f3396362effdb9317d41664ce65df147ef35372"
 
 PACKAGECONFIG ?= "goabackend kerberos owncloud google windows_live"
 
