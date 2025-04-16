@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/tristanpenman/valijson"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
 
-SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https"
-SRCREV = "7d59abf50cff4ee53e6584e6d6aa201a19fb5b51"
+SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "8b320f25676030ba13fb90c1bf06133df2628086"
 
 S = "${WORKDIR}/git"
 
