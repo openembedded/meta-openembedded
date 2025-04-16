@@ -6,8 +6,9 @@ causal actions in error situations."
 HOMEPAGE = "http://mmonit.com/monit/"
 
 LICENSE = "AGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=ea116a7defaf0e93b3bb73b2a34a3f51 \
-                    file://libmonit/COPYING;md5=2405f1c59ed1bf3714cebdb40162ce92"
+LIC_FILES_CHKSUM = "file://COPYING;md5=79ca9f26f1ecb1e377e90383109ede64 \
+                    file://libmonit/COPYING;md5=44aaa0a664332e9568add09f1ddb01cb \
+                    "
 
 SRC_URI = " \
 	https://mmonit.com/monit/dist/monit-${PV}.tar.gz \
@@ -15,7 +16,7 @@ SRC_URI = " \
 	file://monitrc \
 "
 
-SRC_URI[sha256sum] = "ef607cfaabfd3767d40b9b9e32032f748beebc4d686831f6111e0e68fbd1b469"
+SRC_URI[sha256sum] = "e9522a78b954eaee933c4810db7b99a36f941e022ca2b01570185d4ce41d8f12"
 
 DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
 
