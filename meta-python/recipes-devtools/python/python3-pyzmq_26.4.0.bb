@@ -29,7 +29,7 @@ SRC_URI:append = " \
     file://run-ptest \
 "
 
-SRC_URI[sha256sum] = "f1cd68b8236faab78138a8fc703f7ca0ad431b17a3fcac696358600d4e6243b3"
+SRC_URI[sha256sum] = "4bd13f85f80962f91a651a7356fe0472791a5f7a92f227822b5acf44795c626d"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest cython
 
