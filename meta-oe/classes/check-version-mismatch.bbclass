@@ -13,6 +13,7 @@ python do_package_check_version_mismatch() {
     import subprocess
     import shutil
     import signal
+    import glob
 
     classes_skip = ["nopackage", "image", "native", "cross", "crosssdk", "cross-canadian"]
     for cs in classes_skip:
@@ -173,6 +174,42 @@ python do_package_check_version_mismatch() {
         else:
             return True
 
+    def is_elf_binary(fexec):
+        fexec_real = os.path.realpath(fexec)
+        elf = oe.qa.ELFFile(fexec_real)
+        try:
+            elf.open()
+            elf.close()
+            return True
+        except:
+            return False
+
+    def get_shebang(fexec):
+        try:
+            with open(fexec, 'r') as f:
+                first_line = f.readline().strip()
+                if first_line.startswith("#!"):
+                    return first_line
+                else:
+                    return None
+        except Exception as e:
+            return None
+
+    def get_interpreter_from_shebang(shebang):
+        if not shebang:
+            return None
+        hosttools_path = d.getVar("TMPDIR") + "/hosttools"
+        if "/sh" in shebang:
+            return hosttools_path + "/sh"
+        elif "/bash" in shebang:
+            return hosttools_path + "/bash"
+        elif "python" in shebang:
+            return hosttools_path + "/python3"
+        elif "perl" in shebang:
+            return hosttools_path + "/perl"
+        else:
+            return None
+
     # helper function to get PKGV, useful for recipes such as perf
     def get_pkgv(pn):
         pkgdestwork = d.getVar("PKGDESTWORK")
@@ -275,6 +312,9 @@ python do_package_check_version_mismatch() {
         return
 
     skipped_directories = [".debug", "ptest", "installed-tests", "tests", "test", "__pycache__", "testcases"]
+    # avoid checking configuration files, they don't give useful version information and some init scripts
+    # will kill all processes
+    skipped_directories.append("etc")
     pkgd_libdir = pkgd + d.getVar("libdir")
     pkgd_base_libdir = pkgd + d.getVar("base_libdir")
     extra_exec_libdirs = []
@@ -312,8 +352,28 @@ python do_package_check_version_mismatch() {
         # first we extend qemu_exec to include library path if needed
         if extra_exec_libdirs:
             qemu_exec += ":" + ":".join(extra_exec_libdirs)
+        orig_qemu_exec = qemu_exec
         for fexec in executables:
+            qemu_exec = orig_qemu_exec
             for version_option in ["--version", "-V", "-v", "--help"]:
+                if not is_elf_binary(fexec):
+                    shebang = get_shebang(fexec)
+                    interpreter = get_interpreter_from_shebang(shebang)
+                    if not interpreter:
+                        bb.debug(1, "file %s is not supported to run" % fexec)
+                    elif interpreter.endswith("perl"):
+                        perl5lib_extra = pkgd + d.getVar("libdir") + "/perl5/site_perl"
+                        for p in glob.glob("%s/usr/share/*" % pkgd):
+                            perl5lib_extra += ":%s" % p
+                        qemu_exec += " -E PERL5LIB=%s:$PERL5LIB %s" % (perl5lib_extra, interpreter)
+                    elif interpreter.endswith("python3"):
+                        pythonpath_extra = glob.glob("%s%s/python3*/site-packages" % (pkgd, d.getVar("libdir")))
+                        if pythonpath_extra:
+                            qemu_exec += " -E PYTHONPATH=%s:$PYTHONPATH %s" % (pythonpath_extra[0], interpreter)
+                    else:
+                        qemu_exec += " %s" % interpreter
+                    # remove the '-E LD_LIBRARY_PATH=xxx'
+                    qemu_exec = re.sub(r"-E\s+LD_LIBRARY_PATH=\S+", "", qemu_exec)
                 version_check_cmd_full = "%s %s %s" % (qemu_exec, fexec, version_option)
                 version_check_cmd = version_check_cmd_full
                 #version_check_cmd = "%s %s" % (os.path.relpath(fexec, pkgd), version_option)
