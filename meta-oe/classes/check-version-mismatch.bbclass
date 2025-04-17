@@ -95,6 +95,8 @@ python do_package_check_version_mismatch() {
                     version = version[1:]
                 if version.endswith(")") and "(" not in version:
                     version = version[:-1]
+                if not version.endswith(")") and "(" in version:
+                    version = version.split('(')[0]
                 # handle extra version info
                 version = version + match.group("extra") + match.group("extra2")
                 possible_versions.append(version)
