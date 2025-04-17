@@ -76,6 +76,6 @@ EXTRA_OEMESON = " \
 "
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM:${PN} = "--system --no-create-home --user-group --shell /bin/nologin flatpak"
+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --shell /sbin/nologin flatpak"
 
 FILES:${PN} += "${libdir} ${datadir}"
