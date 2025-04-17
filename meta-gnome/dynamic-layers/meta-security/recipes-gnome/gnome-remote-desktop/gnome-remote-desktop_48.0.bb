@@ -47,6 +47,7 @@ USERADD_PARAM:${PN} = " \
 	--no-create-home \
 	--user-group \
 	--home-dir ${localstatedir}/lib/gnome-remote-desktop \
+	--shell /sbin/nologin \
 	gnome-remote-desktop \
 "
 
