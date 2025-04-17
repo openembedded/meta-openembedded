@@ -207,6 +207,14 @@ python do_package_check_version_mismatch() {
         os.makedirs(debug_directory, exist_ok=True)
         data_lines.append("pv: %s\n" % pv)
 
+    # handle a special case: a pure % means matching all, no point in further checking
+    if pv == "%":
+        if enable_debug:
+            data_lines.append("FINAL RESULT: MATCH (%s matches all, skipped)\n\n" % pv)
+            with open(debug_data_file, "w") as f:
+                f.writelines(data_lines)
+        return
+
     got_quick_match_result = False
     # handle python3-xxx recipes quickly
     __regex_python_module_version__ = re.compile(r"(?:^|.*:)Version: (?P<version>.*)$")
