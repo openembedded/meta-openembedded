@@ -395,7 +395,7 @@ python do_package_check_version_mismatch() {
         bb.debug(1, "No stale process")
 }
 
-addtask do_package_check_version_mismatch after do_package before do_build
+addtask do_package_check_version_mismatch after do_prepare_recipe_sysroot do_package before do_build
 
 do_build[rdeptask] += "do_package_check_version_mismatch"
 do_rootfs[recrdeptask] += "do_package_check_version_mismatch"
