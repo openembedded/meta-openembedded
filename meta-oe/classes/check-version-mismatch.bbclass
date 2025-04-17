@@ -315,6 +315,7 @@ python do_package_check_version_mismatch() {
     # avoid checking configuration files, they don't give useful version information and some init scripts
     # will kill all processes
     skipped_directories.append("etc")
+    skipped_directories.append("go/src")
     pkgd_libdir = pkgd + d.getVar("libdir")
     pkgd_base_libdir = pkgd + d.getVar("base_libdir")
     extra_exec_libdirs = []
