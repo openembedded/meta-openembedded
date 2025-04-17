@@ -8,8 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "flex-native flex bison-native"
 DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
 
-SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-          "
+SRC_URI = " \
+    https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+    file://0001-pki-Fix-signature-of-help-to-match-that-of-a-callbac.patch \
+    file://0002-callback-job-Replace-return_false-in-constructors-wi.patch \
+    file://0003-Cast-uses-of-return_-nop-and-enumerator_create_empty.patch \
+    "
 
 SRC_URI[sha256sum] = "212368cbc674fed31f3292210303fff06da8b90acad2d1387375ed855e6879c4"
 
