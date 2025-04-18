@@ -4,7 +4,6 @@ KNOWN_NON_REPRO_META_OE = " \
     asio-dbg \
     asio-ptest \
     asio-src \
-    boinc-client-dev \
     cjson-ptest \
     cpuid-doc \
     crash \
