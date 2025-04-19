@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 
 require ${BPN}-crates.inc
 
-SRC_URI[sha256sum] = "bcc9c6fdb0ced789245b02b7d6603e17d1563064ddcfc36f046b61c0c05dd9df"
+SRC_URI += "file://0001-Upgrade-radium-to-1.0.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/bitvec-1.0.1/"
+SRC_URI += "file://0001-cargo.toml-Update-bitvec-to-use-radium-1.x.patch"
+SRC_URI[sha256sum] = "6bf31628ab6d0e7c7c0372419898c52ef0a447b33ab47c7f62053bd013cc5b09"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
@@ -46,6 +48,3 @@ do_install_ptest:append () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-# It needs bitvec to adopt radum 1.x see https://github.com/ferrilab/bitvec/pull/220
-COMPATIBLE_HOST:riscv32 = "null"
