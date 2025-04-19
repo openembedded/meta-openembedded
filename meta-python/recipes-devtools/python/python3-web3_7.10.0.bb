@@ -24,6 +24,3 @@ RDEPENDS:${PN} += " \
     python3-websockets \
     python3-pyunormalize \
 "
-
-# Needs python3-pydantic to be buildable on rv32
-COMPATIBLE_HOST:riscv32 = "null"
