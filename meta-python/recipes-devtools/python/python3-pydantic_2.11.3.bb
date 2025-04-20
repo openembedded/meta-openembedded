@@ -9,9 +9,13 @@ HOMEPAGE = "https://github.com/samuelcolvin/pydantic"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
-inherit pypi python_hatchling ptest-python-pytest
+inherit python_hatchling ptest-python-pytest
 
-SRC_URI[sha256sum] = "7471657138c16adad9322fe3070c0116dd6c3ad8d649300e3cbdfe91f4db4ec3"
+SRCREV = "bce81efdeac1cbefd0196b478a32aa2586bd595a"
+PV .= "+git"
+SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=main"
+
+S = "${WORKDIR}/git"
 
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
