@@ -11,20 +11,6 @@ SRC_URI[sha256sum] = "2213b56fdaff2220d0e38c8e420cbe1a83c87374190cba8c70af215609
 
 S = "${WORKDIR}/SDL2_image-${PV}"
 
-inherit autotools pkgconfig
+inherit cmake pkgconfig
 
-# Disable the run-time loading of the libs and bring back the soname dependencies.
-EXTRA_OECONF += "--disable-jpg-shared --disable-png-shared -disable-tif-shared"
-
-do_configure:prepend() {
-    # make autoreconf happy
-    touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog
-    # Removing these files fixes a libtool version mismatch.
-    rm -f ${S}/acinclude/libtool.m4
-    rm -f ${S}/acinclude/sdl2.m4
-    rm -f ${S}/acinclude/pkg.m4
-    rm -f ${S}/acinclude/lt~obsolete.m4
-    rm -f ${S}/acinclude/ltoptions.m4
-    rm -f ${S}/acinclude/ltsugar.m4
-    rm -f ${S}/acinclude/ltversion.m4
-}
+FILES:${PN} += "${datadir}/licenses"
