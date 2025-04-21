@@ -22,7 +22,13 @@ inherit cmake pkgconfig upstream-version-is-even features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl x11"
 
+do_install:append() {
+	mv ${D}${libdir}/pkgconfig/sdl2_compat.pc ${D}${libdir}/pkgconfig/sdl2.pc
+}
+
 FILES:${PN} += "${datadir}/licenses"
 
 RCONFLICTS:${PN} = "libsdl2"
 RPROVIDES:${PN} = "libsdl2"
+
+BBCLASSEXTEND = "nativesdk native"
