@@ -11,7 +11,7 @@ SRC_URI = " \
     file://0002-fluid_synth_nwrite_float-Allow-zero-pointer-for-left.patch \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
-SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
+SRCREV = "9f2edaa3cbd456997cb420fb68b6f960faaafd12"
 
 S = "${WORKDIR}/git"
 
@@ -37,3 +37,4 @@ PACKAGECONFIG[readline] = "-Denable-readline=ON,-Denable-readline=OFF,readline"
 PACKAGECONFIG[sdl] = "-Denable-sdl2=ON,-Denable-sdl2=OFF,libsdl2"
 PACKAGECONFIG[sndfile] = "-Denable-libsndfile=ON,-Denable-libsndfile=OFF,libsndfile1"
 PACKAGECONFIG[systemd] = "-Denable-systemd=ON,-Denable-systemd=OFF,systemd"
+
