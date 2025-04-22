@@ -3,11 +3,11 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=79808397c3355f163c012616125c9e26"
 SECTION = "libs"
 
-SRC_URI = "git://git.netfilter.org/libnftnl;branch=master \
+SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${P} \
            file://0001-configure.ac-Add-serial-tests.patch \
            file://run-ptest \
            "
-SRCREV = "06e2cbec41c7cd7f2b1e660ce5e5f949912e32eb"
+SRCREV = "17190762f33f78090f5ff99a436c4cb866ac3ccd"
 
 S = "${WORKDIR}/git"
 
