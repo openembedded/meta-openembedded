@@ -9,9 +9,9 @@ HOMEPAGE = "https://gitlab.com/nbdkit/nbdkit"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
 
-SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=stable-1.40;tag=v${PV} \
+SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=stable-1.42;tag=v${PV} \
            file://0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch"
-SRCREV = "900a0d2bea4b027d71cf213f385711a2bab33eef"
+SRCREV = "14de71af1bd13e5c781d83959bdeb7ebbe759d6f"
 
 S = "${WORKDIR}/git"
 
