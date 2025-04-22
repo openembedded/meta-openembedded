@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0724597863f1581ab01429e0423e779f"
 
 DEPENDS += "icu"
 
-PYPI_PACKAGE = "PyICU"
+PYPI_PACKAGE = "pyicu"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "241bf4e73851524af67fea5d94ff60bac83dd98ce3ef6fd6f2c00e07e8476c87"
+SRC_URI[sha256sum] = "a9e6c3056668e3c75568da7172a7b0eb24727eb2892e8528b370faa122522f02"
 
 SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
 
