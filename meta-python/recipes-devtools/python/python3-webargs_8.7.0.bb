@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=27586b20700d7544c06933afe56f7df4"
 
 inherit pypi python_flit_core
 
-SRC_URI[sha256sum] = "b8d098ab92bd74c659eca705afa31d681475f218cb15c1e57271fa2103c0547a"
+SRC_URI[sha256sum] = "0c617dec19ed4f1ff6b247cd73855e949d87052d71900938b71f0cafd92f191b"
 
 RDEPENDS:${PN} += "\
     python3-marshmallow \
