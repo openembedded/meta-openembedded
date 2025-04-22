@@ -1,4 +1,4 @@
-From 0dfdbeef174c18e846b98af816a9675c12a42845 Mon Sep 17 00:00:00 2001
+From 64d537a8e5e8dd2f651d8fe214b73bbc96cc5655 Mon Sep 17 00:00:00 2001
 From: Markus Volk <f_l_k@t-online.de>
 Date: Fri, 20 Sep 2024 16:43:44 +0200
 Subject: [PATCH] src/libtracker-sparql/meson.build: dont create compatibility
@@ -16,10 +16,10 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/libtinysparql/meson.build b/src/libtinysparql/meson.build
-index 5eccb92fc..6ed7c2b1f 100644
+index 031f7e1..11f8a96 100644
 --- a/src/libtinysparql/meson.build
 +++ b/src/libtinysparql/meson.build
-@@ -247,6 +247,6 @@ endif
+@@ -246,6 +246,6 @@ endif
  
  tracker_sparql_uninstalled_dir = meson.current_build_dir()
  
@@ -27,6 +27,3 @@ index 5eccb92fc..6ed7c2b1f 100644
 +#meson.add_install_script('symlink-libtracker-sparql.sh', get_option('libdir'), meson.current_build_dir())
  
  meson.override_dependency('tinysparql-3.0', tracker_sparql_dep)
--- 
-2.46.0
-
