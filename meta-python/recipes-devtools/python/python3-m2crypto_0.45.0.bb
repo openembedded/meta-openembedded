@@ -4,7 +4,7 @@ HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
 
-SRC_URI[sha256sum] = "384bb4cbd178ee0e74015311b7b1f9f2c377e3686e03fa070b3ec2f494671c0f"
+SRC_URI[sha256sum] = "ffc10d4d09901514f408dc74f60a4d7df21c44ebc9bf776c947bfdc7359421cf"
 
 SRC_URI += " \
            file://0001-setup.py-Make-the-cmd-available.patch \

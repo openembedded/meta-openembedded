@@ -1,4 +1,4 @@
-From b14664fdab286485c5cbc0fbe5b0ff13f062edd8 Mon Sep 17 00:00:00 2001
+From eaeb95ec64762a58dde7cf368fc17188382e7df6 Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Fri, 28 Mar 2025 12:13:26 +0800
 Subject: [PATCH] setup.py: Make the cmd available
@@ -23,10 +23,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/setup.py b/setup.py
-index 7e295f3..cc414c9 100644
+index 9938e67..21e2346 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -221,7 +221,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+@@ -230,7 +230,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
              with open(
                  "src/SWIG/x509_v_flag.h", "w", encoding="utf-8"
              ) as x509_v_h:
@@ -35,6 +35,3 @@ index 7e295f3..cc414c9 100644
                  cflags = os.environ.get("CFLAGS")
                  if cflags is not None:
                      cmd += cflags.split()
--- 
-2.34.1
-
