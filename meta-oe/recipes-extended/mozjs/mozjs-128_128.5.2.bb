@@ -99,6 +99,7 @@ do_install:append() {
     rm -f ${D}${libdir}/libjs_static.ajs
 }
 
+INSANE_SKIP += "32bit-time"
 PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 PACKAGES =+ "lib${BPN}"
 FILES:lib${BPN} += "${libdir}/lib*"
