@@ -10,9 +10,9 @@ BUGTRACKER = "https://github.com/smarty-php/smarty/issues"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
 
-SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "c6bff5795081ca5e60aabda59fb87daa511acd1e"
+SRCREV = "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
 
 S = "${UNPACKDIR}/git"
 
