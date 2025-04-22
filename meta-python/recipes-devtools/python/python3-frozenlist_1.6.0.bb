@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/frozenlist"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cf056e8e7a0a5477451af18b7b5aa98c"
 
-SRC_URI[sha256sum] = "81d5af29e61b9c8348e876d442253723928dce6433e0e76cd925cd83f1b4b817"
+SRC_URI[sha256sum] = "b99655c32c1c8e06d111e7f41c06c29a5318cb1835df23a45518e02a47c63b68"
 
 inherit pypi python_setuptools_build_meta cython
 
