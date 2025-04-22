@@ -34,6 +34,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
            file://CVE-2024-31950.patch \
            file://CVE-2024-31951.patch \
            file://CVE-2024-31948.patch \
+           file://CVE-2024-55553.patch \
 	      "
 
 SRCREV = "79188bf710e92acf42fb5b9b0a2e9593a5ee9b05"
