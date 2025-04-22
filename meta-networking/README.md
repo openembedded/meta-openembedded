@@ -18,17 +18,17 @@ Dependencies
 This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: Scarthgap
+branch: walnascar
 
 For some recipes, the meta-oe layer is required:
 
 URI: git://git.openembedded.org/meta-openembedded
 subdirectory: meta-oe
-branch: Scarthgap
+branch: walnascar
 
 URI: git://git.openembedded.org/meta-openembedded
 subdirectory: meta-python
-branch: Scarthgap
+branch: walnascar
 
 Maintenance
 -----------
