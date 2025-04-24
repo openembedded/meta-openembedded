@@ -19,7 +19,7 @@ PACKAGECONFIG[vulkan] =  "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-loader shade
 PACKAGECONFIG[glslang] = "-Dglslang=enabled,-Dglslang=disabled,glslang"
 PACKAGECONFIG[opengl] = "-Dopengl=enabled,-Dopengl=disabled"
 PACKAGECONFIG[lcms] = "-Dlcms=enabled,-Dlcms=disabled,lcms"
-PACKAGECONFIG[demos] = "-Ddemos=true,-Ddemos=false,ffmpeg libsdl2 libsdl2-image"
+PACKAGECONFIG[demos] = "-Ddemos=true,-Ddemos=false,ffmpeg virtual/libsdl2 libsdl2-image"
 
 EXTRA_OEMESON = "-Dvulkan-registry=${STAGING_DATADIR}/vulkan/registry/vk.xml"
 
