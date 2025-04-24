@@ -23,17 +23,13 @@ PROVIDES = "coreutils"
 RPROVIDES:${PN} = "coreutils"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
-
-PACKAGECONFIG[selinux] = ",,libselinux"
+PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
 
 CARGO_BUILD_FLAGS += "--features unix"
-CARGO_BUILD_FLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', '--features feat_selinux', '', d)}"
-
-DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'selinux', 'clang-native libselinux-native', '', d)}"
 
 # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
 
-# [ df mktemp nice printenv base64 gets a special treatment and is not included in this
+# df mktemp nice printenv base32 base64 get a special treatment and are not included in this
 bindir_progs = "[ arch basename cksum comm csplit cut dir dircolors dirname du \
                 env expand expr factor fmt fold groups head hostid id install \
                 join link logname md5sum mkfifo nl nohup nproc od paste pathchk \
