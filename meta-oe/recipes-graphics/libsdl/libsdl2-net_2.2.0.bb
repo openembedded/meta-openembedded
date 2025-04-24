@@ -10,7 +10,7 @@ S = "${WORKDIR}/SDL2_net-${PV}"
 
 inherit cmake pkgconfig
 
-DEPENDS = "libsdl2"
+DEPENDS = "virtual/libsdl2"
 
 SRC_URI[sha256sum] = "4e4a891988316271974ff4e9585ed1ef729a123d22c08bd473129179dc857feb"
 
