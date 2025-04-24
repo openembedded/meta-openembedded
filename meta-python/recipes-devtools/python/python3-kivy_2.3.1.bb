@@ -46,7 +46,7 @@ ANY_OF_DISTRO_FEATURES = "x11 wayland"
 DEPENDS += " \
     gstreamer1.0 \
     gstreamer1.0-python \
-    libsdl2 \
+    virtual/libsdl2 \
     libsdl2-ttf \
     libsdl2-image \
     libsdl2-mixer \
