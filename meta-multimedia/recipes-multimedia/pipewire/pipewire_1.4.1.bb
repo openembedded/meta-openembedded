@@ -126,7 +126,7 @@ PACKAGECONFIG[raop] = "-Draop=enabled,-Draop=disabled,openssl"
 # Starting with version 0.3.60, readline usage can be turned off in pw-cli.
 # If it is disabled, getline() is used as a fallback.
 PACKAGECONFIG[readline] = "-Dreadline=enabled,-Dreadline=disabled,readline"
-PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,libsdl2"
+PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
 PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
 PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsystemd-system-service=disabled,systemd"
