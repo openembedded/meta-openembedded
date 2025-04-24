@@ -34,7 +34,7 @@ PACKAGECONFIG[portaudio] = "-Denable-portaudio=ON,-Denable-portaudio=OFF,portaud
 PACKAGECONFIG[profiling] = "-Denable-profiling=ON,-Denable-profiling=OFF"
 PACKAGECONFIG[pulseaudio] = "-Denable-pulseaudio=ON,-Denable-pulseaudio=OFF,pulseaudio"
 PACKAGECONFIG[readline] = "-Denable-readline=ON,-Denable-readline=OFF,readline"
-PACKAGECONFIG[sdl] = "-Denable-sdl2=ON,-Denable-sdl2=OFF,libsdl2"
+PACKAGECONFIG[sdl] = "-Denable-sdl2=ON,-Denable-sdl2=OFF,virtual/libsdl2"
 PACKAGECONFIG[sndfile] = "-Denable-libsndfile=ON,-Denable-libsndfile=OFF,libsndfile1"
 PACKAGECONFIG[systemd] = "-Denable-systemd=ON,-Denable-systemd=OFF,systemd"
 
