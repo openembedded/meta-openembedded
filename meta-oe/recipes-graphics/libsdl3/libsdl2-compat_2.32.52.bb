@@ -16,7 +16,7 @@ S = "${WORKDIR}/sdl2-compat-${PV}"
 
 DEPENDS += "libsdl3"
 
-PROVIDES = "libsdl2"
+PROVIDES = "virtual/libsdl2"
 
 inherit cmake pkgconfig upstream-version-is-even features_check
 
