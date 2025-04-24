@@ -157,6 +157,14 @@ remove_unused_installed_files() {
     rm -f "${D}${datadir}/pipewire/minimal.conf"
 }
 
+do_install:append() {
+    # The pipewire-alsa plugin needs the following files in /etc/alsa/conf.d/ to
+    # be picked up by alsa.
+    install -d ${D}${sysconfdir}/alsa/conf.d
+    ln -sf ${datadir}/alsa/alsa.conf.d/50-pipewire.conf ${D}${sysconfdir}/alsa/conf.d/50-pipewire.conf
+    ln -sf ${datadir}/alsa/alsa.conf.d/99-pipewire-default.conf ${D}${sysconfdir}/alsa/conf.d/99-pipewire-default.conf
+}
+
 do_install[postfuncs] += "remove_unused_installed_files"
 
 python split_dynamic_packages () {
@@ -328,6 +336,8 @@ RDEPENDS:${PN}-pulse += " \
 FILES:${PN}-alsa = "\
     ${libdir}/alsa-lib/* \
     ${datadir}/alsa/alsa.conf.d/* \
+    ${sysconfdir}/alsa/conf.d/50-pipewire.conf \
+    ${sysconfdir}/alsa/conf.d/99-pipewire-default.conf \
 "
 
 # JACK drop-in libraries to redirect audio to pipewire.
