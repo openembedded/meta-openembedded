@@ -3,9 +3,7 @@ HOMEPAGE = "https://github.com/scott-griffiths/bitstring"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=963a24c175e658fbf16a764135121ffa"
 
-SRC_URI[sha256sum] = "81800bc4e00b6508716adbae648e741256355c8dfd19541f76482fb89bee0313"
-
-PYPI_PACKAGE = "bitstring"
+SRC_URI[sha256sum] = "a08bc09d3857216d4c0f412a1611056f1cc2b64fd254fb1e8a0afba7cfa1a95a"
 
 inherit pypi python_poetry_core
 
