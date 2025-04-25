@@ -15,8 +15,6 @@ LIC_FILES_CHKSUM = "\
     file://src/video/yuv2rgb/LICENSE;md5=79f8f3418d91531e05f0fc94ca67e071 \
 "
 
-PROVIDES = "virtual/libsdl3"
-
 SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
 
 S = "${WORKDIR}/SDL3-${PV}"
