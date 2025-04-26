@@ -87,6 +87,10 @@ export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
 # ignore the OPTS="CC=$CC" in Makefile it will not use the CC=$CC $CCARGS
 EXTRA_OEMAKE += "OPT= DEBUG= OPTS= "
 
+# use gnu17 for now as recommended in:
+# https://marc.info/?l=postfix-users&m=173542420611213
+CFLAGS += "-std=gnu17"
+
 do_compile () {
     unset CFLAGS CPPFLAGS CXXFLAGS
     local native_build
