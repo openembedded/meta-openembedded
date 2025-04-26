@@ -4,10 +4,10 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-SRCREV = "30eef4d42d9efbc4aafada28130abca993af99a2"
-BRANCH = "1.3.8"
+SRCREV = "ae25959adb05ae1d6ebfa1f36bf778c9c34e9410"
+BRANCH = "${PV}"
 
-SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https \
+SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
            file://basic.conf.patch \
            file://proftpd-basic.init \
            file://default \
