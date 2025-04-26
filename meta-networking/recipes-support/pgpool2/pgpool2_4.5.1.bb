@@ -48,3 +48,7 @@ do_install:append() {
     install -D -m 0644 ${S}/src/sample/pool_hba.conf.sample ${D}${sysconfdir}/pgpool-II/pool_hba.conf
     install -Dm 0644 ${UNPACKDIR}/pgpool.service ${D}${systemd_system_unitdir}/pgpool.service
 }
+
+# Avoid build failure with gcc-15:
+# http://errors.yoctoproject.org/Errors/Details/853019/
+CFLAGS += "-std=gnu17"
