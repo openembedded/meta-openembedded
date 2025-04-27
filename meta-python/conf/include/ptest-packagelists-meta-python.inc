@@ -117,6 +117,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-marshmallow \
     python3-pillow \
     python3-pint \
+    python3-pykickstart \
     python3-pytest-localserver \
     python3-scrypt \
     python3-traitlets \
