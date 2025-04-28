@@ -29,6 +29,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-deps-disable-io_uring-support-in-libuv.patch \
            file://0001-positional-args.patch \
            file://0001-custom-env.patch \
+           file://zlib-fix-pointer-alignment.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
