@@ -2,16 +2,16 @@ SUMMARY = "JSON for modern C++"
 HOMEPAGE = "https://nlohmann.github.io/json/"
 SECTION = "libs"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f969127d7b7ed0a8a63c2bbeae002588"
+LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=3b489645de9825cca5beeb9a7e18b6eb"
 
 CVE_PRODUCT = "json-for-modern-cpp"
 
-SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
+SRC_URI = "git://github.com/nlohmann/json.git;branch=master;protocol=https \
            git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
            file://run-ptest \
 "
 
-SRCREV = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03"
+SRCREV = "55f93686c01528224f448c19128836e7df245f72"
 SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
 
 SRCREV_FORMAT .= "_json-test-data"
@@ -25,7 +25,7 @@ EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-DJSON_BuildTests=
 # nlohmann-json is a header only C++ library, so the main package will be empty.
 ALLOW_EMPTY:${PN} = "1"
 RDEPENDS:${PN}-dev = ""
-RDEPENDS:${PN}-ptest = "perl"
+RDEPENDS:${PN}-ptest = "perl locale-base-de-de"
 
 BBCLASSEXTEND = "native nativesdk"
 
