@@ -26,6 +26,29 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
 
 inherit autotools-brokensep pkgconfig systemd
 
+def get_dm_version(p):
+    import re
+
+    fn = p + '/VERSION_DM'
+    try:
+        f = open(fn, 'r')
+    except IOError:
+        return None
+
+    lines = f.readlines()
+    f.close()
+    for line in lines:
+        m = re.match(r'(\w+)[-. ](\w+)[-. ](\w+)', line.strip())
+        if m:
+            return ".".join([m.group(1), m.group(2), m.group(3)])
+
+    return None
+
+DM_VERSION = '${@get_dm_version("${S}")}'
+python do_package:prepend() {
+    d.setVar('PKGV:libdevmapper', d.getVar("DM_VERSION"))
+}
+
 LVM2_PACKAGECONFIG = "dmeventd"
 LVM2_PACKAGECONFIG:append:class-target = " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
