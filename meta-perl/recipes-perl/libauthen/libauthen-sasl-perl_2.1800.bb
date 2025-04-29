@@ -14,7 +14,7 @@ RDEPENDS:${PN} = "libdigest-hmac-perl"
 SRC_URI = "${CPAN_MIRROR}/authors/id/E/EH/EHUELS/Authen-SASL-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "b86d5a576b8d387aee24f39f47a54afd14bb66b09003db5065001f1de03a8ece"
+SRC_URI[sha256sum] = "0b03686bddbbf7d5c6548e468d079a4051c9b73851df740ae28cfd2db234e922"
 
 S = "${WORKDIR}/Authen-SASL-${PV}"
 
