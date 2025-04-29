@@ -5,10 +5,9 @@ HOMEPAGE = "https://github.com/thuanalg/simplelog-topic"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
 
-SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https;tag=v${PV}"
 
-PV = "1.0.4+git"
-SRCREV = "781f5eaa1713e7f60e9ee79ab5143c0bacfcccef"
+SRCREV = "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
 
 S = "${WORKDIR}/git"
 
