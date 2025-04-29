@@ -13,7 +13,7 @@ DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
 SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            file://abseil-ppc-fixes.patch \
            "
-SRC_URI[sha256sum] = "2b85f7820475ad3edec209d3d89a7909ada16caab05d3f2e08a7e8ae3200a55c"
+SRC_URI[sha256sum] = "05aee9be958a580e169e1aa8987387bcd8be6ed7fc5c2a3a048b6a2b911473cd"
 
 RDEPENDS:${PN} = "python3-protobuf"
 
