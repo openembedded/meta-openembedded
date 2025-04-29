@@ -15,7 +15,7 @@ RDEPENDS:${PN} = "python3-greenlet \
 
 SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
 
-SRC_URI[sha256sum] = "8bd1419114e9e4a3ed33a5bad766afff9a3cf765cb440a582a1b3a9bc80c1aca"
+SRC_URI[sha256sum] = "7ffba461458ed28a85a01285ea0e0dc14f883204d17ce5ed82fa839a9d620028"
 
 inherit pypi python_setuptools_build_meta cython
 
