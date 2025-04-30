@@ -334,7 +334,9 @@ FILES:${PN}-pulse = " \
     ${systemd_user_unitdir}/pipewire-pulse.* \
     ${bindir}/pipewire-pulse \
 "
-RDEPENDS:${PN}-pulse += " \
+# This uses :append:class-target rather than += to avoid a dependency from
+# pipewire-native to pipewire.
+RDEPENDS:${PN}-pulse:append:class-target = " \
     ${PN}-modules-protocol-pulse \
 "
 
