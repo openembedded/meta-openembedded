@@ -58,6 +58,7 @@ KNOWN_NON_REPRO_META_OE = " \
     ldns \
     libass9 \
     libass-dbg \
+    libbotan-3-7 \
     libbotan-3-bin \
     libbotan-3-dbg \
     libbotan-3-dev \
