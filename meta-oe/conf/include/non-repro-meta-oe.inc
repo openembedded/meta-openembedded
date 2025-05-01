@@ -71,6 +71,10 @@ KNOWN_NON_REPRO_META_OE = " \
     librelp-ptest \
     libsdl2-compat \
     libsdl2-compat-dbg \
+    libsource-highlight5 \
+    libsource-highlight-dbg \
+    libsource-highlight-dev \
+    libsource-highlight-src \
     libthrift-c-glib-zlib-src \
     libvncserver-dev \
     libwebsockets-testapps \
