@@ -46,6 +46,9 @@ KNOWN_NON_REPRO_META_OE = " \
     hplip-src \
     iotop \
     iotop-dbg \
+    ipmiutil \
+    ipmiutil-dbg \
+    ipmiutil-dev \
     jpnevulator-doc \
     jsonrpc-dev \
     kpatch-build \
