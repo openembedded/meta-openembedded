@@ -13,13 +13,14 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
+    file://0001-fix-bool-reserved-word-error-in-gcc-15.patch \
 "
 
 SRC_URI[sha256sum] = "3f7132c55ac6c5f50585bfaa115d29e30b47ccf535cb0a12ff50214ddae2f63d"
 
 S ?= "${WORKDIR}/vbox_module"
 S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
-S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+S:task-patch = "${WORKDIR}/${BP}"
 
 export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
 export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
@@ -29,7 +30,7 @@ EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 
 # otherwise 5.2.22 builds just vboxguest
 MAKE_TARGETS = "all"
 
-addtask export_sources after do_patch before do_configure
+addtask export_sources before do_patch after do_unpack
 do_export_sources[depends] += "virtual/kernel:do_shared_workdir"
 
 do_export_sources() {
