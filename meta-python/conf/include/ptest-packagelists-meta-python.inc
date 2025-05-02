@@ -23,6 +23,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-dasbus \
     python3-dominate \
     python3-dnspython \
+    python3-evdev \
     python3-execnet \
     python3-fastjsonschema \
     python3-fastnumbers \
