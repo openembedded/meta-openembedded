@@ -44,5 +44,6 @@ do_install () {
     PCP_LIBADM_DIR=${D}/${libdir} \
     PCP_LIB_DIR=${D}/${libdir} \
     PCP_MAN_DIR=${D}/${mandir} \
-    PCP_DOC_DIR=${D}/${docdir} 
+    PCP_DOC_DIR=${D}/${docdir} \
+    PCP_SYSTEMDUNIT_DIR=${D}${systemd_system_unitdir}
 }

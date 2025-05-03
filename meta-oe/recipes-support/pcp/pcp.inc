@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
                     "
 COMPATIBLE_HOST:libc-musl = "null"
 
-SRC_URI = "git://github.com/performancecopilot/pcp;branch=main;protocol=https \
+SRC_URI = "git://github.com/performancecopilot/pcp;branch=stable;protocol=https \
            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
            file://0001-htop-Change-dependency-order-of-header-and-sourcefil.patch \
            file://config.linux \
 	   "
 
-SRCREV = "c13558fd0df54438cbb87cf303dc279cb58816c2"
+SRCREV = "d8d97b79ee47d9dfb076a3242564ed3cae04eba9"
 
 S = "${WORKDIR}/git"
 
@@ -39,5 +39,3 @@ EXTRA_OECONF:append = "\
 PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
 
 PACKAGECONFIG ?= ""
-
-PARALLEL_MAKE = ""
