@@ -11,8 +11,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "https://download.geany.org/${BP}.tar.bz2 \
            file://0001-configure-Upgrade-to-a-modern-Gettext.patch \
+           file://geany-2.0-gcc15.patch \
           "
-SRC_URI[sha256sum] = "abff176e4d48bea35ee53037c49c82f90b6d4c23e69aed6e4a5ca8ccd3aad546"
+SRC_URI[sha256sum] = "565b4cd2f0311c1e3a167ec71c4a32dba642e0fe554ae5bb6b8177b7a74ccc92"
 
 FILES:${PN} += "${datadir}/icons"
 
