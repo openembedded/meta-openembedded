@@ -2,12 +2,11 @@ SUMMARY = "RenderDoc recipe providing renderdoccmd"
 DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
 HOMEPAGE = "https://github.com/baldurk/renderdoc"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5536c2b72eeed14bafaf4d2a6c032b87"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=963d134bd809d24547253120513346d3"
 
-SRCREV = "cae289323847ce0a84a0deca4958183567eee17e"
+SRCREV = "34c3c40787f440da9c2947cd63a41e6c4d1f95b9"
 SRC_URI = " \
     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
-    file://0001-jpeg-compressor-Reorder-stdio.h-include-location.patch \
 "
 S = "${WORKDIR}/git"
 
