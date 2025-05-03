@@ -30,12 +30,12 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = " \
     https://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
-    file://0001-Use-pkg-config-to-find-gpgme.patch \
-    file://0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch \
-    file://0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch \
-    file://0001-scope-Use-0-instead-of-NULL-for-gboolean.patch \
+    file://geany-plugins-2.0-gcc15.patch \
+    file://0001-projectorganizer-fix-invalid-string-comparison.patch \
+    file://0002-projectorganizer-fix-various-warnings.patch \
+    file://0003-projectorganizer-Use-g_pattern_spec_match_string-ins.patch \
 "
-SRC_URI[sha256sum] = "1c578a7ebb390aa8882f195acd3d8da3ceb73925d291b28dec90cd3e5fd20586"
+SRC_URI[sha256sum] = "9fc2ec5c99a74678fb9e8cdfbd245d3e2061a448d70fd110a6aefb62dd514705"
 
 do_configure:prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
@@ -75,8 +75,6 @@ PLUGINS += "${PN}-defineformat"
 LIC_FILES_CHKSUM += "file://defineformat/COPYING;md5=751419260aa954499f7abaabaa882bbe"
 FILES:${PN}-defineformat = "${libdir}/geany/defineformat.so"
 
-# no gnome devhelp in some common layer
-EXTRA_OECONF += "--disable-devhelp"
 #PLUGINS += "${PN}-devhelp"
 #LIC_FILES_CHKSUM += "file://devhelp/COPYING;md5=d32239bcb673463ab874e80d47fae504"
 #LICENSE:${PN}-devhelp = "GPLv3"
@@ -165,8 +163,6 @@ EXTRA_OECONF += "--disable-peg-markdown"
 #LIC_FILES_CHKSUM += "file://markdown/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 #FILES:${PN}-markdown = "${libdir}/geany/markdown.so"
 
-# | checking whether the GTK version in use is compatible with plugin multiterm... no
-EXTRA_OECONF += "--disable-multiterm"
 #PLUGINS += "${PN}-multiterm"
 #LIC_FILES_CHKSUM += "file://multiterm/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 #FILES:${PN}-multiterm = "${libdir}/geany/multiterm.so"
