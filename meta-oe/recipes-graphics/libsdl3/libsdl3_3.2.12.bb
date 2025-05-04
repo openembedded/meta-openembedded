@@ -19,7 +19,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
 
 S = "${WORKDIR}/SDL3-${PV}"
 
-SRC_URI[sha256sum] = "f87be7b4dec66db4098e9c167b2aa34e2ca10aeb5443bdde95ae03185ed513e0"
+SRC_URI[sha256sum] = "9734f308e130c64a2b4df6bca5884c5aca577ee6c7c77ab3379474ea85e51f96"
 
 inherit cmake lib_package binconfig-disabled pkgconfig upstream-version-is-even
 
@@ -37,7 +37,6 @@ EXTRA_OECMAKE = " \
 	-DSDL_X11_XDBE=OFF \
 	-DSDL_X11_XFIXES=OFF \
 	-DSDL_X11_XINPUT=OFF \
-	-DSDL_X11_XRANDR=OFF \
 	-DSDL_X11_XSCRNSAVER=OFF \
 	-DSDL_X11_XSHAPE=OFF \
 "
