@@ -12,7 +12,8 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI[sha256sum] = "561e77eedff17cec6839f26211f7a5ce3c071b776e8a0ec9d1207f46cbce598f"
 
-SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
+SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch \
+            file://0001-Remove-assert-checking-for-trivial-type.patch"
 
 inherit pkgconfig pypi python_setuptools_build_meta
 
