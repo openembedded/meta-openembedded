@@ -52,10 +52,6 @@ EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
         CC="${CC}" AR="${AR}" \
         PROG_EXTRA="sensors ${PACKAGECONFIG_CONFARGS}"'
 
-do_configure:prepend() {
-    sed -i -e 's:^#\(PROG_EXTRA\):\1:' ${S}/Makefile
-}
-
 do_compile() {
     # Respect LDFLAGS
     sed -i -e 's/\$(LIBDIR)$/\$(LIBDIR) \$(LDFLAGS)/g' ${S}/Makefile
