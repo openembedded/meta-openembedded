@@ -9,4 +9,9 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI[sha256sum] = "b7444e2703c156b3cb9fcb568e85d716232f3e78f04529ebc881cfb2aedb3838"
 
+SRC_URI += " \
+    file://0001-build_support-use-source-filename-instead-of-foo-for.patch \
+    file://0002-build_support-handle-empty-max_priority-value-as-Non.patch \
+    file://0003-build_support-use-does_build_succeed-in-compile_and_.patch \
+"
 inherit pypi python_setuptools_build_meta
