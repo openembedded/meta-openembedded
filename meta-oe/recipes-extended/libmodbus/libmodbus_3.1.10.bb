@@ -21,3 +21,6 @@ inherit autotools pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[test] = "--enable-tests,--disable-tests,,"
+
+CVE_STATUS[CVE-2023-26793] = "disputed: The buffer overflow concerns unit-test-client and it's intentional."
+CVE_STATUS[CVE-2024-34244] = "disputed: This issue is invalid and only found a bug in the fuzzing driver"
