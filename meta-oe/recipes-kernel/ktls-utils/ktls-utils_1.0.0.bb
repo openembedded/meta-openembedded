@@ -7,10 +7,11 @@ RDEPENDS:${PN} += " gnutls"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
 
-SRCREV = "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
+SRCREV = "c787cd26330af457e1ca9cf43232db2c71c03154"
 SRC_URI = " \
 	git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https \
 	file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
+	file://0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch \
 	"
 
 S = "${WORKDIR}/git"
