@@ -10,6 +10,7 @@ DEPENDS = "zlib elfutils"
 
 SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master \
            file://0001-libbpf-check-for-empty-BTF-data-section-in-btf_parse.patch \
+           file://CVE-2025-29481.patch;striplevel=2 \
 "
 SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
 
