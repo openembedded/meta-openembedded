@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=884d48c2aa7b82e1ad4a33909fab24b6"
 SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master \
            file://0001-CMakeLists-do-not-use-vendored-libcurl.patch \
            "
-SRCREV = "c34d89b29f3d0d12793cd78b194d2f1d11728baf"
+SRCREV = "f081c69c26e330cf03ec790051c415c4716509d9"
 
 S = "${WORKDIR}/git"
 
