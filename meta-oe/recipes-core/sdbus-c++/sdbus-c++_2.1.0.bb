@@ -16,9 +16,8 @@ PACKAGECONFIG[with-tests] = "-DSDBUSCPP_BUILD_TESTS=ON -DSDBUSCPP_INSTALL_TESTS=
 
 DEPENDS += "expat"
 
-PV .= "+git"
-SRCREV = "e62472b210d9e7f06a5e611c23471d414c99a99c"
-SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master \
+SRCREV = "0261d0ec60b68c1f0a6ec9acf63d1379f7d569f8"
+SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV} \
            file://run-ptest"
 
 EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
