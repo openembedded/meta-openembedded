@@ -7,8 +7,7 @@ ALLPERMS exists in glibc, but not on musl, so we manually define
 it if it doesn't exist. This fixes building on musl systems.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Upstream-Status: Submitted
-[https://github.com/oracle/ktls-utils/pull/88]
+Upstream-Status: Submitted [https://github.com/oracle/ktls-utils/pull/88]
 ---
  src/tlshd/config.c | 8 ++++++++
  1 file changed, 8 insertions(+)
