@@ -44,6 +44,8 @@ SYSTEMD_AUTO_ENABLE = "enable"
 
 LDFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--allow-shlib-undefined ', '', d)}"
 
+CFLAGS += "-std=gnu17"
+
 EXTRA_OECONF = '--enable-debug \
                 --enable-ssl \
                 --enable-pam \
