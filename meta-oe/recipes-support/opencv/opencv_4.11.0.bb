@@ -16,7 +16,7 @@ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
-SRCREV_fastcv = "f4413cc2ab7233fdfc383a4cded402c072677fb0"
+SRCREV_fastcv = "8d86e68dad8b80b8575a8d3cf401d3ee96c24148"
 
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
@@ -26,7 +26,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
-           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250212;destsuffix=git/fastcv;name=fastcv;protocol=https \
+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250410;destsuffix=git/fastcv;name=fastcv;protocol=https  \
            file://0003-To-fix-errors-as-following.patch \
            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
            file://0001-core-fixed-VSX-intrinsics-implementation.patch \
            file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
+           file://0001-FROMLIST-FastCV-latest-libs-hash-update.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 
