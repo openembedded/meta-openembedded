@@ -9,7 +9,7 @@ SRC_URI += " \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "a87d090c930e2058bb3e970ca7f2bafe678687966b5c0b8b42a802977e391ce9"
+SRC_URI[sha256sum] = "df51ef5920fae69e1b435f657376aa93772c0c1720b954a3bac10ebba26bfedf"
 
 inherit gettext pkgconfig autotools systemd features_check
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3targetconfig', d)}
@@ -24,15 +24,10 @@ RDEPENDS:${PN} += "glib-networking"
 REQUIRED_DISTRO_FEATURES = "systemd pam"
 
 COCKPIT_USER_GROUP ?= "root"
-COCKPIT_WS_USER_GROUP ?= "${COCKPIT_USER_GROUP}"
 
 EXTRA_AUTORECONF = "-I tools"
 EXTRA_OECONF = " \
-    --with-cockpit-user=${COCKPIT_USER_GROUP} \
-    --with-cockpit-group=${COCKPIT_USER_GROUP} \
     --with-admin-group=${COCKPIT_USER_GROUP} \
-    --with-cockpit-ws-instance-user=${COCKPIT_WS_USER_GROUP} \
-    --with-cockpit-ws-instance-group=${COCKPIT_WS_USER_GROUP} \
     --disable-doc \
     --with-systemdunitdir=${systemd_system_unitdir} \
     --with-pamdir=${base_libdir}/security \
@@ -40,14 +35,12 @@ EXTRA_OECONF = " \
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
-    old-bridge \
 "
 
-PACKAGECONFIG[pcp] = "--enable-pcp,--disable-pcp,pcp"
-PACKAGECONFIG[dashboard] = "--enable-ssh,--disable-ssh,libssh"
-PACKAGECONFIG[storaged] = ",,,udisks2"
-PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
-PACKAGECONFIG[old-bridge] = "--enable-old-bridge"
+PACKAGECONFIG[pcp] = ",,pcp"
+PACKAGECONFIG[dashboard] = ",,libssh"
+PACKAGECONFIG[storaged] = ",,udisks2"
+PACKAGECONFIG[polkit] = ",,polkit"
 
 PACKAGES =+ " \
     ${PN}-pcp \
@@ -83,27 +76,28 @@ FILES:${PN}-systemd = "${datadir}/cockpit/systemd"
 FILES:${PN}-users = "${datadir}/cockpit/users"
 FILES:${PN}-kdump = " \
     ${datadir}/cockpit/kdump \
-    ${datadir}/metainfo/org.cockpit-project.cockpit-kdump.metainfo.xml \
+    ${datadir}/metainfo/org.cockpit_project.cockpit_kdump.metainfo.xml \
 "
 FILES:${PN}-sosreport = " \
     ${datadir}/cockpit/sosreport \
-    ${datadir}/metainfo/org.cockpit-project.cockpit-sosreport.metainfo.xml \
+    ${datadir}/metainfo/org.cockpit_project.cockpit_sosreport.metainfo.xml \
     ${datadir}/pixmaps/cockpit-sosreport.png \
+    ${datadir}/icons/hicolor/64x64/apps/cockpit-sosreport.png \
 "
 FILES:${PN}-storaged = " \
     ${datadir}/cockpit/storaged \
-    ${datadir}/metainfo/org.cockpit-project.cockpit-storaged.metainfo.xml \
+    ${datadir}/metainfo/org.cockpit_project.cockpit_storaged.metainfo.xml \
 "
 
 FILES:${PN}-networkmanager = " \
     ${datadir}/cockpit/networkmanager \
-    ${datadir}/metainfo/org.cockpit-project.cockpit-networkmanager.metainfo.xml \
+    ${datadir}/metainfo/org.cockpit_project.cockpit_networkmanager.metainfo.xml \
 "
 RDEPENDS:${PN}-networkmanager = "networkmanager"
 
 FILES:${PN}-selinux = " \
     ${datadir}/cockpit/selinux \
-    ${datadir}/metainfo/org.cockpit-project.cockpit-selinux.metainfo.xml \
+    ${datadir}/metainfo/org.cockpit_project.cockpit_selinux.metainfo.xml \
 "
 FILES:${PN}-playground = "${datadir}/cockpit/playground"
 FILES:${PN}-dashboard = "${datadir}/cockpit/dashboard"
@@ -143,6 +137,9 @@ FILES:${PN}-ws = " \
     ${systemd_system_unitdir}/cockpit-wsinstance-https@.socket \
     ${systemd_system_unitdir}/cockpit-wsinstance-https@.service \
     ${systemd_system_unitdir}/system-cockpithttps.slice \
+    ${systemd_system_unitdir}/cockpit-session-socket-user.service \
+    ${systemd_system_unitdir}/cockpit-wsinstance-socket-user.service \
+    ${systemd_system_unitdir}/cockpit-issue.service \
     ${libdir}/tmpfiles.d/cockpit-tempfiles.conf \
     ${sbindir}/remotectl \
     ${base_libdir}/security/pam_ssh_add.so \
@@ -169,7 +166,8 @@ FILES:${PN} += " \
     ${datadir}/cockpit/ssh \
     ${libexecdir}/cockpit-ssh \
     ${datadir}/cockpit \
-    ${datadir}/metainfo/cockpit.appdata.xml \
+    ${datadir}/icons/hicolor/128x128/apps/cockpit.png \
+    ${datadir}/metainfo/org.cockpit_project.cockpit.appdata.xml \
     ${datadir}/pixmaps/cockpit.png \
     ${nonarch_libdir}/tmpfiles.d \
     ${nonarch_libdir}/firewalld \
@@ -187,7 +185,12 @@ do_install:append() {
     install -p -m 0644 ${UNPACKDIR}/cockpit.pam ${D}${sysconfdir}/pam.d/cockpit
 
     # provided by firewalld
-    rm -rf ${D}${libdir}/firewalld
+    rm -rf ${D}${libdir}/firewalld \
+    ${D}${PYTHON_SITEPACKAGES_DIR}/*/__pycache__ \
+    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/__pycache__ \
+    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/*/__pycache__ \
+    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/__pycache__ \
+    ${D}${PYTHON_SITEPACKAGES_DIR}/${BP}.dist-info/direct_url.json
 
     if ! ${@bb.utils.contains('PACKAGECONFIG', 'storaged', 'true', 'false', d)}; then
         for filename in ${FILES:${PN}-storaged}
