@@ -61,6 +61,7 @@ SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch"
 SRC_URI += "file://0002-meson.build-reproducibility-fix.patch"
 SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
 SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
+SRC_URI += "file://85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch"
 SRC_URI[sha256sum] = "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad8cbcbf6ea571a2"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
