@@ -11,6 +11,7 @@ EXTRA_OECMAKE += "-DSELECTED_BUILD_TARGETS="cts-runner deqp-egl deqp-gles2 deqp-
 do_install() {
 	install -d ${D}/${CTSDIR}
 	cp -r ${B}/external/openglcts/modules/* ${D}/${CTSDIR}
+	cp -r ${S}/external/openglcts/data/gl_cts/data/mustpass/ ${D}/${CTSDIR}/mustpass/
 
 	install -m 0755 ${B}/modules/egl/deqp-egl ${D}/${CTSDIR}
 	install -m 0755 ${B}/modules/gles2/deqp-gles2 ${D}/${CTSDIR}
