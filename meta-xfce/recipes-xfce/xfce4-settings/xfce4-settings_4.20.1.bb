@@ -8,9 +8,8 @@ inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "23548da3429a296501fbfdbc98a861ee241b9fdd47e8d5de1781f57c6bbce5a9"
+SRC_URI[sha256sum] = "fd0d602853ea75d94024e5baae2d2bf5ca8f8aa4dad7bfd5d08f9ff8afee77b2"
 
-CFLAGS += " -Wno-deprecated-declarations -Wno-implicit-function-declaration"
 EXTRA_OECONF += " \
     GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
     --enable-maintainer-mode --disable-debug \
