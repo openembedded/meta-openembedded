@@ -11,10 +11,27 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 
 BASE_PV := "${PV}"
 PV .= "-62"
-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+    file://CVE-2021-20309.patch \
+    file://CVE-2021-20310.patch \
+    file://CVE-2021-3610.patch \
+    file://CVE-2022-0284.patch \
+    file://fix-cipher-leak.patch \
+    file://CVE-2022-2719.patch \
+"
+
 SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
 
 S = "${WORKDIR}/git"
+
+# current version is not affected by the CVE which affects versions at least earlier than 6.9.4-0
+CVE_CHECK_IGNORE += "CVE-2014-9826"
+
+# current version is not affected by the CVE which affects versions at least earlier than 6.9.4-0
+CVE_CHECK_IGNORE += "CVE-2016-7538"
+
+# current version is not affected by the CVE which affects versions at least earlier than 7.0.4-4
+CVE_CHECK_IGNORE += "CVE-2017-5506"
 
 inherit autotools pkgconfig update-alternatives
 

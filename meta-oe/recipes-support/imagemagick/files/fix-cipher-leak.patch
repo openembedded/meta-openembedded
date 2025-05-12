@@ -1,0 +1,178 @@
+From 70aa86f5d5d8aa605a918ed51f7574f433a18482 Mon Sep 17 00:00:00 2001
+From: Cristy <mikayla-grace@urban-warrior.org>
+Date: Thu, 25 Feb 2021 17:05:14 -0500
+Subject: [PATCH] possible divide by zero + clear buffers
+
+---
+ MagickCore/cipher.c     | 12 ++++++------
+ MagickCore/colorspace.c | 16 ++++++++--------
+ MagickCore/memory.c     | 22 ++++++++++++++++------
+ MagickCore/signature.c  |  2 +-
+ coders/thumbnail.c      |  3 ++-
+ 5 files changed, 41 insertions(+), 25 deletions(-)
+
+CVE: CVE-2021-20311
+CVE: CVE-2021-20312
+CVE: CVE-2021-20313
+
+Upstream-Status: Backport[https://github.com/ImageMagick/ImageMagick/commit/70aa86f5d5d8aa605a918ed51f7574f433a18482.patch]
+Comment: Refreshed patch based on the codebase
+
+Signed-off-by: Sana Kazi Sana.Kazi@kpit.com
+diff --git a/MagickCore/cipher.c b/MagickCore/cipher.c
+index 057b11c4720..91ad1d1d662 100644
+--- a/MagickCore/cipher.c
++++ b/MagickCore/cipher.c
+@@ -484,8 +484,8 @@ static void EncipherAESBlock(AESInfo *ae
+     Reset registers.
+   */
+   alpha=0;
+-  (void) memset(key,0,sizeof(key));
+-  (void) memset(text,0,sizeof(text));
++  (void) ResetMagickMemory(key,0,sizeof(key));
++  (void) ResetMagickMemory(text,0,sizeof(text));  
+ }
+ 
+
+ /*
+@@ -708,8 +708,8 @@ MagickExport MagickBooleanType PasskeyDe
+   */
+   quantum_info=DestroyQuantumInfo(quantum_info);
+   aes_info=DestroyAESInfo(aes_info);
+-  (void) memset(input_block,0,sizeof(input_block));
+-  (void) memset(output_block,0,sizeof(output_block));
++  (void) ResetMagickMemory(input_block,0,sizeof(input_block));
++  (void) ResetMagickMemory(output_block,0,sizeof(output_block));  
+   return(y == (ssize_t) image->rows ? MagickTrue : MagickFalse);
+ }
+ 
+
+@@ -925,8 +925,8 @@ MagickExport MagickBooleanType PasskeyEn
+   */
+   quantum_info=DestroyQuantumInfo(quantum_info);
+   aes_info=DestroyAESInfo(aes_info);
+-  (void) memset(input_block,0,sizeof(input_block));
+-  (void) memset(output_block,0,sizeof(output_block));
++  (void) ResetMagickMemory(input_block,0,sizeof(input_block));
++  (void) ResetMagickMemory(output_block,0,sizeof(output_block));
+   return(y == (ssize_t) image->rows ? MagickTrue : MagickFalse);
+ }
+ 
+
+diff --git a/MagickCore/colorspace.c b/MagickCore/colorspace.c
+index 2ffc72f88fa..e3b7df339f6 100644
+--- a/MagickCore/colorspace.c
++++ b/MagickCore/colorspace.c
+@@ -940,15 +940,15 @@ static MagickBooleanType sRGBTransformImage(Image *image,
+       if (logmap == (Quantum *) NULL)
+         ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed",
+           image->filename);
+-      black=pow(10.0,(reference_black-reference_white)*(gamma/density)*0.002/
+-        film_gamma);
++      black=pow(10.0,(reference_black-reference_white)*(gamma/density)*0.002*
++        PerceptibleReciprocal(film_gamma));
+ #if defined(MAGICKCORE_OPENMP_SUPPORT)
+       #pragma omp parallel for schedule(static)
+ #endif
+       for (i=0; i <= (ssize_t) MaxMap; i++)
+         logmap[i]=ScaleMapToQuantum((double) (MaxMap*(reference_white+
+-          log10(black+(1.0*i/MaxMap)*(1.0-black))/((gamma/density)*0.002/
+-          film_gamma))/1024.0));
++          log10(black+(1.0*i/MaxMap)*(1.0-black))/((gamma/density)*0.002*
++          PerceptibleReciprocal(film_gamma)))/1024.0));
+       image_view=AcquireAuthenticCacheView(image,exception);
+ #if defined(MAGICKCORE_OPENMP_SUPPORT)
+       #pragma omp parallel for schedule(static) shared(status) \
+@@ -2502,14 +2502,14 @@ static MagickBooleanType TransformsRGBImage(Image *image,
+       if (logmap == (Quantum *) NULL)
+         ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed",
+           image->filename);
+-      black=pow(10.0,(reference_black-reference_white)*(gamma/density)*0.002/
+-        film_gamma);
++      black=pow(10.0,(reference_black-reference_white)*(gamma/density)*0.002*
++        PerceptibleReciprocal(film_gamma));
+       for (i=0; i <= (ssize_t) (reference_black*MaxMap/1024.0); i++)
+         logmap[i]=(Quantum) 0;
+       for ( ; i < (ssize_t) (reference_white*MaxMap/1024.0); i++)
+         logmap[i]=ClampToQuantum(QuantumRange/(1.0-black)*
+-          (pow(10.0,(1024.0*i/MaxMap-reference_white)*(gamma/density)*0.002/
+-          film_gamma)-black));
++          (pow(10.0,(1024.0*i/MaxMap-reference_white)*(gamma/density)*0.002*
++          PerceptibleReciprocal(film_gamma))-black));
+       for ( ; i <= (ssize_t) MaxMap; i++)
+         logmap[i]=QuantumRange;
+       if (image->storage_class == PseudoClass)
+diff --git a/MagickCore/memory.c b/MagickCore/memory.c
+index 2598044486a..01bc80d86c5 100644
+--- a/MagickCore/memory.c
++++ b/MagickCore/memory.c
+@@ -1269,26 +1269,36 @@ MagickExport MemoryInfo *RelinquishVirtualMemory(MemoryInfo *memory_info)
+ %                                                                             %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %
+-%  ResetMagickMemory() fills the first size bytes of the memory area pointed to
+-%  by memory with the constant byte c.
++%  ResetMagickMemory() fills the first size bytes of the memory area pointed to %  by memory with the constant byte c.  We use a volatile pointer when
++%  updating the byte string.  Most compilers will avoid optimizing away access
++%  to a volatile pointer, even if the pointer appears to be unused after the
++%  call.
+ %
+ %  The format of the ResetMagickMemory method is:
+ %
+-%      void *ResetMagickMemory(void *memory,int byte,const size_t size)
++%      void *ResetMagickMemory(void *memory,int c,const size_t size)
+ %
+ %  A description of each parameter follows:
+ %
+ %    o memory: a pointer to a memory allocation.
+ %
+-%    o byte: set the memory to this value.
++%    o c: set the memory to this value.
+ %
+ %    o size: size of the memory to reset.
+ %
+ */
+-MagickExport void *ResetMagickMemory(void *memory,int byte,const size_t size)
++MagickExport void *ResetMagickMemory(void *memory,int c,const size_t size)
+ {
++  volatile unsigned char
++    *p = memory;
++
++  size_t
++    n = size;
++
+   assert(memory != (void *) NULL);
+-  return(memset(memory,byte,size));
++  while (n-- != 0)
++  	*p++=(unsigned char) c;
++  return(memory);
+ }
+ 
+ /*
+diff --git a/MagickCore/signature.c b/MagickCore/signature.c
+index 2d9b0801523..1f79c91b11b 100644
+--- a/MagickCore/signature.c
++++ b/MagickCore/signature.c
+@@ -736,7 +736,7 @@ RestoreMSCWarning
+   T=0;
+   T1=0;
+   T2=0;
+-  (void) memset(W,0,sizeof(W));
++  (void) ResetMagickMemory(W,0,sizeof(W));
+ }
+ 
+ /*
+diff --git a/coders/thumbnail.c b/coders/thumbnail.c
+index 59d97380d9e..e92dd312011 100644
+--- a/coders/thumbnail.c
++++ b/coders/thumbnail.c
+@@ -199,7 +199,8 @@ static MagickBooleanType WriteTHUMBNAILImage(const ImageInfo *image_info,
+       break;
+     q++;
+   }
+-  if ((q+length) > (GetStringInfoDatum(profile)+GetStringInfoLength(profile)))
++  if ((q > (GetStringInfoDatum(profile)+GetStringInfoLength(profile))) ||
++      (length > (GetStringInfoDatum(profile)+GetStringInfoLength(profile)-q)))
+     ThrowWriterException(CoderError,"ImageDoesNotHaveAThumbnail");
+   thumbnail_image=BlobToImage(image_info,q,length,exception);
+   if (thumbnail_image == (Image *) NULL)
