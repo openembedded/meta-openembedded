@@ -16,6 +16,7 @@ SRC_URI += " \
 "
 
 RDEPENDS:${PN}-ptest += "\
+    libatomic-dev \
     packagegroup-core-buildessential \
     procps-ps \
     python3-dev \
