@@ -17,3 +17,5 @@ RDEPENDS:${PN} = "python3-html \
                   python3-pygments \
                   python3-unixadmin \
                   "
+
+BBCLASSEXTEND = "native nativesdk"
