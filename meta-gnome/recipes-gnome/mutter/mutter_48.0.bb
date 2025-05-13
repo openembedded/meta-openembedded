@@ -3,7 +3,6 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = " \
-    xserver-xorg-cvt-native \
     wayland-native \
     virtual/libx11 \
     colord \
@@ -16,6 +15,7 @@ DEPENDS = " \
     json-glib \
     libdisplay-info \
     libei \
+    libxcvt-native \
     libxtst \
     libxkbfile \
     python3-argcomplete-native \
