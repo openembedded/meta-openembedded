@@ -21,6 +21,7 @@ GIR_MESON_OPTION = ""
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
+SRC_URI += "file://a3e0aca75e16aeafc171751028406b54f5ed8397.patch"
 SRC_URI[archive.sha256sum] = "1bc06daff093ec7b5e37ecb4f92e5da3474a1b1ba076edb9151ee967d1c30adf"
 
 PACKAGECONFIG ??= ""
