@@ -70,3 +70,4 @@ do_install:append() {
 
 FILES:${PN}:append = " ${sysconfdir}/etcd.d/etcd-existing.conf"
 
+SKIP_RECIPE[etcd] ?= "QA Issue: task do_compile has network enabled"
