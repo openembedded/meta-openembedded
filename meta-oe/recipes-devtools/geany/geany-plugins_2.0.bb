@@ -15,7 +15,7 @@ DEPENDS = " \
     fribidi \
     geany \
     libxml2 \
-    libsoup-2.4 \
+    libsoup \
     enchant2 \
     intltool-native \
     libassuan \
