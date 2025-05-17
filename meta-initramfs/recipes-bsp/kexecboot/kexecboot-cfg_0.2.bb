@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRC_URI = "file://icon.xpm"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/sources"
+UNPACKDIR = "${S}"
 
-do_install_prepend () {
+do_install:prepend () {
 echo '# /boot/boot.cfg - KEXECBOOT configuration file.
 #
 # First kernel stanza.
@@ -55,7 +56,7 @@ do_install () {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FILES_${PN} += "/boot/*"
+FILES:${PN} += "/boot/*"
 
 CMDLINE ?= ""
 CMDLINE_DEBUG ?= "quiet"

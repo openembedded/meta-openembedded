@@ -1,0 +1,62 @@
+From 85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0 Mon Sep 17 00:00:00 2001
+From: Nils Philippsen <nils@tiptoe.de>
+Date: Wed, 29 Jan 2025 12:51:53 +0100
+Subject: [PATCH] Avoid type names and keywords
+
+This fixes various errors when compiling with current toolchains and/or
+-std=c23.
+
+Signed-off-by: Nils Philippsen <nils@tiptoe.de>
+
+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch]
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ libgimpconfig/gimpconfig-serialize.c |  6 +++---
+ plug-ins/selection-to-path/types.h   | 13 ++++---------
+ 2 files changed, 7 insertions(+), 12 deletions(-)
+
+diff --git a/libgimpconfig/gimpconfig-serialize.c b/libgimpconfig/gimpconfig-serialize.c
+index 377b2371630..b3abca229d1 100644
+--- a/libgimpconfig/gimpconfig-serialize.c
++++ b/libgimpconfig/gimpconfig-serialize.c
+@@ -522,10 +522,10 @@ gimp_config_serialize_value (const GValue *value,
+ 
+   if (G_VALUE_HOLDS_BOOLEAN (value))
+     {
+-      gboolean bool;
++      gboolean boolean;
+ 
+-      bool = g_value_get_boolean (value);
+-      g_string_append (str, bool ? "yes" : "no");
++      boolean = g_value_get_boolean (value);
++      g_string_append (str, boolean ? "yes" : "no");
+       return TRUE;
+     }
+ 
+diff --git a/plug-ins/selection-to-path/types.h b/plug-ins/selection-to-path/types.h
+index 9b040fa3a19..1521937b15e 100644
+--- a/plug-ins/selection-to-path/types.h
++++ b/plug-ins/selection-to-path/types.h
+@@ -19,15 +19,10 @@
+ #ifndef TYPES_H
+ #define TYPES_H
+ 
+-/* Booleans.  */
+-typedef enum { false = 0, true = 1 } boolean;
+-
+-/* The X11 library defines `FALSE' and `TRUE', and so we only want to
+-   define them if necessary.  */
+-#ifndef FALSE
+-#define FALSE false
+-#define TRUE true
+-#endif /* FALSE */
++/* Cope with C23 */
++typedef int boolean;
++#define false FALSE
++#define true TRUE
+ 
+ /* The usual null-terminated string.  */
+ typedef char *string;
+-- 
+GitLab
+

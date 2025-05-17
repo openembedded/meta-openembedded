@@ -1,13 +1,13 @@
 SUMMARY = "Shows and sets processor power related values"
 DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
 saving related features of your processor."
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 DEPENDS = "pciutils gettext-native"
 PROVIDES = "virtual/cpupower"
 
 inherit kernelsrc kernel-arch bash-completion
 
-do_populate_lic[depends] += "virtual/kernel:do_patch"
+do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
 
 EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
 
@@ -26,9 +26,9 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"
 
-python do_package_prepend() {
+python do_package:prepend() {
     d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
 }
 

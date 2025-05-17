@@ -10,22 +10,24 @@ there are no clients anymore on the message bus, as well as convenience \
 functions and decorators for integrating a dbus service with PolicyKit."
 
 SECTION = "devel/python"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 SRCNAME = "python-slip"
 
-SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
+SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2 \
+           file://9b939c0b534c1b7958fa0a3c7aedf30bca910431.patch \
+           file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
+          "
 SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
 
-do_compile_prepend() {
+S = "${WORKDIR}/${SRCNAME}-${PV}"
+
+do_compile:prepend() {
     sed -e 's/@VERSION@/${PV}/g' ${S}/setup.py.in > ${S}/setup.py
 }
 
-RDEPENDS_${PN} += "\
-    ${PYTHON_PN}-six \
+RDEPENDS:${PN} += "\
+    python3-six \
 "
 # http://errors.yoctoproject.org/Errors/Details/184713/
 # python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory

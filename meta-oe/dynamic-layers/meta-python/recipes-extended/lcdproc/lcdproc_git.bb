@@ -3,20 +3,15 @@ shipped with this package can be used to acquire various kinds of system stats."
 SUMMARY = "Drivers for character-based LCD displays"
 HOMEPAGE = "http://lcdproc.org"
 SECTION = "utils"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 DEPENDS = "ncurses lirc"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
                     file://README.md;beginline=107;md5=5db392f043253a2d64b1737068ce6b58"
 
-PV = "0.5.9+git${SRCPV}"
-SRCREV = "3a3d622d9bb74c44fa67bc20573751a207514134"
-SRC_URI = "git://github.com/lcdproc/lcdproc \
-           file://0001-Fix-parallel-build-fix-port-internal-make-dependenci.patch \
-           file://0002-Include-limits.h-for-PATH_MAX-definition.patch \
-           file://0003-Fix-non-x86-platforms-on-musl.patch \
-           file://0001-Fix-compilation-with-GCC-10.x.patch \
-           "
+PV = "0.5.9+git"
+SRCREV = "0e2ce9b9c46c47363436f9ee730f7c71bf455f0f"
+SRC_URI = "git://github.com/lcdproc/lcdproc;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -24,9 +19,9 @@ inherit autotools pkgconfig update-rc.d
 
 LCD_DRIVERS ?= "all,!irman,!svga${SERIALVFD}"
 SERIALVFD ?= ""
-SERIALVFD_libc-musl = ",!serialVFD"
-SERIALVFD_libc-musl_x86 = ""
-SERIALVFD_libc-musl_x86-64 = ""
+SERIALVFD:libc-musl = ",!serialVFD"
+SERIALVFD:libc-musl:x86 = ""
+SERIALVFD:libc-musl:x86-64 = ""
 
 LCD_DEFAULT_DRIVER ?= "curses"
 
@@ -37,7 +32,7 @@ PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
 PACKAGECONFIG[hid] = "--enable-libhid,--disable-libhid,libhid"
 PACKAGECONFIG[png] = "--enable-libpng,--disable-libpng,libpng"
 
-LCD_DRIVERS_append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
+LCD_DRIVERS:append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
 
 EXTRA_OECONF = "--enable-drivers='${LCD_DRIVERS}'"
 
@@ -74,33 +69,33 @@ do_install () {
 
 PACKAGES =+ "lcdd lcdvc"
 
-RRECOMMENDS_${PN} = "lcdd"
+RRECOMMENDS:${PN} = "lcdd"
 
-FILES_lcdd = "${sysconfdir}/LCDd.conf \
+FILES:lcdd = "${sysconfdir}/LCDd.conf \
     ${sbindir}/LCDd \
     ${sysconfdir}/init.d/lcdd"
 
-CONFFILES_lcdd = "${sysconfdir}/LCDd.conf"
-CONFFILES_${PN} = "${sysconfdir}/lcdproc.conf"
-CONFFILES_lcdvc = "${sysconfdir}/lcdvc.conf"
-FILES_lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
+CONFFILES:lcdd = "${sysconfdir}/LCDd.conf"
+CONFFILES:${PN} = "${sysconfdir}/lcdproc.conf"
+CONFFILES:lcdvc = "${sysconfdir}/lcdvc.conf"
+FILES:lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
 
 # Driver packages
 
 # USB / no USB trickery
 
-RCONFLICTS_lcdd-driver-hd47780nousb = "lcdd-driver-hd44780"
-RCONFLICTS_lcdd-driver-hd47780 = "lcdd-driver-hd44780nousb"
+RCONFLICTS:lcdd-driver-hd47780nousb = "lcdd-driver-hd44780"
+RCONFLICTS:lcdd-driver-hd47780 = "lcdd-driver-hd44780nousb"
 
 INITSCRIPT_PACKAGES = "lcdd lcdproc"
-INITSCRIPT_NAME_lcdd = "lcdd"
-INITSCRIPT_NAME_lcdproc = "lcdproc"
-INITSCRIPT_PARAMS_lcdd = "defaults 70 21"
-INITSCRIPT_PARAMS_lcdproc = "defaults 71 20"
+INITSCRIPT_NAME:lcdd = "lcdd"
+INITSCRIPT_NAME:lcdproc = "lcdproc"
+INITSCRIPT_PARAMS:lcdd = "defaults 70 21"
+INITSCRIPT_PARAMS:lcdproc = "defaults 71 20"
 
-python populate_packages_prepend() {
+python populate_packages:prepend() {
     plugindir = d.expand('${libdir}/lcdproc')
-    do_split_packages(d, plugindir, '(.*)\.so$', 'lcdd-driver-%s', 'LCDd driver for %s', prepend=True)
+    do_split_packages(d, plugindir, r'(.*)\.so$', 'lcdd-driver-%s', 'LCDd driver for %s', prepend=True)
 }
 
 PACKAGES_DYNAMIC += "^lcdd-driver-.*"

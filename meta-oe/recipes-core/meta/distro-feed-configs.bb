@@ -1,5 +1,4 @@
 SUMMARY = "Configuration files for online package repositories aka feeds"
-PR = "r6"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
@@ -28,6 +27,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 #    confs = [ ( "${sysconfdir}/opkg/%s-feed.conf" % feed ) for feed in archs ]
 #    return " ".join( confs )
 #
-#CONFFILES_${PN} += '${@distro_feed_configs(d)}'
+#CONFFILES:${PN} += '${@distro_feed_configs(d)}'
 
-CONFFILES_${PN} += '${@ " ".join( [ ( "${sysconfdir}/opkg/%s-feed.conf" % feed ) for feed in "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}".split() ] ) }'
+CONFFILES:${PN} += '${@ " ".join( [ ( "${sysconfdir}/opkg/%s-feed.conf" % feed ) for feed in "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}".split() ] ) }'

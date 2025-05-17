@@ -12,9 +12,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 --- a/build/cmake/DefineInstallationPaths.cmake
 +++ b/build/cmake/DefineInstallationPaths.cmake
-@@ -22,11 +22,11 @@
- set(BIN_INSTALL_DIR "bin" CACHE PATH "The binary install dir (default: bin)")
- set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
+@@ -26,11 +26,11 @@ else()
+     set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
+ endif()
  set(INCLUDE_INSTALL_DIR "include" CACHE PATH "The library install dir (default: include)")
 -set(CMAKE_INSTALL_DIR "lib/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
 -set(PKGCONFIG_INSTALL_DIR "lib/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")

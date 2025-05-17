@@ -1,15 +1,14 @@
 SUMMARY = "A client for the Cisco3000 VPN Concentrator"
 HOMEPAGE = "http://www.unix-ag.uni-kl.de/~massar/vpnc/"
-AUTHOR = "Maurice Massar vpnc@unix-ag.uni-kl.de"
 SECTION = "net"
-LICENSE = "GPL-2.0+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
 
 DEPENDS += "libgcrypt"
 
 PV .= "r550-2jnpr1"
 SRCREV = "b1243d29e0c00312ead038b04a2cf5e2fa31d740"
-SRC_URI = "git://github.com/ndpgroup/vpnc \
+SRC_URI = "git://github.com/ndpgroup/vpnc;branch=master;protocol=https \
            file://long-help \
            file://default.conf \
            file://0001-search-for-log-help-in-build-dir.patch \
@@ -36,17 +35,17 @@ inherit perlnative pkgconfig
 
 #EXTRA_OEMAKE = "-e MAKEFLAGS="
 
-do_configure_append () {
+do_configure:append () {
     # Make sure we use our nativeperl wrapper
     sed -i "1s:#!.*:#!/usr/bin/env nativeperl:" ${S}/*.pl
-    cp ${WORKDIR}/long-help ${S}
+    cp ${UNPACKDIR}/long-help ${S}
 }
 
 do_install () {
     sed -i s:m600:m\ 600:g Makefile
     oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' install
     rm -f ${D}${sysconfdir}/vpnc/vpnc.conf #This file is useless
-    install ${WORKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
+    install ${UNPACKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
 }
 
 SYSROOT_PREPROCESS_FUNCS += "vpnc_sysroot_preprocess"
@@ -56,8 +55,8 @@ vpnc_sysroot_preprocess () {
     install -m 755 ${D}${sysconfdir}/vpnc/vpnc-script ${SYSROOT_DESTDIR}${sysconfdir}/vpnc
 }
 
-FILES_${PN}-script = "${sysconfdir}/vpnc/vpnc-script"
+FILES:${PN}-script = "${sysconfdir}/vpnc/vpnc-script"
 
-CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
-RDEPENDS_${PN} = "perl-module-io-file ${PN}-script"
-RRECOMMENDS_${PN} = "kernel-module-tun"
+CONFFILES:${PN} = "${sysconfdir}/vpnc/default.conf"
+RDEPENDS:${PN} = "perl-module-io-file ${PN}-script"
+RRECOMMENDS:${PN} = "kernel-module-tun"

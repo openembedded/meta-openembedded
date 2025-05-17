@@ -7,12 +7,11 @@
 
 SUMMARY = "The fbset console tool"
 HOMEPAGE = "http://users.telenet.be/geertu/Linux/fbdev/"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://fbset.c;endline=19;md5=bf326f82cdfcac391af208f019c5603f"
-RRECOMMENDS_${PN} = "fbset-modes"
+RRECOMMENDS:${PN} = "fbset-modes"
 DEPENDS = "bison-native flex-native"
 
-PR = "r4"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/f/fbset/fbset_2.1.orig.tar.gz \
            file://makefile.patch \
@@ -29,10 +28,9 @@ do_install() {
     install -m 0644 ${B}/*.8 ${D}${datadir}/man/man8
 }
 
-ALTERNATIVE_fbset = "fbset"
+ALTERNATIVE:fbset = "fbset"
 ALTERNATIVE_LINK_NAME[fbset] = "${sbindir}/fbset"
 ALTERNATIVE_TARGET[fbset] = "${sbindir}/fbset.real"
 ALTERNATIVE_PRIORITY[fbset] = "55"
 
-SRC_URI[md5sum] = "40ed9608f46d787bfb65fd1269f7f459"
 SRC_URI[sha256sum] = "517fa062d7b2d367f931a1c6ebb2bef84907077f0ce3f0c899e34490bbea9338"

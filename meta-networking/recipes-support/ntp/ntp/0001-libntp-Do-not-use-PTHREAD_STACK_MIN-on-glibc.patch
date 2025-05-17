@@ -1,0 +1,33 @@
+From 082a504cfcc046c3d8adaae1164268bc94e5108a Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 31 Jul 2021 10:51:41 -0700
+Subject: [PATCH] libntp: Do not use PTHREAD_STACK_MIN on glibc
+
+In glibc 2.34+ PTHREAD_STACK_MIN is not a compile-time constant which
+could mean different stack sizes at runtime on different architectures
+and it also causes compile failure. Default glibc thread stack size
+or 64Kb set by ntp should be good in glibc these days.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ libntp/work_thread.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libntp/work_thread.c b/libntp/work_thread.c
+index c1fe5c2..21db4a0 100644
+--- a/libntp/work_thread.c
++++ b/libntp/work_thread.c
+@@ -598,7 +598,7 @@ start_blocking_thread_internal(
+ 		/* now clamp on lower stack limit. */
+ 		if (nstacksize < THREAD_MINSTACKSIZE)
+ 			nstacksize = THREAD_MINSTACKSIZE;
+-#            ifdef PTHREAD_STACK_MIN
++#            ifdef PTHREAD_STACK_MIN && !defined(__GLIBC__)
+ 		if (nstacksize < PTHREAD_STACK_MIN)
+ 			nstacksize = PTHREAD_STACK_MIN;
+ #            endif
+-- 
+2.34.1
+

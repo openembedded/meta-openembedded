@@ -2,7 +2,7 @@ DESCRIPTION = "This is a userland SCTP stack supporting FreeBSD, Linux, Mac OS X
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ffcf846341f3856d79a483eafa18e2a5"
 
-SRCREV = "a10cd498d964508c0e6ec6bd2be9dd4afcbb4d86"
+SRCREV = "848eca82f92273af9a79687a90343a2ebcf3481d"
 SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
           "
 
@@ -23,3 +23,6 @@ PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
 PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
 
 EXTRA_OECONF += "--disable-debug"
+
+CVE_VERSION = "0.9.5.0"
+CVE_STATUS[CVE-2019-20503] = "cpe-incorrect: The current version (0.9.5.0) is not affected by the CVE which affects versions at least earlier than 0.9.4.0"

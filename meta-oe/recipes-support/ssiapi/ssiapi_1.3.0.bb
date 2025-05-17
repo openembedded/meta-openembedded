@@ -22,18 +22,19 @@ SRC_URI = "http://sourceforge.net/projects/irstessi/files/${BPN}.${PV}.tgz \
            file://0004-include-limits.h.patch \
            file://0001-Include-libgen.h.patch \
            "
-SRC_URI[md5sum] = "d06c9b426437a7697d77266e9835b520"
 SRC_URI[sha256sum] = "59daab29363d6e9f07c524029c4239653cfbbee6b0e57fd75df62499728dad8a"
 
-S ="${WORKDIR}/${BPN}.${PV}"
+S = "${WORKDIR}/${BPN}.${PV}"
 
 inherit autotools
 
-do_configure_prepend(){
+CXXFLAGS += "-std=gnu++14"
+
+do_configure:prepend(){
     ${S}/autogen.sh
 }
 
-RDEPENDS_${PN} += "mdadm"
+RDEPENDS:${PN} += "mdadm"
 
-COMPATIBLE_HOST_powerpc = 'null'
-COMPATIBLE_HOST_powerpc64le = 'null'
+COMPATIBLE_HOST:powerpc = 'null'
+COMPATIBLE_HOST:powerpc64le = 'null'

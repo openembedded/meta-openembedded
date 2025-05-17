@@ -1,0 +1,24 @@
+From 66c08ade24e4472b5af5dca48097ed9a2ec035ec Mon Sep 17 00:00:00 2001
+From: Rui Costa <rui.ms.costa@ctw.bmwgroup.com>
+Date: Fri, 5 Apr 2024 11:33:51 +0000
+Subject: [PATCH] Update CXX standard to CXX14
+
+Upstream-Status: Inappropriate [oe-specific]
+
+---
+ lang/c++/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4748b111d..1e45c13d5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,7 +21,7 @@ cmake_minimum_required (VERSION 3.1)
+ set (CMAKE_LEGACY_CYGWIN_WIN32 0)
+
+ if (NOT DEFINED CMAKE_CXX_STANDARD)
+-    set(CMAKE_CXX_STANDARD 11)
++    set(CMAKE_CXX_STANDARD 14)
+ endif()
+
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)

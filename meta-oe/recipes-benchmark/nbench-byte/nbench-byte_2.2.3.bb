@@ -9,9 +9,9 @@ SECTION = "console/utils"
 
 SRC_URI = "https://fossies.org/linux/misc/old/${BP}.tar.gz \
            file://nbench_32bits.patch \
-           file://Makefile-add-more-dependencies-to-pointer.h.patch"
+           file://Makefile-add-more-dependencies-to-pointer.h.patch \
+           file://0001-Fix-build-error-with-gcc-15.patch"
 
-SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
 SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
 
 EXTRA_OEMAKE = "-e MAKEFLAGS="

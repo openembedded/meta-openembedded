@@ -1,6 +1,6 @@
 DESCRIPTION = "A real-time adjustable equalizer plugin for ALSA"
 HOMEPAGE = "https://web.archive.org/web/20161105202833/http://thedigitalmachine.net/alsaequal.html"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
 
 DEPENDS = "alsa-lib"
@@ -36,9 +36,9 @@ do_install() {
     install -Dm 0644 libasound_module_pcm_equal.so ${D}${libdir}/alsa-lib/libasound_module_pcm_equal.so
 }
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     alsa-utils \
     caps \
 "
 
-FILES_${PN} = "${libdir}/alsa-lib/"
+FILES:${PN} = "${libdir}/alsa-lib/"

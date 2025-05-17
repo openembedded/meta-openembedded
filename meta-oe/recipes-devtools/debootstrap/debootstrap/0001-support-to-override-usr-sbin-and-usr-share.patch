@@ -1,0 +1,39 @@
+From 6c8b0a3f9c09a7a135d95ff18038bcba22e87b86 Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Thu, 8 Apr 2021 14:06:05 +0800
+Subject: [PATCH] support to override /usr/sbin and /usr/share
+
+Upstream-Status: Submitted [https://salsa.debian.org/installer-team/debootstrap/-/merge_requests/55]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ Makefile | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 21a9a39..649f465 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,13 +5,15 @@ all:
+ 
+ clean:
+ 
+-DSDIR=$(DESTDIR)/usr/share/debootstrap
++datadir ?= "/usr/share"
++sbindir ?= "/usr/sbin"
++DSDIR=$(DESTDIR)${datadir}/debootstrap
+ install:
+ 	mkdir -p $(DSDIR)/scripts
+-	mkdir -p $(DESTDIR)/usr/sbin
++	mkdir -p $(DESTDIR)$(sbindir)
+ 
+ 	cp -a scripts/* $(DSDIR)/scripts/
+ 	install -m 0644 functions $(DSDIR)/
+ 
+-	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)/usr/sbin/debootstrap
+-	chmod 0755 $(DESTDIR)/usr/sbin/debootstrap
++	sed 's/@VERSION@/$(VERSION)/g' debootstrap >$(DESTDIR)$(sbindir)/debootstrap
++	chmod 0755 $(DESTDIR)$(sbindir)/debootstrap
+-- 
+2.25.1
+

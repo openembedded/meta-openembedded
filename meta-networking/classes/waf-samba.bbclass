@@ -1,7 +1,7 @@
 # waf is a build system which is used by samba related project.
 # Obtain details from https://wiki.samba.org/index.php/Waf
 #
-inherit qemu python3native
+inherit python3native
 
 DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python3"
 
@@ -15,7 +15,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
                   --localstatedir=${localstatedir} \
                   --libdir=${libdir} \
                   --includedir=${includedir} \
-                  --oldincludedir=${oldincludedir} \
+                  --oldincludedir=${includedir} \
                   --infodir=${infodir} \
                   --mandir=${mandir} \
                   ${PACKAGECONFIG_CONFARGS} \
@@ -77,7 +77,7 @@ do_configure() {
     echo 'Checking uname release type: "${OLDEST_KERNEL}"' >> ${CROSS_ANSWERS}
     cat ${WAF_CROSS_ANSWERS_PATH}/cross-answers-${TARGET_ARCH}.txt >> ${CROSS_ANSWERS}
 
-    qemu_binary="${@qemu_target_binary(d)}"
+    qemu_binary="${@oe.qemu.qemu_target_binary(d)}"
     if [ "${qemu_binary}" = "qemu-allarch" ]; then
         qemu_binary="qemuwrapper"
     fi
@@ -95,6 +95,8 @@ do_configure() {
     export STAGING_LIBDIR=${STAGING_LIBDIR}
     export STAGING_INCDIR=${STAGING_INCDIR}
     export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
+    export PYTHONARCHDIR=${PYTHON_SITEPACKAGES_DIR}
+    export PYTHON_CONFIG=${STAGING_EXECPREFIXDIR}/python-target-config/python3-config
 
     CONFIG_CMD="./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile"
     if [ "${CROSS_METHOD}" = "answer" ]; then
@@ -111,7 +113,7 @@ do_configure() {
 
 do_compile[progress] = "outof:^\[\s*(\d+)/\s*(\d+)\]\s+"
 do_compile () {
-    python3 ./buildtools/bin/waf ${@oe.utils.parallel_make_argument(d, '-j%d', limit=64)}
+    $PYTHON ./buildtools/bin/waf ${@oe.utils.parallel_make_argument(d, '-j%d', limit=64)}
 }
 
 do_install() {

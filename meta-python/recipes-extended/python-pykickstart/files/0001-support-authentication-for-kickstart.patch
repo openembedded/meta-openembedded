@@ -1,7 +1,7 @@
-From f05f5fc363e2510f6943532f3e14a6423f6a2cf1 Mon Sep 17 00:00:00 2001
+From 80190be8d9c82ed816fb571abef416a1fbfb9a35 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Tue, 31 Jul 2018 17:24:47 +0800
-Subject: [PATCH 1/4] support authentication for kickstart
+Subject: [PATCH] support authentication for kickstart
 
 While download kickstart file from web server,
 we support basic/digest authentication.
@@ -9,17 +9,20 @@ we support basic/digest authentication.
 Add KickstartAuthError to report authentication failure,
 which the invoker could parse this specific error.
 
-Upstream-Status: inappropriate [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+Rebase to 3.62
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
  pykickstart/errors.py | 17 +++++++++++++++++
- pykickstart/load.py   | 34 ++++++++++++++++++++++++++++------
+ pykickstart/load.py   | 33 ++++++++++++++++++++++++++++-----
  pykickstart/parser.py |  4 ++--
- 3 files changed, 47 insertions(+), 8 deletions(-)
+ 3 files changed, 47 insertions(+), 7 deletions(-)
 
 diff --git a/pykickstart/errors.py b/pykickstart/errors.py
-index bf08ac5..aada7aa 100644
+index 8294f59..3d20bf8 100644
 --- a/pykickstart/errors.py
 +++ b/pykickstart/errors.py
 @@ -32,6 +32,9 @@ This module exports several exception classes:
@@ -51,25 +54,23 @@ index bf08ac5..aada7aa 100644
 +    def __str__(self):
 +        return self.value
 diff --git a/pykickstart/load.py b/pykickstart/load.py
-index fb935f2..41a2e9e 100644
+index e8301a4..45d402a 100644
 --- a/pykickstart/load.py
 +++ b/pykickstart/load.py
-@@ -18,10 +18,13 @@
+@@ -18,9 +18,11 @@
  # with the express permission of Red Hat, Inc.
  #
  import requests
 +from requests.auth import HTTPDigestAuth
 +from requests.auth import HTTPBasicAuth
-+
  import shutil
- import six
  
 -from pykickstart.errors import KickstartError
 +from pykickstart.errors import KickstartError, KickstartAuthError
  from pykickstart.i18n import _
  from requests.exceptions import SSLError, RequestException
  
-@@ -29,7 +32,7 @@ _is_url = lambda location: '://' in location  # RFC 3986
+@@ -28,7 +30,7 @@ is_url = lambda location: '://' in location  # RFC 3986
  
  SSL_VERIFY = True
  
@@ -78,21 +79,20 @@ index fb935f2..41a2e9e 100644
      '''Load a destination URL or file into a string.
      Type of input is inferred automatically.
  
-@@ -40,7 +43,7 @@ def load_to_str(location):
+@@ -39,7 +41,7 @@ def load_to_str(location):
      Raises: KickstartError on error reading'''
  
-     if _is_url(location):
+     if is_url(location):
 -        return _load_url(location)
 +        return _load_url(location, user=user, passwd=passwd)
      else:
          return _load_file(location)
  
-@@ -70,11 +73,30 @@ def load_to_file(location, destination):
+@@ -69,11 +71,32 @@ def load_to_file(location, destination):
          _copy_file(location, destination)
          return destination
  
 -def _load_url(location):
--    '''Load a location (URL or filename) and return contents as string'''
 +def _get_auth(location, user=None, passwd=None):
 +
 +    auth = None
@@ -101,7 +101,7 @@ index fb935f2..41a2e9e 100644
 +        if user is None or passwd is None:
 +            log.info("Require Authentication")
 +            raise KickstartAuthError("Require Authentication.\nAppend 'ksuser=<username> kspasswd=<password>' to boot command")
- 
++
 +        reasons = request.headers.get("WWW-Authenticate", "").split()
 +        if reasons:
 +            auth_type = reasons[0]
@@ -113,19 +113,21 @@ index fb935f2..41a2e9e 100644
 +    return auth
 +
 +def _load_url(location, user=None, passwd=None):
-+    '''Load a location (URL or filename) and return contents as string'''
+     '''Load a location (URL or filename) and return contents as string'''
+ 
 +    auth = _get_auth(location, user=user, passwd=passwd)
++
      try:
--        request = requests.get(location, verify=SSL_VERIFY)
-+        request = requests.get(location, verify=SSL_VERIFY, auth=auth)
+-        request = requests.get(location, verify=SSL_VERIFY, timeout=120)
++        request = requests.get(location, verify=SSL_VERIFY, auth=auth, timeout=120)
      except SSLError as e:
          raise KickstartError(_('Error securely accessing URL "%s"') % location + ': {e}'.format(e=str(e)))
      except RequestException as e:
 diff --git a/pykickstart/parser.py b/pykickstart/parser.py
-index d8880eb..22d14cb 100644
+index 12b0467..351dc1b 100644
 --- a/pykickstart/parser.py
 +++ b/pykickstart/parser.py
-@@ -801,7 +801,7 @@ class KickstartParser(object):
+@@ -831,7 +831,7 @@ class KickstartParser(object):
          i = PutBackIterator(s.splitlines(True) + [""])
          self._stateMachine(i)
  
@@ -134,7 +136,7 @@ index d8880eb..22d14cb 100644
          """Process a kickstart file, given by the filename f."""
          if reset:
              self._reset()
-@@ -822,7 +822,7 @@ class KickstartParser(object):
+@@ -852,7 +852,7 @@ class KickstartParser(object):
          self.currentdir[self._includeDepth] = cd
  
          try:
@@ -144,5 +146,5 @@ index d8880eb..22d14cb 100644
              raise KickstartError(_("Unable to open input kickstart file: %s") % str(e), lineno=0)
  
 -- 
-2.7.4
+2.34.1
 

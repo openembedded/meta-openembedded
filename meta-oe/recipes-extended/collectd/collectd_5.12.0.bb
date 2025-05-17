@@ -1,11 +1,12 @@
 SUMMARY = "Collects and summarises system performance statistics"
 DESCRIPTION = "collectd is a daemon which collects system performance statistics periodically and provides mechanisms to store the values in a variety of ways, for example in RRD files."
-LICENSE = "GPLv2 & MIT"
+HOMEPAGE = "https://collectd.org/"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1bd21f19f7f0c61a7be8ecacb0e28854"
 
-DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
+DEPENDS = "curl libpcap libxml2 yajl libgcrypt libtool lvm2"
 
-SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
+SRC_URI = "https://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://collectd.init \
            file://collectd.service \
            file://no-gcrypt-badpath.patch \
@@ -15,12 +16,11 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
            file://0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch \
            "
-SRC_URI[md5sum] = "2b23a65960bc323d065234776a542e04"
 SRC_URI[sha256sum] = "5bae043042c19c31f77eb8464e56a01a5454e0b39fa07cf7ad0f1bfc9c3a09d6"
 
 inherit autotools python3native update-rc.d pkgconfig systemd
 
-SYSTEMD_SERVICE_${PN} = "collectd.service"
+SYSTEMD_SERVICE:${PN} = "collectd.service"
 
 # Floatingpoint layout, architecture dependent
 # 'nothing', 'endianflip' or 'intswap'
@@ -50,7 +50,9 @@ PACKAGECONFIG[libmnl] = "--with-libmnl,--without-libmnl,libmnl"
 PACKAGECONFIG[libatasmart] = "--with-libatasmart,--without-libatasmart,libatasmart"
 PACKAGECONFIG[ldap] = "--enable-openldap --with-libldap,--disable-openldap --without-libldap, openldap"
 PACKAGECONFIG[rrdtool] = "--enable-rrdtool,--disable-rrdtool,rrdtool"
-PACKAGECONFIG[rrdcached] = "--enable-rrdcached,--disable-rrdcached,rrdcached"
+PACKAGECONFIG[rrdcached] = "--enable-rrdcached,--disable-rrdcached,rrdtool"
+PACKAGECONFIG[python] = "--enable-python,--disable-python"
+PACKAGECONFIG[dpdk] = "--with-libdpdk,--without-libdpdk,dpdk"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
@@ -59,9 +61,9 @@ EXTRA_OECONF = " \
                 --disable-notify_desktop --disable-werror \
 "
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/collectd.init ${D}${sysconfdir}/init.d/collectd
+    install -m 0755 ${UNPACKDIR}/collectd.init ${D}${sysconfdir}/init.d/collectd
     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/collectd
@@ -70,17 +72,17 @@ do_install_append() {
     # Fix configuration file to allow collectd to start up
     sed -i 's!^#FQDNLookup[ \t]*true!FQDNLookup   false!g' ${D}${sysconfdir}/collectd.conf
 
-    rmdir "${D}${localstatedir}/run"
-    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+    rmdir ${D}${localstatedir}/run ${D}${localstatedir}/log
+    rmdir --ignore-fail-on-non-empty ${D}${localstatedir}
 
     # Install systemd unit files
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/collectd.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/collectd.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@SBINDIR@,${sbindir},g' \
         ${D}${systemd_unitdir}/system/collectd.service
 }
 
-CONFFILES_${PN} = "${sysconfdir}/collectd.conf"
+CONFFILES:${PN} = "${sysconfdir}/collectd.conf"
 
 INITSCRIPT_NAME = "collectd"
 INITSCRIPT_PARAMS = "defaults"

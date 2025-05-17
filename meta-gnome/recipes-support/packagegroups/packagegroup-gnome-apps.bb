@@ -4,21 +4,25 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit packagegroup features_check
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 polkit gobject-introspection-data"
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     evolution-data-server \
     evince \
     file-roller \
+    geary \
     gedit \
     ghex \
     gnome-calculator \
     gnome-calendar \
-    gnome-disk-utility \
+    gnome-commander \
     gnome-font-viewer \
     gnome-photos \
+    gnome-screenshot \
     gnome-terminal \
+    gnome-text-editor \
+    gthumb \
     libwnck3 \
     nautilus \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'gnome-system-monitor', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'gnome-system-monitor gnome-disk-utility', '', d)} \
 "

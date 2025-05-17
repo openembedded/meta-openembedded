@@ -1,0 +1,31 @@
+From 24667f728fabe141a92d4de828ab24d9fe953b08 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 25 Dec 2022 19:23:17 -0800
+Subject: [PATCH] mariadb: Alias lseek64/open64/ftruncate64 on musl systems
+
+Upstream-Status: Pending
+---
+ storage/connect/os.h | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/storage/connect/os.h b/storage/connect/os.h
+index 7d0d5cab..10da630f 100644
+--- a/storage/connect/os.h
++++ b/storage/connect/os.h
+@@ -2,13 +2,15 @@
+ #ifndef _OS_H_INCLUDED
+ #define _OS_H_INCLUDED
+ 
+-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__APPLE__) || (defined(__linux__) && !defined(__GLIBC__))
+ typedef off_t off64_t;
+ #define lseek64(fd, offset, whence) lseek((fd), (offset), (whence))
+ #define open64(path, flags, mode)   open((path), (flags), (mode))
+ #define ftruncate64(fd, length)     ftruncate((fd), (length))
++#ifndef O_LARGEFILE
+ #define O_LARGEFILE 0
+ #endif
++#endif
+ 
+ #ifdef _AIX
+ #ifndef O_LARGEFILE

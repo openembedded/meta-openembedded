@@ -1,9 +1,12 @@
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=72d977d697c3c05830fdff00a7448931"
-SRCREV = "b31bce98d65f894aad6427bcf6f3f7822e261a59"
-PV = "1.0+git${SRCPV}"
+SRCREV = "7626d0a0707391970080d493ce69638719938da7"
+PV = "1.0+git"
 
-SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https"
+SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https;branch=master"
+
+# Upstream repo does not tag
+UPSTREAM_CHECK_COMMITS = "1"
 
 S = "${WORKDIR}/git"
 
@@ -11,4 +14,8 @@ inherit module
 
 EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 
-PNBLACKLIST[can-isotp] ?= "Kernel module Needs forward porting to kernel 5.2+"
+do_install:append() {
+    install -Dm 644 ${S}/include/uapi/linux/can/isotp.h ${D}${includedir}/linux/can/isotp.h
+}
+
+SKIP_RECIPE[can-isotp] ?= "Not needed with kernel 5.10+"

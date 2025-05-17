@@ -33,12 +33,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
    }
 --- a/src/epggrab/module/psip.c
 +++ b/src/epggrab/module/psip.c
-@@ -383,14 +383,14 @@ _psip_eit_callback_channel
+@@ -223,14 +223,14 @@ _psip_eit_callback_channel
  
-     tvhtrace(LS_PSIP, "  %03d: [%s] eventid 0x%04x at %"PRItime_t", duration %d, title: '%s' (%d bytes)",
+     tvhtrace(LS_PSIP, "  %03d: [%s] eventid 0x%04x at %"PRItime_t", duration %d, etmlocation %x, title: '%s' (%d bytes)",
               i, ch ? channel_get_name(ch, channel_blank_name) : "(null)",
--             eventid, start, length,
-+             eventid, (intmax_t)start, length,
+-             eventid, start, length, etmlocation,
++             eventid, (intmax_t)start, length, etmlocation,
               lang_str_get(title, NULL), titlelen);
  
      save2 = changes2 = 0;
@@ -146,12 +146,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
    /* Failed */
 --- a/src/epggrab/module/opentv.c
 +++ b/src/epggrab/module/opentv.c
-@@ -486,7 +486,7 @@ opentv_parse_event_section_one
+@@ -497,7 +497,7 @@ opentv_parse_event_section_one
                                         1, &save, &changes);
        tvhdebug(LS_OPENTV, "find by time start %"PRItime_t " stop "
-                "%"PRItime_t " eid %d = %p",
--               ev.start, ev.stop, ev.eid, ebc);
-+               (intmax_t)ev.start, (intmax_t)ev.stop, ev.eid, ebc);
+                "%"PRItime_t " ch %"PRId64" eid %d = %p",
+-               ev.start, ev.stop, ch->ch_number, ev.eid, ebc);
++               (intmax_t)ev.start, (intmax_t)ev.stop, ch->ch_number, ev.eid, ebc);
        save |= epg_broadcast_set_dvb_eid(ebc, ev.eid, &changes);
      } else {
        ebc = epg_broadcast_find_by_eid(ch, ev.eid);

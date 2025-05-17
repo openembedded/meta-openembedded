@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pytest --benchmark-disable -vv --minimal-messages-config --automake tests/test_functional.py

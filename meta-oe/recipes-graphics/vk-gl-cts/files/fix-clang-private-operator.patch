@@ -1,8 +1,8 @@
-Index: git/external/glslang/src/glslang/Include/PoolAlloc.h
-===================================================================
---- git.orig/external/glslang/src/glslang/Include/PoolAlloc.h
-+++ git/external/glslang/src/glslang/Include/PoolAlloc.h
-@@ -240,8 +240,9 @@ protected:
+Upstream-Status: Pending
+
+--- a/external/glslang/src/glslang/Include/PoolAlloc.h
++++ b/external/glslang/src/glslang/Include/PoolAlloc.h
+@@ -245,8 +245,9 @@ protected:
  
      int numCalls;           // just an interesting statistic
      size_t totalBytes;      // just an interesting statistic

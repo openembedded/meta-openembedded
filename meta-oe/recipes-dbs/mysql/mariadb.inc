@@ -1,78 +1,78 @@
 SUMMARY = "A robust, scalable, and reliable SQL server"
 HOMEPAGE = "http://mariadb.org"
 SECTION = "libs"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b1becf0cfa3366e0f4d854d1d264f311"
 
-SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz \
+SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://my.cnf \
            file://mysqld.service \
            file://install_db.service \
            file://install_db \
            file://mysql-systemd-start \
            file://configure.cmake-fix-valgrind.patch \
-           file://fix-a-building-failure.patch \
            file://support-files-CMakeLists.txt-fix-do_populate_sysroot.patch \
-           file://sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
-           file://0001-disable-ucontext-on-musl.patch \
-           file://c11_atomics.patch \
-           file://clang_version_header_conflict.patch \
            file://fix-arm-atomic.patch \
            file://0001-Fix-library-LZ4-lookup.patch \
            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
-           file://0001-stacktrace-t.c-make-the-test-conditional.patch \
+           file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
+           file://ssize_t.patch \
+           file://sys_futex.patch \
+           file://cross-compiling.patch \
+           file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+           file://lfs64.patch \
+           file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+           file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+           file://riscv32.patch \
           "
-SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
+SRC_URI[sha256sum] = "1b26c0bb2d025dbfac3b9852d2b7eafda56a171b67ac2e27831ec0414fb7df07"
 
-SRC_URI[sha256sum] = "eb4824f6f2c532cd3fc6a6bce7bf78ea7c6b949f8bdd07656b2c84344e757be8"
-
-UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
-
-S = "${WORKDIR}/mariadb-${PV}"
+UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
 
 BINCONFIG_GLOB = "mysql_config"
 
-inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
+inherit cmake gettext binconfig update-rc.d systemd multilib_script multilib_header pkgconfig
 
 MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
-                    ${PN}-server:${bindir}/mariadb-install-db"
+                    ${PN}-setupdb:${bindir}/mariadb-install-db \
+                    libmysqlclient-dev:${bindir}/mysql_config \
+                    "
 
 INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
-INITSCRIPT_NAME_${PN}-server = "mysqld"
-INITSCRIPT_PARAMS_${PN}-server ?= "start 45 5 . stop 45 0 6 1 ."
+INITSCRIPT_NAME:${PN}-server = "mysqld"
+INITSCRIPT_PARAMS:${PN}-server ?= "start 45 5 . stop 45 0 6 1 ."
 
-USERADD_PACKAGES = "${PN}-server"
-USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
-GROUPADD_PARAM_${PN}-server = "--system mysql"
-
-INITSCRIPT_NAME_${PN}-setupdb = "install_db"
-INITSCRIPT_PARAMS_${PN}-setupdb ?= "defaults 44 44"
+INITSCRIPT_NAME:${PN}-setupdb = "install_db"
+INITSCRIPT_PARAMS:${PN}-setupdb ?= "defaults 44 44"
 
 SYSTEMD_PACKAGES = "${PN}-server ${PN}-setupdb"
-SYSTEMD_SERVICE_${PN}-server = "mysqld.service"
-SYSTEMD_AUTO_ENABLE_${PN}-server ?= "disable"
+SYSTEMD_SERVICE:${PN}-server = "mysqld.service"
+SYSTEMD_AUTO_ENABLE:${PN}-server ?= "disable"
 
-SYSTEMD_SERVICE_${PN}-setupdb = "install_db.service"
-SYSTEMD_AUTO_ENABLE_${PN}-setupdb ?= "enable"
-ALLOW_EMPTY_${PN}-setupdb ?= "1"
-FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db"
+SYSTEMD_SERVICE:${PN}-setupdb = "install_db.service"
+SYSTEMD_AUTO_ENABLE:${PN}-setupdb ?= "enable"
+ALLOW_EMPTY:${PN}-setupdb ?= "1"
+FILES:${PN}-setupdb = "${sysconfdir}/init.d/install_db \
+                       ${bindir}/mariadb-install-db \
+                       ${bindir}/my_print_defaults \
+                       ${bindir}/mysql_install_db \
+                       ${bindir}/mysql-systemd-start \
+                       "
 
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} lz4 openssl"
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} setupdb"
-PACKAGECONFIG_class-native = ""
-PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
+PACKAGECONFIG:class-native = ""
+PACKAGECONFIG[pam] = "-DPLUGIN_AUTH_PAM=YES -DINSTALL_PAMDIR=${base_libdir}/security,-DPLUGIN_AUTH_PAM=NO,libpam"
 PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITH_VALGRIND=FALSE,valgrind"
 PACKAGECONFIG[krb5] = ", ,krb5"
-PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
-PACKAGECONFIG[zstd] = "-DWITH_ROCKSDB_ZSTD=ON,-DWITH_ROCKSDB_ZSTD=OFF,zstd"
+PACKAGECONFIG[lz4] = ", ,lz4"
+PACKAGECONFIG[openssl] = "-DWITH_SSL='system',-DWITH_SSL='bundled',openssl"
 
-# MariaDB doesn't link properly with gold
-# https://mariadb.atlassian.net/browse/MDEV-5982
-TARGET_CFLAGS += "-fuse-ld=bfd"
 LDFLAGS += " -pthread"
-BUILD_CFLAGS += "-fuse-ld=bfd"
-BUILD_CXXFLAGS += "-fuse-ld=bfd"
+
+LDFLAGS:x86:toolchain-clang = "-latomic"
+LDFLAGS:riscv32:toolchain-clang = "-latomic"
 
 EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DWITH_JEMALLOC=no \
@@ -87,19 +87,30 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
                  -DINSTALL_LIBDIR:PATH=${baselib} \
                  -DINSTALL_PLUGINDIR:PATH=${baselib}/plugin \
+                 -DINSTALL_PCDIR:PATH=${baselib}/pkgconfig \
                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
                  -DMYSQL_DATADIR:PATH=/var/mysql \
                  -DCAT_EXECUTABLE=`which cat` \
+                 -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
+                 -DLSTAT_FOLLOWS_SLASHED_SYMLINK_EXITCODE=0 \
+                 -DSTAT_EMPTY_STRING_BUG_EXITCODE=0 \
+                 -DMASK_LONGDOUBLE_EXITCODE=0 \
                  -DCMAKE_AR:FILEPATH=${AR}"
+
 
 # With Ninja it fails with:
 # make: *** No rule to make target `install'.  Stop.
 OECMAKE_GENERATOR = "Unix Makefiles"
 
-ARM_INSTRUCTION_SET_armv4 = "arm"
-ARM_INSTRUCTION_SET_armv5 = "arm"
+ARM_INSTRUCTION_SET:armv4 = "arm"
+ARM_INSTRUCTION_SET:armv5 = "arm"
 
-do_configure_append() {
+do_compile:prepend:class-target () {
+    # remove the buildpath
+    sed -i -e "s:CMAKE_SYSROOT:CMAKE_SYSROOT_PLACE_HOLDER:g" ${S}/libmariadb/mariadb_config/mariadb_config.c.in
+}
+
+do_configure:append() {
     # handle distros with different values of ${libexecdir}
     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysql_install_db.sh
@@ -107,19 +118,19 @@ do_configure_append() {
     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysqld_safe.sh
 }
 
-do_generate_toolchain_file_append_class-native () {
+do_generate_toolchain_file:append:class-native () {
     # If these are set cmake will assume we're cross-compiling, which will
     # result in certain things we want being disabled
     sed -i "/set( CMAKE_SYSTEM_NAME/d" ${WORKDIR}/toolchain.cmake
     sed -i "/set( CMAKE_SYSTEM_PROCESSOR/d" ${WORKDIR}/toolchain.cmake
 }
 
-do_compile_prepend_class-target () {
+
+do_compile:prepend:class-target () {
     # These need to be in-tree or make will think they need to be built,
     # and since we're cross-compiling that is disabled
     cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
     cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
-
     if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
         if ! [ -e ${B}/include/openssl/kssl.h ] ; then
             mkdir -p ${B}/include/openssl
@@ -129,11 +140,7 @@ do_compile_prepend_class-target () {
             echo "#endif" >>${B}/include/openssl/kssl.h
         fi
     fi
-    # workaround to handle out-of-source build from source package
-    yacc_files="sql_yacc.hh sql_yacc.cc sql_yacc_ora.hh sql_yacc_ora.cc"
-    for yacc_file in ${yacc_files}; do
-        cp ${S}/sql/${yacc_file} ${B}/sql/${yacc_file}
-    done
+    install -D ${RECIPE_SYSROOT_NATIVE}/usr/bin/uca-dump ${B}/strings/uca-dump
 }
 
 SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
@@ -150,102 +157,108 @@ mariadb_sysroot_preprocess () {
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
+    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
 
     install -d ${D}/${sysconfdir}/init.d
-    install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
-    install -m 0755 ${WORKDIR}/install_db ${D}/${sysconfdir}/init.d/
+    install -m 0644 ${UNPACKDIR}/my.cnf ${D}/${sysconfdir}/
+    install -m 0755 ${UNPACKDIR}/install_db ${D}/${sysconfdir}/init.d/
     mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/install_db.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/mysqld.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/install_db.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service \
                                                                    ${D}${systemd_unitdir}/system/install_db.service
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -d ${D}${sysconfdir}/tmpfiles.d
-        echo "f /var/log/mysqld.err 0640 mysql mysql -" \
-            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
-    fi
     install -d ${D}${bindir}
-    install -m 755 ${WORKDIR}/mysql-systemd-start ${D}${bindir}
+    install -m 755 ${UNPACKDIR}/mysql-systemd-start ${D}${bindir}
     install -d ${D}${datadir}/doc/${PN}
     if [ -f ${D}${datadir}/doc/README ]; then
         mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
     fi
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-        pam_so=$(find ${D} -name pam_user_map.so)
-        if [ x"${pam_so}" != x ]; then
-            pam_dir=$(dirname ${pam_so})
-            mv ${pam_dir} ${D}/${libdir}
-            rmdir --ignore-fail-on-non-empty ${pam_dir%security}
-        fi
+
+    # mini-benchmark used for Gitlab-CI to run on every commit to catch
+    # if there are severe performance regressions.
+    # remove it to avoid introducing bash dependency
+    if [ -f ${D}${datadir}/mariadb/mini-benchmark ]; then
+        rm -rf ${D}${datadir}/mariadb/mini-benchmark
     fi
 }
 
-PACKAGES = "${PN}-dbg ${PN} \
+PACKAGES = "${PN}-dbg ${PN}-setupdb ${PN} \
     libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev \
     libmysqlclient libmysqlclient-dev libmysqlclient-staticdev \
-    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-setupdb ${PN}-leftovers"
-CONFFILES_${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
-CONFFILES_${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
-CONFFILES_libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
+    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-leftovers"
+CONFFILES:${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
+CONFFILES:${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
+CONFFILES:libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
 
-RPROVIDES_${PN}-dbg += "libmysqlclient-r-dbg libmysqlclient-dbg"
+RPROVIDES:${PN}-dbg += "libmysqlclient-r-dbg libmysqlclient-dbg"
 
-FILES_${PN} = " "
-RDEPENDS_${PN} = "${PN}-client ${PN}-server"
-ALLOW_EMPTY_${PN} = "1"
+FILES:${PN} = " "
+RDEPENDS:${PN} = "${PN}-client ${PN}-server"
+ALLOW_EMPTY:${PN} = "1"
 
-RDEPENDS_${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
+RDEPENDS:${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
     perl-module-fcntl perl-module-sys-hostname perl-module-ipc-open3 \
     perl-module-exporter"
-RDEPENDS_${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
+RDEPENDS:${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
     perl-module-file-basename perl-module-file-path perl-module-sys-hostname \
     perl-module-file-copy perl-module-file-temp perl-module-posix \
-    ${PN}-client ${PN}-setupdb libdbi-perl libdbd-mysql-perl"
-RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
+    ${PN}-client ${PN}-setupdb libdbi-perl dbd-mariadb lzo"
+RDEPENDS:${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
     perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-module-threads \
     perl-module-threads-shared perl-module-io-socket perl-module-sys-hostname perl-module-file-copy \
     perl-module-file-spec perl-module-file-find perl-module-file-basename perl-module-file-path \
     perl-module-constant perl-module-lib perl-module-file-temp perl-module-file-spec-functions \
     perl-module-io-socket-inet perl-module-io-select bash"
-RDEPENDS_${PN}-setupdb = "coreutils"
+RDEPENDS:${PN}-setupdb = "coreutils"
 
 # Allow old code to link to the backward compatible library
-RDEPENDS_libmysqlclient-dev = "libmysqlclient-r-dev"
+RDEPENDS:libmysqlclient-dev = "libmysqlclient-r-dev"
 
-FILES_libmysqlclient = "\
+PACKAGE_PREPROCESS_FUNCS += "src_package_preprocess"
+src_package_preprocess () {
+        # Trim build paths from comments in generated sources to ensure reproducibility
+        sed -i -e "s,${S}/sql/,,g" \
+               -e "s,${B}/sql/,,g" \
+            ${B}/sql/yy_oracle.hh \
+            ${B}/sql/yy_mariadb.cc \
+            ${B}/sql/yy_mariadb.hh \
+            ${B}/sql/yy_oracle.cc
+}
+
+FILES:libmysqlclient = "\
     ${libdir}/libmysqlclient.so.* \
     ${libdir}/libmariadb.so.* \
     ${sysconfdir}/my.cnf.d/client.cnf"
-FILES_libmysqlclient-dev = " \
+FILES:libmysqlclient-dev = " \
     ${includedir}/mysql/ \
     ${libdir}/libmysqlclient.so \
     ${libdir}/libmariadb.so \
     ${sysconfdir}/aclocal \
     ${bindir}/mysql_config"
-FILES_libmysqlclient-staticdev = "\
+FILES:libmysqlclient-staticdev = "\
     ${libdir}/*.a"
 
 # Avoid warnings about ha_xtradb.so.0.0.0 and ha_innodb_plugin.so.0.0.0
 # which are intentionally non-PIC on 32-bit x86 (see e.g.
 # storage/xtradb/plug.in in the source)
-INSANE_SKIP_libmysqlclient_append_x86 = " textrel"
+INSANE_SKIP:libmysqlclient:append:x86 = " textrel"
 
-FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
-FILES_libmysqlclient-r-dev = "\
+FILES:libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
+FILES:libmysqlclient-r-dev = "\
     ${libdir}/libmysqlclient_r.so"
-FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
+FILES:libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
 
-FILES_libmysqld = "\
+FILES:libmysqld = "\
     ${libdir}/libmysqld.so.* \
     ${libdir}/libmariadbd.so.*"
-FILES_libmysqld-dev = "\
+FILES:libmysqld-dev = "\
     ${libdir}/libmysqld.so \
     ${libdir}/libmariadbd.so"
 
-FILES_${PN}-client = "\
+FILES:${PN}-client = "\
     ${bindir}/myisam_ftdump \
     ${bindir}/mysql \
     ${bindir}/mariadb \
@@ -280,7 +293,7 @@ FILES_${PN}-client = "\
     ${libexecdir}/mysqlmanager \
     ${sysconfdir}/my.cnf.d/mysql-clients.cnf"
 
-FILES_${PN}-server = "\
+FILES:${PN}-server = "\
     ${bindir}/msql2mysql \
     ${bindir}/my_print_defaults \
     ${bindir}/myisamchk \
@@ -289,7 +302,6 @@ FILES_${PN}-server = "\
     ${bindir}/mysql_convert_table_format \
     ${bindir}/mariadb-convert-table-format \
     ${bindir}/mysql_install_db \
-    ${bindir}/mariadb-install-db \
     ${bindir}/mysql_secure_installation \
     ${bindir}/mariadb-secure-installation \
     ${bindir}/mysql_setpermission \
@@ -321,9 +333,9 @@ FILES_${PN}-server = "\
     ${sbindir}/mysqld \
     ${sbindir}/mariadbd \
     ${libdir}/plugin/*.so \
-    ${libdir}/security/*.so \
+    ${base_libdir}/security/*.so \
     ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
-    ${datadir}/mysql/ \
+    ${datadir}/mariadb/ \
     ${localstatedir}/mysql/ \
     ${sysconfdir}/init.d/mysqld \
     ${sysconfdir}/my.cnf \
@@ -331,5 +343,5 @@ FILES_${PN}-server = "\
     ${sysconfdir}/security/user_map.conf \
     ${sysconfdir}/tmpfiles.d"
 
-DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
-FILES_${PN}-leftovers = "/"
+DESCRIPTION:${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
+FILES:${PN}-leftovers = "/"

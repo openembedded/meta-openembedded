@@ -1,0 +1,84 @@
+From 86aa3f2333a9b8e6f1c631e6d5cb7296b6e8380b Mon Sep 17 00:00:00 2001
+From: Rui Costa <rui.ms.costa@ctw.bmwgroup.com>
+Date: Fri, 22 Mar 2024 13:27:38 +0000
+Subject: [PATCH] Add package configuration files
+
+Upstream-Status: Pending
+
+---
+ lang/c++/CMakeLists.txt            | 45 ++++++++++++++++++++++++------
+ lang/c++/cmake/AvroCppConfig.cmake |  5 ++++
+ 2 files changed, 42 insertions(+), 8 deletions(-)
+ create mode 100644 lang/c++/cmake/AvroCppConfig.cmake
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d94ba42d3..4748b111d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -140,14 +140,18 @@ set (CPACK_PACKAGE_FILE_NAME "avrocpp-${AVRO_VERSION_MAJOR}")
+
+ include (CPack)
+
+-install (TARGETS avrocpp avrocpp_s
+-    LIBRARY DESTINATION lib
+-    ARCHIVE DESTINATION lib
+-    RUNTIME DESTINATION lib)
+-
+-install (TARGETS avrogencpp RUNTIME DESTINATION bin)
+-
+-install (DIRECTORY api/ DESTINATION include/avro
++install (TARGETS avrocpp
++    EXPORT AvroCppTargets
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    INCLUDES DESTINATION include)
++
++install (TARGETS avrogencpp
++    EXPORT AvroCppTargets
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
++
++install (DIRECTORY api/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/avro
+     FILES_MATCHING PATTERN *.hh)
+
+ if (NOT CMAKE_BUILD_TYPE)
+@@ -155,3 +159,28 @@ if (NOT CMAKE_BUILD_TYPE)
+       "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+       FORCE)
+ endif (NOT CMAKE_BUILD_TYPE)
++
++# Create cmake config files
++include(CMakePackageConfigHelpers)
++write_basic_package_version_file(
++    "${CMAKE_CURRENT_BINARY_DIR}/AvroCppConfigVersion.cmake"
++    VERSION ${AVRO_VERSION_MAJOR}.${AVRO_VERSION_MINOR}.${AVRO_VERSION_PATCH}
++    COMPATIBILITY AnyNewerVersion
++)
++
++configure_file(cmake/AvroCppConfig.cmake
++    "${CMAKE_CURRENT_BINARY_DIR}/AvroCppConfig.cmake"
++    COPYONLY
++)
++
++set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/avrocpp)
++install(EXPORT AvroCppTargets
++    FILE AvroCppTargets.cmake
++    NAMESPACE AvroCpp::
++    DESTINATION ${ConfigPackageLocation}
++)
++install(FILES
++    "cmake/AvroCppConfig.cmake"
++    "${CMAKE_CURRENT_BINARY_DIR}/AvroCppConfigVersion.cmake"
++    DESTINATION ${ConfigPackageLocation}
++    COMPONENT Devel)
+diff --git a/cmake/AvroCppConfig.cmake b/cmake/AvroCppConfig.cmake
+new file mode 100644
+index 000000000..deb8aaa31
+--- /dev/null
++++ b/cmake/AvroCppConfig.cmake
+@@ -0,0 +1,5 @@
++include(CMakeFindDependencyMacro)
++find_dependency(Boost 1.38 REQUIRED
++    COMPONENTS filesystem iostreams program_options regex system)
++
++include("${CMAKE_CURRENT_LIST_DIR}/AvroCppTargets.cmake")

@@ -1,7 +1,7 @@
 SUMMARY = "Drivers and tools to support ATM networking under Linux"
 HOMEPAGE = "http://linux-atm.sourceforge.net/"
 SECTION = "libs"
-LICENSE = "GPL-2.0 & LGPL-2.0"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only"
 
 DEPENDS = "flex flex-native"
 
@@ -13,11 +13,15 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
            file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
            file://0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch \
-"
+           file://0001-make-Add-PREFIX-knob.patch \
+           file://0001-include-string-h-from-memcpy-and-strcpy-function-pro.patch \
+           file://0001-configure-Check-for-symbol-from-libresolv-instead-of.patch \
+           file://0001-Fix-implicit-declaration-error.patch \
+           file://0002-Fix-build-with-gcc-15.patch \
+           "
 
-SRC_URI_append_libc-musl = " file://musl-no-on_exit.patch"
+SRC_URI:append:libc-musl = " file://musl-no-on_exit.patch"
 
-SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
 SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
 
 LIC_FILES_CHKSUM = "\
@@ -27,7 +31,6 @@ file://COPYING.LGPL;md5=6e29c688d912da12b66b73e32b03d812"
 
 inherit autotools pkgconfig
 
-# The firmware is explicitly put under /lib when installed.
-#
+EXTRA_OEMAKE += "ROOTPREFIX=${root_prefix}"
 
-FILES_${PN} += "/lib/firmware"
+FILES:${PN} += "${nonarch_base_libdir}/firmware"

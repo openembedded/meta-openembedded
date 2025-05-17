@@ -1,19 +1,18 @@
 SUMMARY = "All packages for full XFCE installation"
 SECTION = "x11/wm"
 
-PR = "r10"
 
 inherit packagegroup features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 # mandatory
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     packagegroup-xfce-base \
 "
 
 # nice to have
-RRECOMMENDS_${PN} = " \
+RRECOMMENDS:${PN} = " \
     xfwm4-theme-daloa \
     xfwm4-theme-kokodi \
     xfwm4-theme-moheli \
@@ -50,7 +49,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-verve-plugin \
     \
     ${@bb.utils.contains('DISTRO_FEATURES','polkit','xfce-polkit','',d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth", "blueman", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth gobject-introspection-data", "blueman", "", d)} \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
@@ -63,6 +62,6 @@ RRECOMMENDS_${PN} = " \
     xfce4-taskmanager \
     gigolo \
     mousepad \
-    catfish \
-    xfce4-panel-profiles \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "catfish", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "xfce4-panel-profiles", "", d)} \
 "

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Ignore mtls test until https://github.com/googleapis/google-api-python-client/issues/2554 is fixed
+pytest --automake --deselect tests/transport/test__mtls_helper.py::TestDecryptPrivateKey

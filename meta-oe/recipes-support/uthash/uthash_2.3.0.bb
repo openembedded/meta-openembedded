@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=736712b5904dd42f8678df7172bc5f2b"
 SRCREV = "e493aa90a2833b4655927598f169c31cfcdf7861"
 
 SRC_URI = "\
-    git://github.com/troydhanson/${BPN}.git \
+    git://github.com/troydhanson/${BPN}.git;branch=master;protocol=https \
     file://run-ptest \
 "
 
@@ -40,7 +40,7 @@ do_install_ptest() {
 
 # The main package is empty and non-existent, so -dev
 # should not depend on it...
-RDEPENDS_${PN}-dev = ""
-RDEPENDS_${PN}-ptest_remove = "${PN}"
+RDEPENDS:${PN}-dev = ""
+RDEPENDS:${PN}-ptest:remove = "${PN}"
 
 BBCLASSEXTEND = "native"

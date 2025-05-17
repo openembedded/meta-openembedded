@@ -1,12 +1,15 @@
 SUMMARY = "kexecboot linux-as-bootloader"
 DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based on kexec."
-HOMEPAGE = "http://kexecboot.org"
-LICENSE = "GPLv2"
+HOMEPAGE = "https://github.com/kexecboot/kexecboot/wiki"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-PV = "0.6+git${SRCPV}"
+PV = "0.6+git"
 S = "${WORKDIR}/git"
-SRC_URI = "git://github.com/kexecboot/kexecboot.git"
-SRC_URI_append_libc-klibc = "\
+SRC_URI = " \
+    git://github.com/kexecboot/kexecboot.git;branch=master;protocol=https \
+    file://0001-Fix-argument-errors-in-gcc-15.patch \
+"
+SRC_URI:append:libc-klibc = "\
     file://0001-kexecboot-Use-new-reboot-API-with-klibc.patch \
     file://0001-make-Add-compiler-includes-in-cflags.patch \
 "
@@ -27,9 +30,9 @@ do_install () {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FILES_${PN} += " ${bindir}/kexecboot /init /proc /mnt /dev /sys"
+FILES:${PN} += " ${bindir}/kexecboot /init /proc /mnt /dev /sys"
 
-pkg_postinst_${PN} () {
+pkg_postinst:${PN} () {
     ln -sf ${bindir}/kexecboot $D/init
 }
 

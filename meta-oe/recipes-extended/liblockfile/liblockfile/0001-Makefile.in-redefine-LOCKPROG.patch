@@ -1,0 +1,51 @@
+From 05227e74b732f13ed5a2a98232676f98bba028e6 Mon Sep 17 00:00:00 2001
+From: Mingli Yu <mingli.yu@windriver.com>
+Date: Fri, 12 Aug 2022 11:18:15 +0800
+Subject: [PATCH] Makefile.in: redefine LOCKPROG
+
+By default the LOCKPROG will be expanded as below:
+LOCKPROG="/build/tmp-glibc/work/core2-32-wrs-linux/liblockfile/1.14-r0/image/usr/bin/dotlockfile"
+
+And it should be "/usr/bin/dotlockfile" on the target.
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+
+Update patch for 1.17, also redefine LOCKPROG in other lines
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ Makefile.in | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index e447cb2..e02d75e 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -44,19 +44,19 @@ dotlockfile:	dotlockfile.o dlockfile.o
+ 		$(CC) $(LDFLAGS) -o dotlockfile dotlockfile.o dlockfile.o
+ 
+ dotlockfile.o:	dotlockfile.c
+-		$(CC) $(CFLAGS) -DLOCKPROG=\"$(bindir)/dotlockfile\" \
++		$(CC) $(CFLAGS) -DLOCKPROG=\"/usr/bin/dotlockfile\" \
+ 			-c dotlockfile.c
+ 
+ lockfile.o:	lockfile.c
+-		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"$(bindir)/dotlockfile\" \
++		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"/usr/bin/dotlockfile\" \
+ 			-DSTATIC -c lockfile.c
+ 
+ solockfile.o:	lockfile.c
+-		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"$(bindir)/dotlockfile\" \
++		$(CC) $(CFLAGS) -DLIB -DLOCKPROG=\"/usr/bin/dotlockfile\" \
+ 			-c lockfile.c -o solockfile.o
+ 
+ dlockfile.o:	lockfile.c
+-		$(CC) $(CFLAGS) -DLOCKPROG=\"$(bindir)/dotlockfile\" \
++		$(CC) $(CFLAGS) -DLOCKPROG=\"/usr/bin/dotlockfile\" \
+ 			-c lockfile.c -o dlockfile.o
+ 
+ install_static:	static install_common
+-- 
+2.25.1
+

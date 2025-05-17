@@ -1,21 +1,33 @@
 SUMMARY = "Inspect and manipulate eBPF programs and maps"
 DESCRIPTION = "bpftool is a kernel tool for inspection and simple manipulation \
 of eBPF programs and maps."
-LICENSE = "GPLv2"
-DEPENDS = "binutils elfutils"
+LICENSE = "GPL-2.0-only"
+DEPENDS = "binutils elfutils elfutils-native"
 PROVIDES = "virtual/bpftool"
 
 inherit bash-completion kernelsrc kernel-arch
 
-do_populate_lic[depends] += "virtual/kernel:do_patch"
+do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
 
-EXTRA_OEMAKE = "V=1 -C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
+EXTRA_OEMAKE = "\
+    V=1 \
+    -C ${S}/tools/bpf/bpftool \
+    O=${B} \
+    CROSS=${TARGET_PREFIX} \
+    CC="${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} ${CFLAGS}" \
+    HOSTCC="${BUILD_CC} ${BUILD_CFLAGS}" \
+    LD="${LD}" \
+    AR=${AR} \
+    ARCH=${ARCH} \
+    bash_compdir=${prefix}/share/bash-completion \
+"
 
 SECURITY_CFLAGS = ""
 
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
-COMPATIBLE_HOST_libc-musl = 'null'
+COMPATIBLE_HOST = "(x86_64|aarch64|riscv64).*-linux"
+COMPATIBLE_HOST:libc-musl = 'null'
 
 do_compile() {
     oe_runmake
@@ -27,9 +39,12 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-python do_package_prepend() {
+python do_package:prepend() {
     d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
 }
 
 B = "${WORKDIR}/${BPN}-${PV}"
-PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"
+
+FILES:${PN} += "${exec_prefix}/sbin/*"
+
+BBCLASSEXTEND = "native nativesdk"

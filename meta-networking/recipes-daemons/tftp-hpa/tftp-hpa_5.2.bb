@@ -29,6 +29,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
            file://fix-writing-emtpy-file.patch \
            file://0001-__progname-is-provided-by-libc.patch \
            file://0001-tftp-Mark-toplevel-definition-as-external.patch \
+           file://0001-tftp-Remove-double-inclusion-of-signal.h.patch \
            file://tftpd-hpa.socket \
            file://tftpd-hpa.service \
 "
@@ -57,41 +58,41 @@ do_install() {
 
     install -m 755 -d ${D}${localstatedir}/lib/tftpboot/
     install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
+    install -m 0755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/tftpd-hpa
 
     install -d ${D}${sysconfdir}/default
-    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/tftpd-hpa
+    install -m 0644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/tftpd-hpa
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/tftpd-hpa.socket ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/tftpd-hpa.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/tftpd-hpa.socket ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/tftpd-hpa.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/tftpd-hpa.service
 }
 
-FILES_${PN} = "${bindir}"
+FILES:${PN} = "${bindir}"
 
 PACKAGES += "tftp-hpa-server"
-SUMMARY_tftp-hpa-server = "Server for the Trivial File Transfer Protocol"
-FILES_tftp-hpa-server = "${sbindir} ${sysconfdir} ${localstatedir}"
-CONFFILES_tftp-hpa-server = "${sysconfdir}/default/tftpd-hpa"
+SUMMARY:tftp-hpa-server = "Server for the Trivial File Transfer Protocol"
+FILES:tftp-hpa-server = "${sbindir} ${sysconfdir} ${localstatedir}"
+CONFFILES:tftp-hpa-server = "${sysconfdir}/default/tftpd-hpa"
 
 INITSCRIPT_PACKAGES = "tftp-hpa-server"
 INITSCRIPT_NAME = "tftpd-hpa"
 INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 1 ."
 
-ALTERNATIVE_${PN}-doc = "tftpd.8 tftp.1"
+ALTERNATIVE:${PN}-doc = "tftpd.8 tftp.1"
 ALTERNATIVE_LINK_NAME[tftpd.8] = "${mandir}/man8/tftpd.8"
 ALTERNATIVE_LINK_NAME[tftp.1] = "${mandir}/man1/tftp.1"
 
-ALTERNATIVE_${PN} = "tftp"
+ALTERNATIVE:${PN} = "tftp"
 ALTERNATIVE_TARGET[tftp] = "${bindir}/tftp-hpa"
 ALTERNATIVE_PRIORITY = "100"
 
 
 SYSTEMD_PACKAGES = "tftp-hpa-server"
-SYSTEMD_SERVICE_tftp-hpa-server = "tftpd-hpa.socket tftpd-hpa.service"
-SYSTEMD_AUTO_ENABLE_tftp-hpa-server = "enable"
+SYSTEMD_SERVICE:tftp-hpa-server = "tftpd-hpa.socket tftpd-hpa.service"
+SYSTEMD_AUTO_ENABLE:tftp-hpa-server = "enable"

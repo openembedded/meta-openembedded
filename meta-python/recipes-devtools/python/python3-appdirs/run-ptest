@@ -1,3 +1,0 @@
-#!/bin/sh
-
-pytest | sed -e 's/\[100%\]//g' | sed -e 's/\.\.F/: FAIL/g' | sed -e 's/\.\.\./: PASS/g'

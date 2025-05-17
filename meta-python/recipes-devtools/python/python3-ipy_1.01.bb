@@ -9,24 +9,13 @@ HOMEPAGE = "https://github.com/autocracy/python-ipy"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=848d24919845901b4f48bae5f13252e6"
 
-SRC_URI[md5sum] = "d6cf83e7f418ebbd23324ba1c658b907"
 SRC_URI[sha256sum] = "edeca741dea2d54aca568fa23740288c3fe86c0f3ea700344571e9ef14a7cc1a"
 
-inherit pypi setuptools3 ptest
+inherit pypi setuptools3_legacy ptest-python-pytest
 
-SRC_URI += " \
-	file://run-ptest \
-"
-
-RDEPENDS_${PN}-ptest += " \
-	${PYTHON_PN}-pytest \
-"
-
-do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/test/
-	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test
-}
+PTEST_PYTEST_DIR = "test"
 
 PYPI_PACKAGE = "IPy"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 BBCLASSEXTEND = "native"

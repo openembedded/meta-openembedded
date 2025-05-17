@@ -47,16 +47,16 @@ do_install() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/ptpd.service ${D}${systemd_unitdir}/system
+        install -m 0644 ${UNPACKDIR}/ptpd.service ${D}${systemd_unitdir}/system
 
         sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/ptpd.service
         sed -i -e 's#@BINDIR@#${bindir}#g' ${D}${systemd_unitdir}/system/ptpd.service
 
         install -d ${D}${sysconfdir}/default/
-        install -m 0644 ${WORKDIR}/ptpd.conf ${D}${sysconfdir}/default/ptpd
+        install -m 0644 ${UNPACKDIR}/ptpd.conf ${D}${sysconfdir}/default/ptpd
     fi
 }
 
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "ptpd.service"
+SYSTEMD_SERVICE:${PN} = "ptpd.service"
 SYSTEMD_AUTO_ENABLE = "disable"

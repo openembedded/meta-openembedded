@@ -1,11 +1,11 @@
 SUMMARY = "Expression parser"
-HOMEPAGE = "https://github.com/ArashPartow/exprtk"
+HOMEPAGE = "https://www.partow.net/programming/exprtk/index.html"
 SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-SRCREV = "281c2ccc65b8f91c012ea3725ebcef406378a225"
+SRCREV = "a4b17d543f072d2e3ba564e4bc5c3a0d2b05c338"
 
-SRC_URI = "git://github.com/ArashPartow/exprtk.git"
+SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=release;protocol=https"
 
 S = "${WORKDIR}/git"
 
@@ -17,6 +17,6 @@ do_install() {
 }
 
 # exprtk is a header only C++ library, so the main package will be empty.
-RDEPENDS_${PN}-dev = ""
+RDEPENDS:${PN}-dev = ""
 
 BBCLASSEXTEND = "native nativesdk"

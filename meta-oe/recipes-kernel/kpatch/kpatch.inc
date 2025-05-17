@@ -1,9 +1,9 @@
 SUMMARY = "Linux dynamic kernel patching infrastructure"
 DESCRIPTION = "kpatch is a Linux dynamic kernel patching infrastructure which allows you to patch a running kernel without rebooting or restarting any processes."
-LICENSE = "GPLv2 & LGPLv2"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only"
 DEPENDS = "elfutils bash"
 
-SRC_URI = "git://github.com/dynup/kpatch.git;protocol=https \
+SRC_URI = "git://github.com/dynup/kpatch.git;protocol=https;branch=master \
 	file://0001-kpatch-build-add-cross-compilation-support.patch \
 	file://0002-kpatch-build-allow-overriding-of-distro-name.patch \
 	"
@@ -32,22 +32,22 @@ PACKAGES =+ "kpatch-build"
 PROVIDES += "kpatch-build"
 
 COMPATIBLE_HOST = "(x86_64).*-linux"
-COMPATIBLE_HOST_libc-musl = "null"
+COMPATIBLE_HOST:libc-musl = "null"
 
-RDEPENDS_${PN} = "bash binutils"
-RDEPENDS_kpatch-build = "bash glibc-utils"
+RDEPENDS:${PN} = "bash binutils"
+RDEPENDS:kpatch-build = "bash glibc-utils"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
 	${sbindir}/kpatch \
 	${systemd_system_unitdir}/kpatch.service \
 	${mandir}/man1/kpatch.1.gz \
 	${sysconfdir}/init/kpatch.conf \
 	"
-FILES_kpatch-build = " \
+FILES:kpatch-build = " \
 	${bindir}/kpatch-build \
 	${libexecdir}/* \
 	${datadir}/kpatch \
 	${mandir}/man1/kpatch-build.1.gz \
 	"
 
-SYSTEMD_SERVICE_${PN} = "kpatch.service"
+SYSTEMD_SERVICE:${PN} = "kpatch.service"

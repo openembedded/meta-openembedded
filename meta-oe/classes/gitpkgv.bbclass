@@ -25,17 +25,17 @@
 #
 # inherit gitpkgv
 #
-# PV = "1.0+gitr${SRCPV}"      # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-# PKGV = "1.0+gitr${GITPKGV}"  # expands also to something like 1.0+gitr31337+4c1c21d7d
+# PV = "1.0+git"               # expands to 1.0+git
+# PKGV = "1.0+git${GITPKGV}"   # expands also to something like 1.0+git31337+4c1c21d7d
 #
 # or
 #
 # inherit gitpkgv
 #
-# PV = "1.0+gitr${SRCPV}" # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
-# PKGV = "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
-#                           if there is tag v1.0 before this revision or
-#                           ver1.0-31337+g4c1c21d if there is tag ver1.0
+# PV = "1.0+git"               # expands to 1.0+git
+# PKGV = "${GITPKGVTAG}"       # expands to something like 1.0-31337+g4c1c21d
+#                                if there is tag v1.0 before this revision or
+#                                ver1.0-31337+g4c1c21d if there is tag ver1.0
 
 GITPKGV = "${@get_git_pkgv(d, False)}"
 GITPKGVTAG = "${@get_git_pkgv(d, True)}"
@@ -56,7 +56,7 @@ def gitpkgv_drop_tag_prefix(d, version):
 def get_git_pkgv(d, use_tags):
     import os
     import bb
-    from pipes import quote
+    from shlex import quote
 
     src_uri = d.getVar('SRC_URI').split()
     fetcher = bb.fetch2.Fetch(src_uri, d)
@@ -70,54 +70,52 @@ def get_git_pkgv(d, use_tags):
         names = []
         for url in ud.values():
             if url.type == 'git' or url.type == 'gitsm':
-                names.extend(url.revisions.keys())
+                names.append(url.name)
         if len(names) > 0:
             format = '_'.join(names)
         else:
             format = 'default'
-
     found = False
     for url in ud.values():
         if url.type == 'git' or url.type == 'gitsm':
-            for name, rev in url.revisions.items():
-                if not os.path.exists(url.localpath):
-                    return None
+            if not os.path.exists(url.localpath):
+                return None
 
-                found = True
+            found = True
 
-                vars = { 'repodir' : quote(url.localpath),
-                         'rev' : quote(rev) }
+            vars = { 'repodir' : quote(url.localpath),
+                     'rev' : quote(url.revision) }
 
-                rev = bb.fetch2.get_srcrev(d).split('+')[1]
-                rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + rev)
+            rev = bb.fetch2.get_srcrev(d).split('+')[1]
+            rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + url.revision)
 
-                if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
-                    commits = bb.fetch2.runfetchcmd(
-                        "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
-                        % vars, d, quiet=True).strip().lstrip('0')
+            if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
+                commits = bb.fetch2.runfetchcmd(
+                    "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
+                    % vars, d, quiet=True).strip().lstrip('0')
 
-                    if commits != "":
-                        oe.path.remove(rev_file, recurse=False)
-                        with open(rev_file, "w") as f:
-                            f.write("%d\n" % int(commits))
-                    else:
-                        commits = "0"
+                if commits != "":
+                    oe.path.remove(rev_file, recurse=False)
+                    with open(rev_file, "w") as f:
+                        f.write("%d\n" % int(commits))
                 else:
-                    with open(rev_file, "r") as f:
-                        commits = f.readline(128).strip()
+                    commits = "0"
+            else:
+                with open(rev_file, "r") as f:
+                    commits = f.readline(128).strip()
 
-                if use_tags:
-                    try:
-                        output = bb.fetch2.runfetchcmd(
-                            "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
-                            % vars, d, quiet=True).strip()
-                        ver = gitpkgv_drop_tag_prefix(d, output)
-                    except Exception:
-                        ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
-                else:
-                    ver = "%s+%s" % (commits, vars['rev'][:7])
+            if use_tags:
+                try:
+                    output = bb.fetch2.runfetchcmd(
+                        "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
+                        % vars, d, quiet=True).strip()
+                    ver = gitpkgv_drop_tag_prefix(d, output)
+                except Exception:
+                    ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
+            else:
+                ver = "%s+%s" % (commits, vars['rev'][:7])
 
-                format = format.replace(name, ver)
+            format = format.replace(url.name, ver)
 
     if found:
         return format

@@ -1,23 +1,37 @@
+From 62d8c09422148c56b7b1011a5b3ccd553631e3c5 Mon Sep 17 00:00:00 2001
+From: Marko Lindqvist <cazfi74@gmail.com>
+Date: Sun, 29 Sep 2024 18:38:05 +0800
+Subject: [PATCH] dont depend on help2man
+
 Upstream-Status: Inappropriate [disable feature]
 
 Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-diff -Nurdd libidn-1.26/doc/Makefile.am libidn-1.26/doc/Makefile.am
---- libidn-1.26/doc/Makefile.am	2012-09-18 11:25:45.000000000 +0300
-+++ libidn-1.26/doc/Makefile.am	2013-02-08 07:41:24.591431462 +0200
-@@ -49,15 +49,9 @@
+---
+ doc/Makefile.am | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
+diff --git a/doc/Makefile.am b/doc/Makefile.am
+index ff62009..dba833f 100644
+--- a/doc/Makefile.am
++++ b/doc/Makefile.am
+@@ -87,16 +87,9 @@ BUILT_SOURCES = example.txt example2.txt example3.txt example4.txt example5.txt
+ 
  # Man pages.
-
+ 
 -dist_man_MANS = idn.1 $(gdoc_MANS)
 +dist_man_MANS = $(gdoc_MANS)
  MAINTAINERCLEANFILES = $(dist_man_MANS)
-
--idn.1: $(top_srcdir)/src/idn.c $(top_srcdir)/src/idn.ggo \
--		$(top_srcdir)/configure.ac
--	$(HELP2MAN) \
+ 
+-idn.1: $(top_srcdir)/src/idn.c $(top_srcdir)/src/idn.ggo $(top_srcdir)/.version
+-	$(MAKE) -C ../lib
+-	$(MAKE) -C ../src
+-	$(AM_V_GEN)env SOURCE_DATE_EPOCH=0 $(HELP2MAN) \
 -		--name="Internationalized Domain Names command line tool" \
 -		--output=$@ $(top_builddir)/src/idn$(EXEEXT)
 -
  # GDOC
+ 
+ gdoc_TEXINFOS =
+-- 
+2.34.1
 
- GDOC_BIN = $(srcdir)/gdoc

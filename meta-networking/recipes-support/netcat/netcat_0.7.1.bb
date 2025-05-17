@@ -1,8 +1,7 @@
 require netcat.inc
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r3"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2 \
            file://obsolete_autoconf_macros.patch \
@@ -18,7 +17,7 @@ inherit autotools
 
 CVE_PRODUCT = "netcat_project:netcat"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${bindir}
     mv ${D}${bindir}/nc ${D}${bindir}/nc.${BPN}
 }

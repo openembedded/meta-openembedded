@@ -8,15 +8,20 @@ inherit cmake
 DEPENDS += "sqlite3"
 
 SRCREV = "e8a9e9416f421303f4b8970caab26dadf8bae98b"
-SRC_URI = "git://github.com/fnc12/sqlite_orm;protocol=https"
+SRC_URI = " \
+    git://github.com/fnc12/sqlite_orm;protocol=https;branch=master \
+    file://0001-fix-cstdint-error-with-gcc-15.0.1.patch \
+"
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF"
+EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF -DLIB_INSTALL_DIR=${libdir} \
+                  -DCMAKE_INSTALL_DIR=${libdir}/cmake \
+                  -DPKGCONFIG_INSTALL_DIR=${libdir}/pkgconfig"
 
 BBCLASSEXTEND = "native nativesdk"
 
-FILES_${PN}-dev += "${libdir}/cmake/${BPN}"
+FILES:${PN}-dev += "${libdir}/cmake/${BPN}"
 
 # Header-only library
-RDEPENDS_${PN}-dev = ""
-RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+RDEPENDS:${PN}-dev = ""
+RRECOMMENDS:${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"

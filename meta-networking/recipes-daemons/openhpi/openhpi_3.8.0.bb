@@ -55,29 +55,31 @@ inherit autotools pkgconfig ptest update-rc.d systemd
 
 PACKAGES =+ "${PN}-libs"
 
-FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
+FILES:${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
 
-INSANE_SKIP_${PN}-libs = "dev-so"
-RDEPENDS_${PN} += "${PN}-libs"
+INSANE_SKIP:${PN}-libs = "dev-so"
+RDEPENDS:${PN} += "${PN}-libs"
+RDEPENDS:${PN}-ptest += "packagegroup-core-buildessential"
 
 PACKAGECONFIG ??= "libgcrypt non32bit snmp-bc"
 PACKAGECONFIG[sysfs] = "--enable-sysfs,--disable-sysfs,sysfsutils,"
 PACKAGECONFIG[libgcrypt] = "--enable-encryption,--disable-encryption,libgcrypt,"
 PACKAGECONFIG[non32bit] = "--enable-non32bit-int,--disable-non32bit-int,,"
 PACKAGECONFIG[snmp-bc] = "--enable-snmp_bc,--disable-snmp_bc"
+PACKAGECONFIG[ov-rest] = "--enable-ov_rest,--disable-ov_rest,curl rabbitmq-c json-c"
 
 export DISTRO
 
-do_install_append () {
+do_install:append () {
     install -m 0755 -d ${D}${sysconfdir}/${BPN}
     install -m 0644 ${S}/openhpiclient.conf.example ${D}${sysconfdir}/${BPN}/openhpiclient.conf
     install -m 0600 ${S}/openhpi.conf.example ${D}${sysconfdir}/${BPN}/openhpi.conf
     install -m 0644 ${S}/simulation.data.example ${D}${sysconfdir}/${BPN}/simulation.data
     install -m 0644 ${S}/test_agent.data.example ${D}${sysconfdir}/${BPN}/test_agent.data
-    install -m 0755 ${WORKDIR}/openhpi.init ${D}${sysconfdir}/init.d/openhpid
+    install -m 0755 ${UNPACKDIR}/openhpi.init ${D}${sysconfdir}/init.d/openhpid
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/openhpid.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/openhpid.service ${D}${systemd_unitdir}/system
     sed -i -e "s,@SBINDIR@,${sbindir},g" -e "s,@SYSCONFDIR@,${sysconfdir},g" \
         ${D}${systemd_unitdir}/system/openhpid.service
 }
@@ -134,5 +136,5 @@ do_install_ptest () {
 INITSCRIPT_NAME = "openhpid"
 INITSCRIPT_PARAMS = "start 30 . stop 70 0 1 2 3 4 5 6 ."
 
-SYSTEMD_SERVICE_${PN} = "openhpid.service"
+SYSTEMD_SERVICE:${PN} = "openhpid.service"
 SYSTEMD_AUTO_ENABLE = "disable"

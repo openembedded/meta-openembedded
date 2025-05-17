@@ -14,14 +14,15 @@ DEPENDS = "libxml2 libxslt"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BP}.tar.gz \
            file://configure.ac.patch \
-           file://0001-usage2c.awk-fix-wrong-basename-regexp.patch"
-SRC_URI[md5sum] = "f3c5dfa3b1a2ee06cd57c255cc8b70a0"
+           file://0001-usage2c.awk-fix-wrong-basename-regexp.patch \
+           file://0001-Make-xmlError-struct-constant.patch \
+           file://0001-Fix-hash_key_put-signature.patch"
 SRC_URI[sha256sum] = "15d838c4f3375332fd95554619179b69e4ec91418a3a5296e7c631b7ed19e7ca"
 
 inherit autotools
 
 # doc build: requires (native) xstlproc, fop, pdf2ps
-EXTRA_OECONF="--disable-build-docs \
+EXTRA_OECONF = "--disable-build-docs \
   --with-libxml-prefix=${STAGING_LIBDIR}/.. \
   --with-libxslt-prefix=${STAGING_LIBDIR}/.."
 

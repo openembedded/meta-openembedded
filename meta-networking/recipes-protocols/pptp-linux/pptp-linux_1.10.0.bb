@@ -6,7 +6,7 @@ DESCRIPTION = "PPTP Client is a Linux, FreeBSD, NetBSD \
     cable and ADSL internet service providers."
 HOMEPAGE = "http://pptpclient.sourceforge.net"
 SECTION = "net"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit perlnative
@@ -26,7 +26,7 @@ do_install() {
     install -d ${D}${sbindir} ${D}${sysconfdir}/ppp ${D}${mandir}/man8
     install -m 555 pptp ${D}${sbindir}
     install -m 644 pptp.8 ${D}${mandir}/man8
-    install -m 644 ${WORKDIR}/options.pptp ${D}${sysconfdir}/ppp
+    install -m 644 ${UNPACKDIR}/options.pptp ${D}${sysconfdir}/ppp
 }
 
-RDEPENDS_${PN} = "ppp"
+RDEPENDS:${PN} = "ppp"

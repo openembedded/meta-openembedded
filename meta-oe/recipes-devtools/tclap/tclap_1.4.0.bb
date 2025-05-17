@@ -10,13 +10,12 @@ compliant with the GNU or POSIX standards, it is close. \
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
 
-SRCREV = "799a8b1f99818e39fee19d0601030770af1221e1"
-SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4 \
-"
+SRCREV = "81b3d2a0c47895c22e9bb8c577f5ab521f76e5d2"
+SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4"
 
 S = "${WORKDIR}/git"
 inherit cmake
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 BBCLASSEXTEND = "native nativesdk"

@@ -2,15 +2,15 @@ SUMMARY = "netcf"
 DESCRIPTION = "netcf is a cross-platform network configuration library."
 HOMEPAGE = "https://pagure.io/netcf"
 SECTION = "libs"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb919cc88dbe06ec0b0bd50e001ccf1f"
 
 SRCREV = "2c5d4255857531bc09d91dcd02e86545f29004d4"
-PV .= "+git${SRCPV}"
+PV .= "+git"
 
-SRC_URI = "git://pagure.io/netcf.git;protocol=https \
-"
+SRC_URI = "git://pagure.io/netcf.git;protocol=https;branch=master \
+           file://0001-Adopt-to-new-gnulib-read_file-fread_file-signature.patch"
 
 UPSTREAM_CHECK_GITTAGREGEX = "release-(?P<pver>(\d+(\.\d+)+))"
 
@@ -22,14 +22,14 @@ S = "${WORKDIR}/git"
 
 inherit gettext autotools perlnative pkgconfig systemd
 
-EXTRA_OECONF_append_class-target = " --with-driver=redhat"
+EXTRA_OECONF:append:class-target = " --with-driver=redhat"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
 
 EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
 
-do_configure_prepend() {
+do_configure:prepend() {
     currdir=`pwd`
     cd ${S}
 
@@ -49,7 +49,7 @@ do_configure_prepend() {
     cd $currdir
 }
 
-do_install_append() {
+do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
        install -d ${D}${systemd_unitdir}/system
        if [ -d "${D}${libdir}/systemd/system" ]; then
@@ -67,9 +67,9 @@ do_install_append() {
     fi
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
         ${libdir} \
         ${nonarch_libdir} \
         "
 
-SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
+SYSTEMD_SERVICE:${PN} = "netcf-transaction.service"

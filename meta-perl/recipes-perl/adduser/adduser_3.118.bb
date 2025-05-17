@@ -3,7 +3,7 @@ DESCRIPTION = "adduser, addgroup - add a user or group to the system"
 HOMEPAGE = "https://salsa.debian.org/debian/adduser"
 SECTION = "base/utils"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
 
 SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${PV}/${BPN}_${PV}.tar.xz \
@@ -11,7 +11,6 @@ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${
            file://0001-adduser-set-default-shell-with-sbin-nologin.patch \
 "
 
-SRC_URI[md5sum] = "44ba2475ebdaafc9613236bdda321c97"
 SRC_URI[sha256sum] = "3e9eea661c9aac6b2c791bfcc1de3a9c6a422d45c8f3d38ed417737ed3166ffc"
 
 S = "${WORKDIR}/${BPN}"
@@ -37,7 +36,7 @@ do_install() {
     cp -rf ${S}/examples ${D}${docdir}/${BPN}
 }
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     shadow \
     perl-module-getopt-long \
     perl-module-overloading \
@@ -45,7 +44,7 @@ RDEPENDS_${PN} += "\
     perl-module-file-temp \
 "
 
-ALTERNATIVE_${PN} = "adduser deluser addgroup delgroup"
+ALTERNATIVE:${PN} = "adduser deluser addgroup delgroup"
 ALTERNATIVE_PRIORITY = "60"
 ALTERNATIVE_LINK_NAME[adduser] = "${sbindir}/adduser"
 ALTERNATIVE_LINK_NAME[deluser] = "${sbindir}/deluser"

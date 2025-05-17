@@ -13,8 +13,9 @@ SRC_URI += " \
 	file://run-ptest \
 "
 
-RDEPENDS_${PN}-ptest += " \
-	${PYTHON_PN}-pytest \
+RDEPENDS:${PN}-ptest += " \
+    python3-pytest \
+    python3-unittest-automake-output \
 "
 
 do_install_ptest() {

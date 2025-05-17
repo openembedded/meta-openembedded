@@ -4,14 +4,14 @@
 DESCRIPTION = "libcamera image"
 LICENSE = "MIT"
 
-require  meta-multimedia-image.bb
+require  meta-multimedia-image-all.bb
 
 IMAGE_INSTALL += " \
         kernel-modules \
         xkeyboard-config \
 "
 
-IMAGE_INSTALL_append = "\
+IMAGE_INSTALL:append = "\
    libcamera \
    gstreamer1.0-plugins-good \
    gstreamer1.0-plugins-base \

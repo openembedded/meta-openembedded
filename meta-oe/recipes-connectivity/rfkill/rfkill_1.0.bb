@@ -1,7 +1,7 @@
 SUMMARY = "Radio enable/disable command line utility"
 HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
 SECTION = "base"
-LICENSE = "BSD-0-Clause"
+LICENSE = "0BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
 
 SRC_URI = "http://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
@@ -20,6 +20,6 @@ do_install() {
 
 inherit update-alternatives
 
-ALTERNATIVE_${PN} = "rfkill"
+ALTERNATIVE:${PN} = "rfkill"
 ALTERNATIVE_PRIORITY = "60"
 ALTERNATIVE_LINK_NAME[rfkill] = "${sbindir}/rfkill"

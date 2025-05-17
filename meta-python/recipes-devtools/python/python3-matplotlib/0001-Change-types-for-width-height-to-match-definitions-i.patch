@@ -1,0 +1,45 @@
+From b19715aeafcf8440466553d01717924add1eabf4 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Apr 2025 23:17:12 -0700
+Subject: [PATCH] Change types for width/height to match definitions in
+ BufferRegion
+
+This is found with clang
+
+Fixes
+../matplotlib-3.10.1/src/_backend_agg_wrapper.cpp:253:17: error: non-constant-expression cannot be narrowed from type 'unsigned int' to 'int' in initializer list [-Wc++11-narrowing]
+
+Upstream-Status: Submitted [https://github.com/matplotlib/matplotlib/pull/29894]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/_backend_agg.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/_backend_agg.h b/src/_backend_agg.h
+index 0e33d38dfd..dcbd7e1496 100644
+--- a/src/_backend_agg.h
++++ b/src/_backend_agg.h
+@@ -131,12 +131,12 @@ class RendererAgg
+ 
+     virtual ~RendererAgg();
+ 
+-    unsigned int get_width()
++    int get_width()
+     {
+         return width;
+     }
+ 
+-    unsigned int get_height()
++    int get_height()
+     {
+         return height;
+     }
+@@ -206,7 +206,7 @@ class RendererAgg
+     void restore_region(BufferRegion &reg);
+     void restore_region(BufferRegion &region, int xx1, int yy1, int xx2, int yy2, int x, int y);
+ 
+-    unsigned int width, height;
++    int width, height;
+     double dpi;
+     size_t NUMBYTES; // the number of bytes in buffer
+ 

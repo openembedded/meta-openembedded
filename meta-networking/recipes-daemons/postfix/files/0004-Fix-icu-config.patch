@@ -1,0 +1,34 @@
+From 404150f53bb49af987d7338a808f47fdbd50ba7f Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 16 Jan 2022 11:21:54 +0800
+Subject: [PATCH] Fix icu config
+
+do not entertain cppflags from icu, this is because
+icu-config feeds the -I path without sysroot which
+caused native headers to be included and build is
+corrupted in any case its just adding -I/usr/include
+to the CCARGS which we loose nothing if its not
+entertained.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ makedefs | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/makedefs b/makedefs
+index 313b401..e5db212 100644
+--- a/makedefs
++++ b/makedefs
+@@ -906,7 +906,6 @@ EOF
+ 		    ${BUILD_CC-gcc} -o makedefs.test makedefs.test.c $icu_cppflags \
+ 			$icu_ldflags >/dev/null 2>&1
+ 		    if ./makedefs.test 2>/dev/null ; then
+-			CCARGS="$CCARGS $icu_cppflags"
+ 			SYSLIBS="$SYSLIBS $icu_ldflags"
+ 		    else
+ 			CCARGS="$CCARGS -DNO_EAI"
+-- 
+2.25.1
+

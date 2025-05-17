@@ -1,6 +1,6 @@
 def xfce_verdir(v):
     import re
-    m = re.match("^([0-9]+)\.([0-9]+)", v)
+    m = re.match(r"^([0-9]+)\.([0-9]+)", v)
     return "%s.%s" % (m.group(1), m.group(2))
 
 HOMEPAGE = "http://www.xfce.org"
@@ -10,5 +10,5 @@ inherit autotools gettext gtk-icon-cache pkgconfig
 
 DEPENDS += "intltool-native"
 
-FILES_${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/modules/*.so*"
-FILES_${PN}-doc += "${datadir}/xfce4/doc"
+FILES:${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/modules/*.so*"
+FILES:${PN}-doc += "${datadir}/xfce4/doc"

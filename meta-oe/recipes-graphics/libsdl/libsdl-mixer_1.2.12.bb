@@ -1,6 +1,6 @@
 SUMMARY = "Simple DirectMedia Layer mixer library"
 SECTION = "libs"
-DEPENDS = "virtual/libsdl flac libmikmod libvorbis"
+DEPENDS = "libsdl flac libmikmod libvorbis"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a37a47a0e579e461474cd03b9e05199d"
 
@@ -8,7 +8,6 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-${PV}.tar.
            file://configure.patch \
 "
 
-SRC_URI[md5sum] = "e03ff73d77a55e3572ad0217131dc4a1"
 SRC_URI[sha256sum] = "1644308279a975799049e4826af2cfc787cad2abb11aa14562e402521f86992a"
 
 S = "${WORKDIR}/SDL_mixer-${PV}"

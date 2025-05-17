@@ -2,12 +2,13 @@ SUMMARY = "C++ bindings for the GTK+ toolkit"
 HOMEPAGE = "http://www.gtkmm.org/"
 SECTION = "libs"
 
-LICENSE = "LGPLv2.1 & GPLv2"
+LICENSE = "LGPL-2.1-only & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "atkmm pangomm glibmm gtk+ cairomm"
 
+GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -17,4 +18,4 @@ SRC_URI[archive.sha256sum] = "0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09
 
 EXTRA_OECONF = " --disable-documentation "
 
-FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
+FILES:${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"

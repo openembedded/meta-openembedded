@@ -1,7 +1,7 @@
 SUMMARY = "FLTK is a cross-platform C++ GUI toolkit"
 HOMEPAGE = "http://www.fltk.org"
 SECTION = "libs"
-LICENSE = "LGPLv2 & FLTK"
+LICENSE = "LGPL-2.0-only & FLTK"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f6b26344a24a941a01a5b0826e80b5ca"
 
 SRC_URI = " \
@@ -11,9 +11,8 @@ SRC_URI = " \
     file://0002-always-build-fluid-and-export-pointers.patch \
 "
 
-PV = "1.3.5"
-SRC_URI[md5sum] = "0de2b45a1896be2b4a8cafae89b84248"
-SRC_URI[sha256sum] = "2933c72400f9e7c0f4c3a81a1ce98bc9582b2a3edc44b8597ccd26e240e32c3c"
+PV = "1.3.9"
+SRC_URI[sha256sum] = "103441134915402808fd45424d4061778609437e804334434e946cfd26b196c2"
 
 inherit cmake pkgconfig
 

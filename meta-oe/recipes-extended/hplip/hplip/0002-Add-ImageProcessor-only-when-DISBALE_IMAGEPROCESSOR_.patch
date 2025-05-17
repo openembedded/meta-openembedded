@@ -1,0 +1,48 @@
+From 3d53d02af7c45763eb33f7bbe5f9e389fbcb7e21 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 2 Sep 2022 17:55:48 -0700
+Subject: [PATCH 2/4] Add ImageProcessor only when DISBALE_IMAGEPROCESSOR_BUILD
+ is not set
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Makefile.am | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 5f75759..73421b1 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -597,7 +597,11 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilter.cpp prnt/hpcups/HPCupsFilter.h prnt/hp
+ 	prnt/hpcups/ImageProcessor.h
+ 
+ hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS)
+-hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lImageProcessor -lcups -lcupsimage -lz $(DBUS_LIBS)
++hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lcups -lcupsimage -lz $(DBUS_LIBS)
++if !DISBALE_IMAGEPROCESSOR_BUILD
++hpcups_LDADD += "-lImageProcessor"
++endif #DISABLE_IMAGEPROCESSOR
++
+ #else
+ #hpcupsdir = $(cupsfilterdir)
+ #hpcups_PROGRAMS = hpcups
+@@ -687,6 +692,7 @@
+ 
+ install-data-hook:
+ if HPLIP_BUILD
++if !DISBALE_IMAGEPROCESSOR_BUILD
+ 	if [ \( "$(UNAME)" = "x86_64" -a  -d "$(libdir)/" \) ]; then \
+ 		cp prnt/hpcups/libImageProcessor-x86_64.so $(libdir)/ ; \
+ 		chmod 775 $(libdir)/libImageProcessor-x86_64.so ; \
+@@ -697,6 +703,7 @@
+ 		chmod 775 $(libdir)/libImageProcessor-x86_32.so ; \
+ 		ln -sf $(libdir)/libImageProcessor-x86_32.so $(libdir)/libImageProcessor.so ; \
+ 	fi
++endif #DISABLE_IMAGEPROCESSOR
+ 	if [ -d "/usr/share/ipp-usb/quirks/" ]; then \
+ 		echo "ipp-usb directory exists"; \
+ 		cp prnt/ipp-usb/HPLIP.conf /usr/share/ipp-usb/quirks/ ; \
+-- 
+2.37.3
+

@@ -5,12 +5,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
 
 DEPENDS = "sqlite3"
 
-SRC_URI = "https://dist.opendnssec.org/source/softhsm-2.6.1.tar.gz"
+SRC_URI = "https://dist.opendnssec.org/source/softhsm-2.6.1.tar.gz \
+           file://0001-avoid-unnecessary-check-for-sqlite3-binary.patch \
+           file://0002-Prevent-accessing-of-global-c-objects-once-they-are-.patch \
+"
 SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614df475f2"
 
 inherit autotools pkgconfig siteinfo
 
 EXTRA_OECONF += " --with-sqlite3=${STAGING_DIR_HOST}/usr"
+EXTRA_OECONF += " --with-objectstore-backend-db"
 EXTRA_OECONF += "${@oe.utils.conditional('SITEINFO_BITS', '64', ' --enable-64bit', '', d)}"
 
 PACKAGECONFIG ?= "ecc eddsa pk11 openssl"
@@ -24,7 +28,9 @@ PACKAGECONFIG[notvisable] = "--disable-visibility"
 PACKAGECONFIG[openssl] = "--with-openssl=${STAGING_DIR_HOST}/usr --with-crypto-backend=openssl, --without-openssl, openssl, openssl"
 PACKAGECONFIG[botan] = "--with-botan=${STAGING_DIR_HOST}/usr --with-crypto-backend=botan, --without-botan, botan"
 PACKAGECONFIG[migrate] = "--with-migrate"
-PACKAGECONFIG[pk11] = "--enable-p11-kit --with-p11-kit==${STAGING_DIR_HOST}/usr, --without-p11-kit, p11-kit, p11-kit"
+PACKAGECONFIG[pk11] = "--enable-p11-kit --with-p11-kit=${datadir}/p11-kit/modules, --without-p11-kit, p11-kit, p11-kit"
 
-RDEPENDS_${PN} = "sqlite3"
+FILES:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'pk11', '${datadir}/p11-kit/modules/softhsm2.module', '', d)}"
+
+RDEPENDS:${PN} = "sqlite3"
 BBCLASSEXTEND = "native nativesdk"

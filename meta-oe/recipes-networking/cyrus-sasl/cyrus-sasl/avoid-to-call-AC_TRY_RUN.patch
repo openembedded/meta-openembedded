@@ -1,0 +1,39 @@
+Remove AC_TRY_RUN
+
+It can not be run during cross compile
+
+Upstream-Status: Inappropriate [Cross-compile specific]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+--- a/m4/sasl2.m4
++++ b/m4/sasl2.m4
+@@ -316,28 +316,8 @@ if test "$gssapi" != no; then
+   AC_CACHE_CHECK([for SPNEGO support in GSSAPI libraries],[ac_cv_gssapi_supports_spnego],[
+     cmu_save_LIBS="$LIBS"
+     LIBS="$LIBS $GSSAPIBASE_LIBS"
+-    AC_TRY_RUN([
+-#ifdef HAVE_GSSAPI_H
+-#include <gssapi.h>
+-#else
+-#include <gssapi/gssapi.h>
+-#endif
+-
+-int main(void)
+-{
+-    gss_OID_desc spnego_oid = { 6, (void *) "\x2b\x06\x01\x05\x05\x02" };
+-    gss_OID_set mech_set;
+-    OM_uint32 min_stat;
+-    int have_spnego = 0;
+-                                                                               
+-    if (gss_indicate_mechs(&min_stat, &mech_set) == GSS_S_COMPLETE) {
+-	gss_test_oid_set_member(&min_stat, &spnego_oid, mech_set, &have_spnego);
+-	gss_release_oid_set(&min_stat, &mech_set);
+-    }
+-
+-    return (!have_spnego);  // 0 = success, 1 = failure
+-}
+-],[ac_cv_gssapi_supports_spnego=yes],[ac_cv_gssapi_supports_spnego=no])
++    AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
++    AC_MSG_RESULT(yes)
+     LIBS="$cmu_save_LIBS"
+   ])
+   AS_IF([test "$ac_cv_gssapi_supports_spnego" = yes],[

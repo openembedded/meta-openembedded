@@ -1,0 +1,3 @@
+#!/bin/sh
+# see https://github.com/pytest-dev/pytest-mock/issues/102 for reasons to use plain asserts
+pytest --automake --assert=plain

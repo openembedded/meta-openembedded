@@ -1,0 +1,30 @@
+From a657a3c88488e761c05011400fcee5328fc797e1 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 10 Sep 2019 20:04:26 -0700
+Subject: [PATCH] src: Do not reset FINAL_LIBS
+
+This helps case where additional libraries are needed to be passed from
+environment to get it going
+
+e.g. -latomic is needed on clang/x86 to provide for 64bit atomics
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ src/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index 5919f01e9..e95050376 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -138,7 +138,7 @@ endif
+ 
+ FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(SERVER_CFLAGS)
+ FINAL_LDFLAGS=$(LDFLAGS) $(OPT) $(SERVER_LDFLAGS) $(DEBUG)
+-FINAL_LIBS=-lm
++FINAL_LIBS+=-lm
+ DEBUG=-g -ggdb
+ 
+ # Linux ARM32 needs -latomic at linking time

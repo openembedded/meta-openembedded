@@ -11,7 +11,7 @@ PACKAGES = ' \
     packagegroup-meta-multimedia-support \
 '
 
-RDEPENDS_packagegroup-meta-multimedia = "\
+RDEPENDS:packagegroup-meta-multimedia = "\
     packagegroup-meta-multimedia \
     packagegroup-meta-multimedia-connectivity \
     packagegroup-meta-multimedia-dvb \
@@ -19,90 +19,58 @@ RDEPENDS_packagegroup-meta-multimedia = "\
     packagegroup-meta-multimedia-support \
 "
 
-RDEPENDS_packagegroup-meta-multimedia = "\
+RDEPENDS:packagegroup-meta-multimedia = "\
     alsa-equal \
     aom \
+    bluealsa \
     caps \
     cdparanoia \
-    dcadec \
-    dleyna-connector-dbus \
-    dleyna-core \
-    dleyna-renderer \
-    dleyna-server \
     dvb-apps \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "faac fdk-aac mpd", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faac mpd", "", d)} \
     gerbera \
-    libao \
     libavc1394 \
-    libdc1394 \
-    libdvbpsi \
-    libdvdnav \
     libiec61883 \
-    fluidsynth \
     libmusicbrainz \
-    libmpdclient \
     mpc \
     ncmpc \
-    libmpd \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "opencore-amr vo-aacenc vo-amrwbenc", "", d)} \
-    gst-shark \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "opencore-amr", "", d)} \
     gstd \
     rtmpdump \
     bigbuckbunny-1080p \
     bigbuckbunny-480p \
     bigbuckbunny-720p \
     tearsofsteel-1080p \
-    schroedinger \
-    projucer \
+    pipewire \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} \
     libcamera \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libde265 openh264", "", d)} \
     vorbis-tools \
-    libdvbcsa \
     libopenmpt \
-    libuvc \
     mimic \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna", "", d)} \
-    mycroft \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "minidlna", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "mycroft", "", d)} \
     openal-soft \
     opusfile \
-    libdvdcss \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vlc", "", d)} \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "sox streamripper", "", d)} \
+    opus-tools \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "sox streamripper", "", d)} \
     tinyalsa \
-    tremor \
-    webrtc-audio-processing \
-    ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "x265", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "x265", "", d)} \
 "
-RDEPENDS_packagegroup-meta-multimedia_remove_libc-musl = "projucer"
-RDEPENDS_packagegroup-meta-multimedia_remove_powerpc64le = "openh264"
+RDEPENDS:packagegroup-meta-multimedia:remove:libc-musl = "projucer"
 
-RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
-    gssdp \
-    gupnp-av \
+RDEPENDS:packagegroup-meta-multimedia-connectivity = "\
     gupnp-dlna \
-    gupnp-igd \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gupnp-tools", "", d)} \
-    gupnp \
     libupnp \
-    rygel \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "rygel", "", d), "", d)} \
 "
-RDEPENDS_packagegroup-meta-multimedia-dvb = "\
+RDEPENDS:packagegroup-meta-multimedia-dvb = "\
     oscam \
     tvheadend \
 "
 
-RDEPENDS_packagegroup-meta-multimedia-mkv = "\
-    libebml \
-    libmatroska \
-"
-
-RDEPENDS_packagegroup-meta-multimedia-support = "\
+RDEPENDS:packagegroup-meta-multimedia-support = "\
     crossguid \
-    libmediaart-2.0 \
-    libmediaart \
     gst-instruments \
-    libsrtp \
-    srt \
 "
 # devel headers/libraries only packages
 # libsquish
