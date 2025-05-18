@@ -12,6 +12,7 @@ inherit setuptools3 pkgconfig features_check cython
 # Also, if using SDL2 as backend, SDL2 needs to be configured with gles
 SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
            file://0001-add-support-for-glesv2.patch \
+           file://0001-Remove-old-Python-2-long-from-Cython-files-fixes-bui.patch \
            "
 
 SRCREV = "20d74dcd30f143abbd1aa94c76bafc5bd934d5bd"
