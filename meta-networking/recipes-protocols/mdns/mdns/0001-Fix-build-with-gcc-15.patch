@@ -1,4 +1,4 @@
-From 189f0d8e9913f4eaca9189f710155ffba9035f7e Mon Sep 17 00:00:00 2001
+From c84f185f29d0839b97177aecb0a78b9717947973 Mon Sep 17 00:00:00 2001
 From: Nguyen Dat Tho <tho3.nguyen@lge.com>
 Date: Wed, 9 Apr 2025 13:05:24 +0900
 Subject: [PATCH] Fix build with gcc-15
@@ -19,7 +19,7 @@ Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/mDNSShared/CommonServices.h b/mDNSShared/CommonServices.h
-index 7efb077..f0f3a8b 100644
+index 7efb077f3b04..f0f3a8b3157e 100644
 --- a/mDNSShared/CommonServices.h
 +++ b/mDNSShared/CommonServices.h
 @@ -192,6 +192,9 @@ extern "C" {
@@ -32,6 +32,3 @@ index 7efb077..f0f3a8b 100644
  
  #elif ( TARGET_OS_SOLARIS )
  
--- 
-2.34.1
-

@@ -6,30 +6,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
 
 DEPENDS:append:libc-musl = " musl-nscd"
 
-SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=${BRANCH} \
+SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=${BRANCH};tag=mDNSResponder-${PV} \
            file://0001-dns-sd-Include-missing-headers.patch \
            file://0002-make-Set-libdns_sd.so-soname-correctly.patch \
            file://0004-make-Separate-TLS-targets-from-libraries.patch \
            file://0005-mDNSCore-Fix-broken-debug-parameter.patch \
            file://0006-make-Add-top-level-Makefile.patch \
-           file://0001-Create-subroutine-for-cleaning-recent-interfaces.patch \
-           file://0002-Create-subroutine-for-tearing-down-an-interface.patch \
-           file://0003-Track-interface-socket-family.patch \
-           file://0004-Indicate-loopback-interface-to-mDNS-core.patch \
-           file://0005-Use-list-for-changed-interfaces.patch \
-           file://0006-Handle-noisy-netlink-sockets.patch \
-           file://0007-Mark-deleted-interfaces-as-being-changed.patch \
-           file://0008-Handle-errors-from-socket-calls.patch \
            file://0009-remove-unneeded-headers.patch \
-           file://mdns.service \
-           file://0001-Handle-interface-without-ifa_addr.patch \
-           file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
            file://0005-Fix-missing-limit-declarations.patch \
-           file://0004-Add-definition-for-MAX.patch \
            file://0001-Fix-build-with-gcc-15.patch \
+           file://mdns.service \
            "
-BRANCH = "rel/mDNSResponder-2559"
-SRCREV = "ecc02274878b0a70dba229de642b081cd1c30927"
+BRANCH = "main"
+SRCREV = "d89f8d1d0e001b810d6c055aa2a57b768bcf9aa2"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst

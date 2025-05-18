@@ -1,4 +1,4 @@
-From cf216a6872139e435d5712787359b03022b51d2b Mon Sep 17 00:00:00 2001
+From 34285024531adbbc7b67506c9fc2e60f3b36b73b Mon Sep 17 00:00:00 2001
 From: Alex Kiernan <alexk@zuma.ai>
 Date: Sat, 26 Oct 2024 13:26:09 +0000
 Subject: [PATCH] Fix missing `limit` declarations
@@ -12,10 +12,10 @@ Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/mDNSShared/dnssd_clientstub.c b/mDNSShared/dnssd_clientstub.c
-index fc93d162446a..a6cf45fa9856 100644
+index 89cb90d947c7..316fc49ab078 100644
 --- a/mDNSShared/dnssd_clientstub.c
 +++ b/mDNSShared/dnssd_clientstub.c
-@@ -2022,6 +2022,7 @@ DNSServiceErrorType DNSServiceRegisterInternal
+@@ -2026,6 +2026,7 @@ DNSServiceErrorType DNSServiceRegisterInternal
      ipc_msg_hdr *hdr;
      DNSServiceErrorType err;
      union { uint16_t s; u_char b[2]; } port = { portInNetworkByteOrder };
@@ -23,7 +23,7 @@ index fc93d162446a..a6cf45fa9856 100644
      (void)attr;
  
      if (!sdRef || !regtype) return kDNSServiceErr_BadParam;
-@@ -2054,6 +2055,7 @@ DNSServiceErrorType DNSServiceRegisterInternal
+@@ -2050,6 +2051,7 @@ DNSServiceErrorType DNSServiceRegisterInternal
      if (!hdr) { DNSServiceRefDeallocate(*sdRef); *sdRef = NULL; return kDNSServiceErr_NoMemory; }
      if (!callBack) hdr->ipc_flags |= IPC_FLAGS_NOREPLY;
  
@@ -31,7 +31,7 @@ index fc93d162446a..a6cf45fa9856 100644
      put_flags(flags, &ptr);
      put_uint32(interfaceIndex, &ptr);
      put_string(name, &ptr);
-@@ -2334,6 +2336,7 @@ DNSServiceErrorType DNSServiceRegisterRecordInternal
+@@ -2326,6 +2328,7 @@ DNSServiceErrorType DNSServiceRegisterRecordInternal
      ipc_msg_hdr *hdr = NULL;
      DNSRecordRef rref = NULL;
      DNSRecord **p;
@@ -39,7 +39,7 @@ index fc93d162446a..a6cf45fa9856 100644
      (void)attr;
  
      // Verify that only one of the following flags is set.
-@@ -2389,6 +2392,7 @@ DNSServiceErrorType DNSServiceRegisterRecordInternal
+@@ -2375,6 +2378,7 @@ DNSServiceErrorType DNSServiceRegisterRecordInternal
      hdr = create_hdr(reg_record_request, &len, &ptr, !(flags & kDNSServiceFlagsQueueRequest), sdRef);
      if (!hdr) return kDNSServiceErr_NoMemory;
  
