@@ -25,15 +25,10 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
  2 files changed, 11 insertions(+), 3 deletions(-)
  create mode 100644 meson.options
 
-diff --git a/meson.options b/meson.options
-new file mode 100644
-index 0000000000..3d3a18d145
 --- /dev/null
 +++ b/meson.options
 @@ -0,0 +1 @@
 +option('numpy_inc_dir', type : 'string', description : 'The absolute path to the numpy headers')
-diff --git a/pandas/meson.build b/pandas/meson.build
-index 435103a..a08c77a 100644
 --- a/pandas/meson.build
 +++ b/pandas/meson.build
 @@ -3,17 +3,24 @@ incdir_numpy = run_command(py,
