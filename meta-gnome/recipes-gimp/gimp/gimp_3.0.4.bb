@@ -56,13 +56,14 @@ GIDOCGEN_MESON_OPTION = "gi-docgen"
 GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
 GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
 
-SRC_URI = "https://download.gimp.org/gimp/v${@oe.utils.trim_version('${PV}', 2)}/gimp-${PV}.tar.xz"
+SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gimp.git;protocol=https;branch=master"
 SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch"
 SRC_URI += "file://0002-meson.build-reproducibility-fix.patch"
 SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
 SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
-SRC_URI += "file://85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch"
-SRC_URI[sha256sum] = "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0ad8cbcbf6ea571a2"
+SRCREV = "c1901c5be644ab8dcaf779b1f383bf5370bc90c6"
+
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
