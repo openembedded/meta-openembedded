@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
 DEPENDS = "libdbi-perl-native libdev-checklib-perl-native libmysqlclient"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PA/PALI/DBD-MariaDB-${PV}.tar.gz"
-SRC_URI[sha256sum] = "0d0c76c660ddd55570e48f3e2fdea8f621a69ac0ed48190e8cfcafcb5e9b859d"
+SRC_URI[sha256sum] = "f977a25b4116a0a95a7c8a894fd37097abe19af9a6a9ed4d800604ec17873fe4"
 
 RDEPENDS:${PN} = "libdbi-perl"
 
