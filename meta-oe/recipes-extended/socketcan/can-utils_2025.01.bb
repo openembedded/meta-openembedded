@@ -29,8 +29,6 @@ FILES:${PN}-access = " \
     ${bindir}/cangw \
     ${bindir}/canlogserver \
     ${bindir}/bcmserver \
-    ${bindir}/socketcand \
-    ${bindir}/cannelloni \
 "
 
 FILES:${PN}-cantest = " \
