@@ -3,8 +3,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f8d2fc4954306888fd0e4b27bef83525"
 
 # v2.7.6
-SRCREV = "9e6661278572009a92a8e125c9b339232a9735a1"
-SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
+SRCREV = "72f7fa621357299bb6c8f5d29b4efbafcbd34bf7"
+SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master;tag=v${PV} \
            file://ldflags.patch \
 "
 S = "${WORKDIR}/git"
