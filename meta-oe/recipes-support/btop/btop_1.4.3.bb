@@ -4,9 +4,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "console/utils"
 
-SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main;tag=v${PV} \
            "
-SRCREV = "274d0c78e5f18514dfbea23cee9d1c5431eb75e0"
+SRCREV = "3f1ccd9f6c455fef6d4d8cfbc8ed71b86961323d"
 
 S = "${WORKDIR}/git"
 
