@@ -18,9 +18,7 @@ S = "${UNPACKDIR}/git"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
-inherit allarch
-
-# `make clean` removes files, they can't be rebuild with `make all` 
+# `make clean` removes files, they can't be rebuild with `make all`
 CLEANBROKEN = "1"
 
 do_configure[noexec] = "1"
