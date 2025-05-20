@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3154adaa1a9ca0d8dcc1944518ece1b9"
 
 DEPENDS = "ncurses"
 
-SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https"
-SRCREV = "4e32789e496a027201e66b5773a9d7955f7c638b"
+SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "dd0f4ad5ec03b9fd642f54144f6465cf6d2c1d12"
 
 S = "${WORKDIR}/git"
 
