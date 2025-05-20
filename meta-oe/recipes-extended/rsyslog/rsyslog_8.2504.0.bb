@@ -32,7 +32,7 @@ SRC_URI:append:libc-musl = " \
     file://0001-Include-sys-time-h.patch \
     file://disable-omfile-outchannel.patch \
 "
-SRC_URI[sha256sum] = "02fa197d21d519f5a25a928deb9397cd387ba7382b9b449782ba31d8f3118206"
+SRC_URI[sha256sum] = "5092a20ed40987c74cc604ebfcd6c749e47eb9fc34adc1c2637e6553e7f047ab"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
