@@ -2,9 +2,7 @@ SUMMARY = "libdecor - A client-side decorations library for Wayland clients"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7ae2be7fb1637141840314b51970a9f7"
 
-SRC_URI = " \
-    git://gitlab.freedesktop.org/libdecor/libdecor.git;protocol=https;branch=master \
-"
+SRC_URI = "git://gitlab.freedesktop.org/libdecor/libdecor.git;protocol=https;branch=libdecor-0.2;tag=${PV}"
 
 DEPENDS = " \
     cairo \
@@ -15,7 +13,7 @@ DEPENDS = " \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "7807ae3480f5c6a37c5e8505d94af1e764aaf704"
+SRCREV = "15afd30a6e23e949d022ff18f17dd7fdbd3361e4"
 
 PACKAGECONFIG ?= "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', d)}"
 
