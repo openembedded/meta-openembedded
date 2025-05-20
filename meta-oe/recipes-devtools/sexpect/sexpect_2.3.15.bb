@@ -4,8 +4,8 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 BRANCH = "master"
-SRC_URI = "git://github.com/clarkwang/sexpect;branch=${BRANCH};protocol=https"
-SRCREV = "532a52d36aae442b7fe1ce20a59effd1dbc6e6fe"
+SRC_URI = "git://github.com/clarkwang/sexpect;branch=${BRANCH};protocol=https;tag=v${PV}"
+SRCREV = "d3645392424d47532be90fcbc0abf3148324785b"
 
 S = "${WORKDIR}/git"
 
