@@ -10,7 +10,7 @@ DEPENDS = "libcbor openssl zlib udev"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=20be19aaa222f71738712b26f7f8717b"
 
 SRC_URI = "https://developers.yubico.com/${BPN}/Releases/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "abaab1318d21d262ece416fb8a7132fa9374bda89f6fa52b86a98a2f5712b61e"
+SRC_URI[sha256sum] = "8c2b6fb279b5b42e9ac92ade71832e485852647b53607c43baaafbbcecea04e4"
 
 inherit cmake pkgconfig manpages
 
