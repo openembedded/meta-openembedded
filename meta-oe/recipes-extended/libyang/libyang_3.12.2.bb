@@ -6,9 +6,9 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9bb3d334294e8719f41c531e28a9a697"
 
-SRCREV = "03e294d83b610f89e8ba7b2156a80dc0ad534443"
+SRCREV = "da7272e19d9e27d1bfdd68108fa9dce25fbdf5e8"
 
-SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=v${PV} \
            file://0001-test_context-skip-test-case-test_searchdirs.patch \
            file://run-ptest \
            "
