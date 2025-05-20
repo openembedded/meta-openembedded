@@ -17,7 +17,7 @@ SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
            file://0001-add-missing-system-header-string.h.patch \
            "
-SRCREV = "651d101aab40bb75cf348ab667eba04d6d771c21"
+SRCREV = "70c268a07273da78a4aadd14c40ffb75138ccebe"
 
 S = "${WORKDIR}/git"
 
