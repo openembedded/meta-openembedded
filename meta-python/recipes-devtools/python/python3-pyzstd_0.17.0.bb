@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aedb5a2679cd1552fb61c181ef974b9e"
 PYPI_PACKAGE = "pyzstd"
 
 SRC_URI += "file://0001-Bump-setuptools-dependency-from-74-to-79.patch"
-SRC_URI[sha256sum] = "179c1a2ea1565abf09c5f2fd72f9ce7c54b2764cf7369e05c0bfd8f1f67f63d2"
+SRC_URI[sha256sum] = "d84271f8baa66c419204c1dd115a4dec8b266f8a2921da21b81764fa208c1db6"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
