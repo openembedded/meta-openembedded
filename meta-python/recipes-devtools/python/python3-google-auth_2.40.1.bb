@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 inherit pypi setuptools3 ptest
 
-SRC_URI[sha256sum] = "73222d43cdc35a3aeacbfdcaf73142a97839f10de930550d89ebfe1d0a00cde7"
+SRC_URI[sha256sum] = "58f0e8416a9814c1d86c9b7f6acf6816b51aba167b2c76821965271bac275540"
 SRC_URI += " \
         file://run-ptest \
 "
