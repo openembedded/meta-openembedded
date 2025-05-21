@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/saghul/pycares"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1538fcaea82ebf2313ed648b96c69b1"
 
-SRC_URI[sha256sum] = "8a1d981206a16240eedc79b51af3293575715d4b0b971f4eb47e24839d5ab440"
+SRC_URI[sha256sum] = "2fc2ebfab960f654b3e3cf08a732486950da99393a657f8b44618ad3ed2d39c1"
 
 PYPI_PACKAGE = "pycares"
 
