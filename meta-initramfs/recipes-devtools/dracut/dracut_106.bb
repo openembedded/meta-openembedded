@@ -10,6 +10,7 @@ PE = "1"
 SRCREV = "956c08774074ddc45b2f975e13d5c13d1fc36eff"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
+           file://0001-fix-broken-symlink-in-dracut-config-examples.patch \
            "
 
 DEPENDS += "kmod"
