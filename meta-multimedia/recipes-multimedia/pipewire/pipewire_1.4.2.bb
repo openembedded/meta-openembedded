@@ -139,7 +139,7 @@ PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
 PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
 PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
 PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
-PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing-1"
+PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing-2"
 PACKAGECONFIG[wireplumber] = ",,,wireplumber,,media-session"
 
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
