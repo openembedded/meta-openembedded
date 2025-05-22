@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
 
 SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https;tag=v${PV}"
 
-SRCREV = "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
+SRCREV = "edbe423bdd1b36faf30d2eeeb869e4c1755864de"
 
 S = "${WORKDIR}/git"
 
