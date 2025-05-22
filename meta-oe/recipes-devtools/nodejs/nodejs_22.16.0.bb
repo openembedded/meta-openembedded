@@ -29,7 +29,6 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-deps-disable-io_uring-support-in-libuv.patch \
            file://0001-positional-args.patch \
            file://0001-custom-env.patch \
-           file://zlib-fix-pointer-alignment.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
@@ -38,7 +37,7 @@ SRC_URI:append:class-target = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "c19f0177d21c621746625e5f37590bd0d79a72043b77b53784cba5f145e7263e"
+SRC_URI[sha256sum] = "720894f323e5c1ac24968eb2676660c90730d715cb7f090be71a668662a17c37"
 
 S = "${WORKDIR}/node-v${PV}"
 
