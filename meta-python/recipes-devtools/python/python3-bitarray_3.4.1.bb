@@ -6,6 +6,6 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee5304
 
 SRC_URI[sha256sum] = "e5fa88732bbcfb5437ee554e18f842a8f6c86be73656b0580ee146fd373176c9"
 
-inherit setuptools3 pypi
+inherit python_setuptools_build_meta pypi
 
 BBCLASSEXTEND = "native nativesdk"
