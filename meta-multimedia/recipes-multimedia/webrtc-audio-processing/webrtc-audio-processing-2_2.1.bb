@@ -16,5 +16,6 @@ SRC_URI[sha256sum] = "ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511
 S = "${WORKDIR}/webrtc-audio-processing-${PV}"
 
 LDFLAGS:append:libc-musl = " -lexecinfo"
-
+# | riscv32-yoe-linux-musl-ld.lld: error: undefined reference: __atomic_store_8
+LDFLAGS:append:riscv32 = " -latomic"
 inherit meson pkgconfig
