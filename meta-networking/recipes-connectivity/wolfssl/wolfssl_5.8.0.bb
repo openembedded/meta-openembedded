@@ -14,19 +14,24 @@ RPROVIDES:${PN} = "cyassl"
 
 SRC_URI = " \
     git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
+    file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch \
     file://run-ptest \
 "
 
-SRCREV = "00e42151ca061463ba6a95adb2290f678cbca472"
+SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
 
 S = "${WORKDIR}/git"
 
 inherit autotools ptest
 
+EXTRA_OECONF += "--enable-certreq --enable-dtls --enable-opensslextra --enable-certext --enable-certgen"
+
 PACKAGECONFIG ?= "reproducible-build"
 
 PACKAGECONFIG[reproducible-build] = "--enable-reproducible-build,--disable-reproducible-build,"
 BBCLASSEXTEND += "native nativesdk"
+
+CFLAGS += '-fPIC -DCERT_REL_PREFIX=\\"./\\"'
 
 RDEPENDS:${PN}-ptest += " bash"
 
