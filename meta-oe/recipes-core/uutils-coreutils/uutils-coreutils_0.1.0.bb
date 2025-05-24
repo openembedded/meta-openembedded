@@ -8,13 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
 inherit cargo cargo-update-recipe-crates
 
 SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main \
-    file://0001-do-not-compile-stdbuf.patch"
+    file://0001-do-not-compile-stdbuf.patch \
+    file://0002-Bump-onig-from-6.4.0-to-6.5.1.patch \
+"
 
-# musl not supported because the libc crate does not support functions like "endutxent" at the moment,
-# so src/uucore/src/lib/features.rs disables utmpx when targetting musl.
-COMPATIBLE_HOST:libc-musl = "null"
-
-SRCREV = "088599f41602e0b0505543a010ec59f5f81e74b1"
+SRCREV = "18b963ed6f612ac30ebca92426280cf4c1451f6a"
 S = "${WORKDIR}/git"
 
 require ${BPN}-crates.inc
@@ -63,4 +61,9 @@ python __anonymous() {
 
     for prog in d.getVar('sbindir_progs').split():
         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('sbindir'), prog))
+}
+
+do_compile:prepend() {
+    # In principle this is supposed to be exported by the project's .cargo/config.toml file, but for some reason it's not working
+    export PROJECT_NAME_FOR_VERSION_STRING="uutils coreutils"
 }
