@@ -5,8 +5,8 @@ LICENSE = "BSD-2-Clause & AOM-Patent-License-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
                     file://PATENTS;md5=a111d47497d3bb49e04eef71377eb8ba \
                    "
-SRCREV = "6054fae218eda6e53e1e3b4f7ef0fff4877c7bf1"
-SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main \
+SRCREV = "10aece4157eb79315da205f39e19bf6ab3ee30d0"
+SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main;tag=v${PV} \
            file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch"
 
 S = "${WORKDIR}/git"
