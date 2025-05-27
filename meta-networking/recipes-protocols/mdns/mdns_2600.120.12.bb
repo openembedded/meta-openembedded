@@ -13,12 +13,12 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0005-mDNSCore-Fix-broken-debug-parameter.patch \
            file://0006-make-Add-top-level-Makefile.patch \
            file://0009-remove-unneeded-headers.patch \
-           file://0005-Fix-missing-limit-declarations.patch \
            file://0001-Fix-build-with-gcc-15.patch \
+           file://0001-Use-secure_getenv-on-Linux.patch \
            file://mdns.service \
            "
-BRANCH = "main"
-SRCREV = "d89f8d1d0e001b810d6c055aa2a57b768bcf9aa2"
+BRANCH = "rel/mDNSResponder-2600"
+SRCREV = "3a0deda2995d98243dae379bcec10e57928c15e8"
 
 # We install a stub Makefile in the top directory so that the various checks
 # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
