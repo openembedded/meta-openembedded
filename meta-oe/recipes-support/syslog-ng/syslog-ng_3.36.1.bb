@@ -30,6 +30,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://CVE-2022-38725-0006.patch \
            file://CVE-2022-38725-0007.patch \
            file://CVE-2022-38725-0008.patch \
+           file://CVE-2024-47619.patch \
 "
 
 SRC_URI[sha256sum] = "90a25c9767fe749db50f118ddfc92ec71399763d2ecd5ad4f11ff5eea049e60b"
