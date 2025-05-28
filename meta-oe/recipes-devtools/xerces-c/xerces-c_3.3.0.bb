@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SRC_URI = "http://archive.apache.org/dist/xerces/c/3/sources/${BP}.tar.bz2 \
     file://0001-aclocal.m4-don-t-use-full-path-of-with_curl-in-xerce.patch \
 "
-SRC_URI[sha256sum] = "1db4028c9b7f1f778efbf4a9462d65e13f9938f2c22f9e9994e12c49ba97e252"
+SRC_URI[sha256sum] = "ef752578587e26013a933f16d76305c9b43ca32f869e3d3426986e03efb01d64"
 
 inherit autotools
 
@@ -29,7 +29,7 @@ PACKAGES = "libxerces-c \
 
 RPROVIDES:${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
 
-FILES:libxerces-c = "${libdir}/libxerces-c-3.2.so"
+FILES:libxerces-c = "${libdir}/libxerces-c-3.3.so"
 FILES:libxerces-c-dev = "${libdir}/lib*.la \
     ${libdir}/libxerces-c.so \
     ${libdir}/pkgconfig/xerces-c.pc \
