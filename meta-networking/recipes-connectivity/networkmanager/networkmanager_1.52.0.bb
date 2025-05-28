@@ -25,32 +25,34 @@ DEPENDS = " \
     intltool-native \
     libxslt-native \
     libnl \
+    libnvme \
     udev \
     util-linux \
+    util-linux-libuuid \
     libndp \
     curl \
     dbus \
 "
 DEPENDS:append:class-target = " bash-completion"
 
-inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc update-alternatives upstream-version-is-even
+inherit meson gettext update-rc.d systemd gobject-introspection update-alternatives upstream-version-is-even pkgconfig
 
 SRC_URI = " \
-    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+    git://github.com/NetworkManager/NetworkManager.git;protocol=https;branch=main;tag=${PV} \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "fc03e7388a656cebc454c5d89481626122b1975d7c26babc64dc7e488faa66e3"
+SRCREV = "995a28fa1ccc54ad22e794294c3c6783cc3f30ed"
 
-S = "${WORKDIR}/NetworkManager-${PV}"
+S = "${WORKDIR}/git"
 
 # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
 NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??= "auto"
 
-# ['dhcpcanon', 'dhclient', 'dhcpcd', 'internal', 'nettools']
+# ['dhclient', 'dhcpcd', 'internal', 'nettools']
 NETWORKMANAGER_DHCP_DEFAULT ??= "internal"
 
 # The default gets detected based on whether /usr/sbin/nft or /usr/sbin/iptables is installed, with nftables preferred.
@@ -65,7 +67,6 @@ EXTRA_OEMESON = "\
     -Dqt=false \
     -Dconfig_dns_rc_manager_default=${NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT} \
     -Dconfig_dhcp_default=${NETWORKMANAGER_DHCP_DEFAULT} \
-    -Ddhcpcanon=false \
     -Diptables=${sbindir}/iptables \
     -Dnft=${sbindir}/nft \
 "
