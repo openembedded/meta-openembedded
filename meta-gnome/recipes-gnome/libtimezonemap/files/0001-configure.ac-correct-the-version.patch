@@ -1,0 +1,29 @@
+From 915bc44d9f243075d084238c72089a346036388c Mon Sep 17 00:00:00 2001
+From: Changqing Li <changqing.li@windriver.com>
+Date: Thu, 29 May 2025 10:08:21 +0800
+Subject: [PATCH] configure.ac: correct the version
+
+The source is here:
+https://salsa.debian.org/cinnamon-team/libtimezonemap
+
+Upstream-Status: Pending [ register account rejected ]
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 3f74dae..24eb0e5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1,5 +1,5 @@
+ AC_INIT([libtimezonemap],
+-        [0.4.4],
++        [0.4.6],
+         [http://bugs.launchpad.net/libtimezonemap],
+         [libtimezonemap],
+         [http://launchpad.net/libtimezonemap])
+-- 
+2.34.1
+
