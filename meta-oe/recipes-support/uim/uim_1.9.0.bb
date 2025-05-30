@@ -25,7 +25,7 @@ LEAD_SONAME = "libuim.so.1"
 COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
 
-inherit features_check autotools pkgconfig gettext gtk-immodules-cache
+inherit features_check autotools pkgconfig gettext qemu gtk-immodules-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -120,10 +120,10 @@ FILES:uim-skk = "${libdir}/uim/plugin/libuim-skk.* \
     ${datadir}/uim/skk*.scm \
 "
 
-PACKAGE_WRITE_DEPS += "qemuwrapper-cross"
+PACKAGE_WRITE_DEPS += "qemu-native"
 pkg_postinst:uim-anthy() {
     if test -n "$D"; then
-        ${@oe.qemu.qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register anthy --path $D${datadir}/uim
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register anthy --path $D${datadir}/uim
     else
 		uim-module-manager --register anthy --path ${datadir}/uim
     fi
@@ -131,7 +131,7 @@ pkg_postinst:uim-anthy() {
 
 pkg_prerm:uim-anthy() {
     if test -n "$D"; then
-        ${@oe.qemu.qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister anthy
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister anthy
     else
 		uim-module-manager --path ${datadir}/uim --unregister anthy
     fi
@@ -139,7 +139,7 @@ pkg_prerm:uim-anthy() {
 
 pkg_postinst:uim-skk() {
     if test -n "$D"; then
-        ${@oe.qemu.qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register skk --path $D${datadir}/uim
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register skk --path $D${datadir}/uim
     else
 		uim-module-manager --register skk --path ${datadir}/uim
     fi
@@ -147,7 +147,7 @@ pkg_postinst:uim-skk() {
 
 pkg_postrm:uim-skk() {
     if test -n "$D"; then
-        ${@oe.qemu.qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister skk
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister skk
     else
 		uim-module-manager --path ${datadir}/uim --unregister skk
     fi
