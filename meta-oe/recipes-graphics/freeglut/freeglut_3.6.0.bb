@@ -1,10 +1,15 @@
 DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
                Utility Toolkit (GLUT) library"
+HOMEPAGE = "https://freeglut.sourceforge.net"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
 
-SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
+SRC_URI = "\
+    https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+    file://0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch \
+"
+
+SRC_URI[sha256sum] = "9c3d4d6516fbfa0280edc93c77698fb7303e443c1aaaf37d269e3288a6c3ea52"
 
 inherit cmake features_check pkgconfig
 
@@ -22,7 +27,10 @@ CFLAGS += "-Wno-implicit-function-declaration"
 
 PROVIDES += "mesa-glut"
 
-DEPENDS = "virtual/libgl libxi"
+DEPENDS += "virtual/libgl libxi"
+
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
 do_install:append() {
     # Remove buildpaths
