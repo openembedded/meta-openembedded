@@ -35,7 +35,7 @@ EXTRA_OECONF = "--prefix=${prefix} \
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
 
-EXTRA_OEMAKE += 'libdir=${nonarch_libdir} LDLIBS="${LDLIBS}" enable_test=no'
+EXTRA_OEMAKE += 'libdir=${nonarch_libdir} LDLIBS="${LDLIBS}" enable_test=no DRACUT_FULL_VERSION=${PV}'
 
 CFLAGS:append = " -fPIC"
 LDLIBS:append:libc-musl = " -lfts"
