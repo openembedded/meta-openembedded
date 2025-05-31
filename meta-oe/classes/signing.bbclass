@@ -145,9 +145,43 @@ signing_import_cert_from_der() {
     signing_pkcs11_tool --type cert --write-object "${der}" --label "${cert_name}"
 }
 
+# signing_import_set_ca <cert_name> <ca_cert_name>
+#
+# Link the certificate from <cert_name> to its issuer stored in
+# <ca_cert_name> By walking this linked list a CA-chain can later be
+# reconstructed from the involed roles.
+signing_import_set_ca() {
+    local cert_name="${1}"
+    local ca_cert_name="${2}"
+
+    echo "_SIGNING_CA_${cert_name}_=\"${ca_cert_name}\"" >> $_SIGNING_ENV_FILE_
+    echo "added link from ${cert_name} to ${ca_cert_name}"
+}
+
+# signing_get_ca <cert_name>
+#
+# returns the <ca_cert_name> that has been set previously through
+# signing_import_set_ca; or the empty string if none was set
+signing_get_ca() {
+    local cert_name="${1}"
+
+    eval local ca_cert_name="\$_SIGNING_CA_${cert_name}_"
+    echo "$ca_cert_name"
+}
+
+# signing_has_ca <cert_name>
+#
+# check if the cert_name links to another cert_name that is its
+# certificate authority/issuer.
+signing_has_ca() {
+    local ca_cert_name="$(signing_get_ca ${1})"
+
+    test -n "$ca_cert_name"
+    return $?
+}
+
 # signing_import_cert_chain_from_pem <role> <pem>
 #
-
 # Import a certificate *chain* from a PEM file to a role.
 # (e.g. multiple ones concatenated in one file)
 #
