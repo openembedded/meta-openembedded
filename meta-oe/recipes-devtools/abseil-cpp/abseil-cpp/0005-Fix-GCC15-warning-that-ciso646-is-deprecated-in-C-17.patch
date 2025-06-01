@@ -1,0 +1,43 @@
+From aa102147cdfff3aa971e61038a6455bff6828350 Mon Sep 17 00:00:00 2001
+From: Derek Mauro <dmauro@google.com>
+Date: Tue, 29 Apr 2025 06:23:36 -0700
+Subject: [PATCH] Fix GCC15 warning that <ciso646> is deprecated in C++17
+
+PiperOrigin-RevId: 752709743
+Change-Id: I4d6b52bca913d888818e1380268089743b03ca2b
+Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/5f3435aba00bcd7f12062d2e8e1839b4eaf1a575]
+---
+ absl/hash/internal/hash.h | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/absl/hash/internal/hash.h b/absl/hash/internal/hash.h
+index f4a0d785..6937f413 100644
+--- a/absl/hash/internal/hash.h
++++ b/absl/hash/internal/hash.h
+@@ -26,13 +26,25 @@
+ 
+ #include "absl/base/config.h"
+ 
++// GCC15 warns that <ciso646> is deprecated in C++17 and suggests using
++// <version> instead, even though <version> is not available in C++17 mode prior
++// to GCC9.
++#if defined(__has_include)
++#if __has_include(<version>)
++#define ABSL_INTERNAL_VERSION_HEADER_AVAILABLE 1
++#endif
++#endif
++
+ // For feature testing and determining which headers can be included.
+-#if ABSL_INTERNAL_CPLUSPLUS_LANG >= 202002L
++#if ABSL_INTERNAL_CPLUSPLUS_LANG >= 202002L || \
++    ABSL_INTERNAL_VERSION_HEADER_AVAILABLE
+ #include <version>
+ #else
+ #include <ciso646>
+ #endif
+ 
++#undef ABSL_INTERNAL_VERSION_HEADER_AVAILABLE
++
+ #include <algorithm>
+ #include <array>
+ #include <bitset>
