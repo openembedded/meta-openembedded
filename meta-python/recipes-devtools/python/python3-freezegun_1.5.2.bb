@@ -3,13 +3,9 @@ HOMEPAGE = "https://github.com/spulec/freezegun"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=acf1d209bb6eddae4cbe6ffd6a0144fe"
 
-SRC_URI[sha256sum] = "b29dedfcda6d5e8e083ce71b2b542753ad48cfec44037b3fc79702e2980a89e9"
+SRC_URI[sha256sum] = "a54ae1d2f9c02dbf42e02c18a3ab95ab4295818b549a34dac55592d72a905181"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
-
-SRC_URI += " \
-        file://1777174bb97c0b514033a09b820078b0d117f4a8.patch \
-"
 
 RDEPENDS:${PN}-ptest += " \
         python3-sqlite3 \
