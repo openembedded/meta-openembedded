@@ -36,13 +36,24 @@ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxt"
 PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxml2"
 
 do_install:append:class-target() {
-    for file in MagickCore-config.im7 MagickWand-config.im7 Magick++-config.im7; do
-        sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${bindir}/"$file"
+    for file in MagickCore-config.im7 MagickWand-config.im7; do
+        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/$file"
     done
-    sed -i 's,${S},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-    sed -i 's,${B},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-    sed -i 's,${RECIPE_SYSROOT},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-    sed -i 's,${HOSTTOOLS_DIR},${bindir},g' ${D}${sysconfdir}/ImageMagick-7/delegates.xml
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'cxx', 'true', 'false', d)}; then
+        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/Magick++-config.im7"
+    fi
+
+    if ${@bb.utils.contains('PACKAGECONFIG', 'xml', 'true', 'false', d)}; then
+        xml_config="${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml"
+        sed -i 's,${S},,g' "$xml_config"
+        sed -i 's,${B},,g' "$xml_config"
+        sed -i 's,${RECIPE_SYSROOT},,g' "$xml_config"
+    fi
+
+    if ${@bb.utils.contains_any('PACKAGECONFIG', 'webp openjpeg', 'true', 'false', d)}; then
+        sed -i 's,${HOSTTOOLS_DIR},${bindir},g' "${D}${sysconfdir}/ImageMagick-7/delegates.xml"
+    fi
 }
 
 FILES:${PN} += "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
