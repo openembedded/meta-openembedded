@@ -1,0 +1,33 @@
+From d04ea418c5fcfec2f6fbb2dd9f982ddf12c5be87 Mon Sep 17 00:00:00 2001
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Tue, 3 Jun 2025 10:02:58 +0200
+Subject: [PATCH] pcp-htop: fix header build race condition
+
+.c and .h files are soft-linked before being compiled. Under heavy load
+or a build with a high CPU count, the compilation can start before
+header files are softlinked, resulting in a build error:
+| pcp-htop.c:13:10: fatal error: CommandLine.h: No such file or directory
+|    13 | #include "CommandLine.h"
+|       |          ^~~~~~~~~~~~~~~
+
+Fix this by adding the make dependency between object files and the
+headers.
+
+Upstream-Status: Submitted [https://github.com/performancecopilot/pcp/pull/2217]
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ src/pcp/htop/GNUmakefile | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/pcp/htop/GNUmakefile b/src/pcp/htop/GNUmakefile
+index 3e29638d6..898f0b766 100644
+--- a/src/pcp/htop/GNUmakefile
++++ b/src/pcp/htop/GNUmakefile
+@@ -224,6 +224,7 @@ default:	build-me
+ include $(BUILDRULES)
+ 
+ ifeq "$(HAVE_NCURSESW)" "true"
++$(OBJECTS): $(HFILES)
+ build-me: $(TOPXFILES) $(SUBXFILES) $(CFGXFILES) $(CMDTARGET) $(DISTLINKS) $(MAN_PAGES)
+ 
+ install: default

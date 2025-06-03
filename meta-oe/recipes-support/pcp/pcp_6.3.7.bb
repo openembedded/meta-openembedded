@@ -14,6 +14,7 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
             file://pass-options-to-AR.patch \
             file://fix_parallel_make.patch \
 			file://0001-bind2-Use-pmcpp-from-native-builds.patch \
+            file://0001-pcp-htop-fix-header-build-race-condition.patch \
            "
 
 export PCP_DIR = "${RECIPE_SYSROOT_NATIVE}"
