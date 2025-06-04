@@ -6,13 +6,13 @@ HOMEPAGE = "https://jqlang.github.io/jq/"
 BUGTRACKER = "https://github.com/jqlang/jq/issues"
 SECTION = "utils"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=488f4e0b04c0456337fb70d1ac1758ba"
+LIC_FILES_CHKSUM = "file://COPYING;md5=08ffb5ac7e7e6bfc66968b89f01f512a"
 
 GITHUB_BASE_URI = "https://github.com/jqlang/${BPN}/releases/"
 SRC_URI = "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
     file://run-ptest \
     "
-SRC_URI[sha256sum] = "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2"
+SRC_URI[sha256sum] = "91811577f91d9a6195ff50c2bffec9b72c8429dc05ec3ea022fd95c06d2b319c"
 
 inherit autotools github-releases ptest
 
@@ -25,9 +25,6 @@ PACKAGECONFIG[maintainer-mode] = "--enable-maintainer-mode,--disable-maintainer-
 PACKAGECONFIG[oniguruma] = "--with-oniguruma,--without-oniguruma,onig"
 # enable if you want ptest running under valgrind
 PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind"
-
-# Gets going with gcc-15 but See if it can be removed with next upgrade
-CFLAGS += "-std=gnu17"
 
 do_configure:append() {
 	sed -i -e "/^ac_cs_config=/ s:${WORKDIR}::g" ${B}/config.status
