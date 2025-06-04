@@ -13,7 +13,7 @@ header files are softlinked, resulting in a build error:
 Fix this by adding the make dependency between object files and the
 headers.
 
-Upstream-Status: Submitted [https://github.com/performancecopilot/pcp/pull/2217]
+Upstream-Status: Backport [https://github.com/performancecopilot/pcp/commit/0ca303467ce382127cd9676e288bf7690a93f084]
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
  src/pcp/htop/GNUmakefile | 1 +
