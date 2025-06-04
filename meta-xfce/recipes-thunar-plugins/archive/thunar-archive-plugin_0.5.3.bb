@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
 
 inherit thunar-plugin
 
-SRC_URI[sha256sum] = "6379f877bcfc0ea85db9f43723b6fb317893050c712bd03c2ae3232fb9d5ade3"
+SRC_URI[sha256sum] = "cc0ffc86dc48e72edc6f6a61ad4345f99018526d5d854360960759ce1ec2ca22"
 
 # install tap files in ${libdir}/thunar-archive-plugin
 EXTRA_OECONF += "--libexecdir=${libdir}"
