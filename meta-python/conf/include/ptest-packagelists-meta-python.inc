@@ -72,6 +72,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pyroute2 \
     python3-pyserial \
     python3-pytest-mock \
+    python3-pytest-sugar \
     python3-pytoml \
     python3-pyyaml-include \
     python3-pydbus \
