@@ -32,6 +32,7 @@ RDEPENDS:${PN}-ptest += "\
     python3-mypy \
     python3-pytest \
     python3-pytest-cov \
+    python3-pytest-sugar \
     python3-pytest-xdist \
     python3-rich \
     python3-shellingham \
