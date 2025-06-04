@@ -24,7 +24,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 
 RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
                    parted python3-pyparted multipath-tools \
-                   lsof cryptsetup libblockdev \
+                   lsof cryptsetup libblockdev libblockdev-bin \
                    libbytesize \
 "
 
