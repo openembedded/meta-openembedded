@@ -3,7 +3,7 @@
 
 DESCRIPTION = "FreeRDP RDP client & server library"
 HOMEPAGE = "http://www.freerdp.com"
-DEPENDS = "openssl alsa-lib libusb1"
+DEPENDS = "openssl libusb1"
 SECTION = "net"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
-    -DWITH_ALSA=ON \
     -DWITH_FFMPEG=OFF \
     -DWITH_CUNIT=OFF \
     -DWITH_NEON=OFF \
@@ -38,7 +37,7 @@ EXTRA_OECMAKE += " \
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'directfb pam pulseaudio wayland x11', d)}\
-    gstreamer cups pcsc server \
+    alsa gstreamer cups pcsc server \
 "
 
 X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
@@ -51,6 +50,7 @@ PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaud
 PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
 PACKAGECONFIG[server] = "-DWITH_SERVER=ON,-DWITH_SERVER=OFF"
+PACKAGECONFIG[alsa] = "-DWITH_ALSA=ON,-DWITH_ALSA=OFF,alsa-lib"
 
 PACKAGES =+ "libfreerdp"
 
