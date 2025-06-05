@@ -101,3 +101,6 @@ do_install_ptest () {
     sed -i -e 's#${PYTHON}#/usr/bin/python3#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
     sed -i -e 's#${WORKDIR}##g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
 }
+
+# It needs fortran compiler and we do not enable fortran with clang yet
+TOOLCHAIN = "gcc"
