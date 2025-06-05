@@ -7,6 +7,6 @@ inherit thunar-plugin features_check
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRC_URI[sha256sum] = "0afc9b9ff31c88b208ca9a58bc61d95f9f5408f2adbcd7fe911dfce9e22fba44"
+SRC_URI[sha256sum] = "34d4d69d413e63837c5083506b4dbf65f1fd2efe17667b1d7ad0699e1e2eb07d"
 
 RDEPENDS:${PN} += "samba-server"

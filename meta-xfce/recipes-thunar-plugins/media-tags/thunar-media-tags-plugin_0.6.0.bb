@@ -7,4 +7,4 @@ inherit thunar-plugin
 
 DEPENDS += "taglib"
 
-SRC_URI[sha256sum] = "105a72d51c7fbcc690c9b9a850f3743accbd9bf5dc51480b5ea283dfde96d61e"
+SRC_URI[sha256sum] = "b62dc047100346324e63d46acaaa497e8d7fccd1d10ef5bfb8370fd666a48c4a"
