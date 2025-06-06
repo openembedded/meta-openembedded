@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
 
 DEPENDS += "gnutls"
 
-SRC_URI[sha256sum] = "054964e9fe4ca668486400991ce1ea01d07aac7ba235f4b14d4a8f7d9800046a"
+SRC_URI[sha256sum] = "c4783f1533891cd2e0c34066da859864dce45a23caa6015b58cb9fa9d65a7e44"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
