@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "ad0ff05d88ba393b7c8922f8233edd33fc0a4e8b000b61de1f8f3a10c5ae5324"
+SRC_URI[sha256sum] = "5219b2ec0f203ab65990671a95b1607f539201e09e8910b854aea848d478cb53"
 
 FILES:${PN} += "${datadir}/xfce4/eyes"
