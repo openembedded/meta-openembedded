@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
 
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "f11d0e6d03f22ab02c2e6b507d365b5a918532e8819e50647ee1860eca60c743"
+SRC_URI[sha256sum] = "ba766a5d31580fad043fbd1fd66b811cbda706229473d24a734a590d49ef710e"
 
 PACKAGECONFIG ??= "notify"
 PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
