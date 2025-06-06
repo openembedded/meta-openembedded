@@ -5,4 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
 
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "948d08ee5f2140847f109b531bc1d4cc6268496913ea7600d3c5ad89025a0362"
+SRC_URI[sha256sum] = "de540562e1ea58f35a9c815e20736d26af541a0a9372011148cb75b5f0b65951"
+
+FILES:${PN} += "${datadir}/xfce4/genmon"
