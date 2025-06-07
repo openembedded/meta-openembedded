@@ -4,9 +4,9 @@ Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of p
 HOMEPAGE = "https://twisted.org"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5316a448a61a38d722c291f78d915d11"
 
-SRC_URI[sha256sum] = "695d0556d5ec579dcc464d2856b634880ed1319f45b10d19043f2b57eb0115b5"
+SRC_URI[sha256sum] = "1deb272358cb6be1e3e8fc6f9c8b36f78eb0fa7c2233d2dbe11ec6fee04ea316"
 
 inherit pypi python_hatchling
 
@@ -41,6 +41,10 @@ RDEPENDS:${PN} = "\
     ${PN}-words \
     ${PN}-zsh \
 "
+
+# Optional dependencies
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[websocket] = ",,,python3-wsproto"
 
 RDEPENDS:${PN}-core = "python3-asyncio \
                        python3-attrs \
