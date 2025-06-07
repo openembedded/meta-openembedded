@@ -1,7 +1,7 @@
 SUMMARY = "libheif is an ISO/IEC 23008-12:2017 HEIF and AVIF (AV1 Image File Format) file format decoder and encoder"
 HOMEPAGE = "https://github.com/strukturag/libheif"
 LICENSE = "LGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f07b2bc152eaee52edbd338825f474d4"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9c0edc7369719b2c47d44e80ba74b4b7"
 LICENSE_FLAGS = "commercial"
 
 COMPATIBLE_MACHINE:powerpc64le = "null"
@@ -9,7 +9,7 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
 SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
-SRCREV = "cd95b113d78d0696105a9e678cbd19487ee13d6c"
+SRCREV = "5e9deb19fe6b3768af0bb8e9e5e8438b15171bf3"
 
 inherit cmake pkgconfig
 
