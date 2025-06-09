@@ -10,16 +10,23 @@ SECTION = "Applications/System"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-inherit autotools gtk-doc gobject-introspection gettext features_check
+inherit autotools gettext gtk-doc gobject-introspection features_check
 
 DEPENDS = "autoconf-archive-native gtk+3 libnotify"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
+SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main \
            file://imsettings-gcc10.patch \
+           file://0001-remove-man-page.patch \
           "
-SRC_URI[sha256sum] = "45986b9ca1b87b760a5dbaecd9a2b77d080adc47868a0512826077175d5b3ee3"
+SRCREV = "27d84c88831ef76397a15891ba0738ce9a83902a"
+
+S = "${WORKDIR}/git"
+
+do_configure:prepend() {
+    cp ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${AUTOTOOLS_AUXDIR}/
+}
 
 EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
