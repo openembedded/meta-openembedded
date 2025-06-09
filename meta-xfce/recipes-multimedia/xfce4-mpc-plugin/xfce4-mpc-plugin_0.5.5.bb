@@ -14,4 +14,4 @@ LICENSE_FLAGS = "commercial"
 # for now we recommend our own mpd-server
 RRECOMMENDS:${PN} = "mpd"
 
-SRC_URI[sha256sum] = "0467fb4d1acd982d3c3e0b89cb41019946850524ff19ed0f658a8d56c7b7664d"
+SRC_URI[sha256sum] = "4ce7d77667a263ee9916c0cab2a733b17e3bd65705cd4ed5cec3cbde6e7298cf"
