@@ -1,4 +1,5 @@
 SUMMARY = "Xfce4 Desktop Manager"
+HOMEPAGE = "https://docs.xfce.org/xfce/xfdesktop/start"
 SECTION = "x11/base"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
@@ -21,7 +22,7 @@ inherit xfce features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "227041ba80c7f3eb9c99dec817f1132b35d8aec7a4335703f61ba1735cd65632"
+SRC_URI[sha256sum] = "acccde849265bbf4093925ba847977b7abf70bb2977e4f78216570e887c157b8"
 
 PACKAGECONFIG ??= "notify"
 PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
