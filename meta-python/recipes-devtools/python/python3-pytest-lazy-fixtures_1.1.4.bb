@@ -12,7 +12,7 @@ HOMEPAGE = "https://github.com/dev-petrov/pytest-lazy-fixtures"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4475e66fcfabe27395e6764c8f69c876"
 
-SRC_URI[sha256sum] = "14ba4154dab52066c1c4d6547cc40bbf60726445cb16f1d2dcc9485cdf38964d"
+SRC_URI[sha256sum] = "c494b52d798890033d64b28687a4d52807c8b0f606d56316e139df0cbe116c57"
 
 inherit pypi python_poetry_core
 
