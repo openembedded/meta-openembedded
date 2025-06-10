@@ -21,6 +21,6 @@ inherit cmake
 
 SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "9509d878ba788271c8b5abca9cfde1720f075335686237b7e9a9e7210fe67c1b"
+SRC_URI[sha256sum] = "8a247f57d1e3e6f6d11413b12a6f28a9d388de110adc0ec608d893180ed7097b"
 
 BBCLASSEXTEND += "native"
