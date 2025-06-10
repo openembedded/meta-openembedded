@@ -10,7 +10,7 @@ SRC_URI = "\
     git://github.com/doxygen/doxygen.git;branch=master;protocol=https \
 "
 
-SRCREV = "26342b775ea25e6fefb53220926b20702c56fcb3"
+SRCREV = "cbe58f6237b2238c9af7f51c6b7afb8bbf52c866"
 
 S = "${WORKDIR}/git"
 
