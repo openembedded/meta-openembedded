@@ -18,6 +18,7 @@ COMPATIBLE_MACHINE:mips64 = "(!.*mips64).*"
 COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:powerpc = "null"
+COMPATIBLE_HOST:powerpc64le = "null"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Do-not-use-glob-in-deps.patch \
