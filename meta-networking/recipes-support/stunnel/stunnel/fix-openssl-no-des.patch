@@ -1,4 +1,4 @@
-From 71751d30ca6bdae6c62e41b8bdd20eb69cecd556 Mon Sep 17 00:00:00 2001
+From e08b9760d319d0334f2aad02d32d791c8ebd8564 Mon Sep 17 00:00:00 2001
 From: Kai Kang <kai.kang@windriver.com>
 Date: Wed, 1 Nov 2017 09:23:41 -0400
 Subject: [PATCH] stunnel: fix compile error when openssl disable des support
@@ -17,10 +17,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
  2 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/src/common.h b/src/common.h
-index f112cf9..8d4be01 100644
+index c2229d0..5eaee8c 100644
 --- a/src/common.h
 +++ b/src/common.h
-@@ -496,7 +496,9 @@ extern char *sys_errlist[];
+@@ -497,7 +497,9 @@ extern char *sys_errlist[];
  #ifndef OPENSSL_NO_MD4
  #include <openssl/md4.h>
  #endif /* !defined(OPENSSL_NO_MD4) */
@@ -31,7 +31,7 @@ index f112cf9..8d4be01 100644
  #include <openssl/dh.h>
  #if OPENSSL_VERSION_NUMBER<0x10100000L
 diff --git a/src/protocol.c b/src/protocol.c
-index 616a65f..5ccbcb0 100644
+index c390a6f..7aca745 100644
 --- a/src/protocol.c
 +++ b/src/protocol.c
 @@ -82,7 +82,7 @@ NOEXPORT void ldap_client_middle(CLI *);
