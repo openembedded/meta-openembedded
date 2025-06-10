@@ -8,7 +8,7 @@ DEPENDS = "osinfo-db-tools-native"
 
 SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https"
 
-SRCREV = "5be10e2c781b62bbaa55bd8f9ae990697fc325b4"
+SRCREV = "62f8adceb8ee88e643a134f2cfaf04fc11b9fc51"
 
 S = "${WORKDIR}/git"
 
