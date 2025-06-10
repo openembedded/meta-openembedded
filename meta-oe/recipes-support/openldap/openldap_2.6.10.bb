@@ -21,7 +21,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
 "
 
-SRC_URI[sha256sum] = "2cb7dc73e9c8340dff0d99357fbaa578abf30cc6619f0521972c555681e6b2ff"
+SRC_URI[sha256sum] = "c065f04aad42737aebd60b2fe4939704ac844266bc0aeaa1609f0cad987be516"
 
 DEPENDS = "util-linux groff-native"
 
