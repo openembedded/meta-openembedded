@@ -14,20 +14,6 @@ DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
 PROVIDES = "mongoose graphblas"
 RPROVIDES:${PN} = "mongoose graphblas"
 
-# The values of $CC, $CXX, and $LD that Bitbake uses have spaces in them which
-# causes problems when the SuiteSparse Makefiles try to pass these values on
-# the command line. To get around this problem, set these variables to only the
-# program name and prepend the rest of the value onto the corresponding FLAGS
-# variable.
-CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
-export CC := "${@d.getVar('CC').split()[0]}"
-
-CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
-export CXX := "${@d.getVar('CXX').split()[0]}"
-
-LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
-export LD := "${@d.getVar('LD').split()[0]}"
-
 export CMAKE_OPTIONS = " \
     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
     -DCMAKE_INSTALL_LIBDIR=${baselib} \
