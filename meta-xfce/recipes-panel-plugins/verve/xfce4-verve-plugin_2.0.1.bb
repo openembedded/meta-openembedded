@@ -1,5 +1,5 @@
 SUMMARY = "Verve panel plugin is a comfortable command line plugin for the Xfce panel"
-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-verve-plugin"
+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-verve-plugin/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 

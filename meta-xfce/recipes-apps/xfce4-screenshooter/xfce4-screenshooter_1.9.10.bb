@@ -1,5 +1,5 @@
 SUMMARY = "Application to take screenshots"
-HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-screenshooter"
+HOMEPAGE = "https://docs.xfce.org/apps/screenshooter/start"
 SECTION = "x11/application"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"

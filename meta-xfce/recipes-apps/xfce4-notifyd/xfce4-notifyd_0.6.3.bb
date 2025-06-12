@@ -1,5 +1,5 @@
 SUMMARY = "Easily themable notification daemon with transparency effects"
-HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-notifyd"
+HOMEPAGE = "https://docs.xfce.org/apps/notifyd/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = " \

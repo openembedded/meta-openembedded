@@ -1,5 +1,5 @@
 SUMMARY = "Panel plugin displaying current load of the network interfaces"
-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin"
+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-netload-plugin/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
 

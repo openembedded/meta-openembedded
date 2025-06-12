@@ -1,5 +1,5 @@
 SUMMARY = "Sensors plugin for the Xfce Panel"
-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-sensors-plugin"
+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-sensors-plugin/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b94789bed9aec03b9656a9cc5398c706"
 
