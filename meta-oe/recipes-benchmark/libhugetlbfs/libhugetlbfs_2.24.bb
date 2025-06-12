@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/libhugetlbfs/libhugetlbfs"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-RDEPENDS:${PN} += "bash python3-core"
+RDEPENDS:${PN} += "bash"
 RDEPENDS:${PN}-tests += "bash python3-core python3-resource"
 
 PE = "1"
@@ -47,7 +47,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 LDFLAGS += "-B${S}"
 
-inherit autotools-brokensep cpan-base
+inherit autotools-brokensep
 
 do_configure:prepend() {
     ln -sf ld.hugetlbfs ${S}/ld
