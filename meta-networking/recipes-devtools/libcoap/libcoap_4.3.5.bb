@@ -5,13 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
 HOMEPAGE = "https://libcoap.net/"
 
 LICENSE = "BSD-2-Clause & BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9aa68c0f6785376aa8ec7f4f1aa6ae3c"
 
 SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
            file://run-ptest \
-           file://CVE-2024-0962.patch \
            "
-SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
+SRCREV = "7cf7465b784baded4de183290c547d582becfd28"
 
 S = "${WORKDIR}/git"
 
