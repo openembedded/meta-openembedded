@@ -2,9 +2,9 @@ SUMMARY = "Simple DNS resolver for asyncio"
 DESCRIPTION = "aiodns provides a simple way for doing asynchronous DNS resolutions using pycares."
 HOMEPAGE = "https://github.com/saghul/aiodns"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a565d8b5d06b9620968a135a2657b093"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d574ab425d1fcb37c9f1ad3961f18527"
 
-SRC_URI[sha256sum] = "24b0ae58410530367f21234d0c848e4de52c1f16fbddc111726a4ab536ec1b2f"
+SRC_URI[sha256sum] = "11264edbab51896ecf546c18eb0dd56dff0428c6aa6d2cd87e643e07300eb310"
 
 PYPI_PACKAGE = "aiodns"
 
