@@ -69,7 +69,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-click-repl \
     python3-click-spinner \
     python3-cmd2 \
-    python3-colorama \
     python3-coloredlogs \
     python3-colorlog \
     python3-colorzero \
