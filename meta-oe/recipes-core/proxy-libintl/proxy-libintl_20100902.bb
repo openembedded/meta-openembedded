@@ -1,5 +1,5 @@
 SUMMARY = "Proxy libintl"
-HOMEPAGE = "http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/"
+HOMEPAGE = "https://download.gnome.org/binaries/win32/dependencies/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/src/proxy-libintl/COPYING.LIB.txt;md5=bc400bc21422f9a92e76ec2c5167ca2e"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/src/proxy-libintl/COPYING.LIB.txt;md5=bc
 PROVIDES = "virtual/libintl"
 
 SRC_URI = " \
-    http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/${BPN}-dev_${PV}_win32.zip \
+    https://download.gnome.org/binaries/win32/dependencies/${BPN}-dev_${PV}_win32.zip \
 "
 SRC_URI[sha256sum] = "291ac350cc5eb4a01b0d651ca99fae64cee8a1c06b2005277fab5a4356f9ae91"
 
