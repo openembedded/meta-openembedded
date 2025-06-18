@@ -33,7 +33,13 @@ UPSTREAM_CHECK_URI = "http://cr.yp.to/daemontools/install.html"
 
 S = "${WORKDIR}/admin/${BP}"
 
+# http://errors.yoctoproject.org/Errors/Details/766886/
+# pathexec_run.c:19:17: error: passing argument 2 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
+# pathexec_run.c:19:22: error: passing argument 3 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
+# pathexec_run.c:36:18: error: passing argument 2 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
+# pathexec_run.c:36:23: error: passing argument 3 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
 do_compile() {
+    export CC="$CC -Wno-error=incompatible-pointer-types"
     ./package/compile
 }
 
@@ -48,10 +54,3 @@ do_install:append:class-target() {
 inherit update-alternatives
 ALTERNATIVE_PRIORITY = "100"
 ALTERNATIVE:${PN} = "svc svok"
-
-# http://errors.yoctoproject.org/Errors/Details/766886/
-# pathexec_run.c:19:17: error: passing argument 2 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
-# pathexec_run.c:19:22: error: passing argument 3 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
-# pathexec_run.c:36:18: error: passing argument 2 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]
-# pathexec_run.c:36:23: error: passing argument 3 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types] 
-CC += "-Wno-error=incompatible-pointer-types"
