@@ -37,6 +37,7 @@ $qemu_binary "\$@"
 EOF
         chmod +x ${WORKDIR}/qemuwrapper
 }
+gen_emu:class-native = ""
 
 do_unpack[postfuncs] += "gen_emu"
 
