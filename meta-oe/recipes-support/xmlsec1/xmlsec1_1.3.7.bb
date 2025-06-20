@@ -54,8 +54,11 @@ do_compile_ptest () {
 }
 
 do_install:append() {
-    for i in ${bindir}/xmlsec1-config ${libdir}/xmlsec1Conf.sh \
-        ${libdir}/pkgconfig/xmlsec1-openssl.pc; do
+    for i in \
+        ${bindir}/xmlsec1-config \
+        ${libdir}/xmlsec1Conf.sh \
+        ${libdir}/pkgconfig/xmlsec1-openssl.pc \
+        ${libdir}/pkgconfig/xmlsec1-gnutls.pc; do
         sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
     done
 }
