@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "git://github.com/OpenPrinting/system-config-printer.git;protocol=https;branch=master"
 
 SRCREV = "895d3dec50c93bfd4f142bac9bfcc13051bf84cb"
-S = "${WORKDIR}/git"
 
 inherit autotools gettext pkgconfig python3native features_check
 

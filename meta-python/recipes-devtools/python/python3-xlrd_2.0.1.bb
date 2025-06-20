@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/python-excel/xlrd.git;branch=master;protocol=https \
 "
 SRCREV = "b8d573e11ec149da695d695c81a156232b89a949"
 
-S = "${WORKDIR}/git"
 
 inherit ptest-python-pytest setuptools3
 

@@ -8,7 +8,6 @@ SRCREV = "5b395a946894eb4f4ef5d07c80a50a88573a541e"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
 

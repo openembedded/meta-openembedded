@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
 # upstream updates
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 # installing in /opt/S-suite since the package has
 # dependencies to the directory structure.

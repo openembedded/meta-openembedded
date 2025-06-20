@@ -14,7 +14,7 @@ SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
 SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e4905f6a92084"
 
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 EXTRA_OEMAKE += "LFLAGS='${LDFLAGS}'"
 

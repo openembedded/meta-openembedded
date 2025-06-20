@@ -14,7 +14,6 @@ SRC_URI = " \
 	file://0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch \
 	"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig systemd
 

@@ -8,7 +8,6 @@ SRC_URI = " \
     file://0001-Makefile-add-clean-target.patch \
 "
 SRCREV = "1889e62e2d35ff7aa9baca2bceb14f053785e6f1"
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} LIBDIR=${baselib}"
 

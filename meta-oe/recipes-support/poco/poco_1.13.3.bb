@@ -18,7 +18,6 @@ SRCREV = "7f848d25aa0461d3beeff1189dc61b48ffe8e2f4"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

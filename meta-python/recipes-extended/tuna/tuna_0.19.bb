@@ -7,7 +7,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main"
 
 SRCREV = "b972b8ce386c29bcbcd45029a617db3db9e5b6ca"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += " \
     python3-io \

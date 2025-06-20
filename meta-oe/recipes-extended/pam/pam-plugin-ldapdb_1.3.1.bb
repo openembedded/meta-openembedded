@@ -13,7 +13,6 @@ REQUIRED_DISTRO_FEATURES = "pam"
 SRCREV = "3e026863cad1fd45c760ee1bc93ef4f0606cc852"
 SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 do_install () {
     oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security

@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main"
 
 SRCREV = "ab3f67fc4fad88cdf07b258c08e4164e06bf7506"
 
-S = "${WORKDIR}/git"
 
 JQUERYCOOKIEDIR = "${datadir}/javascript/jquery-cookie"
 JQUERYCOOKIEDOCDIR = "${docdir}/libjs-jquery-cookie"

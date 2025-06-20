@@ -23,7 +23,6 @@ SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 COMPATIBLE_HOST:libc-musl = "null"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd', '', d)}"
 

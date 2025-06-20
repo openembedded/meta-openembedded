@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
            file://0001-test-Including-missing-string.h-for-memcpy.patch"
 SRCREV = "08468cc3830185c75f9e7edefd88aa01e5c2f8ab"
 
-S = "${WORKDIR}/git"
 
 DEPENDS:append:libc-musl = " libucontext"
 XCFLAGS = "-pthread"

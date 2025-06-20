@@ -10,7 +10,7 @@ SRC_URI = "https://moji.or.jp/wp-content/ipafont/IPAfont/IPAfont00303.zip "
 
 SRC_URI[sha256sum] = "f755ed79a4b8e715bed2f05a189172138aedf93db0f465b4e20c344a02766fe5"
 
-S = "${WORKDIR}/IPAfont00303"
+S = "${UNPACKDIR}/IPAfont00303"
 
 PACKAGES = "ttf-ipag ttf-ipagp ttf-ipam ttf-ipamp"
 FONT_PACKAGES = "ttf-ipag ttf-ipagp ttf-ipam ttf-ipamp"

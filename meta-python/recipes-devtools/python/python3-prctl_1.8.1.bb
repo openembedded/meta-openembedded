@@ -7,7 +7,6 @@ SECTION = "devel/python"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
 
-S = "${WORKDIR}/git"
 B = "${S}"
 
 SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"

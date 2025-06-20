@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "e2f389fe3e7a9e4b61488692919ad723b98f3b479b5288f610daa8c27995b351"
 
-S = "${WORKDIR}/perl-ldap-${PV}"
+S = "${UNPACKDIR}/perl-ldap-${PV}"
 
 inherit cpan ptest-perl
 

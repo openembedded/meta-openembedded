@@ -15,7 +15,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.sha256sum] = "6ec264eaa0c4de0adb7202c600170bde9a7fbe4d466bfbe940eaf7faaa6c5974"
 
-S = "${WORKDIR}/${GNOMEBN}-${PV}"
+S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
 EXTRA_OEMESON = "-Dbuild-documentation=false"
 

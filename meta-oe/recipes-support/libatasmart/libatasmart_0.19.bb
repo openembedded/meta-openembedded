@@ -9,7 +9,6 @@ SRC_URI = "git://git.0pointer.net/libatasmart.git;protocol=http;branch=master \
            file://0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit autotools lib_package pkgconfig
 

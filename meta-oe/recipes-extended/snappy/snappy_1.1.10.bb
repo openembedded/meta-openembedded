@@ -15,7 +15,6 @@ SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main \
 
 SRCREV = "dc05e026488865bc69313a68bcc03ef2e4ea8e83"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

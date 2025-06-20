@@ -14,6 +14,5 @@ SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master \
 
 SRCREV = "434f205cbd45de0961cc42e541b5bf54569e912a"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/daq/*.so"

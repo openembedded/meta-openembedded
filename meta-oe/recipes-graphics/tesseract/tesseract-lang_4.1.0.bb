@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SRCREV = "4767ea922bcc460e70b87b1d303ebdfed0897da8"
 SRC_URI = "git://github.com/tesseract-ocr/tessdata.git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit allarch
 

@@ -21,7 +21,6 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
            file://0001-Musl-build-fix.patch;patchdir=third_party/openthread/repo \
            "
 
-S = "${WORKDIR}/git"
 SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
 
 inherit pkgconfig cmake systemd

@@ -22,7 +22,7 @@ RDEPENDS:${PN} = " \
 
 EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
 
-S = "${WORKDIR}/Crypt-OpenSSL-RSA-${PV}"
+S = "${UNPACKDIR}/Crypt-OpenSSL-RSA-${PV}"
 
 inherit cpan ptest-perl
 

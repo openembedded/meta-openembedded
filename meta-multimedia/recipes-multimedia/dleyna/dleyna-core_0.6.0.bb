@@ -15,7 +15,6 @@ PV .= "+git"
 
 SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
 SRCREV = "1c6853f5bc697dc0a8774fd70dbc915c4dbe7c5b"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

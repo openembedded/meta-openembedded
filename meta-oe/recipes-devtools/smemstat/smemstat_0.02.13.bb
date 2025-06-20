@@ -9,7 +9,6 @@ DEPENDS = "ncurses"
 SRC_URI = "git://github.com/ColinIanKing/smemstat.git;protocol=https;branch=master"
 SRCREV = "1edc560602aa116b96408110b8b9d66a4edef60e"
 
-S = "${WORKDIR}/git"
 
 inherit bash-completion
 

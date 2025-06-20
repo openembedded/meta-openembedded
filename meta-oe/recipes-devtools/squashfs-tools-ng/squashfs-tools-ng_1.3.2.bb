@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=a709b68f1ce8a9f10aeea6401446c1f4 \
 SRCREV = "667faf69cc35215e33e747b4bffdcba3643c2629"
 SRC_URI = "git://github.com/AgentD/squashfs-tools-ng.git;protocol=https;branch=fixes-1.3.0"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

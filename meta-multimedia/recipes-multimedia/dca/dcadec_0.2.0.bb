@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/foo86/dcadec.git;protocol=https;branch=master \
            file://0001-define-BASELIB-make-variable.patch \
           "
 
-S = "${WORKDIR}/git"
 
 inherit lib_package
 

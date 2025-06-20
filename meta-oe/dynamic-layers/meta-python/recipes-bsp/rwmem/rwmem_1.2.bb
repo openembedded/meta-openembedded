@@ -20,7 +20,6 @@ SRCREV = "8416326777b2aada0706539b8f9f6acefa476b16"
 SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master \
            file://0001-include-missing-cstdint.patch"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig python3native
 

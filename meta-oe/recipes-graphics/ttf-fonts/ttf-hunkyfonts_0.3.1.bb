@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../COPYRIGHT.TXT;md5=70d34478e38b1ad9995079f9921f9ef7
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
 
-S = "${WORKDIR}/hunkyfonts-${PV}/TTF"
+S = "${UNPACKDIR}/hunkyfonts-${PV}/TTF"
 
 PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
 FONT_PACKAGES = "ttf-hunky-sans ttf-hunky-serif"

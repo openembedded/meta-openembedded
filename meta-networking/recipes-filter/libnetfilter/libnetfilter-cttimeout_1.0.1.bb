@@ -11,6 +11,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_cttimeout/files/libne
 SRC_URI[md5sum] = "ac64b55952b79cb9910db95ce8883940"
 SRC_URI[sha256sum] = "0b59da2f3204e1c80cb85d1f6d72285fc07b01a2f5678abf5dccfbbefd650325"
 
-S = "${WORKDIR}/libnetfilter_cttimeout-${PV}"
+S = "${UNPACKDIR}/libnetfilter_cttimeout-${PV}"
 
 inherit autotools pkgconfig

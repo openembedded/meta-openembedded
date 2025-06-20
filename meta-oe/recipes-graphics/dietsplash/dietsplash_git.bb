@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git;branch=master;protocol=
 
 inherit autotools
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " --with-systemdsystemunitdir=${systemd_unitdir}/system \
                  --disable-staticimages --with-rootdir=${root_prefix}"

@@ -21,7 +21,7 @@ SRC_URI = "\
 
 SRC_URI[sha256sum] = "bd4d4b7e37da02fc67e47ddf20b6f1243c0a7af7b02b918d5e72138ea8727547"
 
-S = "${WORKDIR}/linuxconsoletools-${PV}"
+S = "${UNPACKDIR}/linuxconsoletools-${PV}"
 
 inherit systemd pkgconfig
 

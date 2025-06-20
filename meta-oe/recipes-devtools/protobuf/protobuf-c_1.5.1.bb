@@ -19,7 +19,6 @@ SRC_URI:append:class-native = " file://0001-Makefile.am-do-not-compile-the-code-
 
 SRCREV = "185beed28e65494be7505b30c1afeaf199e19b23"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

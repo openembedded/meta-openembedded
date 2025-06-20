@@ -16,7 +16,6 @@ SRC_URI += "git://github.com/LadislavSopko/mimetic/;branch=master;protocol=https
 
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 CXXFLAGS += "-Wno-narrowing -std=c++14"
 

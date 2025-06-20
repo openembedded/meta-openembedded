@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "f977a25b4116a0a95a7c8a894fd37097abe19af9a6a9ed4d800604ec17
 
 RDEPENDS:${PN} = "libdbi-perl"
 
-S = "${WORKDIR}/DBD-MariaDB-${PV}"
+S = "${UNPACKDIR}/DBD-MariaDB-${PV}"
 
 inherit cpan
 

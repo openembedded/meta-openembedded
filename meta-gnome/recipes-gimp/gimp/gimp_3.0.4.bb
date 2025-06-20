@@ -63,7 +63,6 @@ SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
 SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
 SRCREV = "c1901c5be644ab8dcaf779b1f383bf5370bc90c6"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"

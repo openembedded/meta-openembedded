@@ -8,7 +8,6 @@ SRCREV = "c94c20743ed7d4aa37835a5c46567ab0790d4acc"
 
 SRC_URI = "git://github.com/zeromq/cppzmq.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

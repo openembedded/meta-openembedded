@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=68a088513da90254b2fbe664f42af315"
 SRC_URI = " \
   https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz \
 "
-S = "${WORKDIR}/SDL2_net-${PV}"
+S = "${UNPACKDIR}/SDL2_net-${PV}"
 
 inherit cmake pkgconfig
 

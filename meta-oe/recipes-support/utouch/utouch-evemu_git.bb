@@ -14,6 +14,5 @@ SRCREV = "9752b50e922572e4cd214ac45ed95e4ee410fe24"
 
 PV = "1.0.6+git"
 
-S = "${WORKDIR}/git"
 
 PARALLEL_MAKE = ""

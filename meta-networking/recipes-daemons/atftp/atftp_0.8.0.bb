@@ -11,7 +11,6 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master;protocol=https \
            file://atftpd.service \
 "
 
-S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d systemd
 

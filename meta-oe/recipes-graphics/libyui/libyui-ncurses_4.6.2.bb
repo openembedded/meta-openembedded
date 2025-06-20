@@ -11,7 +11,7 @@ SRC_URI:append:class-target = " file://0001-Fix-the-error-of-can-t-find-header-f
 
 SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
 
-S = "${WORKDIR}/git/libyui-ncurses"
+S = "${UNPACKDIR}/${BP}/libyui-ncurses"
 
 inherit cmake gettext pkgconfig
 

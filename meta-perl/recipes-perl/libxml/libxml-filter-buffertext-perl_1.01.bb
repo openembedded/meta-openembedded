@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "8fd2126d3beec554df852919f4739e689202cbba6a17506e9b66ea1658
 
 LIC_FILES_CHKSUM = "file://BufferText.pm;beginline=88;endline=90;md5=497aa6d79cc84c3d769a2a0016bee928"
 
-S = "${WORKDIR}/XML-Filter-BufferText-${PV}"
+S = "${UNPACKDIR}/XML-Filter-BufferText-${PV}"
 
 inherit cpan
 

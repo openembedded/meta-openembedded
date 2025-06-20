@@ -9,7 +9,6 @@ SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${bindir}

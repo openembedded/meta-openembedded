@@ -18,7 +18,6 @@ DEPENDS += "libdaemon"
 
 RDEPENDS:${PN} = "iproute2-tipc"
 
-S = "${WORKDIR}/git"
 
 do_configure:prepend() {
     ( cd ${S}; ${S}/bootstrap )

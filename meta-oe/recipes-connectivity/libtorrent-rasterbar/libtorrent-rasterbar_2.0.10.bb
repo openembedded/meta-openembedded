@@ -7,13 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8b6cb42d66e6b3c47a909c3ce678a7b"
 DEPENDS = "boost openssl"
 
 SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https \
-	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=git/deps/try_signal;name=try_signal"
+	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal"
 
 SRCREV = "74bc93a37a5e31c78f0aa02037a68fb9ac5deb41"
 SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
 SRCREV_FORMAT .= "_try_signal"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig python3targetconfig
 

@@ -19,7 +19,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master"
 SRCREV = "9e4737f2293c0d127bda92e5b01896df10571424"
 
-S = "${WORKDIR}/git"
 
 do_install:append() {
     sed -i -e 's@${RECIPE_SYSROOT}@@g' ${D}${bindir}/libwmf-config ${D}${libdir}/pkgconfig/libwmf.pc

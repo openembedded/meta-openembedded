@@ -16,7 +16,6 @@ SRC_URI += "git://github.com/westerndigitalcorporation/spdm-utils.git;protocol=h
 include spdm-utils-crates.inc
 
 SRCREV = "f67ac9e00b79f603ecbbd29928a4ecc3dec5abd5"
-S = "${WORKDIR}/git"
 
 # bindgen-cli comes from meta-clang and depends on libclang
 DEPENDS += "libspdm udev bindgen-cli-native pciutils"

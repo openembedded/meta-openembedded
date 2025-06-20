@@ -11,7 +11,6 @@ SRCREV = "2d373432e604960c1dcc14fb97098febe4d64025"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

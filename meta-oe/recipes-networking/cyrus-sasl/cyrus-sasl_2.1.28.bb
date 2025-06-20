@@ -24,7 +24,6 @@ SRC_URI = " \
 
 UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig useradd systemd
 

@@ -38,7 +38,7 @@ SRC_URI[sha256sum] = "b68ce6eb0ccd2870fa3c8c334f2028b5d16606fd41308696c17b71959f
 
 inherit pkgconfig waf-samba ptest
 
-S = "${WORKDIR}/ldb-${PV}"
+S = "${UNPACKDIR}/ldb-${PV}"
 
 # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
 # to cross Popen

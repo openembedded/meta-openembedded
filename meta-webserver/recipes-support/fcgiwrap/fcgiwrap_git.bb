@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/gnosek/fcgiwrap.git;protocol=https;branch=${BRANCH} 
 BRANCH = "master"
 SRCREV = "99c942c90063c73734e56bacaa65f947772d9186"
 
-S = "${WORKDIR}/git"
 CFLAGS =+ "-I${B}"
 EXTRA_OEMAKE = "VPATH=${S}"
 

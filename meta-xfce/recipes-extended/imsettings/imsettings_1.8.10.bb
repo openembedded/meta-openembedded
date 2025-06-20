@@ -22,7 +22,6 @@ SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main \
           "
 SRCREV = "27d84c88831ef76397a15891ba0738ce9a83902a"
 
-S = "${WORKDIR}/git"
 
 do_configure:prepend() {
     cp ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${AUTOTOOLS_AUXDIR}/

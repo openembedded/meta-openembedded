@@ -28,7 +28,6 @@ SRC_URI = " \
     file://run-ptest \
 "
 SRCREV = "c497eff1ae8c4cfd4fdff370f04c78fa0584f4f3"
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
 

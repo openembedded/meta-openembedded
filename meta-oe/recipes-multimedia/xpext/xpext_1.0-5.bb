@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db043791349ba57ad1169e1c92477cb6"
 
 SRC_URI = "http://repository.maemo.org/pool/maemo/ossw/source/x/${BPN}/${BPN}_${PV}.tar.gz \
            file://auxdir.patch;striplevel=0"
-S = "${WORKDIR}/xpext-1.0"
+S = "${UNPACKDIR}/xpext-1.0"
 
 inherit autotools pkgconfig features_check
 # depends on virtual/libx11

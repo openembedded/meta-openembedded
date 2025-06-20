@@ -6,7 +6,6 @@ PV = "2+git"
 SRCREV = "8882328c08ba2efb13c049812098f1d0cb8adf0c"
 SRC_URI = "git://github.com/wkz/phytool.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 # The Makefile has "$PREFIX/bin" hardcoded into it, hence not using $bindir here
 do_install() {

@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
 # Tag v0.9.6
 SRCREV = "144d1e7c29b3b0c6dede7917a0476cc95248559c"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG[build_tests] = "-Dbuild_tests=true,-Dbuild_tests=false,"
 

@@ -12,7 +12,6 @@ PV = "0.0.1+git"
 
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

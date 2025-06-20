@@ -9,7 +9,6 @@ SRCREV = "5c2ab772338bcbe516306bf8cf1059ddf2fa6bb7"
 SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

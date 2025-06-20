@@ -16,7 +16,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8cdfa87bc5e09bc07f8cf64135026d91"
 SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main"
 SRCREV = "8a3bdd7e0a43b44e3b32548543128d95e68a3802"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

@@ -11,7 +11,6 @@ SRCREV = "aac7ccaa4d1dea4543453b96f7d6fc47066a57ff"
 PACKAGES = "${PN}-color ${PN}-regular"
 FONT_PACKAGES = "${PN}-color ${PN}-regular"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN}-color = "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
 FILES:${PN}-regular = "${datadir}/fonts/truetype/NotoEmoji-Regular.ttf"

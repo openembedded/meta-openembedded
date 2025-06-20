@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
 SRC_URI = "${CPAN_MIRROR}/authors/id/D/DS/DSKOLL/IO-stringy-${PV}.tar.gz"
 SRC_URI[sha256sum] = "8c67fd6608c3c4e74f7324f1404a856c331dbf48d9deda6aaa8296ea41bf199d"
 
-S = "${WORKDIR}/IO-stringy-${PV}"
+S = "${UNPACKDIR}/IO-stringy-${PV}"
 
 inherit cpan
 

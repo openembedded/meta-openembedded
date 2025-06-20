@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
            "
 SRCREV = "7cf7465b784baded4de183290c547d582becfd28"
 
-S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig ptest
 

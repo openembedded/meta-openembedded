@@ -10,4 +10,3 @@ SRCREV_perfetto = "c74251226a8caa0b43377902ee06d2570faa0c15"
 SRCREV_FORMAT = "perfetto"
 PV = "47.0"
 
-S = "${WORKDIR}/git"

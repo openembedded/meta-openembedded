@@ -28,7 +28,7 @@ do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 # We need to set S, for not being set to STAGING_KERNEL_DIR, and by that
 # be wiped when we prune dest below. We just set it to usbip-tools-1.0
-S = "${WORKDIR}/${BP}"
+S = "${UNPACKDIR}/${BP}"
 
 # Copy the source files from KERNEL/tools/usb/usbip to ${S}
 do_configure[prefuncs] += "copy_usbip_source_from_kernel"

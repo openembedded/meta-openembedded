@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https 
            file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig python3-dir python3native siteinfo
 

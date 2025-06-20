@@ -8,7 +8,6 @@ SRC_URI = " \
     file://0001-reproducibility-Prevent-configuration-from-reading-h.patch \
 "
 SRCREV = "adfdf1656f23e5ab3b52c7d7edf91249a4477e8d"
-S = "${WORKDIR}/git"
 
 inherit cmake
 

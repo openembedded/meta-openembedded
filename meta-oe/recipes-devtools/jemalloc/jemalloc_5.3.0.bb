@@ -20,7 +20,6 @@ SRCREV = "630434bb0ac619f7beec927569782d924c459385"
 PV_LONG := "${PV}-171-g${SRCREV}"
 PV .= "+git"
 
-S = "${WORKDIR}/git"
 
 inherit autotools ptest
 

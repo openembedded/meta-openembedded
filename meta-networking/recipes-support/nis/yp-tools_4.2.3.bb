@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/thkukuk/yp-tools;branch=master;protocol=https \
            file://domainname.service \
            "
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "libtirpc libnsl2 virtual/crypt"
 

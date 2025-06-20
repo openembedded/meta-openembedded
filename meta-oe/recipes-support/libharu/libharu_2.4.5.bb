@@ -11,6 +11,5 @@ DEPENDS += "libpng zlib"
 SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https"
 SRCREV = "8fe5a738541a04642885fb7a75b2b5b9c5b416fa"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

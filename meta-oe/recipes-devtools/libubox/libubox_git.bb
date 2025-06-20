@@ -25,7 +25,6 @@ PV = "1.0.1+git"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

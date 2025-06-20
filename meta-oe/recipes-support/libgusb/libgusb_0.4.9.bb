@@ -16,6 +16,5 @@ GIDOCGEN_MESON_OPTION = 'docs'
 
 SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
 SRCREV = "ed31c8134d80d006bd45450e84180be2a7c0742e"
-S = "${WORKDIR}/git"
 
 BBCLASSEXTEND = "native"

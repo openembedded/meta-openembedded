@@ -19,7 +19,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=209;endline=223;md5=3cf363f1e405dea6
 SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Import-Into-${PV}.tar.gz"
 SRC_URI[sha256sum] = "decb259bc2ff015fe3dac85e4a287d4128e9b0506a0b2c5fa7244836a68b1084"
 
-S = "${WORKDIR}/Import-Into-${PV}"
+S = "${UNPACKDIR}/Import-Into-${PV}"
 
 inherit cpan
 

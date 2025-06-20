@@ -16,7 +16,6 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=https;branch=master"
 SRC_URI += "file://0001-build-Define-list-of-libc-feature-test-macros.patch"
 SRCREV = "77ecbaddab0ed2121859926acbfccc9cecdee0db"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "modules"
 PACKAGECONFIG[httpd] = "-Dhttpd=${sbindir}/httpd,,,apache2 mod-dnssd"

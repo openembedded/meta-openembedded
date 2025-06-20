@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/jpbarrette/curlpp.git;branch=master;protocol=https \
 
 SRCREV = "592552a165cc569dac7674cb7fc9de3dc829906f"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig binconfig
 

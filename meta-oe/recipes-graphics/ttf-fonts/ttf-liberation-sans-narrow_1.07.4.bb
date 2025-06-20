@@ -15,7 +15,7 @@ SRC_URI = "https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-${P
 
 SRC_URI[sha256sum] = "61a7e2b6742a43c73e8762cdfeaf6dfcf9abdd2cfa0b099a9854d69bc4cfee5c"
 
-S = "${WORKDIR}/liberation-fonts-ttf-${PV}"
+S = "${UNPACKDIR}/liberation-fonts-ttf-${PV}"
 
 do_install:append () {
     install -d ${D}${datadir}/fonts/TTF/

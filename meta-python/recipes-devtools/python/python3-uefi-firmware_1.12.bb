@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch
 
 SRCREV = "0c5fb74bcecc0e5c80625c38130fe948c2a3656e"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

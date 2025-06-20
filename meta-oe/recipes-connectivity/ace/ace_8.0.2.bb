@@ -20,7 +20,7 @@ CVE_STATUS[CVE-2009-1147] = "cpe-incorrect: this CVE is for vmware ace"
 
 COMPATIBLE_HOST:libc-musl = "null"
 
-S = "${WORKDIR}/ACE_wrappers"
+S = "${UNPACKDIR}/ACE_wrappers"
 B = "${WORKDIR}/ACE_wrappers/ace"
 export ACE_ROOT = "${WORKDIR}/ACE_wrappers"
 

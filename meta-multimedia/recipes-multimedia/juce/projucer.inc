@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH} \
            file://0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch \
            "
 
-S = "${WORKDIR}/git"
 PV = "6.1.6"
 
 JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"

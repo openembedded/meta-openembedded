@@ -29,7 +29,7 @@ ARMPATCHES:arm = " \
                  "
 SRC_URI[sha256sum] = "d673a294f742d59368222ff5c38462d81098c55063799de6fb8a7ba3d4af0436"
 
-S = "${WORKDIR}/klibc-${PV}"
+S = "${UNPACKDIR}/klibc-${PV}"
 
 OPTFLAGS = "${TUNE_CCARGS} -Os -fcommon"
 OPTFLAGS:append = " ${DEBUG_PREFIX_MAP}"

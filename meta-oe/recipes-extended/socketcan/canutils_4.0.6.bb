@@ -14,7 +14,6 @@ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=https;branch
 
 inherit update-alternatives
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/snowballstem/snowball.git;branch=master;protocol=htt
            file://0001-Build-so-lib.patch \
            "
 SRCREV = "48a67a2831005f49c48ec29a5837640e23e54e6b"
-S = "${WORKDIR}/git"
 
 LIBVER = "0.0.0"
 

@@ -37,4 +37,3 @@ SRCREV = "6e0d1238cb4696a9040072a5a28a706e5775c552"
 
 UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
 
-S = "${WORKDIR}/git"

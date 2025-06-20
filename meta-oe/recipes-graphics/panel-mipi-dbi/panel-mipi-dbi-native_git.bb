@@ -15,7 +15,6 @@ SRCREV = "1cbd40135a8c7f25d7b444a7fac77fd3c3ad471e"
 
 SRC_URI = "git://github.com/notro/panel-mipi-dbi.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 inherit native
 

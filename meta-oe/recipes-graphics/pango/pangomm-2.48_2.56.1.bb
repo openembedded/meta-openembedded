@@ -12,7 +12,7 @@ inherit gnomebase features_check
 SRC_URI[archive.sha256sum] = "539f5aa60e9bdc6b955bb448e2a62cc14562744df690258040fbb74bf885755d"
 REQUIRED_DISTRO_FEATURES = "x11"
 
-S = "${WORKDIR}/${GNOMEBN}-${PV}"
+S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
 FILES:${PN} = "${libdir}/lib*.so.*"
 FILES:${PN}-dev += "${libdir}/*/include/ ${libdir}/pangomm-*/"

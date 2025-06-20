@@ -8,7 +8,6 @@ PV .= "+git"
 
 SRC_URI += "gitsm://github.com/Naios/function2;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 inherit ptest

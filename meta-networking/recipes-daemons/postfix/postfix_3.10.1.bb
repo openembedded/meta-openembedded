@@ -32,7 +32,7 @@ SRC_URI[sha256sum] = "75868db7a8ed252cd3a14c13a3ce383ddd42563160c02027d061202ee3
 
 UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.10(\.\d+)+).tar.gz"
 
-S = "${WORKDIR}/postfix-${PV}"
+S = "${UNPACKDIR}/postfix-${PV}"
 
 CLEANBROKEN = "1"
 

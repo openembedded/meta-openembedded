@@ -14,7 +14,6 @@ RDEPENDS:${PN} = "dleyna-connector-dbus"
 PV .= "+git"
 SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
 SRCREV = "eb895ae82715e9889a948ffa810c0f828b4f4c76"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

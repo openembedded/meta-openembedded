@@ -3,7 +3,6 @@ require mdio-tools.inc
 DEPENDS += "virtual/kernel libmnl"
 # This module requires Linux 5.6 higher
 
-S = "${WORKDIR}/git"
 
 inherit module
 

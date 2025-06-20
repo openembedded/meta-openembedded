@@ -9,7 +9,6 @@ inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache f
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
 SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable"
-S = "${WORKDIR}/git"
 SRCREV = "bdacba8afe53066bc3a338997e26fee416af2261"
 
 EXTRA_OEMESON = "-Druntime_deps_check=false \

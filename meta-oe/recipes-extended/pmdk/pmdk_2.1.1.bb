@@ -9,7 +9,6 @@ DEPENDS = "ndctl"
 # Required to have the fts.h header for musl
 DEPENDS:append:libc-musl = " fts"
 
-S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/pmem/pmdk.git;branch=master;protocol=https"
 SRCREV = "0f0ab391d8e3db52f745f33c92b9d9a462bb3695"

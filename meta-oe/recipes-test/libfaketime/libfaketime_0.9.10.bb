@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;protocol=https 
            file://0001-Makefile-Detect-compiler-in-makefile.patch \
            "
 
-S = "${WORKDIR}/git"
 
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 

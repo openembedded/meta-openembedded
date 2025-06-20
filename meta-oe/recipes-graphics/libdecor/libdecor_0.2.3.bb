@@ -12,7 +12,6 @@ DEPENDS = " \
     wayland-protocols \
 "
 
-S = "${WORKDIR}/git"
 SRCREV = "15afd30a6e23e949d022ff18f17dd7fdbd3361e4"
 
 PACKAGECONFIG ?= "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', d)}"

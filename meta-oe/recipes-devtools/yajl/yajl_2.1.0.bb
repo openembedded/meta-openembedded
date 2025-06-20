@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/lloyd/yajl;branch=master;protocol=https \
            "
 SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
 
-S = "${WORKDIR}/git"
 
 inherit cmake lib_package
 

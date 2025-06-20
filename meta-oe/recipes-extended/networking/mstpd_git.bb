@@ -9,7 +9,6 @@ SRC_URI = " \
     file://mstpd.service \
 "
 SRCREV = "181c453fc1a00573e19f14960dcc54ad84beea7c"
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+){2,})"
 

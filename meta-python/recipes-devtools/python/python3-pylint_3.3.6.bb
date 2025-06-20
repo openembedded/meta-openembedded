@@ -12,7 +12,6 @@ SRC_URI += "git://github.com/pylint-dev/pylint;branch=maintenance/3.3.x;protocol
 
 inherit python_setuptools_build_meta ptest
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += "\
     python3-astroid \

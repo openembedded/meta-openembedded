@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/performancecopilot/pcp;branch=stable;protocol=https 
 
 SRCREV = "d8d97b79ee47d9dfb076a3242564ed3cae04eba9"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3-base pkgconfig autotools-brokensep
 

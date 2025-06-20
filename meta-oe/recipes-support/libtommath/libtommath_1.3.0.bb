@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
 
 SRCREV = "95d80fd8229d05dd6cb4ec88bc8d4f5377ff00ef"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' 'CFLAGS=${CFLAGS}'"
 

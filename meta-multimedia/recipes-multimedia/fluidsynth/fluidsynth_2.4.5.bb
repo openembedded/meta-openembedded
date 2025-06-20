@@ -13,7 +13,6 @@ SRC_URI = " \
 "
 SRCREV = "9f2edaa3cbd456997cb420fb68b6f960faaafd12"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig lib_package
 

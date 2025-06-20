@@ -16,7 +16,6 @@ DEPENDS = "zlib openssl zstd"
 
 inherit cmake
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${datadir}"
 

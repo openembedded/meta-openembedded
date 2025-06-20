@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git;branch=master;protocol
            file://0001-http-fetch-Pass-a-non-null-buffer-to-ne_set_request_.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

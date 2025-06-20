@@ -16,7 +16,6 @@ LIC_FILES_CHKSUM = "\
 SRCREV = "858ce1b38e1534c2602eb431124b5dca706bc746"
 SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 inherit meson
 

@@ -11,7 +11,6 @@ SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
 
 FILES:${PN} = "${datadir}/ace-builds"
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "rsync-native"
 

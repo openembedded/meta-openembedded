@@ -15,7 +15,6 @@ DEPENDS = " \
     libgudev \
 "
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

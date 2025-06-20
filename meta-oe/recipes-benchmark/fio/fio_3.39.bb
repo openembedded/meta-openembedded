@@ -27,7 +27,6 @@ SRCREV = "a6e474c9e896e4ba1eb40066a03402afb040710a"
 
 UPSTREAM_CHECK_GITTAGREGEX = "fio-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 # avoids build breaks when using no-static-libs.inc
 DISABLE_STATIC = ""

@@ -11,7 +11,6 @@ DEPENDS = "curl openssl"
 SRC_URI = "git://github.com/libcpr/cpr.git;protocol=https;branch=1.10.x"
 SRCREV = "3b15fa82ea74739b574d705fea44959b58142eb8"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

@@ -12,7 +12,7 @@ VERMINOR = "${@get_minor_dir("${PV}")}"
 REALNAME = "${@get_real_name("${BPN}")}"
 
 SRC_URI = "${GNOME_MIRROR}/${REALNAME}/${VERMINOR}/${REALNAME}-${PV}.tar.xz;name=archive"
-S = "${WORKDIR}/${REALNAME}-${PV}"
+S = "${UNPACKDIR}/${REALNAME}-${PV}"
 
 CLUTTERBASEBUILDCLASS ??= "autotools"
 inherit ${CLUTTERBASEBUILDCLASS} pkgconfig gtk-doc gettext

@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 
 SRC_URI[sha256sum] = "17f515970b04ed7900b733c95fd8091f4f85e52f1fb5f268757f25c858eb1f7b"
 
-S = "${WORKDIR}/dirty_equals-${PV}"
+S = "${UNPACKDIR}/dirty_equals-${PV}"
 
 inherit pypi python_hatchling
 

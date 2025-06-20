@@ -20,7 +20,6 @@ SRC_URI = " \
 
 SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
 
-S = "${WORKDIR}/git"
 
 inherit autotools ptest
 

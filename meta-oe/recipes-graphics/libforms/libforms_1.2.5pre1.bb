@@ -18,7 +18,7 @@ inherit autotools features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl x11"
 
-S = "${WORKDIR}/xforms-${PV}"
+S = "${UNPACKDIR}/xforms-${PV}"
 
 DEPENDS = "libxpm jpeg libx11 virtual/libgl"
 RDEPENDS:${PN} = "bash"

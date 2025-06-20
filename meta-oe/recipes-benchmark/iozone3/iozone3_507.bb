@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "1e8087ada056f5d8018ee0bc76686d416fc2251ed03038055dbd0af78d
 
 UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
 
-S = "${WORKDIR}/${BPN}_${PV}/src/current"
+S = "${UNPACKDIR}/${BPN}_${PV}/src/current"
 
 #
 # All other arches can use the default OEMAKE except those

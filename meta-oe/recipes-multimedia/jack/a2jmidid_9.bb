@@ -16,7 +16,6 @@ SRC_URI = " \
     file://ppc_musl_ucontext.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

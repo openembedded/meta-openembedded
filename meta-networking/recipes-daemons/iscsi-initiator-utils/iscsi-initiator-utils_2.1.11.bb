@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
            file://iscsi-initiator-targets.service \
            file://set_initiatorname \
            "
-S = "${WORKDIR}/git"
 
 inherit update-rc.d systemd autotools pkgconfig
 

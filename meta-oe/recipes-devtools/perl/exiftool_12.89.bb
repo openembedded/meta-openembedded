@@ -10,7 +10,6 @@ inherit cpan
 SRCREV = "e04534a40925354187e8432d44248229d774f34a"
 SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} = " \
     perl \

@@ -13,7 +13,6 @@ inherit autotools-brokensep pkgconfig
 SRC_URI = "git://github.com/akopytov/sysbench.git;protocol=https;branch=master"
 SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
 
-S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64).*-linux*"
 

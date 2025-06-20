@@ -9,7 +9,6 @@ DEPENDS = "glib-2.0 dbus dleyna-core"
 
 SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
 SRCREV = "de913c35e5c936e2d40ddbd276ee902cd802bd3a"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

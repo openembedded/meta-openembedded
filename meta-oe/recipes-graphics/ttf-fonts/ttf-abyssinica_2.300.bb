@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://OFL.txt;md5=6c56db018aa8803f8aff326829e3ce32"
 
 SRCNAME = "AbyssinicaSIL"
 SRC_URI = "http://software.sil.org/downloads/r/abyssinica/${SRCNAME}-${PV}.zip"
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
 UPSTREAM_CHECK_URI = "https://software.sil.org/abyssinica/download/"
 

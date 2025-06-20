@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "eec464e42301d93586cbeca3845ed61bff40f560670e5b35baec57301d
 
 DEPENDS += "i2c-tools"
 
-S = "${WORKDIR}/i2c-tools-${PV}"
+S = "${UNPACKDIR}/i2c-tools-${PV}"
 
 inherit setuptools3
 

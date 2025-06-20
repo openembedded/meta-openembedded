@@ -17,7 +17,7 @@ SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
 
-S = "${WORKDIR}/git/src"
+S = "${UNPACKDIR}/${BP}/src"
 
 EXTRA_OEMAKE += "DESTDIR=${D} LIBDIR=${libdir} INCLUDEDIR=${includedir}"
 EXTRA_OEMAKE:append:class-native = " UAPIDIR=${includedir}"

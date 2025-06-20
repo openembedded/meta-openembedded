@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 inherit cmake
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
 

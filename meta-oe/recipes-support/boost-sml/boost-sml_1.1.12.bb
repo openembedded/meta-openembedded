@@ -11,7 +11,6 @@ DEPENDS += "boost qemu-native"
 SRC_URI = "git://github.com/boost-ext/sml.git;protocol=https;branch=master"
 SRCREV = "cd3ef80206b71463de96d6b682cfdc99703ec147"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

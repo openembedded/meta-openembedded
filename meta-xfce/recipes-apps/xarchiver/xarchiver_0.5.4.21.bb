@@ -10,7 +10,6 @@ DEPENDS = "gtk+3 glib-2.0 xfce4-dev-tools-native intltool-native"
 SRC_URI = "git://github.com/ib/xarchiver.git;branch=master;protocol=https"
 SRCREV = "55f923ebc623bcc8f53368543847350a23688189"
 
-S = "${WORKDIR}/git"
 
 inherit gettext pkgconfig autotools gtk-icon-cache features_check mime-xdg
 

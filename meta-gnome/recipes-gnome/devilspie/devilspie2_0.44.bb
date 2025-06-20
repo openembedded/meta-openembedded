@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/dsalt/devilspie2;branch=master;protocol=https \
     file://devilspie2.desktop \
 "
 
-S = "${WORKDIR}/git"
 
 inherit features_check pkgconfig gettext
 

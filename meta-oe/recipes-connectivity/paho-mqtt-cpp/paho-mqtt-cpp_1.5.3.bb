@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=master;t
 
 DEPENDS = "openssl paho-mqtt-c"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

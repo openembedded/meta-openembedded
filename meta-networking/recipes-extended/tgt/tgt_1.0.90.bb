@@ -17,7 +17,6 @@ SRC_URI += "file://tgtd.init \
             file://tgtd \
 "
 
-S = "${WORKDIR}/git"
 
 CONFFILES:${PN} += "${sysconfdir}/tgt/targets.conf"
 

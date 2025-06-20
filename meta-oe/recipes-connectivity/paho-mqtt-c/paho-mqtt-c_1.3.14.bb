@@ -19,7 +19,6 @@ SRCREV = "2150ba29d9df24ad1733c460eb099f292af84ee5"
 
 DEPENDS = "openssl"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

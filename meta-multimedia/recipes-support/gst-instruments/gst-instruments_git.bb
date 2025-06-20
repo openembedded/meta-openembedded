@@ -10,7 +10,6 @@ PV = "0.3.1+git"
 
 SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit vala meson pkgconfig
 

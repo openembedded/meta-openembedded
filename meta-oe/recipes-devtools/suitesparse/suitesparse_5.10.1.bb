@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branc
            "
 SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
 

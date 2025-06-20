@@ -17,7 +17,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MP/MPIOTR/Text-Iconv-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "5b80b7d5e709d34393bcba88971864a17b44a5bf0f9e4bcee383d029e7d2d5c3"
 
-S = "${WORKDIR}/Text-Iconv-${PV}"
+S = "${UNPACKDIR}/Text-Iconv-${PV}"
 
 inherit cpan
 

@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=98241180d857fe975e4b60d44d6c01a5"
 
 SRC_URI = "http://www.libsdl.org/release/sdl2-compat-${PV}.tar.gz"
 SRC_URI[sha256sum] = "27e845b1b7dc0a91a85f1a1f18892ed205adb38caf767741eb258008d8264de0"
-S = "${WORKDIR}/sdl2-compat-${PV}"
+S = "${UNPACKDIR}/sdl2-compat-${PV}"
 
 DEPENDS += "libsdl3"
 

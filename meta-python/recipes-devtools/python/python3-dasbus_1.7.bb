@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/dasbus-project/dasbus.git;protocol=https;branch=mast
 "
 SRCREV = "413cf9a0b7c231468f1d28d9a29dd8dd8bda15c5"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3 ptest-python-pytest
 

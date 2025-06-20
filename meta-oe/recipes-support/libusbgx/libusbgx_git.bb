@@ -18,7 +18,6 @@ SRC_URI = " \
     file://usbgx.service \
 "
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "examples gadget-schemes libconfig"
 PACKAGECONFIG[libconfig] = "--with-libconfig=yes,--without-libconfig,libconfig"

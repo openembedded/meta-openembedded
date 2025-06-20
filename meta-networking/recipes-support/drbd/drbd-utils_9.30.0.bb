@@ -8,7 +8,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
 SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;protocol=https \
-           git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
+           git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/drbd-headers;branch=master;protocol=https \
            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
            file://0001-Fix-build-with-gcc-15.patch \
@@ -18,7 +18,6 @@ SRCREV_drbd-headers = "94f4472513f351efba5788f783feba6ac6efe9fc"
 
 SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
 

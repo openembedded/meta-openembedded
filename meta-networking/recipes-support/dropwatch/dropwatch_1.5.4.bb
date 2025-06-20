@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/nhorman/dropwatch.git;protocol=https;nobranch=1 \
 "
 SRCREV = "1e7e487a019a7c02f1f429c4d3a4647fa3787a13"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "binutils libnl libpcap readline"
 

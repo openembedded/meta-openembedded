@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/manatools/dnfdragora.git;branch=stable-2.x;protocol=
 
 SRCREV = "abbe08b7a487325182758d5285b54437a914207b"
 
-S = "${WORKDIR}/git"
 
 inherit cmake gettext pkgconfig python3-dir python3native setuptools3-base mime-xdg
 

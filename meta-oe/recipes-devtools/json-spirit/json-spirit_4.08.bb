@@ -16,7 +16,7 @@ SRC_URI = "file://json_spirit_v${PV}.zip \
            file://0001-Link-to-libatomic.patch \
 "
 
-S = "${WORKDIR}/json_spirit_v${PV}"
+S = "${UNPACKDIR}/json_spirit_v${PV}"
 
 inherit cmake
 

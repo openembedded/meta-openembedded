@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/freesmartphone/mdbus.git;protocol=https;branch=maste
            "
 SRCREV = "28202692d0b441000f4ddb8f347f72d1355021aa"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig vala
 

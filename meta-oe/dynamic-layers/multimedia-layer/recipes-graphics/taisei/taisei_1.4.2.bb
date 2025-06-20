@@ -38,7 +38,6 @@ SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=h
 
 SRCREV = "c098579d4fa0f004ccc204c5bc46eac3717cba28"
 
-S = "${WORKDIR}/git"
 
 inherit features_check meson mime mime-xdg pkgconfig python3native
 

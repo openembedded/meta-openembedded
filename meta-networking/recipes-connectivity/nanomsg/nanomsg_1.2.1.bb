@@ -12,7 +12,6 @@ SECTION = "libs/networking"
 SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master"
 SRCREV = "fc3f684a80151a3319446fc96083a9ff384ee4fe"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

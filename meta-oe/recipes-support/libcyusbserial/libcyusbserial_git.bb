@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https \
     file://0001-Fix-gcc-15-incompatible-pointer-types-error.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

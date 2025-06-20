@@ -9,7 +9,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "724cd895ecf4da319a3ef164892b72078bd92632a5d812111261cde248ebcdb7"
 
-S = "${WORKDIR}/SDL_ttf-${PV}"
+S = "${UNPACKDIR}/SDL_ttf-${PV}"
 
 inherit autotools pkgconfig
 

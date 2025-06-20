@@ -15,6 +15,5 @@ SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
 
 SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

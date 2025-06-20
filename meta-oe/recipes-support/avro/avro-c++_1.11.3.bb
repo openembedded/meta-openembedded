@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/apache/avro;branch=${BRANCH};protocol=https \
            file://0003-Update-CXX-standard-to-CXX14.patch \
           "
 
-S = "${WORKDIR}/git/lang/c++"
+S = "${UNPACKDIR}/${BP}/lang/c++"
 
 inherit cmake pkgconfig
 

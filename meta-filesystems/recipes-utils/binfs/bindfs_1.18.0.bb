@@ -10,6 +10,5 @@ RDEPENDS:${PN} = "fuse"
 SRC_URI = "git://github.com/mpartel/bindfs;protocol=https;branch=master;tag=${PV}"
 SRCREV = "a276dbe66faaf7af02d967a648f7598589bf5c5b"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig gettext

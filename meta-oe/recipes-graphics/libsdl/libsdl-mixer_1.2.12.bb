@@ -10,7 +10,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-${PV}.tar.
 
 SRC_URI[sha256sum] = "1644308279a975799049e4826af2cfc787cad2abb11aa14562e402521f86992a"
 
-S = "${WORKDIR}/SDL_mixer-${PV}"
+S = "${UNPACKDIR}/SDL_mixer-${PV}"
 
 inherit autotools-brokensep pkgconfig
 

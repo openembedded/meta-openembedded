@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b365c2155d66e550e1447075d6744a5"
 SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
 SRC_URI[sha256sum] = "65c1d2f78b9f2fb20082c38cbe47c951ad5839345876e46941612ee87f9a7ce1"
 
-S = "${WORKDIR}/opus-${PV}"
+S = "${UNPACKDIR}/opus-${PV}"
 
 inherit autotools pkgconfig
 

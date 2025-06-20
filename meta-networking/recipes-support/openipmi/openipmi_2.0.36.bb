@@ -32,7 +32,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://ipmi.service \
            "
 
-S = "${WORKDIR}/OpenIPMI-${PV}"
+S = "${UNPACKDIR}/OpenIPMI-${PV}"
 
 SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
 

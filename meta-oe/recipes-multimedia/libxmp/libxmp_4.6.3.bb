@@ -8,4 +8,3 @@ inherit cmake pkgconfig
 SRC_URI = "git://github.com/libxmp/libxmp.git;protocol=https;branch=master;tag=libxmp-${PV}"
 SRCREV = "bed660f8e530d399c38f27a5a7732f4e79740585"
 
-S = "${WORKDIR}/git"

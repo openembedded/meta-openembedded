@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "3d61d07ef43b0126f5b4de4f415a256fa859fa88dc4fdabaad70b7be7c
 
 LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-S = "${WORKDIR}/XML-SAX-Writer-${PV}"
+S = "${UNPACKDIR}/XML-SAX-Writer-${PV}"
 
 inherit cpan
 

@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/NilsBrause/waylandpp.git;protocol=https;branch=maste
 DEPENDS = "pugixml"
 DEPENDS:append:class-target = " waylandpp-native wayland virtual/egl virtual/libgles2"
 
-S = "${WORKDIR}/git"
 SRCREV = "4321ed5c7b4bffa41b8a2a13dc7f3ece1191f4f3"
 
 inherit cmake pkgconfig features_check

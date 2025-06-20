@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCREV = "352f5878e999c0a9d5a453b34110479b2056d7e7"
 SRC_URI = "git://github.com/mvp/${BPN};branch=master;protocol=https"
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

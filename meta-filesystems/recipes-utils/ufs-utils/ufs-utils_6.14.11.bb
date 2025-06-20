@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=htt
 
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" CFLAGS="${CFLAGS}""
 

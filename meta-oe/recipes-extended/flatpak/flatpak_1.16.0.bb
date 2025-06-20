@@ -10,7 +10,6 @@ SRC_URI = " \
 
 SRCREV = "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
 

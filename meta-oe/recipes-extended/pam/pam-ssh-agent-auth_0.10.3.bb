@@ -25,7 +25,7 @@ RDEPENDS:${PN} += "openssh-misc"
 
 # Kind of unfortunate to have underscores in the name.
 #
-S = "${WORKDIR}/pam_ssh_agent_auth-${PV}"
+S = "${UNPACKDIR}/pam_ssh_agent_auth-${PV}"
 
 inherit autotools-brokensep perlnative
 

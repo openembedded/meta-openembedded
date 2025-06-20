@@ -10,7 +10,6 @@ PV = "3.9.9"
 SRC_URI = "git://github.com/iipeace/${BPN};branch=master;protocol=https;tag=versions/${PV}"
 SRCREV = "118ab61773463e56dedc78f5cf6723b97a4ad946"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

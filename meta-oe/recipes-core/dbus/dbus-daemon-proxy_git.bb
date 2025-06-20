@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/alban/dbus-daemon-proxy;branch=master;protocol=https
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

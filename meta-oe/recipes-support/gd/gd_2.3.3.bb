@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1;protocol=https \
 
 SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
 
-S = "${WORKDIR}/git"
 
 inherit autotools binconfig gettext pkgconfig
 

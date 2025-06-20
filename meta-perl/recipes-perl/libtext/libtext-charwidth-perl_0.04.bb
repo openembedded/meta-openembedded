@@ -19,7 +19,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-CharWidth-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "abded5f4fdd9338e89fd2f1d8271c44989dae5bf50aece41b6179d8e230704f8"
 
-S = "${WORKDIR}/Text-CharWidth-${PV}"
+S = "${UNPACKDIR}/Text-CharWidth-${PV}"
 
 inherit cpan
 

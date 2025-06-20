@@ -9,6 +9,5 @@ SRCREV = "21046ebc4a5475c14cea446715734c88fe33d276"
 
 DEPENDS = "openssl boost"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

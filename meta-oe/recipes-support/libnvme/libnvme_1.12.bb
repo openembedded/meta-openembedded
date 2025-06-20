@@ -16,7 +16,6 @@ SRCREV = "5ec1f5284ecb0eda481f3d2d61236fbc5b46164f"
 SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
            file://0001-mock.c-fix-checking-of-HAVE_GLIBC_IOCTL.patch"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

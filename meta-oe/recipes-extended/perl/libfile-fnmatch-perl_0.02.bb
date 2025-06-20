@@ -14,7 +14,7 @@ SRC_URI = "https://cpan.metacpan.org/authors/id/M/MJ/MJP/File-FnMatch-${PV}.tar.
 
 SRC_URI[sha256sum] = "962454b8e86bea8b132bf8af35757d0c6a8f5d599015bd6a5d68cb7ae7a9e916"
 
-S = "${WORKDIR}/File-FnMatch-${PV}"
+S = "${UNPACKDIR}/File-FnMatch-${PV}"
 
 inherit cpan
 

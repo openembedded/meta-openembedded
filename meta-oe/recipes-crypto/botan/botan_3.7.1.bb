@@ -7,7 +7,7 @@ SECTION = "libs"
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
 SRC_URI[sha256sum] = "fc0620463461caaea8e60f06711d7e437a3ad1eebd6de4ac29c14bbd901ccd1b"
 
-S = "${WORKDIR}/Botan-${PV}"
+S = "${UNPACKDIR}/Botan-${PV}"
 
 inherit python3native siteinfo lib_package
 

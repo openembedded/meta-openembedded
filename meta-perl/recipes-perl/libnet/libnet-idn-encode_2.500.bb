@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/C/CF/CFAERBER/Net-IDN-Encode-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "55453633e3ff24ce325b34bc2c8157b9859962a31ab5cf28bf7ccc1c9b3a3eaa"
 
-S = "${WORKDIR}/Net-IDN-Encode-${PV}"
+S = "${UNPACKDIR}/Net-IDN-Encode-${PV}"
 
 inherit cpan ptest-perl
 

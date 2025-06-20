@@ -9,7 +9,6 @@ SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https"
 
 SRCREV = "bf253640d33d03331310778e001fb6f5aba2989e"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 

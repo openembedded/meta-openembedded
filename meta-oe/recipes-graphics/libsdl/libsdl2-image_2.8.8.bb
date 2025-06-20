@@ -9,7 +9,7 @@ DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
 SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
 SRC_URI[sha256sum] = "2213b56fdaff2220d0e38c8e420cbe1a83c87374190cba8c70af2156097ce30a"
 
-S = "${WORKDIR}/SDL2_image-${PV}"
+S = "${UNPACKDIR}/SDL2_image-${PV}"
 
 inherit cmake pkgconfig
 

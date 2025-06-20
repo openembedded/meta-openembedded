@@ -25,7 +25,7 @@ SRC_URI = "https://download.gnome.org/sources/gcr/3.41/gcr-${PV}.tar.xz;name=arc
 SRC_URI += "file://0001-meson.build-correctly-handle-disabled-ssh_agent-opti.patch"
 SRC_URI[archive.sha256sum] = "bad10f3c553a0e1854649ab59c5b2434da22ca1a54ae6138f1f53961567e1ab7"
 
-S = "${WORKDIR}/gcr-${PV}"
+S = "${UNPACKDIR}/gcr-${PV}"
 
 PACKAGECONFIG ??= " \
 	${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \

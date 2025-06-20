@@ -18,7 +18,7 @@ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.or
 
 SRC_URI[sha256sum] = "ce95a1c79f6d18e959f9dc129b8529b711c60e76754acc285e60946303b923ec"
 
-S = "${WORKDIR}/live"
+S = "${UNPACKDIR}/live"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
                     file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02 \

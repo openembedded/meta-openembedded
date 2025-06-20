@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://zip.h;beginline=14;endline=30;md5=8eaa8535a3a1a2296b3
 SRC_URI = "${SOURCEFORGE_MIRROR}/libpng/zlib/${PV}/zlib-${PV}.tar.gz"
 UPSTREAM_CHECK_URI = "http://zlib.net/"
 
-S = "${WORKDIR}/zlib-${PV}/contrib/minizip"
+S = "${UNPACKDIR}/zlib-${PV}/contrib/minizip"
 
 SRC_URI[sha256sum] = "9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23"
 

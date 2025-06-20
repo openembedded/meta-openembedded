@@ -26,7 +26,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git;p
            "
 SRCREV = "cb3bb194cca88211cbfcdde2f10c0f43c3fb8ec3"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[manpages] = ""

@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "4f179b1db021ef15ac7e9b2eed57c525db127a754c574f591c367460cd
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/user-mode-linux/files/tools/1/"
 
-S = "${WORKDIR}/tools"
+S = "${UNPACKDIR}/tools"
 
 inherit update-alternatives
 

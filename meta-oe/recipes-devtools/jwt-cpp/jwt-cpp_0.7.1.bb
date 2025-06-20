@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https 
 
 SRCREV = "e71e0c2d584baff06925bbb3aad683f677e4d498"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "openssl"
 

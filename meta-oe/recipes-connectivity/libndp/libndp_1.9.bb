@@ -8,6 +8,5 @@ SRC_URI = "git://github.com/jpirko/libndp;branch=master;protocol=https \
            "
 # tag for v1.8
 SRCREV = "2730638bf88984b09531813974f9bd14e1a50165"
-S = "${WORKDIR}/git"
 
 inherit autotools

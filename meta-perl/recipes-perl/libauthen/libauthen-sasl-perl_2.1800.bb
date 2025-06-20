@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/E/EH/EHUELS/Authen-SASL-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "0b03686bddbbf7d5c6548e468d079a4051c9b73851df740ae28cfd2db234e922"
 
-S = "${WORKDIR}/Authen-SASL-${PV}"
+S = "${UNPACKDIR}/Authen-SASL-${PV}"
 
 inherit cpan ptest
 

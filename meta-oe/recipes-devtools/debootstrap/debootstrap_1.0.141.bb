@@ -13,7 +13,7 @@ SRC_URI  = "\
 
 SRC_URI[sha256sum] = "232ec755f4b1f445f829996885846abba6f1b6fd55d049476ab26ddd8c4b4e1b"
 
-S = "${WORKDIR}/debootstrap"
+S = "${UNPACKDIR}/debootstrap"
 
 DEPENDS = " \
     virtual/fakeroot-native \

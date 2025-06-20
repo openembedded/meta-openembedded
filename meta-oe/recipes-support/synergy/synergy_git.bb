@@ -16,7 +16,6 @@ SRC_URI += "file://CVE-2020-15117.patch"
 SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
 PV = "1.10.1+git"
 
-S = "${WORKDIR}/git"
 
 inherit cmake features_check
 

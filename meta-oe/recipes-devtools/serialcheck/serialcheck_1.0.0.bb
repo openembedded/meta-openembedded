@@ -9,7 +9,6 @@ SRC_URI = " \
 
 SRCREV = "45eb2ffa5378396e85432872833890b0a1cba872"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

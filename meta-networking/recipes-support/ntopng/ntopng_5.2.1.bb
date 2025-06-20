@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/ntop/ntopng.git;protocol=https;branch=5.2-stable \
            file://ntopng.service \
            "
 
-S = "${WORKDIR}/git"
 
 # don't use the lua under thirdparty as it supports cross compiling badly
 export LUA_LIB = "${STAGING_LIBDIR}/liblua.a"

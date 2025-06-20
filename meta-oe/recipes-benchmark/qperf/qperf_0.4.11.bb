@@ -9,7 +9,6 @@ inherit autotools-brokensep
 SRCREV = "c706363815a38ff2c5cbc07b73e2cfaaa59bae0f"
 SRC_URI = "git://github.com/linux-rdma/qperf.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 do_configure() {
   ./cleanup

@@ -12,7 +12,6 @@ DEPENDS = "perl"
 SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=master;protocol=https"
 SRCREV = "ad56c3b5f5a211d32bbb8ac29f180d707ee58c1b"
 
-S = "${WORKDIR}/git"
 
 inherit cpan
 

@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/pixel/hexedit.git;branch=master;protocol=https \
 
 SRCREV = "eab92dcaa34b66bc5182772afc9fda4ac8a27597"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep update-alternatives
 

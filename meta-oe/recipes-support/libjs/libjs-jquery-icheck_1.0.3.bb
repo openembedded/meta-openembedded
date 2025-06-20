@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/fronteed/icheck.git;protocol=https;branch=${PV}"
 
 SRCREV = "c8c1af84e4b90b4aea31466aad09bf877619e943"
 
-S = "${WORKDIR}/git"
 
 do_install() {
         install -d ${D}${datadir}/javascript/jquery-icheck/

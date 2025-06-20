@@ -16,14 +16,13 @@ SRCREV_json = "8c391e04fe4195d8be862c97f38cfe10e2a3472e"
 SRCREV_doctest = "ae7a13539fb71f270b87eb2e874fbac80bc8dda2"
 
 SRC_URI = "git://github.com/ToruNiina/toml11;branch=main;protocol=https \
-           git://github.com/nlohmann/json;destsuffix=git/tests/extlib/json;name=json;branch=develop;protocol=https \
-           git://github.com/doctest/doctest;destsuffix=git/tests/extlib/doctest;name=doctest;branch=master;protocol=https \
+           git://github.com/nlohmann/json;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/tests/extlib/json;name=json;branch=develop;protocol=https \
+           git://github.com/doctest/doctest;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/tests/extlib/doctest;name=doctest;branch=master;protocol=https \
            file://0001-Remove-whitespace-in-operator.patch \
            file://run-ptest \
 "
 SRCREV_FORMAT = "json_doctest"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

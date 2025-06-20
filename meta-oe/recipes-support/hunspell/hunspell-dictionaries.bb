@@ -140,7 +140,6 @@ SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=main;protocol=https"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     for LANGUAGE in `ls -d1 ${S}/dictionaries/*` ; do

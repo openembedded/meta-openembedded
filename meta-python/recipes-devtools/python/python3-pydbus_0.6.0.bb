@@ -14,7 +14,6 @@ SRC_URI = " \
 
 inherit ptest setuptools3
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} = "python3-pygobject \
                   python3-io \

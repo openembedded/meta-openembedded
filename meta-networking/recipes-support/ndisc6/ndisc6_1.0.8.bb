@@ -11,7 +11,6 @@ SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
            file://0001-Remove-use-of-variables-indicating-buildtime-informa.patch \
            "
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "coreutils-native"
 

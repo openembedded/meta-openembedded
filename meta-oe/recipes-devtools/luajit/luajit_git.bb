@@ -11,7 +11,6 @@ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
 PV = "2.1"
 SRCREV = "538a82133ad6fddfd0ca64de167c4aca3bc1a2da"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig binconfig siteinfo
 

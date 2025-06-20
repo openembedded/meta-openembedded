@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https \
 
 SRCREV = "e03e8e29dc618e08e7baba9636e57ba1254874ce"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig lib_package
 

@@ -13,7 +13,6 @@ PV = "2.3.0+git"
 SRCREV = "2cd858c679d25633077ca78b67182a9b77653816"
 SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
 CVE_STATUS_LIBLIST[status] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."

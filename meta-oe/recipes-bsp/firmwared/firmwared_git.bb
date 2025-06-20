@@ -16,7 +16,6 @@ SRCREV = "2e6b5db43d63a5c0283a4cae9a6a20b7ad107a04"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "glib-2.0 systemd"
 

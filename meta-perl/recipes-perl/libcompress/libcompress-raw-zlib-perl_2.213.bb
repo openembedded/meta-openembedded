@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "56b21c99cb3a3a7f7876a74dd05daa3f41fc9143ddd4dc98f8e46710a1
 
 DEPENDS += "zlib"
 
-S = "${WORKDIR}/Compress-Raw-Zlib-${PV}"
+S = "${UNPACKDIR}/Compress-Raw-Zlib-${PV}"
 
 inherit cpan
 

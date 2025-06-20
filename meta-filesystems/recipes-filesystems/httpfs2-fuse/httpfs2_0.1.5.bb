@@ -11,7 +11,7 @@ RDEPENDS:${PN} += "fuse"
 SRC_URI += "${SOURCEFORGE_MIRROR}/project/httpfs/httpfs2/httpfs2-${PV}.tar.gz"
 SRC_URI[sha256sum] = "01cb4bb38deb344f540da6f1464dc7edbdeb51213ad810b8c9c282c1e17e0fc1"
 
-S = "${WORKDIR}/httpfs2-${PV}"
+S = "${UNPACKDIR}/httpfs2-${PV}"
 
 do_compile() {
     oe_runmake -C ${S} httpfs2

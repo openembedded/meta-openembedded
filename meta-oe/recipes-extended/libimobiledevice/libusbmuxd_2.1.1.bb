@@ -11,6 +11,5 @@ PKGV = "${GITPKGVTAG}"
 SRCREV = "adf9c22b9010490e4b55eaeb14731991db1c172c"
 SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${base_libdir}/udev/rules.d/"

@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8de00431559a76a1b43f6fd44f8f6689"
 SRC_URI = "git://github.com/jarro2783/cxxopts.git;protocol=https;branch=master"
 SRCREV = "44380e5a44706ab7347f400698c703eb2a196202"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

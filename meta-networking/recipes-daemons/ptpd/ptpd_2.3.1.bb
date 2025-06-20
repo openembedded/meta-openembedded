@@ -34,7 +34,7 @@ SRC_URI[sha256sum] = "0dbf54dd2c178bd9fe62481d2c37513ee36636d8bf137cfdad96891490
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ptpd/files/releases"
 
-S = "${WORKDIR}/ptpd-${PV}"
+S = "${UNPACKDIR}/ptpd-${PV}"
 
 EXTRA_OEMAKE = ""
 

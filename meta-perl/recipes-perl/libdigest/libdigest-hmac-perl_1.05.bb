@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "215cb59cba610745cfb2d4b3f8ef756d590e57e3ad7986a992e87c4969fcdc7a"
 
-S = "${WORKDIR}/Digest-HMAC-${PV}"
+S = "${UNPACKDIR}/Digest-HMAC-${PV}"
 
 inherit cpan ptest
 

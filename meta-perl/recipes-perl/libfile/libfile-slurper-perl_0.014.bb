@@ -28,7 +28,7 @@ RDEPENDS:${PN}-ptest += "libtest-warnings-perl \
     perl-module-test-more \
     "
 
-S = "${WORKDIR}/File-Slurper-${PV}"
+S = "${UNPACKDIR}/File-Slurper-${PV}"
 
 inherit cpan ptest-perl
 

@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
            file://CVE-2024-32661.patch \
            "
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
     -DWITH_FFMPEG=OFF \

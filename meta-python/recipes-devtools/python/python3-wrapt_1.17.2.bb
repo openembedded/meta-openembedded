@@ -12,7 +12,6 @@ SRCREV = "bcc1f26b2fe8fc962f5033c3a3a773425500789a"
 SRC_URI += "git://github.com/GrahamDumpleton/wrapt;protocol=https;branch=master \
 "
 
-S = "${WORKDIR}/git"
 
 # python3-misc for 'this' module
 RDEPENDS:${PN}-ptest += " \

@@ -9,7 +9,6 @@ SRCREV = "a0eca0d2bf10326506fb762f0eec14255b27bef5"
 SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https;branch=libiio-v0"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 SETUPTOOLS_SETUP_PATH ?= "${B}/bindings/python/"
 

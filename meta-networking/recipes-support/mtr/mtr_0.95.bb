@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 SRCREV = "852e5617fbf331cf292723702161f0ac9afe257c"
 SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

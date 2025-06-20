@@ -14,7 +14,6 @@ REQUIRED_DISTRO_FEATURES = "systemd gobject-introspection-data"
 SRCREV = "dfd26d72793914eb3da910ef8c71de6d7c8942a2"
 SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher;protocol=https;nobranch=1"
 
-S = "${WORKDIR}/git"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "networkd-dispatcher.service"

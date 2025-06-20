@@ -20,7 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-WrapI18N-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "4bd29a17f0c2c792d12c1005b3c276f2ab0fae39c00859ae1741d7941846a488"
 
-S = "${WORKDIR}/Text-WrapI18N-${PV}"
+S = "${UNPACKDIR}/Text-WrapI18N-${PV}"
 
 DEPENDS = "libtext-charwidth-perl"
 

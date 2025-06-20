@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
            file://auditd \
           "
 
-S = "${WORKDIR}/git"
 SRCREV = "97c4ec3d68b5b199f2796d1e126c2144506bd228"
 
 inherit autotools python3targetconfig update-rc.d systemd

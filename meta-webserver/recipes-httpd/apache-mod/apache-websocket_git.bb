@@ -17,7 +17,6 @@ SRCREV = "0ee34c77fc78ff08fd548706300b80a7bc7874e4"
 
 PV = "0.1.2+git"
 
-S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 

@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
 SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https;tag=v${PV}"
 SRCREV = "4edda758546436462da479bb8c8514f8a95c35ad"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

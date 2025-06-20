@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/libusbg/libusbg.git;branch=master;protocol=https \
            file://0001-Fix-out-of-tree-builds.patch \
           "
 
-S = "${WORKDIR}/git"
 
 ALTERNATIVE:${PN} = "gadget-acm-ecm show-gadgets"
 ALTERNATIVE_LINK_NAME[gadget-acm-ecm] = "${bindir}/gadget-acm-ecm"

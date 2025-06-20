@@ -13,7 +13,6 @@ inherit autotools
 SRCREV = "b0d936107edcefb519abbc9c363ca40daaac23b3"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
            file://0001-include-libgen.h-for-basename.patch"
-S = "${WORKDIR}/git"
 
 LDFLAGS:append:libc-musl = " -largp"
 

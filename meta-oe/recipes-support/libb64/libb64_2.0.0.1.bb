@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/libb64/libb64;protocol=https;branch=master \
            file://0001-examples-Use-proper-function-prototype-for-main.patch \
            "
 
-S = "${WORKDIR}/git"
 
 CFLAGS += "-fPIC"
 

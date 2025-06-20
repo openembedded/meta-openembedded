@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
 SRC_URI[sha256sum] = "88fc236ab99b2864b248de7d49a008ec2afd7551e64dce8b95f58f32f94c46ab"
 
-S = "${WORKDIR}/httpd-${PV}"
+S = "${UNPACKDIR}/httpd-${PV}"
 
 inherit autotools update-rc.d pkgconfig systemd multilib_script multilib_header
 

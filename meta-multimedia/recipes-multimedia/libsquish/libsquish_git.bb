@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https;branch=master 
            file://0001-Add-support-for-variable-libdir.patch \
           "
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix} LIBDIR_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
                 ${@bb.utils.contains('TUNE_FEATURES', 'altivec', 'USE_ALTIVEC=1', '', d)}"

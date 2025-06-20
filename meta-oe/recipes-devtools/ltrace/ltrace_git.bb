@@ -31,7 +31,6 @@ SRC_URI = "git://gitlab.com/cespedes/ltrace.git;protocol=https;branch=main \
            "
 SRC_URI:append:libc-musl = " file://add_ppc64le.patch"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

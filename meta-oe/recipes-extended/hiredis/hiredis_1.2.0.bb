@@ -10,7 +10,6 @@ SRC_URI = " \
     "
 SRCREV = "60e5075d4ac77424809f855ba3e398df7aacefe8"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

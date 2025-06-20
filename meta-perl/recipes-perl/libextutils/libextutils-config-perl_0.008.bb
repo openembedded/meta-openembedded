@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
 SRC_URI[sha256sum] = "ae5104f634650dce8a79b7ed13fb59d67a39c213a6776cfdaa3ee749e62f1a8c"
 
-S = "${WORKDIR}/ExtUtils-Config-${PV}"
+S = "${UNPACKDIR}/ExtUtils-Config-${PV}"
 
 inherit cpan ptest-perl
 

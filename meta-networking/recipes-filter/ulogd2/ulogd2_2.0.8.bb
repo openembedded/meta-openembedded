@@ -17,7 +17,6 @@ SRC_URI = "git://git.netfilter.org/ulogd2;branch=master \
 "
 SRCREV = "79aa980f2df9dda0c097e8f883a62f414b9e5138"
 
-S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig systemd update-rc.d
 

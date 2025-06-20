@@ -20,7 +20,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
 CVE_PRODUCT = "frrouting"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep python3native pkgconfig useradd systemd
 

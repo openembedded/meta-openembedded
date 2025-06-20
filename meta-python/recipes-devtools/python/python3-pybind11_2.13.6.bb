@@ -12,7 +12,6 @@ SRC_URI = "\
     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake python_setuptools_build_meta
 

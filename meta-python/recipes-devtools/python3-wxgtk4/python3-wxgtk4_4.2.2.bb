@@ -18,7 +18,7 @@ SRC_URI += "file://add-back-option-build-base.patch \
            "
 SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
 
-S = "${WORKDIR}/wxPython-${PV}"
+S = "${UNPACKDIR}/wxPython-${PV}"
 
 inherit pypi setuptools3 pkgconfig features_check
 

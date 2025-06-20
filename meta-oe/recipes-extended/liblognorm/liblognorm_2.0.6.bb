@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/rsyslog/liblognorm;branch=master;protocol=https \
            "
 SRCREV = "46c6ee4c8e5f827893e485a4ef1aff04ea881273"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

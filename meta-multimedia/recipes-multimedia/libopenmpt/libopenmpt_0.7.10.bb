@@ -16,7 +16,7 @@ SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release
           "
 SRC_URI[sha256sum] = "093713c1c1024f4f10c4779a66ceb2af51fb7c908a9e99feb892d04019220ba1"
 
-S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
+S = "${UNPACKDIR}/libopenmpt-${PV}+release.autotools"
 
 inherit autotools pkgconfig ptest
 

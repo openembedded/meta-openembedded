@@ -35,7 +35,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SH/SHLOMIF/Error-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "34d382276c0fb0d6b38355b94c96a30b12d834d5662eb53f088ee25e3e712924"
 
-S = "${WORKDIR}/Error-${PV}"
+S = "${UNPACKDIR}/Error-${PV}"
 
 inherit cpan ptest-perl
 

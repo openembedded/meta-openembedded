@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/ago/pps-tools.git;branch=master;protocol=https \
            file://0001-Use-lld-in-printf-for-64-bit-time_t.patch \
            "
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} = "bash"
 

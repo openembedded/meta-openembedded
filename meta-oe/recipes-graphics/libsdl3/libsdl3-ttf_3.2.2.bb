@@ -8,7 +8,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL3_ttf-${PV}.tar.gz 
 "
 SRC_URI[sha256sum] = "63547d58d0185c833213885b635a2c0548201cc8f301e6587c0be1a67e1e045d"
 
-S = "${WORKDIR}/SDL3_ttf-${PV}"
+S = "${UNPACKDIR}/SDL3_ttf-${PV}"
 
 inherit cmake pkgconfig
 

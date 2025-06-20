@@ -16,7 +16,6 @@ SRC_URI = " \
     file://0001-Fix-function-protype-visibility.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit autotools gettext pkgconfig mime mime-xdg features_check
 # depends on openbox, which is X11-only

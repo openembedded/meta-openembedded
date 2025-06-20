@@ -13,7 +13,6 @@ SRCREV = "b9cc7963051b2099795129450f9b70c81950d02f"
 SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master \
            file://0001-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

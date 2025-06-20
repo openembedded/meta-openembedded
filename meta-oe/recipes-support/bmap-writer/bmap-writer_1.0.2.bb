@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
 
 SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https"
 SRCREV = "7489280a7a1247f23543343aba4e95bf2f2e8fa6"
-S = "${WORKDIR}/git"
 
 DEPENDS = "libtinyxml2 libarchive"
 inherit cmake pkgconfig

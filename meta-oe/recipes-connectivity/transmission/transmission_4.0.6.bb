@@ -15,7 +15,6 @@ SRC_URI = " \
 # Transmission release 4.0.6
 SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
 
-S = "${WORKDIR}/git"
 
 inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
 

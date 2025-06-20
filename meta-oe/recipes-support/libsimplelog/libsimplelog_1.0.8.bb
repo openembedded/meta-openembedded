@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=ht
 
 SRCREV = "093d80b4006042b75a433a5e63760ae9bebad142"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

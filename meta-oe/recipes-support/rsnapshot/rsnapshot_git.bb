@@ -29,7 +29,6 @@ SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=https \
            file://configure-fix-cmd_rsync.patch \
           "
 
-S = "${WORKDIR}/git"
 
 inherit autotools perlnative
 

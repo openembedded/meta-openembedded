@@ -16,7 +16,6 @@ EXTRA_OEMAKE = "NOSTRIP=1 DESTDIR=${D} PREFIX=${prefix}"
 
 PV = "1.0+${SRCPV}"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     oe_runmake install

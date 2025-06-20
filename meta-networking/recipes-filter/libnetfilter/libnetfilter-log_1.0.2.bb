@@ -9,6 +9,5 @@ SRCREV = "b0e4be94c0b8f68d4e912402b93a130063c34e17"
 
 SRC_URI = "git://git.netfilter.org/libnetfilter_log;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig

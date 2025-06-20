@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/tomaszmrugalski/dibbler;branch=master;protocol=https
            "
 PV = "1.0.1+1.0.2RC1+git${SRCREV}"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "debug bind-reuse resolvconf dns-update"
 

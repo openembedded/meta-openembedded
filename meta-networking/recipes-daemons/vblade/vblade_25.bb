@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/OpenAoE/vblade;branch=master;protocol=https \
            file://volatiles.99_vblade \
           "
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://github.com/OpenAoE/vblade/archive/"
 

@@ -33,7 +33,6 @@ SRC_URI = "\
 
 SRCREV = "fc15e229d9d337e46d730f00647821adbbd58548"
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v4l-utils-(?P<pver>\d+(\.\d+)+)"
 

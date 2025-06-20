@@ -20,7 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FT/FTASSIN/Data-HexDump-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "1a9d843e7f667c1c6f77c67af5d77e7462ff23b41937cb17454d03535cd9be70"
 
-S = "${WORKDIR}/Data-HexDump-${PV}"
+S = "${UNPACKDIR}/Data-HexDump-${PV}"
 
 inherit cpan ptest update-alternatives
 

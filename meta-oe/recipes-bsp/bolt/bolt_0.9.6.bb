@@ -10,7 +10,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 SRC_URI = "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=https;branch=master"
 SRCREV = "f03c50b22ae3fda26711ddabd91e2c5dd8103478"
 
-S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "freedesktop:bolt"
 

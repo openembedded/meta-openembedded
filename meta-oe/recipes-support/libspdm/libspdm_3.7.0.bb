@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/DMTF/libspdm.git;branch=main;protocol=https \
            file://0001-Backport-API-introduced-in-openssl-3.5.0.patch"
 SRCREV = "1be116c7b7713fa9003e1bd53b53a34758549eb9"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

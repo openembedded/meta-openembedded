@@ -13,7 +13,7 @@ SRC_URI = "https://cpan.metacpan.org/modules/by-module/Devel/Devel-CheckLib-${PV
 "
 SRC_URI[sha256sum] = "869d38c258e646dcef676609f0dd7ca90f085f56cf6fd7001b019a5d5b831fca"
 
-S = "${WORKDIR}/Devel-CheckLib-${PV}"
+S = "${UNPACKDIR}/Devel-CheckLib-${PV}"
 
 inherit cpan
 

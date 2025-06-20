@@ -15,7 +15,7 @@ UPSTREAM_CHECK_REGEX = "${BPN}-R(?P<pver>.*)\.tgz"
 
 inherit update-alternatives
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 ALTERNATIVE:${PN} = "sh"
 ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"

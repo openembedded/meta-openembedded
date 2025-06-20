@@ -21,7 +21,6 @@ UPSTREAM_CHECK_COMMITS = "1"
 
 PV = "4.9+git"
 
-S = "${WORKDIR}/git"
 
 export HOSTCC = "${BUILD_CC}"
 do_configure:prepend() {

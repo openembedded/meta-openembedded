@@ -8,7 +8,7 @@ SRC_URI = "https://git.savannah.gnu.org/cgit/chess.git/snapshot/chess-${PV}.tar.
            file://0001-Remove-register-storage-class-classifier.patch"
 SRC_URI[sha256sum] = "03f9e844ccdd48d20ee49314174404f8b643d83bb8ce9ec9d2e6a21f1b6fb9f5"
 
-S = "${WORKDIR}/chess-${PV}"
+S = "${UNPACKDIR}/chess-${PV}"
 
 inherit autotools gettext
 

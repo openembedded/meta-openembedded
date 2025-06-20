@@ -12,6 +12,6 @@ SRC_URI = "http://ftp.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.
 SRC_URI[md5sum] = "814b2972b2f5c740ff87510bc109168b"
 SRC_URI[sha256sum] = "4250ceef3efe2034f4ac05906c3ee427db31b9b0a2df41b2744f4bf79a959a1a"
 
-S = "${WORKDIR}/libnetfilter_acct-${PV}"
+S = "${UNPACKDIR}/libnetfilter_acct-${PV}"
 
 inherit autotools pkgconfig

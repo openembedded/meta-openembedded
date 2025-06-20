@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
 # April 1, 2025
 SRCREV = "635738b64eb52d376c5d1756c265de67236c8934"
 
-S = "${WORKDIR}/git"
 
 do_install() {
 	install -d ${D}${datadir}

@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz \
 
 SRC_URI[sha256sum] = "754ab0a7e28033dbea81308ef424bc7df4d6e2fe31b60cc536b61b51fefbd8fb"
 
-S = "${WORKDIR}/iperf-${PV}"
+S = "${UNPACKDIR}/iperf-${PV}"
 
 inherit autotools pkgconfig
 

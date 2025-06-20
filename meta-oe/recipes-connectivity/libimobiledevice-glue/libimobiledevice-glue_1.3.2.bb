@@ -11,5 +11,4 @@ DEPENDS = "libplist"
 SRCREV = "aef2bf0f5bfe961ad83d224166462d87b1df2b00"
 SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 inherit autotools pkgconfig

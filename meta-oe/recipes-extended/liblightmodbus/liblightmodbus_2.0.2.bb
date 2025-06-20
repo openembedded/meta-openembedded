@@ -12,4 +12,3 @@ SRC_URI = "git://github.com/Jacajack/liblightmodbus.git;protocol=https;branch=ma
           "
 SRCREV = "59d2b405f95701e5b04326589786dbb43ce49e81"
 
-S = "${WORKDIR}/git"

@@ -19,7 +19,6 @@ SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
            "
 SRCREV = "70c268a07273da78a4aadd14c40ffb75138ccebe"
 
-S = "${WORKDIR}/git"
 
 CVE_STATUS[CVE-2012-5638] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 

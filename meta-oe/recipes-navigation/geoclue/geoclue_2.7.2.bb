@@ -17,7 +17,6 @@ SRC_URI = "git://gitlab.freedesktop.org/geoclue/geoclue.git;protocol=https;branc
     file://0001-libgeoclue-don-t-try-to-use-g-ir-scanner-when-intros.patch \
 "
 
-S = "${WORKDIR}/git"
 
 # Without this line, package is declared a library and named libgeoclue*
 AUTO_LIBNAME_PKGS = ""

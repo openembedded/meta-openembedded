@@ -13,7 +13,7 @@ inherit autotools
 
 BBCLASSEXTEND = "native"
 
-S = "${WORKDIR}/${BPN}-2.8"
+S = "${UNPACKDIR}/${BPN}-2.8"
 
 EXTRA_OECONF += "--enable-ipv6 --enable-c-locale"
 PARALLEL_MAKE = ""

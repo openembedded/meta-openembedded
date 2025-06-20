@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master \
 
 SRCREV = "01083a64ebf28cc716efe2d2fd51c141042ae34b"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig update-alternatives
 

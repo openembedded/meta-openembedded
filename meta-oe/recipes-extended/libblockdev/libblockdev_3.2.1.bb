@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.2.x-branch;pro
            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
            "
 SRCREV = "b829b60d9ff049abb190f09a3b9a5fac648cd5a3"
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 

@@ -21,7 +21,6 @@ PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
 # not config defaults
 PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig bash-completion
 

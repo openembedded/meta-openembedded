@@ -14,6 +14,5 @@ SRCREV = "773f1853b043eeb64b7459f903a2c65bd096f9d9"
 DEPENDS = "fuse3"
 RDEPENDS:${PN} = "bash"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig

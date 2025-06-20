@@ -13,7 +13,6 @@ SRC_URI = "\
     git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cpan autotools-brokensep gettext pkgconfig python3native python3-dir systemd
 

@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master \
            "
 SRCREV = "f081c69c26e330cf03ec790051c415c4716509d9"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "curl libyaml libusb1 openssl libftdi"
 

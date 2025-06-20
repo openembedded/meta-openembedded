@@ -9,7 +9,6 @@ SRC_URI = " \
             git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
           "
 
-S = "${WORKDIR}/git"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 

@@ -14,7 +14,7 @@ SRC_URI = " \
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecf6fd2b19915afc4da56043926ca18f"
 
-S = "${WORKDIR}/DirectFB-examples-${PV}"
+S = "${UNPACKDIR}/DirectFB-examples-${PV}"
 
 inherit autotools pkgconfig
 

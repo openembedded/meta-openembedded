@@ -12,7 +12,6 @@ SRC_URI = "\
 
 SRCREV = "cbe58f6237b2238c9af7f51c6b7afb8bbf52c866"
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_GITTAGREGEX = "Release_(?P<pver>\d+(\_\d+)+)"
 

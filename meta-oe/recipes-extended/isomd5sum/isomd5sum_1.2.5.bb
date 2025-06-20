@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/rhinstaller/isomd5sum.git;branch=master;protocol=htt
            file://0002-fix-parallel-error.patch \
 "
 
-S = "${WORKDIR}/git"
 inherit python3native
 
 EXTRA_OEMAKE += " \

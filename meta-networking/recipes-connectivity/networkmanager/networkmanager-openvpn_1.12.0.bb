@@ -15,7 +15,7 @@ SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld',
 
 SRC_URI[sha256sum] = "903fd4c0aebd2aa7ac70c9d8c2bed8df922655d22d764514403566ae89b7e886"
 
-S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
+S = "${UNPACKDIR}/NetworkManager-openvpn-${PV}"
 
 # meta-gnome in layers is required using gnome:
 PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 libnma libsecret"

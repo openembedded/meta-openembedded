@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/open-iscsi/open-isns;branch=master;protocol=https \
 
 SRCREV = "c0e6d9fedc5a7041260de477fe1a8455fa074113"
 
-S = "${WORKDIR}/git"
 
 inherit systemd autotools-brokensep update-rc.d
 

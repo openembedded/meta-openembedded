@@ -12,7 +12,6 @@ SRCREV = "be527327653e94b02e711f7eff59285ad13e1db0"
 
 inherit cmake ptest
 
-S = "${WORKDIR}/git"
 
 do_install_ptest () {
     install -d ${D}${PTEST_PATH}/src/test/pegtl/data

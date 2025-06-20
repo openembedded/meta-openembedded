@@ -24,7 +24,6 @@ SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
            file://0001-Link-with-libm-for-floor-function.patch \
            "
 
-S = "${WORKDIR}/git"
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"

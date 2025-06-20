@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/libpwquality/libpwquality;branch=master;protocol=htt
 "
 SRCREV = "5490e96a3dd6ed7371435ca5b3ccef98bdb48b5a"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep gettext setuptools3-base
 

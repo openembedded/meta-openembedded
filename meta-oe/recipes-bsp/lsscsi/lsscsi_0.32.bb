@@ -10,6 +10,6 @@ SRC_URI[sha256sum] = "0a800e9e94dca2ab702d65d72777ae8cae078e3d74d0bcbed64ba0849e
 
 inherit autotools
 
-S = "${WORKDIR}/lsscsi-${PV}"
+S = "${UNPACKDIR}/lsscsi-${PV}"
 
 UPSTREAM_CHECK_REGEX = "lsscsi-(?P<pver>\d+(\.\d+)+)\.tgz"

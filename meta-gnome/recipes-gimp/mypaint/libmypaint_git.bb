@@ -19,7 +19,6 @@ SRCREV = "2768251dacce3939136c839aeca413f4aa4241d0"
 
 PV = "1.6.1"
 
-S = "${WORKDIR}/git"
 
 EXTRA_AUTORECONF += "-I m4"
 

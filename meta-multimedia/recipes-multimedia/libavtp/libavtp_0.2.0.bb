@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Avnu/libavtp.git;branch=master;protocol=https"
 SRC_URI:append:libc-musl = " file://0001-provide-64bit-host-to-network-conversion-macros.patch"
 SRCREV = "3599a5bf2d18fc3ae89b64f208d8380e6ee3a866"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

@@ -11,4 +11,3 @@ inherit autotools pkgconfig
 SRC_URI = "git://github.com/phatina/simple-mtpfs.git;protocol=https;branch=master"
 SRCREV = "19e7bb9b608b0c0dce2ee6f56fac75901bc69529"
 
-S = "${WORKDIR}/git"

@@ -18,7 +18,6 @@ DEPENDS = "\
 SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master"
 SRCREV = "dad1033640f249fa4994f976cf6ee96826c15702"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

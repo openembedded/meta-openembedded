@@ -28,7 +28,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
            file://0001-libdirect-remove-use-of-keyword-register.patch \
            "
 
-S = "${WORKDIR}/DirectFB-${PV}"
+S = "${UNPACKDIR}/DirectFB-${PV}"
 
 LDFLAGS:append = " -lm"
 

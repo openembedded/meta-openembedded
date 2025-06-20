@@ -35,7 +35,6 @@ IANA_ENTERPRISE_NUMBERS ?= ""
 #IANA_ENTERPRISE_NUMBERS = "http://www.iana.org/assignments/enterprise-numbers.txt;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
 #SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

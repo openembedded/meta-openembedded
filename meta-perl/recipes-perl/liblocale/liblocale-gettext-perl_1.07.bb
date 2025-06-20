@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PV/PVANDRY/Locale-gettext-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "909d47954697e7c04218f972915b787bd1244d75e3bd01620bc167d5bbc49c15"
 
-S = "${WORKDIR}/Locale-gettext-${PV}"
+S = "${UNPACKDIR}/Locale-gettext-${PV}"
 
 inherit cpan
 

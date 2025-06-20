@@ -10,7 +10,6 @@ SRCREV = "c7b4aded1cab9560b226041dd962f63375a9a384"
 
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

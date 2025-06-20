@@ -19,7 +19,6 @@ SRC_URI = " \
     file://polkit-gnome-authentication-agent-1.desktop \
 "
 SRCREV = "a0763a246a81188f60b0f9810143e49224dc752f"
-S = "${WORKDIR}/git"
 
 
 do_install:append() {

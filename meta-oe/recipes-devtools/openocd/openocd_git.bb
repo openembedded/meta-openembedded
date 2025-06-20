@@ -7,8 +7,8 @@ RDEPENDS:${PN} = "libusb1"
 SRC_URI = " \
     git://repo.or.cz/openocd.git;protocol=http;name=openocd;branch=master \
     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
-    git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=git/jimtcl;name=jimtcl;branch=master \
-    git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
+    git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/jimtcl;name=jimtcl;branch=master \
+    git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
     file://0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch \
 "
 
@@ -19,7 +19,6 @@ SRCREV_jimtcl = "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
 SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
 
 PV = "0.12+git"
-S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools-brokensep gettext
 

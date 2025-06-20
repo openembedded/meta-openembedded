@@ -33,7 +33,7 @@ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 
 SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
 
-S = "${WORKDIR}/tevent-${PV}"
+S = "${UNPACKDIR}/tevent-${PV}"
 
 # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
 # to cross Popen

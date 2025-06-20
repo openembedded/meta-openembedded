@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;t
 
 SRCREV = "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
 
-S = "${UNPACKDIR}/git"
 
 INHIBIT_DEFAULT_DEPS = "1"
 

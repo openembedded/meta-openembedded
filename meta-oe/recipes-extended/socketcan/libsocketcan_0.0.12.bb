@@ -9,7 +9,6 @@ SRCREV = "077def398ad303043d73339112968e5112d8d7c8"
 
 SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

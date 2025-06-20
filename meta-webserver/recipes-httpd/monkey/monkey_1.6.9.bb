@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/monkey/monkey;branch=1.6;protocol=https \
            file://monkey.init"
 
 SRCREV = "7999b487fded645381d387ec0e057e92407b0d2c"
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
 UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"

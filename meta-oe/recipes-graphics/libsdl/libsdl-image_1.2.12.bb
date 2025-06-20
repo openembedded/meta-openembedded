@@ -11,7 +11,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.
            file://configure.patch"
 SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
 
-S = "${WORKDIR}/SDL_image-${PV}"
+S = "${UNPACKDIR}/SDL_image-${PV}"
 
 inherit autotools pkgconfig
 

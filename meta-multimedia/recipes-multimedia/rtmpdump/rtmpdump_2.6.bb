@@ -13,7 +13,6 @@ SRC_URI = " \
     git://git.ffmpeg.org/rtmpdump;branch=master \
 "
 
-S = "${WORKDIR}/git"
 
 CVE_STATUS_GROUPS += "CVES_2015"
 CVES_2015 = "CVE-2015-8270 CVE-2015-8271 CVE-2015-8272"

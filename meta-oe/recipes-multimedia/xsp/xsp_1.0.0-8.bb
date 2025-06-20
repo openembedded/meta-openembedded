@@ -7,7 +7,7 @@ SRC_URI = "http://repository.maemo.org/pool/maemo/ossw/source/x/xsp/${BPN}_${PV}
            file://xsp-fix-pc.patch \
            file://0001-fix-incompatible-pointer-types-build-error-in-gcc-15.patch \
 "
-S = "${WORKDIR}/Xsp"
+S = "${UNPACKDIR}/Xsp"
 
 inherit autotools pkgconfig features_check
 # depends on virtual/libx11

@@ -24,7 +24,7 @@ SRC_URI += "file://0001-rarpd.8-add-man-file.patch \
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://rarpd.c;md5=199b20b172ea93121bc613a9c77b6931"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 

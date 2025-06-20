@@ -41,7 +41,6 @@ SRC_URI = " \
 	file://0001-meson-Do-not-check-for-iso-xml-files-during-build.patch \
 "
 
-S = "${WORKDIR}/git"
 SRCREV = "46e93c0c0dafc381e8a308b1befb07e908121722"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"

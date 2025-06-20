@@ -16,7 +16,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kgdb/agent-proxy.git;protoc
 
 BBCLASSEXTEND = "native nativesdk"
 
-S = "${WORKDIR}/git"
 
 do_install () {
     install -d ${D}${bindir}

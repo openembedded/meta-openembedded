@@ -14,6 +14,6 @@ SRC_URI = " \
     file://0001-AVRO-3960-C-Fix-st-ANYARGS-warning-2798.patch;patchdir=../.. \
     file://0001-AVRO-3957-C-Fix-typos-in-docs-and-examples-2795.patch;patchdir=../.. \
 "
-S = "${WORKDIR}/git/lang/c"
+S = "${UNPACKDIR}/${BP}/lang/c"
 
 inherit cmake pkgconfig

@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=
            file://run-ptest \
            "
 
-S = "${WORKDIR}/git"
 
 # Main dependencies
 inherit cmake pkgconfig lib_package ptest multilib_header

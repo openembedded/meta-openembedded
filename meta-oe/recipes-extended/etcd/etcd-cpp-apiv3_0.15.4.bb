@@ -16,7 +16,6 @@ inherit cmake
 
 DEPENDS += "grpc protobuf cpprest grpc-native protobuf-native"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "-DCPPREST_EXCLUDE_WEBSOCKETS=ON"
 

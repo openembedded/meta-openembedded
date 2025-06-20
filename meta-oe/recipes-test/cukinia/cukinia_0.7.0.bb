@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/savoirfairelinux/cukinia.git;protocol=https;branch=m
 
 SRCREV = "be56f653743cc0e68bef81ef35df7c50ff8919c4"
 
-S = "${WORKDIR}/git"
 
 RRECOMMENDS:${PN} = "libgpiod-tools"
 

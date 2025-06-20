@@ -18,8 +18,7 @@ SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
 SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
 SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_compile () {
     ${CC} ${CFLAGS} ${LDFLAGS} -o nuttcp nuttcp-${PV}.c

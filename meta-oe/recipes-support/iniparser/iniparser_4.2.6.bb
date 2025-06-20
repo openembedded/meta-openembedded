@@ -7,7 +7,6 @@ SRCBRANCH = "main"
 SRCREV = "4bef811283e0ec1658c60e09950bd5a1ddc92e4b"
 
 SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
-S = "${WORKDIR}/git"
 
 inherit cmake
 

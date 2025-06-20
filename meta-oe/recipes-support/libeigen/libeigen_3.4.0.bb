@@ -19,7 +19,6 @@ SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;branch=3.4 \
 
 SRCREV = "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

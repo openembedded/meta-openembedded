@@ -9,7 +9,6 @@ DEPENDS = "libusb1 openssl pcsc-lite"
 SRCREV = "190d6dee96ca70f8b614932b1498332b1504632b"
 SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;nobranch=1"
 
-S = "${UNPACKDIR}/git"
 
 inherit cmake
 

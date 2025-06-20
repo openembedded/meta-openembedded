@@ -9,7 +9,6 @@ DEPENDS = "jack"
 SRC_URI = "git://github.com/jackaudio/jack-example-tools.git;branch=main;protocol=https"
 SRCREV = "33de8b4285fa5054af1b37fe0496c110604ed564"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

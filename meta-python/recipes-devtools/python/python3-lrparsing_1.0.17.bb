@@ -18,6 +18,6 @@ RDEPENDS:${PN} = " \
 
 inherit setuptools3
 
-S = "${WORKDIR}/lrparsing-${PV}"
+S = "${UNPACKDIR}/lrparsing-${PV}"
 
 BBCLASSEXTEND = "native"

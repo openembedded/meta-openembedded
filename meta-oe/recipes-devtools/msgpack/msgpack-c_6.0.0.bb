@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https \
            "
 SRCREV = "8160ede5e20fd3019a77eea46d9c72cf6163f802"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

@@ -7,7 +7,7 @@ SECTION = "devel"
 SRC_URI = "https://01.org/sites/default/files/downloads/msr-tools/msr-tools-${PV}.zip"
 SRC_URI[sha256sum] = "f9457b5340f5f274da4239a461f0db6b514142b40461559d9c6150f05aab1d1e"
 
-S = "${WORKDIR}/msr-tools-master"
+S = "${UNPACKDIR}/msr-tools-master"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 

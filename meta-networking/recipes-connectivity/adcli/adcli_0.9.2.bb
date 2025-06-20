@@ -8,7 +8,6 @@ SRCREV = "8e88e3590a19006362ea8b8dfdc18bb88b3cb3b5"
 
 SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"

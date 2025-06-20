@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/libwbxml/libwbxml-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "a057daa098f12838eb4e635bb28413027f1b73819872c3fbf64e3207790a3f7d"
 
-S = "${WORKDIR}/libwbxml-${PV}"
+S = "${UNPACKDIR}/libwbxml-${PV}"
 
 inherit cmake pkgconfig
 

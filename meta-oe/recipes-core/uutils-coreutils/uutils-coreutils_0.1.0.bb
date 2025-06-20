@@ -13,7 +13,6 @@ SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main \
 "
 
 SRCREV = "18b963ed6f612ac30ebca92426280cf4c1451f6a"
-S = "${WORKDIR}/git"
 
 require ${BPN}-crates.inc
 

@@ -13,7 +13,7 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/
 
 SRC_URI[sha256sum] = "5dedaa785d82d8e239ddd082bfac5250c691e964464be1807b6827263633cdcc"
 
-S = "${WORKDIR}/NetworkManager-openconnect-${PV}"
+S = "${UNPACKDIR}/NetworkManager-openconnect-${PV}"
 
 # meta-gnome in layers is required using gnome:
 PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 gcr3 libnma libsecret,"

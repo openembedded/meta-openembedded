@@ -5,7 +5,6 @@ HOMEPAGE = "http://open-lldp.org/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools
 inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}

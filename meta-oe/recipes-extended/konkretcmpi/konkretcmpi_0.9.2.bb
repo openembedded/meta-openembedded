@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/rnovacek/konkretcmpi.git;branch=master;protocol=http
            "
 
 SRCREV = "ad28225e6eceff88417a60c1ba8896c8e40f21a7"
-S = "${WORKDIR}/git"
 
 inherit cmake python3-dir
 

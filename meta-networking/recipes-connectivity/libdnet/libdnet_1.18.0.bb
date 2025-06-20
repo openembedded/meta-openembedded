@@ -10,7 +10,6 @@ SRCREV = "3dfbe889b1f65077efe579da34fc1d6819fcb7f3"
 
 UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 inherit autotools multilib_script pkgconfig
 

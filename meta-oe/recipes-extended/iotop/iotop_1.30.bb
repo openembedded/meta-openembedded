@@ -7,7 +7,6 @@ DEPENDS = "ncurses"
 SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https;tag=v${PV}"
 SRCREV = "c3366a8a235f9c8ddc4797625f22cfdf12ba2c36"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

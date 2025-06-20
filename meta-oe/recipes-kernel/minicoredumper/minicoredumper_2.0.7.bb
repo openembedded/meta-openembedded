@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
            file://0001-corestripper-Fix-uninitialized-warning.patch \
            "
 
-S = "${WORKDIR}/git"
 
 SYSTEMD_SERVICE:${PN} = "minicoredumper.service"
 SYSTEMD_AUTO_ENABLE = "enable"

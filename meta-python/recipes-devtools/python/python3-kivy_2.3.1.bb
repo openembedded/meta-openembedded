@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
 
 SRCREV = "20d74dcd30f143abbd1aa94c76bafc5bd934d5bd"
 
-S = "${WORKDIR}/git"
 
 PACKAGES += "${PN}-examples"
 FILES:${PN}-examples = "/usr/share/kivy-examples"

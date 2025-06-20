@@ -12,6 +12,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_cthelper/files/libnet
 SRC_URI[md5sum] = "e59279645fe65d40dd7dfc82a797ca5b"
 SRC_URI[sha256sum] = "14073d5487233897355d3ff04ddc1c8d03cc5ba8d2356236aa88161a9f2dc912"
 
-S = "${WORKDIR}/libnetfilter_cthelper-${PV}"
+S = "${UNPACKDIR}/libnetfilter_cthelper-${PV}"
 
 inherit autotools pkgconfig

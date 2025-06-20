@@ -20,7 +20,6 @@ UPSTREAM_CHECK_COMMITS = "1"
 
 inherit autotools-brokensep
 
-S = "${WORKDIR}/git"
 
 do_configure () {
     # no debug set -s flag

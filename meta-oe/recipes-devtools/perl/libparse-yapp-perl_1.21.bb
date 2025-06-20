@@ -13,7 +13,7 @@ SRC_URI = "https://www.cpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-${PV}.tar.g
 
 SRC_URI[sha256sum] = "3810e998308fba2e0f4f26043035032b027ce51ce5c8a52a8b8e340ca65f13e5"
 
-S = "${WORKDIR}/Parse-Yapp-${PV}"
+S = "${UNPACKDIR}/Parse-Yapp-${PV}"
 
 inherit cpan
 

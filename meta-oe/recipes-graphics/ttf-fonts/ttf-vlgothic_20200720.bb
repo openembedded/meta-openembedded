@@ -12,7 +12,7 @@ SRC_URI = "https://osdn.jp/dl/vlgothic/VLGothic-${PV}.tar.xz"
 
 SRC_URI[sha256sum] = "297a3813675fbea12c5813b55a78091c9a5946515ecbf9fde8b8102e01c579f4"
 
-S = "${WORKDIR}/VLGothic"
+S = "${UNPACKDIR}/VLGothic"
 
 do_install:append () {
     install -D -m644 ${S}/LICENSE_E.mplus ${D}${datadir}/licenses/${PN}/COPYING_MPLUS.txt

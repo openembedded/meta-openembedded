@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=m
 
 SRCREV = "5aff8fa2b5b60b7c11bbfb39c884477e72d11d02"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3_legacy
 

@@ -7,7 +7,7 @@ SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "b15309fc85623893289cb9b2b88dfa9ed1e69156b75f29938553a45be6d730af"
 
-S = "${WORKDIR}/IO-Tty-${PV}"
+S = "${UNPACKDIR}/IO-Tty-${PV}"
 
 inherit cpan ptest-perl
 

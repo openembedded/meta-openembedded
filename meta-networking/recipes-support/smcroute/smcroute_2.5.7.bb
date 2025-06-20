@@ -8,6 +8,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRCREV = "b315d06ddb0dad16a52fe91e5831b4030ce37010"
 SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig

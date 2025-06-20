@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/sqlite/sqlite;protocol=https;branch=branch-3.44"
 
 SRCREV = "c8f9803dc32bfee78a9ca2b1abbe39499729219b"
 
-S = "${WORKDIR}/git"
 
 do_compile() {
     ${CC} ${CFLAGS} ${LDFLAGS} tool/lemon.c -o lemon

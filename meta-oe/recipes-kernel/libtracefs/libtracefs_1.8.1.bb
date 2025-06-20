@@ -13,7 +13,6 @@ SRCREV = "417c2e3aa21af670cc5c13db633dd35292f2d0fa"
 SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
            "
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

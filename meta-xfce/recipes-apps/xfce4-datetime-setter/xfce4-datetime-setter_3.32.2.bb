@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=htt
 "
 SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
 
-S = "${WORKDIR}/git"
 
 inherit gettext meson features_check pkgconfig
 

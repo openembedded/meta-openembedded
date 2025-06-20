@@ -7,8 +7,7 @@ PV = "0.1.0"
 
 SRC_URI = "file://fb.modes"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install() {
     install -d ${D}${sysconfdir}

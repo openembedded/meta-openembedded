@@ -14,7 +14,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "486762e4cacddcc77b13989f979a029f84630b8175e7fef17989e157d4b6318a"
 
-S = "${WORKDIR}/Unicode-LineBreak-${PV}"
+S = "${UNPACKDIR}/Unicode-LineBreak-${PV}"
 
 DEPENDS = "libsombok3 libmime-charset-perl"
 

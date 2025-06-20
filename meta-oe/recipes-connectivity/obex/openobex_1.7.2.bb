@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "158860aaea52f0fce0c8e4b64550daaae06df2689e05834697b7e8c7d7
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openobex/files/openobex/"
 UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/${BP}-Source"
+S = "${UNPACKDIR}/${BP}-Source"
 
 inherit cmake pkgconfig
 

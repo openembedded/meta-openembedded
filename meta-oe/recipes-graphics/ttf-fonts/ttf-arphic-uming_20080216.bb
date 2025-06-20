@@ -8,7 +8,7 @@ RPROVIDES:${PN} = "virtual-chinese-font"
 FONT_PACKAGES = "${PN}"
 
 SRC_URI = "https://deb.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.${PV}.2.orig.tar.bz2"
-S = "${WORKDIR}/ttf-arphic-uming-0.2.20080216.2"
+S = "${UNPACKDIR}/ttf-arphic-uming-0.2.20080216.2"
 
 require ttf.inc
 

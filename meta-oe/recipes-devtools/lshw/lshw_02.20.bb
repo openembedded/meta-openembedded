@@ -18,7 +18,6 @@ SRC_URI = " \
     file://0001-disable-docbook2man.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

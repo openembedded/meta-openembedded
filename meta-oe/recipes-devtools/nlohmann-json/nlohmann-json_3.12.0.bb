@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=3b489645de9825cca5beeb9a7e18b6eb"
 CVE_PRODUCT = "json-for-modern-cpp"
 
 SRC_URI = "git://github.com/nlohmann/json.git;branch=master;protocol=https \
-           git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
+           git://github.com/nlohmann/json_test_data.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/json_test_data;name=json-test-data;branch=master;protocol=https \
            file://run-ptest \
 "
 
@@ -16,7 +16,6 @@ SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
 
 SRCREV_FORMAT .= "_json-test-data"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

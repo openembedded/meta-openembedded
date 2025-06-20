@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git;branch=master;protocol=ht
 
 SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
 
-S = "${WORKDIR}/git"
 
 inherit update-rc.d autotools texinfo systemd
 

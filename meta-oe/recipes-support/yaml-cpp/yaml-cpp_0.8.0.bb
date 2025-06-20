@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/jbeder/yaml-cpp.git;branch=master;protocol=https"
 SRCREV = "28f93bdec6387d42332220afa9558060c8016795"
 PV .= "+git"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

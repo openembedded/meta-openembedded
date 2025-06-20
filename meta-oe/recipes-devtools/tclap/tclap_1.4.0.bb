@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
 SRCREV = "81b3d2a0c47895c22e9bb8c577f5ab521f76e5d2"
 SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4"
 
-S = "${WORKDIR}/git"
 inherit cmake
 
 ALLOW_EMPTY:${PN} = "1"

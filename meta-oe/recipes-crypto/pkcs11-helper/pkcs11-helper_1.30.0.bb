@@ -17,7 +17,6 @@ LIC_FILES_CHKSUM = " \
 "
 SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 # master
 SRCREV = "8bed16034f629a0361fa8ff89deed2b43dc45d8b"
 PV .= "+1.30.0+git"

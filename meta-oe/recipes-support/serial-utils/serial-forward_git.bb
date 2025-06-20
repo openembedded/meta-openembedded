@@ -9,6 +9,6 @@ SRC_URI = "git://github.com/freesmartphone/cornucopia.git;branch=master;protocol
            file://0001-serial_forward-Disable-default-static-linking.patch;striplevel=3 \
            file://0001-correct-the-typo-in-include-file-name-string.h.patch;striplevel=3 \
           "
-S = "${WORKDIR}/git/tools/serial_forward"
+S = "${UNPACKDIR}/${BP}/tools/serial_forward"
 
 inherit autotools

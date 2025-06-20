@@ -13,7 +13,6 @@ SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
            "
 
 SRCREV = "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " \
 	-DCMAKE_BUILD_TYPE=Release \

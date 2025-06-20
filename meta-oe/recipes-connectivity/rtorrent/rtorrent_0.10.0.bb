@@ -8,7 +8,6 @@ DEPENDS = "autoconf-archive libsigc++-2.0 curl cppunit libtool libtorrent ncurse
 SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https"
 SRCREV = "a88cab6d2e764e22cac232ef8d5af039d41b8280"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 

@@ -13,7 +13,6 @@ PV = "0.5.9+git"
 SRCREV = "0e2ce9b9c46c47363436f9ee730f7c71bf455f0f"
 SRC_URI = "git://github.com/lcdproc/lcdproc;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig update-rc.d
 

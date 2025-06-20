@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
 
 DEPENDS += "fmt"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

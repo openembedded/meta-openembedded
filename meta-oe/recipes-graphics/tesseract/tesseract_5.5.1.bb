@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SRCREV = "3b7c70e34dea179549ed3e995872e2e019eb8477"
 SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "leptonica"
 

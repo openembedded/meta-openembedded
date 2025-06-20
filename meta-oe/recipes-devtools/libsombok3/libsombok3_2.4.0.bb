@@ -16,7 +16,6 @@ inherit autotools-brokensep pkgconfig
 # sombok-2.4.0
 SRCREV = "0098d85a037ef5c99a648a3669a077781a45e8cc"
 
-S = "${WORKDIR}/git"
 
 # Disable libthai support
 EXTRA_OECONF = "--disable-libthai"

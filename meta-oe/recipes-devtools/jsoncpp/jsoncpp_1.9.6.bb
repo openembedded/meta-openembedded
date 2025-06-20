@@ -16,7 +16,6 @@ PE = "1"
 SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
 SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

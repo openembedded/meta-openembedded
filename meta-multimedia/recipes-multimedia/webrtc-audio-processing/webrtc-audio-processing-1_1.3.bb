@@ -15,7 +15,7 @@ SRC_URI = " \
     file://0001-task_queue-fix-build-with-gcc-15.patch \
 "
 SRC_URI[sha256sum] = "2365e93e778d7b61b5d6e02d21c47d97222e9c7deff9e1d0838ad6ec2e86f1b9"
-S = "${WORKDIR}/webrtc-audio-processing-${PV}"
+S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
 
 LDFLAGS:append:libc-musl = " -lexecinfo"
 

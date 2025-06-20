@@ -16,7 +16,6 @@ SRC_URI = "\
     file://a53f123040998744602f190944464af0e159ea19.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

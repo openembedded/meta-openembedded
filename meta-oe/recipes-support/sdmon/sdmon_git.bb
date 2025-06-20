@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Ognian/sdmon;protocol=https;branch=master"
 PV = "0.9.0"
 SRCREV = "4dff9b690e8d4454fada6abfbb6b32fcb794968c"
 
-S = "${WORKDIR}/git"
 
 do_compile() {
 	oe_runmake -C ${S}/src CC="${CC}" CFLAGS="${CFLAGS} -D_REENTRANT -DVERSION=\"\\\"${PV}\\\"\"" LDFLAGS="${LDFLAGS}"

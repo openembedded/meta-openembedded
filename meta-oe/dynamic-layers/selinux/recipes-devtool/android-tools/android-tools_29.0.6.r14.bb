@@ -43,9 +43,9 @@ SRC_URI += " \
 
 # patches which don't come from debian
 SRC_URI += " \
-    file://rules_yocto.mk;subdir=git \
+    file://rules_yocto.mk;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
     file://android-tools-adbd.service \
-    file://adbd.mk;subdir=git/debian/system/core \
+    file://adbd.mk;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/debian/system/core \
     file://remount \
     file://0001-Fixes-for-yocto-build.patch \
     file://0002-android-tools-modifications-to-make-it-build-in-yoct.patch \
@@ -55,7 +55,6 @@ SRC_URI += " \
     file://0001-liblp-fix-building-with-GCC-14.patch \
 "
 
-S = "${WORKDIR}/git"
 B = "${WORKDIR}/${BPN}"
 
 # http://errors.yoctoproject.org/Errors/Details/1debian881/

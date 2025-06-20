@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/IanHarvey/bluepy.git;protocol=https;branch=master \
            file://0001-bluepy-Fix-username-issue-with-tarballs.patch \
           "
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3 pkgconfig
 

@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/berke/wipe.git;branch=master;protocol=https \
 "
 SRCREV = "796b62293e007546e051619bd03f5ba338ef28e5"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "linux"
 

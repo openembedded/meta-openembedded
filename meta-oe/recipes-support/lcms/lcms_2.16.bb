@@ -10,7 +10,7 @@ DEPENDS = "tiff"
 
 BBCLASSEXTEND = "native nativesdk"
 
-S = "${WORKDIR}/lcms2-${PV}"
+S = "${UNPACKDIR}/lcms2-${PV}"
 
 inherit autotools
 

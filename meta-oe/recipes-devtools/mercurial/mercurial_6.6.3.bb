@@ -12,7 +12,7 @@ inherit python3native python3targetconfig
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
 SRC_URI[sha256sum] = "f75d6a4a75823a1b7d713a4967eca2f596f466e58fc6bc06d72642932fd7e307"
 
-S = "${WORKDIR}/mercurial-${PV}"
+S = "${UNPACKDIR}/mercurial-${PV}"
 
 BBCLASSEXTEND = "native"
 

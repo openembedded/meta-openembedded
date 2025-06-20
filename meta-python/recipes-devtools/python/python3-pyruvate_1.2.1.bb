@@ -20,7 +20,6 @@ SRCREV = "57db64c9f65ced05c71b8d786c1cedfaa2991597"
 
 SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/libsystemd-0.5.0/"
 
-S = "${WORKDIR}/git"
 
 inherit python_setuptools3_rust cargo-update-recipe-crates
 

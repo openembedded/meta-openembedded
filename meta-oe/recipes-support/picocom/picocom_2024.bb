@@ -9,7 +9,6 @@ SRCREV = "7b6acbd421a2d4ca99376b7b427828dc1bcba4d8"
 SRC_URI = "git://gitlab.com/wsakernel/picocom;branch=master;protocol=https \
            "
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "'CC=${CC}' 'LD=${CC}' 'VERSION=${PV}' \
 		'CFLAGS=${CFLAGS}' 'LDFLAGS=${LDFLAGS}' "

@@ -9,7 +9,7 @@ inherit allarch gtk-icon-cache
 SRC_URI = "https://mirrors.dotsrc.org/mirrors/exherbo/111343-OpenZone-${PV}.tar.xz"
 SRC_URI[sha256sum] = "db6fa6d0798aceb56998ce81382fa2246c77911d56b3b06e6aadee4cf5b4816e"
 
-S = "${WORKDIR}/OpenZone"
+S = "${UNPACKDIR}/OpenZone"
 
 do_compile() {
 }

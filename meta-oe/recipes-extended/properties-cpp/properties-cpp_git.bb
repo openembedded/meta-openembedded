@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lib-cpp/${BPN}.git;branch=master;protocol=https"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_configure:prepend() {
     echo " " > ${S}/tests/CMakeLists.txt

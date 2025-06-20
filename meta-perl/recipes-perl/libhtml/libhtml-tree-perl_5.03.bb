@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "7d6d73fca622aa74855a8b088faa39454a0f91b7af83c9ec0387f01eefc2148f"
 
-S = "${WORKDIR}/HTML-Tree-${PV}"
+S = "${UNPACKDIR}/HTML-Tree-${PV}"
 
 inherit cpan_build
 

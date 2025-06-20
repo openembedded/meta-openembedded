@@ -14,6 +14,5 @@ SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git;branch=master;proto
            file://0001-Fix-build-on-big-endian-architectures.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep

@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/pistacheio/pistache.git;branch=master;protocol=https
 # SRCREV tagged 0.4.26
 SRCREV = "ddffda861aa49012dcda28f1362d0339e718cd52"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "rapidjson"
 

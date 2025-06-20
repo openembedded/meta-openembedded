@@ -10,7 +10,6 @@ inherit pkgconfig cmake
 SRCREV = "eda5c99686e15327f2f37b9cadf307e852b96adf"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "freerdp"
 

@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-Lzma-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "daa63c3fa1f7708aa55b97a4d189820f5e849f8e4583dc24b5cceebd06a493eb"
 
-S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
+S = "${UNPACKDIR}/IO-Compress-Lzma-${PV}"
 
 inherit cpan
 

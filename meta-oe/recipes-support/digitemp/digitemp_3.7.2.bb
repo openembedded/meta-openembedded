@@ -11,7 +11,6 @@ SRC_URI = " \
 
 SRCREV = "a162e63aad35358aab325388f3d5e88121606419"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "ds9097 ds9097u \
                 SYSTYPE='Linux' \

@@ -8,7 +8,6 @@ PV = "1.0.4+git"
 SRC_URI = "git://github.com/ReimuNotMoe/ydotool;protocol=https;branch=master"
 SRCREV = "0c295346d55afcc6aebaaee564333b3e1efabcbd"
 
-S = "${WORKDIR}/git"
 
 inherit cmake systemd
 

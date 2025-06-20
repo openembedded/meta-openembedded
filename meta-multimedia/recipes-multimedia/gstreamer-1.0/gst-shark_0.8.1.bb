@@ -15,11 +15,10 @@ SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
 SRCREV_FORMAT = "default_common"
 SRC_URI = " \
     git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH} \
-    git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;branch=master;destsuffix=git/common;name=common \
+    git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/common;name=common \
     file://0001-tracers-Fix-buffer-overflow.patch \
 "
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += " \
     --disable-graphviz \

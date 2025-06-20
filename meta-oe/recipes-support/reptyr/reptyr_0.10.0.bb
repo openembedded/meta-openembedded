@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=25a0555028c71837623fa6dfa4cc45c0"
 SRC_URI = "git://github.com/nelhage/reptyr.git;protocol=https;branch=master"
 SRCREV = "1238097fc2cd15db058d2185cc4985daa87bcd41"
 
-S = "${WORKDIR}/git"
 
 inherit bash-completion github-releases manpages pkgconfig
 

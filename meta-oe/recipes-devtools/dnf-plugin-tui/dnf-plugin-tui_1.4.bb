@@ -10,7 +10,6 @@ SRC_URI:append:class-target = " file://oe-remote.repo.sample"
 
 inherit setuptools3-base
 
-S = "${WORKDIR}/git"
 
 do_install:append() {
     install -d ${D}${datadir}/dnf

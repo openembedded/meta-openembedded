@@ -15,7 +15,6 @@ SRCREV = "bce81efdeac1cbefd0196b478a32aa2586bd595a"
 PV .= "+git"
 SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 

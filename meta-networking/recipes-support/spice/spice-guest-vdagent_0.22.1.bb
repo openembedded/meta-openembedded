@@ -7,7 +7,6 @@ SRCREV = "aa08162f036840d3e33502dc0a836b03b9cec97c"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/linux/vd_agent.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "opengl x11"

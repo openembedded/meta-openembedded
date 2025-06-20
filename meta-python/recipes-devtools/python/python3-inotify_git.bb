@@ -12,7 +12,6 @@ SRC_URI = " \
 
 SRCREV = "9be6a51d1660991562eefaaddefa757ca0e0e00f"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3 ptest-python-pytest
 

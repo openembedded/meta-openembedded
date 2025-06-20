@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
 
 SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
 
-S = "${WORKDIR}/git/libyui"
+S = "${UNPACKDIR}/${BP}/libyui"
 
 inherit cmake gettext pkgconfig
 

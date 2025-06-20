@@ -18,6 +18,5 @@ GI_DATA_ENABLED:libc-musl:armv7a = "False"
 GI_DATA_ENABLED:libc-musl:armv7ve = "False"
 SRC_URI = "git://github.com/stressapptest/stressapptest;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit autotools

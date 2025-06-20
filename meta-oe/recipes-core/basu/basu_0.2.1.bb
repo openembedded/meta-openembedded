@@ -8,7 +8,6 @@ SRC_URI = "git://git.sr.ht/~emersion/basu;protocol=https;branch=master"
 
 DEPENDS += "gperf-native"
 
-S = "${WORKDIR}/git"
 PV = "0.2.1+git"
 SRCREV = "a08cf5a575325435040d35710dbac3d0c32b1676"
 

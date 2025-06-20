@@ -13,7 +13,7 @@ SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
 SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd77309b"
 
 SRCNAME = "volume_key"
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
 inherit autotools python3native python3targetconfig gettext pkgconfig
 

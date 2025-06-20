@@ -13,7 +13,6 @@ SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=st
            file://run-ptest \
           "
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

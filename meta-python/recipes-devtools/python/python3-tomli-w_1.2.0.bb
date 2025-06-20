@@ -4,11 +4,10 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aaaaf0879d17df0110d1aa8c8c9f46f5"
 
 SRCREV = "a8f80172ba16fe694e37f6e07e6352ecee384c58"
-PYPI_SRC_URI = "git://github.com/hukkin/tomli-w.git;protocol=https;branch=master"
+PYPI_SRC_URI = "git://github.com/hukkin/tomli-w.git;protocol=https;branch=master;destsuffix=${S}"
 
 inherit pypi python_flit_core ptest-python-pytest
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN}-ptest += " \
         python3-tomli \

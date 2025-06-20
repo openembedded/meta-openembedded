@@ -25,7 +25,6 @@ RDEPENDS:${PN}-dev = ""
 # tag 0.8.2
 SRCREV = "56123c87598f8b1dd471be83ca841ceae07f95ba"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

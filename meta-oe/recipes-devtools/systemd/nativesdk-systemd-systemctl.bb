@@ -7,8 +7,7 @@ inherit nativesdk
 
 SRC_URI = "file://systemctl"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install() {
 	install -d ${D}${bindir}

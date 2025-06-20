@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
 SRC_URI[sha256sum] = "d57bd0141aea082e3adfc198bfc3db5dfd12a7014c7c2655e97f61cd54901d0e"
 
-S = "${WORKDIR}/fping-${PV}"
+S = "${UNPACKDIR}/fping-${PV}"
 
 inherit autotools
 

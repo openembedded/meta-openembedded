@@ -11,6 +11,5 @@ SRC_URI = "git://gitlab.freedesktop.org/libevdev/evtest.git;protocol=https;branc
            file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig

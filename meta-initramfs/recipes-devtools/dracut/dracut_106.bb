@@ -18,7 +18,6 @@ DEPENDS:append:libc-musl = " fts"
 
 inherit bash-completion pkgconfig
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--prefix=${prefix} \
                 --libdir=${nonarch_libdir} \

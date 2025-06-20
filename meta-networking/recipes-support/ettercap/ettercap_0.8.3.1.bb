@@ -25,7 +25,6 @@ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
 
 SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_SKIP_RPATH=TRUE \

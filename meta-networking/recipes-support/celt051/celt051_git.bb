@@ -21,7 +21,6 @@ SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=htt
            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools-brokensep
 

@@ -9,6 +9,5 @@ PV = "1.3.0"
 
 SRC_URI = "git://github.com/cwzx/nngpp;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

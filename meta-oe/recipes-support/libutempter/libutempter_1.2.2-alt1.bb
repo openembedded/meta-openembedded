@@ -14,7 +14,7 @@ SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=mas
            file://0002-Proper-macro-path-generation.patch \
            "
 
-S = "${WORKDIR}/git/${BPN}"
+S = "${UNPACKDIR}/${BP}/${BPN}"
 
 CFLAGS += "-DLIBEXECDIR=${libexecdir}"
 

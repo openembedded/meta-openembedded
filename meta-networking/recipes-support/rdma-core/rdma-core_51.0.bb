@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=http
            file://0001-librdmacm-Use-overloadable-function-attribute-with-c.patch \
 "
 SRCREV = "6cd09097ad2eebde9a7fa3d3bb09a2cea6e3c2d6"
-S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
 LICENSE = "BSD-2-Clause | GPL-2.0-only"

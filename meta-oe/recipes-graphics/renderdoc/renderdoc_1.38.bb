@@ -8,7 +8,6 @@ SRCREV = "34c3c40787f440da9c2947cd63a41e6c4d1f95b9"
 SRC_URI = " \
     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
 "
-S = "${WORKDIR}/git"
 
 DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms"
 

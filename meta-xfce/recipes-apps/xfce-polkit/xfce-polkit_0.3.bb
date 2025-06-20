@@ -11,4 +11,3 @@ SRC_URI = " \
     git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
 "
 SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
-S = "${WORKDIR}/git"

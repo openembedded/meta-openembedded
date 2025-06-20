@@ -9,7 +9,6 @@ SRC_URI = "git://code.videolan.org/videolan/libdvbcsa.git;protocol=https;branch=
            file://libdvbcsa.pc \
 "
 
-S = "${WORKDIR}/git"
 
 inherit autotools lib_package pkgconfig
 

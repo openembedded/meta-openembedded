@@ -24,7 +24,6 @@ SRC_URI = " \
 	file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
 "
 SRCREV = "965cb9307713c618253918633416fcad86bcc5d2"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"

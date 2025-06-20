@@ -14,7 +14,6 @@ SRCREV = "860ffb707af3af94467d2ece4ad258dda957c6cd"
 SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master \
            file://0001-include-unistd.h-for-usleep.patch"
 
-S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " --without-cython "

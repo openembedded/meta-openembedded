@@ -21,7 +21,7 @@ EXTRA_OECONF = " \
     --enable-usbdropdir=${libdir}/pcsc/drivers \
 "
 
-S = "${WORKDIR}/pcsc-lite-${PV}"
+S = "${UNPACKDIR}/pcsc-lite-${PV}"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} udev"
 PACKAGECONFIG:class-native ??= ""

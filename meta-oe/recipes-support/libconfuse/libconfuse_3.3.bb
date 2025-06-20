@@ -10,6 +10,6 @@ SRC_URI += "file://CVE-2022-40320.patch"
 
 inherit autotools-brokensep pkgconfig gettext
 
-S = "${WORKDIR}/confuse-${PV}"
+S = "${UNPACKDIR}/confuse-${PV}"
 
 BBCLASSEXTEND = "native nativesdk"

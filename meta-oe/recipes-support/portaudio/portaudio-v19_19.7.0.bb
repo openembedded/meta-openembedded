@@ -8,7 +8,6 @@ PV .= "+git"
 SRC_URI = "git://github.com/PortAudio/portaudio.git;branch=master;protocol=https"
 SRCREV = "929e2e8f7af281c5eb4fa07758930d542ec43d97"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

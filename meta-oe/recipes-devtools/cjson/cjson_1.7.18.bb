@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
          "
 SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig ptest
 

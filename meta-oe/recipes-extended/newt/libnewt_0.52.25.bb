@@ -24,7 +24,7 @@ SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
 
 SRC_URI[sha256sum] = "ef0ca9ee27850d1a5c863bb7ff9aa08096c9ed312ece9087b30f3a426828de82"
 
-S = "${WORKDIR}/newt-${PV}"
+S = "${UNPACKDIR}/newt-${PV}"
 
 inherit autotools-brokensep python3native python3-dir python3targetconfig
 

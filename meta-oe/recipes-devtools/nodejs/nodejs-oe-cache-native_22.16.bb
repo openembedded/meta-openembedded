@@ -8,8 +8,7 @@ SRC_URI = "\
 
 inherit native
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 B = "${WORKDIR}/build"
 

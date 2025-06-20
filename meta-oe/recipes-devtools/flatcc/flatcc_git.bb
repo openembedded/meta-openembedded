@@ -14,7 +14,6 @@ SRC_URI = " \
 "
 SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

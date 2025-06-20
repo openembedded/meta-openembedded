@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https \
            file://0001-configure-Fix-checks-for-libjpeg-and-libexif.patch \
            "
 SRCREV = "9a175cd67eaa61fe45413d8da82da72936567047"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

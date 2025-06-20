@@ -14,9 +14,8 @@ DEPENDS = "zlib readline coreutils-native ncurses-native"
 
 INC_PR = "r1"
 
-S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=https \
-           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=git \
+           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
            file://7001force_define_architecture.patch \
            file://7003cross_ranlib.patch \
            file://0001-cross_add_configure_option.patch \

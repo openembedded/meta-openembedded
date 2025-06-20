@@ -9,4 +9,3 @@ SRC_URI = "git://anongit.freedesktop.org/xdg/pyxdg;branch=master"
 
 inherit setuptools3
 
-S = "${WORKDIR}/git"

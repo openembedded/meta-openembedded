@@ -16,7 +16,6 @@ SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master \
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

@@ -13,7 +13,6 @@ DEPENDS = " \
 	gobject-introspection-native \
 "
 
-S = "${WORKDIR}/git"
 SRCREV = "d7666f77e7ee33907c84f5efdef32aef2e1cc196"
 SRCPV = "${PV}+${SRCREV}"
 

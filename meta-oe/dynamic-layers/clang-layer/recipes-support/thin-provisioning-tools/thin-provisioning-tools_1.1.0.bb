@@ -5,7 +5,6 @@ LICENSE = "GPL-3.0-only"
 SECTION = "devel"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
-S = "${WORKDIR}/git"
 
 SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \

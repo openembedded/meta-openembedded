@@ -21,7 +21,7 @@ inherit autotools-brokensep
 LIBS:append:libc-musl = " -lssp_nonshared"
 LIBS:append:libc-glibc = " -lc_nonshared"
 
-S = "${WORKDIR}/tsocks-1.8"
+S = "${UNPACKDIR}/tsocks-1.8"
 
 FILES:${PN} = "${libdir}/* ${bindir}/tsocks"
 FILES:${PN}-dev = ""

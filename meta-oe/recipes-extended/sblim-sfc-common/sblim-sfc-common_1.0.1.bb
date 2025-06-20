@@ -9,7 +9,7 @@ SECTION = "Development/Libraries"
 
 DEPENDS = "cmpi-bindings"
 
-S = "${WORKDIR}/sblim-sfcCommon-${PV}"
+S = "${UNPACKDIR}/sblim-sfcCommon-${PV}"
 SRC_URI = "http://downloads.sourceforge.net/sblim/sblim-sfcCommon-${PV}.tar.bz2"
 SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
 

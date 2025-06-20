@@ -9,7 +9,7 @@ SECTION = "x11/gnome"
 DEPENDS = "udev gtk+3 libnotify libcanberra bluez5"
 
 GNOMEBN = "gnome-bluetooth"
-S = "${WORKDIR}/${GNOMEBN}-${PV}"
+S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 

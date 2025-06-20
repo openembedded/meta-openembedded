@@ -20,7 +20,6 @@ UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 
 inherit autotools pkgconfig
 
-S = "${WORKDIR}/git"
 
 # libknet/transport_udp.c:326:48: error: comparison of integers of different signs: 'unsigned long' and 'int' [-Werror,-Wsign-compare]
 # for (cmsg = CMSG_FIRSTHDR(&msg);cmsg; cmsg = CMSG_NXTHDR(&msg, cmsg)) {

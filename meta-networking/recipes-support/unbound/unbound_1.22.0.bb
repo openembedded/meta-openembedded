@@ -26,7 +26,6 @@ inherit autotools pkgconfig systemd update-rc.d ptest
 DEPENDS = "openssl libtool-native bison-native expat"
 RDEPENDS:${PN} = "bash openssl-bin daemonize"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
                 --disable-rpath --with-ssl=${STAGING_EXECPREFIXDIR} \

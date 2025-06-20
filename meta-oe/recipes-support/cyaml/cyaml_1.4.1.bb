@@ -11,7 +11,6 @@ SRCREV = "07ff8654a270ec9b410acd3152b60de9e9f941af"
 
 SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

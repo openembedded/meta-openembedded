@@ -27,6 +27,5 @@ SRC_URI = "git://github.com/MycroftAI/mimic1.git;branch=master;protocol=https \
 
 inherit autotools pkgconfig
 
-S = "${WORKDIR}/git"
 
 CPPFLAGS:append = " -Wno-error"

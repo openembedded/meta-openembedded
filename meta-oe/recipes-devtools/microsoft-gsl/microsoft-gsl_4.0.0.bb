@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=main \
 "
 SRCREV = "a3534567187d2edc428efd3f13466ff75fe5805c"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig ptest
 

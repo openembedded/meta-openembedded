@@ -8,7 +8,6 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
 
 SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 SRCREV = "5e9deb19fe6b3768af0bb8e9e5e8438b15171bf3"
 
 inherit cmake pkgconfig

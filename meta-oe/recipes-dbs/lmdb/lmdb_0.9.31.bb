@@ -18,7 +18,7 @@ SRCREV = "ce201088de95d26fc0da36ba805bf2ddc2ba74ff"
 
 inherit ptest
 
-S = "${WORKDIR}/git/libraries/liblmdb"
+S = "${UNPACKDIR}/${BP}/libraries/liblmdb"
 
 do_compile() {
     oe_runmake CC="${CC}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" XCFLAGS="${CFLAGS}"

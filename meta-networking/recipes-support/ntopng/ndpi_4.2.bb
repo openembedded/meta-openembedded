@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.2-stable;protocol=https \
            file://0001-autogen.sh-not-generate-configure.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 

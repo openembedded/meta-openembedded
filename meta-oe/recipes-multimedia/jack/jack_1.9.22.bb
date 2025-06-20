@@ -24,7 +24,6 @@ SRCREV = "4f58969432339a250ce87fe855fb962c67d00ddb"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 inherit waf pkgconfig
 

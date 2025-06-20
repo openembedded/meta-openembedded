@@ -33,7 +33,7 @@ RDEPENDS:${PN} += "perl-module-text-parsewords"
 RDEPENDS:${PN} += "perl-module-warnings"
 RRECOMMENDS:${PN} += "libfile-slurper-perl"
 
-S = "${WORKDIR}/Config-AutoConf-${PV}"
+S = "${UNPACKDIR}/Config-AutoConf-${PV}"
 
 inherit cpan ptest-perl
 

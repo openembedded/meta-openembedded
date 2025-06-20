@@ -12,7 +12,7 @@ SRC_URI = "https://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
 SRC_URI[sha256sum] = "68406329827b783d0a8959cc20a94c6e1791ac861a27f854e06e9020541816dd"
 
 # hardcoded here for use in dialog-static recipe
-S = "${WORKDIR}/dialog-${PV}"
+S = "${UNPACKDIR}/dialog-${PV}"
 
 inherit autotools-brokensep pkgconfig
 

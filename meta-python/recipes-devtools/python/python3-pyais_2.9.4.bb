@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/M0r13n/pyais;protocol=https;branch=master"
 PV .= "+git"
 SRCREV = "e7780f743b03c5e6ecc651fdeb209fa94e0e0250"
 
-S = "${WORKDIR}/git"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 

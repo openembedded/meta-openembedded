@@ -7,7 +7,6 @@ RDEPENDS:${PN} = "coreutils hicolor-icon-theme perl bash xkbcomp"
 
 LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
 
-S = "${WORKDIR}/git"
 
 inherit autotools cmake features_check pkgconfig systemd
 

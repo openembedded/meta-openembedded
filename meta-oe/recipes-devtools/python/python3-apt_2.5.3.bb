@@ -7,7 +7,6 @@ SRC_URI = "git://salsa.debian.org/apt-team/python-apt.git;protocol=https;branch=
 
 SRCREV = "3252935b6224b3bd2e2250894b9559b47c61b2e1"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
            "
 SRCREV = "8ce36bce2438df9b02fcaafd19efa90a56426601"
 
-S = "${WORKDIR}/git/advanced"
+S = "${UNPACKDIR}/${BP}/advanced"
 
 inherit autotools-brokensep binconfig pkgconfig
 

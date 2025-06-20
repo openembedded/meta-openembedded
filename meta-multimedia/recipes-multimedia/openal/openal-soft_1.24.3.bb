@@ -10,7 +10,6 @@ DEPENDS = "zlib libsndfile1"
 SRCREV = "dc7d7054a5b4f3bec1dc23a42fd616a0847af948"
 SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pipewire pulseaudio', d)}"
 PACKAGECONFIG[alsa] = "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"

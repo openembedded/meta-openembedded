@@ -11,6 +11,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libne
 
 SRC_URI[sha256sum] = "67edcb4eb826c2f8dc98af08dabff68f3b3d0fe6fb7d9d0ac1ee7ecce0fe694e"
 
-S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
+S = "${UNPACKDIR}/libnetfilter_conntrack-${PV}"
 
 inherit autotools pkgconfig

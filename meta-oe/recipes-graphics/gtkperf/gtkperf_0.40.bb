@@ -18,7 +18,7 @@ UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)"
 
 DEPENDS = "gtk+"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 inherit features_check autotools binconfig pkgconfig gettext
 

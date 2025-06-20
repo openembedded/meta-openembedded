@@ -9,7 +9,6 @@ SRCREV = "778da3d86a59f5166443118c158e11ba4da9a5f1"
 
 inherit autotools pkgconfig
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "pcsc-lite autoconf-archive-native"
 

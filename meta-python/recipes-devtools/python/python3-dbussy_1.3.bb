@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/ldo/dbussy.git;branch=master;protocol=https \
 
 SRCREV = "37ede4242b48def73ada46c2747a4c5cae6abf45"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

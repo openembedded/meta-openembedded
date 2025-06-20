@@ -18,7 +18,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MANOWAR/RadiusPerl-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "3b276506986ccaa4949d92b13ce053a0017ad11562a991cc753364923fe81ca7"
 
-S = "${WORKDIR}/Authen-Radius-${PV}"
+S = "${UNPACKDIR}/Authen-Radius-${PV}"
 
 inherit cpan ptest
 

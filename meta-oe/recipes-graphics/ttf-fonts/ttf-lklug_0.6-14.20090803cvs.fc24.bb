@@ -10,8 +10,7 @@ SRC_URI[sha256sum] = "de5750f7048973f851961050f76b8b58e9bda400d5007c3078d9317fbe
 
 DEPENDS = "fontforge-native"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 FONT_PACKAGES = "${PN}"
 FILES:${PN} = "${datadir}"
 

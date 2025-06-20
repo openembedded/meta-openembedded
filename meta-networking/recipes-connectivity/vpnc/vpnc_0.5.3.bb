@@ -29,7 +29,6 @@ PACKAGECONFIG[openssl] = ",,openssl"
 
 PACKAGES =+ "${PN}-script"
 
-S = "${WORKDIR}/git"
 
 inherit perlnative pkgconfig
 

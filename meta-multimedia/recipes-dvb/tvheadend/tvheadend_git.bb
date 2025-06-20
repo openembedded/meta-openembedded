@@ -16,7 +16,6 @@ SRCREV = "cc602833684953fc3e6f1c89d4f08f6dfef179e3"
 PV = "4.3+git"
 PKGV = "4.3+git${GITPKGV}"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--arch=${TARGET_ARCH} \
                  --disable-hdhomerun_static \

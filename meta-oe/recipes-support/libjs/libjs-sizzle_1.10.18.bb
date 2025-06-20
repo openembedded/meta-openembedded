@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9"
 SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/universe/s/sizzle/sizzle_1.10.18.orig.tar.gz"
 SRC_URI[sha256sum] = "8e04ab84bb74b2e338dffc63cd2e52b007f1d8af01b3d25da4d2e07f2b5890f8"
 
-S = "${WORKDIR}/sizzle-${PV}"
+S = "${UNPACKDIR}/sizzle-${PV}"
 
 SIZZLEDIR = "${S}/dist"
 

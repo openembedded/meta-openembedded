@@ -15,7 +15,6 @@ SRCREV = "6d669183c7b241ce47ecce28744837ad92814f5c"
 
 UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

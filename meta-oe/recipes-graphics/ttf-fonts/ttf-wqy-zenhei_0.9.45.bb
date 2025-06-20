@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "e4b7e306475bf9427d1757578f0e4528930c84c44eaa3f167d4c42f110
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/wqy/files/wqy-zenhei/"
 UPSTREAM_CHECK_REGEX = "wqy-zenhei/(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/wqy-zenhei"
+S = "${UNPACKDIR}/wqy-zenhei"
 
 do_install:append () {
     sed -i -e '/<string>[^W]/d' ${S}/44-wqy-zenhei.conf

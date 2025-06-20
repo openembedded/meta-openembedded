@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=0.26.1;protocol=https"
 
 CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig bash-completion
 

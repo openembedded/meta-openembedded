@@ -12,7 +12,7 @@ DEPENDS += "openssl"
 
 UPSTREAM_CHECK_REGEX = "Net\-DNS\-SEC\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
-S = "${WORKDIR}/Net-DNS-SEC-${PV}"
+S = "${UNPACKDIR}/Net-DNS-SEC-${PV}"
 
 EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_BASELIBDIR} -lcrypto'"
 

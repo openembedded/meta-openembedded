@@ -17,7 +17,6 @@ inherit autotools-brokensep pkgconfig manpages
 SRCREV = "c06d333b3162660694b26604a364cdab89e2010e"
 SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= " \
     readcmd \

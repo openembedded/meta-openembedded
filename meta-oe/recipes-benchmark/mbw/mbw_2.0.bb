@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/raas/${BPN}.git;branch=master;protocol=https"
 
 SRCREV = "c3155b544a5065e8235508059c6512af6c46bd4d"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${bindir}

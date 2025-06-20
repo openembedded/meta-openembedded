@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https"
 SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake dos2unix
 

@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https;branch=master"
 
 SRCREV = "fdde6677b21329432db8b481e2637cd10f7d3cb2"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

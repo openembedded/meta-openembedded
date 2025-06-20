@@ -9,6 +9,5 @@ DEPENDS = "libusb jpeg"
 SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https"
 SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig

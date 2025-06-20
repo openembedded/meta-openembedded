@@ -12,7 +12,6 @@ SRC_URI:append:toolchain-clang = "file://fix-clang-private-operator.patch"
 
 SRCREV_FORMAT = "vk-gl-cts"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake cmake-qemu features_check python3native
 

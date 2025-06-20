@@ -22,7 +22,6 @@ RDEPENDS:${PN} = "mcelog mce-inject dialog bash"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
 

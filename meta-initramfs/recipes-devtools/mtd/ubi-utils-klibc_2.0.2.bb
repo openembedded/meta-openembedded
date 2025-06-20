@@ -19,7 +19,6 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git;branch=master \
              file://0001-make-Add-compiler-includes-in-cflags.patch \
              "
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--disable-tests --without-jffs --without-ubifs"
 

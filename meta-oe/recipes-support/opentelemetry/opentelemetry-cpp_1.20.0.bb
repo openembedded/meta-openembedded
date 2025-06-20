@@ -10,7 +10,6 @@ DEPENDS = "nlohmann-json"
 SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;tag=v${PV}"
 SRCREV = "6175aa0b213eea053247e43b4f35b8d201fa356e"
 
-S = "${WORKDIR}/git"
 inherit cmake pkgconfig lib_package
 
 LDFLAGS:append:riscv32 = " -latomic"

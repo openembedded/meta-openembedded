@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/jpirko/libteam;branch=master;protocol=https \
            "
 SRCREV = "8b843e93cee1dab61fb79b01791201cdad45e1d1"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig ptest
 

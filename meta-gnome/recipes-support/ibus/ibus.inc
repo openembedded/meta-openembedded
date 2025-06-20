@@ -17,7 +17,6 @@ SRC_URI = " \
     file://0001-src-Fix-declaration-errors-with-GCC-15.patch \
 "
 SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
 PACKAGECONFIG[dconf] = "--enable-dconf,--disable-dconf,dconf"

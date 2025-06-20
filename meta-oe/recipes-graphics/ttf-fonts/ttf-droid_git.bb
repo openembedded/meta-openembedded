@@ -9,7 +9,7 @@ PV = "0.1+git"
 
 SRC_URI = "git://github.com/android/platform_frameworks_base.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git/data/fonts"
+S = "${UNPACKDIR}/${BP}/data/fonts"
 
 do_install:append() {
     for f in Ahem.ttf MTLc3m.ttf DroidSansArabic.ttf DroidSansThai.ttf \

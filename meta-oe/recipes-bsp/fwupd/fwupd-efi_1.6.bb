@@ -6,7 +6,6 @@ SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main \
            file://0001-efi-generate_binary.py-Use-env-to-detect-python3.patch"
 
 SRCREV = "58a2928f778278ab1f7f8fcddbab81ba587a8962"
-S = "${WORKDIR}/git"
 
 DEPENDS = "gnu-efi python3-pefile-native"
 

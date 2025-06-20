@@ -14,6 +14,6 @@ SRC_URI = " \
   file://am_foreign.patch \
 "
 
-S = "${WORKDIR}/SDL_net-${PV}"
+S = "${UNPACKDIR}/SDL_net-${PV}"
 
 SRC_URI[sha256sum] = "5f4a7a8bb884f793c278ac3f3713be41980c5eedccecff0260411347714facb4"

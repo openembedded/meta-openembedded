@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https;branch=master"
 
 SRCREV = "3b718ee560b3b97d6255c55f0ed7f64cb4b72082"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += "lapack suitesparse"
 DEPENDS += "lapack suitesparse"

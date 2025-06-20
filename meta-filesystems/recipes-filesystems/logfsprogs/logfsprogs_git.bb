@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/prasad-joshi/logfsprogs.git;branch=master;protocol=h
            "
 SRCREV = "45b72c81ce3c6fa17ca19bafc207ea93e76312f4"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "CC="${CC}" LD="${LD}" AR="${AR}""
 

@@ -9,7 +9,6 @@ DEPENDS = "fontconfig freetype fribidi harfbuzz"
 
 SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
 SRCREV = "bbb3c7f1570a4a021e52683f3fbdf74fe492ae84"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

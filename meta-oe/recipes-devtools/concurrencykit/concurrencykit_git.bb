@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
            file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch \
            file://0001-build-Use-ilp32d-abi-on-riscv32-and-lp64d-on-rv64.patch"
 
-S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
 

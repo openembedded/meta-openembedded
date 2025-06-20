@@ -17,7 +17,6 @@ DEPENDS = " \
 SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master"
 SRCREV = "5ef08f0cd6ede62de14de477b74fc3611108c676"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig systemd
 

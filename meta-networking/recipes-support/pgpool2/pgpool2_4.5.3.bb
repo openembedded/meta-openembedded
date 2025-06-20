@@ -18,7 +18,7 @@ SRC_URI = "https://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
            "
 SRC_URI[sha256sum] = "25ed340d7b7dc00c20e4ba763d3f9c07ba891b150d9d48af313a1351cafdd778"
 
-S = "${WORKDIR}/pgpool-II-${PV}"
+S = "${UNPACKDIR}/pgpool-II-${PV}"
 
 inherit autotools-brokensep systemd
 

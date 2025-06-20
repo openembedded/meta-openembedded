@@ -17,7 +17,7 @@ DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libext
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
 SRC_URI[sha256sum] = "79a73e506fb7badabdf79137a45c6c5027daaf6f9ac3dcfb9d4ffcce92eb36bd"
 
-S = "${WORKDIR}/Module-Build-Tiny-${PV}"
+S = "${UNPACKDIR}/Module-Build-Tiny-${PV}"
 
 inherit cpan_build ptest-perl
 

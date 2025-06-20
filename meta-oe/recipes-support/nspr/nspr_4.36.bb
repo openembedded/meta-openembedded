@@ -27,7 +27,7 @@ SRC_URI[sha256sum] = "55dec317f1401cd2e5dba844d340b930ab7547f818179a4002bce62e6f
 
 CVE_PRODUCT = "netscape_portable_runtime"
 
-S = "${WORKDIR}/nspr-${PV}/nspr"
+S = "${UNPACKDIR}/nspr-${PV}/nspr"
 
 RDEPENDS:${PN}-dev += "perl"
 TARGET_CC_ARCH += "${LDFLAGS}"

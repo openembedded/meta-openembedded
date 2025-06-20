@@ -13,7 +13,6 @@ SRC_URI = " \
 SRCREV = "abcf929efb748c7846dd59007cbb807e108db311"
 PV .= "+git"
 
-S = "${WORKDIR}/git"
 PEP517_SOURCE_PATH = "${S}/api/python"
 
 export LIEF_BUILD_DIR = "${B}"

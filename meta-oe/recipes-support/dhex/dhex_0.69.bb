@@ -13,7 +13,7 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "52730bcd1cf16bd4dae0de42531be9a4057535ec61ca38c0804eb8246ea6c41b"
 
-S = "${WORKDIR}/dhex_${PV}"
+S = "${UNPACKDIR}/dhex_${PV}"
 
 EXTRA_OEMAKE += "'CC=${CC}' 'LDFLAGS=${LDFLAGS}' 'CPPFLAGS=${CPPFLAGS}'"
 

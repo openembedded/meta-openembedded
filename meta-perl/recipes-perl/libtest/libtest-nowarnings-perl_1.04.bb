@@ -29,7 +29,7 @@ SRC_URI[sha256sum] = "638a57658cb119af1fe5b15e73d47c2544dcfef84af0c6b1b2e97f0820
 
 RDEPENDS:${PN} += "perl-module-test-builder perl-module-test-more perl-module-test-tester"
 
-S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
+S = "${UNPACKDIR}/${CPAN_PACKAGE}-${PV}"
 
 inherit cpan ptest-perl
 

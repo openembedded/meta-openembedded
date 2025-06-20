@@ -15,7 +15,6 @@ SRCREV = "445ed623ec8d3ecbb1d566900b4ef3fb3031d689"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "i2c-tools"
 

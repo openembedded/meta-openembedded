@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
 "
 SRCREV = "84b81cd97a1b5515d3d4b304796680da24c666d8"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "popt openssl"
 

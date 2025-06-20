@@ -14,7 +14,6 @@ SRC_URI:append:libc-musl = "\
            file://0001-Undefine-REGEX-for-musl-based-systems.patch \
            "
 
-S = "${WORKDIR}/git"
 
 # CFLAGS isn't in EXTRA_OEMAKE, as the makefile picks it up via ?=
 EXTRA_OEMAKE = "\

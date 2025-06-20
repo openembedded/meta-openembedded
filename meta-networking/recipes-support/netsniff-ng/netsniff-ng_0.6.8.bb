@@ -10,7 +10,6 @@ SRC_URI = " \
 	file://0001-Cmds-automatically-create-folder.patch \
 	"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

@@ -11,7 +11,7 @@ SRC_URI = " \
     file://0001-fix-build-failure-with-gcc-15-by-adding-cstdint-head.patch \
 "
 SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
-S = "${WORKDIR}/${BP}-Source"
+S = "${UNPACKDIR}/${BP}-Source"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
 

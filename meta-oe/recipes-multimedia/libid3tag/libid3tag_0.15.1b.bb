@@ -21,6 +21,6 @@ UPSTREAM_CHECK_REGEX = "/projects/mad/files/libid3tag/(?P<pver>.*)/$"
 
 SRC_URI[sha256sum] = "63da4f6e7997278f8a3fef4c6a372d342f705051d1eeb6a46a86b03610e26151"
 
-S = "${WORKDIR}/libid3tag-${PV}"
+S = "${UNPACKDIR}/libid3tag-${PV}"
 
 inherit autotools pkgconfig

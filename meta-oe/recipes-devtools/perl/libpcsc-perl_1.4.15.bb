@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "5cc834438739bd6e4e837fb7e10bd8befb809cd185ae6cf4b33e5fa916
 UPSTREAM_CHECK_URI = "https://cpan.metacpan.org/authors/id/W/WH/WHOM/"
 UPSTREAM_CHECK_REGEX = "pcsc-perl-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/pcsc-perl-${PV}"
+S = "${UNPACKDIR}/pcsc-perl-${PV}"
 
 inherit cpan pkgconfig
 

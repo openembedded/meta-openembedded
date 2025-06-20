@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FL/FLORA/Env-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "d94a3d412df246afdc31a2199cbd8ae915167a3f4684f7b7014ce1200251ebb0"
 
-S = "${WORKDIR}/Env-${PV}"
+S = "${UNPACKDIR}/Env-${PV}"
 
 inherit cpan
 

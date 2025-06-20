@@ -9,7 +9,7 @@ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
 
 SRC_URI[sha256sum] = "1f934b076ed49eace203655ec249fc7861a6b8e87fe4aef732e47b6e485b6293"
 
-S = "${WORKDIR}/flashrom-v${PV}"
+S = "${UNPACKDIR}/flashrom-v${PV}"
 
 inherit meson pkgconfig
 

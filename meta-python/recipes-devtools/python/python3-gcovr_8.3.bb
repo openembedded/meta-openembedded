@@ -10,7 +10,6 @@ SRC_URI = " \
 "
 SRCREV = "fe536afac4da31e86909191ef31708755ab8cf83"
 
-S = "${WORKDIR}/git"
 
 inherit python_hatchling
 

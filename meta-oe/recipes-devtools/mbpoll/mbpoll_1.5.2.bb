@@ -11,6 +11,5 @@ DEPENDS = "libmodbus (>=3.1.4)"
 SRC_URI = "git://github.com/epsilonrt/mbpoll;protocol=https;branch=master"
 SRCREV = "a0bd6c08d3d15b086f2104477295c0705aed366a"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake

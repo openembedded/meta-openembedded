@@ -12,7 +12,6 @@ inherit autotools pkgconfig python3-dir
 SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
 SRC_URI = "git://github.com/jackmitch/libsoc.git;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 BOARD ??= "devboard"
 

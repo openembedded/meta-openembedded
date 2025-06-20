@@ -9,7 +9,6 @@ SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https;branc
           "
 SRCREV = "12da22087de2ec43f0fe5af1237389e94619c483"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "parted"
 

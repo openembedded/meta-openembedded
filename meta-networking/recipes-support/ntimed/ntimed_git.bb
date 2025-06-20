@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/bsdphk/Ntimed;branch=master;protocol=https \
 PV = "0.0+git"
 SRCREV = "db0abbb4c80f2ecef6bc5d9639bca5bea28532a2"
 
-S = "${WORKDIR}/git"
 
 # use adjtimex on musl
 CFLAGS:append:libc-musl = " -Dntp_adjtime=adjtimex"

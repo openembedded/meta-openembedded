@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0280160e4f26faafef507664884bf63"
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
 SRC_URI[sha256sum] = "c8574875cce073e7dc5345a7b06d502e52044d68894f9160203fcaab379514fe"
 
-S = "${WORKDIR}/ExtUtils-Helpers-${PV}"
+S = "${UNPACKDIR}/ExtUtils-Helpers-${PV}"
 
 inherit cpan
 

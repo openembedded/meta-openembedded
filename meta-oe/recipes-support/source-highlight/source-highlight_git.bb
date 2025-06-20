@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
 SRCREV = "894cacd0799ca60afa359a63782729dec76cbb79"
 PV = "3.1.9+git"
 SRC_URI = "git://git.savannah.gnu.org/git/src-highlite.git;protocol=https;branch=master"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

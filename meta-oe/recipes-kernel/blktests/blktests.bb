@@ -10,7 +10,6 @@ SRC_URI = " \
 	git://github.com/osandov/blktests.git;nobranch=1;protocol=https \
 	"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
 

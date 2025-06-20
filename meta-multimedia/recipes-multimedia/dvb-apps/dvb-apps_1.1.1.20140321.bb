@@ -13,7 +13,7 @@ SRC_URI = "https://www.linuxtv.org/hg/dvb-apps/archive/3d43b280298c.tar.bz2;down
           file://0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch \
           "
 SRC_URI[sha256sum] = "f39e2f0ebed7e32bce83522062ad4d414f67fccd5df1b647618524497e15e057"
-S = "${WORKDIR}/${BPN}-3d43b280298c"
+S = "${UNPACKDIR}/${BPN}-3d43b280298c"
 
 inherit perlnative
 

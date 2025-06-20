@@ -13,7 +13,6 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 
 inherit meson pkgconfig features_check
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= "\
   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \

@@ -14,7 +14,6 @@ PV .= "+git"
 SRCREV = "7482de6071d21db77a7236155da44c172a7f6c9e"
 SRC_URI = "git://github.com/glfw/glfw.git;branch=3.3-stable;protocol=https"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_DOCS=OFF"
 

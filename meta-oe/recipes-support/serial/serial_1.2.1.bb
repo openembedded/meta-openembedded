@@ -11,7 +11,6 @@ SRC_URI = " \
 SRCREV = "10ac4e1c25c2cda1dc0a32a8e12b87fd89f3bb4f"
 SRC_URI[sha256sum] = "c8cd235dda2ef7d977ba06dfcb35c35e42f45cfd9149ba3ad257756123d8ff96"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

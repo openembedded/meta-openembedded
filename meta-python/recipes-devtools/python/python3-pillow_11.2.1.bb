@@ -60,7 +60,6 @@ RDEPENDS:${PN}-ptest += " \
 
 CVE_PRODUCT = "pillow"
 
-S = "${WORKDIR}/git"
 
 RPROVIDES:${PN} += "python3-imaging"
 

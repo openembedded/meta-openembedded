@@ -31,7 +31,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL-${PV}.tar.gz \
 
 UPSTREAM_CHECK_REGEX = "SDL-(?P<pver>\d+(\.\d+)+)\.tar"
 
-S = "${WORKDIR}/SDL-${PV}"
+S = "${UNPACKDIR}/SDL-${PV}"
 
 SRC_URI[sha256sum] = "d6d316a793e5e348155f0dd93b979798933fb98aa1edebcc108829d6474aad00"
 

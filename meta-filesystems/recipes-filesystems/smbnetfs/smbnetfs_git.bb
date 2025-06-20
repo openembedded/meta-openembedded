@@ -27,6 +27,5 @@ SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=m
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
 
-S = "${WORKDIR}/git"
 
 LDFLAGS:append:libc-musl = " -lexecinfo"

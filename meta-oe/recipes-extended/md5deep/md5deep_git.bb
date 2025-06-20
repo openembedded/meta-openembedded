@@ -13,6 +13,5 @@ SRC_URI = "git://github.com/jessek/hashdeep.git;branch=master;protocol=https \
            file://0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools

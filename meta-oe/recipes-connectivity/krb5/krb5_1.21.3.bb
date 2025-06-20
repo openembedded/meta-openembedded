@@ -40,7 +40,7 @@ SRC_URI[sha256sum] = "b7a4cd5ead67fb08b980b21abd150ff7217e85ea320c9ed0c6dadd3048
 CVE_PRODUCT = "kerberos"
 CVE_VERSION = "5-${PV}"
 
-S = "${WORKDIR}/${BP}/src"
+S = "${UNPACKDIR}/${BP}/src"
 
 DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
 

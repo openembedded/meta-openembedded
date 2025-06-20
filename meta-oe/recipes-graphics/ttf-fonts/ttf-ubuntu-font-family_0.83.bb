@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "61a2b342526fd552f19fef438bb9211a8212de19ad96e32a1209c039f1
 UPSTREAM_CHECK_URI = "https://repology.org/project/fonts:ubuntu/packages"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/ubuntu-font-family-${PV}"
+S = "${UNPACKDIR}/ubuntu-font-family-${PV}"
 
 PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"
 FONT_PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"

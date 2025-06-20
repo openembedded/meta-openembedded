@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/flatpak/flatpak-xdg-utils.git;protocol=https;branch=
 
 SRCREV = "05abdd7421688be5835a6b12f2b068086c38d4aa"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

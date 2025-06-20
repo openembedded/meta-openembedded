@@ -11,7 +11,6 @@ inherit meson systemd pkgconfig useradd features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
 COMPATIBLE_HOST:libc-musl = "null"
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "systemd"
 DEPENDS += "openssl"

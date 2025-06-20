@@ -53,7 +53,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
 SRCREV = "cb8de98b2cc3b62fd1a578ba479c0820778e9c02"
 
-S = "${WORKDIR}/git"
 
 inherit systemd pkgconfig
 

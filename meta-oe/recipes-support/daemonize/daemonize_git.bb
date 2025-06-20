@@ -12,6 +12,5 @@ SRC_URI = " \
     file://0001-fix-getopt.c-too-many-arguments-to-function-write-er.patch \
 "
 
-S = "${WORKDIR}/git"
 
 EXTRA_AUTORECONF += "--exclude=autoheader"

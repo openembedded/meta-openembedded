@@ -31,7 +31,6 @@ SRC_URI = " \
 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
 "
 
-S = "${WORKDIR}/git"
 SRCREV = "85df26fb1c53334969fea3f15c2a06a14831094b"
 
 FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"

@@ -16,7 +16,7 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "b055e26349b516b23585798ab3ef57b436b014800e92a8ac732cfc8e76c5dafa"
 
-S = "${WORKDIR}/NetworkManager-fortisslvpn-${PV}"
+S = "${UNPACKDIR}/NetworkManager-fortisslvpn-${PV}"
 
 # meta-gnome in layers is required using gnome:
 PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 libnma libsecret,"

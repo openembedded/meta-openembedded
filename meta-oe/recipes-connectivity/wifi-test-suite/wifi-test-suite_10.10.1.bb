@@ -7,7 +7,6 @@ LICENSE  = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
 SECTION = "test"
 
-S = "${WORKDIR}/git"
 SRCREV = "12e85fbeca8ca21a632d18e55089a8a7606d64aa"
 SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git;branch=master;protocol=https \
 	file://0001-Use-toolchain-from-environment-variables.patch \

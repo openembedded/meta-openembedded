@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/explodinglabs/jsonrpcclient.git;branch=main;protocol
 
 inherit python_setuptools_build_meta
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += "\
     python3-json \

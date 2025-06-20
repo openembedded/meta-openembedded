@@ -7,7 +7,6 @@ SRCREV = "72f7fa621357299bb6c8f5d29b4efbafcbd34bf7"
 SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master;tag=v${PV} \
            file://ldflags.patch \
 "
-S = "${WORKDIR}/git"
 
 DEPENDS = "openssl lua libpcre2"
 

@@ -13,7 +13,6 @@ SRCREV = "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_compile() {
     oe_runmake CC="${CC}" CXX="${CXX}" EXTRA_INCLUDES="${TARGET_CFLAGS}" AR="${AR}";

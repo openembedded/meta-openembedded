@@ -9,6 +9,5 @@ DEPENDS += "virtual/libx11 libdrm xorgproto"
 SRCREV = "8bbdb2ae3bb8ef649999a8da33ddbe11a04763b8"
 SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-armsoc;branch=master"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += "xserver-xorg-module-exa"

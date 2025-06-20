@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "12fb5a5b392032413571169257f98533488005550774bcbd0715be687a590cf2"
 
-S = "${WORKDIR}/CGI-${PV}"
+S = "${UNPACKDIR}/CGI-${PV}"
 
 inherit cpan ptest-perl
 

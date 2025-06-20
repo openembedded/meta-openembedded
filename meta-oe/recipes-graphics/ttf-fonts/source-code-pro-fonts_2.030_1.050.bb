@@ -12,7 +12,7 @@ SRC_URI = " \
     file://44-source-code-pro-fonts-fontconfig.conf \
 "
 SRC_URI[sha256sum] = "da2ac159497d31b0c6d9daa8fc390fb8252e75b4a9805ace6a2c9cccaed4932e"
-S = "${WORKDIR}/source-code-pro-2.030R-ro-1.050R-it"
+S = "${UNPACKDIR}/source-code-pro-2.030R-ro-1.050R-it"
 
 UPSTREAM_CHECK_URI = "https://github.com/adobe-fonts/source-code-pro/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+\.\d+)R"

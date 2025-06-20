@@ -11,7 +11,6 @@ SRCREV = "4b0192046158094654e865245832c66d2104219e"
 SRC_URI = "git://github.com/liberationfonts/liberation-fonts.git;branch=main;protocol=https"
 
 DEPENDS = "fontforge-native"
-S = "${WORKDIR}/git"
 
 PACKAGES = "ttf-liberation-mono ttf-liberation-sans ttf-liberation-serif"
 FONT_PACKAGES = "ttf-liberation-mono ttf-liberation-sans ttf-liberation-serif"

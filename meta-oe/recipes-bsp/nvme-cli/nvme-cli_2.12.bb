@@ -9,7 +9,6 @@ DEPENDS = "json-c libnvme"
 SRCREV = "71fa5d9310d6b41a69e844593423ac91b1453472"
 
 SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
-S = "${WORKDIR}/git"
 
 inherit bash-completion meson pkgconfig systemd
 

@@ -15,7 +15,6 @@ SRC_URI = "\
     file://0004-cleanup-includes.patch \
 "
 
-S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "kernel:bridge-utils"
 

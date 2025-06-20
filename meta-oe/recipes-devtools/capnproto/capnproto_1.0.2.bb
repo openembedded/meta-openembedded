@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};prot
            file://0001-Export-binaries-only-for-native-build.patch"
 SRCREV = "1a0e12c0a3ba1f0dbbad45ddfef555166e0a14fc"
 
-S = "${WORKDIR}/git/c++"
+S = "${UNPACKDIR}/${BP}/c++"
 
 inherit cmake
 

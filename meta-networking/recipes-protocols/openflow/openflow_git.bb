@@ -37,7 +37,6 @@ EXTRA_OECONF += " \
                 "
 DEPENDS:append:libc-musl = " libexecinfo"
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 

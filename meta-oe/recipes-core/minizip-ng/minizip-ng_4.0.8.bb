@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master 
 
 SRCREV = "55db144e03027b43263e5ebcb599bf0878ba58de"
 
-S = "${WORKDIR}/git"
 
 RCONFLICTS:${PN} += "minizip"
 

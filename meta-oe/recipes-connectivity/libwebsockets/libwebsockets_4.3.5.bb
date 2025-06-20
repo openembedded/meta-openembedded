@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
 DEPENDS = "zlib"
 DEPENDS:append:class-native = " libcap-native"
 
-S = "${WORKDIR}/git"
 SRCREV = "ab9df9cfc39de7a49967f18387b6b76310947442"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
            file://0001-sll_protocol-may-be-be16.patch \

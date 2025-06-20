@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/seladb/PcapPlusPlus.git;protocol=https;branch=master
           "
 SRCREV = "4af4b8b04e6d5dd40b8e69cc30c5c1f62e7fe368"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

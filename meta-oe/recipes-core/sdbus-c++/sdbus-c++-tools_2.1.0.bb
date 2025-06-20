@@ -11,6 +11,6 @@ DEPENDS += "expat"
 SRCREV = "0261d0ec60b68c1f0a6ec9acf63d1379f7d569f8"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV};subpath=tools"
 
-S = "${WORKDIR}/tools"
+S = "${UNPACKDIR}/tools"
 
 BBCLASSEXTEND = "native nativesdk"

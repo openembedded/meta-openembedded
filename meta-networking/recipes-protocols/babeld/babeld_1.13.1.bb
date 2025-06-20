@@ -17,7 +17,6 @@ SRCREV = "3d61ea1e843e2c5f9706c74d1adad4e1d24d44b9"
 
 UPSTREAM_CHECK_GITTAGREGEX = "babeld-(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
 

@@ -13,7 +13,7 @@ SRC_URI = " \
     file://e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch \
 "
 SRC_URI[sha256sum] = "ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511f9f9fe"
-S = "${WORKDIR}/webrtc-audio-processing-${PV}"
+S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
 
 LDFLAGS:append:libc-musl = " -lexecinfo"
 # | riscv32-yoe-linux-musl-ld.lld: error: undefined reference: __atomic_store_8

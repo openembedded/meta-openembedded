@@ -15,7 +15,6 @@ SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused
 
 SRCREV = "854795c654eda518ed6de6c1ebb4e2107fcb2e73"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

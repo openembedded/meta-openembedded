@@ -10,7 +10,6 @@ SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https"
 
 SRCREV = "62f8adceb8ee88e643a134f2cfaf04fc11b9fc51"
 
-S = "${WORKDIR}/git"
 
 inherit allarch autotools-brokensep
 

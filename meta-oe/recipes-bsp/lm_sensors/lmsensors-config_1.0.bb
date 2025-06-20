@@ -12,8 +12,7 @@ SRC_URI = "file://fancontrol \
            file://sensors.conf \
            file://sensord \
 "
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 PACKAGECONFIG ??= "sensord"
 PACKAGECONFIG[sensord] = ",,"

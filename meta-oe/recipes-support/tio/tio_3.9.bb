@@ -9,7 +9,6 @@ SRCREV = "bdfe87e1cbf6e3bfd48324a25ea026fcd3cc47e9"
 
 SRC_URI = "git://github.com/tio/tio;protocol=https;branch=master;tag=v${PV}"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

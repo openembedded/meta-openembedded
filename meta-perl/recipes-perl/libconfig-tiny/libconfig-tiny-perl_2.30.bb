@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab27c3cedbdb0eb6e656a8722476191a"
 
 RDEPENDS:${PN} += "perl"
 
-S = "${WORKDIR}/Config-Tiny-${PV}"
+S = "${UNPACKDIR}/Config-Tiny-${PV}"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/R/RS/RSAVAGE/Config-Tiny-${PV}.tgz"
 

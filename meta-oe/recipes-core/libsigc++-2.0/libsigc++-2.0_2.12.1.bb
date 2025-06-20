@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "a9dbee323351d109b7aee074a9cb89ca3e7bcf8ad8edef1851f4cf359b
 UPSTREAM_CHECK_URI = "https://download.gnome.org/sources/libsigc++/2.12/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/libsigc++-${PV}"
+S = "${UNPACKDIR}/libsigc++-${PV}"
 
 inherit meson
 

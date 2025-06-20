@@ -14,7 +14,6 @@ SRCREV = "e5431fa6f5505e385c6f9367260717e9c47dc2ee"
 
 UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
 
-S = "${WORKDIR}/git"
 
 # Support Yocto cross compiling
 CXXFLAGS:append:toolchain-clang = " -Wno-error=cast-qual -Wno-error=sign-conversion \

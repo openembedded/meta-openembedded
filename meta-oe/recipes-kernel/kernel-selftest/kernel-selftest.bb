@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS = "rsync-native llvm-native"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 # for musl libc
 SRC_URI:append:libc-musl = "\
@@ -46,7 +45,7 @@ do_compile[depends] += "virtual/kernel:do_install"
 
 inherit linux-kernel-base module-base kernel-arch ptest siteinfo
 
-S = "${WORKDIR}/${BP}"
+S = "${UNPACKDIR}/${BP}"
 
 DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 

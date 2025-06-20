@@ -3,7 +3,6 @@ SECTION = "console/network"
 HOMEPAGE = "https://github.com/globalizejs/globalize"
 LICENSE = "MIT"
 
-S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4db68fb4d1d9986d736b35039f2ad9ea"
 

@@ -7,7 +7,6 @@ PV .= "+git${SRCREV}"
 SRCREV = "9520119376046aeff73804b5f1ea05d87a63f370"
 SRC_URI += "git://github.com/behave/behave;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

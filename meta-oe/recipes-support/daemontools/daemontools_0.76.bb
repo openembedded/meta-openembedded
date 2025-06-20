@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710
 
 UPSTREAM_CHECK_URI = "http://cr.yp.to/daemontools/install.html"
 
-S = "${WORKDIR}/admin/${BP}"
+S = "${UNPACKDIR}/admin/${BP}"
 
 # http://errors.yoctoproject.org/Errors/Details/766886/
 # pathexec_run.c:19:17: error: passing argument 2 of 'execve' from incompatible pointer type [-Wincompatible-pointer-types]

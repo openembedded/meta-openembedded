@@ -8,7 +8,6 @@ DEPENDS = "virtual/libx11 libxext xorgproto"
 SRCREV = "79f1506a3307d3275b0fdfb2e110c173f68e6f78"
 SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit features_check meson pkgconfig
 

@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
 
-S = "${WORKDIR}/SDL3-${PV}"
+S = "${UNPACKDIR}/SDL3-${PV}"
 
 SRC_URI[sha256sum] = "6340e58879b2d15830c8460d2f589a385c444d1faa2a4828a9626c7322562be8"
 

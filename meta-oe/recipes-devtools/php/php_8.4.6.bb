@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
             file://php-fpm.service \
           "
 
-S = "${WORKDIR}/php-${PV}"
+S = "${UNPACKDIR}/php-${PV}"
 
 SRC_URI[sha256sum] = "9cf2734509b603f6589617ab52a9712a03e0fe059951cddd2d4623df4bf7c6c6"
 

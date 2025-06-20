@@ -9,7 +9,6 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
            "
 SRCREV = "17190762f33f78090f5ff99a436c4cb866ac3ccd"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig ptest
 

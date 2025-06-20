@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/linux-wpan/lowpan-tools;branch=master;protocol=https
            "
 SRCREV = "1c2d8674cc6f4b1166a066e8822e295c105ae7a2"
 
-S = "${WORKDIR}/git"
 
 inherit autotools python3-dir pkgconfig
 

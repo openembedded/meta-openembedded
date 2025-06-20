@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "7099cb5133401acc92d8fb0fd398cac682140be0680e7dfcb4aaf40315a2dfca"
 
-S = "${WORKDIR}/MIME-Types-${PV}"
+S = "${UNPACKDIR}/MIME-Types-${PV}"
 
 inherit cpan ptest
 

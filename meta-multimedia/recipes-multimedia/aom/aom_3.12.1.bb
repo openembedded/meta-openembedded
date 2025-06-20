@@ -9,7 +9,6 @@ SRCREV = "10aece4157eb79315da205f39e19bf6ab3ee30d0"
 SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main;tag=v${PV} \
            file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

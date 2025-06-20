@@ -7,6 +7,5 @@ inherit autotools allarch
 SRC_URI = "git://github.com/mypaint/mypaint-brushes.git;protocol=https;branch=v1.3.x"
 SRCREV = "8a0124ac0675103eae8fa41fad533851768ae1ce"
 PV = "1.3.1"
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${datadir}/mypaint-data"

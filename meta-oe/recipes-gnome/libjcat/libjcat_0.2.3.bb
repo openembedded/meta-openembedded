@@ -12,7 +12,6 @@ SRC_URI = "\
     file://run-ptest \
 "
 SRCREV = "f284d18a694ed98f49ddb06e6920265781a30125"
-S = "${WORKDIR}/git"
 
 inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
 

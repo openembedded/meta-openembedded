@@ -16,7 +16,6 @@ SRC_URI = " \
     file://90-OE-disable-session-dbus-dependent-features.lua \
 "
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig gobject-introspection systemd
 

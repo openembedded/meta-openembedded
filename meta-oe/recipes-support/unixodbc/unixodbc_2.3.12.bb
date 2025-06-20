@@ -20,7 +20,7 @@ UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
 
 inherit autotools-brokensep multilib_header qemu
 
-S = "${WORKDIR}/unixODBC-${PV}"
+S = "${UNPACKDIR}/unixODBC-${PV}"
 
 EXTRA_OEMAKE += "LIBS=-lltdl"
 EXTRA_OECONF += "--enable-utf8ini"

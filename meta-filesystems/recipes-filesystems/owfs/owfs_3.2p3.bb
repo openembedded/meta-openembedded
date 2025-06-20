@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https \
            file://owserver \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep update-rc.d pkgconfig systemd
 

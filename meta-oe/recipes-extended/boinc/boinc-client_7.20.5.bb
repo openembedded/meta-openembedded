@@ -41,7 +41,6 @@ inherit gettext autotools pkgconfig features_check systemd
 
 REQUIRED_DISTRO_FEATURES += "opengl"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "\
     --enable-libraries \

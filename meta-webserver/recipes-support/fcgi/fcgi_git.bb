@@ -9,7 +9,6 @@ PV = "2.4.2"
 SRC_URI = "git://github.com/FastCGI-Archives/fcgi2.git;protocol=https;branch=master \
           "
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

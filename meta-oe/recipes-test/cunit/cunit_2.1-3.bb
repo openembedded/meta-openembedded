@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.0-only"
 SECTION = "libs"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7734aa853b85d6f935466f081490ddbb"
 
-S = "${WORKDIR}/CUnit-${PV}"
+S = "${UNPACKDIR}/CUnit-${PV}"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/cunit/CUnit/${PV}/CUnit-${PV}.tar.bz2 \
            file://fixup-install-docdir.patch \

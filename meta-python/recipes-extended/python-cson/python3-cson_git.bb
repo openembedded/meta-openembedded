@@ -12,7 +12,6 @@ SRCREV = "69090778bccc5ed124342ba288597fbb2bfa9f39"
 SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https \
            file://0001-setup.py-Do-not-poke-at-git-describe-to-find-version.patch"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} = "python3-json"
 

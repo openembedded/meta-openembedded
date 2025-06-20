@@ -11,6 +11,5 @@ SRCREV = "2ee61484167eab846f7b7c565284d7c350d738d3"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

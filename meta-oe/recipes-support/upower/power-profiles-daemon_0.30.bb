@@ -18,7 +18,6 @@ EXTRA_OEMESON = "-Dtests=false"
 
 SRCREV = "5b4994c8a91290481bef87a5bae95391d0ec677f"
 SRC_URI = "git://gitlab.freedesktop.org/upower/power-profiles-daemon;branch=main;protocol=https"
-S = "${WORKDIR}/git"
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/tmpfiles.d

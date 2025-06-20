@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 GNOMEBN = "libgweather"
-S = "${WORKDIR}/${GNOMEBN}-${PV}"
+S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
 inherit gnomebase gsettings gobject-introspection gettext gi-docgen vala features_check
 

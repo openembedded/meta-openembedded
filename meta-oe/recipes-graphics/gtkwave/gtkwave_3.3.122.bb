@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
 SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
 SRC_URI[sha256sum] = "6201b5f93dcaeafa92fc0ec4ad4baeaf60acf16fc8f019bbf061cf4ebf27938a"
-S = "${WORKDIR}/${BPN}-gtk3-${PV}"
+S = "${UNPACKDIR}/${BPN}-gtk3-${PV}"
 
 DEPENDS = " \
     gperf-native \

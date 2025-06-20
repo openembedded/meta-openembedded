@@ -10,7 +10,6 @@ SRCREV = "b83f3576ce4187d9285f06e9066ef43a691464d4"
 
 PV = "0.3.0+git"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"

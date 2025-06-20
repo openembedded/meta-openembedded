@@ -12,7 +12,6 @@ DEPENDS = "libsigc++-3"
 
 RDEPENDS:${PN}:class-target = "${VIRTUAL-RUNTIME_dbus}"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake
 

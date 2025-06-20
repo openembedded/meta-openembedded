@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https \
            file://0001-add-gupnp-1.2-API-support.patch \
           "
 SRCREV = "50fd1ec9d51328e7dea98874129dc8d6fe3ea1dd"
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

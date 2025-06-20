@@ -11,7 +11,6 @@ SRC_URI = "gitsm://github.com/google/${BPN}.git;branch=main;protocol=https \
 "
 
 SRCREV = "068d5ee1a3ac40dabd00d211d5013af44be55bea"
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 PACKAGECONFIG ??= ""

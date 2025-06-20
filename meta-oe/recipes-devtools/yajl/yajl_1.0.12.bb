@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lloyd/yajl;nobranch=1;protocol=https"
 
 inherit cmake lib_package
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 

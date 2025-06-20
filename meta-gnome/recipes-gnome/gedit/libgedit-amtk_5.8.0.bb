@@ -8,7 +8,6 @@ DEPENDS = "glib-2.0 gtk+3"
 inherit meson pkgconfig gobject-introspection features_check gtk-doc
 
 SRC_URI = "git://github.com/gedit-technology/libgedit-amtk.git;protocol=https;branch=main"
-S = "${WORKDIR}/git"
 SRCREV = "f6fbfd1c57de3d97cab2056a5c3088b0da49e8a4"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"

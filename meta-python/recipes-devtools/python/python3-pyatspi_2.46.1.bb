@@ -10,7 +10,6 @@ DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygob
 SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
 SRCREV = "8c69016b38d0e4caaf4c986938ea3410fb7351b6"
 
-S = "${WORKDIR}/git" 
 
 # Same restriction as gtk+
 inherit features_check setuptools3

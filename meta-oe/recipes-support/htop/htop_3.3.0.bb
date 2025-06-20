@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https \
 "
 SRCREV = "68c970c7ef4a0682760ed570b3d82388ae7ccf54"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

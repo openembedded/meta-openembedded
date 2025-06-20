@@ -19,7 +19,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/${CPAN_AUTHOR}/${CPAN_PACKAGE}-${PV}.t
 
 SRC_URI[sha256sum] = "b4f3f63b80f680a421332d8851ddbe5a8e72fcaa74d5d1d98f3c8cc4a3ece293"
 
-S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
+S = "${UNPACKDIR}/${CPAN_PACKAGE}-${PV}"
 
 inherit cpan ptest-perl
 

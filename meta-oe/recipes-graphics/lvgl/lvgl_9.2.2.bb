@@ -17,7 +17,6 @@ SRCREV = "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
 inherit cmake
 
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
-S = "${WORKDIR}/git"
 
 require lv-conf.inc
 

@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
 
 SRCREV = "db0870edd2919f4f4d0101843136bcae92ab0743"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "libtraceevent"
 RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \

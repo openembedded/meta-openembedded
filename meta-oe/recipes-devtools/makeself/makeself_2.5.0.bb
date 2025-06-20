@@ -14,7 +14,6 @@ SRC_URI = "\
 
 SRCREV = "09488c50c6bdc40aec8e3a9b23a539c5054a634c"
 
-S = "${WORKDIR}/git"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"

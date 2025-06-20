@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master 
 
 SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

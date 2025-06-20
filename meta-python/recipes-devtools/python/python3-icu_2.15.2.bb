@@ -18,4 +18,4 @@ SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch \
 inherit pkgconfig pypi python_setuptools_build_meta
 
 # it's lowercase pyicu instead of ${PYPI_PACKAGE} in this version
-S = "${WORKDIR}/pyicu-${PV}"
+S = "${UNPACKDIR}/pyicu-${PV}"

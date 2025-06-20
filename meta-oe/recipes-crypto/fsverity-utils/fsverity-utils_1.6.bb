@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bc974d217b525ea216a336adb73e1220"
 SRCREV = "2543e6e5037c0b1b448282c2793f8a6ce8b12d71"
 SRC_URI = "git://git.kernel.org/pub/scm/fs/fsverity/fsverity-utils.git;branch=master"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "openssl"
 

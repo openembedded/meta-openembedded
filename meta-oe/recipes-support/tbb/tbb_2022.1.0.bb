@@ -17,7 +17,6 @@ SRCREV = "45587e94dfb6dfe00220c5f520020a5bc745e92f"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
           "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

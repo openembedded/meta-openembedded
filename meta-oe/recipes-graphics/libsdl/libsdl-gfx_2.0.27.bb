@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "dfb15ac5f8ce7a4952dc12d2aed9747518c5e6b335c0e31636d23f93c6
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sdlgfx/files/"
 
-S = "${WORKDIR}/SDL_gfx-${PV}"
+S = "${UNPACKDIR}/SDL_gfx-${PV}"
 
 inherit autotools pkgconfig
 

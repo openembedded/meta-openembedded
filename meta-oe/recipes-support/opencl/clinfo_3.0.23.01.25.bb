@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https;branch=master"
 
 SRCREV = "748c3930a9b9cb826e631d77439e2cb8f84f5bcf"
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "opencl-headers virtual/opencl-icd"
 

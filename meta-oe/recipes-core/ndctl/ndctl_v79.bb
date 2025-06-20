@@ -18,7 +18,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>v\d+(\.\d+)*)"
 
 DEPENDS = "kmod udev json-c keyutils iniparser libtraceevent libtracefs"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "-Diniparserdir=${STAGING_INCDIR}/iniparser"
 

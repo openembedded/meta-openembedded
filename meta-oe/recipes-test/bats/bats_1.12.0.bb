@@ -12,7 +12,6 @@ SRC_URI = "\
 # v1.12.0
 SRCREV = "713504bc0224a19b3d7c7958c18dc07f64f54b44"
 
-S = "${WORKDIR}/git"
 
 # Numerous scripts assume ${baselib} == lib, which is not true.
 #

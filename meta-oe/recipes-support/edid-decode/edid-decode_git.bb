@@ -13,7 +13,6 @@ PV = "0.0+git"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install

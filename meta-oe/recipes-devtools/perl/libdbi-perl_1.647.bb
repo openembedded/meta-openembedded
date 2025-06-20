@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=65f65488c774efe1da488e36ad6c4a36"
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
 SRC_URI[sha256sum] = "0df16af8e5b3225a68b7b592ab531004ddb35a9682b50300ce50174ad867d9aa"
 
-S = "${WORKDIR}/DBI-${PV}"
+S = "${UNPACKDIR}/DBI-${PV}"
 
 inherit cpan ptest-perl
 

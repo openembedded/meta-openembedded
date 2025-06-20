@@ -9,4 +9,3 @@ SRC_URI = "git://github.com/tgraf/bmon.git;branch=master;protocol=https"
 
 inherit autotools pkgconfig
 
-S = "${WORKDIR}/git"

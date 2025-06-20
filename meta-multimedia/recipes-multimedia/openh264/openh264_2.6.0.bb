@@ -11,7 +11,6 @@ DEPENDS = " nasm-native"
 
 inherit meson pkgconfig
 
-S = "${WORKDIR}/git"
 SRCREV = "19120fcb8f89b16126e9cfee096b2f0751554fdc"
 BRANCH = "openh264v${PV}"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \

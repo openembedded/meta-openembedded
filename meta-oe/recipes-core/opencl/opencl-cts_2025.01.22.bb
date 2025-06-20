@@ -8,7 +8,6 @@ inherit pkgconfig cmake
 DEPENDS += "opencl-headers opencl-icd-loader"
 RDEPENDS:${PN} += "python3-core python3-io"
 
-S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
 	   file://0001-Ignore-Compiler-Warnings.patch"

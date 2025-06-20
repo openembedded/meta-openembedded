@@ -11,7 +11,6 @@ SRCREV = "ca1bf4b810e2d188d04cb6286f957008ee1b7681"
 SRC_URI = "git://github.com/graeme-hill/crossguid;protocol=https;branch=master \
            file://0001-include-missing-cstdint.patch"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

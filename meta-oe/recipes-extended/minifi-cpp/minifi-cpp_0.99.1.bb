@@ -58,7 +58,6 @@ SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765
 # libsodium: 1.0.19
 SRC_URI[libsodium.sha256sum] = "018d79fe0a045cca07331d37bd0cb57b2e838c51bc48fd837a1472e50068bbea"
 
-S = "${UNPACKDIR}/git"
 
 inherit pkgconfig cmake systemd
 

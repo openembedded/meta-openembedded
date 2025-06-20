@@ -22,7 +22,6 @@ EXTRA_OEMAKE = " \
 	CC='${CC}' \
 	"
 
-S = "${WORKDIR}/git"
 
 do_install () {
 	oe_runmake install

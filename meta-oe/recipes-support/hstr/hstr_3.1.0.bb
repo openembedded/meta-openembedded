@@ -10,7 +10,7 @@ SRC_URI = "https://github.com/dvorka/hstr/releases/download/3.1/hstr-${PV}-tarba
            file://0001-configure.ac-Don-t-use-AC_CHECK_FILE.patch \
            file://0001-Use-OE-specific-checks-for-ncurses.patch"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 SRC_URI[sha256sum] = "4dabf61f045f022bac8bc909e5fd96041af6c53df56d97dfa3cfbf49af4453a5"
 

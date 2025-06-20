@@ -15,7 +15,6 @@ SRC_URI = " \
 "
 SRCREV = "6c603565f36e9996d85045c8012cd04aba5f3708"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--disable-zypp"
 

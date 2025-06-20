@@ -19,7 +19,7 @@ SRC_URI += "file://libidn-wr-cross-compile.patch"
 
 LIC_FILES_CHKSUM = "file://README;beginline=42;endline=92;md5=3374ea0369ca3ead6047520477a43147"
 
-S = "${WORKDIR}/Net-LibIDN-${PV}"
+S = "${UNPACKDIR}/Net-LibIDN-${PV}"
 
 EXTRA_CPANFLAGS = "--with-libidn=${STAGING_LIBDIR} --with-libidn-inc=${STAGING_INCDIR} --compiler='${CC}'"
 EXTRA_CPANFLAGS += "--disable-tld"

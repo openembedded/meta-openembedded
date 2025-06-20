@@ -7,7 +7,6 @@ PV = "2.3.6+git"
 SRC_URI = "git://github.com/snarlistic/jpnevulator.git;protocol=https;branch=master"
 SRCREV = "bc1d4f6587a4a4829b5d55e3ca7ad584da6de545"
 
-S = "${WORKDIR}/git"
 
 do_compile() {
 	oe_runmake

@@ -20,7 +20,6 @@ PACKAGECONFIG[utils] += "-Dutils=true, -Dutils=false"
 
 DEPENDS += "libdrm libevdev fmt"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

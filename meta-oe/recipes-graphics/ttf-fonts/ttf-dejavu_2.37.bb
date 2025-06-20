@@ -17,7 +17,7 @@ RDEPENDS:${PN}-common = ""
 SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
            file://30-dejavu-aliases.conf"
 
-S = "${WORKDIR}/dejavu-fonts-ttf-${PV}/ttf"
+S = "${UNPACKDIR}/dejavu-fonts-ttf-${PV}/ttf"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/dejavu/files/dejavu/"
 

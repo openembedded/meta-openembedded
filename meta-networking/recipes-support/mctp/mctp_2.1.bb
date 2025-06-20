@@ -10,7 +10,6 @@ SRCREV = "dd944cf5b5a8b834f3685bcb2017190258dbcd0b"
 SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https \
            file://0001-mctp-bench-Adjust-headers.patch"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig systemd
 

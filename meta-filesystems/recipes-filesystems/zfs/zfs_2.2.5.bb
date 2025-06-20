@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
            file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
 "
 
-S = "${WORKDIR}/git"
 
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.

@@ -11,7 +11,6 @@ SRC_URI = " \
 "
 SRCREV = "34b42992a43fda69c6ba2557b718601cafe16251"
 
-S = "${WORKDIR}/git"
 
 # coreutils provides fmt which is used in the Makefile
 DEPENDS = "i2c-tools coreutils-native"

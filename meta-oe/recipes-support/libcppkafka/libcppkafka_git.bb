@@ -21,7 +21,6 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DCPPKAFKA_BUILD_SHARED=ON"
 
-S = "${WORKDIR}/git"
 
 do_install:append(){
     chrpath -d ${D}${libdir}/libcppkafka.so.${BASEPV}

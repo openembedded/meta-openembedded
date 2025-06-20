@@ -10,7 +10,6 @@ SRCREV = "57ebc07ad8723ea4106090536c58c7f7160743e2"
 SRC_URI = "git://github.com/kenyapcomau/p910nd;protocol=https;branch=master \
            file://fix-var-lock.patch"
 
-S = "${WORKDIR}/git"
 
 inherit update-rc.d
 

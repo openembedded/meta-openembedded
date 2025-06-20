@@ -7,7 +7,6 @@ SRCREV = "a4b17d543f072d2e3ba564e4bc5c3a0d2b05c338"
 
 SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=release;protocol=https"
 
-S = "${WORKDIR}/git"
 
 # other packages commonly reference the file directly as "exprtk.hpp"
 # create symlink to allow this usage

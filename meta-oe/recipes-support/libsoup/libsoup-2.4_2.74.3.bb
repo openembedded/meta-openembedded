@@ -44,7 +44,7 @@ SRC_URI[sha256sum] = "e4b77c41cfc4c8c5a035fcdc320c7bc6cfb75ef7c5a034153df1413fa1
 
 CVE_PRODUCT = "libsoup"
 
-S = "${WORKDIR}/libsoup-${PV}"
+S = "${UNPACKDIR}/libsoup-${PV}"
 
 inherit meson gettext pkgconfig upstream-version-is-even gobject-introspection gtk-doc
 

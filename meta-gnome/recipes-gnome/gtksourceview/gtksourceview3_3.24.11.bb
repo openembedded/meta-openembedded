@@ -8,7 +8,7 @@ DEPENDS = "gtk+3 libxml2 glib-2.0-native"
 
 PNAME = "gtksourceview"
 
-S = "${WORKDIR}/${PNAME}-${PV}"
+S = "${UNPACKDIR}/${PNAME}-${PV}"
 
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection upstream-version-is-even

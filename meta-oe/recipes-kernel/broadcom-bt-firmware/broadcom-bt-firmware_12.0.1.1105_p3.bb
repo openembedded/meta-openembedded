@@ -14,7 +14,6 @@ SRCREV = "a0eb4805dbb232f02f156b9351a23790c1a4cec7"
 
 PE = "1"
 
-S = "${WORKDIR}/git"
 
 inherit allarch
 

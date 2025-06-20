@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=802d3d83ae80ef5f343050bf96cce3a4 \
 
 SRC_URI = "\
 	git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.2;name=demo \
-	git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.2;name=lvgl;subdir=git/lvgl \
+	git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.2;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
 	file://0001-thorvg-fix-build-with-gcc-15.patch;patchdir=lvgl \
 	"
 SRCREV_demo = "c924e24c7aa55317521bcd9dd75ce9337508f5a5"
@@ -24,7 +24,6 @@ require lv-conf.inc
 
 inherit cmake
 
-S = "${WORKDIR}/git"
 
 do_configure:prepend() {
 	if [ "${LVGL_CONFIG_USE_SDL}" -eq 1 ] ; then

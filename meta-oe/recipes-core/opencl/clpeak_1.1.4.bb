@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRCREV = "527695de8393a3144863a0a07f9b92f1c734d1c4"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

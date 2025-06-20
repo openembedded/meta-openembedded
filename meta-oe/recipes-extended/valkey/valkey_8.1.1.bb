@@ -19,7 +19,6 @@ SRC_URI = " \
 "
 SRCREV = "fcd8bc3ee40f5d7841b7d5a8f3cd12252fec14e4"
 
-S = "${WORKDIR}/git"
 
 RPROVIDES:${PN} = "virtual-redis"
 

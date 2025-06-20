@@ -15,7 +15,7 @@ SRC_URI = "https://downloads.yoctoproject.org/mirror/sources/${BP}.tar.gz \
 
 SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
 
-S = "${WORKDIR}/${BPN}"
+S = "${UNPACKDIR}/${BPN}"
 
 
 do_compile:prepend() {

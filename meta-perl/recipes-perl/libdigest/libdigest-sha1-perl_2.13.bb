@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
 
-S = "${WORKDIR}/Digest-SHA1-${PV}"
+S = "${UNPACKDIR}/Digest-SHA1-${PV}"
 
 inherit cpan ptest
 

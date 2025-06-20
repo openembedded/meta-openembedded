@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/MIME-Charset-${PV}.tar.gz"
 
 SRC_URI[sha256sum] = "1bb7a6e0c0d251f23d6e60bf84c9adefc5b74eec58475bfee4d39107e60870f0"
 
-S = "${WORKDIR}/MIME-Charset-${PV}"
+S = "${UNPACKDIR}/MIME-Charset-${PV}"
 
 inherit cpan
 

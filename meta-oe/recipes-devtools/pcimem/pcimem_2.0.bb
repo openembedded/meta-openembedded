@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/billfarrow/pcimem.git;branch=master;protocol=https"
 # Upstream repo does not tag
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     install -D -m 0755 ${B}/pcimem ${D}${bindir}/pcimem

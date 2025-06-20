@@ -12,7 +12,6 @@ SRC_URI += " \
         file://0001-Drop-ptests-fixtures-and-recorde_modes.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3 ptest
 

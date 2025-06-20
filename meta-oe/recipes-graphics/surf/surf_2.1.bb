@@ -14,7 +14,6 @@ SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
            "
 SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'soup3', 'file://0001-config.mk-Fix-compiler-and-linker.patch file://0001-config.ml-make-compatible-with-webkitgtk-2.34.0.patch', '', d)}"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig features_check
 

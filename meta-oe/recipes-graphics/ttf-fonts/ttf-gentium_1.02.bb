@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://OFL;md5=33a5bf7b98a9c0ae87430760ba762295 \
 
 SRC_URI = "https://archive.debian.org/debian/pool/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz "
 
-S = "${WORKDIR}/ttf-sil-gentium-${PV}"
+S = "${UNPACKDIR}/ttf-sil-gentium-${PV}"
 
 do_install:append() {
 

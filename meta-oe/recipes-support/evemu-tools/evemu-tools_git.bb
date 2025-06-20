@@ -10,7 +10,6 @@ DEPENDS = "libevdev"
 SRCREV = "86a5627dbeac8d9d9bc34326a758d6a477e876e4"
 SRC_URI = "git://git@gitlab.freedesktop.org/libevdev/evemu.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 PV = "2.7.0+git"
 
 inherit autotools pkgconfig

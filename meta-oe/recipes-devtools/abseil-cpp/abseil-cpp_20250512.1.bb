@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
            file://0002-abseil-ppc-fixes.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

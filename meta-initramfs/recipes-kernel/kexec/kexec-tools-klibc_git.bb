@@ -61,7 +61,6 @@ SRC_URI:append:aarch64 = " file://arm64_kexec-image-header.h-add-missing-le64toh
 
 SRC_URI:append:powerpc = " file://powerpc-purgatory-Makefile-remove-unknown-flags.patch"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
 

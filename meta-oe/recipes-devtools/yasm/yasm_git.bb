@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
            file://0001-bitvect-fix-build-with-gcc-15.patch \
 "
 
-S = "${WORKDIR}/git"
 
 inherit autotools gettext python3native
 

@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
 
-S = "${WORKDIR}/Text-Diff-${PV}"
+S = "${UNPACKDIR}/Text-Diff-${PV}"
 
 inherit cpan ptest
 RDEPENDS:${PN}-ptest += "perl-module-test perl-module-test-more"

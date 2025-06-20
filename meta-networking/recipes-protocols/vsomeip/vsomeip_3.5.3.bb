@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
 
 GTEST_VER = "1.15.2"
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
-           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=git/ \
+           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/ \
            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
            file://0004-Do-not-specify-PIE-flag-explicitly.patch \
@@ -26,7 +26,6 @@ COMPATIBLE_HOST:libc-musl = 'null'
 
 DEPENDS = "boost dlt-daemon googletest"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

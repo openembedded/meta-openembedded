@@ -8,7 +8,6 @@ DEPENDS = "libebml"
 SRC_URI = "git://github.com/Matroska-Org/libmatroska.git;branch=v1.x;protocol=https"
 SRCREV = "f5315fddda2d434e47035c038549a808d8b8eac7"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake
 

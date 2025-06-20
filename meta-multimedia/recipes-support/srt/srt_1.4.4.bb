@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master \
            file://0001-don-t-install-srt-ffplay.patch \
            "
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

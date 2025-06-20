@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/makamaka/JSON.git;protocol=https;branch=master"
 
 SRCREV = "39bc0e567c202762a575fed2844ebdb941c3ca09"
 
-S = "${WORKDIR}/git"
 
 inherit cpan
 

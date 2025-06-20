@@ -14,7 +14,6 @@ SRC_URI = "gitsm://github.com/WuBingzheng/libleak;protocol=https;branch=master \
            file://0001-respect-environment-variables.patch \
           "
 
-S = "${WORKDIR}/git"
 
 do_configure () {
 	:

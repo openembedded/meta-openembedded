@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
 SRCREV = "870dd32d42f626dc2246d34b2224ffb6fd73e205"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2"
 

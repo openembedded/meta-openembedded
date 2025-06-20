@@ -7,6 +7,5 @@ BRANCH = "master"
 SRC_URI = "git://github.com/clarkwang/sexpect;branch=${BRANCH};protocol=https;tag=v${PV}"
 SRCREV = "d3645392424d47532be90fcbc0abf3148324785b"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

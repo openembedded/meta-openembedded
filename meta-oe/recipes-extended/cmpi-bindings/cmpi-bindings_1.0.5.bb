@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/kkaempf/cmpi-bindings.git;protocol=https;branch=main
            "
 
 SRCREV = "49d6dcfc71ca421100fcf325e31625817c469fc9"
-S = "${WORKDIR}/git"
 
 inherit cmake python3targetconfig
 

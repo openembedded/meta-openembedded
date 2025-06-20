@@ -13,7 +13,7 @@ SRC_URI = " \
     file://0001-json11.cpp-Include-cstdint.patch \
 "
 SRC_URI[sha256sum] = "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
-S = "${WORKDIR}/x265_${PV}/source"
+S = "${UNPACKDIR}/x265_${PV}/source"
 
 inherit lib_package cmake pkgconfig
 

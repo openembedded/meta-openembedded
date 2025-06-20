@@ -6,8 +6,7 @@ inherit allarch
 
 SRC_URI = "file://classic-light.xml"
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install() {
     install -d ${D}${datadir}/gtksourceview-3.0/styles

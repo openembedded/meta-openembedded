@@ -10,7 +10,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;beginline=37;endline=41;md5=255fbd5f98a90d51d9908d31271ae4d4"
 SRC_URI = "${CPAN_MIRROR}/authors/id/U/UR/URI/File-Slurp-${PV}.tar.gz"
 
-S = "${WORKDIR}/File-Slurp-${PV}"
+S = "${UNPACKDIR}/File-Slurp-${PV}"
 
 inherit cpan
 

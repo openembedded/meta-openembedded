@@ -53,7 +53,7 @@ SRC_URI:append:libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.pat
 
 SRCREV = "f2ca37ef3510543172657b82493d1eceefa9a134"
 
-S = "${WORKDIR}/git/open-vm-tools"
+S = "${UNPACKDIR}/${BP}/open-vm-tools"
 
 DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps libtirpc"
 

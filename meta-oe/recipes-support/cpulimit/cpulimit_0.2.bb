@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/opsengine/cpulimit.git;protocol=https;branch=master 
            file://0002-busy.c-Fix-incompatible-pointer-type-error.patch \
            "
 
-S = "${WORKDIR}/git"
 
 do_compile() {
     oe_runmake all

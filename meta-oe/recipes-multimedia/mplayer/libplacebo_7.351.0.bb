@@ -9,7 +9,6 @@ SRCREV = "3188549fba13bbdf3a5a98de2a38c2e71f04e21e"
 
 inherit meson pkgconfig
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan opengl', d)} lcms"
 

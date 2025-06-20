@@ -28,7 +28,7 @@ PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
 PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 
-S = "${WORKDIR}/tdb-${PV}"
+S = "${UNPACKDIR}/tdb-${PV}"
 
 inherit waf-samba pkgconfig ptest
 

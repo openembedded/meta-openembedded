@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1
 
 PYPI_SRC_URI = "https://files.pythonhosted.org/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-${PV}.tar.gz"
 
-S = "${WORKDIR}/paho_mqtt-${PV}"
+S = "${UNPACKDIR}/paho_mqtt-${PV}"
 
 DEPENDS += "python3-pytest-runner-native"
 

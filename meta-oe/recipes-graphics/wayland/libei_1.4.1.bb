@@ -16,7 +16,6 @@ DEPENDS = " \
 
 SRC_URI = "git://gitlab.freedesktop.org/libinput/libei.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 SRCREV = "9e0413cbc7d3ae6656266890425f152589ddf74d"
 
 inherit meson pkgconfig

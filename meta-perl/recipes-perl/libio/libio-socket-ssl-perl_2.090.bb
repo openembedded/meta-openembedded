@@ -23,7 +23,7 @@ RDEPENDS:${PN} += "\
 SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
 SRC_URI[sha256sum] = "fdda17888df9f88251b62856f17fcac8f144858c72d7e01d1c4b437d23383d97"
 
-S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+S = "${UNPACKDIR}/IO-Socket-SSL-${PV}"
 
 inherit cpan ptest-perl
 

@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "5fd555742e37bbd58d166199e669f01f743c7b3c6177191dd7b31fb0c3
 UPSTREAM_CHECK_URI = "https://github.com/msgpack/msgpack-c/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/msgpack-cxx-${PV}"
+S = "${UNPACKDIR}/msgpack-cxx-${PV}"
 
 DEPENDS += "boost"
 

@@ -10,7 +10,6 @@ SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib.git;protoc
 PV = "1.2.2+git"
 SRCREV = "8991f0e93713ebf4da48ae4f23940ead42f64c8c"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig gobject-introspection
 

@@ -40,7 +40,6 @@ EXTRA_OEMAKE += 'CC="${CC}" CFLAGS="${CFLAGS}" LDDLL="${CCLD} ${LDFLAGS}" LD="${
                  ${@ "STATICLIB=no" if d.getVar('DISABLE_STATIC') != "" else "" } \
 '
 
-S = "${WORKDIR}/git"
 
 do_install() {
 	install -d ${D}/${bindir} ${D}/${libdir} ${D}/${includedir}

@@ -10,7 +10,6 @@ PV .= "+git"
 SRCREV = "f78ed25aced2dfea743867b8205a787bfb091340"
 SRC_URI = "git://github.com/tinyalsa/tinyalsa;branch=master;protocol=https"
 
-S = "${WORKDIR}/git"
 
 inherit meson
 

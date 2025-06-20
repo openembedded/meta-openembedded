@@ -29,7 +29,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
 
-S = "${WORKDIR}/Net-SSLeay-${PV}"
+S = "${UNPACKDIR}/Net-SSLeay-${PV}"
 
 inherit cpan ptest
 

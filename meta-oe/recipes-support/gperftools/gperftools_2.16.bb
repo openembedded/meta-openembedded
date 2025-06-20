@@ -21,7 +21,6 @@ SRC_URI:append:libc-musl = " \
 
 inherit autotools
 
-S = "${WORKDIR}/git"
 
 # On mips, we have the following error.
 #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008

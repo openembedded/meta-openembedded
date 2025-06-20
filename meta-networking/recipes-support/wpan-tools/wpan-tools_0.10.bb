@@ -11,6 +11,5 @@ DEPENDS = "libnl"
 SRC_URI = "git://github.com/linux-wpan/wpan-tools;branch=master;protocol=https"
 SRCREV = "91b0f038aef2f62cb6a222d190b887fdfd6bc164"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig

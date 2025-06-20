@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "0a33a7a935be63371071dbe600cfaefa67cd971b67580a917bbf6ebaf7
 
 UPSTREAM_CHECK_REGEX = "DBD\-SQLite\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
-S = "${WORKDIR}/DBD-SQLite-${PV}"
+S = "${UNPACKDIR}/DBD-SQLite-${PV}"
 
 DEPENDS += "libdbi-perl-native"
 

@@ -16,7 +16,6 @@ SRCREV = "d463bad9639c910fadc2f30dac473c7688b11cfc"
 
 PV = "0.9.19"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/xorg/modules/*"
 

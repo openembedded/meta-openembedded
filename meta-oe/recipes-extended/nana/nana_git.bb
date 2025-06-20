@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/pjmaker/nana;protocol=https;branch=master \
     file://0001-Makefile.am-fix-build-with-separate-build-dir.patch \
     file://0002-man-Makefile.am-we-seem-not-to-need-the-work-around-.patch \
 "
-S = "${WORKDIR}/git"
 
 LICENSE = "BSD-2-Clause"
 

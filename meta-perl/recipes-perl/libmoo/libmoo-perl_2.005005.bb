@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=742;endline=787;md5=74f4de483dce5aa4
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
 SRC_URI[sha256sum] = "fb5a2952649faed07373f220b78004a9c6aba387739133740c1770e9b1f4b108"
 
-S = "${WORKDIR}/Moo-${PV}"
+S = "${UNPACKDIR}/Moo-${PV}"
 
 inherit cpan
 

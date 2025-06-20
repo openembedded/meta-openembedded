@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "161131c686a6d9962a0e96912526dd46308e022d62e3f8acaed5a56fda
 UPSTREAM_CHECK_URI = "https://selenic.com/repo/smem/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/${BPN}-${HG_CHANGESET}"
+S = "${UNPACKDIR}/${BPN}-${HG_CHANGESET}"
 
 do_compile() {
         ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap

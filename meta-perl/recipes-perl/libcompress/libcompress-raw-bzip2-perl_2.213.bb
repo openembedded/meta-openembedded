@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "8d75d3d366c9101ca18061b00d438d3da39478c06159147dea3c666770
 
 DEPENDS += "bzip2"
 
-S = "${WORKDIR}/Compress-Raw-Bzip2-${PV}"
+S = "${UNPACKDIR}/Compress-Raw-Bzip2-${PV}"
 
 inherit cpan
 

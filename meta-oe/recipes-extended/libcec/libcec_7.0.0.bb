@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https
            file://0001-Enhance-reproducibility.patch \
           "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

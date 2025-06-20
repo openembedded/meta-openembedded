@@ -18,7 +18,6 @@ DEPENDS += "augeas libnl libxslt libxml2"
 
 do_configure[depends] += "${MLPREFIX}gnulib:do_populate_sysroot"
 
-S = "${WORKDIR}/git"
 
 inherit gettext autotools perlnative pkgconfig systemd
 

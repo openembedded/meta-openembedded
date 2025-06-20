@@ -12,7 +12,6 @@ SRCREV = "d732aaf9a315415ae8fd7eb11e3a4c1f80e42a48"
 
 UPSTREAM_CHECK_COMMITS = "1"
 
-S = "${WORKDIR}/git"
 
 # nlohmann-fifo is a header only C++ library, so the main package will be empty.
 

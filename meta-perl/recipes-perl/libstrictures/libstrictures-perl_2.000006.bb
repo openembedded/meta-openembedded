@@ -31,7 +31,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=246;endline=262;md5=43be558cf4f19823
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/strictures-${PV}.tar.gz"
 SRC_URI[sha256sum] = "09d57974a6d1b2380c802870fed471108f51170da81458e2751859f2714f8d57"
 
-S = "${WORKDIR}/strictures-${PV}"
+S = "${UNPACKDIR}/strictures-${PV}"
 
 inherit cpan ptest-perl
 

@@ -11,5 +11,4 @@ DEPENDS = "libimobiledevice-glue libusb1 readline"
 SRCREV = "2fb767d784c01269a0ded5bacd5539aee3768c35"
 SRC_URI = "git://github.com/libimobiledevice/libirecovery;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 inherit autotools pkgconfig

@@ -20,7 +20,6 @@ SRCREV = "f7a64114b35fd8ee63ce07290f8a2dffd52b215f"
 SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https \
            file://run-ptest"
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_COMMITS = "1"
 

@@ -55,7 +55,6 @@ CFLAGS:append:libc-musl = " -D__UAPI_DEF_ETHHDR=0 "
 
 EXTRA_OEMESON += "-Dstatic-libsystemd=pic"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN}-dev = ""
 

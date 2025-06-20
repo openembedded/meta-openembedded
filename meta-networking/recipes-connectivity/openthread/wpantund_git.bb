@@ -19,7 +19,6 @@ SRC_URI = "gitsm://github.com/openthread/wpantund.git;protocol=https;branch=mast
            file://basename.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig perlnative autotools
 

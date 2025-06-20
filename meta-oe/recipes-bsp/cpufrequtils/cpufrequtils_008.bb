@@ -20,7 +20,6 @@ UPSTREAM_CHECK_COMMITS = "1"
 EXTRA_OEMAKE:append = " ${@['', 'NLS=false']['${USE_NLS}' == 'no']} "
 
 
-S = "${WORKDIR}/git"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 

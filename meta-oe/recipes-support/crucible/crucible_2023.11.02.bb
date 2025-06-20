@@ -9,7 +9,6 @@ require ${BPN}-go-mods.inc
 
 SRCREV = "dec27cd4e0e0db106c0a21d429c04ca8d36bbdd5"
 
-S = "${WORKDIR}/git"
 
 GO_IMPORT = "github.com/usbarmory/crucible"
 GO_INSTALL = "\

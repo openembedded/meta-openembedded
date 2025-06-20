@@ -23,8 +23,7 @@ SRC_URI += "\
             file://COPYING \
             "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 DEPENDS = "libcap"

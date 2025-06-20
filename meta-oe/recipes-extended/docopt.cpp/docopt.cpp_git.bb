@@ -20,7 +20,6 @@ SRC_URI = "\
     git://github.com/docopt/docopt.cpp.git;protocol=https;branch=master \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

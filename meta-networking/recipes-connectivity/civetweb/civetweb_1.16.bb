@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
            "
 
-S = "${WORKDIR}/git"
 
 # civetweb supports building with make or cmake (although cmake lacks few features)
 inherit cmake

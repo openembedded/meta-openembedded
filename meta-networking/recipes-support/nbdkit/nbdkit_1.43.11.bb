@@ -14,7 +14,6 @@ SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=master;tag=v
            "
 SRCREV = "2d0f232b590f4001881dd0819f55af72b88c4b2f"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "curl xz e2fsprogs zlib"
 

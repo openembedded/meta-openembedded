@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/google/highway.git;protocol=https;branch=master \
            file://0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch"
 
 SRCREV = "457c891775a7397bdb0376bb1031e6e027af1c48"
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=0 -DCMAKE_BUILD_TYPE=Release"
 

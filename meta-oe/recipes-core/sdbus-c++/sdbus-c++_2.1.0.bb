@@ -24,7 +24,6 @@ EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
                  -DSDBUSCPP_BUILD_DOCS=ON \
                  -DSDBUSCPP_BUILD_DOXYGEN_DOCS=OFF"
 
-S = "${WORKDIR}/git"
 
 # Link libatomic on architectures without 64bit atomics fixes
 # libsdbus-c++.so.1.1.0: undefined reference to `__atomic_load_8'

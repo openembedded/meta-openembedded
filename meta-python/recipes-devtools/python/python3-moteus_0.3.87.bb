@@ -7,7 +7,7 @@ inherit pypi setuptools3
 
 SRC_URI[sha256sum] = "988f264c330a17d63219c49dd2365bdaff97156be3ab6c5eaa204b45dca621e8"
 
-S = "${WORKDIR}/moteus-${PV}"
+S = "${UNPACKDIR}/moteus-${PV}"
 
 RDEPENDS:${PN} += "\
     python3-can \

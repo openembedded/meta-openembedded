@@ -9,7 +9,6 @@ inherit autotools pkgconfig
 
 PV = "1.8.0+git"
 
-S = "${WORKDIR}/git"
 SRCREV = "f02ff51449240102c27a97173dc495e8e7789046"
 SRC_URI = "git://github.com/nfc-tools/libnfc.git;branch=master;protocol=https"
 

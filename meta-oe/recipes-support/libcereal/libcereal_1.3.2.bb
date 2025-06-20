@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
            file://run-ptest \
 "
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig ptest
 

@@ -11,7 +11,6 @@ SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
             file://0001-Do-not-download-the-catch-framework-during-configure.patch"
 
 SRC_URI[sha256sum] = "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc"
-S = "${WORKDIR}/git"
 
 do_configure:prepend() {
     mkdir -p ${S}/tests/catch2

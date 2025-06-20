@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://spectre-meltdown-checker.sh;beginline=2;endline=2;md5
 SRC_URI = "git://github.com/speed47/spectre-meltdown-checker;protocol=https;branch=master"
 SRCREV = "b8f8c81d519435c0871b13f02b5c4a72c5bffd5e"
 
-S = "${UNPACKDIR}/git"
 
 # binutils: readelf,objdump might be used for deeper analysis
 # coreutils: dd with iflag=skip_bytes oflag=seek_bytes in some cases

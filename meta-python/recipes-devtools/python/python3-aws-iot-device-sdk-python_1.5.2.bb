@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/aws/aws-iot-device-sdk-python;branch=master;protocol
            file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit setuptools3
 

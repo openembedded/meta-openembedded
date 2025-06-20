@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253
 SRCREV = "62e60904afbe58fda0c7104fdad1c4f618266ba6"
 SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https;branch=main"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     install -m 0755 -D ${S}/debian/ifenslave.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/ifenslave

@@ -12,7 +12,7 @@ SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/${B
 SRC_URI[md5sum] = "37a4310e98912030a74bdd4ed789f33c"
 SRC_URI[sha256sum] = "b35d696e6fafd4563ca708fcecf9d0cf6705c846d417b5000f5252e0188848e7"
 
-S = "${WORKDIR}/${BP}/dev"
+S = "${UNPACKDIR}/${BP}/dev"
 
 inherit cmake
 

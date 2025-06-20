@@ -22,7 +22,6 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
            file://CVE-2024-25081_CVE-2024-25082.patch \
 "
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
 PACKAGECONFIG = "readline"

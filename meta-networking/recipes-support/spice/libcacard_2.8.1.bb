@@ -8,7 +8,6 @@ SRCREV = "7b07684ea6698d4885ff2062350ad8798a04de42"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

@@ -13,7 +13,6 @@ SRC_URI += "file://0001-Remove-defining-const-as-nothing.patch"
 
 SRCREV = "e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-shared"
 

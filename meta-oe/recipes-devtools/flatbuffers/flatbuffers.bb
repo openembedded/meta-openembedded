@@ -13,7 +13,6 @@ DEPENDS = "flatbuffers-native"
 RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-dev += "${PN}-compiler"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
     -DFLATBUFFERS_BUILD_TESTS=OFF \    

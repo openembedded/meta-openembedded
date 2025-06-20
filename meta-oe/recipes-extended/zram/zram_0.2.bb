@@ -17,8 +17,7 @@ SRC_URI = " \
            file://dev-zram0.swap \
 "
 
-S = "${WORKDIR}/sources"
-UNPACKDIR = "${S}"
+S = "${UNPACKDIR}"
 
 do_install () {
     # Install systemd related configuration file

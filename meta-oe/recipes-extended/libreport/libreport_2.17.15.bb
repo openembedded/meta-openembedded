@@ -21,7 +21,6 @@ SRCREV = "f6bb06a699617d078fcd4f8b71b4d063bf47b52b"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/git"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "systemd"

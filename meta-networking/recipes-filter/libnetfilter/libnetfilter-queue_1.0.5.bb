@@ -11,7 +11,6 @@ SRCREV = "2ff321690b8dafeca99ee8e9cafac71e36f292b9"
 SRC_URI = "git://git.netfilter.org/libnetfilter_queue;branch=master \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

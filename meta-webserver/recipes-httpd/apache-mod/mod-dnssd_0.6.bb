@@ -8,7 +8,6 @@ DEPENDS = "apache2 avahi"
 SRC_URI = "git://git.0pointer.net/mod_dnssd.git;protocol=https;branch=master"
 SRCREV = "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--disable-lynx"
 

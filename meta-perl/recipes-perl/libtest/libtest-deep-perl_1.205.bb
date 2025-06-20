@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "42781e9943a7a215e662c4973b9feafdc019fd16469bdb849a8537ee58
 
 UPSTREAM_CHECK_REGEX = "Test\-Deep\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
-S = "${WORKDIR}/Test-Deep-${PV}"
+S = "${UNPACKDIR}/Test-Deep-${PV}"
 
 inherit cpan ptest-perl
 

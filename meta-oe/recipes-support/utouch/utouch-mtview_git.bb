@@ -16,4 +16,3 @@ DEPENDS += "mtdev utouch-frame utouch-evemu libx11"
 
 PV = "1.1.7+git"
 
-S = "${WORKDIR}/git"

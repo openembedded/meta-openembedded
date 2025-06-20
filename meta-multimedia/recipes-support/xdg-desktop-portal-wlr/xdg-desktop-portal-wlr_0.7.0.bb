@@ -19,7 +19,6 @@ REQUIRED_DISTRO_FEATURES = "opengl wayland"
 SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master \
            file://0001-screencast-Fix-build-with-older-mesa.patch"
 
-S = "${WORKDIR}/git"
 PV .= "+git"
 SRCREV = "d9ada849aeca6137915de2df69beaef4e272cc1d"
 

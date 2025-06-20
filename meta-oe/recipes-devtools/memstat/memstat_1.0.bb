@@ -8,7 +8,7 @@ SECTION = "devtool"
 
 LICENSE = "GPL-2.0-only"
 
-S = "${WORKDIR}/memstattool"
+S = "${UNPACKDIR}/memstattool"
 
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb"
 

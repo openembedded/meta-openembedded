@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55
 
 # Uppercase letters are not allowed in the recipe name, thus the recipe can not be named cdparanoia-III and
 # we need to add the path to the extracted sources explicitely:
-S = "${WORKDIR}/cdparanoia-III-${PV}"
+S = "${UNPACKDIR}/cdparanoia-III-${PV}"
 
 # cdparanoia Makefile can not be used with several threads (because the static library target and the shared
 # library target use object files which are compiled in the same directory, the object files are just removed

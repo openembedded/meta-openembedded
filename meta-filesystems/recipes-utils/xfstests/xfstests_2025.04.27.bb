@@ -15,7 +15,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;ta
            file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
            "
 
-S = "${WORKDIR}/git"
 
 # brokensep because m4/package_globals.m4 calls ". ./VERSION" (and that's not the only issue)
 inherit autotools-brokensep useradd pkgconfig

@@ -48,7 +48,6 @@ CVE_STATUS[CVE-2011-4966] = "fixed-version: The CPE in the NVD database doesn't 
 
 PARALLEL_MAKE = ""
 
-S = "${WORKDIR}/git"
 
 LDFLAGS:append:powerpc = " -latomic"
 LDFLAGS:append:mipsarch = " -latomic"

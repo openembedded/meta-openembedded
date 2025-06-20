@@ -17,7 +17,6 @@ SRC_URI = " \
     file://v6test.sh \
 "
 
-S = "${WORKDIR}/git"
 
 BBCLASSEXTEND = "native"
 

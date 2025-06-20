@@ -12,7 +12,7 @@ SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-python/telepathy-
            file://telepathy-python_fix_for_automake_1.12.patch"
 
 
-S = "${WORKDIR}/telepathy-python-${PV}"
+S = "${UNPACKDIR}/telepathy-python-${PV}"
 
 inherit autotools python3native
 

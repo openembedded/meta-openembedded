@@ -11,7 +11,6 @@ SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-Explicit-header-stdint.patch \
           "
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "zlib libpng python3-native"
 

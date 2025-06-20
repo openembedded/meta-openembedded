@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d
 UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs128"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-S = "${WORKDIR}/firefox-${PV}"
+S = "${UNPACKDIR}/firefox-${PV}"
 
 inherit pkgconfig perlnative python3native rust cargo
 

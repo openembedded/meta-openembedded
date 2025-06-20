@@ -41,7 +41,6 @@ SRC_URI = " \
 
 SRCREV = "7baf540e56fb1a3e91752acba872a88543529d46"
 
-S = "${WORKDIR}/git"
 
 inherit autotools gettext update-alternatives pkgconfig python3native perlnative features_check
 # depends on virtual/libx11

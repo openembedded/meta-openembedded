@@ -10,7 +10,6 @@ inherit python_setuptools_build_meta
 SRC_URI = "git:///github.com/russhousley/pyhsslms.git;branch=master;protocol=https"
 SRCREV = "c798728deed6d3f681c9e6bfd7fe8a6705f5638b"
 
-S = "${WORKDIR}/git"
 
 RDEPENDS:${PN} += " \
     python3-core \

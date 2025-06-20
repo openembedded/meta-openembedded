@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
            file://0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch"
 SRCREV = "6c02c6a469d62a047f230b0ccf03f72328312d2b"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "curl xz e2fsprogs zlib"
 

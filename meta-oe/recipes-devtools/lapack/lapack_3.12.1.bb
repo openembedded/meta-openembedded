@@ -20,7 +20,6 @@ SRCREV = "5ebe92156143a341ab7b14bf76560d30093cfc54"
 SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master \
            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
           "
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[lapacke] = "-DLAPACKE=ON,-DLAPACKE=OFF"

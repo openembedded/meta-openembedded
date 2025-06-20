@@ -13,7 +13,6 @@ DEPENDS = " sysfsutils"
 SRCREV = "1c57818ecee186aa47af0342149577df5302c022"
 PV = "0.18+git"
 
-S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/grondo/edac-utils;branch=master;protocol=https \
     file://make-init-script-be-able-to-automatically-load-EDAC-.patch \

@@ -17,4 +17,3 @@ PV .= "+git"
 SRC_URI = "git://github.com/HamzaM3/ftgl;protocol=https;branch=master \
            file://0001-Fix-type-mismatch-with-latest-FreeType.patch"
 
-S = "${WORKDIR}/git"

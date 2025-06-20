@@ -15,7 +15,6 @@ inherit meson pkgconfig bash-completion gobject-introspection upstream-version-i
 SRCREV = "3f07d6e5b4677558543b3b4484ea88ad92257e92"
 SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-34"
 
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "udev mbim"
 PACKAGECONFIG[udev] = "-Dudev=true,-Dudev=false,libgudev"

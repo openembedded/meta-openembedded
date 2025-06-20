@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=ma
 
 SRCREV  = "e0760b2e9657907e691be4df384ca7617109635d"
 
-S = "${WORKDIR}/git"
 
 inherit cmake ptest
 

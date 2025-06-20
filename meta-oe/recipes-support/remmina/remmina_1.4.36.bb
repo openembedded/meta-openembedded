@@ -27,7 +27,6 @@ LDFLAGS:append:libc-musl = " -lexecinfo"
 
 SRCREV = "17cf7956b9f925fa788083a2db8d5e669f86bfaf"
 SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master"
-S = "${WORKDIR}/git"
 
 inherit cmake features_check mime mime-xdg gtk-icon-cache pkgconfig
 REQUIRED_DISTRO_FEATURES = "x11"

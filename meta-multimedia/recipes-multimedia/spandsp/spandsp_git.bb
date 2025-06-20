@@ -28,7 +28,6 @@ SRC_URI = "\
 # https://lists.openembedded.org/g/openembedded-devel/message/109325
 SRCREV = "df1282eb9af538ab1aadb6d66146e258451d4fe4"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

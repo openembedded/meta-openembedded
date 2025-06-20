@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https \
            file://a1d58ae1be99571a88b8439b027abe6349b74658.patch \
 "
 SRCREV = "c91eb9a9a992f1a36c49a8e6f1146e45b5e1c8e7"
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig ptest
 

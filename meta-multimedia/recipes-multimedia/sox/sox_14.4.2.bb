@@ -41,7 +41,6 @@ SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
 # last release was in 2015, use latest hash from 2024-05-30
 PV .= "+git"
 SRCREV = "f3094754a7c2a7e55c35621d20fa9945736e72df"
-S = "${WORKDIR}/git"
 
 CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
 

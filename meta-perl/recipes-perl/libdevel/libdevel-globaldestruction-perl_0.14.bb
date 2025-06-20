@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=53;endline=55;md5=935dadb9423774f535
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Devel-GlobalDestruction-${PV}.tar.gz"
 SRC_URI[sha256sum] = "34b8a5f29991311468fe6913cadaba75fd5d2b0b3ee3bb41fe5b53efab9154ab"
 
-S = "${WORKDIR}/Devel-GlobalDestruction-${PV}"
+S = "${UNPACKDIR}/Devel-GlobalDestruction-${PV}"
 
 inherit cpan
 

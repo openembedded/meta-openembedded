@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https \
 SRCBRANCH = "master"
 SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
 
-S = "${WORKDIR}/git"
 
 CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"
 

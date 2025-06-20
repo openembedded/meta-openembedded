@@ -22,7 +22,6 @@ EXTRA_OEMAKE = "\
     CC='${CC}' CFLAGS='${CFLAGS} -pthread -I${STAGING_INCDIR}/libnl3' \
 "
 
-S = "${WORKDIR}/git"
 
 # wavemon does not support using out-of-tree builds
 inherit autotools-brokensep pkgconfig

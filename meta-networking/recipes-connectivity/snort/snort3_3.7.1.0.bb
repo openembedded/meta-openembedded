@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
 
 SRCREV = "6a11279883a8584e06ad9ab2df162c639961cd61"
 
-S = "${WORKDIR}/git"
 
 PACKAGES =+ "${PN}-scripts"
 

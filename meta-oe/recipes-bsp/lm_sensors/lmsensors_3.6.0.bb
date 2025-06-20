@@ -44,7 +44,6 @@ SYSTEMD_SERVICE:${PN}-fancontrol = "fancontrol.service"
 SYSTEMD_SERVICE:${PN}-sensord = "sensord.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
         MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \

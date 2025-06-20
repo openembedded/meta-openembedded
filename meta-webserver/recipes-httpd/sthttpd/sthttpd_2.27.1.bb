@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/blueness/${BPN};branch=master;protocol=https \
 UPSTREAM_CHECK_URI = "https://github.com/blueness/sthttpd/releases/"
 UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
 
-S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d systemd update-alternatives
 

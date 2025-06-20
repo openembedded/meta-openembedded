@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/MycroftAI/mycroft-core.git;branch=master;protocol=ht
            file://mycroft.service \
           "
 
-S = "${WORKDIR}/git"
 
 inherit systemd features_check
 

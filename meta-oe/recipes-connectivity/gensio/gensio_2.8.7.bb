@@ -9,7 +9,6 @@ SRCREV = "e4dbb9687bd5e887fa98a4cdcec012ea85da1ef2"
 
 SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
 
-S = "${WORKDIR}/git"
 
 inherit autotools
 

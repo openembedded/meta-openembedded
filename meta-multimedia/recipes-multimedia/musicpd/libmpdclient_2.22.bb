@@ -9,7 +9,6 @@ SRC_URI = " \
     git://github.com/MusicPlayerDaemon/libmpdclient;branch=master;protocol=https \
 "
 SRCREV = "7124a0ad4841a44db084bb785a6e7120bc8f0139"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "tcp"
 PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"

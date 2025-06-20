@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7c83d30e99508d6b790eacdd3abab846"
 SRC_URI = "git://github.com/osandov/drgn.git;protocol=https;branch=main;tag=v${PV}"
 SRCREV = "8209a147fb61deed38ca376d063bbff0343ca234"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "\
     autoconf-native \

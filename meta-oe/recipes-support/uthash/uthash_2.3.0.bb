@@ -16,7 +16,6 @@ SRC_URI = "\
     file://run-ptest \
 "
 
-S = "${WORKDIR}/git"
 
 inherit ptest
 

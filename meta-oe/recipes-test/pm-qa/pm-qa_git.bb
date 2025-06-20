@@ -15,7 +15,6 @@ SRC_URI = " \
     file://0001-fix-build-with-gcc-15-Wincompatible-pointer-types-er.patch \
 "
 
-S = "${WORKDIR}/git"
 
 CFLAGS += "-pthread"
 

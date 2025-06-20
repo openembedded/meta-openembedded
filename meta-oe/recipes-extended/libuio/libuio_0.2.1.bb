@@ -11,7 +11,6 @@ PV .= "+0.2.2+git"
 
 inherit autotools
 
-S = "${WORKDIR}/git"
 
 PACKAGES += "${PN}-tools"
 

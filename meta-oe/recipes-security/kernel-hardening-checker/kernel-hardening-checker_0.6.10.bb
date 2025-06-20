@@ -15,7 +15,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;branch=master"
 SRCREV = "f4dbe258ff3d37489962ea9cf210192ae7ff9280"
 
-S = "${UNPACKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

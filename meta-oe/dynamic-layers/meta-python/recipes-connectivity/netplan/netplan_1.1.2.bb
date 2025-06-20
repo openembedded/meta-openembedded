@@ -22,7 +22,6 @@ SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined
 
 SRCREV = "01045f683b9419beb90119497cd1b2be44e83b8e"
 
-S = "${WORKDIR}/git"
 
 DEPENDS = "glib-2.0 libyaml util-linux-libuuid \
            systemd python3-cffi-native \

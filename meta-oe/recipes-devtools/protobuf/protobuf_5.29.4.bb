@@ -26,7 +26,6 @@ SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-cla
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>.(25\.(\d+)))"
 
-S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
 

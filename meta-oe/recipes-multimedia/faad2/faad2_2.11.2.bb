@@ -12,6 +12,5 @@ PV .= "+git"
 SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
 SRCREV = "673a22a3c7c33e96e2ff7aae7c4d2bc190dfbf92"
 
-S = "${WORKDIR}/git"
 
 inherit cmake

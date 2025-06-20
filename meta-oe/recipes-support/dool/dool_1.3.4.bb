@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=master;protocol=http
 
 SRCREV = "5068abef0a960c173a91e84a45e7fea1b0a802c0"
 
-S = "${WORKDIR}/git"
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install

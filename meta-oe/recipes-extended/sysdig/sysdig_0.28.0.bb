@@ -23,7 +23,7 @@ DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
 RDEPENDS:${PN} = "bash"
 
 SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
-           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
+           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
            file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
            file://0001-libsinsp-fix-build-with-gcc-15.patch;patchdir=./falcosecurity-libs \
@@ -33,7 +33,6 @@ SRCREV_falco = "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
 
 SRCREV_FORMAT = "sysdig_falco"
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "\
                 -DBUILD_DRIVER=OFF \

@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/telmich/gpm;protocol=https;branch=master \
            file://0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch \
            "
 
-S = "${WORKDIR}/git"
 
 inherit autotools-brokensep update-rc.d systemd texinfo
 

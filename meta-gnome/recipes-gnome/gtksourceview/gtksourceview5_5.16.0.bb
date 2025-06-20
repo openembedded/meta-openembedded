@@ -16,7 +16,7 @@ DEPENDS = " \
 
 PNAME = "gtksourceview"
 
-S = "${WORKDIR}/${PNAME}-${PV}"
+S = "${UNPACKDIR}/${PNAME}-${PV}"
 
 
 inherit gnomebase lib_package gettext features_check gi-docgen gtk-icon-cache gobject-introspection vala
