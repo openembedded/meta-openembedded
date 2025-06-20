@@ -1,0 +1,32 @@
+OE's CC and CXX contain spaces and extra options which is incompatible with 
+cmake way of handling them. Remove passing the compiler options this way in
+favour of our normal cmake toolchain files added elsewhere.
+
+Upstream-Status: Pending
+
+Index: git/Makefile
+===================================================================
+--- git.orig/Makefile
++++ git/Makefile
+@@ -282,7 +282,7 @@ metis: include/metis.h
+ # hardcoded below.
+ include/metis.h:
+ ifeq (,$(MY_METIS_LIB))
+-	- ( cd metis-5.1.0 && $(MAKE) config shared=1 prefix=$(SUITESPARSE) cc=$(CC) )
++	- ( cd metis-5.1.0 && $(MAKE) config shared=1 prefix=$(SUITESPARSE) )
+ 	- ( cd metis-5.1.0 && $(MAKE) )
+ 	- ( cd metis-5.1.0 && $(MAKE) install )
+ 	- $(SO_INSTALL_NAME) $(SUITESPARSE)/lib/libmetis.dylib \
+Index: git/SuiteSparse_config/SuiteSparse_config.mk
+===================================================================
+--- git.orig/SuiteSparse_config/SuiteSparse_config.mk
++++ git/SuiteSparse_config/SuiteSparse_config.mk
+@@ -146,7 +146,7 @@ SUITESPARSE_VERSION = 5.10.1
+         endif
+     endif
+ 
+-    CMAKE_OPTIONS += -DCMAKE_CXX_COMPILER=$(CXX) -DCMAKE_C_COMPILER=$(CC)
++    #CMAKE_OPTIONS += -DCMAKE_CXX_COMPILER=$(CXX) -DCMAKE_C_COMPILER=$(CC)
+ 
+     #---------------------------------------------------------------------------
+     # CFLAGS for the C/C++ compiler

@@ -4,6 +4,7 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branc
            file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
            file://0002-Preserve-links-when-installing-libmetis.patch \
            file://0003-Add-version-information-to-libmetis.patch \
+           file://makefile-quoting.patch \
            "
 SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
 
@@ -14,24 +15,16 @@ DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
 PROVIDES = "mongoose graphblas"
 RPROVIDES:${PN} = "mongoose graphblas"
 
-# The values of $CC, $CXX, and $LD that Bitbake uses have spaces in them which
-# causes problems when the SuiteSparse Makefiles try to pass these values on
-# the command line. To get around this problem, set these variables to only the
-# program name and prepend the rest of the value onto the corresponding FLAGS
-# variable.
-CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
-export CC := "${@d.getVar('CC').split()[0]}"
+inherit cmake
 
-CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
-export CXX := "${@d.getVar('CXX').split()[0]}"
-
-LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
-export LD := "${@d.getVar('LD').split()[0]}"
+B = "${S}"
 
 export CMAKE_OPTIONS = " \
     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
     -DCMAKE_INSTALL_LIBDIR=${baselib} \
 "
+
+OECMAKE_SOURCEPATH = "${S}/Mongoose ${S}/metis-5.1.0 ${S}/GraphBLAS"
 
 do_compile () {
 	oe_runmake library
