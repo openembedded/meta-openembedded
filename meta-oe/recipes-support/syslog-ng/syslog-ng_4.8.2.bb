@@ -64,6 +64,7 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
 PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
 PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
 PACKAGECONFIG[native] = "--enable-native,--disable-native,,"
+PACKAGECONFIG[examples] = "--enable-example-modules,--disable-example-modules,,"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/${BPN}
