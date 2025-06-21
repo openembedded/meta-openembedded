@@ -1,0 +1,34 @@
+From 8349d121e3595ac4d935169150984260f8b697b9 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 20 Jun 2025 15:20:05 +0800
+Subject: [PATCH] utils/Makefile: fix symbolic links
+
+Create correct symlinks to fix the following error:
+
+mkyaffsimage.c:29:10: fatal error: yaffs_ecc.h: No such file or directory
+   29 | #include "yaffs_ecc.h"
+      |          ^~~~~~~~~~~~~
+
+Upstream-Status: Submitted [https://github.com/Aleph-One-Ltd/yaffs2/pull/13]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ utils/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/utils/Makefile b/utils/Makefile
+index a00fa13..22c2fdb 100644
+--- a/utils/Makefile
++++ b/utils/Makefile
+@@ -45,7 +45,7 @@ ALL_LINKS = $(BASE_LINKS) $(DIRECT_LINKS)
+ all: mkyaffsimage mkyaffs2image
+ 
+ $(BASE_LINKS):
+-	ln -s ../$@ $@
++	ln -s ../core/$@ $@
+ 
+ $(DIRECT_LINKS):
+ 	ln -s ../direct/$@ $@
+-- 
+2.34.1
+

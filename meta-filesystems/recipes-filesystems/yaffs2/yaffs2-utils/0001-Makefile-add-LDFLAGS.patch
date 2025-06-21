@@ -1,12 +1,20 @@
+From 8393f9d64b4cead722ee1a7674da1c41b33cfdcc Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 20 Jun 2025 15:08:19 +0800
+Subject: [PATCH] Makefile: add LDFLAGS
+
 Upstream-Status: Pending
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ utils/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/utils/Makefile b/utils/Makefile
-index 710ebbf..6259893 100644
+index a00fa13..13e91f7 100644
 --- a/utils/Makefile
 +++ b/utils/Makefile
-@@ -57,10 +57,10 @@ $(COMMONOBJS) $(MKYAFFSIMAGEOBJS) $(MKYAFFS2IMAGEOBJS) : %.o: %.c
+@@ -56,10 +56,10 @@ $(COMMONOBJS) $(MKYAFFSIMAGEOBJS) $(MKYAFFS2IMAGEOBJS) : %.o: %.c
  	$(CC) -c $(CFLAGS) $< -o $@
  
  mkyaffsimage: $(MKYAFFSIMAGEOBJS) $(COMMONOBJS)
@@ -19,3 +27,6 @@ index 710ebbf..6259893 100644
  
  
  clean:
+-- 
+2.34.1
+

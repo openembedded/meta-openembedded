@@ -1,4 +1,4 @@
-From 05cc2b958090f96d6fa128da43aa69669625e529 Mon Sep 17 00:00:00 2001
+From 75fe0fbe254f63fe58d22f2d6090e9a8b3a6fe41 Mon Sep 17 00:00:00 2001
 From: Robert Yang <liezhi.yang@windriver.com>
 Date: Tue, 5 Mar 2024 12:03:23 +0000
 Subject: [PATCH] yaffs_guts.h: define YTIME_T if not already defined
@@ -11,14 +11,14 @@ Upstream-Status: Pending
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- yaffs_guts.h | 4 ++++
+ core/yaffs_guts.h | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/yaffs_guts.h b/yaffs_guts.h
-index 74ded0b..598271b 100644
---- a/yaffs_guts.h
-+++ b/yaffs_guts.h
-@@ -487,6 +487,10 @@ struct yaffs_obj {
+diff --git a/core/yaffs_guts.h b/core/yaffs_guts.h
+index 4bd2646..507bf16 100644
+--- a/core/yaffs_guts.h
++++ b/core/yaffs_guts.h
+@@ -491,6 +491,10 @@ struct yaffs_obj {
  
  	YCHAR short_name[YAFFS_SHORT_NAME_LENGTH + 1];
  
@@ -30,5 +30,5 @@ index 74ded0b..598271b 100644
  	//these are always 64 bits
  	u32 win_ctime[2];
 -- 
-2.35.5
+2.34.1
 
