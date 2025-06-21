@@ -1,11 +1,12 @@
 SUMMARY = "Windowing concept abstraction library for X11 and Wayland"
+HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4windowing/start"
 SECTION = "x11/libs"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 
 DEPENDS = "xfce4-dev-tools-native libdisplay-info libwnck3"
 
-SRC_URI[sha256sum] = "56f29b1d79606fb00a12c83ef4ece12877d2b22bf1acaaff89537fbe8e939f68"
+SRC_URI[sha256sum] = "df2419a6bd960c0bfac3307eff593050857524642597eb35a26fb4f8261a017b"
 
 inherit features_check gobject-introspection gtk-doc xfce
 
