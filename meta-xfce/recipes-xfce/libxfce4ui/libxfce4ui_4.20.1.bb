@@ -1,4 +1,5 @@
 SUMMARY = "Xfce4 Widget library and X Window System interaction"
+HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4ui/start"
 SECTION = "x11/libs"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
@@ -12,7 +13,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 # TODO: Check if 0001-... can go
 SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
-SRC_URI[sha256sum] = "75e8996984f20375aadecd5c16f5147c211ed0bd26d7861ab0257561eb76eaee"
+SRC_URI[sha256sum] = "ec99f0b8f6d7cd4222c8f8e3bca51d144fb240d719829344b354900eb3a07100"
 
 EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 EXTRA_OECONF += "--disable-vala"
