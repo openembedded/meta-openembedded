@@ -20,8 +20,8 @@ RDEPENDS:${PN}-python3 = "${PN}"
 
 PACKAGE_PREPROCESS_FUNCS += "src_package_preprocess"
 src_package_preprocess () {
-        # Trim build paths from comments in generated sources to ensure reproducibility
-        sed -i -e "s,${B}/../${BPN}-${PV}/${BPN}/,,g" \
+        # Trim build paths from code in generated sources to ensure reproducibility
+        sed -i -e "s,${B}/../sources/${BP},${TARGET_DBGSRC_DIR},g" \
             ${B}/gexiv2/gexiv2-enums.cpp
 }
 
