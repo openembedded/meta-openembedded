@@ -11,19 +11,19 @@ SRC_URI[sha256sum] = "5fc3cee3361ca1615af862364c480593171d0c54ec156de79fc421e31a
 
 RDEPENDS:${PN} = "ssh"
 
-CFLAGS:prepend = "-I${WORKDIR}/build "
+CFLAGS:prepend = "-I${B} "
 
 inherit autotools
 
 EXTRA_OECONF = "--with-ssh=/usr/bin/ssh"
 
 do_compile:append() {
-        cp ${WORKDIR}/autossh-${PV}/CHANGES ${WORKDIR}/build
-        cp ${WORKDIR}/autossh-${PV}/README ${WORKDIR}/build
-        cp ${WORKDIR}/autossh-${PV}/autossh.host ${WORKDIR}/build
-        cp ${WORKDIR}/autossh-${PV}/rscreen ${WORKDIR}/build
-        cp ${WORKDIR}/autossh-${PV}/autossh.1 ${WORKDIR}/build
-        cp ${WORKDIR}/autossh-${PV}/autossh.spec ${WORKDIR}/build
+        cp ${S}/CHANGES ${B}/
+        cp ${S}/README ${B}/
+        cp ${S}/autossh.host ${B}/
+        cp ${S}/rscreen ${B}/
+        cp ${S}/autossh.1 ${B}/
+        cp ${S}/autossh.spec ${B}/
 }
 
 do_install:append() {
