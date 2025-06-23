@@ -8,7 +8,7 @@ HOMEPAGE = "https://github.com/mongodb/mongo-python-driver"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI[sha256sum] = "92a06e3709e3c7e50820d352d3d4e60015406bcba69808937dac2a6d22226fde"
+SRC_URI[sha256sum] = "0f64c6469c2362962e6ce97258ae1391abba1566a953a492562d2924b44815c2"
 
 inherit pypi python_setuptools_build_meta python_hatchling
 
