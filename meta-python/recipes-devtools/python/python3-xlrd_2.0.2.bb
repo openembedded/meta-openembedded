@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef27
 
 SRC_URI = "git://github.com/python-excel/xlrd.git;branch=master;protocol=https \
 "
-SRCREV = "b8d573e11ec149da695d695c81a156232b89a949"
+SRCREV = "3a19d22014d7b3f3041b7188d21a653c18c709bf"
 
 
 inherit ptest-python-pytest setuptools3
