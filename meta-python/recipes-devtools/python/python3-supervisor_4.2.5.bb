@@ -12,11 +12,13 @@ SRC_URI[sha256sum] = "34761bae1a23c58192281a5115fb07fbf22c9b0133c08166beffc70fed
 PYPI_PACKAGE = "supervisor"
 inherit pypi systemd setuptools3
 RDEPENDS:${PN} = "\
-    python3-meld3 \
+    python3-fcntl \
     python3-io \
-    python3-xmlrpc \
+    python3-meld3 \
     python3-resource \
     python3-setuptools \
+    python3-unixadmin \
+    python3-xmlrpc \
 "
 
 SRC_URI += "file://supervisord.conf \
