@@ -1,0 +1,60 @@
+From ef4ead927f69452c95b80e5bf042f67897f67e9d Mon Sep 17 00:00:00 2001
+From: Alper Ak <alperyasinak1@gmail.com>
+Date: Mon, 23 Jun 2025 15:46:37 +0300
+Subject: [PATCH] Allow extra CFLAGS via EXTRA_CFLAGS variable
+
+This patch introduces an EXTRA_CFLAGS variable to the Makefile, which is
+appended to CFLAGS. This allows users or external build systems to pass
+their additional compiler flags.
+
+Upstream-Status: Submitted [https://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT/pull/61]
+
+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+---
+ Makefile.inc | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/Makefile.inc b/Makefile.inc
+index 0094bdf..76729b9 100644
+--- a/Makefile.inc
++++ b/Makefile.inc
+@@ -22,28 +22,29 @@ UCC=ucc
+ CON=console_src
+ WTG=WTGService
+ MAKE?=make
++EXTRA_CFLAGS ?=
+ 
+ # This is for WMM-PS
+ #for Ext TG
+-#CFLAGS = -g -O2 -D_REENTRANT -DWFA_WMM_PS_EXT -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT -DWFA_WMM_PS_EXT -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ ## for WMM-AC, WMM-PS, Voice, PMF, TDLS Test-Bed 
+-#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -DWFA_STA_TB -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -DWFA_STA_TB -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ ## for WMM-AC, WMM-PS Test-Bed
+-#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_STA_TB -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_STA_TB -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ ## for non-Test-Bed WMM-AC, WMM-PS and Voice
+-#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ ## for PC-ENDPOINT
+-#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -DWFA_PC_CONSOLE -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_VOICE_EXT -DWFA_PC_CONSOLE -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ ## for PC-ENDPOINT No Voice
+-#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_PC_CONSOLE -DWFA_STA_TB -Wall -I../inc
++#CFLAGS = -g -O2 -D_REENTRANT  -DWFA_WMM_PS_EXT -DWFA_WMM_AC -DWFA_PC_CONSOLE -DWFA_STA_TB -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ # This is for WPA2 as default
+-CFLAGS = -g -O2 -D_REENTRANT -Wall -I../inc
++CFLAGS = -g -O2 -D_REENTRANT -Wall -I../inc ${EXTRA_CFLAGS}
+ 
+ DUTLIBS = ../lib/libwfa_dut.a -lpthread
+ CALIBS = ../lib/libwfa_ca.a -lpthread
+-- 
+2.43.0
+
