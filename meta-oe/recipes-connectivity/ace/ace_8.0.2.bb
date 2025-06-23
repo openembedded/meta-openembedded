@@ -26,8 +26,10 @@ export ACE_ROOT = "${UNPACKDIR}/ACE_wrappers"
 
 inherit pkgconfig
 
-CXXFLAGS:append = " -fpermissive -Wnodeprecated-declarations"
+CXXFLAGS:append = " -fpermissive -Wno-deprecated-declarations"
 CXX:append = " -ffile-prefix-map=${UNPACKDIR}= "
+export CCFLAGS = "${CXXFLAGS}"
+
 EXTRA_OEMAKE += "INSTALL_LIB=${baselib} install_rpath=0"
 
 do_install() {
