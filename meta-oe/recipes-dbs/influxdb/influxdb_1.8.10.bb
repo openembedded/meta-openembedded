@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb
 require ${BPN}-licenses.inc
 
 SRC_URI = "\
-    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/${GO_IMPORT} \
+    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${GO_SRCURI_DESTSUFFIX} \
     file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=src/${GO_IMPORT} \
     file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT} \
     file://influxdb \
