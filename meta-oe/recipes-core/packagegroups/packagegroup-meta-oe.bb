@@ -201,6 +201,7 @@ RDEPENDS:packagegroup-meta-oe-crypto = "\
 RDEPENDS:packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
 
 RDEPENDS:packagegroup-meta-oe-dbs = "\
+    influxdb \
     leveldb \
     libdbi \
     lmdb \
