@@ -2,7 +2,7 @@ SUMMARY = "Starlette is a lightweight ASGI framework/toolkit, which is ideal for
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
 
-SRC_URI[sha256sum] = "1f64887e94a447fed5f23309fb6890ef23349b7e478faa7b24a851cd4eb844af"
+SRC_URI[sha256sum] = "aef012dd2b6be325ffa16698f9dc533614fb1cebd593a906b90dc1025529a79b"
 
 inherit pypi python_hatchling ptest
 
