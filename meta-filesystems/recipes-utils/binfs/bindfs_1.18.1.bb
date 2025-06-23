@@ -8,7 +8,7 @@ DEPENDS = "fuse"
 RDEPENDS:${PN} = "fuse"
 
 SRC_URI = "git://github.com/mpartel/bindfs;protocol=https;branch=master;tag=${PV}"
-SRCREV = "a276dbe66faaf7af02d967a648f7598589bf5c5b"
+SRCREV = "70a663b3476c0b9b21b626473c00c68a3dc97b92"
 
 
 inherit autotools pkgconfig gettext
