@@ -1,4 +1,4 @@
-From 2bb7bf2d945d4ea0dafe3858adc6b8faae18b1e8 Mon Sep 17 00:00:00 2001
+From f8b5f542c782b235051ed39239dd32c93eb2c69c Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 24 Nov 2021 13:33:35 +0800
 Subject: [PATCH] Fix pyext_PATTERN for cross compilation
@@ -25,10 +25,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/third_party/waf/waflib/Tools/python.py b/third_party/waf/waflib/Tools/python.py
-index b2dd1a9..2bd3545 100644
+index 8646454..4eb8725 100644
 --- a/third_party/waf/waflib/Tools/python.py
 +++ b/third_party/waf/waflib/Tools/python.py
-@@ -339,7 +339,7 @@ def check_python_headers(conf, features='pyembed pyext'):
+@@ -351,7 +351,7 @@ def check_python_headers(conf, features='pyembed pyext'):
  	x = 'MACOSX_DEPLOYMENT_TARGET'
  	if dct[x]:
  		env[x] = conf.environ[x] = str(dct[x])
@@ -37,6 +37,3 @@ index b2dd1a9..2bd3545 100644
  
  
  	# Try to get pythonX.Y-config
--- 
-2.25.1
-
