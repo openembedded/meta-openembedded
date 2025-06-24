@@ -74,6 +74,7 @@ do_install_ptest() {
 		fi
 	done
 	cp "${S}/${TEST_SRC_DIR}/addressbook_pb2.py" "${D}/${PTEST_PATH}"
+	sed -i -e 's#env python#env python3#' ${D}/${PTEST_PATH}/add_person.py ${D}/${PTEST_PATH}/list_people.py
 	cd "$olddir"
 }
 
@@ -84,7 +85,7 @@ FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 
 RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-dev += "${PN}-compiler"
-RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python-protobuf', '', d)}"
+RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
 
 MIPS_INSTRUCTION_SET = "mips"
 
