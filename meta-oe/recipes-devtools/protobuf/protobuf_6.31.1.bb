@@ -7,20 +7,18 @@ SECTION = "console/tools"
 LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b \
-    file://third_party/lunit/LICENSE;md5=99f08e72434dfa34fe0581d3dfb2d7f4 \
     file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
 "
 
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "f5de0a0495faa63b4186fc767324f8b9a7bf4fc4"
+SRCREV = "74211c0dfc2777318ab53c2cd2c317a2ef9012de"
 
-SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=https \
+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=31.x;protocol=https \
            file://run-ptest \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
            file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
-           file://0001-utf8_range-add-version-marker-to-library-19009.patch \
            "
 SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 
