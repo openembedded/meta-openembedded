@@ -27,8 +27,6 @@ EXTRA_OECONF:append:class-target = " --with-driver=redhat"
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
 
-EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
-
 do_configure:prepend() {
     currdir=`pwd`
     cd ${S}
