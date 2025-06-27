@@ -54,7 +54,7 @@
 SIGNING_PKCS11_URI ?= ""
 SIGNING_PKCS11_MODULE ?= ""
 
-DEPENDS += "softhsm-native libp11-native opensc-native openssl-native"
+DEPENDS += "softhsm-native libp11-native opensc-native openssl-native extract-cert-native"
 
 def signing_class_prepare(d):
     import os.path
@@ -451,6 +451,30 @@ signing_get_module() {
     else
         echo "$module"
     fi
+}
+
+# signing_extract_cert_der <role> <der>
+#
+# Export a certificate attached to a role into a DER file.
+# To be used with SoftHSM.
+signing_extract_cert_der() {
+    local role="${1}"
+    local output="${2}"
+
+    extract-cert "$(signing_get_uri $role)" "${output}"
+}
+
+# signing_extract_cert_pem <role> <pem>
+#
+# Export a certificate attached to a role into a PEM file.
+# To be used with SoftHSM.
+signing_extract_cert_pem() {
+    local role="${1}"
+    local output="${2}"
+
+    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
+    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
+    rm "${output}.tmp-der"
 }
 
 python () {
