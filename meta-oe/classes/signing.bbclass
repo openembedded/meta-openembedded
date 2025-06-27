@@ -194,6 +194,22 @@ signing_has_ca() {
     return $?
 }
 
+# signing_get_root_cert <cert_name>
+#
+# return the role/name of the CA root certificate for a given
+# <cert_name>, by walking the chain setup with signing_import_set_ca
+# all the way to the last in line that doesn't have a CA set - which
+# would be the root.
+#
+# To be used with SoftHSM.
+signing_get_root_cert() {
+    local cert_name="${1}"
+    while signing_has_ca "${cert_name}"; do
+        cert_name="$(signing_get_ca ${cert_name})"
+    done
+    echo "${cert_name}"
+}
+
 # signing_import_cert_chain_from_pem <role> <pem>
 #
 # Import a certificate *chain* from a PEM file to a role.
