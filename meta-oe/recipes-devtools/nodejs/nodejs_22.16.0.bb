@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b4f41dcacabc8f07b9ca7dee2f188a00"
 CVE_PRODUCT = "nodejs node.js"
 
 DEPENDS = "openssl openssl-native file-replacement-native python3-packaging-native"
-DEPENDS:append:class-target = " qemu-native"
 DEPENDS:append:class-native = " c-ares-native"
 
-inherit pkgconfig python3native qemu ptest siteinfo
+inherit pkgconfig python3native ptest siteinfo
+inherit_defer ${@bb.utils.contains('HOST_AND_TARGET_SAME_WIDTH', '0', 'qemu', '', d)}
+
 
 COMPATIBLE_MACHINE:armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE:armv5 = "(!.*armv5).*"
@@ -108,11 +109,11 @@ python do_create_v8_qemu_wrapper () {
     on the host."""
     qemu_libdirs = [d.expand('${STAGING_DIR_HOST}${libdir}'),
                     d.expand('${STAGING_DIR_HOST}${base_libdir}')]
-    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'),
-                                    qemu_libdirs)
+    qemu_cmd = ""
 
-    if d.getVar("HOST_AND_TARGET_SAME_WIDTH") == "1":
-        qemu_cmd = ""
+    if d.getVar("HOST_AND_TARGET_SAME_WIDTH") == "0":
+        qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'),
+                                        qemu_libdirs)
 
     wrapper_path = d.expand('${B}/v8-qemu-wrapper.sh')
     with open(wrapper_path, 'w') as wrapper_file:
@@ -209,6 +210,7 @@ python __anonymous () {
     # 32 bit target and 64 bit host (x86-64 or aarch64) have different bit width
     if d.getVar("SITEINFO_BITS") == "32" and "64" in d.getVar("BUILD_ARCH"):
         d.setVar("HOST_AND_TARGET_SAME_WIDTH", "0")
+        d.appendVar("DEPENDS:class-target", " qemu-native")
     else:
         d.setVar("HOST_AND_TARGET_SAME_WIDTH", "1")
 }
