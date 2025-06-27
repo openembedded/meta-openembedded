@@ -123,15 +123,26 @@ signing_import_define_role() {
     echo "_SIGNING_PKCS11_MODULE_${role}_=\"softhsm\"" >> $_SIGNING_ENV_FILE_
 }
 
-# signing_import_cert_from_der <role> <der>
+# signing_import_cert_from_der <cert_name> <der>
 #
-# Import a certificate from DER file to a role. To be used
-# with SoftHSM.
+# Import a certificate from DER file to a cert_name.
+# Where the <cert_name> can either be a previously setup
+# signing_import_define_role linking the certificate to a signing key,
+# or a new identifier when dealing with a standalone certificate.
+#
+# To be used with SoftHSM.
 signing_import_cert_from_der() {
-    local role="${1}"
+    local cert_name="${1}"
     local der="${2}"
 
-    signing_pkcs11_tool --type cert --write-object "${der}" --label "${role}"
+    # check wether the cert_name/role needs to be defined first,
+    # or do so otherwise
+    local uri=$(siging_get_uri $cert_name)
+    if [ -z "$uri" ]; then
+        signing_import_define_role "$cert_name"
+    fi
+
+    signing_pkcs11_tool --type cert --write-object "${der}" --label "${cert_name}"
 }
 
 # signing_import_cert_chain_from_pem <role> <pem>
@@ -164,17 +175,28 @@ signing_import_cert_chain_from_pem() {
         done
 }
 
-# signing_import_cert_from_pem <role> <pem>
+# signing_import_cert_from_pem <cert_name> <pem>
 #
-# Import a certificate from PEM file to a role. To be used
-# with SoftHSM.
+# Import a certificate from PEM file to a cert_name.
+# Where the <cert_name> can either be a previously setup
+# signing_import_define_role linking the certificate to a signing key,
+# or a new identifier when dealing with a standalone certificate.
+#
+# To be used with SoftHSM.
 signing_import_cert_from_pem() {
-    local role="${1}"
+    local cert_name="${1}"
     local pem="${2}"
+
+    # check wether the cert_name/role needs to be defined first,
+    # or do so otherwise
+    local uri=$(siging_get_uri $cert_name)
+    if [ -z "$uri" ]; then
+        signing_import_define_role "$cert_name"
+    fi
 
     openssl x509 \
         -in "${pem}" -inform pem -outform der |
-    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --label "${role}"
+    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --label "${cert_name}"
 }
 
 # signing_import_pubkey_from_der <role> <der>
