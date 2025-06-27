@@ -45,8 +45,6 @@ do_compile[depends] += "virtual/kernel:do_install"
 
 inherit linux-kernel-base module-base kernel-arch ptest siteinfo
 
-S = "${UNPACKDIR}/${BP}"
-
 DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 
 TEST_LIST = "\
