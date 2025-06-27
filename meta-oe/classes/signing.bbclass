@@ -87,6 +87,11 @@ def signing_class_prepare(d):
         export(role, "SIGNING_PKCS11_URI_%s_", pkcs11_uri)
         export(role, "SIGNING_PKCS11_MODULE_%s_", pkcs11_module)
 
+        # there can be an optional CA associated with this role
+        ca_cert_name = d.getVarFlag("SIGNING_CA", role) or d.getVar("SIGNING_CA")
+        if ca_cert_name:
+            export(role, "SIGNING_CA_%s_", ca_cert_name)
+
 signing_pkcs11_tool() {
     pkcs11-tool --module "${STAGING_LIBDIR_NATIVE}/softhsm/libsofthsm2.so" --login --pin 1111 $*
 }
@@ -145,9 +150,52 @@ signing_import_cert_from_der() {
     signing_pkcs11_tool --type cert --write-object "${der}" --label "${cert_name}"
 }
 
+# signing_import_set_ca <cert_name> <ca_cert_name>
+#
+# Link the certificate from <cert_name> to its issuer stored in
+# <ca_cert_name> By walking this linked list a CA-chain can later be
+# reconstructed from the involed roles.
+signing_import_set_ca() {
+    local cert_name="${1}"
+    local ca_cert_name="${2}"
+
+    echo "_SIGNING_CA_${cert_name}_=\"${ca_cert_name}\"" >> $_SIGNING_ENV_FILE_
+    echo "added link from ${cert_name} to ${ca_cert_name}"
+}
+
+# signing_get_ca <cert_name>
+#
+# returns the <ca_cert_name> that has been set previously through
+# either signing_import_set_ca;
+# or a local.conf override SIGNING_CA[role] = ...
+# If none was set, the empty string is returned.
+signing_get_ca() {
+    local cert_name="${1}"
+
+    # prefer local configuration
+    eval local ca="\$SIGNING_CA_${cert_name}_"
+    if [ -n "$ca" ]; then
+        echo "$ca"
+        return
+    fi
+
+    # fall back to softhsm
+    eval echo "\$_SIGNING_CA_${cert_name}_"
+}
+
+# signing_has_ca <cert_name>
+#
+# check if the cert_name links to another cert_name that is its
+# certificate authority/issuer.
+signing_has_ca() {
+    local ca_cert_name="$(signing_get_ca ${1})"
+
+    test -n "$ca_cert_name"
+    return $?
+}
+
 # signing_import_cert_chain_from_pem <role> <pem>
 #
-
 # Import a certificate *chain* from a PEM file to a role.
 # (e.g. multiple ones concatenated in one file)
 #
