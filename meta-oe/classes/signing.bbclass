@@ -194,6 +194,27 @@ signing_has_ca() {
     return $?
 }
 
+# signing_get_intermediate_certs <cert_name>
+#
+# return a list of role/name intermediary CA certificates for a given
+# <cert_name> by walking the chain setup with signing_import_set_ca.
+#
+# The returned list will not include the the root CA, and can
+# potentially be empty.
+#
+# To be used with SoftHSM.
+signing_get_intermediate_certs() {
+    local cert_name="${1}"
+    local intermediary=""
+    while signing_has_ca "${cert_name}"; do
+        cert_name="$(signing_get_ca ${cert_name})"
+        if signing_has_ca "${cert_name}"; then
+            intermediary="${intermediary} ${cert_name}"
+        fi
+    done
+    echo "${intermediary}"
+}
+
 # signing_get_root_cert <cert_name>
 #
 # return the role/name of the CA root certificate for a given
