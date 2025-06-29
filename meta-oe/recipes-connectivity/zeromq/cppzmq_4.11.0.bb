@@ -14,3 +14,5 @@ inherit cmake
 EXTRA_OECMAKE = "-DCPPZMQ_BUILD_TESTS=OFF"
 
 ALLOW_EMPTY:${PN} = "1"
+
+BBCLASSEXTEND = "native nativesdk"
