@@ -77,7 +77,10 @@ do_install:prepend() {
 }
 
 do_install:append() {
-	sed -i -e 's#${S}##g' ${D}${includedir}/boinc/svn_version.h
+	# By default, the SVN_VERSION definition looks like:
+	#define SVN_VERSION "$SHA1 [https://github.com/BOINC/boinc] ($HOSTNAME:$S [client_release/7/7.20]) [Server-Release: server_release/1.1/1.1.0]"
+	# ... remove HOSTNAME and S to make it reproducible.
+	sed -i -e '/^#define SVN_VERSION /s#(\S*:\S* \[#([#g' ${D}${includedir}/boinc/svn_version.h
 }
 
 SYSTEMD_SERVICE:${PN} = "boinc-client.service"
