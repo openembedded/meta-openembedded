@@ -27,3 +27,5 @@ do_install_ptest () {
 }
 
 FILES:${PN}-doc += "${datadir}/zmq/*.txt"
+
+BBCLASSEXTEND = "native nativesdk"
