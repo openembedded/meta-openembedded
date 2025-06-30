@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gruns/icecream"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eca5ce1610d64ed40920efdce85ff8d1"
 
-SRC_URI[sha256sum] = "58755e58397d5350a76f25976dee7b607f5febb3c6e1cddfe6b1951896e91573"
+SRC_URI[sha256sum] = "14d21e3383326a69a8c1a3bcf11f83283459f0d269ece5af83fce2c0d663efec"
 
 inherit pypi setuptools3
 
