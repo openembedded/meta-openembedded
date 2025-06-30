@@ -1,0 +1,28 @@
+From a8c3996d3f8d9b8f3a2888b7062c1139263c5aba Mon Sep 17 00:00:00 2001
+From: Wen Yang <yellowriver2010@hotmail.com>
+Date: Mon, 23 Jun 2025 02:06:53 +0800
+Subject: [PATCH] tests: fix the issue of cross compilation failure
+
+By replacing objcopy with MAKE_OBJCOPY, pstack could support both
+native and cross compilation.
+
+Upstream-Status: Backport [https://github.com/peadar/pstack/pull/38]
+---
+ tests/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index 71a62a7..bf11a04 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -38,7 +38,7 @@ SET_TARGET_PROPERTIES(noreturn PROPERTIES COMPILE_FLAGS "-O2 -g")
+
+ add_custom_command(
+    OUTPUT basic-no-unwind-gen
+-   COMMAND objcopy --strip-debug --remove-section .eh_frame basic basic-no-unwind
++   COMMAND ${CMAKE_OBJCOPY} --strip-debug --remove-section .eh_frame basic basic-no-unwind
+    VERBATIM )
+
+ add_custom_target(basic-no-unwind ALL DEPENDS basic basic-no-unwind-gen)
+--
+2.25.1
