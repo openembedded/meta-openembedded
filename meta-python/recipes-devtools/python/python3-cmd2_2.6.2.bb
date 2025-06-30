@@ -1,11 +1,11 @@
 SUMMARY = "Extra features for standard library's cmd module"
 HOMEPAGE = "https://github.com/python-cmd2/cmd2"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=01d2b71040983a2abc614fc4d0284771"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=26efe44f9946f43292f90070d9d5590c"
 
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "650a5892bf29b233d3d6775b5e3cc813648cff0d79134f707981f66baaed9f42"
+SRC_URI[sha256sum] = "bde128c0b6dba9d2d9179a1c7c8fe92ab930473d0ddf46f2bc19cb789f942e4d"
 
 inherit pypi python_setuptools_build_meta python3native
 
