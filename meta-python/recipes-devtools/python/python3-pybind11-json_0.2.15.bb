@@ -11,3 +11,5 @@ DEPENDS += "nlohmann-json python3-pybind11"
 EXTRA_OECMAKE += "-DPYBIND11_USE_CROSSCOMPILING=ON"
 
 inherit cmake python3native python3targetconfig
+
+BBCLASSEXTEND = "native nativesdk"
