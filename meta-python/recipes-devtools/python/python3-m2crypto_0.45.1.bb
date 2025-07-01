@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b611855
 
 SRC_URI += " \
            file://0001-setup.py-Make-the-cmd-available.patch \
+           file://0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch \
 "
 
 inherit pypi siteinfo python_setuptools_build_meta
