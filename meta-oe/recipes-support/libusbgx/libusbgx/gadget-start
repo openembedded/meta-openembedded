@@ -15,6 +15,10 @@ for i in $ENABLED_SCHEMAS; do
     if [ -n "${configured_udc}" ] && [ -e "/sys/class/udc/${configured_udc}" ]; then
         echo ${configured_udc} > /sys/kernel/config/usb_gadget/"$i"/UDC
     else
-        ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/"$i"/UDC
+        detected_udc=$(ls /sys/class/udc/)
+        if [ -z "${detected_udc}" ]; then
+            exit 1
+        fi
+        echo "${detected_udc}" > /sys/kernel/config/usb_gadget/"$i"/UDC
     fi
 done
