@@ -250,9 +250,7 @@ signing_import_cert_from_pem() {
         signing_import_define_role "$cert_name"
     fi
 
-    openssl x509 \
-        -in "${pem}" -inform pem -outform der |
-    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --label "${cert_name}"
+    signing_pkcs11_tool --type cert --write-object ${pem} --label "${cert_name}"
 }
 
 # signing_import_pubkey_from_der <role> <der>
@@ -276,12 +274,12 @@ signing_import_pubkey_from_pem() {
     if [ -n "${IMPORT_PASS_FILE}" ]; then
         openssl pkey \
             -passin "file:${IMPORT_PASS_FILE}" \
-            -in "${pem}" -inform pem -pubout -outform der
+            -in "${pem}" -inform pem -pubout -outform pem -out ${B}/pubkey_out.pem
     else
         openssl pkey \
-            -in "${pem}" -inform pem -pubout -outform der
-    fi |
-    signing_pkcs11_tool --type pubkey --write-object /proc/self/fd/0 --label "${role}"
+            -in "${pem}" -inform pem -pubout -outform pem -out ${B}/pubkey_out.pem
+    fi
+    signing_pkcs11_tool --type pubkey --write-object ${B}/pubkey_out.pem --label "${role}"
 }
 
 # signing_import_privkey_from_der <role> <der>
@@ -304,12 +302,12 @@ signing_import_privkey_from_pem() {
     if [ -n "${IMPORT_PASS_FILE}" ]; then
         openssl pkey \
             -passin "file:${IMPORT_PASS_FILE}" \
-            -in "${pem}" -inform pem -outform der
+            -in "${pem}" -inform pem -outform dem -out ${B}/privkey_out.pem
+        signing_pkcs11_tool --type privkey --write-object ${B}/privkey_out.pem --label "${role}"
     else
-        openssl pkey \
-            -in "${pem}" -inform pem -outform der
-    fi |
-    signing_pkcs11_tool --type privkey --write-object /proc/self/fd/0 --label "${role}"
+        signing_pkcs11_tool --type privkey --write-object ${pem} --label "${role}"
+    fi
+
 }
 
 # signing_import_key_from_pem <role> <pem>
