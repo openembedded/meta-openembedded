@@ -7,6 +7,7 @@ SRC_URI += "\
             file://0001-Update-setuptools-requirement-from-78.0-65.6-to-65.6.patch \
             file://0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch \
             file://0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch \
+			file://0001-bump-required-version-to-0.46.1-for-python3-wheel.patch \
 "
 
 SRC_URI[sha256sum] = "7abbae80a2c9e05b93b1a7b8b4d771bbc764d88fd5e56a566f46ac1bd3f93848"
