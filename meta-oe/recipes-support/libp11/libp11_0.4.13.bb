@@ -19,6 +19,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--disable-static"
+EXTRA_OECONF:append:class-native = " --with-enginesdir=${RECIPE_SYSROOT_NATIVE}/usr/lib/engines-3"
 
 do_install:append () {
     rm -rf ${D}${docdir}/${BPN}
