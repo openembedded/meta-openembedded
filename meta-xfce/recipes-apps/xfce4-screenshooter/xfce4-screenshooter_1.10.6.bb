@@ -9,9 +9,13 @@ inherit xfce-app perlnative
 
 SRC_URI[sha256sum] = "992066cfecfb44a68681340bfd55d524d40410aac3da6ef25c6c6cb2150a5965"
 
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native wayland"
+
+EXTRA_OECONF += "WAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner"
+
 do_compile:prepend() {
-    mkdir -p lib
-    mkdir -p src panel-plugin
+    mkdir -p lib src panel-plugin protocols
 }
 
 FILES:${PN} += " \
