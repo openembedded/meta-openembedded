@@ -26,6 +26,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
            file://0003-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
            file://0004-Fix-icu-config.patch \
            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+           file://0006-postfix-add-preliminary-setting.patch \
            "
 
 SRC_URI[sha256sum] = "75868db7a8ed252cd3a14c13a3ce383ddd42563160c02027d061202ee36799bf"
