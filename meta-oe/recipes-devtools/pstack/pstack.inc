@@ -37,3 +37,5 @@ FILES:${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debu
 
 PACKAGES += "${PN}-dev"
 FILES:${PN}-dev += "${base_libdir}/*.so"
+
+TOOLCHAIN = "gcc"
