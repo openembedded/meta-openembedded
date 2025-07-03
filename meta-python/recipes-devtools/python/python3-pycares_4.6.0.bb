@@ -6,6 +6,7 @@ HOMEPAGE = "https://github.com/saghul/pycares"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1538fcaea82ebf2313ed648b96c69b1"
 
+SRC_URI += "file://CVE-2025-48945.patch"
 SRC_URI[sha256sum] = "b8a004b18a7465ac9400216bc3fad9d9966007af1ee32f4412d2b3a94e33456e"
 
 PYPI_PACKAGE = "pycares"
