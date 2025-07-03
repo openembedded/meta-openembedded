@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "acl"
 SRC_URI = " \
 	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
 	file://0001-Makefile.am-Dont-include-buildpath.patch \
+    file://CVE-2025-6019.patch \
 "
 SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
 
