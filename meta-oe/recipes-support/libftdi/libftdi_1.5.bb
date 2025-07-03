@@ -14,6 +14,9 @@ DEPENDS = "libusb1 python3 swig-native"
 SRC_URI = "\
     http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2 \
     file://CMakeLists-txt-fix-paths-when-FTDIPP-is-set.patch \
+    file://0001-CMake-bump-the-minimal-required-version-to-2.8.12.patch \
+    file://0002-CMake-require-2.8.12-for-cmake_example.patch \
+    file://0003-CMake-bump-the-minimal-required-version-to-3.5.patch \
 "
 SRC_URI[sha256sum] = "7c7091e9c86196148bd41177b4590dccb1510bfe6cea5bf7407ff194482eb049"
 

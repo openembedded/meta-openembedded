@@ -1,0 +1,24 @@
+From 579c08ec00d7cfd72071a86c67fb3b3c5fec5a9e Mon Sep 17 00:00:00 2001
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Thu, 31 Aug 2023 09:23:29 +0200
+Subject: [PATCH] CMake: require 2.8.12 for cmake_example
+
+Make CMake minimal version requirement consistent for the entire
+project.
+
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+Upstream-Status: Backport [61a6bac98bbac623fb33b6153a063b6436f84721]
+---
+ examples/cmake_example/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/examples/cmake_example/CMakeLists.txt b/examples/cmake_example/CMakeLists.txt
+index fe203ed..264752d 100644
+--- a/examples/cmake_example/CMakeLists.txt
++++ b/examples/cmake_example/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required ( VERSION 2.8 )
++cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+ 
+ project ( example C )
+ 

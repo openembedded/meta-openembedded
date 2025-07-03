@@ -1,0 +1,34 @@
+From e6d18a015907b22345bf8994110f68f0609949a9 Mon Sep 17 00:00:00 2001
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Tue, 12 Dec 2023 14:20:36 +0100
+Subject: [PATCH] CMake: bump the minimal required version to 3.5
+
+Older CMake versions are treated as deprecated.
+
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+Upstream-Status: Backport [de9f01ece34d2fe6e842e0250a38f4b16eda2429]
+---
+ CMakeLists.txt                        | 2 +-
+ examples/cmake_example/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 41ddf58..c37887b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+ 
+ # Project
+ project(libftdi1 C)
+diff --git a/examples/cmake_example/CMakeLists.txt b/examples/cmake_example/CMakeLists.txt
+index 264752d..cbdd2e4 100644
+--- a/examples/cmake_example/CMakeLists.txt
++++ b/examples/cmake_example/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+ 
+ project ( example C )
+ 
