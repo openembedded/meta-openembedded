@@ -12,6 +12,7 @@ inherit autotools gobject-introspection pkgconfig
 
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https \
            file://0001-lvm-Do-not-include-duplicate-entries-in-bd_lvm_lvs-o.patch \
+           file://CVE-2025-6019.patch \
 "
 SRCREV = "47ff12242c89e36a33259d18b7068b26c3bb1c64"
 S = "${WORKDIR}/git"
