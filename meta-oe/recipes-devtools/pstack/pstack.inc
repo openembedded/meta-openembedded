@@ -39,3 +39,6 @@ PACKAGES += "${PN}-dev"
 FILES:${PN}-dev += "${base_libdir}/*.so"
 
 TOOLCHAIN = "gcc"
+
+COMPATIBLE_HOST:riscv64 = "null"
+COMPATIBLE_HOST:riscv32 = "null"
