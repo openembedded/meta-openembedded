@@ -31,6 +31,7 @@ EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
                "
 
+CFLAGS:append:toolchain-clang = " -Wno-error=unused-function -Wno-error=single-bit-bitfield-constant-conversion"
 PACKAGECONFIG ??= "xfce"
 PACKAGECONFIG[xfce] = ",,xfconf"
 PACKAGECONFIG[xim] = ",,libgxim"
