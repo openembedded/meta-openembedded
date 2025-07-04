@@ -42,7 +42,7 @@ do_compile:append() {
 }
 
 do_install:prepend() {
-	sed -i -e 's;${S};;g' ${B}/pandas/_libs/sparse.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/sparse.pyx.c
+	sed -i -e 's;${S};;g' ${B}/pandas/_libs/sparse.cpython-*/pandas/_libs/sparse.pyx.c
 }
 
 EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
