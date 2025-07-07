@@ -5,12 +5,12 @@ HOMEPAGE = "https://github.com/pengutronix/genimage"
 
 SECTION = "base"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 
 DEPENDS = "libconfuse"
 
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/genimage-${PV}.tar.xz"
-SRC_URI[sha256sum] = "ebc3f886c4d80064dd6c6d5e3c2e98e5a670078264108ce2f89ada8a2e13fedd"
+SRC_URI[sha256sum] = "7ec4fcb865662a8b2ff20284819044ffa84137bf3ca16fb749701291bc01f108"
 
 EXTRA_OECONF = "--enable-largefile"
 
