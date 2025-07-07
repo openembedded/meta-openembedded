@@ -9,7 +9,13 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2814b59e00e7918c864fa3b6bbe049b4"
 
 PV = "1.6+git${SRCPV}"
-SRC_URI = "git://github.com/stedolan/jq;protocol=https;branch=master"
+SRC_URI = " \
+    git://github.com/stedolan/jq;protocol=https;branch=master \
+    file://CVE-2024-23337.patch \
+    file://CVE-2025-48060.patch \
+    file://CVE-2024-53427-01.patch \
+    file://CVE-2024-53427-02.patch \
+    "
 SRCREV = "a9f97e9e61a910a374a5d768244e8ad63f407d3e"
 S = "${WORKDIR}/git"
 
