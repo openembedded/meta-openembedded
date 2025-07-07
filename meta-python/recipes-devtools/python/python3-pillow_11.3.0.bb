@@ -5,10 +5,10 @@ HOMEPAGE = "https://pillow.readthedocs.io"
 LICENSE = "MIT-CMU"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 
-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
            file://0001-support-cross-compiling.patch \
            "
-SRCREV = "339bc5db93bd95decf65a59fab273f300db6594d"
+SRCREV = "89f1f4626a2aaf5f3d5ca6437f41def2998fbe09"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 
