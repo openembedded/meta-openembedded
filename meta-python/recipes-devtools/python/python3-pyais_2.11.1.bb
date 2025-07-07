@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=79d9e278b76e3e5b3358cd70b328173c"
 SRC_URI = "git://github.com/M0r13n/pyais;protocol=https;branch=master"
 
 PV .= "+git"
-SRCREV = "e7780f743b03c5e6ecc651fdeb209fa94e0e0250"
+SRCREV = "b86b35e29b1f442d9bd20ce5ece4f4db8fb3dab5"
 
 
 inherit python_setuptools_build_meta ptest-python-pytest
