@@ -9,10 +9,10 @@ DEPENDS = "libdnet libpcap"
 
 inherit autotools pkgconfig
 
-SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master;tag=v${PV} \
            file://0001-example-Use-lm-for-the-fst-module.patch"
 
-SRCREV = "434f205cbd45de0961cc42e541b5bf54569e912a"
+SRCREV = "ec9741c22f74b6ed8955b5f1fb4113775d4df0d4"
 
 
 FILES:${PN} += "${libdir}/daq/*.so"
