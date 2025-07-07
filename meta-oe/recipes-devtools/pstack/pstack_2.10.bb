@@ -5,14 +5,12 @@ HOMEPAGE = "https://github.com/peadar/pstack"
 SECTION = "devel/pstack"
 
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ea061f8731d5e6a5761dfad951ef5f5f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=671019a96ba80415b696240ed2ca5e80"
 
 DEPENDS = "tcl virtual/libx11 libxt zip-native"
 
 SRC_URI = "git://github.com/peadar/pstack;branch=master;tag=v${PV};protocol=https"
 SRCREV = "a310df637d74917a1d3570c540bf3aef899d7e63"
-
-S = "${WORKDIR}/${BPN}${PV}"
 
 PACKAGES =+ "${PN}-lib"
 
