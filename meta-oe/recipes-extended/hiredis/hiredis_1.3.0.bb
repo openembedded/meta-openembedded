@@ -8,8 +8,7 @@ SRC_URI = " \
     git://github.com/redis/hiredis;protocol=https;branch=master \
     file://run-ptest \
     "
-SRCREV = "60e5075d4ac77424809f855ba3e398df7aacefe8"
-
+SRCREV = "ccad7ebaf99310957004661d1c5f82d2a33ebd10"
 
 inherit cmake ptest
 
