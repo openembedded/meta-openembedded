@@ -10,9 +10,8 @@ inherit cmake
 
 SRCREV ?= "7ec1fc7e5bd734f1d3c89b095e630e83c86b9be1"
 SRC_URI = "git://github.com/libfann/fann.git;branch=master;protocol=https \
-          "
+        file://0001-allow-build-with-cmake-4.patch"
 
 PV = "2.2.0+git"
-
 
 EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
