@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=292c42e2aedc4af636636bf7af0e2b26"
 SRC_URI = "http://polypux.org/projects/read-edid/read-edid-${PV}.tar.gz \
            file://0001-Do-not-install-license-file.patch \
            file://0001-get-edid-define-quiet-once.patch \
+           file://0002-allow-build-with-cmake-4.patch \
 	   "
 SRC_URI[sha256sum] = "c7c6d8440f5b90f98e276829271ccea5b2ff5a3413df8a0f87ec09f834af186f"
 
