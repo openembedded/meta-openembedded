@@ -9,15 +9,13 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=363055e71e77071107ba2bb9a54bd9a7"
 
 SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=main \
-    file://run-ptest \
-    file://0001-Fix-initialization-in-test-1140.patch \
-    file://0002-Fix-gcc-build-problem.patch \
-    file://0003-Adapt-check_cxx_compiler_flag-to-cmake-3.0.2.patch \
+        file://run-ptest \
 "
-SRCREV = "a3534567187d2edc428efd3f13466ff75fe5805c"
-
+SRCREV = "2828399820ef4928cc89b65605dca5dc68efca6e"
 
 inherit cmake pkgconfig ptest
+
+EXTRA_OECMAKE += "-DGSL_CXX_STANDARD=17"
 
 # this is header-only library
 ALLOW_EMPTY:${PN} = "1"
