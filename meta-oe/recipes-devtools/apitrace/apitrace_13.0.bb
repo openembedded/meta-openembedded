@@ -26,5 +26,6 @@ EXTRA_OECMAKE += "\
 EXTRA_OECMAKE += "\
     -DENABLE_STATIC_SNAPPY=ON \
 "
+LDFLAGS:append:riscv32 = " -latomic"
 
 SECURITY_CFLAGS:toolchain-clang = ""
