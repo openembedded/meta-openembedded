@@ -5,17 +5,14 @@ HOMEPAGE = "https://github.com/edenhill/librdkafka"
 SECTION = "libs"
 LICENSE = "BSD-2-Clause"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2be8675acbfdac48935e73897af5f646"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=40b04809b5d6f648f20f45143cbcb1ad"
 
-SRC_URI = "git://github.com/edenhill/librdkafka;protocol=https;branch=master \
-           file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR.patch \
-          "
-SRCREV = "063a9ae7a65cebdf1cc128da9815c05f91a2a996"
+SRC_URI = "git://github.com/edenhill/librdkafka;protocol=https;branch=master"
+SRCREV = "c56a3e68483ae33622901988ab9c4085f0785c3c"
 
-DEPENDS = "zlib openssl zstd"
+DEPENDS = "zlib openssl zstd curl"
 
 inherit cmake
-
 
 FILES:${PN} += "${datadir}"
 
