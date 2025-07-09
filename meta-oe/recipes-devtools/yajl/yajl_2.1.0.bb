@@ -12,9 +12,9 @@ SRC_URI = "git://github.com/lloyd/yajl;branch=master;protocol=https \
            file://CVE-2017-16516.patch \
            file://CVE-2022-24795.patch \
            file://CVE-2023-33460.patch \
+           file://0001-allow-build-with-cmake-4.patch \
            "
 SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
-
 
 inherit cmake lib_package
 
