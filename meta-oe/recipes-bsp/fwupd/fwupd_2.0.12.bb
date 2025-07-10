@@ -85,4 +85,7 @@ FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
                       ${datadir}/installed-tests/"
 RDEPENDS:${PN}-ptest += "gnome-desktop-testing python3"
 
+# ESP mounting, not strictly necessary
+RRECOMMENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'udisks2', '', d)}"
+
 INSANE_SKIP:${PN}-ptest += "buildpaths"
