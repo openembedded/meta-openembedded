@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "68406329827b783d0a8959cc20a94c6e1791ac861a27f854e06e902054
 # hardcoded here for use in dialog-static recipe
 S = "${UNPACKDIR}/dialog-${PV}"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep pkgconfig multilib_script
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 
@@ -22,6 +22,8 @@ PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${ST
 
 EXTRA_OECONF = "--with-ncurses \
                 --disable-rpath-hack"
+
+MULTILIB_SCRIPTS = "${PN}:${bindir}/dialog"
 
 do_configure() {
     gnu-configize --force
