@@ -346,7 +346,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     isomd5sum \
     jansson \
     jpnevulator \
-    konkretcmpi \
     libblockdev \
     libcec \
     libconfig \
