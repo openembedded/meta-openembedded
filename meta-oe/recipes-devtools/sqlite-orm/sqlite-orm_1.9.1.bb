@@ -1,19 +1,18 @@
 SUMMARY = "SQLite ORM light header only library for modern C++"
 HOMEPAGE = "https://github.com/fnc12/sqlite_orm"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b5bf5ee8bb16d8e19359efe11bdc3f2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4ae09d45eac4aa08d013b5f2e01c67f6"
 
 inherit cmake
 
 DEPENDS += "sqlite3"
 
-SRCREV = "e8a9e9416f421303f4b8970caab26dadf8bae98b"
+SRCREV = "5f1a2ce84a3d72711b4f0a440fdaba977868ae67"
 SRC_URI = " \
     git://github.com/fnc12/sqlite_orm;protocol=https;branch=master \
-    file://0001-fix-cstdint-error-with-gcc-15.0.1.patch \
 "
 
-EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF -DLIB_INSTALL_DIR=${libdir} \
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF -DLIB_INSTALL_DIR=${libdir} \
                   -DCMAKE_INSTALL_DIR=${libdir}/cmake \
                   -DPKGCONFIG_INSTALL_DIR=${libdir}/pkgconfig"
 
