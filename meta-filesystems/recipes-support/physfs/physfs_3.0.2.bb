@@ -8,7 +8,8 @@ inherit cmake
 
 PE = "1"
 
-SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
+SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2 \
+        file://0001-allow-build-with-cmake-4.patch"
 SRC_URI[md5sum] = "dc751294aaf59d1359bbe34e693d1d87"
 SRC_URI[sha256sum] = "304df76206d633df5360e738b138c94e82ccf086e50ba84f456d3f8432f9f863"
 
