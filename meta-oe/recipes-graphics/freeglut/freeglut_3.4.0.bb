@@ -8,6 +8,8 @@ SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6
 
 inherit cmake features_check pkgconfig
 
+EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+
 # depends on virtual/libgl and libxi
 REQUIRED_DISTRO_FEATURES = "opengl x11"
 
