@@ -14,6 +14,8 @@ SRCREV = "17bb8d9fcea62db8cdeb0fc7ef8d15dbd19a22e4"
 
 inherit cmake pkgconfig
 
+EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+
 PACKAGECONFIG ?= "libsdl"
 PACKAGECONFIG[libsdl] = "-DENABLE_SDL=ON,-DENABLE_SDL=OFF,virtual/libsdl2"
 
