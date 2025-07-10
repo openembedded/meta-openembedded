@@ -14,4 +14,8 @@ SRC_URI += " \
     file://0002-build_support-handle-empty-max_priority-value-as-Non.patch \
     file://0003-build_support-use-does_build_succeed-in-compile_and_.patch \
 "
+
+# Message queue support requires librt for proper linking
+LDFLAGS += "-lrt"
+
 inherit pypi python_setuptools_build_meta
