@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;proto
 
 EXTRA_OECMAKE:append = " \
     -DOPENCL_ICD_LOADER_HEADERS_DIR=${STAGING_INCDIR} \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 
 do_install() {
