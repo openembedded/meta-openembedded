@@ -23,6 +23,8 @@ PV .= "+0.9.9.9+git"
 
 inherit cmake
 
+EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+
 do_install() {
     install -d ${D}${includedir} ${D}${docdir}/glm ${D}${libdir}/pkgconfig ${D}${libdir}/cmake/glm
     cp -R --no-dereference --preserve=mode,links ${S}/glm ${D}${includedir}
