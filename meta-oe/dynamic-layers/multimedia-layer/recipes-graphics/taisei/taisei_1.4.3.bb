@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1a11ffd7e1bdd1d3156cecec60a2846f"
 DEPENDS = "\
     cglm \
     freetype \
-    virtual/libsdl2 \
+    libsdl3 \
     libwebp \
     opusfile \
     zstd \
@@ -32,12 +32,8 @@ RDEPENDS_${PN} = "\
     zlib \
 "
 
-SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https \
-           file://0001-util-consideredharmful-Use-overloadable-func-attribu.patch \
-           file://0001-Remove-strip-option-from-executable-build.patch"
-
-SRCREV = "c098579d4fa0f004ccc204c5bc46eac3717cba28"
-
+SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https;tag=v${PV}"
+SRCREV = "02b7c71ae7d7a53202378e384f2cb26df9164f22"
 
 inherit features_check meson mime mime-xdg pkgconfig python3native
 
@@ -48,5 +44,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[a_null] = "-Da_null=true,-Da_null=false"
 PACKAGECONFIG[developer] = "-Ddeveloper=true,-Ddeveloper=false"
 PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,python3-docutils-native"
+
+EXTRA_OEMESON += "-Dstrip=false"
 
 FILES:${PN} += "${datadir}"
