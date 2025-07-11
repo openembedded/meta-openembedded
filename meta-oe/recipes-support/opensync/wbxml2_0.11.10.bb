@@ -1,16 +1,13 @@
 SUMMARY = "WBXML parsing and encoding library"
-HOMEPAGE = "http://libwbxml.opensync.org/"
+HOMEPAGE = "https://github.com/libwbxml/libwbxml"
 SECTION = "libs"
 LICENSE = "LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c1128ee5341ccd5927d8bafe4b6266e1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b17146e5186e05865f75664e910ace79"
 
 DEPENDS = "expat"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/libwbxml/libwbxml-${PV}.tar.gz"
-
-SRC_URI[sha256sum] = "a057daa098f12838eb4e635bb28413027f1b73819872c3fbf64e3207790a3f7d"
-
-S = "${UNPACKDIR}/libwbxml-${PV}"
+SRC_URI = "git://github.com/libwbxml/libwbxml;branch=master;protocol=https;tag=libwbxml-${PV}"
+SRCREV = "e58b1f19f11dbadff53e5b486b8c4b16639a656a"
 
 inherit cmake pkgconfig
 
