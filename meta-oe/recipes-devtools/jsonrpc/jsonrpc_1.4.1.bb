@@ -9,7 +9,9 @@ SECTION = "libs"
 
 DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
 
-SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https"
+SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https \
+           file://0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch \
+           "
 
 SRCREV = "ec5ce12fc9c0299e1454cc002c70218b5a6f005b"
 
@@ -22,6 +24,7 @@ inherit cmake
 EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO \
                   -DBUILD_SHARED_LIBS=YES -DBUILD_STATIC_LIBS=YES \
                   -DCMAKE_LIBRARY_PATH=${libdir} \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 
 do_install:append() {

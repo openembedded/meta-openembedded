@@ -1,0 +1,38 @@
+From 7cc415c5b2406b16adcccdce3fc8bf5223a1bdb1 Mon Sep 17 00:00:00 2001
+From: Moritz Haase <Moritz.Haase@bmw.de>
+Date: Fri, 11 Jul 2025 12:31:49 +0200
+Subject: [PATCH] cmake: Remove usage of obsolete MacOS-only policy
+
+Workaround an error reported by CMake 4 that only affects MacOS.
+
+CMake Error at CMakeLists.txt:21 (cmake_policy):
+  Policy CMP0042 may not be set to OLD behavior because this version of CMake
+  no longer supports it.  The policy was introduced in CMake version 3.0.0,
+  and use of NEW behavior is now required.
+
+  Please either update your CMakeLists.txt files to conform to the new
+  behavior or use an older version of CMake that still supports the old
+  behavior.  Run cmake --help-policy CMP0042 for more information.
+
+Upstream-Status: Inactive-Upstream [2022-01-12]
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+---
+ CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 961e55a..909610b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -16,11 +16,6 @@ project(libjson-rpc-cpp)
+ cmake_policy(SET CMP0007 NEW)
+ cmake_policy(SET CMP0012 NEW)
+ 
+-if (${CMAKE_MAJOR_VERSION} GREATER 2)
+-    # old policy do not use MACOSX_RPATH
+-    cmake_policy(SET CMP0042 OLD)
+-endif()
+-
+ set(MAJOR_VERSION 1)
+ set(MINOR_VERSION 4)
+ set(PATCH_VERSION 1)
