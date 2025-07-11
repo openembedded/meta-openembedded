@@ -19,6 +19,8 @@ PV = "1.10.1+git"
 
 inherit cmake features_check
 
-EXTRA_OECMAKE += "-DSYNERGY_BUILD_LEGACY_GUI=OFF"
+EXTRA_OECMAKE += "-DSYNERGY_BUILD_LEGACY_GUI=OFF \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+"
 
 FILES:${PN} += "${datadir}/icons/hicolor"
