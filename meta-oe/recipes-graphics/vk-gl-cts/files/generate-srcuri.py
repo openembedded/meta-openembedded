@@ -53,11 +53,15 @@ def convert_fetch(basedir):
             # Ignore these as so far we can use the system copies
             pass
         elif isinstance(p, fetch.SourceFile):
-            dest = "/".join(["git/external", p.baseDir, p.extractDir])
+            dest = "/".join(
+                ["${BB_GIT_DEFAULT_DESTSUFFIX}/external", p.baseDir, p.extractDir]
+            )
             url = f"{p.url};subdir={dest};sha256sum={p.checksum}"
             lines.append(f"    {url} \\")
         elif isinstance(p, fetch.GitRepo):
-            dest = "/".join(["git/external", p.baseDir, p.extractDir])
+            dest = "/".join(
+                ["${BB_GIT_DEFAULT_DESTSUFFIX}/external", p.baseDir, p.extractDir]
+            )
             url = transform_git(p.httpsUrl, p.revision, dest)
             lines.append(f"    {url} \\")
         else:
