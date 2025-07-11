@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
 
 DEPENDS = "libpcap"
 
-SRC_URI = "git://github.com/seladb/PcapPlusPlus.git;protocol=https;branch=master \
-           file://0001-Remove-whitespace-in-operator-_json.patch \
-          "
-SRCREV = "4af4b8b04e6d5dd40b8e69cc30c5c1f62e7fe368"
+SRC_URI = "git://github.com/seladb/PcapPlusPlus.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "a49a79e0b67b402ad75ffa96c1795def36df75c8"
 
 
 inherit cmake
