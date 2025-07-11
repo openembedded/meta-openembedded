@@ -27,7 +27,9 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 
 inherit setuptools3-base cmake pkgconfig
 
-EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE -DWERROR=off"
+EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE -DWERROR=off \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+"
 
 # override this in local.conf to get needed bindings.
 # BINDINGS:pn-upm="python"
