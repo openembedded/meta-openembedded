@@ -10,6 +10,7 @@ PV = "5.1.0+git"
 SRCREV = "4655b571a70d73d41467091f59c518517c956198"
 SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git;branch=master;protocol=https \
            file://0001-http-fetch-Pass-a-non-null-buffer-to-ne_set_request_.patch \
+           file://0002-allow-build-with-cmake-4.patch \
            "
 
 
