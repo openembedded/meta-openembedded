@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "libebml"
 
-SRC_URI = "git://github.com/Matroska-Org/libmatroska.git;branch=v1.x;protocol=https"
+SRC_URI = "git://github.com/Matroska-Org/libmatroska.git;branch=v1.x;protocol=https \
+        file://0001-allow-build-with-cmake-4.patch"
+
 SRCREV = "f5315fddda2d434e47035c038549a808d8b8eac7"
 
 
