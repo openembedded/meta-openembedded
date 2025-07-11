@@ -4,9 +4,11 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
 
-SRC_URI[sha256sum] = "ae856e1138612b7e412db63b7708735cff4d38d0399f6a5435d3dac2669f558a"
+SRC_URI[sha256sum] = "6e06e120e34d93100de448fd941522e11dafa78ef1a893c179901b7d66aa29f2"
 
 inherit python_setuptools_build_meta pypi
+
+DEPENDS = "python3-pkgconfig-native"
 
 RDEPENDS:${PN} = "\
     python3-aiohappyeyeballs \
