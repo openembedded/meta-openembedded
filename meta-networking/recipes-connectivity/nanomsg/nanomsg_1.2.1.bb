@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
 
 SECTION = "libs/networking"
 
-SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master \
+        file://0001-allow-build-with-cmake-4.patch"
+
 SRCREV = "fc3f684a80151a3319446fc96083a9ff384ee4fe"
 
 

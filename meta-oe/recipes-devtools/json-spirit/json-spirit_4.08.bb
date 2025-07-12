@@ -14,6 +14,7 @@ DEPENDS = "boost"
 SRC_URI = "file://json_spirit_v${PV}.zip \
            file://0001-Adjust-the-cmake-files.patch \
            file://0001-Link-to-libatomic.patch \
+           file://0002-allow-build-with-cmake-4.patch \
 "
 
 S = "${UNPACKDIR}/json_spirit_v${PV}"

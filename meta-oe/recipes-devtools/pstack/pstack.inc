@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=671019a96ba80415b696240ed2ca5e80"
 
 inherit cmake
 
-S = "${UNPACKDIR}/${BPN}-${PV}"
 DEPENDS += "zlib xz libunwind elfutils"
 
 RDEPENDS:${PN} += "elfutils"
@@ -42,3 +41,5 @@ TOOLCHAIN = "gcc"
 
 COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST:arm = "null"
+COMPATIBLE_HOST:libc-musl = "null"
