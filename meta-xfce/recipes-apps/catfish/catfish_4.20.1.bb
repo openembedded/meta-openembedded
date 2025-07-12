@@ -5,11 +5,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
 inherit xfce-app python_setuptools_build_meta gtk-icon-cache mime-xdg features_check
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-DEPENDS += "python3-distutils-extra-native"
+DEPENDS += "python3-distutils-extra-native \
+            python3-dbus-native \
+            python3-pygobject-native \
+            python3-pexpect-native \
+            xfconf"
 
-SRC_URI[sha256sum] = "fdae9b73cc754a50716bb04b958aa31dbd7e94047068b7207f2ae313a7d58b99"
+SRC_URI[sha256sum] = "fe00d45b163cf86b4c85ebdd23a73d53aa55bc97ba3f691a248ec403d4ade62b"
 
 FILES:${PN} += "${datadir}/metainfo"
 
