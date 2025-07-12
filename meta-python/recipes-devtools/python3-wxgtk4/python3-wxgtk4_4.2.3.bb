@@ -5,7 +5,7 @@ LICENSE = "LGPL-2.0-only & WXwindows & BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"
 
 DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
-           wxwidgets \
+           python3-requests-native wxwidgets \
            "
 
 PYPI_PACKAGE = "wxPython"
@@ -16,7 +16,7 @@ SRC_URI += "file://add-back-option-build-base.patch \
            file://not-overwrite-cflags-cxxflags.patch \
            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
            "
-SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
+SRC_URI[sha256sum] = "20d6e0c927e27ced85643719bd63e9f7fd501df6e9a8aab1489b039897fd7c01"
 
 S = "${UNPACKDIR}/wxPython-${PV}"
 
