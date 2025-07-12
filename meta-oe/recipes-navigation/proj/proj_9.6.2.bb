@@ -6,18 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 DEPENDS = "sqlite3 sqlite3-native"
 
 SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "b0f919cb9e1f42f803a3e616c2b63a78e4d81ecfaed80978d570d3a5e29d10bc"
+SRC_URI[sha256sum] = "53d0cafaee3bb2390264a38668ed31d90787de05e71378ad7a8f35bb34c575d1"
 
-inherit cmake lib_package
+inherit bash-completion cmake lib_package pkgconfig
 
-EXTRA_OECMAKE = "-DBUILD_TESTING=OFF -DSQLITE3_LIBRARY:STRING=sqlite3"
+EXTRA_OECMAKE = "-DBUILD_TESTING=OFF"
 
 FILES:${PN} += "${datadir}/proj"
 
 BBCLASSEXTEND = "native"
 
 PACKAGECONFIG ?= "curl shared"
-PACKAGECONFIG:append:class-native = " apps"
+PACKAGECONFIG:class-native = "curl shared apps"
 
 PACKAGECONFIG[apps] = "-DBUILD_APPS=ON, -DBUILD_APPS=OFF"
 PACKAGECONFIG[curl] = "-DENABLE_CURL=ON,-DENABLE_CURL=OFF,curl"
