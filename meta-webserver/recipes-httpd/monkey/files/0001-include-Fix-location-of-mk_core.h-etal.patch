@@ -1,0 +1,36 @@
+From 2dd5ec693b44c1ae6343803e193dea9b3cd2684d Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 11 Jul 2025 20:51:07 -0700
+Subject: [PATCH] include: Fix location of mk_core.h etal
+
+This helps install task find the headers in right source location
+Fixes
+
+| CMake Error at include/cmake_install.cmake:46 (file):
+|   file INSTALL cannot find
+|   "/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/monkey/1.8.4/sources/monkey-1.8.4/include/mk_core.h":
+|   No such file or directory.
+
+Upstream-Status: Submitted [https://github.com/monkey/monkey/pull/424]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ include/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
+index 78af01bc..dea4083d 100644
+--- a/include/CMakeLists.txt
++++ b/include/CMakeLists.txt
+@@ -1,10 +1,10 @@
+ # MK_CORE
+ if(NOT WITHOUT_HEADERS)
+-  install(FILES "mk_core.h"
++  install(FILES "monkey/mk_core.h"
+     DESTINATION include/
+     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+ 
+-  file(GLOB headers "mk_core/*.h")
++  file(GLOB headers "monkey/mk_core/*.h")
+   install(FILES ${headers}
+     DESTINATION include/mk_core
+     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
