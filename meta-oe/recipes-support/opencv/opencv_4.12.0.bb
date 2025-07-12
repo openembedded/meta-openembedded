@@ -10,13 +10,13 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "31b0eeea0b44b370fd0712312df4214d4ae1b158"
-SRCREV_contrib = "0e5254ebf54d2aed6e7eaf6660bf3b797cf50a02"
+SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
+SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
-SRCREV_fastcv = "8d86e68dad8b80b8575a8d3cf401d3ee96c24148"
+SRCREV_fastcv = "2265e79b3b9a8512a9c615b8c4d0244e88f45a9d"
 
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
@@ -26,16 +26,13 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
-           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250410;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250606;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
            file://0003-To-fix-errors-as-following.patch \
            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
-           file://0001-core-fixed-VSX-intrinsics-implementation.patch \
-           file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
-           file://0001-FROMLIST-FastCV-latest-libs-hash-update.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 

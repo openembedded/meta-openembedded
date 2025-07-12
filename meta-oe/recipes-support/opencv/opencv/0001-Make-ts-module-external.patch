@@ -7,7 +7,7 @@ Make ts module external
 
 Reference: https://github.com/qbonnard/opencv/commit/6b229c5834cb9a0930425e762a6c7b03244d7abb
 
-Upstream-Status: Submitted [https://github.com/opencv/opencv/issues/8408]
+Upstream-Status: Denied [https://github.com/opencv/opencv/issues/8408]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
