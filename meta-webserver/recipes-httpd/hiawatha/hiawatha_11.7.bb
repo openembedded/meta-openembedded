@@ -10,7 +10,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
            file://hiawatha-init \
            file://hiawatha.service "
 
-SRC_URI[sha256sum] = "99c64f76927f93469f062ab76b74eb79a397ea4be12da86bf746b2bb57cf1bc5"
+SRC_URI[sha256sum] = "8bc180ae3b986d02466f081efeefdb1595d96783f581fded2a9b198752ab7ae1"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
@@ -19,12 +19,12 @@ SYSTEMD_SERVICE:${PN} = "hiawatha.service"
 
 inherit cmake update-rc.d systemd
 
+
 CFLAGS += "-std=gnu17"
 
 EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DENABLE_CACHE=OFF \
                   -DENABLE_DEBUG=OFF \
-                  -DENABLE_TLS=OFF \
                   -DENABLE_TOOLKIT=OFF \
                   -DENABLE_CHROOT=OFF \
                   -DENABLE_XSLT=ON \
@@ -34,7 +34,9 @@ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DCMAKE_INSTALL_SBINDIR=${sbindir} \
                   -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
                   -DCMAKE_INSTALL_LIBDIR=${libdir} \
-                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir}"
+                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir} \
+                  -DENABLE_TLS=ON \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
 do_install:append() {
     # Copy over init script and sed in the correct sbin path
@@ -78,5 +80,11 @@ CONFFILES:${PN} = " \
     ${sysconfdir}/hiawatha/php-fcgi.conf \
 "
 
+PACKAGES =+ "${PN}-letsencrypt"
+
+FILES:${PN}-letsencrypt += "${sbindir}/lefh ${libdir}/hiawatha/letsencrypt"
+
 FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
-FILES:${PN}-dev = "${libdir}/hiawatha/*${SOLIBSDEV}"
+FILES:${PN}-dev += "${libdir}/hiawatha/*${SOLIBSDEV}"
+
+RDEPENDS:${PN}-letsencrypt += "php-cli"
