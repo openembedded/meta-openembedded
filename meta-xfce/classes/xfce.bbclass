@@ -7,7 +7,10 @@ HOMEPAGE = "http://www.xfce.org"
 XFCE_COMPRESS_TYPE ?= "bz2"
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
 
-inherit autotools gettext gtk-icon-cache pkgconfig
+inherit gettext gtk-icon-cache pkgconfig
+
+XFCEBASEBUILDCLASS ??= "autotools"
+inherit_defer ${XFCEBASEBUILDCLASS}
 
 DEPENDS += "intltool-native"
 
