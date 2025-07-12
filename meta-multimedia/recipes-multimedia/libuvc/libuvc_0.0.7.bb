@@ -6,8 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2f1963e0bb88c93463af750daf9ba0c2"
 
 DEPENDS = "libusb jpeg"
 
-SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https"
-SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
+SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https \
+        file://0001-allow-build-with-cmake-4.patch"
 
+SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
 
 inherit cmake pkgconfig

@@ -1,38 +1,34 @@
 DESCRIPTION = "InfluxDB is a time series database designed to handle high write and query loads."
 HOMEPAGE = "https://www.influxdata.com/products/influxdb-overview/"
 
-LICENSE = "MIT"
+LICENSE = "MIT & ${GO_MOD_LICENSES}"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6"
+require ${BPN}-licenses.inc
 
-RDEPENDS:${PN} = "bash"
-RDEPENDS:${PN}-dev = "bash"
+SRC_URI = "\
+    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${GO_SRCURI_DESTSUFFIX} \
+    file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=src/${GO_IMPORT} \
+    file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT} \
+    file://influxdb \
+    file://influxdb.conf \
+"
+require ${BPN}-go-mods.inc
+
+SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
 
 GO_IMPORT = "github.com/influxdata/influxdb"
-
 GO_INSTALL = "\
     ${GO_IMPORT}/cmd/influx \
     ${GO_IMPORT}/cmd/influxd \
 "
 
-SRC_URI = "\
-    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
-    file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=src/${GO_IMPORT} \
-    file://influxdb \
-    file://influxdb.conf \
-"
-
-SRC_URI:append:mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
-
-SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
-
 inherit go-mod pkgconfig systemd update-rc.d useradd
 
-export GOPROXY = "https://proxy.golang.org,direct"
+INITSCRIPT_PACKAGES = "${PN}"
+INITSCRIPT_NAME = "influxdb"
+INITSCRIPT_PARAMS = "defaults"
 
-# Workaround for network access issue during compile step
-# this needs to be fixed in the recipes buildsystem to move
-# this such that it can be accomplished during do_fetch task
-do_compile[network] = "1"
+SYSTEMD_SERVICE:${PN} = "influxdb.service"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
@@ -70,11 +66,7 @@ do_install:append() {
 
 FILES:${PN} += "${libdir}/influxdb/scripts/influxd-systemd-start.sh"
 
-INITSCRIPT_PACKAGES = "${PN}"
-INITSCRIPT_NAME = "influxdb"
-INITSCRIPT_PARAMS = "defaults"
-
-SYSTEMD_SERVICE:${PN} = "influxdb.service"
+RDEPENDS:${PN} = "bash"
+RDEPENDS:${PN}-dev = "bash"
 
 CVE_STATUS[CVE-2019-10329] = "cpe-incorrect: Version does not match and only the Jenkins plugin is affected."
-SKIP_RECIPE[influxdb] ?= "QA Issue: task do_compile has network enabled"

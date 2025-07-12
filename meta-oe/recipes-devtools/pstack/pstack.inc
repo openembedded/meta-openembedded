@@ -41,3 +41,5 @@ TOOLCHAIN = "gcc"
 
 COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST:arm = "null"
+COMPATIBLE_HOST:libc-musl = "null"

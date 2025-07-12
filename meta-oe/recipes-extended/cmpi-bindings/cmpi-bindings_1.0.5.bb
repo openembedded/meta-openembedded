@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/kkaempf/cmpi-bindings.git;protocol=https;branch=main
            file://cmpi-bindings-0.4.17-no-ruby-perl.patch \
            file://cmpi-bindings-0.4.17-sblim-sigsegv.patch \
            file://0001-Fix-error.patch \
+           file://0002-allow-build-with-cmake-4.patch \
            "
 
 SRCREV = "49d6dcfc71ca421100fcf325e31625817c469fc9"

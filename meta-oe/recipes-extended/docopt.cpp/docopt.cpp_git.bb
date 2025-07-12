@@ -18,8 +18,7 @@ PV = "0.6.3+git"
 
 SRC_URI = "\
     git://github.com/docopt/docopt.cpp.git;protocol=https;branch=master \
-"
-
+    file://0001-allow-build-with-cmake-4.patch"
 
 inherit cmake
 

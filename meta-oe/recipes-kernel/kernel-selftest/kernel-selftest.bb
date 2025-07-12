@@ -97,6 +97,12 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
     sed -i -e '/mrecord-mcount/d' ${S}/Makefile
     sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/Makefile
     sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/scripts/Makefile.*
+    
+    # Add kernel headers to CFLAGS to fix PTP selftest compilation
+    # Required for PTP_MASK_CLEAR_ALL and PTP_MASK_EN_SINGLE definitions
+    # introduced in kernel v6.7 (commit c5a445b)
+    export CFLAGS="${CFLAGS} -I${STAGING_KERNEL_BUILDDIR}/usr/include"
+    
     oe_runmake -C ${S}/tools/testing/selftests TARGETS="${TEST_LIST}"
 }
 

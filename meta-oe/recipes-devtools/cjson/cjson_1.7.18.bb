@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
 
 SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
            file://run-ptest \
+           file://0001-allow-build-with-cmake-4.patch \
          "
 SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
-
 
 inherit cmake pkgconfig ptest
 

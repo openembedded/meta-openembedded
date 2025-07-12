@@ -59,7 +59,7 @@ do_install:append() {
         ${libdir}/xmlsec1Conf.sh \
         ${libdir}/pkgconfig/xmlsec1-openssl.pc \
         ${libdir}/pkgconfig/xmlsec1-gnutls.pc; do
-        sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
+        [ -f ${D}$i ] && sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i || true
     done
 }
 

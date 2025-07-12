@@ -7,6 +7,7 @@ HOMEPAGE = "https://wammu.eu/"
 SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
     file://gammurc \
     file://gammu-smsdrc \
+    file://0001-allow-build-with-cmake-4.patch \
 "
 
 SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"

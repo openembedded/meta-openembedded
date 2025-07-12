@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/gflags/gflags"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
 
-SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https \
+        file://0001-allow-build-with-cmake-4.patch"
 SRCREV = "e171aa2d15ed9eb17054558e0b3a6a413bb01067"
-
 
 inherit cmake
 
