@@ -8,14 +8,16 @@ inherit xfce-panel-plugin
 
 DEPENDS += "xfconf xorgproto libxtst glib-2.0-native"
 
+XFCEBASEBUILDCLASS = "meson"
 XFCE_COMPRESS_TYPE = "xz"
 SRC_URI[sha256sum] = "903302c3070a951d44ee17a84fa3cf21d36c6787678af8fbfc79e469fd00cb46"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
-PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
-PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native wayland"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+                   ${@bb.utils.filter('DISTRO_FEATURES', 'ptest', d)} \
+"
 
-EXTRA_OECONF += "WAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
-				 GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources"
+PACKAGECONFIG[ptest] = "-Dtests=true,-Dtests=false,"
+PACKAGECONFIG[qrencode] = "-Dqrencode=enabled,-Dqrencode=disabled,qrencode"
+PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland-native wayland"
 
 FILES:${PN} += "${datadir}/metainfo"
