@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            git://github.com/HowardHinnant/date.git;protocol=https;branch=master;name=date;destsuffix=${S}/thirdparty/date-src \
            git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;name=asio;destsuffix=${S}/thirdparty/asio-src \
            git://github.com/fmtlib/fmt.git;protocol=https;branch=master;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
-           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
+           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.15.3;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=${S}/thirdparty \
            https://download.libsodium.org/libsodium/releases/libsodium-1.0.19.tar.gz;name=libsodium;subdir=${S}/thirdparty \
            file://0001-Do-not-use-bundled-packages.patch \
@@ -48,8 +48,8 @@ SRCREV_date = "5bdb7e6f31fac909c090a46dbd9fea27b6e609a4"
 SRCREV_asio = "814f67e730e154547aea3f4d99f709cbdf1ea4a0"
 # fmt: 11.1.4
 SRCREV_fmt = "123913715afeb8a437e6388b4473fcc4753e1c9a"
-# spdlog: 1.15.1
-SRCREV_spdlog = "f355b3d58f7067eee1706ff3c801c2361011f3d5"
+# spdlog: 1.15.3
+SRCREV_spdlog = "6fa36017cfd5731d617e1a934f0e5ea9c4445b13"
 
 SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog"
 
