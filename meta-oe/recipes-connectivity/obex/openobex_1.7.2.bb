@@ -21,8 +21,10 @@ S = "${UNPACKDIR}/${BP}-Source"
 
 inherit cmake pkgconfig
 
-EXTRA_OECONF = " -DCMAKE_SKIP_RPATH=ON "
-EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF"
+EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF \
+                  -DCMAKE_SKIP_RPATH=ON \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+                  "
 
 ASNEEDED = ""
 
