@@ -7,19 +7,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 
 SECTION = "net"
 
-SRC_URI = "git://github.com/monkey/monkey;branch=1.6;protocol=https \
+SRC_URI = "git://github.com/monkey/monkey;branch=master;protocol=https \
            file://0001-fastcgi-Use-value-instead-of-address-of-sin6_port.patch \
+           file://0001-include-Fix-location-of-mk_core.h-etal.patch \
            file://monkey.service \
            file://monkey.init"
 
-SRCREV = "7999b487fded645381d387ec0e057e92407b0d2c"
+SRCREV = "94af273244369e1a8426d0d1f6376475aff90db9"
 
-UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
-UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_COMMITS = "1"
 
-EXTRA_OECMAKE = "-DINSTALL_LOGDIR=${localstatedir}/log/monkey/ \
+EXTRA_OECMAKE = "-DMK_PATH_LOG=${localstatedir}/log/monkey/ \
                  -DPID_FILE=/run/monkey.pid \
-                 -DINSTALL_SYSCONFDIR=${sysconfdir}/monkey/ \
+                 -DMK_PATH_CONF=${sysconfdir}/monkey/ \
                  -DWITH_PLUGINS=* \
                  -DWITHOUT_PLUGINS=mbedtls \
                  -DWITH_DEBUG=1 \
@@ -29,22 +29,15 @@ EXTRA_OECMAKE = "-DINSTALL_LOGDIR=${localstatedir}/log/monkey/ \
 
 EXTRA_OECMAKE:append:libc-musl = " -DWITH_MUSL=1 "
 
-# GCC-10+ defaults to -fno-common
-CFLAGS += "-fcommon"
-
 DISABLE_STATIC = ""
 
 inherit cmake pkgconfig update-rc.d systemd
 
-OECMAKE_GENERATOR = "Unix Makefiles"
-
 do_configure:append() {
-    sed -i -e 's|${STAGING_BINDIR_TOOLCHAIN}/||g' ${S}/include/monkey/mk_env.h
+    sed -i -e 's|${STAGING_BINDIR_TOOLCHAIN}/||g' ${B}/include/monkey/mk_env.h
 }
 
 do_install:append() {
-    rmdir ${D}${localstatedir}/log/${BPN} ${D}${localstatedir}/run ${D}${localstatedir}/log
-    rmdir --ignore-fail-on-non-empty ${D}${localstatedir}
     install -Dm 0755 ${UNPACKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
     # Create /var/log/monkey in runtime.
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
