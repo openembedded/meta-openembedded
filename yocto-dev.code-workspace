@@ -1,0 +1,39 @@
+{
+    "folders": [
+        {
+            "name": "meta-openembedded (Windows)",
+            "path": "."
+        },
+        {
+            "name": "meta-openembedded (WSL)",
+            "path": "//wsl$/Ubuntu/home/jpanov/yocto-workspace/meta-openembedded"
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "*.bb": "bitbake",
+            "*.bbappend": "bitbake",
+            "*.bbclass": "bitbake",
+            "*.inc": "bitbake",
+            "*.conf": "bitbake"
+        },
+        "terminal.integrated.profiles.windows": {
+            "WSL Ubuntu": {
+                "path": "wsl.exe",
+                "args": ["-d", "Ubuntu"]
+            }
+        },
+        "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+        "remote.WSL.fileWatcher.polling": true,
+        "python.defaultInterpreterPath": "/usr/bin/python3"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode-remote.remote-wsl",
+            "yocto-project.yocto-bitbake",
+            "ms-python.python",
+            "ms-vscode.cmake-tools",
+            "ms-vscode.cpptools"
+        ]
+    }
+}
