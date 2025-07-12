@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9573510928429ad0cbe5ba4de77546e9"
 
 PV .= "+git"
 SRCREV = "96a8f6250cbf4e8c76387c614f666710a2fa9bad"
-SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
+SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x \
+    file://CVE-2025-6140.patch \
+"
 
 DEPENDS += "fmt"
 
