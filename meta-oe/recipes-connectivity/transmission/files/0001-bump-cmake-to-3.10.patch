@@ -1,0 +1,21 @@
+From c548c2192c6e4b3129711981d6446afd12dbe6e4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?C=C5=93ur?= <coeur@gmx.fr>
+Date: Thu, 1 May 2025 04:53:55 +0200
+Subject: [PATCH] bump cmake to 3.10
+
+Upstream-Status: Submitted [https://github.com/transmission/libb64/pull/3]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ecf6d3b..d500ea6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+ project(libb64 VERSION 2.0.0 LANGUAGES C)
+ 
+ set(LIBB64_STANDALONE_BUILD OFF)

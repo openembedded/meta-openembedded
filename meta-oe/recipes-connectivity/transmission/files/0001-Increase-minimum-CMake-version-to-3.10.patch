@@ -1,0 +1,30 @@
+From b6a145b5a525d892279d87dec4f35785f7d7c3b9 Mon Sep 17 00:00:00 2001
+From: Eric Biggers <ebiggers@google.com>
+Date: Sun, 17 Nov 2024 18:39:29 -0800
+Subject: [PATCH] Increase minimum CMake version to 3.10
+
+CMake 3.31 warns:
+
+    CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+      Compatibility with CMake < 3.10 will be removed from a future version of
+      CMake.
+
+      Update the VERSION argument <min> value or use a ...<max> suffix to tell
+      CMake that the project does not need compatibility with older versions.
+
+Upstream-Status: Backport [https://github.com/ebiggers/libdeflate/pull/402]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d3bc08d..3ca6d64 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.7)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Default to a release build.
+ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
