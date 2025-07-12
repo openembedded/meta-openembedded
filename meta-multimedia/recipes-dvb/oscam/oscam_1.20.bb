@@ -12,7 +12,10 @@ SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;nobranch=1"
 
 inherit cmake
 
-EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir} -DCMAKE_BUILD_TYPE=Debug"
+EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir} \
+                 -DCMAKE_BUILD_TYPE=Debug \
+                 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+                "
 
 do_configure:append() {
     sed -i -e '1 s|${TOPDIR}|<TOPDIR>|g' ${B}/config.c
