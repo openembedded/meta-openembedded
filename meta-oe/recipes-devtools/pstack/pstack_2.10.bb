@@ -23,7 +23,9 @@ RDEPENDS:${PN}:class-native = ""
 
 BBCLASSEXTEND = "native nativesdk"
 
-inherit binconfig
+inherit binconfig features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SYSROOT_DIRS += "${bindir_crossscripts}"
 
