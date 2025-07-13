@@ -11,6 +11,7 @@ DEPENDS = "libpcre zlib"
 SRC_URI = " \
     git://github.com/pocoproject/poco.git;branch=main;protocol=https \
     file://run-ptest \
+    file://CVE-2025-6375.patch \
    "
 SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"
 
