@@ -1,4 +1,4 @@
-From 2a08adb0e90219626dac0b6d05a21265e460eae2 Mon Sep 17 00:00:00 2001
+From a1ec7fa97cb73754cb250a9cf0ea95b9d0511e0c Mon Sep 17 00:00:00 2001
 From: Leon Anavi <leon.anavi@konsulko.com>
 Date: Thu, 20 Mar 2025 12:09:42 +0000
 Subject: [PATCH] pyproject.toml: Keep tool.setuptools.license-files
@@ -20,7 +20,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/pyproject.toml b/pyproject.toml
-index 0cf1ade57..7a4665ce0 100644
+index a3cc3f43b..5eaf5ee5e 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
 @@ -8,8 +8,7 @@ name = "pylint"
@@ -43,6 +43,3 @@ index 0cf1ade57..7a4665ce0 100644
  [tool.setuptools.packages.find]
  include = [ "pylint*" ]
  
--- 
-2.39.5
-
