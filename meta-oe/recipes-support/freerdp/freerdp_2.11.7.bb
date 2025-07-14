@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
 
 
 EXTRA_OECMAKE += " \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DWITH_FFMPEG=OFF \
     -DWITH_CUNIT=OFF \
     -DWITH_NEON=OFF \
