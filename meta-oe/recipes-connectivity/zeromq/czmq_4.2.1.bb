@@ -16,6 +16,7 @@ inherit cmake pkgconfig
 PACKAGES = "lib${BPN} lib${BPN}-dev lib${BPN}-staticdev ${PN} ${PN}-dbg"
 
 EXTRA_OECMAKE = " \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKECONFIG_INSTALL_DIR:PATH=${@os.path.relpath(d.getVar('libdir'), d.getVar('prefix') + '/') + "/cmake/"} \
 "
 
