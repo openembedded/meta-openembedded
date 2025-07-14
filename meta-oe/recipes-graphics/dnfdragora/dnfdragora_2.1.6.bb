@@ -20,7 +20,8 @@ DEPENDS += "dnf python3 "
 RDEPENDS:${PN}:class-target = " python3-core libyui libyui-ncurses "
 
 # manpages generation requires http://www.sphinx-doc.org/
-EXTRA_OECMAKE = " -DWITH_MAN=OFF -DPYTHON_INSTALL_DIR=${PYTHON_SITEPACKAGES_DIR} -DPYTHON_DESIRED=3"
+EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+                  -DWITH_MAN=OFF -DPYTHON_INSTALL_DIR=${PYTHON_SITEPACKAGES_DIR} -DPYTHON_DESIRED=3"
 
 BBCLASSEXTEND = "nativesdk"
 
