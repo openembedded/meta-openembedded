@@ -1,0 +1,35 @@
+From ed35037e3ba575d9b0d1ef4cd5b6ab9111136922 Mon Sep 17 00:00:00 2001
+From: Moritz Haase <Moritz.Haase@bmw.de>
+Date: Mon, 14 Jul 2025 13:57:30 +0200
+Subject: [PATCH] update(cmake): Only add dependencies when we bundle
+
+Only add dependencies for valijson when we're using the bundled version.
+
+Fixes
+
+| CMake Error at falcosecurity-libs/userspace/libsinsp/CMakeLists.txt:184 (add_dependencies):
+|   The dependency target "valijson" of target "sinsp" does not exist.
+
+when building with CMake 4.
+
+Upstream-Status: Backport [7d850bad002b56ca5e85fffb1f69b4b1cfeddd91]
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+---
+ userspace/libsinsp/CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/userspace/libsinsp/CMakeLists.txt b/userspace/libsinsp/CMakeLists.txt
+index 9794a697c..a82f8c0c1 100644
+--- a/userspace/libsinsp/CMakeLists.txt
++++ b/userspace/libsinsp/CMakeLists.txt
+@@ -181,7 +181,9 @@ set(SINSP_LIBRARIES
+ 	"${JSONCPP_LIB}"
+ 	"${CARES_LIB}")
+ 
+-add_dependencies(sinsp valijson)
++if(USE_BUNDLED_VALIJSON)
++	add_dependencies(sinsp valijson)
++endif()
+ 
+ if(WITH_CHISEL AND USE_BUNDLED_LUAJIT)
+ 	add_dependencies(sinsp luajit)
