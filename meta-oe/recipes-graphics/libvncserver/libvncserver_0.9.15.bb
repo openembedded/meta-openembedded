@@ -44,8 +44,10 @@ FILES:libvncclient = "${libdir}/libvncclient.*"
 
 inherit cmake
 
-SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https"
-SRCREV = "10e9eb75f73e973725dc75c373de5d89807af028"
+SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https;tag=LibVNCServer-${PV} \
+           file://0001-CMake-require-at-least-CMake-3.5.patch \
+"
+SRCREV = "9b54b1ec32731bd23158ca014dc18014db4194c3"
 
 
 EXTRA_OECMAKE = "-DMAKE_INSTALL_LIBDIR=${libdir}"
