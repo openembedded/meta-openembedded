@@ -2,18 +2,17 @@ DESCRIPTION = "Bluetooth library with attribute support"
 SECTION = "libs/network"
 
 LICENSE = "GPL-2.0-or-later | BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://CMakeLists.txt;beginline=1;endline=6;md5=a87ee154f005a6f035b8b34ac2191f3b"
+LIC_FILES_CHKSUM = "file://CMakeLists.txt;beginline=1;endline=6;md5=f44a9a14d37330e7cd454e694e714ab8"
 
 DEPENDS = "bluez5 glib-2.0 glib-2.0-native python3-packaging-native"
 
-PV = "0.2+git"
-
-SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https;tag=${PV} \
            file://dbus-avoid-strange-chars-from-the-build-dir.patch \
+           file://0001-Add-missing-include.patch \
            "
 
 SRCBRANCH = "master"
-SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
+SRCREV = "f99558d9b8e3dbba2a952a0b292d3497aec8ee69"
 
 
 CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"

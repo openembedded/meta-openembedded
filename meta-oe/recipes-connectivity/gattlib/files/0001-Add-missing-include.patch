@@ -1,0 +1,24 @@
+From a074af0d6a21665d3dfbd785ffd788146afeacef Mon Sep 17 00:00:00 2001
+From: Davide Cavalca <dcavalca@fedoraproject.org>
+Date: Thu, 25 Apr 2024 21:39:23 -0700
+Subject: [PATCH] Add missing include
+
+Upstream-Status: Backport [a074af0d6a21665d3dfbd785ffd788146afeacef]
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+---
+ common/gattlib_common_adapter.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/common/gattlib_common_adapter.c b/common/gattlib_common_adapter.c
+index d56ed5b..d4274c8 100644
+--- a/common/gattlib_common_adapter.c
++++ b/common/gattlib_common_adapter.c
+@@ -4,6 +4,8 @@
+  * Copyright (c) 2021-2024, Olivier Martin <olivier@labapart.org>
+  */
+ 
++#include <ctype.h>
++
+ #include "gattlib_internal.h"
+ 
+ // Keep track of the allocated adapters to avoid an adapter to be freed twice.
