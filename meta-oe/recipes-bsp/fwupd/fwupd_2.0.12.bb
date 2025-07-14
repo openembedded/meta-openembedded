@@ -37,6 +37,8 @@ GIDOCGEN_MESON_DISABLE_FLAG = 'disabled'
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
 
+EXTRA_OEMESON = "-Dvendor_ids_dir=${datadir}/hwdata"
+
 PACKAGECONFIG ??= "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
