@@ -6,7 +6,9 @@ SRCREV_vk-gl-cts = "42e61858e862e153cd0fe36593a8c3f7c16c3275"
 
 require opengl-es-cts-sources.inc
 
-EXTRA_OECMAKE += "-DSELECTED_BUILD_TARGETS="cts-runner deqp-egl deqp-gles2 deqp-gles3 deqp-gles31 deqp-gl-shared de-internal-tests glcts""
+EXTRA_OECMAKE += "-DSELECTED_BUILD_TARGETS="cts-runner deqp-egl deqp-gles2 deqp-gles3 deqp-gles31 deqp-gl-shared de-internal-tests glcts" \
+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+"
 
 do_install() {
 	install -d ${D}/${CTSDIR}
