@@ -14,12 +14,12 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = "\
     git://git.openwrt.org/project/libubox.git;branch=master \
-    file://0001-version-libraries.patch \
-    file://fix-libdir.patch \
-    file://0001-blobmsg-fix-array-out-of-bounds-GCC-10-warning.patch \
+    file://0001-cmake-Set-library-version.patch \
+    file://0002-cmake-fix-the-CMAKE_INSTALL_LIBDIR.patch \
+    file://0003-cmake-Don-t-include-lua-and-examples-directories-if-.patch \
 "
 
-SRCREV = "07413cce72e19520af55dfcbc765484f5ab41dd9"
+SRCREV = "b7acc8e6fd5e13611ad90a593e98f9589af4009a"
 PV = "1.0.1+git"
 
 # Upstream repo does not tag

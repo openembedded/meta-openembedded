@@ -1,0 +1,35 @@
+From 93e7b9014a14193e39e5d414c81da2d32f94ed43 Mon Sep 17 00:00:00 2001
+From: Moritz Haase <Moritz.Haase@bmw.de>
+Date: Mon, 14 Jul 2025 09:23:09 +0200
+Subject: [PATCH 3/3] cmake: Don't include 'lua' and 'examples' directories if
+ disabled
+
+It's the sensible thing to do and unblocks builds with CMake 4+, since both
+CMakeLists.txt files in the directories in question have
+'cmake_minimum_required(VERSION 2.6)'.
+
+Upstream-Status: Pending
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+---
+ CMakeLists.txt | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 783fa0a..61e152c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,8 +46,12 @@ INSTALL(TARGETS ubox ubox-static
+ 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+ )
+ 
+-ADD_SUBDIRECTORY(lua)
+-ADD_SUBDIRECTORY(examples)
++IF(BUILD_LUA)
++	ADD_SUBDIRECTORY(lua)
++ENDIF()
++IF(BUILD_EXAMPLES)
++	ADD_SUBDIRECTORY(examples)
++ENDIF()
+ 
+ MACRO(ADD_UNIT_TEST_SAN name)
+   ADD_EXECUTABLE(${name}-san ${name}.c)
