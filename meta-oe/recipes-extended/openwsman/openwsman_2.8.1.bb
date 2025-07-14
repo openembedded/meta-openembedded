@@ -15,15 +15,12 @@ DEPENDS = "curl libxml2 openssl libpam"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "0120e256faa255d997d9a49d5207662c0b73d430"
+SRCREV = "20efbccaf804a5a27a914eb8802b806416c03ece"
 
-SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
-           file://libssl-is-required-if-eventint-supported.patch \
+SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https;tag=v${PV} \
            file://openwsmand.service \
            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
-           file://0001-Link-with-libm-for-floor-function.patch \
            "
-
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"

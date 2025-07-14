@@ -13,8 +13,6 @@ Upstream-Status: Pending
  src/lib/u/lock.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/lib/u/lock.c b/src/lib/u/lock.c
-index 025eea4c..b31c77b5 100644
 --- a/src/lib/u/lock.c
 +++ b/src/lib/u/lock.c
 @@ -50,7 +50,7 @@
@@ -26,6 +24,3 @@ index 025eea4c..b31c77b5 100644
  #define PTHREAD_MUTEX_RECURSIVE_NP PTHREAD_MUTEX_RECURSIVE
  #endif
  
--- 
-2.14.1
-
