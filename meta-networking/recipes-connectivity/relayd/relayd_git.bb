@@ -15,4 +15,6 @@ UPSTREAM_CHECK_COMMITS = "1"
 
 inherit cmake
 
+EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+
 CFLAGS:append:toolchain-clang = " -Wno-error=gnu-variable-sized-type-not-at-end"
