@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0005-generateVersion.sh-set-correct-buildrev.patch \
            file://0006-CMakeLists.txt-do-not-use-ccache.patch \
            file://0007-libsodium-aarch64-set-compiler-attributes-after-including-arm_.patch \
+           file://0008-MINIFICPP-2553-CMP0065-OLD-removed-in-cmake-4.0-remo.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
