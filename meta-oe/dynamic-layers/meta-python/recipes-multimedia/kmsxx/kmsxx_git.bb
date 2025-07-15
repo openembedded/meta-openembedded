@@ -20,15 +20,7 @@ PACKAGECONFIG[utils] += "-Dutils=true, -Dutils=false"
 
 DEPENDS += "libdrm libevdev fmt"
 
-
 inherit meson pkgconfig
-
-do_install:append() {
-    if ${@bb.utils.contains('PACKAGECONFIG', 'utils', 'true', 'false', d)}; then
-        # kmstest already provided by libdrm-tests
-        mv ${D}${bindir}/kmstest ${D}${bindir}/kmsxxtest
-    fi
-}
 
 FILES:${PN} = "${bindir} ${libdir}"
 FILES:${PN}-python += "${PYTHON_SITEPACKAGES_DIR}/*"
