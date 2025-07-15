@@ -1,0 +1,92 @@
+From: Ulrich Weigand <ulrich.weigand@de.ibm.com>
+Date: Fri, 4 Mar 2022 17:41:12 +0100
+Subject: [PATCH] Support 64-bit limbs on no-asm platforms
+
+Currently, platforms without assembler support always use 32-bit limbs,
+but the Rust bindings always assume 64-bit limbs.  This breaks on
+big-endian platforms like our IBM Z (s390x).
+
+This patch enables 64-bit limbs on 64-bit platforms even if there is
+no hand-written assembler, by using a 128-bit integer type in the
+C implementation (this is an extension that is widely supported on
+64-bit platforms with GCC or LLVM).
+
+Note that this means that the argument "n" to quot_rem_n is no
+longer guaranteed to always be a multiple of 2, so the corresponding
+assertion needs to be removed as well.
+
+This fixes the broken Rust bindings on IBM Z, and also improves
+performance by a factor or 3 or more, because compiler-generated
+code handling __int128 already uses the 64x64->128 multiply
+instruction our ISA provides.
+
+To improve performance of compiler-generated code a bit more, this
+also switches to the -O3 optimization level, which helps with
+unrolling of the Montgomery multiply core loop.
+
+Upstream-Status: Pending
+
+diff --git a/blst/bindings/rust/build.rs b/blst/bindings/rust/build.rs
+index d823057..093a072 100644
+--- a/blst/bindings/rust/build.rs
++++ b/blst/bindings/rust/build.rs
+@@ -234,7 +234,11 @@ fn main() {
+         cc.define("SCRATCH_LIMIT", "(45 * 1024)");
+     }
+     if !cfg!(debug_assertions) {
+-        cc.opt_level(2);
++        if target_arch.eq("s390x") {
++            cc.opt_level(3);
++        } else {
++            cc.opt_level(2);
++        }
+     }
+     cc.files(&file_vec).compile("blst");
+ 
+diff --git a/blst/src/no_asm.h b/blst/src/no_asm.h
+index be7bf47..802b78f 100644
+--- a/blst/src/no_asm.h
++++ b/blst/src/no_asm.h
+@@ -6,6 +6,8 @@
+ 
+ #if LIMB_T_BITS==32
+ typedef unsigned long long llimb_t;
++#else
++typedef unsigned __int128 llimb_t;
+ #endif
+ 
+ #if !defined(__STDC_VERSION__) || __STDC_VERSION__<199901 || defined(__STDC_NO_VLA__)
+@@ -1155,7 +1157,7 @@ limb_t div_3_limbs(const limb_t div_top[2], limb_t d_lo, limb_t d_hi)
+ static limb_t quot_rem_n(limb_t *div_rem, const limb_t *divisor,
+                                           limb_t quotient, size_t n)
+ {
+-    __builtin_assume(n != 0 && n%2 == 0);
++    __builtin_assume(n != 0);
+     llimb_t limbx;
+     limb_t tmp[n+1], carry, mask, borrow;
+     size_t i;
+diff --git a/blst/src/vect.h b/blst/src/vect.h
+index 19640b1..938a5ff 100644
+--- a/blst/src/vect.h
++++ b/blst/src/vect.h
+@@ -18,7 +18,7 @@ typedef unsigned long long limb_t;
+ typedef unsigned __int64 limb_t;
+ # define LIMB_T_BITS    64
+ 
+-#elif defined(__BLST_NO_ASM__) || defined(__wasm64__)
++#elif defined(__wasm64__)
+ typedef unsigned int limb_t;
+ # define LIMB_T_BITS    32
+ # ifndef __BLST_NO_ASM__
+@@ -31,8 +31,10 @@ typedef unsigned long limb_t;
+ #   define LIMB_T_BITS   64
+ #  else
+ #   define LIMB_T_BITS   32
+-#   define __BLST_NO_ASM__
+ #  endif
++# ifndef __BLST_NO_ASM__
++#  define __BLST_NO_ASM__
++# endif
+ #endif
+ 
+ /*
