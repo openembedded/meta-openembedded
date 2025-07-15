@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# The whole test suite may take up to 40 minutes to run, so setting -t 2400
+# parameter in ptest-runner is necessary to not kill it before completion
+
+cd tests || exit 1
+export BPFTRACE_RUNTIME_TEST_EXECUTABLE=/usr/bin/bpftrace
+export BPFTRACE_AOT_RUNTIME_TEST_EXECUTABLE=/usr/bin/bpftrace-aotrt
+
+PASS_CNT=0
+FAIL_CNT=0
+SKIP_CNT=0
+FAILED=""
+
+print_test_result() {
+     if [ $? -eq 0 ]; then
+         echo "PASS: $1"
+         PASS_CNT=$((PASS_CNT + 1))
+     else
+         echo "FAIL: $1"
+         FAIL_CNT=$((FAIL_CNT + 1))
+         FAILED="${FAILED:+$FAILED }$1;"
+     fi
+ }
+
+IFS=$(printf '\n\t')
+# Start unit tests
+for test_name in $(./bpftrace_test --gtest_list_tests | grep -v "^ "); do
+    ./bpftrace_test --gtest_filter="${test_name}*" > /dev/null 2>&1
+    print_test_result "unit:$test_name"
+done
+
+# Start runtime tests
+for test_name in $(ls runtime); do
+    # Ignore test cases that hang the suite forever (bpftrace v0.16.0)
+    if [ "$test_name" = "signals" ] || [ "$test_name" = "watchpoint" ]; then
+        echo "SKIP: runtime:$test_name"
+        SKIP_CNT=$((SKIP_CNT + 1))
+        continue
+    fi
+    python3 runtime/engine/main.py --filter="${test_name}.*" > /dev/null 2>&1
+    print_test_result "runtime:$test_name"
+done
+unset IFS
+
+echo "#### bpftrace tests summary ####"
+echo "# TOTAL: $((PASS_CNT + FAIL_CNT + SKIP_CNT))"
+echo "# PASS:  $PASS_CNT"
+echo "# FAIL:  $FAIL_CNT ($FAILED)"
+echo "# SKIP:  $SKIP_CNT"
+echo "################################"

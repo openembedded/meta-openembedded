@@ -1,0 +1,41 @@
+From 4f64ed40e1ffea7ea278627f30a01018e57dcbcf Mon Sep 17 00:00:00 2001
+From: Mingli Yu <mingli.yu@windriver.com>
+Date: Wed, 9 Sep 2020 05:48:19 +0000
+Subject: [PATCH] CMakeLists.txt: override the PY_CMD_ESCAPED
+
+Override the PY_CMD_ESCAPED as the PY_CMD_ESCAPED is constructed by
+the full path of the python3. In some cases, the path is so long and
+result in the PY_CMD_ESCAPED exceeds 255 characters and comes below
+do_configure error:
+ | CMake Error at src/python/CMakeLists.txt:18 (configure_file):
+ |   configure_file Problem configuring file
+ |
+ | CMake Error: Could not open file for write in copy operation /buildarea1/test/wr_build/wr1020_20200909_bcc/bcc_long_Kernel/auto-standalone_next/200827/lxbuilds/Intel-Snow-Ridge-NS_platform_up/intel-x86-64-standard-glibc-std/wrlinux/build/tmp-glibc/work/corei7-64-wrs-linux/bcc/0.15.0-r0/build/src/python/bcc--buildarea1-test-wr_build-wr1020_20200909_bcc-bcc_long_Kernel-auto-standalone_next-200827-lxbuilds-Intel-Snow-Ridge-NS_platform_up-intel-x86-64-standard-glibc-std-wrlinux-build-tmp-glibc-work-corei7-64-wrs-linux-bcc-0.15.0-r0-recipe-sysroot-native-usr-bin-python3-native-python3/bcc/version.py.tmp
+
+Upstream-Status: Pending
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ src/python/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/src/python/CMakeLists.txt
++++ b/src/python/CMakeLists.txt
+@@ -16,7 +16,7 @@ file(GLOB_RECURSE PYTHON_INCLUDES RELATI
+ 
+ foreach(PY_CMD ${PYTHON_CMD})
+   string(REPLACE "/" "-" PY_CMD_ESCAPED ${PY_CMD})
+-  set(PY_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bcc-${PY_CMD_ESCAPED})
++  set(PY_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bcc-python3)
+ 
+   foreach(PY_SRC ${PYTHON_SOURCES})
+     configure_file(${PY_SRC} ${PY_DIRECTORY}/${PY_SRC} COPYONLY)
+@@ -35,7 +35,7 @@ foreach(PY_CMD ${PYTHON_CMD})
+     DEPENDS ${PYTHON_SOURCES} ${PYTHON_INCLUDES}
+     COMMENT "Building sdist for ${PY_CMD}"
+   )
+-  add_custom_target(bcc_py_${PY_CMD_ESCAPED} ALL DEPENDS ${PIP_INSTALLABLE})
++  add_custom_target(bcc_py_python3 ALL DEPENDS ${PIP_INSTALLABLE})
+ 
+   if(NOT PYTHON_PREFIX)
+      set(PYTHON_PREFIX ${CMAKE_INSTALL_PREFIX})

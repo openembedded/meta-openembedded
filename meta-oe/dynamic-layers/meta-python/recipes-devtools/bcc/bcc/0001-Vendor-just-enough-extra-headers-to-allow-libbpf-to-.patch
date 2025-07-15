@@ -1,0 +1,124 @@
+From 6cffc195eca6b53a12865d325ff97e7b5ba8f22b Mon Sep 17 00:00:00 2001
+From: Daniel Thompson <daniel.thompson@linaro.org>
+Date: Thu, 19 May 2022 09:14:20 +0000
+Subject: [PATCH] Vendor just enough extra headers to allow libbpf to be
+ de-vendored
+
+Currently it is not possible to build the bcc recipe when we de-vendor
+libbpf and adopt the packaged version. Ironically this is due to the
+deliberate vendoring of some depreciated btf code that is being removed
+upstream because bcc was the only user! In other words the vendored code
+doesn't work the de-vendored libbpf because also ends up de-vendoring
+one of the Linux uapi headers.
+
+This is obviously an OE specific issue (due to the current combination
+of linux headers, libbpf and bcc). It's a bit of a mess and the right
+solution is probably to update the system UAPI headers but I am committing
+this for now simply so I can easily show why we must de-vendor libbpf in
+the first place!
+
+Upstream-Status: Inappropriate [other]
+
+Signed-off-by: Daniel Thompson <daniel.thompson@linaro.org>
+---
+ src/cc/bcc_btf.cc | 87 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 87 insertions(+)
+
+diff --git a/src/cc/bcc_btf.cc b/src/cc/bcc_btf.cc
+index 7f551ae8..cca3c6c3 100644
+--- a/src/cc/bcc_btf.cc
++++ b/src/cc/bcc_btf.cc
+@@ -33,6 +33,93 @@
+ 
+ namespace btf_ext_vendored {
+ 
++#ifdef HAVE_EXTERNAL_LIBBPF
++/*
++ * When we de-vendor libbpf we end up picking up an older version of
++ * [uapi/]linux/bpf.h which misses out some of the data structures needed
++ * to compile this file. Annoyingly the code that doesn't compile it
++ * a result of de-vendoring
++ *
++ * This section is a minimized re-vendoring to fix that. It is not robust
++ * against version skew: When the system linux/bpf.h is updated then this
++ * will break the build and the patch can be dropped.
++ */
++
++/* bpf_core_relo_kind encodes which aspect of captured field/type/enum value
++ * has to be adjusted by relocations. It is emitted by llvm and passed to
++ * libbpf and later to the kernel.
++ */
++enum bpf_core_relo_kind {
++	BPF_CORE_FIELD_BYTE_OFFSET = 0,      /* field byte offset */
++	BPF_CORE_FIELD_BYTE_SIZE = 1,        /* field size in bytes */
++	BPF_CORE_FIELD_EXISTS = 2,           /* field existence in target kernel */
++	BPF_CORE_FIELD_SIGNED = 3,           /* field signedness (0 - unsigned, 1 - signed) */
++	BPF_CORE_FIELD_LSHIFT_U64 = 4,       /* bitfield-specific left bitshift */
++	BPF_CORE_FIELD_RSHIFT_U64 = 5,       /* bitfield-specific right bitshift */
++	BPF_CORE_TYPE_ID_LOCAL = 6,          /* type ID in local BPF object */
++	BPF_CORE_TYPE_ID_TARGET = 7,         /* type ID in target kernel */
++	BPF_CORE_TYPE_EXISTS = 8,            /* type existence in target kernel */
++	BPF_CORE_TYPE_SIZE = 9,              /* type size in bytes */
++	BPF_CORE_ENUMVAL_EXISTS = 10,        /* enum value existence in target kernel */
++	BPF_CORE_ENUMVAL_VALUE = 11,         /* enum value integer value */
++};
++
++/*
++ * "struct bpf_core_relo" is used to pass relocation data form LLVM to libbpf
++ * and from libbpf to the kernel.
++ *
++ * CO-RE relocation captures the following data:
++ * - insn_off - instruction offset (in bytes) within a BPF program that needs
++ *   its insn->imm field to be relocated with actual field info;
++ * - type_id - BTF type ID of the "root" (containing) entity of a relocatable
++ *   type or field;
++ * - access_str_off - offset into corresponding .BTF string section. String
++ *   interpretation depends on specific relocation kind:
++ *     - for field-based relocations, string encodes an accessed field using
++ *       a sequence of field and array indices, separated by colon (:). It's
++ *       conceptually very close to LLVM's getelementptr ([0]) instruction's
++ *       arguments for identifying offset to a field.
++ *     - for type-based relocations, strings is expected to be just "0";
++ *     - for enum value-based relocations, string contains an index of enum
++ *       value within its enum type;
++ * - kind - one of enum bpf_core_relo_kind;
++ *
++ * Example:
++ *   struct sample {
++ *       int a;
++ *       struct {
++ *           int b[10];
++ *       };
++ *   };
++ *
++ *   struct sample *s = ...;
++ *   int *x = &s->a;     // encoded as "0:0" (a is field #0)
++ *   int *y = &s->b[5];  // encoded as "0:1:0:5" (anon struct is field #1,
++ *                       // b is field #0 inside anon struct, accessing elem #5)
++ *   int *z = &s[10]->b; // encoded as "10:1" (ptr is used as an array)
++ *
++ * type_id for all relocs in this example will capture BTF type id of
++ * `struct sample`.
++ *
++ * Such relocation is emitted when using __builtin_preserve_access_index()
++ * Clang built-in, passing expression that captures field address, e.g.:
++ *
++ * bpf_probe_read(&dst, sizeof(dst),
++ *		  __builtin_preserve_access_index(&src->a.b.c));
++ *
++ * In this case Clang will emit field relocation recording necessary data to
++ * be able to find offset of embedded `a.b.c` field within `src` struct.
++ *
++ * [0] https://llvm.org/docs/LangRef.html#getelementptr-instruction
++ */
++struct bpf_core_relo {
++	__u32 insn_off;
++	__u32 type_id;
++	__u32 access_str_off;
++	enum bpf_core_relo_kind kind;
++};
++#endif /* HAVE_EXTERNAL_LIBBPF */
++
+ /* The minimum bpf_func_info checked by the loader */
+ struct bpf_func_info_min {
+         uint32_t   insn_off;

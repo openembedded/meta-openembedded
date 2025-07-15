@@ -1,0 +1,65 @@
+#!/bin/sh
+
+cd tests || exit 1
+
+PASS_CNT=0
+FAIL_CNT=0
+FAILED=""
+
+print_test_result() {
+    if [ $? -eq 0 ]; then
+        echo PASS: "$1"
+        PASS_CNT=$((PASS_CNT + 1))
+    else
+        echo FAIL: "$1"
+        FAIL_CNT=$((FAIL_CNT + 1))
+        FAILED="$FAILED $1;"
+    fi
+}
+
+ARCH=$(uname -m)
+
+case "$ARCH" in
+  x86_64)
+    KDIR="x86"
+    ;;
+  riscv64)
+    KDIR="riscv"
+    ;;
+  aarch64)
+    KDIR="arm64"
+    ;;
+  powerpc64le | ppc64le)
+    KDIR="powerpc"
+    ;;
+  *)
+    echo "Architecture not present, Add the architecture in run-ptest: $ARCH"
+    exit 1
+    ;;
+esac
+
+export BCC_KERNEL_SOURCE="/usr/src/kernel/arch/$KDIR"
+
+# Run CC tests, set IFS as test names have spaces
+IFS=$(printf '\n\t')
+for test_name in $(./cc/test_libbcc_no_libbpf --list-test-names-only); do
+    ./cc/test_libbcc_no_libbpf "$test_name" > /dev/null 2>&1
+    print_test_result "cc $test_name"
+done
+unset IFS
+
+# Run python tests, skip namespace tests as they currently don't work
+if cmake -DCMAKE_TESTING_ENABLED=ON -DTEST_WRAPPER="$(pwd)/ptest_wrapper.sh" python > /dev/null 2>&1; then
+    for test_name in $(awk -F '[( ]' '/^add_test/ && !/namespace/ {print $2}' CTestTestfile.cmake); do
+        ctest -Q -R "$test_name"
+        print_test_result "python $test_name"
+    done
+else
+    print_test_result "cmake error, couldn't start python tests"
+fi
+
+echo "#### bcc tests summary ####"
+echo "# TOTAL: $((PASS_CNT + FAIL_CNT))"
+echo "# PASS:  $PASS_CNT"
+echo "# FAIL:  $FAIL_CNT ($FAILED)"
+echo "###########################"
