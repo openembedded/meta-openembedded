@@ -1,4 +1,4 @@
-From 06207b1340963e77f2e5d08ebf9727180ad86a36 Mon Sep 17 00:00:00 2001
+From bcf7da314d4cd1db1708d48c908ab7da797a733b Mon Sep 17 00:00:00 2001
 From: Naveen Saini <naveen.kumar.saini@intel.com>
 Date: Fri, 2 Aug 2019 10:41:26 +0800
 Subject: [PATCH] configure.ac: skip running test program when cross-compiling
@@ -11,10 +11,10 @@ Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
  1 file changed, 2 insertions(+), 17 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index c4a9b02..3f5a792 100644
+index 7d16afb..65cd194 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -151,7 +151,7 @@ AC_CHECK_FUNCS([backtrace_symbols_fd memrchr sysctl sysctlbyname])
+@@ -152,7 +152,7 @@ AC_CHECK_FUNCS([backtrace_symbols_fd memrchr sysctl sysctlbyname \
  AC_FUNC_SELECT_ARGTYPES
  
  AC_MSG_CHECKING([for strlcpy])
@@ -23,7 +23,7 @@ index c4a9b02..3f5a792 100644
                 char a[2];
                 if (strlcpy(a, "yes", 2) != 3)
                     return 1;]])],
-@@ -167,7 +167,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
+@@ -168,7 +168,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
                ])
  
  AC_MSG_CHECKING([for strlcat])
@@ -32,7 +32,7 @@ index c4a9b02..3f5a792 100644
                 char a[4] = "no";
                 if (strlcat(a, "yes", 4) != 5)
                     return 1;]])],
-@@ -182,21 +182,6 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
+@@ -183,21 +183,6 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <string.h>]],[[
                             [Define to 1 if you have the strlcat function.])
                ])
  
