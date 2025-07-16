@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
 
 SRC_URI[sha256sum] = "16f8a2c9538c14a557b4d309ed4d0a7c60f0253e8ed7b6c9a2859a7582f8b1b8"
 
+SRC_URI += "file://CVE-2025-53643.patch"
+
 inherit python_setuptools_build_meta pypi
 
 RDEPENDS:${PN} = "\
