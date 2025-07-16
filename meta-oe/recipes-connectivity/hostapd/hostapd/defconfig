@@ -157,6 +157,17 @@ CONFIG_SAE_PK=y
 # code is not needed.
 #CONFIG_NO_STDOUT_DEBUG=y
 
+# Automatic Channel Selection
+# This will allow hostapd to pick the channel automatically when channel is set
+# to "acs_survey" or "0". Eventually, other ACS algorithms can be added in
+# similar way.
+CONFIG_ACS=y
+
+# Multiband Operation support
+# These extensions facilitate efficient use of multiple frequency bands
+# available to the AP and the devices that may associate with it.
+CONFIG_MBO=y
+
 # Opportunistic Wireless Encryption (OWE)
 CONFIG_OWE=y
 
