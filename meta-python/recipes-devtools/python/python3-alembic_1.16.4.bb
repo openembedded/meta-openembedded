@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2ee18d90dcc02d96b76e9e953629936"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "e53c38ff88dadb92eb22f8b150708367db731d58ad7e9d417c9168ab516cbed8"
+SRC_URI[sha256sum] = "efab6ada0dd0fae2c92060800e0bf5c1dc26af15a10e02fb4babff164b4725e2"
 
 RDEPENDS:${PN} += "\
     python3-dateutil \
