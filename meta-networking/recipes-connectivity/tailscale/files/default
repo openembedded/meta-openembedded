@@ -1,0 +1,2 @@
+# tailscaled arguments, e.g. use "-statedir /data/.." to point to persistent storage
+ARGS=""
