@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "elfutils"
 DEPENDS:append:libc-musl = " argp-standalone"
 
-inherit autotools
-
 SRCREV = "8ccd4f627569b0af122c8d1df98dc6813ab97a40"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https;tag=v${PV} \
-           file://0001-include-libgen.h-for-basename.patch"
+           file://0001-include-libgen.h-for-basename.patch \
+           file://0001-build-Fix-a-build-error-on-i386.patch \
+          "
 
 LDFLAGS:append:libc-musl = " -largp"
 
@@ -26,11 +26,22 @@ def set_target_arch(d):
     else:
         return arch
 
-EXTRA_UFTRACE_OECONF = "ARCH=${@set_target_arch(d)} \
-                        with_elfutils=/use/libelf/from/sysroot"
 
 do_configure() {
-    ${S}/configure ${EXTRA_UFTRACE_OECONF}
+    ${S}/configure --prefix=${prefix} \
+    --objdir=${B} \
+    --cflags='${CFLAGS}' \
+    --ldflags='${LDFLAGS}' \
+    --arch='${@set_target_arch(d)}' \
+    --with-elfutils=${STAGING_EXECPREFIXDIR}
+}
+
+do_compile() {
+    oe_runmake V=1
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D}
 }
 
 FILES_SOLIBSDEV = ""
