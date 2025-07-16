@@ -142,6 +142,10 @@ CONFIG_IEEE80211N=y
 # IEEE 802.11ac (Very High Throughput) support
 CONFIG_IEEE80211AC=y
 
+# IEEE 802.11be EHT support
+# CONFIG_IEEE80211AX is mandatory for setting CONFIG_IEEE80211BE.
+CONFIG_IEEE80211BE=y
+
 # Simultaneous Authentication of Equals (SAE), WPA3-Personal
 CONFIG_SAE=y
 
