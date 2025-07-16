@@ -149,7 +149,17 @@ CONFIG_IEEE80211BE=y
 # Simultaneous Authentication of Equals (SAE), WPA3-Personal
 CONFIG_SAE=y
 
+# SAE Public Key, WPA3-Personal
+CONFIG_SAE_PK=y
+
 # Remove debugging code that is printing out debug messages to stdout.
 # This can be used to reduce the size of the hostapd considerably if debugging
 # code is not needed.
 #CONFIG_NO_STDOUT_DEBUG=y
+
+# Opportunistic Wireless Encryption (OWE)
+CONFIG_OWE=y
+
+# Enable support for SuiteB
+CONFIG_SUITEB=y
+CONFIG_SUITEB192=y
