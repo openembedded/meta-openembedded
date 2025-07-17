@@ -41,6 +41,15 @@ do_install_ptest() {
         cp -rf ${B}/tests/runtime ${D}${PTEST_PATH}/tests
         cp -rf ${B}/tests/test* ${D}${PTEST_PATH}/tests
     fi
+    for f in testlibs/cmake_install.cmake \
+    testprogs/cmake_install.cmake \
+    testlibs/CTestTestfile.cmake \
+    testprogs/CTestTestfile.cmake
+    do
+        sed -i -e 's|${STAGING_BINDIR_TOOLCHAIN}/||' ${D}${libdir}/bpftrace/ptest/tests/$f
+        sed -i -e 's|${S}/||' ${D}${libdir}/bpftrace/ptest/tests/$f
+        sed -i -e 's|${B}/||' ${D}${libdir}/bpftrace/ptest/tests/$f
+    done
 }
 
 EXTRA_OECMAKE = " \
