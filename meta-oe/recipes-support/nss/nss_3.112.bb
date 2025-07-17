@@ -73,11 +73,15 @@ do_compile:prepend:class-native() {
     RPATH="-Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} -Wl,-rpath-link,${STAGING_BASE_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_BASE_LIBDIR_NATIVE}"
 }
 
+NATIVE_CC:class-target:toolchain-clang = "clang --rtlib=libgcc --unwindlib=libgcc"
+NATIVE_CC:class-nativesdk:toolchain-clang = "clang --rtlib=libgcc --unwindlib=libgcc"
+NATIVE_CC ?= "${BUILD_CC}"
+
 do_compile() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR}/nspr
 
     export CROSS_COMPILE=1
-    export NATIVE_CC="${BUILD_CC}"
+    export NATIVE_CC="${NATIVE_CC}"
     # Additional defines needed on Centos 7
     export NATIVE_FLAGS="${BUILD_CFLAGS} -DLINUX -Dlinux"
     export BUILD_OPT=1
@@ -91,7 +95,6 @@ do_compile() {
 
     export LIBDIR=${libdir}
     export MOZILLA_CLIENT=1
-    export NS_USE_GCC=1
     export NSS_USE_SYSTEM_SQLITE=1
     export NSS_ENABLE_ECC=1
     export NSS_ENABLE_WERROR=0
@@ -144,14 +147,13 @@ do_install:prepend:class-nativesdk() {
 
 do_install() {
     export CROSS_COMPILE=1
-    export NATIVE_CC="${BUILD_CC}"
+    export NATIVE_CC="${NATIVE_CC}"
     export BUILD_OPT=1
 
     export FREEBL_NO_DEPEND=1
 
     export LIBDIR=${libdir}
     export MOZILLA_CLIENT=1
-    export NS_USE_GCC=1
     export NSS_USE_SYSTEM_SQLITE=1
     export NSS_ENABLE_ECC=1
 
