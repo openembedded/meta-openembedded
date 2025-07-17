@@ -142,10 +142,35 @@ CONFIG_IEEE80211N=y
 # IEEE 802.11ac (Very High Throughput) support
 CONFIG_IEEE80211AC=y
 
+# IEEE 802.11be EHT support
+# CONFIG_IEEE80211AX is mandatory for setting CONFIG_IEEE80211BE.
+CONFIG_IEEE80211BE=y
+
 # Simultaneous Authentication of Equals (SAE), WPA3-Personal
 CONFIG_SAE=y
+
+# SAE Public Key, WPA3-Personal
+CONFIG_SAE_PK=y
 
 # Remove debugging code that is printing out debug messages to stdout.
 # This can be used to reduce the size of the hostapd considerably if debugging
 # code is not needed.
 #CONFIG_NO_STDOUT_DEBUG=y
+
+# Automatic Channel Selection
+# This will allow hostapd to pick the channel automatically when channel is set
+# to "acs_survey" or "0". Eventually, other ACS algorithms can be added in
+# similar way.
+CONFIG_ACS=y
+
+# Multiband Operation support
+# These extensions facilitate efficient use of multiple frequency bands
+# available to the AP and the devices that may associate with it.
+CONFIG_MBO=y
+
+# Opportunistic Wireless Encryption (OWE)
+CONFIG_OWE=y
+
+# Enable support for SuiteB
+CONFIG_SUITEB=y
+CONFIG_SUITEB192=y
