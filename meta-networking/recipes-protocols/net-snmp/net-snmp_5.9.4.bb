@@ -46,8 +46,6 @@ PARALLEL_MAKE = ""
 CCACHE = ""
 CLEANBROKEN = "1"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
-
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} des smux"
 PACKAGECONFIG[des] = "--enable-des, --disable-des"
 PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
