@@ -16,6 +16,10 @@ CPPFLAGS = "${TUNE_CCARGS}"
 CPPFLAGS[export] = "1"
 
 LDFLAGS = "${TUNE_CCARGS}"
+# Linking with compiler-rt on arm results in
+# libclang_rt.builtins-armhf.a(divmoddi4.c.o): in function `__divmoddi4':
+#/usr/src/debug/compiler-rt/20.1.8/compiler-rt/lib/builtins/divmoddi4.c:(.text.__divmoddi4+0x7a): undefined reference to `__stack_chk_fail'
+LDFLAGS:append:toolchain-clang:libc-klibc:arm = " --rtlib=libgcc --unwindlib=libgcc"
 LDFLAGS[export] = "1"
 
 OVERRIDES =. "libc-klibc:"
