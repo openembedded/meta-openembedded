@@ -118,6 +118,9 @@ SYSROOT_DIR = "${STAGING_DIR_TARGET}"
 SYSROOT_DIR:class-native = "${STAGING_DIR_NATIVE}"
 do_configure[vardeps] += "SYSROOT_DIR"
 
+# i686-yoe-linux-ld.lld: error: undefined symbol: __unordtf2
+LDFLAGS:append:libc-glibc:toolchain-clang:x86 = " --rtlib=libgcc --unwindlib=libgcc"
+
 do_configure:prepend() {
     # this reflects what autogen.sh does, but the OE wrappers for autoreconf
     # allow it to work without the other gyrations which exist there
