@@ -24,6 +24,7 @@ SRC_URI = " \
     file://0011-include-limits.h-for-PATH_MAX.patch \
     file://0012-huge_page_setup_helper-use-python3-interpreter.patch \
     file://0013-elflink.c-include-libgen.h-for-basename.patch \
+    file://0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -41,8 +42,6 @@ PARALLEL_MAKE = ""
 CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
 
 export HUGETLB_LDSCRIPT_PATH = "${S}/ldscripts"
-
-TARGET_CC_ARCH += "${LDFLAGS}"
 
 LDFLAGS += "-B${S}"
 
