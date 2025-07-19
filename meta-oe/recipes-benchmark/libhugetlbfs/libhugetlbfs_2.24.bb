@@ -44,6 +44,9 @@ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0
 export HUGETLB_LDSCRIPT_PATH = "${S}/ldscripts"
 
 LDFLAGS += "-B${S}"
+# glibc objects have missing symbols from libgcc that compiler-rt does not provide
+# /usr/src/debug/glibc/2.41+git/stdio-common/../stdio-common/printf_fphex.c:123:(.text+0x77): undefined reference to `__unordtf2'
+LDFLAGS:append:libc-glibc:toolchain-clang:x86 = " --rtlib=libgcc --unwindlib=libgcc"
 
 inherit autotools-brokensep
 
