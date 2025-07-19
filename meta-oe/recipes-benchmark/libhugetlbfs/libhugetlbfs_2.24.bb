@@ -42,8 +42,6 @@ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0
 
 export HUGETLB_LDSCRIPT_PATH = "${S}/ldscripts"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
-
 LDFLAGS += "-B${S}"
 
 inherit autotools-brokensep
