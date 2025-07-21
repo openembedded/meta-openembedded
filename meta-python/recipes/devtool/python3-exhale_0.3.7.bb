@@ -13,4 +13,8 @@ inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "exhale"
 
+RDEPENDS:${PN} = "\
+    python3-beautifulsoup4 \
+    "
+
 BBCLASSEXTEND =+ "native"
