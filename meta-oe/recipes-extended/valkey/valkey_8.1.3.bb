@@ -17,15 +17,14 @@ SRC_URI = " \
 	file://0001-src-Do-not-reset-FINAL_LIBS.patch \
 	file://GNU_SOURCE-7.patch \
 "
-SRCREV = "fcd8bc3ee40f5d7841b7d5a8f3cd12252fec14e4"
-
+SRCREV = "d063dff523340e5a075f7ddc436e0c2a43d04061"
 
 RPROVIDES:${PN} = "virtual-redis"
 
 inherit pkgconfig update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
-FINAL_LIBS:riscv32:toolchain-clang = "-latomic"
+FINAL_LIBS:riscv32 = "-latomic"
 FINAL_LIBS:mips = "-latomic"
 FINAL_LIBS:arm = "-latomic"
 FINAL_LIBS:powerpc = "-latomic"
