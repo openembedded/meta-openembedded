@@ -19,7 +19,7 @@ SRC_URI = "\
     file://0001-fix-missing-makefile-rule-dependency.patch \
 "
 
-SRC_URI[sha256sum] = "52ee3cee3bc500a42095f73c4584e223b4b9d2dfc1cd3e5df965c5952eba8c8d"
+SRC_URI[sha256sum] = "342c0c028658a4a859fe70578b58c3b07e17bee0c7e3a13d063d4791e82c2dee"
 
 S = "${UNPACKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
 
