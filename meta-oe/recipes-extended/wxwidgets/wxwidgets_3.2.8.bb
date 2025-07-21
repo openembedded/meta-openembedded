@@ -40,6 +40,9 @@ EXTRA_OECMAKE += " \
     -DwxUSE_LIBPNG=sys \
     -DwxUSE_LIBTIFF=sys \
     -DwxUSE_REGEX=builtin \
+    -DwxBUILD_INSTALL_RUNTIME_DIR=${libdir} \
+    -DwxBUILD_INSTALL_LIBRARY_DIR=${libdir} \
+    -DwxBUILD_INSTALL_PLATFORM_SUBDIR=${libdir} \
 "
 EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
 
