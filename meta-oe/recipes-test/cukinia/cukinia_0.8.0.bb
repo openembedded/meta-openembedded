@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 SRC_URI = "git://github.com/savoirfairelinux/cukinia.git;protocol=https;branch=master"
 
-SRCREV = "be56f653743cc0e68bef81ef35df7c50ff8919c4"
+SRCREV = "bacdc5437aeae25099b0271231ec8b277e0caed9"
 
 
 RRECOMMENDS:${PN} = "libgpiod-tools"
