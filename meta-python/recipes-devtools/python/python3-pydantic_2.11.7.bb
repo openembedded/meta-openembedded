@@ -11,11 +11,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
 inherit python_hatchling ptest-python-pytest
 
-SRCREV = "bce81efdeac1cbefd0196b478a32aa2586bd595a"
+SRCREV = "702aaa6354cc30ae815676c57a8bbb4557ccb295"
 PV .= "+git"
 SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=main"
-
-
+SRC_URI += "file://0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch"
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
 RECIPE_NO_UPDATE_REASON = "Must be updated in sync with python3-pydantic-core."
