@@ -8,16 +8,15 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'goabackend', 
 
 DEPENDS += "gdk-pixbuf dbus glib-2.0 gcr keyutils"
 
-SRC_URI[archive.sha256sum] = "bcf655dd1ddc22bc25793b6840da19f5cad7ba0b7227ff969ed9c252f036aac5"
+SRC_URI[archive.sha256sum] = "fd69d0aec3b672621f525671b5e54f28b73939920b3fc308ade561a83a727b2d"
 
-PACKAGECONFIG ?= "goabackend kerberos owncloud google windows_live"
+PACKAGECONFIG ?= "goabackend kerberos owncloud google"
 
 PACKAGECONFIG[goabackend] = "-Dgoabackend=true,-Dgoabackend=false,gtk4 libadwaita json-glib libxml2 libsoup rest libsecret webkitgtk"
 PACKAGECONFIG[kerberos] = "-Dkerberos=true, -Dkerberos=false,krb5"
 PACKAGECONFIG[exchange] = "-Dexchange=true, -Dexchange=false"
 PACKAGECONFIG[google] = "-Dgoogle=true, -Dgoogle=false"
 PACKAGECONFIG[owncloud] = "-Downcloud=true, -Downcloud=false"
-PACKAGECONFIG[windows_live] = "-Dwindows_live=true, -Dwindows_live=false"
 PACKAGECONFIG[man] = "-Dman=true, -Dman=false,libxslt-native docbook-xsl-stylesheets-native"
 
 FILES:${PN} += " \
