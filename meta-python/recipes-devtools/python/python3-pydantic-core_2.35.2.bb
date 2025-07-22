@@ -12,7 +12,7 @@ require ${BPN}-crates.inc
 
 SRC_URI += "file://0001-Upgrade-radium-to-1.0.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/bitvec-1.0.1/"
 SRC_URI += "file://0001-cargo.toml-Update-bitvec-to-use-radium-1.x.patch"
-SRC_URI[sha256sum] = "6bf31628ab6d0e7c7c0372419898c52ef0a447b33ab47c7f62053bd013cc5b09"
+SRC_URI[sha256sum] = "e010b13ff0d6375ee83f7478fbda42e1fbf55f1b2feef76b673c40861ffd31e6"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
@@ -38,6 +38,7 @@ RDEPENDS:${PN}-ptest += "\
     python3-pytest-mock \
     python3-pytest-timeout \
     python3-pytest-benchmark \
+    python3-typing-inspection \
 	python3-tzdata \
 	python3-zoneinfo \
 "
