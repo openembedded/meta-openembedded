@@ -27,7 +27,4 @@ do_install() {
 }
 
 SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
-# GCC-15 segfaults see - https://gcc.gnu.org/bugzilla/show_bug.cgi?id=120119
-# TUNE_CCARGS:remove:aarch64 = "cortex-a57+crc+nocrypto"
-TUNE_CCARGS:append:aarch64 = " -march=armv8-a"
 LTO = ""
