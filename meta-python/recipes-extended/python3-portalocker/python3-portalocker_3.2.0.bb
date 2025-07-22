@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=152634da660a374ca18c0734ed07c63c"
 
-SRC_URI[sha256sum] = "ec20f6dda2ad9ce89fa399a5f31f4f1495f515958f0cb7ca6543cef7bb5a749e"
+SRC_URI[sha256sum] = "1f3002956a54a8c3730586c5c77bf18fae4149e07eaf1c29fc3faf4d5a3f89ac"
 
 DEPENDS += "python3-setuptools-scm-native"
 
@@ -23,9 +23,9 @@ RDEPENDS:${PN}-ptest += " \
 "
 
 do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/tests
-	cp -rf ${S}/portalocker_tests/* ${D}${PTEST_PATH}/tests/
-	rm -rf ${D}${PTEST_PATH}/tests/test_combined.py
+	install -d ${D}${PTEST_PATH}/portalocker_tests
+	cp -rf ${S}/portalocker_tests/* ${D}${PTEST_PATH}/portalocker_tests/
+	rm -rf ${D}${PTEST_PATH}/portalocker_tests/test_combined.py
 }
 
 RDEPENDS:${PN} += " \
