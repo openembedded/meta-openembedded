@@ -18,6 +18,7 @@ RDEPENDS:${PN}-ptest += " \
     python3-typing-extensions \
     python3-unixadmin \
     python3-mypy \
+    python3-pathspec \
 "
 
 DEPENDS += "\
