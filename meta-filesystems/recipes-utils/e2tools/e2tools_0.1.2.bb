@@ -34,11 +34,11 @@ do_install_ptest() {
     rm -rf "${D}${PTEST_PATH}/*"
     cp -r ../build "${D}${PTEST_PATH}"
     cp -r "${S}/build-aux" "${D}${PTEST_PATH}/build"
-    cp -r "${S}" "${D}${PTEST_PATH}"
+    cp -r "${UNPACKDIR}" "${D}${PTEST_PATH}/"
     rm -rf ${D}${PTEST_PATH}/build/config.log \
         ${D}${PTEST_PATH}/build/autom4te.cache \
-        ${D}${PTEST_PATH}/*/.git ${D}${PTEST_PATH}/*/.github \
-        ${D}${PTEST_PATH}/*/autom4te.cache
+        ${D}${PTEST_PATH}/*/*/.git ${D}${PTEST_PATH}/*/*/.github \
+        ${D}${PTEST_PATH}/*/*/autom4te.cache
     sed -i -e 's;${TMPDIR};;g' ${D}${PTEST_PATH}/build/config.status
 }
 
