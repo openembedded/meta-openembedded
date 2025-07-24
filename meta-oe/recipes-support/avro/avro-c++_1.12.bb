@@ -26,4 +26,16 @@ do_configure:prepend() {
         cp -r ${UNPACKDIR}/_deps/fmt-src ${B}/_deps/
 }
 
+# Workaround for 32-bit build failures due to -Werror:
+# 'useless-cast' in Symbol.cc and 'conversion' in FileStream.cc
+#
+# A patch has been submitted upstream: https://github.com/apache/avro/pull/3433
+# Once this or an equivalent fix is merged and the recipe upgraded, this can be removed.
+#
+# These errors don't occur when using Clang accordingly to upstream configuration and
+# the workaround flags aren't recognized by Clang either.
+# To avoid unnecessary warnings and keep the build clean across toolchains, the flags are conditionally added
+# using the toolchain-gcc override. This makes it unnecessary to override anything for Clang.
+CXXFLAGS:append:toolchain-gcc = " -Wno-error=useless-cast -Wno-error=conversion"
+
 BBCLASSEXTEND = "native nativesdk"
