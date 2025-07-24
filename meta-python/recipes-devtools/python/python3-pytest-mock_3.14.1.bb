@@ -8,15 +8,16 @@ LIC_FILES_CHKSUM = " \
 SRC_URI += " \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "2719255a1efeceadbc056d6bf3df3d1c5015530fb40cf347c0f9afac88410bd0" 
+SRC_URI[sha256sum] = "159e9edac4c451ce77a5cdb9fc5d1100708d2dd4ba3c3df572f14097351af80e"
 
 inherit pypi python_setuptools_build_meta ptest
 
-PYPI_PACKAGE = "pytest-mock"
+PYPI_PACKAGE = "pytest_mock"
 
 DEPENDS += "python3-setuptools-scm-native"
 
 RDEPENDS:${PN}-ptest += " \
+    python3-asyncio \
     python3-misc \
     python3-mock \
     python3-pytest \
