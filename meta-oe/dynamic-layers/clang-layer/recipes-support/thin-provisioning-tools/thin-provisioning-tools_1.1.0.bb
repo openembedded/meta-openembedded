@@ -22,7 +22,10 @@ inherit pkgconfig
 DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
 
 export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
-export BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
+# Remove octeontx2 specific CPU flags that may cause issues with bindgen
+BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
+BINDGEN_EXTRA_CLANG_ARGS:remove = "-mcpu=octeontx2+crypto"
+export BINDGEN_EXTRA_CLANG_ARGS
 
 require ${BPN}-crates.inc
 require ${BPN}-git-crates.inc
