@@ -129,5 +129,4 @@ PTESTS_SLOW_META_PYTHON = "\
 
 PTESTS_PROBLEMS_META_PYTHON = "\
     python3-pyasyncore \
-    tftpy \
 "
