@@ -16,5 +16,3 @@ SRC_URI[sha256sum] = "61d473929340d3073722f6316b7fbbdb11132faa6bac0242328e8436cc
 DEPENDS += "libheif"
 
 RDEPENDS:${PN} += "python3-pillow"
-
-BBCLASSEXTEND = "native nativesdk"
