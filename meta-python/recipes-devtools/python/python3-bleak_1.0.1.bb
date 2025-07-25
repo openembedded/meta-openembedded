@@ -8,9 +8,10 @@ PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;d
 
 inherit pypi python_poetry_core ptest-python-pytest
 
-
 RDEPENDS:${PN}-ptest += " \
+	python3-asyncio \
 	python3-pytest-asyncio \
+	python3-pytest-cov \
 "
 
 RDEPENDS:${PN} += " \
