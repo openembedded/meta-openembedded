@@ -6,7 +6,7 @@ BRANCH ?= "dev"
 
 SRCREV = "dd2e655780424eadf7610de33e5966be19168a95"
 
-SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=https;branch=${BRANCH} \
+SRC_URI = "git://github.com/SanDisk-Open-Source/ufs-utils.git;protocol=https;branch=${BRANCH} \
            file://0001-ufs_cmds-fix-full_path-buffer-size-in-find_bsg_devic.patch \
           "
 
