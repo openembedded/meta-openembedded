@@ -8,12 +8,12 @@ SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
 SRC_URI:append:class-target = "\
     file://uim-module-manager.patch \
 "
-SRC_URI[sha256sum] = "271f0ed5f455e5bffa859f01b2d0f7fb966554ebd4822657afb67a0431dd85a8"
+SRC_URI[sha256sum] = "67f0e5fa4292a533edc6f98b842df60c531a89cf82d0336a4e1ab72202ab8c83"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit"
+DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit autoconf-archive-native"
 DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native"
 
 RDEPENDS:uim = "libuim0 libedit"
@@ -30,8 +30,6 @@ inherit features_check autotools pkgconfig gettext qemu gtk-immodules-cache
 REQUIRED_DISTRO_FEATURES = "x11"
 
 GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
-
-CFLAGS += "-std=gnu17"
 
 EXTRA_OECONF += "--disable-emacs \
     --with-libedit=${STAGING_EXECPREFIXDIR} \
@@ -57,7 +55,7 @@ do_configure:prepend () {
 }
 
 do_install:append() {
-    rm -rf ${D}/${datadir}/applications
+    rm -rf ${D}${datadir}/applications
 }
 
 PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy uim-common libuim0 libuim-dev"
