@@ -10,4 +10,4 @@ inherit pypi python_setuptools_build_meta
 
 SRC_URI[sha256sum] = "52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
