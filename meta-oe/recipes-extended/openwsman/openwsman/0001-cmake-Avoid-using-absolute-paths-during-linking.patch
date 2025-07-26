@@ -1,0 +1,40 @@
+From cabdf02ee9779b5afd094ecf0e2893eae44c158c Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 25 Jul 2025 20:41:05 -0700
+Subject: [PATCH] cmake: Avoid using absolute paths during linking
+
+This encodes absolutes paths currently, especially
+in cross builds. This helps with reproducible builds
+
+With IMPORTED_NO_SONAME=TRUE, CMake will ask the
+linker to search for -lssl/-lcrypto instead of
+embedding the full path
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,6 +32,8 @@ endif(COMMAND cmake_policy)
+ # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+ # SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
+ 
++set(CMAKE_SKIP_RPATH TRUE)
++
+ INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+ SET(VERSION "${OPENWSMAN_MAJOR}.${OPENWSMAN_MINOR}.${OPENWSMAN_PATCH}")
+    MESSAGE(STATUS "Version ${VERSION}")
+@@ -184,6 +186,9 @@ IF(OPENSSL_FOUND)
+   SET(HAVE_SSL 1)
+   SET(USE_OPENSSL 1)
+ ENDIF(OPENSSL_FOUND)
++# force CMake to link by SONAME (i.e. -lssl) rather than "/usr/lib/libssl.so"
++set_target_properties(OpenSSL::SSL   PROPERTIES IMPORTED_NO_SONAME TRUE)
++set_target_properties(OpenSSL::Crypto PROPERTIES IMPORTED_NO_SONAME TRUE)
+ 
+ IF( BUILD_RUBY )
+   find_package(Ruby)
