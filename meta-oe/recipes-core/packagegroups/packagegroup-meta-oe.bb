@@ -294,8 +294,8 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
     yajl \
     yasm \
 "
-RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid msr-tools pahole"
-RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid msr-tools pahole pcimem"
+RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid pahole"
+RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid pahole pcimem"
 RDEPENDS:packagegroup-meta-oe-devtools:append:riscv64 = " pcimem"
 RDEPENDS:packagegroup-meta-oe-devtools:append:arm = " pcimem"
 RDEPENDS:packagegroup-meta-oe-devtools:append:aarch64 = " pahole pcimem"
