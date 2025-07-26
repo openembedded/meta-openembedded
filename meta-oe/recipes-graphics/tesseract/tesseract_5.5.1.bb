@@ -18,3 +18,5 @@ inherit autotools pkgconfig
 FILES:${PN} += "${datadir}/tessdata"
 
 RRECOMMENDS:${PN} += "tesseract-lang-eng"
+
+BBCLASSEXTEND = "native"

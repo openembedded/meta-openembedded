@@ -18,3 +18,5 @@ PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
 PACKAGECONFIG[giflib] = "--with-giflib,--without-giflib,giflib"
 
 inherit autotools pkgconfig
+
+BBCLASSEXTEND = "native"
