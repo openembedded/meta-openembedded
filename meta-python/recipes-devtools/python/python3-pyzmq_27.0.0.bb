@@ -50,6 +50,8 @@ RDEPENDS:${PN} += "\
 RDEPENDS:${PN}-ptest += "\
     ${PN}-test \
     python3-pytest \
+    python3-asyncio \
+    python3-pytest-asyncio \
     python3-unittest-automake-output \
     python3-unixadmin \
 "
