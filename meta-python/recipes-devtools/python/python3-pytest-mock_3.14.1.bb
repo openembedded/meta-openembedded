@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI += " \
+    file://0001-Add-asyncio-fixture-to-test_instance_async_method_sp.patch \
     file://run-ptest \
 "
 SRC_URI[sha256sum] = "159e9edac4c451ce77a5cdb9fc5d1100708d2dd4ba3c3df572f14097351af80e"
