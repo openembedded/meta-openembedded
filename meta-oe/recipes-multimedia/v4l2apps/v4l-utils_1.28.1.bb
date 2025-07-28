@@ -13,10 +13,6 @@ DEPENDS = "jpeg \
 DEPENDS:append:libc-musl = " argp-standalone"
 DEPENDS:append:class-target = " udev"
 LDFLAGS:append = " -pthread"
-# v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
-# both 32 and 64 bit file APIs.  But it does not handle the time side?
-# Needs further investigation
-GLIBC_64BIT_TIME_FLAGS = ""
 
 inherit meson gettext pkgconfig
 
@@ -29,6 +25,7 @@ SRC_URI = "\
     git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.28 \
     file://0001-media-ctl-Install-media-ctl-header-and-library-files.patch \
     file://0002-media-ctl-Install-media-ctl-pkg-config-files.patch \
+    file://0003-meson.build-fix-arm-_TIME_BITS-64-error.patch \
 "
 
 SRCREV = "fc15e229d9d337e46d730f00647821adbbd58548"
