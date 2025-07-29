@@ -10,6 +10,7 @@ RDEPENDS:${PN} += "python3-core python3-io"
 
 
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
+           file://0001-Always-enable-beta-extensions-2330.patch \
 	   file://0001-Ignore-Compiler-Warnings.patch"
 
 SRCREV = "5b3518096ca7b82854daadb2b2fae704fe2d9cb5"
