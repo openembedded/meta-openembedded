@@ -10,10 +10,9 @@ RDEPENDS:${PN} += "python3-core python3-io"
 
 
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
-           file://0001-Always-enable-beta-extensions-2330.patch \
 	   file://0001-Ignore-Compiler-Warnings.patch"
 
-SRCREV = "5b3518096ca7b82854daadb2b2fae704fe2d9cb5"
+SRCREV = "e96edaef8b582c2412a2aab4b82f5c88af88617d"
 
 EXTRA_OECMAKE:append = " -DENABLE_WERROR=OFF -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
 
