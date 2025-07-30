@@ -11,7 +11,7 @@ DEPENDS += "python3-grpcio"
 PYPI_PACKAGE = "grpcio_channelz"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "e48c5444db505d9e42ceca4399ccb9926bceb41189a8956140a94d2f95538be9"
+SRC_URI[sha256sum] = "6b80079b6d6e3484eaf89f4e547438e8fcb8658f244027dafb67803bbbd07d4b"
 
 RDEPENDS:${PN} = "python3-grpcio"
 
