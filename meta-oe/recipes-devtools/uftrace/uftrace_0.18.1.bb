@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "elfutils"
 DEPENDS:append:libc-musl = " argp-standalone"
 
-SRCREV = "8ccd4f627569b0af122c8d1df98dc6813ab97a40"
+SRCREV = "6d006b71ac32e28b7829cc21ccc7bb9c10add964"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https;tag=v${PV} \
            file://0001-include-libgen.h-for-basename.patch \
-           file://0001-build-Fix-a-build-error-on-i386.patch \
-          "
+           "
 
 LDFLAGS:append:libc-musl = " -largp"
 
