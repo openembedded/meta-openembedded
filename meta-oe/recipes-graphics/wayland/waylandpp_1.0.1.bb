@@ -3,7 +3,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3aae28cc66d61975114c2b14df215407"
 
 SRC_URI = " \
-	git://github.com/NilsBrause/waylandpp.git;protocol=https;branch=1.0.x \
+	git://github.com/NilsBrause/waylandpp.git;protocol=https;tag=${PV};branch=1.0.x \
 "
 
 DEPENDS = "pugixml"
