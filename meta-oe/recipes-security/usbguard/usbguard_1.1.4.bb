@@ -12,11 +12,10 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "https://github.com/USBGuard/usbguard/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-    file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch \
-    file://0001-Adapt-for-protobuf-30.0-API-changes.patch \
-    "
+           file://0001-Add-and-use-pkgconfig-instead-of-libgcrypt-config.patch \
+           "
 
-SRC_URI[sha256sum] = "707dad2938923202697f636c2b4e0be80f192242039a2af3fc7ac35d03f78551"
+SRC_URI[sha256sum] = "7d76b75e779e3c9e6c2fc10e7389dfa34056864c9f0c6eaca722687b7e75893c"
 
 inherit autotools-brokensep bash-completion pkgconfig systemd github-releases
 
