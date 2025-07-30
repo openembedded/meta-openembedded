@@ -13,7 +13,7 @@ inherit gnomebase ptest
 
 S = "${UNPACKDIR}/libxml++-${PV}"
 
-SRC_URI[archive.sha256sum] = "15c38307a964fa6199f4da6683a599eb7e63cc89198545b36349b87cf9aa0098"
+SRC_URI[archive.sha256sum] = "e9a23c436686a94698d2138e6bcbaf849121d63bfa0f50dc34fefbfd79566848"
 
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
