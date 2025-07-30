@@ -7,12 +7,10 @@ RDEPENDS:${PN} += " gnutls"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
 
-SRCREV = "c787cd26330af457e1ca9cf43232db2c71c03154"
-SRC_URI = " \
-	git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https \
-	file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
-	file://0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch \
-	"
+SRCREV = "03abde4ed7f539d77a412a1c98052e1c4d262963"
+SRC_URI = "git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https;branch=ktls-utils-1.2-fixes \
+           file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
+           "
 
 
 inherit autotools-brokensep pkgconfig systemd
