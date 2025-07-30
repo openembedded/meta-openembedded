@@ -1,5 +1,5 @@
 SUMMARY = "A server-side, HTML-embedded scripting language"
-HOMEPAGE = "http://www.php.net"
+HOMEPAGE = "https://www.php.net"
 SECTION = "console/network"
 
 LICENSE = "PHP-3.0"
@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
 
 S = "${WORKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "9cf2734509b603f6589617ab52a9712a03e0fe059951cddd2d4623df4bf7c6c6"
+SRC_URI[sha256sum] = "36569c64dd1499e570c436603b641eee7cde4af576af786597d0ee711b3a3a8a"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
