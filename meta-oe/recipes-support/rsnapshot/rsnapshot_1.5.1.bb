@@ -22,10 +22,9 @@ RDEPENDS:${PN} = "rsync \
                   perl-module-ipc-open3 \
                  "
 
-SRCREV = "1b943dbc7695d62fac5c0f9549ec696a538be19c"
-PV = "1.4.5"
+SRCREV = "367a49cda9d428c27a50641d99734c7b790f2cc1"
 
-SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=https \
+SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=https;tag=${PV} \
            file://configure-fix-cmd_rsync.patch \
           "
 
