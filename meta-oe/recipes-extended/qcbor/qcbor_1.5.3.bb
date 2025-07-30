@@ -6,11 +6,11 @@ DESCRIPTION = " \
 HOMEPAGE = "https://github.com/laurencelundblade/QCBOR"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=498c298542365dfcfe29948c72a5849b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9abe2371333f4ab0e62402a486f308a5"
 
-SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master"
+SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "4487f10e1bf258434fb8a39e4f59c29e31910ad0"
+SRCREV = "4ace4620d549f22c1163c5b00d3ae0c0dae1d207"
 
 
 inherit pkgconfig
