@@ -9,8 +9,8 @@ DEPENDS = "p8platform udev ncurses swig-native python3"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
 DEPENDS:append:rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
 
-SRCREV = "ceeec8bfd2242792b6de59ce8fb854437208dc11"
-SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https \
+SRCREV = "3519af0715e654c43382423d843ad658f2e01cb4"
+SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https;tag=${BPN}-${PV} \
            file://0001-Enhance-reproducibility.patch \
           "
 
