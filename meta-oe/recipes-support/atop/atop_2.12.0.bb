@@ -21,9 +21,8 @@ SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
            ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
            file://fix-permissions.patch \
            file://sysvinit-implement-status.patch \
-           file://0001-Redefine-function-prototypes-solves-issue-322.patch \
            "
-SRC_URI[sha256sum] = "9b94c666602efff7bf402ecce706c347f38c39cb63498f9d39626861e5646e20"
+SRC_URI[sha256sum] = "0d09ecc90c14e6ef41c22e3c57c142c3e4fb9cf3c94379077a33c961d5343086"
 
 UPSTREAM_CHECK_URI = "https://atoptool.nl/downloadatop.php"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+).tar"
