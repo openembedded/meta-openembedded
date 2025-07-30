@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
 
 SRC_URI = "https://github.com/msktutil/msktutil/releases/download/${PV}/${BP}.tar.bz2 \
            file://0001-configure.ac-Remove-native-include-path.patch"
-SRC_URI[sha256sum] = "f9686237c4e24414802415f4c8627c7343da365c5a3bcdef7a853fa3cd27b45d"
+SRC_URI[sha256sum] = "51314bb222c20e963da61724c752e418261a7bfc2408e7b7d619e82a425f6541"
 
 UPSTREAM_CHECK_URI = "https://github.com/msktutil/msktutil/releases/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
