@@ -17,8 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
            file://0006-Define-correct-gregs-for-RISCV32.patch \
           "
-
-SRC_URI[sha256sum] = "6be4fdfcdb2e5ac91454438246d00842d2671f792673390e742dfcaf1bf01574"
+SRC_URI[sha256sum] = "e576ad54bc53770649c556933ecd555b975e3dac422e46356102436a437b43c7"
 
 RPROVIDES:${PN} = "virtual-redis"
 
