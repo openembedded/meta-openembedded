@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b4f41dcacabc8f07b9ca7dee2f188a00"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0c50f40949c25ef1b63d51a6ae6c6cbe"
 
 CVE_PRODUCT = "nodejs node.js"
 
@@ -20,7 +20,7 @@ COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:powerpc = "null"
 COMPATIBLE_HOST:powerpc64le = "null"
 
-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Do-not-use-glob-in-deps.patch \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "720894f323e5c1ac24968eb2676660c90730d715cb7f090be71a668662a17c37"
+SRC_URI[sha256sum] = "120e0f74419097a9fafae1fd80b9de7791a587e6f1c48c22b193239ccd0f7084"
 
 S = "${UNPACKDIR}/node-v${PV}"
 

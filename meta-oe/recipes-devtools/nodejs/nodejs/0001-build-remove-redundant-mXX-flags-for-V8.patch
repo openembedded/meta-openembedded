@@ -25,7 +25,7 @@ Index: node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
 ===================================================================
 --- node-v22.16.0.orig/tools/v8_gypfiles/toolchain.gypi
 +++ node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
-@@ -97,33 +97,6 @@
+@@ -103,33 +103,6 @@
      # Indicates if gcmole tools are downloaded by a hook.
      'gcmole%': 0,
    },
@@ -57,8 +57,8 @@ Index: node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
 -    }],
 -  ],
    'target_defaults': {
-     'include_dirs': [
-       '<(V8_ROOT)',
+     'cflags!': ['-Wall', '-Wextra'],
+     'conditions': [
 @@ -553,71 +526,6 @@
            '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
          ],
