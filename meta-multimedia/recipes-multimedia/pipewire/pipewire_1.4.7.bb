@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "83a155d0c09d703bdc95ed4558277784e9751bd3"
+SRCREV = "1c542e9a0ca4226c9befb08fe9c19170aca3ce95"
 BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
-SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https"
+SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
 
 
 inherit meson pkgconfig systemd gettext useradd
