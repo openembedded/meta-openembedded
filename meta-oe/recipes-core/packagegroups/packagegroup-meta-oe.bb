@@ -876,6 +876,7 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "synergy", "", d)} \
     syslog-ng \
     tbb \
+    thin-provisioning-tools \
     tokyocabinet \
     tree \
     uchardet \
