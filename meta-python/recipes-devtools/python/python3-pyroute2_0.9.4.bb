@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
 
-SRC_URI[sha256sum] = "97253f8a192e92ac29db9c159a50a59195d72f2b8cdcf20c069d59187fa49ad1"
+SRC_URI[sha256sum] = "3cbccbe1af0c2b2aeae81b327e0e91aa94c81ab19f851e74b26bef70202f3070"
 
 inherit python_setuptools_build_meta pypi ptest-python-pytest
 
