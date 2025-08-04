@@ -4,12 +4,9 @@ HOMEPAGE = "https://github.com/any1/aml"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e6f3cfaa39204b96e14b68b9d50d3e4e"
 
-SRC_URI = "git://github.com/any1/aml;branch=master;protocol=https"
+SRC_URI = "git://github.com/any1/aml;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "b83f3576ce4187d9285f06e9066ef43a691464d4"
-
-PV = "0.3.0+git"
-
+SRCREV = "685035c9830aa89df02a43df89b644690bd885f5"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
