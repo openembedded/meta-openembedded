@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "4e57f39797fd5d9e2d22b8806a252d7c0106c936039d1e71c8c6b8008e
 
 DEPENDS += "systemd (<=235)"
 
-inherit pypi features_check pkgconfig python_setuptools_build_meta
+inherit pypi features_check pkgconfig setuptools3
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
