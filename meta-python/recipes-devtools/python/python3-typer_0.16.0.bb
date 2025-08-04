@@ -9,12 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
 
 SRC_URI[sha256sum] = "af377ffaee1dbe37ae9440cb4e8f11686ea5ce4e9bae01b84ae7c63b87f1dd3b"
 
-inherit pypi python_setuptools_build_meta ptest
-
-DEPENDS += "\
-    python3-pdm-backend-native \
-    python3-pdm-native \
-"
+inherit pypi python_pdm ptest
 
 SRC_URI:append = " \
     file://run-ptest \
