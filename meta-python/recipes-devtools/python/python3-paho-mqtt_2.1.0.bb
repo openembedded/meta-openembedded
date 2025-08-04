@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e5f264c6988aec56808a3a11e77b913 \
 "
 SRCNAME = "paho-mqtt"
 
-inherit pypi python_hatchling python_setuptools_build_meta
+inherit pypi python_hatchling
 
 SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
 
