@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "1d95cbdc50bf6353a387f881f2584eaf60d14e00dbbdd8872a73de79c6
 
 PYPI_PACKAGE = "tweepy"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_flit_core
 
 RDEPENDS:${PN} += "\
     python3-pip \
