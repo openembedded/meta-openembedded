@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "a731ca15bc3b03dfffc438db08c96d0c4e8ce5f472403573e40a193979
 
 RDEPENDS:${PN} += "python3-io python3-core"
 
-inherit pypi python_setuptools_build_meta python_hatchling
+inherit pypi python_hatchling
