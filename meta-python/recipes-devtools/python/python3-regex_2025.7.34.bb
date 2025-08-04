@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "7ab159b063c52a0333c884e4679f8d7a85112ee3078fe3d9004b2dd875585519"
+SRC_URI[sha256sum] = "9ead9765217afd04a86822dfcd4ed2747dfe426e887da413b15ff0ac2457e21a"
 
 RDEPENDS:${PN} += " \
 	python3-stringold \
