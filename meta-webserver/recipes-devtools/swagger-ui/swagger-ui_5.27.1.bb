@@ -10,9 +10,9 @@ SECTION = "net"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https"
+SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "7b86721ad6494216d8bad0540c737efe1885688c"
+SRCREV = "43ed706e9519841e97401cfad83faca564b37eaf"
 
 CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
 
