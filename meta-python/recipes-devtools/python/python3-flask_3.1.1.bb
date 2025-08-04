@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
 
 SRC_URI[sha256sum] = "284c7b8f2f58cb737f0cf1c30fd7eaf0ccfcde196099d24ecede3fc2005aa59e"
 
-inherit pypi python_setuptools_build_meta ptest-python-pytest
+inherit pypi python_flit_core ptest-python-pytest
 
 CLEANBROKEN = "1"
 
