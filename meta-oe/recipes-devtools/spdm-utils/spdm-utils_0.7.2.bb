@@ -17,7 +17,6 @@ include spdm-utils-crates.inc
 
 SRCREV = "f67ac9e00b79f603ecbbd29928a4ecc3dec5abd5"
 
-# bindgen-cli comes from meta-clang and depends on libclang
 DEPENDS += "libspdm udev bindgen-cli-native pciutils"
 
 COMPATIBLE_HOST:riscv32 = "null"
