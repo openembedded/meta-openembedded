@@ -17,7 +17,7 @@ include spdm-utils-crates.inc
 
 SRCREV = "f67ac9e00b79f603ecbbd29928a4ecc3dec5abd5"
 
-DEPENDS += "libspdm udev bindgen-cli-native pciutils"
+DEPENDS += "libspdm udev clang-native bindgen-cli-native pciutils"
 
 COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:mipsarcho32 = "null"
