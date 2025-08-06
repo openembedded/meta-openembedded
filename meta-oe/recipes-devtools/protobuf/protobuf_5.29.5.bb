@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "1be1c9d0ea6efa2a25bd7b76186844d1669be78a"
+SRCREV = "f5de0a0495faa63b4186fc767324f8b9a7bf4fc4"
 
 SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=https \
            file://run-ptest \
