@@ -81,7 +81,14 @@ do_configure () {
     CXX_BIN=`echo $CXX | awk '{print $1}'`
     STRIP_BIN=`echo $STRIP | awk '{print $1}'`
 
-    ARGS="is_debug=false "  # Tell gn to use release mode
+    ARGS="is_debug=false"  # Tell gn to use release mode
+
+    # Disable x64 CPU optimizations for qemux86-64 since QEMU doesn't support
+    # all the required CPU features (SSE4.2, BMI2, AVX2). Without this flag,
+    # the tracebox binary will fail at runtime with an error message in qemux86-64.
+    if [ "${MACHINE}" = "qemux86-64" ]; then
+        ARGS=$ARGS" enable_perfetto_x64_cpu_opt=false"
+    fi
 
     if [ -z `echo ${TOOLCHAIN} | grep clang` ]; then
         ARGS=$ARGS" is_clang=false"
