@@ -19,9 +19,9 @@ SRC_URI = "git://github.com/systemd/systemd.git;protocol=https;branch=${SRCBRANC
 DEPENDS = " \
     cryptsetup-native \
     gperf-native \
-    libcap \
+    libcap-native \
     python3-jinja2-native \
-    util-linux \
+    util-linux-native \
 "
 
 inherit meson pkgconfig gettext native
