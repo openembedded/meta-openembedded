@@ -3,7 +3,7 @@ HOMEPAGE = "https://openvpn.net/"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=89196bacc47ed37a5b242a535661a049"
-DEPENDS = "lzo lz4 openssl iproute2 libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} ${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)} "
+DEPENDS = "lzo lz4 openssl libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} ${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)} "
 
 inherit autotools systemd update-rc.d pkgconfig ptest
 
@@ -26,7 +26,6 @@ INITSCRIPT_PARAMS:${PN} = "start 10 2 3 4 5 . stop 70 0 1 6 ."
 CFLAGS += "-fno-inline"
 
 # I want openvpn to be able to read password from file (hrw)
-EXTRA_OECONF += "--enable-iproute2"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
 
 # Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
@@ -38,8 +37,12 @@ EXTRA_OECONF += "SYSTEMD_UNIT_DIR=${systemd_system_unitdir} \
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+                   iproute2 \
                   "
 
+# dco and iproute2 are mutually incompatible
+PACKAGECONFIG[dco] = ",--disable-dco,libnl"
+PACKAGECONFIG[iproute2] = "--enable-iproute2,,iproute2,iproute2-ip"
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 
