@@ -13,4 +13,7 @@ SRCREV = "beef80159525d9fb7abb8645ea85f4c4f6842e8f"
 
 inherit cmake
 
+# BASISU does not work with avx
+TUNE_CCARGS:append:x86-64 = " -mno-avx"
+
 PACKAGECONFIG[ocl_backend] = "-DBASISU_SUPPORT_OPENCL=ON, -DBASISU_SUPPORT_OPENCL=OFF, virtual/opencl-icd"
