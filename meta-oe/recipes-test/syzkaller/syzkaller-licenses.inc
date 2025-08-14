@@ -73,8 +73,11 @@ LIC_FILES_CHKSUM += "\
     file://pkg/mod/google.golang.org/protobuf@v1.36.6/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
 "
 
-LIC_FILES_CHKSUM:class-native += "\
+LIC_FILES_CHKSUM_HOST = "\
     file://pkg/mod/github.com/golang/protobuf@v1.5.4/LICENSE;md5=939cce1ec101726fa754e698ac871622;spdx=BSD-3-Clause \
     file://pkg/mod/github.com/gorilla/handlers@v1.5.2/LICENSE;md5=c30eee78985cf2584cded5f89ba3d787;spdx=Unknown \
     file://pkg/mod/google.golang.org/appengine/v2@v2.0.6/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
 "
+
+LIC_FILES_CHKSUM:class-native += "${LIC_FILES_CHKSUM_HOST}"
+LIC_FILES_CHKSUM:class-nativesdk += "${LIC_FILES_CHKSUM_HOST}"

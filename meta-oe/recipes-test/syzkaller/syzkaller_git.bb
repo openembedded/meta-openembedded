@@ -41,11 +41,19 @@ LDFLAGS:append:class-target = "${@bb.utils.contains_any("TC_CXX_RUNTIME", "llvm 
 
 DEPENDS:class-native += "qemu-system-native"
 
-do_compile:class-native() {
+compile_native() {
     export HOSTOS="${GOHOSTOS}"
     export HOSTARCH="${GOHOSTARCH}"
 
     oe_runmake HOSTGO="${GO}" host
+}
+
+do_compile:class-native() {
+    compile_native
+}
+
+do_compile:class-nativesdk() {
+    compile_native
 }
 
 do_compile:class-target() {
@@ -63,7 +71,7 @@ do_compile:class-target() {
     oe_runmake GO="${GO}" REV=${SRCREV} target
 }
 
-do_install:class-native() {
+install_native() {
     SYZ_BINS_NATIVE="syz-manager syz-repro syz-mutate syz-prog2c syz-db \
                      syz-upgrade"
 
@@ -72,6 +80,14 @@ do_install:class-native() {
     for i in ${SYZ_BINS_NATIVE}; do
         install -m 0755 ${B}/${i} ${D}${bindir}
     done
+}
+
+do_install:class-native() {
+    install_native
+}
+
+do_install:class-nativesdk() {
+    install_native
 }
 
 do_install:class-target() {
@@ -85,4 +101,4 @@ do_install:class-target() {
     done
 }
 
-BBCLASSEXTEND += "native"
+BBCLASSEXTEND += "native nativesdk"
