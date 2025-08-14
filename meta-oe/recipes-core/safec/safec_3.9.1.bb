@@ -6,10 +6,10 @@ SECTION = "lib"
 
 inherit autotools pkgconfig
 
-SRCREV = "f9add9245b97c7bda6e28cceb0ee37fb7e254fd8"
-SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https \
-           file://0001-strpbrk_s-Remove-unused-variable-len.patch \
-           "
+SRCREV = "39a0a819f80853498e48a6e601a446a122b64aaa"
+SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https;tag=v${PV} \
+           file://0001-vsnprintf_s-Increase-Buffer-Size-by-1.patch \
+		  "
 # arm-yoe-linux-gnueabi-clang: error: argument unused during compilation: '-mretpoline' [-Werror,-Wunused-command-line-argument]
 # arm-yoe-linux-gnueabi-clang: error: argument unused during compilation: '-fstack-clash-protection' [-Werror,-Wunused-command-line-argument]
 TUNE_CCARGS:append:toolchain-clang = " -Qunused-arguments"
