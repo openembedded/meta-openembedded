@@ -1,0 +1,509 @@
+From ab32e0c4f730e94e636fe1e2a863b8c99cdcd28b Mon Sep 17 00:00:00 2001
+From: Eli Schwartz <eschwartz93@gmail.com>
+Date: Tue, 9 Aug 2022 00:02:45 -0400
+Subject: [PATCH] feat(cmake): add installation support for pkg-config
+ dependency detection (#4077)
+
+* add installation support for pkg-config dependency detection
+
+pkg-config is a buildsystem-agnostic alternative to
+`pybind11Config.cmake` that can be used from build systems other than
+cmake.
+
+Fixes #230
+
+* tests: add test for pkg config
+
+Signed-off-by: Henry Schreiner <henryschreineriii@gmail.com>
+
+Co-authored-by: Henry Schreiner <henryschreineriii@gmail.com>
+---
+ .pre-commit-config.yaml                  |   3 +
+ CMakeLists.txt                           |  13 +++
+ noxfile.py                               |   4 +-
+ pybind11/__init__.py                     |   3 +-
+ pybind11/__main__.py                     |   9 +-
+ pybind11/commands.py                     |  12 +++
+ setup.py                                 |   1 +
+ tests/extra_python_package/test_files.py | 124 +++++++++++++----------
+ tools/JoinPaths.cmake                    |  23 +++++
+ tools/pybind11.pc.in                     |   7 ++
+ tools/setup_global.py.in                 |   2 +
+ tools/setup_main.py.in                   |   2 +
+ 12 files changed, 145 insertions(+), 58 deletions(-)
+ create mode 100644 tools/JoinPaths.cmake
+ create mode 100644 tools/pybind11.pc.in
+
+diff --git a/.pre-commit-config.yaml b/.pre-commit-config.yaml
+index b3e51790..5765a4bf 100644
+--- a/.pre-commit-config.yaml
++++ b/.pre-commit-config.yaml
+@@ -12,6 +12,9 @@
+ #
+ # See https://github.com/pre-commit/pre-commit
+ 
++# third-party content
++exclude: ^tools/JoinPaths.cmake$
++
+ repos:
+ # Standard hooks
+ - repo: https://github.com/pre-commit/pre-commit-hooks
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2e81869c..62c98aba 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -196,6 +196,9 @@ else()
+ endif()
+ 
+ include("${CMAKE_CURRENT_SOURCE_DIR}/tools/pybind11Common.cmake")
++# https://github.com/jtojnar/cmake-snips/#concatenating-paths-when-building-pkg-config-files
++# TODO: cmake 3.20 adds the cmake_path() function, which obsoletes this snippet
++include("${CMAKE_CURRENT_SOURCE_DIR}/tools/JoinPaths.cmake")
+ 
+ # Relative directory setting
+ if(USE_PYTHON_INCLUDE_DIR AND DEFINED Python_INCLUDE_DIRS)
+@@ -260,6 +263,16 @@ if(PYBIND11_INSTALL)
+     NAMESPACE "pybind11::"
+     DESTINATION ${PYBIND11_CMAKECONFIG_INSTALL_DIR})
+ 
++  # pkg-config support
++  if(NOT prefix_for_pc_file)
++    set(prefix_for_pc_file "${CMAKE_INSTALL_PREFIX}")
++  endif()
++  join_paths(includedir_for_pc_file "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
++  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/tools/pybind11.pc.in"
++                 "${CMAKE_CURRENT_BINARY_DIR}/pybind11.pc" @ONLY)
++  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pybind11.pc"
++          DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig/")
++
+   # Uninstall target
+   if(PYBIND11_MASTER_PROJECT)
+     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake_uninstall.cmake.in"
+diff --git a/noxfile.py b/noxfile.py
+index 757a5384..b49753bc 100644
+--- a/noxfile.py
++++ b/noxfile.py
+@@ -11,7 +11,7 @@ def lint(session: nox.Session) -> None:
+     Lint the codebase (except for clang-format/tidy).
+     """
+     session.install("pre-commit")
+-    session.run("pre-commit", "run", "-a")
++    session.run("pre-commit", "run", "-a", *session.posargs)
+ 
+ 
+ @nox.session(python=PYTHON_VERISONS)
+@@ -44,7 +44,7 @@ def tests_packaging(session: nox.Session) -> None:
+     """
+ 
+     session.install("-r", "tests/requirements.txt", "--prefer-binary")
+-    session.run("pytest", "tests/extra_python_package")
++    session.run("pytest", "tests/extra_python_package", *session.posargs)
+ 
+ 
+ @nox.session(reuse_venv=True)
+diff --git a/pybind11/__init__.py b/pybind11/__init__.py
+index 64e999ba..e60bb457 100644
+--- a/pybind11/__init__.py
++++ b/pybind11/__init__.py
+@@ -1,11 +1,12 @@
+ # -*- coding: utf-8 -*-
+ 
+ from ._version import __version__, version_info
+-from .commands import get_cmake_dir, get_include
++from .commands import get_cmake_dir, get_include, get_pkgconfig_dir
+ 
+ __all__ = (
+     "version_info",
+     "__version__",
+     "get_include",
+     "get_cmake_dir",
++    "get_pkgconfig_dir",
+ )
+diff --git a/pybind11/__main__.py b/pybind11/__main__.py
+index 3235747b..7a437c2d 100644
+--- a/pybind11/__main__.py
++++ b/pybind11/__main__.py
+@@ -5,7 +5,7 @@ import argparse
+ import sys
+ import sysconfig
+ 
+-from .commands import get_cmake_dir, get_include
++from .commands import get_cmake_dir, get_include, get_pkgconfig_dir
+ 
+ 
+ def print_includes():
+@@ -39,6 +39,11 @@ def main():
+         action="store_true",
+         help="Print the CMake module directory, ideal for setting -Dpybind11_ROOT in CMake.",
+     )
++    parser.add_argument(
++        "--pkgconfigdir",
++        action="store_true",
++        help="Print the pkgconfig directory, ideal for setting $PKG_CONFIG_PATH.",
++    )
+     args = parser.parse_args()
+     if not sys.argv[1:]:
+         parser.print_help()
+@@ -46,6 +51,8 @@ def main():
+         print_includes()
+     if args.cmakedir:
+         print(get_cmake_dir())
++    if args.pkgconfigdir:
++        print(get_pkgconfig_dir())
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/pybind11/commands.py b/pybind11/commands.py
+index 11f81d2d..7f416bb0 100644
+--- a/pybind11/commands.py
++++ b/pybind11/commands.py
+@@ -16,6 +16,18 @@ def get_cmake_dir():
+     cmake_installed_path = os.path.join(DIR, "share", "cmake", "pybind11")
+     if os.path.exists(cmake_installed_path):
+         return cmake_installed_path
++
+     else:
+         msg = "pybind11 not installed, installation required to access the CMake files"
+         raise ImportError(msg)
++
++def get_pkgconfig_dir() -> str:
++    """
++    Return the path to the pybind11 pkgconfig directory.
++    """
++    pkgconfig_installed_path = os.path.join(DIR, "share", "pkgconfig")
++    if os.path.exists(pkgconfig_installed_path):
++        return pkgconfig_installed_path
++
++    msg = "pybind11 not installed, installation required to access the pkgconfig files"
++    raise ImportError(msg)
+diff --git a/setup.py b/setup.py
+index a2326287..c8276bdd 100644
+--- a/setup.py
++++ b/setup.py
+@@ -145,6 +145,7 @@ with remove_output("pybind11/include", "pybind11/share"):
+             "-DCMAKE_INSTALL_PREFIX=pybind11",
+             "-DBUILD_TESTING=OFF",
+             "-DPYBIND11_NOPYTHON=ON",
++            "-Dprefix_for_pc_file=${pcfiledir}/../../",
+         ]
+         cmake_opts = dict(cwd=DIR, stdout=sys.stdout, stderr=sys.stderr)
+         subprocess.check_call(cmd, **cmake_opts)
+diff --git a/tests/extra_python_package/test_files.py b/tests/extra_python_package/test_files.py
+index 337a72df..859f1df8 100644
+--- a/tests/extra_python_package/test_files.py
++++ b/tests/extra_python_package/test_files.py
+@@ -13,6 +13,16 @@ import zipfile
+ DIR = os.path.abspath(os.path.dirname(__file__))
+ MAIN_DIR = os.path.dirname(os.path.dirname(DIR))
+ 
++PKGCONFIG = """\
++prefix=${{pcfiledir}}/../../
++includedir=${{prefix}}/include
++
++Name: pybind11
++Description: Seamless operability between C++11 and Python
++Version: {VERSION}
++Cflags: -I${{includedir}}
++"""
++
+ 
+ main_headers = {
+     "include/pybind11/attr.h",
+@@ -60,6 +70,10 @@ cmake_files = {
+     "share/cmake/pybind11/pybind11Tools.cmake",
+ }
+ 
++pkgconfig_files = {
++    "share/pkgconfig/pybind11.pc",
++}
++
+ py_files = {
+     "__init__.py",
+     "__main__.py",
+@@ -72,7 +86,7 @@ py_files = {
+ }
+ 
+ headers = main_headers | detail_headers | stl_headers
+-src_files = headers | cmake_files
++src_files = headers | cmake_files | pkgconfig_files
+ all_files = src_files | py_files
+ 
+ 
+@@ -85,6 +99,7 @@ sdist_files = {
+     "pybind11/share",
+     "pybind11/share/cmake",
+     "pybind11/share/cmake/pybind11",
++    "pybind11/share/pkgconfig",
+     "pyproject.toml",
+     "setup.cfg",
+     "setup.py",
+@@ -104,22 +119,25 @@ local_sdist_files = {
+ }
+ 
+ 
++def read_tz_file(tar: tarfile.TarFile, name: str) -> bytes:
++    start = tar.getnames()[0] + "/"
++    inner_file = tar.extractfile(tar.getmember(f"{start}{name}"))
++    assert inner_file
++    with contextlib.closing(inner_file) as f:
++        return f.read()
++
++
++def normalize_line_endings(value: bytes) -> bytes:
++    return value.replace(os.linesep.encode("utf-8"), b"\n")
++
++
+ def test_build_sdist(monkeypatch, tmpdir):
+ 
+     monkeypatch.chdir(MAIN_DIR)
+ 
+-    out = subprocess.check_output(
+-        [
+-            sys.executable,
+-            "setup.py",
+-            "sdist",
+-            "--formats=tar",
+-            "--dist-dir",
+-            str(tmpdir),
+-        ]
++    subprocess.run(
++        [sys.executable, "setup.py", "sdist", "--formats=tar", f"--dist-dir={tmpdir}"], check=True
+     )
+-    if hasattr(out, "decode"):
+-        out = out.decode()
+ 
+     (sdist,) = tmpdir.visit("*.tar")
+ 
+@@ -128,25 +146,17 @@ def test_build_sdist(monkeypatch, tmpdir):
+         version = start[9:-1]
+         simpler = {n.split("/", 1)[-1] for n in tar.getnames()[1:]}
+ 
+-        with contextlib.closing(
+-            tar.extractfile(tar.getmember(start + "setup.py"))
+-        ) as f:
+-            setup_py = f.read()
+-
+-        with contextlib.closing(
+-            tar.extractfile(tar.getmember(start + "pyproject.toml"))
+-        ) as f:
+-            pyproject_toml = f.read()
+-
+-        with contextlib.closing(
+-            tar.extractfile(
+-                tar.getmember(
+-                    start + "pybind11/share/cmake/pybind11/pybind11Config.cmake"
+-                )
+-            )
+-        ) as f:
+-            contents = f.read().decode("utf8")
+-        assert 'set(pybind11_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/include")' in contents
++        setup_py = read_tz_file(tar, "setup.py")
++        pyproject_toml = read_tz_file(tar, "pyproject.toml")
++        pkgconfig = read_tz_file(tar, "pybind11/share/pkgconfig/pybind11.pc")
++        cmake_cfg = read_tz_file(
++            tar, "pybind11/share/cmake/pybind11/pybind11Config.cmake"
++        )
++
++    assert (
++        'set(pybind11_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/include")'
++        in cmake_cfg.decode("utf-8")
++    )
+ 
+     files = {"pybind11/{}".format(n) for n in all_files}
+     files |= sdist_files
+@@ -157,9 +167,9 @@ def test_build_sdist(monkeypatch, tmpdir):
+ 
+     with open(os.path.join(MAIN_DIR, "tools", "setup_main.py.in"), "rb") as f:
+         contents = (
+-            string.Template(f.read().decode())
++            string.Template(f.read().decode("utf-8"))
+             .substitute(version=version, extra_cmd="")
+-            .encode()
++            .encode("utf-8")
+         )
+     assert setup_py == contents
+ 
+@@ -167,25 +177,25 @@ def test_build_sdist(monkeypatch, tmpdir):
+         contents = f.read()
+     assert pyproject_toml == contents
+ 
++    simple_version = ".".join(version.split(".")[:3])
++    pkgconfig_expected = PKGCONFIG.format(VERSION=simple_version).encode("utf-8")
++    assert normalize_line_endings(pkgconfig) == pkgconfig_expected
++
+ 
+ def test_build_global_dist(monkeypatch, tmpdir):
+ 
+     monkeypatch.chdir(MAIN_DIR)
+     monkeypatch.setenv("PYBIND11_GLOBAL_SDIST", "1")
+-
+     out = subprocess.check_output(
+         [
+             sys.executable,
+-            "setup.py",
+-            "sdist",
+-            "--formats=tar",
+-            "--dist-dir",
++            "-m",
++            "build",
++            "--sdist",
++            "--outdir",
+             str(tmpdir),
+         ]
+     )
+-    if hasattr(out, "decode"):
+-        out = out.decode()
+-
+     (sdist,) = tmpdir.visit("*.tar")
+ 
+     with tarfile.open(str(sdist)) as tar:
+@@ -193,15 +203,17 @@ def test_build_global_dist(monkeypatch, tmpdir):
+         version = start[16:-1]
+         simpler = {n.split("/", 1)[-1] for n in tar.getnames()[1:]}
+ 
+-        with contextlib.closing(
+-            tar.extractfile(tar.getmember(start + "setup.py"))
+-        ) as f:
+-            setup_py = f.read()
++        setup_py = read_tz_file(tar, "setup.py")
++        pyproject_toml = read_tz_file(tar, "pyproject.toml")
++        pkgconfig = read_tz_file(tar, "pybind11/share/pkgconfig/pybind11.pc")
++        cmake_cfg = read_tz_file(
++            tar, "pybind11/share/cmake/pybind11/pybind11Config.cmake"
++        )
+ 
+-        with contextlib.closing(
+-            tar.extractfile(tar.getmember(start + "pyproject.toml"))
+-        ) as f:
+-            pyproject_toml = f.read()
++    assert (
++        'set(pybind11_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/include")'
++        in cmake_cfg.decode("utf-8")
++    )
+ 
+     files = {"pybind11/{}".format(n) for n in all_files}
+     files |= sdist_files
+@@ -212,7 +224,7 @@ def test_build_global_dist(monkeypatch, tmpdir):
+         contents = (
+             string.Template(f.read().decode())
+             .substitute(version=version, extra_cmd="")
+-            .encode()
++            .encode("utf-8")
+         )
+         assert setup_py == contents
+ 
+@@ -220,12 +232,16 @@ def test_build_global_dist(monkeypatch, tmpdir):
+         contents = f.read()
+         assert pyproject_toml == contents
+ 
++    simple_version = ".".join(version.split(".")[:3])
++    pkgconfig_expected = PKGCONFIG.format(VERSION=simple_version).encode("utf-8")
++    assert normalize_line_endings(pkgconfig) == pkgconfig_expected
++
+ 
+ def tests_build_wheel(monkeypatch, tmpdir):
+     monkeypatch.chdir(MAIN_DIR)
+ 
+-    subprocess.check_output(
+-        [sys.executable, "-m", "pip", "wheel", ".", "-w", str(tmpdir)]
++    subprocess.run(
++        [sys.executable, "-m", "pip", "wheel", ".", "-w", str(tmpdir)], check=True
+     )
+ 
+     (wheel,) = tmpdir.visit("*.whl")
+@@ -254,8 +270,8 @@ def tests_build_global_wheel(monkeypatch, tmpdir):
+     monkeypatch.chdir(MAIN_DIR)
+     monkeypatch.setenv("PYBIND11_GLOBAL_SDIST", "1")
+ 
+-    subprocess.check_output(
+-        [sys.executable, "-m", "pip", "wheel", ".", "-w", str(tmpdir)]
++    subprocess.run(
++        [sys.executable, "-m", "pip", "wheel", ".", "-w", str(tmpdir)], check=True
+     )
+ 
+     (wheel,) = tmpdir.visit("*.whl")
+diff --git a/tools/JoinPaths.cmake b/tools/JoinPaths.cmake
+new file mode 100644
+index 00000000..c68d91b8
+--- /dev/null
++++ b/tools/JoinPaths.cmake
+@@ -0,0 +1,23 @@
++# This module provides function for joining paths
++# known from most languages
++#
++# SPDX-License-Identifier: (MIT OR CC0-1.0)
++# Copyright 2020 Jan Tojnar
++# https://github.com/jtojnar/cmake-snips
++#
++# Modelled after Python’s os.path.join
++# https://docs.python.org/3.7/library/os.path.html#os.path.join
++# Windows not supported
++function(join_paths joined_path first_path_segment)
++    set(temp_path "${first_path_segment}")
++    foreach(current_segment IN LISTS ARGN)
++        if(NOT ("${current_segment}" STREQUAL ""))
++            if(IS_ABSOLUTE "${current_segment}")
++                set(temp_path "${current_segment}")
++            else()
++                set(temp_path "${temp_path}/${current_segment}")
++            endif()
++        endif()
++    endforeach()
++    set(${joined_path} "${temp_path}" PARENT_SCOPE)
++endfunction()
+diff --git a/tools/pybind11.pc.in b/tools/pybind11.pc.in
+new file mode 100644
+index 00000000..402f0b35
+--- /dev/null
++++ b/tools/pybind11.pc.in
+@@ -0,0 +1,7 @@
++prefix=@prefix_for_pc_file@
++includedir=@includedir_for_pc_file@
++
++Name: @PROJECT_NAME@
++Description: Seamless operability between C++11 and Python
++Version: @PROJECT_VERSION@
++Cflags: -I${includedir}
+diff --git a/tools/setup_global.py.in b/tools/setup_global.py.in
+index 8b7e5387..73d903ed 100644
+--- a/tools/setup_global.py.in
++++ b/tools/setup_global.py.in
+@@ -35,6 +35,7 @@ main_headers = glob.glob("pybind11/include/pybind11/*.h")
+ detail_headers = glob.glob("pybind11/include/pybind11/detail/*.h")
+ stl_headers = glob.glob("pybind11/include/pybind11/stl/*.h")
+ cmake_files = glob.glob("pybind11/share/cmake/pybind11/*.cmake")
++pkgconfig_files = glob.glob("pybind11/share/pkgconfig/*.pc")
+ headers = main_headers + detail_headers + stl_headers
+ 
+ cmdclass = {"install_headers": InstallHeadersNested}
+@@ -57,6 +58,7 @@ setup(
+     headers=headers,
+     data_files=[
+         (base + "share/cmake/pybind11", cmake_files),
++        (base + "share/pkgconfig", pkgconfig_files),
+         (base + "include/pybind11", main_headers),
+         (base + "include/pybind11/detail", detail_headers),
+         (base + "include/pybind11/stl", stl_headers),
+diff --git a/tools/setup_main.py.in b/tools/setup_main.py.in
+index 533a75ae..52560ed6 100644
+--- a/tools/setup_main.py.in
++++ b/tools/setup_main.py.in
+@@ -18,6 +18,7 @@ setup(
+         "pybind11.include.pybind11.detail",
+         "pybind11.include.pybind11.stl",
+         "pybind11.share.cmake.pybind11",
++        "pybind11.share.pkgconfig",
+     ],
+     package_data={
+         "pybind11": ["py.typed", "*.pyi"],
+@@ -25,6 +26,7 @@ setup(
+         "pybind11.include.pybind11.detail": ["*.h"],
+         "pybind11.include.pybind11.stl": ["*.h"],
+         "pybind11.share.cmake.pybind11": ["*.cmake"],
++        "pybind11.share.pkgconfig": ["*.pc"],
+     },
+     extras_require={
+         "global": ["pybind11_global==$version"]
+-- 
+2.34.1
+
