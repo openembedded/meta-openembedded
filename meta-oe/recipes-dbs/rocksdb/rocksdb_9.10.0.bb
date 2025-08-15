@@ -51,6 +51,7 @@ EXTRA_OECMAKE = "\
 "
 
 CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+CXXFLAGS += "${@bb.utils.contains('TUNE_FEATURES', 'x86-64-v3', '-mpclmul', '', d)}"
 
 do_install:append() {
     # Fix for qa check buildpaths
