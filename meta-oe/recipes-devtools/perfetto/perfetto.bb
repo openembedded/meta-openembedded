@@ -53,6 +53,9 @@ require perfetto.inc
 
 DEPENDS += " ninja-native"
 
+# Use clang in order to enable traced_perf ( see https://github.com/google/perfetto/blob/092d0ceace6fa516fac1bd4e715c226eaaebe26e/gn/perfetto.gni#L177 ,
+# enable_perfetto_traced_perf depends on "is_clang")
+TOOLCHAIN = "clang"
 COMPATIBLE_HOST = "(i.86|x86_64|aarch64|arm).*-linux*"
 
 CCACHE_DISABLE = "1"
