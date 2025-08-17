@@ -13,13 +13,14 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;branch=master"
-SRCREV = "f4dbe258ff3d37489962ea9cf210192ae7ff9280"
-
+SRCREV = "0ebece346f187e7d3589883cc1d194fcd1c3cda8"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 RDEPENDS:${PN} = "\
     python3-json \
+    python3-misc \
+    bash \
 "
 
 # /boot/config is required for the analysis
@@ -27,7 +28,7 @@ RRECOMMENDS:${PN}:class-target = "\
     kernel-dev \
 "
 
-inherit setuptools3
+inherit python_setuptools_build_meta
 
 # allow to run on build host, if you don't want it in the image
 # oe-run-native kernel-hardening-checker-native kernel-hardening-checker ...
