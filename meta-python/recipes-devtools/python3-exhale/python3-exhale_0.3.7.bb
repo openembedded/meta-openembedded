@@ -17,4 +17,4 @@ RDEPENDS:${PN} = "\
     python3-beautifulsoup4 \
     "
 
-BBCLASSEXTEND =+ "native"
+BBCLASSEXTEND =+ "native nativesdk"
