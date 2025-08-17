@@ -12,4 +12,4 @@ RDEPENDS:${PN} = "python3-sphinx"
 
 PYPI_PACKAGE = "breathe"
 
-BBCLASSEXTEND =+ "native"
+BBCLASSEXTEND =+ "native nativesdk"
