@@ -12,7 +12,7 @@ inherit autotools pkgconfig
 SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master;tag=v${PV} \
            file://0001-example-Use-lm-for-the-fst-module.patch"
 
-SRCREV = "ec9741c22f74b6ed8955b5f1fb4113775d4df0d4"
+SRCREV = "e48649648790e4e2ead7fe4ae1017f911b1cc177"
 
 
 FILES:${PN} += "${libdir}/daq/*.so"
