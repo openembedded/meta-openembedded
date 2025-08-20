@@ -50,6 +50,12 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov \
     gcov-symlinks \
 "
+
+RDEPENDS:${PN}:append:class-nativesdk = " \
+    nativesdk-gcov \
+    nativesdk-gcov-symlinks \
+"
+
 SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
 SRC_URI[md5sum] = "bfee0cef50d7b7bd1df03bfadf68dcef"
 SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
