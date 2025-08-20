@@ -7,7 +7,7 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
            file://0001-configure.ac-Add-serial-tests.patch \
            file://run-ptest \
            "
-SRCREV = "17190762f33f78090f5ff99a436c4cb866ac3ccd"
+SRCREV = "d36691a4ac486857fd437d3a9aa3701a073a9539"
 
 
 inherit autotools pkgconfig ptest
