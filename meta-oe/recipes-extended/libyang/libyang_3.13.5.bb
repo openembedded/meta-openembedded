@@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/CESNET/libyang"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9bb3d334294e8719f41c531e28a9a697"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b69fd3b2815bbf1cef5c97f0eee2519a"
 
-SRCREV = "da7272e19d9e27d1bfdd68108fa9dce25fbdf5e8"
+SRCREV = "efe43e3790822a3dc64d7d28db935d03fff8b81f"
 
 SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=v${PV} \
            file://0001-test_context-skip-test-case-test_searchdirs.patch \
