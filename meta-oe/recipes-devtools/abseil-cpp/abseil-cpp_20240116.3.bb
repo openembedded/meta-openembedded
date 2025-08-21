@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
            file://abseil-ppc-fixes.patch \
            file://0003-Remove-neon-option-from-cross-compilation.patch \
            file://0004-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch \
+           file://0001-PR-1739-container-internal-Explicitly-include-cstdin.patch \
           "
 
 S = "${WORKDIR}/git"
