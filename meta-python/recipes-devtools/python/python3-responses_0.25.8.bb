@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0e601511a8517f4daf688a8eb95be7a2"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "8ebae11405d7a5df79ab6fd54277f6f2bc29b2d002d0dd2d5c632594d1ddcedb"
+SRC_URI[sha256sum] = "9374d047a575c8f781b94454db5cab590b6029505f488d12899ddb10a4af1cf4"
 
 RDEPENDS:${PN} += " \
 	python3-mock \
