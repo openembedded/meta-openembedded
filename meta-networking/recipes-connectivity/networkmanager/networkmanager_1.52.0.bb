@@ -77,6 +77,12 @@ CFLAGS:append:libc-musl = " \
     -DRTLD_DEEPBIND=0 \
 "
 
+# networkmanager-1.52.0/src/nmcli/agent.c:88:29: error: incompatible function pointer types assigning to 'rl_hook_func_t *' (aka 'int (*)(void)') from 'int (const char *, int)' [-Wincompatible-function-pointer-types]
+#   88 |             rl_startup_hook = set_deftext;
+#      |                             ^ ~~~~~~~~~~~
+ 
+CFLAGS:append:toolchain-clang = " -Wno-error=incompatible-function-pointer-types"
+
 PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez5', '', d)} \
