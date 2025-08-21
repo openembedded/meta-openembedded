@@ -6,7 +6,7 @@ inherit pypi python_setuptools_build_meta cython
 
 SRC_URI += "file://rpath.patch"
 
-SRC_URI[sha256sum] = "60d72facd7b6b79853f19744779abcd3f804c4e0d4fa8815469db20c9f640a47"
+SRC_URI[sha256sum] = "39a0cf1ecc7e282d1d30f36594ebd55c9fae1fda8a2622cee5d100430628f88c"
 
 DEPENDS = "proj proj-native"
 
