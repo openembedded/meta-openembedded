@@ -1,9 +1,9 @@
 SUMMARY = "A fast implementation of the Cassowary constraint solver"
 HOMEPAGE = "https://github.com/nucleic/kiwi"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5f7ce5ba663b186ce35b78df96a2eb0a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=27a71439e89b80e41dc526a4b8bbfa2f"
 
-SRC_URI[sha256sum] = "23d5f023bdc8c7e54eb65f03ca5d5bb25b601eac4d7f1a042888a1f45237987e"
+SRC_URI[sha256sum] = "c3b22c26c6fd6811b0ae8363b95ca8ce4ea3c202d3d0975b2914310ceb1bcc4d"
 
 inherit pypi python_setuptools_build_meta
 
