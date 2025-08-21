@@ -20,6 +20,9 @@ EXTRA_OECMAKE += " \
 	-DBUILD_SHARED_LIBS=ON \
 	${@bb.utils.contains('PTEST_ENABLED', '1', '-DRE2_BUILD_TESTING=ON', '-DRE2_BUILD_TESTING=OFF', d)} \
 "
+# | riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_load_8
+# | >>> referenced by libtesting.so (disallowed by --no-allow-shlib-undefined)
+LDFLAGS:append:riscv32 = " -latomic"
 
 do_install_ptest () {
     cp -r ${B}/*_test ${D}${PTEST_PATH}
