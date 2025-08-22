@@ -1,0 +1,45 @@
+From 63ddedc5ed9702ea3966243cc33992339cdbf71c Mon Sep 17 00:00:00 2001
+From: Youngseok Jeong <youngseok1.jeong@lge.com>
+Date: Thu, 21 Aug 2025 19:17:22 +0900
+Subject: [PATCH] Do not use the CMAKE_INSTALL_PREFIX
+
+Remove absolute path in INSTALL_CMAKE_DIR for fixing sysroot path issue.
+This issue is resolved v2.2.0 which is in scarthgap but backport patch
+is not matched well in kirkstone branch.
+
+See patch:
+https://github.com/pboettch/json-schema-validator/pull/121/commits/1cdca2a64d6e15e9d3191cc175053b08095a74fa
+
+Upstream-Status: Inappropriate [kirkstone specific]
+
+Signed-off-by: Youngseok Jeong <youngseok1.jeong@lge.com>
+---
+ CMakeLists.txt | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 594dc5f..676071a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -157,7 +157,7 @@ if(JSON_VALIDATOR_INSTALL)
+     # Set Up the Project Targets and Config Files for CMake
+ 
+     # Set the install path to the cmake config files
+-    set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
++    set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+ 
+     # Create the ConfigVersion file
+     include(CMakePackageConfigHelpers) # write_basic_package_version_file
+@@ -165,12 +165,6 @@ if(JSON_VALIDATOR_INSTALL)
+                                       VERSION ${PACKAGE_VERSION}
+                                       COMPATIBILITY SameMajorVersion)
+ 
+-    # Get the relative path from the INSTALL_CMAKE_DIR to the include directory
+-    file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}" "${CMAKE_INSTALL_PREFIX}/include")
+-
+-
+-    # Configure the Config.cmake file with the proper include directory
+-    set(CONF_INCLUDE_DIRS "\${JSON_SCHEMA_VALIDATOR_CMAKE_DIR}/${REL_INCLUDE_DIR}")
+     configure_file(${PROJECT_NAME}Config.cmake.in
+                    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" @ONLY)
+ 

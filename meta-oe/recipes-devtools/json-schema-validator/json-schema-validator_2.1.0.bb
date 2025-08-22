@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c441d022da1b1663c70181a32225d006"
 
 SRC_URI = "git://github.com/pboettch/json-schema-validator;branch=master;protocol=https \
            file://0001-cmake-Use-GNUInstallDirs.patch \
+           file://0002-Do-not-use-the-CMAKE_INSTALL_PREFIX.patch \
           "
 SRCREV = "27fc1d094503623dfe39365ba82581507524545c"
 
