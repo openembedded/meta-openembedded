@@ -18,10 +18,11 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch \
-            file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch \
-            file://0003-libsysprof-Check-for-unw_set_caching_policy-before-u.patch \
+           file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch \
+           file://0003-libsysprof-Check-for-unw_set_caching_policy-before-u.patch \
+           file://0004-sysprof-greeter-fix-environ-with-shadowing.patch \
            "
-SRC_URI[archive.sha256sum] = "e4b5ede9fd978ec3f0d5a0d44d0429a6d201c362bf6cb4527319031ae462c54f"
+SRC_URI[archive.sha256sum] = "1b0f0380f2f30708ba87829321a06fee1db36dfa87797bbf07f0a7acf4498d18"
 
 # reason: gtk4 requires opengl distro feature
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'gtk', 'opengl', '', d)}"
