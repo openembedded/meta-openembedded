@@ -826,7 +826,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     monit \
     mscgen \
     libsmi \
-    remmina \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "remmina", "", d)} \
     neon \
     nmon \
     libjs-jquery-icheck \
@@ -888,7 +888,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     system-config-keyboard \
     tbb \
     satyr \
-    pcp \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcp", "", d)} \
     pcsc-lite \
     pcsc-tools \
     sharutils \
