@@ -60,3 +60,4 @@ do_configure:append() {
 }
 
 FILES:${PN} += "${datadir}"
+SYSROOT_DIRS += "${bindir}"
