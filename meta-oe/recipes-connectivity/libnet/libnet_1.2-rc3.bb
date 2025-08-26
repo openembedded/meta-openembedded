@@ -10,6 +10,7 @@ PROVIDES = "libnet-1.2rc2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/libnet-dev/${BPN}-${PV}.tar.gz \
            file://0001-Support-musl-libc-remove-support-for-glibc-2.1.patch \
+           file://0001-Remove-support-for-SOCK_PACKET-sockets.patch \
           "
 
 SRC_URI[md5sum] = "f051e6e5bdecddb90f77c701c2ca1804"

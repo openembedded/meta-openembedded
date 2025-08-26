@@ -1,0 +1,251 @@
+From dd77c43a9773edb895bfe9074315e83a19cac471 Mon Sep 17 00:00:00 2001
+From: Guocai He <guocai.he.cn@windriver.com>
+Date: Tue, 26 Aug 2025 06:15:41 +0000
+Subject: [PATCH] Remove support for SOCK_PACKET sockets
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The current code has a build-time check to verify that PF_PACKET sockets
+are supported on Linux systems and if not, fallback on SOCK_PACKET sockets.
+
+The test implementation relies on FTM (Feature Test Macros) to detect
+glibc and its version to include correct headers.
+But, some libc such as the musl libc do not have such macros, making the
+test program compilation fail and libnet fallback on SOCK_PACKET.
+
+Since PF_PACKET support is present in kernel for more than 20 years now,
+the simplest solution and safe choice is to just drop support for
+SOCK_PACKET and assume PF_PACKET is always available on any Linux system.
+
+Signed-off-by: Hervé Boisse <admin@netgeek.ovh>
+
+Upstream-Status: Backport [19979c4541ddcc817c64ea911a309ee71a8cc250]
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
+---
+ acinclude.m4            | 87 -----------------------------------------
+ configure.ac            |  3 --
+ src/libnet_link_linux.c | 19 +--------
+ win32/config.h          |  1 -
+ 4 files changed, 1 insertion(+), 109 deletions(-)
+
+diff --git a/acinclude.m4 b/acinclude.m4
+index 064b582..f8ab967 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -25,93 +25,6 @@ AC_DEFUN([AC_LIBNET_LINUX_PROCFS],
+                   [Define if you have the Linux /proc filesystem.])
+     fi])
+ 
+-dnl
+-dnl Checks to see if this linux kernel has a working PF_PACKET
+-dnl
+-dnl usage:
+-dnl
+-dnl     AC_LIBNET_CHECK_PF_PACKET
+-dnl
+-dnl results:
+-dnl
+-dnl     HAVE_PACKET_SOCKET (DEFINED)
+-dnl
+-
+-AC_DEFUN([AC_LIBNET_CHECK_PF_PACKET],
+-[
+-    AC_MSG_CHECKING(for packet socket (PF_PACKET))
+-    AC_CACHE_VAL(libnet_cv_have_packet_socket,
+-
+-        [
+-    cat > pf_packet-test.c << EOF
+-#include <stdio.h>
+-#include <errno.h>
+-#include <stdlib.h>
+-#include <netinet/in.h>
+-#include <sys/socket.h>
+-#include <features.h>    /* for the glibc version number */
+-#if __GLIBC__ >= 2 && __GLIBC_MINOR >= 1
+-#include <netpacket/packet.h>
+-#include <net/ethernet.h>     /* the L2 protocols */
+-#else
+-#include <asm/types.h>
+-#include <linux/if_packet.h>
+-#include <linux/if_ether.h>   /* The L2 protocols */
+-#endif
+- 
+-#ifndef SOL_PACKET
+-#define SOL_PACKET 263
+-#endif  /* SOL_PACKET */
+- 
+-int
+-main(int argc, char **argv)
+-{
+-    int fd;
+- 
+-    fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+-    if (fd == -1)
+-    {
+-        if (errno == EPERM)
+-        {
+-            /* user's UID != 0 */
+-            printf("probably");
+-            exit (EXIT_FAILURE);
+-        }
+-        printf("no");
+-        exit (EXIT_FAILURE);
+-    }
+-    printf("yes");
+-    exit (EXIT_SUCCESS);
+-}
+-EOF
+-    ${CC-cc} -o pf_packet-test $CFLAGS pf_packet-test.c >/dev/null 2>&1
+-
+-    # Oopz 4.3 BSD doesn't have this.  Sorry.
+-    if test ! -x ./pf_packet-test ; then
+-        libnet_cv_have_packet_socket=choked
+-    else
+-        libnet_cv_have_packet_socket=`./pf_packet-test`;
+-    fi
+-    if test $libnet_cv_have_packet_socket = choked; then
+-        AC_MSG_RESULT(test program compile choked... assuming no)
+-    elif test $libnet_cv_have_packet_socket = yes; then
+-        AC_MSG_RESULT(yes)
+-    elif test $libnet_cv_have_packet_socket = probably; then
+-        AC_MSG_RESULT(test program got EPERM... assuming yes)
+-    elif test $libnet_cv_have_packet_socket = no; then
+-        AC_MSG_RESULT(no)
+-    fi
+-
+-    rm -f pf_packet-test* core core.pf_packet-test
+-
+-    ])
+-
+-    if test $libnet_cv_have_packet_socket = yes -o $libnet_cv_have_packet_socket = probably; then
+-        AC_DEFINE(HAVE_PACKET_SOCKET, 1,
+-          [Define if we're running on a Linux system with PF_PACKET sockets.])
+-    fi
+-])
+-
+ dnl
+ dnl Looks for a previous libnet version and attempts to determine which verion
+ dnl it is.  Version 0.8 was the first version that actually knew internally
+diff --git a/configure.ac b/configure.ac
+index 4751f62..ad002b9 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -51,7 +51,6 @@ AC_LIBNET_ENDIAN_CHECK
+ dnl AC_LBL_LIBRARY_NET
+ 
+ AC_SUBST(ENDIANESS)
+-AC_SUBST(HAVE_PACKET_SOCKET)
+ AC_SUBST(ADDITIONAL_LIBS)
+ AC_SUBST(LIBNET_CONFIG_DEFINES)
+ AC_SUBST(LIBNET_CONFIG_LIBS)
+@@ -87,7 +86,6 @@ if test -n "${with_link_layer}"; then
+         snoop) AC_LIBOBJ([libnet_link_snoop]) ;;
+         dlpi)  AC_LIBOBJ([libnet_link_dlpi]) ;;
+         linux) AC_LIBOBJ([libnet_link_linux])
+-	       AC_LIBNET_CHECK_PF_PACKET
+ 	       AC_LIBNET_LINUX_PROCFS ;;
+         none) AC_LIBOBJ([libnet_link_none]) ;;
+         *) AC_MSG_ERROR([Invalid link type "${with_link_layer}"]) ;;
+@@ -115,7 +113,6 @@ elif test "${ac_cv_header_sys_dlpi_h}" = "yes" ; then
+ elif test "${ac_cv_header_linux_socket_h}" = "yes" ; then
+     AC_LIBOBJ([libnet_link_linux])
+     AC_MSG_RESULT(found link layer linux)
+-    AC_LIBNET_CHECK_PF_PACKET
+     AC_LIBNET_LINUX_PROCFS
+ elif test "${cross_compiling}" != "yes" -a -c /dev/bpf0 ; then           # check again in case not readable
+     AC_LIBOBJ([libnet_link_bpf])
+diff --git a/src/libnet_link_linux.c b/src/libnet_link_linux.c
+index 3c6df3c..1dd2a42 100644
+--- a/src/libnet_link_linux.c
++++ b/src/libnet_link_linux.c
+@@ -33,13 +33,11 @@
+ #include <netinet/if_ether.h>
+ #include <net/if_arp.h>
+ 
+-#if (HAVE_PACKET_SOCKET)
+ #ifndef SOL_PACKET
+ #define SOL_PACKET 263
+ #endif  /* SOL_PACKET */
+ #include <netpacket/packet.h>
+ #include <net/ethernet.h>     /* the L2 protocols */
+-#endif  /* HAVE_PACKET_SOCKET */
+ 
+ #include "../include/libnet.h"
+ 
+@@ -69,11 +67,8 @@ libnet_open_link(libnet_t *l)
+         return (-1);
+     } 
+ 
+-#if (HAVE_PACKET_SOCKET)
+     l->fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+-#else
+-    l->fd = socket(PF_INET, SOCK_PACKET, htons(ETH_P_ALL));
+-#endif
++    
+     if (l->fd == -1)
+     {
+         if (errno == EPERM) {
+@@ -177,7 +172,6 @@ libnet_close_link(libnet_t *l)
+ }
+ 
+ 
+-#if (HAVE_PACKET_SOCKET)
+ static int
+ get_iface_index(int fd, const char *device)
+ {
+@@ -194,18 +188,12 @@ get_iface_index(int fd, const char *device)
+  
+     return ifr.ifr_ifindex;
+ }
+-#endif
+-
+ 
+ int
+ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+ {
+     int c;
+-#if (HAVE_PACKET_SOCKET)
+     struct sockaddr_ll sa;
+-#else
+-    struct sockaddr sa;
+-#endif
+ 
+     if (l == NULL)
+     { 
+@@ -213,7 +201,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+     }
+ 
+     memset(&sa, 0, sizeof (sa));
+-#if (HAVE_PACKET_SOCKET)
+     sa.sll_family    = AF_PACKET;
+     sa.sll_ifindex   = get_iface_index(l->fd, l->device);
+     if (sa.sll_ifindex == -1)
+@@ -221,10 +208,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+         return (-1);
+     }
+     sa.sll_protocol  = htons(ETH_P_ALL);
+-#else
+-	strncpy(sa.sa_data, l->device, sizeof (sa.sa_data) - 1);
+-    sa.sa_data[sizeof (sa.sa_data) - 1] = 0;
+-#endif
+ 
+     c = sendto(l->fd, packet, size, 0,
+             (struct sockaddr *)&sa, sizeof (sa));
+diff --git a/win32/config.h b/win32/config.h
+index 926f12f..12e1ee7 100644
+--- a/win32/config.h
++++ b/win32/config.h
+@@ -11,7 +11,6 @@
+ #undef HAVE_HPUX11
+ #undef HAVE_SOCKADDR_SA_LEN
+ #undef HAVE_DLPI
+-#undef HAVE_PACKET_SOCKET
+ #undef HAVE_STRUCT_IP_CSUM
+ #undef HAVE_LIB_PCAP
+ #undef STUPID_SOLARIS_CHECKSUM_BUG
+-- 
+2.35.5
+
