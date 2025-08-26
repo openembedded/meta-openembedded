@@ -5,8 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
 
 DEPENDS = "sqlite3"
 
-SRC_URI = "https://dist.opendnssec.org/source/softhsm-2.6.1.tar.gz"
-SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614df475f2"
+SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=develop"
+SRCREV = "7f99bedae002f0dd04ceeb8d86d59fc4a68a69a0"
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig siteinfo
 
