@@ -13,10 +13,8 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://0001-fix-bool-reserved-word-error-in-gcc-15.patch \
 "
-
-SRC_URI[sha256sum] = "6f9618f39168898134975f51df7c2d6d5129c0aa82b6ae11cf47f920c70df276"
+SRC_URI[sha256sum] = "4f2804ff27848ea772aee6b637bb1e10ee74ec2da117c257413e2d2c4f670ba0"
 
 S ?= "${UNPACKDIR}/vbox_module"
 S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
