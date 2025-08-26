@@ -7,15 +7,17 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
 
-SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
+SRC_URI = "git://github.com/hyperrealm/libconfig.git;protocol=https;branch=master"
+SRCREV = "525922a6b49ca19235cdf307376e7c9c539d1b93"
+S = "${WORKDIR}/git"
+
+# needed when we modify grammar.y with above patch
+DEPENDS += "bison-native"
 
 UPSTREAM_CHECK_URI = "https://github.com/hyperrealm/libconfig/releases"
 UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
 
 inherit autotools-brokensep pkgconfig
-
-SRC_URI[md5sum] = "15ec701205f91f21b1187f8b61e0d64f"
-SRC_URI[sha256sum] = "545166d6cac037744381d1e9cc5a5405094e7bfad16a411699bcff40bbb31ee7"
 
 PACKAGE_BEFORE_PN = "${PN}++"
 FILES:${PN}++ = "${libdir}/${BPN}++*${SOLIBS}"
