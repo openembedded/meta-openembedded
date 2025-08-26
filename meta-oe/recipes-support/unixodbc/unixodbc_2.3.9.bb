@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "52833eac3d681c8b0c9a5a65f2ebd745b3a964f208fc748f977e44015a
 
 UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
 
-inherit autotools-brokensep
+inherit autotools-brokensep multilib_header
 
 S = "${WORKDIR}/unixODBC-${PV}"
 
@@ -26,4 +26,8 @@ do_configure:prepend() {
     # old m4 files will cause libtool version don't match
     rm -rf m4/*
     rm -fr libltdl
+}
+
+do_install:append() {
+    oe_multilib_header unixodbc_conf.h
 }
