@@ -1,0 +1,13 @@
+diff --git a/20100902/src/proxy-libintl/libintl.c b/20100902_fix/src/proxy-libintl/libintl.c
+index ae0f9e6..bb5f9f6 100644
+--- a/src/proxy-libintl/libintl.c
++++ b/src/proxy-libintl/libintl.c
+@@ -27,7 +27,7 @@
+ #  endif
+ typedef void* HMODULE;
+ #endif
+-
++#include <stdlib.h>
+ #include <string.h>
+ 
+ #include "libintl.h"

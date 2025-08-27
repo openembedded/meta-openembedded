@@ -8,6 +8,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
 
 SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
+    file://cross.patch \
     file://dont-run-tests.patch \
     file://makefile-remove-tools.patch \
     file://libenca-003-iconv.patch \
