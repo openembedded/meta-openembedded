@@ -1,0 +1,36 @@
+diff --git a/uim-1.8.8/replace/bsd-snprintf.c b/uim-1.8.8_fix/replace/bsd-snprintf.c
+index 8759a4a..9ee91e5 100644
+--- a/replace/bsd-snprintf.c
++++ b/replace/bsd-snprintf.c
+@@ -94,16 +94,16 @@
+ # undef HAVE_VSNPRINTF
+ #endif
+ 
++#include <stdarg.h>
++#include <string.h>
+ #ifndef VA_COPY
+-# ifdef HAVE_VA_COPY
+-#  define VA_COPY(dest, src) va_copy(dest, src)
+-# else
+-#  ifdef HAVE___VA_COPY
+-#   define VA_COPY(dest, src) __va_copy(dest, src)
++#  if defined(va_copy)
++#    define VA_COPY(dst, src) va_copy((dst), (src))
++#  elif defined(__va_copy)
++#    define VA_COPY(dst, src) __va_copy((dst), (src))
+ #  else
+-#   define VA_COPY(dest, src) (dest) = (src)
++#    define VA_COPY(dst, src) memcpy(&(dst), &(src), sizeof(va_list))
+ #  endif
+-# endif
+ #endif
+ 
+ #if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF)
+@@ -111,7 +111,6 @@
+ #include <ctype.h>
+ #include <stdarg.h>
+ #include <stdlib.h>
+-#include <string.h>
+ 
+ #ifdef HAVE_LONG_DOUBLE
+ # define LDOUBLE long double
