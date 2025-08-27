@@ -2,6 +2,9 @@ SUMMARY = "Evolution database backend server"
 HOMEPAGE = "http://www.gnome.org/projects/evolution/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 
+## stop the leaking into the host system
+EXTRA_OECMAKE:append = " -DINTROSPECTION_GIRDIR=${RECIPE_SYSROOT}/usr/share/gir-1.0 "
+
 LICENSE = "LGPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
                     file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \

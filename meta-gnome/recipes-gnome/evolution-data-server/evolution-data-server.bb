@@ -1,9 +1,9 @@
 require ${BPN}.inc
 
 DEPENDS = " \
-    ${BPN}-native gperf-native \
+    ${BPN}-native gperf-native vala-native \
     glib-2.0 json-glib gtk4 libxml2 icu \
-    dbus db virtual/libiconv zlib libsoup-3.0 libical nss libsecret \
+    dbus db virtual/libiconv zlib libsoup-3.0 libical nss libsecret vala \
 "
 
 inherit pkgconfig gsettings gobject-introspection features_check gtk-doc gettext perlnative vala
@@ -17,6 +17,7 @@ SRC_URI += " \
     file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
     file://0004-call-native-helpers.patch \
+    file://0005-dont-bleed-into-host-for-vala-girdir.patch \
     file://iconv-detect.h \
 "
 

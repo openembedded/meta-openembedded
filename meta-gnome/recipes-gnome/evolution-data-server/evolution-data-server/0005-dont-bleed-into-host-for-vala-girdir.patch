@@ -1,0 +1,39 @@
+diff --git a/evolution-data-server-3.50.1/CMakeLists.txt b/evolution-data-server-3.50.1_fix/CMakeLists.txt
+index bbc9c4b..4d53298 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -153,6 +153,21 @@ include(CheckLibraryExists)
+ include(CheckSymbolExists)
+ include(CheckTypeSize)
+ 
++
++# Build-time GIR search dir (stop the bleeding into my host)
++set(INTROSPECTION_GIRDIR "" CACHE PATH "GIR directory to use at build time")
++
++# if cross, use the toolchain sysroot; else fall back to install prefix
++if(NOT INTROSPECTION_GIRDIR)
++  if(CMAKE_SYSROOT)
++    set(INTROSPECTION_GIRDIR "${CMAKE_SYSROOT}/usr/share/gir-1.0")
++  else()
++    set(INTROSPECTION_GIRDIR "${SHARE_INSTALL_PREFIX}/gir-1.0")
++  endif()
++endif()
++
++message(STATUS "Using build-time GIR dir: ${INTROSPECTION_GIRDIR}")
++
+ # Project custom modules
+ include(PrintableOptions)
+ 
+diff --git a/evolution-data-server-3.50.1/src/vala/CMakeLists.txt b/evolution-data-server-3.50.1_fix/src/vala/CMakeLists.txt
+index 8cc698a..4bf8262 100644
+--- a/src/vala/CMakeLists.txt
++++ b/src/vala/CMakeLists.txt
+@@ -47,7 +47,7 @@ macro(_build_vala_files _lib_name _gir_fullname_var _gir_deps_var _gir_dirs_var
+ 			--vapidir=${CMAKE_CURRENT_SOURCE_DIR}
+ 			--vapidir=${CMAKE_CURRENT_BINARY_DIR}
+ 			${gir_dirs_param}
+-			--girdir=${SHARE_INSTALL_PREFIX}/gir-1.0
++			--girdir=${INTROSPECTION_GIRDIR}/gir-1.0
+ 			${vala_deps_param}
+ 			--library ${_lib_name}
+ 			--metadatadir=${CMAKE_CURRENT_SOURCE_DIR}

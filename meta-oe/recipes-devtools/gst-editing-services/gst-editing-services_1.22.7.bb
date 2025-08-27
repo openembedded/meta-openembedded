@@ -25,4 +25,8 @@ PACKAGES += "gst-validate-launcher libges"
 FILES:gst-validate-launcher = "${nonarch_libdir}/gst-validate-launcher ${datadir}/gstreamer-1.0/validate"
 FILES:libges = "${libdir}/gstreamer-1.0/*.so"
 
-FILES:${PN} += "/usr/lib/python${PYTHON_BASEVERSION}"
+FILES:${PN} += "\
+    ${libdir}/gst-validate-launcher/python/launcher/apps/geslaunch.py \
+    /usr/lib/python3.12/site-packages/gi/overrides/GES.py \
+    /usr/lib/python3.12/site-packages/gi/overrides/__pycache__/* \
+"
