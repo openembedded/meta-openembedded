@@ -41,7 +41,7 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 do_compile:prepend() {
-    oe_runmake -C deps hiredis lua linenoise
+    oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
 }
 
 do_install() {
