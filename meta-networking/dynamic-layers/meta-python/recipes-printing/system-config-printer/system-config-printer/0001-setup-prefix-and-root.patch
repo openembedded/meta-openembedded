@@ -1,0 +1,13 @@
+diff --git a/Makefile.am b/Makefile.am
+index 4e181de8..92cecf2a 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -63,7 +63,7 @@ all-local: .stamp-distutils-in-builddir config.py cupshelpers/config.py
+ 
+ # Use distutils to install the module.
+ install-exec-local: .stamp-distutils-in-builddir
+-	$(PYTHON) setup.py install --prefix=$(DESTDIR)$(prefix)
++	$(PYTHON) setup.py install --root=$(DESTDIR) --prefix=$(prefix) --install-lib=$(pythonsitedir)
+ 
+ # Uninstall the module, crossing our fingers that we know enough
+ # about how distutils works to do this.  Unfortunately, distutils

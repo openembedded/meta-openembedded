@@ -2,7 +2,10 @@ DESCRIPTION = "a graphical user interface that allows the user to change print s
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "git://github.com/OpenPrinting/system-config-printer.git;protocol=https;branch=master"
+SRC_URI = "\
+    git://github.com/OpenPrinting/system-config-printer.git;protocol=https;branch=master \
+    file://0001-setup-prefix-and-root.patch \
+"
 
 SRCREV = "895d3dec50c93bfd4f142bac9bfcc13051bf84cb"
 S = "${WORKDIR}/git"
@@ -17,9 +20,22 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)}"
 PACKAGECONFIG[systemd] = ",--without-systemdsystemunitdir,systemd"
 PACKAGECONFIG[polkit] = ",,,cups-pk-helper"
 
+
+# Makefile.am will honor multilib
+EXTRA_OEMAKE += " \
+    DESTDIR=${D} \
+    prefix=${prefix} \
+    PYTHON=${PYTHON} \
+    pythonsitedir=${PYTHON_SITEPACKAGES_DIR} \
+"
+
 do_configure:prepend() {
     # This file is not provided if fetching from git but required for configure
     touch ${S}/ChangeLog
+}
+
+do_install:prepend(){
+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}
 }
 
 do_install:append() {
@@ -34,7 +50,15 @@ do_install:append() {
     done
 }
 
-FILES:${PN} += "${libdir} ${datadir}"
+FILES:${PN} += "\
+    ${PYTHON_SITEPACKAGES_DIR}/cupshelpers \
+    ${PYTHON_SITEPACKAGES_DIR}/cupshelpers/* \
+    ${PYTHON_SITEPACKAGES_DIR}/cupshelpers/__pycache__/* \
+    ${PYTHON_SITEPACKAGES_DIR}/cupshelpers-*.egg-info \
+    ${PYTHON_SITEPACKAGES_DIR}/cupshelpers-*.egg-info/* \
+    ${libdir} \
+    ${datadir} \
+"
 
 RDEPENDS:${PN} = " \
     cups \
