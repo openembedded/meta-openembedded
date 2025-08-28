@@ -28,7 +28,7 @@ EXTRA_OECMAKE = " \
 "
 
 PACKAGECONFIG ??= " \
-    usb_backend network_backend serial_backend xml_backend \
+    usb_backend network_backend serial_backend xml_backend hwmon \
     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'dnssd', '', d)} \
 "
 
@@ -41,6 +41,7 @@ PACKAGECONFIG[serial_backend] = "-DWITH_SERIAL_BACKEND=ON -DWITH_XML_BACKEND=ON,
 PACKAGECONFIG[xml_backend] = "-DWITH_XML_BACKEND=ON,${XML_BACKEND_DISABLE},libxml2"
 PACKAGECONFIG[dnssd] = "-DHAVE_DNS_SD=ON,-DHAVE_DNS_SD=off,avahi"
 PACKAGECONFIG[libiio-python3] = "-DPYTHON_BINDINGS=ON,-DPYTHON_BINDINGS=OFF"
+PACKAGECONFIG[hwmon] = "-DWITH_HWMON=ON,-DWITH_HWMON=OFF"
 
 PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python3"
 
