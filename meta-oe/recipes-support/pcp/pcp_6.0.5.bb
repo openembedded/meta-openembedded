@@ -93,6 +93,16 @@ do_install () {
 	sed -i "s#PCP_SORT_PROG=.*#PCP_SORT_PROG=sort#" ${D}/${sysconfdir}/pcp.conf
 	sed -i "s#PCP_ECHO_PROG=.*#PCP_ECHO_PROG=echo#" ${D}/${sysconfdir}/pcp.conf
 	sed -i "s#PCP_WHICH_PROG=.*#PCP_WHICH_PROG=which#" ${D}/${sysconfdir}/pcp.conf
+
+	if [ -d ${D}${prefix}/lib/sysusers.d ]; then
+            install -d ${D}${libdir}/sysusers.d
+            # move all snippets over
+            mv ${D}${prefix}/lib/sysusers.d/* ${D}${libdir}/sysusers.d/ || true
+            # clean empty dirs
+            rmdir ${D}${prefix}/lib/sysusers.d 2>/dev/null || true
+            rmdir ${D}${prefix}/lib 2>/dev/null || true
+        fi
+
 }
 
 PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
