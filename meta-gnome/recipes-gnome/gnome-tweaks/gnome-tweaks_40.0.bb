@@ -21,13 +21,16 @@ SRC_URI[archive.sha256sum] = "f95f3fe031b0b01c02f79a1659f889152d3772ae3e44df8403
 SRC_URI += " \
     file://0001-Make-python-path-configurable.patch \
     file://0002-meson-fix-invalid-positional-argument.patch \
+    file://0003-make-sure-gtweakdir-installs.patch \
 "
-
 EXTRA_OEMESON = "-Dpython_site_dir=${PYTHON_SITEPACKAGES_DIR}"
 
 FILES:${PN} += " \
     ${datadir}/metainfo \
     ${PYTHON_SITEPACKAGES_DIR} \
+    ${PYTHON_SITEPACKAGES_DIR}/gtweak \
+    ${PYTHON_SITEPACKAGES_DIR}/gtweak/* \
+    ${PYTHON_SITEPACKAGES_DIR}/gtweak/__pycache__/* \
 "
 
 RDEPENDS:${PN} += "gnome-shell python3-core python3-logging libhandy"

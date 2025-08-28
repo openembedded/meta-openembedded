@@ -1,0 +1,70 @@
+From efc5b098cd340a46a150a5c9f818732fd18d2382 Mon Sep 17 00:00:00 2001
+From: JosephMillsAtWork <josephjamesmills@gmail.com>
+Date: Thu, 28 Aug 2025 21:19:16 +0000
+Subject: [PATCH 1/1] gnome-tweaks: make sure gtweakdir installs to the correct
+ dir for multilib images. lib vs lib64 vs lib32
+
+Signed-off-by: JosephMillsAtWork <josephjamesmills@gmail.com>
+---
+ gtweak/meson.build   | 4 ++--
+ meson-postinstall.py | 8 ++++++--
+ meson.build          | 4 ++--
+ 3 files changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/gtweak/meson.build b/gtweak/meson.build
+index a491f6a..097ba7c 100644
+--- a/gtweak/meson.build
++++ b/gtweak/meson.build
+@@ -43,5 +43,5 @@ tweak_sources = [
+   'tweaks/tweak_wacom.py',
+ ]
+ 
+-python3.install_sources(shell_sources, subdir: 'gtweak')
+-python3.install_sources(tweak_sources, subdir: join_paths('gtweak', 'tweaks'))
++install_data(shell_sources, install_dir: gtweakdir)
++install_data(tweak_sources, install_dir: join_paths(gtweakdir, 'tweaks'))
+diff --git a/meson-postinstall.py b/meson-postinstall.py
+index 2f7f0b1..1f36411 100755
+--- a/meson-postinstall.py
++++ b/meson-postinstall.py
+@@ -1,5 +1,6 @@
+ #!/usr/bin/env python3
+ 
++import sys
+ import sysconfig
+ from compileall import compile_dir
+ from os import environ, path
+@@ -16,6 +17,9 @@ if not destdir:
+     print('Updating icon cache...')
+     call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
+ 
+-print('Compiling python bytecode...')
+-moduledir = sysconfig.get_path('purelib', vars={'base': str(prefix)})
++# Prefer path passed from Meson, fallback to sysconfig
++if len(sys.argv) >= 2 and sys.argv[1]:
++    moduledir = sys.argv[1]
++else:
++    moduledir = sysconfig.get_path('purelib', vars={'base': str(prefix)})
+ compile_dir(destdir + path.join(moduledir, 'gtweak'), optimize=2)
+diff --git a/meson.build b/meson.build
+index a673d9c..3418321 100644
+--- a/meson.build
++++ b/meson.build
+@@ -24,7 +24,7 @@ pkgdatadir = join_paths(datadir, meson.project_name())
+ 
+ appdatadir = join_paths(datadir, 'metainfo')
+ desktopdir = join_paths(datadir, 'applications')
+-gtweakdir = python3.get_install_dir(subdir: 'gtweak')
++gtweakdir = join_paths(get_option('python_site_dir'), 'gtweak')
+ icondir = join_paths(datadir, 'icons', 'hicolor')
+ schemadir = join_paths(datadir, 'glib-2.0', 'schemas')
+ 
+@@ -37,4 +37,4 @@ subdir('gtweak')
+ subdir('data')
+ subdir('po')
+ 
+-meson.add_install_script('meson-postinstall.py')
++meson.add_install_script('meson-postinstall.py', get_option('python_site_dir'))
+-- 
+2.50.1
+
