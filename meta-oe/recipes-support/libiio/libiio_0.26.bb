@@ -16,7 +16,7 @@ DEPENDS = " \
     flex-native bison-native libaio \
 "
 
-inherit cmake python3native systemd setuptools3 pkgconfig
+inherit cmake python3native systemd setuptools3 pkgconfig update-rc.d
 
 EXTRA_OECMAKE = " \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
@@ -25,6 +25,7 @@ EXTRA_OECMAKE = " \
     -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
     -DUDEV_RULES_INSTALL_DIR=${nonarch_base_libdir}/udev/rules.d \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '-DWITH_SYSVINIT=on', '', d)} \
 "
 
 PACKAGECONFIG ??= " \
@@ -59,6 +60,7 @@ FILES:${PN}-python3 = "${PYTHON_SITEPACKAGES_DIR}"
 
 SYSTEMD_PACKAGES = "${PN}-iiod"
 SYSTEMD_SERVICE:${PN}-iiod = "iiod.service"
+INITSCRIPT_NAME = "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'iiod', '', d)}"
 
 # Explicitly define do_configure, do_compile and do_install because both cmake and setuptools3 have
 # EXPORT_FUNCTIONS do_configure do_compile do_install
