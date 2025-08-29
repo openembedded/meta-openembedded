@@ -1,4 +1,4 @@
-From a1c982808ebfb71ba7e0f16040013b7127a6e2ab Mon Sep 17 00:00:00 2001
+From 41819656682c8ab68d1181a5ee39634df7630de3 Mon Sep 17 00:00:00 2001
 From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Tue, 6 Dec 2022 13:28:31 +0000
 Subject: [PATCH] make: Add top-level Makefile
@@ -8,15 +8,19 @@ Simple top level Makefile that just delegates to mDNSPosix.
 Upstream-Status: Inappropriate [oe-specific]
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ Makefile | 6 ++++++
+ 1 file changed, 6 insertions(+)
  create mode 100644 Makefile
 
 diff --git a/Makefile b/Makefile
 new file mode 100644
-index 000000000000..feb6ac67ef47
+index 000000000000..2fe39ad8938a
 --- /dev/null
 +++ b/Makefile
-@@ -0,0 +1,2 @@
+@@ -0,0 +1,6 @@
++# We install a stub Makefile in the top directory so that the various checks
++# in base.bbclass pass their tests for a Makefile, this ensures (that amongst
++# other things) the sstate checks will clean the build directory when the
++# task hashes changes.
 +all clean:
 +	cd mDNSPosix && $(MAKE) $@

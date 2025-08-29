@@ -18,15 +18,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://mdns.service \
            "
 BRANCH = "rel/mDNSResponder-2600"
-SRCREV = "3a0deda2995d98243dae379bcec10e57928c15e8"
-
-# We install a stub Makefile in the top directory so that the various checks
-# in base.bbclass pass their tests for a Makefile, this ensures (that amongst
-# other things) the sstate checks will clean the build directory when the
-# task hashes changes.
-#
-# We can't use the approach of setting ${S} to mDNSPosix as we need
-# DEBUG_PREFIX_MAP to cover files which come from the Clients directory too.
+SRCREV = "62914d23f299cf336a8647fb3a1b5b78647b3b41"
 
 inherit github-releases manpages systemd update-rc.d
 

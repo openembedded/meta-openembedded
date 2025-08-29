@@ -1,4 +1,4 @@
-From 1bf3be6cd775635aed95689f97a13fa6a037c741 Mon Sep 17 00:00:00 2001
+From 3d4d517fe8924696584e84b953ab22f496b371be Mon Sep 17 00:00:00 2001
 From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Tue, 27 May 2025 13:33:30 +0100
 Subject: [PATCH] Use secure_getenv on Linux
