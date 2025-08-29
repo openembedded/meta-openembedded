@@ -9,18 +9,12 @@ LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c 
 CVE_PRODUCT = "7-zip 7zip"
 SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main \
            file://0001-support-yocto-cross-compiling.patch \
+           file://0001-Remove-treating-warning-as-errors.patch \
            file://7z_wrapper.sh \
            "
 SRCREV = "5e96a8279489832924056b1fa82f29d5837c9469"
 
 UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
-
-
-# Support Yocto cross compiling
-CXXFLAGS:append:toolchain-clang = " -Wno-error=cast-qual -Wno-error=sign-conversion \
-                                    -Wno-error=disabled-macro-expansion \
-                                    -Wno-error=shorten-64-to-32 \
-                                    -Wno-error=cast-function-type-strict"
 
 EXTRA_OEMAKE += " \
     CXXFLAGS_EXTRA='${CXXFLAGS}' \
