@@ -8,13 +8,8 @@ DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib
 # Build separation is slightly broken
 inherit autotools-brokensep pkgconfig gettext
 
-SRC_URI = " \
-    git://github.com/openSUSE/snapper.git;protocol=https;branch=master \
-    file://0001-Include-linux-types.h-for-__u16-__u32-__u64-type.patch \
-    file://0002-Use-statvfs-instead-of-statvfs64.patch \
-"
-SRCREV = "6c603565f36e9996d85045c8012cd04aba5f3708"
-
+SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
+SRCREV = "4f3d2b2fc58aefa976668cd25b8eac02ba0f85e7"
 
 EXTRA_OECONF += "--disable-zypp"
 
@@ -24,10 +19,13 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd"
 PACKAGECONFIG[api-documentation] = "--enable-doc,--disable-doc,libxslt-native docbook-xsl-stylesheets-native"
 
 # Avoid HOSTTOOLS path in binaries
-export DIFFBIN = "${bindir}/diff"
-export RMBIN = "${bindir}/rm"
-export TOUCHBIN = "${bindir}/touch"
-export CPBIN = "${bindir}/cp"
+export DIFF_BIN = "${bindir}/diff"
+export RM_BIN = "${bindir}/rm"
+export RMDIR_BIN = "${bindir}/rmdir"
+export MKDIR_BIN = "${bindir}/mkdir"
+export TOUCH_BIN = "${bindir}/touch"
+export CP_BIN = "${bindir}/cp"
+export REALPATH_BIN = "${bindir}/realpath"
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/sysconfig
