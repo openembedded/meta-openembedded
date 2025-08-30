@@ -1,0 +1,43 @@
+From 56b26ede007453a4ee9832076597e82d2a903700 Mon Sep 17 00:00:00 2001
+From: Felix Conway <felix.conway@arm.com>
+Date: Wed, 11 Jun 2025 16:04:06 +0100
+Subject: [PATCH 1/2] Add __attribute__ ((nonstring)) to remove
+ unterminated-string-initialization warning
+
+Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/pull/10216]
+Signed-off-by: Felix Conway <felix.conway@arm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ library/ssl_tls13_keys.c | 3 ++-
+ library/ssl_tls13_keys.h | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/library/ssl_tls13_keys.c b/library/ssl_tls13_keys.c
+index 739414e..375814c 100644
+--- a/library/ssl_tls13_keys.c
++++ b/library/ssl_tls13_keys.c
+@@ -81,7 +81,8 @@ struct mbedtls_ssl_tls13_labels_struct const mbedtls_ssl_tls13_labels =
+  *            the HkdfLabel structure on success.
+  */
+ 
+-static const char tls13_label_prefix[6] = "tls13 ";
++/* We need to tell the compiler that we meant to leave out the null character. */
++static const char tls13_label_prefix[6] __attribute__ ((nonstring)) = "tls13 ";
+ 
+ #define SSL_TLS1_3_KEY_SCHEDULE_HKDF_LABEL_LEN(label_len, context_len) \
+     (2                     /* expansion length           */ \
+diff --git a/library/ssl_tls13_keys.h b/library/ssl_tls13_keys.h
+index d3a4c6c..95cde7a 100644
+--- a/library/ssl_tls13_keys.h
++++ b/library/ssl_tls13_keys.h
+@@ -40,8 +40,9 @@
+ 
+ #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
+ 
++/* We need to tell the compiler that we meant to leave out the null character. */
+ #define MBEDTLS_SSL_TLS1_3_LABEL(name, string)       \
+-    const unsigned char name    [sizeof(string) - 1];
++    const unsigned char name    [sizeof(string) - 1] __attribute__ ((nonstring));
+ 
+ union mbedtls_ssl_tls13_labels_union {
+     MBEDTLS_SSL_TLS1_3_LABEL_LIST

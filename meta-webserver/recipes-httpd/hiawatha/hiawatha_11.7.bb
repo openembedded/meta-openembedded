@@ -7,8 +7,12 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
 SECTION = "net"
 
 SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
+           file://0001-Add-__attribute__-nonstring-to-remove-unterminated-s.patch;patchdir=mbedtls \
+           file://0002-Replace-__attribute__-nonstring-with-macro-MBEDTLS_A.patch;patchdir=mbedtls \
+           file://define-MBEDTLS_ATTRIBUTE_UNTERMINATED_STRING.patch;patchdir=mbedtls \
            file://hiawatha-init \
-           file://hiawatha.service "
+           file://hiawatha.service \
+          "
 
 SRC_URI[sha256sum] = "8bc180ae3b986d02466f081efeefdb1595d96783f581fded2a9b198752ab7ae1"
 
