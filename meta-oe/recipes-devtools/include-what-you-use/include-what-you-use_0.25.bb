@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=3bb66a14534286912cd6f26649b5c60a \
 
 DEPENDS = "clang"
 
-SRC_URI = "git://github.com/include-what-you-use/include-what-you-use.git;protocol=https;branch=master"
-SRCREV = "fa1094c0b3848f82244778bc6153cc84f8a890f6"
-
 PV .= "+git"
+SRCREV = "791e69ea4662cb3e74e8128fd5fd69bd7f4ea6b3"
+SRC_URI = "git://github.com/include-what-you-use/include-what-you-use.git;protocol=https;branch=clang_21"
 
 inherit cmake python3native
 
