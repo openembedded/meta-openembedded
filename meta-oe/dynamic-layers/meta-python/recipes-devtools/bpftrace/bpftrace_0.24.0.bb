@@ -7,6 +7,7 @@ DEPENDS += "bison-native \
             flex-native \
             gzip-native \
             elfutils \
+            bpftool-native \
             bcc \
             systemtap \
             libcereal \
@@ -16,11 +17,15 @@ DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-nativ
 
 RDEPENDS:${PN} += "bash python3 xz"
 
-SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.23.x;protocol=https \
+SRC_URI = "git://github.com/iovisor/bpftrace;branch=master;protocol=https \
            file://run-ptest \
+           file://0001-cmake-Raise-max-supported-clang-version-to-clang-21.patch \
            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
+           file://0001-Include-missing-c-runtime-headers.patch \
+           file://0002-chrono-Fix-build-when-using-libc-casting-ns-to-syste.patch \
+           file://0003-ast-Adapt-to-Clang-LLVM-21-DiagnosticOptions-API.patch \
 "
-SRCREV = "e48ccc66c9971515648b63699bc4b1490c388d85"
+SRCREV = "3b78184eed28501ab4bbb55e45c4172538999da1"
 
 inherit bash-completion cmake ptest pkgconfig
 

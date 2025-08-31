@@ -1,0 +1,39 @@
+From ead4dc45e35fc6c3770ef4021720e0e6a5b60674 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 31 Aug 2025 15:23:27 -0700
+Subject: [PATCH 1/3] Include missing c++ runtime headers
+
+These headers are required and found to fail builds
+when using llvm/libc++ instead of libstdc++ on linux
+
+Upstream-Status: Submitted [https://github.com/bpftrace/bpftrace/pull/4526]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/util/bpf_names.cpp | 1 +
+ tests/opaque.cpp       | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/util/bpf_names.cpp b/src/util/bpf_names.cpp
+index 68525bfc..ab8f6f2f 100644
+--- a/src/util/bpf_names.cpp
++++ b/src/util/bpf_names.cpp
+@@ -1,6 +1,7 @@
+ #include <algorithm>
+ #include <iomanip>
+ #include <iostream>
++#include <sstream>   // for std::ostringstream
+
+ #include "util/bpf_names.h"
+
+diff --git a/tests/opaque.cpp b/tests/opaque.cpp
+index a030a05d..034888d3 100644
+--- a/tests/opaque.cpp
++++ b/tests/opaque.cpp
+@@ -1,6 +1,7 @@
+ #include "util/opaque.h"
+ #include "gtest/gtest.h"
+ #include <cstring>
++#include <numbers> // for std::numbers
+ #include <string>
+ #include <vector>
+
