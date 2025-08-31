@@ -12,7 +12,7 @@ SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
            file://0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch \
            "
 
-SRCREV = "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
+SRCREV = "794a5dcf0d54f9f0b20d288a12e87afb91d20dfc"
 
 EXTRA_OECMAKE = " \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -42,5 +42,9 @@ PACKAGECONFIG[gdk-pixbuf-loader] = "-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=ON,-DJPEGXL
 PACKAGECONFIG[gimp] = "-DJPEGXL_ENABLE_PLUGIN_GIMP210=ON,-DJPEGXL_ENABLE_PLUGIN_GIMP210=OFF,gimp"
 PACKAGECONFIG[mime] = "-DJPEGXL_ENABLE_PLUGIN_MIME=ON,-DJPEGXL_ENABLE_PLUGIN_MIME=OFF"
 PACKAGECONFIG[sizeless-vectors] = "-DJPEGXL_ENABLE_SIZELESS_VECTORS=ON,-DJPEGXL_ENABLE_SIZELESS_VECTORS=OFF"
+
+# lcms/src/cmsps2.c
+# error: out of range pc-relative fixup value
+CFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 
 FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
