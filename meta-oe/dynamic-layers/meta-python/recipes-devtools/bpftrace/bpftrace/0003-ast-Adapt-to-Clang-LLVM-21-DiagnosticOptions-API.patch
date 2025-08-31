@@ -1,0 +1,78 @@
+From 9771348249981680c2b893a435099673e79997c4 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 31 Aug 2025 15:29:26 -0700
+Subject: [PATCH 3/3] ast: Adapt to Clang/LLVM 21 DiagnosticOptions API
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Clang 21 removed intrusive ref-counting from DiagnosticOptions and
+switched consumers to take a DiagnosticOptions&. Building bpftrace
+with clang-21/libc++ failed with errors like:
+
+  IntrusiveRefCntPtr.h:163: error: no member named 'Retain' in
+    'clang::DiagnosticOptions'
+  Diagnostic.h:578: no known conversion from
+    'IntrusiveRefCntPtr<clang::DiagnosticOptions>' to
+    'DiagnosticOptions&'
+
+Update the frontend glue:
+- For LLVM >= 21, construct a real DiagnosticOptions object and pass
+  it by reference to TextDiagnosticPrinter and DiagnosticsEngine
+  (no IntrusiveRefCntPtr). Keep it alive via shared_ptr to satisfy
+  DiagnosticsEngine’s reference lifetime.
+- Replace ci.setInvocation(inv) with
+  ci.getInvocation() = *inv; which is stable across modern Clang.
+
+Retain the old code path for LLVM < 21 via #if guards.
+
+This fixes builds with clang-21/libc++ while keeping compatibility
+with older LLVM releases.
+
+No functional change intended.
+
+Upstream-Status: Submitted [https://github.com/bpftrace/bpftrace/pull/4526]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/ast/passes/clang_build.cpp | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/src/ast/passes/clang_build.cpp b/src/ast/passes/clang_build.cpp
+index fa5b2add..3debc350 100644
+--- a/src/ast/passes/clang_build.cpp
++++ b/src/ast/passes/clang_build.cpp
+@@ -78,12 +78,21 @@ static Result<> build(CompileContext &ctx,
+   // a string, which we can then capture and associate with the import.
+   std::string errstr;
+   llvm::raw_string_ostream err(errstr);
++#if LLVM_VERSION_MAJOR < 21
+   auto diagOpts = llvm::makeIntrusiveRefCnt<clang::DiagnosticOptions>();
+   auto diags = std::make_unique<clang::DiagnosticsEngine>(
+       llvm::makeIntrusiveRefCnt<clang::DiagnosticIDs>(),
+       diagOpts,
+       new clang::TextDiagnosticPrinter(err, diagOpts.get()));
+-
++#else
++  // Clang 21: DiagnosticOptions is NOT intrusive-refcounted anymore.
++  // Keep it alive for the program lifetime (or store it on a longer-lived object).
++  static std::shared_ptr<clang::DiagnosticOptions> diagOpts =
++      std::make_shared<clang::DiagnosticOptions>();
++  llvm::IntrusiveRefCntPtr<clang::DiagnosticIDs> diagID(new clang::DiagnosticIDs());
++  auto client = std::make_unique<clang::TextDiagnosticPrinter>(err, *diagOpts);
++  auto diags = std::make_unique<clang::DiagnosticsEngine>(diagID, *diagOpts, client.release());
++#endif
+   // We create a temporary memfd that we can use to store the output,
+   // since the ClangDriver API is framed in terms of filenames. Perhaps
+   // we could use the internals here, but that carries other risks.
+@@ -122,7 +131,9 @@ static Result<> build(CompileContext &ctx,
+   inv->getCodeGenOpts().DebugColumnInfo = true;
+
+   clang::CompilerInstance ci;
+-  ci.setInvocation(inv);
++  // Cross-version friendly: assign into the existing invocation
++  // (works across modern Clang majors, including 21)
++  ci.getInvocation() = *inv;
+   ci.setDiagnostics(diags.release());
+   ci.setFileManager(new clang::FileManager(clang::FileSystemOptions(), vfs));
+   ci.createSourceManager(ci.getFileManager());
