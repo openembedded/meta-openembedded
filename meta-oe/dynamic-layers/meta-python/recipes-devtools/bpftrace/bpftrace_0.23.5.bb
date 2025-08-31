@@ -16,14 +16,11 @@ DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-nativ
 
 RDEPENDS:${PN} += "bash python3 xz"
 
-PV .= "+git"
-
 SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.23.x;protocol=https \
            file://run-ptest \
            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
-           file://0001-Fix-build-failures-due-to-missing-location.hh.patch \
 "
-SRCREV = "01e806d24c61f996f1809e1e991646311499db4f"
+SRCREV = "e48ccc66c9971515648b63699bc4b1490c388d85"
 
 inherit bash-completion cmake ptest pkgconfig
 
