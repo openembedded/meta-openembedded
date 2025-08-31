@@ -8,7 +8,9 @@ DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib
 # Build separation is slightly broken
 inherit autotools-brokensep pkgconfig gettext
 
-SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master \
+           file://0001-Fix-build-with-boost-1.89.patch \
+          "
 SRCREV = "4f3d2b2fc58aefa976668cd25b8eac02ba0f85e7"
 
 EXTRA_OECONF += "--disable-zypp"
