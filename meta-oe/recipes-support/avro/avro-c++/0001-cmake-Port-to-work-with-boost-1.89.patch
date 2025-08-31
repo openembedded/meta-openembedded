@@ -1,0 +1,49 @@
+From f7c76ff3d693e6df5693fcd2864101b9913b1a44 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 30 Aug 2025 18:16:10 -0700
+Subject: [PATCH] cmake: Port to work with boost 1.89+
+
+boost 1.88 does not have boost system libs anymore
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ CMakeLists.txt | 25 ++++++++++++++-----------
+ 1 file changed, 14 insertions(+), 11 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 73596a6..42f4225 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -80,17 +80,20 @@ endif ()
+ 
+ 
+ find_package (Boost 1.38 REQUIRED
+-    COMPONENTS filesystem iostreams program_options regex system)
+-
+-include(FetchContent)
+-FetchContent_Declare(
+-        fmt
+-        GIT_REPOSITORY  https://github.com/fmtlib/fmt.git
+-        GIT_TAG         10.2.1
+-        GIT_PROGRESS    TRUE
+-        USES_TERMINAL_DOWNLOAD TRUE
+-)
+-FetchContent_MakeAvailable(fmt)
++    COMPONENTS filesystem iostreams program_options regex)
++
++find_package(fmt)
++if (NOT fmt_FOUND)
++    include(FetchContent)
++    FetchContent_Declare(
++            fmt
++            GIT_REPOSITORY  https://github.com/fmtlib/fmt.git
++            GIT_TAG         10.2.1
++            GIT_PROGRESS    TRUE
++            USES_TERMINAL_DOWNLOAD TRUE
++    )
++    FetchContent_MakeAvailable(fmt)
++endif (NOT fmt_FOUND)
+ 
+ find_package(Snappy)
+ if (SNAPPY_FOUND)

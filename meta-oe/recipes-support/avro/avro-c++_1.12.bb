@@ -10,7 +10,9 @@ DEPENDS = "boost"
 SRC_URI = "git://github.com/apache/avro.git;branch=branch-1.12;protocol=https;name=avro-c++ \
         git://github.com/fmtlib/fmt.git;branch=10.x;protocol=https;name=fmt;destsuffix=_deps/fmt-src \
         file://0001-Remove-cpp-unittest-compilation.patch \
-        file://0002-Add-package-configuration-files.patch"
+        file://0002-Add-package-configuration-files.patch \
+        file://0001-cmake-Port-to-work-with-boost-1.89.patch \
+        "
 
 SRCREV_FORMAT = "avro-c++ fmt"
 SRCREV_avro-c++ = "8c27801dc8d42ccc00997f25c0b8f45f8d4a233e"
