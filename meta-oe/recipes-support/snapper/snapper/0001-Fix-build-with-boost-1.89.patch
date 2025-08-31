@@ -1,0 +1,89 @@
+From c33e7707da86a23c4ad7e2451ddb04df419d6412 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 31 Aug 2025 00:13:07 -0700
+Subject: [PATCH] Fix build with boost 1.89
+
+boost 1.89+ does not have boost system lib anymore all needed functions
+are now in header
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ dbus/Makefile.am             | 2 +-
+ examples/c++-lib/Makefile.am | 1 -
+ server/Makefile.am           | 2 +-
+ snapper/Makefile.am          | 2 +-
+ testsuite-cmp/Makefile.am    | 1 -
+ zypp-plugin/Makefile.am      | 1 -
+ 6 files changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index 9c0456a..2078d7d 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -15,4 +15,4 @@ libdbus_la_SOURCES =					\
+ 	DBusMainLoop.cc		DBusMainLoop.h
+ 
+ libdbus_la_LIBADD = $(DBUS_LIBS)
+-libdbus_la_LDFLAGS = -lboost_system -lboost_thread
++libdbus_la_LDFLAGS = -lboost_thread
+diff --git a/examples/c++-lib/Makefile.am b/examples/c++-lib/Makefile.am
+index 52c81e5..f55da6f 100644
+--- a/examples/c++-lib/Makefile.am
++++ b/examples/c++-lib/Makefile.am
+@@ -5,7 +5,6 @@
+ AM_CPPFLAGS = -I$(top_srcdir)
+ 
+ LDADD = ../../snapper/libsnapper.la
+-AM_LDFLAGS = -lboost_system
+ 
+ noinst_PROGRAMS = List ListAll Create CmpDirs CreateNumber CreateTimeline
+ 
+diff --git a/server/Makefile.am b/server/Makefile.am
+index c03f373..1aef916 100644
+--- a/server/Makefile.am
++++ b/server/Makefile.am
+@@ -16,4 +16,4 @@ snapperd_SOURCES =					\
+ 	FilesTransferTask.cc	FilesTransferTask.h
+ 
+ snapperd_LDADD = ../snapper/libsnapper.la ../dbus/libdbus.la -lrt
+-snapperd_LDFLAGS = -lboost_system -lboost_thread -lpthread
++snapperd_LDFLAGS = -lboost_thread -lpthread
+diff --git a/snapper/Makefile.am b/snapper/Makefile.am
+index b0fe55c..d75599f 100644
+--- a/snapper/Makefile.am
++++ b/snapper/Makefile.am
+@@ -71,7 +71,7 @@ endif
+ 
+ libsnapper_la_CPPFLAGS = $(XML2_CFLAGS) $(ZLIB_CFLAGS)
+ libsnapper_la_LDFLAGS = -version-info @LIBVERSION_INFO@
+-libsnapper_la_LIBADD = -lboost_thread -lboost_system $(XML2_LIBS) -lacl $(ZLIB_LIBS)
++libsnapper_la_LIBADD = -lboost_thread $(XML2_LIBS) -lacl $(ZLIB_LIBS)
+ if ENABLE_ROLLBACK
+ libsnapper_la_LIBADD += -lmount
+ endif
+diff --git a/testsuite-cmp/Makefile.am b/testsuite-cmp/Makefile.am
+index 81104bf..555bc3b 100644
+--- a/testsuite-cmp/Makefile.am
++++ b/testsuite-cmp/Makefile.am
+@@ -3,7 +3,6 @@
+ #
+ 
+ AM_CPPFLAGS = -I$(top_srcdir)
+-AM_LDFLAGS = -lboost_system
+ 
+ LDADD = ../snapper/libsnapper.la
+ 
+diff --git a/zypp-plugin/Makefile.am b/zypp-plugin/Makefile.am
+index 9d102e0..e395f59 100644
+--- a/zypp-plugin/Makefile.am
++++ b/zypp-plugin/Makefile.am
+@@ -33,7 +33,6 @@ forwarding_zypp_plugin_SOURCES = \
+ forwarding_zypp_plugin_LDADD = \
+ 	../snapper/libsnapper.la \
+ 	../stomp/libstomp.la \
+-	-lboost_system \
+ 	-lpthread
+ 
+ TESTS = solvable-matcher.test
