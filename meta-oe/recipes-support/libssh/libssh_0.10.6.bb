@@ -13,6 +13,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
            file://CVE-2025-5318.patch \
            file://CVE-2025-5351.patch \
            file://CVE-2025-5372.patch \
+           file://CVE-2025-4877.patch \
           "
 SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
 
