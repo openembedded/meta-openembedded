@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=afd6ce4aa04fdc346e5b3c6e634bd75c"
 
 DEPENDS = "php re2c-native"
 
-SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[sha256sum] = "a043888c86e1526ac5ddb220d37ed3a1809e79a16bbb059b9c7e2d2f83b43cc1"
+SRC_URI[sha256sum] = "f58442306ce55fe3b811c31759a247242989164f2a7933f05c8d59b06665b9c9"
 
 UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
 
