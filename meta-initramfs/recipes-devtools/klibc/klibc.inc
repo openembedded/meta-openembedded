@@ -35,7 +35,7 @@ S = "${UNPACKDIR}/klibc-${PV}"
 
 OPTFLAGS = "${TUNE_CCARGS} -Os -fcommon"
 OPTFLAGS:append = " ${DEBUG_PREFIX_MAP}"
-OPTFLAGS:append:toolchain-clang = " -fno-builtin-bcmp"
+OPTFLAGS:append:toolchain-clang = " -fno-builtin-bcmp -fno-builtin-wcslen"
 OPTFLAGS:append:toolchain-clang:mipsarch = " -no-integrated-as"
 
 PARALLEL_MAKE = ""
