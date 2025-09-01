@@ -20,6 +20,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
            file://cross-clang.patch \
            file://0001-workaround-for-overlapping-sections-in-binary.patch \
+           file://0001-stdint.h-Fix-build-with-newer-clang.patch \
+           file://0002-mount_opts-Fix-the-mount_opts-str-length.patch \
            "
 
 ARMPATCHES ?= ""
@@ -27,7 +29,7 @@ ARMPATCHES ?= ""
 ARMPATCHES:arm = " \
                   file://armv4-fix-v4bx.patch \
                  "
-SRC_URI[sha256sum] = "d673a294f742d59368222ff5c38462d81098c55063799de6fb8a7ba3d4af0436"
+SRC_URI[sha256sum] = "281bfb683e196818412af70b8968b7726475a80ff1c4bd67119e6bf5059f9075"
 
 S = "${UNPACKDIR}/klibc-${PV}"
 
