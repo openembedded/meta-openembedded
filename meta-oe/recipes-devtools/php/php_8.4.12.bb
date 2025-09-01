@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
 
 S = "${UNPACKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "2c39c75b54df89b01195b72ad0ee1fcd490c71db18bc52bcd61fb2ffb57b26fa"
+SRC_URI[sha256sum] = "2ebd5382eb090d603087da649ed21de64b079616bc9a02abbc532b89b17e3468"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
