@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
 
-SRC_URI += "file://0001-pyproject.toml-Update-mypy-requirement.patch"
+#SRC_URI += "file://0001-pyproject.toml-Update-mypy-requirement.patch"
 
-SRC_URI[sha256sum] = "5baececa9ecba31eff645232d59845c07aa030f0c81ee70184a90d35099a0e63"
+SRC_URI[sha256sum] = "6fce4b8500244f6fcb71465d4a4930d132ba9ab8e71a7859e6a5d59851068d14"
 
 DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 
@@ -17,7 +17,6 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 RDEPENDS:${PN} += " \
 	python3-core \
 	python3-logging \
-	python3-mypy \
 	python3-codecs \
 	python3-json \
 "
