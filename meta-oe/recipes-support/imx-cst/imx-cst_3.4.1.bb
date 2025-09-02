@@ -25,15 +25,17 @@ S = "${UNPACKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
 
 EXTRA_OEMAKE = 'CC="${CC}" LD="${CC}" AR="${AR}" OBJCOPY="${OBJCOPY}"'
 
+inherit siteinfo
+
 do_compile() {
-    oe_runmake -C code/obj.linux64 OSTYPE=linux64 ENCRYPTION=yes COPTIONS="${CFLAGS} ${CPPFLAGS}" LDOPTIONS="${LDFLAGS}"
+    oe_runmake -C code/obj.linux${SITEINFO_BITS} OSTYPE=linux${SITEINFO_BITS} ENCRYPTION=yes COPTIONS="${CFLAGS} ${CPPFLAGS}" LDOPTIONS="${LDFLAGS}"
     oe_runmake -C add-ons/hab_csf_parser COPTS="${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
 }
 
 do_install () {
     install -d ${D}${bindir}
-    install -m 755 ${S}/code/obj.linux64/cst ${D}${bindir}/
-    install -m 755 ${S}/code/obj.linux64/srktool ${D}${bindir}
+    install -m 755 ${S}/code/obj.linux${SITEINFO_BITS}/cst ${D}${bindir}/
+    install -m 755 ${S}/code/obj.linux${SITEINFO_BITS}/srktool ${D}${bindir}
     install -m 755 ${S}/add-ons/hab_csf_parser/csf_parser ${D}${bindir}
 }
 
