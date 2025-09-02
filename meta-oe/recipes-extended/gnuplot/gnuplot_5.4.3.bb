@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
            file://CVE-2025-31177.patch \
            file://CVE-2025-31178.patch \
            file://CVE-2025-31179.patch \
+           file://CVE-2025-31180.patch \
            "
 SRC_URI:append:class-target = " \
     file://0002-do-not-build-demos.patch \
