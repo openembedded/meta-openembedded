@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcprepl
            file://CVE-2023-4256.patch \
            file://CVE-2024-22654-0001.patch \
            file://CVE-2024-22654-0002.patch \
+           file://CVE-2023-43279.patch \
            file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
 "
 
