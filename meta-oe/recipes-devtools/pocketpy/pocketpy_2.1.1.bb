@@ -11,13 +11,17 @@ HOMEPAGE = "https://pocketpy.dev/"
 BUGTRACKER = "https://github.com/pocketpy/pocketpy/issues"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8cdfa87bc5e09bc07f8cf64135026d91"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c292beb20a17db07c359b0cc2c039027"
 
 SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main"
-SRCREV = "8a3bdd7e0a43b44e3b32548543128d95e68a3802"
+SRCREV = "b6a6aa85a6cbfe0427b48e523d53ee3832bf5bd2"
 
 
 inherit cmake
+
+EXTRA_OECMAKE = "\
+    -DPK_ENABLE_OS=ON \
+"
 
 CFLAGS += "-fPIC"
 
