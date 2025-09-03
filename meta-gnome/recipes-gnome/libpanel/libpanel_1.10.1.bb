@@ -11,7 +11,7 @@ DEPENDS += " \
     libadwaita \
 "
 
-SRC_URI[archive.sha256sum] = "578ce512278ff2bb5eeebb55099392c52537a5abd9bd0629567f102532b38b25"
+SRC_URI[archive.sha256sum] = "936bbe96dfb383556482120fddd4533a52d2f49303328cb694861606492445eb"
 
 PACKAGECONFIG ?= ""
 #EXTRA_OEMESON += "-Ddocs=disabled"
