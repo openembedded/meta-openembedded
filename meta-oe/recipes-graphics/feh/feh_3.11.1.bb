@@ -2,14 +2,14 @@ SUMMARY = "X11 image viewer aimed mostly at console users"
 HOMEPAGE = "https://feh.finalrewind.org/"
 SECTION = "x11/utils"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=150e4c518ff8aaecfe35694e47661d9a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=275a549d1abc07e3bae1d7137f53f602"
 DEPENDS = "\
     imlib2 \
     virtual/libx11 libxt\
 "
 
 SRC_URI = "https://feh.finalrewind.org/feh-${PV}.tar.bz2"
-SRC_URI[sha256sum] = "5426e2799770217af1e01c2e8c182d9ca8687d84613321d8ab4a66fe4041e9c8"
+SRC_URI[sha256sum] = "43d8e6742ec273ef3084bde82c5ead5a074348d9bfce28f1b0f8504623ca9b74"
 
 inherit mime-xdg features_check
 # depends on virtual/libx11
