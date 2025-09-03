@@ -22,7 +22,7 @@ SRC_URI += "file://run-ptest \
             file://0001-Do-not-download-external-dependency-tarballs-via-mes.patch \
             file://0001-Change-types-for-width-height-to-match-definitions-i.patch \
             "
-SRC_URI[sha256sum] = "352ed6ccfb7998a00881692f38b4ca083c691d3e275b4145423704c34c909076"
+SRC_URI[sha256sum] = "ec01b645840dd1996df21ee37f208cd8ba57644779fa20464010638013d3203c"
 
 inherit pypi pkgconfig python3targetconfig meson ptest-python-pytest
 
