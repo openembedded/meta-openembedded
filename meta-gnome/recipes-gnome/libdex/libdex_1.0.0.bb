@@ -11,7 +11,7 @@ DEPENDS:append:libc-musl = " libucontext"
 
 LDFLAGS:append:libc-musl = " -lucontext"
 
-SRC_URI[archive.sha256sum] = "7472e88090db2b228307505edeba4483e872681340cb0404ae64ac3da5bed0a6"
+SRC_URI[archive.sha256sum] = "7b8f5c5db3796e14e12e10422e2356766ba830b92815fee70bbc867b5b207f5d"
 
 PACKAGECONFIG ?= ""
 EXTRA_OEMESON += "-Dintrospection=enabled -Dvapi=false"
