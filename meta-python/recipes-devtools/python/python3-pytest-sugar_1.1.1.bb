@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e485b36215d1a038821b3e51bd189197"
 
 SRC_URI += "file://run-ptest"
-SRC_URI[sha256sum] = "53138645cabc311a677bb09c307eab41681a563e498318cd2a0d7cd184837af4"
+SRC_URI[sha256sum] = "73b8b65163ebf10f9f671efab9eed3d56f20d2ca68bda83fa64740a92c08f65d"
 
 inherit pypi python_poetry_core ptest-python-pytest
 
