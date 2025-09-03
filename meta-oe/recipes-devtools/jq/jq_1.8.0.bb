@@ -43,4 +43,6 @@ do_install_ptest() {
     sed -i s:@libdir@:${libdir}:g ${D}${PTEST_PATH}/run-ptest
 }
 
+RDEPENDS:${PN}-ptest += "tzdata"
+
 BBCLASSEXTEND = "native"
