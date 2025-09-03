@@ -19,4 +19,4 @@ PACKAGECONFIG ?= ""
 
 EXTRA_OEMESON += "-Ddocs=disabled  -Dintrospection=enabled -Dvapi=false"
 
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
