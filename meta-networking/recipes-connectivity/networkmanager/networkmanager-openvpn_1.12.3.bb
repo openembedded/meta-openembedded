@@ -13,7 +13,7 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/Netw
 
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "aa1b5f9addf8d64bc8c459361cf0d5e3eb99f14b60ea82a3500631928af62a6f"
+SRC_URI[sha256sum] = "4bda1c8559bb8c35f6f131c09edae90cdfccd0314e8b8cb98ac55e09b6005adc"
 
 S = "${UNPACKDIR}/NetworkManager-openvpn-${PV}"
 
