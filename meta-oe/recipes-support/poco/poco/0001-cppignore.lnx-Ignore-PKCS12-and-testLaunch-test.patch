@@ -40,9 +40,16 @@ There were 4 failures:
   Not found: POCO_BASE"
   │ │ in "<unknown>", line -1
 
+There was 1 error:
+ 1: CppUnit::TestCaller<ProcessRunnerTest>.testProcessRunner
+    "Poco::TimeoutException:
+Timeout: ProcessRunner::checkTimeout(): waiting for PID file"
+    in "<unknown>", line -1
+
 Upstream-Status: Inappropriate [OE specific]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  cppignore.lnx | 9 +++++++++
  1 file changed, 9 insertions(+)
@@ -51,7 +58,7 @@ diff --git a/cppignore.lnx b/cppignore.lnx
 index b3288d474..9aad48ca5 100644
 --- a/cppignore.lnx
 +++ b/cppignore.lnx
-@@ -30,3 +30,12 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
+@@ -30,3 +30,13 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
  CppUnit::TestCaller<HTTPSStreamFactoryTest>.testProxy
  CppUnit::TestCaller<DNSTest>.testHostByAddress
  CppUnit::TestCaller<DNSTest>.testHostByName
@@ -64,3 +71,4 @@ index b3288d474..9aad48ca5 100644
 +CppUnit::TestCaller<PKCS12ContainerTest>.testCertsOnlyPKCS12
 +CppUnit::TestCaller<PKCS12ContainerTest>.testPEMReadWrite
 +CppUnit::TestCaller<MongoDBTest>.testArray
++CppUnit::TestCaller<ProcessRunnerTest>.testProcessRunner
