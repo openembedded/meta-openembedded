@@ -11,13 +11,13 @@ HOMEPAGE = "https://canopenterm.de"
 BUGTRACKER = "https://github.com/CANopenTerm/CANopenTerm/issues"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=10e84ea70e8c3a1fbc462f5424806474"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5f8a62fabd50ce3f1d7794bc849ae7a5"
 
-DEPENDS = "cjson libinih virtual/libsdl2 lua libsocketcan pocketpy"
+DEPENDS = "cjson libinih libsdl3 lua libsocketcan pocketpy"
 
 SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
 
-SRCREV  = "e0760b2e9657907e691be4df384ca7617109635d"
+SRCREV  = "b0555360e5e8b444a2a9e14088fd253412184eb8"
 
 
 inherit cmake ptest
@@ -26,4 +26,4 @@ EXTRA_OECMAKE += "-DBUILD_YOCTO=ON"
 
 FILES:${PN} += "${bindir}/CANopenTerm ${bindir}/codb2json ${datadir}"
 
-RDEPENDS:${PN} = "cjson libinih libsdl2 lua libsocketcan pocketpy"
+RDEPENDS:${PN} = "cjson libinih libsdl3 lua libsocketcan pocketpy"
