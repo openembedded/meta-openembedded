@@ -31,6 +31,8 @@ PACKAGECONFIG:remove:riscv32 = "MongoDB"
 PACKAGECONFIG:remove:riscv64 = "MongoDB"
 PACKAGECONFIG:remove:mipsarch = "MongoDB"
 PACKAGECONFIG:remove:powerpc = "MongoDB"
+# Following options have dependencies on recipes which don't have native variant
+PACKAGECONFIG:remove:class-native = "MongoDB DataODBC"
 
 PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
 PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
