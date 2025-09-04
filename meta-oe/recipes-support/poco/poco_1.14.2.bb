@@ -6,15 +6,14 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 
 # These dependencies are required by Foundation
-DEPENDS = "libpcre2 zlib"
+DEPENDS = "libpcre2 utf8proc zlib"
 
-SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-1.13.3;protocol=https \
+SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=https;tag=poco-${PV}-release \
            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
+           file://0002-DataTest-disable-testSQLChannel-test.patch \
            file://run-ptest \
-           file://0001-SimpleRowFormatter.h-fix-the-build-on-gcc-15-unsatis.patch \
-           file://0002-fix-Foundation-Build-error-with-GCC-15-class-Poco-Pr.patch \
            "
-SRCREV = "7f848d25aa0461d3beeff1189dc61b48ffe8e2f4"
+SRCREV = "96d182a99303fb068575294b36f0cc20da2e7b25"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
@@ -24,7 +23,7 @@ inherit cmake ptest
 # By default the most commonly used poco components are built
 # Foundation is built anyway and doesn't need to be listed explicitly
 # these don't have dependencies outside oe-core
-PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataPostgreSQL DataSQLite Zip Encodings Prometheus"
+PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataPostgreSQL DataSQLite DNSSDAvahi Zip Encodings Prometheus"
 # MongoDB does not build for all architectures yet keep in sync with COMPATIBLE_HOST list in mongodb recipe
 # and mongodb needs meta-python enabled as well
 PACKAGECONFIG:remove:riscv32 = "MongoDB"
@@ -32,11 +31,11 @@ PACKAGECONFIG:remove:riscv64 = "MongoDB"
 PACKAGECONFIG:remove:mipsarch = "MongoDB"
 PACKAGECONFIG:remove:powerpc = "MongoDB"
 # Following options have dependencies on recipes which don't have native variant
-PACKAGECONFIG:remove:class-native = "MongoDB DataODBC DataPostgreSQL"
+PACKAGECONFIG:remove:class-native = "MongoDB DataODBC DataPostgreSQL DNSSDAvahi"
 
 PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
 PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
-PACKAGECONFIG[PDF] = "-DENABLE_PDF=ON,-DENABLE_PDF=OFF,zlib"
+PACKAGECONFIG[PDF] = "-DENABLE_PDF=ON,-DENABLE_PDF=OFF,libpng zlib"
 PACKAGECONFIG[Util] = "-DENABLE_UTIL=ON,-DENABLE_UTIL=OFF"
 PACKAGECONFIG[Net] = "-DENABLE_NET=ON,-DENABLE_NET=OFF"
 PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
@@ -45,6 +44,7 @@ PACKAGECONFIG[JWT] = "-DENABLE_JWT=ON,-DENABLE_JWT=OFF,openssl"
 PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
 PACKAGECONFIG[DataPostgreSQL] = "-DENABLE_DATA_POSTGRESQL=ON,-DENABLE_DATA_POSTGRESQL=OFF,postgresql,postgresql"
 PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON,-DENABLE_DATA_SQLITE=OFF,sqlite3"
+PACKAGECONFIG[DNSSDAvahi] = "-DENABLE_DNSSD=ON -DENABLE_DNSSD_AVAHI=ON,-DENABLE_DNSSD=OFF -DENABLE_DNSSD_AVAHI=OFF,avahi"
 PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
 PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
 PACKAGECONFIG[Prometheus] = "-DENABLE_PROMETHEUS=ON,-DENABLE_PROMETHEUS=OFF"
@@ -90,6 +90,16 @@ python populate_packages:prepend () {
                     'poco-%s', 'Poco %s component', extra_depends='', prepend=True, hook=hook)
 
     d.setVar("RRECOMMENDS:%s" % pn, " ".join(packages))
+}
+
+do_install:append() {
+    # fix buildpaths
+    if [ -e ${D}${nonarch_libdir}/cmake/Poco/PocoPDFTargets.cmake ]; then
+        sed -i 's#${RECIPE_SYSROOT}##' ${D}${nonarch_libdir}/cmake/Poco/PocoPDFTargets.cmake
+    fi
+    if [ -e ${D}${nonarch_libdir}/cmake/Poco/PocoDNSSDAvahiTargets.cmake ]; then
+        sed -i 's#${RECIPE_SYSROOT}##g' ${D}${nonarch_libdir}/cmake/Poco/PocoDNSSDAvahiTargets.cmake
+    fi
 }
 
 do_install_ptest () {
