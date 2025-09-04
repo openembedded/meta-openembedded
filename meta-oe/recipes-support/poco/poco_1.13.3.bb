@@ -24,7 +24,7 @@ inherit cmake ptest
 # By default the most commonly used poco components are built
 # Foundation is built anyway and doesn't need to be listed explicitly
 # these don't have dependencies outside oe-core
-PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataSQLite Zip Encodings Prometheus"
+PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataPostgreSQL DataSQLite Zip Encodings Prometheus"
 # MongoDB does not build for all architectures yet keep in sync with COMPATIBLE_HOST list in mongodb recipe
 # and mongodb needs meta-python enabled as well
 PACKAGECONFIG:remove:riscv32 = "MongoDB"
@@ -32,7 +32,7 @@ PACKAGECONFIG:remove:riscv64 = "MongoDB"
 PACKAGECONFIG:remove:mipsarch = "MongoDB"
 PACKAGECONFIG:remove:powerpc = "MongoDB"
 # Following options have dependencies on recipes which don't have native variant
-PACKAGECONFIG:remove:class-native = "MongoDB DataODBC"
+PACKAGECONFIG:remove:class-native = "MongoDB DataODBC DataPostgreSQL"
 
 PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
 PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
@@ -43,6 +43,7 @@ PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
 PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON,-DENABLE_CRYPTO=OFF,openssl"
 PACKAGECONFIG[JWT] = "-DENABLE_JWT=ON,-DENABLE_JWT=OFF,openssl"
 PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
+PACKAGECONFIG[DataPostgreSQL] = "-DENABLE_DATA_POSTGRESQL=ON,-DENABLE_DATA_POSTGRESQL=OFF,postgresql,postgresql"
 PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON,-DENABLE_DATA_SQLITE=OFF,sqlite3"
 PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
 PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
@@ -94,6 +95,9 @@ python populate_packages:prepend () {
 do_install_ptest () {
        cp -rf ${B}/bin/ ${D}${PTEST_PATH}
        cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
+       if ${@bb.utils.contains('PACKAGECONFIG', 'DataPostgreSQL', 'true', 'false', d)}; then
+            cp -f ${B}/lib/libPocoDataTest.so* ${D}${libdir}
+       fi
        cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
        find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
        rm -f ${D}${PTEST_PATH}/testrunners
@@ -108,12 +112,14 @@ PACKAGES_DYNAMIC = "poco-.*"
 # "poco" is a metapackage which pulls in all Poco components
 ALLOW_EMPTY:${PN} = "1"
 
-# cppunit is only built if tests are enabled
-PACKAGES =+ "${PN}-cppunit"
+# cppunit and datatest is only built if tests are enabled
+PACKAGES =+ "${PN}-cppunit ${PN}-datatest"
 FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
 ALLOW_EMPTY:${PN}-cppunit = "1"
+FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
+ALLOW_EMPTY:${PN}-datatest = "1"
 
-RDEPENDS:${PN}-ptest += "${PN}-cppunit"
+RDEPENDS:${PN}-ptest += "${PN}-cppunit ${PN}-datatest"
 RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'MongoDB', 'mongodb', '', d)}"
 RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'Redis', 'redis', '', d)}"
 
