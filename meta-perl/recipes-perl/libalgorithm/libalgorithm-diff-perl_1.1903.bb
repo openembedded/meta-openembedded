@@ -12,8 +12,8 @@ HOMEPAGE = "https://metacpan.org/release/TYEMQ/Algorithm-Diff-1.1901"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=1676;endline=1680;md5=f6b2fe8ca06ca6faefa4f265fc494c2c"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/T/TY/TYEMQ/Algorithm-Diff-${PV}.zip"
-SRC_URI[sha256sum] = "229a5708b0791675a8cd50ace77e79a323e52bfb4d34799dddfed644a2036662"
+SRC_URI = "${CPAN_MIRROR}/authors/id/T/TY/TYEMQ/Algorithm-Diff-${PV}.tar.gz"
+SRC_URI[sha256sum] = "30e84ac4b31d40b66293f7b1221331c5a50561a39d580d85004d9c1fff991751"
 
 S = "${UNPACKDIR}/Algorithm-Diff-${PV}"
 
