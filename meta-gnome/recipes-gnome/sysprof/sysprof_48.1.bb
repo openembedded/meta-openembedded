@@ -8,6 +8,7 @@ inherit gnomebase gnome-help gettext systemd gsettings gtk-icon-cache mime mime-
 
 DEPENDS += " \
     desktop-file-utils-native \
+    elfutils \
     glib-2.0 \
     glib-2.0-native \
     json-glib \
