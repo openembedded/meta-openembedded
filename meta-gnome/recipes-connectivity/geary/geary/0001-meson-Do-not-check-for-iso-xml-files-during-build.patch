@@ -1,0 +1,31 @@
+From 474cd5a9d22ef9f25c37194d3c8ce1bc4d18102d Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Nov 2024 00:44:49 -0800
+Subject: [PATCH] meson: Do not check for iso xml files during build
+
+These files are needed during runtime and may exist in a different
+path ( staging area ) when cross-compiled, therefore its not completely
+valid to check for these files to exist during build-time
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Adapted for Kirkstone - Geary v40
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meson.build | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index d0af9eef8..46c8106fa 100644
+--- a/meson.build
++++ b/meson.build
+@@ -221,8 +221,6 @@ if iso_3166_xml == ''
+   iso_3166_xml = iso_codes_dir / 'iso_3166.xml'
+ endif
+ 
+-files(iso_639_xml, iso_3166_xml) # Check to make sure these exist
+-
+ # Post-install scripts
+ meson.add_install_script('build-aux' / 'post_install.py')
+ 

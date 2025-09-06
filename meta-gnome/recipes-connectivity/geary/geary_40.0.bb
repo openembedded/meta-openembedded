@@ -36,6 +36,7 @@ SRC_URI = " \
 	git://github.com/GNOME/geary.git;branch=main;protocol=https \
         file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
         file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
+        file://0001-meson-Do-not-check-for-iso-xml-files-during-build.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -45,7 +46,9 @@ SRCREV = "e561775c1580a9f60a726355b2b897bfc9cb3382"
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
 GIR_MESON_OPTION = ""
-EXTRA_OEMESON = "-Dprofile=release"
+EXTRA_OEMESON = "-Dprofile=release \
+                 -Diso_639_xml=${datadir}/xml/iso-codes/iso_639.xml \
+                 -Diso_3166_xml=${datadir}/xml/iso-codes/iso_3166.xml"
 
 PACKAGECONFIG[libunwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
 PACKAGECONFIG[tnef] = "-Dtnef=enabled,-Dtnef=disabled,libytnef"
