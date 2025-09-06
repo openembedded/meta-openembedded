@@ -27,11 +27,11 @@ RDEPENDS:${PN} = "bubblewrap rtkit ${PORTAL_BACKENDS} fuse3-utils"
 inherit meson pkgconfig python3native features_check
 
 SRC_URI = " \
-	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=main \
+	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=xdg-desktop-portal-1.20 \
 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
 "
 
-SRCREV = "85df26fb1c53334969fea3f15c2a06a14831094b"
+SRCREV = "23a76c392170dbbd26230f85ef56c3a57e52b857"
 
 FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"
 
