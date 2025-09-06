@@ -1,0 +1,38 @@
+From 003983a6e04a5e8d9373a96cb0a1c13caae9b193 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sat, 6 Sep 2025 14:04:40 +0800
+Subject: [PATCH] auparse/test: disable some test cases
+
+Disable test cases databuf_test lru_cache_test and uid_name_wrap_test as
+they can not be built with --disable-static configuration. See [1].
+
+[1]: https://github.com/linux-audit/audit-userspace/issues/494
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ auparse/test/Makefile.am | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/auparse/test/Makefile.am b/auparse/test/Makefile.am
+index 06928438..dad75e76 100644
+--- a/auparse/test/Makefile.am
++++ b/auparse/test/Makefile.am
+@@ -21,10 +21,10 @@
+ #
+ 
+ CONFIG_CLEAN_FILES = *.loT *.rej *.orig *.cur
+-noinst_PROGRAMS = auparse_test auparselol_test lookup_test databuf_test \
+-	auparse_extra_test lru_cache_test uid_name_wrap_test
++noinst_PROGRAMS = auparse_test auparselol_test lookup_test \
++	auparse_extra_test
+ TESTS = run_auparse_tests.sh run_auparselol_test.sh lookup_test \
+-	databuf_test auparse_extra_test lru_cache_test uid_name_wrap_test
++	auparse_extra_test
+ dist_check_SCRIPTS = run_auparse_tests.sh run_auparselol_test.sh
+ EXTRA_DIST = auparse_test.ref auparse_test.ref.py test.log test2.log test3.log test4.log auditd_raw.sed run_auparse_tests.sh auparse_test.py run_auparselol_test.sh
+ CLEANFILES = run_auparse_tests.sh run_auparselol_test.sh
+-- 
+2.34.1
+
