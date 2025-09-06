@@ -8,7 +8,7 @@ SRC_URI = " \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
+SRCREV = "b676905d91aa3c4e524ca663784d4cf085c465d7"
 
 
 inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
