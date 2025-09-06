@@ -2,12 +2,17 @@ SUMMARY = "Inspect and manipulate eBPF programs and maps"
 DESCRIPTION = "bpftool is a kernel tool for inspection and simple manipulation \
 of eBPF programs and maps."
 LICENSE = "GPL-2.0-only"
-DEPENDS = "binutils elfutils elfutils-native"
-PROVIDES = "virtual/bpftool"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+UPSTREAM_CHECK_URI = "https://www.kernel.org/"
 
-inherit bash-completion kernelsrc kernel-arch
+DEPENDS = "binutils-native elfutils-native"
 
-do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
+inherit native bash-completion
+
+SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz"
+SRC_URI[sha256sum] = "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab48516bcc1befbcd83"
+
+S = "${UNPACKDIR}/linux-${PV}"
 
 EXTRA_OEMAKE = "\
     V=1 \
@@ -22,12 +27,6 @@ EXTRA_OEMAKE = "\
     bash_compdir=${prefix}/share/bash-completion \
 "
 
-SECURITY_CFLAGS = ""
-
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
-
-COMPATIBLE_HOST = "(x86_64|aarch64|riscv64).*-linux"
-
 do_compile() {
     oe_runmake
 }
@@ -36,14 +35,4 @@ do_install() {
     oe_runmake DESTDIR=${D} install
 }
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
-python do_package:prepend() {
-    d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
-}
-
-B = "${WORKDIR}/${BPN}-${PV}"
-
 FILES:${PN} += "${exec_prefix}/sbin/*"
-
-BBCLASSEXTEND = "nativesdk"
