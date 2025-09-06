@@ -9,13 +9,13 @@ DEPENDS += "bison-native \
             elfutils \
             bpftool-native \
             bcc \
-            systemtap \
             libcereal \
             libbpf \
             "
 DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native', '', d)}"
 
 RDEPENDS:${PN} += "bash python3 xz"
+RDEPENDS:${PN}-ptest += "bpftool"
 
 SRC_URI = "git://github.com/iovisor/bpftrace;branch=master;protocol=https \
            file://run-ptest \
@@ -63,7 +63,6 @@ EXTRA_OECMAKE = " \
 "
 
 COMPATIBLE_HOST = "(x86_64.*|aarch64.*|powerpc64.*|riscv64.*)-linux"
-COMPATIBLE_HOST:libc-musl = "null"
 
 INHIBIT_PACKAGE_STRIP_FILES += "\
     ${PKGD}${PTEST_PATH}/tests/testprogs/uprobe_test \
