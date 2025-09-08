@@ -21,6 +21,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-click \
     python3-dasbus \
     python3-dominate \
+    python3-evdev \
     python3-execnet \
     python3-flask \
     python3-flexcache \
