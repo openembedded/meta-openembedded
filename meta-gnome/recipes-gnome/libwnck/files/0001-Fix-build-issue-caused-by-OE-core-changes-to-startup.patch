@@ -23,7 +23,7 @@ Upstream-Status: Inappropriate [oe-specific]
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 Refresh the patch
-Don't use explicit type cast to avoid truncation, use long long for tv_sec.
+Don't use explicit type cast to avoid truncation, use time_t for tv_sec.
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 
@@ -40,7 +40,7 @@ index 7418f89..f0f30b2 100644
    GList *tmp;
    gint64 now;
 -  long tv_sec, tv_usec;
-+  long long tv_sec;
++  time_t tv_sec;
 +  long tv_usec;
    double elapsed;
  
