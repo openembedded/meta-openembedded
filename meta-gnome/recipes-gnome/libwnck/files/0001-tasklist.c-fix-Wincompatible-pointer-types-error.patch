@@ -32,7 +32,7 @@ index 4f0c6c4..758fc5f 100644
    GList *tmp;
    GTimeVal now;
 -  long tv_sec, tv_usec;
-+  long long tv_sec;
++  time_t tv_sec;
 +  long tv_usec;
    double elapsed;
  
