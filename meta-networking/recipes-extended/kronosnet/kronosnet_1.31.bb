@@ -11,10 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
 SECTION = "libs"
 DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
 
-SRCREV = "f8f80fd7f9b85f2626d2c6452612962ad8efca9e"
-SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
-           file://0001-links.c-Fix-build-with-gcc-12.patch \
-           "
+SRCREV = "da73f2a1e0ffe2aee15d4f705edf90ee8445e2d4"
+SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1;tag=v${PV}"
 
 UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 
