@@ -214,7 +214,9 @@ do_install:append() {
         fi
     done
 
-    # rename shape dir to avoid rootfs conflict with
-    # mesa-demos /usr/bin/shape file.
-    mv ${D}/${bindir}/shape ${D}/${bindir}/opencv_shape
+    if [ -d ${D}/${bindir}/shape ]; then
+        # rename shape dir to avoid rootfs conflict with
+        # mesa-demos /usr/bin/shape file.
+        mv ${D}/${bindir}/shape ${D}/${bindir}/opencv_shape
+    fi
 }
