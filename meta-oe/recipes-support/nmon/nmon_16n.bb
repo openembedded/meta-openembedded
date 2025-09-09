@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/nmon/lmon${PV}.c;name=lmon \
            file://0001-lmon16g.c-Adjust-system-headers.patch \
            file://0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch \
            "
-SRC_URI[lmon.sha256sum] = "2bed4d45fdfdf1d1387ec91e139c04975d5f838e3e0d53c0fe2d803a707e5fc1"
+SRC_URI[lmon.sha256sum] = "c0012cc2d925dee940c37ceae297abac64ba5a5c30e575e7418b04028613f5f2"
 SRC_URI[doc.sha256sum] = "1f7f83afe62a7210be5e83cd24157adb854c14599efe0b377a7ecca933869278"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/nmon/files/"
