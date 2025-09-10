@@ -38,6 +38,7 @@ base_bindir_progs = "cat chgrp chmod chown cp date dd echo false hostname kill l
 
 sbindir_progs = "chroot"
 
+FILES:${PN}:append = " ${libdir}/coreutils/libstdbuf.so"
 inherit update-alternatives
 
 # Higher than busybox (which uses 50)
