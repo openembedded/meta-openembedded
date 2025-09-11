@@ -3,12 +3,12 @@ DESCRIPTION = "This module contains several data tables useful in various \
 kinds of HTML parsing operations."
 HOMEPAGE = "https://metacpan.org/release/HTML-Tagset"
 SECTION = "libs"
-LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+LICENSE = "Artistic-2.0"
 
-LIC_FILES_CHKSUM = "file://README;beginline=62;endline=66;md5=aa91eed6adfe182d2af676954f06a7c9"
+LIC_FILES_CHKSUM = "file://README.md;beginline=42;endline=46;md5=6e702d3d2c184c6972123c9bef7b29b7"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PE/PETDANCE/HTML-Tagset-${PV}.tar.gz"
-SRC_URI[sha256sum] = "adb17dac9e36cd011f5243881c9739417fd102fce760f8de4e9be4c7131108e2"
+SRC_URI[sha256sum] = "eb89e145a608ed1f8f141a57472ee5f69e67592a432dcd2e8b1dbb445f2b230b"
 
 S = "${UNPACKDIR}/HTML-Tagset-${PV}"
 
