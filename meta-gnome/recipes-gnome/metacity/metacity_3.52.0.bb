@@ -25,7 +25,8 @@ GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gsettings gettext upstream-version-is-even features_check
 
 SRC_URI[archive.sha256sum] = "a72438ace6d5903ae79338c6098b1b35ab91c8a97c4323701d3bef1f3eeb191c"
-SRC_URI += "file://0001-drop-zenity-detection.patch"
+SRC_URI += "file://0001-drop-zenity-detection.patch \
+            file://screen_avoid_sn_startup_sequence_get_last_active_time.patch"
 
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
 # enable as neccessary until new warnings are dealt with
