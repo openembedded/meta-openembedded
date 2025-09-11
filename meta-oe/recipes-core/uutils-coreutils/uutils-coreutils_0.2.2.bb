@@ -12,7 +12,7 @@ SRC_URI = " \
     file://0001-systemd_logind-replace-i8-with-libc-c_char.patch \
 "
 
-SRCREV = "38a248cba6ddf72a453a79365cd919fa40783a44"
+SRCREV = "3a07ffc5a9bd4c283e75afa548ba1f1957bad242"
 
 require ${BPN}-crates.inc
 
