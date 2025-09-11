@@ -4,8 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3 \
                     file://debian/copyright;md5=4ed7b6862ca422678b17e7d4ed592285"
 
 SRC_URI = "git://salsa.debian.org/apt-team/python-apt.git;protocol=https;branch=main"
+SRCREV = "626bf176c1844b63973d39bcceb0202ad36da797"
 
-SRCREV = "3252935b6224b3bd2e2250894b9559b47c61b2e1"
+# this is env var is used by setup.py - if not present, it
+# tries to run dpkg to get this info
+export DEBVER = "${PV}"
 
 
 inherit setuptools3
