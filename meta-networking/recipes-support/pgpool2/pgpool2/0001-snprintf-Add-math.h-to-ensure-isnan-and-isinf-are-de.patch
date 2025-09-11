@@ -1,0 +1,40 @@
+From c0b6ae020ad87040b5bc6fbae94fb815f10884d2 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Thu, 11 Sep 2025 11:58:02 +0200
+Subject: [PATCH] snprintf: Add math.h to ensure isnan and isinf are defined
+
+When building for 32-bit arm arch, compilation fails with the following error:
+| snprintf.c: In function 'fmtfloat':
+| snprintf.c:1232:13: error: implicit declaration of function 'isnan' [-Wimplicit-function-declaration]
+|  1232 |         if (isnan(value))
+|       |             ^~~~~
+| snprintf.c:50:1: note: include '<math.h>' or provide a declaration of 'isnan'
+|    49 | #include "postgresql/server/port.h"
+|   +++ |+#include <math.h>
+|    50 |
+| snprintf.c:1254:21: error: implicit declaration of function 'isinf' [-Wimplicit-function-declaration]
+|  1254 |                 if (isinf(value))
+|       |                     ^~~~~
+| snprintf.c:1254:21: note: include '<math.h>' or provide a declaration of 'isinf'
+
+To avoid the error, add math.h to snprintf.c.
+
+Upstream-Status: Pending [project ML registration is down]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/parser/snprintf.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/parser/snprintf.c b/src/parser/snprintf.c
+index 6dd4a50..cce7951 100644
+--- a/src/parser/snprintf.c
++++ b/src/parser/snprintf.c
+@@ -36,6 +36,7 @@
+ #include "c.h"
+ #endif
+ 
++#include <math.h>
+ #include <stdarg.h>
+ #include <stdio.h>
+ #include <stdint.h>
