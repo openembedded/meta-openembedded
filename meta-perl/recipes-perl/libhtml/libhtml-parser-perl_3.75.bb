@@ -1,15 +1,15 @@
 DESCRIPTION = "This package contains the Parser.pm module with friends."
-HOMEPAGE = "https://metacpan.org/release/CAPOEIRAB/HTML-Parser-3.73"
+HOMEPAGE = "https://metacpan.org/release/CAPOEIRAB/HTML-Parser-3.75"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;md5=b0459e4426b94753b9a9b8a15f1223b8"
+LIC_FILES_CHKSUM = "file://README;beginline=992;endline=996;md5=cab05784294bb47dc319aeced156e96a"
 
 DEPENDS += "perl"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/C/CA/CAPOEIRAB/HTML-Parser-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "85f05d944e166b8c5913db54779802eb38f4bbefb89a1730401ef06eb9ad8e69"
+SRC_URI[sha256sum] = "ac6b5e25a8df7af54885201e91c45fb9ab6744c08cedc1a38fcc7d95d21193a9"
 
 S = "${UNPACKDIR}/HTML-Parser-${PV}"
 
