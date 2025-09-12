@@ -12,3 +12,14 @@ SRC_URI = "git://github.com/gnome/libchamplain.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
+# Compilation fails on 32-bit targets, due to GTimeVal usage, which assumes that
+# time_t is always long, which is not always the case.
+# See bugreport:
+# https://gitlab.gnome.org/GNOME/libchamplain/-/issues/61
+COMPATIBLE_HOST:armv4 = "null"
+COMPATIBLE_HOST:armv5 = "null"
+COMPATIBLE_HOST:armv7 = "null"
+COMPATIBLE_HOST:armv7a = "null"
+COMPATIBLE_HOST:armv7ve = "null"
+COMPATIBLE_HOST:riscv32 = "null"
+COMPATIBLE_HOST:x86 = "null"
