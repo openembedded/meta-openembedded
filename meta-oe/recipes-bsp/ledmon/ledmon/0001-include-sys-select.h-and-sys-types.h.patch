@@ -9,16 +9,19 @@ sys/types.h is needed for ssize_t
 Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Adapted to latest release - sys/types.h is already included in the project.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
  src/dellssd.c | 1 +
- src/utils.h   | 1 +
- 2 files changed, 2 insertions(+)
+ 1 file changed, 1 insertion(+)
 
-diff --git a/src/dellssd.c b/src/dellssd.c
+diff --git a/src/lib/dellssd.c b/src/lib/dellssd.c
 index 7b8d431..e97fe45 100644
---- a/src/dellssd.c
-+++ b/src/dellssd.c
-@@ -27,6 +27,7 @@
+--- a/src/lib/dellssd.c
++++ b/src/lib/dellssd.c
+@@ -13,6 +13,7 @@
  #include <unistd.h>
  
  #include <sys/ioctl.h>
@@ -26,18 +29,6 @@ index 7b8d431..e97fe45 100644
  #include <linux/ipmi.h>
  
  #if _HAVE_DMALLOC_H
-diff --git a/src/utils.h b/src/utils.h
-index 720447a..c106529 100644
---- a/src/utils.h
-+++ b/src/utils.h
-@@ -21,6 +21,7 @@
- #define _UTILS_H_INCLUDED_
- 
- #include <getopt.h>
-+#include <sys/types.h>
- #include "config_file.h"
- #include "stdlib.h"
- #include "stdint.h"
 -- 
 2.21.0
 

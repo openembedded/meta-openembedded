@@ -8,17 +8,16 @@ HOMEPAGE = "https://github.com/intel/ledmon"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS = "sg3-utils udev pciutils"
+DEPENDS = "autoconf-archive-native sg3-utils udev pciutils"
 
 inherit autotools systemd pkgconfig
 
 SYSTEMD_SERVICE:${PN} = "ledmon.service"
 
-SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
-	   file://0002-include-sys-select.h-and-sys-types.h.patch \
-	   file://0001-fix-build-with-clang.patch"
+SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https;tag=v${PV} \
+	   file://0001-include-sys-select.h-and-sys-types.h.patch"
 
-SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
+SRCREV = "f70201d255b667de00f15880e99732699df6dce0"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 COMPATIBLE_HOST:libc-musl = "null"
