@@ -16,7 +16,8 @@ SYSTEMD_SERVICE:${PN} = "ledmon.service"
 
 SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
 	   file://0002-include-sys-select.h-and-sys-types.h.patch \
-	   file://0001-fix-build-with-clang.patch"
+	   file://0001-fix-build-with-clang.patch \
+	   file://Correct-get_uint64.patch"
 
 SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
 
