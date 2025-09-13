@@ -7,17 +7,21 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
 
 inherit cargo cargo-update-recipe-crates
 
-SRC_URI = "git://github.com/uutils/coreutils.git;protocol=https;branch=main"
+SRC_URI = " \
+    git://github.com/uutils/coreutils.git;protocol=https;branch=main;tag=${PV} \
+    file://0001-systemd_logind-replace-i8-with-libc-c_char.patch \
+"
 
-SRCREV = "38a248cba6ddf72a453a79365cd919fa40783a44"
+SRCREV = "3a07ffc5a9bd4c283e75afa548ba1f1957bad242"
 
 require ${BPN}-crates.inc
 
 PROVIDES = "coreutils"
 RPROVIDES:${PN} = "coreutils"
 
-PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
 PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
+PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
 
 CARGO_BUILD_FLAGS += "--features unix --features feat_external_libstdbuf"
 
