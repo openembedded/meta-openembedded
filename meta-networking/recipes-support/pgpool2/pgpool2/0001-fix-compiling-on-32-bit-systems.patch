@@ -16,7 +16,7 @@ as long - however on 32 bit systems this fails due to different time_t size:
 To account for this, introduce a new helper function to get a json value as
 a time_t type.
 
-Upstream-Status: Pending [project ML registration is down]
+Upstream-Status: Submitted [https://github.com/pgpool/pgpool2/pull/128]
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---

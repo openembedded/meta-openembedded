@@ -19,7 +19,7 @@ When building for 32-bit arm arch, compilation fails with the following error:
 
 To avoid the error, add math.h to snprintf.c.
 
-Upstream-Status: Pending [project ML registration is down]
+Upstream-Status: Submitted [https://github.com/pgpool/pgpool2/pull/128]
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
