@@ -52,7 +52,7 @@ PACKAGECONFIG ?= "${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gt
 "
 PACKAGECONFIG:append:class-target = " mediactrl ${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'webkit', '', d)}"
 
-PACKAGECONFIG:remove:class-native = "opengl"
+PACKAGECONFIG:class-native ?= "${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gtk', 'no_gui', d)}"
 
 # Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
 PACKAGECONFIG[no_gui] = "-DwxUSE_GUI=OFF,,,,,qt gtk opengl"
