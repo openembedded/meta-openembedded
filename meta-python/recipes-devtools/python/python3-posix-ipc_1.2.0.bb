@@ -12,5 +12,6 @@ SRC_URI += " \
     file://0001-build_support-use-source-filename-instead-of-foo-for.patch \
     file://0002-build_support-handle-empty-max_priority-value-as-Non.patch \
     file://0003-build_support-use-does_build_succeed-in-compile_and_.patch \
+    file://0004-build_support-handle-runtime-errors-and-return-None-.patch \
 "
 inherit pypi python_setuptools_build_meta
