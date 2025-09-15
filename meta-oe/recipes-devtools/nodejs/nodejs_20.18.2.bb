@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://libatomic.patch \
            file://182d9c05e78.patch \
            file://zlib-fix-pointer-alignment.patch \
+           file://0001-src-fix-build-with-GCC-15.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
