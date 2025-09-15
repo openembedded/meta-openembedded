@@ -5,7 +5,7 @@ DESCRIPTION = "Pgpool-II is a middleware that works between PostgreSQL \
                under a license similar to BSD and MIT. It provides the \
                following features."
 
-HOMEPAGE = "http://pgpool.net"
+HOMEPAGE = "https://pgpool.net"
 
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
@@ -18,7 +18,7 @@ SRC_URI = "https://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
 	   file://pgpool.sysconfig \
 	   file://pgpool.service \
            "
-SRC_URI[sha256sum] = "d1392e74ce2807f8ae628872cb1ab7914249921180dc99df40a1d602647a10fd"
+SRC_URI[sha256sum] = "95ffeeaeb6b0cebea8034e30fc1933fec7384b227ad511305eaccc5d090ff998"
 
 S = "${UNPACKDIR}/pgpool-II-${PV}"
 
