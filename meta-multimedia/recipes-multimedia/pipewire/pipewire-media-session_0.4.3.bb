@@ -10,11 +10,9 @@ DEPENDS = " \
 	dbus \
 "
 
-SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master \
-           file://0001-pass-right-types-to-methods.patch \
-           "
+SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=https;branch=master"
 
-SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
+SRCREV = "4ac1d82d26bbf9c6f37c56546d26be5a03f886fa"
 
 inherit meson pkgconfig
 # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952
