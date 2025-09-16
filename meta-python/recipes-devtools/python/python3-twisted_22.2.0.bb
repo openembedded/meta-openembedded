@@ -13,7 +13,8 @@ PYPI_PACKAGE = "Twisted"
 
 SRC_URI += "file://CVE-2024-41671-0001.patch \
             file://CVE-2024-41671-0002.patch \
-            file://CVE-2024-41810.patch"
+            file://CVE-2024-41810.patch \
+            file://CVE-2023-46137.patch"
 
 inherit pypi python_setuptools_build_meta
 
