@@ -9,15 +9,12 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
+        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
+SRCREV = "096c50ca881f72d858aca19757a5e73b4775a7cc"
 
 PE = "1"
-
 
 DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
@@ -28,8 +25,17 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[dng] = ",,tiff"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
+PACKAGECONFIG[raspberrypi] = ",,libpisp"
+
+# Raspberry Pi requires the meta-raspberrypi layer
+# These values are coming from the project's meson.build file,
+# which lists the supported values by arch.
+ARM_PIPELINES = "${@bb.utils.contains('PACKAGECONFIG', 'raspberrypi', 'rpi/pisp,rpi/vc4,', '', d)}"
+ARM_PIPELINES .= "imx8-isi,mali-c55,simple,uvcvideo"
 
 LIBCAMERA_PIPELINES ??= "auto"
+LIBCAMERA_PIPELINES:arm ??= "${ARM_PIPELINES}"
+LIBCAMERA_PIPELINES:aarch64 ??= "${ARM_PIPELINES}"
 
 EXTRA_OEMESON = " \
     -Dpipelines=${LIBCAMERA_PIPELINES} \
