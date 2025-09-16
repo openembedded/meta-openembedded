@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.libimobiledevice.org/"
 
 DEPENDS = "libimobiledevice-glue libusb1 readline"
 
-SRCREV = "2fb767d784c01269a0ded5bacd5539aee3768c35"
+SRCREV = "23f201d13f2fad05f5096e254e104bcaf35fd607"
 SRC_URI = "git://github.com/libimobiledevice/libirecovery;protocol=https;branch=master"
 
 inherit autotools pkgconfig
