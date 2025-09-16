@@ -20,7 +20,7 @@ inherit gettext gnomebase gobject-introspection vala gi-docgen bash-completion
 
 SRC_URI += "file://0001-fix-reproducibility.patch"
 SRC_URI += "file://0001-src-libtracker-sparql-meson.build-dont-create-compat.patch"
-SRC_URI[archive.sha256sum] = "14ce039024135e181022bcce4b1aad2e00377dd9c7d812b98391ccfc756dad8e"
+SRC_URI[archive.sha256sum] = "fb0af98355ea1db700764cf4fa245884a199ca145ed42ed55f9a18c68552ca30"
 
 # text search is not an option anymore and requires sqlite3 build with
 # PACKAGECONFIG[fts5] set (default)
