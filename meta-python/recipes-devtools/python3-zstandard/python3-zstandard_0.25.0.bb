@@ -16,7 +16,7 @@ RDEPENDS_${PN} = "\
 
 inherit setuptools3 pypi
 
-SRC_URI[sha256sum] = "fe3198b81c00032326342d973e526803f183f97aa9e9a98e3f897ebafe21178f"
+SRC_URI[sha256sum] = "7713e1179d162cf5c7906da876ec2ccb9c3a9dcbdffef0cc7f70c3667a205f0b"
 
 # Because the pyproject.toml is still in development and it contains invalid
 # requirements.
