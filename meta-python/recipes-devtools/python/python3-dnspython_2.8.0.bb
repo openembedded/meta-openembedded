@@ -3,7 +3,7 @@ HOMEPAGE = "https://www.dnspython.org/"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
 
-SRC_URI[sha256sum] = "ce9c432eda0dc91cf618a5cedf1a4e142651196bbcd2c80e89ed5a907e5cfaf1"
+SRC_URI[sha256sum] = "181d3c6996452cb1189c4046c61599b84a5a86e099562ffde77d26984ff26d0f"
 
 inherit pypi python_hatchling ptest
 
