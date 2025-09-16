@@ -24,7 +24,7 @@ with '[meta-initramfs][walnascar]' in the subject.
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][walnascar][PATCH'
 
-Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
+Stable layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
 
 License

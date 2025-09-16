@@ -55,7 +55,7 @@ with '[meta-webserver][walnascar]' in the subject.
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-webserver][walnascar][PATCH'
 
-Layer maintainer: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
 
 License

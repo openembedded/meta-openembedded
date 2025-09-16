@@ -1,6 +1,6 @@
 Collection of layers for the OE-core universe
 
-Main layer maintainer: Armin Kuster <akuster808@gmail.com>
+Main layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
 This repository is a collection of layers to suppliment OE-Core
 with additional packages, Each layer have designated maintainer
