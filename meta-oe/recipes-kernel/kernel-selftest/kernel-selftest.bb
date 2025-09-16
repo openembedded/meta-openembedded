@@ -44,6 +44,8 @@ S = "${WORKDIR}/${BP}"
 TEST_LIST = "\
     ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
     rtc \
+    ptp \
+    timers \
 "
 
 EXTRA_OEMAKE = '\
