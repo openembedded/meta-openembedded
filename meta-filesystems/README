@@ -24,7 +24,7 @@ Please submit any patches against the filesystems layer to the
 OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
 with '[meta-filesystems][kirkstone]' in the subject.
 
-Layer maintainer: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
 When sending single patches, please use something like:
 

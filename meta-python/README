@@ -41,4 +41,4 @@ git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-pr
 Maintenance
 -------------------------
 
-Layer maintainers: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>

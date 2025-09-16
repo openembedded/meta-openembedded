@@ -24,7 +24,7 @@ with '[meta-initramfs][kirkstone]' in the subject.
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][kirkstone][PATCH'
 
-Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
+Interm layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
 
 License

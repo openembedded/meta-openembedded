@@ -18,4 +18,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][kirkstone][PATCH'
 
-Layer maintainer: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
