@@ -19,7 +19,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
 
 S = "${UNPACKDIR}/SDL3-${PV}"
 
-SRC_URI[sha256sum] = "467600ae090dd28616fa37369faf4e3143198ff1da37729b552137e47f751a67"
+SRC_URI[sha256sum] = "f29d00cbcee273c0a54f3f32f86bf5c595e8823a96b1d92a145aac40571ebfcc"
 
 inherit cmake lib_package binconfig-disabled pkgconfig upstream-version-is-even
 
