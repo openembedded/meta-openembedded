@@ -27,7 +27,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "1189cf7e63cc87cfdd1f3a86e8f14d97c33d6a9da254f23e81655549b6c50d93"
+SRC_URI[archive.sha256sum] = "02ed0ab4194fc537540f9ee92acbf5af8209971a404df319c1cb7763294ae58b"
 
 SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
 
