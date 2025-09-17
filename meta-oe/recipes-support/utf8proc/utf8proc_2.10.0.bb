@@ -12,6 +12,7 @@ SRC_URI = "\
     git://github.com/JuliaStrings/utf8proc;protocol=https;branch=master;tag=v${PV} \
     file://run-ptest \
 "
+SRCREV = "a1b99daa2a3393884220264c927a48ba1251a9c6"
 
 inherit cmake ptest
 
