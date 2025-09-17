@@ -7,3 +7,5 @@ inherit pypi setuptools3
 SRC_URI[sha256sum] = "2f54d11bdb225779d7e729011e93a9fb717668ce3dc65f8d4f5a5d7ba2f48e10"
 
 RDEPENDS:${PN} += "python3-six python3-logging"
+
+BBCLASSEXTEND = "native"
