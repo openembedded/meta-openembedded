@@ -7,7 +7,7 @@ require ${BPN}-licenses.inc
 SRC_URI = "git://${GO_IMPORT}.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX}"
 require ${BPN}-go-mods.inc
 
-SRCREV = "dec27cd4e0e0db106c0a21d429c04ca8d36bbdd5"
+SRCREV = "9f6ece1a689bca0abbeae230fa05a749fd8086ec"
 
 
 GO_IMPORT = "github.com/usbarmory/crucible"
