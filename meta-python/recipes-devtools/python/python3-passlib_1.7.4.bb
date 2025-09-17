@@ -18,3 +18,5 @@ RDEPENDS:${PN} += "\
     python3-logging \
     python3-netclient \
 "
+
+BBCLASSEXTEND = "native"
