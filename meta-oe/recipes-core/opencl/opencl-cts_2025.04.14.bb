@@ -3,7 +3,9 @@ DESCRIPTION = "OpenCL CTS test suite"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-inherit pkgconfig cmake
+inherit pkgconfig cmake features_check
+
+REQUIRED_DISTRO_FEATURES = "opencl"
 
 DEPENDS += "opencl-headers virtual/libopencl1"
 RDEPENDS:${PN} += "python3-core python3-io"
