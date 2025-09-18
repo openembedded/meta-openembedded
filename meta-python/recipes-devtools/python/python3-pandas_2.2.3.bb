@@ -46,3 +46,5 @@ do_install:prepend() {
 }
 
 EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
+
+BBCLASSEXTEND = "native"
