@@ -23,6 +23,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
                      -Ccmake.define.CMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
                      -Ccmake.define.CMAKE_FIND_ROOT_PATH="${STAGING_DIR_NATIVE}" \
                      -Ccmake.build-type="RelWithDebInfo" \
+                     -Cbuild-dir="${B}" \
 "
 
 SRC_URI:append = " \
