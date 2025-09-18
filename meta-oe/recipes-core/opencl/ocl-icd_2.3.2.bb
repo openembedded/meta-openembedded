@@ -13,6 +13,6 @@ SRCREV = "fdde6677b21329432db8b481e2637cd10f7d3cb2"
 inherit autotools
 
 DEPENDS = "ruby-native"
-PROVIDES = "virtual/opencl-icd"
+PROVIDES = "virtual/libopencl1"
 
 BBCLASSEXTEND = "native nativesdk"

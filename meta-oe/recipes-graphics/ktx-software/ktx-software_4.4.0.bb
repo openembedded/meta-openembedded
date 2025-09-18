@@ -16,4 +16,4 @@ inherit cmake
 # BASISU does not work with avx
 TUNE_CCARGS:append:x86-64 = " -mno-avx"
 
-PACKAGECONFIG[ocl_backend] = "-DBASISU_SUPPORT_OPENCL=ON, -DBASISU_SUPPORT_OPENCL=OFF, virtual/opencl-icd"
+PACKAGECONFIG[ocl_backend] = "-DBASISU_SUPPORT_OPENCL=ON, -DBASISU_SUPPORT_OPENCL=OFF, virtual/libopencl1"
