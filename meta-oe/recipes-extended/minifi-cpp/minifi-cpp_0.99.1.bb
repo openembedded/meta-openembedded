@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0007-libsodium-aarch64-set-compiler-attributes-after-including-arm_.patch \
            file://0008-MINIFICPP-2553-CMP0065-OLD-removed-in-cmake-4.0-remo.patch \
            file://0001-Add-missing-include-for-malloc-free.patch;patchdir=thirdparty/fmt-src \
+           file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
@@ -114,6 +115,7 @@ EXTRA_OECMAKE = " \
                  -DFETCHCONTENT_SOURCE_DIR_FMT=${S}/thirdparty/fmt-src \
                  -DFETCHCONTENT_SOURCE_DIR_SPDLOG=${S}/thirdparty/spdlog-src \
                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DENABLE_SYSTEMD=ON', '-DENABLE_SYSTEMD=OFF', d)} \
+                 -DBUILD_IDENTIFIER=${PV} \
                 "
 
 PACKAGECONFIG ??= "libarchive expression-language"
