@@ -16,4 +16,4 @@ GO_INSTALL = "\
     ${GO_IMPORT}/cmd/habtool \
 "
 
-inherit go-mod
+inherit go-mod go-mod-update-modules
