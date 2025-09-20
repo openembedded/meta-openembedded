@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
 SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
 "
 
-SRC_URI[sha256sum] = "368ed198e1fbaebaa2e681d77dbb3c6f0f94e9bacd97b2674759bfaa75bf4a35"
+SRC_URI[sha256sum] = "5eebd55ac071634c864a8e78f5cfafbaaf43cf84c04323a09b71dd76bf025cc2"
 
 DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
 
