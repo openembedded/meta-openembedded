@@ -15,7 +15,7 @@ DEPENDS = "\
     p11-kit \
 "
 
-SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
+SRCREV = "acb7086e44849d019956233348046c4f07c0670b"
 
 SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
 
@@ -26,3 +26,5 @@ inherit meson pkgconfig
 #EXTRA_OEMESON += "-Ddefault_pkcs11_module=/path/to/mymodule.so"
 
 FILES:${PN} += "${libdir}/ossl-modules/pkcs11.so"
+
+BBCLASSEXTEND = "native"
