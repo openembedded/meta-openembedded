@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pytest-dev/pytest-xdist"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fbae836e16c18f4b220f7db6564e8f61"
 
-SRC_URI[sha256sum] = "f9248c99a7c15b7d2f90715df93610353a485827bc06eefb6566d23f6400f126"
+SRC_URI[sha256sum] = "7e578125ec9bc6050861aa93f2d59f1d8d085595d6551c2c90b6f4fad8d3a9f1"
 
 inherit pypi python_setuptools_build_meta
 
