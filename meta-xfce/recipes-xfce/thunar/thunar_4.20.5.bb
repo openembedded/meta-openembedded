@@ -11,7 +11,7 @@ inherit xfce gobject-introspection features_check mime-xdg perlnative gtk-doc
 # cairo would at least needed to be built with xlib.
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[sha256sum] = "fe1908b396298e6515a90fa9ddaec0db8b684e4b3d7773118e21561baf8f9639"
+SRC_URI[sha256sum] = "da299babd233a079a443e527fa38cba3899b6131ef056593de9451178d812f2a"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[pcre] = "--enable-pcre2,--disable-pcre2,libpcre2"
