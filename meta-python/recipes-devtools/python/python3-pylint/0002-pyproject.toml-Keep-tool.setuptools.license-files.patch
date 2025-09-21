@@ -1,4 +1,4 @@
-From a1ec7fa97cb73754cb250a9cf0ea95b9d0511e0c Mon Sep 17 00:00:00 2001
+From b559c86a8e6efb7f2081c4aacf9ce1c552d60abb Mon Sep 17 00:00:00 2001
 From: Leon Anavi <leon.anavi@konsulko.com>
 Date: Thu, 20 Mar 2025 12:09:42 +0000
 Subject: [PATCH] pyproject.toml: Keep tool.setuptools.license-files
