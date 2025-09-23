@@ -1,7 +1,7 @@
-From 8871c593973d9abfef45408575e5da887830f42e Mon Sep 17 00:00:00 2001
+From e01991f1d55d4d1327793790bad3724b89952704 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Thu, 22 May 2025 18:07:27 +0800
-Subject: [PATCH] fix broken symlink in dracut config examples
+Subject: [PATCH 2/2] fix broken symlink in dracut config examples
 
 Due to commit [1], it installs dracut config examples under /usr.
 But while enable_test=no, the symlink of test in dracut config is broken
@@ -28,17 +28,17 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/Makefile b/Makefile
-index d33aebbc..151d9f79 100644
+index 3a40594b..df7956ab 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -180,6 +180,7 @@ ifneq ($(enable_test),no)
- 	cp -arx test $(DESTDIR)$(pkglibdir)
+@@ -218,6 +218,7 @@ ifeq ($(enable_test),yes)
+ 	done
  else
- 	rm -rf $(DESTDIR)$(pkglibdir)/modules.d/80test*
+ 	rm -rf $(DESTDIR)$(pkglibdir)/modules.d/70test*
 +	rm -rf $(DESTDIR)$(pkglibdir)/dracut.conf.d/test*
  endif
  ifneq ($(enable_documentation),no)
  	for i in $(man1pages); do install -m 0644 $$i $(DESTDIR)$(mandir)/man1/$${i##*/}; done
 -- 
-2.34.1
+2.47.3
 

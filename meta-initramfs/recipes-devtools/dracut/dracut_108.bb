@@ -7,17 +7,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "956c08774074ddc45b2f975e13d5c13d1fc36eff"
+PV = "108"
+SRCREV = "97c5568ec42abd5e6035f0cfa9d319ae6ae4e50a"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
-           file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
-           file://0001-fix-broken-symlink-in-dracut-config-examples.patch \
+           file://0001-feat-dracut.sh-try-STRIP-for-strip_cmd-first.patch \
+           file://0002-fix-broken-symlink-in-dracut-config-examples.patch \
            "
 
 DEPENDS += "kmod"
 DEPENDS:append:libc-musl = " fts"
 
 inherit bash-completion pkgconfig
-
 
 EXTRA_OECONF = "--prefix=${prefix} \
                 --libdir=${nonarch_libdir} \
@@ -55,6 +55,32 @@ do_install() {
     fi
 }
 
+do_install:append:class-target () {
+    # Generate and install a config file listing where the DISTRO puts things, dracut
+    # is not always savvy enough to figure it out by itself
+    # Since this primarily fixes systemd issues, only install it when using systemd.
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        cat << EOF > ${B}/${DISTRO}.conf
+stdloglvl=3
+sysloglvl=5
+sysctlconfdir=${sysconfdir}/sysctl.d
+systemdutildir=${systemd_unitdir}
+systemdutilconfdir=${sysconfdir}/systemd
+systemdcatalog=${systemd_unitdir}catalog
+systemdntpunits=${systemd_unitdir}ntp-units.d
+systemdntpunitsconfdir=${sysconfdir}/systemd/ntp-units.d
+systemdportable=${systemd_unitdir}/portable
+systemdportableconfdir=${sysconfdir}/systemd/portable
+systemdsystemunitdir=${systemd_system_unitdir}
+systemdsystemconfdir=${sysconfdir}/systemd/system
+systemduser=${systemd_user_unitdir}
+systemduserconfdir=${sysconfdir}/systemd/user
+EOF
+        install -m 0644 ${B}/${DISTRO}.conf ${D}${libdir}/dracut/dracut.conf.d/
+    fi
+}
+
+
 FILES:${PN} += "${nonarch_libdir}/kernel \
                 ${nonarch_libdir}/dracut \
                 ${systemd_unitdir} \
@@ -63,11 +89,16 @@ FILES:${PN}-dbg += "${nonarch_libdir}/dracut/.debug"
 
 CONFFILES:${PN} += "${sysconfdir}/dracut.conf"
 
-RDEPENDS:${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
+# The native variant uses a non-ldd based method of getting library
+# dependencies, so ldd is only needed on the target
+RDEPENDS:${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux bash"
+RDEPENDS:${PN}:append:class-target = " ldd"
 
 # This could be optimized a bit, but let's avoid non-booting systems :)
-RRECOMMENDS:${PN} = "kernel-modules \
-                     coreutils \
-                    "
+RRECOMMENDS:${PN}:class-target = "kernel-modules \
+                                  coreutils \
+                                 "
+
+BBCLASSEXTEND = "native nativesdk"
 
 CVE_STATUS[CVE-2010-4176] = "not-applicable-platform: Applies only to Fedora"

@@ -1,0 +1,33 @@
+From b8504fdbc6ac7b49aa0a9671267be8ac7affb2ee Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen.kooi@oss.qualcomm.com>
+Date: Thu, 19 Jun 2025 16:06:14 +0200
+Subject: [PATCH 1/2] feat: dracut.sh: try $STRIP for $strip_cmd first
+
+When using dracut in a cross enviroment, like OpenEmbedded, the host
+provided strip (or eu-strip) won't work, so try using the $STRIP
+variable from the shell environment first before falling back to path
+based lookups.
+
+Signed-off-by: Koen Kooi <koen.kooi@oss.qualcomm.com>
+Upstream-Status: Submitted [https://github.com/dracut-ng/dracut-ng/pull/1639]
+---
+ dracut.sh | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/dracut.sh b/dracut.sh
+index 45373efb..dbc5cd72 100755
+--- a/dracut.sh
++++ b/dracut.sh
+@@ -2262,7 +2262,8 @@ done
+ if [[ $do_strip == yes ]]; then
+     # Prefer strip from elfutils for package size
+     declare strip_cmd
+-    strip_cmd=$(command -v eu-strip)
++    strip_cmd="${STRIP}"
++    [ -z "$strip_cmd" ] && strip_cmd=$(command -v eu-strip)
+     [ -z "$strip_cmd" ] && strip_cmd="strip"
+ 
+     for p in "$strip_cmd" xargs find; do
+-- 
+2.47.3
+
