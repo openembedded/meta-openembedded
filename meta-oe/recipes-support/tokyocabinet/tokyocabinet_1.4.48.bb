@@ -15,7 +15,7 @@ HOMEPAGE = "http://fallabs.com/tokyocabinet/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
-SRC_URI = "http://fallabs.com/tokyocabinet/${BP}.tar.gz \
+SRC_URI = "${DEBIAN_MIRROR}/main/t/${BPN}/${BPN}_${PV}.orig.tar.gz \
            file://remove-hard-coded-include-and-lib-paths.patch \
            file://0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch \
 "
