@@ -163,7 +163,8 @@ FILES:${PN}-kdc = "${libdir}/krb5/plugins/kdb/db2.so \
 
 FILES:${PN}-kdc-ldap = "${libdir}/krb5/libkdb_ldap${SOLIBS} \
                         ${libdir}/krb5/plugins/kdb/kldap.so \
-                        ${sbindir}/kdb5_ldap_util"
+                        ${sbindir}/kdb5_ldap_util \
+                        ${libdir}/libkdb_ldap${SOLIBS}"
 
 FILES:${PN}-kpropd = "${sbindir}/kpropd"
 FILES:${PN}-otp = "${libdir}/krb5/plugins/preauth/otp.so"
