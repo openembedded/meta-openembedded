@@ -34,6 +34,7 @@ Maintenance
 -----------
 Stable Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
 
 Please see the MAINTAINERS file for information on contacting the
 maintainers of this layer, as well as instructions for submitting patches. 

@@ -26,6 +26,8 @@ git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-pr
 
 Stable layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
+
 
 License
 -------

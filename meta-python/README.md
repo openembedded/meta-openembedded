@@ -37,3 +37,5 @@ Maintenance
 -------------------------
 
 Layer maintainers: Gyorgy Sarvari <skandigraun@gmail.com>
+
+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>

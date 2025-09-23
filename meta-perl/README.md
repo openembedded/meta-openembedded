@@ -79,7 +79,9 @@ When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][walnascar][PATCH'
 
 Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-    
+
+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>    
+
 
 License
 -------

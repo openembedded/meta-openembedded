@@ -26,6 +26,8 @@ with '[meta-filesystems][walnascar]' in the subject.
 
 Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
 
+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
+
 When sending single patches, please use something like:
 
    git send-email -1 -M \
