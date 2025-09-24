@@ -4,7 +4,7 @@ SECTION = "console/devel"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
 
-SRCREV = "5c2ab772338bcbe516306bf8cf1059ddf2fa6bb7"
+SRCREV = "81c6c9881edf4844f2b8250e63f82da9cb7f5444"
 
 SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
            "
