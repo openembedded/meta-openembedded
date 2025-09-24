@@ -5,7 +5,7 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ee7f7ed2001e4cde4679fdb8926f820"
 
 SRC_URI = "git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "d2842d33c85588aa564a392831e026c6224ab62a"
+SRCREV = "64abcff1f6a828f854e54650b106326dc328fab6"
 
 
 inherit cmake
