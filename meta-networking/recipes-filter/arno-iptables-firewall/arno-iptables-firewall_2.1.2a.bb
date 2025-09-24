@@ -4,8 +4,8 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
 
-SRCREV = "c8dfd85b9e8e453e279525f30c1e3184c092f036"
-SRC_URI = "git://github.com/arno-iptables-firewall/aif;branch=master;protocol=https"
+SRCREV = "4651194df5f985ebfc989da0a20d62b9baecf314"
+SRC_URI = "git://github.com/arno-iptables-firewall/aif;branch=master;protocol=https;tag=${PV}"
 
 
 inherit systemd
