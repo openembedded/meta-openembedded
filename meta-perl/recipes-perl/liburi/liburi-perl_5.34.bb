@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/URI-${PV}.tar.gz \
            file://0001-Skip-TODO-test-cases-that-fail.patch \
            "
 
-SRC_URI[sha256sum] = "9632067d34e14e0dae2da94631c4f25a387fcc48d06fa29330e8b3c04c4e913d"
+SRC_URI[sha256sum] = "de64c779a212ff1821896c5ca2bb69e74767d2674cee411e777deea7a22604a8"
 
 S = "${UNPACKDIR}/URI-${PV}"
 
