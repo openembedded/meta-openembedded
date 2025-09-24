@@ -11,8 +11,8 @@ LICENSE = "Fraunhofer_FDK_AAC_Codec_Library_for_Android"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875"
 
-SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=https;branch=master"
-SRCREV = "801f67f671929311e0c9952c5f92d6e147c7b003"
+SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "716f4394641d53f0d79c9ddac3fa93b03a49f278"
 
 
 SRC_URI[md5sum] = "fef453b5d6ee28ff302c600b8cded3e7"
