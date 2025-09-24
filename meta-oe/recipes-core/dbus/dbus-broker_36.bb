@@ -31,7 +31,7 @@ do_install:append() {
 }
 
 RCONFLICTS:${PN} = "dbus"
-RDEPENDS:${PN} += "dbus-common"
+RDEPENDS:${PN} += "dbus-common dbus-tools"
 
 FILES:${PN} += "${nonarch_libdir}/systemd/catalog"
 FILES:${PN} += "${systemd_system_unitdir}"
