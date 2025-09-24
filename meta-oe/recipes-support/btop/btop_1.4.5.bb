@@ -6,7 +6,7 @@ SECTION = "console/utils"
 
 SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main;tag=v${PV} \
            "
-SRCREV = "0f398abd64febfbc5f2115be3156682f47308f48"
+SRCREV = "a1099d075fa914452366b28c67ff171e21a1f02e"
 
 
 inherit cmake
