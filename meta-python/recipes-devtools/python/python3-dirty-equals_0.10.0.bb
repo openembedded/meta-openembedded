@@ -8,9 +8,9 @@ into its own when writing unit tests for applications where you're \
 commonly checking the response to API calls and the contents of a database."
 HOMEPAGE = "https://github.com/samuelcolvin/dirty-equals"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=aa97bb3778992892e226b4504b83b60c"
 
-SRC_URI[sha256sum] = "17f515970b04ed7900b733c95fd8091f4f85e52f1fb5f268757f25c858eb1f7b"
+SRC_URI[sha256sum] = "623d7a07c5ba437f1a834c6246d1e3eb97238ca70331c61a499d9aabd757b899"
 
 S = "${UNPACKDIR}/dirty_equals-${PV}"
 
