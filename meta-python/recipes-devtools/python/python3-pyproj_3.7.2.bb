@@ -1,5 +1,6 @@
 SUMMARY = "Python interface to PROJ (cartographic projections and coordinate transformations library)"
 LICENSE = "MIT"
+HOMEPAGE = "https://pyproj4.github.io/pyproj/stable/index.html"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3f3574263859ef2dc9bd7817d51adbaa"
 
 inherit pypi python_setuptools_build_meta cython
@@ -21,3 +22,5 @@ RDEPENDS:${PN} = " \
 export PROJ_INCDIR = "${STAGING_INCDIR}"
 export PROJ_LIBDIR = "${STAGING_LIBDIR}"
 export PROJ_DIR = "${STAGING_BINDIR_NATIVE}/.."
+
+BBCLASSEXTEND = "native"
