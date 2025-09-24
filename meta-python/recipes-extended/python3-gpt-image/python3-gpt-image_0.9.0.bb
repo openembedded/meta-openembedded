@@ -15,3 +15,5 @@ inherit pypi python3native python_setuptools_build_meta ptest-python-pytest
 do_install:append() {
 	rm -fr ${D}${libdir}/python*/site-packages/gpt-image/__pycache__
 }
+
+BBCLASSEXTEND = "native nativesdk"
