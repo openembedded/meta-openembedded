@@ -17,6 +17,7 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
     file://CVE-2024-22654-0002.patch \
     file://CVE-2025-9157.patch \
     file://CVE-2025-9384.patch \
+    file://CVE-2025-51006.patch \
 "
 
 SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
