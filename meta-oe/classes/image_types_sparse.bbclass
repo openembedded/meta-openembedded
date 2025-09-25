@@ -8,9 +8,17 @@ inherit image_types
 SPARSE_BLOCK_SIZE ??= "4096"
 
 CONVERSIONTYPES += "sparse"
+
+DELETE_RAWIMAGE_AFTER_SPARSE_CMD ??= "0"
+
 CONVERSION_CMD:sparse = " \
-    INPUT="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" && \
-    truncate --no-create --size=%${SPARSE_BLOCK_SIZE} "$INPUT" && \
-    img2simg -s "$INPUT" "$INPUT.sparse" ${SPARSE_BLOCK_SIZE} \
+    INPUT=${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} && \
+    truncate --no-create --size=%${SPARSE_BLOCK_SIZE} $INPUT && \
+    img2simg $INPUT $INPUT.sparse && \
+    if [ ${DELETE_RAWIMAGE_AFTER_SPARSE_CMD} = 1 ]; then \
+        rm -f $INPUT; \
+        bbwarn 'Raw file $INPUT removed'; \
+    fi \
 "
+
 CONVERSION_DEPENDS_sparse = "android-tools-native"
