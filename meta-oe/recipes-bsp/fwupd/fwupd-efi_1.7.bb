@@ -2,10 +2,9 @@ SUMMARY = "EFI executable for fwupd"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main \
-           file://0001-efi-generate_binary.py-Use-env-to-detect-python3.patch"
+SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main"
 
-SRCREV = "58a2928f778278ab1f7f8fcddbab81ba587a8962"
+SRCREV = "cfd0be286a9b050c1aa4bfa3f0820256903a264a"
 S = "${WORKDIR}/git"
 
 DEPENDS = "gnu-efi python3-pefile-native"
