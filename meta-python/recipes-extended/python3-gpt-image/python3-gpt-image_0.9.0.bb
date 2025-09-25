@@ -28,3 +28,5 @@ RDEPENDS:${PN}-ptest += " \
 do_install:append() {
 	rm -fr ${D}${libdir}/python*/site-packages/gpt-image/__pycache__
 }
+
+BBCLASSEXTEND = "native nativesdk"
