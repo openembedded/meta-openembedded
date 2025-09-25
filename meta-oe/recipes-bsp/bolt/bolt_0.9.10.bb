@@ -8,7 +8,7 @@ DEPENDS = "udev polkit dbus"
 REQUIRED_DISTRO_FEATURES = "polkit"
 
 SRC_URI = "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=https;branch=master"
-SRCREV = "f03c50b22ae3fda26711ddabd91e2c5dd8103478"
+SRCREV = "c0d4cb2f4399e86417907a37c0d8ef3bb9fb406f"
 
 S = "${WORKDIR}/git"
 
