@@ -210,12 +210,12 @@ pkg_postinst:${PN} () {
         # for radiusd.service with multilib
         if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
             install -d ${sysconfdir}/sysconfig
-            echo "MLPREFIX=${MLPREFIX}" > ${sysconfdir}/sysconfig/radiusd
+            echo "MLPREFIX=" > ${sysconfdir}/sysconfig/radiusd
         fi
     else
         if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
             install -d $D${sysconfdir}/sysconfig
-            echo "MLPREFIX=${MLPREFIX}" > $D${sysconfdir}/sysconfig/radiusd
+            echo "MLPREFIX=" > $D${sysconfdir}/sysconfig/radiusd
         fi
     fi
 }
