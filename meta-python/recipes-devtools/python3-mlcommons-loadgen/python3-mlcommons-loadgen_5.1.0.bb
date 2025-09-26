@@ -14,6 +14,10 @@ DEPENDS = "python3-pybind11-native"
 
 inherit setuptools3 pypi
 
+SRC_URI += " \
+    file://source-date-epoch.patch \
+"
+
 PYPI_PACKAGE = "mlcommons_loadgen"
 UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
 
