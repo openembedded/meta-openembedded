@@ -712,7 +712,7 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     c-ares \
     ccid \
     ckermit \
-    clinfo \
+    ${@bb.utils.contains("DISTRO_FEATURES", "opencl", "clinfo", "", d)} \
     cmark \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit gobject-introspection-data", "colord", "", d)} \
     consolation \
