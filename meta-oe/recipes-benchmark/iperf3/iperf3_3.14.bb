@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
            file://CVE-2025-54349.patch \
            file://CVE-2023-7250.patch \
            file://CVE-2024-26306.patch \
+           file://CVE-2024-53580.patch \
            "
 
 SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
