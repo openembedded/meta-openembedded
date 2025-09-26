@@ -9,6 +9,10 @@ PYPI_PACKAGE = "yarl"
 
 inherit pypi ptest-python-pytest python_setuptools_build_meta cython
 
+SRC_URI += " \
+    file://0001-build-wheel-in-place.patch \
+"
+
 DEPENDS += " \
     python3-expandvars-native \
 "
