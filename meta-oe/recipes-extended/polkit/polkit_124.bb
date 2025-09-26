@@ -5,7 +5,10 @@ LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
 BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
 
-SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main"
+SRC_URI = "\
+     git://github.com/polkit-org/polkit.git;protocol=https;branch=main \
+     file://CVE-2025-7519.patch \
+"
 
 S = "${WORKDIR}/git"
 SRCREV = "82f0924dc0eb23b9df68e88dbaf9e07c81940a5a"
