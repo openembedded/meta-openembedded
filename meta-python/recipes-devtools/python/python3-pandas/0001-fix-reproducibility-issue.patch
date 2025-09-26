@@ -1,0 +1,43 @@
+From 80274cd3a0746ddc5421643dd40d47bdf3c6a68c Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Fri, 26 Sep 2025 15:47:53 +0800
+Subject: [PATCH] fix reproducibility issue
+
+The type of new_value is either `npy_timedelta' or `int64_t'
+In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
+..
+npy_timedelta __pyx_v_new_value;
+...
+
+In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
+...
+__pyx_t_5numpy_int64_t __pyx_v_new_value;
+...
+
+Explicitly define it as int64_t to assure the generated source is
+reproducibility between builds
+
+Upstream-Status: Submitted [https://github.com/pandas-dev/pandas/pull/62459]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ pandas/_libs/tslibs/timedeltas.pyx | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/pandas/_libs/tslibs/timedeltas.pyx b/pandas/_libs/tslibs/timedeltas.pyx
+index f6c69cf..34ac9e7 100644
+--- a/pandas/_libs/tslibs/timedeltas.pyx
++++ b/pandas/_libs/tslibs/timedeltas.pyx
+@@ -1820,6 +1820,9 @@ class Timedelta(_Timedelta):
+ 
+         disallow_ambiguous_unit(unit)
+ 
++        cdef:
++            int64_t new_value;
++
+         # GH 30543 if pd.Timedelta already passed, return it
+         # check that only value is passed
+         if isinstance(value, _Timedelta):
+-- 
+2.34.1
+
