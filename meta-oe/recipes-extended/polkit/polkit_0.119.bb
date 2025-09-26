@@ -28,6 +28,7 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
            file://0002-CVE-2021-4115-GHSL-2021-077-fix.patch \
            file://0003-Added-support-for-duktape-as-JS-engine.patch \
            file://0004-Make-netgroup-support-optional.patch \
+           file://CVE-2025-7519.patch \
            "
 SRC_URI[sha256sum] = "c8579fdb86e94295404211285fee0722ad04893f0213e571bd75c00972fd1f5c"
 
