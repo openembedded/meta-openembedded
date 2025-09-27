@@ -49,7 +49,7 @@ SRC_URI[gn.sha256sum] = "f706aaa0676e3e22f5fc9ca482295d7caee8535d1869f99efa23581
 
 require perfetto.inc
 
-DEPENDS += " ninja-native"
+DEPENDS += " ninja-native gn-native"
 
 # Use clang in order to enable traced_perf ( see https://github.com/google/perfetto/blob/092d0ceace6fa516fac1bd4e715c226eaaebe26e/gn/perfetto.gni#L177 ,
 # enable_perfetto_traced_perf depends on "is_clang")
@@ -73,8 +73,8 @@ do_configure () {
     cd ${S}
     # Rename a few build tools if they have not been renamed
     cd buildtools
-    x="gn-linux64-1968-0725d782"
-    [ -f $x ] && mkdir linux64 && mv $x linux64/gn
+
+    mkdir linux64 && cp ${RECIPE_SYSROOT_NATIVE}${bindir}/gn linux64/gn
     chmod +x linux64/gn
     cd ..
 
