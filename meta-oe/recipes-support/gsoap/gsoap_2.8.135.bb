@@ -2,12 +2,12 @@ DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language bindin
 for the development of SOAP Web Services and clients."
 SECTION = "devel"
 LICENSE = "GPL-2.0-with-OpenSSL-exception"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7eaf5d4df67c0db38549ba3c714a37d6 \
                     file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
 
 SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
            file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
-SRC_URI[sha256sum] = "63478e555c0ccde0164f055ff605b02805db0abc6712a04bcb14cb617b047218"
+SRC_URI[sha256sum] = "b11757e405d55d4674dfbf88c4fa6d7e24155cf64ed8ed578ccad2f2b555e98d"
 
 inherit autotools
 
