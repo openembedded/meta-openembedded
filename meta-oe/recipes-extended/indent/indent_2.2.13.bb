@@ -10,20 +10,19 @@ you want a program to format your code."
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "virtual/gettext"
+DEPENDS = "virtual/gettext texinfo-replacement-native"
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
            file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
            file://0001-Makefile.am-remove-regression-dir.patch \
-           file://0001-Fix-builds-with-recent-gettext.patch \
            file://0001-Remove-dead-paren_level-code.patch \
            file://CVE-2023-40305_0001.patch \
            file://CVE-2023-40305_0002.patch \
            file://0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch \
            "
-SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
+SRC_URI[sha256sum] = "9e64634fc4ce6797b204bcb8897ce14fdd0ab48ca57696f78767c59cae578095"
 
-inherit autotools gettext texinfo
+inherit autotools gettext
 
 CFLAGS:append:class-native = " -Wno-error=unused-value"
 

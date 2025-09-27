@@ -76,10 +76,10 @@ diff --git a/regression/TEST b/regression/TEST
 index a76c112..0888a18 100755
 --- a/regression/TEST
 +++ b/regression/TEST
-@@ -38,7 +38,7 @@ BUGS="case-label.c one-line-1.c one-line-2.c one-line-3.c \
+@@ -40,7 +40,7 @@
          macro.c enum.c elif.c nested.c wrapped-string.c minus_predecrement.c \
          bug-gnu-33364.c float-constant-suffix.c block-comments.c \
-         no-forced-nl-in-block-init.c hexadecimal_float.c \
+         no-forced-nl-in-block-init.c hexadecimal_float.c binary-constant.c \
 -        comment-heap-overread.c"
 +        comment-heap-overread.c comment-parent-heap-underread.c"
  
