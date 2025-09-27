@@ -1,6 +1,6 @@
 SUMMARY = "Common GNOME build files for C++ bindings"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 
 
 inherit gnomebase
@@ -8,7 +8,7 @@ inherit gnomebase
 # All the recipe does is stage python and shell script, some autotools files; nothing is compiled.
 inherit allarch
 
-SRC_URI[archive.sha256sum] = "b55c46037dbcdabc5cee3b389ea11cc3910adb68ebe883e9477847aa660862e7"
+SRC_URI[archive.sha256sum] = "494abfce781418259b1e9d8888c73af4de4b6f3be36cc75d9baa8baa0f2a7a39"
 
 BBCLASSEXTEND = "native nativesdk"
 
