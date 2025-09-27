@@ -15,7 +15,7 @@ inherit features_check autotools gettext pkgconfig gnomebase gobject-introspecti
 # cairo would at least needed to be built with xlib.
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.36/glade-${PV}.tar.xz \
+SRC_URI = "${GNOME_MIRROR}/glade/3.36/glade-${PV}.tar.xz \
            file://remove-yelp-help-rules-var.patch \
            file://CVE-2020-36774.patch \
           "
