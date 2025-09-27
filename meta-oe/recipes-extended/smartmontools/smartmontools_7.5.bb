@@ -23,7 +23,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'libcap-ng selinux', d)
 PACKAGECONFIG[libcap-ng] = "--with-libcap-ng=yes,--with-libcap-ng=no,libcap-ng"
 PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
 
-SRC_URI[sha256sum] = "e9a61f641ff96ca95319edfb17948cd297d0cd3342736b2c49c99d4716fb993d"
+SRC_URI[sha256sum] = "690b83ca331378da9ea0d9d61008c4b22dde391387b9bbad7f29387f2595f76e"
 
 inherit autotools update-rc.d systemd
 
