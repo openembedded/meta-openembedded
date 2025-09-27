@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1bd21f19f7f0c61a7be8ecacb0e28854"
 
 DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
 
-SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${BP}/${BP}.tar.bz2 \
            file://collectd.init \
            file://collectd.service \
            file://no-gcrypt-badpath.patch \
