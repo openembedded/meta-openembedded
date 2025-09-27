@@ -39,6 +39,7 @@ CVE_STATUS_PHP = " \
     CVE-2007-4596 \
 "
 CVE_STATUS[CVE-2022-4900] = "cpe-incorrect: The current version (8.2.20) is not affected."
+CVE_STATUS[CVE-2024-3566] = "not-applicable-platform: Issue only applies on Windows"
 
 inherit autotools pkgconfig python3native gettext multilib_header multilib_script systemd
 
