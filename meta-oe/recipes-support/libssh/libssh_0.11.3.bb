@@ -13,7 +13,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
 
 SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
 
-SRCREV = "dff6c0821ed54f6fbf5b755af43f54cbb723b1b1"
+SRCREV = "301d0e16dfa8a5cac1cff956b6880ca90eb82864"
 
 S = "${WORKDIR}/git"
 
