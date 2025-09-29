@@ -7,7 +7,7 @@ inherit pkgconfig cmake features_check
 
 REQUIRED_DISTRO_FEATURES = "opencl"
 
-DEPENDS += "opencl-headers virtual/libopencl1"
+DEPENDS += "opencl-headers virtual/libopencl1 spirv-tools-native"
 RDEPENDS:${PN} += "python3-core python3-io"
 
 
