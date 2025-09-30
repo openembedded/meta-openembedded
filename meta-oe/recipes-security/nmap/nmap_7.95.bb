@@ -14,6 +14,9 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
            file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
            "
 SRC_URI[sha256sum] = "e14ab530e47b5afd88f1c8a2bac7f89cd8fe6b478e22d255c5b9bddb7a1c5778" 
+
+UPSTREAM_CHECK_REGEX = "nmap-(?P<pver>\d+(\.\d+)+)\.tar"
+
 inherit autotools-brokensep pkgconfig python3native
 
 PACKAGECONFIG ?= "pcre ncat nping pcap"
