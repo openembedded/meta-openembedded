@@ -1,5 +1,5 @@
 SUMMARY = "An HTTP and WebDAV client library with a C interface"
-HOMEPAGE = "http://www.webdav.org/neon/"
+HOMEPAGE = "https://notroj.github.io/neon/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
@@ -11,7 +11,7 @@ SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
            file://run-ptest \
            "
 
-SRC_URI[sha256sum] = "659a5cc9cea05e6e7864094f1e13a77abbbdbab452f04d751a8c16a9447cf4b8"
+SRC_URI[sha256sum] = "f98ce3c74300be05eddf05dccbdca498b14d40c289f773195dd1a559cffa5856"
 
 inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest gettext
 
