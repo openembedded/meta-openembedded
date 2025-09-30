@@ -7,9 +7,6 @@ KNOWN_NON_REPRO_META_OE = " \
     boinc-client-dev \
     cjson-ptest \
     cpuid-doc \
-    crash \
-    crash-dbg \
-    crash-src \
     dhrystone \
     dhrystone-dbg \
     dhrystone-dev \
