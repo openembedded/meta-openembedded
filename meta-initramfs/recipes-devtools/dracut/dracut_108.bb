@@ -76,7 +76,7 @@ systemdsystemconfdir=${sysconfdir}/systemd/system
 systemduser=${systemd_user_unitdir}
 systemduserconfdir=${sysconfdir}/systemd/user
 EOF
-        install -m 0644 ${B}/${DISTRO}.conf ${D}${libdir}/dracut/dracut.conf.d/
+        install -m 0644 ${B}/${DISTRO}.conf ${D}${nonarch_libdir}/dracut/dracut.conf.d/
     fi
 }
 
