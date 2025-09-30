@@ -40,3 +40,5 @@ do_configure:append() {
 }
 
 FILES:${PN}-dev += "${datadir}/${BPN}/cmake"
+
+BBCLASSEXTEND = "native"
