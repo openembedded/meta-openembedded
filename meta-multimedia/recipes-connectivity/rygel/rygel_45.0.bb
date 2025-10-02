@@ -18,15 +18,15 @@ RRECOMMENDS:${PN} = "rygel-plugin-media-export"
 inherit gnomebase features_check vala gobject-introspection gettext systemd
 
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "7b2c631b842408da27a54242f8082aba49bd1ca02041e79e1eefba0c7009a87b"
+SRC_URI[archive.sha256sum] = "82667b902fc0672e64cf91eb727a70137a8fdfe7a3d9a4c158b0f4b1fc700882"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
 
 EXTRA_OEMESON = "-Dengines=gstreamer -Dplugins=${@strip_comma('${RYGEL_PLUGINS}')}"
-PACKAGECONFIG:append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk+3", "", d)}"
+PACKAGECONFIG:append = "${@bb.utils.contains_any("DISTRO_FEATURES", "opengl vulkan", " gtk4", "", d)}"
 
 PACKAGECONFIG ?= "external mpris ruih gst-launch media-export"
 
@@ -35,8 +35,8 @@ PACKAGECONFIG[mpris] = ""
 PACKAGECONFIG[ruih] = ""
 PACKAGECONFIG[media-export] = ""
 PACKAGECONFIG[gst-launch] = ""
-PACKAGECONFIG[tracker3] = ""
-PACKAGECONFIG[gtk+3] = ",-Dgtk=disabled,gtk+3"
+PACKAGECONFIG[localsearch] = ""
+PACKAGECONFIG[gtk4] = "-Dgtk=enabled,-Dgtk=disabled,gtk4"
 
 RYGEL_PLUGINS = ""
 RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'external', ',external', '', d)}"
@@ -44,7 +44,7 @@ RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'mpris', ',mpris',
 RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'ruih', ',ruih', '', d)}"
 RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'gst-launch', ',gst-launch', '', d)}"
 RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'media-export', ',media-export', '', d)}"
-RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'tracker3', ',tracker3', '', d)}"
+RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'localsearch', ',localsearch', '', d)}"
 RYGEL_PLUGINS:append = "${@bb.utils.contains('PACKAGECONFIG', 'playbin', ',playbin', '', d)}"
 
 LIBV = "2.8"
