@@ -39,11 +39,13 @@ inherit features_check meson mime mime-xdg pkgconfig python3native
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'lto', d)}"
 
 PACKAGECONFIG[a_null] = "-Da_null=true,-Da_null=false"
 PACKAGECONFIG[developer] = "-Ddeveloper=true,-Ddeveloper=false"
 PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,python3-docutils-native"
+PACKAGECONFIG[rtti] = "-Dcpp_rtti=true,-Dcpp_rtti=false,"
+PACKAGECONFIG[lto] = "-Db_lto=true,-Db_lto=false,"
 
 EXTRA_OEMESON += "-Dstrip=false"
 
