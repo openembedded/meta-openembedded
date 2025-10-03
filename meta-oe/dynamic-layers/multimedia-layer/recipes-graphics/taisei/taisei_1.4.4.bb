@@ -33,7 +33,7 @@ RDEPENDS_${PN} = "\
 "
 
 SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https;tag=v${PV}"
-SRCREV = "02b7c71ae7d7a53202378e384f2cb26df9164f22"
+SRCREV = "6a484e6e61cc51a22a9943762dc2ff6883914f38"
 
 inherit features_check meson mime mime-xdg pkgconfig python3native
 
