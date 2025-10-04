@@ -37,6 +37,25 @@ DEPENDS = "openssl expat pcre apr apr-util apache2-native "
 
 CVE_PRODUCT = "apache:http_server"
 
+# not-applicable-platform: The current version is not affected. It only applies for Windows
+CVE_CHECK_IGNORE += "CVE-1999-0289 CVE-2010-0425"
+# not-applicable-platform: this CVE is for Debian packaging configuration
+CVE_CHECK_IGNORE += "CVE-1999-0678"
+# cpe-incorrect: This is vulnerability of Apache AuthenSmb module, fixed in 0.9
+CVE_CHECK_IGNORE += "CVE-1999-1237"
+# not-applicable-platform: this CVE is for MAC OS X specific problem
+CVE_CHECK_IGNORE += "CVE-1999-1412"
+# disputed: this CVE is officially disputed by Redhat
+CVE_CHECK_IGNORE += "CVE-2007-0086"
+# not-applicable-platform: The current version is not affected. It only applies for Windows.
+CVE_CHECK_IGNORE += "CVE-2007-0450"
+# cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2 (incl.) to 2.2.8 (excl.)
+CVE_CHECK_IGNORE += "CVE-2007-6421 CVE-2007-6422"
+# cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev
+CVE_CHECK_IGNORE += "CVE-2007-6423"
+# cpe-incorrect: The current version is not affected by the CVE which affects versions up to 2.2.6 (excl.)
+CVE_CHECK_IGNORE += "CVE-2008-2168"
+
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
