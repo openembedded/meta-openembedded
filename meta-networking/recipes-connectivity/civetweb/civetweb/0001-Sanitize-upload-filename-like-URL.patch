@@ -1,0 +1,27 @@
+From e7c4fca110a0823262cf444371d01309c85c760f Mon Sep 17 00:00:00 2001
+From: bel2125 <bel2125@gmail.com>
+Date: Sat, 3 Jul 2021 21:54:28 +0200
+Subject: [PATCH] Sanitize upload filename like URL
+
+CVE: CVE-2020-27304
+
+Upstream-Status: Backport [https://github.com/civetweb/civetweb/commit/b2ed60c589172b37f3d705c69d84313eeb8348b1]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/handle_form.inl | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/handle_form.inl b/src/handle_form.inl
+index 9853faf1..21536158 100644
+--- a/src/handle_form.inl
++++ b/src/handle_form.inl
+@@ -55,6 +55,8 @@ url_encoded_field_found(const struct mg_connection *conn,
+ 			mg_cry_internal(conn, "%s: Cannot decode filename", __func__);
+ 			return MG_FORM_FIELD_STORAGE_SKIP;
+ 		}
++		remove_dot_segments(filename_dec);
++
+ 	} else {
+ 		filename_dec[0] = 0;
+ 	}

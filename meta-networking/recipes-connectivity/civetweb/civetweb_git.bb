@@ -8,6 +8,8 @@ SRCREV = "4b440a339979852d5a51fb11a822952712231c23"
 PV = "1.12+git${SRCPV}"
 SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
+           file://0001-Sanitize-upload-filename-like-URL.patch \
+           file://0002-handle_form-example-Upload-to-temporary-directory-an.patch \
            "
 
 S = "${WORKDIR}/git"
