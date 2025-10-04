@@ -40,3 +40,6 @@ do_install() {
 }
 
 UPSTREAM_CHECK_URI = "https://github.com/DOCGroup/ACE_TAO/releases"
+
+# The CVE is for another application, for VMWare "Assured Computing Environment"
+CVE_CHECK_IGNORE += "CVE-2009-1147"
