@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "d31496a4f4df9825e1a1e4f1f74d19abb0154aff311c3b376fcc89dae8
 
 DEPENDS += "python3-pbr-native"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "python3-pbr python3-six"
 
