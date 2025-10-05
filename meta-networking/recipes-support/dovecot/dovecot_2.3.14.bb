@@ -12,6 +12,7 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
            file://0001-not-check-pandoc.patch \
            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
            file://0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch \
+           file://0001-lib-smtp-smtp-server-connection-Fix-STARTTLS-command.patch \
            "
 
 SRC_URI[md5sum] = "2f03532cec3280ae45a101a7a55ccef5"

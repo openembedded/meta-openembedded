@@ -1,0 +1,76 @@
+From 29a76d549b1d5eaa8a98831ee2968b36791e7806 Mon Sep 17 00:00:00 2001
+From: Stephan Bosch <stephan.bosch@open-xchange.com>
+Date: Sat, 22 May 2021 00:16:38 +0200
+Subject: [PATCH] lib-smtp: smtp-server-connection - Fix STARTTLS command
+ injection vulnerability.
+
+The input handler kept reading more commands even though the input was locked by
+the STARTTLS command, thereby causing it to read the command pipelined beyond
+STARTTLS. This causes a STARTTLS command injection vulerability.
+
+CVE: CVE-2021-33515
+
+Upstream-Status: Backport [https://github.com/dovecot/core/commit/321c339756f9b2b98fb7326359d1333adebb5295]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/lib-smtp/smtp-server-cmd-starttls.c | 14 ++++++++++++++
+ src/lib-smtp/smtp-server-connection.c   |  6 +++++-
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/src/lib-smtp/smtp-server-cmd-starttls.c b/src/lib-smtp/smtp-server-cmd-starttls.c
+index ed1687e..de53b39 100644
+--- a/src/lib-smtp/smtp-server-cmd-starttls.c
++++ b/src/lib-smtp/smtp-server-cmd-starttls.c
+@@ -37,6 +37,13 @@ static int cmd_starttls_start(struct smtp_server_connection *conn)
+ 		return -1;
+ 	}
+ 
++	/* The command queue must be empty at this point. If anything were to be
++	   queued somehow, this connection is vulnerable to STARTTLS command
++	   insertion.
++	 */
++	i_assert(conn->command_queue_count == 0 &&
++		 conn->command_queue_head == NULL);
++
+ 	/* RFC 3207, Section 4.2:
+ 
+ 	   Upon completion of the TLS handshake, the SMTP protocol is reset to
+@@ -107,6 +114,13 @@ cmd_starttls_next(struct smtp_server_cmd_ctx *cmd, void *context ATTR_UNUSED)
+ 	const struct smtp_server_callbacks *callbacks = conn->callbacks;
+ 	int ret;
+ 
++	/* The command queue can only contain the STARTTLS command at this
++	   point. If anything beyond the STARTTLS were queued somehow, this
++	   connection is vulnerable to STARTTLS command insertion.
++	 */
++	i_assert(conn->command_queue_count == 1 &&
++	         conn->command_queue_tail == command);
++
+ 	smtp_server_connection_set_state(conn, SMTP_SERVER_STATE_STARTTLS,
+ 					 NULL);
+ 
+diff --git a/src/lib-smtp/smtp-server-connection.c b/src/lib-smtp/smtp-server-connection.c
+index e4e9ee7..3d34378 100644
+--- a/src/lib-smtp/smtp-server-connection.c
++++ b/src/lib-smtp/smtp-server-connection.c
+@@ -440,7 +440,7 @@ smtp_server_connection_handle_input(struct smtp_server_connection *conn)
+ 
+ 	/* Parse commands */
+ 	ret = 1;
+-	while (!conn->closing && ret != 0) {
++	while (!conn->closing && !conn->input_locked && ret != 0) {
+ 		while ((ret = smtp_command_parse_next(
+ 			conn->smtp_parser, &cmd_name, &cmd_params,
+ 			&error_code, &error)) > 0) {
+@@ -464,6 +464,10 @@ smtp_server_connection_handle_input(struct smtp_server_connection *conn)
+ 
+ 			if (conn->disconnected)
+ 				return;
++			/* Last command locked the input; stop trying to read
++			   more. */
++			if (conn->input_locked)
++				break;
+ 			/* Client indicated it will close after this command;
+ 			   stop trying to read more. */
+ 			if (conn->closing)
