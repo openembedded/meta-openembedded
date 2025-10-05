@@ -10,6 +10,7 @@ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
            file://0003-FIX-missing-validation-of-authority-of-delegation-re.patch \
            file://0004-review-comments.patch \
            file://0001-Address-various-name-constraint-bugs.patch \
+           file://0001-Add-more-value-barriers-to-avoid-compiler-induced-si.patch \
            "
 SRC_URI[sha256sum] = "e26e00cfefda64082afdd540d3c537924f645d6a674afed2cd171005deff5560"
 
