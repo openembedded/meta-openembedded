@@ -4,7 +4,12 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://license.txt;md5=f4ce98476c07c34e1793daa036960fad"
 SECTION = "libs"
 
-SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
+           file://0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch \
+           file://0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch \
+           file://0003-FIX-missing-validation-of-authority-of-delegation-re.patch \
+           file://0004-review-comments.patch \
+           "
 SRC_URI[sha256sum] = "e26e00cfefda64082afdd540d3c537924f645d6a674afed2cd171005deff5560"
 
 S = "${WORKDIR}/Botan-${PV}"

@@ -1,0 +1,31 @@
+From 6eb071078e35a6a29e3a27fb91d9449b25f1bbcc Mon Sep 17 00:00:00 2001
+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
+Date: Wed, 21 Sep 2022 14:00:26 +0200
+Subject: [PATCH] add Certificate_Store_In_Memory c'tor that takes a vector of
+ certs
+
+CVE: CVE-2022-43705
+Upstream-Status: Backport [https://github.com/randombit/botan/commit/5d8d9fbf75c8b814ea609161bee525d520f5cb57]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/lib/x509/certstor.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/lib/x509/certstor.h b/src/lib/x509/certstor.h
+index 6901589..165c414 100644
+--- a/src/lib/x509/certstor.h
++++ b/src/lib/x509/certstor.h
+@@ -95,6 +95,12 @@ class BOTAN_PUBLIC_API(2,0) Certificate_Store_In_Memory final : public Certifica
+       */
+       explicit Certificate_Store_In_Memory(const X509_Certificate& cert);
+ 
++      /**
++      * Adds given certificate list to the store.
++      */
++      explicit Certificate_Store_In_Memory(std::vector<std::shared_ptr<const X509_Certificate>> certs)
++         : m_certs(std::move(certs)) {}
++
+       /**
+       * Create an empty store.
+       */

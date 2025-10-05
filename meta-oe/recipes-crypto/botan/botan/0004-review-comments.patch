@@ -1,0 +1,28 @@
+From 18e7dc2e81429e1ac4e69cbe0b530bf707d38d94 Mon Sep 17 00:00:00 2001
+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
+Date: Thu, 3 Nov 2022 09:27:20 +0100
+Subject: [PATCH] review comments
+
+CVE: CVE-2022-43705
+Upstream-Status: Backport [https://github.com/randombit/botan/commit/a33689613127f319c0047fb96f092de16e7cb350]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/lib/x509/x509path.cpp    |  3 +--
+ src/tests/test_x509_path.cpp | 12 +++++-------
+ 2 files changed, 6 insertions(+), 9 deletions(-)
+
+diff --git a/src/lib/x509/x509path.cpp b/src/lib/x509/x509path.cpp
+index 37de6d8..6f3159a 100644
+--- a/src/lib/x509/x509path.cpp
++++ b/src/lib/x509/x509path.cpp
+@@ -237,8 +237,7 @@ PKIX::check_ocsp(const std::vector<std::shared_ptr<const X509_Certificate>>& cer
+             // When verifying intermediate certificates we need to truncate the
+             // cert_path so that the intermediate under investigation becomes the
+             // last certificate in the chain.
+-            auto ocsp_cert_path = cert_path;
+-            ocsp_cert_path.erase(ocsp_cert_path.begin(), ocsp_cert_path.begin()+i);
++            std::vector<std::shared_ptr<const X509_Certificate>> ocsp_cert_path(cert_path.begin() + i, cert_path.end());
+             Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, ocsp_cert_path);
+ 
+             if(ocsp_signature_status == Certificate_Status_Code::OCSP_SIGNATURE_OK)

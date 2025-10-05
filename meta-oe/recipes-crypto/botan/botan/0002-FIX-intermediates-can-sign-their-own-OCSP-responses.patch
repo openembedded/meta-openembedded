@@ -1,0 +1,36 @@
+From 48947029f72e2091dfbaaa5e3576d98eb7d6c34e Mon Sep 17 00:00:00 2001
+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
+Date: Tue, 20 Sep 2022 17:20:52 +0200
+Subject: [PATCH] FIX: intermediates can sign their own OCSP responses
+
+Before it was possible that intermediates signed their
+own OCSP responses. I.e a compromised intermediate
+certificate allowed the attacker to sign OCSP responses
+for this very certificate.
+
+CVE: CVE-2022-43705
+Upstream-Status: Backport [https://github.com/randombit/botan/commit/1829ef9d89614da1eacdf511356bdf98a970f5f5]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/lib/x509/x509path.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/lib/x509/x509path.cpp b/src/lib/x509/x509path.cpp
+index b5cdc27..37de6d8 100644
+--- a/src/lib/x509/x509path.cpp
++++ b/src/lib/x509/x509path.cpp
+@@ -234,7 +234,12 @@ PKIX::check_ocsp(const std::vector<std::shared_ptr<const X509_Certificate>>& cer
+          {
+          try
+             {
+-            Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, cert_path);
++            // When verifying intermediate certificates we need to truncate the
++            // cert_path so that the intermediate under investigation becomes the
++            // last certificate in the chain.
++            auto ocsp_cert_path = cert_path;
++            ocsp_cert_path.erase(ocsp_cert_path.begin(), ocsp_cert_path.begin()+i);
++            Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, ocsp_cert_path);
+ 
+             if(ocsp_signature_status == Certificate_Status_Code::OCSP_SIGNATURE_OK)
+                {
