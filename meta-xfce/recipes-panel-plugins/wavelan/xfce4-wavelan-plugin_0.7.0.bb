@@ -3,6 +3,8 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-wavelan-plugin/start"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e1e5872df9c5cf1a23f16493d9104920"
 
+XFCE_COMPRESS_TYPE = "xz"
+
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "61c0c2f56cb70872d403b770dd76349df9ff24c0dbe905ee1b4f913c34d8f72b"
+SRC_URI[sha256sum] = "5fdce1e1b0d29d0a258dca86bab9d4edcbc12098134b92e00ea1502086a49116"
