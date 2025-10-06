@@ -2,11 +2,13 @@ SUMMARY = "XKB layout switching panel plug-in for the Xfce desktop environment"
 HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-xkb-plugin/start"
 SECTION = "x11/application"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+
+XFCE_COMPRESS_TYPE = "xz"
 
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "bb4be13f6f73cd86a6d939e1a6b125841cf266415bc4fd134a511e4f0cf97967"
+SRC_URI[sha256sum] = "7cd7f3626ef39dc4ce142b2f96ab7583cbea84b4c0352fbc9c9667faac0bdd12"
 
 DEPENDS += "libxklavier libwnck3 librsvg garcon"
 
