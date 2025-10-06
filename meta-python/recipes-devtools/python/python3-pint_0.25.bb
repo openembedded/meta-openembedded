@@ -6,11 +6,11 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
 
-inherit pypi ptest-python-pytest python_setuptools_build_meta
+inherit pypi python_hatchling ptest-python-pytest python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "35275439b574837a6cd3020a5a4a73645eb125ce4152a73a2f126bf164b91b80"
+SRC_URI[sha256sum] = "22911a30d682ee0540d656571c19a7b1806ce00b2be88a16f67218108b7b8cc2"
 
-DEPENDS += "python3-setuptools-scm-native"
+DEPENDS += "python3-setuptools-scm-native python3-hatch-vcs-native"
 
 BBCLASSEXTEND = "native nativesdk"
 
