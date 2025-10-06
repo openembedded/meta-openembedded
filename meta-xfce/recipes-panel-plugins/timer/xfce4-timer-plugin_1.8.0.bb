@@ -4,6 +4,8 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-timer-plugin/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f1c52159bdaebd029cb11927cbe709e4"
 
+XFCE_COMPRESS_TYPE = "xz"
+
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "feb3b8c2d39505e816683540a3226bd7bda870ccbcb4c7d0f6abfeeff5c58b7d"
+SRC_URI[sha256sum] = "1d3ac3aa2c4345400c025642778e7643aab41047622baf9cdc00bbac78e89f99"
