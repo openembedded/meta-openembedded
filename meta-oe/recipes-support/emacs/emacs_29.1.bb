@@ -10,6 +10,7 @@ SRC_URI:append:class-target = " \
     file://use-emacs-native-tools-for-cross-compiling.patch \
     file://avoid-running-host-binaries-for-sanity.patch \
     file://0001-org-macro-set-templates-Prevent-code-evaluation.patch \
+    file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
 "
 
 SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
