@@ -13,6 +13,7 @@ SRC_URI:append:class-target = " \
     file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
     file://0001-org-latex-preview-Add-protection-when-untrusted-cont.patch \
     file://0001-org-file-contents-Consider-all-remote-files-unsafe.patch \
+    file://0001-org-link-expand-abbrev-Do-not-evaluate-arbitrary-uns.patch \
 "
 
 SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
