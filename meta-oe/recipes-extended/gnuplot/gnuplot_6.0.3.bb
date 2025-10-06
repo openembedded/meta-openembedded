@@ -18,10 +18,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
 SRC_URI:append:class-target = " \
     file://0002-do-not-build-demos.patch \
     file://0003-Use-native-tools-to-build-docs.patch \
-    file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
+    file://0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch \
 "
 
-SRC_URI[archive.sha256sum] = "51f89bbab90f96d3543f95235368d188eb1e26eda296912256abcd3535bd4d84"
+SRC_URI[archive.sha256sum] = "ec52e3af8c4083d4538152b3f13db47f6d29929a3f6ecec5365c834e77f251ab"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 
 # for building docs (they deserve it) we need *doc2* tools native
@@ -39,14 +39,17 @@ do_install:class-native() {
 
 PACKAGECONFIG ??= "cairo ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
-PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
-PACKAGECONFIG[qt5] = "--with-qt --with-qt5nativesysroot=${STAGING_DIR_NATIVE},--without-qt,qtbase-native qtbase qtsvg qttools-native"
+PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua lua-native"
+# qt5 requires meta-qt5 layer, qt6 requires meta-qt6 layer
+PACKAGECONFIG[qt5] = "--with-qt=qt5 --with-qt5nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native,,,qt6"
+PACKAGECONFIG[qt6] = "--with-qt --with-qt6nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native qt5compat,,,qt5"
 PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11"
 
 EXTRA_OECONF = " \
     --with-readline=${STAGING_LIBDIR}/.. \
     --disable-wxwidgets \
     --without-libcerf \
+    ${@bb.utils.contains_any('PACKAGECONFIG', 'qt5 qt6', '', '--without-qt', d)} \
 "
 
 do_compile:prepend() {
