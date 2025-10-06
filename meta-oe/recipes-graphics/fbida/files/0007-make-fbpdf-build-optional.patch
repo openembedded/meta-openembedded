@@ -1,0 +1,102 @@
+From e1f3007cb40f031c600e884a2c7c763aadc7348b Tue Oct 6 00:00:00 2025
+From: simoneScaravati <simone.scaravati@gmail.com>
+Date: Thu, 8 Oct 2025 16:37:58 +0200
+Subject: [PATCH] fbida: fix make fbpdf build optional 
+
+ORIGINAL BACKPORTED PATCH: 0001-meson.build-make-fbpdf-build-optional.patch FROM scarthgap branch: 
+From c00a155e90a9b22bd6ab5fa5407bb9923ee16ca0 Mon Sep 17 00:00:00 2001
+From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
+Date: Fri, 16 Sep 2022 18:45:58 +0200
+Subject: [PATCH] meson.build: make fbpdf build optional
+
+Upstream-Status: Submitted [https://github.com/kraxel/fbida/pull/4]
+Signed-off-by: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
+
+--- a/GNUmakefile	2025-10-03 15:20:42.926132622 +0000
++++ b/GNUmakefile	2025-10-03 15:22:39.018131109 +0000
+@@ -29,7 +29,7 @@ deps:
+ 	@echo "  fbi   needs:  $(PKGS_FBI)"
+ 	@echo "  fbpdf needs:  $(PKGS_FBPDF)"
+ 	@echo "Please install.  Try 'make yum', 'make dnf' or 'make apt-get' (needs sudo)."
+-	@false
++	@echo "Warning: missing some deps, build may fail due to missing packages"
+ 
+ yum dnf:
+ 	sudo $@ install $(patsubst %,"pkgconfig(%)",$(PKGS_FBI) $(PKGS_FBPDF))
+@@ -46,11 +46,14 @@ all: build
+ # what to build
+ TARGETS := exiftran thumbnail.cgi
+ ifeq ($(HAVE_LINUX_FB_H),yes)
+-  TARGETS += fbi fbpdf kbdtest
++  TARGETS += fbi kbdtest
+ endif
+ ifeq ($(HAVE_MOTIF),yes)
+   TARGETS += ida
+ endif
++ifeq ($(HAVE_LIBPDF), yes)
++  TARGETS += fbpdf 
++endif
+ 
+ 
+ #################################################################
+@@ -73,6 +76,7 @@ HAVE_LIBGIF	:= $(call ac_lib,DGifOpenFileName,gif)
+ HAVE_LIBWEBP	:= $(call ac_pkg_config,libwebp)
+ HAVE_MOTIF	:= $(call ac_lib,XmStringGenerate,Xm,-L/usr/X11R6/$(LIB) -lXpm -lXt -lXext -lX11)
+ JPEG_VER        := $(call ac_jpeg_ver)
++HAVE_LIBPDF := yes
+ # deprecated
+ #HAVE_GLIBC	:= $(call ac_func,fopencookie)
+ #HAVE_LIBSANE	:= $(call ac_lib,sane_init,sane)
+@@ -215,17 +219,18 @@ fbi: $(OBJS_FBI) $(OBJS_READER)
+ ########################################################################
+ # rules for fbpdf
+ 
+-# object files
+-OBJS_FBPDF := \
+-	fbpdf.o vt.o kbd.o fbtools.o drmtools.o drmtools-egl.o \
+-	fbiconfig.o parseconfig.o
+-
+-# font + drm + jpeg/exif libs
+-fbpdf : CFLAGS += $(shell $(PKG_CONFIG) --cflags $(PKGS_FBPDF))
+-fbpdf : LDLIBS += $(shell $(PKG_CONFIG) --libs   $(PKGS_FBPDF))
+-
+-fbpdf: $(OBJS_FBPDF)
+-
++ifeq ($(HAVE_LIBPDF),yes) 
++  # object files
++  OBJS_FBPDF := \
++  	fbpdf.o vt.o kbd.o fbtools.o drmtools.o drmtools-egl.o \
++  	fbiconfig.o parseconfig.o
++  
++  # font + drm + jpeg/exif libs
++  fbpdf : CFLAGS += $(shell $(PKG_CONFIG) --cflags $(PKGS_FBPDF))
++  fbpdf : LDLIBS += $(shell $(PKG_CONFIG) --libs   $(PKGS_FBPDF))
++  
++  fbpdf: $(OBJS_FBPDF)
++endif
+ 
+ ########################################################################
+ # rules for kbdtest
+@@ -249,10 +254,7 @@ install: build
+ 	$(INSTALL_DATA) $(srcdir)/man/exiftran.1 $(mandir)/man1
+ ifeq ($(HAVE_LINUX_FB_H),yes)
+ 	$(INSTALL_BINARY) fbi $(bindir)
+-	$(INSTALL_SCRIPT) fbgs $(bindir)
+-	$(INSTALL_SCRIPT) fbpdf $(bindir)
+ 	$(INSTALL_DATA) $(srcdir)/man/fbi.1 $(mandir)/man1
+-	$(INSTALL_DATA) $(srcdir)/man/fbgs.1 $(mandir)/man1
+ endif
+ ifeq ($(HAVE_MOTIF),yes)
+ 	$(INSTALL_BINARY) ida $(bindir)
+@@ -260,6 +262,11 @@ ifeq ($(HAVE_MOTIF),yes)
+ 	$(INSTALL_DIR) $(resdir)/app-defaults
+ 	$(INSTALL_DATA) $(srcdir)/Ida.ad $(resdir)/app-defaults/Ida
+ endif
++ifeq ($(HAVE_LIBPDF),yes)
++	$(INSTALL_SCRIPT) fbpdf $(bindir)
++	$(INSTALL_SCRIPT) fbgs $(bindir)
++	$(INSTALL_DATA) $(srcdir)/man/fbgs.1 $(mandir)/man1
++endif
+ 
+ clean:
+ 	-rm -f *.o jpeg/$(JPEG_VER)/*.o rd/*.o wr/*.o $(depfiles) core core.*
