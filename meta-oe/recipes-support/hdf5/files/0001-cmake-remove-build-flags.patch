@@ -10,13 +10,13 @@ Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- config/cmake/libhdf5.settings.cmake.in | 18 +++++++++---------
+ src/libhdf5.settings.cmake.in | 18 +++++++++---------
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/config/cmake/libhdf5.settings.cmake.in b/config/cmake/libhdf5.settings.cmake.in
 index deb07ed..6f255c4 100644
---- a/config/cmake/libhdf5.settings.cmake.in
-+++ b/config/cmake/libhdf5.settings.cmake.in
+--- a/src/libhdf5.settings.cmake.in
++++ b/src/libhdf5.settings.cmake.in
 @@ -23,23 +23,23 @@ Linking Options:
  ----------------
                        Libraries: @BUILD_NAME_EXT@
