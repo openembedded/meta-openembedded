@@ -18,6 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0006-Define-correct-gregs-for-RISCV32.patch \
            file://0001-CVE-2025-27151.patch \
            file://0001-Fix-out-of-bounds-write-in-hyperloglog-commands-CVE-.patch \
+           file://0001-Retry-accept-even-if-accepted-connection-reports-an-.patch \
           "
 
 SRC_URI[sha256sum] = "470c75bac73d7390be4dd66479c6f29e86371c5d380ce0c7efb4ba2bbda3612d"
