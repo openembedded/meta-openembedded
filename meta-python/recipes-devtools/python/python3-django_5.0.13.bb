@@ -7,3 +7,5 @@ RDEPENDS:${PN} += "\
     python3-sqlparse \
     python3-asgiref \
 "
+
+CVE_STATUS[CVE-2025-27556] = "not-applicable-platform: vulnerability affects only Windows"
