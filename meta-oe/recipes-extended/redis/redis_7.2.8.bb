@@ -74,3 +74,4 @@ SYSTEMD_SERVICE:${PN} = "redis.service"
 
 CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
 CVE_STATUS[CVE-2022-0543] = "not-applicable-platform: Debian-specific CVE"
+CVE_STATUS[CVE-2025-21605] = "fixed-version: The backported fix by upstream is included in the used version"
