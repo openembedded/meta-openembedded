@@ -1,0 +1,61 @@
+From ab395bb857bef8f06ed60eb6a4e091785c38dced Mon Sep 17 00:00:00 2001
+From: John Thacker <johnthacker@gmail.com>
+Date: Sat, 26 Apr 2025 10:01:19 +0000
+Subject: [PATCH] column: Do not allow fence to go beyond column size when
+ prepending
+
+When moving the fence location forward when prepending, ensure
+that it does not go past the end of the buffer.
+
+Also get rid of unnecessary branching and strlen calls.
+
+Fix #20509
+
+(cherry picked from commit 53213086304caa3dfbdd7dc39c2668a3aea1a5c0)
+
+CVE: CVE-2025-5601
+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/merge_requests/19684/diffs?commit_id=8c186dbb381cf51064fa8dbff7953468d5ae394c]
+
+Co-authored-by: John Thacker <johnthacker@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ epan/column-utils.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/epan/column-utils.c b/epan/column-utils.c
+index 5e5b298..4ebd2b1 100644
+--- a/epan/column-utils.c
++++ b/epan/column-utils.c
+@@ -646,8 +646,13 @@ col_prepend_fstr(column_info *cinfo, const gint el, const gchar *format, ...)
+       /*
+        * Move the fence, unless it's at the beginning of the string.
+        */
+-      if (col_item->col_fence > 0)
+-        col_item->col_fence += (int) strlen(col_item->col_buf);
++      if (col_item->col_fence > 0) {
++        /* pos >= strlen if truncation occurred; this saves on a strlen
++         * call and prevents adding a single byte character later if a
++         * a multibyte character was truncated (good). */
++        col_item->col_fence += (int) pos;
++        col_item->col_fence = MIN((int)(max_len - 1), col_item->col_fence);
++      }
+ 
+       /*
+        * Append the original data.
+@@ -699,11 +704,11 @@ col_prepend_fence_fstr(column_info *cinfo, const gint el, const gchar *format, .
+        * Move the fence if it exists, else create a new fence at the
+        * end of the prepended data.
+        */
+-      if (col_item->col_fence > 0) {
+-        col_item->col_fence += (int) strlen(col_item->col_buf);
+-      } else {
+-        col_item->col_fence = (int) strlen(col_item->col_buf);
+-      }
++      /* pos >= strlen if truncation occurred; this saves on a strlen
++       * call and prevents adding a single byte character later if a
++       * a multibyte character was truncated (good). */
++      col_item->col_fence += (int) pos;
++      col_item->col_fence = MIN((int)(max_len - 1), col_item->col_fence);
+       /*
+        * Append the original data.
+        */
