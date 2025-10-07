@@ -21,6 +21,8 @@ SRC_URI[sha256sum] = "2f9886eca68d30114ad6a01da65631f8007d802fd3e6c9fac711251e63
 
 RPROVIDES:${PN} = "virtual-redis"
 
+CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
+
 inherit pkgconfig update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"

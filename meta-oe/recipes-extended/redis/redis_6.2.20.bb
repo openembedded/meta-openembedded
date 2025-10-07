@@ -20,6 +20,8 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
 
 SRC_URI[sha256sum] = "7f8b8a7aed53c445a877adf9e3743cdd323518524170135a58c0702f2dba6ef4"
 
+CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
+
 inherit update-rc.d systemd useradd
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
