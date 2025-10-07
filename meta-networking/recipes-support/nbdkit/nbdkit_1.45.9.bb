@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
 SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=master;tag=v${PV} \
            file://0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch \
            "
-SRCREV = "243c6911984abc82bb711d2e5ecb1a13c7ff93c4"
+SRCREV = "2e2f933abf4e19842db0fdba2ac4030baea57686"
 
 
 DEPENDS = "curl xz e2fsprogs zlib"
@@ -31,3 +31,6 @@ EXTRA_OECONF = " --without-libvirt --without-libguestfs --disable-perl"
 #EXTRA_OECONF += " --disable-tcl"
 #EXTRA_OECONF += " --disable-lua"
 #EXTRA_OECONF += " --disable-vddk"
+
+CVE_STATUS[CVE-2025-47711] = "fixed-version: the used revision contains the vulnerability fix"
+CVE_STATUS[CVE-2025-47712] = "fixed-version: the used revision contains the vulnerability fix"
