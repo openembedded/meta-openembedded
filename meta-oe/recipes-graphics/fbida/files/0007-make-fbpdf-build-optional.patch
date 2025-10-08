@@ -1,3 +1,18 @@
+From e1f3007cb40f031c600e884a2c7c763aadc7348b Tue Oct 6 00:00:00 2025
+From: simoneScaravati <simone.scaravati@gmail.com>
+Date: Thu, 8 Oct 2025 16:37:58 +0200
+Subject: [PATCH] fbida: fix make fbpdf build optional 
+
+ORIGINAL BACKPORTED PATCH: 0001-meson.build-make-fbpdf-build-optional.patch FROM scarthgap branch: 
+From c00a155e90a9b22bd6ab5fa5407bb9923ee16ca0 Mon Sep 17 00:00:00 2001
+From: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
+Date: Fri, 16 Sep 2022 18:45:58 +0200
+Subject: [PATCH] meson.build: make fbpdf build optional
+
+Upstream-Status: Submitted [https://github.com/kraxel/fbida/pull/4]
+Signed-off-by: "Meyer, Wolfgang" <Wolfgang.Meyer@gossenmetrawatt.com>
+---
+
 --- a/GNUmakefile	2025-10-03 15:20:42.926132622 +0000
 +++ b/GNUmakefile	2025-10-03 15:22:39.018131109 +0000
 @@ -29,7 +29,7 @@ deps:
