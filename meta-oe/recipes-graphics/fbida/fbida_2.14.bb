@@ -16,6 +16,7 @@ SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
            file://support-jpeg-turbo.patch \
            file://cairo-weak-detect.patch \
            file://fbida-gcc10.patch \
+           file://0007-make-fbpdf-build-optional.patch \
 	   "
 SRC_URI[sha256sum] = "95b7c01556cb6ef9819f358b314ddfeb8a4cbe862b521a3ed62f03d163154438"
 
@@ -34,6 +35,7 @@ PACKAGECONFIG[tiff] = ",,tiff"
 PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
 PACKAGECONFIG[webp] = ",,libwebp"
 PACKAGECONFIG[lirc] = ",,lirc"
+PACKAGECONFIG[pdf] = ",,poppler libepoxy"
 # This can only be enabled when cairo has egl enabled in its packageconfig support too
 PACKAGECONFIG[egl] = ",,"
 
@@ -68,6 +70,9 @@ do_compile() {
     fi
     if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'lirc', d)}" ]; then
         sed -i -e '/^HAVE_LIBLIRC/s/:=.*$/:= no/' ${S}/GNUmakefile
+    fi
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'pdf', d)}" ]; then
+        sed -i -e '/^HAVE_LIBPDF/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
 
     oe_runmake
