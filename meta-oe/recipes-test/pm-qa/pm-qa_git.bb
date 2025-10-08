@@ -18,8 +18,6 @@ SRC_URI = " \
 
 CFLAGS += "-pthread"
 
-PATCHTOOL = "git"
-
 do_compile () {
     # Find all the .c files in this project and build them.
     for x in `find . -name "*.c"`
