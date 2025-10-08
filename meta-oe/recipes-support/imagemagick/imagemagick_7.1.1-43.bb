@@ -12,7 +12,9 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 BASE_PV = "${@d.getVar('PV').split('-')[0]}"
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
 
-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+           file://0001-Correct-out-of-bounds-read-of-a-single-byte.patch \
+           "
 SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
 
 S = "${WORKDIR}/git"
