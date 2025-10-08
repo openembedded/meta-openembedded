@@ -50,6 +50,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
            file://CVE-2023-34058.patch;patchdir=.. \
            file://CVE-2023-34059.patch;patchdir=.. \
            file://CVE-2025-22247.patch;patchdir=.. \
+           file://CVE-2025-41244.patch;patchdir=.. \
            "
 
 UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
