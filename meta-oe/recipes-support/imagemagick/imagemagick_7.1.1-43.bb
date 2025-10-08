@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
            file://0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch \
            file://0002-Added-missing-return.patch \
            file://0001-Fixed-memory-leak-when-entering-StreamImage-multiple.patch \
+           file://0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch \
            "
 SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
 
