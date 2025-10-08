@@ -8,11 +8,12 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
 
 SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
+           file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
            file://CVE-2023-4256.patch \
            file://CVE-2024-22654-0001.patch \
            file://CVE-2024-22654-0002.patch \
            file://CVE-2023-43279.patch \
-           file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
+           file://CVE-2025-9157.patch \
 "
 
 SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
