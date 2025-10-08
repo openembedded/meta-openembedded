@@ -14,6 +14,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
 
 SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
            file://0001-Correct-out-of-bounds-read-of-a-single-byte.patch \
+           file://0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch \
+           file://0002-Added-missing-return.patch \
            "
 SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
 
