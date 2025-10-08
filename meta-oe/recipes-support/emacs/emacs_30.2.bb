@@ -4,8 +4,9 @@ HOMEPAGE = "https://www.gnu.org/software/emacs/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
-          "
+SRC_URI = "${GNU_MIRROR}/emacs/${BP}.tar.xz"
+UPSTREAM_CHECK_URI = "${GNU_MIRROR}/emacs/"
+
 SRC_URI:append:class-target = " \
     file://use-emacs-native-tools-for-cross-compiling.patch \
     file://avoid-running-host-binaries-for-sanity.patch \
