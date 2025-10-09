@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
 
 SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master \
            file://0001-Fixes-400.patch \
+           file://0001-Fixes-401.patch \
            "
 SRCREV = "917f7708b755d8434f70618108c1a76f1b6a0a82"
 
