@@ -9,10 +9,10 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "\
-    git://github.com/megastep/${BPN}.git;protocol=https;branch=master \
+    git://github.com/megastep/${BPN}.git;protocol=https;branch=master;tag=release-${PV} \
 "
 
-SRCREV = "09488c50c6bdc40aec8e3a9b23a539c5054a634c"
+SRCREV = "55d96ab79d39e10e3aec1bb1a7647ec0d4ddf1aa"
 
 
 do_configure[noexec] = "1"
