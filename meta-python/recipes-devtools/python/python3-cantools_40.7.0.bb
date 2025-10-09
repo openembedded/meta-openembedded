@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
 
-SRC_URI[sha256sum] = "adfd80f9d1704be0dfae3fde0000f748635888bcb76c1a12b8b6420f34d95834"
+SRC_URI[sha256sum] = "5779113b068ab043140ea9441ad77d44ad4d382eed88de16678fb320e32146ec"
 
 PYPI_PACKAGE = "cantools"
 
