@@ -1,9 +1,9 @@
 SUMMARY = "Telnet server and client library based on asyncio"
 HOMEPAGE = "https://github.com/jquast/telnetlib3"
 LICENSE = "ISC"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fc2166986ad8169d334a342e0d8db8e0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b2cbfe1ec99d8830fa20d62c8f21d0e8"
 
-SRC_URI[sha256sum] = "dbcbc16456a0e03a62431be7cfefff00515ab2f4ce2afbaf0d3a0e51a98c948d"
+SRC_URI[sha256sum] = "08a2a7a3a6790f89617442b7d491da8b531d87706fffd6a33eeff57ac440b752"
 
 PYPI_PACKAGE = "telnetlib3"
 
