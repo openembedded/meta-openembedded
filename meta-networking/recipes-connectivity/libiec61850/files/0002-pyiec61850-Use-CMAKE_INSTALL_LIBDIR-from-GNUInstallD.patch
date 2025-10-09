@@ -1,4 +1,4 @@
-From 16d07a82242c3263ec0038c9b4c97355795d2dd9 Mon Sep 17 00:00:00 2001
+From aa48ec52d5792c18a3b369a55ed6472a7dfa1ec1 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 19 Mar 2022 23:16:51 -0700
 Subject: [PATCH] pyiec61850: Use CMAKE_INSTALL_LIBDIR from GNUInstallDirs in
@@ -13,6 +13,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  pyiec61850/CMakeLists.txt | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
+diff --git a/pyiec61850/CMakeLists.txt b/pyiec61850/CMakeLists.txt
+index d1732a16..c19f889b 100644
 --- a/pyiec61850/CMakeLists.txt
 +++ b/pyiec61850/CMakeLists.txt
 @@ -31,7 +31,9 @@ endif()
