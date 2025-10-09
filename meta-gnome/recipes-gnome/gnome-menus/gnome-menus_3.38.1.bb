@@ -9,7 +9,6 @@ DEPENDS = "glib-2.0"
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gettext pkgconfig gobject-introspection upstream-version-is-even
 
-SRC_URI[archive.md5sum] = "a8fd71fcf31a87fc799d80396a526829"
-SRC_URI[archive.sha256sum] = "d9348f38bde956fc32753b28c1cde19c175bfdbf1f4d5b06003b3aa09153bb1f"
+SRC_URI[archive.sha256sum] = "1198a91cdbdcfb232df94e71ef5427617d26029e327be3f860c3b0921c448118"
 
 FILES:${PN} += "${datadir}/desktop-directories/"
