@@ -2,7 +2,7 @@ DESCRIPTION = "Fully featured framework for fast, easy and documented API develo
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c96dd911c6d9e32868b6bc667a38a3e2"
 
-SRC_URI[sha256sum] = "4f3d3fa7b6191fcc715b18c201a12cd875176f92ba4acc61626ccfd571ee1728"
+SRC_URI[sha256sum] = "0ae13d77e7d7e4dce513970cfa9db45364aef210e99022de26d2b73eb4dbced5"
 
 inherit pypi setuptools3
 
