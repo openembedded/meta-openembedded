@@ -16,6 +16,7 @@ SRC_URI = " \
     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
     file://0001-cmake-remove-build-flags.patch \
     file://0001-CVE-2025-2923.patch \
+    file://0002-CVE-2025-2924.patch \
 "
 SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
 
