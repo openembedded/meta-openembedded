@@ -3,7 +3,7 @@ HOMEPAGE = "https://spice-space.org"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "aa08162f036840d3e33502dc0a836b03b9cec97c"
+SRCREV = "761770bf10455563375a022315039779bf8aac36"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/linux/vd_agent.git;protocol=https;branch=master"
 
