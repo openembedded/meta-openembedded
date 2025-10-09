@@ -20,6 +20,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
            file://0002-squid-make-squid-conf-tests-run-on-target-device.patch \
            file://0001-libltdl-remove-reference-to-nonexisting-directory.patch \
            file://squid.nm \
+           file://CVE-2025-59362.patch \
            "
 
 SRC_URI[sha256sum] = "763b5a78561cedc4e47634fa42b8e6b8d46c87c949a151b4e7ac2396d2f97dea"
