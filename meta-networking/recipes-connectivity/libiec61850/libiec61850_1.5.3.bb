@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https 
            file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
            file://0002-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
            file://0003-LIB61850-430-fixed-null-pointer-dereference-in-mmsSe.patch \
+           file://0004-LIB61850-447-replaced-unsafe-function-StringUtils_cr.patch \
 "
 
 S = "${WORKDIR}/git"
