@@ -4,6 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=599d2d1ee7fc84c0467b3d19801db870"
 DEPENDS = "libusb-compat libftdi"
 RDEPENDS:${PN} = "libusb1"
 
+MIRRORS += " \
+    git://repo.or.cz/openocd.git git://github.com/openocd-org/openocd.git \
+"
+
 SRC_URI = " \
     git://repo.or.cz/openocd.git;protocol=http;name=openocd;branch=master \
     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
