@@ -21,3 +21,6 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
 CVE_PRODUCT = "iperf_project:iperf"
+
+# cpe-incorrect: the vulnerabilities are in iperf3, which is a different project
+CVE_CHECK_IGNORE += "CVE-2025-54349 CVE-2025-54350 CVE-2025-54351"
