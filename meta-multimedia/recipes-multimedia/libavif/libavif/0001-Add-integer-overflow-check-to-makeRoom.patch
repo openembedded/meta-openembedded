@@ -1,0 +1,27 @@
+From b6fc69afc6e1156455c70ebd2227b82fc4f1769f Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Thu, 9 Oct 2025 20:50:57 +0200
+Subject: [PATCH] Add integer overflow check to makeRoom.
+
+CVE: CVE-2025-48174
+Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/pull/2768]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/stream.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/stream.c b/src/stream.c
+index c85ca31b..b38c93c6 100644
+--- a/src/stream.c
++++ b/src/stream.c
+@@ -319,6 +319,9 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
+ #define AVIF_STREAM_BUFFER_INCREMENT (1024 * 1024)
+ static avifResult makeRoom(avifRWStream * stream, size_t size)
+ {
++    if (size > SIZE_MAX - stream->offset) {
++        return AVIF_RESULT_OUT_OF_MEMORY;
++    }
+     size_t neededSize = stream->offset + size;
+     size_t newSize = stream->raw->size;
+     while (newSize < neededSize) {

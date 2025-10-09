@@ -4,7 +4,9 @@ SECTION = "libs"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c528b75b07425b5c1d2e34de98c397b5"
 
-SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x"
+SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x \
+           file://0001-Add-integer-overflow-check-to-makeRoom.patch \
+           "
 
 S = "${WORKDIR}/git"
 SRCREV = "d1c26facaf5a8a97919ceee06814d05d10e25622"
