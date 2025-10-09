@@ -9,10 +9,9 @@ HOMEPAGE = "http://www.squid-cache.org"
 SECTION = "web"
 LICENSE = "GPL-2.0-or-later"
 
-MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
-MIN_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+PV_U = "${@d.getVar('PV').replace('.', '_')}"
 
-SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.xz \
+SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}/${BPN}-${PV}.tar.xz \
            file://Set-up-for-cross-compilation.patch \
            file://Skip-AC_RUN_IFELSE-tests.patch \
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
@@ -28,6 +27,10 @@ SRC_URI[sha256sum] = "f3df3abb2603a513266f24a5d4699a9f0d76b9f554d1848b67f9c51cd3
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://errors/COPYRIGHT;md5=6fbb6a2adc362e206da7b4f42846cdec \
                     "
+
+UPSTREAM_CHECK_URI = "https://github.com/squid-cache/${BPN}/releases/"
+UPSTREAM_CHECK_REGEX = "v?(?P<pver>\d+(\.\d+)+)"
+
 DEPENDS = "libtool"
 
 inherit autotools pkgconfig useradd ptest perlnative systemd
