@@ -1,4 +1,4 @@
-From e63a6950dbebf4dd95e5c74c423c06fd65df5182 Mon Sep 17 00:00:00 2001
+From 5e7b53a3268e7cdc81e358825a8c84f06289866c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Antonio=20S=C3=A1nchez?= <cantonios@google.com>
 Date: Wed, 8 Feb 2023 01:25:06 +0000
 Subject: [PATCH] Remove LGPL Code and references.
@@ -12,12 +12,11 @@ Upstream-Status: Backport [https://gitlab.com/libeigen/eigen/-/commit/e256ad1823
  bench/tensors/eigen_sycl_bench.sh             |   1 -
  bench/tensors/eigen_sycl_bench_contract.sh    |   2 +-
  doc/PreprocessorDirectives.dox                |   3 -
- test/CMakeLists.txt                           |   1 -
  test/mpl2only.cpp                             |  24 -
  unsupported/Eigen/IterativeSolvers            |   6 -
  .../IterativeSolvers/ConstrainedConjGrad.h    | 187 -------
  .../IterativeSolvers/IterationController.h    | 154 ------
- 12 files changed, 4 insertions(+), 898 deletions(-)
+ 11 files changed, 4 insertions(+), 897 deletions(-)
  delete mode 100644 COPYING.LGPL
  delete mode 100644 Eigen/src/Core/util/NonMPL2.h
  delete mode 100644 test/mpl2only.cpp
@@ -567,7 +566,7 @@ index 1af67cf18..000000000
 -#error Including non-MPL2 code in EIGEN_MPL2_ONLY mode
 -#endif
 diff --git a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h b/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
-index 7803fd817..1a5d7faeb 100644
+index 5e632c4e2..8b6077601 100644
 --- a/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
 +++ b/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
 @@ -24,8 +24,7 @@ namespace Eigen {
@@ -606,7 +605,7 @@ index 73fd6c4a0..3ab0138a1 100644
  ./tensor_contract_sycl_bench
  
 diff --git a/doc/PreprocessorDirectives.dox b/doc/PreprocessorDirectives.dox
-index 0f545b086..b7d59ccbc 100644
+index eda0d1961..2b5cb1b92 100644
 --- a/doc/PreprocessorDirectives.dox
 +++ b/doc/PreprocessorDirectives.dox
 @@ -92,9 +92,6 @@ run time. However, these assertions do cost time and can thus be turned off.
@@ -619,18 +618,6 @@ index 0f545b086..b7d59ccbc 100644
  
  \section TopicPreprocessorDirectivesPerformance Alignment, vectorization and performance tweaking
  
-diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index 5136f82aa..9f557743a 100644
---- a/test/CMakeLists.txt
-+++ b/test/CMakeLists.txt
-@@ -277,7 +277,6 @@ ei_add_test(special_numbers)
- ei_add_test(rvalue_types)
- ei_add_test(dense_storage)
- ei_add_test(ctorleak)
--ei_add_test(mpl2only)
- ei_add_test(inplace_decomposition)
- ei_add_test(half_float)
- ei_add_test(bfloat16_float)
 diff --git a/test/mpl2only.cpp b/test/mpl2only.cpp
 deleted file mode 100644
 index 296350d08..000000000
@@ -662,11 +649,11 @@ index 296350d08..000000000
 -  return 0;
 -}
 diff --git a/unsupported/Eigen/IterativeSolvers b/unsupported/Eigen/IterativeSolvers
-index a3f58d676..f045fb607 100644
+index b53f10937..3ac64e9f8 100644
 --- a/unsupported/Eigen/IterativeSolvers
 +++ b/unsupported/Eigen/IterativeSolvers
 @@ -19,7 +19,6 @@
-   * \defgroup IterativeLinearSolvers_Module Iterative solvers module
+   * \defgroup IterativeLinearSolvers_Module IterativeLinearSolvers module
    * This module aims to provide various iterative linear and non linear solver algorithms.
    * It currently provides:
 -  *  - a constrained conjugate gradient
@@ -1038,3 +1025,6 @@ index a116e09e2..000000000
 -} // end namespace Eigen
 -
 -#endif // EIGEN_ITERATION_CONTROLLER_H
+-- 
+2.48.1
+

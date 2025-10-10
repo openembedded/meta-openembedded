@@ -13,14 +13,22 @@ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad \
 "
 
 SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;branch=3.4 \
-    file://0001-Default-eigen_packet_wrapper-constructor.patch \
-    file://0002-Remove-LGPL-Code-and-references.patch \
+    file://0001-Remove-LGPL-Code-and-references.patch \
 "
 
-SRCREV = "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
+SRCREV = "d71c30c47858effcbd39967097a2d99ee48db464"
 
 
 inherit cmake
+
+PACKAGECONFIG ??= ""
+
+PACKAGECONFIG[blas] = "-DEIGEN_BUILD_BLAS=ON,-DEIGEN_BUILD_BLAS=OFF,libgfortran"
+PACKAGECONFIG[lapack] = "-DEIGEN_BUILD_LAPACK=ON,-DEIGEN_BUILD_LAPACK=OFF,libgfortran"
+
+EXTRA_OECMAKE += " \
+    -DEIGEN_BUILD_TESTING=OFF \
+"
 
 FILES:${PN}-dev += "${datadir}/eigen3/cmake"
 
