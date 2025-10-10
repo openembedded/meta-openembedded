@@ -30,7 +30,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://0001-Android-Fix-the-build.patch \
            file://netsnmp-swinst-crash.patch \
            file://net-snmp-5.9.4-kernel-6.7.patch \
-          "
+           file://0001-Fix-LDFLAGS-vs-LIBS-ordering.patch \
+           "
 SRC_URI[sha256sum] = "8b4de01391e74e3c7014beb43961a2d6d6fa03acc34280b9585f4930745b0544"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
@@ -117,6 +118,10 @@ do_configure:append() {
         -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L${STAGING_DIR_TARGET}\$\{libdir\}@g" \
         -e "s@^NSC_LDFLAGS=\"-L.* @NSC_LDFLAGS=\"-L${STAGING_DIR_TARGET}\$\{libdir\} @g" \
         -i ${B}/net-snmp-config
+
+    # Make libtool inject -Wl,--as-needed so that it is specified before any lib
+    # dependencies. This is needed due to libtools' reordering of the arguments.
+    [ -z "${ASNEEDED}" ] || sed -e "s@CC -shared@\0 ${ASNEEDED}@" -i ${B}/libtool
 }
 
 do_install:append() {
