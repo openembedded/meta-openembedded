@@ -92,3 +92,5 @@ python populate_packages:prepend () {
         description='FreeRDP plugin %s',
         prepend=True, extra_depends='')
 }
+
+CVE_STATUS[CVE-2024-32662] = "fixed-version: 2.x is not affected, bug was introduced in 3.0.0"
