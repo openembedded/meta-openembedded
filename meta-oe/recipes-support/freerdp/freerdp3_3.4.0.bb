@@ -11,6 +11,7 @@ SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
            file://CVE-2024-32039.patch \
            file://CVE-2024-32040.patch \
+           file://CVE-2024-32458.patch \
            "
 
 S = "${WORKDIR}/git"
