@@ -5,7 +5,7 @@ security-enabled client and server applications. \
 Applications built with NSS can support SSL v2 and v3, \
 TLS, PKCS 5, PKCS 7, PKCS 11, PKCS 12, S/MIME, X.509 \
 v3 certificates, and other security standards."
-HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
+HOMEPAGE = "https://firefox-source-docs.mozilla.org/security/nss/index.html"
 SECTION = "libs"
 
 DEPENDS = "sqlite3 nspr zlib nss-native"
@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://nss/COPYING;md5=3b1e88e1b9c0b5a4b2881d46cce06a18 \
 
 VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '_RTM'}"
 
-SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
+SRC_URI = "https://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
            file://nss.pc.in \
            file://blank-cert9.db \
            file://blank-key4.db \
@@ -33,7 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
            file://0006-Fix-nss-multilib-build-on-openSUSE-11.x-32bit.patch \
            file://0007-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
            "
-SRC_URI[sha256sum] = "3938611de4ad1e3b71f27f3cd5ea717a5b5f83bffc9cd427e6d929dc67f2bb73"
+SRC_URI[sha256sum] = "5786b523a2f2e9295ed10d711960d2e33cd620bb80d6288443eda43553a51996"
 
 UPSTREAM_CHECK_URI = "https://ftp.mozilla.org/pub/security/nss/releases/"
 UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>\d+(\_\d+)+)"
