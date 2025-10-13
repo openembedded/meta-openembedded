@@ -20,22 +20,10 @@ DEPENDS = "\
 DEPENDS:append:libc-musl = " libucontext"
 LDFLAGS:append:libc-musl = " -lucontext"
 
-RDEPENDS_${PN} = "\
-    cglm (>= 0.7.8) \
-    freetype \
-    libsdl2 (>= 2.0.16) \
-    libpng (>= 1.5.0) \
-    libwebp (>= 0.5) \
-    libzstd (>= 1.4.0) \
-    opengl (>= 3.3) \
-    opusfile \
-    zlib \
-"
-
 SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https;tag=v${PV}"
 SRCREV = "6a484e6e61cc51a22a9943762dc2ff6883914f38"
 
-inherit features_check meson mime mime-xdg pkgconfig python3native
+inherit features_check meson mime mime-xdg pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
