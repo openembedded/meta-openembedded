@@ -10,7 +10,7 @@ SRC_URI = " \
     file://fix-make-race.patch \
     file://0001-Fix-build-failure-with-GCC-15-and-std-c23.patch \
 "
-SRC_URI[sha256sum] = "b5152e3dd148ed73835827ac2f219df7cf5808dbf9dbaec2aa0127b44de800d8"
+SRC_URI[sha256sum] = "39e71de3ce06762b342749f1dc7cba6817738f7bf4d322c1bb9ab10b8569ab80"
 
 UPSTREAM_CHECK_URI = "https://github.com/OpenPrinting/cups-filters/releases"
 
@@ -22,9 +22,6 @@ EXTRA_OECONF += " \
     --with-fontdir=${datadir}/fonts \
     --localstatedir=${localstatedir} \
 "
-
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
-PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
 
 FILES:${PN} += "${datadir}"
 FILES:${PN}-dev += "${datadir}/ppdc"
