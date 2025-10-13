@@ -75,3 +75,5 @@ FILES:${PN} += "${libdir}/dovecot/*plugin.so \
 FILES:${PN}-staticdev += "${libdir}/dovecot/*/*.a"
 FILES:${PN}-dev += "${libdir}/dovecot/libdovecot*.so"
 FILES:${PN}-dbg += "${libdir}/dovecot/*/.debug"
+
+CVE_STATUS[CVE-2016-4983] = "not-applicable-platform: Affects only postinstall script on specific distribution."
