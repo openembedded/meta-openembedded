@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "866c17223f7d734377a260a2800e14791cb5e55ec252de624e053a0b36b8568a"
+SRC_URI[sha256sum] = "bebf8557577d4401ba8bd9ff33906f1376c877aa78d1fe216ad01b4d6745af71"
 
 PYPI_PACKAGE = "yarl"
 
