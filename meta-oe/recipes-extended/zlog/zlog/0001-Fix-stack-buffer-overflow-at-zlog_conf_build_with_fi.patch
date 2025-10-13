@@ -1,0 +1,25 @@
+From 2f6083e78c4142449580247da470a774d3b2afde Mon Sep 17 00:00:00 2001
+From: XiangfeiCH <chenthrone@163.com>
+Date: Tue, 12 Apr 2022 00:13:35 +0800
+Subject: [PATCH] Fix stack-buffer-overflow at zlog_conf_build_with_file
+
+CVE: CVE-2021-43521
+Upstream-Status: Backport [https://github.com/HardySimpson/zlog/commit/a5be8b3a8ddc498de4ad041757285136a55d97e3]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ src/conf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/conf.c b/src/conf.c
+index c592153..9eae63c 100644
+--- a/src/conf.c
++++ b/src/conf.c
+@@ -305,7 +305,7 @@ static int zlog_conf_build_with_file(zlog_conf_t * a_conf)
+ 				/* Oops the buffer is full - what now? */
+ 				pline = line;
+ 			} else {
+-				for (p--; isspace((int)*p); --p)
++				for (p--; p >= line && isspace((int)*p); --p)
+ 					/*EMPTY*/;
+ 				p++;
+ 				*p = 0;
