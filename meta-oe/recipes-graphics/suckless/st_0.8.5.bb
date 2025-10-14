@@ -33,3 +33,6 @@ ALTERNATIVE:${PN} = "st st-256color"
 ALTERNATIVE_LINK_NAME[st] = "${datadir}/terminfo/s/st"
 
 ALTERNATIVE_LINK_NAME[st-256color] = "${datadir}/terminfo/s/st-256color"
+
+#cpe-incorrect: The recipe used in the meta-openembedded is a different st package compared to the one which has the CVE issue.
+CVE_CHECK_IGNORE += "CVE-2017-16224"
