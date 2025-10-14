@@ -5,12 +5,12 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=be298b85ef6036ef77810ae0dce93776"
 SECTION = "libs"
 
+SRCREV = "a4fcb58cfb5f0016a944f7ac20dcf4fca08aa6a9"
 SRC_URI = " \
     git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.16.x;tag=${PV} \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
     file://0002-api-python-config-default.toml-Debug.patch \
 "
-SRCREV = "d52c66d6da4d67c69438989df83a5415236ae08b"
 
 PEP517_SOURCE_PATH = "${S}/api/python"
 
