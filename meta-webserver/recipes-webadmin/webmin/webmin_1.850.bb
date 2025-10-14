@@ -22,6 +22,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://0001-Escape-potentially-malicious-HTTP-headers.patch \
            file://0001-HTML-escape-command-description.patch \
            file://0001-Object-names-cannot-contact-special-characters.patch \
+           file://0001-Foreign-module-may-need-a-check.patch \
            "
 
 SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
