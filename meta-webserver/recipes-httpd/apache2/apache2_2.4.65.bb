@@ -55,6 +55,8 @@ CVE_CHECK_IGNORE += "CVE-2007-6421 CVE-2007-6422"
 CVE_CHECK_IGNORE += "CVE-2007-6423"
 # cpe-incorrect: The current version is not affected by the CVE which affects versions up to 2.2.6 (excl.)
 CVE_CHECK_IGNORE += "CVE-2008-2168"
+# cpe-incorrect: The CVE is for a 3rd party module, which is not part of the Apache source distribution
+CVE_CHECK_IGNORE += "CVE-2025-3891"
 
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
