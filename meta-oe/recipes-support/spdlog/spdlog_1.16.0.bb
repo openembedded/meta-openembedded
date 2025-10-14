@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9573510928429ad0cbe5ba4de77546e9"
 
-SRCREV = "6fa36017cfd5731d617e1a934f0e5ea9c4445b13"
+SRCREV = "486b55554f11c9cccc913e11a87085b2a91f706f"
 SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v${PV}"
 
 DEPENDS += "fmt"
