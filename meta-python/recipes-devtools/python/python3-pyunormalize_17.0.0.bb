@@ -1,8 +1,8 @@
 SUMMARY = "Unicode normalization forms (NFC, NFKC, NFD, NFKD). A library independent from the Python core Unicode database."
 HOMEPAGE = "https://github.com/mlodewijck/pyunormalize"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e2c2ee871081d4e4c24f32e37c413c73"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1d882216fa7fde0aec58695aa05ef72f"
 
-SRC_URI[sha256sum] = "2e1dfbb4a118154ae26f70710426a52a364b926c9191f764601f5a8cb12761f7"
+SRC_URI[sha256sum] = "0949a3e56817e287febcaf1b0cc4b5adf0bb107628d379335938040947eec792"
 
 inherit pypi setuptools3
