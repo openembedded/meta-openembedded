@@ -16,6 +16,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/downloads/${
            file://0001-cmake-remove-build-flags.patch \
            file://0001-Fix-CVE-2025-2153-5795.patch \
            file://0001-Fix-CVE-2025-2310-5872.patch \
+           file://0001-Refix-of-the-attempts-in-PR-5209-5722.patch \
            "
 SRC_URI[sha256sum] = "e4defbac30f50d64e1556374aa49e574417c9e72c6b1de7a4ff88c4b1bea6e9b"
 
