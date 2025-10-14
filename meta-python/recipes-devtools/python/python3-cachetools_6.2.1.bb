@@ -14,6 +14,6 @@ RDEPENDS:${PN} += " \
 	python3-math \
 "
 
-SRC_URI[sha256sum] = "38b328c0889450f05f5e120f56ab68c8abaf424e1275522b138ffc93253f7e32"
+SRC_URI[sha256sum] = "3f391e4bd8f8bf0931169baf7456cc822705f4e2a31f840d218f445b9a854201"
 
 BBCLASSEXTEND = "native nativesdk"
