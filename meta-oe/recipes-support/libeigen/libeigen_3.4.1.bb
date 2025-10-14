@@ -14,10 +14,10 @@ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad \
 
 SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;branch=3.4 \
     file://0001-Remove-LGPL-Code-and-references.patch \
+    file://0001-Make-eigen_packet_wrapper-trivial-for-c-11.patch \
 "
 
 SRCREV = "d71c30c47858effcbd39967097a2d99ee48db464"
-
 
 inherit cmake
 
