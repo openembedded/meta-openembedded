@@ -1,0 +1,25 @@
+From 15dd0e4e55579671c01e4808236beb4fe23e9eef Mon Sep 17 00:00:00 2001
+From: Jamie Cameron <jcameron@webmin.com>
+Date: Sat, 19 Feb 2022 13:10:36 -0800
+Subject: [PATCH] Add missing permissions check when saving allowed cron users
+
+CVE: CVE-2022-0829
+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/eeeea3c097f5cc473770119f7ac61f1dcfa671b9]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ cron/save_allow.cgi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cron/save_allow.cgi b/cron/save_allow.cgi
+index 87bbe453..73df9a84 100755
+--- a/cron/save_allow.cgi
++++ b/cron/save_allow.cgi
+@@ -4,6 +4,7 @@
+ 
+ require './cron-lib.pl';
+ &ReadParse();
++$access{'allow'} || &error($text{'allow_ecannot'});
+ 
+ &lock_file($config{cron_allow_file});
+ &lock_file($config{cron_deny_file});
