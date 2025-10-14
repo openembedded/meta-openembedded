@@ -3,7 +3,7 @@ HOMEPAGE = "https://www.pyinvoke.org/"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a8815068973f31b78c328dc067e297ab"
 
-SRC_URI[sha256sum] = "ee6cbb101af1a859c7fe84f2a264c059020b0cb7fe3535f9424300ab568f6bd5"
+SRC_URI[sha256sum] = "515bf49b4a48932b79b024590348da22f39c4942dff991ad1fb8b8baea1be707"
 
 inherit pypi setuptools3
 
