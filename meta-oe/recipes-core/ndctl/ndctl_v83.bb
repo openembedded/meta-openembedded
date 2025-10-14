@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74a614eac8b2657a4b8e6607421a0883"
 
 inherit meson pkgconfig bash-completion systemd
 
-SRCREV = "74b9e411bf13e87df39a517d10143fafa7e2ea92"
+SRCREV = "4f7a1c63b3305c97013d3c46daa6c0f76feff10d"
 SRC_URI = "git://github.com/pmem/ndctl.git;branch=main;protocol=https;tag=${PV} \
            file://0001-include-libgen.h-for-basename.patch"
 
