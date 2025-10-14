@@ -12,7 +12,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
-SRC_URI[sha256sum] = "aed4e42a21307512ad236ad58d7ee4e0196670c8524a168a0edccdc32964ea0c"
+SRC_URI[sha256sum] = "c1baf418b685ffe4150c8a75c04da0cec70323fe094b5b257b287eea564d3f56"
 S = "${UNPACKDIR}/${BPN}-v${PV}"
 
 UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
@@ -40,11 +40,13 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_dbus}"
 RRECOMMENDS:${PN} += "pm-utils"
+PACKAGES += "${PN}-zsh-completion"
 FILES:${PN} += " \
     ${datadir}/dbus-1/ \
     ${datadir}/polkit-1/ \
     ${base_libdir}/udev/* \
 "
+FILES:${PN}-zsh-completion = "${datadir}/zsh"
 
 do_install:append() {
     # remove integration tests scripts
