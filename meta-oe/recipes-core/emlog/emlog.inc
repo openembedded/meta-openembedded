@@ -8,6 +8,8 @@ SRCREV = "aee53e8dee862f35291242ba41b0ca88010f6c71"
 PV = "0.70+git${SRCPV}"
 S = "${WORKDIR}/git"
 
+CVE_PRODUCT = "nicupavel:emlog"
+
 EXTRA_OEMAKE += " \
     CFLAGS='${TARGET_CFLAGS}' \
 "
