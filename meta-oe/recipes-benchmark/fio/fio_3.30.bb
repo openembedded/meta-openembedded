@@ -26,6 +26,8 @@ SRCREV = "a3e48f483db27d20e02cbd81e3a8f18c6c5c50f5"
 SRC_URI = "git://git.kernel.dk/fio.git;branch=master \
 "
 
+SRC_URI += "file://CVE-2025-10823.patch"
+
 S = "${WORKDIR}/git"
 
 # avoids build breaks when using no-static-libs.inc
