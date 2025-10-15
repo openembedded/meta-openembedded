@@ -5,11 +5,11 @@ Monitor)."
 HOMEPAGE = "https://github.com/dvarrazzo/py-setproctitle"
 BUGTRACKER = "https://github.com/dvarrazzo/py-setproctitle/issues"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=86d2d41b5f4f023f43466f8cb7adebaa"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a9efff04c3ae658687dd38e20398a20d"
 
 inherit pypi setuptools3 ptest
 
-SRC_URI[sha256sum] = "c9f32b96c700bb384f33f7cf07954bb609d35dd82752cef57fb2ee0968409169"
+SRC_URI[sha256sum] = "bc2bc917691c1537d5b9bca1468437176809c7e11e5694ca79a9ca12345dcb9e"
 
 SRC_URI += " \
     file://run-ptest \
