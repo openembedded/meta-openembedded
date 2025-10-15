@@ -9,7 +9,7 @@ RDEPENDS:pyldb += "python3"
 export PYTHONHASHSEED = "1"
 export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
 
-SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+SRC_URI = "https://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://0001-do-not-import-target-module-while-cross-compile.patch \
            file://0002-ldb-Add-configure-options-for-packages.patch \
            file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
@@ -34,7 +34,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[sha256sum] = "b68ce6eb0ccd2870fa3c8c334f2028b5d16606fd41308696c17b71959f7bf59f"
+SRC_URI[sha256sum] = "0e9aeb657aedbd048b1c0de4afe5b01a8dd33c24a6adb8361a0829374a2fc016"
 
 inherit pkgconfig waf-samba ptest
 
