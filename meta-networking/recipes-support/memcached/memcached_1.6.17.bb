@@ -23,6 +23,7 @@ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
            file://memcached-add-hugetlbfs-check.patch \
            file://0001-Fix-function-protypes.patch \
            file://CVE-2023-46852.patch \
+           file://CVE-2023-46853.patch \
            "
 SRC_URI[sha256sum] = "2055e373613d8fc21529aff9f0adce3e23b9ce01ba0478d30e7941d9f2bd1224"
 
