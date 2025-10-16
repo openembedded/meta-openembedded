@@ -12,11 +12,9 @@ SRC_URI += " \
     "
 SRC_URI[sha256sum] = "df51ef5920fae69e1b435f657376aa93772c0c1720b954a3bac10ebba26bfedf"
 
-inherit gettext pkgconfig autotools systemd features_check
-inherit ${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3targetconfig', d)}
+inherit gettext pkgconfig autotools systemd features_check python3targetconfig
 
-DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd python3-setuptools-native"
-DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3-pip-native', d)}"
+DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd python3-pip-native python3-setuptools-native"
 
 COMPATIBLE_HOST:libc-musl = "null"
 
@@ -112,7 +110,7 @@ FILES:${PN}-bridge = " \
     ${libexecdir}/cockpit-askpass \
     ${PYTHON_SITEPACKAGES_DIR} \
 "
-RDEPENDS:${PN}-bridge = "${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3', d)}"
+RDEPENDS:${PN}-bridge = "python3"
 
 FILES:${PN}-desktop = "${libexecdir}/cockpit-desktop"
 RDEPENDS:${PN}-desktop += "bash"
