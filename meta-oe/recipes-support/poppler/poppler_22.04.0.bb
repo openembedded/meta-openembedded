@@ -20,6 +20,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://CVE-2025-52886-0003.patch \
            file://CVE-2025-52886-0004.patch \
            file://CVE-2025-43718.patch \
+           file://CVE-2025-52885.patch \
            "
 SRC_URI[sha256sum] = "813fb4b90e7bda63df53205c548602bae728887a60f4048aae4dbd9b1927deff"
 
