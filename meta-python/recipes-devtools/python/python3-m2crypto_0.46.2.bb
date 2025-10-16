@@ -1,14 +1,13 @@
 SUMMARY = "A Python crypto and SSL toolkit"
 HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740aef06c82a2"
 
-SRC_URI[sha256sum] = "d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b6118551e76ec"
+SRC_URI[sha256sum] = "13c2fa89562f7b8af40cc74b55f490be5e2ab8ccfb739f11c16d3ce6221a61ba"
 
 SRC_URI += " \
-           file://0001-setup.py-Make-the-cmd-available.patch \
-           file://0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch \
+          file://0001-setup.py-Make-the-cmd-available.patch \
 "
 
 inherit pypi siteinfo python_setuptools_build_meta
