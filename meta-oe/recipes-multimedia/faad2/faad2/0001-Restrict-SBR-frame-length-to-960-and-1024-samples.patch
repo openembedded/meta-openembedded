@@ -1,0 +1,87 @@
+From 9f7515c9571d5c72f6ec2dd6199650093628730b Mon Sep 17 00:00:00 2001
+From: Andrew Wesie <awesie@gmail.com>
+Date: Mon, 5 Oct 2020 05:47:59 -0500
+Subject: [PATCH] Restrict SBR frame length to 960 and 1024 samples.
+
+Fixes #59 and #60.
+
+CVE: CVE-2021-32274 CVE-2021-32277
+Upstream-Status: Backport [https://github.com/knik0/faad2/commit/c78251b2b5d41ea840fd61ab9502b3d3036bd747]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ libfaad/sbr_dec.c | 9 ++++++++-
+ libfaad/specrec.c | 4 ++++
+ libfaad/syntax.c  | 7 +++++++
+ 3 files changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/libfaad/sbr_dec.c b/libfaad/sbr_dec.c
+index 0705ddd..1a541ef 100644
+--- a/libfaad/sbr_dec.c
++++ b/libfaad/sbr_dec.c
+@@ -97,10 +97,17 @@ sbr_info *sbrDecodeInit(uint16_t framelength, uint8_t id_aac,
+     {
+         sbr->numTimeSlotsRate = RATE * NO_TIME_SLOTS_960;
+         sbr->numTimeSlots = NO_TIME_SLOTS_960;
+-    } else {
++    }
++    else if (framelength == 1024)
++    {
+         sbr->numTimeSlotsRate = RATE * NO_TIME_SLOTS;
+         sbr->numTimeSlots = NO_TIME_SLOTS;
+     }
++    else
++    {
++        faad_free(sbr);
++        return NULL;
++    }
+ 
+     sbr->GQ_ringbuf_index[0] = 0;
+     sbr->GQ_ringbuf_index[1] = 0;
+diff --git a/libfaad/specrec.c b/libfaad/specrec.c
+index 9797d6e..d539bbe 100644
+--- a/libfaad/specrec.c
++++ b/libfaad/specrec.c
+@@ -1053,6 +1053,8 @@ uint8_t reconstruct_single_channel(NeAACDecStruct *hDecoder, ic_stream *ics,
+ #endif
+                 );
+         }
++        if (!hDecoder->sbr[ele])
++            return 19;
+ 
+         if (sce->ics1.window_sequence == EIGHT_SHORT_SEQUENCE)
+             hDecoder->sbr[ele]->maxAACLine = 8*min(sce->ics1.swb_offset[max(sce->ics1.max_sfb-1, 0)], sce->ics1.swb_offset_max);
+@@ -1305,6 +1307,8 @@ uint8_t reconstruct_channel_pair(NeAACDecStruct *hDecoder, ic_stream *ics1, ic_s
+ #endif
+                 );
+         }
++        if (!hDecoder->sbr[ele])
++            return 19;
+ 
+         if (cpe->ics1.window_sequence == EIGHT_SHORT_SEQUENCE)
+             hDecoder->sbr[ele]->maxAACLine = 8*min(cpe->ics1.swb_offset[max(cpe->ics1.max_sfb-1, 0)], cpe->ics1.swb_offset_max);
+diff --git a/libfaad/syntax.c b/libfaad/syntax.c
+index f8e808c..462ba9e 100644
+--- a/libfaad/syntax.c
++++ b/libfaad/syntax.c
+@@ -1079,6 +1079,8 @@ static uint8_t fill_element(NeAACDecStruct *hDecoder, bitfile *ld, drc_info *drc
+ #endif
+                     );
+             }
++            if (!hDecoder->sbr[sbr_ele])
++                return 19;
+ 
+             hDecoder->sbr_present_flag = 1;
+ 
+@@ -1348,6 +1350,11 @@ void DRM_aac_scalable_main_element(NeAACDecStruct *hDecoder, NeAACDecFrameInfo *
+             hDecoder->sbr[0] = sbrDecodeInit(hDecoder->frameLength, hDecoder->element_id[0],
+                 2*get_sample_rate(hDecoder->sf_index), 0 /* ds SBR */, 1);
+         }
++        if (!hDecoder->sbr[0])
++        {
++            hInfo->error = 19;
++            return;
++        }
+ 
+         /* Reverse bit reading of SBR data in DRM audio frame */
+         revbuffer = (uint8_t*)faad_malloc(buffer_size*sizeof(uint8_t));
