@@ -1,0 +1,31 @@
+From 4f8a793807d57d6a28aac3ab73ba0992efd5d828 Mon Sep 17 00:00:00 2001
+From: Andrew Wesie <awesie@gmail.com>
+Date: Mon, 5 Oct 2020 00:33:44 -0500
+Subject: [PATCH] Check return value of ltp_data.
+
+Fixes #62.
+
+CVE: CVE-2021-32278
+Upstream-Status: Backport [https://github.com/knik0/faad2/commit/e19a5e491354e0e4664d02b796dacee28fb2521e]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ libfaad/syntax.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/libfaad/syntax.c b/libfaad/syntax.c
+index 462ba9e..4e57efd 100644
+--- a/libfaad/syntax.c
++++ b/libfaad/syntax.c
+@@ -872,7 +872,10 @@ static uint8_t ics_info(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *ld,
+                     if ((ics->ltp.data_present = faad_get1bit(ld
+                         DEBUGVAR(1,50,"ics_info(): ltp.data_present"))) & 1)
+                     {
+-                        ltp_data(hDecoder, ics, &(ics->ltp), ld);
++                        if ((retval = ltp_data(hDecoder, ics, &(ics->ltp), ld)) > 0)
++                        {
++                            return retval;
++                        }
+                     }
+                 }
+ #endif
