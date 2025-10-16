@@ -17,11 +17,9 @@ DEPENDS = "\
 
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-    file://0001-build-certs.py-use-usr-bin-env-for-python3.patch \
-    file://0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "83eab17ef2e65249491aef5e99419827b43ac56d40c5b0747b59ee94b147215e"
+SRC_URI[sha256sum] = "79cce6b61d9ea531de0ef3b13e7f2682c699901b11f410b2ed91192618e1620e"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
