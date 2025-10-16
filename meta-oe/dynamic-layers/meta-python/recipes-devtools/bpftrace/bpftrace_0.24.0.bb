@@ -11,6 +11,7 @@ DEPENDS += "bison-native \
             bcc \
             libcereal \
             libbpf \
+            xxd-native \
             "
 DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native', '', d)}"
 
@@ -34,7 +35,7 @@ PACKAGECONFIG ?= " \
         ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)} \
         "
 
-PACKAGECONFIG[tests] = "-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF,gtest xxd-native"
+PACKAGECONFIG[tests] = "-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF,gtest"
 PACKAGECONFIG[systemd] = "-DENABLE_SYSTEMD=ON,-DENABLE_SYSTEMD=OFF,systemd"
 
 do_install_ptest() {
