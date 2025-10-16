@@ -172,8 +172,8 @@ FILES:${PN} += " \
     ${nonarch_libdir}/firewalld \
 "
 RDEPENDS:${PN} += "${PN}-bridge"
-# Needs bash for /usr/libexec/cockpit-certificate-helper
-RDEPENDS:${PN} += "bash"
+# Needs bash and mv for /usr/libexec/cockpit-certificate-helper
+RDEPENDS:${PN} += "bash coreutils"
 
 do_install:append() {
     pkgdatadir=${datadir}/cockpit
