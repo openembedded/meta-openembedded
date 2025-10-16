@@ -1,0 +1,28 @@
+From a58cf881b820bfb4544995192fe5992ae010f1d7 Mon Sep 17 00:00:00 2001
+From: Fabian Greffrath <fabian@greffrath.com>
+Date: Mon, 17 Aug 2020 07:37:09 +0200
+Subject: [PATCH] mp4read.c: fix stack-buffer-overflow in stringin()/ftypin()
+
+Terminate the string read into the stack buffer,
+fixes #56.
+
+CVE: CVE-2021-32273
+Upstream-Status: Backport [https://github.com/knik0/faad2/commit/1073aeef823cafd844704389e9a497c257768e2f]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ frontend/mp4read.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/frontend/mp4read.c b/frontend/mp4read.c
+index 5dc36b7..a978e62 100644
+--- a/frontend/mp4read.c
++++ b/frontend/mp4read.c
+@@ -91,6 +91,7 @@ static int stringin(char *txt, int sizemax)
+         if (!txt[size])
+             break;
+     }
++    txt[sizemax-1] = '\0';
+ 
+     return size;
+ }

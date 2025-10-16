@@ -9,6 +9,7 @@ LICENSE_FLAGS = "commercial"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz \
            file://0001-fix-heap-buffer-overflow-in-mp4read.c.patch \
+           file://0001-mp4read.c-fix-stack-buffer-overflow-in-stringin-ftyp.patch \
            "
 SRC_URI[md5sum] = "28f6116efdbe9378269f8a6221767d1f"
 SRC_URI[sha256sum] = "985c3fadb9789d2815e50f4ff714511c79c2710ac27a4aaaf5c0c2662141426d"
