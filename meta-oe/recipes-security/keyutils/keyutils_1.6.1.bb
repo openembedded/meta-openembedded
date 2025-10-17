@@ -50,7 +50,7 @@ do_install_ptest () {
 }
 
 
-RDEPENDS:${PN}-ptest += "lsb-release"
+RDEPENDS:${PN}-ptest += "lsb-release make file coreutils"
 RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-utils"
 RDEPENDS:${PN}-ptest:append:libc-musl = " musl-utils"
 
