@@ -1,0 +1,25 @@
+From a056df0dadd8aa09a750a65f2b7201b8742c9378 Mon Sep 17 00:00:00 2001
+From: Jan Tojnar <jtojnar@gmail.com>
+Date: Fri, 29 Apr 2022 18:02:10 +0200
+Subject: [PATCH] installed-tests: install firmware.bin.ed25519
+
+This was forgotten in f802f078ec0349e4056bf764ee4da16fe9973978.
+
+Upstream-Status: Backport [https://github.com/hughsie/libjcat/commit/a056df0dadd8aa09a750a65f2b7201b8742c9378]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ data/tests/colorhug/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/data/tests/colorhug/meson.build b/data/tests/colorhug/meson.build
+index 7ee3e62..b871500 100644
+--- a/data/tests/colorhug/meson.build
++++ b/data/tests/colorhug/meson.build
+@@ -1,6 +1,7 @@
+ install_data([
+     'firmware.bin',
+     'firmware.bin.asc',
++    'firmware.bin.ed25519',
+     'firmware.bin.p7b',
+   ],
+   install_dir: join_paths(installed_test_bindir, 'colorhug'),

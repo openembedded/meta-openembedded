@@ -9,6 +9,7 @@ DEPENDS = "\
 
 SRC_URI = "\
     git://github.com/hughsie/libjcat.git;branch=main;protocol=https \
+    file://install_missing_ptest_binary.patch \
     file://run-ptest \
 "
 SRCREV = "ffa0b5a9a49a7880e9ab3ae3b061080f15e95e15"
@@ -32,3 +33,7 @@ GTKDOC_MESON_OPTION = "gtkdoc"
 RDEPENDS:${PN}:class-target = "\
     ${@bb.utils.contains('PACKAGECONFIG', 'gpg', 'gnupg', '', d)} \
 "
+
+do_install_ptest:append(){
+	install ${S}/data/tests/pki/test.ed25519 ${D}${libexecdir}/installed-tests/libjcat/pki/
+}
