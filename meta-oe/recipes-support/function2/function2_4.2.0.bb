@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 SRCREV = "02ca99831de59c7c3a4b834789260253cace0ced"
 PV .= "+git${SRCPV}"
 
-SRC_URI += "gitsm://github.com/Naios/function2;branch=master;protocol=https"
+SRC_URI += "gitsm://github.com/Naios/function2;branch=master;protocol=https \
+            file://run-ptest"
 
 S = "${WORKDIR}/git"
 
@@ -18,4 +19,10 @@ do_install:append() {
 	mkdir -p ${D}/${datadir}/function2
 	mv ${D}/${prefix}/Readme.md ${D}/${datadir}/function2/
 	mv ${D}/${prefix}/LICENSE.txt ${D}/${datadir}/function2/
+}
+
+do_install_ptest(){
+	if [ -f ${B}/test/function2_tests ]; then
+		install ${B}/test/function2_tests ${D}${PTEST_PATH}/
+	fi
 }

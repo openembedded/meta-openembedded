@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./function2_tests && echo PASS: function2_tests || echo FAIL: function2_tests
