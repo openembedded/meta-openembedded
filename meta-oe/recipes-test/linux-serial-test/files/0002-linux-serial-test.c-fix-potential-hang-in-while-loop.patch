@@ -1,0 +1,60 @@
+From 9cf6c1d80c2f159dbb69967fbe934bf6de73c9e8 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Tue, 5 Aug 2025 09:35:06 +0200
+Subject: [PATCH 2/2] linux-serial-test.c: fix potential hang in while loop
+
+process_read_data() assumes that we can always wait for reception
+of 1024 chars. However that is not true if one sets the number of
+chars with the '-w' cmdline parameter or chars are lost. Maybe there
+are other reasons.
+
+Replace the magic number of 1024 by calculating the number of expected
+chars from _cl_tx_bytes.
+
+Brake a possible infinite while loop by adding a timeout to the loop
+calculated from the expected chars times chartime.
+
+Upstream-Status: Submitted [https://github.com/cbrake/linux-serial-test/pull/61/]
+Fixes: 7fd1057f8a95 ("Add loop to read all data in rcv buffer")
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ linux-serial-test.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/linux-serial-test.c b/linux-serial-test.c
+index c2c8882d601b..294f53882570 100644
+--- a/linux-serial-test.c
++++ b/linux-serial-test.c
+@@ -543,8 +543,13 @@ static unsigned char next_count_value(unsigned char c)
+ static void process_read_data(void)
+ {
+ 	unsigned char rb[1024];
++	int loopcounter = 0;
+ 	int actual_read_count = 0;
+-	while (actual_read_count < 1024) {
++	int expected_read_count = _cl_tx_bytes == 0 ? 1024 : _cl_tx_bytes;
++	/* time for one char at current baudrate in us */
++	int chartime = 1000000 * (8 + _cl_parity + 1 + _cl_2_stop_bit) / _cl_baud;
++
++	while (actual_read_count < expected_read_count) {
+ 		int c = read(_fd, &rb, sizeof(rb));
+ 		if (c > 0) {
+ 			if (_cl_rx_dump) {
+@@ -577,7 +582,12 @@ static void process_read_data(void)
+ 			if (errno != EAGAIN) {
+ 				perror("read failed");
+ 			}
+-			continue; // Retry the read
++
++			if (loopcounter++ < expected_read_count) {
++				usleep(chartime);
++				continue; // Retry the read
++			}
++			break;
+ 		} else {
+ 		    break;
+ 		}
+-- 
+2.43.0
+
