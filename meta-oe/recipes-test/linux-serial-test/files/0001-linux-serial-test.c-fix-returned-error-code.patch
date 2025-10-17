@@ -1,0 +1,62 @@
+From 1add8f3d228368665c3abd452640b91a86f41976 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Mon, 4 Aug 2025 14:57:22 +0200
+Subject: [PATCH 1/2] linux-serial-test.c: fix returned error code
+
+_cl_no_rx/_cl_no_rx are true in two cases, first when the relevant
+command line paramter is set and second when a rx or tx time is set
+and that time expired.
+
+This fixes the second case in a loopback test. With the change the
+application now correctly returns 125 if the number of written and
+read chars differ.
+
+E.g. `./linux-serial-test -o2 -i3 -b 115200 -p /dev/ttyS1 ; echo $?`
+returns now 0 with a loopback and 125 without, before it returned 0
+with or without a loopback.
+
+Upstream-Status: Submitted [https://github.com/cbrake/linux-serial-test/pull/61/]
+Fixes: 4e57f58c58ae ("compute error count valid when no_tx or no_rx")
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+---
+ linux-serial-test.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/linux-serial-test.c b/linux-serial-test.c
+index d8f66c16c72f..c2c8882d601b 100644
+--- a/linux-serial-test.c
++++ b/linux-serial-test.c
+@@ -55,6 +55,8 @@ int _cl_loopback = 0;
+ int _cl_dump_err = 0;
+ int _cl_no_rx = 0;
+ int _cl_no_tx = 0;
++int _cl_no_rx_param = 0;
++int _cl_no_tx_param = 0;
+ int _cl_rx_delay = 0;
+ int _cl_tx_delay = 0;
+ int _cl_tx_bytes = 0;
+@@ -442,9 +444,11 @@ static void process_options(int argc, char * argv[])
+ 			break;
+ 		case 'r':
+ 			_cl_no_rx = 1;
++			_cl_no_rx_param = 1;
+ 			break;
+ 		case 't':
+ 			_cl_no_tx = 1;
++			_cl_no_tx_param = 1;
+ 			break;
+ 		case 'l': {
+ 			char *endptr;
+@@ -745,7 +749,7 @@ static int diff_s(const struct timespec *t1, const struct timespec *t2)
+ static int compute_error_count(void)
+ {
+ 	long long int result;
+-	if (_cl_no_rx == 1 || _cl_no_tx == 1)
++	if (_cl_no_rx_param == 1 || _cl_no_tx_param == 1)
+ 		result = _error_count;
+ 	else
+ 		result = llabs(_write_count - _read_count) + _error_count;
+-- 
+2.43.0
+
