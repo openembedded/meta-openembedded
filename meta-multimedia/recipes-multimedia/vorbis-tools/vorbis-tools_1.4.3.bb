@@ -12,12 +12,9 @@ DEPENDS = "libogg libvorbis"
 
 SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
            file://gettext.patch \
-           file://0001-ogginfo-Include-utf8.h-for-missing-utf8_decode.patch \
-           file://CVE-2023-43361.patch \
           "
 
-SRC_URI[md5sum] = "998fca293bd4e4bdc2b96fb70f952f4e"
-SRC_URI[sha256sum] = "db7774ec2bf2c939b139452183669be84fda5774d6400fc57fde37f77624f0b0"
+SRC_URI[sha256sum] = "a1fe3ddc6777bdcebf6b797e7edfe0437954b24756ffcc8c6b816b63e0460dde"
 
 inherit autotools pkgconfig gettext
 
