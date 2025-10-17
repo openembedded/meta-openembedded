@@ -5,10 +5,10 @@ HOMEPAGE = "https://gnome.pages.gitlab.gnome.org/libmanette/"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS = "libevdev libgudev"
+DEPENDS = "libevdev libgudev hidapi"
 
 SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
-SRC_URI[sha256sum] = "29366be5452f60a74c65fc64ffe2d74eddd4e6e6824c2cefa567a43bd92b688f"
+SRC_URI[sha256sum] = "287cc2fde0de092919366af757d85e7b3a0248eb1b395344726e97955a77d8ae"
 
 inherit meson pkgconfig gobject-introspection ptest vala
 
