@@ -14,6 +14,8 @@ DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl 
 SRCREV = "da73f2a1e0ffe2aee15d4f705edf90ee8445e2d4"
 SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1;tag=v${PV}"
 
+BB_GIT_SHALLOW_EXTRA_REFS = "refs/tags/v${PV}"
+
 UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 
 inherit autotools pkgconfig
