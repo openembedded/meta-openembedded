@@ -7,10 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "libevdev libgudev"
 
-SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
+SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz \
+           file://run-ptest"
 SRC_URI[sha256sum] = "63653259a821ec7d90d681e52e757e2219d462828c9d74b056a5f53267636bac"
 
 inherit meson pkgconfig gobject-introspection ptest vala
 
-FILES:${PN}-ptest =+ "${bindir}/manette-test"
 FILES:${PN}-dev =+ "${libdir}/girepository-1.0"
+FILES:${PN}-ptest += "${libexecdir}/installed-tests"
+
+EXTRA_OEMESON += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dinstall-tests=true', '', d)}"
