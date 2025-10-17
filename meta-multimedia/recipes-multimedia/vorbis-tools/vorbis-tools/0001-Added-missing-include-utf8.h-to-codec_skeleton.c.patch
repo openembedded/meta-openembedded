@@ -1,0 +1,28 @@
+From 68c5a33685f5b86e7f18f239ceb8861484fee552 Mon Sep 17 00:00:00 2001
+From: Petter Reinholdtsen <pere@debian.org>
+Date: Sun, 6 Apr 2025 07:53:53 +0200
+Subject: [PATCH] Added missing include "utf8.h" to codec_skeleton.c.
+
+Patch from Sebastian Ramacher <sramacher@debian.org> and Debian.
+
+Upstream-Status: Backport [https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/68c5a33685f5b86e7f18f239ceb8861484fee552]
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+---
+ ogginfo/codec_skeleton.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ogginfo/codec_skeleton.c b/ogginfo/codec_skeleton.c
+index a27f8da..0709860 100644
+--- a/ogginfo/codec_skeleton.c
++++ b/ogginfo/codec_skeleton.c
+@@ -25,6 +25,7 @@
+ #include <ogg/ogg.h>
+ 
+ #include "i18n.h"
++#include "utf8.h"
+ 
+ #include "private.h"
+ 
+-- 
+GitLab
+
