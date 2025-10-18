@@ -108,13 +108,15 @@ do_install_ptest () {
        if ${@bb.utils.contains('PACKAGECONFIG', 'DataPostgreSQL', 'true', 'false', d)}; then
             cp -f ${B}/lib/libPocoDataTest.so* ${D}${libdir}
        fi
-       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
+       cp -rf ${S}/*/testsuite/data ${D}${PTEST_PATH}/bin/
        find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
        rm -f ${D}${PTEST_PATH}/testrunners
        for f in ${D}${PTEST_PATH}/bin/*-testrunner; do
             echo `basename $f` >> ${D}${PTEST_PATH}/testrunners
        done
        install -Dm 0644 ${S}/cppignore.lnx ${D}${PTEST_PATH}/cppignore.lnx
+       install ${B}/bin/TestLibrary.so ${D}${libdir}
+       install -D ${B}/bin/TestApp ${D}${bindir}/TestApp
 }
 
 PACKAGES_DYNAMIC = "poco-.*"
@@ -128,6 +130,7 @@ FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
 ALLOW_EMPTY:${PN}-cppunit = "1"
 FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
 ALLOW_EMPTY:${PN}-datatest = "1"
+FILES:${PN}-ptest += "${bindir}/TestApp ${libdir}/TestLibrary.so"
 
 RDEPENDS:${PN}-ptest += "${PN}-cppunit ${PN}-datatest"
 RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'MongoDB', 'mongodb', '', d)}"
