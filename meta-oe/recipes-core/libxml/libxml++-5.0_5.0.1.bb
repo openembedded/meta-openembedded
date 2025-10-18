@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34 "
 
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 SRC_URI = "${GNOME_MIRROR}/libxml++/${SHRT_VER}/libxml++-${PV}.tar.xz \
+           file://run-ptest \
 "
 SRC_URI[sha256sum] = "15c38307a964fa6199f4da6683a599eb7e63cc89198545b36349b87cf9aa0098"
 
@@ -15,6 +16,12 @@ S = "${WORKDIR}/libxml++-${PV}"
 DEPENDS = "libxml2 glibmm"
 
 inherit meson pkgconfig ptest
+
+do_install_ptest(){
+	for t in `ls ${B}/tests/*_test`; do
+		install $t ${D}${PTEST_PATH}/
+	done
+}
 
 FILES:${PN}-doc += "${datadir}/devhelp"
 FILES:${PN}-dev += "${libdir}/libxml++-${SHRT_VER}/include/libxml++config.h"
