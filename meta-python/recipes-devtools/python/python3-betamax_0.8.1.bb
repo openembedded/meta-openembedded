@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=61c15f0c146c5fb1a8ce8ba2f310d73c"
 
 SRC_URI += " \
         file://run-ptest \
+        file://fix-failing-ptest.patch \
+        file://fix-direct-calls-to-test-fixtures.patch \
 "
 
 SRC_URI[md5sum] = "b8182d43a200fc126a3bf7555626f964"
