@@ -15,6 +15,7 @@ RDEPENDS:${PN}-ptest += " \
         ${PYTHON_PN}-pytest \
         ${PYTHON_PN}-typing-extensions \
         ${PYTHON_PN}-unixadmin \
+        ${PYTHON_PN}-mypy \
 "
 
 do_install_ptest() {
