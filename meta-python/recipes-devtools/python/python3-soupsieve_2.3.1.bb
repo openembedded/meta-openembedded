@@ -10,6 +10,7 @@ inherit pypi python_setuptools_build_meta ptest
 
 SRC_URI += " \
         file://run-ptest \
+        file://update_tests_for_latest_libxml.patch \
 "
 
 RDEPENDS:${PN}-ptest += " \
