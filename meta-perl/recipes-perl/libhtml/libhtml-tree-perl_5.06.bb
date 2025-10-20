@@ -6,7 +6,7 @@ libwww-perl distribution, but are now unbundled in order to facilitate \
 a separate development track."
 SECTION = "libs"
 
-HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.05/source/README"
+HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.06/source/README"
 
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d31370658947ae050eef27aca9"
@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d3137065894
 SRC_URI = "${CPAN_MIRROR}/authors/id/K/KE/KENTNL/HTML-Tree-${PV}.tar.gz \
            file://bin-htmltree-fix-shebang.patch \
 "
-SRC_URI[sha256sum] = "9c0461e9058d4d1bf1dca353bb1266cf99c99c8adabd9d3ca97d2bc4a5e8bd0f"
+SRC_URI[sha256sum] = "9c36eb19cbdf9a5906c858948ca51c35bd7561f52cc18c43281acbe57327536e"
 
 S = "${UNPACKDIR}/HTML-Tree-${PV}"
 
