@@ -6,8 +6,10 @@ and can hence offer more features than plain dm-crypt. On the other \
 hand, the header is visible and vulnerable to damage."
 HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
 SECTION = "console"
-LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception"
-LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception & (Apache-2.0 | CC0-1.0)"
+LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326 \
+                    file://COPYING.LGPL;md5=1960515788100ce5f9c98ea78a65dc52 \
+                    file://lib/crypto_backend/argon2/argon2.c;endline=16;md5=c11955376e1f924066ca8d0dec33133e"
 
 DEPENDS = " \
     json-c \
