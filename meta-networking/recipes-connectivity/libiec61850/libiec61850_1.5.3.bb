@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https 
            file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
            file://CVE-2024-26529.patch \
            file://CVE-2024-45970.patch \
+           file://CVE-2024-45971.patch \
 "
 
 S = "${WORKDIR}/git"
