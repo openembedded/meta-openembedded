@@ -35,6 +35,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
            file://CVE-2023-5824.patch \
            file://CVE-2021-46784.patch \
            file://CVE-2022-41317.patch \
+           file://CVE-2022-41318.patch \
            "
 
 SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
