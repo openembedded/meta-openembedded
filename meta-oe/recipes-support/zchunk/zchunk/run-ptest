@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# this is a shell-rewrite of meson tests, from test/meson.build file
+
+report_result(){
+  if [ $1 -eq 0 ]; then
+    echo PASS: $2
+  else
+    echo FAIL: $2
+  fi
+}
+
+report_result_expected_fail(){
+  if [ $? -eq 0 ]; then
+    echo FAIL: $2
+  else
+    echo PASS: $2
+  fi
+}
+
+# create and validate empty zchunk file
+./tests/empty
+report_result $? empty
+
+# check version info in zck
+zck -V
+report_result $? "zck version"
+
+# check version info of unzck
+unzck -V
+report_result $? "unzck version"
+
+# check version of zckdl
+zckdl -V
+report_result $? "zckdl version"
+
+# check version of zck_read_header
+zck_read_header -V
+report_result $? "zck_read_header version"
+
+# check version of zck_delta_size
+zck_delta_size -V
+report_result $? "zck_delta_size version"
+
+# check opening file with optional flags
+./tests/optelems ./tests/files/empty.optelems.zck
+report_result $? "check opening file with optional flags"
+
+# checksum with non-hex character
+./tests/invalid_input_checksum ./tests/files/empty.optelems.zck
+report_result $? "checksum with non-hex character"
+
+# read single chunk
+./tests/read_single_chunk ./tests/files/LICENSE.dict.fodt.zck
+report_result $? "read single chunk"
+
+# read single compressed chunk
+./tests/read_single_comp_chunk ./tests/files/LICENSE.dict.fodt.zck
+report_result $? "read single compressed chunk"
+
+# check verbosity in unzck
+unzck -vvvvv ./empty.zck
+report_result $? "check verbosity in unzck"
+
+# check verbosity in zck
+zck -vvvvv ./empty
+report_result $? "check verbosity in zck"
+
+# check verbosity in zckdl
+zckdl -vvvvv file:///empty
+report_result_expected_fail $? "check verbosity in zckdl"
+
+# check verbosity in zck_read_header
+zck_read_header -vvvvvfc ./empty.zck
+report_result $? "check verbosity in zck_read_header"
+
+# check verbosity in zck_delta_size
+zck_delta_size -vvvvv ./empty.zck ./empty.zck
+report_result $? "check verbosity in zck_delta_size"
+
+# copy chunks from source
+./tests/copy_chunks ./tests/files/LICENSE.header.new.nodict.fodt.zck ./tests/files/LICENSE.nodict.fodt.zck
+report_result $? "copy chunks from source"
+
+# decompress previously generated auto-chunked file - nocomp
+./tests/shacheck `which unzck` LICENSE.nocomp.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.nocomp.fodt.zck
+report_result $? "decompress previously generated auto-chunked file - nocomp"
+
+# decompress previously generated auto-chunked file - no dict
+./tests/shacheck `which unzck` LICENSE.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.nodict.fodt.zck
+report_result $? "decompress previously generated auto-chunked file - no dict"
+
+# decompress previously generated auto-chunked file - dict
+./tests/shacheck `which unzck` LICENSE.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.dict.fodt.zck
+report_result $? "decompress previously generated auto-chunked file - dict"
+
+# decompress previously generated manual file - no dict
+./tests/shacheck `which unzck` LICENSE.manual.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.manual.nodict.fodt.zck
+report_result $? "decompress previously generated manual file - no dict"
+
+# decompress previously generated manual file - dict
+./tests/shacheck `which unzck` LICENSE.manual.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.manual.dict.fodt.zck
+report_result $? "decompress previously generated manual file - dict"
+
+# decompress dict from previously generated auto-chunked file
+./tests/shacheck `which unzck` LICENSE.dict.fodt.zdict b20064d89c3beb8605d99c994ff45304f308abd840c0981475dd2faca6ec854b --dict ./tests/files/LICENSE.dict.fodt.zck
+report_result $? "decompress dict from previously generated auto-chunked file"
+
+# compress auto-chunked file - no dict
+./tests/shacheck `which zck` LICENSE.nodict.fodt.zck ac9d431f1f568d8921257fa17929c320f0cdcbff450d9f3c38c78c4f410ee788 -o LICENSE.nodict.fodt.zck ./tests/files/LICENSE.fodt
+report_result $? "compress auto-chunked file - no dict'"
+
+# decompress auto-chunked file - no dict
+./tests/shacheck `which unzck` LICENSE.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.nodict.fodt.zck
+report_result $? "decompress auto-chunked file - no dict"
+
+# compress auto-chunked file - dict
+./tests/shacheck `which zck` LICENSE.dict.fodt.zck 35549b28b01c0a43d7389d4c40d5b750c73fb6c0c6701355ef709ef4a37df389 -D ./tests/files/LICENSE.dict -o LICENSE.dict.fodt.zck ./tests/files/LICENSE.fodt
+report_result $? "compress auto-chunked file - dict"
+
+# decompress auto-chunked file - dict
+./tests/shacheck `which unzck` LICENSE.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.dict.fodt.zck
+report_result $? "decompress auto-chunked file - dict"
+
+# compress manual file - no dict
+./tests/shacheck `which zck` LICENSE.manual.nodict.fodt.zck 2580f66412adce1ed8d92abc09b0f64eb155155f61e21a8269a2c4a338857e51 -m -s "<text:" -o LICENSE.manual.nodict.fodt.zck ./tests/files/LICENSE.fodt
+report_result $? "compress manual file - no dict"
+
+# decompress manual file - no dict
+./tests/shacheck `which unzck` LICENSE.manual.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.manual.nodict.fodt.zck
+report_result $? "decompress manual file - no dict"
+
+# compress manual file - dict
+./tests/shacheck `which zck` LICENSE.manual.dict.fodt.zck 863dc2bda721a32c26485eeb2223d5dabcf9ac517ecba8c7991fa0120d04c937 -D ./tests/files/LICENSE.dict -m -s "<text:" -o LICENSE.manual.dict.fodt.zck ./tests/files/LICENSE.fodt
+report_result $? "compress manual file - dict"
+
+# decompress manual file - dict
+./tests/shacheck `which unzck` LICENSE.manual.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.manual.dict.fodt.zck
+report_result $? "decompress manual file - dict"
