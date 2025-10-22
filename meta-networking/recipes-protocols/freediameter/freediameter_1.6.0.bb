@@ -14,7 +14,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 fd_pkgname = "freeDiameter"
 
 PV .= "+git"
-SRCREV = "f9f1e464e6c675d222b3be4cab9c13408d544c83"
+SRCREV = "5403feb543ed5e720165a4b3a3b4a365cdee28fb"
 SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=master \
     file://Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch \
     file://run-ptest \
@@ -24,8 +24,6 @@ SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=mast
     file://install_test.patch \
     file://0001-tests-use-EXTENSIONS_DIR.patch \
     file://0001-bison-flex-Add-flags-for-carrying-user-specified-par.patch \
-    file://0001-fixes-for-gcc-15.patch \
-    file://0002-allow-build-with-cmake-4.patch \
     "
 
 LICENSE = "BSD-3-Clause"
