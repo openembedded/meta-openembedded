@@ -24,7 +24,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
 
-SRC_URI[archive.sha256sum] = "b3129270434fc7c533f97ed7f8c442704f00a02d27a290802d8d16ab42a16bf8"
+SRC_URI[archive.sha256sum] = "add2a0e410fd22da2851ddd0c5b3d22c9e9d8c33111511f336961e3b461b535e"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
 
