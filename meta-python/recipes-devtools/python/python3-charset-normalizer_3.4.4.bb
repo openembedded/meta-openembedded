@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
 
 #SRC_URI += "file://0001-pyproject.toml-Update-mypy-requirement.patch"
 
-SRC_URI[sha256sum] = "6fce4b8500244f6fcb71465d4a4930d132ba9ab8e71a7859e6a5d59851068d14"
+SRC_URI[sha256sum] = "94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"
 
 DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 
