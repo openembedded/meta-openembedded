@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/dashea/requests-file"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b"
 
-SRC_URI[sha256sum] = "0f549a3f3b0699415ac04d167e9cb39bccfb730cb832b4d20be3d9867356e658"
+SRC_URI[sha256sum] = "68789589cfde7098e8933fe3e69bbd864f7f0c22f118937b424d94d0e1b7760f"
 
 PYPI_PACKAGE = "requests_file"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
