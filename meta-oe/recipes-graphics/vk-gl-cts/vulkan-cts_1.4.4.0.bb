@@ -2,9 +2,11 @@ DESCRIPTION = "Vulkan CTS"
 
 require khronos-cts.inc
 
-SRCREV_vk-gl-cts = "f36967dd19034bdfe30e5cb21544079078c154d1"
+SRCREV_vk-gl-cts = "03c0746a55b78eab63c664a11948b52419e1f309"
 
 require vulkan-cts-sources.inc
+
+SRC_URI:append = " file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src"
 
 # Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT
 OECMAKE_CXX_FLAGS:remove:toolchain-gcc = "-O2"
