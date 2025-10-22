@@ -23,8 +23,8 @@ LIC_FILES_CHKSUM = "file://README.QUICK;md5=dd27361ad00943bb27bc3e0589037075"
 
 DEPENDS = "libatomic-ops"
 
-SRCREV = "ee59af3722e56de8404de6cd0c21c2493cc4d855"
-SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_2;protocol=https"
+SRCREV = "2955e33aba7467d4777aa985637620f909cc2a14"
+SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_2;protocol=https;tag=v${PV}"
 
 
 inherit autotools pkgconfig
