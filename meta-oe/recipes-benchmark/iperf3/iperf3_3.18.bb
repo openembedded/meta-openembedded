@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
 
 SRCREV = "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
 
+RDEPENDS:${PN} = "libgcc"
 
 inherit autotools
 
