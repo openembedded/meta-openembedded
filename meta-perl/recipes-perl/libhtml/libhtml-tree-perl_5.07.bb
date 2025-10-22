@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d3137065894
 SRC_URI = "${CPAN_MIRROR}/authors/id/K/KE/KENTNL/HTML-Tree-${PV}.tar.gz \
            file://bin-htmltree-fix-shebang.patch \
 "
-SRC_URI[sha256sum] = "9c36eb19cbdf9a5906c858948ca51c35bd7561f52cc18c43281acbe57327536e"
+SRC_URI[sha256sum] = "f0374db84731c204b86c1d5b90975fef0d30a86bd9def919343e554e31a9dbbf"
 
 S = "${UNPACKDIR}/HTML-Tree-${PV}"
 
