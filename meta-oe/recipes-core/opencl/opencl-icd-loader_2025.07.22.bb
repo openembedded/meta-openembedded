@@ -12,7 +12,7 @@ DEPENDS += "opencl-headers"
 
 PROVIDES = "virtual/libopencl1"
 
-SRCREV = "861b68b290e76d08e7241608479c16431f529945"
+SRCREV = "ad770a1b64c6b8d5f2ed4e153f22e4f45939f27f"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
 
 EXTRA_OECMAKE:append = " \
@@ -28,9 +28,9 @@ do_install() {
     install -m 0644 ${B}/libIcdLog.so ${D}${libdir}/
     install -m 0644 ${B}/libOpenCLDriverStub.so ${D}${libdir}/
     chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
-    install -m 0644 ${B}/libOpenCL.so.1.2 ${D}${libdir}/
+    install -m 0644 ${B}/libOpenCL.so.1.0.0 ${D}${libdir}/
     cd ${D}${libdir}
-    ln -s libOpenCL.so.1.2 libOpenCL.so.1
+    ln -s libOpenCL.so.1.0.0 libOpenCL.so.1
     ln -s libOpenCL.so.1 libOpenCL.so
 }
 
@@ -41,7 +41,7 @@ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 FILES:${PN} = " \
     ${bindir}/icd_loader_test \
     ${libdir}/libOpenCLDriverStub.so \
-    ${libdir}/libOpenCL.so.1.2 \
+    ${libdir}/libOpenCL.so.1.0.0 \
     ${libdir}/libOpenCL.so.1 \
 "
 FILES:${PN}-dev = " \
