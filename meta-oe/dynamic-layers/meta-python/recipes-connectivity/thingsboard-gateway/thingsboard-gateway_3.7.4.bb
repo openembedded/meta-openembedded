@@ -21,6 +21,24 @@ RDEPENDS:${PN} += " python3-jsonpath-rw \
                     python3-requests \
                     python3-pip \
                     python3-pyrsistent \
+                    python3-cachetools \
+                    python3-orjson \
+                    python3-psutil \
+                    python3-pybase64 \
+                    python3-grpcio \
+                    python3-packaging \
+                    python3-protobuf \
+                    python3-service-identity \
+                    python3-termcolor \
+                    python3-charset-normalizer \
+                    python3-mmh3 \
+                    python3-dateutil \
+                    python3-setuptools \
+                    python3-urllib3 \
+                    python3-questionary \
+                    python3-pyfiglet \
+                    python3-cryptography \
+                    python3-pysocks \
 "
 
 SRC_URI += "file://bacnet.json \
