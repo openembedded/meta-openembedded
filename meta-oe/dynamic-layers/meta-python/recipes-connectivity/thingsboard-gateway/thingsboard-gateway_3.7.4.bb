@@ -43,21 +43,39 @@ RDEPENDS:${PN} += " python3-jsonpath-rw \
 
 SRC_URI += "file://thingsboard-gateway.service"
 
-
-inherit systemd
+inherit systemd useradd
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "thingsboard-gateway.service"
 
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = " \
+    --system --no-create-home \
+    --comment 'ThingsBoard-Gateway Service' \
+    --home-dir ${localstatedir}/lib/${BPN} \
+    --shell ${base_sbindir}/nologin \
+    --gid thingsboard_gateway thingsboard_gateway"
+GROUPADD_PARAM:${PN} = "--system thingsboard_gateway"
+
 FILES:${PN} += "/etc \
                 /lib \
                 /usr \
+                ${localstatedir} \
 "
 
 do_install:append(){
     install -d ${D}${sysconfdir}/${BPN}/config
     install -m 0644 ${S}/thingsboard_gateway/config/*.json ${D}${sysconfdir}/${BPN}/config
+    chown -R thingsboard_gateway:thingsboard_gateway ${D}${sysconfdir}/${BPN}
 
-    install -d ${D}${systemd_unitdir}/system/
+    install -d ${D}${systemd_system_unitdir}/
     install -m 0644 ${UNPACKDIR}/thingsboard-gateway.service ${D}${systemd_system_unitdir}/thingsboard-gateway.service
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d ${localstatedir}/log/${BPN} 0755 thingsboard_gateway thingsboard_gateway -" \
+            > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+        echo "d ${localstatedir}/lib/${BPN} 0755 thingsboard_gateway thingsboard_gateway -" \
+            >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+    fi
 }
