@@ -1,0 +1,72 @@
+From 453a8bdcaafde9fcd108a195ffea3ccb5c4d0a21 Mon Sep 17 00:00:00 2001
+From: Christoph Berg <myon@debian.org>
+Date: Mon, 16 Jun 2025 20:25:26 +0200
+Subject: [PATCH] Add expected output file for descrec test in C locale (#131)
+
+When running with LC_ALL=C, SQL_DESC_OCTET_LENGTH matches the character
+length. Add "10" as accepted value.
+
+The net diff to the existing descrec.out file is this:
+
+ test/expected/descrec.out	2025-06-13 19:02:36.460302799 +0200
+ test/expected/descrec_2.out	2025-06-16 14:34:44.270543393 +0200
+ @@ -19,7 +19,7 @@
+  -- Column 3 --
+  SQL_DESC_NAME: col3
+  SQL_DESC_TYPE: 12
+ -SQL_DESC_OCTET_LENGTH: 40
+ +SQL_DESC_OCTET_LENGTH: 10
+  SQL_DESC_PRECISION: 0
+  SQL_DESC_SCALE: 0
+  SQL_DESC_NULLABLE: 0
+
+Fixes #51.
+
+Upstream-Status: Backport [https://github.com/postgresql-interfaces/psqlodbc/commit/453a8bdcaafde9fcd108a195ffea3ccb5c4d0a21]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+
+---
+ test/expected/descrec_2.out | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 test/expected/descrec_2.out
+
+diff --git a/test/expected/descrec_2.out b/test/expected/descrec_2.out
+new file mode 100644
+index 0000000..6f61c49
+--- /dev/null
++++ b/test/expected/descrec_2.out
+@@ -0,0 +1,34 @@
++connected
++
++-- Column 1 --
++SQL_DESC_NAME: col1
++SQL_DESC_TYPE: 4
++SQL_DESC_OCTET_LENGTH: 0
++SQL_DESC_PRECISION: 0
++SQL_DESC_SCALE: 0
++SQL_DESC_NULLABLE: 0
++
++-- Column 2 --
++SQL_DESC_NAME: col2
++SQL_DESC_TYPE: 2
++SQL_DESC_OCTET_LENGTH: 6
++SQL_DESC_PRECISION: 4
++SQL_DESC_SCALE: 2
++SQL_DESC_NULLABLE: 1
++
++-- Column 3 --
++SQL_DESC_NAME: col3
++SQL_DESC_TYPE: 12
++SQL_DESC_OCTET_LENGTH: 10
++SQL_DESC_PRECISION: 0
++SQL_DESC_SCALE: 0
++SQL_DESC_NULLABLE: 0
++
++-- Column 4 --
++SQL_DESC_NAME: col4
++SQL_DESC_TYPE: -5
++SQL_DESC_OCTET_LENGTH: 8
++SQL_DESC_PRECISION: 0
++SQL_DESC_SCALE: 0
++SQL_DESC_NULLABLE: 0
++disconnecting
