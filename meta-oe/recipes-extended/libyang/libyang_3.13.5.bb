@@ -16,7 +16,10 @@ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=
 
 # Main dependencies
 inherit cmake pkgconfig lib_package ptest multilib_header
-DEPENDS = "libpcre2"
+DEPENDS = " \
+    libpcre2 \
+    xxhash \
+"
 DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'cmocka', '', d)}"
 
 EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
