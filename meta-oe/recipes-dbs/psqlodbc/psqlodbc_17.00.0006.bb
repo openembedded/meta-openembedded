@@ -19,11 +19,11 @@ HOMEPAGE = "https://odbc.postgresql.org/"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://license.txt;md5=6db3822fc7512e83087ba798da013692"
 
-SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions.old/src/${BPN}-${PV}.tar.gz \
+PV_WITH_USCORE = "${@d.getVar('PV').replace('.', '_')}"
+SRC_URI = "git://github.com/postgresql-interfaces/psqlodbc.git;protocol=https;branch=main;tag=REL-${PV_WITH_USCORE} \
     file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
     file://psqlodbc-donot-use-the-hardcode-libdir.patch \
     file://psqlodbc-fix-for-ptest-support.patch \
-    file://0001-configure-make-sure-to-call-AC_CHECK_HEADER_STDBOOL.patch \
     file://run-ptest \
 "
 
