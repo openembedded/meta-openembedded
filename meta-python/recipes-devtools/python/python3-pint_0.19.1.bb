@@ -27,9 +27,5 @@ RDEPENDS:${PN} += " \
 
 RDEPENDS:${PN}-ptest += " \
 	${PYTHON_PN}-pytest \
+        ${PYTHON_PN}-pytest-subtests \
 "
-
-do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/testsuite
-	cp -rf ${S}/pint/testsuite/* ${D}${PTEST_PATH}/testsuite/
-}
