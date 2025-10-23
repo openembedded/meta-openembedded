@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
 	file://0001-contrib-add-yocto-compatible-init-script.patch \
 	file://CVE-2022-30698_30699.patch \
+	file://CVE-2022-3204.patch \
 "
 SRCREV = "c29b0e0a96c4d281aef40d69a11c564d6ed1a2c6"
 
