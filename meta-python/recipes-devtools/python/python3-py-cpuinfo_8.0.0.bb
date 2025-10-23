@@ -16,6 +16,7 @@ SRC_URI += "file://run-ptest \
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+    cp -rf ${D}${PYTHON_SITEPACKAGES_DIR}/cpuinfo ${D}${PTEST_PATH}/
 }
 
 RDEPENDS:${PN}-ptest += "\
