@@ -41,22 +41,7 @@ RDEPENDS:${PN} += " python3-jsonpath-rw \
                     python3-pysocks \
 "
 
-SRC_URI += "file://bacnet.json \
-            file://ble.json \
-            file://can.json \
-            file://custom_serial.json \
-            file://modbus.json \
-            file://modbus_serial.json \
-            file://mqtt.json \
-            file://opcua.json \
-            file://odbc.json \
-            file://request.json \
-            file://rest.json \
-            file://snmp.json \
-            file://tb_gateway.yaml \
-            file://logs.conf \
-            file://thingsboard-gateway.service \
-            "
+SRC_URI += "file://thingsboard-gateway.service"
 
 
 inherit systemd
@@ -70,15 +55,8 @@ FILES:${PN} += "/etc \
 "
 
 do_install:append(){
-
-    install -d ${D}${sysconfdir}/thingsboard-gateway/config
-
-    for file in $(find ${UNPACKDIR} -maxdepth 1 -type f -name *.json); do
-        install -m 0644 "$file" ${D}${sysconfdir}/thingsboard-gateway/config
-    done
-
-    install -m 0644 ${UNPACKDIR}/tb_gateway.yaml ${D}${sysconfdir}/thingsboard-gateway/config
-    install -m 0644 ${UNPACKDIR}/logs.conf ${D}${sysconfdir}/thingsboard-gateway/config
+    install -d ${D}${sysconfdir}/${BPN}/config
+    install -m 0644 ${S}/thingsboard_gateway/config/*.json ${D}${sysconfdir}/${BPN}/config
 
     install -d ${D}${systemd_unitdir}/system/
     install -m 0644 ${UNPACKDIR}/thingsboard-gateway.service ${D}${systemd_system_unitdir}/thingsboard-gateway.service
