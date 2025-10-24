@@ -12,13 +12,11 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0004-make-Separate-TLS-targets-from-libraries.patch \
            file://0005-mDNSCore-Fix-broken-debug-parameter.patch \
            file://0006-make-Add-top-level-Makefile.patch \
-           file://0009-remove-unneeded-headers.patch \
            file://0001-Fix-build-with-gcc-15.patch \
-           file://0001-Use-secure_getenv-on-Linux.patch \
            file://mdns.service \
            "
-BRANCH = "rel/mDNSResponder-2600"
-SRCREV = "62914d23f299cf336a8647fb3a1b5b78647b3b41"
+BRANCH = "main"
+SRCREV = "d4658af3f5f291311c6aee4210aa6d39bda82bbe"
 
 inherit github-releases manpages systemd update-rc.d
 

@@ -1,9 +1,9 @@
-From aedffca94035f7a16303fb4f90cba19c0df1ca2e Mon Sep 17 00:00:00 2001
+From dcc1f39a0918cdebf53ac7c105b3d33df960ed14 Mon Sep 17 00:00:00 2001
 From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Mon, 5 Dec 2022 15:14:12 +0000
 Subject: [PATCH] make: Set libdns_sd.so soname correctly
 
-Upstream-Status: Pending
+Upstream-Status: Inactive-Upstream [Upstream does not take patches]
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSPosix/Makefile | 2 +-
