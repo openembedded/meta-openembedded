@@ -35,6 +35,7 @@ RDEPENDS:${PN} = "\
 "
 
 RDEPENDS:${PN}-ptest = "\
+    libmime-types-perl \
     perl-module-lib \
     perl-module-test-more \
 "
