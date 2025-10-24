@@ -13,6 +13,8 @@ LICENSE = "GPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
 DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 
+PATCHTOOL = "git"
+
 SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0;;protocol=https \
     file://freeradius \
     file://volatiles.58_radiusd \
@@ -36,6 +38,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0
     file://0016-version.c-don-t-print-build-flags.patch \
     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
     file://0018-Fix-Service-start-error.patch \
+    file://0019-freeradius-Remove-files-which-have-license-issues.patch \
 "
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
@@ -81,6 +84,7 @@ EXTRA_OECONF = " --enable-strict-dependencies \
         --without-rlm_securid \
         --without-rlm_unbound \
         --without-rlm_python \
+        --without-rlm_eap_teap \
         ac_cv_path_PERL=${bindir}/perl \
         ax_cv_cc_builtin_choose_expr=no \
         ax_cv_cc_builtin_types_compatible_p=no \
