@@ -21,3 +21,5 @@ RDEPENDS:${PN} = "\
     python3-yarl \
     python3-aiodns \
 "
+
+CFLAGS:append:arm = " -flax-vector-conversions"
