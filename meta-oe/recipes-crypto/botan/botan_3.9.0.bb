@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://license.txt;md5=3f911cecfc74a2d9f1ead9a07bd92a6e"
 SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-SRC_URI[sha256sum] = "fc0620463461caaea8e60f06711d7e437a3ad1eebd6de4ac29c14bbd901ccd1b"
+SRC_URI[sha256sum] = "8c3f284b58ddd42e8e43e9fa86a7129d87ea7c3f776a80d3da63ec20722b0883"
 
 S = "${UNPACKDIR}/Botan-${PV}"
 
@@ -24,8 +24,6 @@ do_configure() {
 	--cc-bin="${CXX}" \
 	--cxxflags="${CXXFLAGS}" \
 	--ldflags="${LDFLAGS}" \
-	--with-endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-	${@bb.utils.contains("TUNE_FEATURES","neon","","--disable-neon",d)} \
 	--with-sysroot-dir=${STAGING_DIR_HOST} \
 	--with-build-dir="${B}" \
 	--optimize-for-size \
@@ -36,12 +34,14 @@ do_configure() {
 }
 
 do_compile() {
+	sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${B}/build/target_info.h
 	oe_runmake
 }
+
 do_install() {
 	oe_runmake DESTDIR=${D} install
 	sed -i -e 's|${WORKDIR}|<scrubbed>|g' ${D}${includedir}/botan-3/botan/build.h
-	
+
 	# Add botan binary and test tool
 	install -d ${D}${bindir}
 	install -d ${D}${datadir}/${PN}/tests/data
