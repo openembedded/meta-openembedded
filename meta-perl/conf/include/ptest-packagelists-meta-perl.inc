@@ -7,6 +7,7 @@
 #
 # ptests which take less than ~30s each
 PTESTS_FAST_META_PERL = "\
+    libauthen-sasl-perl \
     libcapture-tiny-perl \
     libcrypt-openssl-random-perl \
     libdigest-hmac-perl \
@@ -27,7 +28,6 @@ PTESTS_SLOW_META_PERL = "\
 "
 
 PTESTS_PROBLEMS_META_PERL = "\
-    libauthen-sasl-perl \
     libcgi-perl \
     libconfig-autoconf-perl \
     libcrypt-openssl-guess-perl \
