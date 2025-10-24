@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
+        file://0001-libcamera-Do-not-assume-libc-with-clang.patch \
 "
 
 SRCREV = "096c50ca881f72d858aca19757a5e73b4775a7cc"
