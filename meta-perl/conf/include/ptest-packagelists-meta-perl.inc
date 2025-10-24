@@ -26,6 +26,7 @@ PTESTS_FAST_META_PERL = "\
     libmozilla-ca-perl \
     libnet-ldap-perl \
     libstrictures-perl \
+    libsub-uplevel-perl \
     libterm-readkey-perl \
     libtest-nowarnings-perl \
     libtext-diff-perl \
@@ -42,7 +43,6 @@ PTESTS_PROBLEMS_META_PERL = "\
     libnet-dns-perl \
     libnet-dns-sec-perl \
     libnet-ssleay-perl \
-    libsub-uplevel-perl \
     libtest-deep-perl \
     libtest-harness-perl \
     libtest-warn-perl \
