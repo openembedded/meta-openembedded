@@ -9,12 +9,13 @@ inherit pypi setuptools3 ptest
 
 SRC_URI += " \
 	file://run-ptest \
+	file://eventlet-worker-ALREADY_HANDLED-WSGI_LOCAL.patch \
 "
 
 RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-eventlet \
     ${PYTHON_PN}-gevent \
-	${PYTHON_PN}-pytest \
+    ${PYTHON_PN}-pytest \
 "
 
 do_install_ptest() {
