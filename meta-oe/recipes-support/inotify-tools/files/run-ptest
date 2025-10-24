@@ -1,0 +1,21 @@
+#!/bin/sh
+# run-ptest for inotify-tools
+
+set -e
+
+# Run the test binary and capture output
+output=$(./test)
+
+# Print the output for logging
+echo "$output"
+
+# Extract the summary line
+summary=$(echo "$output" | tail -n 1)
+
+# Check if any tests failed
+if echo "$summary" | grep -q "0 failed"; then
+    exit 0
+else
+    echo "Some tests failed!"
+    exit 1
+fi
