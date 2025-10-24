@@ -11,6 +11,7 @@ PTESTS_FAST_META_PERL = "\
     libcapture-tiny-perl \
     libcrypt-openssl-guess-perl \
     libcrypt-openssl-random-perl \
+    libcrypt-openssl-rsa-perl \
     libcgi-perl \
     libdigest-hmac-perl \
     liberror-perl \
@@ -31,7 +32,6 @@ PTESTS_SLOW_META_PERL = "\
 
 PTESTS_PROBLEMS_META_PERL = "\
     libconfig-autoconf-perl \
-    libcrypt-openssl-rsa-perl \
     libdata-hexdump-perl \
     libdbd-sqlite-perl \
     libdigest-sha1-perl \

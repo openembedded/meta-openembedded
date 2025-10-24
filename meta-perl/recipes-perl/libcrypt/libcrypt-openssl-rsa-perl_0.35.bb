@@ -31,9 +31,11 @@ do_compile() {
     cpan_do_compile
 }
 
-RDEPENDS:${PN}-ptest = " \
-    ${PN} \
+RDEPENDS:${PN}-ptest += " \
     perl-module-file-copy \
     perl-module-test \
     perl-module-test-more \
+    perl-module-lib \
+    libcrypt-openssl-guess-perl \
+    perl-module-english \
 "
