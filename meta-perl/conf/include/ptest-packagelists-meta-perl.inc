@@ -20,6 +20,7 @@ PTESTS_FAST_META_PERL = "\
     liberror-perl \
     libextutils-config-perl \
     libextutils-installpaths-perl \
+    libfile-slurper-perl \
     libhtml-tagset-perl \
     libmozilla-ca-perl \
     libnet-ldap-perl \
@@ -35,7 +36,6 @@ PTESTS_SLOW_META_PERL = "\
 
 PTESTS_PROBLEMS_META_PERL = "\
     libconfig-autoconf-perl \
-    libfile-slurper-perl \
     libhtml-parser-perl \
     libmime-types-perl \
     libmodule-build-tiny-perl \
