@@ -7,15 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34cb96edab958a981837bf6f44bf654d"
 
 DEPENDS = "boost"
 
-SRC_URI = "git://github.com/apache/avro.git;branch=branch-1.12;protocol=https;name=avro-c++ \
-        git://github.com/fmtlib/fmt.git;branch=10.x;protocol=https;name=fmt;destsuffix=_deps/fmt-src \
-        file://0001-Remove-cpp-unittest-compilation.patch \
-        file://0002-Add-package-configuration-files.patch \
-        file://0001-cmake-Port-to-work-with-boost-1.89.patch \
-        "
+SRC_URI = "git://github.com/apache/avro.git;branch=branch-1.12;protocol=https;name=avro-c++;tag=release-${PV} \
+           git://github.com/fmtlib/fmt.git;branch=10.x;protocol=https;name=fmt;destsuffix=_deps/fmt-src \
+           "
 
-SRCREV_FORMAT = "avro-c++ fmt"
-SRCREV_avro-c++ = "8c27801dc8d42ccc00997f25c0b8f45f8d4a233e"
+SRCREV_FORMAT = "avro-c++_fmt"
+SRCREV_avro-c++ = "9110c693767c1dde2665b2b57939333478b12036"
 # Tag 10.2.1
 SRCREV_fmt = "e69e5f977d458f2650bb346dadf2ad30c5320281"
 
@@ -23,6 +20,7 @@ S = "${UNPACKDIR}/${BP}/lang/c++"
 
 inherit cmake pkgconfig
 
+EXTRA_OECMAKE += "-DAVRO_BUILD_TESTS=OFF"
 do_configure:prepend() {
         install -d ${B}/_deps
         cp -r ${UNPACKDIR}/_deps/fmt-src ${B}/_deps/
