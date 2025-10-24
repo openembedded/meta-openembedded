@@ -22,6 +22,7 @@ PTESTS_FAST_META_PERL = "\
     libextutils-installpaths-perl \
     libfile-slurper-perl \
     libhtml-tagset-perl \
+    libmime-base32-perl \
     libmime-types-perl \
     libmozilla-ca-perl \
     libnet-ldap-perl \
