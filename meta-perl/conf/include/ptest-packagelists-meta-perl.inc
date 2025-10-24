@@ -16,6 +16,7 @@ PTESTS_FAST_META_PERL = "\
     libdata-hexdump-perl \
     libdbd-sqlite-perl \
     libdigest-hmac-perl \
+    libdigest-sha1-perl \
     liberror-perl \
     libextutils-config-perl \
     libextutils-installpaths-perl \
@@ -34,7 +35,6 @@ PTESTS_SLOW_META_PERL = "\
 
 PTESTS_PROBLEMS_META_PERL = "\
     libconfig-autoconf-perl \
-    libdigest-sha1-perl \
     libfile-slurper-perl \
     libhtml-parser-perl \
     libmime-types-perl \
