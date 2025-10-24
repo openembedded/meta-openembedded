@@ -30,6 +30,7 @@ PTESTS_FAST_META_PERL = "\
     libterm-readkey-perl \
     libtest-deep-perl \
     libtest-nowarnings-perl \
+    libtest-warn-perl \
     libtext-diff-perl \
 "
 
@@ -45,7 +46,6 @@ PTESTS_PROBLEMS_META_PERL = "\
     libnet-dns-sec-perl \
     libnet-ssleay-perl \
     libtest-harness-perl \
-    libtest-warn-perl \
     libunicode-linebreak-perl \
     libunix-statgrab \
     liburi-perl \
