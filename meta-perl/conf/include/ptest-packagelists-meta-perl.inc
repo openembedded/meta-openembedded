@@ -34,6 +34,7 @@ PTESTS_FAST_META_PERL = "\
     libtest-warn-perl \
     libtext-diff-perl \
     libunicode-linebreak-perl \
+    liburi-perl \
 "
 
 PTESTS_SLOW_META_PERL = "\
@@ -49,6 +50,5 @@ PTESTS_PROBLEMS_META_PERL = "\
     libnet-ssleay-perl \
     libtest-harness-perl \
     libunix-statgrab \
-    liburi-perl \
     libxml-libxml-perl \
 "

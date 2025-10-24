@@ -37,6 +37,7 @@ RDEPENDS:${PN} += "\
 "
 
 RDEPENDS:${PN}-ptest += " \
+    libmime-base32-perl \
     libtest-fatal-perl \
     libtest-needs-perl \
     libtest-warnings-perl \
