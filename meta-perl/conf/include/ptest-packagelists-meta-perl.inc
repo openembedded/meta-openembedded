@@ -13,6 +13,7 @@ PTESTS_FAST_META_PERL = "\
     libcrypt-openssl-random-perl \
     libcrypt-openssl-rsa-perl \
     libcgi-perl \
+    libdata-hexdump-perl \
     libdigest-hmac-perl \
     liberror-perl \
     libextutils-config-perl \
@@ -32,7 +33,6 @@ PTESTS_SLOW_META_PERL = "\
 
 PTESTS_PROBLEMS_META_PERL = "\
     libconfig-autoconf-perl \
-    libdata-hexdump-perl \
     libdbd-sqlite-perl \
     libdigest-sha1-perl \
     libfile-slurper-perl \
