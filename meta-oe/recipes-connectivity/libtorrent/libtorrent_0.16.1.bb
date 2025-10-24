@@ -4,15 +4,13 @@ HOMEPAGE = "http://libtorrent.rakshasa.no/"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
+DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
 
-SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https"
-SRCREV = "08fb6635ba249665cb08a4de1b955288d25c21e1"
+SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV} \
+		   file://0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch"
+SRCREV = "919d23923ad0a483fa24441093eda1c12cea4c0b"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-
-CVE_STATUS[CVE-2009-1760] = "backported-patch: patched in our product"
-
 
 CVE_PRODUCT = ""
 
@@ -27,4 +25,4 @@ PACKAGECONFIG[aligned] = "--enable-aligned,--disable-aligned,"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF = "--with-zlib=${STAGING_EXECPREFIXDIR}"
+EXTRA_OECONF = "--with-posix-fallocate"
