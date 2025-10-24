@@ -40,10 +40,17 @@ do_install:append() {
 do_install_ptest() {
 	cp -r ${B}/MANIFEST ${D}${PTEST_PATH}
 	chown -R root:root ${D}${PTEST_PATH}
+
+	# the t/virtual_table/11_filcontent_fulltext tests load these files directly
+	cp -r ${S}/lib ${D}${PTEST_PATH}
+	cp -r ${S}/inc ${D}${PTEST_PATH}
 }
 
 RDEPENDS:${PN}-ptest += " \
     libtest-nowarnings-perl \
+    perl-module-digest-md5 \
+    perl-module-encode-encoding \
+    perl-module-if \
     perl-module-lib \
     perl-module-encode \
     perl-module-file-spec \
