@@ -33,6 +33,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://CVE-2024-21096-0003.patch \
            file://CVE-2024-21096-0004.patch \
            file://CVE-2024-21096-0005.patch \
+	   file://CVE-2025-21490.patch \
           "
 SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
 
