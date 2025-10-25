@@ -24,6 +24,7 @@ PTESTS_FAST_META_PERL = "\
     libhtml-tagset-perl \
     libmime-base32-perl \
     libmime-types-perl \
+    libmodule-build-tiny-perl \
     libmozilla-ca-perl \
     libnet-dns-perl \
     libnet-dns-sec-perl \
@@ -48,7 +49,6 @@ PTESTS_SLOW_META_PERL = "\
 PTESTS_PROBLEMS_META_PERL = "\
     libconfig-autoconf-perl \
     libhtml-parser-perl \
-    libmodule-build-tiny-perl \
     libunix-statgrab \
     libxml-libxml-perl \
 "
