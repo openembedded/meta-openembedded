@@ -1,7 +1,7 @@
 PACKAGECONFIG ??= "drm"
 
-PACKAGECONFIG[drm] = ",,libdrm"
-PACKAGECONFIG[fbdev] = ",,"
+PACKAGECONFIG[drm] = ",,libdrm libevdev"
+PACKAGECONFIG[fbdev] = ",,libevdev"
 PACKAGECONFIG[gridnav] = ",,"
 PACKAGECONFIG[thorvg] = ",,"
 PACKAGECONFIG[sdl] = ",,virtual/libsdl2 libsdl2-image"
