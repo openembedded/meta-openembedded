@@ -69,6 +69,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-ptyprocess \
     python3-py-cpuinfo \
     python3-pyasn1-modules \
+    python3-pyasyncore \
     python3-pyroute2 \
     python3-pyserial \
     python3-pytest-mock \
@@ -128,5 +129,4 @@ PTESTS_SLOW_META_PYTHON = "\
 "
 
 PTESTS_PROBLEMS_META_PYTHON = "\
-    python3-pyasyncore \
 "
