@@ -9,7 +9,7 @@ DEPENDS += "perl"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "c9884fcb08e4d03c23188d4e10836c2382fcb65b69859581a20845a3235a7203"
+SRC_URI[sha256sum] = "04acb4f177d57c147dcedc4bd70e23806af3db75a532f46f95461b2bc9a94959"
 
 UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
@@ -41,12 +41,27 @@ RRECOMMENDS:${PN} += " \
     libnet-dns-sec-perl \
 "
 
+do_install_ptest_perl:append(){
+    install ${S}/MANIFEST ${D}${PTEST_PATH}
+    cp -r ${S}/lib ${D}${PTEST_PATH}
+    cp ${D}${PTEST_PATH}/t/TestToolkit.pm ${D}${PTEST_PATH}
+
+    # This test tries to reconcile the MANIFEST file content with the actual
+    # package content. While this might be useful for package integrity
+    # verification, it is not much for runtime testing. It also requires the
+    # whole source package to be installed. Rather just drop this test.
+    rm ${D}${PTEST_PATH}/t/00-install.t
+}
+
 RDEPENDS:${PN}-ptest += " \
     perl-module-encode \
+    perl-module-encode-encoding \
     perl-module-encode-byte \
     perl-module-extutils-mm \
     perl-module-extutils-mm-unix \
     perl-module-overload \
+    perl-module-perlio \
+    perl-module-perlio-encoding \
 "
 
 python __anonymous () {
@@ -61,4 +76,3 @@ python __anonymous () {
        raise bb.parse.SkipRecipe("incompatible with %s C library" %
                                    d.getVar('TCLIBC'))
 }
-
