@@ -29,6 +29,7 @@ SRC_URI:append:mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equ
 SRC_URI:append:powerpc = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
 SRC_URI:remove:toolchain-clang:riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
 
+LDFLAGS:append:toolchain-clang:x86 = "${@bb.utils.contains_any("TC_CXX_RUNTIME", "gnu", " -latomic", "", d)}"
 
 inherit cmake ptest
 
