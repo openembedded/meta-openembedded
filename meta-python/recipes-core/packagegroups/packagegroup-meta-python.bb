@@ -210,7 +210,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-jsonref \
     python3-jsonschema \
     python3-jstyleson \
-    python3-kconfiglib \
     python3-keras-applications \
     python3-keras-preprocessing \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "python3-kivy", "", d)} \
