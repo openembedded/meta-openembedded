@@ -280,6 +280,7 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
     protobuf-c \
     pugixml \
     python3-distutils-extra \
+    python3-pcpp \
     python3-pycups \
     rapidjson \
     serialcheck \
