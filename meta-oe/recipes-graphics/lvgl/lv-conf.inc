@@ -7,7 +7,11 @@ PACKAGECONFIG[thorvg] = ",,"
 PACKAGECONFIG[sdl] = ",,virtual/libsdl2 libsdl2-image"
 
 # Add libdrm include if drm is selected in PACKAGECONFIG
-TARGET_CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm', '', d)}"
+LVGL_FLAGS += " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm', '', d)} \
+"
+CFLAGS += "${LVGL_FLAGS}"
+CXXFLAGS += "${LVGL_FLAGS}"
 
 LVGL_CONFIG_USE_DRM = "${@bb.utils.contains('PACKAGECONFIG', 'drm', '1', '0', d)}"
 
@@ -45,11 +49,7 @@ LVGL_CONFIG_USE_FLOAT = "${@bb.utils.contains('PACKAGECONFIG', 'thorvg', '1', '0
 
 DEBUG_BUILD ??= "0"
 
-ALLOW_EMPTY:${PN} = "1"
-
-EXTRA_OECMAKE += "-Dinstall:BOOL=ON -DLIB_INSTALL_DIR=${baselib}"
-
-do_configure:append() {
+do_configure:prepend() {
     # If there is a configuration template, start from that
     [ -r "${S}/lv_conf_template.h" ] && cp -Lv "${S}/lv_conf_template.h" "${S}/lv_conf.h"
 
