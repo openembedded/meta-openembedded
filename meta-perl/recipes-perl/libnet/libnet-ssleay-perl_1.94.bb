@@ -7,8 +7,8 @@ so you can write servers or clients for more complicated applications."
 HOMEPAGE = "https://metacpan.org/dist/Net-SSLeay"
 SECTION = "libs"
 
-LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
+LICENSE = "Artistic-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c49f0a6dd21ce7d8988794dea20b650e"
 
 DEPENDS = "openssl zlib openssl-native"
 RDEPENDS:${PN} += "\
@@ -23,25 +23,31 @@ RDEPENDS:${PN} += "\
     zlib \
 "
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
-           file://no-exec-on-configure.patch \
-           file://run-ptest \
-          "
-SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
+SRC_URI = "${CPAN_MIRROR}/authors/id/C/CH/CHRISN/Net-SSLeay-${PV}.tar.gz \
+           file://0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch \
+           file://0001-test-32_x509_get_cert_info-allow-single-colon.patch \
+           file://run-ptest"
+SRC_URI[sha256sum] = "9d7be8a56d1bedda05c425306cc504ba134307e0c09bda4a788c98744ebcd95d"
 
 S = "${UNPACKDIR}/Net-SSLeay-${PV}"
 
-inherit cpan ptest
+inherit cpan ptest-perl
 
 do_configure() {
     export OPENSSL_PREFIX="${STAGING_EXECPREFIXDIR}"
     cpan_do_configure
 }
 
-do_install_ptest() {
-    cp -r ${B}/t ${D}${PTEST_PATH}
+do_install_ptest_perl:append(){
+    cp -r ${S}/inc ${D}${PTEST_PATH}
 }
 
 FILES:${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
 
-RDEPENDS:${PN}-ptest = " perl"
+RDEPENDS:${PN}-ptest += "\
+    perl-module-english \
+    perl-module-file-spec-functions \
+    perl-module-findbin \
+    perl-module-perlio \
+    perl-module-test-more \
+    perl-module-threads"

@@ -26,6 +26,7 @@ PTESTS_FAST_META_PERL = "\
     libmime-types-perl \
     libmozilla-ca-perl \
     libnet-ldap-perl \
+    libnet-ssleay-perl \
     libstrictures-perl \
     libsub-uplevel-perl \
     libterm-readkey-perl \
@@ -48,7 +49,6 @@ PTESTS_PROBLEMS_META_PERL = "\
     libmodule-build-tiny-perl \
     libnet-dns-perl \
     libnet-dns-sec-perl \
-    libnet-ssleay-perl \
     libunix-statgrab \
     libxml-libxml-perl \
 "
