@@ -58,6 +58,7 @@ do_install_ptest() {
     install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
     install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
     install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
+    install -m 0644 ${S}/test/test.mod ${D}${PTEST_PATH}/test
 
     install -d ${D}${PTEST_PATH}/libopenmpt
     install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt

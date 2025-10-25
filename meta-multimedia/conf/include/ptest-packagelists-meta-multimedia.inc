@@ -7,11 +7,11 @@
 # ptests which take less than ~30s each
 
 PTESTS_FAST_META_MULTIMEDIA = "\
+    libopenmpt\
 "
 
 PTESTS_SLOW_META_MULTIMEDIA = "\
 "
 
 PTESTS_PROBLEMS_META_MULTIMEDIA = "\
-    libopenmpt \
 "
