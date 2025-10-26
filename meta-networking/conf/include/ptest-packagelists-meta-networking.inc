@@ -34,12 +34,12 @@ PTESTS_FAST_META_NETWORKING:remove:libc-musl = "\
 # firewalld currently hangs forever so disable it for now
 #    firewalld
 PTESTS_SLOW_META_NETWORKING = "\
+    lksctp-tools \
     net-snmp \
     openvpn \
 "
 
 PTESTS_PROBLEMS_META_NETWORKING = "\
-    lksctp-tools \
     nftables \
     python3-scapy \
 "
