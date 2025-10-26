@@ -282,8 +282,12 @@ RDEPENDS:${PN}-libs += "${PN}-lib-netsnmp \
                         ${PN}-lib-mibs \
 "
 RDEPENDS:${PN}-libs:append:class-target = " libpci"
-RDEPENDS:${PN}-ptest += "perl \
+RDEPENDS:${PN}-ptest += "${PN}-server-snmpd \
+                         ${PN}-server-snmptrapd \
+                         net-tools \
+                         perl \
                          perl-module-test \
+                         perl-module-socket \
                          perl-module-file-basename \
                          perl-module-getopt-long \
                          perl-module-file-temp \
