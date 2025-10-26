@@ -30,9 +30,19 @@ do_install:append() {
 }
 
 do_install_ptest() {
+    install -d ${D}${libdir}/test/pcaps
     install -m 0644 ${S}/scapy/tools/UTscapy.py ${D}${PTEST_PATH}
     install -m 0644 ${S}/test/regression.uts ${D}${PTEST_PATH}
+    install -m 0644 ${S}/test/pcaps/bad_rsn_parsing_overrides_ssid.pcap ${D}${libdir}/test/pcaps/
+    install -m 0644 ${S}/test/pcaps/macos.pcapng.gz ${D}${libdir}/test/pcaps/
     sed -i 's,@PTEST_PATH@,${PTEST_PATH},' ${D}${PTEST_PATH}/run-ptest
+
+    # note1: if ipv6 isn't enabled, skip the related test (add '-K ipv6' argument)
+    # note2: to make this test work, your ISP also must support ipv6 - the test is trying
+    #        to ping google.com through ipv6.
+    if [ "${@oe.utils.all_distro_features(d, 'ipv6', 'true', 'false')}" = "false" ]; then
+        sed -i 's/UTscapy.py/UTscapy.py -K ipv6/g' ${D}${PTEST_PATH}/run-ptest
+    fi
 }
 
 RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netclient  \
@@ -41,3 +51,5 @@ RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netcl
                   python3-difflib"
 RDEPENDS:${PN}-ptest += "python3-json python3-mock python3-multiprocessing \
                          iproute2 tshark"
+
+FILES:${PN}-ptest += "${libdir}/test/"

@@ -20,6 +20,7 @@ PTESTS_FAST_META_NETWORKING = "\
     mbedtls \
     openhpi \
     openl2tp \
+    python3-scapy \
     squid \
     tcpdump \
     wolfssl \
@@ -41,7 +42,6 @@ PTESTS_SLOW_META_NETWORKING = "\
 
 PTESTS_PROBLEMS_META_NETWORKING = "\
     nftables \
-    python3-scapy \
 "
 PTESTS_PROBLEMS_META_NETWORKING:append:libc-musl = "\
     libtalloc \
