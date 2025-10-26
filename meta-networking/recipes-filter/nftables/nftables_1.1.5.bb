@@ -12,6 +12,7 @@ DEPENDS = "libmnl libnftnl bison-native \
            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
+           file://0001-fix-typo-in-test-script.patch \
            file://run-ptest \
           "
 SRC_URI[sha256sum] = "1daf10f322e14fd90a017538aaf2c034d7cc1eb1cc418ded47445d714ea168d4"
@@ -67,6 +68,9 @@ do_install() {
 
 RDEPENDS:${PN}-ptest += " ${PN}-python bash coreutils make iproute2 iputils-ping procps python3-core python3-ctypes python3-json python3-misc sed util-linux"
 
+
+# For ptests compile the kernel with CONFIG_NFT_TPROXY
+
 RRECOMMENDS:${PN}-ptest += "\
 kernel-module-nft-chain-nat     kernel-module-nft-queue \
 kernel-module-nft-compat        kernel-module-nft-quota \
@@ -79,7 +83,7 @@ kernel-module-nft-log           kernel-module-nft-socket \
 kernel-module-nft-masq          kernel-module-nft-synproxy \
 kernel-module-nft-nat           kernel-module-nft-tunnel \
 kernel-module-nft-numgen        kernel-module-nft-xfrm \
-kernel-module-nft-osf \
+kernel-module-nft-osf           kernel-module-nft-tproxy \
 kernel-module-nf-flow-table \
 kernel-module-nf-flow-table-inet \
 kernel-module-nf-nat \
@@ -102,6 +106,7 @@ do_install_ptest() {
     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}/${TESTDIR}
     sed -i 's#/usr/bin/python#/usr/bin/python3#' ${D}${PTEST_PATH}/${TESTDIR}/json_echo/run-test.py
     sed -i 's#/usr/bin/env python#/usr/bin/env python3#' ${D}${PTEST_PATH}/${TESTDIR}/py/nft-test.py
+    sed -i 's#exec python -c#exec python3 -c#' ${D}${PTEST_PATH}/${TESTDIR}/shell/helpers/json-pretty.sh
     # handle multilib
     sed -i s:@libdir@:${libdir}:g ${D}${PTEST_PATH}/run-ptest
 }
