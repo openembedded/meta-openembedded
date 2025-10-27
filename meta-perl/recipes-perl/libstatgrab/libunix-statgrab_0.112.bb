@@ -35,4 +35,8 @@ S = "${WORKDIR}/Unix-Statgrab-${PV}"
 
 export LD = "${CCLD}"
 
+do_install_ptest_perl:append(){
+    sed -i 's/perl -I/perl -TI/g' ${D}${PTEST_PATH}/run-ptest
+}
+
 inherit cpan pkgconfig ptest-perl
