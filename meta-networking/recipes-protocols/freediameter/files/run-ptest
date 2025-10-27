@@ -8,4 +8,4 @@ fi
 
 export EXTENSIONS_DIR=$EXTENSIONS_DIR
 cmake  -E cmake_echo_color --cyan "Running tests..."
-ctest --force-new-ctest-process
+ctest --force-new-ctest-process && echo PASS: freediameter || echo FAIL: freediameter
