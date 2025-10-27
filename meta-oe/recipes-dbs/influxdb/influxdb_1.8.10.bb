@@ -68,3 +68,6 @@ INITSCRIPT_NAME = "influxdb"
 INITSCRIPT_PARAMS = "defaults"
 
 SYSTEMD_SERVICE:${PN} = "influxdb.service"
+
+#cpe-incorrect: Version does not match and only the Jenkins plugin is affected.
+CVE_CHECK_IGNORE += "CVE-2019-10329"
