@@ -9,10 +9,9 @@ inherit cargo cargo-update-recipe-crates
 
 SRC_URI = " \
     git://github.com/uutils/coreutils.git;protocol=https;branch=main;tag=${PV} \
-    file://0001-systemd_logind-replace-i8-with-libc-c_char.patch \
 "
 
-SRCREV = "3a07ffc5a9bd4c283e75afa548ba1f1957bad242"
+SRCREV = "a452d86a3af749b20f1aad76014ea5c2a615605a"
 
 require ${BPN}-crates.inc
 
