@@ -47,6 +47,8 @@ BUILD_CFLAGS += " -D_GNU_SOURCE "
 FILES:${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
 
 RDEPENDS:${PN}-ptest += " \
+    glibc-gconv-iso8859-2 \
+    glibc-charmap-iso-8859-2 \
     liburi-perl \
     perl-module-encode-byte \
     perl-module-encode-unicode \
