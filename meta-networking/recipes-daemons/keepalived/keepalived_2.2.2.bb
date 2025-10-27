@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
            file://0001-layer4-Change-order-of-include-files.patch \
+           file://CVE-2021-44225.patch \
            "
 SRC_URI[sha256sum] = "103692bd5345a4ed9f4581632ea636214fdf53e45682e200aab122c4fa674ece"
 UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
