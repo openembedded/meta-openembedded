@@ -18,15 +18,11 @@ DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-nativ
 RDEPENDS:${PN} += "bash python3 xz"
 RDEPENDS:${PN}-ptest += "bpftool"
 
-SRC_URI = "git://github.com/iovisor/bpftrace;branch=master;protocol=https \
+SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.24.x;protocol=https;tag=v${PV} \
            file://run-ptest \
-           file://0001-cmake-Raise-max-supported-clang-version-to-clang-21.patch \
            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
-           file://0001-Include-missing-c-runtime-headers.patch \
-           file://0002-chrono-Fix-build-when-using-libc-casting-ns-to-syste.patch \
-           file://0003-ast-Adapt-to-Clang-LLVM-21-DiagnosticOptions-API.patch \
 "
-SRCREV = "3b78184eed28501ab4bbb55e45c4172538999da1"
+SRCREV = "4c1f02a43f993758d445952ccd96e552752defec"
 
 inherit bash-completion cmake ptest pkgconfig
 
