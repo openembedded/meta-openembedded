@@ -22,6 +22,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
            file://cross-clang.patch \
            file://0001-workaround-for-overlapping-sections-in-binary.patch \
            file://CVE-2021-31870.patch \
+           file://CVE-2021-31871.patch \
            "
 
 ARMPATCHES ?= ""
