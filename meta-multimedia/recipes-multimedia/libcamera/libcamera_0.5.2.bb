@@ -83,3 +83,5 @@ FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
 # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
 # both 32 and 64 bit file APIs.
 GLIBC_64BIT_TIME_FLAGS = ""
+
+INSANE_SKIP += "32bit-time"
