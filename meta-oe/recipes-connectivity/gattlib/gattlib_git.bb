@@ -30,3 +30,6 @@ inherit pkgconfig cmake
 
 FILES:${PN} = "${libdir}/*"
 FILES:${PN}-dev = "${includedir}/* ${libdir}/pkgconfig"
+
+# The used revision contains the fix
+CVE_CHECK_IGNORE += "CVE-2019-6498"
