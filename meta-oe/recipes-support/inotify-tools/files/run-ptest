@@ -4,18 +4,18 @@
 set -e
 
 # Run the test binary and capture output
-output=$(./test)
+output=$(./test 2>&1)
+status=$?
 
 # Print the output for logging
 echo "$output"
 
-# Extract the summary line
-summary=$(echo "$output" | tail -n 1)
-
-# Check if any tests failed
-if echo "$summary" | grep -q "0 failed"; then
+# Evaluate result based on exit code
+if [ $status -eq 0 ]; then
+    echo "All tests passed successfully."
     exit 0
 else
-    echo "Some tests failed!"
+    echo "Test program exited with status $status."
+    echo "Some tests may have failed. See output above for details."
     exit 1
 fi
