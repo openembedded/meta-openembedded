@@ -22,6 +22,8 @@ SRC_URI = " \
     file://0001-SAE-Check-for-invalid-Rejected-Groups-element-length.patch \
     file://0003-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch \
     file://CVE-2023-52160.patch \
+    file://CVE-2025-24912_01.patch \
+    file://CVE-2025-24912_02.patch \
 "
 
 
