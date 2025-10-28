@@ -34,6 +34,7 @@ EXTRA_OECMAKE = " \
     -DWITH_ALSA=OFF \
     -DWITH_CLIENT_SDL=OFF \
     -DWITH_SAMPLE=OFF \
+    -DWITH_CAIRO=ON \
  "
 
 X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
