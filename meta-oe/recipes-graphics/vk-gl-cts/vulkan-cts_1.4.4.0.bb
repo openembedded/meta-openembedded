@@ -6,7 +6,10 @@ SRCREV_vk-gl-cts = "03c0746a55b78eab63c664a11948b52419e1f309"
 
 require vulkan-cts-sources.inc
 
-SRC_URI:append = " file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src"
+SRC_URI:append = " \
+    file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src \
+    file://0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch;patchdir=external/vulkan-video-samples/src \
+"
 
 # Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT
 OECMAKE_CXX_FLAGS:remove:toolchain-gcc = "-O2"

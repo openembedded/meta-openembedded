@@ -1,0 +1,89 @@
+From 95b4ea5b8a5044fed7aeb1c279eddae709a6ce5f Mon Sep 17 00:00:00 2001
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Date: Tue, 28 Oct 2025 19:27:21 +0200
+Subject: [PATCH] decode: fix building for non-NEON-enabled ARM targets
+
+Building for non-NEON ARM targets fails with the cryptic message. Verify
+that it is possible to build NEON code at all.
+
+.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/recipe-sysroot-native/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/15.2.0/include/arm_neon.h:11019:1:
+error: inlining failed in call to 'always_inline' 'uint8x16_t
+vld1q_u8(const uint8_t*)': target specific option mismatch
+11019 | vld1q_u8 (const uint8_t * __a)
+       | ^~~~~~~~
+.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/sources/vulkan-cts-1.4.4.0/external/vulkan-video-samples/src/vk_video_decoder/libs/NvVideoParser/src/NextStartCodeNEON.cpp:22:36:
+note: called from here
+    22 |         uint8x16_t vdata = vld1q_u8(pdatain);
+       |                            ~~~~~~~~^~~~~~~~~
+
+Reported-by: Ryan Eatmon <reatmon@ti.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Video-Samples/pull/112]
+---
+ .../libs/NvVideoParser/CMakeLists.txt          | 18 +++++++++++++++++-
+ .../NvVideoParser/src/VulkanVideoDecoder.cpp   |  2 ++
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+index 84251ed60ab9..65da635e2929 100644
+--- a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
++++ b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+@@ -65,6 +65,13 @@ check_cxx_source_compiles("
+   #endif
+ " IS_ARM)
+ 
++check_cxx_source_compiles("
++  #include <arm_neon.h>
++  uint8_t *pin;
++  uint8x16_t vdata;
++  int main() { vdata = vld1q_u8(pin); return 0; }
++  " HAS_ARM_NEON)
++
+ check_cxx_source_compiles("
+   #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
+   int main() { return 0; }
+@@ -85,6 +99,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
+     set(SVE_CPU_FEATURE "-march=armv8-a+sve")
+   endif()
+   MESSAGE(STATUS "Parser optimizations selected for generic ARM NEON")
++  add_compile_definitions(HAS_ARM_NEON=1)
+   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
+   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
+@@ -102,7 +117,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
+     target_link_libraries(${VULKAN_VIDEO_PARSER_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
+     target_link_libraries(${VULKAN_VIDEO_PARSER_STATIC_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
+   endif()
+-elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM"))
++elseif ((IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM")) AND HAS_ARM_NEON)
+   MESSAGE(STATUS "Parser optimization for ARM ${CMAKE_SYSTEM_PROCESSOR}")
+   if(WIN32)
+     MESSAGE(STATUS "Parser optimizations selected for WIN32 VFPv4")
+@@ -111,6 +126,7 @@ elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_
+     MESSAGE(STATUS "Parser optimizations selected for UNIX armv7-a+simd")
+     set(NEON_CPU_FEATURE "-march=armv7-a+simd")
+   endif()
++  add_compile_definitions(HAS_ARM_NEON=1)
+   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
+   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
+diff --git a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+index 83b968ef55df..eced7fcd7bba 100644
+--- a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
++++ b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+@@ -335,10 +335,12 @@ bool VulkanVideoDecoder::ParseByteStream(const VkParserBitstreamPacket* pck, siz
+         return ParseByteStreamSVE(pck, pParsedBytes);
+     } else
+ #endif //__aarch64__
++#if defined(HAS_ARM_NEON)
+     if (m_NextStartCode == SIMD_ISA::NEON)
+     {
+         return ParseByteStreamNEON(pck, pParsedBytes);
+     } else
++#endif // HAS_ARM_NEON
+ #endif
+     {
+         return ParseByteStreamC(pck, pParsedBytes);
+-- 
+2.51.0
+
