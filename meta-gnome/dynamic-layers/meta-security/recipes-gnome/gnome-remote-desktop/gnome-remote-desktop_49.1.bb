@@ -4,11 +4,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gettext gsettings features_check useradd
+inherit gnomebase pkgconfig gettext gsettings features_check useradd
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI[archive.sha256sum] = "038c42e48fe1d890849bec5d567566c152bd6d7f463eadeec59b1eae8fbb32a0"
+SRC_URI += "file://0001-src-meson.build-add-missing-dependency-on-winpr.patch"
+SRC_URI[archive.sha256sum] = "7800f388301eeb8147b0be55e8fa7cbd7521066a48a06115cc0ead9f0cea188a"
 
 DEPENDS = " \
     asciidoc-native \

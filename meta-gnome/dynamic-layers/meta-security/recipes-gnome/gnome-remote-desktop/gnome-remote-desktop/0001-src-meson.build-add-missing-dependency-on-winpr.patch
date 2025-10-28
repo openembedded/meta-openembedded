@@ -1,0 +1,34 @@
+From 22f223873de1e805ad8760cdf59a1e7af89a436c Mon Sep 17 00:00:00 2001
+From: Markus Volk <f_l_k@t-online.de>
+Date: Tue, 28 Oct 2025 19:33:44 +0100
+Subject: [PATCH] src/meson.build: add missing dependency on winpr
+
+This fixes:
+    | In file included from ../sources/gnome-remote-desktop-49.1/src/grd-settings.c:28:
+    | /home/flk/poky/build/tmp/work/corei7-64-poky-linux/gnome-remote-desktop/49.1/recipe-sysroot/usr/include/freerdp3/freerdp/freerdp.h:25:10: fatal error: winpr/stream.h: No such file or directory
+    |    25 | #include <winpr/stream.h>
+    |       |          ^~~~~~~~~~~~~~~~
+    | compilation terminated.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+
+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/merge_requests/350]
+---
+ src/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/meson.build b/src/meson.build
+index 1b2cb93..cca475a 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -360,6 +360,7 @@ if have_rdp
+   ctl_deps += [
+     freerdp_dep,
+     polkit_dep,
++    winpr_dep,
+   ]
+ 
+   enable_service_sources = ([
+-- 
+2.51.0
+
