@@ -63,6 +63,8 @@ python __anonymous() {
         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('sbindir'), prog))
 }
 
+BBCLASSEXTEND = "native nativesdk"
+
 do_compile:prepend() {
     export LIBSTDBUF_DIR="${libdir}/coreutils"
 }
