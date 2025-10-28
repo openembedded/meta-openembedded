@@ -19,9 +19,11 @@ SRC_URI += " \
 RDEPENDS:${PN}-ptest += " \
         ${PYTHON_PN}-pytest \
         bash \
+        fuse \
 "
 
 do_install_ptest() {
         install -d ${D}${PTEST_PATH}/test
         cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
+        ln -sf ${bindir}/sshfs ${D}${PTEST_PATH}/sshfs
 }
