@@ -269,8 +269,12 @@ RDEPENDS:${PN}-libs += "libpci \
                         ${PN}-lib-helpers \
                         ${PN}-lib-mibs \
 "
-RDEPENDS:${PN}-ptest += "perl \
+RDEPENDS:${PN}-ptest += "${PN}-server-snmpd \
+                         ${PN}-server-snmptrapd \
+                         net-tools \
+                         perl \
                          perl-module-test \
+                         perl-module-socket \
                          perl-module-file-basename \
                          perl-module-getopt-long \
                          perl-module-file-temp \
