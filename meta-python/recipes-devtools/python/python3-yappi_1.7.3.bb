@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/sumerc/yappi"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
 
-SRC_URI[sha256sum] = "463b822727658937bd95a7d80ca9758605b8cd0014e004e9e520ec9cb4db0c92"
+SRC_URI[sha256sum] = "bef71ad0595b600261668dcb1e18b935a7117a724c04d7be60d9d246e32d0928"
 
 SRC_URI += " \
            file://0001-test_functionality-convert-line-endings-to-Unix.patch \
