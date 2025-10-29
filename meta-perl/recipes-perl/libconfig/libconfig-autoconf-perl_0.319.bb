@@ -6,7 +6,7 @@ DESCRIPTION = "Config::AutoConf is intended to provide the same opportunities to
 developers as GNU Autoconf <http://www.gnu.org/software/autoconf/> does for \
 Shell developers."
 
-HOMEPAGE=       "https://metacpan.org/release/Config-AutoConf"
+HOMEPAGE = "https://metacpan.org/release/Config-AutoConf"
 
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
@@ -14,7 +14,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf61"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz"
+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz \
+           file://0001-correct-libperl-regex.patch"
 
 SRC_URI[md5sum] = "eeeab8cc93eef7dd2e2c343ecdf247b7"
 SRC_URI[sha256sum] = "304f66cc2653264c0fe127d21669e86d3d18cd72f2574d8f5131beec31a0a33e"
@@ -33,6 +34,17 @@ RDEPENDS:${PN} += "perl-module-strict"
 RDEPENDS:${PN} += "perl-module-text-parsewords"
 RDEPENDS:${PN} += "perl-module-warnings"
 RRECOMMENDS:${PN} += "libfile-slurper-perl"
+
+RDEPENDS:${PN}-ptest += " \
+    packagegroup-core-buildessential \
+    perl-dev \
+    perl-module-file-glob \
+    perl-module-perl-ostype \
+    perl-module-metadata"
+
+# One test requires perl headers (perl-dev) to compile some
+# test application.
+INSANE_SKIP:${PN}-ptest += "dev-deps"
 
 S = "${WORKDIR}/Config-AutoConf-${PV}"
 
