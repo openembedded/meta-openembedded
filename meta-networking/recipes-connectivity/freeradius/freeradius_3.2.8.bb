@@ -37,13 +37,14 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0
     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
     file://0016-version.c-don-t-print-build-flags.patch \
     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
-    file://0018-Fix-Service-start-error.patch \
-    file://0019-freeradius-Remove-files-which-have-license-issues.patch \
+    file://0018-update-license-1.patch \
+    file://0019-update-license-2.patch \
+    file://0020-update-license-3.patch \
 "
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "694a97dddbdd26423504afe7c530e8e1502b7354"
+SRCREV = "032be31bb52646171099617928ec1703335bcf73"
 
 UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
 
@@ -84,7 +85,6 @@ EXTRA_OECONF = " --enable-strict-dependencies \
         --without-rlm_securid \
         --without-rlm_unbound \
         --without-rlm_python \
-        --without-rlm_eap_teap \
         ac_cv_path_PERL=${bindir}/perl \
         ax_cv_cc_builtin_choose_expr=no \
         ax_cv_cc_builtin_types_compatible_p=no \
@@ -113,6 +113,7 @@ PACKAGECONFIG[ruby] = "--with-rlm_ruby,--without-rlm_ruby,ruby"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl"
 PACKAGECONFIG[rlm-eap-fast] = "--with-rlm_eap_fast, --without-rlm_eap_fast"
 PACKAGECONFIG[rlm-eap-pwd] = "--with-rlm_eap_pwd, --without-rlm_eap_pwd"
+PACKAGECONFIG[kafka] = "--with-rlm_kafka, --without-rlm_kafka, librdkafka"
 
 inherit useradd autotools-brokensep update-rc.d systemd multilib_script multilib_header
 
