@@ -32,5 +32,6 @@ BBCLASSEXTEND = "native"
 PROVIDES += "libcrypt-openssl-guess"
 
 RDEPENDS:${PN}-ptest += "\
+    perl-module-english \
     perl-module-test-more \
 "
