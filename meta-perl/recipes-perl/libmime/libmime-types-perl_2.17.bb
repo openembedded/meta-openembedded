@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "\
     perl-module-overload \
 "
 
-RDEPENDS:${PN}-ptest = "perl-module-lib perl-module-test-more"
+RDEPENDS:${PN}-ptest = "libmime-types-perl perl-module-lib perl-module-test-more"
 #RSUGGESTS:${PN}-ptest = "libmojo-base-perl"
 
 do_install () {
