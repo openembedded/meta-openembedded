@@ -30,6 +30,11 @@ RDEPENDS:${PN}-ptest += "libtest-warnings-perl \
 
 S = "${WORKDIR}/File-Slurper-${PV}"
 
+do_install_ptest:append(){
+    install -d ${D}${PTEST_PATH}/lib
+    touch ${D}${PTEST_PATH}/lib/File
+}
+
 inherit cpan ptest-perl
 
 BBCLASSEXTEND = "native"
