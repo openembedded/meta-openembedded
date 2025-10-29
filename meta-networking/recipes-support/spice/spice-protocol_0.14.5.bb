@@ -8,7 +8,7 @@ HOMEPAGE = "https://spice-space.org"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b37311cb5604f3e5cc2fb0fd23527e95"
 
-SRCREV = "6f453a775d87087c6ba59fc180c1a1e466631a47"
+SRCREV = "c5c2f26422b44e3143c87814af73c38125d4ccfc"
 
 SRC_URI = "git://gitlab.freedesktop.org/spice/spice-protocol.git;protocol=https;branch=master"
 
