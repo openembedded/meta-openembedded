@@ -13,11 +13,9 @@ architectures."
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-PV = "0.15.2"
+SRCREV = "a6668fff651726e5d4cfd52cbf8669540970452c"
 
-SRCREV = "0c2c1413a8b387ea597a95b6c867470a7c56c8ab"
-
-SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice;branch=master;protocol=https"
+SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice;branch=master;protocol=https;tag=v0.16.0"
 
 
 CVE_STATUS[CVE-2016-0749] = "fixed-version: patched since 0.13.2"
