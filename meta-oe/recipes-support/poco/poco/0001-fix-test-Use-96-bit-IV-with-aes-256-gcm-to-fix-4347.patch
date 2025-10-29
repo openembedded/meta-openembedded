@@ -1,0 +1,26 @@
+From aa202b4eedfef259718b74a66cf0abfe7b49bb6f Mon Sep 17 00:00:00 2001
+From: Matej Kenda <matejken@gmail.com>
+Date: Wed, 3 Jan 2024 20:13:57 +0100
+Subject: [PATCH] fix(test): Use 96-bit IV with aes-256-gcm to fix (#4347):
+
+I/O error: error:1C800066:Provider routines::cipher operation failed
+
+Upstream-Status: Backport [https://github.com/pocoproject/poco/commit/0f25b4c114f23c22681a981d8aed3464530fa6b1]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ Crypto/testsuite/src/CryptoTest.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Crypto/testsuite/src/CryptoTest.cpp b/Crypto/testsuite/src/CryptoTest.cpp
+index d60f1988e..fd798e72b 100644
+--- a/Crypto/testsuite/src/CryptoTest.cpp
++++ b/Crypto/testsuite/src/CryptoTest.cpp
+@@ -214,7 +214,7 @@ void CryptoTest::testEncryptDecryptGCM()
+ {
+ 	CipherKey key("aes-256-gcm");
+ 
+-	CipherKey::ByteVec iv(20, 213);
++	CipherKey::ByteVec iv(12, 213);
+ 	key.setIV(iv);
+ 
+ 	Cipher::Ptr pCipher = CipherFactory::defaultFactory().createCipher(key);

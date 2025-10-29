@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 # These dependencies are required by Foundation
 DEPENDS = "libpcre zlib"
 
-SRC_URI = " \
-    git://github.com/pocoproject/poco.git;branch=main;protocol=https \
-    file://run-ptest \
-    file://CVE-2025-6375.patch \
-   "
+SRC_URI = "git://github.com/pocoproject/poco.git;branch=main;protocol=https \
+           file://run-ptest \
+           file://CVE-2025-6375.patch \
+           file://0001-fix-test-Use-96-bit-IV-with-aes-256-gcm-to-fix-4347.patch \
+           "
 SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
@@ -79,13 +79,15 @@ python populate_packages:prepend () {
 do_install_ptest () {
        cp -rf ${B}/bin/ ${D}${PTEST_PATH}
        cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
-       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
+       cp -rf ${S}/*/testsuite/data ${D}${PTEST_PATH}/bin/
        find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
        rm -f ${D}${PTEST_PATH}/testrunners
        for f in ${D}${PTEST_PATH}/bin/*-testrunner; do
             echo `basename $f` >> ${D}${PTEST_PATH}/testrunners
        done
        install -Dm 0644 ${S}/cppignore.lnx ${D}${PTEST_PATH}/cppignore.lnx
+       install ${B}/bin/TestLibrary.so ${D}${libdir}
+       install -D ${B}/bin/TestApp ${D}${bindir}/TestApp
 }
 
 PACKAGES_DYNAMIC = "poco-.*"
@@ -97,7 +99,8 @@ ALLOW_EMPTY:${PN} = "1"
 PACKAGES =+ "${PN}-cppunit"
 FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
 ALLOW_EMPTY:${PN}-cppunit = "1"
+FILES:${PN}-ptest += "${bindir}/TestApp ${libdir}/TestLibrary.so"
 
-RDEPENDS:${PN}-ptest += "${PN}-cppunit"
+RDEPENDS:${PN}-ptest += "${PN}-cppunit redis mongodb"
 
 BBCLASSEXTEND = "native"
