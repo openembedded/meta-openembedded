@@ -5,11 +5,11 @@ HOMEPAGE = "https://metacpan.org/release/Compress-Raw-Bzip2"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=cd551ef796cc7fa34351ced771a3a7f9"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=d9968e06481ca195215d0f29ba557f98"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Bzip2-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "8d75d3d366c9101ca18061b00d438d3da39478c06159147dea3c666770577c7b"
+SRC_URI[sha256sum] = "b0810a4d6e1a402892840564e6589e6ecd39cb87561bc556f171b78e900079cb"
 
 DEPENDS += "bzip2"
 
