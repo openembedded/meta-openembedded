@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
            file://0001-test-test_syscalls.c-allow-EBADF-in-fcheck_stat-631.patch \
+           file://run-ptest \
 "
 SRC_URI[sha256sum] = "b2e283485d47404ac896dd0bb7f7ba81e1470838e677e45f659804c3a3b69666"
 
@@ -33,6 +34,8 @@ RDEPENDS:${PN}-ptest += " \
         ${PYTHON_PN}-pytest \
 	bash \
 "
+
+RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
 do_install_ptest() {
         install -d ${D}${PTEST_PATH}/test
