@@ -85,10 +85,12 @@ RPROVIDES:${PN} += " \
 RDEPENDS:${PN}-ptest += " \
     perl-module-blib \
     perl-module-charnames \
+    perl-module-devel-peek \
     perl-module-file-compare \
     perl-module-file-copy \
     perl-module-filehandle \
     perl-module-findbin \
+    perl-module-getopt-long \
     perl-module-integer \
     perl-module-io-select \
     perl-module-ipc-open3 \
