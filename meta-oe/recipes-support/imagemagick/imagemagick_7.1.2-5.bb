@@ -67,7 +67,7 @@ BBCLASSEXTEND = "native nativesdk"
 ALTERNATIVE_PRIORITY = "100"
 
 ALTERNATIVE:${PN} = "animate compare composite conjure convert display \
-    identify import magick-script mogrify montage stream"
+    identify import magick-script mogrify montage stream magick"
 
 ALTERNATIVE_TARGET[animate] = "${bindir}/animate.im7"
 ALTERNATIVE_TARGET[compare] = "${bindir}/compare.im7"
@@ -81,6 +81,7 @@ ALTERNATIVE_TARGET[magick-script] = "${bindir}/magick-script.im7"
 ALTERNATIVE_TARGET[mogrify] = "${bindir}/mogrify.im7"
 ALTERNATIVE_TARGET[montage] = "${bindir}/montage.im7"
 ALTERNATIVE_TARGET[stream] = "${bindir}/stream.im7"
+ALTERNATIVE_TARGET[magick] = "${bindir}/magick.im7"
 
 ALTERNATIVE:${PN}-doc = "animate.1 compare.1 composite.1 conjure.1 \
     convert.1 display.1 identify.1 import.1 magick-script.1 mogrify.1 montage.1 stream.1"
@@ -109,6 +110,7 @@ ALTERNATIVE_LINK_NAME[montage.1] = "${mandir}/man1/montage.1"
 ALTERNATIVE_TARGET[montage.1] = "${mandir}/man1/montage.im7.1"
 ALTERNATIVE_LINK_NAME[stream.1] = "${mandir}/man1/stream.1"
 ALTERNATIVE_TARGET[stream.1] = "${mandir}/man1/stream.im7.1"
+ALTERNATIVE_LINK_NAME[magick] = "${bindir}/magick"
 
 CVE_STATUS[CVE-2007-1667] = "cpe-incorrect: CVE should not include a CPE for imagemagick"
 CVE_STATUS[CVE-2014-9804] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 6.9.4-0"
