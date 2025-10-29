@@ -8,6 +8,7 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
            python3-pyyaml-native python3-cheetah-native \
            python3-psutil-native python3-regex-native \
            "
+RDEPENDS:${PN} += "tzdata"
 
 inherit scons dos2unix siteinfo python3native systemd useradd
 
