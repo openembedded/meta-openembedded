@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=170620b648626a9705
 SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
            file://0001-include-missing-pty.h-header-for-openpty.patch \
           "
-SRC_URI[sha256sum] = "5260c5793cd564c69e53ef6f528c00af066ae67b42d02137fb7ef8fafe70bb7a"
+SRC_URI[sha256sum] = "1331b0df5919cb243ffe326dc6ff10a291e683a262f70cdf964a664be733ad83"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
