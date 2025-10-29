@@ -40,6 +40,7 @@ SRC_URI += " \
     file://debian/system/core/fix-standard-namespace-errors.patch \
     file://debian/system/core/Add-riscv64-support.patch \
     file://debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch \
+    file://debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch \
     \
 "
 
