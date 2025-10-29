@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2963f0dc7a24919505850460dd1a785b"
 
 DEPENDS += "python3-hatch-vcs-native"
 
-SRC_URI[sha256sum] = "a85149a62fcaa8a4d95214ca217f3910ea6800d79d65ef1cfb1005720b4f713a"
+SRC_URI[sha256sum] = "8b05ea2953322c74c49d2af180f7eac73ad0aa3d4c391cab896175ec4fa3d642"
 
 inherit pypi python_hatchling
 
