@@ -48,6 +48,10 @@ CVE_PRODUCT += "node.js"
 # v8 errors out if you have set CCACHE
 CCACHE = ""
 
+# Use '-flax-vector-conversions' to permit conversions between vectors
+# with differing element types or numbers of subparts
+CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
+
 def map_nodejs_arch(a, d):
     import re
 
