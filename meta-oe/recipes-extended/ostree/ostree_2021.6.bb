@@ -19,6 +19,7 @@ DEPENDS = " \
 
 SRC_URI = " \
     gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
+    file://tests-account-for-different-locales-in-remote-gpg-list-keys-test.patch \
     file://run-ptest \
 "
 SRCREV = "f1155c8d283c3c85d74d5e1050b0dcf8198f750a"
@@ -196,6 +197,7 @@ RDEPENDS:${PN}-ptest += " \
     util-linux \
     xz \
     ${PN}-trivial-httpd \
+    ${PN}-switchroot \
     python3-pyyaml \
     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
 "

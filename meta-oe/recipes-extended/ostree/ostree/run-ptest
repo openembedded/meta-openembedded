@@ -1,3 +1,14 @@
 #! /bin/sh
 
-gnome-desktop-testing-runner libostree
+if ! nslookup openpgpkey.test.com; then
+    mv /etc/resolv.conf /etc/resolv.conf.bak
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    trap "mv /etc/resolv.conf.bak /etc/resolv.conf" INT EXIT
+fi
+
+# The tests use terminal colors when the output is a tty. This is a problem, because the tests
+# check the output of some commands, which might be colored - and the regex used for matching does not
+# account for the colors. This seemingly useless tee is here to get rid of the colors. (The application
+# doesn't respect the NO_COLOR envvar and doesn't seem to have other options to disable coloring)
+
+gnome-desktop-testing-runner libostree | tee
