@@ -22,4 +22,4 @@ RDEPENDS:${PN} = "\
     python3-aiodns \
 "
 
-CFLAGS:append:arm = " -flax-vector-conversions"
+CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
