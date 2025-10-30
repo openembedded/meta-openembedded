@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "iso-codes"
 
 EXTRA_OEMESON += "-Dtests=false"
 
-SRC_URI[archive.sha256sum] = "126971e8bc000ddc200178c8fac8f7114eed42de4a4e2012ba06b3ffe707e23a"
+SRC_URI[archive.sha256sum] = "49dfeca77928801756d0c5386c1d20454ca077600a5d1ed66ec46ee33a32c66d"
 
 PACKAGECONFIG ?= "flatpak"
 PACKAGECONFIG[flatpak] = "-Dflatpak=true,-Dflatpak=false,flatpak ostree"
@@ -39,5 +39,5 @@ PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,gnome-packagek
 PACKAGECONFIG[fwupd] = "-Dfwupd=true,-Dfwupd=false,fwupd,fwupd"
 PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent"
 
-FILES:${PN} += "${datadir}"
+FILES:${PN} += "${datadir} ${systemd_user_unitdir}"
 FILES:${PN}-dev += "${libdir}/gnome-software/libgnomesoftware.so"
