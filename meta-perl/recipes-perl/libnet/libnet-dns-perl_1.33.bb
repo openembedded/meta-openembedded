@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=de95b6a896d5f861
 
 DEPENDS += "perl"
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz \
+           file://run-ptest"
 
 SRC_URI[sha256sum] = "5a40e7cf524e4bd2c33cf03b82b47d5308b712083aa5ee180b0b5af54c71fbd2"
 
@@ -48,6 +49,14 @@ RDEPENDS:${PN}-ptest += " \
     perl-module-extutils-mm-unix \
     perl-module-overload \
 "
+
+do_install_ptest_perl:append(){
+    # This test tries to reconcile the MANIFEST file content with the actual
+    # package content. While this might be useful for package integrity
+    # verification, it is not much for runtime testing. It also requires the
+    # whole source package to be installed. Rather just drop this test.
+    rm ${D}${PTEST_PATH}/t/00-install.t
+}
 
 python __anonymous () {
     # rather than use "find" to determine libc-*.so,

@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if ! nslookup example.com; then
+    mv /etc/resolv.conf /etc/resolv.conf.bak
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    trap "mv /etc/resolv.conf.bak /etc/resolv.conf" INT EXIT
+fi
+
 for case in `find t -type f -name '*.t'`; do
     perl $case >$case.output 2>&1
     ret=$?
