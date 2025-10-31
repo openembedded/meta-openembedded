@@ -8,10 +8,9 @@ DEPENDS = "glib-2.0"
 
 SRC_URI = " \
     git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https \
-    file://0002-fluid_synth_nwrite_float-Allow-zero-pointer-for-left.patch \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
-SRCREV = "9f2edaa3cbd456997cb420fb68b6f960faaafd12"
+SRCREV = "70a10b365c707c73bd340e28970601d52d425d8c"
 
 
 inherit cmake pkgconfig lib_package
