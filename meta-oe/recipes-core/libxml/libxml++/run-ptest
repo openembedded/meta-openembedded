@@ -1,3 +1,4 @@
 #!/bin/sh
-cd examples
-make -k check-TESTS
+for t in tests/*; do
+  $t && echo PASS: $t || echo FAIL: $t
+done
