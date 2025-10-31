@@ -1,0 +1,54 @@
+From 2b1e16fa9de6f444ed42c89b8d689e2607b6e358 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Sun, 19 Oct 2025 17:05:35 +0200
+Subject: [PATCH] fix failing ptests
+
+Some error messages in Python now include the classname also, so
+prepare the tests to expect these errors instead of the old version.
+
+This patch is the backport of a very small portion of this change:
+https://github.com/ionelmc/python-aspectlib/commit/ed4b036b9e69e195226faab719c470f77ad11cc2
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/test_aspectlib_test.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/test_aspectlib_test.py b/tests/test_aspectlib_test.py
+index 05e2c25..db315a2 100644
+--- a/tests/test_aspectlib_test.py
++++ b/tests/test_aspectlib_test.py
+@@ -414,14 +414,14 @@ def test_story_empty_play_proxy_class():
+         (('stuff_1', 'mix', "'a', 'b'", ''), _Returns("(1, 2, 'a', 'b')")),
+         (('stuff_1', 'meth', "123", ''), _Raises(repr_ex(TypeError(
+             'meth() takes exactly 1 argument (2 given)' if PY2 else
+-            'meth() takes 1 positional argument but 2 were given'
++            'Stuff.meth() takes 1 positional argument but 2 were given'
+         )))),
+         ((None, 'test_pkg1.test_pkg2.test_mod.Stuff', "0, 1", ''), _Binds('stuff_2')),
+         (('stuff_2', 'mix', "'a', 'b'", ''), _Returns("(0, 1, 'a', 'b')")),
+         (('stuff_2', 'mix', "3, 4", ''), _Returns("(0, 1, 3, 4)")),
+         (('stuff_2', 'meth', "123", ''), _Raises(repr_ex(TypeError(
+             'meth() takes exactly 1 argument (2 given)' if PY2 else
+-            'meth() takes 1 positional argument but 2 were given'
++            'Stuff.meth() takes 1 positional argument but 2 were given'
+         ))))
+     ]))
+ 
+@@ -449,14 +449,14 @@ def test_story_half_play_proxy_class():
+         (('stuff_1', 'meth', '', ''), _Returns('None')),
+         (('stuff_1', 'meth', '123', ''), _Raises(repr_ex(TypeError(
+             'meth() takes exactly 1 argument (2 given)' if PY2 else
+-            'meth() takes 1 positional argument but 2 were given'
++            'Stuff.meth() takes 1 positional argument but 2 were given'
+         )))),
+         ((None, 'test_pkg1.test_pkg2.test_mod.Stuff', '0, 1', ''), _Binds("stuff_2")),
+         (('stuff_2', 'mix', "'a', 'b'", ''), _Returns("(0, 1, 'a', 'b')")),
+         (('stuff_2', 'mix',  '3, 4', ''), _Returns('(0, 1, 3, 4)')),
+         (('stuff_2', 'meth', '123', ''), _Raises(repr_ex(TypeError(
+             'meth() takes exactly 1 argument (2 given)' if PY2 else
+-            'meth() takes 1 positional argument but 2 were given'
++            'Stuff.meth() takes 1 positional argument but 2 were given'
+         ))))
+     ]))
+ 

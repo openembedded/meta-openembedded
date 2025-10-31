@@ -12,6 +12,7 @@ inherit ptest pypi setuptools3
 
 SRC_URI += "file://run-ptest \
             file://0001-Remove-tornado-6-test-constraint.-Ref-15.patch \
+            file://0001-fix-failing-ptests.patch \
            "
 
 do_install_ptest() {
