@@ -50,5 +50,4 @@ PTESTS_SLOW_META_PERL = "\
 PTESTS_PROBLEMS_META_PERL = "\
     libhtml-parser-perl \
     libunix-statgrab \
-    libxml-libxml-perl \
 "
