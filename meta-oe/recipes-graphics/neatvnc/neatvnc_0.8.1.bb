@@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/any1/neatvnc"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
 
-SRC_URI = "git://github.com/any1/neatvnc;branch=master;protocol=https"
+SRC_URI = "git://github.com/any1/neatvnc;branch=v0.8;protocol=https"
 
-SRCREV = "46432ce8cade0b54a38d4bb42eb07f96c8ff49fd"
+SRCREV = "07081567ab21a2b099ceb41ae8cab872a31cbb9a"
 
 S = "${WORKDIR}/git"
 
