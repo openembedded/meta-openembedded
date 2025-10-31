@@ -51,3 +51,6 @@ FILES:${PN} += " \
     ${datadir}/metainfo \
     ${libdir}/libsysprof-6*.so.* \
 "
+
+# Needs libunwind to be ported first
+COMPATIBLE_HOST:riscv32 = "null"
