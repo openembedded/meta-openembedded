@@ -54,8 +54,11 @@ SYSTEMD_AUTO_ENABLE = "disable"
 do_install:append () {
     rm -rf ${D}${libdir}/dovecot/dovecot-config
     install -d 755 ${D}/etc/dovecot
-    touch ${D}/etc/dovecot/dovecot.conf
     chmod 644 ${D}/etc/dovecot/dovecot.conf
+    touch ${D}/etc/dovecot/ssl-key.pem
+    touch ${D}/etc/dovecot/ssl-cert.pem
+    chmod 600 ${D}/etc/dovecot/ssl-key.pem
+    chmod 600 ${D}/etc/dovecot/ssl-cert.pem
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
         install -m 0644 ${UNPACKDIR}/dovecot.service ${D}${systemd_unitdir}/system
         sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
