@@ -12,6 +12,8 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
+    file://CVE-2025-24912-01.patch \
+    file://CVE-2025-24912-02.patch \
 "
 
 
