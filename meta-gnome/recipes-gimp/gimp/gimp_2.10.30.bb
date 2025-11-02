@@ -67,3 +67,6 @@ do_compile:prepend() {
 FILES:${PN}  += "${datadir}/metainfo"
 
 RDEPENDS:${PN} += "mypaint-brushes-1.0"
+
+# It has been fixed in version 2.2.16
+CVE_CHECK_IGNORE += "CVE-2007-3741"
