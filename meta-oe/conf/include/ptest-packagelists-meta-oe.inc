@@ -33,6 +33,7 @@ PTESTS_FAST_META_OE = "\
     libxml++-5.0 \
     libyang \
     lmdb \
+    mbedtls \
     microsoft-gsl \
     minicoredumper \
     minizip-ng \

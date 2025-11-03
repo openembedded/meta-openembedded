@@ -26,7 +26,7 @@ SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls
            file://run-ptest \
            "
 
-SRCREV = "c765c831e5c2a0971410692f92f7a81d6ec65ec2"
+SRCREV = "e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
