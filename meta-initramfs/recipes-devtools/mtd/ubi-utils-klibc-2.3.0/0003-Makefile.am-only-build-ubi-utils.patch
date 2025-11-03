@@ -16,7 +16,7 @@ diff --git a/Makefile.am b/Makefile.am
 index 5a6e77c..98715dd 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -34,9 +34,9 @@ EXTRA_DIST += $(GLOBAL_HEADER) $(GLOBAL_EXTRA)
+@@ -46,9 +46,9 @@ EXTRA_DIST = COPYING CHANGELOG.md README.txt
  
  include lib/Makemodule.am
  include ubi-utils/Makemodule.am
@@ -29,6 +29,3 @@ index 5a6e77c..98715dd 100644
  
  if BUILD_UBIFS
  include ubifs-utils/Makemodule.am
--- 
-2.7.4
-

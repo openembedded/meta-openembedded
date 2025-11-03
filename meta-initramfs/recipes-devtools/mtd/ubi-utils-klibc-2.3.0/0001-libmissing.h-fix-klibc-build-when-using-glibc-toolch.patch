@@ -23,9 +23,9 @@ diff --git a/include/libmissing.h b/include/libmissing.h
 index 0196033..832c372 100644
 --- a/include/libmissing.h
 +++ b/include/libmissing.h
-@@ -3,9 +3,11 @@
- 
- #include "config.h"
+@@ -1,9 +1,11 @@
+ #ifndef LIBMISSING_H
+ #define LIBMISSING_H
  
 +#ifndef __KLIBC__
  #ifdef HAVE_EXECINFO_H
@@ -35,6 +35,3 @@ index 0196033..832c372 100644
  
  #ifndef HAVE_EXECINFO_H
  int backtrace(void **buffer, int size);
--- 
-2.7.4
-
