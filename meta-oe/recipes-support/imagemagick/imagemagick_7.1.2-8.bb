@@ -13,7 +13,7 @@ BASE_PV = "${@d.getVar('PV').split('-')[0]}"
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
 
 SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https;tag=${PV}"
-SRCREV = "4a620c2a89a7481e83cb4a0ff32db0ccbb3afcd2"
+SRCREV = "a3b13d143fd7dea44cd71d31aa02f411b597688f"
 
 
 inherit autotools pkgconfig update-alternatives
