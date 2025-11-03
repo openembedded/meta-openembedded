@@ -8,6 +8,8 @@ SRC_URI[sha256sum] = "13c2fa89562f7b8af40cc74b55f490be5e2ab8ccfb739f11c16d3ce622
 
 SRC_URI += " \
           file://0001-setup.py-Make-the-cmd-available.patch \
+          file://0001-fix-allow-64-bit-time_t-on-32-bit-systems-in-test_is.patch \
+          file://0002-fix-correct-struct-packing-on-32-bit-with-_TIME_BITS.patch \
 "
 
 inherit pypi siteinfo python_setuptools_build_meta
