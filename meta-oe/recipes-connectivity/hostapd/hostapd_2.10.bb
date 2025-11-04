@@ -24,6 +24,10 @@ SRC_URI = " \
     file://0003-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch \
     file://CVE-2025-24912-01.patch \
     file://CVE-2025-24912-02.patch \
+    file://CVE-2022-37660-01.patch \
+    file://CVE-2022-37660-02.patch \
+    file://CVE-2022-37660-03.patch \
+    file://CVE-2022-37660-04.patch \
 "
 
 
