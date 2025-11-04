@@ -24,6 +24,10 @@ SRC_URI = " \
     file://CVE-2023-52160.patch \
     file://CVE-2025-24912_01.patch \
     file://CVE-2025-24912_02.patch \
+    file://CVE-2022-37660-01.patch \
+    file://CVE-2022-37660-02.patch \
+    file://CVE-2022-37660-03.patch \
+    file://CVE-2022-37660-04.patch \
 "
 
 
