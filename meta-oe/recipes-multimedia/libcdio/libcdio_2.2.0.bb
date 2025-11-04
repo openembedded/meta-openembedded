@@ -4,14 +4,11 @@ SECTION = "libs"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2 \
-           file://0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch \
-           file://Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch \
-           "
+SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2"
 
-SRC_URI[sha256sum] = "8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b"
+SRC_URI[sha256sum] = "6f8fbdf4d189cf63f2a7a1549c516cd720c7b222c7aaadbc924a26e745a48539"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig github-releases
 
 PACKAGECONFIG ??= "cdda-player"
 PACKAGECONFIG[cdda-player] = "--with-cdda-player,--without-cdda-player,ncurses"
