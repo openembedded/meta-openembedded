@@ -23,6 +23,9 @@ RPROVIDES:${PN} = "virtual-redis"
 
 CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
 CVE_STATUS[CVE-2025-27151] = "cpe-incorrect: the used version already contains the fix"
+CVE_STATUS[CVE-2025-46817] = "cpe-incorrect: the used version already contains the fix"
+CVE_STATUS[CVE-2025-46818] = "cpe-incorrect: the used version already contains the fix"
+CVE_STATUS[CVE-2025-46819] = "cpe-incorrect: the used version already contains the fix"
 
 inherit pkgconfig update-rc.d systemd useradd
 
