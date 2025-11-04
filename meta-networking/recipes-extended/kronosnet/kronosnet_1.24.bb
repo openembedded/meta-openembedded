@@ -16,6 +16,8 @@ SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
            file://0001-links.c-Fix-build-with-gcc-12.patch \
            "
 
+BB_GIT_SHALLOW_EXTRA_REFS = "refs/tags/v${PV}"
+
 UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
 
 inherit autotools pkgconfig
