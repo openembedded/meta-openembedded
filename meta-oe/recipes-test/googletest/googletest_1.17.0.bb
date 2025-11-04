@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
 
 PROVIDES += "gmock gtest"
 
-SRCREV = "6910c9d9165801d8827d628cb72eb7ea9dd538c5"
-SRC_URI = "git://github.com/google/googletest.git;branch=v1.16.x;protocol=https \
-    file://gtest-ciso646.patch \
-"
+SRC_URI = "git://github.com/google/googletest.git;branch=v1.17.x;protocol=https \
+          "
+SRCREV = "52eb8108c5bdec04579160ae17225d66034bd723"
 
 inherit cmake pkgconfig
 
