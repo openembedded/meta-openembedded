@@ -15,3 +15,6 @@ inherit pypi features_check pkgconfig setuptools3
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 RDEPENDS:${PN} += "systemd python3-syslog python3-logging python3-syslog"
+
+# v235's setup.py is not written in a way to avoid race condition
+PARALLEL_MAKE = "-j 1"
