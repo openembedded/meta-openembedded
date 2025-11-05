@@ -207,6 +207,11 @@ do_install() {
 
         sed -i "s|@MINIFI_LOG@|${MINIFI_LOG}|g" ${D}${sysconfdir}/default/volatiles/99_minifi
     fi
+    
+    for ss in $(find ${D}${libexecdir}/minifi-python-examples -type f); do
+        sed -i 's,/usr/bin/env python$,/usr/bin/env python3,' "$ss"
+    done
+
 }
 
 pkg_postinst:${PN}() {
