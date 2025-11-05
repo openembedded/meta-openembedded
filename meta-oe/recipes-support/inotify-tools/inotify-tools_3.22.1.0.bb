@@ -9,11 +9,12 @@ SRCREV = "4b72dcd15299e1d0cb096397d9aab513ffed1657"
 
 SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
            file://0002-libinotifytools-Bridge-differences-between-musl-glib.patch \
+           file://run-ptest \
           "
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools ptest
 
 EXTRA_OECONF = "--disable-doxygen"
 
@@ -24,3 +25,16 @@ CFLAGS += "-Wno-error"
 PACKAGES =+ "libinotifytools"
 
 FILES:libinotifytools = "${libdir}/lib*.so.*"
+
+do_compile_ptest() {
+        cd libinotifytools/src
+        oe_runmake
+        oe_runmake test
+}
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}
+    cp -r ${B}/libinotifytools/src/.libs/test ${D}${PTEST_PATH}/
+}
+
+FILES:${PN}-ptest += "${PTEST_PATH}"
