@@ -1,4 +1,4 @@
-From ec2d36466c9050ee282ea1c3bb1b5f1f61c96ecb Mon Sep 17 00:00:00 2001
+From 8054f459d47cde818ed9d1eb1e49efb4a8d4b3df Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Mon, 17 Jul 2023 14:33:32 +0800
 Subject: [PATCH] Do not specify PIE flag explicitly
@@ -23,9 +23,11 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b42f8688..c39184e9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -70,7 +70,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux"
+@@ -73,7 +73,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
      # This is only relevant for GCC and causes warnings on Clang
      set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap.gcc")
@@ -34,12 +36,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  endif()
  
      set(NO_DEPRECATED "")
-@@ -78,7 +78,7 @@ endif()
-   if(NOT DEFINED _FORTIFY_SOURCE)
-       set(_FORTIFY_SOURCE 2)
-   endif()
--    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
-+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic")
+@@ -82,7 +82,7 @@ endif()
+     if(NOT DEFINED _FORTIFY_SOURCE)
+         set(_FORTIFY_SOURCE 2)
+     endif()
+-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE -Wno-inconsistent-missing-override")
++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -Wno-inconsistent-missing-override")
  
      # force all use of std::mutex and std::recursive_mutex to use runtime init
      # instead of static initialization so mutexes can be hooked to enable PI as needed
+-- 
+2.34.1
+
