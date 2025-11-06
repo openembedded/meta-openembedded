@@ -82,6 +82,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-rapidjson \
     python3-requests-file \
     python3-requests-toolbelt \
+    python3-rich-toolkit \
     python3-schedule \
     python3-semver \
     python3-serpent \
