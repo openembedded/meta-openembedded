@@ -33,8 +33,6 @@ REQUIRED_DISTRO_FEATURES = "pam"
 
 EXTRA_AUTORECONF = "-I ${S}"
 
-PACKAGECONFIG[libwrap] = ",--disable-libwrap,tcp-wrappers,libwrap"
-
 PACKAGECONFIG ??= ""
 
 do_install:append() {

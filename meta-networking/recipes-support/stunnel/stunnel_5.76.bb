@@ -15,10 +15,9 @@ SRC_URI[sha256sum] = "cda37eb4d0fb1e129718ed27ad77b5735e899394ce040bb2be28bbb937
 
 inherit autotools bash-completion pkgconfig
 
-PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} libwrap"
+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)}"
 
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
-PACKAGECONFIG[libwrap] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 
 EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
