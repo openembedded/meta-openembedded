@@ -65,19 +65,19 @@ PTESTS_SLOW_META_OE = "\
     c-ares \
     fftw \
     libusb-compat \
+    mariadb \
     rocksdb \
     re2 \
 "
 PTESTS_SLOW_META_OE:append:x86 = " kernel-selftest"
 PTESTS_SLOW_META_OE:append:x86-64 = " kernel-selftest"
-PTESTS_SLOW_META_OE:remove:libc-musl = "kernel-selftest"
+PTESTS_SLOW_META_OE:remove:libc-musl = "kernel-selftest mariadb"
 
 PTESTS_PROBLEMS_META_OE = "\
     keyutils \
-    mariadb \
     ostree \
     poco \
     psqlodbc \
     rsyslog \
 "
-PTESTS_PROBLEMS_META_OE:append:libc-musl = " jemalloc minicoredumper oprofile"
+PTESTS_PROBLEMS_META_OE:append:libc-musl = " jemalloc minicoredumper oprofile mariadb"
