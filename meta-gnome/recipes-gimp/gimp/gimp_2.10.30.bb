@@ -45,6 +45,9 @@ SHPV = "${@gnome_verdir("${PV}")}"
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
            file://CVE-2022-30067.patch \
+           file://CVE-2022-32990-1.patch \
+           file://CVE-2022-32990-2.patch \
+           file://CVE-2022-32990-3.patch \
            "
 SRC_URI[sha256sum] = "88815daa76ed7d4277eeb353358bafa116cd2fcd2c861d95b95135c1d52b67dc"
 
