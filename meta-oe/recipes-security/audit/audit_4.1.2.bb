@@ -24,10 +24,9 @@ INITSCRIPT_PARAMS = "defaults"
 SYSTEMD_PACKAGES = "auditd"
 SYSTEMD_SERVICE:auditd = "auditd.service audit-rules.service"
 
-DEPENDS = "python3 tcp-wrappers libcap-ng linux-libc-headers swig-native python3-setuptools-native coreutils-native"
+DEPENDS = "python3 libcap-ng linux-libc-headers swig-native python3-setuptools-native coreutils-native"
 
 EXTRA_OECONF = " \
-        --with-libwrap \
         --with-libcap-ng \
         --with-python3 \
         --with-arm \

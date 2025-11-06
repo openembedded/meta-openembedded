@@ -12,10 +12,9 @@ SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.8.x;tag=v${P
 
 inherit autotools
 
-PACKAGECONFIG ??= "openssl tcp-wrappers"
+PACKAGECONFIG ??= "openssl"
 
 PACKAGECONFIG[openssl] = "--with-openssl=${STAGING_DIR_HOST}${prefix},--without-openssl, openssl"
-PACKAGECONFIG[tcp-wrappers] = "--with-tcp-wrappers,--without-tcp-wrappers, tcp-wrappers"
 PACKAGECONFIG[swig] = "--with-swig,--without-swig, swig"
 
 EXTRA_OECONF = "--without-python"
