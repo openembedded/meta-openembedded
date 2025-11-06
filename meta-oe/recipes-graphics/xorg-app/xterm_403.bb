@@ -22,6 +22,7 @@ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
                  --disable-rpath-hack \
                  --disable-setuid \
                  --with-app-defaults=${datadir}/X11/app-defaults \
+                 --program-transform-name= \
                  "
 
 B = "${S}"
