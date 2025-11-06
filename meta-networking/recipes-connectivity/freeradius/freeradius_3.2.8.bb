@@ -195,6 +195,7 @@ do_install() {
     oe_multilib_header freeradius/autoconf.h
     oe_multilib_header freeradius/missing.h
     oe_multilib_header freeradius/radpaths.h
+    oe_multilib_header freeradius/features.h
 }
 
 # This is only needed when we install/update on a running target.
