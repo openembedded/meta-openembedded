@@ -16,6 +16,7 @@ PTESTS_FAST_META_OE = "\
     function2 \
     fwupd \
     gcab \
+    imagemagick \
     jemalloc \
     jq \
     leveldb \

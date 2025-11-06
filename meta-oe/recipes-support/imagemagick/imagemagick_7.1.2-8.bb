@@ -12,11 +12,15 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 BASE_PV = "${@d.getVar('PV').split('-')[0]}"
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
 
-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https;tag=${PV}"
+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https;tag=${PV} \
+           file://run-ptest \
+           file://imagemagick-ptest.sh \
+"
+
 SRCREV = "a3b13d143fd7dea44cd71d31aa02f411b597688f"
 
 
-inherit autotools pkgconfig update-alternatives
+inherit autotools pkgconfig update-alternatives ptest
 export ac_cv_sys_file_offset_bits = "64"
 
 EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --enable-largefile"
@@ -54,6 +58,13 @@ do_install:append:class-target() {
         sed -i 's,${HOSTTOOLS_DIR},${bindir},g' "${D}${sysconfdir}/ImageMagick-7/delegates.xml"
     fi
 }
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}
+    install -m 0755 ${UNPACKDIR}/run-ptest ${D}${PTEST_PATH}/
+    install -m 0755 ${UNPACKDIR}/imagemagick-ptest.sh ${D}${PTEST_PATH}/
+}
+
 
 FILES:${PN} += "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
                 ${datadir}/ImageMagick-7"
