@@ -7,9 +7,9 @@ status=$?
 
 # Exit with the test’s result code
 if [ $status -eq 0 ]; then
-    echo "All tests passed successfully."
+    echo "PASS: All tests passed successfully."
 else
-    echo "Some tests failed. See output above for details."
+    echo "FAIL: Some tests failed. See output above for details."
 fi
 
 exit $status
