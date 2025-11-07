@@ -8,7 +8,8 @@ SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
 
 SRC_URI[sha256sum] = "4cd6a2523d9c1576c818eb4d15fe0c1650a25dde4d31d1d20a616e9d9435cc20"
 
-UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
+UPSTREAM_CHECK_URI = "https://github.com/xdebug/xdebug/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools
 
