@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https 
 	   file://CVE-2023-50447-2.patch \
 	   file://CVE-2023-50447-3.patch \
 	   file://CVE-2023-50447-4.patch \
+           file://CVE-2024-28219.patch \
            "
 SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
 
