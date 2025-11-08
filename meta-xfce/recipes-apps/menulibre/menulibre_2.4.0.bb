@@ -15,6 +15,9 @@ REQUIRED_DISTRO_FEATURES = "x11 gobject-introspection-data"
 SRC_URI = "https://github.com/bluesabre/${BPN}/releases/download/${BP}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "d906acf9cc13b0e15b8e342ae9aab8b0680db336a382d0c42f5d5f465f593c9f"
 
+UPSTREAM_CHECK_URI = "https://github.com/bluesabre/menulibre/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/menulibre-(?P<pver>\d+(\.\d+)+)"
+
 do_compile[noexec] = "1"
 
 do_install:append() {
