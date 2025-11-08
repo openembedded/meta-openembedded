@@ -14,8 +14,8 @@ DEPENDS = " \
     udev \
 "
 
-SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master"
-SRCREV = "5ef08f0cd6ede62de14de477b74fc3611108c676"
+SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master;protocol=https;tag=${BP}"
+SRCREV = "26cc27451dc10128dd64e804c9f071680e7fd8ed"
 
 
 inherit autotools pkgconfig systemd
