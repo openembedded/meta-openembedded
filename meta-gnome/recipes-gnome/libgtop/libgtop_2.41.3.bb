@@ -9,4 +9,6 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.sha256sum] = "775676df958e2ea2452f7568f28b2ea581063d312773dd5c0b7624c1b9b2da8c"
 
+UPSTREAM_CHECK_REGEX = "libgtop-(?P<pver>\d+(\.\d+)+).tar"
+
 DEPENDS = "glib-2.0 libxau"
