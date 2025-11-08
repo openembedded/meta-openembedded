@@ -13,8 +13,8 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
 S = "${UNPACKDIR}/ntfs-3g_ntfsprogs-${PV}"
 SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
 
-UPSTREAM_CHECK_URI = "https://www.tuxera.com/community/open-source-ntfs-3g/"
-UPSTREAM_CHECK_REGEX = "ntfs-3g_ntfsprogs-(?P<pver>\d+(\.\d+)+)\.tgz"
+UPSTREAM_CHECK_URI = "https://github.com/tuxera/ntfs-3g/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
 
 inherit autotools pkgconfig
 
