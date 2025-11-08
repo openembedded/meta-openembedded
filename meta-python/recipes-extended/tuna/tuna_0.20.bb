@@ -15,7 +15,7 @@ RDEPENDS:${PN} += " \
     python3-six \
     "
 
-inherit setuptools3
+inherit python_setuptools_build_meta
 
 do_install:append() {
     install -m 0755 -d ${D}${bindir}
