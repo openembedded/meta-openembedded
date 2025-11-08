@@ -4,11 +4,8 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9dd40dfb621eed702c0775577fbb7011"
 DEPENDS = "libpcap"
 
-SRCREV = "be3e706f00295024ebc199e70177343fdaebbc9e"
-SRC_URI = " \
-	git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=master \
-	file://0001-Cmds-automatically-create-folder.patch \
-	"
+SRCREV = "fb6183fe03b6eaa6c47b18de03b1745fa78633e4"
+SRC_URI = "git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=main;tag=v${PV}"
 
 
 inherit pkgconfig
