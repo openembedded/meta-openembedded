@@ -7,6 +7,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz \
            file://makefile-add-ldflags.patch \
           "
 
+inherit sourceforge-releases
+
 do_compile() {
     oe_runmake tunctl
 }
