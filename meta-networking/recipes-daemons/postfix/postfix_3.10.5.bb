@@ -30,7 +30,8 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
 
 SRC_URI[sha256sum] = "6a926bf702173861b08e49bcb51fca3a2f269f9a337f72ef159bf46052087e35"
 
-UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.10(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
+UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
 
 S = "${UNPACKDIR}/postfix-${PV}"
 
