@@ -6,7 +6,7 @@ SECTION = "graphics"
 
 S = "${WORKDIR}/git"
 SRCREV = "f09ba2777714871bddb70d049878af34b94fa54d"
-SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=main;protocol=https"
 inherit cmake pkgconfig
 
 EXTRA_OECMAKE = "-DSPIRV_CROSS_SHARED=ON"
