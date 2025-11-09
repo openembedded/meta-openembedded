@@ -23,7 +23,7 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/oldstable/6.2/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
     file://0001-initialize-msghdr-portably.patch \
     file://zabbix-agent.service \
