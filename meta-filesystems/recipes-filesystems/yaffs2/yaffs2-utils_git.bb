@@ -14,8 +14,7 @@ PV = "20221209"
 
 DEPENDS = "mtd-utils"
 
-# Source is the HEAD of master branch at the time of writing this recipe
-SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
+SRC_URI = "git://github.com/Aleph-One-Ltd/yaffs2;protocol=https;branch=master \
            file://makefile-add-ldflags.patch \
            file://0001-define-loff_t-if-not-already-defined.patch \
            file://0001-yaffs_guts.h-define-YTIME_T-if-not-already-defined.patch \
