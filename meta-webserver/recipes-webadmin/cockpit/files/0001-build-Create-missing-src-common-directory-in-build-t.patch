@@ -1,0 +1,32 @@
+From e0e5959d91f53bdc7825f8bf07b2d8c74e0f56cf Mon Sep 17 00:00:00 2001
+From: Martin Pitt <mpitt@redhat.com>
+Date: Fri, 25 Jul 2025 07:00:52 +0200
+Subject: [PATCH] build: Create missing src/common/ directory in build tree
+
+This caused a build failure with parallel builds when using a separate
+build tree. Thanks to Nicolas LANTZ for the fix!
+
+Fixes #21918
+
+Upstream-Status: Backport [https://github.com/cockpit-project/cockpit/commit/2038da3237abf8ae181ada05db1cde834876b03d]
+
+Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
+---
+ src/common/Makefile-common.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/common/Makefile-common.am b/src/common/Makefile-common.am
+index e7d1ca04f3f7..0da5b74e9f25 100644
+--- a/src/common/Makefile-common.am
++++ b/src/common/Makefile-common.am
+@@ -102,6 +102,7 @@ libcockpit_common_a_SOURCES = \
+ # libcockpit-common.a static-links an HTML template to use on failures
+ nodist_libcockpit_common_a_SOURCES = src/common/fail.html.c
+ src/common/fail.html.c: src/common/fail.html
++	@mkdir -p '$(dir $@)'
+ 	$(AM_V_GEN) $(top_srcdir)/tools/escape-to-c cockpit_webresponse_fail_html_text < $< > $@.tmp && mv $@.tmp $@
+ CLEANFILES += src/common/fail.html.c
+ EXTRA_DIST += src/common/fail.html
+-- 
+2.25.1
+
