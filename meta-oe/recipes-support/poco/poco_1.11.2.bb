@@ -101,6 +101,9 @@ FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
 ALLOW_EMPTY:${PN}-cppunit = "1"
 FILES:${PN}-ptest += "${bindir}/TestApp ${libdir}/TestLibrary.so"
 
-RDEPENDS:${PN}-ptest += "${PN}-cppunit redis mongodb"
+# When running the full ptests suite, mongodb should be added to RDEPENDS, however it
+# is in dynamic-layers folder, only available when meta-python is
+# available - thus breaking signature generation and failing YP compatibility.
+RDEPENDS:${PN}-ptest += "${PN}-cppunit redis"
 
 BBCLASSEXTEND = "native"
