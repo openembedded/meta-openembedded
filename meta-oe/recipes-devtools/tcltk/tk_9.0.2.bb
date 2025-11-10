@@ -44,6 +44,7 @@ EXTRA_OECONF = "\
     --with-x \
     --with-tcl=${STAGING_BINDIR}/crossscripts \
     --libdir=${libdir} \
+    --disable-zipfs \
 "
 
 export TK_LIBRARY = '${libdir}/tk${VER}'
