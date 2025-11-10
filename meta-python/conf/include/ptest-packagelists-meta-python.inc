@@ -65,6 +65,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pydantic \
     python3-pydantic-core \
     python3-pylint \
+    python3-python-dotenv \
     python3-python-multipart \
     python3-ptyprocess \
     python3-py-cpuinfo \
