@@ -49,13 +49,15 @@ do_install_ptest() {
     install -m 0755 ${B}/bin/*_testsuite ${D}${PTEST_PATH}/tests/
 }
 
-PACKAGES += "pytalloc pytalloc-dev"
+PACKAGES =+ "pytalloc pytalloc-dev"
 
 RPROVIDES:${PN}-dbg += "pytalloc-dbg"
 
 FILES:pytalloc = "${PYTHON_SITEPACKAGES_DIR}/* \
-                  ${libdir}/libpytalloc-util.so.2 \
-                  ${libdir}/libpytalloc-util.so.2.1.1 \
+                  ${libdir}/libpytalloc-util.so.* \
                  "
-FILES:pytalloc-dev = "${libdir}/libpytalloc-util.so"
+FILES:pytalloc-dev = "${libdir}/libpytalloc-util.so \
+                      ${includedir}/pytalloc.h \
+                      ${libdir}/pkgconfig/pytalloc.pc \
+                     "
 RDEPENDS:pytalloc = "python3"
