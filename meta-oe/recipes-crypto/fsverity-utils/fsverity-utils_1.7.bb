@@ -9,7 +9,7 @@ SECTION = "console"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bc974d217b525ea216a336adb73e1220"
 
-SRCREV = "2543e6e5037c0b1b448282c2793f8a6ce8b12d71"
+SRCREV = "96d12bd0d34a034d6e0b85512422f0d6df3c7c4a"
 SRC_URI = "git://git.kernel.org/pub/scm/fs/fsverity/fsverity-utils.git;branch=master"
 
 
