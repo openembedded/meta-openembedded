@@ -353,4 +353,10 @@ RDEPENDS:${PN}-test = "\
     ${PN}-testsuite \
     "
 
+pkg_postinst:${PN}-common() {
+    if [ -z "$D" ] && [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+        ${sysconfdir}/init.d/populate-volatile.sh update
+    fi
+}
+
 ALLOW_EMPTY:${PN}-test = "1"
