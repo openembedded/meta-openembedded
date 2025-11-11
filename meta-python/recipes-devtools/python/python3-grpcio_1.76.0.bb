@@ -15,7 +15,7 @@ SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            "
 SRC_URI[sha256sum] = "7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73"
 
-RDEPENDS:${PN} = "python3-protobuf"
+RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 
 inherit setuptools3
 inherit pypi
