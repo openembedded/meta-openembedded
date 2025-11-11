@@ -6,11 +6,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
 SRC_URI = "\
-  git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
+  git://github.com/bats-core/bats-core.git;branch=master;protocol=https;tag=v${PV} \
   "
 
-# v1.12.0
-SRCREV = "713504bc0224a19b3d7c7958c18dc07f64f54b44"
+# v1.13.0
+SRCREV = "3bca150ec86275d6d9d5a4fd7d48ab8b6c6f3d87"
 
 
 # Numerous scripts assume ${baselib} == lib, which is not true.
