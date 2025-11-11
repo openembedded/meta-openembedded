@@ -8,4 +8,4 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 inherit pypi python_poetry_core
 
-SRC_URI[sha256sum] = "ecf249665400a0b7a9d5e4ee1ffc234fd5d003186d3e1904f70bc14038642c13"
+SRC_URI[sha256sum] = "579554887ffd189226774b87570f4a76db75cf0efcbaffcacd5e98b8ee877f61"
