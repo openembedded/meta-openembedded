@@ -12,8 +12,8 @@ BUGTRACKER = "https://github.com/a13xp0p0v/kernel-hardening-checker/issues"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;branch=master"
-SRCREV = "0ebece346f187e7d3589883cc1d194fcd1c3cda8"
+SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "afc376f2a935994793343cfeb05953583cc30191"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
