@@ -13,6 +13,7 @@ SRC_URI = "https://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://0001-do-not-import-target-module-while-cross-compile.patch \
            file://0002-ldb-Add-configure-options-for-packages.patch \
            file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
+           file://c23_memset_explicit.patch \
            file://run-ptest \
           "
 
