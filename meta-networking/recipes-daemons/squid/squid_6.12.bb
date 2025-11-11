@@ -19,14 +19,15 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.xz \
            file://run-ptest \
            file://volatiles.03_squid \
            file://0002-squid-make-squid-conf-tests-run-on-target-device.patch \
+           file://0001-libltdl-remove-reference-to-nonexisting-directory.patch \
            file://squid.nm \
            file://CVE-2025-59362.patch \
            "
 
-SRC_URI[sha256sum] = "0b07b187e723f04770dd25beb89aec12030a158696aa8892d87c8b26853408a7"
+SRC_URI[sha256sum] = "f3df3abb2603a513266f24a5d4699a9f0d76b9f554d1848b67f9c51cd3b3cb50"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
+                    file://errors/COPYRIGHT;md5=6fbb6a2adc362e206da7b4f42846cdec \
                     "
 DEPENDS = "libtool"
 
