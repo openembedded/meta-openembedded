@@ -7,11 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind luajit zlib"
 
-SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master;tag=${PV} \
            file://0001-cmake-Check-for-HP-libunwind.patch \
-           file://0001-cmake-Pass-noline-flag-to-flex.patch"
+           file://0001-cmake-Pass-noline-flag-to-flex.patch \
+		   file://0001-Fix-build-on-c23.patch \
+		  "
 
-SRCREV = "6730d53f99f3714654804d07203f33e6b1b8a107"
+SRCREV = "892f9f3b04d604797851d60e89d6cfe640a047cd"
 
 PACKAGES =+ "${PN}-scripts"
 
