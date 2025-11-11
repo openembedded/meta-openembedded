@@ -16,7 +16,7 @@ SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.
            file://ts.conf \
            file://tslib.sh \
            "
-SRC_URI[sha256sum] = "9b489a54d48006201f2fe955a88c3f857535ac93b6cf8e5a16c7b166c8991dac"
+SRC_URI[sha256sum] = "58d9941ffaa269c399f00d0d308184c96087f7acf69aa8e3c6645e852f993ba2"
 
 UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
 
