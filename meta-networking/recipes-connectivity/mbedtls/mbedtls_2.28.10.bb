@@ -24,7 +24,7 @@ SECTION = "libs"
 
 S = "${WORKDIR}/git"
 SRCREV = "2fc8413bfcb51354c8e679141b17b3f1a5942561"
-SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
+SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=archive/mbedtls-2.28 \
            file://run-ptest \
           "
 
