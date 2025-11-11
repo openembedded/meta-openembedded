@@ -10,7 +10,7 @@ DEPENDS += "icu"
 PYPI_PACKAGE = "pyicu"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "f32e78e1cb64d0aeb14f027e037a8944861d3114548818a6adf0081ef51aefc3"
+SRC_URI[sha256sum] = "42b3a8062e3b23e927ca727e6b5e1730d86c70279834e4887152895d2eb012d9"
 
 SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
 
