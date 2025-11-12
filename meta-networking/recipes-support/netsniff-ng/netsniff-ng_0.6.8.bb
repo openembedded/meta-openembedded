@@ -6,7 +6,7 @@ DEPENDS = "libpcap"
 
 SRCREV = "be3e706f00295024ebc199e70177343fdaebbc9e"
 SRC_URI = " \
-	git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=master \
+	git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=main \
 	file://0001-Cmds-automatically-create-folder.patch \
 	"
 
