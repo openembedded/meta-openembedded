@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7646f9ee25e49eaf53f89a10665c568c"
 
 SRC_URI[sha256sum] = "e7608472de99d375759814cab3e2c94aba3f9ec80e62cfef8ced495ca5c27d6e"
 
-inherit pypi python_setuptools_build_meta cmake lib_package
+inherit pypi cmake python_setuptools_build_meta
 
 EXTRA_OECMAKE += "-DNB_TEST=OFF"
 
 DEPENDS += "\
+    python3-cmake-native \
     python3-scikit-build-native \
     python3-scikit-build-core-native \
     ninja-native \
 "
 
 do_install:append() {
-    install -d ${D}${base_libdir}/cmake/${PN}
-    install -m 0644 ${S}/cmake/* ${D}${base_libdir}/cmake/${PN}/
+    install -d ${D}${libdir}/cmake/${PYPI_PACKAGE}
+    install -m 0644 ${S}/cmake/* ${D}${libdir}/cmake/${PYPI_PACKAGE}/
 }
 
 FILES:${PN} += "${prefix_native}/* ${prefix_native}/${PN}/* ${base_libdir}/cmake/*"
