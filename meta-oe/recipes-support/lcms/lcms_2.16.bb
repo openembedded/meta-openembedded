@@ -12,6 +12,6 @@ BBCLASSEXTEND = "native nativesdk"
 
 S = "${UNPACKDIR}/lcms2-${PV}"
 
-inherit autotools
+inherit autotools sourceforge-releases
 
 CVE_PRODUCT += "littlecms:little_cms_color_engine"
