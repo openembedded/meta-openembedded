@@ -24,6 +24,9 @@ SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz
 
 SRC_URI[sha256sum] = "d82e93b69b8aa205a616b62917a269322bf63a3eaafb3775014e61752b2013ea"
 
+UPSTREAM_CHECK_URI = "https://github.com/lsh123/xmlsec/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools-brokensep ptest pkgconfig
 
 #CFLAGS += "-I${STAGING_INCDIR}/nss3"
