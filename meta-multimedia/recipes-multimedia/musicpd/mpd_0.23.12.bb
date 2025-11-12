@@ -18,7 +18,7 @@ DEPENDS += " \
     fmt \
 "
 
-SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=v0.23.x;protocol=https \
+SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
            file://mpd.conf.in \
            "
 SRCREV = "d91da9679801224847c30147f5914785b6f8f240"
