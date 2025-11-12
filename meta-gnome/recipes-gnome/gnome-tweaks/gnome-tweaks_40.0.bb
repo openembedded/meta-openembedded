@@ -25,6 +25,12 @@ SRC_URI += " \
 
 EXTRA_OEMESON = "-Dpython_site_dir=${PYTHON_SITEPACKAGES_DIR}"
 
+# The optimised .pyc files contain buildpaths, delete them and leave the
+# normal ones to be packaged.
+do_install:append() {
+    find ${D}${PYTHON_SITEPACKAGES_DIR} -name *.opt*.pyc -delete
+}
+
 FILES:${PN} += " \
     ${datadir}/metainfo \
     ${PYTHON_SITEPACKAGES_DIR} \
