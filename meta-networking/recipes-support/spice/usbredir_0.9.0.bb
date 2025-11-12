@@ -9,9 +9,7 @@ DEPENDS = "libusb1"
 
 SRCREV = "bca484fc6f206ab9da2f73e8a0118fad45374d4e"
 
-SRC_URI = " \
-    git://anongit.freedesktop.org/spice/usbredir;branch=master \
-"
+SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 
