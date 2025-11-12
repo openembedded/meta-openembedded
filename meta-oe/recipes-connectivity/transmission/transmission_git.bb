@@ -8,7 +8,7 @@ DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
 RDEPENDS:${PN}-web = "${PN}"
 
 SRC_URI = " \
-	gitsm://github.com/transmission/transmission;branch=master;protocol=https \
+	gitsm://github.com/transmission/transmission;branch=main;protocol=https \
 	file://transmission-daemon \
 "
 
