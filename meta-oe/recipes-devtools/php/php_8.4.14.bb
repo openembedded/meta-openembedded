@@ -27,6 +27,9 @@ SRC_URI:append:class-target = " \
             file://php-fpm.service \
           "
 
+UPSTREAM_CHECK_URI = "https://github.com/php/php-src/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+
 S = "${UNPACKDIR}/php-${PV}"
 
 SRC_URI[sha256sum] = "f2139ce4cb7a6c5643ee98caa34e5c32ba841c2ba293e34a3d0357faa84bb3e7"
