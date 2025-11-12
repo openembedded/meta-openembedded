@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8
 S = "${UNPACKDIR}/fuse-${PV}"
 
 UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
-UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
+UPSTREAM_CHECK_REGEX = "releases/tag/fuse-(?P<pver>\d+(\.\d+)+)"
 
 CVE_PRODUCT = "fuse_project:fuse"
 
