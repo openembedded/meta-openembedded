@@ -15,7 +15,7 @@ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
 SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
 SRC_URI[sha256sum] = "f7abfbf0eed5f573ab51bd77a458f32d82f9859c55e9689f819d96fe1437a619"
 
-UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
+UPSTREAM_CHECK_URI = "${GNU_MIRROR}/nano"
 
 inherit autotools gettext pkgconfig
 
