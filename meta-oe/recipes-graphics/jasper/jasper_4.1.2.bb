@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=mas
            file://0001-Fixes-401.patch \
            file://0001-Fixes-402-403.patch \
            "
-SRCREV = "917f7708b755d8434f70618108c1a76f1b6a0a82"
+SRCREV = "ff633699cb785967a2cb0084d89d56e53c46e416"
 
 CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 
