@@ -1,4 +1,4 @@
-From 7a98e3ac480413ce7db3a5edd5dc70458b921b29 Mon Sep 17 00:00:00 2001
+From 577335d0309c852d9f6099c255d5a80603fcbdb9 Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Wed, 6 Feb 2013 20:51:02 -0600
 Subject: [PATCH] hack to force use of libc malloc
@@ -19,10 +19,10 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
  src/Makefile | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-Index: redis-7.2.10/src/Makefile
-===================================================================
---- redis-7.2.10.orig/src/Makefile
-+++ redis-7.2.10/src/Makefile
+diff --git a/src/Makefile b/src/Makefile
+index 6a87909..b8e0d44 100644
+--- a/src/Makefile
++++ b/src/Makefile
 @@ -13,7 +13,8 @@
  # Just use 'make dep', but this is only needed by developers.
  
