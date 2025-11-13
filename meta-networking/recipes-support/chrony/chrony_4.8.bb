@@ -102,9 +102,6 @@ do_install() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/examples/chronyd.service ${D}${systemd_unitdir}/system/
 
-    # Variable data (for drift and/or rtc file)
-    install -d ${D}${localstatedir}/lib/chrony
-
     # Fix hard-coded paths in config files and init scripts
     sed -i -e 's!/var/!${localstatedir}/!g' -e 's!/etc/!${sysconfdir}/!g' \
            -e 's!/usr/sbin/!${sbindir}/!g' -e 's!/usr/bin/!${bindir}/!g' \
@@ -114,12 +111,17 @@ do_install() {
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/chronyd
     sed -i 's!^EnvironmentFile=.*!EnvironmentFile=-${sysconfdir}/default/chronyd!' ${D}${systemd_unitdir}/system/chronyd.service
 
-    install -d ${D}${sysconfdir}/tmpfiles.d
-    echo "d /var/lib/chrony 0755 root root -" > ${D}${sysconfdir}/tmpfiles.d/chronyd.conf
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d /var/lib/chrony 0755 root root -" > ${D}${sysconfdir}/tmpfiles.d/chronyd.conf
+    else
+        install -d ${D}${sysconfdir}/default/volatiles
+        echo "d root root 0755 /var/lib/chrony none" > "${D}${sysconfdir}/default/volatiles/00_runtime_chrony_dirs"
+    fi
 
 }
 
-FILES:${PN} = "${sbindir}/chronyd ${sysconfdir} ${localstatedir}/lib/chrony ${localstatedir}"
+FILES:${PN} = "${sbindir}/chronyd ${sysconfdir}"
 CONFFILES:${PN} = "${sysconfdir}/chrony.conf"
 INITSCRIPT_NAME = "chronyd"
 INITSCRIPT_PARAMS = "defaults"
