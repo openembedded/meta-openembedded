@@ -13,11 +13,8 @@ DEPENDS:append:class-target = " hwloc"
 PE = "1"
 
 BRANCH = "onetbb_2021"
-SRCREV = "8b829acc65569019edb896c5150d427f288e8aba"
-SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-            file://0001-hwloc_detection.cmake-remove-cross-compiation-check.patch \
-            file://0001-Fix-suppress-new-GCC-12-13-warnings-1192.patch \
-"
+SRCREV = "9afd759b72c0c233cd5ea3c3c06b0894c9da9c54"
+SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH}"
 S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
@@ -26,6 +23,7 @@ inherit cmake pkgconfig
 EXTRA_OECMAKE += " \
                     -DTBB_TEST=OFF \
                     -DCMAKE_BUILD_TYPE=Release \
+                    -DTBB_DISABLE_HWLOC_AUTOMATIC_SEARCH=OFF \
                 "
 
 # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
