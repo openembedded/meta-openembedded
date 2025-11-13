@@ -4,24 +4,18 @@ extremely large and complex data collections"
 HOMEPAGE = "https://www.hdfgroup.org/"
 SECTION = "libs"
 
-LICENSE = "HDF5"
-LIC_FILES_CHKSUM = "file://COPYING;md5=adebb1ecf1b3b80c13359e18ef67301e"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=71a191398102f76050a4e56e78cb4891"
 
 inherit cmake siteinfo qemu multilib_header multilib_script
 
 DEPENDS += "qemu-native zlib"
 
-SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/downloads/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BPN}-${PV}.tar.gz \
            file://0002-Remove-suffix-shared-from-shared-library-name.patch \
            file://0001-cmake-remove-build-flags.patch \
-           file://0001-Fix-CVE-2025-2153-5795.patch \
-           file://0001-Fix-CVE-2025-2310-5872.patch \
-           file://0001-Refix-of-the-attempts-in-PR-5209-5722.patch \
-           file://0001-Fix-CVE-2025-2924-5814.patch \
-           file://0001-Fix-CVE-2025-2925-5739.patch \
-           file://0001-Fixes-CVE-2025-6750-5856.patch \
            "
-SRC_URI[sha256sum] = "e4defbac30f50d64e1556374aa49e574417c9e72c6b1de7a4ff88c4b1bea6e9b"
+SRC_URI[sha256sum] = "6e45a4213cb11bb5860e1b0a7645688ab55562cc2d55c6ff9bcb0984ed12b22b"
 
 FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
 
@@ -58,11 +52,6 @@ do_configure:append() {
 do_install:append() {
     # Used for generating config files on target
     oe_multilib_header H5pubconf.h
-    # remove the buildpath
-    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/pkgconfig/hdf5.pc
-    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/hdf5-targets.cmake
-    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' ${D}${bindir}/h5hlcc
-    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' ${D}${bindir}/h5cc
 }
 
 BBCLASSEXTEND = "native"
