@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "796aa822981e01b68c12e4827b8697108f7205020f24b5793b3c41555d
 inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "pytest_asyncio"
+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 DEPENDS += "python3-setuptools-scm-native"
 
