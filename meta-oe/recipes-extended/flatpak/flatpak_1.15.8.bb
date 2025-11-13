@@ -38,6 +38,7 @@ RDEPENDS:${PN} = " \
     ca-certificates \
     dconf \
     flatpak-xdg-utils \
+    fuse3-utils \
 "
 
 GIR_MESON_OPTION = "gir"
