@@ -127,6 +127,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-scrypt \
     python3-traitlets \
     python3-typer \
+    python3-uvicorn \
     python3-yappi \
 "
 
