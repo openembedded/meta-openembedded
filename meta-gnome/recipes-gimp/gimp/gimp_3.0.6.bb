@@ -5,7 +5,7 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"
 
 DEPENDS = " \
-    appstream-glib \
+    appstream \
     atk \
     babl \
     bzip2 \
@@ -56,13 +56,12 @@ GIDOCGEN_MESON_OPTION = "gi-docgen"
 GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
 GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
 
-SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gimp.git;protocol=https;branch=master"
+SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz"
 SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch"
 SRC_URI += "file://0002-meson.build-reproducibility-fix.patch"
 SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
 SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
-SRCREV = "c1901c5be644ab8dcaf779b1f383bf5370bc90c6"
-
+SRC_URI[sha256sum] = "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94ce466a62862e296b"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"

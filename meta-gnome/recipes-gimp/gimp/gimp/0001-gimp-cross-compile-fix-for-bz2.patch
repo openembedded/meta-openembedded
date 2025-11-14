@@ -16,8 +16,8 @@ diff --git a/meson.build b/meson.build
 index 4e48f8c64c..d5dce47015 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -765,7 +765,7 @@ zlib = dependency('zlib')
- MIMEtypes += 'image/x-psp'
+@@ -777,7 +777,7 @@ zlib = dependency('zlib')
+ zlib = dependency('zlib')
  
  # Compiler-provided headers can't be found in crossroads environment
 -if not meson.is_cross_build()
