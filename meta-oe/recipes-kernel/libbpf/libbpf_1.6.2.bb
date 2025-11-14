@@ -8,11 +8,8 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
 
 DEPENDS = "zlib elfutils"
 
-SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master \
-           file://0001-libbpf-check-for-empty-BTF-data-section-in-btf_parse.patch \
-           file://CVE-2025-29481.patch;striplevel=2 \
-"
-SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
+SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=${BPN}-${PV}"
+SRCREV = "45e89348ec74617c11cd5241ccd0ffc91dfd03c4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
