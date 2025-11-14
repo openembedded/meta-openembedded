@@ -38,6 +38,7 @@ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 CVE_PRODUCT = "rsyslog:rsyslog"
+CVE_STATUS[CVE-2015-3243] = "fix-file-included: The shipped default rsyslog.conf contains the fix"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
