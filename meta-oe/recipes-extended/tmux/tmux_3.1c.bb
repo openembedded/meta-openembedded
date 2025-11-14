@@ -23,3 +23,7 @@ do_configure:prepend() {
     # not automatically created when building outside the source directory.
     mkdir -p ${B}/compat
 }
+
+# The fix was backported to the user version:
+# https://github.com/tmux/tmux/commit/d0ad34e94d63def5178f02281637d2d15cb42c88
+CVE_CHECK_IGNORE += "CVE-2020-27347"
