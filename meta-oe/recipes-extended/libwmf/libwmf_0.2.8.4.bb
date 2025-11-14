@@ -23,6 +23,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/${BPN}/${PV}/${BPN}-${PV}.tar.gz;name=ta
            file://CVE-2015-0848-CVE-2015-4588.patch \
            file://CVE-2015-4695.patch \
            file://CVE-2015-4696.patch \
+           file://CVE-2016-9011.patch \
            "
 
 SRC_URI[tarball.md5sum] = "d1177739bf1ceb07f57421f0cee191e0"
