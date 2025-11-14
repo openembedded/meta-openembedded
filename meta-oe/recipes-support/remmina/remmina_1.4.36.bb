@@ -20,6 +20,7 @@ DEPENDS = " \
     libvncserver \
     libsecret \
     libxkbfile \
+    curl \
 "
 
 DEPENDS:append:libc-musl = " libexecinfo"
