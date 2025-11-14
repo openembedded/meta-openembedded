@@ -25,6 +25,8 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
            file://riscv32.patch \
            file://0001-Remove-x86-specific-loop-in-my_convert.patch \
+           file://0001-support-reproducible-builds.patch \
+           file://0001-storage-mroonga-CMakeLists.txt-fix-reproducible-buil.patch \
           "
 SRC_URI[sha256sum] = "52fa4dca2c5f80afc1667d523a27c06176d98532298a6b0c31ed73505f49e15c"
 
