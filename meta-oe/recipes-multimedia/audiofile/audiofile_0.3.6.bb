@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 
 SRC_URI = " \
     ${GNOME_MIRROR}/audiofile/0.3/${BP}.tar.xz \
+    file://run-ptest \
     file://0001-fix-negative-shift-constants.patch \
     file://0002-fix-build-on-gcc6.patch \
     file://0003-fix-CVE-2015-7747.patch \
@@ -23,7 +24,7 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
 
-inherit autotools lib_package pkgconfig
+inherit autotools lib_package pkgconfig ptest
 
 CXXFLAGS += "-std=c++14"
 
@@ -33,3 +34,18 @@ DEPENDS = " \
     libogg \
     flac \
 "
+
+do_compile_ptest(){
+    oe_runmake -C gtest libgtest.la
+    cd test
+    # Query the TESTS variable value, remove the $(...) parts from it,
+    # compile as make target along with FLAC (which is an optional test)
+    oe_runmake `make -p | grep "^TESTS = " | sed 's/$([^)]*)//g' | cut -d= -f2` FLAC
+}
+
+do_install_ptest(){
+    install -d ${D}${PTEST_PATH}/test
+    for t in test/.libs/*; do
+        install $t ${D}${PTEST_PATH}/test/
+    done
+}
