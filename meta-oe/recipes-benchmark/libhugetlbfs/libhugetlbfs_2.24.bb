@@ -25,6 +25,7 @@ SRC_URI = " \
     file://0012-huge_page_setup_helper-use-python3-interpreter.patch \
     file://0013-elflink.c-include-libgen.h-for-basename.patch \
     file://0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch \
+    file://0015-support-reproducible-builds.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
