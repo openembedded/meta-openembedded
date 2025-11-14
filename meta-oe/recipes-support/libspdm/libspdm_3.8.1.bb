@@ -9,10 +9,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=8f9b59a81a88da8e812af43728b72dd7"
 
 DEPENDS = "openssl"
 
-SRC_URI = "git://github.com/DMTF/libspdm.git;branch=main;protocol=https \
-           file://0001-Backport-API-introduced-in-openssl-3.5.0.patch"
-SRCREV = "1be116c7b7713fa9003e1bd53b53a34758549eb9"
-
+SRC_URI = "git://github.com/DMTF/libspdm.git;branch=release-3.8;protocol=https"
+SRCREV = "d7c8c8247b4d0bd8ed75d9f35a558a4df173a4c7"
 
 inherit cmake
 
