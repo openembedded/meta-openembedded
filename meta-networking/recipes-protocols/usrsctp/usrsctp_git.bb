@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ffcf846341f3856d79a483eafa18e2a5"
 
 SRCREV = "a10cd498d964508c0e6ec6bd2be9dd4afcbb4d86"
 SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
-          "
+           file://CVE-2019-20503.patch \
+           "
 
 S = "${WORKDIR}/git"
 
