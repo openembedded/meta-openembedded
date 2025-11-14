@@ -2,6 +2,8 @@ http://cvs.fedoraproject.org/viewvc/devel/libwmf/libwmf-0.2.8.4-intoverflow.patc
 
 CVE-2006-3376 libwmf integer overflow
 
+CVE: CVE-2006-3376
+
 --- libwmf-0.2.8.4.orig/src/player.c	2002-12-10 19:30:26.000000000 +0000
 +++ libwmf-0.2.8.4/src/player.c	2006-07-12 15:12:52.000000000 +0100
 @@ -42,6 +42,7 @@
