@@ -25,6 +25,10 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
            file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
            file://9aa5c43315d83c19514251a11c4fba5a137f2821.patch \
+           file://0001-lib-replace-Implement-memset_explicit.patch \
+           file://0002-lib-replace-Add-test-for-memset_explicit.patch \
+           file://0003-Replace-memset_s-with-memset_explicit.patch \
+           file://0004-lib-replace-Remove-memset_s.patch \
            "
 
 SRC_URI:append:libc-musl = " \
