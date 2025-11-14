@@ -9,9 +9,8 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-test-Including-missing-string.h-for-memcpy.patch"
-SRCREV = "08468cc3830185c75f9e7edefd88aa01e5c2f8ab"
+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
+SRCREV = "e907d6a342e80b70874f93abd440b92b8a40b7bc"
 
 
 DEPENDS:append:libc-musl = " libucontext"
