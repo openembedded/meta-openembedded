@@ -9,7 +9,9 @@ DEPENDS = "libusb1"
 
 SRCREV = "bca484fc6f206ab9da2f73e8a0118fad45374d4e"
 
-SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
+SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https \
+           file://CVE-2021-3700.patch \
+           "
 
 S = "${WORKDIR}/git"
 
