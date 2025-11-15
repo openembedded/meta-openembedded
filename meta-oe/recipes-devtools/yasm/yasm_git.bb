@@ -33,3 +33,5 @@ do_configure:prepend() {
 CVE_STATUS_GROUPS += "CVE_STATUS_HASH_UPDATE"
 CVE_STATUS_HASH_UPDATE = "CVE-2021-33454 CVE-2023-31975 CVE-2023-37732"
 CVE_STATUS_HASH_UPDATE[status] = "fixed-version: patched in current git hash"
+
+CVE_PRODUCT += "tortall:yasm yasm_project:yasm"
