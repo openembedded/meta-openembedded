@@ -54,4 +54,4 @@ FILES:${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
 
 CVE_PRODUCT = "evince"
 # fixed-version: No action required. The current version (42.3) is not affected by the CVE which has been patched since version 3.1.2
-CVE_CHECK_IGNORE += "CVE-2021-0433 CVE-2011-5244"
+CVE_CHECK_IGNORE += "CVE-2011-0433 CVE-2011-5244"
