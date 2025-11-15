@@ -14,6 +14,9 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
+# fixed-version: patched in current git hash
+CVE_CHECK_IGNORE += "CVE-2015-8270 CVE-2015-8271 CVE-2015-8272"
+
 inherit autotools-brokensep
 
 EXTRA_OEMAKE = " \
