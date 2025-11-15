@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
            file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
            file://0001-bitvect-fix-build-with-gcc-15.patch \
            file://CVE-2023-29579.patch \
+           file://CVE-2021-33464.patch \
            "
 
 
