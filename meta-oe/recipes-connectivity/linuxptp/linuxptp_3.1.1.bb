@@ -30,3 +30,6 @@ PACKAGES =+ "${PN}-configs"
 
 FILES:${PN}-configs = "${docdir}"
 FILES:${PN}-doc = "${mandir}"
+
+# disputed: Considered to be bogus by upstream and major distros
+CVE_CHECK_IGNORE += "CVE-2024-42861"
