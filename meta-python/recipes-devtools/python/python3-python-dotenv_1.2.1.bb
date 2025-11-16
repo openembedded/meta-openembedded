@@ -11,12 +11,14 @@ SRC_URI += "file://0001-test_main.py-skip-two-test-when-running-as-root.patch"
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 # Uncomment this line to enable all the optional features.
-#PACKAGECONFIG ?= "cli"
+PACKAGECONFIG ?= ""
+PACKAGECONFIG:append = "${@bb.utils.contains('PTEST_ENABLED', '1', ' cli', '', d)}"
 PACKAGECONFIG[cli] = ",,,python3-click"
 
 PYPI_PACKAGE = "python_dotenv"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN}-ptest += "\
+    coreutils \
     python3-sh \
 "
