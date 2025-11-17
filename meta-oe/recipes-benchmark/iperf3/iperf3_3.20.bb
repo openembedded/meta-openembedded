@@ -10,17 +10,14 @@ SECTION = "console/network"
 BUGTRACKER = "https://github.com/esnet/iperf/issues"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f9873a72f714e240530e759e103ac7b2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b51332d7f45357a9410daa9a14a3655f"
 
 SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
            file://0001-configure.ac-check-for-CPP-prog.patch \
-           file://0001-fix-build-with-gcc-15.patch \
-           file://CVE-2025-54349.patch \
-           file://CVE-2025-54350.patch \
           "
 
-SRCREV = "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
+SRCREV = "0711330bacfaf1c2a804be66e7ecc26f481ede5d"
 
 RDEPENDS:${PN} = "libgcc"
 
