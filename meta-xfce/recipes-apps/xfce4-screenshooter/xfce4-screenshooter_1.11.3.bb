@@ -10,7 +10,7 @@ inherit xfce-app perlnative mime-xdg
 XFCEBASEBUILDCLASS = "meson"
 XFCE_COMPRESS_TYPE = "xz"
 
-SRC_URI[sha256sum] = "6ae5bc4823d43e770b3a11700d048d56bdcaafdef37de7deacb8970b55fc1565"
+SRC_URI[sha256sum] = "1f6a14f7d1b0c440f31e24a8cc4fe2996185357fa786f0c2cdfe564ef673a710"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[wayland] = "-Dwayland=enabled, -Dwayland=disabled, wayland-native wayland"
