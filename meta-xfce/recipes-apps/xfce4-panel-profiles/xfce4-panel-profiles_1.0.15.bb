@@ -1,4 +1,5 @@
 SUMMARY = "Backup, restore, import, and export panel layouts"
+HOMEPAGE = "https://docs.xfce.org/apps/xfce4-panel-profiles/start"
 SECTION = "x11/application"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
@@ -10,7 +11,7 @@ REQUIRED_DISTRO_FEATURES = "x11 gobject-introspection-data"
 DEPENDS += "intltool-native"
 
 SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "6d08354e8c44d4b0370150809c1ed601d09c8b488b68986477260609a78be3f9"
+SRC_URI[sha256sum] = "56cce1a27e88a18a282d568cbc601547a5dd704f0449a75bc284f0171aebaf3b"
 
 do_configure() {
     # special configure - no autotools...
