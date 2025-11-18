@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
 
 SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
 
-SRCREV = "69dd7d6764e333413dd12848607d72cab310e406"
+SRCREV = "222d1a4da3661dd95c2445b96f7e1e208f55d219"
 
 DEPENDS = "zstd"
 DEPENDS:append:libc-musl = " argp-standalone"
