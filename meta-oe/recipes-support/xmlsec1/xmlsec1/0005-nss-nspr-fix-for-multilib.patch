@@ -1,4 +1,4 @@
-From 1d7c01467e6f510b5636c73757f302a4bd277a3c Mon Sep 17 00:00:00 2001
+From 9f1e319a5f7dcbe611d1f41a551f644c293ac3f0 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Tue, 4 Feb 2020 23:39:49 -0800
 Subject: [PATCH] nss/nspr: fix for multilib
@@ -11,10 +11,10 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
  1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 40e9c0d..8f42d4d 100644
+index b59acc86..b8b0542d 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -966,24 +966,24 @@ fi
+@@ -990,24 +990,24 @@ fi
  dnl Priority 1: User specifies the path to installation
  if test "z$NSPR_FOUND" = "zno" -a "z$with_nspr" != "z" -a "z$with_nspr" != "zyes" ; then
      AC_MSG_CHECKING(for nspr library installation in "$with_nspr" folder)
@@ -47,6 +47,3 @@ index 40e9c0d..8f42d4d 100644
      fi
  fi
  
--- 
-2.43.0
-

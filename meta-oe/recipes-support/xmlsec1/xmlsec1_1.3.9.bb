@@ -13,16 +13,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
 SECTION = "libs"
 
 SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz \
-           file://fix-ltmain.sh.patch \
-           file://change-finding-path-of-nss.patch \
-           file://makefile-ptest.patch \
-           file://xmlsec1-examples-allow-build-in-separate-dir.patch \
-           file://0001-nss-nspr-fix-for-multilib.patch \
+           file://0001-force-to-use-our-own-libtool.patch \
+           file://0002-change-finding-path-of-nss-and-nspr.patch \
+           file://0003-xmlsec1-add-new-recipe.patch \
+           file://0004-examples-allow-build-in-separate-dir.patch \
+           file://0005-nss-nspr-fix-for-multilib.patch \
+           file://0006-xmlsec1-Fix-configure-QA-error-caused-by-host-lookup.patch \
+           file://0007-xmlsec-examples-Fix-LibXML2-deprecation-warnings-and.patch \
            file://run-ptest \
-           file://ensure-search-path-non-host.patch \
            "
 
-SRC_URI[sha256sum] = "d82e93b69b8aa205a616b62917a269322bf63a3eaafb3775014e61752b2013ea"
+SRC_URI[sha256sum] = "a631c8cd7a6b86e6adb9f5b935d45a9cf9768b3cb090d461e8eb9d043cf9b62f"
 
 UPSTREAM_CHECK_URI = "https://github.com/lsh123/xmlsec/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"

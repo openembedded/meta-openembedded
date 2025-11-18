@@ -1,4 +1,4 @@
-From c16d384fb64cf53351e150fb9e9b99cc6ba970b2 Mon Sep 17 00:00:00 2001
+From 67642a6bbf7261626f41b84cccf9b55b93c4cbc9 Mon Sep 17 00:00:00 2001
 From: Anatol Belski <anbelski@linux.microsoft.com>
 Date: Thu, 14 Jan 2021 17:36:23 +0000
 Subject: [PATCH] xmlsec1: Fix configure QA error caused by host lookup path
@@ -9,16 +9,15 @@ It will eventually arise after the configure QA as the configure script should o
 
 Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Anatol Belski <anbelski@linux.microsoft.com>
-
 ---
  configure.ac | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 3d23683..baf27b7 100644
+index b8b0542d..795355af 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -286,8 +286,8 @@ fi
+@@ -306,8 +306,8 @@ fi
  dnl ==========================================================================
  dnl Common installation locations
  dnl ==========================================================================

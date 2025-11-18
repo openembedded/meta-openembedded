@@ -1,4 +1,4 @@
-From 83a1381e1d6bd1b5ec3df6f7c4bc1f4fe4f860b6 Mon Sep 17 00:00:00 2001
+From 2e66dbeeec7d75ed86c87b83b3ac300257363c04 Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Thu, 15 Jun 2017 14:44:01 +0800
 Subject: [PATCH] xmlsec1: add new recipe
@@ -14,7 +14,7 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
  1 file changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/examples/Makefile b/examples/Makefile
-index 0b352bc..de3c217 100644
+index c6a25f09..3da1cb33 100644
 --- a/examples/Makefile
 +++ b/examples/Makefile
 @@ -12,9 +12,17 @@ PROGRAMS = \
@@ -37,6 +37,3 @@ index 0b352bc..de3c217 100644
  
  all: $(PROGRAMS)
  
--- 
-2.43.0
-
