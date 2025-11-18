@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 inherit pypi setuptools3
-SRC_URI[sha256sum] = "140303d5c8d2037730c548f8c7b93b20bb1dc301be280c378b82b8894589c954"
+SRC_URI[sha256sum] = "97f65757e8d09870de6fd973aeddb92f85435607235d20b2dfed93405d00c85b"
 
 CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
 
