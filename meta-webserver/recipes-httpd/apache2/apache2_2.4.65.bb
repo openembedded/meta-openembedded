@@ -48,6 +48,7 @@ CVE_STATUS[CVE-2007-6422] = "cpe-incorrect: The current version is not affected 
 CVE_STATUS[CVE-2007-6423] = "cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev"
 CVE_STATUS[CVE-2008-2168] = "cpe-incorrect: The current version is not affected by the CVE which affects versions up to 2.2.6 (excl.)"
 CVE_STATUS[CVE-2010-0425] = "not-applicable-platform: The current version is not affected. It only applies for Windows."
+CVE_STATUS[CVE-2025-3891] = "cpe-incorrect: The CVE is for a 3rd party module, which is not part of the Apache source distribution"
 
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
