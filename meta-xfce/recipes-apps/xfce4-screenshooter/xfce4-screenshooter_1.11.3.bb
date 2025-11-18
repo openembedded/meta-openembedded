@@ -13,7 +13,7 @@ XFCE_COMPRESS_TYPE = "xz"
 SRC_URI[sha256sum] = "1f6a14f7d1b0c440f31e24a8cc4fe2996185357fa786f0c2cdfe564ef673a710"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
-PACKAGECONFIG[wayland] = "-Dwayland=enabled, -Dwayland=disabled, wayland-native wayland"
+PACKAGECONFIG[wayland] = "-Dwayland=enabled, -Dwayland=disabled, gtk-layer-shell wayland-native wayland"
 
 EXTRA_OECONF += "WAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner"
 
