@@ -12,6 +12,8 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 BASE_PV := "${PV}"
 PV .= "-62"
 SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+    file://run-ptest \
+    file://imagemagick-ptest.sh \
     file://CVE-2021-20309.patch \
     file://CVE-2021-20310.patch \
     file://CVE-2021-3610.patch \
@@ -39,7 +41,11 @@ CVE_CHECK_IGNORE += "CVE-2016-7538"
 # current version is not affected by the CVE which affects versions at least earlier than 7.0.4-4
 CVE_CHECK_IGNORE += "CVE-2017-5506"
 
-inherit autotools pkgconfig update-alternatives
+inherit autotools pkgconfig update-alternatives ptest
+
+do_install_ptest() {
+    install -m 0755 ${WORKDIR}/imagemagick-ptest.sh ${D}${PTEST_PATH}/
+}
 
 # xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
 # if someone needs xml support then fix it first
