@@ -6,6 +6,7 @@ SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
            file://CVE-2024-34703.patch \
+		   file://CVE-2024-50382-and-CVE-2024-50383.patch \
 "
 SRC_URI[sha256sum] = "049c847835fcf6ef3a9e206b33de05dd38999c325e247482772a5598d9e5ece3"
 
