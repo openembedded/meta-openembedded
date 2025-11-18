@@ -3,10 +3,8 @@ SECTION = "console/utils"
 LICENSE = "GPL-2.0-only | Artistic-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c6570d8d699af1883db9d0e733ac9bfb"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
-           file://0001-checkpc-Do-not-define-Mail_fd-multiple-times.patch \
-          "
-SRC_URI[sha256sum] = "694a1747a96385b89e93f43343bf35cee5c8c73353a83814106911c99f09de10"
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+SRC_URI[sha256sum] = "c92597671f4c7cbe8bb3f38fbc4283354db84c6abff1efb675fa2e120421915d"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/lprng/files/lprng/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.tar"
