@@ -1,12 +1,12 @@
 SUMMARY = "PROJ.4 - Cartographic Projections library"
-HOMEPAGE = "http://trac.osgeo.org/proj/"
+HOMEPAGE = "https://proj.org/en/stable/"
 SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 DEPENDS = "sqlite3 sqlite3-native"
 
-SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "53d0cafaee3bb2390264a38668ed31d90787de05e71378ad7a8f35bb34c575d1"
+SRC_URI = "https://download.osgeo.org/${BPN}/${BP}.tar.gz"
+SRC_URI[sha256sum] = "65705ecd987b50bf63e15820ce6bd17c042feaabda981249831bd230f6689709"
 
 inherit bash-completion cmake lib_package pkgconfig
 
