@@ -1,0 +1,26 @@
+From 8470368e42af2b66a31a112299df6239fccf111e Mon Sep 17 00:00:00 2001
+From: Jamie Cameron <jcameron@webmin.com>
+Date: Sat, 3 Aug 2019 22:41:37 -0700
+Subject: [PATCH] Object names cannot contact special characters
+
+CVE: CVE-2019-15642
+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/df8a43fb4bdc9c858874f72773bcba597ae9432c]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ web-lib-funcs.pl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/web-lib-funcs.pl b/web-lib-funcs.pl
+index df673bb7..bbe154a9 100755
+--- a/web-lib-funcs.pl
++++ b/web-lib-funcs.pl
+@@ -7102,7 +7102,7 @@ elsif ($v[0] eq 'REF') {
+ elsif ($v[0] eq 'UNDEF') {
+ 	$rv = undef;
+ 	}
+-elsif ($v[0] =~ /^OBJECT\s+(.*)$/) {
++elsif ($v[0] =~ /^OBJECT\s+([A-Za-z0-9_:]+)$/) {
+ 	# An object hash that we have to re-bless
+ 	my $cls = $1;
+ 	$rv = { };
