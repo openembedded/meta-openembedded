@@ -8,7 +8,7 @@ SRC_URI = "https://www.ivarch.com/programs/sources/${BP}.tar.gz \
            file://pv-test-system-version.patch \
            file://run-ptest \
 "
-SRC_URI[sha256sum] = "998e717419c02ee735aea0b8d57f9cbe1112f40f4b947a39ba2611a415b64da0"
+SRC_URI[sha256sum] = "20d38794b00fa9384a1ddf9e395a8357a0782cd95c8b74cf1df8df6388950eec"
 
 UPSTREAM_CHECK_URI = "http://www.ivarch.com/programs/pv.shtml"
 UPSTREAM_CHECK_REGEX = "pv-(?P<pver>\d+(\.\d+)+).tar"
