@@ -3,7 +3,7 @@ SUMMARY = "Snagboot intends to be an open-source replacement vendor-specific too
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI[sha256sum] = "651e9bcc2e43d3fc67cc1cff5b812e3bfb4ed132f4fd7fc1dc5e3fea31a7406d"
+SRC_URI[sha256sum] = "64d114f743cf4d892a63bc35d6af45958e569030881154f9f2ffeac13cf9b664"
 
 inherit pypi python_setuptools_build_meta
 
