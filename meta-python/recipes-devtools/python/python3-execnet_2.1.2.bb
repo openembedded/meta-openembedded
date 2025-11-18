@@ -11,7 +11,7 @@ DEPENDS += "\
     python3-hatch-vcs-native \
 "
 
-SRC_URI[sha256sum] = "5189b52c6121c24feae288166ab41b32549c7e2348652736540b9e6e7d4e72e3"
+SRC_URI[sha256sum] = "63d83bfdd9a23e35b9c6a3261412324f964c2ec8dcd8d3c6916ee9373e0befcd"
 
 inherit ptest-python-pytest pypi python_hatchling
 
