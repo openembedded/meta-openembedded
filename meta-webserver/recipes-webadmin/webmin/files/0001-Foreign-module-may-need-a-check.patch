@@ -1,0 +1,27 @@
+From 2659c2990427c587a49014abb5275aec0ea44c0a Mon Sep 17 00:00:00 2001
+From: Ilia Rostovtsev <ilia@rostovtsev.io>
+Date: Sun, 20 Feb 2022 12:48:27 +0300
+Subject: [PATCH] Foreign module may need a check
+
+CVE: CVE-2022-0824
+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/39ea464f0c40b325decd6a5bfb7833fa4a142e38]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ web-lib-funcs.pl | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/web-lib-funcs.pl b/web-lib-funcs.pl
+index bbe154a9..4bb2b0d6 100755
+--- a/web-lib-funcs.pl
++++ b/web-lib-funcs.pl
+@@ -4669,7 +4669,8 @@ if ($module_name) {
+ 	}
+ 
+ if ($module_name && !$main::no_acl_check &&
+-    !defined($ENV{'FOREIGN_MODULE_NAME'}) &&
++    (!defined($ENV{'FOREIGN_MODULE_NAME'}) ||
++      defined($ENV{'FOREIGN_MODULE_SEC_CHECK'})) &&
+     $main::webmin_script_type eq 'web') {
+ 	# Check if the HTTP user can access this module
+ 	if (!&foreign_available($module_name)) {
