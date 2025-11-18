@@ -3,8 +3,8 @@ HOMEPAGE = "https://www.pylint.org/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 
-SRCREV = "98942ba4126a6fe1657bad77027bcc11016d16da"
-SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https \
+SRCREV = "84b6552b86e210097ac29de7ef64b152efb4a454"
+SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v${PV} \
            file://0001-Adjust-test-expectations-for-ptest.patch \
            file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
            file://run-ptest \
