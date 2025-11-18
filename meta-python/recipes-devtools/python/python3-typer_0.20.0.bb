@@ -23,8 +23,11 @@ RDEPENDS:${PN} += "\
 "
 # python3-misc for webbrowser module
 RDEPENDS:${PN}-ptest += "\
+    python3-coverage \
+    python3-markdown-it-py \
     python3-misc \
     python3-mypy \
+    python3-pluggy \
     python3-pytest \
     python3-pytest-cov \
     python3-pytest-sugar \
