@@ -1,0 +1,29 @@
+From 0d5e731a173767e7e4ea2051a7a33c8e5cc57880 Mon Sep 17 00:00:00 2001
+From: Jamie Cameron <jcameron@webmin.com>
+Date: Mon, 27 Nov 2017 08:50:15 -0800
+Subject: [PATCH] HTML escape command description
+
+CVE: CVE-2017-17089
+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/a9c97eea6c268fb83d93a817d58bac75e0d2599e]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ custom/run.cgi | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/custom/run.cgi b/custom/run.cgi
+index 327de410..375b041b 100755
+--- a/custom/run.cgi
++++ b/custom/run.cgi
+@@ -40,8 +40,9 @@ if ($cmd->{'format'} ne 'redirect' && $cmd->{'format'} ne 'form') {
+ 		print "\n";
+ 		}
+ 	else {
+-		&ui_print_unbuffered_header($cmd->{'desc'}, $text{'run_title'},
+-					    "", -d "help" ? "run" : undef);
++		&ui_print_unbuffered_header(
++			&html_escape($cmd->{'desc'}), $text{'run_title'},
++			"", -d "help" ? "run" : undef);
+ 		}
+ 	}
+ 
