@@ -20,7 +20,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
 SRC_URI:append:class-target = " \
             file://0003-iconv-fix-detection.patch \
             file://0004-pear-fix-Makefile.frag-for-Yocto.patch \
-            file://0005-sapi-cli-config.m4-fix-build-directory.patch \
+            file://0005-explicitly-not-generate-phar.php-during-cross-compil.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
@@ -230,11 +230,10 @@ php_sysroot_preprocess () {
 
 MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp', '', d)}"
 
-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-phpdbg ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
+PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-phpdbg ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
 
 RDEPENDS:${PN} += "libgcc"
 RDEPENDS:${PN}-pear = "${PN}"
-RDEPENDS:${PN}-phar = "${PN}-cli"
 RDEPENDS:${PN}-cli = "${PN}"
 RDEPENDS:${PN}-modphp = "${PN} apache2"
 RDEPENDS:${PN}-opcache = "${PN}"
@@ -254,7 +253,6 @@ FILES:${PN}-dbg =+ "${bindir}/.debug \
 FILES:${PN}-doc += "${PHP_LIBDIR}/php/doc"
 FILES:${PN}-cli = "${bindir}/php"
 FILES:${PN}-phpdbg = "${bindir}/phpdbg"
-FILES:${PN}-phar = "${bindir}/phar*"
 FILES:${PN}-cgi = "${bindir}/php-cgi"
 FILES:${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${sysconfdir}/php-fpm.d/www.conf.default"
 FILES:${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
