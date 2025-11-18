@@ -19,7 +19,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://remove-python2.3.patch \
            file://mysql-config-fix.patch \
            file://webmin.service \
-            "
+           file://0001-Escape-potentially-malicious-HTTP-headers.patch \
+           "
 
 SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
 SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
