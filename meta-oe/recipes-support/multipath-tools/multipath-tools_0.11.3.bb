@@ -44,14 +44,12 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
            file://0010-Always-use-devmapper.patch \
            file://0011-fix-bug-of-do_compile-and-do_install.patch \
            file://0012-add-explicit-dependency-on-libraries.patch \
-           file://0001-libmpathutils-uxsock.c-Include-string.h-for-memcpy.patch \
-           file://0013-libdmmp-Makefile-Fix-KBUILD_BUILD_TIMESTAMP-usage.patch \
-           file://0014-libdmmp-Makefile-Add-target-docs-man-dmmp_strerror.3.patch \
+           file://0013-libdmmp-Makefile-Add-target-docs-man-dmmp_strerror.3.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRCREV = "cb8de98b2cc3b62fd1a578ba479c0820778e9c02"
+SRCREV = "7a84cc602ea0884ae0c767e6c89592059012db04"
 
 
 inherit systemd pkgconfig
