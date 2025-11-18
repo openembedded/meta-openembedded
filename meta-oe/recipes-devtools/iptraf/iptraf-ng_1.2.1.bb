@@ -28,6 +28,7 @@ SRC_URI = "https://src.fedoraproject.org/repo/pkgs/iptraf-ng/v${PV}.tar.gz/sha51
            file://iptraf-ng-tmpfiles.conf \
            file://ncurses-config.patch \
            file://0001-make-Make-CC-weak-assignment.patch \
+           file://CVE-2024-52949.patch \
            "
 SRC_URI[sha256sum] = "9f5cef584065420dea1ba32c86126aede1fa9bd25b0f8362b0f9fd9754f00870"
 
