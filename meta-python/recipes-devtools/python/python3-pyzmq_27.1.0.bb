@@ -59,4 +59,5 @@ RDEPENDS:${PN}-ptest += "\
 do_install_ptest() {
         install -d ${D}${PTEST_PATH}/tests
         cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+        install -m 0644 ${S}/pytest.ini ${D}${PTEST_PATH}/pytest.ini
 }
