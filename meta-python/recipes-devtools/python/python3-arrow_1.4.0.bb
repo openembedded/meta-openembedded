@@ -14,6 +14,7 @@ inherit pypi python_flit_core ptest-python-pytest
 RDEPENDS:${PN}-ptest += " \
     python3-dateparser \
     python3-dateutil-zoneinfo \
+    python3-pre-commit \
     python3-pytest-cov \
     python3-pytest-mock \
     python3-pytz \
@@ -23,4 +24,5 @@ RDEPENDS:${PN}-ptest += " \
 
 RDEPENDS:${PN} += " \
     python3-dateutil \
+    python3-tzdata \
 "
