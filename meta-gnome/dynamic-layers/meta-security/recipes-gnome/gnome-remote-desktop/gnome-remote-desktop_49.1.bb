@@ -8,7 +8,6 @@ inherit gnomebase pkgconfig gettext gsettings features_check useradd
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI += "file://0001-src-meson.build-add-missing-dependency-on-winpr.patch"
 SRC_URI[archive.sha256sum] = "7800f388301eeb8147b0be55e8fa7cbd7521066a48a06115cc0ead9f0cea188a"
 
 DEPENDS = " \
