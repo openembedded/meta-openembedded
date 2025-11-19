@@ -25,6 +25,7 @@ SRC_URI = " \
     file://respect-DESTDIR-when-create-link.patch \
     file://not-append-system-name-to-lib-name.patch \
     file://wx-config-fix-libdir-for-multilib.patch \
+    file://CVE-2024-58249.patch \
 "
 SRCREV= "9c0a8be1dc32063d91ed1901fd5fcd54f4f955a1"
 S = "${WORKDIR}/git"
