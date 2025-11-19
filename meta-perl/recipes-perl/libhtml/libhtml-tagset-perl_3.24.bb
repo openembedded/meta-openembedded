@@ -18,7 +18,7 @@ inherit cpan ptest-perl
 
 RDEPENDS:${PN} += "perl-module-strict perl-module-vars"
 
-RDEPENDS:${PN}-ptest += "perl-module-test"
+RDEPENDS:${PN}-ptest += "perl-module-test perl-module-test-more"
 
 do_install:prepend() {
     # requires "-T" (taint) command line option
