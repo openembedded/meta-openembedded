@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
 
 SRC_URI[sha256sum] = "e080377d98957beec053580d38ae54fcdf7c470fb78670ba4bf8b5f9d5cad2a9"
 
-inherit pypi setuptools3
+DEPENDS += "python3-setuptools-scm-native"
+
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "python3-regex"
