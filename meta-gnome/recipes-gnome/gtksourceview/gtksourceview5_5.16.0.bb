@@ -14,17 +14,13 @@ DEPENDS = " \
     pango \
 "
 
-PNAME = "gtksourceview"
-
-S = "${UNPACKDIR}/${PNAME}-${PV}"
-
-
 inherit gnomebase lib_package gettext features_check gi-docgen gtk-icon-cache gobject-introspection vala
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI = "${GNOME_MIRROR}/gtksourceview/5.16/${PNAME}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "ab35d420102f3e8b055dd3b8642d3a48209f888189e6254d0ffb4b6a7e8c3566"
+GNOMEBN = "gtksourceview"
+
+SRC_URI[archive.sha256sum] = "ab35d420102f3e8b055dd3b8642d3a48209f888189e6254d0ffb4b6a7e8c3566"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
