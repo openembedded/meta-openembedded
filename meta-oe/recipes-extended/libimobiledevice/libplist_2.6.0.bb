@@ -6,10 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
 
 DEPENDS = "libxml2 glib-2.0 swig python3"
 
-inherit autotools pkgconfig python3native python3targetconfig
+inherit autotools pkgconfig python3native python3targetconfig ptest
 
 SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
-SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
+SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master \
+           file://run-ptest \
+"
 
 
 CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
@@ -30,6 +32,28 @@ do_install:append () {
     fi
 }
 
+do_install_ptest(){
+    # tests expect a particular directory structure for input and output
+    install -d ${D}${PTEST_PATH}/input/test/data
+    install -d ${D}${PTEST_PATH}/test/tools
+    install -d ${D}${PTEST_PATH}/test/test/.libs
+    install -d ${D}${PTEST_PATH}/test/test/data
+    install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
+    install ${S}/test/*.test ${D}${PTEST_PATH}/test/
+    install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/test/test/.libs/
+    install -m 0755 ${B}/test/.libs/integer_set_test ${D}${PTEST_PATH}/test/test/
+    for t in $(find ${B}/test -type f -name 'plist*' \! -name '*.o'); do
+        install -m 0755 $t ${D}${PTEST_PATH}/test/test/
+    done
+    for t in $(find ${B}/tools -type f -name 'plist*' \! -name '*.o'); do
+        install -m 0755 $t ${D}${PTEST_PATH}/test/tools/
+    done
+    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
+        ${D}${PTEST_PATH}/test/test/plist_cmp
+    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
+        ${D}${PTEST_PATH}/test/test/plist_test
+}
+
 PACKAGES =+ "${PN}-utils \
              ${PN}++ \
              ${PN}-python"
@@ -38,3 +62,5 @@ FILES:${PN} = "${libdir}/libplist-2.0${SOLIBS}"
 FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
 FILES:${PN}-utils = "${bindir}/*"
 FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+
+RDEPENDS:${PN}-ptest += "bash"

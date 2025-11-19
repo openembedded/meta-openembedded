@@ -54,6 +54,7 @@ PTESTS_FAST_META_OE = "\
     xmlsec1 \
     zeromq \
     cjson \
+    libplist \
 "
 PTESTS_FAST_META_OE:append:x86 = " mcelog"
 PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
