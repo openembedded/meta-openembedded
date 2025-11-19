@@ -1,0 +1,34 @@
+From 35eea881e1aeb27fc12cfb301e497e72e59e720f Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Nov 2025 17:23:09 -0800
+Subject: [PATCH] make the TLS tests skip when pyopenssl isn't available
+
+In some distributions e.g. yocto
+pyOpenSSL is a packageconfig and disabled by default,
+and it means pyopenssl.py module is not installed as a result.
+
+This test fails plainly when it can not find urllib3.contrib.pyopenssl
+instead skip the test if it does not find the module.
+
+Upstream-Status: Submitted [https://github.com/googleapis/google-auth-library-python/pull/1873]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ tests/transport/test__custom_tls_signer.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/tests/transport/test__custom_tls_signer.py b/tests/transport/test__custom_tls_signer.py
+index 3a33c2c..6f88ddf 100644
+--- a/tests/transport/test__custom_tls_signer.py
++++ b/tests/transport/test__custom_tls_signer.py
+@@ -18,7 +18,10 @@ import os
+ import mock
+ import pytest  # type: ignore
+ from requests.packages.urllib3.util.ssl_ import create_urllib3_context  # type: ignore
+-import urllib3.contrib.pyopenssl  # type: ignore
++urllib3_pyopenssl = pytest.importorskip(
++    "urllib3.contrib.pyopenssl",
++    reason="urllib3.contrib.pyopenssl not available in this environment",
++)
+ 
+ from google.auth import exceptions
+ from google.auth.transport import _custom_tls_signer
