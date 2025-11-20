@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
            file://0001-support-cross-compiling.patch \
            "
-SRCREV = "89f1f4626a2aaf5f3d5ca6437f41def2998fbe09"
+SRCREV = "693df7b42c666f88c719f9973be0ad71607328e0"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 
@@ -34,6 +34,7 @@ DEPENDS += " \
     freetype \
     lcms \
     openjpeg \
+    python3-pybind11-native \
 "
 
 RDEPENDS:${PN} += " \
