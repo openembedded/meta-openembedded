@@ -49,10 +49,12 @@ do_install_ptest(){
     for t in $(find ${B}/tools -type f -name 'plist*' \! -name '*.o'); do
         install -m 0755 $t ${D}${PTEST_PATH}/test/tools/
     done
-    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
-        ${D}${PTEST_PATH}/test/test/plist_cmp
-    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
-        ${D}${PTEST_PATH}/test/test/plist_test
+    for f in test/plist_cmp test/plist_test test/plist_test++ test/plist_jtest \
+        test/plist_btest test/plist_otest tools/plistutil; do
+        sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
+            ${D}${PTEST_PATH}/test/$f
+    done
+    sed -i '/notinst_deplibs=/d' ${D}${PTEST_PATH}/test/test/plist_test++
 }
 
 PACKAGES =+ "${PN}-utils \
