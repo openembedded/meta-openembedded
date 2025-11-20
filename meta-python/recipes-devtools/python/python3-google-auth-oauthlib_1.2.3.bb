@@ -4,9 +4,11 @@ HOMEPAGE = "https://github.com/googleapis/google-auth-library-python-oauthlib"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"
+SRC_URI += "file://0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch"
+SRC_URI[sha256sum] = "eb09e450d3cc789ecbc2b3529cb94a713673fd5f7a22c718ad91cf75aedc2ea4"
 
 inherit pypi setuptools3 ptest
+PYPI_PACKAGE = "google_auth_oauthlib"
 
 SRC_URI += " \
         file://run-ptest \
