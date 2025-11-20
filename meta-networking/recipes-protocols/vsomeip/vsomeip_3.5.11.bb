@@ -17,9 +17,11 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=
            file://0005-Replace-address-from_string-with-make_address.patch \
            file://0006-Fix-scanning-64-bit-integer-types.patch \
            file://0007-Do-not-treat-warnings-as-errors-with-clang.patch \
+           file://0008-Replace-io_service-with-io_context.patch \
+           file://0009-cached_event_tests-CMakeLists.txt-update-cmake_minim.patch \
           "
 
-SRCREV = "c4e0db329da9b63f511f3c2456c040582daf9305"
+SRCREV = "f58ba578c8c04e02dcf08d3ebcb9a71ca1e203ea"
 SRC_URI[gtest.sha256sum] = "65fab701d9829d38cb77c14acdc431d2108bfdbf8979e40eb8ae567edf10b27c"
 
 COMPATIBLE_HOST:mips = "null"
