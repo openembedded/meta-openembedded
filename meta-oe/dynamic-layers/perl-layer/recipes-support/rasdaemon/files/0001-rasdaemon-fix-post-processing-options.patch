@@ -1,0 +1,83 @@
+From 64bc04705ea8606eed1b1e810904cc8296e99472 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sat, 2 Aug 2025 15:43:11 +0800
+Subject: [PATCH] rasdaemon: fix post-processing options
+
+Some post-processing options require an argument, otherwise a segfault
+will occur:
+
+root@qemux86-64:~# rasdaemon  -p --status --ipid
+Segmentation fault    (core dumped) rasdaemon -p --status --ipid
+
+According to the specification of argp, when an option requires an
+argument, we should use the 'arg' parameter, which points to the
+argument string for that option. Therefore we set char* arg for these
+options in struct argp_option and use it in parse_opt_offline function
+instead of state->argv[state->next].
+
+Fix #220
+
+Upstream-Status: Backport
+[https://github.com/mchehab/rasdaemon/commit/64bc04705ea8606eed1b1e810904cc8296e99472]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ rasdaemon.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/rasdaemon.c b/rasdaemon.c
+index be5c390..9368b12 100644
+--- a/rasdaemon.c
++++ b/rasdaemon.c
+@@ -98,22 +98,22 @@ static error_t parse_opt_offline(int key, char *arg,
+ 		event.smca = true;
+ 		break;
+ 	case MODEL:
+-		event.model = strtoul(state->argv[state->next], NULL, 0);
++		event.model = strtoul(arg, NULL, 0);
+ 		break;
+ 	case FAMILY:
+-		event.family = strtoul(state->argv[state->next], NULL, 0);
++		event.family = strtoul(arg, NULL, 0);
+ 		break;
+ 	case BANK_NUM:
+-		event.bank = atoi(state->argv[state->next]);
++		event.bank = atoi(arg);
+ 		break;
+ 	case IPID_REG:
+-		event.ipid = strtoull(state->argv[state->next], NULL, 0);
++		event.ipid = strtoull(arg, NULL, 0);
+ 		break;
+ 	case STATUS_REG:
+-		event.status = strtoull(state->argv[state->next], NULL, 0);
++		event.status = strtoull(arg, NULL, 0);
+ 		break;
+ 	case SYNDROME_REG:
+-		event.synd = strtoull(state->argv[state->next], NULL, 0);
++		event.synd = strtoull(arg, NULL, 0);
+ 		break;
+ 	default:
+ 		return ARGP_ERR_UNKNOWN;
+@@ -146,12 +146,12 @@ int main(int argc, char *argv[])
+ #ifdef HAVE_MCE
+ 	const struct argp_option offline_options[] = {
+ 		{"smca", SMCA, 0, 0, "AMD SMCA Error Decoding"},
+-		{"model", MODEL, 0, 0, "CPU Model"},
+-		{"family", FAMILY, 0, 0, "CPU Family"},
+-		{"bank", BANK_NUM, 0, 0, "Bank Number"},
+-		{"ipid", IPID_REG, 0, 0, "IPID Register (for SMCA systems only)"},
+-		{"status", STATUS_REG, 0, 0, "Status Register"},
+-		{"synd", SYNDROME_REG, 0, 0, "Syndrome Register"},
++		{"model", MODEL, "MODEL", 0, "CPU Model"},
++		{"family", FAMILY, "FAMILY", 0, "CPU Family"},
++		{"bank", BANK_NUM, "BANK_NUM", 0, "Bank Number"},
++		{"ipid", IPID_REG, "IPID_REG", 0, "IPID Register (for SMCA systems only)"},
++		{"status", STATUS_REG, "STATUS_REG", 0, "Status Register"},
++		{"synd", SYNDROME_REG, "SYNDROME_REG", 0, "Syndrome Register"},
+ 		{0, 0, 0, 0, 0, 0},
+ 	};
+ 
+-- 
+2.43.0
+
