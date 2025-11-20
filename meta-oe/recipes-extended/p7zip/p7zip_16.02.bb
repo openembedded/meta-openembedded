@@ -42,4 +42,7 @@ do_install() {
 RPROVIDES:${PN} += "lib7z.so()(64bit) 7z lib7z.so"
 RPROVIDES:${PN}-dev += "lib7z.so()(64bit) 7z lib7z.so"
 
+# According to debian, this is due to Crash in CLI tool, no security impact
+CVE_CHECK_IGNORE += "CVE-2022-47069"
+
 BBCLASSEXTEND = "native nativesdk"
