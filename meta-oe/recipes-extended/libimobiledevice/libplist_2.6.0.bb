@@ -11,6 +11,7 @@ inherit autotools pkgconfig python3native python3targetconfig ptest
 SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
 SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master;tag=${PV} \
            file://run-ptest \
+           file://0001-test-fix-operator-error.patch \
 "
 
 
