@@ -7,9 +7,8 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
 
 inherit cpan
 
-SRCREV = "e04534a40925354187e8432d44248229d774f34a"
+SRCREV = "a162a723be10dac03b3037f7cc64c1f9c480448e"
 SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
-
 
 RDEPENDS:${PN} = " \
     perl \
@@ -19,3 +18,11 @@ RDEPENDS:${PN} = " \
     perl-module-scalar-util \
     perl-module-compress-zlib \
 "
+
+do_install:append() {
+    # Remove reference to TMPDIR [buildpaths]
+    sed -i -e 's,${TMPDIR},,g' ${D}${bindir}/exiftool
+
+    # Fix shebang and QA Issue [file-rdeps] to use target /usr/bin/env
+    sed -i -e '1s|^#!.*env perl|#!/usr/bin/env perl|' ${D}${bindir}/exiftool
+}
