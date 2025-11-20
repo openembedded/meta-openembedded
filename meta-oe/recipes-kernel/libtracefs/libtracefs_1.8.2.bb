@@ -16,6 +16,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BP
 
 inherit pkgconfig bash-completion
 
+do_compile:prepend() {
+    touch ${S}/src/sqlhist.tab.c
+}
+
 do_install() {
     oe_runmake install DESTDIR=${D} pkgconfig_dir=${libdir}/pkgconfig
 }
