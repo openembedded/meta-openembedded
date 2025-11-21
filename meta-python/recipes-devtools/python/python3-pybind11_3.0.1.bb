@@ -7,7 +7,7 @@ DEPENDS = "\
     python3-ninja-native \
 "
 
-SRCREV = "a2e59f0e7065404b44dfe92a28aca47ba1378dc4"
+SRCREV = "f5fbe867d2d26e4a0a9177a51f6e568868ad3dc8"
 SRC_URI = "\
     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
 "
