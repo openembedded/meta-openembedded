@@ -7,6 +7,7 @@ inherit pypi setuptools3 ptest
 
 SRC_URI += " \
         file://0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch \
+        file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
         file://run-ptest \
 "
 SRC_URI[sha256sum] = "88228eee5fc21b62a1b5fe773ca15e67778cb07dc8363adcb4a8827b52d81483"
