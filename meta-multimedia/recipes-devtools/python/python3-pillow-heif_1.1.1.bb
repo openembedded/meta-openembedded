@@ -11,7 +11,7 @@ PYPI_PACKAGE = "pillow_heif"
 inherit pypi python_setuptools_build_meta
 
 SRC_URI += "file://0001-setup.py-support-cross-compiling.patch"
-SRC_URI[sha256sum] = "61d473929340d3073722f6316b7fbbdb11132faa6bac0242328e8436cc55b39a"
+SRC_URI[sha256sum] = "f60e8c8a8928556104cec4fff39d43caa1da105625bdb53b11ce3c89d09b6bde"
 
 DEPENDS += "libheif"
 
