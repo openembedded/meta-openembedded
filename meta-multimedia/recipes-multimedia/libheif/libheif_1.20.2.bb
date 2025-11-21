@@ -6,9 +6,9 @@ LICENSE_FLAGS = "commercial"
 
 COMPATIBLE_MACHINE:powerpc64le = "null"
 
-SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases"
 
-SRCREV = "5e9deb19fe6b3768af0bb8e9e5e8438b15171bf3"
+SRCREV = "35dad50a9145332a7bfdf1ff6aef6801fb613d68"
 
 inherit cmake pkgconfig
 
