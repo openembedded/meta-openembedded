@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
           "
 
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(-\d+)+)"
 
 DEPENDS = "abseil-cpp ${@bb.utils.contains('PTEST_ENABLED', '1', 'gtest googlebenchmark', '', d)}"
 
