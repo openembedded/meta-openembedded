@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=main;protocol=https \
            file://run-ptest \
            file://CVE-2025-6375.patch \
            file://0001-fix-test-Use-96-bit-IV-with-aes-256-gcm-to-fix-4347.patch \
+           file://CVE-2023-52389.patch \
            "
 SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"
 
