@@ -136,7 +136,7 @@ do_install:append:class-nativesdk() {
     create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="\$OECORE_NATIVE_SYSROOT/usr/lib/ostree/ostree-grub-generator"
 }
 
-PACKAGE_BEFORE_PN = " \
+PACKAGE_BEFORE_PN += " \
     ${PN}-dracut \
     ${PN}-grub \
     ${PN}-mkinitcpio \
