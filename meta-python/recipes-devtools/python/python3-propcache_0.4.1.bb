@@ -22,3 +22,4 @@ RDEPENDS:${PN}-ptest += " \
 	python3-statistics \
 "
 
+BBCLASSEXTEND += "native nativesdk"
