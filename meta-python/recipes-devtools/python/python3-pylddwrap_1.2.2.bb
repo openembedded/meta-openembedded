@@ -11,7 +11,7 @@ PR = "r0"
 
 RDEPENDS:${PN} += "python3-icontract"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
 do_install:append() {
     # similarly to https://gitlab.com/akuster/meta-security/-/commit/0fd8e0f8cae612010bafecbff77ed9bb6f647a2d#4e154e295e639fd6c298ca644c75291eb99e0a57_0_16
