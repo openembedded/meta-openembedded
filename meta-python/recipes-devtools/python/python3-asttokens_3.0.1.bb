@@ -15,4 +15,4 @@ RDEPENDS:${PN} += " \
 	python3-six \
 "
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
