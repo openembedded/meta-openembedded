@@ -15,6 +15,7 @@ SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source
            file://CVE-2021-3482.patch \
            file://CVE-2021-29623.patch \
            file://CVE-2021-32617.patch \
+           file://CVE-2021-32815.patch \
            "
 SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
 
