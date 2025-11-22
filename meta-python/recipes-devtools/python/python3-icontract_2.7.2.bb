@@ -11,4 +11,4 @@ SRC_URI[sha256sum] = "281ec16f1d09bbcca7a4227e82cd10b4d5fb291f638df77c29b7acf493
 
 RDEPENDS:${PN} += "python3-asttokens"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
