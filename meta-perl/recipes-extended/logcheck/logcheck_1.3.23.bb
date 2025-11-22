@@ -77,3 +77,6 @@ RDEPENDS:${PN} = "\
 "
 
 FILES:${PN} += "${datadir}/logtail"
+
+# This vulnerability is specific to the way Gentoo packages this application.
+CVE_CHECK_IGNORE += "CVE-2017-20148"
