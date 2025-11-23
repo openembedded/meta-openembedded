@@ -34,6 +34,11 @@ SRC_URI[sha256sum] = "98066f5363504b26c34dd20fbcc3c957990d764cdf42576c836fc02107
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
+# not-applicable-config: the vulnerability is not present in upstream, only in Debian-packaged version
+CVE_CHECK_IGNORE += "CVE-2022-0543"
+# not-applicable-config: only affects Windows
+CVE_CHECK_IGNORE += "CVE-2022-3734"
+
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32:toolchain-clang = "-latomic"
 FINAL_LIBS:mips = "-latomic"
