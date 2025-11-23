@@ -13,6 +13,7 @@ PTESTS_FAST_META_OE = "\
     cmocka \
     cunit \
     duktape \
+    exiv2 \
     fuse3 \
     function2 \
     fwupd \
