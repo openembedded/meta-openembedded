@@ -16,8 +16,6 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            file://0006-Define-correct-gregs-for-RISCV32.patch \
-           file://CVE-2023-41056.patch \
-           file://CVE-2023-45145.patch \
            file://CVE-2024-31227.patch \
            file://CVE-2024-31228.patch \
            file://CVE-2024-31449.patch \
@@ -32,7 +30,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://CVE-2025-46819.patch \
            file://CVE-2025-49844.patch \
            "
-SRC_URI[sha256sum] = "97065774d5fb8388eb0d8913458decfcb167d356e40d31dd01cd30c1cc391673"
+SRC_URI[sha256sum] = "98066f5363504b26c34dd20fbcc3c957990d764cdf42576c836fc021073f4341"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
