@@ -85,3 +85,5 @@ FILES:${PN} += " \
 "
 
 SYSTEMD_SERVICE:${PN} = "vncserver@.service"
+
+CVE_STATUS[2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.15.0)"
