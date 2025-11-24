@@ -22,17 +22,15 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://rsyslog.conf \
            file://rsyslog.logrotate \
            file://rsyslog.service \
-           file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
            file://0001-tests-disable-the-check-for-inotify.patch \
            file://0001-tests-tcpflood.c-Pass-correct-parameter-type-to-send.patch \
 "
 
 SRC_URI:append:libc-musl = " \
-    file://0001-Include-sys-time-h.patch \
     file://disable-omfile-outchannel.patch \
 "
-SRC_URI[sha256sum] = "6d6fd0257c95e756765d4d585a833d54dd3a0e5eeb8308b862a81b368a74bb7b"
+SRC_URI[sha256sum] = "a70a9834186859539a6a4d1c7b3f68c23897e805829b764a45e92cb0cc95e66a"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -92,6 +90,8 @@ TESTDIR = "tests"
 do_compile_ptest() {
     echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
     oe_runmake -C ${TESTDIR} buildtest-TESTS
+    # buildpaths: remove .deps/*, an unneeded compile dependency automake artifact.
+    rm -rf ${B}/${TESTDIR}/.deps
 }
 
 do_install_ptest() {
