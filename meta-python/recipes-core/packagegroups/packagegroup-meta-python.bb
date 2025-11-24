@@ -348,6 +348,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-forked \
     python3-pytest-helpers-namespace \
     python3-pytest-html \
+    python3-pytest-httpx \
     python3-pytest-lazy-fixtures \
     python3-pytest-metadata \
     python3-pytest-tempdir \
