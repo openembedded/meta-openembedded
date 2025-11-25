@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
            file://0001-include-libgen.h-for-basename.patch \
            "
 
-SRCREV = "c8b7a765cbd731af32964adaf921f9e19d56a048"
-PV = "2.03.36"
+SRCREV = "d34fc799fd86538756ba56b37e1ab56ab1b75d13"
+PV = "2.03.37"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
 
