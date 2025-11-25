@@ -10,7 +10,7 @@ HOMEPAGE = "https://github.com/samuelcolvin/dirty-equals"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aa97bb3778992892e226b4504b83b60c"
 
-SRC_URI[sha256sum] = "623d7a07c5ba437f1a834c6246d1e3eb97238ca70331c61a499d9aabd757b899"
+SRC_URI[sha256sum] = "f4ac74ee88f2d11e2fa0f65eb30ee4f07105c5f86f4dc92b09eb1138775027c3"
 
 S = "${UNPACKDIR}/dirty_equals-${PV}"
 
