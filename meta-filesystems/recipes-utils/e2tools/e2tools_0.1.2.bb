@@ -39,7 +39,21 @@ do_install_ptest() {
         ${D}${PTEST_PATH}/build/autom4te.cache \
         ${D}${PTEST_PATH}/*/*/.git ${D}${PTEST_PATH}/*/*/.github \
         ${D}${PTEST_PATH}/*/*/autom4te.cache
-    sed -i -e 's;${TMPDIR};;g' ${D}${PTEST_PATH}/build/config.status
+    sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+        -e 's@[^ ]*--sysroot=[^ "]*@@g' \
+        -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
+        -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
+        -e '/EXT2FS_CFLAGS/d' \
+        -e '/LDFLAGS/d' \
+        -e '/PKG_CONFIG_PATH/d' \
+        -e '/PKG_CONFIG_LIBDIR/d' \
+        -e 's@${S}@${PTEST_PATH}@g' \
+        -e 's@${B}@${PTEST_PATH}/build@g' \
+        -e 's@${HOSTTOOLS_DIR}@@g' \
+        -e 's@${RECIPE_SYSROOT}@@g' \
+        -i ${D}${PTEST_PATH}/build/config.status
 }
 
 RDEPENDS:${PN}-ptest += "bash coreutils e2fsprogs e2tools gawk make perl"
