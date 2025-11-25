@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI += " \
-    file://0001-Add-asyncio-fixture-to-test_instance_async_method_sp.patch \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "159e9edac4c451ce77a5cdb9fc5d1100708d2dd4ba3c3df572f14097351af80e"
+SRC_URI[sha256sum] = "1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"
 
 inherit pypi python_setuptools_build_meta ptest
 
