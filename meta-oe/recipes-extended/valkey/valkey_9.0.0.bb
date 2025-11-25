@@ -7,17 +7,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = " \
-	git://github.com/valkey-io/valkey.git;branch=8.1;protocol=https \
+	git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https \
         file://valkey.conf \
 	file://init-valkey-server \
 	file://valkey.service \
-	file://hiredis-use-default-CC-if-it-is-set.patch \
 	file://lua-update-Makefile-to-use-environment-build-setting.patch \
 	file://oe-use-libc-malloc.patch \
 	file://0001-src-Do-not-reset-FINAL_LIBS.patch \
 	file://GNU_SOURCE-7.patch \
+	file://0001-src-config.h-Enable-HAVE_ARM_NEON-on-AArch64.patch \
 "
-SRCREV = "5f4bae3ea10174a7c872cc099c953b0e91afa93a"
+SRCREV = "5018b12b0de2d2322a1bbf6b041c43740587c0f2"
 
 RPROVIDES:${PN} = "virtual-redis"
 
@@ -41,7 +41,7 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 do_compile() {
-    oe_runmake -C deps hiredis lua linenoise
+    oe_runmake -C deps libvalkey lua linenoise
     oe_runmake
 }
 
