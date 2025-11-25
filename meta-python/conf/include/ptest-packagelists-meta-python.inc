@@ -96,6 +96,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-soupsieve \
     python3-sqlparse \
     python3-starlette \
+    python3-tenacity \
     python3-tomli-w \
     python3-tomlkit \
     python3-trustme \
