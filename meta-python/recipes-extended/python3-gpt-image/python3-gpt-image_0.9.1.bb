@@ -3,14 +3,14 @@ on local disks. Written in pure Python gpt-image allows GPT disk images to \
 be built on a local filesystem and exported to a destination device."
 SUMMARY = "GPT Image (pure python)"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=db5f8de88d13d0917db21293d0e82e1d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d91d608dc8f12334a889700389229b7b"
 
 DEPENDS += "python3-pip"
 
 PYPI_PACKAGE = "gpt_image"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "c06d8efc7cf8d6f3954c1c3d8544f494aa95da37fe04e38a9699ad3f57455f7e"
+SRC_URI[sha256sum] = "07363562ec1cf5b50319ad0389486b576ed43c4682a16a8286822af9fd1f4594"
 
 inherit pypi python3native python_setuptools_build_meta ptest-python-pytest
 
