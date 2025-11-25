@@ -13,20 +13,20 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
            file://xrdp.sysconfig \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
-           file://0001-Fix-the-compile-error.patch \
            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
            file://0001-mark-count-with-unused-attribute.patch \
            "
+SRC_URI:append:libc-musl = " file://fix-compiling-with-musl.patch"
 
-SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
+SRC_URI[sha256sum] = "52eadf3e86c57be0de0b9d5c184b52a7946a070746d3eb04b5089dd6d42f8f5f"
 
 UPSTREAM_CHECK_URI = "https://github.com/neutrinolabs/xrdp/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
 CFLAGS += " -Wno-deprecated-declarations"
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse"
+PACKAGECONFIG ??= "fuse"
+PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse3"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system xrdp"
@@ -36,10 +36,14 @@ USERADD_PARAM:${PN}  = "--system --home /var/run/xrdp -g xrdp \
 FILES:${PN} += "${datadir}/dbus-1/services/*.service \
                 ${datadir}/dbus-1/accessibility-services/*.service "
 
-FILES:${PN}-dev += "${libdir}/xrdp/libcommon.so \
-                    ${libdir}/xrdp/libxrdp.so \
-                    ${libdir}/xrdp/libscp.so \
-                    ${libdir}/xrdp/libxrdpapi.so "
+FILES:${PN}-dev += " \
+    ${libdir}/xrdp/libcommon.so \
+    ${libdir}/xrdp/libxrdp.so \
+    ${libdir}/xrdp/libxrdpapi.so \
+    ${libdir}/xrdp/libtoml.so \
+    ${libdir}/xrdp/libsesman.so \
+    ${libdir}/xrdp/libipm.so \
+    "
 
 EXTRA_OECONF = "--enable-pam-config=suse --enable-fuse \
                 --enable-pixman --enable-painter --enable-vsock \
