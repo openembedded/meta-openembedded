@@ -8,7 +8,7 @@ DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
            python3-requests-native wxwidgets \
            "
 
-PYPI_PACKAGE = "wxPython"
+PYPI_PACKAGE = "wxpython"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI += "file://add-back-option-build-base.patch \
@@ -16,11 +16,11 @@ SRC_URI += "file://add-back-option-build-base.patch \
            file://not-overwrite-cflags-cxxflags.patch \
            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
            "
-SRC_URI[sha256sum] = "20d6e0c927e27ced85643719bd63e9f7fd501df6e9a8aab1489b039897fd7c01"
+SRC_URI[sha256sum] = "2eb123979c87bcb329e8a2452269d60ff8f9f651e9bf25c67579e53c4ebbae3c"
+
+inherit pypi setuptools3 cython pkgconfig features_check
 
 S = "${UNPACKDIR}/wxPython-${PV}"
-
-inherit pypi setuptools3 pkgconfig features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -37,4 +37,4 @@ RDEPENDS:${PN} = "\
     python3-six \
     python3-xml \
     python3-cairocffi \
-" 
+"
