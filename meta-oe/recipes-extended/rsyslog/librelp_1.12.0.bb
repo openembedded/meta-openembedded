@@ -7,16 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
 DEPENDS = "gmp libidn zlib"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
-           file://0001-Fix-function-inline-errors-in-debug-optimization-Og.patch \
-           file://0001-tests-Fix-callback-prototype.patch \
-           file://0001-tcp-fix-some-compiler-warnings-with-enable-tls-opens.patch \
-           file://0001-tests-Include-missing-sys-time.h.patch \
-           file://0001-relp-fix-build-against-upcoming-gcc-14-Werror-calloc.patch \
            file://run-ptest \
 "
 
-SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
-
+SRCREV = "dab30db5108ef4bb5b6f9135e0428b57be7c4085"
 
 CVE_PRODUCT = "rsyslog:librelp"
 
