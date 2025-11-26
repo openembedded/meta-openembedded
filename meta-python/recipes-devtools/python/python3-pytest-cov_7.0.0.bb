@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=cbc4e25353c748c817db2daffe605e43 \
 "
 
-SRC_URI[sha256sum] = "25cc6cc0a5358204b8108ecedc51a9b57b34cc6b8c967cc2c01a4e00d8a67da2"
+SRC_URI[sha256sum] = "33c97eda2e049a0c5298e91f519302a1334c26ac65c1a483d6206fd458361af1"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta python_hatchling
 
-DEPENDS += "python3-setuptools-scm-native"
+DEPENDS += "python3-setuptools-scm-native python3-hatch-fancy-pypi-readme-native"
 RDEPENDS:${PN} += "python3-coverage python3-pytest python3-pluggy"
 
 PYPI_PACKAGE = "pytest_cov"
