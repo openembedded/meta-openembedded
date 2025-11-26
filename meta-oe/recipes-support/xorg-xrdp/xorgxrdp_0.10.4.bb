@@ -10,14 +10,17 @@ DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
-SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.9;protocol=https"
+SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.10;protocol=https;tag=v${PV}"
 
-SRCREV = "d463bad9639c910fadc2f30dac473c7688b11cfc"
-
-PV = "0.9.19"
-
+SRCREV = "2b1f913f4aa6b88d63d9ce9302c61cb0e39483f6"
 
 FILES:${PN} += "${libdir}/xorg/modules/*"
+FILES:${PN}-staticdev += " \
+    ${libdir}/xorg/modules/libxorgxrdp.a \
+    ${libdir}/xorg/modules/drivers/xrdpdev_drv.a \
+    ${libdir}/xorg/modules/input/xrdpmouse_drv.a \
+    ${libdir}/xorg/modules/input/xrdpkeyb_drv.a \
+    "
 
 require recipes-graphics/xorg-xserver/xserver-abi.inc
 
