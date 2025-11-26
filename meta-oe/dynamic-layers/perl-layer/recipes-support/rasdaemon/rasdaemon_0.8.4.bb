@@ -4,14 +4,12 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
 SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
-           file://0001-rasdaemon-fix-post-processing-options.patch \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "db0870edd2919f4f4d0101843136bcae92ab0743"
+SRCREV = "5a1efb8f324498df8cbaaa5adff0e9db96f648a9"
 
-
-DEPENDS = "libtraceevent"
+DEPENDS = "libtraceevent pciutils"
 RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
 	perl-module-posix perl-module-file-glob libdbi-perl libdbd-sqlite-perl"
 
@@ -41,6 +39,7 @@ do_install:append() {
 
 FILES:${PN} += "${sbindir}/rasdaemon \
 		${sysconfdir}/init.d \
+		${datadir} \
 		${systemd_unitdir}/system/rasdaemon.service"
 
 SYSTEMD_SERVICE:${PN} = "rasdaemon.service"
