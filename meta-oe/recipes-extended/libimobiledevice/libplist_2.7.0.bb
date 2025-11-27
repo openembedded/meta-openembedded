@@ -8,12 +8,12 @@ DEPENDS = "libxml2 glib-2.0 swig python3"
 
 inherit autotools pkgconfig python3native python3targetconfig ptest
 
-SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
+SRCREV = "cf5897a71ea412ea2aeb1e2f6b5ea74d4fabfd8c"
 SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master;tag=${PV} \
            file://run-ptest \
            file://0001-test-fix-operator-error.patch \
+           file://0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch \
 "
-
 
 CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
 CVE_STATUS_LIBLIST[status] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
@@ -37,8 +37,10 @@ do_install_ptest(){
     # tests expect a particular directory structure for input and output
     install -d ${D}${PTEST_PATH}/input/test/data
     install -d ${D}${PTEST_PATH}/test/tools
+    install -d ${D}${PTEST_PATH}/test/tools/.libs
     install -d ${D}${PTEST_PATH}/test/test/.libs
     install -d ${D}${PTEST_PATH}/test/test/data
+    install -m 0755 ${B}/tools/.libs/plistutil ${D}${PTEST_PATH}/test/tools/.libs/
     install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
     install ${S}/test/*.test ${D}${PTEST_PATH}/test/
     install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/test/test/.libs/
@@ -66,4 +68,4 @@ FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
 FILES:${PN}-utils = "${bindir}/*"
 FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
 
-RDEPENDS:${PN}-ptest += "bash"
+RDEPENDS:${PN}-ptest += "bash diffutils"
