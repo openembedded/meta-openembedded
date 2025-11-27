@@ -35,6 +35,7 @@ RDEPENDS:${PN}-ptest += " \
     python3-pytest \
     python3-looseversion \
     bash \
+    file \
 "
 RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
