@@ -28,3 +28,5 @@ do_install:append() {
     # Change the fully defined path on the target
     sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BPN}/libqpdfTargets.cmake
 }
+
+BBCLASSEXTEND = "native nativesdk"
