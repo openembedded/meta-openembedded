@@ -18,6 +18,7 @@ DEPENDS += "expat"
 
 SRCREV = "28b78822cfc5fbec4bd9906168493e9985f586ed"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV} \
+           file://0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch \
            file://run-ptest"
 
 EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
