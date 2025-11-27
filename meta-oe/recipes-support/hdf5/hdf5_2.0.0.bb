@@ -7,7 +7,7 @@ SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=71a191398102f76050a4e56e78cb4891"
 
-inherit cmake siteinfo qemu multilib_header multilib_script
+inherit cmake siteinfo qemu multilib_header
 
 DEPENDS += "qemu-native zlib"
 
@@ -39,10 +39,6 @@ EOF
 gen_emu:class-native = ""
 
 do_unpack[postfuncs] += "gen_emu"
-
-MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc \
-                     ${PN}:${bindir}/h5hlcc \
-"
 
 do_configure:append() {
     sed -i -e 's|${WORKDIR}||g' ${B}/src/libhdf5.settings
