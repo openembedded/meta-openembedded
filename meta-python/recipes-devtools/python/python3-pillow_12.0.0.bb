@@ -64,4 +64,4 @@ CVE_PRODUCT = "pillow"
 
 RPROVIDES:${PN} += "python3-imaging"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
