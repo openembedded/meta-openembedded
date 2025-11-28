@@ -54,6 +54,7 @@ PTESTS_FAST_META_OE = "\
     utf8proc \
     uthash \
     xmlsec1 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'xrdp', '', d)} \
     zeromq \
     cjson \
     libplist \

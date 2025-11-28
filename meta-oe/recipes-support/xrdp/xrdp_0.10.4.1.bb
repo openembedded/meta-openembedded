@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
 "
 
-inherit features_check autotools pkgconfig useradd systemd
+inherit features_check autotools pkgconfig useradd systemd ptest
 
 DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native imlib2 pixman libsm"
 
@@ -12,6 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
            file://xrdp.sysconfig \
+           file://run-ptest \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
            file://0001-mark-count-with-unused-attribute.patch \
@@ -25,8 +26,9 @@ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
 CFLAGS += " -Wno-deprecated-declarations"
 
-PACKAGECONFIG ??= "fuse"
+PACKAGECONFIG ??= "fuse ${@bb.utils.contains('PTEST_ENABLED', '1', 'test', '', d)}"
 PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse3"
+PACKAGECONFIG[test] = " --enable-tests, , libcheck cmocka"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system xrdp"
@@ -76,6 +78,37 @@ do_install:append() {
 	install -m 0644 ${UNPACKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
 }
+
+do_compile_ptest() {
+	for testdir in $(find ./tests -type d -mindepth 1); do
+		cd $testdir
+		echo 'buildtest-TESTS: $(check_PROGRAMS)' >> Makefile
+		# change the test-data folder to ./data instead of ${S}
+		sed -i 's|-D TOP_SRCDIR=[^ ]*|-D TOP_SRCDIR=\\"./data\\"|' Makefile
+		# another test data folder redirection
+		sed -i 's|-D IMAGEDIR=[^ ]*|-D IMAGEDIR=\\"./data\\"|' Makefile
+		# and another
+		sed -i 's|-DXRDP_TOP_SRCDIR=[^ ]*|-DXRDP_TOP_SRCDIR=\\"..\\"|' Makefile
+		oe_runmake buildtest-TESTS
+		cd -
+	done
+}
+
+do_install_ptest() {
+	install -d ${D}${PTEST_PATH}/tests/xrdp/gfx
+	install -d ${D}${PTEST_PATH}/tests/data/xrdp
+	for testbin in $(find ./tests -type f -executable -mindepth 3); do
+		install $testbin ${D}${PTEST_PATH}/tests/
+	done
+	install -m 666 ${S}/xrdp/xrdp256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
+	install -m 666 ${S}/xrdp/ad256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
+	install -m 666 ${S}/tests/xrdp/*.bmp ${D}${PTEST_PATH}/tests/data/
+	install -m 666 ${S}/tests/xrdp/test1.jpg ${D}${PTEST_PATH}/tests/data/
+	install -m 666 ${S}/tests/xrdp/test_alpha_blend.png ${D}${PTEST_PATH}/tests/data/
+	install -m 666 ${S}/tests/xrdp/gfx/* ${D}${PTEST_PATH}/tests/xrdp/gfx/
+}
+
+RDEPENDS:${PN}-ptest += "imlib2-loaders"
 
 SYSTEMD_SERVICE:${PN} = "xrdp.service xrdp-sesman.service"
 
