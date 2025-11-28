@@ -57,10 +57,11 @@ PACKAGECONFIG ??= "\
 PACKAGECONFIG:remove:toolchain-clang = "ipo"
 
 # Use system libs
-PACKAGECONFIG[prefer-system-libs] = "-DFLB_PREFER_SYSTEM_LIBS=Yes,-DFLB_PREFER_SYSTEM_LIBS=No, nghttp2 c-ares"
+PACKAGECONFIG[prefer-system-libs] = "-DFLB_PREFER_SYSTEM_LIBS=Yes,-DFLB_PREFER_SYSTEM_LIBS=No, nghttp2 c-ares msgpack-c zstd"
 DEPENDS += " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs backtrace', 'libbacktrace', '', d)}"
 DEPENDS += " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs jemalloc', 'jemalloc', '', d)}"
 DEPENDS += " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs luajit', 'luajit', '', d)}"
+DEPENDS += " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs sqldb', 'sqlite3', '', d)}"
 
 PACKAGECONFIG[all] = "-DFLB_ALL=Yes,-DFLB_ALL=No"
 PACKAGECONFIG[arrow] = "-DFLB_ARROW=Yes,-DFLB_ARROW=No"
