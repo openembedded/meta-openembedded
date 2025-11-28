@@ -9,3 +9,6 @@ S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 DEPENDS = "jpeg jasper lcms"
+
+# The fix is already included in the current versin (0.20.2)
+CVE_CHECK_IGNORE += "CVE-2020-35530"
