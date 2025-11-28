@@ -10,7 +10,10 @@ DEPENDS = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux (>= 3.2)', '', d)} \
 "
 
-SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/${BP}.tar.xz"
+SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/${BP}.tar.xz \
+           file://0001-test-sockopt-loosen-verification-of-stale-pidfds.patch \
+           file://run-ptest \
+           "
 SRC_URI[sha256sum] = "f819a8db8795fa08c767612e3823fd594694a0990f2543ecf35d6a1a6bf2ab5b"
 
 UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
@@ -18,10 +21,11 @@ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+)"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
-inherit meson pkgconfig systemd features_check
+inherit meson pkgconfig systemd features_check ptest
 
 EXTRA_OEMESON += "-Daudit=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
 EXTRA_OEMESON += "-Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
+EXTRA_OEMESON += "-Dtests=${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)}"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
@@ -36,3 +40,7 @@ RDEPENDS:${PN} += "dbus-common dbus-tools"
 FILES:${PN} += "${nonarch_libdir}/systemd/catalog"
 FILES:${PN} += "${systemd_system_unitdir}"
 FILES:${PN} += "${systemd_user_unitdir}"
+FILES:${PN}-ptest += "${libdir}/${PN}/tests"
+
+# test-sockopt fails to compile with musl without this flag
+CFLAGS:append:libc-musl = "${@bb.utils.contains('PTEST_ENABLED', '1', ' -Wno-error=incompatible-pointer-types ', '', d)}"
