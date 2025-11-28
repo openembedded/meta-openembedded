@@ -189,3 +189,5 @@ do_install:append() {
         done
     fi
 }
+
+CVE_PRODUCT = "cockpit-project:cockpit"
