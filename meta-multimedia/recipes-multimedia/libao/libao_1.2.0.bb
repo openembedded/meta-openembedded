@@ -31,3 +31,6 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
 PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
 FILES:${BPN}-ckport = "${libdir}/ckport"
+
+# disputed: the referenced vulnerability is not in libao
+CVE_CHECK_IGNORE += "CVE-2017-11548"
