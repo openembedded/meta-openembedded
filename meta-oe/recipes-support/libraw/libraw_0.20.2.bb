@@ -6,6 +6,7 @@ SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=master;protocol=https \
            file://CVE-2023-1729.patch \
            file://CVE-2025-43961-43962.patch \
            file://CVE-2025-43963.patch \
+           file://CVE-2025-43964.patch \
            "
 SRCREV = "0209b6a2caec189e6d1a9b21c10e9e49f46e5a92"
 S = "${WORKDIR}/git"
