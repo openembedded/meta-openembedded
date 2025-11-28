@@ -17,7 +17,7 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "b12e507090273576d1156342780c7c6d358fa579"
+SRCREV = "6bc014390c5485b96521c56b98369b44b9faa08b"
 SRC_URI = "\
     git://github.com/fluent/fluent-bit.git;branch=master;protocol=https \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
@@ -26,7 +26,6 @@ SRC_URI = "\
 "
 SRC_URI:append:libc-musl = "\
     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
-    file://0005-Use-posix-strerror_r-with-musl.patch \
 "
 
 # prefix tag with "v" to avoid upgrade to random tags like "20220215"
