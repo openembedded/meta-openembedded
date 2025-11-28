@@ -1,0 +1,108 @@
+From 15145304ea3f2abff2418adc220c1459190246eb Mon Sep 17 00:00:00 2001
+From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
+Date: Fri, 4 Apr 2025 12:12:10 -0400
+Subject: [PATCH] libtracefs: Add make sqlhist_remake to run bison and flex
+
+Because git tends to not maintain timestamps of files, the sqlhist.y and
+sqlhist.l can end up having an later timestamp than the files they
+produce. This triggers bison and flex to be run and recreate the files
+sqlhist.tab.h, sqlhist.tab.c and sqlhist-lex.c.
+
+At best, this causes git to see the differences, at worse, the system may
+not even have bison or flex and the build fails.
+
+Add a new make target: make sqlhist_remake
+
+This new target will run the bison and flex portions of the build.
+It only needs to be run if the files sqlhist.y or sqlhist.l are modified.
+
+Cc: Oleh Matiusha <omatiush@cisco.com>
+Link: https://lore.kernel.org/20250404161504.1671790-2-rostedt@goodmis.org
+Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+
+Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/commit/?id=1514530]
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ Makefile      |  3 +++
+ src/Makefile  | 14 ++++++++------
+ src/sqlhist.l |  2 ++
+ src/sqlhist.y |  1 +
+ 4 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9f377e9..0fe252b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -393,6 +393,9 @@ sqlhist: samples/sqlhist
+ samples: libtracefs.a force
+ 	$(Q)$(call descend,$(src)/samples,all)
+ 
++sqlhist_remake:
++	$(Q)$(call descend,$(src)/src,sqlhist_remake)
++
+ clean:
+ 	$(Q)$(call descend_clean,utest)
+ 	$(Q)$(call descend_clean,src)
+diff --git a/src/Makefile b/src/Makefile
+index 90bd88d..eb5a2e7 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -44,18 +44,20 @@ $(LIBTRACEFS_SHARED_SO): $(LIBTRACEFS_SHARED_VERSION)
+ libtracefs.so: $(LIBTRACEFS_SHARED_SO)
+ 
+ # bison will create both sqlhist.tab.c and sqlhist.tab.h
+-sqlhist.tab.h:
+-sqlhist.tab.c: sqlhist.y sqlhist.tab.h
+-	bison --debug -v --report-file=bison.report -d -o $@ $<
++sqlhist.tab_gen.h:
++sqlhist.tab_gen.c: sqlhist.y sqlhist.tab.h
++	bison --debug -v --report-file=bison.report -d -o $(subst _gen,,$@) $<
+ 
+-sqlhist-lex.c: sqlhist.l sqlhist.tab.c
+-	flex -o $@ $<
++sqlhist-lex_gen.c: sqlhist.l sqlhist.tab.c
++	flex -o $(subst _gen,,$@) $<
+ 
+ $(bdir)/%.o: %.c
+ 	$(Q)$(call do_fpic_compile)
+ 
+ tracefs-sqlhist.o: sqlhist.tab.h
+ 
++sqlhist_remake: sqlhist.tab_gen.c sqlhist-lex_gen.c
++
+ $(OBJS): | $(bdir)
+ 
+ clean:
+@@ -65,4 +67,4 @@ clean:
+ 
+ $(bdir)/tracefs-sqlhist.o tracefs-sqlhist.o: sqlhist.tab.h
+ 
+-.PHONY: $(LIBTRACEFS_SHARED_SO) $(LIBTRACEFS_STATIC)
++.PHONY: $(LIBTRACEFS_SHARED_SO) $(LIBTRACEFS_STATIC) sqlhist.tab_gen.c sqlhist-lex_gen.c
+diff --git a/src/sqlhist.l b/src/sqlhist.l
+index 4df475a..2a3ca61 100644
+--- a/src/sqlhist.l
++++ b/src/sqlhist.l
+@@ -1,6 +1,8 @@
+ %{
+ /* code here */
+ 
++/* If you change this file, run: make sqlhist_remake */
++
+ #include <stdarg.h>
+ #include "sqlhist-parse.h"
+ 
+diff --git a/src/sqlhist.y b/src/sqlhist.y
+index fade9a4..90039a7 100644
+--- a/src/sqlhist.y
++++ b/src/sqlhist.y
+@@ -1,4 +1,5 @@
+ %{
++/* If you change this file, run: make sqlhist_remake */
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-- 
+2.34.1
+

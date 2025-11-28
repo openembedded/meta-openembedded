@@ -13,6 +13,7 @@ SRCREV = "aebab37379d0fbadc702d64aca0fe5cf18676404"
 SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
            file://0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch \
+           file://0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch \
            "
 S = "${WORKDIR}/git"
 
