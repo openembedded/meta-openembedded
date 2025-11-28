@@ -11,4 +11,4 @@ inherit autotools pkgconfig
 DEPENDS = "jpeg jasper lcms"
 
 # The fixes are already included in the current versin (0.20.2)
-CVE_CHECK_IGNORE += "CVE-2020-35530 CVE-2020-35531"
+CVE_CHECK_IGNORE += "CVE-2020-35530 CVE-2020-35531 CVE-2020-35532"
