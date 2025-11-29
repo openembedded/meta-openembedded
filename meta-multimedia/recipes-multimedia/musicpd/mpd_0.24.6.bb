@@ -18,10 +18,10 @@ DEPENDS += " \
     expat \
 "
 
-SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
+SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https;tag=v${PV} \
            file://mpd.conf.in \
            "
-SRCREV = "063abb31a68f7ee92a246256eec4234ab8b7ed8b"
+SRCREV = "c426749d4709e8d4ec4a6808c004625fae37b60d"
 
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
