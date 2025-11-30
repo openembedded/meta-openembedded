@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
            file://CVE-2023-37732.patch \
            file://CVE-2024-22653.patch \
            file://CVE-2023-29579.patch \
+           file://CVE-2021-33464.patch \
            "
 
 S = "${WORKDIR}/git"
