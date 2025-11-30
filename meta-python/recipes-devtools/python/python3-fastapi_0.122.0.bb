@@ -9,6 +9,12 @@ SRC_URI += "file://run-ptest"
 
 inherit pypi python_pdm ptest-python-pytest
 
+PACKAGECONFIG ?= ""
+# swagger-ui is in meta-xfce that meta-python does not depend upon
+# Users can still enable it in their distros explicitly but its disabled
+# by default
+PACKAGECONFIG[swagger-ui] = ",,,swagger-ui"
+
 RDEPENDS:${PN} += "\
     python3-annotated-doc \
     python3-fastapi-cli \
@@ -17,7 +23,5 @@ RDEPENDS:${PN} += "\
     python3-starlette \
     python3-typing-extensions \
 "
-
-RRECOMMENDS:${PN} += "swagger-ui"
 
 RDEPENDS:${PN}-ptest += "python3-orjson"
