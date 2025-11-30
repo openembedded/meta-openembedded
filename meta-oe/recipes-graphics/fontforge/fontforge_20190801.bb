@@ -17,7 +17,9 @@ REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
 SRCREV = "ac635b818e38ddb8e7e2e1057330a32b4e25476e"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
-"
+           file://CVE-2020-25690-1.patch \
+           file://CVE-2020-25690-2.patch \
+           "
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--without-libuninameslist  --enable-python-scripting --enable-python-extension"
