@@ -34,3 +34,4 @@ do_configure:prepend() {
      sed -i -e "s/^echo \"\/\* generated \$ac_cv_stdint_message \*\/\" >>\$ac_stdint$"// ${S}/m4/ax_create_stdint_h.m4
 }
 
+CVE_PRODUCT += "tortall:yasm yasm_project:yasm"
