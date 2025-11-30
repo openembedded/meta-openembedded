@@ -8,6 +8,7 @@ RDEPENDS:${PN} += "\
 "
 SRC_URI += "\
        file://CVE-2025-26699.patch \
+       file://CVE-2024-56374.patch \
 "
 
 # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
