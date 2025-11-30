@@ -3,7 +3,11 @@ HOMEPAGE = "http://www.djangoproject.com/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
 
-PYPI_PACKAGE = "Django"
+# From 4.2.21 onwards package name changed to "django". This common include file
+# is used across 2.x, 3.x and 4.x variants hence making this as a weak variable 
+# which can be overwritten in 4.x recipe
+PYPI_PACKAGE ?= "Django"
+
 inherit pypi
 
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
