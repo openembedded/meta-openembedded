@@ -43,5 +43,8 @@ FILES:${PN} += " \
 FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR} ${datadir}/${BPN}/python"
 RDEPENDS:${PN}-python = "python3"
 
+# The vulnerability was introduced after the used revision.
+CVE_CHECK_IGNORE += "CVE-2019-15785"
+
 # for e.g kde's oxygen-fonts
 BBCLASSEXTEND = "native"
