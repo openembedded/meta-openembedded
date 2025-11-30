@@ -10,7 +10,7 @@ SRC_URI += "file://run-ptest"
 inherit pypi python_pdm ptest-python-pytest
 
 PACKAGECONFIG ?= ""
-# swagger-ui is in meta-xfce that meta-python does not depend upon
+# swagger-ui is in meta-webserver that meta-python does not depend upon
 # Users can still enable it in their distros explicitly but its disabled
 # by default
 PACKAGECONFIG[swagger-ui] = ",,,swagger-ui"
