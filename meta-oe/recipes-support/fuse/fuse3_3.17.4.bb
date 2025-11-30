@@ -25,6 +25,9 @@ CVE_PRODUCT = "fuse_project:fuse"
 
 inherit meson pkgconfig ptest
 
+# fix  riscv32-yoe-linux-musl-ld.lld: error: undefined symbol: __atomic_fetch_add_8
+LDFLAGS:append:toolchain-clang:riscv32 = " -latomic"
+
 SRC_URI += " \
     file://run-ptest \
     file://fuse3.conf \
