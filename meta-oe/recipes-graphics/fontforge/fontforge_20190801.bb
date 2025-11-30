@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
            file://CVE-2020-25690-1.patch \
            file://CVE-2020-25690-2.patch \
+           file://CVE-2024-25081-25082.patch \
            "
 S = "${WORKDIR}/git"
 
