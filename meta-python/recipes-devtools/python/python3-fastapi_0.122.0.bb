@@ -24,4 +24,13 @@ RDEPENDS:${PN} += "\
     python3-typing-extensions \
 "
 
-RDEPENDS:${PN}-ptest += "python3-orjson"
+RDEPENDS:${PN}-ptest += "\
+                        python3-coverage \
+                        python3-httpx \
+                        python3-orjson \
+                        python3-dirty-equals \
+                        python3-pytest-httpx \
+                        python3-python-multipart \
+                        python3-sqlalchemy \
+                        python3-trio \
+"
