@@ -6,7 +6,7 @@ has a definite Sendmail-ish flavor, but the inside is completely different."
 
 HOMEPAGE = "http://www.postfix.org"
 SECTION = "mail"
-DEPENDS = "db icu libpcre libnsl2 m4-native openssl postfix-native \
+DEPENDS = "db icu libpcre2 libnsl2 m4-native openssl postfix-native \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
 "
@@ -80,8 +80,8 @@ export CCARGS-sasl:class-native = ""
 export AUXLIBS-sasl:class-native = ""
 
 # PCRE, TLS support default
-export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
-export AUXLIBS = "-lpcre -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
+export CCARGS  = "${CFLAGS} -DHAS_PCRE=2 -DUSE_TLS -I${STAGING_INCDIR}/openssl ${CCARGS-ldap} ${CCARGS-sasl} ${CCARGS-nonis}"
+export AUXLIBS = "-lpcre2-8 -lssl -lcrypto ${AUXLIBS-sasl} ${AUXLIBS-ldap}"
 export POSTCONF = "${STAGING_DIR_NATIVE}${sbindir_native}/postconf"
 
 # OPT,DEBUG is aready in CFLAGS
