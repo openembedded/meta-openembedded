@@ -20,14 +20,13 @@ LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://license.txt;md5=6db3822fc7512e83087ba798da013692"
 
 SRC_URI = "git://github.com/postgresql-interfaces/psqlodbc.git;protocol=https;branch=main;tag=REL-${PV_WITH_USCORE} \
-    file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
-    file://psqlodbc-donot-use-the-hardcode-libdir.patch \
-    file://psqlodbc-fix-for-ptest-support.patch \
-    file://add-expected-output-file-for-descrec-test.patch \
-    file://run-ptest \
-"
+           file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
+           file://psqlodbc-donot-use-the-hardcode-libdir.patch \
+           file://psqlodbc-fix-for-ptest-support.patch \
+           file://run-ptest \
+           "
 
-SRCREV = "251c8e8200c7a030fa46e59429d3fec7a73de4ec"
+SRCREV = "8038cee43d6dff468320008ea928f3eaa1186726"
 PV_WITH_USCORE = "${@d.getVar('PV').replace('.', '_')}"
 
 DEPENDS += "postgresql unixodbc"
