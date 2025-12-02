@@ -8,7 +8,7 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "cdb39c30a81ce6e433aa672922d59b78c4c6a9c64cd9936f1f6894d26c82ae0f"
+SRC_URI[sha256sum] = "7f42e7a7845a93397e430b48a8074a35410d7a436695fd3375ec9b687d8d95f8"
 
 BBCLASSEXTEND = "native"
 
