@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "e2fsprogs gssdp libsoup-3.0 libxml2"
 
-inherit gnomebase pkgconfig vala gobject-introspection
+inherit gnomebase pkgconfig vala gobject-introspection ptest
+SRC_URI += "file://run-ptest"
 SRC_URI[archive.sha256sum] = "2edb6ee3613558e62f538735368aee27151b7e09d4e2e2c51606833da801869b"
 
 SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
@@ -18,3 +19,14 @@ gupnp_sysroot_preprocess () {
 FILES:${PN}-dev += "${bindir}/gupnp-binding-tool*"
 
 RDEPENDS:${PN}-dev += "python3-core python3-xml"
+
+do_configure:prepend(){
+    # change the test-datadir from source-folder to ptest-folder
+    sed -i "s!\(-DDATA_PATH=\"\).*!\1${PTEST_PATH}/tests/data\"',!" ${S}/tests/meson.build
+}
+
+do_install_ptest(){
+    install -d ${D}${PTEST_PATH}/tests
+    find ${B}/tests -type f -executable -exec install {} ${D}${PTEST_PATH}/tests/ \;
+    cp -r ${S}/tests/data ${D}${PTEST_PATH}/tests/
+}
