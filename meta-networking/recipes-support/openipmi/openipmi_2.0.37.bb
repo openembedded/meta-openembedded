@@ -28,6 +28,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://openipmi-no-openipmigui-man.patch \
            file://ipmi-init-fix-the-arguments.patch \
            file://include_sys_types.patch \
+           file://0001-Makefile.am-Pass-BUILD_CFLAGS-to-BUILD_CC.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
