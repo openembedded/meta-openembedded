@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab48516bcc1be
 
 S = "${UNPACKDIR}/linux-${PV}"
 
+DEBUG_PREFIX_MAP_EXTRA:toolchain-gcc = ""
+
 EXTRA_OEMAKE = "\
     V=1 \
     -C ${S}/tools/bpf/bpftool \
