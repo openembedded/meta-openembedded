@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
 
 DEPENDS += "gmp mpfr libmpc"
 
-SRC_URI[sha256sum] = "e83e07567441b78cb87544910cb3cc4fe94e7da987e93ef7622e76fb96650432"
+SRC_URI[sha256sum] = "d9b8c81e0f5e1a3cabf1ea8d154b29b5ef6e33b8f4e4c37b3da957b2dd6a3fa8"
 
 inherit pypi python_setuptools_build_meta python3native
 
