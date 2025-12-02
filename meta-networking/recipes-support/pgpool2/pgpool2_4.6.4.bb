@@ -12,13 +12,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
 
 SRC_URI = "https://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
 	   file://0001-Fix-build-error-when-build-this-file.patch \
-           file://0001-snprintf-Add-math.h-to-ensure-isnan-and-isinf-are-de.patch \
-           file://v1-0001-Make-time-calculations-always-long-long.patch \
 	   file://define_SIGNAL_ARGS.patch \
 	   file://pgpool.sysconfig \
 	   file://pgpool.service \
            "
-SRC_URI[sha256sum] = "46688668b2ace67d8161a320256252d98698bc7d9788cc6727269d5720299f2c"
+SRC_URI[sha256sum] = "ef0d2e91a9a11d737c6476247219e679f718bec53550646189594ef9aefd298d"
 
 S = "${UNPACKDIR}/pgpool-II-${PV}"
 
