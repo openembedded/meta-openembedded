@@ -24,6 +24,6 @@ do_compile () {
 }
 
 do_install () {
-	oe_runmake install.minimal PREFIX=${D}
+	oe_runmake install.minimal TARGET=${D} PREFIX=${root_prefix}
 }
 
