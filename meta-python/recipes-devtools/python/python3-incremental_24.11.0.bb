@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/twisted/incremental"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ca9b07f08e2c72d48c74d363d1e0e15"
 
-SRC_URI[sha256sum] = "fb4f1d47ee60efe87d4f6f0ebb5f70b9760db2b2574c59c8e8912be4ebd464c9"
+SRC_URI[sha256sum] = "87d3480dbb083c1d736222511a8cf380012a8176c2456d01ef483242abbbcf8c"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_setuptools_build_meta python_hatchling
 
 PACKAGE_BEFORE_PN = "\
     ${PN}-scripts \
