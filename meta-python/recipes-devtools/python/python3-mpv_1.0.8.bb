@@ -14,3 +14,4 @@ RDEPENDS:${PN} += "\
     mpv \
     python3-ctypes \
 "
+EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
