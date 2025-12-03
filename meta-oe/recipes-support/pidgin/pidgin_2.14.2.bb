@@ -60,6 +60,13 @@ PACKAGES =+ "libpurple-dev libpurple finch finch-dev ${PN}-data"
 
 RPROVIDES:${PN}-dbg += "libpurple-dbg finch-dbg"
 
+# CONFIG_ARGS is used to display build info. Replace full paths by reproducible
+# variables ($S, $WORKDIR)
+do_configure:append() {
+    sed -i -e "/CONFIG_ARGS/s|${S}|\$S|g" ${B}/config.h
+    sed -i -e "/CONFIG_ARGS/s|${WORKDIR}|\$WORKDIR|g" ${B}/config.h
+}
+
 LEAD_SONAME = "libpurple.so.0"
 FILES:libpurple     = "${libdir}/libpurple*.so.* ${libdir}/purple-2 ${bindir}/purple-* ${sysconfdir}/gconf/schemas/purple* ${datadir}/purple/ca-certs"
 FILES:libpurple-dev = "${libdir}/libpurple*.la \
