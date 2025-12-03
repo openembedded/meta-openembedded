@@ -12,9 +12,7 @@ inherit bash-completion cmake lib_package pkgconfig
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF"
 
-FILES:${PN} += " \
-	${datadir}/proj \
-	${datadir}/bash-completion"
+FILES:${PN} += "${datadir}/proj"
 
 BBCLASSEXTEND = "native"
 
