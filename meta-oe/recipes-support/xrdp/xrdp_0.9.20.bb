@@ -24,6 +24,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
            file://CVE-2022-23480-2.patch \
            file://CVE-2022-23481.patch \
            file://CVE-2022-23482.patch \
+           file://CVE-2022-23483.patch \
            "
 
 SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
