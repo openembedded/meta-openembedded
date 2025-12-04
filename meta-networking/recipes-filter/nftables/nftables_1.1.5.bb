@@ -42,6 +42,8 @@ inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python_setuptools
 PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', '${PN}-python', '', d)}"
 FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
 RDEPENDS:${PN}-python = "python3-core python3-json ${PN}"
+# setuptools3-base.bbclass adds this to main package, but this recipe is moving it to python sub-package
+RDEPENDS:${PN}:remove:class-target = "python3-core"
 
 # Explicitly define do_configure, do_compile and do_install because both autotools and setuptools3
 # have EXPORT_FUNCTIONS do_configure do_compile do_install
