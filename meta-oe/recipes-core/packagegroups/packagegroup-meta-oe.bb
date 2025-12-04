@@ -294,7 +294,6 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
     xerces-c-samples \
     xmlrpc-c \
     yajl \
-    yasm \
 "
 RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid pahole"
 RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid pahole pcimem"
