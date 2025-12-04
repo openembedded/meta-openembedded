@@ -5,12 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
 HOMEPAGE = "https://libcoap.net/"
 
 LICENSE = "BSD-2-Clause & BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9aa68c0f6785376aa8ec7f4f1aa6ae3c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=05d17535846895e23ea4c79b16a9e904"
 
-SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/obgm/libcoap.git;branch=release-4.3.5-patches;protocol=https;tag=v${PV} \
            file://run-ptest \
            "
-SRCREV = "7cf7465b784baded4de183290c547d582becfd28"
+SRCREV = "e3fdcdcfbd1588754fe9dd4b754ac9397260f0f9"
 
 
 inherit autotools manpages pkgconfig ptest
