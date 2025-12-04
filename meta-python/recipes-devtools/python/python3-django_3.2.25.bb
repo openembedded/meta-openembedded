@@ -13,6 +13,7 @@ SRC_URI += "\
        file://CVE-2024-39329.patch \
        file://CVE-2024-39330.patch \
        file://CVE-2024-41991.patch \
+       file://CVE-2024-53907.patch \
 "
 
 # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
