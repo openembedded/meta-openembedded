@@ -6,11 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b4fef6e4b0828c2401fb983363985b39"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
-PV .= "+git"
-
-SRCREV = "dbd686f37c1bc14355dce9c16dbbfae82f11dc00"
-PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
-S = "${UNPACKDIR}/python3-multidict-${PV}"
+SRC_URI[sha256sum] = "c6e99d9a65ca282e578dfea819cfa9c0a62b2499d8677392e09feaf305e9e6f5"
 
 RDEPENDS:${PN}-ptest += " \
     python3-objgraph \
