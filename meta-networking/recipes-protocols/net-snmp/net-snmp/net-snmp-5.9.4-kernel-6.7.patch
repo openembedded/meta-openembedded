@@ -8,7 +8,7 @@ This breaks the hard-coded assumptions about the Ip line length.
 Add compatibility to parse Linux 6.7 Ip header while keep support
 for previous versions.
 
-Upstream-Status: Pending
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/49d60ba57f4b462df7dc5fd5b38b4425dab0982c]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  .../ip-mib/data_access/systemstats_linux.c    | 46 +++++++++++++++----
