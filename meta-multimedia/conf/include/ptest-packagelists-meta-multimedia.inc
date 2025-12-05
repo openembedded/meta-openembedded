@@ -9,6 +9,7 @@
 PTESTS_FAST_META_MULTIMEDIA = "\
     gssdp \
     gupnp-av \
+    gupnp-igd \
     libopenmpt\
 "
 
