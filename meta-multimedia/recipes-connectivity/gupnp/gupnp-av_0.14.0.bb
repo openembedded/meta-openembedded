@@ -6,7 +6,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "gupnp"
 
-inherit meson pkgconfig gobject-introspection vala
+inherit meson pkgconfig gobject-introspection vala ptest
 
-SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz"
+SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz \
+           file://run-ptest"
 SRC_URI[sha256sum] = "20aed546fc882e78a3f186a0c8bce5c841cc3a44b7ea528298fbdc82596fb156"
+
+do_configure:prepend(){
+    # set ABS_TOP_SRCDIR to ${PTEST_PATH instead of the source-dir on the host}
+    sed -i "s!\(-DABS_TOP_SRCDIR=\"\).*!\1${PTEST_PATH}/tests\"'],!" ${S}/tests/meson.build
+    # same for DATA_PATH in the other test folder
+    sed -i "s!\(-DDATA_PATH=\"\).*!\1${PTEST_PATH}/tests\"']!" ${S}/tests/gtest/meson.build
+}
+
+do_install_ptest(){
+    cd ${B}/tests
+    find . -type f -executable -exec install -D {} ${D}${PTEST_PATH}/tests/{} \;
+    cp -r ${S}/tests/gtest/data ${D}${PTEST_PATH}/tests
+
+    # this test is not enabled for execution in 0.14.4 in meson.build
+    rm ${D}${PTEST_PATH}/tests/test-search-criteria-parser
+}
