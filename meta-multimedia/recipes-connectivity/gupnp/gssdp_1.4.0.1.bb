@@ -7,6 +7,7 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz"
+SRC_URI += "file://run-ptest"
 SRC_URI[sha256sum] = "8676849d57fb822b8728856dbadebf3867f89ee47a0ec47a20045d011f431582"
 
 GTKDOC_MESON_OPTION = 'gtk_doc'
@@ -16,7 +17,7 @@ DEPENDS = " \
     libsoup-2.4 \
 "
 
-inherit meson pkgconfig gobject-introspection vala gtk-doc features_check
+inherit meson pkgconfig gobject-introspection vala gtk-doc features_check ptest
 
 SNIFFER = "${@bb.utils.contains("BBFILE_COLLECTIONS", "gnome-layer", "sniffer", "", d)}"
 
@@ -28,4 +29,10 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'sniffer', 'op
 
 PACKAGES =+ "gssdp-tools"
 
+do_install_ptest(){
+    install -d ${D}${PTEST_PATH}/tests
+    find ${B}/tests -type f -executable -exec install {} ${D}${PTEST_PATH}/tests \;
+}
+
 FILES:gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
+
