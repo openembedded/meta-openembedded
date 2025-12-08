@@ -13,7 +13,7 @@ SRC_URI = " \
         file://0001-libcamera-Do-not-assume-libc-with-clang.patch \
 "
 
-SRCREV = "096c50ca881f72d858aca19757a5e73b4775a7cc"
+SRCREV = "3c17d1fbb2bd93f221afee788ebf0d7394032e4d"
 
 PE = "1"
 
