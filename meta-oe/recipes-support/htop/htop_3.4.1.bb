@@ -4,15 +4,17 @@ SECTION = "console/utils"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "ncurses"
+DEPENDS = "ncurses libnl"
 
 SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https \
-           file://0001-Use-pkg-config.patch \
+           file://0001-configure.ac-Remove-usr-include-libnl3.patch \
 "
-SRCREV = "68c970c7ef4a0682760ed570b3d82388ae7ccf54"
+SRCREV = "348c0a6bf4f33571835a0b6a1a0f5deb15132128"
 
 
 inherit autotools pkgconfig
+
+CFLAGS += " -I${STAGING_INCDIR}/libnl3"
 
 PACKAGECONFIG ??= " \
     unicode \
