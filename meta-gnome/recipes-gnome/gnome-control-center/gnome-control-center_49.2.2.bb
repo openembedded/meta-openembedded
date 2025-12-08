@@ -32,19 +32,22 @@ DEPENDS = " \
     udisks2 \
     upower \
     ${@' libxslt-native docbook-xsl-stylesheets-native' if d.getVar('GIDOCGEN_ENABLED') == 'True' else ''} \
+    blueprint-compiler-native \
 "
 
 inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-version-is-even bash-completion features_check
 
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
 
-SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
-SRC_URI[archive.sha256sum] = "c0698245a6420badd077c16ffb218860e457cd7300612718eabf9aba47222bae"
+SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
+SRC_URI[sha256sum] = "c23ae220d6c1237d285925de7801e0e36338b9cc1a8bb51c2e37e715e6b503ad"
 
-PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
+
+PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
-PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
+PACKAGECONFIG[x11] = "-Dx11=true, -Dx11=false, virtual/libx11"
 PACKAGECONFIG[file-share] = ",,,gnome-user-share"
 PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
 PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
@@ -54,6 +57,7 @@ EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
 GIDOCGEN_MESON_OPTION = 'documentation'
 
 export XDG_DATA_DIRS = "${STAGING_DATADIR}"
+export GI_TYPELIB_PATH = "${RECIPE_SYSROOT}${libdir}/girepository-1.0"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
