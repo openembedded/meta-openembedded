@@ -24,3 +24,5 @@ do_install() {
         install -m 0644 ${S}/libs/sysplugins/*.php ${D}${datadir}/php/smarty3/libs/sysplugins/
 }
 FILES:${PN} = "${datadir}/php/smarty3/"
+
+CVE_PRODUCT = "smarty:smarty"
