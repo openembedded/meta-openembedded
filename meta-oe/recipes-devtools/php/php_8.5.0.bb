@@ -72,6 +72,7 @@ EXTRA_OECONF = "--enable-mbstring \
                 --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
                 --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
+                ac_cv_path_PROG_SENDMAIL=sendmail \
                 ${COMMON_EXTRA_OECONF} \
 "
 
