@@ -6,19 +6,18 @@ DESCRIPTION = "wolfSSL, formerly CyaSSL, is a lightweight SSL library written \
 HOMEPAGE = "https://www.wolfssl.com/products/wolfssl"
 BUGTRACKER = "https://github.com/wolfssl/wolfssl/issues"
 SECTION = "libs"
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LICENSE = "GPL-3.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 PROVIDES += "cyassl"
 RPROVIDES:${PN} = "cyassl"
 
 SRC_URI = " \
-    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
-    file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch \
+    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master;tag=v${PV}-stable \
     file://run-ptest \
 "
 
-SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
+SRCREV = "59f4fa568615396fbf381b073b220d1e8d61e4c2"
 
 
 inherit autotools ptest
