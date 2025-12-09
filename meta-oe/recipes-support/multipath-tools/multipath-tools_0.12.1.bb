@@ -29,7 +29,7 @@ DEPENDS = "libdevmapper \
 
 LICENSE = "GPL-2.0-only"
 
-SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=stable-0.11.y \
+SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=stable-0.12.y \
            file://multipathd.oe \
            file://multipath.conf.example \
            file://0001-RH-fixup-udev-rules-for-redhat.patch \
@@ -49,7 +49,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRCREV = "7a84cc602ea0884ae0c767e6c89592059012db04"
+SRCREV = "a1f7f3d5b4972c39e8950c722a04c21a9e030a31"
 
 
 inherit systemd pkgconfig
