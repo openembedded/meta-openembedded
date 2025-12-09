@@ -15,7 +15,7 @@ SRC_URI = " \
     https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-1.14.4/src/${BPN}-${PV}.tar.gz \
     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
     file://0001-cmake-remove-build-flags.patch \
-    file://CVE-2025-2913.patch \
+    file://CVE-2025-2913-CVE-2025-2912.patch \
     file://CVE-2025-2914.patch \
     file://CVE-2025-2915.patch \
     file://CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch \
