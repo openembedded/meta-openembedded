@@ -8,13 +8,13 @@ SECTION = "net"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
-SRC_URI = "https://launchpad.net/ufw/0.36/0.36.1/+download/ufw-0.36.1.tar.gz \
+SRC_URI = "https://launchpad.net/ufw/0.36/0.36.2/+download/ufw-0.36.2.tar.gz \
            file://0001-optimize-boot.patch \
            file://0002-add-an-option-to-specify-iptables-location.patch \
            file://0003-only-make-one-reference-to-env.patch \
            file://setuptools.patch \
            "
-SRC_URI[sha256sum] = "1c57e78fbf2970f0cc9c56ea87a231e6d83d825e55b9e31e2c88b91b0ea03c8c"
+SRC_URI[sha256sum] = "2a57a99eecef6b44db3537ed2520b30bae3759f8465456e22e404cd643838bf5"
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
 
