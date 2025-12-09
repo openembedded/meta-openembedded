@@ -26,7 +26,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
 "
 SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
 
-SRC_URI[sha256sum] = "7d1ebe70746009dc06bd2fa5c412a1985579a9c887292f766cc775d169d60e68"
+SRC_URI[sha256sum] = "841503de6c2486e66fd08f0c62ac2568fc8ed1021297f855e8acd58ad7caff76"
 
 UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/syslog-ng-(?P<pver>\d+(\.\d+)+)"
