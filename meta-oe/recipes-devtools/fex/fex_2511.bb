@@ -54,3 +54,9 @@ LDFLAGS += "-fuse-ld=lld"
 
 FILES:${PN} += "${datadir} ${libdir}/binfmt.d ${libdir}/libFEXCore.so"
 FILES:${PN}-dev = "${includedir}"
+
+# At the time of writing this, this recipe has no historical CVEs associated, and couldn't
+# find a CPE to set. So ignore these unrelated vulnerabilities.
+CVE_STATUS_GROUPS = "CVE_STATUS_WRONG_CPE"
+CVE_STATUS_WRONG_CPE[status] = "cpe-incorrect: These vulnerabilities are for unrelated Fram's Fast File-EXchange application"
+CVE_STATUS_WRONG_CPE = "CVE-2012-0869 CVE-2012-1293 CVE-2014-3875 CVE-2014-3876 CVE-2014-3877"
