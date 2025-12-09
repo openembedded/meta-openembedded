@@ -7,8 +7,8 @@ SECTION = "devel/lib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 
-SRCREV = "9da72b2732508b0ba0ceed27f5e50bc276ef31f2"
-SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https"
+SRCREV = "518fd4a0a863e896675a7f5ef0164a36eb4d7b03"
+SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https;tag=${PV}"
 
 inherit gettext autotools pkgconfig python3native
 
