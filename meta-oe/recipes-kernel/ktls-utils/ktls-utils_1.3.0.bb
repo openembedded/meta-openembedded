@@ -19,3 +19,5 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd',
 PACKAGECONFIG[systemd] = "--with-systemd,,systemd"
 
 SYSTEMD_SERVICE:${PN} = "tlshd.service"
+# ../../../sources/ktls-utils-1.3.0/src/tlshd/quic.c:515:58: error: comparison of integers of different signs: 'unsigned long' and 'long' [-Werror,-Wsign-compare]
+CFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
