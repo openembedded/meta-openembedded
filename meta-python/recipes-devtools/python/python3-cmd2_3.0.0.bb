@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26efe44f9946f43292f90070d9d5590c"
 
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "81d8135b46210e1d03a5a810baf859069a62214788ceeec3588f44eed86fbeeb"
+SRC_URI[sha256sum] = "f6fab21d2b344a3ab9fe174a6286c9fb4f43a185ad1dfacd13ef017a26a2c333"
 
 inherit pypi python_setuptools_build_meta python3native
 
