@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/platformdirs/platformdirs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4f5a41454746a9ed111e3d8723d17a"
 
-SRC_URI[sha256sum] = "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+SRC_URI[sha256sum] = "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
 
 inherit pypi python_hatchling ptest-python-pytest
 
