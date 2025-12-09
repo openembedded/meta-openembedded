@@ -18,3 +18,5 @@ DEPENDS += "python3-hatch-vcs-native"
 do_configure:append:arm:toolchain-clang() {
     sed -i -e "s|'-flto'|''|" ${S}/setup.py
 }
+
+RDEPENDS:${PN}-ptest += "python3-backports-zstd"
