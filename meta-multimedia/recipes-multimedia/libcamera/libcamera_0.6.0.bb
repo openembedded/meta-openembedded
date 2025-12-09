@@ -1,4 +1,5 @@
 SUMMARY = "Linux libcamera framework"
+HOMEPAGE = "https://libcamera.org/"
 SECTION = "libs"
 
 LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
