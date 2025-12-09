@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 DEPENDS += "boost qemu-native"
 
-SRC_URI = "git://github.com/boost-ext/sml.git;protocol=https;branch=master"
-SRCREV = "cd3ef80206b71463de96d6b682cfdc99703ec147"
+SRC_URI = "git://github.com/boost-ext/sml.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "8015e095dab82c03eb2277258645956bcd84cbcb"
 
 
 inherit cmake
