@@ -2,8 +2,8 @@ SUMMARY = "Client for PPP+SSL VPN tunnel services"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3d575262a651a6f1a17210ce41bf907d"
 
-SRC_URI = "git://github.com/adrienverge/openfortivpn.git;protocol=https;branch=master"
-SRCREV = "a011b5c916075bd240db6a03c02eac95baf09ad8"
+SRC_URI = "git://github.com/adrienverge/openfortivpn.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "9230413f47de40fbf0dc8ba18eff42e943e27ca7"
 
 DEPENDS = "openssl"
 
