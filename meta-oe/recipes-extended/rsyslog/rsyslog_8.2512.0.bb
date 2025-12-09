@@ -30,7 +30,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
 SRC_URI:append:libc-musl = " \
     file://disable-omfile-outchannel.patch \
 "
-SRC_URI[sha256sum] = "a70a9834186859539a6a4d1c7b3f68c23897e805829b764a45e92cb0cc95e66a"
+SRC_URI[sha256sum] = "93c50025d90b6c795fa350d56a3d832bfce45043ea9bd68240d9c2a9394bc629"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
