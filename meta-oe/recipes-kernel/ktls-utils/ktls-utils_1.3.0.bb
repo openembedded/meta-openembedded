@@ -7,11 +7,9 @@ RDEPENDS:${PN} += " gnutls"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
 
-SRCREV = "03abde4ed7f539d77a412a1c98052e1c4d262963"
-SRC_URI = "git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https;branch=ktls-utils-1.2-fixes \
-           file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
+SRC_URI = "https://github.com/oracle/ktls-utils/releases/download/${BP}/${BP}.tar.gz \
            "
-
+SRC_URI[sha256sum] = "8ee295b26b608450bc0c47ba199b34cf92f7f9ec4c81a62363e6450da76b6739"
 
 inherit autotools-brokensep pkgconfig systemd
 
