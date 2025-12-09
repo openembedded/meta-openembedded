@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
 
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;tag=frr-${PV} \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.5;tag=frr-${PV} \
            file://frr.pam \
            "
-
-SRCREV = "88f5c06cbc1cc4d62e1cba3e7791f5cea4179ba5"
+SRCREV = "c41ba202c3f821a43091781181c73772501034ae"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
@@ -124,7 +123,6 @@ do_install:append:class-target () {
         echo "d /run/frr 0755 frr frr -" \
             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
     fi
-    oe_multilib_header frr/version.h
 }
 
 USERADD_PACKAGES = "${PN}"
