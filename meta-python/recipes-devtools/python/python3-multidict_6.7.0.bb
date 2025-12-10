@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "c6e99d9a65ca282e578dfea819cfa9c0a62b2499d8677392e09feaf305
 
 RDEPENDS:${PN}-ptest += " \
     python3-objgraph \
+    python3-psutil \
     python3-pytest-cov \
     python3-pytest-codspeed \
 "
