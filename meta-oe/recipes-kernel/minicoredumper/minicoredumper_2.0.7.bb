@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
            file://minicoredumper.init \
            file://run-ptest \
            file://0001-corestripper-Fix-uninitialized-warning.patch \
+           file://0002-Fix-2038-year-problem-in-timestamp-handling.patch \
            "
 
 
