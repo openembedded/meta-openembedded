@@ -12,14 +12,15 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "crate://crates.io/fd-find/${PV};name=fd-find"
+SRC_URI += "file://0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch;patchdir=../tikv-jemallocator-0.6.0"
 SRC_URI[fd-find.sha256sum] = "2fbf004b5bbdefab92e76237e2022c77842cdef5d3213fe09fd804e0474785db"
 S = "${CARGO_VENDORING_DIRECTORY}/fd-find-${PV}"
 
 inherit cargo cargo-update-recipe-crates
 
-#Upstream fd-find sets strip = true in [profile.release], which causes Cargo 
-#to strip the binary during compilation. This interferes with Yocto’s normal 
-#do_package stripping process.By adding the following flag, we ensure that 
+#Upstream fd-find sets strip = true in [profile.release], which causes Cargo
+#to strip the binary during compilation. This interferes with Yocto’s normal
+#do_package stripping process.By adding the following flag, we ensure that
 #stripping is handled by Yocto as usual:
 CARGO_BUILD_FLAGS += " --config profile.release.strip=false"
 
