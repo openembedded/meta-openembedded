@@ -1,5 +1,6 @@
 SUMMARY = "UPower is an abstraction for enumerating power devices"
 DESCRIPTION = "UPower is an abstraction for enumerating power devices, listening to device events and querying history and statistics."
+HOMEPAGE = "https://upower.freedesktop.org/"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 
