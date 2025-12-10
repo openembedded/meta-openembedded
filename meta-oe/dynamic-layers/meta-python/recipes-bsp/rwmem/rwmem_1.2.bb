@@ -7,6 +7,7 @@ Using /dev/mem as the memory mapped file makes rwmem access memory and \
 can thus be used to access devices which have memory mapped registers. \
 \
 In i2c mode rwmem accesses an i2c peripheral by sending i2c messages to it."
+HOMEPAGE = "https://github.com/tomba/rwmem"
 
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
