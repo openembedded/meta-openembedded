@@ -1,4 +1,5 @@
 SUMMARY = "v4l2 and IR applications"
+HOMEPAGE = "https://git.linuxtv.org/v4l-utils.git"
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
                     file://COPYING.libv4l;md5=d749e86a105281d7a44c2328acebc4b0"
