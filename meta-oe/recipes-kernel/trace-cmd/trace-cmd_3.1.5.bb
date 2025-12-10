@@ -1,4 +1,5 @@
 SUMMARY = "User-space front-end command-line tool for ftrace"
+HOMEPAGE = "https://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git"
 
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
