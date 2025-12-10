@@ -1,4 +1,5 @@
 SUMMARY = "VirtualBox Linux Guest Drivers"
+HOMEPAGE = "https://www.virtualbox.org/"
 SECTION = "core"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/${VBOX_NAME}/COPYING;md5=217590d3a513571b94632edf5fa1169a"
