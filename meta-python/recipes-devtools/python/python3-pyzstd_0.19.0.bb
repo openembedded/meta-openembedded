@@ -14,9 +14,4 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest python_hatchling
 
 DEPENDS += "python3-hatch-vcs-native"
 
-# clang-16 with -flto segfaults on arm, therefore ignore flto for now
-do_configure:append:arm:toolchain-clang() {
-    sed -i -e "s|'-flto'|''|" ${S}/setup.py
-}
-
 RDEPENDS:${PN}-ptest += "python3-backports-zstd"
