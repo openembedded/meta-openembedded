@@ -13,6 +13,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
            file://CVE-2018-5996.patch \
            file://CVE-2016-9296.patch \
            file://0001-Fix-two-buffer-overflow-vulnerabilities.patch \
+           file://CVE-2022-47069.patch \
            "
 
 SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
