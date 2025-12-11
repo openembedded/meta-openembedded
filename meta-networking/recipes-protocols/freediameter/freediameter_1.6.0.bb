@@ -50,6 +50,7 @@ EXTRA_OECMAKE = " \
     -DCMAKE_SKIP_RPATH:BOOL=ON \
     -DFLEX_TARGET_ARG_COMPILE_FLAGS='--noline' \
     -DBISON_TARGET_ARG_COMPILE_FLAGS='--no-lines' \
+    -DTEST_TIMEOUT=600 \
 "
 # INSTALL_LIBRARY_SUFFIX is relative to CMAKE_INSTALL_PREFIX
 # specify it on cmd line will fix the SET bug in CMakeList.txt
@@ -125,7 +126,7 @@ FILES:${PN} += "${libdir}/${fd_pkgname}/*"
 
 RDEPENDS:${PN}  = "glib-2.0 gnutls libidn"
 RDEPENDS:${PN} += "openssl openssl-conf openssl-engines"
-RRECOMMENDS:${PN} += "kernel-module-tipc kernel-module-sctp" 
+RRECOMMENDS:${PN} += "kernel-module-tipc kernel-module-sctp"
 RRECOMMENDS:${PN} += "kernel-module-udp-tunnel kernel-module-ipip"
 RDEPENDS:${PN}-ptest = "cmake"
 
@@ -137,4 +138,3 @@ SYSTEMD_SERVICE:${PN} = "freediameter.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 CONFFILES:${PN} = "${sysconfdir}/freediameter.conf"
-
