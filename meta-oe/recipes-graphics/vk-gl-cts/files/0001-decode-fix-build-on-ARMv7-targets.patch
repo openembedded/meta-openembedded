@@ -9,8 +9,10 @@ Building NEON code on ARMv7 fails with the following error:
 
 Add missing vreinterpret call in order to fix that error.
 
+Fixes KhronosGroup/VK-GL-CTS#547
+
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Video-Samples/pull/109]
+Upstream-Status: Backport [https://github.com/KhronosGroup/Vulkan-Video-Samples/commit/1e665d0f5139114203e04a1398de8c94ef031fd7]
 ---
  vk_video_decoder/libs/NvVideoParser/src/NextStartCodeNEON.cpp | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
