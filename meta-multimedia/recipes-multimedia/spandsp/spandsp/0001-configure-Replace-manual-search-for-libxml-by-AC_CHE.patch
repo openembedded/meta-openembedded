@@ -1,6 +1,7 @@
+From 62791a5d2532644c401060b6d49c84bee83f953c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
 Date: Thu, 14 Mar 2024 09:41:57 +0100
-Subject: [PATCH 2/2] configure: Replace manual search for libxml by
+Subject: [PATCH 1/2] configure: Replace manual search for libxml by
  AC_CHECK_LIB
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -9,22 +10,20 @@ Content-Transfer-Encoding: 8bit
 The manual search fails if the include directories (and build environment)
 are located somewhere else.
 
+Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull/109]
 Signed-off-by: Jörg Sommer <joerg.sommer@navimatix.de>
-Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull/74]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-
-ERROR: spandsp-3.0.0+git-r0 do_configure: QA Issue: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
-
  configure.ac | 22 +++++-----------------
  1 file changed, 5 insertions(+), 17 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 2140837..b5138d6 100644
+index fa87245..bc40690 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -185,23 +185,11 @@ then
+@@ -232,23 +232,11 @@ then
  fi
- 
+
  # Determine XML2 include path
 -AC_MSG_CHECKING(for libxml/xmlmemory.h)
 -
@@ -49,8 +48,5 @@ index 2140837..b5138d6 100644
 +else
 +    AC_MSG_WARN([libxml2 not found. Disabling cache.])
  fi
- 
- AC_CHECK_HEADERS([libxml/xmlmemory.h])
--- 
-2.34.1
 
+ AC_CHECK_HEADERS([libxml/xmlmemory.h])
