@@ -212,6 +212,7 @@ RDEPENDS:packagegroup-meta-oe-dbs = "\
     soci \
 "
 RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc = "rocksdb"
+RDEPENDS:packagegroup-meta-oe-dbs:remove:riscv32 = "influxdb"
 
 RDEPENDS:packagegroup-meta-oe-devtools = "\
     abseil-cpp \
@@ -311,7 +312,7 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc = "android-tools breakpad 
 RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc64 = "android-tools breakpad lshw luajit ply uftrace"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc64le = "android-tools breakpad lshw luajit ply uftrace"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv64 = "breakpad concurrencykit lshw ltrace luajit nodejs ply"
-RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv32 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
+RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv32 = "android-tools breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:libc-musl:riscv32 = "php"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:aarch64 = "concurrencykit"
 RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 = "ply"

@@ -33,6 +33,8 @@ RDEPENDS:packagegroup-meta-filesystems = "\
     sshfs-fuse \
 "
 
+RDEPENDS:packagegroup-meta-filesystems:remove:riscv32 = "smbnetfs"
+
 RDEPENDS:packagegroup-meta-filesystems-support = "\
     fuse3 \
     fuse \
