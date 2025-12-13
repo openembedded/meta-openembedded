@@ -4,11 +4,10 @@ HOMEPAGE = "https://code.videolan.org/videolan/dav1d"
 SECTION = "multimedia"
 LICENSE = "BSD-2-Clause"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=c8055cfe7548dfdaa3a6dc45d8793669"
+LIC_FILES_CHKSUM = "file://COPYING;md5=48d9210a87a24f62609b5a4f777d8dfe"
 
 SRC_URI = "git://code.videolan.org/videolan/dav1d.git;protocol=https;nobranch=1"
-SRCREV = "42b2b24fb8819f1ed3643aa9cf2a62f03868e3aa"
-
+SRCREV = "c720f4d3556a01916324aea155555d3efba842e8"
 
 DEPENDS:append:x86 = " nasm-native"
 DEPENDS:append:x86-64 = " nasm-native"
