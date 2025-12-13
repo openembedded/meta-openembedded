@@ -15,7 +15,7 @@ S = "${CARGO_VENDORING_DIRECTORY}/ripgrep-${PV}"
 
 inherit cargo cargo-update-recipe-crates
 
-DEPENDS += "libstd-rs"
+DEPENDS:append:class-target = " libstd-rs"
 
 require ${BPN}-crates.inc
 
