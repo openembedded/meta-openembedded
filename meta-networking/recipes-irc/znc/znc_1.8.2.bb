@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "openssl zlib icu"
 
-SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https"
+SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https \
+           file://CVE-2024-39844.patch \
+           "
 
 SRCREV = "bf253640d33d03331310778e001fb6f5aba2989e"
 
