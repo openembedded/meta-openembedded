@@ -11,7 +11,7 @@ SRC_URI = " \
     git://github.com/uutils/coreutils.git;protocol=https;branch=main;tag=${PV} \
 "
 
-SRCREV = "6cf5b06d8be0d8b6b4882dcdd1e7838376c6262d"
+SRCREV = "64203e309810d7e01eaf9c6cc7c21df22a8a896d"
 
 require ${BPN}-crates.inc
 
