@@ -350,7 +350,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     jpnevulator \
     libblockdev \
     libcec \
-    libconfig \
     libdivecomputer \
     libfastjson \
     libfile-fnmatch-perl \
