@@ -3,7 +3,7 @@ From: Jack Lloyd <jack@randombit.net>
 Date: Sun, 7 Jul 2024 05:02:48 -0400
 Subject: [PATCH] Address various name constraint bugs
 
-CVE: CVE-2024-39312
+CVE: CVE-2024-39312 CVE-2024-34702
 Upstream-Status: Backport [https://github.com/randombit/botan/commit/68338f5912534c74469f7f4e6e22b37aa5159952]
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
