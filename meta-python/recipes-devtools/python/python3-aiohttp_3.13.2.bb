@@ -23,3 +23,5 @@ RDEPENDS:${PN} = "\
 "
 
 CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
+
+BBCLASSEXTEND = "native nativesdk"
