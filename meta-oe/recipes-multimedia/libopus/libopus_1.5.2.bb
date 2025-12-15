@@ -28,9 +28,9 @@ EXTRA_OECONF = " \
 "
 
 # ne10 is available only for armv7a, armv7ve and aarch64
-DEPENDS:append:aarch64 = " ne10"
-DEPENDS:append:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
-DEPENDS:append:armv7ve = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
+DEPENDS:append:class-target:aarch64 = " ne10"
+DEPENDS:append:class-target:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
+DEPENDS:append:class-target:armv7ve = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
 
 python () {
     if d.getVar('TARGET_FPU') in [ 'soft' ]:
