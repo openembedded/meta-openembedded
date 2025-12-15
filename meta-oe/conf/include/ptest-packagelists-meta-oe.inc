@@ -9,6 +9,7 @@
 PTESTS_FAST_META_OE = "\
     asio \
     audiofile \
+    botan \
     cli11 \
     cmocka \
     cunit \

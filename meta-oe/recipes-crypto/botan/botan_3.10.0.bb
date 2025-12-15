@@ -4,12 +4,13 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://license.txt;md5=3f911cecfc74a2d9f1ead9a07bd92a6e"
 SECTION = "libs"
 
-SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
+           file://run-ptest"
 SRC_URI[sha256sum] = "fde194236f6d5434f136ea0a0627f6cc9d26af8b96e9f1e1c7d8c82cd90f4f24"
 
 S = "${UNPACKDIR}/Botan-${PV}"
 
-inherit python3native siteinfo lib_package
+inherit python3native siteinfo lib_package ptest
 
 CPU ?= "${TARGET_ARCH}"
 CPU:x86 = "x86_32"
@@ -55,7 +56,8 @@ FILES:${PN}-python3 = "${libdir}/python3"
 
 RDEPENDS:${PN}-python3 += "python3"
 RDEPENDS:${PN}-bin  += "${PN}"
-RDEPENDS:${PN}-test += "${PN}"
+RDEPENDS:${PN}-test += "${PN} ca-certificates"
+RDEPENDS:${PN}-ptest += "${PN}-test"
 FILES:${PN}:remove   = "${bindir}/*"
 FILES:${PN}-bin:remove   = "${bindir}/*"
 FILES:${PN}-bin   = "${bindir}/botan"
