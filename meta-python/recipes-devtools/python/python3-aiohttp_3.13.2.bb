@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
 
-SRC_URI[sha256sum] = "4fc61385e9c98d72fcdf47e6dd81833f47b2f77c114c29cd64a361be57a763a2"
+SRC_URI[sha256sum] = "40176a52c186aefef6eb3cad2cdd30cd06e3afbe88fe8ab2af9c0b90f228daca"
 
 inherit python_setuptools_build_meta pypi
 
@@ -18,8 +18,8 @@ RDEPENDS:${PN} = "\
     python3-frozenlist \
     python3-misc \
     python3-multidict \
+    python3-propcache \
     python3-yarl \
-    python3-aiodns \
 "
 
 CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
