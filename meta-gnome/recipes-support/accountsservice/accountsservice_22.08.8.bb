@@ -30,3 +30,6 @@ FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
 "
+
+# not-applicable-platform: The vulnerability is Ubuntu specific
+CVE_CHECK_IGNORE += "CVE-2023-3297"
