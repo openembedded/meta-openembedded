@@ -60,3 +60,5 @@ PACKAGE_BEFORE_PN += "\
 
 FILES:${PN}-bin = "${bindir}"
 FILES:${PN}-dev += "${datadir}/${BPN}/examples"
+
+CVE_STATUS[CVE-2025-50518] = "disputed: happens only when library is used incorrectly"
