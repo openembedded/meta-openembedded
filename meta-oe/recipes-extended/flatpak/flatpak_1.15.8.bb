@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 SRC_URI = " \
     gitsm://github.com/flatpak/flatpak;protocol=https;branch=main \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
+    file://CVE-2024-42472_1.patch \
+    file://CVE-2024-42472_2.patch \
 "
 
 SRCREV = "925c80f913d69e7ca424428823e1431c4ffb0deb"
