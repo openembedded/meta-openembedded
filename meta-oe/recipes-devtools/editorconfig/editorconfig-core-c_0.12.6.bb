@@ -4,7 +4,10 @@ SECTION = "libs"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f515fff3ea0a2b9797eda60d83c0e5ca"
 
-SRC_URI = "git://github.com/editorconfig/editorconfig-core-c.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/editorconfig/editorconfig-core-c.git;protocol=https;branch=master \
+           file://CVE-2024-53849_1.patch \
+           file://CVE-2024-53849_2.patch \
+"
 
 S = "${WORKDIR}/git"
 SRCREV = "b7837029494c03af5ea70ed9d265e8c2123bff53"
