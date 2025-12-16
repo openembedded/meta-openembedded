@@ -7,6 +7,7 @@ SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=mas
            file://0001-Fixes-400.patch \
            file://0001-Fixes-401.patch \
            file://0001-Fixes-402-403.patch \
+           file://0001-Fixes-381.patch \
            "
 SRCREV = "ff633699cb785967a2cb0084d89d56e53c46e416"
 

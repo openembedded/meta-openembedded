@@ -1,0 +1,30 @@
+From 0a3bbc33b88a44e03c7d7a2732b80f4e2ed45355 Mon Sep 17 00:00:00 2001
+From: Michael Adams <mdadams@ece.uvic.ca>
+Date: Fri, 29 Mar 2024 07:57:29 -0700
+Subject: [PATCH] Fixes #381.
+
+Added a missing check to the jpc_dec_process_sod function of the JPC codec.
+Added another image to the test set.
+
+CVE: CVE-2024-31744
+Upstream-Status: Backport [https://github.com/jasper-software/jasper/commit/6d084c53a77762f41bb5310713a5f1872fef55f5]
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ src/libjasper/jpc/jpc_dec.c |   4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/libjasper/jpc/jpc_dec.c b/src/libjasper/jpc/jpc_dec.c
+index 929f7ae..7e44f05 100644
+--- a/src/libjasper/jpc/jpc_dec.c
++++ b/src/libjasper/jpc/jpc_dec.c
+@@ -611,7 +611,9 @@ static int jpc_dec_process_sod(jpc_dec_t *dec, jpc_ms_t *ms)
+ 	if (dec->pkthdrstreams) {
+ 		/* Get the stream containing the packet header data for this
+ 		  tile-part. */
+-		if (!(tile->pkthdrstream = jpc_streamlist_remove(dec->pkthdrstreams, 0))) {
++		if (jpc_streamlist_numstreams(dec->pkthdrstreams) != 0 &&
++		  !(tile->pkthdrstream = jpc_streamlist_remove(dec->pkthdrstreams,
++		  0))) {
+ 			return -1;
+ 		}
+ 	}
