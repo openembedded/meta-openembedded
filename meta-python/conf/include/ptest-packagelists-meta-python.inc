@@ -38,6 +38,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-gpiod \
     python3-gpt-image \
     python3-gunicorn \
+    python3-h2 \
     python3-html2text \
     python3-httptools \
     python3-inflection \
