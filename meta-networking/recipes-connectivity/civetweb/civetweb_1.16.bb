@@ -9,6 +9,7 @@ SRCREV = "d7ba35bbb649209c66e582d5a0244ba988a15159"
 SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
            file://0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch \
+           file://CVE-2025-9648.patch \
            "
 
 S = "${WORKDIR}/git"
