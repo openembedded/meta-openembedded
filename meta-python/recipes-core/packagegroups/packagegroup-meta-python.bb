@@ -335,7 +335,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pyperclip \
     python3-pyperf \
     python3-pyrad \
-    python3-pyro4 \
     python3-pyroute2 \
     python3-pyrsistent \
     python3-pyscaffold \
