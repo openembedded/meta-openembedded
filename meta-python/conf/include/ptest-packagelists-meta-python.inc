@@ -42,6 +42,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-hpack \
     python3-html2text \
     python3-httptools \
+    python3-hyperframe \
     python3-inflection \
     python3-inotify \
     python3-intervals \
