@@ -15,6 +15,7 @@ SRCREV = "50a1fcf70fafe962c526749991cb4646406933ba"
 BRANCH = "openh264v2.1.1"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
            file://0001-Makefile-Use-cp-options-to-preserve-file-mode.patch \
+           file://CVE-2025-27091.patch \
            "
 
 COMPATIBLE_MACHINE:armv7a = "(.*)"
