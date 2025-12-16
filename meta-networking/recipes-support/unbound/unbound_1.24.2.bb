@@ -47,8 +47,11 @@ do_install:append() {
 }
 
 do_install_ptest() {
-        install -d ${D}${PTEST_PATH}/tests
         install -d ${D}${PTEST_PATH}/tests/testdata
+        install -d ${D}${PTEST_PATH}/sources/${BP}
+        # unittests are looking for the data in the source folder, though it's the
+        # same data used by the other tests
+        ln -sr ${D}${PTEST_PATH}/tests ${D}${PTEST_PATH}/sources/${BP}/testdata
 
         install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
         install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
@@ -56,7 +59,10 @@ do_install_ptest() {
         install -m 0664 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/
         install -m 0664 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/
         install -m 0664 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/test_ldnsrr* ${D}${PTEST_PATH}/tests/
+        install -m 0664 ${S}/testdata/zonemd.example* ${D}${PTEST_PATH}/tests/
         install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
+
 }
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
