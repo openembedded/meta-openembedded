@@ -65,6 +65,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-portion \
     python3-precise-runner \
     python3-prettytable \
+    python3-priority \
     python3-propcache \
     python3-pyais \
     python3-pydantic \
