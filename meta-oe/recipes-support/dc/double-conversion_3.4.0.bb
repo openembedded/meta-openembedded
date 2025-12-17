@@ -6,11 +6,10 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ea35644f0ec0d9767897115667e901f"
 
 SRC_URI = " \
-        git://github.com/google/double-conversion.git;protocol=https;branch=master \
+        git://github.com/google/double-conversion.git;protocol=https;branch=master;tag=v${PV} \
         file://run-ptest \
-        file://0001-allow-build-with-cmake-4.patch \
 "
-SRCREV = "ae0dbfeb9744efd216c95b30555049d75d47116a"
+SRCREV = "9dd6227ee3e29807183e56877f0282aeb40b8b1e"
 
 inherit cmake ptest
 
