@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=13;endline=13;md5=963ce28228347875
 SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "4a6d4ec9b3aa0df2f935d4d74f7dc809fd523d508cd0e9966b5b257c02c03414"
+SRC_URI[sha256sum] = "f31b1666bdf420b4b65c373ce0129ee349dd24bab4cd16c7f01b698fe450be6f"
 
 S = "${UNPACKDIR}/MIME-Types-${PV}"
 
