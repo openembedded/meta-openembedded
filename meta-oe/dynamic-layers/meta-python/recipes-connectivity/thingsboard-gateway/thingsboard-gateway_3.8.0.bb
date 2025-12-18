@@ -7,11 +7,11 @@ HOMEPAGE = "https://thingsboard.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-SRC_URI[sha256sum] = "5811a3c5a2334e41776f249df20c1d6a0def62a6e11e77bf2abeaa02f2725260"
+SRCREV = "4215a302c649f8fe3739814e365b0d6af722b66b"
+PYPI_SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
+PYPI_PACKAGE = "thingsboard-gateway"
 
 inherit pypi setuptools3
-
-PYPI_PACKAGE = "thingsboard-gateway"
 
 RDEPENDS:${PN} += " python3-jsonpath-rw \
                     python3-regex \
