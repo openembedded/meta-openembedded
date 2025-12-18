@@ -67,4 +67,9 @@ INITSCRIPT_PARAMS = "defaults 87"
 
 SYSTEMD_SERVICE:${PN} = "redis.service"
 
-CVE_STATUS[CVE-2022-0543] = "not-applicable-config: the vulnerability is not present in upstream, only in Debian-packaged versions"
+# The vulnerability originates from Debian's packaging methodology,
+# which loads system-wide Lua libraries (lua-cjson, lua-cmsgpack),
+# enabling Lua sandbox escape. Upstream Redis builds, including
+# those built by Yocto/OpenEmbedded, utilize embedded Lua from the
+# deps/ directory and are therefore not affected by this issue.
+CVE_STATUS[CVE-2022-0543] = "not-applicable-config: Debian-specific packaging issue caused by loading system-wide Lua libraries; upstream builds use embedded Lua and are not affected"
