@@ -20,7 +20,7 @@ DEPENDS = "tcl virtual/libx11 libxt zip-native"
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
 "
-SRC_URI[sha256sum] = "76fb852b2f167592fe8b41aa6549ce4e486dbf3b259a269646600e3894517c76"
+SRC_URI[sha256sum] = "bf344efadb618babb7933f69275620f72454d1c8220130da93e3f7feb0efbf9b"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
 UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
