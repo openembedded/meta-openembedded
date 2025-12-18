@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "osinfo-db-tools-native"
 
-SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https"
+SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https;tag=v${PV}"
 
-SRCREV = "62f8adceb8ee88e643a134f2cfaf04fc11b9fc51"
+SRCREV = "70fe571c605541e7be76b50f430c1cd13959c5b9"
 
 
 inherit allarch autotools-brokensep
