@@ -12,7 +12,7 @@ SRC_URI = "\
     git://github.com/megastep/${BPN}.git;protocol=https;branch=master;tag=release-${PV} \
 "
 
-SRCREV = "55d96ab79d39e10e3aec1bb1a7647ec0d4ddf1aa"
+SRCREV = "3815292f7359a4ccab8e27bdbe8a844947c51e4c"
 
 
 do_configure[noexec] = "1"
