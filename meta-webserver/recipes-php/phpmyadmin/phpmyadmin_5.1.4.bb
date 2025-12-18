@@ -14,7 +14,7 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
            file://CVE-2025-24530.patch \
 "
 
-SRC_URI[sha256sum] = "c562feddc0f8ff5e69629113f273a0d024a65fb928c48e89ce614744d478296f"
+SRC_URI[sha256sum] = "3230cf0e004b6284c70e0cb26064a8666b271749ef54236d035104a972822999"
  
 UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
 UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
