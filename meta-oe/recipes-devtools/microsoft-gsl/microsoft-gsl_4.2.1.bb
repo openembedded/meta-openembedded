@@ -8,10 +8,10 @@ HOMEPAGE = "https://github.com/microsoft/GSL"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=363055e71e77071107ba2bb9a54bd9a7"
 
-SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=main \
-        file://run-ptest \
-"
-SRCREV = "2828399820ef4928cc89b65605dca5dc68efca6e"
+SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=rel/4.2;tag=v${PV} \
+           file://run-ptest \
+           "
+SRCREV = "249146590e322123cd0b378b1f364d6069717687"
 
 inherit cmake pkgconfig ptest
 
