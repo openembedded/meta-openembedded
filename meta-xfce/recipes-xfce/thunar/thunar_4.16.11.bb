@@ -8,7 +8,7 @@ inherit xfce gobject-introspection features_check mime-xdg perlnative
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "520bf318eef8bc792db38ae4af343b648f87d4b8d66f5b5d6f092e15264ee5af"
+SRC_URI[sha256sum] = "f47dde90b2e5e3e31920a4f57ddd3670282d0a90870a45e89148fce41b2a8a1b"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
