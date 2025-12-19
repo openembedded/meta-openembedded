@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
 
 S = "${UNPACKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "cd16cb045b34a6cec6a83008e1b335f365c7a832fcc483df82308664c6d021f9"
+SRC_URI[sha256sum] = "55f428c426e7241752ea9afff160bb64c32a9321cbd6d17d1c145b8df8823737"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
