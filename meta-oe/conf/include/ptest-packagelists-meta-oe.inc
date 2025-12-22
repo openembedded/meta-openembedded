@@ -59,6 +59,7 @@ PTESTS_FAST_META_OE = "\
     zeromq \
     cjson \
     libplist \
+    uriparser \
 "
 PTESTS_FAST_META_OE:append:x86 = " mcelog"
 PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
