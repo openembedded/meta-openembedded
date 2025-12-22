@@ -39,6 +39,20 @@ do_install_ptest() {
         ${D}${PTEST_PATH}/build/autom4te.cache \
         ${D}${PTEST_PATH}/*/*/.git ${D}${PTEST_PATH}/*/*/.github \
         ${D}${PTEST_PATH}/*/*/autom4te.cache
+
+    # config.status contains WORKDIR paths in strings literal split across
+    # multiple lines. ie
+    # S["foo"]="/path/to/work"\
+    # "dir/"
+    # These line splits prevent the following sed from working properly.
+    # Make a first pass on the file to undo any line split
+    sed '
+        :a;N;$!ba;  # Read the whole file into the pattern buffer
+        s/"\\\n"//g # Delete "\<newline>" ie literal string line break
+        ' \
+        -i ${D}${PTEST_PATH}/build/config.status
+
+    # Now remove/replace the non-reproducible paths
     sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
         -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
         -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
