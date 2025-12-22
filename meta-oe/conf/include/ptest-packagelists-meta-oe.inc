@@ -10,6 +10,7 @@ PTESTS_FAST_META_OE = "\
     asio \
     audiofile \
     botan \
+    cjson \
     cli11 \
     cmocka \
     cunit \
@@ -30,6 +31,7 @@ PTESTS_FAST_META_OE = "\
     libjcat \
     libio-pty-perl \
     libmanette \
+    libplist \
     librelp \
     libssh \
     libteam \
@@ -52,14 +54,12 @@ PTESTS_FAST_META_OE = "\
     pv \
     sdbus-c++ \
     tomlplusplus \
+    uriparser \
     utf8proc \
     uthash \
     xmlsec1 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'xrdp', '', d)} \
     zeromq \
-    cjson \
-    libplist \
-    uriparser \
 "
 PTESTS_FAST_META_OE:append:x86 = " mcelog"
 PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
@@ -73,8 +73,8 @@ PTESTS_SLOW_META_OE = "\
     fftw \
     libusb-compat \
     mariadb \
-    rocksdb \
     re2 \
+    rocksdb \
 "
 PTESTS_SLOW_META_OE:append:x86 = " kernel-selftest"
 PTESTS_SLOW_META_OE:append:x86-64 = " kernel-selftest"
