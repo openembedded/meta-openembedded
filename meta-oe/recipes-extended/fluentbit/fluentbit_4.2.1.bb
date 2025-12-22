@@ -17,9 +17,9 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "6bc014390c5485b96521c56b98369b44b9faa08b"
+SRCREV = "909b1a917b4f46c40657a73821541fa03581a823"
 SRC_URI = "\
-    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https \
+    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https;tag=v${PV} \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
