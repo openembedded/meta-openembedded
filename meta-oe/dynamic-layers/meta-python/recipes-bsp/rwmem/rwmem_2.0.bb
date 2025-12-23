@@ -14,22 +14,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS += "fmt libinih"
 
-PV .= "+git"
+SRCREV = "d8dda76a0d8bc3356120d087f783d237602e0278"
 
-SRCREV = "8416326777b2aada0706539b8f9f6acefa476b16"
+SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV}"
 
-SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master \
-           file://0001-include-missing-cstdint.patch"
-
-
-inherit meson pkgconfig python3native
-
-PACKAGECONFIG ?= "python static"
-PACKAGECONFIG[python] = "-Dpyrwmem=enabled,-Dpyrwmem=disabled,cmake-native python3 python3-pybind11"
-PACKAGECONFIG[static] = "-Dstatic-libc=true,-Dstatic-libc=false,"
+inherit meson pkgconfig
 
 do_install:append() {
 	install -D -m 0644 ${B}/librwmem/librwmem.a ${D}${libdir}/librwmem.a
 }
-
-FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}/pyrwmem"
