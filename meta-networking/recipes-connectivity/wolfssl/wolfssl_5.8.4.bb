@@ -46,3 +46,6 @@ do_install_ptest() {
     cp -rf ${S}/certs  ${D}${PTEST_PATH}
     cp -rf ${S}/tests  ${D}${PTEST_PATH}
 }
+
+CVE_STATUS[CVE-2025-11931] = "fixed-version: The currently used version (5.8.4) contains the fix already."
+CVE_STATUS[CVE-2025-12889] = "fixed-version: The currently used version (5.8.4) contains the fix already."
