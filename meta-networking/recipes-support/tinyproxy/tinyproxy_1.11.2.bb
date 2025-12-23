@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
            file://disable-documentation.patch \
            file://tinyproxy.service \
            file://tinyproxy.conf \
+           file://run-ptest \
            file://CVE-2025-63938.patch \
            "
 
@@ -22,7 +23,7 @@ EXTRA_OECONF += " \
 	--enable-xtinyproxy \
 	"
 
-inherit autotools systemd useradd
+inherit autotools systemd useradd ptest
 
 #User specific
 USERADD_PACKAGES = "${PN}"
@@ -40,3 +41,26 @@ do_install:append() {
 	fi
 	install -m 0644 ${UNPACKDIR}/tinyproxy.conf ${D}${sysconfdir}/tinyproxy.conf
 }
+
+do_install_ptest() {
+	install -d ${D}${PTEST_PATH}/tests/scripts
+	install -d ${D}${PTEST_PATH}/data/templates
+	install ${S}/tests/scripts/*.sh ${D}${PTEST_PATH}/tests/scripts
+	install ${S}/tests/scripts/*.pl ${D}${PTEST_PATH}/tests/scripts
+	install -m 0644 ${S}/data/templates/*.html ${D}${PTEST_PATH}/data/templates/
+	# test the installed binary, not the one that was just compiled in the src folder
+	sed -i 's,TINYPROXY_BIN=.*,TINYPROXY_BIN=tinyproxy,' ${D}${PTEST_PATH}/tests/scripts/run_tests.sh
+}
+
+RDEPENDS:${PN}-ptest += "\
+    perl \
+    perl-module-cwd \
+    perl-module-encode-encoding \
+    perl-module-file-spec \
+    perl-module-getopt-long \
+    perl-module-io-socket \
+    perl-module-io-socket-inet \
+    perl-module-pod-text \
+    perl-module-posix \
+    procps \
+"

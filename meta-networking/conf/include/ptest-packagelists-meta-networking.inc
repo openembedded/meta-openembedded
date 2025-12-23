@@ -23,6 +23,7 @@ PTESTS_FAST_META_NETWORKING = "\
     python3-scapy \
     squid \
     tcpdump \
+    tinyproxy \
     unbound \
     wolfssl \
 "
