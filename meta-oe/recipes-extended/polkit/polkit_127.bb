@@ -5,9 +5,9 @@ LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
 BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
 
-SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV}"
 
-SRCREV = "d627b0d1e1108563658dabe3fb8d2a065e64df10"
+SRCREV = "9e4894c969eecf26a3ba762f4f7a268aa0fb3e51"
 
 DEPENDS = "expat glib-2.0 duktape"
 
@@ -62,4 +62,6 @@ FILES:${PN} += " \
 	${nonarch_libdir}/tmpfiles.d \
 	${nonarch_libdir}/polkit-1 \
 	${datadir} \
+	${systemd_unitdir}/system/polkit-agent-helper.socket \
+	${systemd_unitdir}/system/polkit-agent-helper@.service \
 "
