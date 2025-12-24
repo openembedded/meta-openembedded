@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "7c85a2526253e35575edb2e28cdc740d004be4b7c5fda954f0e721ee1c423a52"
+SRC_URI[sha256sum] = "ff12a044d79e342eff6bc8b27dfd4c24b395943052169bb43eea4a23a4100e56"
 
 inherit pypi python_setuptools_build_meta
 
