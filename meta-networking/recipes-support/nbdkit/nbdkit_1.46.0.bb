@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26250adec854bc317493f6fb98efe049"
 SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=master;tag=v${PV} \
            file://0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch \
            "
-SRCREV = "d50245af5b76f71c0659d981aeefc5fdc1de621d"
+SRCREV = "8c660cbf507ce6008483ae21c186444aa3dc0f11"
 
 
 DEPENDS = "curl xz e2fsprogs zlib"
