@@ -12,7 +12,8 @@ PTESTS_FAST_META_MULTIMEDIA = "\
     gupnp-av \
     gupnp-igd \
     libmediaart-2.0 \
-    libopenmpt\
+    libopenmpt \
+    wireplumber \
 "
 
 PTESTS_SLOW_META_MULTIMEDIA = "\
