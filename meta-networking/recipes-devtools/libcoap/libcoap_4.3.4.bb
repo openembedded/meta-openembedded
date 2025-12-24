@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
            file://run-ptest \
            file://CVE-2024-0962.patch \
            file://CVE-2024-31031.patch \
+           file://CVE-2025-59391.patch \
            "
 SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
 
