@@ -8,6 +8,7 @@ DEPENDS = "libcupsfilters libppd glib-2.0 poppler"
 SRC_URI = " \
 	https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
 	file://fix-make-race.patch \
+	file://CVE-2025-64524.patch \
 "
 SRC_URI[sha256sum] = "b5152e3dd148ed73835827ac2f219df7cf5808dbf9dbaec2aa0127b44de800d8"
 
