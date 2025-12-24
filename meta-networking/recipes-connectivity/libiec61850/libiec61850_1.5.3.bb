@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https 
            file://CVE-2024-26529.patch \
            file://CVE-2024-45970.patch \
            file://CVE-2024-45971.patch \
+           file://CVE-2024-45969.patch \
 "
 
 S = "${WORKDIR}/git"
