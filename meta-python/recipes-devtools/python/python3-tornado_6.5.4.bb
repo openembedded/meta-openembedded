@@ -6,7 +6,7 @@ HOMEPAGE = "https://www.tornadoweb.org/en/stable/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "16abdeb0211796ffc73765bc0a20119712d68afeeaf93d1a3f2edf6b3aee8d5a"
+SRC_URI[sha256sum] = "a22fa9047405d03260b483980635f0b041989d8bcc9a313f8fe18b411d84b1d7"
 
 inherit pypi python_setuptools_build_meta
 
