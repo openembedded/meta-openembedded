@@ -16,14 +16,14 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native bison-nat
 LDFLAGS:append:riscv64 = " -latomic"
 LDFLAGS:append:riscv32 = " -latomic"
 
-SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;branch=3.0.x \
+SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;nobranch=1 \
            file://0001-make-opencv-configurable.patch \
            file://0002-use-vorbisidec.patch \
            file://0003-fix-luaL-checkint.patch \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
            file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
 "
-SRCREV = "aa76328c572d93f1d99c867a94ecad1dc3259733"
+SRCREV = "c650ce1a4e352cc04192229a8878b8b6c312527d"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
