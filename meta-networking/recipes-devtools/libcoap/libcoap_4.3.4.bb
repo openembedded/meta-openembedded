@@ -64,3 +64,4 @@ FILES:${PN}-bin = "${bindir}"
 FILES:${PN}-dev += "${datadir}/${BPN}/examples"
 
 CVE_STATUS[CVE-2025-50518] = "disputed: happens only when library is used incorrectly"
+CVE_STATUS[CVE-2023-51847] = "not-applicable-config: Doesn't apply to our configuration so we can safely ignore it."
