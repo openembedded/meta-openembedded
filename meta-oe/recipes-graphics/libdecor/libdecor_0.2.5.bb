@@ -12,7 +12,7 @@ DEPENDS = " \
     wayland-protocols \
 "
 
-SRCREV = "4d026d59edbf8e2e876c3f2c07c480f8840aa922"
+SRCREV = "149c6f0b05663aaa69fdf7f94be2483776d1a311"
 
 PACKAGECONFIG ?= "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', d)}"
 
