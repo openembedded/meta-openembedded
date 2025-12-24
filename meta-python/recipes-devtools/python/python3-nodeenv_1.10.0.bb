@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a9e238ffae5bb6447dbac6291e1dc3a3"
 PYPI_PACKAGE = "nodeenv"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "6ec12890a2dab7946721edbfbcd91f3319c6ccc9aec47be7c7e6b7011ee6645f"
+SRC_URI[sha256sum] = "996c191ad80897d076bdfba80a41994c2b47c68e224c542b48feba42ba00f8bb"
 
 DEPENDS += "python3-setuptools-scm-native"
