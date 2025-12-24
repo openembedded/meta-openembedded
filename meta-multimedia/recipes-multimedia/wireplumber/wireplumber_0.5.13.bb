@@ -10,14 +10,14 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
 "
 
-SRCREV = "3a785e502642ddb1e91d953e587c7b06444e0b51"
+SRCREV = "84429b47943d789389fbde17c06b82efb197d04e"
 SRC_URI = " \
-    git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
+    git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https;tag=${PV} \
     file://90-OE-disable-session-dbus-dependent-features.lua \
 "
 
 
-inherit meson pkgconfig gobject-introspection systemd
+inherit meson pkgconfig gobject-introspection systemd bash-completion
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
