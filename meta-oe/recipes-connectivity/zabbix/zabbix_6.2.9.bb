@@ -27,6 +27,7 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/oldstable/6.2/${BPN}-${PV}.tar.
     file://0001-Fix-configure.ac.patch \
     file://0001-initialize-msghdr-portably.patch \
     file://zabbix-agent.service \
+    file://CVE-2025-49643.patch \
 "
 SRC_URI[sha256sum] = "a2325be57b8027bb340bb602c33f8092165dbce4da562301c03867101a21efa6"
 
