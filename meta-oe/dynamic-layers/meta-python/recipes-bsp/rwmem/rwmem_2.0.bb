@@ -16,7 +16,9 @@ DEPENDS += "fmt libinih"
 
 SRCREV = "d8dda76a0d8bc3356120d087f783d237602e0278"
 
-SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV}"
+SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV} \
+           file://0001-test_data_generator-Use-own-generic-htobe-template.patch \
+		  "
 
 inherit meson pkgconfig
 
