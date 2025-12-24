@@ -10,7 +10,7 @@ HOMEPAGE = "https://gpsd.io/"
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
            file://gpsd.init \
            "
-SRC_URI[sha256sum] = "6195292dd7910be68cb7018d45166283eaefd3f9db9773fcd6e9a78d49eac999"
+SRC_URI[sha256sum] = "3baa03b8fd922982950593665fa4d86fe9ecde8b3d2ed5c2d0320c7dcecc2937"
 
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
 
