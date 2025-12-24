@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz"
-SRC_URI[sha256sum] = "df9e40ae927b73dc702d0bce7925c0c618af47ad0b13204fbf2be66e54d8528b"
+SRC_URI[sha256sum] = "dd395c88f29c7540bbdd0b830260ab8092ccb241bb6e66f603643f715fb9322c"
 
 S = "${UNPACKDIR}/fuse-${PV}"
 
