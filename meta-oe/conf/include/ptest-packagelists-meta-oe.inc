@@ -17,6 +17,7 @@ PTESTS_FAST_META_OE = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'dbus-broker', '', d)} \
     duktape \
     exiv2 \
+    freerdp3 \
     fuse3 \
     function2 \
     fwupd \
