@@ -34,4 +34,4 @@ FILES:${PN} += "${datadir}/php/smarty3/"
 
 RDEPENDS:${PN} = "php"
 
-CVE_PRODUCT = "smarty:smarty"
+CVE_PRODUCT = "smarty:smarty smarty-php:smarty"
