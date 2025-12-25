@@ -9,6 +9,7 @@ DEPENDS += "php"
 
 SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master \
            file://CVE-2018-25047.patch \
+           file://CVE-2023-28447.patch \
            "
 
 SRCREV = "71036be8be02bf93735c47b0b745f722efbc729f"
