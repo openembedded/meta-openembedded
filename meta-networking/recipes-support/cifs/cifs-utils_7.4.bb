@@ -21,6 +21,8 @@ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disab
 
 inherit autotools pkgconfig
 
+CFLAGS += "-I ${B}"
+
 do_configure:prepend() {
     # want installed to /usr/sbin rather than /sbin to be DISTRO_FEATURES usrmerge compliant
     # must override ROOTSBINDIR (default '/sbin'),
