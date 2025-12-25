@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
 
 DEPENDS += "php"
 
-SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master \
+           file://CVE-2018-25047.patch \
+           "
 
 SRCREV = "71036be8be02bf93735c47b0b745f722efbc729f"
 
