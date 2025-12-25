@@ -66,6 +66,7 @@ do_install_ptest() {
         -e 's@${S}@${PTEST_PATH}@g' \
         -e 's@${B}@${PTEST_PATH}/build@g' \
         -e 's@${HOSTTOOLS_DIR}@@g' \
+        -e 's@${RECIPE_SYSROOT_NATIVE}@@g' \
         -e 's@${RECIPE_SYSROOT}@@g' \
         -i ${D}${PTEST_PATH}/build/config.status
 }
