@@ -4,8 +4,8 @@ SECTION = "otherosfs"
 LICENSE = "GPL-3.0-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "316522036133d44ed02cd39ed2748e2b59c85b30"
-SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master"
+SRCREV = "edac7178bec9520fb57d14946e67f5dd33b82d43"
+SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master;tag=${BP}"
 
 DEPENDS += "libtalloc"
 
@@ -38,6 +38,11 @@ do_install:append() {
     fi
 }
 
+PACKAGE_BEFORE_PN = "${PN}-scripts"
 FILES:${PN} += "${base_libdir}/security"
 FILES:${PN}-dbg += "${base_libdir}/security/.debug"
+# these scripts are python, package them separately so python
+# won't be mandatory dependency
+FILES:${PN}-scripts = "${bindir}/smb2-quota ${bindir}/smbinfo"
+RDEPENDS:${PN}-scripts += "python3-core"
 RRECOMMENDS:${PN} = "kernel-module-cifs"
