@@ -9,7 +9,9 @@ SECTION = "console/utils"
 DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
 DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
 
-SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
+SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
+           file://CVE-2025-57812.patch \
+           "
 
 inherit autotools-brokensep gettext pkgconfig
 
