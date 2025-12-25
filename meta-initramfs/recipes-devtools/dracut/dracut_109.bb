@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-PV = "108"
-SRCREV = "97c5568ec42abd5e6035f0cfa9d319ae6ae4e50a"
-SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
-           file://0001-feat-dracut.sh-try-STRIP-for-strip_cmd-first.patch \
+SRCREV = "13c5e5feee9ba86b960d351f87aa0eb25f242ff0"
+SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main;tag=${PV} \
            file://0002-fix-broken-symlink-in-dracut-config-examples.patch \
            "
 
