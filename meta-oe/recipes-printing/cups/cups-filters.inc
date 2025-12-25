@@ -11,6 +11,7 @@ DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-nat
 
 SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
            file://CVE-2025-57812.patch \
+           file://CVE-2025-64524.patch \
            "
 
 inherit autotools-brokensep gettext pkgconfig
