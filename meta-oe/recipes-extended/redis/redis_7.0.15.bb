@@ -38,6 +38,8 @@ inherit autotools-brokensep update-rc.d systemd useradd
 CVE_CHECK_IGNORE += "CVE-2022-0543"
 # not-applicable-config: only affects Windows
 CVE_CHECK_IGNORE += "CVE-2022-3734"
+# disputed: not strictly a bug, mitigating it would affect functionality
+CVE_CHECK_IGNORE += "CVE-2025-46686"
 
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32:toolchain-clang = "-latomic"
