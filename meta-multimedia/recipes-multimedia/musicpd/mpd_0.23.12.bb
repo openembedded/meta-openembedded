@@ -99,3 +99,6 @@ USERADD_PARAM:${PN} = " \
     --home ${localstatedir}/lib/mpd \
     --groups audio \
     --user-group mpd"
+
+# cpe-incorrect: The recipe used in the meta-openembedded is a different mpd package compared to the one which has the CVE issue.
+CVE_CHECK_IGNORE += "CVE-2020-7465 CVE-2020-7466"
