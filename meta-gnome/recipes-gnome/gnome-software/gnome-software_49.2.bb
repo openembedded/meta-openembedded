@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 GTKDOC_MESON_OPTION ?= "gtk_doc"
 
-inherit gnomebase gsettings itstool gnome-help gtk-icon-cache gtk-doc mime mime-xdg gettext upstream-version-is-even features_check
+inherit gnomebase gsettings itstool gnome-help gtk-icon-cache gtk-doc mime mime-xdg gettext upstream-version-is-even features_check pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
 
@@ -29,7 +29,7 @@ RDEPENDS:${PN} = "iso-codes"
 EXTRA_OEMESON += "-Dtests=false"
 
 SRC_URI += "file://0001-meson.build-dont-look-for-flatpak-http_backend-varia.patch"
-SRC_URI[archive.sha256sum] = "49dfeca77928801756d0c5386c1d20454ca077600a5d1ed66ec46ee33a32c66d"
+SRC_URI[archive.sha256sum] = "b610b6932a8d666432bc58d6c78c4568cd63d442ae736db8be2c4ca01bbc946c"
 
 PACKAGECONFIG ?= "flatpak"
 PACKAGECONFIG[flatpak] = "-Dflatpak=true,-Dflatpak=false,flatpak ostree"
