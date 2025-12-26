@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
 
 DEPENDS = "sqlite3"
 
-SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=develop;tag=${PV} \
+SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=main;tag=${PV} \
            file://0001-avoid-unnecessary-check-for-sqlite3-binary.patch \
            file://0002-Prevent-accessing-of-global-c-objects-once-they-are-.patch \
 "
