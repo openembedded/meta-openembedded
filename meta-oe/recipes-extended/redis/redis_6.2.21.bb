@@ -28,6 +28,7 @@ CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains t
 # deps/ directory and are therefore not affected by this issue.
 CVE_STATUS[CVE-2022-0543] = "not-applicable-config: Debian-specific packaging issue caused by loading system-wide Lua libraries; upstream builds use embedded Lua and are not affected"
 CVE_STATUS[CVE-2022-3734] = "not-applicable-config: only affects Windows"
+CVE_STATUS[CVE-2025-46686] = "disputed: upstream rejected because mitigating it would affect other functionality"
 
 inherit update-rc.d systemd useradd
 
