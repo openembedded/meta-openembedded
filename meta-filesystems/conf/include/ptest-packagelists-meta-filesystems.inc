@@ -8,6 +8,7 @@
 
 PTESTS_FAST_META_FILESYSTEMS = "\
     e2tools \
+    unionfs-fuse \
 "
 
 PTESTS_SLOW_META_FILESYSTEMS = "\
