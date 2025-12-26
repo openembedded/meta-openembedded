@@ -3,13 +3,11 @@ HOMEPAGE = "https://github.com/rpodgorny/unionfs-fuse"
 SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8abab00b483a1b7943a32 \
-                    file://LICENSE;md5=7e5a37fce17307066eec6b23546da3b3 \
+                    file://LICENSE;md5=0e75c95b3e0e1c01489b39e7fadd3e2d \
 "
 
-SRC_URI = "git://github.com/rpodgorny/${BPN}.git;branch=master;protocol=https \
-           file://0001-support-cross-compiling.patch \
-           "
-SRCREV = "773f1853b043eeb64b7459f903a2c65bd096f9d9"
+SRC_URI = "git://github.com/rpodgorny/${BPN}.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "3fcbd11f78b9a9e02ea0e861d741840fe45dc9c8"
 
 DEPENDS = "fuse3"
 RDEPENDS:${PN} = "bash"
