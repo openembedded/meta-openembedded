@@ -1,10 +1,11 @@
 DESCRIPTION = "REALTIMEKIT Realtime Policy and Watchdog Daemon"
+HOMEPAGE = "https://gitlab.freedesktop.org/pipewire/rtkit"
 LICENSE = "GPL-3.0-only & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a8e768468b658b3ed44971b53d4a6716"
 
-SRC_URI = "git://github.com/heftig/rtkit.git;protocol=https;branch=master"
+SRC_URI = "git://gitlab.freedesktop.org/pipewire/rtkit.git;protocol=https;branch=master"
 
-SRCREV = "b9169402fe5e82d20efb754509eb0b191f214599"
+SRCREV = "c52db0a9849908613ab8775b519834671b7bec8b"
 
 inherit meson pkgconfig features_check useradd
 
