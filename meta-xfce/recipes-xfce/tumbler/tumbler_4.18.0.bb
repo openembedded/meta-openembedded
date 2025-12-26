@@ -1,4 +1,5 @@
 DESCRIPTION = "Thumbnail service implementing the thumbnail management D-Bus specification"
+HOMEPAGE = "https://docs.xfce.org/xfce/tumbler/start"
 SECTION = "x11/libs"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"

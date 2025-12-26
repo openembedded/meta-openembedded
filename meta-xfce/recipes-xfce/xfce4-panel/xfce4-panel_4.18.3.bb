@@ -1,4 +1,5 @@
 SUMMARY = "Xfce4 Panel"
+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-panel/start"
 SECTION = "x11"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
