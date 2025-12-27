@@ -11,17 +11,17 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
 RDEPENDS:${PN} = "perl"
 
-SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "5eb42d983a9667003368b572149fce788c0d7e13daaf1f28ad1bf3a140b865cf"
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+SRC_URI[sha256sum] = "0c9a10c2d8e5bc0cb10e16dc86c83be60d71d8a52b97bca785c64a30ed642839"
 
 do_install() {
-    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
+    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts/services
     install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/logfiles
     install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/services
     install -m 0755 -d ${D}${localstatedir}/cache/logwatch
-    cp -r -f conf/ ${D}${datadir}/logwatch/default.conf
-    cp -r -f scripts/ ${D}${datadir}/logwatch/scripts
-    cp -r -f lib ${D}${datadir}/logwatch/lib
+    cp -r conf/ ${D}${datadir}/logwatch/default.conf
+    cp -r scripts/ ${D}${datadir}/logwatch/scripts
+    cp -r lib ${D}${datadir}/logwatch/lib
     chown -R root:root ${D}${datadir}/logwatch
 
     install -m 0755 -d ${D}${mandir}/man1
@@ -36,7 +36,7 @@ do_install() {
 
     install -m 0755 -d ${D}${sysconfdir}/cron.daily
     install -m 0755 -d ${D}${sbindir}
-    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
+    ln -sr  ${D}${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
     cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
     DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
     if [ "\$DailyReport" != "No" ] && [ "\$DailyReport" != "no" ]
@@ -45,6 +45,13 @@ do_install() {
     fi
 EOF
     chmod 755 ${D}${sysconfdir}/cron.daily/0logwatch
+
+    for i in scripts/logfiles/*; do
+        if [ $(ls $i | wc -l) -ne 0 ]; then
+            install -d ${D}${datadir}/logwatch/$i
+            install -m 0644 $i/* ${D}${datadir}/logwatch/$i
+        fi
+    done
 
     install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/logfiles
     install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/services
