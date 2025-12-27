@@ -4,13 +4,10 @@ LICENSE = "WTFPL"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
 
 SRC_URI = "\
-    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master \
-    file://0001-always-use-glibc-basename.patch \
-    file://0002-Change-program_name-to-have-const-attribute.patch \
+    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=${PV} \
 "
 
-SRCREV = "7a4a0c4f2c6c86aa46a40e3468e394fd4a237491"
-
+SRCREV = "6e925bbbe747fbb58bc4a95a646907a2101741f6"
 
 inherit meson pkgconfig
 
