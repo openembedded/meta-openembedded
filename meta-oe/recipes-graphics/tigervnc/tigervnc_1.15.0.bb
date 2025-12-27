@@ -44,6 +44,16 @@ do_patch_xserver () {
     patch -p1 -b --suffix .vnc --directory ${XSERVER_SOURCE_DIR} <${S}/unix/xserver21.patch
 }
 
+# It is very easy to miss xserver updates in oe-core, and this recipe's xserver
+# gets out of sync due to this. Hopefully this warning will help.
+do_configure[prefuncs] += "do_verify_xserver_version"
+do_verify_xserver_version() {
+    OE_CORE_XSERVER_VERSION=$(pkg-config --modversion xorg-server)
+    if [ "$OE_CORE_XSERVER_VERSION" != "${XORG_PV}" ]; then
+        bbwarn "TigerVNC xorg-server version (${XORG_PV}) is different from oe-core's xorg-xserver version ($OE_CORE_XSERVER_VERSION)"
+    fi
+}
+
 EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb \
         --disable-xwin --disable-xephyr --disable-kdrive --with-pic \
         --disable-static --disable-xinerama \
