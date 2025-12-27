@@ -7,18 +7,16 @@ DEPENDS = "libcap"
 
 SRC_URI = " \
     https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz \
-    file://0001-Use-stdbool.h-for-booleans.patch \
 "
-SRC_URI[sha256sum] = "65d92cf44a63a51e1b7771f70c05013dce5bd6b0b2841c4b4be54b0c45565471"
+SRC_URI[sha256sum] = "988fd6b232dafa04b8b8198723efeaccdb3c6aa9c1c7936219d5791a8b7a8646"
 
-inherit autotools bash-completion github-releases manpages pkgconfig
+inherit meson bash-completion github-releases manpages pkgconfig
 
 GITHUB_BASE_URI = "https://github.com/containers/${BPN}/releases/"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
-PACKAGECONFIG[manpages] = "--enable-man,--disable-man,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
-PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
-PACKAGECONFIG[setuid] = "--with-priv-mode=setuid,--with-priv-mode=none"
+PACKAGECONFIG[manpages] = "-Dman=enabled,-Dman=disabled,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
+PACKAGECONFIG[selinux] = "-Dselinux=enabled,-Dselinux=disabled,libselinux"
 
 PACKAGES += "${PN}-zsh-completion"
 
