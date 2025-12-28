@@ -7,11 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
                     "
 COMPATIBLE_HOST:libc-musl = "null"
 
-SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${BP}.src.tar.gz \
+SRC_URI = "git://git@github.com/performancecopilot/pcp.git;protocol=https;nobranch=1 \
            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
            file://config.linux \
 	   "
-SRC_URI[sha256sum] = "6ef33b7aa14c09860ba7cd8873e76d38ccd24eab0c94a50e235f813e77fe3610"
+SRCREV = "520c142c23f87dc01c4e419d4b56e80069546dc2"
+
+S = "${WORKDIR}/git"
 
 inherit setuptools3-base pkgconfig autotools-brokensep
 
