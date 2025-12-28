@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://Copyright;md5=575cf2715c3bf894e1f79aec1d4eaaf5"
 SECTION = "base"
 DEPENDS = "ncurses virtual/crypt gettext-native"
 SRC_URI = " \
-    https://astron.com/pub/${BPN}/${BP}.tar.gz \
+    https://astron.com/pub/${BPN}/old/${BP}.tar.gz \
     file://0001-Enable-system-malloc-on-all-linux.patch \
     file://0002-Add-debian-csh-scripts.patch \
 "
