@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
 
 DEPENDS = "sqlite3"
 
-SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=develop"
+SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=main"
 SRCREV = "7f99bedae002f0dd04ceeb8d86d59fc4a68a69a0"
 S = "${WORKDIR}/git"
 
