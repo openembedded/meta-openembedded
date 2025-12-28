@@ -4,7 +4,7 @@ LICENSE = "GPL-3.0-or-later & LGPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8dfcbf2f0a144b97f0931b6394debea7"
 
 SRC_URI = " \
-    http://srecord.sourceforge.net/srecord-${PV}.tar.gz \
+    https://sourceforge.net/projects/${BPN}/files/srecord/${PV}/${BP}.tar.gz \
     file://add-option-to-remove-docs.patch \
     file://libtool.patch \
 "
