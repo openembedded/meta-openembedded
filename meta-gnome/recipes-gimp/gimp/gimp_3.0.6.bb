@@ -63,6 +63,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
            file://0001-meson.build-require-iso-codes-native.patch \
            file://CVE-2025-14422.patch \
            file://CVE-2025-14423.patch \
+           file://CVE-2025-14424.patch \
            "
 SRC_URI[sha256sum] = "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94ce466a62862e296b"
 
