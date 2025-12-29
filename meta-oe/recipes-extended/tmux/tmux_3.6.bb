@@ -17,6 +17,7 @@ inherit autotools pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[utempter] = "ac_cv_header_utempter_h=yes,ac_cv_header_utempter_h=no,libutempter,"
+PACKAGECONFIG[sixel] = "--enable-sixel,--disable-sixel"
 
 do_configure:prepend() {
     # The 'compat' directory is needed for output during the build but it's
