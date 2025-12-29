@@ -67,7 +67,8 @@ PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
 
 PTESTS_FAST_META_OE:remove:libc-musl = "jemalloc minicoredumper oprofile"
 PTESTS_FAST_META_OE:remove:riscv64 = "nodejs oprofile"
-PTESTS_FAST_META_OE:remove:riscv32 = "nodejs oprofile"
+# botan needs go
+PTESTS_FAST_META_OE:remove:riscv32 = "botan nodejs oprofile"
 
 PTESTS_SLOW_META_OE = "\
     c-ares \
