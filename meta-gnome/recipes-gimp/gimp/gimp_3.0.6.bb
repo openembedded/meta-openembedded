@@ -56,11 +56,13 @@ GIDOCGEN_MESON_OPTION = "gi-docgen"
 GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
 GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
 
-SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz"
-SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch"
-SRC_URI += "file://0002-meson.build-reproducibility-fix.patch"
-SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
-SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
+SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
+           file://0001-gimp-cross-compile-fix-for-bz2.patch \
+           file://0002-meson.build-reproducibility-fix.patch \
+           file://0001-meson.build-dont-check-for-lgi.patch \
+           file://0001-meson.build-require-iso-codes-native.patch \
+           file://CVE-2025-14422.patch \
+           "
 SRC_URI[sha256sum] = "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94ce466a62862e296b"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
