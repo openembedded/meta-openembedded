@@ -7,6 +7,8 @@ SRC_URI[sha256sum] = "f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cb
 
 inherit pypi python_setuptools_build_meta ptest
 
+CVE_PRODUCT = "gunicorn"
+
 SRC_URI += " \
 	file://run-ptest \
 "
