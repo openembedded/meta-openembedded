@@ -28,3 +28,5 @@ RDEPENDS:${PN} = " \
     python3-threading \
     python3-unittest \
 "
+
+CVE_PRODUCT = "python-ldap"
