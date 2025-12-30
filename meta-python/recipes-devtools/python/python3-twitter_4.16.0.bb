@@ -17,3 +17,5 @@ RDEPENDS:${PN} += "\
     python3-requests-oauthlib \
     python3-six \
 "
+
+CVE_PRODUCT = "tweepy"
