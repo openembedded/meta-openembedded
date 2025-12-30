@@ -13,3 +13,5 @@ RDEPENDS:${PN} += "\
     python3-netclient \
     python3-pyparsing \
 "
+
+CVE_PRODUCT = "httplib2"
