@@ -24,3 +24,5 @@ RDEPENDS:${PN} += " \
     python3-modules \
     python3-platformdirs \
 "
+
+CVE_PRODUCT = "virtualenv"
