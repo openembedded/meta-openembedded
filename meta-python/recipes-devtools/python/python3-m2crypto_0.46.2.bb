@@ -51,4 +51,6 @@ do_install:append() {
     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/__pycache__/*.cpython-*.pyc
 }
 
+CVE_PRODUCT = "m2crypto"
+
 BBCLASSEXTEND = "native"
