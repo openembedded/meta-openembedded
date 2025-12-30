@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI[sha256sum] = "083f250643d2e75fd363f256aeb6b1af369a7513ad37647ce4a601f6966e3ba5"
 
+CVE_PRODUCT = "marshmallow"
+
 inherit python_flit_core pypi ptest-python-pytest
 
 RDEPENDS:${PN}-ptest += " \
