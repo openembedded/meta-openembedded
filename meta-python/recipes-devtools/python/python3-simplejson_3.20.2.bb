@@ -20,5 +20,6 @@ FILES:${PN}-tests += " \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
 "
+CVE_PRODUCT = "simplejson"
 
 BBCLASSEXTEND = "native nativesdk"
