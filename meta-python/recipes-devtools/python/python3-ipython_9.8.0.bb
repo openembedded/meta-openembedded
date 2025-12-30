@@ -24,3 +24,5 @@ RDEPENDS:${PN} = "\
 "
 
 inherit python_setuptools_build_meta pypi
+
+CVE_PRODUCT = "ipython"
