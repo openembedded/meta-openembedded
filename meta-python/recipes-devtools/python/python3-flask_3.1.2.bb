@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
 
 SRC_URI[sha256sum] = "bf656c15c80190ed628ad08cdfd3aaa35beb087855e2f494910aa3774cc4fd87"
 
+CVE_PRODUCT = "flask"
+
 inherit pypi python_flit_core ptest-python-pytest
 
 CLEANBROKEN = "1"
