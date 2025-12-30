@@ -13,7 +13,7 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/Netw
 
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "4bda1c8559bb8c35f6f131c09edae90cdfccd0314e8b8cb98ac55e09b6005adc"
+SRC_URI[sha256sum] = "ce32e38b0500eddf2fc8072ca17679817fc2d35eb91f6ff7b9904209c14b5afd"
 
 S = "${UNPACKDIR}/NetworkManager-openvpn-${PV}"
 
@@ -43,6 +43,8 @@ FILES:${PN} += " \
     ${datadir}/metainfo \
     ${libdir}/NetworkManager/*.so \
     ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
+    ${nonarch_libdir}/sysusers.d \
+    ${nonarch_libdir}/tmpfiles.d \
 "
 
 FILES:${PN}-staticdev += " \
