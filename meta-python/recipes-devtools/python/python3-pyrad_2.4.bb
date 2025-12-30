@@ -19,3 +19,5 @@ RDEPENDS:${PN} += " \
     python3-netaddr \
     python3-six \
 "
+
+CVE_PRODUCT = "pyrad"
