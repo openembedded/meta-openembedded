@@ -13,4 +13,6 @@ RDEPENDS:${PN} += "\
     python3-xml \
 "
 
+CVE_PRODUCT = "html5lib"
+
 BBCLASSEXTEND = "native nativesdk"
