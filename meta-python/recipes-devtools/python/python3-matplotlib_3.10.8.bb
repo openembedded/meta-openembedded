@@ -47,4 +47,6 @@ RDEPENDS:${PN} = "\
     python3-packaging \
 "
 
+CVE_PRODUCT = "matplotlib"
+
 BBCLASSEXTEND = "native"
