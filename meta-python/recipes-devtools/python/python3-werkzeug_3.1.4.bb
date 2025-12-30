@@ -12,6 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
 
 SRC_URI[sha256sum] = "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
 
+CVE_PRODUCT = "werkzeug"
+
 inherit pypi python_flit_core
 
 RDEPENDS:${PN} += " \
