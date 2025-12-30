@@ -21,4 +21,6 @@ RDEPENDS:${PN} += " \
     python3-typing-extensions \
 "
 
+CVE_PRODUCT = "sqlalchemy"
+
 BBCLASSEXTEND = "native nativesdk"
