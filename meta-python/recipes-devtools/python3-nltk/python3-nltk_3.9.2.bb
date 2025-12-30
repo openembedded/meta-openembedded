@@ -7,6 +7,8 @@ BUGTRACKER = "https://github.com/nltk/nltk/issues"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
+CVE_PRODUCT = "nltk"
+
 RDEPENDS:${PN} = "\
     python3-click \
     python3-joblib \
