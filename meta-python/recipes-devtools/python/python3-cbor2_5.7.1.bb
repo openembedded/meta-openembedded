@@ -15,4 +15,6 @@ RDEPENDS:${PN} += " \
     python3-datetime \
 "
 
+CVE_PRODUCT = "cbor2"
+
 BBCLASSEXTEND = "native nativesdk"
