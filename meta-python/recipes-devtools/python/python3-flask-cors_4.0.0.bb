@@ -16,6 +16,8 @@ SRC_URI += " \
 
 SRC_URI[sha256sum] = "f268522fcb2f73e2ecdde1ef45e2fd5c71cc48fe03cffb4b441c6d1b40684eb0"
 
+CVE_PRODUCT = "flask-cors"
+
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += "python3-flask"
