@@ -7,6 +7,7 @@ SRC_URI[sha256sum] = "a2a17b22203254bcbc2e1f926d2d55f3f9497f769416b3190768befe59
 inherit pypi python_hatchling ptest
 
 PYPI_PACKAGE = "starlette"
+CVE_PRODUCT = "starlette"
 
 SRC_URI += " \
         file://run-ptest \
