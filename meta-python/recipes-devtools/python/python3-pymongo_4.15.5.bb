@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI[sha256sum] = "3a8d6bf2610abe0c97c567cf98bf5bba3e90ccc93cc03c9dde75fa11e4267b42"
 
+CVE_PRODUCT = "pymongo"
+
 inherit pypi python_hatchling
 
 PACKAGES =+ "python3-bson"
