@@ -15,6 +15,8 @@ SRC_URI:append:class-target = " file://0001-BLD-add-option-to-specify-numpy-head
 
 SRC_URI[sha256sum] = "4f18ba62b61d7e192368b84517265a99b4d7ee8912f8708660fb4a366cc82667"
 
+CVE_PRODUCT = "pandas"
+
 inherit pkgconfig pypi python_mesonpy cython
 
 DEPENDS += " \
