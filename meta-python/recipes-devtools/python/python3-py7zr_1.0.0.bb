@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI[sha256sum] = "f6bfee81637c9032f6a9f0eb045a4bfc7a7ff4138becfc42d7cb89b54ffbfef1"
 
+CVE_PRODUCT = "py7zr"
+
 inherit pypi python_setuptools_build_meta
 
 DEPENDS += " \
