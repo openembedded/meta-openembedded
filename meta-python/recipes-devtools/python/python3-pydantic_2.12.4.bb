@@ -16,6 +16,8 @@ PV .= "+git"
 SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=v2.12-fixes"
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
+CVE_PRODUCT = "pydantic:pydantic"
+
 RECIPE_NO_UPDATE_REASON = "Must be updated in sync with python3-pydantic-core."
 
 RDEPENDS:${PN} += "\
