@@ -7,6 +7,8 @@ SRC_URI[sha256sum] = "0e9422e8d6b797515f33f500309f6e1c98ee4e85563ba0f2debb282df6
 
 SRC_URI += "file://run-ptest"
 
+CVE_PRODUCT = "tiangolo:fastapi"
+
 inherit pypi python_pdm ptest-python-pytest
 
 PACKAGECONFIG ?= ""
