@@ -23,6 +23,8 @@ SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v$
 
 UPSTREAM_CHECK_COMMITS = "1"
 
+CVE_PRODUCT = "scapy"
+
 inherit python_setuptools_build_meta ptest
 
 do_install:append() {
