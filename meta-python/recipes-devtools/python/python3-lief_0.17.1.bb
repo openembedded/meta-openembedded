@@ -12,6 +12,8 @@ SRC_URI = " \
     file://0002-api-python-config-default.toml-Debug.patch \
 "
 
+CVE_PRODUCT = "lief"
+
 PEP517_SOURCE_PATH = "${S}/api/python"
 
 export LIEF_BUILD_DIR = "${B}"
