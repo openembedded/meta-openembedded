@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bde3c575382996b75d85702949512751"
 
 SRC_URI[sha256sum] = "7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f"
 
+CVE_PRODUCT = "mpmath"
+
 inherit pypi setuptools3
 
 DEPENDS += "python3-setuptools-scm-native"
