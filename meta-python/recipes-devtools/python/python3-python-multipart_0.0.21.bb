@@ -8,6 +8,7 @@ inherit pypi python_hatchling ptest-python-pytest
 
 PYPI_PACKAGE = "python_multipart"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+CVE_PRODUCT = "python-multipart"
 
 RDEPENDS:${PN}-ptest += " \
 	python3-pyyaml \
