@@ -17,6 +17,8 @@ SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
 
 SRC_URI[sha256sum] = "adf9cd552de44a4e6754c51ff2e78d9193b7fa6eab123db9578a210e657235dd"
 
+CVE_PRODUCT = "gevent"
+
 inherit pypi python_setuptools_build_meta cython
 
 # Don't embed libraries, link to the system provided libs instead
