@@ -9,6 +9,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest cython
 
 SRC_URI += " \
     file://0001-build-wheel-in-place.patch \
+    file://0001-Update-Cython-to-version-3.2.3-184.patch \
 "
 
 DEPENDS += " \
