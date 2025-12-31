@@ -9,6 +9,8 @@ inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "pikepdf"
 
+CVE_PRODUCT = "pikepdf"
+
 DEPENDS += " \
 	python3-pybind11-native \
 	qpdf \
