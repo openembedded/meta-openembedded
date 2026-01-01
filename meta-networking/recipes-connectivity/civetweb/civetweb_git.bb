@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
            file://0001-Sanitize-upload-filename-like-URL.patch \
            file://0002-handle_form-example-Upload-to-temporary-directory-an.patch \
+           file://CVE-2025-9648.patch \
            "
 
 S = "${WORKDIR}/git"
