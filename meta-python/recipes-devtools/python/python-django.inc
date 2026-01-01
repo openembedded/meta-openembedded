@@ -36,3 +36,5 @@ RDEPENDS:${PN} += "\
 "
 
 CVE_PRODUCT = "django"
+# cpe-incorrect: this is for gofiber:django, some go-project, not python-django
+CVE_CHECK_IGNORE += "CVE-2024-22199"
