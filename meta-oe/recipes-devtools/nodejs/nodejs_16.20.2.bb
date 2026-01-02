@@ -46,6 +46,9 @@ S = "${WORKDIR}/node-v${PV}"
 
 CVE_PRODUCT = "nodejs node.js"
 
+# the vulnerabilities were introduced in v20
+CVE_CHECK_IGNORE = "CVE-2023-30583 CVE-2023-30584 CVE-2023-30587"
+
 # v8 errors out if you have set CCACHE
 CCACHE = ""
 
