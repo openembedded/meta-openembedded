@@ -36,6 +36,10 @@ EXTRA_OECMAKE += " \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
+do_compile:prepend() {
+    sed -i -e 's|/etc/ssl|${RECIPE_SYSROOT_NATIVE}/etc/ssl|g' ${S}/lib/tls/CMakeLists.txt
+}
+
 do_install:append() {
     sed -i -e 's|${STAGING_LIBDIR}/libcrypto.so|crypto|g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake
     sed -i -e 's|${STAGING_LIBDIR}/libssl.so|ssl|g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake
