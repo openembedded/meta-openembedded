@@ -45,3 +45,6 @@ do_install() {
     install -d ${D}/${docdir}/${PN}
     cp -R --no-dereference --preserve=mode,links -v ${S}/examples ${D}/${docdir}/${PN}/
 }
+
+# disputed: Maintainer could not reproduce the issue, issue is closed without change.
+CVE_CHECK_IGNORE += "CVE-2025-10824"
