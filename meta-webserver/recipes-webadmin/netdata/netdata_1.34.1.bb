@@ -79,3 +79,6 @@ do_install:append() {
 FILES:${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
 
 RDEPENDS:${PN} = "bash zlib"
+
+# versions <1.45.0 are not vulnerable yet
+CVE_CHECK_IGNORE = "CVE-2024-32019"
