@@ -41,3 +41,6 @@ FILES:${PN} = "${datadir}/${BPN} \
                ${sysconfdir}/apache2/conf.d"
 
 RDEPENDS:${PN} += "bash php-cli"
+
+# fix is contained in the recipe version
+CVE_CHECK_IGNORE = "CVE-2020-22452"
