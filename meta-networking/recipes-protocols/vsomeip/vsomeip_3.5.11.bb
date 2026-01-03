@@ -44,6 +44,8 @@ EXTRA_OECMAKE += "-DTEST_IP_MASTER=10.0.3.1 \
                   -DTEST_IP_SLAVE_SECOND=10.0.3.3 \
                   -DTEST_UID=1000 -DTEST_GID=1000 \
                  "
+# Fixes build with boost 1.90+
+CXXFLAGS:append = " -Wno-error=deprecated-declarations"
 
 RDEPENDS:${PN}-test = "bash lsof"
 
