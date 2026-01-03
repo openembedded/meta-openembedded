@@ -54,6 +54,9 @@ CVE_CHECK_IGNORE = "CVE-2023-30583 CVE-2023-30584 CVE-2023-30587"
 # the vulnerability was introduced later (with libuv 1.45)
 CVE_CHECK_IGNORE += "CVE-2024-22017"
 
+# this vulnerabilities affect only Windows
+CVE_CHECK_IGNORE += "CVE-2024-3566 CVE-2024-36138"
+
 # v8 errors out if you have set CCACHE
 CCACHE = ""
 
