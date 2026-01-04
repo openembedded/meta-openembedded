@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-or-later"
 SECTION = "devel/python"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI[sha256sum] = "f6bfee81637c9032f6a9f0eb045a4bfc7a7ff4138becfc42d7cb89b54ffbfef1"
+SRC_URI[sha256sum] = "087b1a94861ad9eb4d21604f6aaa0a8986a7e00580abd79fedd6f82fecf0592c"
 
 CVE_PRODUCT = "py7zr"
 
@@ -14,6 +14,7 @@ DEPENDS += " \
     python3-setuptools-scm-native \
     python3-toml-native \
     python3-wheel-native \
+    python3-coherent-licensed-native \
 "
 
 RDEPENDS:${PN} += "\
