@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag
 
 
 CVE_PRODUCT = "freerdp"
+CVE_STATUS[CVE-2025-68118] = "not-applicable-config: Windows-only vulnerability"
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pam pulseaudio wayland x11', d)} \
