@@ -12,6 +12,6 @@ SRC_URI += "\
    file://0001-tcl.m4-Recognize-tclsh9.patch \
 "
 
-SRC_URI[sha256sum] = "e0630a3600aea27511715563259ec2111cd5f4353a4b040e0be827f94cd7a8b0"
+SRC_URI[sha256sum] = "ef9e343302eccd33112f1b2f0247be493cb5768313adeb558b02de8797a2e9b5"
 
-CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
+CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Doesn't apply to our configuration of postgresql so we can safely ignore it."
