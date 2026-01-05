@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3
            file://0001-sll_protocol-may-be-be16.patch \
            file://0002-allow-build-with-cmake-4.patch \
            file://CVE-2025-11677.patch \
+           file://CVE-2025-11678.patch \
            "
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
