@@ -12,6 +12,9 @@ SRC_URI += " \
         file://run-ptest \
 "
 
+# not vulnerable yet, vulnerability was introduced in v5.6.0
+CVE_CHECK_IGNORE = "CVE-2025-64076"
+
 RDEPENDS:${PN}-ptest += " \
        ${PYTHON_PN}-pytest \
        ${PYTHON_PN}-unixadmin \
