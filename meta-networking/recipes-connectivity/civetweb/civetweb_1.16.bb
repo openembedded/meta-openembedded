@@ -10,7 +10,8 @@ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
            "
 
-CVE_STATUS[CVE-2025-55763] = "cpe-incorrect: The vulnerability is fixed in the used revision"
+CVE_STATUS[CVE-2025-55763] = "fixed-version: The vulnerability is fixed in the used revision"
+CVE_STATUS[CVE-2025-9648] = "fixed-version: The vulnerability is fixed in the used revision"
 
 # civetweb supports building with make or cmake (although cmake lacks few features)
 inherit cmake
