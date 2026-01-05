@@ -11,6 +11,8 @@ SRC_URI += "file://CVE-2025-4565.patch"
 
 SRC_URI[sha256sum] = "2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2"
 
+CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
+
 # http://errors.yoctoproject.org/Errors/Details/184715/
 # Can't find required file: ../src/google/protobuf/descriptor.proto
 CLEANBROKEN = "1"
