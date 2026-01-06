@@ -4,14 +4,18 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=941ee9cd1609382f946352712a319b4b"
 
-PYPI_PACKAGE = "Brotli"
+PYPI_PACKAGE = "brotli"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 CVE_PRODUCT = "brotli"
 
-SRC_URI[sha256sum] = "81de08ac11bcb85841e440c13611c00b67d3bf82698314928d0b676362546724"
+SRC_URI[sha256sum] = "e310f77e41941c13340a95976fe66a8a95b01e783d430eeaf7a2f87e0a57dd0a"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi pkgconfig python_setuptools_build_meta
+
+DEPENDS += " \
+	python3-pkgconfig-native \
+"
 
 RDEPENDS:${PN} += " \
 	python3-cffi \
