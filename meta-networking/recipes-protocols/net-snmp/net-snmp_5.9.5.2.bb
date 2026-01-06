@@ -26,7 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://0011-ac_add_search_path.m4-keep-consistent-between-32bit-.patch \
            file://netsnmp-swinst-crash.patch \
            "
-SRC_URI[sha256sum] = "07f94f06a8d681485e43eeec4f190d9bea43e1b335146d0de466b6de3f3f4c5a"
+SRC_URI[sha256sum] = "16707719f833184a4b72835dac359ae188123b06b5e42817c00790d7dc1384bf"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
 UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
