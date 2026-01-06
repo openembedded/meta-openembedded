@@ -1,4 +1,5 @@
 DESCRIPTION = "Xfce4 Application Finder"
+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-appfinder/start"
 SECTION = "x11"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"

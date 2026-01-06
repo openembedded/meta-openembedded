@@ -1,4 +1,5 @@
 SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-session/start"
 SECTION = "x11"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
