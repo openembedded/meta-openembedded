@@ -3,7 +3,7 @@ HOMEPAGE = "http://networkx.github.io/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7592b173aee2da0e062f9cfa0378e9d"
 
-SRC_URI[sha256sum] = "285276002ad1f7f7da0f7b42f004bcba70d381e936559166363707fdad3d72ad"
+SRC_URI[sha256sum] = "26b7c357accc0c8cde558ad486283728b65b6a95d85ee1cd66bafab4c8168509"
 
 inherit pypi python_setuptools_build_meta
 
