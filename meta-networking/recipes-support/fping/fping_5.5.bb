@@ -15,7 +15,7 @@ NO_GENERIC_LICENSE[fping] = "COPYING"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 
 SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
-SRC_URI[sha256sum] = "be320771f075e47dd7e5704b485e9bdc7dd11107884345c0f7c18749357f668d"
+SRC_URI[sha256sum] = "15c4e32b6c55ff105bafe03e8c91c7ca1b2eda31bf9a7127326bb87887ee18fe"
 
 S = "${UNPACKDIR}/fping-${PV}"
 
