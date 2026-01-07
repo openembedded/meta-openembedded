@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
            file://0001-support-cross-compiling.patch \
            "
-SRCREV = "693df7b42c666f88c719f9973be0ad71607328e0"
+SRCREV = "46f45f674d47b5d8bc54230dda8fe9e214598b87"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 
