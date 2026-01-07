@@ -10,6 +10,11 @@ RDEPENDS:${PN} += " \
         python3-logging \
 "
 
+SRC_URI += "file://CVE-2024-49768-1.patch \
+           file://CVE-2024-49768-2.patch \
+           file://CVE-2024-49768-3.patch \
+           file://CVE-2024-49768-4.patch \
+           "
 SRC_URI[sha256sum] = "780a4082c5fbc0fde6a2fcfe5e26e6efc1e8f425730863c04085769781f51eba"
 
 inherit python_setuptools_build_meta pypi
