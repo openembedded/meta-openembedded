@@ -4,8 +4,8 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1fca0a9c7e4e4148d675b4dafd5c1e80"
 
 PV .= "+git${SRCREV}"
-SRCREV = "c7ddf9aedf4d525a87f0be57dd83f2a3f63dd497"
-SRC_URI += "git://github.com/behave/behave;branch=main;protocol=https"
+SRCREV = "7673da8324be5588642b23511ca4d7a134a0b0c1"
+SRC_URI += "git://github.com/behave/behave;branch=release/v1.3.x;protocol=https"
 
 
 inherit python_setuptools_build_meta
