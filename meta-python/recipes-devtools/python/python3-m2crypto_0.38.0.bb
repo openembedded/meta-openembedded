@@ -45,4 +45,7 @@ export SWIG_FEATURES
 
 export STAGING_DIR
 
+# disputed, upstream claims there is no bug
+CVE_CHECK_IGNORE = "CVE-2009-0127"
+
 BBCLASSEXTEND = "native"
