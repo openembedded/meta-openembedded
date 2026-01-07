@@ -1,4 +1,4 @@
-From 2d1fb35bd81acadc12cc077de86361ac59cee2f1 Mon Sep 17 00:00:00 2001
+From 7dc235e1558b087c69024ed40c6066bd8126f2a3 Mon Sep 17 00:00:00 2001
 From: Kai Kang <kai.kang@windriver.com>
 Date: Fri, 22 Sep 2023 22:59:59 +0000
 Subject: [PATCH] Backport patch from firefox bugzilla to fix compile error for

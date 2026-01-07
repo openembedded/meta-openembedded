@@ -8,14 +8,15 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
            file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch \
            file://0004-use-asm-sgidefs.h.patch \
-           file://riscv32.patch \
-           file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
-           file://0001-rewrite-cargo-host-linker-in-python3.patch  \
-           file://musl-disable-stackwalk.patch \
-           file://0001-add-arm-to-list-of-mozinline.patch \
-           file://armv5.patch \
-           file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
-           file://riscv.patch \
+           file://0005-Add-RISCV32-support.patch \
+           file://0006-util.configure-fix-one-occasionally-reproduced-confi.patch \
+           file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
+           file://0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch \
+           file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch \
+           file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch \
+           file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
+           file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch \
+           file://0013-Fix-build-error-with-musl.patch \
            "
 SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d68358f"
 
