@@ -12,6 +12,8 @@ SRC_URI += " \
           file://0002-fix-correct-struct-packing-on-32-bit-with-_TIME_BITS.patch \
 "
 
+CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
+
 inherit pypi siteinfo python_setuptools_build_meta
 
 DEPENDS += "openssl swig-native"
