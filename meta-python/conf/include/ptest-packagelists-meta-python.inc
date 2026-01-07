@@ -115,6 +115,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-unidiff \
     python3-uritemplate \
     python3-validators \
+    python3-waitress \
     python3-wrapt \
     python3-wsproto \
     python3-xlrd \
@@ -143,4 +144,11 @@ PTESTS_SLOW_META_PYTHON = "\
 "
 
 PTESTS_PROBLEMS_META_PYTHON = "\
+"
+
+PTESTS_FAST_META_PYTHON:remove:libc-musl = "\
+    python3-waitress \
+"
+PTESTS_PROBLEMS_META_PYTHON:append:libc-musl = "\
+    python3-waitress \
 "
