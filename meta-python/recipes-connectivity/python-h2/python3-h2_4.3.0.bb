@@ -10,3 +10,9 @@ inherit ptest-python-pytest pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "python3-hpack python3-hyperframe"
 RDEPENDS:${PN}-ptest += "python3-hypothesis"
+
+do_install_ptest:append(){
+    # by defining CI envvar, hypothesis will use the CI-profile by default,
+    # and will not use tight execution deadlines (which times out easily on qemu without kvm)
+    sed -i 's/pytest/CI=1 pytest/' ${D}${PTEST_PATH}/run-ptest
+}
