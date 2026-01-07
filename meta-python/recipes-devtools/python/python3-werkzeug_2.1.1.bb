@@ -43,3 +43,6 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-profile \
 "
+
+# Windows-only vulnerabilities
+CVE_CHECK_IGNORE = "CVE-2024-49766 CVE-2025-66221"
