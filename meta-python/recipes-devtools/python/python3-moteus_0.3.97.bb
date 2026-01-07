@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=9;md5=24025d3c660abfc62a
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "b30d63a38bfc834e0bf8154d2f8cead81fbeaee38f14fff0ef2a40f620ed11eb"
+SRC_URI[sha256sum] = "59f6f185390822c41f993c56027e4be338be87d40435acb0e10df1d68d662e69"
 
 S = "${UNPACKDIR}/moteus-${PV}"
 
