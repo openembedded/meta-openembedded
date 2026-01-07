@@ -11,7 +11,7 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
 
 inherit meson pkgconfig bash-completion gobject-introspection upstream-version-is-even
 
-SRCREV = "e10df4b6b3edfe6a46d93f7f5f5cab31c29a7091"
+SRCREV = "2bca5d22137883f348cb117597746483637491db"
 SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libmbim.git;protocol=https;branch=main"
 
 
