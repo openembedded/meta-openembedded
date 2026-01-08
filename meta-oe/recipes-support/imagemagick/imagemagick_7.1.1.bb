@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
            file://CVE-2025-55004.patch \
            file://CVE-2025-55005.patch \
            file://CVE-2025-55154.patch \
+           file://CVE-2025-55160.patch \
            "
 SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
 
