@@ -6,7 +6,9 @@ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI += "file://CVE-2023-28370.patch"
+SRC_URI += "file://CVE-2023-28370.patch \
+            file://CVE-2024-52804.patch \
+"
 SRC_URI[md5sum] = "f324f5e7607798552359d6ab054c4321"
 SRC_URI[sha256sum] = "33c6e81d7bd55b468d2e793517c909b139960b6c790a60b7991b9b6b76fb9791"
 
