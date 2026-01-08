@@ -22,3 +22,5 @@ EXTRA_OECONF = " \
     --without-xml2-config \
     --without-xslt-config \
 "
+
+CVE_PRODUCT = "librdf:raptor_rdf_syntax_library librdf:raptor"
