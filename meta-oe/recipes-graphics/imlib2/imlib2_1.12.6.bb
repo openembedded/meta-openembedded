@@ -7,14 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
 
 DEPENDS = "freetype "
 PROVIDES = "virtual/imlib2"
-PV = "1.12.5"
-SRCREV = "df73df52ddf0e1ea40507f5ee8c6b794b328b3bc"
+SRCREV = "8c6a7640c91d7815a6318d3641554869c62cc926"
 
 inherit autotools pkgconfig lib_package
 
 AUTO_LIBNAME_PKGS = ""
 
-SRC_URI = "git://git.enlightenment.org/old/legacy-${BPN}.git;protocol=https;branch=master"
+SRC_URI = "git://git.enlightenment.org/old/legacy-${BPN}.git;protocol=https;branch=master;tag=v${PV}"
 
 PACKAGECONFIG ??= "jpeg png zlib ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 
