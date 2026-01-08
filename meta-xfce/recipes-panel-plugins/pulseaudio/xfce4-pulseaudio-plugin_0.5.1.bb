@@ -7,7 +7,7 @@ XFCE_COMPRESS_TYPE = "xz"
 
 inherit xfce-panel-plugin features_check
 
-REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
+REQUIRED_DISTRO_FEATURES = "pulseaudio"
 
 DEPENDS += "dbus-glib pulseaudio"
 
@@ -15,8 +15,8 @@ SRC_URI[sha256sum] = "8e1f3a505f37aa3bc2816a58bec5f9555366f1c476f10eab59fd0e6581
 
 PACKAGECONFIG ??= "libnotify"
 PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
+PACKAGECONFIG[libcanberra] = "--enable-libcanberra,--disable-libcanberra,libcanberra"
 
-EXTRA_OECONF = "GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources \
-                "
+EXTRA_OECONF = "GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources"
 
-RRECOMMENDS:${PN} = "pavucontrol"
+RRECOMMENDS:${PN} = "${@bb.utils.contains_any('DISTRO_FEATURES', 'opengl vulkan', 'pavucontrol', '', d)}"
