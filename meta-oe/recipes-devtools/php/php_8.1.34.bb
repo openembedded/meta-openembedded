@@ -39,6 +39,7 @@ CVE_CHECK_IGNORE += "\
     CVE-2007-2728 \
     CVE-2007-3205 \
     CVE-2007-4596 \
+    CVE-2024-3566 \
 "
 
 inherit autotools pkgconfig python3native gettext multilib_header multilib_script systemd
