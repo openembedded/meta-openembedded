@@ -11,7 +11,9 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 
 BASE_PV := "${PV}"
 PV .= "-47"
-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+           file://CVE-2025-53014.patch \
+           "
 SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
 
 S = "${WORKDIR}/git"
