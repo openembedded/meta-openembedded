@@ -18,6 +18,10 @@ CVE_CHECK_IGNORE = "\
     CVE-2015-1612 \
 "
 
+# This CVE is not for this product but cve-check assumes it is
+# because two CPE collides when checking the NVD database
+CVE_CHECK_IGNORE += "CVE-2018-1078"
+
 DEPENDS = "virtual/libc"
 
 PACKAGECONFIG ??= ""
@@ -58,7 +62,3 @@ do_install:append() {
 }
 
 FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
-
-# This CVE is not for this product but cve-check assumes it is
-# because two CPE collides when checking the NVD database
-CVE_CHECK_IGNORE = "CVE-2018-1078"
