@@ -20,11 +20,11 @@ SRC_URI = " \
 "
 
 SRCREV_FORMAT = "fex"
-SRCREV_fex = "663fd5a98befbf7a0ac585627de15c662715a731"
+SRCREV_fex = "1188c90c10569ca800d7a99c11e59cfeab5e2cc9"
 SRCREV_cpp-optparse = "9f94388a339fcbb0bc95c17768eb786c85988f6e"
 SRCREV_fex-drm = "3e49836995c1dcb3df709440ad2f270b569c6a5f"
 SRCREV_xxhash = "e626a72bc2321cd320e953a0ccf1584cad60f363"
-SRCREV_jemalloc = "ce24593018ca5d5af7e5661ceda9744e02b59f8f"
+SRCREV_jemalloc = "97d986993dc735a2022856e7e9fdfa1180e8527a"
 SRCREV_jemalloc-glibc = "8436195ad5e1bc347d9b39743af3d29abee59f06"
 SRCREV_robin-map = "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
 SRCREV_range-v3 = "ca1388fb9da8e69314dda222dc7b139ca84e092f"
