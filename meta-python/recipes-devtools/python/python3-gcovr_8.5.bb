@@ -2,13 +2,13 @@ DESCRIPTION = "generate GCC code coverage reports"
 HOMEPAGE = "https://gcovr.com"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ae27363fce24765bc79a095313a3b002"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ba06c93410cc51bafc66fa06456879bf"
 
 SRC_URI = " \
     git://github.com/gcovr/gcovr.git;branch=main;protocol=https \
     file://0001-pyproject.toml-Support-newer-versions.patch \
 "
-SRCREV = "fe536afac4da31e86909191ef31708755ab8cf83"
+SRCREV = "71eedb8f300612d4095f2ffa4ac60e3fdd58c192"
 
 
 inherit python_hatchling
