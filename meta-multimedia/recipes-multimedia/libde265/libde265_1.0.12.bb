@@ -8,7 +8,9 @@ LICENSE = "LGPL-3.0-only & MIT"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
-SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https \
+           file://CVE-2023-43887.patch \
+"
 SRCREV = "a267c84707ab264928fa9b86de2ee749c48c318c"
 
 S = "${WORKDIR}/git"
