@@ -5,11 +5,12 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
 LICENSE = "Unlicense"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
 
+SRC_URI += "file://run-ptest"
 SRC_URI[sha256sum] = "a2241ff4ddde2a7cebddf78e39832509cb045d18ec1a09d7248d6bfc6bfbbe64"
 
 BBCLASSEXTEND = "native nativesdk"
 
-inherit pypi python_hatchling
+inherit pypi python_hatchling ptest-python-pytest
 
 DEPENDS += "\
     python3-hatch-vcs-native \
@@ -19,4 +20,10 @@ RDEPENDS:${PN} += " \
     python3-core \
     python3-logging \
     python3-asyncio \
+"
+
+RDEPENDS:${PN}-ptest += " \
+    python3-pytest-asyncio \
+    python3-pytest-mock \
+    python3-virtualenv \
 "

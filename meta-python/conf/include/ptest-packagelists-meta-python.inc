@@ -29,6 +29,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-execnet \
     python3-fastjsonschema \
     python3-fastnumbers \
+    python3-filelock \
     python3-flask \
     python3-flexcache \
     python3-flexparser \
