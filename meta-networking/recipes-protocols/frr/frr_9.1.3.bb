@@ -135,3 +135,5 @@ USERADD_PARAM:${PN} = "--system --home ${localstatedir}/run/frr/ -M -g frr -G fr
 FILES:${PN} += "${datadir}/yang"
 
 BBCLASSEXTEND = "native"
+
+CVE_STATUS[CVE-2024-44070] = "fixed-version: The current version (9.1.3) contains the fix."
