@@ -29,6 +29,8 @@ CPPFLAGS += "-P"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 LIBS += "-ltirpc"
 
+CFLAGS:append:libc-musl = " -D_GNU_SOURCE"
+
 REQUIRED_DISTRO_FEATURES = "pam"
 
 EXTRA_AUTORECONF = "-I ${S}"
