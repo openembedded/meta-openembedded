@@ -102,4 +102,7 @@ FILES:${PN} += "${datadir}*"
 
 RDEPENDS:tshark = "wireshark"
 
+# disputed, vulnerabilities didn't appear in any releases
+CVE_CHECK_IGNORE = "CVE-2024-24476 CVE-2024-24478 CVE-2024-24479"
+
 BBCLASSEXTEND = "native"
