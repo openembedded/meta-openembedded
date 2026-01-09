@@ -7,6 +7,7 @@ DEPENDS = "openssl zlib icu"
 
 SRC_URI = "git://github.com/znc/znc.git;name=znc;branch=master;protocol=https \
            git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket;branch=master;protocol=https \
+           file://CVE-2024-39844.patch \
           "
 SRCREV_znc = "bf253640d33d03331310778e001fb6f5aba2989e"
 SRCREV_Csocket = "e8d9e0bb248c521c2c7fa01e1c6a116d929c41b4"
