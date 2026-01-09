@@ -22,7 +22,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
 "
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
-PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
+PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra sound-theme-freedesktop"
 PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native"
 
 FILES:${PN} += " \
@@ -32,6 +32,5 @@ FILES:${PN} += " \
 "
 
 RRECOMMENDS:${PN} += "adwaita-icon-theme"
-RRECOMMENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
-RRECOMMENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES','pulseaudio','libcanberra-pulse','',d)}"
+RRECOMMENDS:${PN} += "${@bb.utils.contains_any('DISTRO_FEATURES','alsa pulseaudio','libcanberra','',d)}"
 RRECOMMENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','xfce4-datetime-setter','',d)}"
