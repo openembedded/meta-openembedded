@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https 
            file://CVE-2023-51713.patch \
            file://CVE-2024-57392.patch \
            file://CVE-2023-48795.patch \
+           file://CVE-2024-48651.patch \
            "
 
 S = "${WORKDIR}/git"
