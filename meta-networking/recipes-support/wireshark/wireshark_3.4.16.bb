@@ -15,7 +15,6 @@ SRC_URI += " \
     file://0002-flex-Remove-line-directives.patch \
     file://0003-bison-Remove-line-directives.patch \
     file://0004-lemon-Remove-line-directives.patch \
-    file://CVE-2022-3190.patch \
     file://CVE-2023-2855.patch \
     file://CVE-2023-2856.patch \
     file://CVE-2023-2858.patch \
@@ -37,7 +36,7 @@ SRC_URI += " \
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[sha256sum] = "881a13303e263b7dc7fe337534c8a541d4914552287879bed30bbe76c5bf68ca"
+SRC_URI[sha256sum] = "6acb3155b89b65bcdbcdac7a9e6a59013a6e21d8ae6a8249a9af4fe9ce3d91ba"
 
 PE = "1"
 
