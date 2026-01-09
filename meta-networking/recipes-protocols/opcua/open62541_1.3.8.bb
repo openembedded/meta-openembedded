@@ -19,6 +19,7 @@ SRC_URI = " \
     git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=git/deps/ua-nodeset \
     git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=git/deps/mqtt-c \
     file://0001-fix-build-do-not-install-git-files.patch \
+    file://CVE-2024-53429.patch \
 "
 
 S = "${WORKDIR}/git"
