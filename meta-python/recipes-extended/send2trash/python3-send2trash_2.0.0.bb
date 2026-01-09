@@ -2,8 +2,10 @@ SUMMARY = "Send file to trash natively under Mac OS X, Windows and Linux"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a02659c2d5f4cc626e4dcf6504b865eb"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_setuptools_build_meta ptest-python-pytest
 
+SRC_URI += "file://0001-add-missing-conftest.py.patch \
+            file://run-ptest"
 SRC_URI[sha256sum] = "1761421da3f9930bfe51ed7c45343948573383ad4c27e3acebc91be324e7770d"
 
 PYPI_PACKAGE = "send2trash"

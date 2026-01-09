@@ -1,0 +1,52 @@
+From ed6d20884108fd7e681baf7278e38ac4800fb5c1 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Fri, 9 Jan 2026 18:04:08 +0100
+Subject: [PATCH] add missing conftest.py
+
+Conftest.py is missing from the source dictribution of v2.0.0,
+making the tests to fail.
+
+The issue is already solved by upstream, but not tagged yet.
+This patch can be removed with the next release.
+
+Upstream-Status: Inappropriate [workaround until https://github.com/arsenetar/send2trash/commit/f8a40143f696da41f81cae87e1c7f9a345cd4003 is tagged]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/conftest.py | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 tests/conftest.py
+
+diff --git a/tests/conftest.py b/tests/conftest.py
+new file mode 100644
+index 0000000..0753384
+--- /dev/null
++++ b/tests/conftest.py
+@@ -0,0 +1,27 @@
++# encoding: utf-8
++import sys
++import os
++from tempfile import NamedTemporaryFile
++import pytest
++
++# Only import HOMETRASH on supported platforms
++if sys.platform != "win32":
++    from send2trash.plat_other import HOMETRASH
++
++
++@pytest.fixture(name="test_file")
++def fixture_test_file():
++    file = NamedTemporaryFile(dir=os.path.expanduser("~"), prefix="send2trash_test", delete=False)
++    file.close()
++    # Verify file was actually created
++    assert os.path.exists(file.name) is True
++    yield file.name
++    # Cleanup trash files on supported platforms
++    if sys.platform != "win32":
++        name = os.path.basename(file.name)
++        # Remove trash files if they exist
++        if os.path.exists(os.path.join(HOMETRASH, "files", name)):
++            os.remove(os.path.join(HOMETRASH, "files", name))
++            os.remove(os.path.join(HOMETRASH, "info", name + ".trashinfo"))
++    if os.path.exists(file.name):
++        os.remove(file.name)

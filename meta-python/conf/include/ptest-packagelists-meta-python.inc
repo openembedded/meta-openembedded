@@ -94,6 +94,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-rich-toolkit \
     python3-schedule \
     python3-semver \
+    python3-send2trash \
     python3-serpent \
     python3-service-identity \
     python3-setproctitle \
