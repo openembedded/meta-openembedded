@@ -68,3 +68,5 @@ RDEPENDS:${PN}-dev += " ${@bb.utils.contains('PACKAGECONFIG', 'static', '${PN}-s
 SSTATE_SCAN_FILES += "*.cmake"
 
 BBCLASSEXTEND = "native"
+
+CVE_STATUS[CVE-2025-1866] = "not-applicable-platform: only affects Windows"
