@@ -5,9 +5,8 @@ SECTION = "libs/networking"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
 
-SRC_URI = "git://github.com/nanomsg/nng.git;branch=main;protocol=https"
-SRCREV = "85fbe7f9e4642b554d0d97f2e3ff2aa12978691a"
-
+SRC_URI = "git://github.com/nanomsg/nng.git;branch=stable;protocol=https"
+SRCREV = "84aa701f42968bf536141a24e826da66963b571a"
 
 inherit cmake pkgconfig
 
