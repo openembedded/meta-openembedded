@@ -38,6 +38,8 @@ SRC_URI[sha256sum] = "b7a4cd5ead67fb08b980b21abd150ff7217e85ea320c9ed0c6dadd3048
 CVE_PRODUCT = "kerberos"
 CVE_VERSION = "5-${PV}"
 
+CVE_STATUS[CVE-2025-3576] = "fixed-version: The vulnerability has been fixed in the current version (1.21.3)"
+
 S = "${WORKDIR}/${BP}/src"
 
 DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
