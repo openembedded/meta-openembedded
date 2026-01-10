@@ -45,3 +45,4 @@ FILES:${PN}-dev += "${datadir}/vala"
 # libcanberra-gtk3-module.so ships a symlink to libcanberra-gtk-module.so
 INSANE_SKIP:${PN} = "dev-so"
 
+RRECOMMENDS:${PN} = "sound-theme-freedesktop"
