@@ -74,3 +74,5 @@ do_configure:append() {
 }
 
 FILES:${PN} += "${datadir}"
+
+CVE_STATUS[CVE-2025-68118] = "not-applicable-platform: only affects Windows"
