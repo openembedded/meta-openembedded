@@ -35,14 +35,14 @@ DEPENDS:append:class-target = " bash-completion"
 inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc update-alternatives upstream-version-is-even
 
 SRC_URI = " \
-    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+    https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/releases/${PV}/downloads/NetworkManager-${PV}.tar.xz \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRC_URI[sha256sum] = "722649e25362693b334371473802a729b0ec9ee283375096905f868808e74068"
+SRC_URI[sha256sum] = "1076c5ee2d60fa09e4af21f2d1bfe638973647c28c9b228d6d44a7044b735eaf"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
