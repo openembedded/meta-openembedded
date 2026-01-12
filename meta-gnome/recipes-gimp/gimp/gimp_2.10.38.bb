@@ -75,3 +75,4 @@ FILES:${PN}  += "${datadir}/metainfo"
 RDEPENDS:${PN} += "mypaint-brushes-1.0"
 
 CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mandriva Linux"
+CVE_STATUS[CVE-2025-48796] = "cpe-incorrect: The current version (2.10.38) is not affected."
