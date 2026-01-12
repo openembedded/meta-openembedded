@@ -11,6 +11,7 @@ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspecti
 
 GNOMEBN = "gtksourceview"
 SRC_URI[archive.sha256sum] = "691b074a37b2a307f7f48edc5b8c7afa7301709be56378ccf9cc9735909077fd"
+S = "${UNPACKDIR}/gtksourceview-${PV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 

@@ -15,6 +15,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 SRC_URI += "file://0001-remove-pointless-check.patch"
 
 SRC_URI[archive.sha256sum] = "7ec9d18fb283d1f84a3a3eff3b7a72b09a10c9c006597b3fbabbb5958420a87d"
+S = "${UNPACKDIR}/gtksourceview-${PV}"
 
 GIR_MESON_OPTION = 'gir'
 GTKDOC_MESON_OPTION = "gtk_doc"
