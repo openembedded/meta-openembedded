@@ -6,10 +6,11 @@ SECTION = "console/utils"
 
 SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main;tag=v${PV} \
            "
-SRCREV = "a1099d075fa914452366b28c67ff171e21a1f02e"
-
+SRCREV = "975e3951daa7d3114112d2cd4ee689cf5ee38745"
 
 inherit cmake
+
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES:${PN} += " \
     ${datadir}/icons \
