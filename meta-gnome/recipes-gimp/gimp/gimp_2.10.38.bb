@@ -46,7 +46,9 @@ SHPV = "${@gnome_verdir("${PV}")}"
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
            file://0001-configure-Keep-first-line-of-compiler-version-string.patch \
-           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch"
+           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch \
+           file://CVE-2025-14422.patch \
+"
 SRC_URI[sha256sum] = "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
 
 EXTRA_OECONF = "--disable-python \
