@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/abseil/${BPN}/releases/download/${PV}/${BP}.tar.gz
            file://0001-absl-always-use-asm-sgidefs.h.patch \
            file://0002-abseil-ppc-fixes.patch \
            "
-SRC_URI[sha256sum] = "1692f77d1739bacf3f94337188b78583cf09bab7e420d2dc6c5605a4f86785a1"
+SRC_URI[sha256sum] = "4c124408da902be896a2f368042729655709db5e3004ec99f57e3e14439bc1b2"
 
 UPSTREAM_CHECK_URI = "https://github.com/abseil/abseil-cpp/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
