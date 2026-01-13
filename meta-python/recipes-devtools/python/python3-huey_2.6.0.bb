@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
 
 PYPI_PACKAGE = "huey"
 
-SRC_URI[sha256sum] = "a39010628a9a1a9e91462f9bf33dc243b006a9f21193026ea47ae18949a12581"
+SRC_URI[sha256sum] = "8d11f8688999d65266af1425b831f6e3773e99415027177b8734b0ffd5e251f6"
 
 RDEPENDS:${PN} += " \
 	python3-datetime \
@@ -14,5 +14,5 @@ RDEPENDS:${PN} += " \
 	python3-json \
 "
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
