@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for interacting with systemd over DBus"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI[sha256sum] = "56875ef5662122d251435f6efa0edfcf15e3c9c17f4a7b15d5481814cf268e6f"
+SRC_URI[sha256sum] = "f217b5792f1e7c391ae46262f43566b6f83364507eaab5d5e73fcd05ab12d2bb"
 
 DEPENDS = "systemd"
 RDEPENDS:${PN} += "\
