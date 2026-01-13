@@ -4,7 +4,7 @@ HOMEPAGE = "https://pywbemtools.readthedocs.io/en/stable/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
-SRC_URI[sha256sum] = "9d0162b74c0b34d4500c099dddfe518cadc295a1a7bfb0abefa740a134d80fea"
+SRC_URI[sha256sum] = "7fb1c32e358d55c2c6966a071c8ecc0ca81de3d32944a67cc646c57b1a7a337a"
 
 inherit pypi setuptools3
 
