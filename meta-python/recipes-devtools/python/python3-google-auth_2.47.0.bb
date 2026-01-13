@@ -6,11 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 inherit pypi setuptools3 ptest
 
 SRC_URI += " \
-        file://0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch \
         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
         file://run-ptest \
 "
-SRC_URI[sha256sum] = "90d3f41b6b72ea72dd9811e765699ee491ab24139f34ebf1ca2b9cc0c38708f3"
+SRC_URI[sha256sum] = "833229070a9dfee1a353ae9877dcd2dec069a8281a4e72e72f77d4a70ff945da"
 
 PYPI_PACKAGE = "google_auth"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
