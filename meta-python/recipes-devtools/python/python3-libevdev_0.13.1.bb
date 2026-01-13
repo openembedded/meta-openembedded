@@ -5,13 +5,27 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d94c10c546b419eddc6296157ec40747"
 
-SRC_URI[sha256sum] = "02e952632ec6c249cbb9c66f6fa00012ea448b06606c77cd139133bc2fe46b08"
+SRC_URI[sha256sum] = "dc3369cd1401767b9ecb1117cd6b73faba9038e3bd9e1695a710a9e9d9415e8d"
 
-inherit pypi setuptools3
+inherit pypi python_hatchling ptest
 
 PYPI_PACKAGE = "libevdev"
+
+SRC_URI += " \
+    file://run-ptest \
+"
 
 RDEPENDS:${PN} += " \
     libevdev \
     python3-ctypes \
 "
+
+RDEPENDS:${PN}-ptest += " \
+    python3-pytest \
+"
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/test
+    cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
+}
+
