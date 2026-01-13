@@ -3,10 +3,10 @@ HOMEPAGE = "https://github.com/google/re2/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b5c31eb512bdf3cb11ffd5713963760"
 
-# tag 2024-03-01
-SRCREV = "2d866a3d0753f4f4fce93cccc6c59c4b052d7db4"
+# tag 2025-11-05
+SRCREV = "927f5d53caf8111721e734cf24724686bb745f55"
 
-SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https;tag=2025-11-05 \
            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
           "
 
