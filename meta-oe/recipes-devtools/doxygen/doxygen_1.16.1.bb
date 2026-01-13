@@ -10,7 +10,7 @@ SRC_URI = "\
     git://github.com/doxygen/doxygen.git;branch=master;protocol=https \
 "
 
-SRCREV = "7cca38ba5185457e6d9495bf963d4cdeacebc25a"
+SRCREV = "669aeeefca743c148e2d935b3d3c69535c7491e6"
 
 
 UPSTREAM_CHECK_GITTAGREGEX = "Release_(?P<pver>\d+(\_\d+)+)"
