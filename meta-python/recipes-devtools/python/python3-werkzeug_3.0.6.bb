@@ -22,3 +22,6 @@ RDEPENDS:${PN} += " \
     python3-json \
     python3-difflib \
 "
+
+CVE_STATUS[CVE-2025-66221] = "not-applicable-platform: The vulnerability is Windows specific"
+CVE_STATUS[CVE-2026-21860] = "not-applicable-platform: The vulnerability is Windows specific"
