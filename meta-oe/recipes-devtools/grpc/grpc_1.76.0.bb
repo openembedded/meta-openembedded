@@ -23,10 +23,11 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
 # Both dependencies are mutually exclusive
 # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
-SRCREV_grpc = "4e9357bca1408596663a218c0c608a4c0560a867"
-BRANCH = "v1.71.x"
-SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+SRCREV = "f5ffb68d8a2fd603dff16287e90a4ac571e1fec6"
+BRANCH = "v1.76.x"
+SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=v${PV} \
            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
+           file://0001-build-add-missing-includes-41351.patch \
            "
 
 inherit cmake pkgconfig
