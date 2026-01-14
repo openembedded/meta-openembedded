@@ -1,0 +1,30 @@
+From 820af24fcaae817ab7c0733035673afc3b37eeac Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Thu, 8 Feb 2024 10:58:54 +0100
+Subject: [PATCH] Fixed #35172 -- Fixed intcomma for string floats.
+
+From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
+
+Thanks Warwick Brown for the report.
+
+Regression in 55519d6cf8998fe4c8f5c8abffc2b10a7c3d14e9.
+
+Upstream-Status: Backport [https://github.com/django/django/commit/2f14c2cedc9c92373471c1f98a80c81ba299584a]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ django/contrib/humanize/templatetags/humanize.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/django/contrib/humanize/templatetags/humanize.py b/django/contrib/humanize/templatetags/humanize.py
+index ee22a45..8490b5e 100644
+--- a/django/contrib/humanize/templatetags/humanize.py
++++ b/django/contrib/humanize/templatetags/humanize.py
+@@ -77,6 +77,8 @@ def intcomma(value, use_l10n=True):
+     if match:
+         prefix = match[0]
+         prefix_with_commas = re.sub(r"\d{3}", r"\g<0>,", prefix[::-1])[::-1]
++        # Remove a leading comma, if needed.
++        prefix_with_commas = re.sub(r"^(-?),", r"\1", prefix_with_commas)
+         result = prefix_with_commas + result[len(prefix) :]
+     return result
+ 
