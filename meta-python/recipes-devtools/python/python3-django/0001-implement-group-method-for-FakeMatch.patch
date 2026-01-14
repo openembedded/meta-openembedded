@@ -1,0 +1,42 @@
+From c78be5dd9f1772a22f3094d8c2cfe56bfb45b122 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Wed, 14 Jan 2026 00:24:12 +0100
+Subject: [PATCH] implement group method for FakeMatch
+
+FakeMatch class was introduced in a backported CVE patch for this
+recipe (CVE-2024-27351). These objects are later accessed in
+django/utils/text.py module, in Truncator._truncate_html() method.
+It is treated as a regex.search() object.
+
+This function, at the time when the upstream project introduced this
+CVE patch was using array-style access, with brackets, so it
+worked, because the FakeMatch class implements the __getitem__()
+method. However in version 2.x, it was using group() access to
+access the matches - which is not implemented for this class, making
+these accesses fail:
+
+AttributeError: 'FakeMatch' object has no attribute 'group'
+
+To avoid this issue, this patch implements this method for this class.
+
+Upstream-Status: Inappropriate [Backport-specific]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ django/utils/text.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/django/utils/text.py b/django/utils/text.py
+index e104b60..5033937 100644
+--- a/django/utils/text.py
++++ b/django/utils/text.py
+@@ -66,6 +66,9 @@ class FakeMatch:
+     def __init__(self, text, end):
+         self._text, self._end = text, end
+ 
++    def group(self, n):
++        return self[n]
++
+ 
+ # ----- End security-related performance workaround -----
+ 

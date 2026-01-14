@@ -35,6 +35,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
             file://Fix-undefined-_lazy_re_compile.patch \
             file://Fix-missing-JSONField-in-django.db.mo.patch \
             file://0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch \
+            file://0001-implement-group-method-for-FakeMatch.patch \
            "
 
 SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
