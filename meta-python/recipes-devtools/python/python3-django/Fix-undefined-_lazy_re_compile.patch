@@ -1,0 +1,49 @@
+From f89fec5d58bc1684478fe23c29a34f17ca529b1a Mon Sep 17 00:00:00 2001
+From: Haixiao Yan <haixiao.yan.cn@windriver.com>
+Date: Tue, 13 Jan 2026 14:14:02 +0800
+Subject: [PATCH] python3-django: Fix undefined _lazy_re_compile
+
+Fix the following error introduced by CVE-2024-27351.patch and
+CVE-2025-32873.patch:
+
+NameError: name '_lazy_re_compile' is not defined
+
+Upstream-Status: Inappropriate [Fix the regression in the previous fix for CVE-2024-27351 and CVE-2025-32873]
+
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
+---
+ django/utils/html.py | 2 +-
+ django/utils/text.py | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/django/utils/html.py b/django/utils/html.py
+index 858a517d92f8..6eb8bc3dbf38 100644
+--- a/django/utils/html.py
++++ b/django/utils/html.py
+@@ -38,7 +38,7 @@ _html_escapes = {
+ }
+ 
+ # HTML tag that opens but has no closing ">" after 1k+ chars.
+-long_open_tag_without_closing_re = _lazy_re_compile(r"<[a-zA-Z][^>]{1000,}")
++long_open_tag_without_closing_re = re.compile(r"<[a-zA-Z][^>]{1000,}")
+ 
+ 
+ @keep_lazy(str, SafeText)
+diff --git a/django/utils/text.py b/django/utils/text.py
+index c474d5681eeb..e104b60c4f6c 100644
+--- a/django/utils/text.py
++++ b/django/utils/text.py
+@@ -27,8 +27,8 @@ def capfirst(x):
+ # text with only open brackets "<<<...". The class below provides the services
+ # and correct answers for the use cases, but in these edge cases does it much
+ # faster.
+-re_notag = _lazy_re_compile(r"([^<>\s]+)", re.S)
+-re_prt = _lazy_re_compile(r"<|([^<>\s]+)", re.S)
++re_notag = re.compile(r"([^<>\s]+)", re.S)
++re_prt = re.compile(r"<|([^<>\s]+)", re.S)
+ 
+ 
+ class WordsRegex:
+-- 
+2.34.1
+
