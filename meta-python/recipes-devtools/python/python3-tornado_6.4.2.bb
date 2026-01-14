@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI[sha256sum] = "92bad5b4746e9879fd7bf1eb21dce4e3fc5128d71601f80005afa39237ad620b"
 
+SRC_URI += "file://CVE-2025-47287.patch"
+
 inherit pypi python_setuptools_build_meta
 
 # Requires _compression which is currently located in misc
