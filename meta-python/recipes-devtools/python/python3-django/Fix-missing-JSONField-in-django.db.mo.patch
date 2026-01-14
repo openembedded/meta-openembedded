@@ -1,0 +1,77 @@
+From c019f2cb6fbe266e09c71cd890a22cbce3769b05 Mon Sep 17 00:00:00 2001
+From: Haixiao Yan <haixiao.yan.cn@windriver.com>
+Date: Tue, 13 Jan 2026 14:44:32 +0800
+Subject: [PATCH] python3-django: Fix missing JSONField in django.db.models
+
+Fix the following error introduced by CVE-2024-42005.patch:
+
+AttributeError: module 'django.db.models' has no attribute 'JSONField'
+
+The patch assumes JSONField is available from django.db.models, which
+is not the case for this Django version.
+
+Revert the changes in the following files to restore compatibility:
+tests/expressions/models.py
+tests/expressions/test_queryset_values.py
+
+Upstream-Status: Inappropriate [Fix the regression in the previous fix for CVE-2024-42005]
+
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
+---
+ tests/expressions/models.py               |  7 -------
+ tests/expressions/test_queryset_values.py | 17 ++---------------
+ 2 files changed, 2 insertions(+), 22 deletions(-)
+
+diff --git a/tests/expressions/models.py b/tests/expressions/models.py
+index fb8093849cba..33f7850ac16e 100644
+--- a/tests/expressions/models.py
++++ b/tests/expressions/models.py
+@@ -97,10 +97,3 @@ class UUID(models.Model):
+ 
+     def __str__(self):
+         return "%s" % self.uuid
+-
+-
+-class JSONFieldModel(models.Model):
+-    data = models.JSONField(null=True)
+-
+-    class Meta:
+-        required_db_features = {"supports_json_field"}
+diff --git a/tests/expressions/test_queryset_values.py b/tests/expressions/test_queryset_values.py
+index bd52b8efc194..0804531869d9 100644
+--- a/tests/expressions/test_queryset_values.py
++++ b/tests/expressions/test_queryset_values.py
+@@ -1,8 +1,8 @@
+ from django.db.models.aggregates import Sum
+ from django.db.models.expressions import F
+-from django.test import TestCase, skipUnlessDBFeature
++from django.test import TestCase
+ 
+-from .models import Company, Employee, JSONFieldModel
++from .models import Company, Employee
+ 
+ 
+ class ValuesExpressionsTests(TestCase):
+@@ -36,19 +36,6 @@ class ValuesExpressionsTests(TestCase):
+         with self.assertRaisesMessage(ValueError, msg):
+             Company.objects.values(**{crafted_alias: F("ceo__salary")})
+ 
+-    @skipUnlessDBFeature("supports_json_field")
+-    def test_values_expression_alias_sql_injection_json_field(self):
+-        crafted_alias = """injected_name" from "expressions_company"; --"""
+-        msg = (
+-            "Column aliases cannot contain whitespace characters, quotation marks, "
+-            "semicolons, or SQL comments."
+-        )
+-        with self.assertRaisesMessage(ValueError, msg):
+-            JSONFieldModel.objects.values(f"data__{crafted_alias}")
+-
+-        with self.assertRaisesMessage(ValueError, msg):
+-            JSONFieldModel.objects.values_list(f"data__{crafted_alias}")
+-
+     def test_values_expression_group_by(self):
+         # values() applies annotate() first, so values selected are grouped by
+         # id, not firstname.
+-- 
+2.34.1
+
