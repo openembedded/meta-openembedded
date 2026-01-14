@@ -18,7 +18,6 @@ DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
             cyrus-sasl libxslt-native xmlto-native coreutils-native\
            "
 
-EXTRA_OECONF += "--disable-static \
-                 --disable-silent-rules \
+EXTRA_OECONF += "--disable-silent-rules \
                  --disable-doc \
                 "
