@@ -1,0 +1,32 @@
+From 744927154e6748db08f5232de78ee0d4a8be61a5 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Mon, 21 Jul 2025 15:23:32 -0300
+Subject: [PATCH] Fixed test_utils.tests.HTMLEqualTests.test_parsing_errors
+ following Python's HTMLParser fixed parsing.
+
+From: Natalia <124304+nessita@users.noreply.github.com>
+
+Further details about Python changes can be found in:
+https://github.com/python/cpython/commit/0243f97cbadec8d985e63b1daec5d1cbc850cae3.
+
+Thank you Clifford Gama for the thorough review!
+
+Upstream-Status: Backport [https://github.com/django/django/commit/e4515dad7a6d953c0bd2414127ba36e1446ff41a]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/test_utils/tests.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/test_utils/tests.py b/tests/test_utils/tests.py
+index a1a113a..d1a1e35 100644
+--- a/tests/test_utils/tests.py
++++ b/tests/test_utils/tests.py
+@@ -736,7 +736,7 @@ class HTMLEqualTests(SimpleTestCase):
+             "('Unexpected end tag `div` (Line 1, Column 6)', (1, 6))"
+         )
+         with self.assertRaisesMessage(AssertionError, error_msg):
+-            self.assertHTMLEqual('< div></ div>', '<div></div>')
++            self.assertHTMLEqual('< div></div>', '<div></div>')
+         with self.assertRaises(HTMLParseError):
+             parse_html('</p>')
+ 

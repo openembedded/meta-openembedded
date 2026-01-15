@@ -1,0 +1,37 @@
+From bd3ffbbacceef7fabd3135ca90eba1397e2b5901 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Tue, 13 Jan 2026 20:07:35 +0000
+Subject: [PATCH] Fix tag_strip tests
+
+Python's htmlparser behavior changed between python versions, and
+the tests expect incorrect result due to this.
+
+This patch is a partial backport, to use only the results that are
+valid for the OE Python version.
+
+Upstream-Status: Backport [https://github.com/django/django/commit/2980627502c84a9fd09272e1349dc574a2ff1fb1]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/utils_tests/test_html.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/utils_tests/test_html.py b/tests/utils_tests/test_html.py
+index 86f5562..71757ad 100644
+--- a/tests/utils_tests/test_html.py
++++ b/tests/utils_tests/test_html.py
+@@ -89,10 +89,10 @@ class TestUtilsHtml(SimpleTestCase):
+             ('&gotcha&#;<>', '&gotcha&#;<>'),
+             ('<sc<!-- -->ript>test<<!-- -->/script>', 'ript>test'),
+             ('<script>alert()</script>&h', 'alert()h'),
+-            ('><!' + ('&' * 16000) + 'D', '><!' + ('&' * 16000) + 'D'),
++            ('><!' + ('&' * 16000) + 'D', '>'),
+             ('X<<<<br>br>br>br>X', 'XX'),
+             ("<" * 50 + "a>" * 50, ""),
+-            (">" + "<a" * 500 + "a", ">" + "<a" * 500 + "a"),
++            (">" + "<a" * 500 + "a", ">"),
+             ("<a" * 49 + "a" * 951, "<a" * 49 + "a" * 951),
+             ("<" + "a" * 1_002, "<" + "a" * 1_002),
+         )
+-- 
+2.39.5
+

@@ -1,0 +1,31 @@
+From 5cae184e0d57dacae25439e533c4e1ef6f6c4cae Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Tue, 13 Jan 2026 23:31:06 +0100
+Subject: [PATCH] fix quote type in expected error message
+
+Instead of double quotes the error is returned with single quotes.
+This is localization dependent, comes from a po file - some locales use
+single quotes, other are translated with double quotes. The default
+locale used with the OE ptest image uses single quotes - adapt the test
+to this.
+
+Upstream-Status: Inappropriate [This is not a nice solution. Hardcoding single quotes is not better than the original]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/forms_tests/field_tests/test_filefield.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/forms_tests/field_tests/test_filefield.py b/tests/forms_tests/field_tests/test_filefield.py
+index ba559ee..3880e11 100644
+--- a/tests/forms_tests/field_tests/test_filefield.py
++++ b/tests/forms_tests/field_tests/test_filefield.py
+@@ -144,7 +144,7 @@ class MultipleFileFieldTest(SimpleTestCase):
+             evil_files[i:] + evil_files[:i]  # Rotate by i.
+             for i in range(len(evil_files))
+         )
+-        msg = "File extension “sh” is not allowed. Allowed extensions are: "
++        msg = "File extension 'sh' is not allowed. Allowed extensions are: "
+         for rotated_evil_files in evil_rotations:
+             with self.assertRaisesMessage(ValidationError, msg):
+                 f.clean(rotated_evil_files)

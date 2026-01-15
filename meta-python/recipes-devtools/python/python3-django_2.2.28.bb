@@ -39,6 +39,11 @@ SRC_URI += "file://CVE-2023-31047.patch \
             file://0001-fix-ipv6-test.patch \
             file://0001-Fixed-32298-Fixed-URLValidator-hostname-length-valid.patch \
             file://0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch \
+            file://0001-Fix-tag_strip-tests.patch \
+            file://0001-Fixed-inspectdb.tests.InspectDBTestCase.test_custom_.patch \
+            file://0001-Fixed-test_utils.tests.HTMLEqualTests.test_parsing_e.patch \
+            file://0001-Made-RemoteTestResultTest.test_pickle_errors_detecti.patch \
+            file://0001-fix-quote-type-in-expected-error-message.patch \
             "
 
 SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"

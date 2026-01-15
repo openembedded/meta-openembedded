@@ -1,0 +1,59 @@
+From 80d06be0a5dc82d8cf8dd8105b6734c188743fae Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Tue, 21 Oct 2025 21:11:44 +0200
+Subject: [PATCH] Made RemoteTestResultTest.test_pickle_errors_detection()
+ compatible with tblib 3.2+.
+
+From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
+
+tblib 3.2+ makes exception subclasses with __init__() and the default
+__reduce__() picklable. This broke the test for
+RemoteTestResult._confirm_picklable(), which expects a specific
+exception to fail unpickling.
+
+https://github.com/ionelmc/python-tblib/blob/master/CHANGELOG.rst#320-2025-10-21
+
+This fix defines ExceptionThatFailsUnpickling.__reduce__() in a way
+that pickle.dumps(obj) succeeds, but pickle.loads(pickle.dumps(obj))
+raises TypeError.
+
+Refs #27301. This preserves the intent of the regression test from
+52188a5ca6bafea0a66f17baacb315d61c7b99cd without skipping it.
+
+Upstream-Status: Backport [https://github.com/django/django/commit/548209e620b3ca34396a360453f07c8dbb8aa6c7]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/test_runner/test_parallel.py | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/tests/test_runner/test_parallel.py b/tests/test_runner/test_parallel.py
+index c1a89bd..7c72216 100644
+--- a/tests/test_runner/test_parallel.py
++++ b/tests/test_runner/test_parallel.py
+@@ -1,3 +1,4 @@
++import pickle
+ import unittest
+
+ from django.test import SimpleTestCase
+@@ -18,6 +19,12 @@ class ExceptionThatFailsUnpickling(Exception):
+     def __init__(self, arg):
+         super().__init__()
+ 
++    def __reduce__(self):
++        # tblib 3.2+ makes exception subclasses picklable by default.
++        # Return (cls, ()) so the constructor fails on unpickle, preserving
++        # the needed behavior for test_pickle_errors_detection.
++        return (self.__class__, ())
++
+ 
+ class ParallelTestRunnerTest(SimpleTestCase):
+     """
+@@ -59,6 +66,8 @@ class RemoteTestResultTest(SimpleTestCase):
+         result = RemoteTestResult()
+         result._confirm_picklable(picklable_error)
+ 
++        # The exception can be pickled but not unpickled.
++        pickle.dumps(not_unpicklable_error)
+         msg = '__init__() missing 1 required positional argument'
+         with self.assertRaisesMessage(TypeError, msg):
+             result._confirm_picklable(not_unpicklable_error)
