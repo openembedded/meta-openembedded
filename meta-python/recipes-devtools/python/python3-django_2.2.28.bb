@@ -44,6 +44,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
             file://0001-Fixed-test_utils.tests.HTMLEqualTests.test_parsing_e.patch \
             file://0001-Made-RemoteTestResultTest.test_pickle_errors_detecti.patch \
             file://0001-fix-quote-type-in-expected-error-message.patch \
+            file://0001-Fix-patch-for-CVE-2023-36053.patch \
             "
 
 SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
