@@ -5,32 +5,40 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = " \
     accountsservice \
     audit \
+    dconf \
     dconf-native \
-    gtk+3 \
+    gtk4 \
     json-glib \
     keyutils \
     libcanberra \
     libgudev \
     libpam \
-    xserver-xorg \
 "
 
-REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
+REQUIRED_DISTRO_FEATURES = "systemd pam polkit gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI += "file://a3e0aca75e16aeafc171751028406b54f5ed8397.patch"
-SRC_URI[archive.sha256sum] = "1bc06daff093ec7b5e37ecb4f92e5da3474a1b1ba076edb9151ee967d1c30adf"
+SRC_URI[archive.sha256sum] = "9813631f9f5f0f860ea14a437866e60efc7bed3023b7c3b765cc5de1de597a06"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
+PACKAGECONFIG[x11] = "-Dx11-support=true,-Dx11-support=false,xau"
 
 EXTRA_OEMESON = " \
     -Ddefault-pam-config=openembedded \
     -Dpam-mod-dir=${base_libdir}/security \
+    --cross-file=${WORKDIR}/meson-${PN}.cross \
 "
+
+do_write_config:append() {
+    cat >${WORKDIR}/meson-${PN}.cross <<EOF
+[binaries]
+nologin = '${sbindir}/nologin'
+EOF
+}
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/daemon/gdm-session-worker-enum-types.c
