@@ -1,0 +1,30 @@
+From ee35cb8dd2f903ddde115ca10186e162ffd8dc62 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Sat, 26 Dec 2020 20:52:44 +0530
+Subject: [PATCH] Fixed #32298 -- Fixed URLValidator hostname length
+ validation.
+
+From: Akshat1Nar <akshat.dixit71@gmail.com>
+
+URLValidator now validates the maximum length of a hostname without
+the userinfo and port.
+
+Upstream-Status: Backport [https://github.com/django/django/commit/b41d38ae26b1da9519a6cd765bc2f2ce7d355007]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ django/core/validators.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/django/core/validators.py b/django/core/validators.py
+index 2dbd3bf..94cc3bf 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -151,7 +151,7 @@ class URLValidator(RegexValidator):
+         # section 3.1. It's defined to be 255 bytes or less, but this includes
+         # one byte for the length of the name and one byte for the trailing dot
+         # that's used to indicate absolute names in DNS.
+-        if len(urlsplit(value).netloc) > 253:
++        if len(urlsplit(value).hostname) > 253:
+             raise ValidationError(self.message, code=self.code)
+ 
+ 
