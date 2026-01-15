@@ -16,6 +16,8 @@ SRC_URI += "\
        file://CVE-2024-53907.patch \
        file://CVE-2025-32873.patch \
        file://0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch \
+       file://0001-Fix-tag_strip-tests.patch \
+       file://0001-Fixed-test_utils.tests.HTMLEqualTests.test_parsing_e.patch \
 "
 
 # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
