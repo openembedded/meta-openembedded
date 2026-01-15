@@ -8,17 +8,17 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
-SRCREV_opcua = "3eed1a6d5c5b207c531b2d35ed88aa0a4a4541e5"
+SRCREV_opcua = "95dc4c1e9c8c4d3619f90b9c3fc3af194acb8b30"
 SRCREV_mdnsd = "488d24fb9d427aec77df180268f0291eeee7fb8b"
-SRCREV_ua-nodeset = "f71b3f411d5cb16097c3ae0c744f67ad45535ffb"
-SRCREV_mqtt-c = "f69ce1e7fd54f3b1834c9c9137ce0ec5d703cb4d"
+SRCREV_ua-nodeset = "d1bb6a22125bd7cd986272b1ee98a18a91d76fff"
+SRCREV_mqtt-c = "0f4c34c8cc00b16cfee094745d68b8cdbaecd8e0"
 
 SRC_URI = " \
-    git://github.com/open62541/open62541.git;name=opcua;branch=1.3;protocol=https \
+    git://github.com/open62541/open62541.git;name=opcua;branch=1.4;protocol=https \
     git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mdnsd \
-    git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/ua-nodeset \
+    git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=latest;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/ua-nodeset \
     git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mqtt-c \
-    file://0001-fix-build-do-not-install-git-files.patch \
+    file://a725a263124ae8c87fe6af34a9b3a7981b7f116d.patch \
 "
 
 
@@ -34,9 +34,9 @@ FILES:${PN} = "${libdir}/lib*${SOLIBS}"
 
 # The tools package contains scripts to generate certificates and OPC UA schema definitions + nodeset descriptions.
 PACKAGES += "${PN}-tools"
-FILES:${PN}-tools = "${datadir}/${BPN}/tools/*"
+FILES:${PN}-tools = "${datadir}/${BPN}/*"
 
-PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth subscriptions subscriptions-events namespace-full"
+PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth pubsub-informationmodel subscriptions subscriptions-events namespace-full"
 PACKAGECONFIG[encryption-mbedtls] = "-DUA_ENABLE_ENCRYPTION=MBEDTLS, , mbedtls, , , encryption-openssl"
 PACKAGECONFIG[encryption-openssl] = "-DUA_ENABLE_ENCRYPTION=OPENSSL, , openssl, , , encryption-mbedtls"
 PACKAGECONFIG[multithreading] = "-DUA_MULTITHREADING=100, -DUA_MULTITHREADING=0"
@@ -44,6 +44,7 @@ PACKAGECONFIG[namespace-full] = "-DUA_NAMESPACE_ZERO=FULL, , , , , namespace-red
 PACKAGECONFIG[namespace-reduced] = "-DUA_NAMESPACE_ZERO=REDUCED, , , , , namespace-full"
 PACKAGECONFIG[pubsub] = "-DUA_ENABLE_PUBSUB=ON, -DUA_ENABLE_PUBSUB=OFF"
 PACKAGECONFIG[pubsub-eth] = "-DUA_ENABLE_PUBSUB_ETH_UADP=ON, -DUA_ENABLE_PUBSUB_ETH_UADP=OFF"
+PACKAGECONFIG[pubsub-informationmodel] = "-DUA_ENABLE_PUBSUB_INFORMATIONMODEL=ON, -DUA_ENABLE_PUBSUB_INFORMATIONMODEL=OFF"
 PACKAGECONFIG[subscriptions] = "-DUA_ENABLE_SUBSCRIPTIONS=ON, -DUA_ENABLE_SUBSCRIPTIONS=OFF"
 PACKAGECONFIG[subscriptions-events] = "-DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON, -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=OFF"
 PACKAGECONFIG[werror] = "-DUA_FORCE_WERROR=ON, -DUA_FORCE_WERROR=OFF"
