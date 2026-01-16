@@ -12,6 +12,8 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=release-4.3.5-patches;protoc
            "
 SRCREV = "e3fdcdcfbd1588754fe9dd4b754ac9397260f0f9"
 
+# patch releases often use alphabetical suffixes
+CVE_VERSION_SUFFIX = "alphabetical"
 
 inherit autotools manpages pkgconfig ptest
 
