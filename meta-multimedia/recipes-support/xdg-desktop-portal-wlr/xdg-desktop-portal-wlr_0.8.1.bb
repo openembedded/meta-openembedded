@@ -13,18 +13,17 @@ DEPENDS = " \
     virtual/libgbm \
 "
 
-inherit meson pkgconfig features_check
+inherit meson pkgconfig features_check manpages
 REQUIRED_DISTRO_FEATURES = "opengl wayland"
 
-SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master \
-           file://0001-screencast-Fix-build-with-older-mesa.patch"
+SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master"
 
 PV .= "+git"
-SRCREV = "d9ada849aeca6137915de2df69beaef4e272cc1d"
+SRCREV = "256eb4a9f6ecffd64289d6501d036c2094b47db6"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'basu', d)}"
 
-PACKAGECONFIG[man-pages] = "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
+PACKAGECONFIG[manpages] = "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled -Dsd-bus-provider=libsystemd,-Dsystemd=disabled"
 PACKAGECONFIG[basu] = "-Dsd-bus-provider=basu,,basu"
 
