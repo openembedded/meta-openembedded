@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
            file://run-ptest \
            file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
            file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
+           file://CVE-2026-22185.patch;striplevel=3 \
            "
 
 SRCREV = "ce201088de95d26fc0da36ba805bf2ddc2ba74ff"
