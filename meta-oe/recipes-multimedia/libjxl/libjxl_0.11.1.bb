@@ -51,3 +51,5 @@ CFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 CXXFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 
 FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
+
+BBCLASSEXTEND = "native"
