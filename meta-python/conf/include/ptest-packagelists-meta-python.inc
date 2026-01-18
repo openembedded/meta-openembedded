@@ -129,6 +129,7 @@ PTESTS_FAST_META_PYTHON = "\
 
 PTESTS_SLOW_META_PYTHON = "\
     python3-arrow \
+    python3-django \
     python3-ecdsa \
     python3-fastapi \
     python3-google-auth \
