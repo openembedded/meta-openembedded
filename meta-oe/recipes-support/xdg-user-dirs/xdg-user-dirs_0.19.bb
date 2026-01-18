@@ -14,4 +14,4 @@ CONFFILES:${PN} += " \
     ${sysconfdir}/xdg/user-dirs.defaults \
 "
 
-FILES:${PN} += "${systemd_unitdir}/user/xdg-user-dirs.service"
+FILES:${PN} += "${systemd_user_unitdir}/xdg-user-dirs.service"
