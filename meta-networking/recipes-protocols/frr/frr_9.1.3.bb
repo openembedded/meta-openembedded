@@ -14,6 +14,10 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.1 \
            file://frr.pam \
            file://0001-zebra-Mimic-GNU-basename-API-for-non-glibc-library-e.patch \
            file://CVE-2024-55553.patch \
+           file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_1.patch \
+           file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_2.patch \
+           file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_3.patch \
+           file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_4.patch \
            "
 
 SRCREV = "ad1766d17be022587fe05ebe1a7bf10e1b7dce19"
