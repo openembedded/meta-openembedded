@@ -15,6 +15,7 @@ FILES:${PN} += "${datadir}/django"
 BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS:${PN} += "\
+    python3-asgiref \
     python3-compression \
     python3-ctypes \
     python3-datetime \
@@ -27,6 +28,7 @@ RDEPENDS:${PN} += "\
     python3-numbers \
     python3-pkgutil \
     python3-pytz \
+    python3-sqlparse \
     python3-threading \
     python3-unixadmin \
     python3-xml \
@@ -45,7 +47,6 @@ do_install_ptest(){
 
 RDEPENDS:${PN}-ptest += " \
     gettext \
-    python3-asgiref \
     python3-bcrypt \
     python3-compile \
     python3-docutils \
