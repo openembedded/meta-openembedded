@@ -10,6 +10,7 @@ SRC_URI = " \
     git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https \
     file://0002-fluid_synth_nwrite_float-Allow-zero-pointer-for-left.patch \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
+    file://CVE-2025-56225.patch \
 "
 SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
 
