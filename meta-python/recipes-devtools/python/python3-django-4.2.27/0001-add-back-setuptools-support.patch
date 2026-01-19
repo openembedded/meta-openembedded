@@ -1,0 +1,179 @@
+From 737b87cc374dc0e66fb7dd218848e1a3a0359a6a Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Mon, 19 Jan 2026 14:58:27 +0100
+Subject: [PATCH] add back setuptools support
+
+Starting 4.2.21 the project started to use setuptools build_mets
+build backend, however it requires a much newer setuptools3 package than
+the one provided by oe-core in the Kirkstone branch, and it fails to
+install any files.
+
+This patch reverts partially the commit [1] that added support for
+build_meta backend, and adds back the setuptools support.
+
+[1]: https://github.com/django/django/commit/afe52d89c4f42870622a4bb161ab5f4d4913aac5
+Upstream-Status: Inappropriate [OE-specific, too old Setuptools recipe]
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ extras/Makefile |  9 +++++++
+ setup.cfg       | 71 +++++++++++++++++++++++++++++++++++++++++++++++--
+ setup.py        | 54 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 132 insertions(+), 2 deletions(-)
+ create mode 100644 extras/Makefile
+ create mode 100644 setup.py
+
+diff --git a/extras/Makefile b/extras/Makefile
+new file mode 100644
+index 0000000..66efd0d
+--- /dev/null
++++ b/extras/Makefile
+@@ -0,0 +1,9 @@
++all: sdist bdist_wheel
++
++sdist:
++	python setup.py sdist
++
++bdist_wheel:
++	python setup.py bdist_wheel
++
++.PHONY : sdist bdist_wheel
+diff --git a/setup.cfg b/setup.cfg
+index 8bfd5a1..8b0d399 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -1,4 +1,71 @@
+-[egg_info]
++[metadata]
++name = Django
++version = attr: django.__version__
++url = https://www.djangoproject.com/
++author = Django Software Foundation
++author_email = foundation@djangoproject.com
++description = A high-level Python web framework that encourages rapid development and clean, pragmatic design.
++long_description = file: README.rst
++license = BSD-3-Clause
++classifiers =
++    Development Status :: 5 - Production/Stable
++    Environment :: Web Environment
++    Framework :: Django
++    Intended Audience :: Developers
++    License :: OSI Approved :: BSD License
++    Operating System :: OS Independent
++    Programming Language :: Python
++    Programming Language :: Python :: 3
++    Programming Language :: Python :: 3 :: Only
++    Programming Language :: Python :: 3.8
++    Programming Language :: Python :: 3.9
++    Programming Language :: Python :: 3.10
++    Programming Language :: Python :: 3.11
++    Programming Language :: Python :: 3.12
++    Topic :: Internet :: WWW/HTTP
++    Topic :: Internet :: WWW/HTTP :: Dynamic Content
++    Topic :: Internet :: WWW/HTTP :: WSGI
++    Topic :: Software Development :: Libraries :: Application Frameworks
++    Topic :: Software Development :: Libraries :: Python Modules
++project_urls =
++    Documentation = https://docs.djangoproject.com/
++    Release notes = https://docs.djangoproject.com/en/stable/releases/
++    Funding = https://www.djangoproject.com/fundraising/
++    Source = https://github.com/django/django
++    Tracker = https://code.djangoproject.com/
++
++[options]
++python_requires = >=3.8
++packages = find:
++include_package_data = true
++zip_safe = false
++install_requires =
++    asgiref >= 3.6.0, < 4
++    backports.zoneinfo; python_version<"3.9"
++    sqlparse >= 0.3.1
++    tzdata; sys_platform == 'win32'
++
++[options.entry_points]
++console_scripts =
++    django-admin = django.core.management:execute_from_command_line
++
++[options.extras_require]
++argon2 = argon2-cffi >= 19.1.0
++bcrypt = bcrypt
++
++[flake8]
++exclude = build,.git,.tox,./tests/.env
++extend-ignore = E203
++max-line-length = 88
++per-file-ignores =
++    django/core/cache/backends/filebased.py:W601
++    django/core/cache/backends/base.py:W601
++    django/core/cache/backends/redis.py:W601
++    tests/cache/tests.py:W601
++
++[isort]
++profile = black
++default_section = THIRDPARTY
++known_first_party = django[egg_info]
+ tag_build = 
+ tag_date = 0
+-
+diff --git a/setup.py b/setup.py
+new file mode 100644
+index 0000000..f0e82b7
+--- /dev/null
++++ b/setup.py
+@@ -0,0 +1,55 @@
++import os
++import site
++import sys
++from distutils.sysconfig import get_python_lib
++
++from setuptools import setup
++
++# Allow editable install into user site directory.
++# See https://github.com/pypa/pip/issues/7953.
++site.ENABLE_USER_SITE = "--user" in sys.argv[1:]
++
++# Warn if we are installing over top of an existing installation. This can
++# cause issues where files that were deleted from a more recent Django are
++# still present in site-packages. See #18115.
++overlay_warning = False
++if "install" in sys.argv:
++    lib_paths = [get_python_lib()]
++    if lib_paths[0].startswith("/usr/lib/"):
++        # We have to try also with an explicit prefix of /usr/local in order to
++        # catch Debian's custom user site-packages directory.
++        lib_paths.append(get_python_lib(prefix="/usr/local"))
++    for lib_path in lib_paths:
++        existing_path = os.path.abspath(os.path.join(lib_path, "django"))
++        if os.path.exists(existing_path):
++            # We note the need for the warning here, but present it after the
++            # command is run, so it's more likely to be seen.
++            overlay_warning = True
++            break
++
++
++setup()
++
++
++if overlay_warning:
++    sys.stderr.write(
++        """
++
++========
++WARNING!
++========
++
++You have just installed Django over top of an existing
++installation, without removing it first. Because of this,
++your install may now include extraneous files from a
++previous version that have since been removed from
++Django. This is known to cause a variety of problems. You
++should manually remove the
++
++%(existing_path)s
++
++directory and re-install Django.
++
++"""
++        % {"existing_path": existing_path}
++    )

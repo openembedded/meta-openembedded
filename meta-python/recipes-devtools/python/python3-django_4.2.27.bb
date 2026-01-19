@@ -1,7 +1,8 @@
 require python-django.inc
-#From 4.2.22 onwards setuptools configuration migrated to pyproject.toml
-inherit pypi python_setuptools_build_meta
 
+inherit pypi setuptools3
+
+SRC_URI += "file://0001-add-back-setuptools-support.patch"
 SRC_URI[sha256sum] = "b865fbe0f4a3d1ee36594c5efa42b20db3c8bbb10dff0736face1c6e4bda5b92"
 
 RDEPENDS:${PN} += "\
