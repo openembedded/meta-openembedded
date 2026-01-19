@@ -4,6 +4,8 @@ LICENSE = "BSL-1.0"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e4224ccaecb14d942c71d31bef20d78c"
 
+CVE_PRODUCT = "async_mqtt"
+
 SRC_URI = "git://github.com/redboltz/async_mqtt;protocol=http;branch=main;protocol=https;tag=${PV}"
 SRCREV = "cb3d37dc3432b9c03fe631eeba2d548de7457bf9"
 
