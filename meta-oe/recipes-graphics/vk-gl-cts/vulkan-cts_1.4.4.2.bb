@@ -2,7 +2,7 @@ DESCRIPTION = "Vulkan CTS"
 
 require khronos-cts.inc
 
-SRCREV_vk-gl-cts = "03c0746a55b78eab63c664a11948b52419e1f309"
+SRCREV_vk-gl-cts = "aa481ab6eb66a1c74768fabec453ea6e60f0ee0e"
 
 require vulkan-cts-sources.inc
 
