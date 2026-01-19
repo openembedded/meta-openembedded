@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9ab5db472ff936b441055522f5000547"
 SECTION = "libs"
 
-SRCREV = "fe54643fe3d7a699c68b164dae87afb1eb059342"
+SRCREV = "aa2b617f47c2f75fca9ff00b146dabbaf1b9f422"
 SRC_URI = " \
     git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.17.x;tag=${PV} \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
