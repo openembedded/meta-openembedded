@@ -1,4 +1,4 @@
-From 0dd6fdbf6a821898617f1bd8e57123be048c07f5 Mon Sep 17 00:00:00 2001
+From e94edc3eba7ea158806283d92ecd71ab87351838 Mon Sep 17 00:00:00 2001
 From: Ross Burton <ross.burton@arm.com>
 Date: Mon, 16 Dec 2024 05:49:57 +0000
 Subject: [PATCH] The ISB instruction isn't available in ARMv5 or v6, so guard

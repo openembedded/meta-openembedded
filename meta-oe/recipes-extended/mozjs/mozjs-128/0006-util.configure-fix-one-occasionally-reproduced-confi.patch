@@ -1,4 +1,4 @@
-From 683cd23dd269509a1d913adb2b049b84771e0a94 Mon Sep 17 00:00:00 2001
+From 13b544e4ed51f41138bf200eb84552e169df87b0 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Thu, 11 Nov 2021 16:05:54 +0800
 Subject: [PATCH] util.configure: fix one occasionally reproduced configure

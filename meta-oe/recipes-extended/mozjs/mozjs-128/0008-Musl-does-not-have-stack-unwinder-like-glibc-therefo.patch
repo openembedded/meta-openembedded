@@ -1,4 +1,4 @@
-From d96e9a40e9da9163e0a4b3475178fe30c26deb19 Mon Sep 17 00:00:00 2001
+From fae21326f717f1c0031f3ad0ff4c3112ffb3a936 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 22 Sep 2023 22:59:56 +0000
 Subject: [PATCH] Musl does not have stack unwinder like glibc therefore we can

@@ -1,4 +1,4 @@
-From 6f6b78628a8edc834aa147c87ebce3eb8e670e7a Mon Sep 17 00:00:00 2001
+From 31d56eba10e7cf856a2a118e0523633195fe9ea2 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Thu, 18 Nov 2021 07:16:39 +0000
 Subject: [PATCH] Rewrite cargo-host-linker in python3
