@@ -13,6 +13,7 @@ SRC_URI = " \
 "
 
 CVE_PRODUCT = "lief"
+CVE_STATUS[CVE-2025-15504] = "fixed-version: the vulnerability is fixed since v0.17.2"
 
 PEP517_SOURCE_PATH = "${S}/api/python"
 
