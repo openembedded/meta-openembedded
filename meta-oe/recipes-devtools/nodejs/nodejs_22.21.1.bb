@@ -43,8 +43,6 @@ SRC_URI[sha256sum] = "487d73fd4db00dc2420d659a8221b181a7937fbc5bc73f31c30b1680ad
 
 S = "${UNPACKDIR}/node-v${PV}"
 
-CVE_PRODUCT += "node.js"
-
 # v8 errors out if you have set CCACHE
 CCACHE = ""
 
