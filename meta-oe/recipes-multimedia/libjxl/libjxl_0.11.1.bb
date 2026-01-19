@@ -46,5 +46,8 @@ PACKAGECONFIG[sizeless-vectors] = "-DJPEGXL_ENABLE_SIZELESS_VECTORS=ON,-DJPEGXL_
 # lcms/src/cmsps2.c
 # error: out of range pc-relative fixup value
 CFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
+# lib/jxl/convolve_separable5.cc
+# error: out of range pc-relative fixup value
+CXXFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 
 FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
