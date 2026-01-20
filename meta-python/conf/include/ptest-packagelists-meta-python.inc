@@ -12,7 +12,6 @@ PTESTS_FAST_META_PYTHON = "\
     python3-ansicolors \
     python3-asgiref \
     python3-aspectlib \
-    python3-backports-zstd \
     python3-betamax \
     python3-bleak \
     python3-blinker \
