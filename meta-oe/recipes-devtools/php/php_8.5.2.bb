@@ -12,7 +12,7 @@ DEPENDS:class-native = "zlib-native libxml2-native"
 
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
-SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+SRC_URI = "https://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-configure.ac-don-t-include-build-libtool.m4.patch \
            file://0002-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
           "
@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
 
 S = "${UNPACKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "55f428c426e7241752ea9afff160bb64c32a9321cbd6d17d1c145b8df8823737"
+SRC_URI[sha256sum] = "f7efdeccc3a810b18920692306536b99a3ba86610dbd0795a296cf77d3fb3a06"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
