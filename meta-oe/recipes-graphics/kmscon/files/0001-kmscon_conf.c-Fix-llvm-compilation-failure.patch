@@ -1,0 +1,40 @@
+From 03a330d486132e3798a125d26d4f10252ffd8e2d Mon Sep 17 00:00:00 2001
+From: Adam Duskett <adam.duskett@amarulasolutions.com>
+Date: Fri, 16 Jan 2026 11:35:39 +0100
+Subject: [PATCH] kmscon_conf.c: Fix llvm compilation failure
+
+When building with an LLVM toolchain, the follow error occurs:
+
+```
+kmscon_conf.c:757:72:
+error: expression which evaluates to zero treated as a null pointer constant
+of type 'void *' [-Werror,-Wnon-literal-null-conversion]
+CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, KMSCON_GPU_ALL),
+                                                                     ^~~~~~~~~~~~~~
+1 error generated.
+```
+
+Fix the error by adding a cast to (void *).
+
+Upstream-Status: Submitted [https://github.com/kmscon/kmscon/pull/225]
+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+---
+ src/kmscon_conf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/kmscon_conf.c b/src/kmscon_conf.c
+index df2e51d..9e9a839 100644
+--- a/src/kmscon_conf.c
++++ b/src/kmscon_conf.c
+@@ -754,7 +754,7 @@ int kmscon_conf_new(struct conf_ctx **out)
+ 		/* Video Options */
+ 		CONF_OPTION_BOOL_FULL(0, "drm", aftercheck_drm, NULL, NULL, &conf->drm, true),
+ 		CONF_OPTION_BOOL(0, "hwaccel", &conf->hwaccel, false),
+-		CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, KMSCON_GPU_ALL),
++		CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, (void *)KMSCON_GPU_ALL),
+ 		CONF_OPTION_STRING(0, "render-engine", &conf->render_engine, NULL),
+ 		CONF_OPTION_BOOL(0, "use-original-mode", &conf->use_original_mode, true),
+ 		CONF_OPTION_STRING(0, "mode", &conf->mode, NULL),
+-- 
+2.52.0
+
