@@ -48,6 +48,7 @@ inherit update-rc.d systemd pkgconfig
 inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'privdrop', 'useradd', '', d)}
 USERADD_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '${PN}', '', d)}"
 USERADD_PARAM:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '--system -d / -M --shell /sbin/nologin chronyd;', '', d)}"
+GROUPADD_PARAM:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '--system chronyd', '', d)}"
 
 # Configuration options:
 # - Security-related:
@@ -113,10 +114,18 @@ do_install() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
-        echo "d /var/lib/chrony 0755 root root -" > ${D}${sysconfdir}/tmpfiles.d/chronyd.conf
+        if ${@bb.utils.contains('PACKAGECONFIG', 'privdrop', 'true', 'false', d)}; then
+            echo "d /var/lib/chrony 0755 chronyd chronyd -" > ${D}${sysconfdir}/tmpfiles.d/chronyd.conf
+        else
+            echo "d /var/lib/chrony 0755 root root -" > ${D}${sysconfdir}/tmpfiles.d/chronyd.conf
+        fi
     else
         install -d ${D}${sysconfdir}/default/volatiles
-        echo "d root root 0755 /var/lib/chrony none" > "${D}${sysconfdir}/default/volatiles/00_runtime_chrony_dirs"
+        if ${@bb.utils.contains('PACKAGECONFIG', 'privdrop', 'true', 'false', d)}; then
+            echo "d chronyd chronyd 0755 /var/lib/chrony none" > "${D}${sysconfdir}/default/volatiles/00_runtime_chrony_dirs"
+        else
+            echo "d root root 0755 /var/lib/chrony none" > "${D}${sysconfdir}/default/volatiles/00_runtime_chrony_dirs"
+        fi
     fi
 
 }
