@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/catchorg/Catch2"
 LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
-SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https"
-SRCREV = "2b60af89e23d28eefc081bc930831ee9d45ea58b"
+SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https;tag=v${PV}"
+SRCREV = "88abf9bf325c798c33f54f6b9220ef885b267f4f"
 
 
 inherit cmake python3native
