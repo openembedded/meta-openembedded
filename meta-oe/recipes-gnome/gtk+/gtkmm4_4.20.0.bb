@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "glib-2.0-native atkmm pangomm-2.48 glibmm gtk4 cairomm-1.16 gdk-pixbuf-native"
 
-BPN = "gtkmm"
+GNOMEBN = "gtkmm"
 
 inherit gnomebase features_check
 
