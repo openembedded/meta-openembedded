@@ -1,11 +1,11 @@
 DESCRIPTION = "A cross-platform clipboard module for Python. (only handles plain text for now)"
 HOMEPAGE = "https://github.com/asweigart/pyperclip"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=d7dd4b0d1f7153322a546e89b5a0a632"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b6cd06fd72984ac1f8428337aec8cff7"
 
-SRC_URI[sha256sum] = "b7de0142ddc81bfc5c7507eea19da920b92252b548b96186caf94a5e2527d310"
+SRC_URI[sha256sum] = "244035963e4428530d9e3a6101a1ef97209c6825edab1567beac148ccc1db1b6"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     python3-ctypes \
