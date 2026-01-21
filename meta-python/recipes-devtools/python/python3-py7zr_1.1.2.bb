@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-or-later"
 SECTION = "devel/python"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI[sha256sum] = "087b1a94861ad9eb4d21604f6aaa0a8986a7e00580abd79fedd6f82fecf0592c"
+SRC_URI[sha256sum] = "2aee212c5516ddcbeb76874dc3ece38b4566fc003f51600032c723cfea89ac56"
 
 CVE_PRODUCT = "py7zr"
 
