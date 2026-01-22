@@ -8,13 +8,16 @@ SECTION = "net"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-inherit pkgconfig cmake gitpkgv
+inherit pkgconfig cmake gitpkgv ptest
+
+RDEPENDS:${PN}-ptest += "coreutils pcsc-lite-lib"
 
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
 SRCREV = "efa899d3deb8595a29fabb2a2251722f9d7e0d7f"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
+           file://run-ptest \
            file://winpr-makecert-Build-with-install-RPATH.patch \
            file://0001-Fixed-compilation-warnings.patch \
            file://0001-Fix-const-qualifier-error.patch \
@@ -37,6 +40,7 @@ EXTRA_OECMAKE += " \
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'directfb pam pulseaudio wayland x11', d)}\
+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'test', '', d)} \
     alsa gstreamer cups pcsc server \
 "
 
@@ -51,6 +55,7 @@ PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gst
 PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
 PACKAGECONFIG[server] = "-DWITH_SERVER=ON,-DWITH_SERVER=OFF"
 PACKAGECONFIG[alsa] = "-DWITH_ALSA=ON,-DWITH_ALSA=OFF,alsa-lib"
+PACKAGECONFIG[test] = "-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF"
 
 PACKAGES =+ "libfreerdp"
 
@@ -58,6 +63,12 @@ LEAD_SONAME = "libfreerdp.so"
 FILES:libfreerdp = "${libdir}/lib*${SOLIBS}"
 
 PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
+
+do_configure:prepend() {
+    sed -i 's,CMAKE_CURRENT_SOURCE_DIR,"${PTEST_PATH}/test_data",' ${S}/libfreerdp/codec/test/TestFreeRDPCodecProgressive.c
+    sed -i 's,\${CMAKE_CURRENT_SOURCE_DIR},"${PTEST_PATH}/test_data",' ${S}/libfreerdp/crypto/test/CMakeLists.txt
+    sed -i 's,\${CMAKE_CURRENT_SOURCE_DIR},${PTEST_PATH}/test_data,' ${S}/winpr/libwinpr/utils/test/CMakeLists.txt
+}
 
 do_configure:append() {
     sed -i -e 's|${WORKDIR}||g' ${B}/buildflags.h
@@ -68,6 +79,15 @@ do_install:append () {
     install -d ${D}${bindir}
     install -m755 winpr/tools/makecert-cli/winpr-makecert ${D}${bindir}
     rm -rf ${D}${libdir}/freerdp
+}
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/test_data
+    cp -r ${B}/Testing ${D}${PTEST_PATH}
+    install -m 0644 ${S}/libfreerdp/codec/test/progressive.bmp ${D}${PTEST_PATH}/test_data/
+    install -m 0644 ${S}/libfreerdp/crypto/test/Test_x509_cert_info.pem ${D}${PTEST_PATH}/test_data/
+    install -m 0644 ${S}/winpr/libwinpr/utils/test/lodepng_32bit.png ${D}${PTEST_PATH}/test_data/
+    install -m 0644 ${S}/winpr/libwinpr/utils/test/lodepng_32bit.bmp ${D}${PTEST_PATH}/test_data/
 }
 
 python populate_packages:prepend () {

@@ -72,6 +72,7 @@ PTESTS_FAST_META_OE:remove:riscv32 = "botan nodejs oprofile"
 
 PTESTS_SLOW_META_OE = "\
     c-ares \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'freerdp', '', d)} \
     fftw \
     libusb-compat \
     mariadb \
