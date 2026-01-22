@@ -23,7 +23,8 @@ EXTRA_OECONF = "\
 
 PACKAGECONFIG ??= " \
 	${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)} \
-	${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gtk3 gstreamer', '', d)} \
+	${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gstreamer', '', d)} \
+	${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk3', '', d)} \
 "
 PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"
