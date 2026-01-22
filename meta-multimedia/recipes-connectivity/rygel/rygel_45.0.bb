@@ -18,7 +18,7 @@ RRECOMMENDS:${PN} = "rygel-plugin-media-export"
 inherit gnomebase features_check vala gobject-introspection gettext systemd
 
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
 SRC_URI[archive.sha256sum] = "82667b902fc0672e64cf91eb727a70137a8fdfe7a3d9a4c158b0f4b1fc700882"
 
