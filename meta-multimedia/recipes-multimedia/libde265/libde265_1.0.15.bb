@@ -16,7 +16,7 @@ inherit cmake pkgconfig
 
 EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
-PACKAGECONFIG ?= "libsdl"
+PACKAGECONFIG ?= ""
 PACKAGECONFIG[libsdl] = "-DENABLE_SDL=ON,-DENABLE_SDL=OFF,virtual/libsdl2"
 
 FILES:${PN} += "${libdir}/libde265.so"
