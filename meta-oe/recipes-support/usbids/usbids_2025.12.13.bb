@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
 SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
 
-# September 15, 2025
-SRCREV = "18b3055a9819a341ac2ff957f0b92f564d0d5d6e"
+# December 13, 2025
+SRCREV = "5de1427442504bc8e28d35cca5397d64ea177456"
 
 
 do_install() {
