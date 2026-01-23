@@ -9,7 +9,8 @@ DEPENDS = "flex-native flex bison-native"
 DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
 
 SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-          "
+           file://CVE-2025-62291.patch \
+           "
 
 SRC_URI[sha256sum] = "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e74693b54fc33678"
 
