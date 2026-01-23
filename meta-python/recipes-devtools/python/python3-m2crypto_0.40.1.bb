@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "bbfd113ec55708c05816252a4f09e4237df4f3bbfc8171cbbc33057d25
 PYPI_PACKAGE = "M2Crypto"
 inherit pypi siteinfo setuptools3
 
+CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
+
 DEPENDS += "openssl swig-native"
 RDEPENDS:${PN} += "\
   python3-datetime \
