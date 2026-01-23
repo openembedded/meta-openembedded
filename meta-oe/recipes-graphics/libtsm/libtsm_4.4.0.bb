@@ -31,5 +31,3 @@ EXTRA_OEMESON:append = " \
     -Dtests=false \
     -Dgtktsm=false \
 "
-
-BBCLASSEXTEND = "native nativesdk"
