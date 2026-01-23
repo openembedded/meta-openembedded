@@ -1,0 +1,25 @@
+From 10ddc1ee660ed5ee4d9aa21f751eb07a1b260b6c Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Fri, 23 Jan 2026 13:49:53 +0100
+Subject: [PATCH] lower setuptools requirements
+
+Scarthgap ships with version 69.1.1 - adjust the requirements for that.
+
+Upstream-Status: Inappropriate [specific to OE LTS versions]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 4635d0e..319b261 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,6 @@
+ [build-system]
+ requires = [
+-    "setuptools>=75.8.1; python_version >= '3.9'",
++    "setuptools>=69.0.0; python_version >= '3.9'",
+     "setuptools<75.4.0; python_version < '3.9'",
+ ]
+ build-backend = "setuptools.build_meta"
