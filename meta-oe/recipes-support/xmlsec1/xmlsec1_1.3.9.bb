@@ -33,7 +33,7 @@ inherit autotools-brokensep ptest pkgconfig
 #CFLAGS += "-I${STAGING_INCDIR}/nss3"
 #CPPFLAGS += "-I${STAGING_INCDIR}/nss3"
 
-PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
+PACKAGECONFIG ??= "gnutls libgcrypt nss openssl"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
 PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},--with-nss=no --with-nspr=no,nss nspr"
