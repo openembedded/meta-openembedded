@@ -7,13 +7,9 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=118fecaa576ab51c1520f95e98db61ce"
 
-PYPI_PACKAGE = "Flask-Cors"
+PYPI_PACKAGE = "flask_cors"
 
-SRC_URI += " \
-        file://CVE-2024-6221.patch \
-"
-
-SRC_URI[sha256sum] = "f268522fcb2f73e2ecdde1ef45e2fd5c71cc48fe03cffb4b441c6d1b40684eb0"
+SRC_URI[sha256sum] = "493b98e2d1e2f1a4720a7af25693ef2fe32fbafec09a2f72c59f3e475eda61d2"
 
 inherit pypi setuptools3
 
