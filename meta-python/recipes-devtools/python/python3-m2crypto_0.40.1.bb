@@ -17,6 +17,7 @@ PYPI_PACKAGE = "M2Crypto"
 inherit pypi siteinfo setuptools3
 
 CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
+CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.40.1) contains the fix already"
 
 DEPENDS += "openssl swig-native"
 RDEPENDS:${PN} += "\
