@@ -61,4 +61,4 @@ PACKAGES =+ "${PN}-configs"
 
 FILES:${PN}-configs += "${docdir}"
 
-CVE_STATUS[2024-42861] = "disputed: Considered to be bogus by upstream and major distros"
+CVE_STATUS[CVE-2024-42861] = "disputed: Considered to be bogus by upstream and major distros"
