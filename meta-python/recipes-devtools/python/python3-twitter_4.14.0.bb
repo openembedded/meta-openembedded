@@ -17,3 +17,5 @@ RDEPENDS:${PN} += "\
     python3-requests-oauthlib \
     python3-six \
 "
+
+CVE_STATUS[CVE-2012-5825] = "fixed-version: The vulnerability has been fixed since v3.1.0"
