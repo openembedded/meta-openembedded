@@ -21,6 +21,8 @@ SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d
 
 inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
 
+CVE_STATUS[CVE-2025-46686] = "disputed: upstream rejected because mitigating it would affect other functionality"
+
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32 = "-latomic"
 FINAL_LIBS:mips = "-latomic"
