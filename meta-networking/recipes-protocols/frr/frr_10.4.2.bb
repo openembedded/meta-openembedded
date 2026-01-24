@@ -12,6 +12,9 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
 
 SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;tag=frr-${PV} \
            file://frr.pam \
+           file://CVE-2025-61099-61107-1.patch \
+           file://CVE-2025-61099-61107-2.patch \
+           file://CVE-2025-61099-61107-3.patch \
            "
 
 SRCREV = "642f65b9e5853c7207982a9cf8275732737d4e44"
