@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 DEPENDS = "glib-2.0 gtk+3 libxml2"
 
-inherit meson pkgconfig gobject-introspection features_check gtk-doc
+inherit gobject-introspection features_check gtk-doc gnomebase
 
-SRC_URI = "git://github.com/gedit-technology/libgedit-gtksourceview.git;protocol=https;branch=main"
-SRCREV = "eaafc892d033713c7c823d8ad602061e456b3c88"
+SRC_URI[archive.sha256sum] = "20c17ff89e2031aed5dc1107fe9a93fd50f92b569be2954b119c86f9e2fd85d6"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
@@ -21,3 +20,9 @@ do_install:prepend() {
 }
 
 FILES:${PN} += "${datadir}"
+
+# Most gnome projects have a verison like x.y.z, and they are stored in a folder called x.y
+# Not this one. This has x.y.z version, but stored in folder called x.
+# The original of this function is in gnomebase.bbclass.
+def gnome_verdir(v):
+    return v.split(".")[0]
