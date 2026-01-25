@@ -13,6 +13,7 @@ DEPENDS += "python3-setuptools-scm-native"
 SRC_URI += " \
         file://run-ptest \
         file://CVE-2025-64076.patch \
+        file://CVE-2025-68131.patch \
 "
 
 RDEPENDS:${PN}-ptest += " \
