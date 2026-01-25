@@ -49,6 +49,7 @@ PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
 PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no, perl"
 PACKAGECONFIG[smux] = ""
 PACKAGECONFIG[systemd] = "--with-systemd, --without-systemd"
+PACKAGECONFIG[aes] = "--enable-blumenthal-aes,"
 
 SYSCONTACT_DISTRO ?= "no-contact-set@example.com"
 
