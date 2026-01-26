@@ -4,16 +4,11 @@ high-performance, easy-to-use data structures and data analysis tools for \
 the Python programming language."
 HOMEPAGE = "https://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
-
-SRC_URI += " \
-            file://0001-pyproject.toml-don-t-pin-dependency-versions.patch \
-            file://0001-fix-reproducibility-issue.patch \
-            "
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e98642e1210ade884e5254ab18d55b7d"
 
 SRC_URI:append:class-target = " file://0001-BLD-add-option-to-specify-numpy-header-location.patch "
 
-SRC_URI[sha256sum] = "4f18ba62b61d7e192368b84517265a99b4d7ee8912f8708660fb4a366cc82667"
+SRC_URI[sha256sum] = "0facf7e87d38f721f0af46fe70d97373a37701b1c09f7ed7aeeb292ade5c050f"
 
 CVE_PRODUCT = "pandas"
 
