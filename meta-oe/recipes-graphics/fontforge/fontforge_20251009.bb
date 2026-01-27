@@ -7,35 +7,30 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro"
-DEPENDS:append:class-target = " libxi"
+DEPENDS:append:class-target = " gtkmm3"
 
 inherit cmake pkgconfig python3native python3targetconfig features_check gettext gtk-icon-cache mime mime-xdg
 
-REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-# tag 20220308
-SRCREV = "a1dad3e81da03d5d5f3c4c1c1b9b5ca5ebcfcecf"
-SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
+SRCREV = "c41bdb922285f35defd1e1385adfd13bde1ab32a"
+SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=${PV} \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
            file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
            file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
-           file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
-           file://CVE-2024-25081_CVE-2024-25082.patch \
 "
 
 EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
+
+# gui requires gtkmm3, which has no native version at the time of writing this comment
+EXTRA_OECMAKE:append:class-native = " -DENABLE_GUI=OFF"
+
 PACKAGECONFIG = "readline"
 PACKAGECONFIG[readline] = "-DENABLE_READLINE=ON,-DENABLE_READLINE=OFF,readline"
 
 CFLAGS += "-fno-strict-aliasing"
 LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
 BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
-
-#do_configure:prepend() {
-# uthash sources are expected in uthash/src
-#    mkdir -p ${S}/uthash/src
-#    cp ${STAGING_INCDIR}/ut*.h ${S}/uthash/src
-#}
 
 PACKAGES =+ "${PN}-python"
 
