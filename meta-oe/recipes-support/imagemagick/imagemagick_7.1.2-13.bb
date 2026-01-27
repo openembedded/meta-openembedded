@@ -4,8 +4,8 @@ HOMEPAGE = "https://www.imagemagick.org/"
 DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
 editing raster and vector image files. It can read and write over 200 image file formats."
 LICENSE = "ImageMagick"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2f9de66264141265b203cde9902819ea \
-                    file://NOTICE;md5=bcbf1f1897b40ec8df39700cb560e9ed"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1f56ade64cf079aff7232f7dbeaea992 \
+                    file://NOTICE;md5=3974428a57d34b981abb7acc416dde8f"
 # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
 
@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
            file://imagemagick-ptest.sh \
 "
 
-SRCREV = "bdd4fa561d7bf4c6afd40ee9c89e9f9e82b6e88b"
+SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
 
 inherit autotools pkgconfig update-alternatives ptest
 export ac_cv_sys_file_offset_bits = "64"
