@@ -1,9 +1,9 @@
 DESCRIPTION = "Provide XPath 1.0 and 2.0 selectors for Python's ElementTree XML data structures, both for the standard ElementTree library and for the lxml.etree library."
 HOMEPAGE = "https://github.com/sissaschool/elementpath"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9291d2ba8ccce92cf704b173e0dca725"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c04ab6ce886cc843af8941bb199406ba"
 
-SRC_URI[sha256sum] = "61618f64686ce73cf6f191b17298e2568e9a1763b125fc7f2cb796ad0eacfd1e"
+SRC_URI[sha256sum] = "c4d1bd6aed987258354d0ea004d965eb0a6818213326bd4fd9bde5dacdb20277"
 
 PYPI_PACKAGE = "elementpath"
 
