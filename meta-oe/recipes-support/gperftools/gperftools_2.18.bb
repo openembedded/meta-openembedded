@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "e1014dead2029b341d06027b4f2b5562d799d5b1"
-SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https"
+SRCREV = "6ed73507dd3970a123e267a50b3ee73392e3b053"
+SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https;tag=gperftools-${PV}"
 
 SRC_URI:append:libc-musl = " \
         file://ppc-musl.patch \
