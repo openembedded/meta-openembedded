@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=$
            file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
            file://CVE-2025-15279-1.patch \
            file://CVE-2025-15279-2.patch \
+           file://CVE-2025-15275.patch \
            "
 
 EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
