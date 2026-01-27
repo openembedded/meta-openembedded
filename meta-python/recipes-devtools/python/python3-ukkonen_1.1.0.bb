@@ -6,9 +6,8 @@ PYPI_PACKAGE = "ukkonen"
 
 inherit setuptools3
 
-PV = "1.0.1+git"
-SRC_URI += "git://github.com/asottile/ukkonen;protocol=https;branch=main"
-SRCREV = "ad108a16e8203867f4860287b61149e0bdd838ca"
+SRC_URI += "git://github.com/asottile/ukkonen;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "5fa9858f0997927d9f9c1794e1741fe8dbd4c1e8"
 DEPENDS += " \
 	python3-pip-native \
 	python3-cffi-native \
