@@ -1,11 +1,11 @@
 SUMMARY = "A top utility for I/O"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3154adaa1a9ca0d8dcc1944518ece1b9"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=26b36b714daebf72b11715ba73efbad4"
 
 DEPENDS = "ncurses"
 
 SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "c3366a8a235f9c8ddc4797625f22cfdf12ba2c36"
+SRCREV = "57890d671ba69ebc4a619a1cfe7d76cdd3d836a8"
 
 
 inherit pkgconfig
