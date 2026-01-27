@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "git://github.com/google/benchmark.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "eddb0241389718a23a42db6af5f0164b6e0139af"
+SRCREV = "192ef10025eb2c4cdd392bc502f0c852196baa48"
 
 EXTRA_OECMAKE = " \
     -DBUILD_SHARED_LIBS=yes \
