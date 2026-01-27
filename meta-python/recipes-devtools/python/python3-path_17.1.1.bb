@@ -1,8 +1,8 @@
 SUMMARY = "A module wrapper for os.path"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=141643e11c48898150daa83802dbc65f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1aeae65f25a15b1e46d4381f2f094e0a"
 
-SRC_URI[sha256sum] = "d41e05ed4fa1d4f6d702df3c1e0a1a255d7b544287432456455dc7c51e5f98e9"
+SRC_URI[sha256sum] = "2dfcbfec8b4d960f3469c52acf133113c2a8bf12ac7b98d629fa91af87248d42"
 
 SRC_URI += "\
     file://run-ptest \
@@ -10,7 +10,10 @@ SRC_URI += "\
 
 inherit pypi python_setuptools_build_meta ptest
 
-DEPENDS += "python3-setuptools-scm-native"
+DEPENDS += " \
+    python3-setuptools-scm-native \
+    python3-coherent-licensed-native \
+"
 
 RDEPENDS:${PN} += " \
     python3-appdirs \
@@ -22,6 +25,7 @@ RDEPENDS:${PN} += " \
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
     python3-unittest-automake-output \
+    python3-more-itertools \
 "
 
 BBCLASSEXTEND = "nativesdk native"
