@@ -4,7 +4,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 
-DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp"
+DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp virtual/libiconv"
 
 DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
 
@@ -13,12 +13,13 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
            file://0002-flex-Remove-line-directives.patch \
            file://0004-lemon-Remove-line-directives.patch \
            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
-           file://CVE-2025-9817.patch \
            "
+
+SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-build.patch"
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
 
-SRC_URI[sha256sum] = "098177f021951638f5bdca5b01f284c14fcc3f6c804f7aa2ca00fdcb99c7a166"
+SRC_URI[sha256sum] = "9fa6a745df8540899dc9d433e4634d6755371ff87bd722ce04c7d7b0132d9af3"
 
 PE = "1"
 
@@ -59,16 +60,19 @@ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
                   -DM_INCLUDE_DIR=${includedir} \
                   -DM_LIBRARY=${libdir} \
                  "
+
+# use lemon from ${PN}-native, instead of cross-compiled or host versions
+EXTRA_OECMAKE:append:class-target = " -DLEMON_EXECUTABLE=${STAGING_BINDIR_NATIVE}/lemon"
 CFLAGS:append = " -lm"
 
 do_compile:append:class-target() {
     # Fix TMPDIR, these are in the comments section
     sed -i -e "s:** source file.*::g"  ${B}/wiretap/ascend_parser.c
-    sed -i -e "s:** source file.*::g"  ${B}/wiretap/candump_parser.c
     sed -i -e "s:** source file.*::g"  ${B}/wiretap/busmaster_parser.c
     sed -i -e "s:** source file.*::g"  ${B}/epan/protobuf_lang_parser.c
-    sed -i -e "s:** source file.*::g"  ${B}/epan/dtd_grammar.c
     sed -i -e "s:** source file.*::g"  ${B}/epan/dfilter/grammar.c
+    test -e ${B}/plugins/epan/mate/mate_grammar.c && \
+        sed -i -e "s:** source file.*::g"  ${B}/plugins/epan/mate/mate_grammar.c
 }
 
 do_install:append:class-native() {
