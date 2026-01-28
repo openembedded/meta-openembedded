@@ -7,20 +7,14 @@ SECTION = "utils"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e8feb78a32950a909621bbb51f634b39"
 
-DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman udev libinput cairo"
+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman udev libinput cairo libxkbcommon"
 
-PV = "2.14+git"
-SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master \
+GITTAG = "${PN}-${PV}-1"
+SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master;tag=${GITTAG} \
            file://fix-preprocessor.patch \
            file://support-jpeg-turbo.patch \
-           file://fbida-gcc10.patch \
-           file://0001-meson.build-install-fbgs-shell-script.patch \
-           file://0002-meson.build-add-features-options-for-png-gif-tiff-we.patch \
-           file://0003-meson.build-do-not-require-xkbcommon.patch \
-           file://0001-meson.build-make-fbpdf-build-optional.patch \
-           file://0001-fbida-Include-missing-sys-types.h.patch \
 "
-SRCREV = "eb769e3d7f4a073d4c37ed524ebd5017c6a578f5"
+SRCREV = "a0d75fbab3ea01bf5b36f813f0ec0d1bfa2db745"
 
 inherit meson pkgconfig features_check
 
