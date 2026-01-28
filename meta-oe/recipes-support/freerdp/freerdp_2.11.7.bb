@@ -115,6 +115,7 @@ python populate_packages:prepend () {
 }
 
 CVE_STATUS[CVE-2024-32662] = "fixed-version: 2.x is not affected, bug was introduced in 3.0.0"
+CVE_STATUS[CVE-2025-68118] = "not-applicable-platform: Windows-only vulnerability"
 
 # avoid http://errors.yoctoproject.org/Errors/Details/852862/
 # fixed in freerdp3 with https://github.com/FreeRDP/FreeRDP/pull/10553
