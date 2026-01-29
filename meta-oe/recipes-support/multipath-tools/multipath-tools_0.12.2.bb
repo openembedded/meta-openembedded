@@ -49,7 +49,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRCREV = "a1f7f3d5b4972c39e8950c722a04c21a9e030a31"
+SRCREV = "5bd1163d187520b958d78b85c7b239561dc86192"
 
 
 inherit systemd pkgconfig
