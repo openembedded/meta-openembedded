@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
 DEPENDS = "json-c libnvme"
-SRCREV = "71fa5d9310d6b41a69e844593423ac91b1453472"
+SRCREV = "faf7326a2997dea91687fd3daa17fc405910a4c1"
 
-SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https;tag=v${PV}"
 
 inherit bash-completion meson pkgconfig systemd
 
