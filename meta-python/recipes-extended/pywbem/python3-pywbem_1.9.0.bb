@@ -16,15 +16,16 @@ HOMEPAGE = "https://pywbem.github.io"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI[sha256sum] = "d1f0a2ebd4ffedef8d067af3855216db5190c7f6f27c8d2dcd467e09701c90b0"
+SRC_URI[sha256sum] = "65c1ff972cea2f017b06795f47c0ad7442f8434ff643a544050c10726704f6ab"
 
-inherit pypi setuptools3 update-alternatives
+inherit pypi python_setuptools_build_meta update-alternatives
 
 DEPENDS += " \
     python3-ply-native \
     python3-pyyaml-native \
     python3-six-native \
     python3-wheel-native \
+    python3-setuptools-scm-native \
 "
 
 RDEPENDS:${PN} += "\
