@@ -7,11 +7,10 @@ LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=36964f044224efeedd694983c34e716f"
 
 SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master \
-           file://0001-crypt.h-Remove-register-keyword.patch \
            file://run-ptest \
 "
 
-SRCREV = "55db144e03027b43263e5ebcb599bf0878ba58de"
+SRCREV = "f3ed731e27a97e30dffe076ed5e0537daae5c1bd"
 
 
 RCONFLICTS:${PN} += "minizip"
