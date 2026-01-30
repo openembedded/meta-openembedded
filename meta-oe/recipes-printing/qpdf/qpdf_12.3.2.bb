@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 DEPENDS = "zlib jpeg ${@bb.utils.contains('PACKAGECONFIG', 'gnutls', 'gnutls', 'openssl', d)}"
 
 SRC_URI = "git://github.com/qpdf/qpdf.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "e1af26a3a76336113e3fc9061df32d7a58eb7469"
+SRCREV = "a898bb3a7289d1d05789d6d3f0d5dd534943a8da"
 
 inherit cmake pkgconfig gettext
 
