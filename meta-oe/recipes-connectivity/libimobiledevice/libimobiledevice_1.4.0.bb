@@ -6,13 +6,10 @@ LIC_FILES_CHKSUM = "\
 "
 HOMEPAGE = "http://www.libimobiledevice.org/"
 
-DEPENDS = "libplist usbmuxd libusbmuxd libtasn1 gnutls libgcrypt libimobiledevice-glue openssl"
+DEPENDS = "libplist usbmuxd libusbmuxd libtasn1 gnutls libgcrypt libimobiledevice-glue openssl libtatsu"
 
-PV = "1.3.0+git"
-
-SRCREV = "860ffb707af3af94467d2ece4ad258dda957c6cd"
-SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master \
-           file://0001-include-unistd.h-for-usleep.patch"
+SRCREV = "149f7623c672c1fa73122c7119a12bfc0012f2ac"
+SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master;tag=${PV}"
 
 inherit autotools pkgconfig
 
