@@ -10,17 +10,19 @@ LIC_FILES_CHKSUM = " \
     file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
 "
 
+PROTOC_VERSION = "v${@d.getVar('PV').split('.', 1)[1]}"
+PROTOC_BRANCH = "${@d.getVar('PV').split('.', 2)[1]}.x"
+
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "74211c0dfc2777318ab53c2cd2c317a2ef9012de"
+SRCREV = "b6f9284da830b69be787732ffdaa35049d20a088"
 
-SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=31.x;protocol=https \
+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH};protocol=https;tag=${PROTOC_VERSION} \
            file://run-ptest \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
            file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
            "
-SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d\.\d+\.\d+)"
 
@@ -70,6 +72,7 @@ do_compile_ptest() {
 	# Adapt uf8_range.pc
 	cp "${B}/third_party/utf8_range/utf8_range.pc" "${B}/${TEST_SRC_DIR}/utf8_range.pc"
 	sed -e 's|libdir=|libdir=${PKG_CONFIG_SYSROOT_DIR}|' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
+	sed -e 's|includedir=.*|includedir=${S}/third_party/utf8_range|' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
 	sed -e 's|Libs:|Libs= -L${B}/third_party/utf8_range |' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
 	# Until out-of-tree build of examples is supported, we have to use this approach
 	sed -e 's|../src/google/protobuf/.libs/timestamp.pb.o|${B}/CMakeFiles/libprotobuf.dir/src/google/protobuf/timestamp.pb.cc.o|' -i "${B}/${TEST_SRC_DIR}/Makefile"
