@@ -4,7 +4,9 @@ SECTION = "libs"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2"
+SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2 \
+           file://CVE-2024-36600.patch \
+           "
 
 SRC_URI[sha256sum] = "6f8fbdf4d189cf63f2a7a1549c516cd720c7b222c7aaadbc924a26e745a48539"
 
