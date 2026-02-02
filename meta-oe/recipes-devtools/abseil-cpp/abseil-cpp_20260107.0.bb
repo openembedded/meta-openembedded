@@ -21,6 +21,7 @@ inherit cmake
 EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
                  -DBUILD_TESTING=OFF    \
                  -DABSL_ENABLE_INSTALL=ON \
+                 -DCMAKE_CXX_STANDARD=17 \
                 "
 #  riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_store_8
 #  >>> referenced by <recipe-sysroot>/usr/lib/libabsl_flags_internal.so.2505.0.0 (disallowed by --no-allow-shlib-undefined)
