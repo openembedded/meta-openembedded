@@ -1,13 +1,14 @@
 SUMMARY = "Gedit Technology - Source code editing widget"
 SECTION = "gnome"
 LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=310c7c93cf5181c6b0cc8229a1f3c6f6"
 
 DEPENDS = "glib-2.0 gtk+3 libxml2"
 
 inherit gobject-introspection features_check gtk-doc gnomebase
 
-SRC_URI[archive.sha256sum] = "20c17ff89e2031aed5dc1107fe9a93fd50f92b569be2954b119c86f9e2fd85d6"
+SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gtksourceview.git;protocol=https;branch=main"
+SRCREV = "a7bdc39f9fbc10c49ea7468ac1e5bf77385da0c0"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
