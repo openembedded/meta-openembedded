@@ -60,6 +60,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
            file://0002-meson.build-reproducibility-fix.patch \
            file://0001-meson.build-dont-check-for-lgi.patch \
            file://0001-meson.build-require-iso-codes-native.patch \
+           file://0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch \
            "
 SRC_URI[sha256sum] = "feb498acc01b26827cff1ff95aa8fb82cdd6a60d7abf773cfcd19abeafca3386"
 
