@@ -60,6 +60,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-parse \
     python3-parse-type \
     python3-parsimonious \
+    python3-pendulum \
     python3-platformdirs \
     python3-polyline \
     python3-portalocker \
