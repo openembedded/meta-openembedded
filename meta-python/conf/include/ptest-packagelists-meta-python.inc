@@ -130,6 +130,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-arrow \
     python3-django \
     python3-ecdsa \
+    python3-faker \
     python3-fastapi \
     python3-google-auth \
     python3-lz4 \
