@@ -21,6 +21,8 @@ RPROVIDES:${PN} = "virtual-redis"
 
 inherit pkgconfig update-rc.d systemd useradd
 
+TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
+
 FINAL_LIBS:x86:toolchain-clang = "-latomic"
 FINAL_LIBS:riscv32 = "-latomic"
 FINAL_LIBS:mips = "-latomic"
