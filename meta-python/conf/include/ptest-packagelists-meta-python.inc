@@ -105,6 +105,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-starlette \
     python3-tblib \
     python3-tenacity \
+    python3-tokenize-rt \
     python3-tomli-w \
     python3-tomlkit \
     python3-trustme \
