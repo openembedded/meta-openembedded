@@ -138,6 +138,7 @@ PTESTS_SLOW_META_PYTHON = "\
     python3-google-auth \
     python3-lz4 \
     python3-marshmallow \
+    python3-orjson \
     python3-pillow \
     python3-pint \
     python3-pykickstart \
