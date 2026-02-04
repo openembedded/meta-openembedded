@@ -8,8 +8,8 @@ LICENSE = "LGPL-3.0-only & MIT"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
-SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
-SRCREV = "17bb8d9fcea62db8cdeb0fc7ef8d15dbd19a22e4"
+SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "7ba65889d3d6d8a0d99b5360b028243ba843be3a"
 
 
 inherit cmake pkgconfig
