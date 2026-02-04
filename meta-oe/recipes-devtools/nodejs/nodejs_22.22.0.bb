@@ -133,8 +133,6 @@ python do_create_v8_qemu_wrapper () {
 do_create_v8_qemu_wrapper[dirs] = "${B}"
 addtask create_v8_qemu_wrapper after do_configure before do_compile
 
-LDFLAGS:append:x86 = " -latomic"
-
 export CC_host
 export CFLAGS_host
 export CXX_host
