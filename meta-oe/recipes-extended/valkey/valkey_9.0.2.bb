@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=$
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            "
-SRCREV = "ab3c953b80289d88991095f53c1235fc2f8b44d6"
+SRCREV = "1ac4cfe4c877a6cb8cb2e28fa7094055ac06f64b"
 
 RPROVIDES:${PN} = "virtual-redis"
 
@@ -46,6 +46,11 @@ do_compile() {
 }
 
 do_install() {
+    # Remove debug paths to avoid TMPDIR [buildpaths] errors
+    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-benchmark
+    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-server
+    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-cli
+
     export PREFIX=${D}/${prefix}
     oe_runmake install
     install -d ${D}/${sysconfdir}/valkey
@@ -65,6 +70,7 @@ do_install() {
     fi
 }
 
+
 CONFFILES:${PN} = "${sysconfdir}/valkey/valkey.conf"
 
 INITSCRIPT_NAME = "valkey-server"
@@ -73,3 +79,5 @@ INITSCRIPT_PARAMS = "defaults 87"
 SYSTEMD_SERVICE:${PN} = "valkey.service"
 
 CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
+
+INSANE_SKIP:${PN} = "already-stripped"
