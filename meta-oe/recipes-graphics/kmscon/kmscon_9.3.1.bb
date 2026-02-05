@@ -19,17 +19,13 @@ DEPENDS = "\
     udev \
 "
 
-SRC_URI = "\
-    git://github.com/kmscon/kmscon;branch=main;protocol=https \
-    file://0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch \
-"
-SRCREV = "7d46650dbb0826f9b89de42f879be879391c14fd"
+SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "e44ff728e51c5a38b56392abe9bc3e8306db86cc"
 
 inherit meson pkgconfig systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
 
-PACKAGECONFIG[backspace_sends_delete] = "-Dbackspace_sends_delete=true, -Dbackspace_sends_delete=false"
 PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
 PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
 PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
@@ -61,9 +57,9 @@ do_install:append() {
     fi
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', d)}; then
+        mv ${D}${sysconfdir}/kmscon/kmscon.conf.example ${D}${sysconfdir}/kmscon/kmscon.conf
         sed -e "s@#drm@drm@g" \
             -e "s@#hwaccel@hwaccel@g" \
-            -e "s@#render-engine=gltex@render-engine=gltex@g" \
             -i ${D}${sysconfdir}/kmscon/kmscon.conf
     fi
 }
