@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
-SRCREV_opcua = "95dc4c1e9c8c4d3619f90b9c3fc3af194acb8b30"
+SRCREV_opcua = "45e4cd3ef6c79a8e503d37c9f5c89fefe90d99db"
 SRCREV_mdnsd = "488d24fb9d427aec77df180268f0291eeee7fb8b"
 SRCREV_ua-nodeset = "d1bb6a22125bd7cd986272b1ee98a18a91d76fff"
 SRCREV_mqtt-c = "0f4c34c8cc00b16cfee094745d68b8cdbaecd8e0"
@@ -18,7 +18,6 @@ SRC_URI = " \
     git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mdnsd \
     git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=latest;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/ua-nodeset \
     git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mqtt-c \
-    file://a725a263124ae8c87fe6af34a9b3a7981b7f116d.patch \
 "
 
 
@@ -36,9 +35,10 @@ FILES:${PN} = "${libdir}/lib*${SOLIBS}"
 PACKAGES += "${PN}-tools"
 FILES:${PN}-tools = "${datadir}/${BPN}/*"
 
-PACKAGECONFIG ?= "encryption-mbedtls pubsub pubsub-eth pubsub-informationmodel subscriptions subscriptions-events namespace-full"
+PACKAGECONFIG ?= "encryption-mbedtls historizing pubsub pubsub-eth pubsub-informationmodel subscriptions subscriptions-events namespace-full"
 PACKAGECONFIG[encryption-mbedtls] = "-DUA_ENABLE_ENCRYPTION=MBEDTLS, , mbedtls, , , encryption-openssl"
 PACKAGECONFIG[encryption-openssl] = "-DUA_ENABLE_ENCRYPTION=OPENSSL, , openssl, , , encryption-mbedtls"
+PACKAGECONFIG[historizing] = "-DUA_ENABLE_HISTORIZING=ON, -DUA_ENABLE_HISTORIZING=OFF"
 PACKAGECONFIG[multithreading] = "-DUA_MULTITHREADING=100, -DUA_MULTITHREADING=0"
 PACKAGECONFIG[namespace-full] = "-DUA_NAMESPACE_ZERO=FULL, , , , , namespace-reduced"
 PACKAGECONFIG[namespace-reduced] = "-DUA_NAMESPACE_ZERO=REDUCED, , , , , namespace-full"
