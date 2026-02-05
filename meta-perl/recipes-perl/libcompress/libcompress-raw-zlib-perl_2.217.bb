@@ -6,11 +6,11 @@ HOMEPAGE = "https://metacpan.org/release/Compress-Raw-Zlib"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=17;md5=a57e80ea8cb4e0305995c08035c77138"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=17;md5=000093d18bfdd0ac3594d80b6e055cec"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Zlib-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "5eea0c05c7b01dc93b620f04c89176eefb5002586ca0bebae3b8c2e70920e62e"
+SRC_URI[sha256sum] = "48309aa25f126365a3c14f49b4e90da56d29d3c00506c7e7c3b724f6df0684c8"
 
 DEPENDS += "zlib"
 
