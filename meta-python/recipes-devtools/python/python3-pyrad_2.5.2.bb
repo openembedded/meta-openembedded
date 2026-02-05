@@ -1,14 +1,10 @@
 SUMMARY = "RADIUS tools"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=53dbfa56f61b90215a9f8f0d527c043d"
 
 PYPI_PACKAGE = "pyrad"
-SRC_URI[sha256sum] = "057de4b7e89d8da57ba782c1bde45c63ebee720ae2c0b0a69beaff15c47e30d9"
-
-SRC_URI += "file://use-poetry-core.patch \
-            file://208.patch \
-            "
+SRC_URI[sha256sum] = "368e8d3cb7b9e2ca9e4357b343787238bf135edd3f3598cf26ccd65d32506ff9"
 
 inherit pypi python_poetry_core
 
