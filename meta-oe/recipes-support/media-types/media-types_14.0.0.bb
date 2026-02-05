@@ -35,5 +35,7 @@ INHIBIT_DEFAULT_DEPS = "1"
 
 # Debian used to have mime-support package which was media-types and
 # mailcap recipes in one.
-PROVIDES += "mime-support"
-RDEPENDS:mime-support = "mailcap"
+PACKAGES += "mime-support"
+RPROVIDES:${PN} += "mime-support"
+RDEPENDS:mime-support += "${PN} mailcap"
+ALLOW_EMPTY:mime-support = "1"
