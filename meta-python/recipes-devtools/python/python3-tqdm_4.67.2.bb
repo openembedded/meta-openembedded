@@ -3,9 +3,9 @@ HOMEPAGE = "https://tqdm.github.io/"
 SECTION = "devel/python"
 
 LICENSE = "MIT & MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=42dfa9e8c616dbc295df3f58d756b2a1"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=9a9bed097dea538bf341c8623c8f8852"
 
-SRC_URI[sha256sum] = "f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2"
+SRC_URI[sha256sum] = "649aac53964b2cb8dec76a14b405a4c0d13612cb8933aae547dd144eacc99653"
 
 CVE_PRODUCT = "tqdm"
 
