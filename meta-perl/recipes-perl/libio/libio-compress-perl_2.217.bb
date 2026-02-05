@@ -14,11 +14,11 @@ HOMEPAGE = "https://metacpan.org/release/IO-Compress"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=6af707e7b2ec1d8f995b973c427fb244"
+LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=a05fdd79b87a410b6178b73126ffafdd"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "0cfbc4b4ac9b28f7cbf22f114e09c9a49ace9e0b6c3778432afa2cde55512d69"
+SRC_URI[sha256sum] = "4d075e04eeef3c451f5e7f572ebd695738bad033e8cd32cf519c68edb3f39dc7"
 
 S = "${UNPACKDIR}/IO-Compress-${PV}"
 
