@@ -8,11 +8,11 @@ HOMEPAGE = "https://github.com/scikit-hep/vector"
 BUGTRACKER = "https://github.com/scikit-hep/vector/issues"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2963f0dc7a24919505850460dd1a785b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b9f683a957276148387db50971a7b3ef"
 
 DEPENDS += "python3-hatch-vcs-native"
 
-SRC_URI[sha256sum] = "8b05ea2953322c74c49d2af180f7eac73ad0aa3d4c391cab896175ec4fa3d642"
+SRC_URI[sha256sum] = "58f95e9e24463851ca34176a20df2fd2e80b41d78615e5b1f7ae4bf313424ca6"
 
 inherit pypi python_hatchling
 
