@@ -821,8 +821,8 @@ RDEPENDS:packagegroup-meta-oe-support = "\
     lvm2 \
     mailcap \
     mbuffer \
+    media-types \
     mg \
-    mime-support \
     minini \
     monit \
     mscgen \
