@@ -12,7 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.10;protocol=https;tag=v${PV}"
 
-SRCREV = "2b1f913f4aa6b88d63d9ce9302c61cb0e39483f6"
+SRCREV = "c2d3cbafebe00be3221f985c06ef6b97f1c63790"
 
 FILES:${PN} += "${libdir}/xorg/modules/*"
 FILES:${PN}-staticdev += " \
