@@ -11,11 +11,7 @@ inherit cmake
 
 EXTRA_OECMAKE = "-Dglaze_BUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF -Dglaze_ENABLE_FUZZING=OFF -Dglaze_DEVELOPER_MODE=OFF"
 
-do_install:append() {
-    install -d ${D}${datadir}/cmake/${BPN}
-    mv -f ${D}${datadir}/${BPN}/*.cmake ${D}${datadir}/cmake/${BPN}
-    rmdir -p --ignore-fail-on-non-empty ${D}${datadir}/${BPN}
-}
+FILES:${PN}-dev += "${datadir}/${BPN}/*.cmake"
 
 # Glaze is a header-only C++ library, so the main package will be empty.
 ALLOW_EMPTY:${PN} = "1"
