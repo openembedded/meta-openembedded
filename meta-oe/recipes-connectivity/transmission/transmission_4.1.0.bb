@@ -2,23 +2,20 @@ DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
 SECTION = "network"
 HOMEPAGE = "https://transmissionbt.com/"
 LICENSE = "MIT & GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d54f298b276b8cc5f20168e43a0e8103"
 
 DEPENDS = "curl libevent libpsl gnutls openssl libtool intltool-native glib-2.0-native"
 RDEPENDS:${PN}-web = "${PN}"
 
 SRC_URI = " \
-	gitsm://github.com/transmission/transmission;branch=4.0.x;protocol=https \
-	file://0001-build-bump-CMake-version-to-3.10-4.patch;patchdir=third-party/dht \
+	gitsm://github.com/transmission/transmission;branch=4.1.x;protocol=https;tag=${PV} \
 	file://0001-bump-cmake-to-3.10.patch;patchdir=third-party/libb64 \
 	file://0001-Increase-minimum-CMake-version-to-3.10.patch;patchdir=third-party/libdeflate \
-	file://0001-miniupnpc-bump-CMake-version-to-3.14.patch;patchdir=third-party/miniupnpc \
-	file://0001-build-set-minimum-required-CMake-to-3.5.patch;patchdir=third-party/libnatpmp \
 	file://transmission-daemon \
 "
 
-# Transmission release 4.0.6
-SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
+# Transmission release 4.1.0
+SRCREV = "272401184f0736e6063f9da90be7d037e907508a"
 
 
 inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
@@ -45,9 +42,9 @@ do_install:append() {
 	fi
 
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-		sed -i '/User=/c\User=${TRANSMISSION_USER}' ${S}/daemon/transmission-daemon.service
+		sed -i '/User=/c\User=${TRANSMISSION_USER}' ${B}/daemon/transmission-daemon.service
 		install -d ${D}${systemd_unitdir}/system
-		install -m 0644 ${S}/daemon/transmission-daemon.service ${D}${systemd_unitdir}/system
+		install -m 0644 ${B}/daemon/transmission-daemon.service ${D}${systemd_unitdir}/system
 	fi
 }
 
