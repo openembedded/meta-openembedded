@@ -7,6 +7,7 @@ inherit cmake
 
 DEPENDS += "ethtool \
             geoip \
+            libmaxminddb \
             librepo \
             libnet \
             libpcap \
@@ -20,11 +21,9 @@ DEPENDS += "ethtool \
 
 RDEPENDS:${PN} += "bash ethtool libgcc"
 
-SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
-           file://0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch \
-           file://0002-allow-build-with-cmake-4.patch"
+SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
+SRCREV = "41da65f4026a9e4cea928e61941b976d9279f508"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_SKIP_RPATH=TRUE \
