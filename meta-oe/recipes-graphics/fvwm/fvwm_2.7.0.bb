@@ -119,9 +119,6 @@ FILES:${PN}-doc = " \
     ${mandir} \
     ${datadir}/fvwm \
 "
-RDEPENDS:${PN} = " \
-    xuser-account \
-"
 RDEPENDS:${PN}-extra += "\
     perl \
     python3-core \

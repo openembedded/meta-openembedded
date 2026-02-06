@@ -19,7 +19,6 @@ DEPENDS = "intltool-native libx11 libxext libxt libxft libxi glib-2.0-native bc-
 # These are only needed as part of the stopgap screensaver implementation:
 RDEPENDS:${PN} = " \
     liberation-fonts \
-    xuser-account \
 "
 
 inherit systemd perlnative pkgconfig gettext autotools-brokensep features_check
