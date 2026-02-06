@@ -71,8 +71,9 @@ do_compile:append:class-target() {
     sed -i -e "s:** source file.*::g"  ${B}/wiretap/busmaster_parser.c
     sed -i -e "s:** source file.*::g"  ${B}/epan/protobuf_lang_parser.c
     sed -i -e "s:** source file.*::g"  ${B}/epan/dfilter/grammar.c
-    test -e ${B}/plugins/epan/mate/mate_grammar.c && \
-        sed -i -e "s:** source file.*::g"  ${B}/plugins/epan/mate/mate_grammar.c
+    if [ -f "${B}/plugins/epan/mate/mate_grammar.c" ]; then
+        sed -i -e 's:** source file.*::g' "${B}/plugins/epan/mate/mate_grammar.c"
+    fi
 }
 
 do_install:append:class-native() {
