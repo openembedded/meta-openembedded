@@ -81,6 +81,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pyasyncore \
     python3-pyroute2 \
     python3-pyserial \
+    python3-pytest-env \
     python3-pytest-httpx \
     python3-pytest-mock \
     python3-pytest-picked \
