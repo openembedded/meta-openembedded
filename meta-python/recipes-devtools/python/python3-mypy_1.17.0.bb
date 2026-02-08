@@ -20,5 +20,6 @@ DEPENDS += " \
 RDEPENDS:${PN} += " \
     python3-modules \
     python3-mypy-extensions \
+    python3-pathspec \
     python3-typing-extensions \
 "
