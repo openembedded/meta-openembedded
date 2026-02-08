@@ -19,6 +19,7 @@ RDEPENDS:${PN} += " \
     python3-profile \
     python3-threading \
     python3-typing-extensions \
+    python3-greenlet \
 "
 
 CVE_PRODUCT = "sqlalchemy"
