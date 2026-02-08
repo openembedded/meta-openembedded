@@ -124,7 +124,7 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
 PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
 PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
 PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,qcom-fastcv-binaries,"
+PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,"
 
 inherit pkgconfig cmake setuptools3-base python3native
 
@@ -171,7 +171,7 @@ python populate_packages:prepend () {
     fastcv_pkgs = ["libopencv-core", "libopencv-fastcv", "libopencv-imgproc"]
     if bb.utils.contains('PACKAGECONFIG', 'fastcv', True, False, d):
         for pkg in fastcv_pkgs:
-            d.appendVar('RDEPENDS:' + pkg, " qcom-fastcv-binaries")
+            d.appendVar('RRECOMMENDS:' + pkg, " qcom-fastcv-binaries")
 }
 
 PACKAGES_DYNAMIC += "^libopencv-.*"
