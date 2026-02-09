@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=htt
            file://run-ptest \
            file://0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch \
            file://0001-checkpoint.h-Add-missing-includes-cstdint.patch \
+           file://0001-Findzstd.cmake-support-pkg-config-based-zstd-detecti.patch \
           "
 
 SRC_URI:append:riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
