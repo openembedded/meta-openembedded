@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
            file://0001-Fixed-compilation-warnings-in-ainput-channel.patch \
            file://CVE-2024-32661.patch \
            file://CVE-2026-22854.patch \
+           file://CVE-2026-22855.patch \
            "
 
 
