@@ -43,6 +43,10 @@ do_install_ptest(){
     cp -r ${S}/tests ${D}${PTEST_PATH}
     sed -i 's,/usr/bin/env python,/usr/bin/env python3,' ${D}${PTEST_PATH}/tests/runtests.py
     ln -sr ${D}${libdir}/python3.*/site-packages/django ${D}${PTEST_PATH}/django
+
+    # make the top folder writable for all - django 6 creates a test db file in there
+    # with a test user
+    chmod 777 ${D}${PTEST_PATH}/tests
 }
 
 RDEPENDS:${PN}-ptest += " \
