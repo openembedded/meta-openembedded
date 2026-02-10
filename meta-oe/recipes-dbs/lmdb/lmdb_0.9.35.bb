@@ -8,14 +8,13 @@ HOMEPAGE = "https://symas.com/lightning-memory-mapped-database/"
 LICENSE = "OLDAP-2.8"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
 
-SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
+SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https;tag=LMDB_${PV} \
            file://run-ptest \
            file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
            file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
-           file://CVE-2026-22185.patch;striplevel=3 \
            "
 
-SRCREV = "ce201088de95d26fc0da36ba805bf2ddc2ba74ff"
+SRCREV = "69087ced3cb6082f7dcfb4fc2dcaa3b68a7e2e8c"
 
 inherit ptest
 
