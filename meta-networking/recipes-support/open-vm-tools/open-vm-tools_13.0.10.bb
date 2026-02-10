@@ -25,7 +25,7 @@ LICENSE:modules/freebsd/vmxnet = "GPL-2.0-only"
 LICENSE:modules/linux = "GPL-2.0-only"
 LICENSE:modules/solaris = "CDDL-1.0"
 
-SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=stable-13.0.x \
+SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=master;tag=stable-${PV} \
            file://tools.conf \
            file://vmtoolsd.service \
            file://vmtoolsd.init \
@@ -51,7 +51,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
 SRC_URI:append:libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.patch;patchdir=.. \
 "
 
-SRCREV = "fbc80ffbd226b4a61bb8ea1c9a682b5c7614e3fd"
+SRCREV = "f8fbcd0bf3b5869e2822542c398a51ddf7bd5f7a"
 
 S = "${UNPACKDIR}/${BP}/open-vm-tools"
 
