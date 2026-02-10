@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
            file://0002-Do-not-install-tools-a-CMake-targets.patch \
            file://0001-Fixed-compilation-warnings-in-ainput-channel.patch \
            file://CVE-2024-32661.patch \
+           file://CVE-2026-22854.patch \
            "
 
 
