@@ -46,11 +46,6 @@ do_compile() {
 }
 
 do_install() {
-    # Remove debug paths to avoid TMPDIR [buildpaths] errors
-    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-benchmark
-    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-server
-    sed -i -e 's#${TMPDIR}##g' ${S}/src/valkey-cli
-
     export PREFIX=${D}/${prefix}
     oe_runmake install
     install -d ${D}/${sysconfdir}/valkey
@@ -79,5 +74,3 @@ INITSCRIPT_PARAMS = "defaults 87"
 SYSTEMD_SERVICE:${PN} = "valkey.service"
 
 CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
-
-INSANE_SKIP:${PN} = "already-stripped"
