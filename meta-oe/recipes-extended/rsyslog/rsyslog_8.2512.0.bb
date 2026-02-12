@@ -149,11 +149,11 @@ do_install:append() {
     sed -i -e "s#@BINDIR@#${bindir}#g" ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'imjournal', 'true', 'false', d)}; then
-        install -d 0755 ${D}${sysconfdir}/rsyslog.d
+        install -d -m 0755 ${D}${sysconfdir}/rsyslog.d
         echo '$ModLoad imjournal' >> ${D}${sysconfdir}/rsyslog.d/imjournal.conf
     fi
     if ${@bb.utils.contains('PACKAGECONFIG', 'mmjsonparse', 'true', 'false', d)}; then
-        install -d 0755 ${D}${sysconfdir}/rsyslog.d
+        install -d -m 0755 ${D}${sysconfdir}/rsyslog.d
         echo '$ModLoad mmjsonparse' >> ${D}${sysconfdir}/rsyslog.d/mmjsonparse.conf
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
