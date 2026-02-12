@@ -32,6 +32,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-custom-env.patch \
            file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
            file://0001-fix-arm-Neon-intrinsics-types.patch \
+           file://0001-detect-aarch64-Neon-correctly.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
