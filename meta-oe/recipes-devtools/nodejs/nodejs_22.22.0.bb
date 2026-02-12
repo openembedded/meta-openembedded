@@ -31,6 +31,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-positional-args.patch \
            file://0001-custom-env.patch \
            file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
+           file://0001-fix-arm-Neon-intrinsics-types.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
@@ -45,10 +46,6 @@ S = "${UNPACKDIR}/node-v${PV}"
 
 # v8 errors out if you have set CCACHE
 CCACHE = ""
-
-# Use '-flax-vector-conversions' to permit conversions between vectors
-# with differing element types or numbers of subparts
-CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
 
 def map_nodejs_arch(a, d):
     import re
