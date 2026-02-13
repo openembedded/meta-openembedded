@@ -37,6 +37,8 @@ EXTRA_OECMAKE:class-target = " \
 	-DCMAKE_EXE_LINKER_FLAGS="-Wl,--enable-new-dtags" \
 "
 
+FILES:${PN}-dev += "${bindir}/wayland-scanner++"
+
 do_install:append:class-target() {
     sed -i -e 's|${S}||g' ${D}${libdir}/cmake/waylandpp/waylandpp-targets.cmake
     sed -i -e 's|${STAGING_DIR_HOST}||g' ${D}${libdir}/cmake/waylandpp/waylandpp-targets.cmake
