@@ -1,0 +1,42 @@
+From e0ee24698be52fdb9bb7b62d70f052044d4de62f Mon Sep 17 00:00:00 2001
+From: Yunguo Wei <yunguo.wei@windriver.com>
+Date: Tue, 17 Jan 2017 17:24:51 +0800
+Subject: [PATCH] Makefile: do not build signed efi image
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Yunguo Wei <yunguo.wei@windriver.com>
+---
+ Makefile | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index da209f6..df8c1e8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,11 +1,10 @@
+-EFIFILES = HelloWorld.efi LockDown.efi Loader.efi ReadVars.efi UpdateVars.efi \
+-	KeyTool.efi HashTool.efi SetNull.efi ShimReplace.efi
++EFIFILES = LockDown.efi
+ BINARIES = cert-to-efi-sig-list sig-list-to-certs sign-efi-sig-list \
+ 	hash-to-efi-sig-list efi-readvar efi-updatevar cert-to-efi-hash-list \
+ 	flash-var
+ 
+ ifeq ($(ARCH),x86_64)
+-EFIFILES += PreLoader.efi
++#EFIFILES += PreLoader.efi
+ endif
+ 
+ MSGUID = 77FA9ABD-0359-4D32-BD60-28F4E78F784B
+@@ -27,7 +26,7 @@ include Make.rules
+ 
+ EFISIGNED = $(patsubst %.efi,%-signed.efi,$(EFIFILES))
+ 
+-all: $(EFISIGNED) $(BINARIES) noPK.auth $(KEYAUTH) \
++all: $(EFIFILES) $(BINARIES) noPK.auth $(KEYAUTH) \
+ 	$(KEYUPDATEAUTH) $(KEYBLACKLISTAUTH) $(KEYHASHBLACKLISTAUTH)
+ 
+ 
+-- 
+2.25.1
+
