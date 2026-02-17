@@ -16,6 +16,7 @@ calls. This patch reverts the below linked commit.
 [1]: https://github.com/nodejs/node/commit/22e0d17097fa419cde5fcd5d648fe70aa9fb80e2
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Upstream-Status: Inappropriate [oe-specific]
 ---
  src/cares_wrap.cc | 24 ++++++++++++------------
  src/cares_wrap.h  | 35 ++++++++++++++++-------------------
