@@ -46,7 +46,7 @@ export SWIG_FEATURES
 
 export STAGING_DIR
 
-do_configure:prepend() {
+do_configure:prepend:class-target() {
     # workaround for https://github.com/swiftlang/swift/issues/69311
     sed -i "/sys\/types.h/d" ${RECIPE_SYSROOT}${includedir}/openssl/e_os2.h
 }
