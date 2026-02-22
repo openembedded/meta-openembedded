@@ -78,3 +78,6 @@ FILES:${PN}-dbg += "${libdir}/dovecot/*/.debug"
 
 # CVE-2016-4983 affects only postinstall script on specific distribution
 CVE_CHECK_IGNORE += "CVE-2016-4983"
+
+# cpe-incorrect: The current version (2.3.14) is not affected.
+CVE_CHECK_IGNORE += "CVE-2025-30189"
