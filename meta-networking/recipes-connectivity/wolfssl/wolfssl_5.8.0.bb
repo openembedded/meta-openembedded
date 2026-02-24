@@ -16,6 +16,7 @@ SRC_URI = " \
     git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
     file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch \
     file://run-ptest \
+    file://CVE-2025-13912.patch \
 "
 
 SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
