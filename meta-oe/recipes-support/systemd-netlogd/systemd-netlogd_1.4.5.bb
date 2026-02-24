@@ -3,8 +3,8 @@ SUMMARY = "Forwards messages from the journal to other hosts over the network us
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL2.1;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/systemd/systemd-netlogd.git;protocol=https;branch=main"
-SRCREV = "b03cc3b1a75048c7cf19467d8918a4b7320767e6"
+SRC_URI = "git://github.com/systemd/systemd-netlogd.git;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "20534091417686d1185acb3f29e93944d8663c4b"
 
 inherit meson systemd pkgconfig useradd features_check
 
