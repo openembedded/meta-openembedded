@@ -13,4 +13,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnom
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-gnome][scarthgap][PATCH'
 
-Layer maintainer: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Anuj Mittal <anuj.mittal@oss.qualcomm.com>

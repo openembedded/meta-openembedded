@@ -24,7 +24,7 @@ with '[meta-initramfs][scarthgap]' in the subject.
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][scarthgap][PATCH'
 
-Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
+Layer maintainer: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 
 
 License

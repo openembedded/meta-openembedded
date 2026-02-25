@@ -78,7 +78,7 @@ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
 When sending single patches, please using something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][scarthgap][PATCH'
 
-Layer maintainers: Armin Kuster <akuster808@gmail.com>
+Layer maintainers: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
     
 
 License
