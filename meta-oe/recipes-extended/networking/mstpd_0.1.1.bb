@@ -1,14 +1,12 @@
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4325afd396febcb659c36b49533135d4"
 
-PV = "0.1.0+git"
-
 SRC_URI = " \
-    git://github.com/mstpd/mstpd;branch=master;protocol=https \
+    git://github.com/mstpd/mstpd;branch=master;protocol=https;tag=${PV} \
     file://bridge-stp \
     file://mstpd.service \
 "
-SRCREV = "181c453fc1a00573e19f14960dcc54ad84beea7c"
+SRCREV = "d7dd987b101f277bfef8ac71de7c1d962a424e8e"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+){2,})"
 
