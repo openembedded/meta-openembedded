@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://L
 DEPENDS = " \
     glib-2.0-native \
     openssl \
-    freerdp \
+    freerdp3 \
     gtk+3 \
     gdk-pixbuf \
     atk \
@@ -26,13 +26,19 @@ DEPENDS = " \
 DEPENDS:append:libc-musl = " libexecinfo"
 LDFLAGS:append:libc-musl = " -lexecinfo"
 
-SRCREV = "17cf7956b9f925fa788083a2db8d5e669f86bfaf"
-SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master"
+SRCREV = "7be0cf2348d149c6bf5bd882fe91d3bec7d6aebb"
+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master;tag=v${PV}"
 
 inherit cmake features_check mime mime-xdg gtk-icon-cache pkgconfig
 REQUIRED_DISTRO_FEATURES = "x11"
 
-EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF -DHAVE_LIBAPPINDICATOR=OFF -DWITH_WEBKIT2GTK=OFF"
+EXTRA_OECMAKE += "\
+    -DWITH_APPINDICATOR=OFF \
+    -DWITH_GETTEXT=OFF \
+    -DWITH_TRANSLATIONS=OFF \
+    -DHAVE_LIBAPPINDICATOR=OFF \
+    -DWITH_WEBKIT2GTK=OFF \
+    -DWITH_FREERDP3=ON"
 
 PACKAGECONFIG[spice] = "-DWITH_SPICE=ON, -DWITH_SPICE=OFF, spice spice-protocol"
 # Switch on gtk support in avahi recipe if you want to enable avahi support
