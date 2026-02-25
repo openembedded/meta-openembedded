@@ -36,6 +36,4 @@ git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-pr
 Maintenance
 -------------------------
 
-Layer maintainers:
-        Tim "moto-timo" Orling <TicoTimo@gmail.com>
-        Derek Straka <derek@asterius.io>
+Layer maintainers: Anuj Mittal <anuj.mittal@oss.qualcomm.com>

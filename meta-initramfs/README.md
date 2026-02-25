@@ -24,8 +24,7 @@ with '[meta-initramfs]' in the subject.
 When sending single patches, please use something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][wrynose][PATCH'
 
-Interim layer maintainer: Khem Raj <raj.khem@gmail.com>
-
+Layer maintainer: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 
 License
 -------

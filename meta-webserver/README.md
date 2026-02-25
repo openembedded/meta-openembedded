@@ -57,8 +57,7 @@ When sending single patches, please use something like:
 git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-webserver][wrynose][PATCH"
 ```
 
-Layer maintainer: Derek Straka <derek@asterius.io>
-
+Layer maintainer: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 
 License
 -------

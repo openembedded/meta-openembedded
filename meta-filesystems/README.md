@@ -24,7 +24,7 @@ Please submit any patches against the filesystems layer to the
 OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
 with '[meta-filesystems]' in the subject.
 
-Layer maintainer: Khem Raj <raj.khem@gmail.com>
+Layer maintainer: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 
 When sending single patches, please use something like:
 
