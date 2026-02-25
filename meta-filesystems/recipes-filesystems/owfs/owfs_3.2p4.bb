@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628b867016631792781a8735a04760e5 \
                     file://COPYING.LIB;md5=9021b7435efdd9fb22beef8291134099"
 
 DEPENDS = "fuse virtual/libusb0"
-# v3.2p3
-SRCREV = "3744375dfaa350e31c9b360eb1e1a517bbeb5c47"
-SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https \
+
+SRCREV = "c68deb1fc6d30fcc5eabe0a0d9c9dc2ca54e455a"
+SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https;tag=v${PV} \
            file://0001-Add-build-rule-for-README.patch \
-           file://0001-Fix-compilation-with-GCC10.patch \
            file://owhttpd \
            file://owserver \
            "
