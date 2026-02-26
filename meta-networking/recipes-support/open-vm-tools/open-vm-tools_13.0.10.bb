@@ -120,6 +120,6 @@ python() {
         raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
 }
 
-CVE_PRODUCT = "open-vm-tools vmware:tools"
+CVE_PRODUCT = "open-vm-tools vmware:tools vmware:open_vm_tools"
 CVE_STATUS[CVE-2014-4199] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
 CVE_STATUS[CVE-2014-4200] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
