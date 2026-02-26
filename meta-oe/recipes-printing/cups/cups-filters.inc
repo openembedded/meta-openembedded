@@ -13,6 +13,7 @@ SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.
            file://CVE-2025-57812.patch \
            file://CVE-2025-64524.patch \
            file://CVE-2023-24805.patch \
+           file://CVE-2025-64503.patch \
            "
 
 inherit autotools-brokensep gettext pkgconfig
