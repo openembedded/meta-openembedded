@@ -12,7 +12,8 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=221118dda731fe93a85d0ed973467249"
 
 SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
-          "
+           file://CVE-2024-54662.patch \
+           "
 SRC_URI[md5sum] = "68c2ce12119e12cea11a90c7a80efa8f"
 SRC_URI[sha256sum] = "b6d232bd6fefc87d14bf97e447e4fcdeef4b28b16b048d804b50b48f261c4f53"
 
