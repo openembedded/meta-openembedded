@@ -37,6 +37,9 @@ EXTRA_OECONF += "--with-protoc=echo"
 TEST_SRC_DIR = "examples"
 LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
 
+# the vulnerability is in python3-protobuf recipe, not in this one
+CVE_CHECK_IGNORE += "CVE-2026-0994"
+
 do_compile_ptest() {
 	mkdir -p "${B}/${TEST_SRC_DIR}"
 
