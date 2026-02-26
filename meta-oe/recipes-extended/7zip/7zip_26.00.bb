@@ -3,16 +3,16 @@ HOMEPAGE = "http://www.7-zip.org/"
 LICENSE = "LGPL-2.1-or-later & unRAR & PD & BSD-2-Clause & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
                     file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
-                    file://DOC/License.txt;md5=e80f9280df93aa8da95cac449f9fd115 \
+                    file://DOC/License.txt;md5=a4ae6e492874f0008c7600c2ef80daa4 \
                     "
 
 CVE_PRODUCT = "7-zip 7zip"
-SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
            file://0001-support-yocto-cross-compiling.patch \
            file://0001-Remove-treating-warning-as-errors.patch \
            file://7z_wrapper.sh \
            "
-SRCREV = "5e96a8279489832924056b1fa82f29d5837c9469"
+SRCREV = "839151eaaad24771892afaae6bac690e31e58384"
 
 UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
 
