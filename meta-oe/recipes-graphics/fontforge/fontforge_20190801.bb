@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://CVE-2020-25690-2.patch \
            file://CVE-2024-25081-25082.patch \
            file://CVE-2025-15269.patch \
+           file://CVE-2025-15270.patch \
            "
 S = "${WORKDIR}/git"
 
