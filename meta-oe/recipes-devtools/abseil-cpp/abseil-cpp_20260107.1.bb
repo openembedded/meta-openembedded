@@ -53,3 +53,6 @@ python split_dynamic_packages() {
 ALLOW_EMPTY:${PN} = "1"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# Add CVE_PRODUCT to match the NVD CPE product name
+CVE_PRODUCT = "abseil:common_libraries"
