@@ -8,7 +8,7 @@ SRC_URI = " \
     git://github.com/gcovr/gcovr.git;branch=main;protocol=https \
     file://0001-pyproject.toml-Support-newer-versions.patch \
 "
-SRCREV = "71eedb8f300612d4095f2ffa4ac60e3fdd58c192"
+SRCREV = "e01ad73582821b5f90e079482164f8e885121e57"
 
 
 inherit python_hatchling
