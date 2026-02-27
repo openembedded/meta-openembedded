@@ -47,6 +47,7 @@ EXTRA_OECONF = " \
 PACKAGE_BEFORE_PN = "${PN}-aplay"
 RRECOMMENDS:${PN} = "${PN}-aplay"
 
+FILES:${PN}-staticdev += "${libdir}/alsa-lib/*.a"
 FILES:${PN}-aplay = "${bindir}/bluealsa-aplay"
 FILES:${PN} += "${libdir}/alsa-lib/*"
 
