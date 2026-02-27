@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
            file://emacs-glibc-2.34.patch \
+           file://CVE-2022-48337.patch \
           "
 SRC_URI:append:class-target = " file://usemake-docfile-native.patch"
 
