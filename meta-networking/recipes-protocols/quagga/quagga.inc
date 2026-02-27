@@ -34,7 +34,8 @@ SRC_URI = "https://github.com/Quagga/quagga/releases/download/quagga-${PV}/quagg
            file://ripd.service \
            file://ripngd.service \
            file://zebra.service \
-          "
+           file://CVE-2017-3224.patch \
+           "
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
 PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
