@@ -13,8 +13,8 @@ PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
 
 DEPENDS = "libnl ncurses"
 
-SRC_URI = "git://github.com/uoaerg/wavemon;branch=master;protocol=https"
-SRCREV = "8ba6604027c0aa5131070e3fafdcda323d58a7ad"
+SRC_URI = "git://github.com/uoaerg/wavemon;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "fb158b047c39af62b6627fc7e6c16e5017681d8f"
 
 # Needs some help to find libnl3 headers.
 # Reorder -pthread flag on the command line.
