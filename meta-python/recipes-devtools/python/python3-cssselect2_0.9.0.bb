@@ -6,7 +6,7 @@ DESCRIPTION = "cssselect2 is a straightforward implementation of CSS4 Selectors 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aa7228954285c7398bb6711fee73b4ac"
 
-SRC_URI[sha256sum] = "7674ffb954a3b46162392aee2a3a0aedb2e14ecf99fcc28644900f4e6e3e9d3a"
+SRC_URI[sha256sum] = "759aa22c216326356f65e62e791d66160a0f9c91d1424e8d8adc5e74dddfc6fb"
 
 inherit pypi python_setuptools_build_meta
 
