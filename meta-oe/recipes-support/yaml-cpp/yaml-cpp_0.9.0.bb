@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6a8aaf0595c2efc1a9c2e0913e9c1a2c"
 # yaml-cpp releases are stored as archive files in github.
 # download the exact revision of release
 SRC_URI = "git://github.com/jbeder/yaml-cpp.git;branch=master;protocol=https"
-SRCREV = "28f93bdec6387d42332220afa9558060c8016795"
+SRCREV = "56e3bb550c91fd7005566f19c079cb7a503223cf"
 PV .= "+git"
 
 
