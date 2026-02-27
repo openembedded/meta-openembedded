@@ -70,3 +70,5 @@ PACKAGES =+ "${PN}-tools ${PN}-gsettings"
 FILES:${PN}-tools = "${bindir}/*-tool"
 RDEPENDS:${PN}-tools = "python3-core"
 
+# not-applicable-config: OE doesn't set CAP_SYS_NICE capability
+CVE_CHECK_IGNORE = "CVE-2021-3982"
