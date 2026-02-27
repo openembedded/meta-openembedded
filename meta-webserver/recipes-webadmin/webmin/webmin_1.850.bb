@@ -24,6 +24,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://0001-Object-names-cannot-contact-special-characters.patch \
            file://0001-Foreign-module-may-need-a-check.patch \
            file://0001-Add-missing-permissions-check-when-saving-allowed-cr.patch \
+           file://CVE-2025-67738.patch \
            "
 
 SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
