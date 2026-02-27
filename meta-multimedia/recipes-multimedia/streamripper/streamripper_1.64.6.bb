@@ -30,3 +30,6 @@ EXTRA_OECONF += "\
 
 # the included argv library needs this
 CPPFLAGS:append = " -DANSI_PROTOTYPES"
+
+# cpe-incorrect: the vulnerability is about a Windows frontend, not the CLI
+CVE_CHECK_IGNORE = "CVE-2020-37065"
