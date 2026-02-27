@@ -8,6 +8,6 @@ HOMEPAGE = "https://github.com/msoulier/tftpy"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=22770e72ae03c61f5bcc4e333b61368d"
 
-SRC_URI[sha256sum] = "f616f6a43a36d481c266573608597b9dd3c7c63818415d72aa04f1d1795480ea"
+SRC_URI[sha256sum] = "e8a5aa092dab2e1cbb9b94392036827b808dc37eb6cf1b1ab33c81957b3f5fe2"
 
 inherit pypi python_setuptools_build_meta
