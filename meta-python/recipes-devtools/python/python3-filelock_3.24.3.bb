@@ -6,7 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2c6acbdf7bb74caa37512c3a5ca6857b"
 
 SRC_URI += "file://run-ptest"
-SRC_URI[sha256sum] = "c22803117490f156e59fafce621f0550a7a853e2bbf4f87f112b11d469b6c81b"
+SRC_URI[sha256sum] = "011a5644dc937c22699943ebbfc46e969cdde3e171470a6e40b9533e5a72affa"
 
 BBCLASSEXTEND = "native nativesdk"
 
