@@ -26,3 +26,6 @@ do_configure:prepend() {
 EXTRA_OEMAKE = " \
     libdir=${libdir} \
 "
+
+# vulnerability was introduced in v4.12
+CVE_CHECK_IGNORE = "CVE-2025-25066"
