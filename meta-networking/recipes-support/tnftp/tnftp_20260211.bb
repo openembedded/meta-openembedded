@@ -30,8 +30,8 @@ ALTERNATIVE_TARGET[ftp] = "${bindir}/tnftp"
 
 FILES:${PN} = "${bindir}/tnftp"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=fbbb944979c7466ed5509b4bbc6c328b"
-SRC_URI[sha256sum] = "be0134394bd7d418a3b34892b0709eeb848557e86474e1786f0d1a887d3a6580"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a78330785e3081e1679266f0ba58c555"
+SRC_URI[sha256sum] = "101cda6927e5de4338ad9d4b264304d7d15d6a78b435968a7b95093e0a2efe03"
 
 PACKAGECONFIG ?= "openssl \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
