@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = " \
-	git://github.com/valkey-io/valkey.git;branch=8.1;protocol=https \
+	git://github.com/valkey-io/valkey.git;branch=8.1;protocol=https;tag=${PV} \
         file://valkey.conf \
 	file://init-valkey-server \
 	file://valkey.service \
@@ -17,7 +17,7 @@ SRC_URI = " \
 	file://0001-src-Do-not-reset-FINAL_LIBS.patch \
 	file://GNU_SOURCE-7.patch \
 "
-SRCREV = "5f4bae3ea10174a7c872cc099c953b0e91afa93a"
+SRCREV = "19b07dfcbb75b14a1ed1b0a48cb8a0efcc81d563"
 
 RPROVIDES:${PN} = "virtual-redis"
 
