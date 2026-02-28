@@ -16,11 +16,9 @@ SRC_URI += "file://add-back-option-build-base.patch \
            file://not-overwrite-cflags-cxxflags.patch \
            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
            "
-SRC_URI[sha256sum] = "2eb123979c87bcb329e8a2452269d60ff8f9f651e9bf25c67579e53c4ebbae3c"
+SRC_URI[sha256sum] = "44e836d1bccd99c38790bb034b6ecf70d9060f6734320560f7c4b0d006144793"
 
 inherit pypi setuptools3 cython pkgconfig features_check
-
-S = "${UNPACKDIR}/wxPython-${PV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
