@@ -7,10 +7,9 @@ HOMEPAGE = "https://github.com/theopolis/uefi-firmware-parser"
 LICENSE = "BSD-2-Clause & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://setup.py;md5=5a59066a8676f17262ef7e691f8ef253"
 
-SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master"
+SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "0c5fb74bcecc0e5c80625c38130fe948c2a3656e"
-
+SRCREV = "6d7cf5f0672c577028462ec175fec9fda95cc5f0"
 
 inherit setuptools3
 
