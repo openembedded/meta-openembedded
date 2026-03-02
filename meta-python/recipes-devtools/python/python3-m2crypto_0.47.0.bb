@@ -4,13 +4,9 @@ HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740aef06c82a2"
 
-SRC_URI[sha256sum] = "13c2fa89562f7b8af40cc74b55f490be5e2ab8ccfb739f11c16d3ce6221a61ba"
+SRC_URI[sha256sum] = "9256300be1e0412be802aa1f827e0ce7f94deb1099b8ccdcfd9867a7f0f975bf"
 
-SRC_URI += " \
-          file://0001-setup.py-Make-the-cmd-available.patch \
-          file://0001-fix-allow-64-bit-time_t-on-32-bit-systems-in-test_is.patch \
-          file://0002-fix-correct-struct-packing-on-32-bit-with-_TIME_BITS.patch \
-"
+SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
 
 CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
 CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.46.2) contains the fix already"
