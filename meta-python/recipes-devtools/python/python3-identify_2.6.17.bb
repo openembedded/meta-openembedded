@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bbdc006359f3157660173ec7f133a80e"
 PYPI_PACKAGE = "identify"
 
 inherit pypi setuptools3
-SRC_URI[sha256sum] = "846857203b5511bbe94d5a352a48ef2359532bc8f6727b5544077a0dcfb24980"
+
+SRC_URI[sha256sum] = "f816b0b596b204c9fdf076ded172322f2723cf958d02f9c3587504834c8ff04d"
 
 RDEPENDS:${PN} = " \
 	python3-ukkonen \
