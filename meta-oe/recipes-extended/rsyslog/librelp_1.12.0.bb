@@ -17,9 +17,12 @@ CVE_PRODUCT = "rsyslog:librelp"
 inherit autotools pkgconfig ptest
 
 PACKAGECONFIG ?= "tls-openssl valgrind"
-# Valgrind is not available for RISCV yet
-PACKAGECONFIG:remove:riscv64 = "valgrind"
+# Valgrind is not available for RISCV32 yet
 PACKAGECONFIG:remove:riscv32 = "valgrind"
+# armv4/armv5/armv6 is not in COMPATIBLE_HOST of valgrind
+PACKAGECONFIG:remove:armv4 = "valgrind"
+PACKAGECONFIG:remove:armv5 = "valgrind"
+PACKAGECONFIG:remove:armv6 = "valgrind"
 
 PACKAGECONFIG[tls] = "--enable-tls,--disable-tls,gnutls nettle"
 PACKAGECONFIG[tls-openssl] = "--enable-tls-openssl,--disable-tls-openssl,openssl"
