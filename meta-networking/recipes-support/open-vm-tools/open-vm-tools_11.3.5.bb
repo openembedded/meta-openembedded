@@ -126,3 +126,13 @@ python() {
     if 'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
         raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
 }
+
+# fixed since 9.10.2
+CVE_CHECK_IGNORE = "CVE-2014-4199"
+
+# fixed since 9.4.6
+CVE_CHECK_IGNORE += "CVE-2014-4200"
+
+# Windows-only vulnerability
+CVE_CHECK_IGNORE += "CVE-2022-22943 CVE-2022-22977 CVE-2022-31693 CVE-2023-34057"
+
