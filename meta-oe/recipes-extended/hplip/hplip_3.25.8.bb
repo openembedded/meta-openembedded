@@ -8,17 +8,15 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://600-fix.patch \
            file://030-replace_unsafe_memcpy_with_memmove.patch \
            file://050-fix-glibcisms.patch \
-           file://hplip-3.19.6-fix-return.patch \
            file://0001-common-utils-Include-string.h-for-strcasestr.patch \
            file://0002-Add-ImageProcessor-only-when-DISBALE_IMAGEPROCESSOR_.patch \
            file://0003-pserror.c-Define-column-to-be-int-explcitly.patch \
            file://0004-Define-missing-prototype-for-functions.patch \
-           file://0005-hp_ipp.c-Add-printf-format-to-snprintf-calls.patch \
            file://0006-Workaround-patch-for-missing-Python3-transition-of-t.patch \
            file://0001-Fix-installing-ipp-usb-quirk.patch \
            file://0001-Drop-using-register-storage-classifier.patch \
            file://0001-Fix-upstream-CFLAGS-override.patch"
-SRC_URI[sha256sum] = "533c3f2f6b53e4163ded4fd81d1f11ae6162a0f6451bd5e62a8382d0c1366624"
+SRC_URI[sha256sum] = "1cf6d6c28735435c8eb6646e83bcfb721e51c4b1f0e8cf9105a6faf96dc9ad25"
 
 CVE_PRODUCT = "hplip linux_imaging_and_printing"
 
@@ -50,6 +48,13 @@ EXTRA_OECONF += "\
 "
 
 EXTRA_OEMAKE = "rulessystemdir=${systemd_unitdir}/system/"
+
+do_configure:prepend() {
+    # If not set directly, it determines the absolute path of site-packages dir in recipe-sysroot,
+    # and then it installs the python libraries into a folder in ${D} that was constructed from
+    # that path, instead of using the correct ${PYTHON_SITEPACKAGES_DIR}.
+    sed -i 's,^\(   PYTHONEXECDIR=\).*,\1"${PYTHON_SITEPACKAGES_DIR}",' configure.in
+}
 
 do_install:append() {
     rm -rf ${D}${datadir}/hplip/upgrade.py
