@@ -20,3 +20,5 @@ RDEPENDS:${PN} = " \
     perl-module-scalar-util \
     perl-module-compress-zlib \
 "
+
+CVE_STATUS[CVE-2026-3102] = "not-applicable-platform: affects only MacOS"
