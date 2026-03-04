@@ -19,7 +19,7 @@
 # build system level, this class takes the approach of always using PKCS #11 at
 # the recipe level. For cases where the keys are available as files (i.e. test
 # keys in CI), they are imported into SoftHSM (a HSM emulation library).
-# 
+#
 # Recipes access the available keys via a specific role. So, depending on
 # whether we're building during development or for release, a given role can
 # refer to different keys.
@@ -33,7 +33,7 @@
 #   SIGNING_PKCS11_MODULE[fit] = "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
 #
 # Examples for defining roles and importing keys:
-# 
+#
 #   meta-code-signing/recipes-security/signing-keys/dummy-rsa-key-native.bb
 #   meta-code-signing-demo/recipes-security/ptx-dev-keys/ptx-dev-keys-native_git.bb
 #
