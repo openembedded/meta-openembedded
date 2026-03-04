@@ -26,7 +26,6 @@ RDEPENDS:${PN} += "\
     python3-msgpack \
     python3-netserver \
     python3-packaging \
-    python3-pkg-resources \
     python3-setuptools \
     python3-sqlite3 \
     python3-typing-extensions \
