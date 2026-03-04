@@ -9,11 +9,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
            file://0001-Fixed-swig-host-contamination-issue.patch \
-           file://0001-auparse-test-disable-some-test-cases.patch \
            file://auditd \
           "
 
-SRCREV = "4db9c700b0c8b24a8113bc00d98101228e7d0212"
+SRCREV = "dfda9708910e4e72412e68d638087b29522df386"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
