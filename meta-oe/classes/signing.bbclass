@@ -54,7 +54,7 @@
 SIGNING_PKCS11_URI ?= ""
 SIGNING_PKCS11_MODULE ?= ""
 
-DEPENDS += "softhsm-native libp11-native opensc-native openssl-native extract-cert-native"
+DEPENDS += "softhsm-native pkcs11-provider-native libp11-native opensc-native openssl-native extract-cert-native"
 
 def signing_class_prepare(d):
     import os.path
@@ -338,16 +338,10 @@ signing_import_install() {
 signing_prepare() {
     export OPENSSL_MODULES="${STAGING_LIBDIR_NATIVE}/ossl-modules"
     export OPENSSL_ENGINES="${STAGING_LIBDIR_NATIVE}/engines-3"
-    export OPENSSL_CONF="${STAGING_LIBDIR_NATIVE}/ssl-3/openssl.cnf"
+    export OPENSSL_CONF="${STAGING_LIBDIR_NATIVE}/openssl-provider-signing.cnf"
     export SSL_CERT_DIR="${STAGING_LIBDIR_NATIVE}/ssl-3/certs"
     export SSL_CERT_FILE="${STAGING_LIBDIR_NATIVE}/ssl-3/cert.pem"
 
-    if [ -f ${OPENSSL_CONF} ]; then
-        echo "Using '${OPENSSL_CONF}' for OpenSSL configuration"
-    else
-        echo "Missing 'openssl.cnf' at '${STAGING_ETCDIR_NATIVE}/ssl'"
-        return 1
-    fi
     if [ -d ${OPENSSL_MODULES} ]; then
         echo "Using '${OPENSSL_MODULES}' for OpenSSL run-time modules"
     else
@@ -367,6 +361,26 @@ signing_prepare() {
     echo "directories.tokendir = $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
     echo "objectstore.backend = db" >> "$SOFTHSM2_CONF"
 
+    cat > "${OPENSSL_CONF}" <<EOF
+openssl_conf = openssl_init
+
+[openssl_init]
+providers = provider_sect
+
+[provider_sect]
+default = default_sect
+pkcs11 = pkcs11_sect
+
+[default_sect]
+activate = 1
+
+[pkcs11_sect]
+pkcs11-module-quirks = no-operation-state no-deinit
+pkcs11-module-cache-keys = false
+pkcs11-module-encode-provider-uri-to-pem = true
+activate = 1
+EOF
+
     for env in $(ls "${STAGING_DIR_NATIVE}/var/lib/meta-signing.env.d"); do
         . "${STAGING_DIR_NATIVE}/var/lib/meta-signing.env.d/$env"
     done
@@ -378,6 +392,8 @@ signing_use_role() {
     local role="${1}"
 
     export PKCS11_MODULE_PATH="$(signing_get_module $role)"
+    export PKCS11_PROVIDER_MODULE="$PKCS11_MODULE_PATH"
+    # export PKCS11_PROVIDER_DEBUG="file:/dev/stderr"
     export PKCS11_URI="$(signing_get_uri $role)"
 
     if [ -z "$PKCS11_MODULE_PATH" ]; then
