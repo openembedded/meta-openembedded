@@ -463,6 +463,40 @@ signing_extract_cert_pem() {
     rm "${output}.tmp-der"
 }
 
+# signing_create_uri_pem <role> <pem>
+#
+# Wrap the role's pkcs11: URI in a PEM file.
+# The resulting file can be used instead of the URI returned by
+# 'signing_get_uri $role' with applications which do not yet support the
+# OSSL_STORE for native access to the PKCS#11 provider.
+signing_create_uri_pem() {
+    local role="${1}"
+    local output="${2}"
+    local conf="${output}.cnf"
+    local der="${output}.der"
+
+    local uri="$(signing_get_uri $role)"
+
+    echo "Wrapping PKCS#11 URI for role '$role' as '${output}'"
+
+    # The \# escape prevents OpenSSL's config parser treating # as a comment.
+    cat > "${conf}" <<EOF
+asn1=SEQUENCE:pkcs11_uri_seq
+
+[pkcs11_uri_seq]
+version=VISIBLESTRING:PKCS\#11 Provider URI v1.0
+uri=UTF8:${uri}
+EOF
+
+    openssl asn1parse -genconf "${conf}" -noout -out "${der}"
+
+    {
+        echo "-----BEGIN PKCS#11 PROVIDER URI-----"
+        openssl base64 -in "${der}"
+        echo "-----END PKCS#11 PROVIDER URI-----"
+    } > "${output}"
+}
+
 python () {
     signing_class_prepare(d)
 }
