@@ -86,3 +86,4 @@ CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mand
 CVE_STATUS[CVE-2025-48796] = "cpe-incorrect: The current version (2.10.38) is not affected."
 CVE_STATUS[CVE-2025-14423] = "cpe-incorrect: The vulnerability was introduced in v3.0"
 CVE_STATUS[CVE-2025-14424] = "cpe-incorrect: The vulnerability was introduced in v3.0"
+CVE_STATUS[CVE-2026-2047] = "cpe-incorrect: The vulnerability was introduced in v3.0"
