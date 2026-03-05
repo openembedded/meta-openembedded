@@ -54,7 +54,8 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
            file://CVE-2025-2760-1.patch \
            file://CVE-2025-2760-2.patch \
            file://CVE-2025-2761.patch \
-           file://CVE-2026-0797.patch \
+           file://CVE-2026-0797-1.patch \
+           file://CVE-2026-0797-2.patch \
            file://CVE-2026-2044.patch \
            file://CVE-2026-2045.patch \
            file://CVE-2026-2048.patch \
