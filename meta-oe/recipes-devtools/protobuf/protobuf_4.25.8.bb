@@ -23,6 +23,8 @@ S = "${WORKDIR}/git"
 
 CVE_STATUS[CVE-2024-7254] = "fixed-version: The vulnerability has been addressed and the fix is included in version v4.25.8"
 
+CVE_STATUS[CVE-2026-0994] = "cpe-incorrect: the vulnerability affects only python3-protobuf recipe"
+
 inherit cmake pkgconfig ptest
 
 PACKAGECONFIG ??= ""
