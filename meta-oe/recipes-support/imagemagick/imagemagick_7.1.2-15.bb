@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
            file://imagemagick-ptest.sh \
 "
 
-SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
+SRCREV = "b5fdb90dac0e6d0bf1bbd95704bbd60216a5bc23"
 
 
 inherit autotools pkgconfig update-alternatives ptest
