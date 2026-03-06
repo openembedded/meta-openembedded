@@ -2,12 +2,12 @@ SUMMARY = "The Network Time Protocol suite, refactored"
 HOMEPAGE = "https://www.ntpsec.org/"
 
 LICENSE = "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
-LIC_FILES_CHKSUM = "file://LICENSES/BSD-2;md5=653830da7b770a32f6f50f6107e0b186 \
-                    file://LICENSES/BSD-3;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
-                    file://LICENSES/CC-BY-4.0;md5=2ab724713fdaf49e4523c4503bfd068d \
-                    file://LICENSES/MIT;md5=5a9dfc801af3eb49df2055c9b07918b2 \
-                    file://LICENSES/NTP;md5=cb56b7747f86157c78ca81f224806694"
-
+LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=653830da7b770a32f6f50f6107e0b186 \
+                    file://LICENSES/BSD-3-Clause.txt;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
+                    file://LICENSES/CC-BY-4.0.txt;md5=2ab724713fdaf49e4523c4503bfd068d \
+                    file://LICENSES/MIT.txt;md5=5a9dfc801af3eb49df2055c9b07918b2 \
+                    file://LICENSES/NTP.txt;md5=cb56b7747f86157c78ca81f224806694"
+                    
 DEPENDS += "bison-native \
             openssl \
             python3"
@@ -17,7 +17,7 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
            file://0001-wscript-Add-BISONFLAGS-support.patch \
            "
 
-SRC_URI[sha256sum] = "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
+SRC_URI[sha256sum] = "443e54a6149d1b0bf08677d17b18fced9028b101fc2ffd2c81e0834f87eebc7d"
 
 UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
 
@@ -63,7 +63,6 @@ EXTRA_OECONF = "--cross-compiler='${CC}' \
                 --pyshebang=${bindir}/python3 \
                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
                 --pythonarchdir=${PYTHON_SITEPACKAGES_DIR} \
-                --enable-debug-gdb \
                 --enable-early-droproot"
 
 EXTRA_OEWAF_BUILD ?= "-v"
@@ -89,6 +88,11 @@ do_install:append() {
 	else
 		install -D -m 0644 ${T}/volatiles.ntpsec ${D}${sysconfdir}/default/volatiles/99_${BPN}
 	fi
+
+    if [ -d ${D}/usr/lib64 ]; then
+        mv ${D}/usr/lib64/* ${D}${libdir}/
+        rmdir ${D}/usr/lib64
+    fi
 }
 
 PACKAGE_BEFORE_PN = "${PN}-python ${PN}-utils ${PN}-viz"
