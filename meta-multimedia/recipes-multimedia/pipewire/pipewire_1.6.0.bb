@@ -48,6 +48,9 @@ SYSTEMD_PACKAGES = "${PN}"
 # AptX and LDAC are not available in OE. Currently, neither
 # are lv2, ROC, and libmysofa.
 #
+# AptX support is only available via freeaptx (libfreeaptx)
+# for Bluetooth audio (A2DP).
+#
 # The RTKit module is deprecated in favor of the newer RT module.
 # It still exists for legacy setups that still include it in
 # their PipeWire configuration files.
@@ -61,7 +64,6 @@ EXTRA_OEMESON += " \
     -Dsession-managers='[]' \
     -Dlv2=disabled \
     -Droc=disabled \
-    -Dbluez5-codec-aptx=disabled \
     -Dbluez5-codec-ldac=disabled \
     -Dlegacy-rtkit=false \
     -Dlibmysofa=disabled \
@@ -85,7 +87,7 @@ BLUETOOTH_AAC = "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'b
 
 PACKAGECONFIG:class-target ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez bluez-opus ${BLUETOOTH_AAC}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez bluez-opus ${BLUETOOTH_AAC} bluez-aptx', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
     ${PIPEWIRE_SESSION_MANAGER} \
@@ -103,6 +105,8 @@ PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc glib-2.0-n
 PACKAGECONFIG[bluez-aac] = "-Dbluez5-codec-aac=enabled,-Dbluez5-codec-aac=disabled,fdk-aac"
 PACKAGECONFIG[bluez-opus] = "-Dbluez5-codec-opus=enabled,-Dbluez5-codec-opus=disabled,libopus"
 PACKAGECONFIG[bluez-lc3] = "-Dbluez5-codec-lc3=enabled,-Dbluez5-codec-lc3=disabled,liblc3"
+# Eneble libfreeaptx to support bluetooth audio codec
+PACKAGECONFIG[bluez-aptx]     = "-Dbluez5-codec-aptx=enabled,-Dbluez5-codec-aptx=disabled,libfreeaptx"
 # From the pipewire git log:
 # "Some Linux phones doesn't use oFono but ModemManager to control the modem."
 # This packageconfig enables modemmanager specific code in the BlueZ backend.
