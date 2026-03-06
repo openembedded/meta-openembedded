@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
 
 SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
            file://0001-support-cross-compiling.patch \
+           file://CVE-2026-25990.patch \
            "
 SRCREV = "693df7b42c666f88c719f9973be0ad71607328e0"
 
@@ -65,3 +66,7 @@ CVE_PRODUCT = "pillow"
 RPROVIDES:${PN} += "python3-imaging"
 
 BBCLASSEXTEND = "native"
+
+# CVE-2026-25990.patch in SRC_URI contains a binary blob, which needs to
+# be applied with git
+PATCHTOOL = "git"
