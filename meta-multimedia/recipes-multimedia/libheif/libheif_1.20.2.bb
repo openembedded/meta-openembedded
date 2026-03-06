@@ -6,7 +6,9 @@ LICENSE_FLAGS = "commercial"
 
 COMPATIBLE_MACHINE:powerpc64le = "null"
 
-SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases"
+SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases \
+           file://CVE-2025-68431.patch \
+           "
 
 SRCREV = "35dad50a9145332a7bfdf1ff6aef6801fb613d68"
 
