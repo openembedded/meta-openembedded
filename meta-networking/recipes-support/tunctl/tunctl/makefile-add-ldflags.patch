@@ -1,6 +1,6 @@
 Add LDFLAGS variable to Makefile, make sure the extra linker flags can be passed.
 
-Upstream-Status: Pending
+Upstream-Status: Inactive-Upstream [last change: 2013-03-22]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 
