@@ -2,8 +2,8 @@ SUMMARY = "Redis key-value store"
 DESCRIPTION = "Redis is an open source, advanced key-value store."
 HOMEPAGE = "http://redis.io"
 SECTION = "libs"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4feb9943a139a170b9d6ed6ec3342d0c"
+LICENSE = "AGPL-3.0-only | SSPL-1.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9f1da87999fb281d8a9e3e3b2d0403b4"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
           "
-SRC_URI[sha256sum] = "cf395665ba5fcecc4ef7aed1d8ab19c268619d98595827565c82344160171262"
+SRC_URI[sha256sum] = "6d0a9913887a4972536f9da226f1575859c34d86354129163260a5f9c6bd4229"
 
 RPROVIDES:${PN} = "virtual-redis"
 
