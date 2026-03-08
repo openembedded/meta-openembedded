@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${
            file://0001-Use-automake-output-for-tests.patch \
            file://0001-Allow-test-data-path-configuration.patch \
            "
-SRCREV = "afcb7a8ba84a7de36d2f1ee7689394e078697956"
+SRCREV = "2cd987a731236037b6b78cbff897d08685a8ef49"
 
 inherit cmake gettext ptest
 
@@ -19,6 +19,7 @@ PACKAGECONFIG[unittest] = "-DEXIV2_BUILD_UNIT_TESTS=ON -DTEST_FOLDER=${PTEST_PAT
 
 RDEPENDS:${PN}-ptest += " \
     python3-html \
+    python3-json \
     python3-lxml \
     python3-multiprocessing \
     python3-shell \
