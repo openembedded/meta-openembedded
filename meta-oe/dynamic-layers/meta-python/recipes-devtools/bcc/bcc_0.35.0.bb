@@ -23,6 +23,7 @@ SRC_URI = "gitsm://github.com/iovisor/bcc;branch=master;protocol=https;tag=v${PV
            file://0001-Vendor-just-enough-extra-headers-to-allow-libbpf-to-.patch \
            file://0001-Fix-a-build-failure-with-clang21-5369.patch \
            file://0001-Add-ARM64-syscall-prefix-detection-in-C-API.patch \
+           file://0002-Add-riscv-syscall-prefix-detection-in-C-API.patch \
            file://run-ptest \
            file://ptest_wrapper.sh \
            file://fix_for_memleak.patch \
