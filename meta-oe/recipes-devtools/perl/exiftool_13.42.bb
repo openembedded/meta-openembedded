@@ -26,3 +26,5 @@ do_install:append() {
     # Fix shebang and QA Issue [file-rdeps] to use target /usr/bin/env
     sed -i -e '1s|^#!.*env perl|#!/usr/bin/env perl|' ${D}${bindir}/exiftool
 }
+
+CVE_STATUS[CVE-2026-3102] = "not-applicable-platform: affects only MacOS"
