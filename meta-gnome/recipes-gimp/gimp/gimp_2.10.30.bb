@@ -75,3 +75,6 @@ RDEPENDS:${PN} += "mypaint-brushes-1.0"
 
 # It has been fixed in version 2.2.16
 CVE_CHECK_IGNORE += "CVE-2007-3741"
+
+# These vulnerabilities were introduced in v3.0
+CVE_CHECK_IGNORE += "CVE-2025-14423 CVE-2025-14224 CVE-2026-2047"
