@@ -20,12 +20,7 @@ SRC_URI[sha256sum] = "6d0a9913887a4972536f9da226f1575859c34d86354129163260a5f9c6
 
 RPROVIDES:${PN} = "virtual-redis"
 
-CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
-CVE_STATUS[CVE-2025-27151] = "cpe-incorrect: the used version already contains the fix"
 CVE_STATUS[CVE-2025-46686] = "disputed: upstream rejected because mitigating it would affect other functionality"
-CVE_STATUS[CVE-2025-46817] = "cpe-incorrect: the used version already contains the fix"
-CVE_STATUS[CVE-2025-46818] = "cpe-incorrect: the used version already contains the fix"
-CVE_STATUS[CVE-2025-46819] = "cpe-incorrect: the used version already contains the fix"
 
 inherit pkgconfig update-rc.d systemd useradd
 
