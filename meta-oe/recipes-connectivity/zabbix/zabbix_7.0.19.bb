@@ -75,3 +75,5 @@ do_install:append() {
 FILES:${PN} += "${libdir}"
 
 RDEPENDS:${PN} = "logrotate"
+
+CVE_STATUS[CVE-2026-23925] = "fixed-version: fixed since 7.0.18"
