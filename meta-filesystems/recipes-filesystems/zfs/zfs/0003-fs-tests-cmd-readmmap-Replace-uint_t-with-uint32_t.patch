@@ -1,4 +1,4 @@
-From 1f9a5cb860b3509791e59a8cae9d5f265e832ed0 Mon Sep 17 00:00:00 2001
+From b37f4e0f11186206863f41e1a638ca4e57c3dc53 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sun, 28 May 2023 16:33:15 -0700
 Subject: [PATCH] fs-tests/cmd/readmmap: Replace uint_t with uint32_t
@@ -12,7 +12,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/tests/zfs-tests/cmd/readmmap.c b/tests/zfs-tests/cmd/readmmap.c
-index 704ffd55c8..a2590e0e8d 100644
+index a5c8079d0..c22b58e9d 100644
 --- a/tests/zfs-tests/cmd/readmmap.c
 +++ b/tests/zfs-tests/cmd/readmmap.c
 @@ -38,6 +38,7 @@
@@ -23,7 +23,7 @@ index 704ffd55c8..a2590e0e8d 100644
  #include <stdio.h>
  #include <stdlib.h>
  #include <unistd.h>
-@@ -55,7 +56,7 @@ main(int argc, char **argv)
+@@ -56,7 +57,7 @@ main(int argc, char **argv)
  	char *buf = NULL;
  	char *map = NULL;
  	int fd = -1, bytes, retval = 0;
@@ -32,7 +32,7 @@ index 704ffd55c8..a2590e0e8d 100644
  
  	if (argc < 2 || optind == argc) {
  		(void) fprintf(stderr,
-@@ -92,7 +93,7 @@ main(int argc, char **argv)
+@@ -93,7 +94,7 @@ main(int argc, char **argv)
  		retval = 1;
  		goto end;
  	}
@@ -41,6 +41,3 @@ index 704ffd55c8..a2590e0e8d 100644
  	srandom(seed);
  
  	idx = random() % size;
--- 
-2.40.1
-

@@ -1,4 +1,4 @@
-From aaf28a4630af60496c9d33db1d06a7d7d8983422 Mon Sep 17 00:00:00 2001
+From d05d2583ae1807e380492ea8570106c1f0a9effb Mon Sep 17 00:00:00 2001
 From: Sebastian Gottschall <s.gottschall@dd-wrt.com>
 Date: Tue, 23 May 2023 13:50:24 +0600
 Subject: [PATCH] fixes broken aarch64 inline assembly for gcc 13.1
@@ -39,9 +39,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  module/Kbuild.in | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/module/Kbuild.in b/module/Kbuild.in
+index a72d2a4cc..c6134baec 100644
 --- a/module/Kbuild.in
 +++ b/module/Kbuild.in
-@@ -57,9 +57,9 @@ asflags-y := $(ZFS_MODULE_CFLAGS) $(ZFS_
+@@ -57,9 +57,9 @@ asflags-y := $(ZFS_MODULE_CFLAGS) $(ZFS_MODULE_CPPFLAGS)
  ccflags-y := $(ZFS_MODULE_CFLAGS) $(ZFS_MODULE_CPPFLAGS)
  
  ifeq ($(CONFIG_ARM64),y)

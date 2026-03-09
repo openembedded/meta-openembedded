@@ -4,11 +4,12 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE = "https://github.com/openzfs/zfs"
 
-SRCREV = "3e4a3e161c00273303cd9fa9e0dc09ead3499a8a"
-SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
+SRCREV = "079ba86d71571bf997ff688da061d8c4aa2fd052"
+SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release;tag=${BP} \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
-           file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
-           file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
+           file://0002-fixes-broken-aarch64-inline-assembly-for-gcc-13.1.patch \
+           file://0003-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
+           file://0004-linux-use-sys-stat.h-instead-of-linux-stat.h.patch \
 "
 
 
