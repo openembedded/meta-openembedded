@@ -14,7 +14,7 @@ SRC_URI = " \
     git://github.com/eclipse/paho.mqtt.c;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "62782406bcf511ee8e22bc34e826f8c6b8254c7c"
+SRCREV = "4a939ddb01eea581a32fd6f0adcfee51b91d2601"
 
 DEPENDS = "openssl"
 
