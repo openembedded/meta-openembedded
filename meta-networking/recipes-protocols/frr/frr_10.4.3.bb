@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;
            file://CVE-2025-61099-61107-3.patch \
            "
 
-SRCREV = "642f65b9e5853c7207982a9cf8275732737d4e44"
+SRCREV = "6ddbeb5eaf71bc5a3f05f22e211684fb85a34091"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
