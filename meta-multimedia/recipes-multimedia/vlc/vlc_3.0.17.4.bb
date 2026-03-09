@@ -130,3 +130,6 @@ FILES:${PN}-staticdev += "\
 INSANE_SKIP:${PN} = "dev-so"
 
 EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
+
+# Android specific CVEs
+CVE_CHECK_IGNORE += "CVE-2026-26227 CVE-2026-26228"
