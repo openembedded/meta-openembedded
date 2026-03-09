@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=79ffa0ec772fa86740948cb7327a0cc7"
 
 DEPENDS = "glib-2.0 pcsc-lite nss"
 
-SRCREV = "7b07684ea6698d4885ff2062350ad8798a04de42"
+SRCREV = "df2d3c05a250741632184c2cc66df247039a70d7"
 
-SRC_URI = "git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master"
+SRC_URI = "git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master;tag=v${PV}"
 
 
 inherit meson pkgconfig
