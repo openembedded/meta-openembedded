@@ -34,7 +34,7 @@ GIR_MESON_OPTION = ""
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 SRC_URI += "file://0001-shell-app-usage.c-only-include-x11-headers-if-HAVE_X.patch"
-SRC_URI[archive.sha256sum] = "fb0203fc748593f14e51732618e1f042525fd719764a0fdb0ee3f6fe413a9b2b"
+SRC_URI[archive.sha256sum] = "2dff328d5f7e29f8c897bc21caac7d2d443be3c63ae84d7623dec800f23493c3"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
@@ -76,7 +76,7 @@ RDEPENDS:${PN} += " \
 	accountsservice \
 	adwaita-icon-theme \
 	adwaita-icon-theme-cursors \
-	gdm-base \
+	gdm \
 	gnome-control-center \
 	gnome-backgrounds \
 	gnome-bluetooth \
