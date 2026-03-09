@@ -51,3 +51,6 @@ CFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 CXXFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
 
 FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
+
+CVE_STATUS[CVE-2025-12474] = "fixed-version: fixed in v0.11.2"
+CVE_STATUS[CVE-2026-1837] = "fixed-version: fixed in v0.11.2"
