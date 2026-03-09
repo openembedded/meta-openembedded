@@ -2,7 +2,7 @@ SUMMARY = "Window navigation construction toolkit"
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-BPN = "libwnck"
+GNOMEBN = "libwnck"
 
 SECTION = "x11/libs"
 DEPENDS = "cairo glib-2.0 gtk+3"
