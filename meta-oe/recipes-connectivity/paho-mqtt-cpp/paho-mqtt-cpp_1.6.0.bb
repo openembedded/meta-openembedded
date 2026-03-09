@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "17ff3dc0270738adc710667be44847eebc038ae0"
+SRCREV = "c0b43a49d7b7e7b5e7009658ca22f19ac1112c83"
 
 DEPENDS = "openssl paho-mqtt-c"
 
