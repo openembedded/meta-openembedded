@@ -1,0 +1,86 @@
+From f4e174870eb8cbe60c922d3bf181f3eb2347523c Mon Sep 17 00:00:00 2001
+From: Jonas Holmberg <jonashg@axis.com>
+Date: Mon, 2 Mar 2026 10:28:26 +0100
+Subject: [PATCH] module-protocol-native: Fix socket activation
+
+Fix path comparison in is_socket_unix() and don't unset LISTEN_FDS since
+the function that uses it is called more than once and it was not unset
+when sd_listen_fds() was used.
+
+Fixes #5140
+Upstream-Status: Backport
+[https://gitlab.freedesktop.org/pipewire/pipewire/-/commit/f4e174870eb8cbe60c922d3bf181f3eb2347523c]
+---
+ src/modules/module-protocol-native.c       |  2 +-
+ src/modules/module-protocol-pulse/server.c |  2 +-
+ src/modules/network-utils.h                | 14 +++++---------
+ 3 files changed, 7 insertions(+), 11 deletions(-)
+
+diff --git a/src/modules/module-protocol-native.c b/src/modules/module-protocol-native.c
+index 2be92a847..98a43829b 100644
+--- a/src/modules/module-protocol-native.c
++++ b/src/modules/module-protocol-native.c
+@@ -907,7 +907,7 @@ static int add_socket(struct pw_protocol *protocol, struct server *s, struct soc
+ 	bool activated = false;
+ 
+ 	{
+-		int i, n = listen_fd();
++		int i, n = listen_fds();
+ 		for (i = 0; i < n; ++i) {
+ 			if (is_socket_unix(LISTEN_FDS_START + i, SOCK_STREAM,
+ 						s->addr.sun_path) > 0) {
+diff --git a/src/modules/module-protocol-pulse/server.c b/src/modules/module-protocol-pulse/server.c
+index aeab710b0..637757dfd 100644
+--- a/src/modules/module-protocol-pulse/server.c
++++ b/src/modules/module-protocol-pulse/server.c
+@@ -576,7 +576,7 @@ static bool is_stale_socket(int fd, const struct sockaddr_un *addr_un)
+ 
+ static int check_socket_activation(const char *path)
+ {
+-	const int n = listen_fd();
++	const int n = listen_fds();
+ 
+ 	for (int i = 0; i < n; i++) {
+ 		const int fd = LISTEN_FDS_START + i;
+diff --git a/src/modules/network-utils.h b/src/modules/network-utils.h
+index a89b7d3bd..6ff80dd7a 100644
+--- a/src/modules/network-utils.h
++++ b/src/modules/network-utils.h
+@@ -143,7 +143,7 @@ static inline bool pw_net_addr_is_any(struct sockaddr_storage *addr)
+ 
+ /* Returns the number of file descriptors passed for socket activation.
+  * Returns 0 if none, -1 on error. */
+-static inline int listen_fd(void)
++static inline int listen_fds(void)
+ {
+ 	uint32_t n;
+ 	int i, flags;
+@@ -161,8 +161,6 @@ static inline int listen_fd(void)
+ 			return -1;
+ 	}
+ 
+-	unsetenv("LISTEN_FDS");
+-
+ 	return (int)n;
+ }
+ 
+@@ -192,12 +190,10 @@ static inline int is_socket_unix(int fd, int type, const char *path)
+ 		if (addr.sun_family != AF_UNIX)
+ 			return 0;
+ 		size_t length = strlen(path);
+-		if (length > 0) {
+-			if (len < offsetof(struct sockaddr_un, sun_path) + length)
+-				return 0;
+-			if (memcmp(addr.sun_path, path, length) != 0)
+-				return 0;
+-		}
++		if (len < offsetof(struct sockaddr_un, sun_path) + length + 1)
++			return 0;
++		if (memcmp(addr.sun_path, path, length + 1) != 0)
++			return 0;
+ 	}
+ 
+ 	return 1;
+-- 
+2.34.1
+

@@ -16,7 +16,7 @@ SRCREV = "700cea78dbe7564131d51b21a7795e2567ee048a"
 BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV} \
     file://0001-treewide-fix-some-Wdiscarded-qualifiers.patch \
-"
+    file://0001-module-protocol-native-Fix-socket-activation.patch"
 
 inherit meson pkgconfig systemd gettext useradd
 
