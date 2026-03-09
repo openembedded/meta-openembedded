@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=http
            file://0002-DataTest-disable-testSQLChannel-test.patch \
            file://run-ptest \
            "
-SRCREV = "96d182a99303fb068575294b36f0cc20da2e7b25"
+SRCREV = "52c558fbcda0578467e4f59c96961eb629ed3c77"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
@@ -126,8 +126,12 @@ PACKAGES_DYNAMIC = "poco-.*"
 ALLOW_EMPTY:${PN} = "1"
 
 # cppunit and datatest is only built if tests are enabled
-PACKAGES =+ "${PN}-cppunit ${PN}-datatest"
-FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
+# Upstream only ships libCppUnit.so.1 + symlink libCppUnit.so (no patch version),
+# so split: runtime in poco-cppunit, dev symlink in poco-cppunit-dev
+PACKAGES =+ "${PN}-cppunit-dev ${PN}-cppunit ${PN}-datatest"
+FILES:${PN}-cppunit-dev += "${libdir}/libCppUnit.so"
+RDEPENDS:${PN}-cppunit-dev += "${PN}-cppunit"
+FILES:${PN}-cppunit += "${libdir}/libCppUnit.so.1"
 ALLOW_EMPTY:${PN}-cppunit = "1"
 FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
 ALLOW_EMPTY:${PN}-datatest = "1"
