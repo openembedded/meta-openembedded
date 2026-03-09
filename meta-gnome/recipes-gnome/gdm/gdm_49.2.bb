@@ -79,3 +79,6 @@ FILES:${PN} += " \
 "
 
 RDEPENDS:${PN} += "${PN}-base"
+# gdm relies on dbus-run-session provided by dbus
+RCONFLICTS:${PN} += "dbus-broker"
+RDEPENDS:${PN} += "dbus"
