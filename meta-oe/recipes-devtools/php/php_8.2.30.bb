@@ -20,9 +20,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
            file://0010-iconv-fix-detection.patch \
            file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
-           file://CVE-2025-14177.patch \
-           file://CVE-2025-14178.patch \
-           file://CVE-2025-14180.patch \
           "
 
 SRC_URI:append:class-target = " \
@@ -37,7 +34,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "51979e8d198cbade2aad4ffe9f53dd3f04f9602d3089e5979985e058ade4267c"
+SRC_URI[sha256sum] = "104820b6c8fc959dde4b3342135f42bdabf246e86918a16381a17d8447c866fa"
 
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
