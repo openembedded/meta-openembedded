@@ -9,8 +9,8 @@ SRC_URI[sha256sum] = "d4000e02102acaf259998c870e25214739d1f16f67f99cb35e4f468413
 
 inherit cmake features_check pkgconfig
 
-# depends on virtual/libgl
-REQUIRED_DISTRO_FEATURES = "opengl"
+# depends on virtual/libgl and libxi
+REQUIRED_DISTRO_FEATURES = "opengl x11"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
 PACKAGECONFIG[gles] = "-DFREEGLUT_GLES=ON,-DFREEGLUT_GLES=OFF,"
