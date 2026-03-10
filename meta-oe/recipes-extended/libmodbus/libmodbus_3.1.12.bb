@@ -6,8 +6,8 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=https"
-SRCREV = "5190e5e141780ae481f24be16d7b39a5f3ad8f8f"
+SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "9af6c16074df566551bca0a7c37443e48f216289"
 
 
 inherit autotools pkgconfig
