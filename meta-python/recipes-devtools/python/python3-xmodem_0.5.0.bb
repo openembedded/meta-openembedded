@@ -3,9 +3,9 @@ DESCRIPTION = "XMODEM protocol implementation"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=90bc9522130d68de0dcbf33707bbf124"
 
-SRC_URI[sha256sum] = "2f1068aa8676f0d1d112498b5786c4f8ea4f89d8f25d07d3a0f293cd21db1c35"
+SRC_URI[sha256sum] = "a1a818f31c29412f1cab0cd69deccd7be77bc1feb516723af990d00161f6fb6a"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 do_install:append() {
     install -d ${D}${docdir}/${PN}
