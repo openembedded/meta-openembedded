@@ -3,9 +3,9 @@ DESCRIPTION = "A file format designed for highly efficient deltas while maintain
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
 
-SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;nobranch=1;tag=${PV}"
 
-SRCREV = "222d1a4da3661dd95c2445b96f7e1e208f55d219"
+SRCREV = "366cf22e725fc273abe0e082c707753cce76c453"
 
 DEPENDS = "zstd"
 DEPENDS:append:libc-musl = " argp-standalone"
