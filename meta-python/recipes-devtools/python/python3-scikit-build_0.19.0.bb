@@ -9,7 +9,7 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 inherit pypi python_hatchling
 
-SRC_URI[sha256sum] = "a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7"
+SRC_URI[sha256sum] = "46e1b2d71343d14e4c07d7e60902e673c78defb9a2c282b70ad80fb8502ade2e"
 
 RDEPENDS:${PN} = " \
 	python3-distro \
