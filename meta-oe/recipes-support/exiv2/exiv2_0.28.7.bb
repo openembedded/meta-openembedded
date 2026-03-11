@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${
            file://CVE-2026-25884-2.patch \
            file://CVE-2026-27596-1.patch \
            file://CVE-2026-27596-2.patch \
+           file://CVE-2026-27631-1.patch \
+           file://CVE-2026-27631-2.patch \
            "
 SRCREV = "afcb7a8ba84a7de36d2f1ee7689394e078697956"
 
