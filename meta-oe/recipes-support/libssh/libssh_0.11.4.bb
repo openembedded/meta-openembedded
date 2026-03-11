@@ -13,7 +13,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
 
 SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
 
-SRCREV = "301d0e16dfa8a5cac1cff956b6880ca90eb82864"
+SRCREV = "ca9c055d7c78ce357346ac7c2b14047568d47aa1"
 
 
 inherit cmake ptest
