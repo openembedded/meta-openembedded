@@ -48,6 +48,8 @@ LDFLAGS:append:libc-musl = " -lexecinfo"
 
 inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspection vala bash-completion
 
+REQUIRED_DISTRO_FEATURES = "x11"
+
 GIR_MESON_OPTION = 'can-crosscompile-gir'
 VALA_MESON_OPTION = "vala"
 VALA_MESON_ENABLE_FLAG = "enabled"
