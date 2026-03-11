@@ -19,7 +19,9 @@ DEPENDS += "ethtool \
 
 RDEPENDS:${PN} += "bash ethtool libgcc"
 
-SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https"
+SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
+           file://CVE-2026-3606.patch \
+           "
 
 SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
 
