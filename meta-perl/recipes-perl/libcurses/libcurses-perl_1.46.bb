@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GI/GIRAFFED/Curses-${PV}.tar.gz \
            file://0001-testtyp.c-Use-proper-prototype-for-main-function.patch \
            "
 
-SRC_URI[sha256sum] = "84221e0013a2d64a0bae6a32bb44b1ae5734d2cb0465fb89af3e3abd6e05aeb2"
+SRC_URI[sha256sum] = "9631d6e3e2859c85913d8b8724f61fbebb9e932e9e50aa0493a4e0276660a3f9"
 
 S = "${UNPACKDIR}/Curses-${PV}"
 
