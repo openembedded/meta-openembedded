@@ -1,5 +1,5 @@
 SUMMARY = "Terminal multiplexer"
-HOMEPAGE = "http://tmux.sourceforge.net"
+HOMEPAGE = "https://github.com/tmux/tmux/wiki"
 SECTION = "console/utils"
 
 LICENSE = "ISC"
@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=f256b76d52e7b4d02bf
 DEPENDS = "ncurses libevent bison-native"
 
 SRC_URI = "https://github.com/tmux/tmux/releases/download/${PV}/tmux-${PV}.tar.gz"
-SRC_URI[sha256sum] = "136db80cfbfba617a103401f52874e7c64927986b65b1b700350b6058ad69607"
+SRC_URI[sha256sum] = "b6d8d9c76585db8ef5fa00d4931902fa4b8cbe8166f528f44fc403961a3f3759"
 
 UPSTREAM_CHECK_URI = "https://github.com/tmux/tmux/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+[a-z]?)"
