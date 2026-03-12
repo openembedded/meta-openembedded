@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d3465a2a183908c9cb95bf490bd1e7ab \
                     file://docs/license.md;md5=d826b3c5269f21a8a0272af3f00d15c0 \
                     file://src/blib2to3/LICENSE;md5=bbbad7490e921f9a73c0e891305cb4b3"
 
-SRC_URI[sha256sum] = "d294ac3340eef9c9eb5d29288e96dc719ff269a88e27b396340459dd85da4c58"
+SRC_URI[sha256sum] = "4d438dfdba1c807c6c7c63c4f15794dda0820d2222e7c4105042ac9ddfc5dd0b"
 
 inherit pypi python_hatchling
 
