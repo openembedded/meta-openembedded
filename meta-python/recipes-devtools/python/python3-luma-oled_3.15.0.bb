@@ -4,11 +4,11 @@ A small library to drive an OLED device with either SSD1306 , SSD1309, SSD1322, 
 SSD1325, SSD1327, SSD1331, SSD1351 or SH1106 chipset"
 HOMEPAGE = "https://github.com/rm-hull/luma.oled"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=95cba8b3a40c6f55d5d901980fe6e067"
+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ddfca5d3a55dc20707b094137c913c4c"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "36218565eda0614c8cf44ef42cb9a5904ddf808e4516e99ddae111fc93c5a206"
+SRC_URI[sha256sum] = "16925fe668f484803df0683add800b19e5dd7316a1d64eb06ec2ae817473901e"
 
 PYPI_PACKAGE = "luma_oled"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
