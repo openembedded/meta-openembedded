@@ -6,12 +6,12 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
 
 SECTION = "net"
 
-SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
+SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-${PV}.tar.gz \
            file://hiawatha-init \
            file://hiawatha.service \
           "
 
-SRC_URI[sha256sum] = "1376763750fb9a88a780bac6aba8707bc2a78f8ee089c62d433e50216a5183bd"
+SRC_URI[sha256sum] = "942dd76e0b0369188612020cbcc92c19e11ea9e844f5dfaef4e9c7ab6892e247"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
