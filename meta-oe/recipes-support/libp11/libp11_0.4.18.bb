@@ -11,7 +11,7 @@ DEPENDS = "libtool openssl"
 
 SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https;tag=${BPN}-${PV}"
 
-SRCREV = "1ad1efdffc90df5dcd69822f3f593898acc1aa78"
+SRCREV = "52a437cd51fcfbaaa8b27d2c6f562e88fd015c0d"
 
 UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
 
