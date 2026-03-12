@@ -30,7 +30,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ac99c8678577a1c2f9f04cccee411d5d"
 SRC_URI = "https://download.openwall.net/pub/projects/${BPN}/${BP}.tar.gz \
            file://makefile-add-ldflags.patch \
           "
-SRC_URI[sha256sum] = "53b0f4bc49369f06195e9e13abb6cff352d5acb79e861004ec95973896488cf4"
+SRC_URI[sha256sum] = "52fa12271104e74126145c6224b22b4a8dd32cc47de04c1e9fb8f348340df4d2"
 
 # explicitly define LINUX_PAM in case DISTRO_FEATURES no pam
 # this package's pam_passwdqc.so needs pam
