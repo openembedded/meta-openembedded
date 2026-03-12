@@ -7,8 +7,8 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 DEPENDS = "systemd"
 RDEPENDS:${PN} += "bash bash-completion"
 
-SRC_URI = "git://gitlab.com/driverctl/driverctl.git;branch=master;protocol=https"
-SRCREV = "2ba60536eb20ca0a6a751bd8b6501dba84ec45d3"
+SRC_URI = "git://gitlab.com/driverctl/driverctl.git;branch=master;protocol=https;tag=${PV}"
+SRCREV = "0a72c5b1091d87e839ff083f686477f9eff5fb97"
 
 
 inherit pkgconfig systemd features_check
