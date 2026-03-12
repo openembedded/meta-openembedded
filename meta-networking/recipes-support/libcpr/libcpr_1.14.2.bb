@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=08beaae5deae1c43c065592da8f38095"
 
 DEPENDS = "curl openssl"
 
-SRC_URI = "git://github.com/libcpr/cpr.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "516cb3e5f4e38bede088f69fcf122c6089e38f00"
+SRC_URI = "git://github.com/libcpr/cpr.git;protocol=https;nobranch=1;tag=${PV}"
+SRCREV = "f091b2c061b307ee89b164c39976fc9202a1c79d"
 
 
 inherit cmake
