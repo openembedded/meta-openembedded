@@ -38,14 +38,15 @@ DEPENDS:append:class-target = " bash-completion"
 inherit meson gettext update-rc.d systemd gobject-introspection update-alternatives upstream-version-is-even pkgconfig
 
 SRC_URI = " \
-    git://github.com/NetworkManager/NetworkManager.git;protocol=https;branch=nm-1-52;tag=${PV} \
+    git://github.com/NetworkManager/NetworkManager.git;protocol=https;branch=nm-1-56;tag=${PV} \
     file://${BPN}.initd \
     file://enable-dhcpcd.conf \
     file://enable-iwd.conf \
+    file://0002-meson-fix-cross-compilation-issues.patch \
 "
 SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
 
-SRCREV = "57a409441bef013f636ac8e72836c19ecb27c1b9"
+SRCREV = "56b51b98fbb8627c4c09a483702e18fd8aee7ce1"
 
 
 # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
@@ -68,6 +69,7 @@ EXTRA_OEMESON = "\
     -Dconfig_dhcp_default=${NETWORKMANAGER_DHCP_DEFAULT} \
     -Diptables=${sbindir}/iptables \
     -Dnft=${sbindir}/nft \
+    -Dman=false \
 "
 
 # stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
@@ -80,7 +82,7 @@ CFLAGS:append:libc-musl = " \
 # networkmanager-1.52.0/src/nmcli/agent.c:88:29: error: incompatible function pointer types assigning to 'rl_hook_func_t *' (aka 'int (*)(void)') from 'int (const char *, int)' [-Wincompatible-function-pointer-types]
 #   88 |             rl_startup_hook = set_deftext;
 #      |                             ^ ~~~~~~~~~~~
- 
+
 CFLAGS:append:toolchain-clang = " -Wno-error=incompatible-function-pointer-types"
 
 PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli \
@@ -111,13 +113,13 @@ PACKAGECONFIG[crypto-null] = "-Dcrypto=null"
 PACKAGECONFIG[wifi] = "-Dwext=true -Dwifi=true,-Dwext=false -Dwifi=false"
 PACKAGECONFIG[iwd] = "-Diwd=true,-Diwd=false"
 PACKAGECONFIG[ifupdown] = "-Difupdown=true,-Difupdown=false"
-PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false"
+PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false,jansson"
 PACKAGECONFIG[nmcli] = "-Dnmcli=true,-Dnmcli=false"
 PACKAGECONFIG[nmtui] = "-Dnmtui=true,-Dnmtui=false,libnewt"
 PACKAGECONFIG[readline] = "-Dreadline=libreadline,,readline"
 PACKAGECONFIG[libedit] = "-Dreadline=libedit,,libedit"
 PACKAGECONFIG[ovs] = "-Dovs=true,-Dovs=false,jansson"
-PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no"
+PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no,audit"
 PACKAGECONFIG[selinux] = "-Dselinux=true,-Dselinux=false,libselinux"
 PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
 PACKAGECONFIG[dhcpcd] = "-Ddhcpcd=${base_sbindir}/dhcpcd,-Ddhcpcd=no,,dhcpcd"
@@ -127,6 +129,7 @@ PACKAGECONFIG[adsl] = ",,"
 PACKAGECONFIG[wwan] = ",,"
 # The following PACKAGECONFIG is used to determine whether NM is managing /etc/resolv.conf itself or not
 PACKAGECONFIG[man-resolv-conf] = ",,"
+PACKAGECONFIG[nbft] = "-Dnbft=true,-Dnbft=false"
 
 
 PACKAGES =+ " \
