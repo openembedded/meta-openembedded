@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "6ed73507dd3970a123e267a50b3ee73392e3b053"
+SRCREV = "d837a42788ba591d5d791c3b686f2738e7a93562"
 SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https;tag=gperftools-${PV}"
 
 SRC_URI:append:libc-musl = " \
