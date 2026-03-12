@@ -8,7 +8,7 @@ DEPENDS = "zlib libgcrypt gnutls curl aspell zstd cjson gettext-native"
 
 SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "e7ac1fbcc71458ed647aada8747990905cb5bfb93fd8ccccbc2a969673a4285a"
+SRC_URI[sha256sum] = "7e2f619d4dcd28d9d86864763581a1b453499f8dd0652af863b54045a8964d6c"
 
 inherit cmake pkgconfig
 
