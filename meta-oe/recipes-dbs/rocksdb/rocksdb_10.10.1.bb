@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "ae8fb3e5000e46d8d4c9dbf3a36019c0aaceebff"
-SRCBRANCH = "9.10.fb"
+SRCREV = "4595a5e95ae8525c42e172a054435782b3479c57"
+SRCBRANCH = "10.10.fb"
 
-SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
+SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https;tag=v${PV} \
            file://0001-cmake-Add-check-for-atomic-support.patch \
            file://0002-cmake-Use-exported-target-for-bz2.patch \
            file://0003-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
@@ -39,7 +39,7 @@ PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
 PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
 PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
 PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
-PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
+PACKAGECONFIG[liburing] = "-DWITH_LIBURING=ON,-DWITH_LIBURING=OFF,liburing"
 PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
 
 # Tools and tests currently don't compile on armv5 so we disable them
