@@ -19,3 +19,5 @@ RDEPENDS:${PN} += " \
 do_install:append() {
     install -D -m 0644 ${S}/src/snagrecover/50-snagboot.rules ${D}${sysconfdir}/udev/rules.d/50-snagboot.rules
 }
+
+BBCLASSEXTEND = "native nativesdk"
