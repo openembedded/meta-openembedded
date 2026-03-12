@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=7b6eb3b7380815648e5
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Bzip2-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "aa80f52473b8ca3368e8f83496fac1b2a25d27723506b94c4ea6c861fce961f8"
+SRC_URI[sha256sum] = "89153e6a2ebda52349493b074fa4b7549ff1f9053de7613c18a5e05c5b415fa8"
 
 DEPENDS += "bzip2"
 
