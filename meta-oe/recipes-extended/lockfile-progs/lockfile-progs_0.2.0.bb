@@ -8,10 +8,12 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 DEPENDS = "liblockfile"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.gz"
-SRC_URI[sha256sum] = "2c5704b01c8f474f82921780e4592a927b2bf6a6d7616354a6c5d7cd5664857e"
+SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz"
+SRC_URI[sha256sum] = "2988fb5a8b407e52e2aa6282ce45497f465c921d591138c100f4898215844c90"
 
 do_compile() {
+    ${BUILD_CC} ${BUILD_CPPFLAGS} ${BUILD_CFLAGS} -c rewrite-time.c
+    ${BUILD_CC} -o rewrite-time ${BUILD_LDFLAGS} rewrite-time.o
     oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables ${DEBUG_PREFIX_MAP}'
 }
 
