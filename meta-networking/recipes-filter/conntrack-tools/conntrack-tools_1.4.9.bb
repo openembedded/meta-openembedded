@@ -13,7 +13,7 @@ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-too
     file://init \
     file://conntrackd.service \
 "
-SRC_URI[sha256sum] = "067677f4c5f6564819e78ed3a9d4a8980935ea9273f3abb22a420ea30ab5ded6"
+SRC_URI[sha256sum] = "c15afe488a8d408c9d6d61e97dbd19f3c591942f62c13df6453a961ca4231cae"
 
 inherit autotools update-rc.d pkgconfig systemd
 
