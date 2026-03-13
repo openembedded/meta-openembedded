@@ -1,8 +1,8 @@
 SUMMARY = "v4l2 and IR applications"
 HOMEPAGE = "https://git.linuxtv.org/v4l-utils.git"
 LICENSE = "GPL-2.0-only & LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
-                    file://COPYING.libv4l;md5=d749e86a105281d7a44c2328acebc4b0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0ebceacbd7029b5e7051e9f529542b7c \
+                    file://COPYING.libv4l;md5=88b8889c2c4329d4cf18ce5895e64c16"
 PROVIDES = "libv4l media-ctl"
 
 DEPENDS = "jpeg \
@@ -23,14 +23,12 @@ PACKAGECONFIG[qvidcap] = ",-Dqvidcap=disabled"
 PACKAGECONFIG[v4l2-tracer] = ",-Dv4l2-tracer=disabled,json-c"
 
 SRC_URI = "\
-    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.28 \
+    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=master;tag=v4l-utils-${PV} \
     file://0001-media-ctl-Install-media-ctl-header-and-library-files.patch \
     file://0002-media-ctl-Install-media-ctl-pkg-config-files.patch \
-    file://0003-meson.build-fix-arm-_TIME_BITS-64-error.patch \
 "
 
-SRCREV = "fc15e229d9d337e46d730f00647821adbbd58548"
-
+SRCREV = "5a666c7ce89c00d66aa8e53c8f098a0c6c401f91"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v4l-utils-(?P<pver>\d+(\.\d+)+)"
 
