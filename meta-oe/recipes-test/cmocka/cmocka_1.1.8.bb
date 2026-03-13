@@ -6,13 +6,10 @@ HOMEPAGE = "https://cmocka.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "a01cc69ee9536f90e57c61a198f2d1944d3d4313"
-PV .= "+git"
-SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=stable-1.1 \
-           file://0001-include-Check-for-previous-declaration-of-uintptr_t.patch \
+SRCREV = "eba4d6ffca53b500ab8dfabc30256bb6c3088b2b"
+SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=stable-1.1;tag=cmocka-${PV} \
            file://run-ptest \
           "
-
 
 inherit cmake ptest
 
