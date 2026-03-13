@@ -10,10 +10,8 @@ DEPENDS = "libtool readline"
 
 SRC_URI = "https://www.unixodbc.org/unixODBC-${PV}.tar.gz \
            file://do-not-use-libltdl-source-directory.patch \
-           file://0001-exe-Makefile.am-add-CROSS_LAUNCHER-to-run-odbc_confi.patch \
-           file://CVE-2024-1013.patch \
 "
-SRC_URI[sha256sum] = "f210501445ce21bf607ba51ef8c125e10e22dffdffec377646462df5f01915ec"
+SRC_URI[sha256sum] = "4e2814de3e01fc30b0b9f75e83bb5aba91ab0384ee951286504bb70205524771"
 
 UPSTREAM_CHECK_URI = "https://www.unixodbc.org/download.html"
 UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
