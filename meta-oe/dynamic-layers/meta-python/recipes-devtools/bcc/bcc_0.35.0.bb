@@ -13,6 +13,7 @@ DEPENDS += "bison-native \
             clang \
             libbpf \
             python3-setuptools-native \
+            xz \
             "
 
 RDEPENDS:${PN} += "bash python3 python3-core python3-setuptools xz"
