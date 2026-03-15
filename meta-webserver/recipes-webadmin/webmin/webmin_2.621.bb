@@ -19,7 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://mysql-config-fix.patch \
            file://webmin.service \
             "
-SRC_URI[sha256sum] = "f73bfff803c8eaf566044fcdcfe5edb150bdeda721ec9daaaafd17a23919f529"
+SRC_URI[sha256sum] = "88381e8bcdd4733b215c114ca2158dc044892ea68dc0da4d235d88d2b1db4bb8"
 UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
 UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
 
