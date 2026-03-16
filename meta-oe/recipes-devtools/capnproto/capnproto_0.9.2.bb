@@ -6,6 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
 
 SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
+           file://CVE-2026-32239_CVE-2026-32240.patch;patchdir=.. \
            "
 SRCREV = "0274bf17374df912ea834687c667bed33bd318db"
 
