@@ -68,6 +68,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     nbench-byte \
     phoronix-test-suite \
     qperf \
+    rtla \
     s-suite \
     stressapptest \
     tinymembench \
