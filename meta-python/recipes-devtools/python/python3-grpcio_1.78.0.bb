@@ -13,11 +13,11 @@ DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
 SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            file://abseil-ppc-fixes.patch \
            "
-SRC_URI[sha256sum] = "7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73"
+SRC_URI[sha256sum] = "7382b95189546f375c174f53a5fa873cef91c4b8005faa05cc5b3beea9c4f1c5"
 
 RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 
-inherit setuptools3
+inherit python_setuptools_build_meta cython
 inherit pypi
 
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
@@ -28,6 +28,12 @@ export GRPC_PYTHON_BUILD_SYSTEM_CARES = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_RE2 = "1"
 export GRPC_PYTHON_BUILD_SYSTEM_ZLIB = "1"
+
+do_configure:append() {
+    # Relax strict cython version pin so that the available cython satisfies the requirement.
+    # The C files are pre-generated so cython is not actually used during compilation.
+    sed -i 's/\"cython==/\"cython>=/' ${S}/pyproject.toml
+}
 
 do_compile:prepend() {
     export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS="${@oe.utils.parallel_make(d, False)}"
