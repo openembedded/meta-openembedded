@@ -11,7 +11,7 @@ SRC_URI += "\
    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
 "
 
-SRC_URI[sha256sum] = "5b30f19347efff32b6e09ed2cdff0b04e9aee913ec9bb7414de2b7c17b17f1f9"
+SRC_URI[sha256sum] = "f57938ad30067077720277f6d7db05aafc07d1545efd2ed82f199ba828a7ad34"
 
 CVE_CHECK_IGNORE += "\
    CVE-2017-8806 \
