@@ -36,3 +36,5 @@ do_install_ptest(){
     install -d ${D}${PTEST_PATH}/src
     install ${S}/src/canonmn_int.cpp ${D}${PTEST_PATH}/src
 }
+
+CVE_STATUS[CVE-2026-27631] = "fixed-version: fixed in 0.28.8"
