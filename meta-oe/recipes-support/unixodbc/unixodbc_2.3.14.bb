@@ -46,3 +46,5 @@ do_install:prepend() {
 do_install:append() {
     oe_multilib_header unixodbc.h unixODBC/unixodbc_conf.h
 }
+
+CVE_STATUS[CVE-2024-1013] = "fixed-version: fixed in 2.3.13"
