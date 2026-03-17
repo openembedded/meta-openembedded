@@ -20,7 +20,7 @@ DEPENDS = " \
     glib-2.0-native \
     gtk+3 \
     harfbuzz \
-    iso-codes-native \
+    iso-codes \
     jpeg \
     json-glib \
     lcms \
@@ -32,7 +32,7 @@ DEPENDS = " \
     librsvg-native \
     libxmu \
     libxslt-native \
-    mypaint-brushes-1.0 \
+    mypaint-brushes \
     pango \
     poppler \
     poppler-data \
@@ -58,13 +58,12 @@ GIDOCGEN_MESON_OPTION = "gi-docgen"
 GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
 GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
 
-SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
-           file://0002-meson.build-reproducibility-fix.patch \
+SRC_URI = "https://download.gimp.org/gimp/v3.2/${BP}.tar.xz \
            file://0001-meson.build-dont-check-for-lgi.patch \
-           file://0001-meson.build-require-iso-codes-native.patch \
-           file://0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch \
-           "
-SRC_URI[sha256sum] = "feb498acc01b26827cff1ff95aa8fb82cdd6a60d7abf773cfcd19abeafca3386"
+           file://0002-meson.build-use-relative-path-for-ISO_CODES_LOCATION.patch \
+           file://0003-meson.build-reproducibility-fix.patch \
+"
+SRC_URI[sha256sum] = "2618391416e51be3c693df9ef90e3860ed72ab3d36363ea1f196e30b75b2e083"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
