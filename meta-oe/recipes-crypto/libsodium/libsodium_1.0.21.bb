@@ -13,3 +13,5 @@ SRC_URI[sha256sum] = "9e4285c7a419e82dedb0be63a72eea357d6943bc3e28e6735bf600dd48
 inherit autotools
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_STATUS[CVE-2025-69277] = "fixed-version: fixed in 1.0.20"
