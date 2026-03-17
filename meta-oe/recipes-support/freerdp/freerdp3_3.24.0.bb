@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
 
 inherit pkgconfig cmake ptest
 
-SRCREV = "b933ae18d9ad2a1d73c610868fcc30eb61654070"
+SRCREV = "b00402d3258402c868224b6ffed04182cbed78d9"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag=${PV} \
            file://run-ptest"
 
@@ -39,6 +39,8 @@ EXTRA_OECMAKE = " \
     -DWITH_SAMPLE=OFF \
     -DWITH_CAIRO=ON \
     -DWITH_MANPAGES=OFF \
+    -DWITH_INTERNAL_RC4=ON \
+    -DWITH_INTERNAL_MD4=ON \
  "
 
 X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
