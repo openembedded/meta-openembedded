@@ -9,7 +9,7 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
 SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "7ba65889d3d6d8a0d99b5360b028243ba843be3a"
+SRCREV = "f3d916c8e63e510bda1f9cf5e8710259c22afece"
 
 
 inherit cmake pkgconfig
@@ -21,3 +21,5 @@ PACKAGECONFIG[libsdl] = "-DENABLE_SDL=ON,-DENABLE_SDL=OFF,virtual/libsdl2"
 
 FILES:${PN} += "${libdir}/libde265.so"
 FILES:${PN}-dev = "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
+INSANE_SKIP:${PN} = "dev-so"
+
