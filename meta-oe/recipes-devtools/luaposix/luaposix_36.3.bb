@@ -1,14 +1,14 @@
 DESCRIPTION = "luaposix is a POSIX binding for Lua."
 LICENSE = "MIT"
 HOMEPAGE = "https://github.com/luaposix/luaposix"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f30d022f6ef53952fa87cc0b6fffb153"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9a2c76dbe2ca56cf57296af9c9995c27"
 
 DEPENDS += "lua-native lua virtual/crypt"
 
-SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release-v36.2;protocol=https \
+SRC_URI = "git://github.com/luaposix/luaposix.git;nobranch=1;tag=v${PV};protocol=https \
 "
-SRCREV = "5a8d8c768fc3c51f42cb591e9523a60399efc6a1"
-LUA_VERSION = "5.4"
+SRCREV = "e6b94b37c19c4bd19a7dc475a4f4cb56f61f5da9"
+LUA_VERSION = "5.5"
 
 B = "${S}"
 
