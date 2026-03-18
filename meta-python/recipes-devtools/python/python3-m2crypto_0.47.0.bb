@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740a
 
 SRC_URI[sha256sum] = "9256300be1e0412be802aa1f827e0ce7f94deb1099b8ccdcfd9867a7f0f975bf"
 
-SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
+SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch \
+            file://0001-fix-swig-avoid-clang-GNUC-pragma-block-before-_lib.h.patch"
 
 CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
 CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.46.2) contains the fix already"
