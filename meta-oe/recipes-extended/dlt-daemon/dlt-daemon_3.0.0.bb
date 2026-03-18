@@ -17,12 +17,13 @@ DEPENDS = "zlib gzip-native json-c"
 SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
            file://0004-Modify-systemd-config-directory.patch \
-           file://544.patch \
-           file://567.patch \
-           file://0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch \
-           file://0003-allow-build-with-cmake-4.patch \
+           file://0001-Fix-compile-failure-related-to-gzlog.patch \
+           file://0001-Fix-kinds-of-build-failure.patch \
+           file://0001-Fix-build-failures.patch \
+           file://0001-fix-build-failure-when-systemd-is-enabled.patch \
+           file://0001-Fix-build-failure-with-glibc-2.43.patch \
            "
-SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
+SRCREV = "f595ea29d1007ca1c3b2d1fd3a88adf7d3db6320"
 
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd systemd-watchdog systemd-journal ', '', d)} \
@@ -71,4 +72,5 @@ FILES:${PN}-doc += "${datadir}/dlt-filetransfer"
 
 do_install:append() {
     rm -f ${D}${bindir}/dlt-test-*
+    sed -i -e 's:${RECIPE_SYSROOT}::g' ${D}/usr/lib/pkgconfig/automotive-dlt.pc
 }
