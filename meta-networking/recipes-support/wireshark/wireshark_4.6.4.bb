@@ -4,7 +4,19 @@ SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 
-DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp virtual/libiconv"
+DEPENDS = "\
+    bison-native \
+    c-ares \
+    expat \
+    glib-2.0 \
+    glib-2.0-native \
+    libgcrypt libgpg-error \
+    libxml2 \
+    pcre2 \
+    speexdsp \
+    virtual/libiconv \
+    xxhash \
+"
 
 DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
 
