@@ -30,3 +30,5 @@ RDEPENDS:${PN} += " \
         python3-pprint \
         python3-packaging \
 "
+
+CVE_STATUS[CVE-2025-68480] = "fixed-version: fixed in 4.1.2"
