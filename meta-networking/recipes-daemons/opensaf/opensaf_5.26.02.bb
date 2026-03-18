@@ -26,14 +26,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
            file://0001-immom_python-convert-to-python3.patch \
-           file://0001-Fix-build-with-fno-common.patch \
            file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
-           file://0001-include-missing-array-header.patch \
            file://0002-configure-Disable-selected-warnings.patch \
-           file://0001-include-cstdint-for-uintXX_t-types.patch \
-           file://0002-Fix-Werror-enum-int-mismatch-with-gcc13.patch \
+           file://0001-To-fix-Werror-discarded-qualifiers-error.patch \
            "
-SRC_URI[sha256sum] = "f008d53c83087ce2014c6089bc4ef08e14c1b4091298b943f4ceade1aa6bf61e"
+SRC_URI[sha256sum] = "c51603bc486ce6db271a7023a75963bfc6f277f4d4486df2fe004a51c81cfdee"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
 
