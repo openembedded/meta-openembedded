@@ -12,11 +12,9 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "700cea78dbe7564131d51b21a7795e2567ee048a"
+SRCREV = "95da54a482b68475958bbc3fa572a9c20df0df74"
 BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
-SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV} \
-    file://0001-treewide-fix-some-Wdiscarded-qualifiers.patch \
-    file://0001-module-protocol-native-Fix-socket-activation.patch"
+SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
 
 inherit meson pkgconfig systemd gettext useradd
 
