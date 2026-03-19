@@ -13,6 +13,7 @@ PTESTS_FAST_META_OE = "\
     cjson \
     cli11 \
     cmocka \
+    conserver \
     cunit \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'dbus-broker', '', d)} \
     duktape \
