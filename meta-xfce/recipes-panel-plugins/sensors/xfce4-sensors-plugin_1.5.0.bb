@@ -3,10 +3,12 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-sensors-plugin/start"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
+XFCE_COMPRESS_TYPE = "xz"
+
 inherit xfce-panel-plugin
 
 SRC_URI += "file://0001-Do-not-check-for-sys-class-power_supply-we-are-cross.patch"
-SRC_URI[sha256sum] = "f69fdf79b7f76d2a81724828124a6fce76803a9122a4c82de8f3dfa3efbb179a"
+SRC_URI[sha256sum] = "840442b87fdddcd8595bd9f83ea8b81f771fe296bb9d2abf0e1979e208727ae9"
 
 EXTRA_OECONF = " \
     --disable-procacpi \
