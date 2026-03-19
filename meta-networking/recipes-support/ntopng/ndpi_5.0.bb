@@ -8,23 +8,19 @@ RDEPENDS:${PN} += " libpcap"
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
 
-SRCREV = "8b5c6af71b562549f8416b31803daae223e09f46"
-SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.2-stable;protocol=https \
-           file://0001-autogen.sh-not-generate-configure.patch \
-           "
+SRCREV = "375f99ef9fb4999d778b57bbeece171b3fa9fba6"
+SRC_URI = "git://github.com/ntop/nDPI.git;branch=5.0-stable;protocol=https;tag=${PV} \
+           file://0001-configure-Stop-embedding-pwd-at-configure-time.patch \
+          "
 
-
-inherit autotools-brokensep pkgconfig
+inherit autotools pkgconfig
 
 CPPFLAGS += "${SELECTED_OPTIMIZATION}"
 
 do_configure:prepend() {
-    ${S}/autogen.sh
+    (cd ${S} && ${S}/autogen.sh)
 }
 
 EXTRA_OEMAKE = " \
     libdir=${libdir} \
 "
-
-# remove this CVE_STATUS, when the recipe is updated to 4.12 or newer
-CVE_STATUS[CVE-2025-25066] = "cpe-incorrect: Version 4.2 is not vulnerable yet"
