@@ -10,8 +10,8 @@ REQUIRED_DISTRO_FEATURES = "x11 gobject-introspection-data"
 
 DEPENDS += "intltool-native"
 
-SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "56cce1a27e88a18a282d568cbc601547a5dd704f0449a75bc284f0171aebaf3b"
+SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.1/${BP}.tar.xz"
+SRC_URI[sha256sum] = "0126373a03778bb4894afa151de28d36bfc563ddab96d3bd7c63962350d34ba2"
 
 do_configure() {
     # special configure - no autotools...
@@ -25,4 +25,4 @@ do_install() {
 
 FILES:${PN} += "${datadir}/metainfo"
 
-RDEPENDS:${PN} += "python3-pygobject python3-pexpect"
+RDEPENDS:${PN} += "python3-pygobject python3-pexpect python3-psutil"
