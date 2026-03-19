@@ -3,8 +3,11 @@ HOMEPAGE = "https://docs.xfce.org/apps/xfce4-taskmanager/start"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+
 inherit xfce-app
 
-DEPENDS += "gtk+3 cairo libwnck libxfce4ui libxmu xfce4-dev-tools-native"
+DEPENDS += "gtk+3 cairo libwnck libxfce4ui libxmu"
 
-SRC_URI[sha256sum] = "14b9d68b8feb88a642a9885b8549efe7fc9e6c155f638003f2a4a58d9eb2baab"
+SRC_URI[sha256sum] = "29bdc7840ab8b9025f6c0e456a83a31090d1c9fd9e26b359baa4a4010cfb0b90"
