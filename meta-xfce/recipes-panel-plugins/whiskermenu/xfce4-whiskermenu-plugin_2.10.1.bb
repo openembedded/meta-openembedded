@@ -8,4 +8,4 @@ XFCEBASEBUILDCLASS = "meson"
 
 inherit xfce-panel-plugin cmake
 
-SRC_URI[sha256sum] = "c2efb3782816d44d421dcbee2900b9513bdb2469b695b776641f495601f33a10"
+SRC_URI[sha256sum] = "8b5a777a5d9df1f1c39b109ba8b2d045cb2cc02c41a9a297aa00dcb2a4520530"
