@@ -14,6 +14,10 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 
 export PYTHONHASHSEED = "1"
 
+# If XML_CATALOG_FILES env var is not defined, waf defaults
+# to build host folders looking for catalogs.
+export XML_CATALOG_FILES = ""
+
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://smb.conf \
            file://volatiles.03_samba \
@@ -24,11 +28,11 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
            file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
-           file://9aa5c43315d83c19514251a11c4fba5a137f2821.patch \
            file://0001-lib-replace-Implement-memset_explicit.patch \
            file://0002-lib-replace-Add-test-for-memset_explicit.patch \
            file://0003-Replace-memset_s-with-memset_explicit.patch \
            file://0004-lib-replace-Remove-memset_s.patch \
+           file://use-xslt-replace-function-when-available.patch;apply=no \
            "
 
 SRC_URI:append:libc-musl = " \
@@ -36,7 +40,7 @@ SRC_URI:append:libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
            "
 
-SRC_URI[sha256sum] = "71ed406444714c90bb9d36c576d807b67af15449f297e91106d42b3ca2fa5549"
+SRC_URI[sha256sum] = "593a43ddd0d57902237dfa76888f7b02cb7fc7747111369cb31e126db4836b9f"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
 
@@ -47,7 +51,7 @@ CVE_STATUS[CVE-2011-2411] = "not-applicable-platform: vulnerable only on HP NonS
 # remove default added RDEPENDS on perl
 RDEPENDS:${PN}:remove = "perl"
 
-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 libtasn1-native jansson libparse-yapp-perl-native gnutls cmocka"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libaio libpam libtasn1 libtasn1-native jansson libparse-yapp-perl-native gnutls cmocka ngtcp2 bison-native"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
@@ -62,7 +66,7 @@ INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
 
 SYSTEMD_PACKAGES = "${PN}-base ${PN}-ad-dc winbind ctdb"
-SYSTEMD_SERVICE:${PN}-base = "nmb.service smb.service"
+SYSTEMD_SERVICE:${PN}-base = "nmb.service smb.service samba-bgqd.service"
 SYSTEMD_SERVICE:${PN}-ad-dc = "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'samba.service', '', d)}"
 SYSTEMD_SERVICE:winbind = "winbind.service"
 SYSTEMD_SERVICE:ctdb = "ctdb.service"
@@ -109,7 +113,7 @@ SAMBA4_MODULES = "${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MO
 # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
 # when adding to this list.
 #
-SAMBA4_LIBS = "heimdal,NONE"
+SAMBA4_LIBS = "heimdal,libquic,NONE"
 
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
@@ -131,6 +135,24 @@ EXTRA_OECONF += "--enable-fhs \
                 "
 
 LDFLAGS += "-Wl,-z,relro,-z,now"
+
+do_configure:prepend() {
+    # The xsltproc tool is actually a wrapper script in OE, which exports its own XML_CATALOG_FILES env var
+    # However samba does that too. So here I'm trying to concatenate the variables.
+    # The original looks like this in the wrapper:
+    # export XML_CATALOG_FILES=oe-core-specific-thing
+    # and this sed prepends the value with $XML_CATALOG_FILES, and encloses it in quotes. So the end value is
+    # export XML_CATALOG_FILES="$XML_CATALOG FILES oe-core-specific-thing"
+    # The first grep just checks if it was already done, so it is not prepended multiple times.
+
+    grep \$XML_CATALOG_FILES ${STAGING_BINDIR_NATIVE}/xsltproc || \
+        sed -i 's,\(XML_CATALOG_FILES\)=\(.*\),\1="\$XML_CATALOG_FILES \2",' ${STAGING_BINDIR_NATIVE}/xsltproc
+
+    # This patch modifies xslt-stylesheets in sysroot. Version is hardcoded in the path - when it fails, that should be an
+    # indicator that a new version is available, which contains this patch
+    grep exslt ${STAGING_DATADIR_NATIVE}/xml/docbook/xsl-stylesheets-1.79.1/lib/lib.xsl || \
+        patch -p 3 -d ${STAGING_DATADIR_NATIVE}/xml/docbook/xsl-stylesheets-1.79.1/lib < ${UNPACKDIR}/use-xslt-replace-function-when-available.patch
+}
 
 do_configure:append() {
     cd ${S}/pidl/
@@ -213,6 +235,9 @@ do_install:append() {
     find ${D}${libdir}/perl5/ -type f -name "perllocal.pod" -delete
     find ${D}${libdir}/perl5/ -type f -name ".packlist" -delete
     sed -i -e '1s,#!.*perl,#!${bindir}/env perl,' ${D}${bindir}/pidl
+
+    sed -i 's,${UNPACKDIR},,g' ${S}/bin/default/libcli/wsp/wsp_aqs_lexer.c
+    sed -i 's,${UNPACKDIR},,g' ${S}/bin/default/libcli/wsp/wsp_aqs_lexer.h
 }
 
 PACKAGES =+ "${PN}-python3 ${PN}-pidl \
@@ -245,7 +270,7 @@ PACKAGESPLITFUNCS:prepend = "samba_populate_packages "
 PACKAGES_DYNAMIC = "samba-auth-.* samba-pdb-.*"
 
 RDEPENDS:${PN} += "${PN}-base ${PN}-python3 ${PN}-dsdb-modules python3"
-RDEPENDS:${PN}-python3 += "pytalloc python3-tdb pyldb"
+RDEPENDS:${PN}-python3 += "pytalloc python3-tdb"
 
 FILES:${PN}-base = "${sbindir}/nmbd \
                     ${sbindir}/smbd \
