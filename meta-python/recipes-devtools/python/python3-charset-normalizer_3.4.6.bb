@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
 
-#SRC_URI += "file://0001-pyproject.toml-Update-mypy-requirement.patch"
+SRC_URI += "file://0001-pyprojects-Bump-setuptools-check-to-be-82.x.patch"
 
-SRC_URI[sha256sum] = "95adae7b6c42a6c5b5b559b1a99149f090a57128155daeea91732c8d970d8644"
+SRC_URI[sha256sum] = "1ae6b62897110aa7c79ea2f5dd38d1abca6db663687c0b1ad9aed6f6bae3d9d6"
 
 DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 
