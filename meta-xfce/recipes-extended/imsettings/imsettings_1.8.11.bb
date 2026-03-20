@@ -16,11 +16,11 @@ DEPENDS = "autoconf-archive-native gtk+3 libnotify"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main \
+SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main;tag=${PV} \
            file://imsettings-gcc10.patch \
            file://0001-remove-man-page.patch \
           "
-SRCREV = "27d84c88831ef76397a15891ba0738ce9a83902a"
+SRCREV = "7fadd84fcbfe6c321dbe1c97b50cbb70efe20155"
 
 
 do_configure:prepend() {
