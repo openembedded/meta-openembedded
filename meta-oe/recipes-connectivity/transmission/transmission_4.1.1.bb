@@ -15,7 +15,7 @@ SRC_URI = " \
 "
 
 # Transmission release 4.1.0
-SRCREV = "272401184f0736e6063f9da90be7d037e907508a"
+SRCREV = "56442e2929cf4e9e20c8604a229e99fbb352190c"
 
 
 inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
@@ -27,6 +27,8 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'gtk', ''
 
 PACKAGECONFIG[gtk] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF,gtk4 gtkmm4,"
 PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd,"
+
+EXTRA_OECMAKE = "-DRUN_CLANG_TIDY=OFF"
 
 # Weak default values for transmission user and group
 # Change them in bbappend if needed
