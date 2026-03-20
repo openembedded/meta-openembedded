@@ -19,21 +19,30 @@ JIT:powerpc64le = ""
 JIT:powerpc64 = ""
 
 DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
-            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson"
+            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson \
+            uthash libbpf clang-native bpftool-native yaml-cpp nlohmann-json"
 RDEPENDS:${PN} = "bash"
 
 SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
-           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
+           git://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
+           git://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=driver;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/driver \
            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
-           file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
-           file://0001-libsinsp-fix-build-with-gcc-15.patch;patchdir=./falcosecurity-libs \
-           file://0001-update-cmake-Only-add-dependencies-when-we-bundle.patch;patchdir=./falcosecurity-libs \
+           file://0001-Avoid-duplicate-operations-of-add_library.patch;patchdir=./falcosecurity-libs \
           "
-SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
-SRCREV_falco = "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
+SRCREV_sysdig = "6ef29110cf1add746e10ab5b38957e22730b7349"
+SRCREV_falco = "e1999d079880d10800c57e004fca794a03cd060a"
+SRCREV_driver = "d4efc80ece48174a71c1a420cb52d233fa94f946"
 
 SRCREV_FORMAT = "sysdig_falco"
 
+#Add this function to generate driver_config.h
+do_configure:prepend() {
+    mkdir -p ${WORKDIR}/driver_Make
+    cd ${WORKDIR}/driver_Make
+    cmake ${S}/driver -DMINIMAL_BUILD=ON -DCREATE_TEST_TARGETS=OFF
+    cd -
+}
+do_configure[cleandirs] = "${WORKDIR}/driver_Make"
 
 EXTRA_OECMAKE = "\
                 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
@@ -44,10 +53,30 @@ EXTRA_OECMAKE = "\
                 -DDIR_ETC=${sysconfdir} \
                 -DLUA_INCLUDE_DIR=${STAGING_INCDIR}/luajit-2.1 \
                 -DFALCOSECURITY_LIBS_SOURCE_DIR=${S}/falcosecurity-libs \
+                -DDRIVER_SOURCE_DIR=${S}/driver \
                 -DVALIJSON_INCLUDE=${STAGING_INCDIR}/valijson \
+                -DUSE_BUNDLED_RE2=OFF \
+                -DUSE_BUNDLED_TBB=OFF \
+                -DUSE_BUNDLED_JSONCPP=OFF \
+                -DBUILD_SYSDIG_MODERN_BPF=OFF \
+                -DCREATE_TEST_TARGETS=OFF \
 "
 
+#Add include dir to find driver_config.h
+CXXFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
+CFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
+
+#To fix do_package QA Issue
+do_compile:append() {
+    sed -i -e "s,${WORKDIR},,g" ${B}/libsinsp/libsinsp.pc
+    sed -i -e "s,${WORKDIR},,g" ${B}/driver/libscap/libscap.pc
+    mkdir -p ${B}/driver/libsinsp
+    cp ${B}/libsinsp/libsinsp.pc ${B}/driver/libsinsp/
+}
+do_compile[cleandirs] = "${B}/driver/libsinsp"
+
 #CMAKE_VERBOSE = "VERBOSE=1"
+
 
 FILES:${PN} += " \
     ${DIR_ETC}/* \
