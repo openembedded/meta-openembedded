@@ -15,6 +15,7 @@ DEPENDS = "dbus ncurses"
 SRCREV = "95da54a482b68475958bbc3fa572a9c20df0df74"
 BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
+SRC_URI += "file://0001-spa-plugins-alsa-acp-compat.h-Fix-missed-Wdiscarded-.patch"
 
 inherit meson pkgconfig systemd gettext useradd
 
