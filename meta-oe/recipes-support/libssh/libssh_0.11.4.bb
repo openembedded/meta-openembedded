@@ -47,6 +47,3 @@ do_install_ptest () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-CVE_STATUS[CVE-2025-5987] = "fixed-version: The vulnerability was fixed in 0.11.2"
-CVE_STATUS[CVE-2025-5318] = "fixed-version: The vulnerability was fixed in 0.11.2"
