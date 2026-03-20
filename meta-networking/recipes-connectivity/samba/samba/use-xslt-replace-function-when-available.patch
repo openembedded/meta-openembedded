@@ -1,0 +1,51 @@
+From: Peter De Wachter <pdewacht@gmail.com>
+Date: Tue, 2 Jun 2020 09:10:39 -0400
+Subject: use EXSLT "replace" function when available
+
+A recursive implementation  of string.subst is problematic,
+long strings with many matches will cause stack overflows.
+
+Bug-Debian: https://bugs.debian.org/750593
+
+OE comment:
+This fixes samba build error:
+xsltApplySequenceConstructor: A potential infinite template recursion was detected
+
+The patch changes xslt-styleshets in native sysroot. It comes from Debian,
+but used by other distros also, for example Fedora.
+
+Looking at the history, it seems that the patch was upstreamed in 2018,
+but upstream hasn't created a stable tag since 2016.
+
+Upstream-Status: Backport [https://github.com/docbook/xslt10-stylesheets/commit/1c41ae5ae3d4816687467712580d5f05957b3b88]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ docbook-xsl/lib/lib.xsl | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/docbook-xsl/lib/lib.xsl b/docbook-xsl/lib/lib.xsl
+index e65776a..bc45cd8 100644
+--- a/docbook-xsl/lib/lib.xsl
++++ b/docbook-xsl/lib/lib.xsl
+@@ -10,7 +10,10 @@
+      This module implements DTD-independent functions
+ 
+      ******************************************************************** -->
+-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
++<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
++                xmlns:str="http://exslt.org/strings"
++                exclude-result-prefixes="str"
++                version="1.0">
+ 
+ <xsl:template name="dot.count">
+   <!-- Returns the number of "." characters in a string -->
+@@ -56,6 +59,9 @@
+   <xsl:param name="replacement"/>
+ 
+   <xsl:choose>
++    <xsl:when test="function-available('str:replace')">
++      <xsl:value-of select="str:replace($string, string($target), string($replacement))"/>
++    </xsl:when>
+     <xsl:when test="contains($string, $target)">
+       <xsl:variable name="rest">
+         <xsl:call-template name="string.subst">
