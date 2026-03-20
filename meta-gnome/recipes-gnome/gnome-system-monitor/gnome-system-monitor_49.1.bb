@@ -28,6 +28,8 @@ SRC_URI[archive.sha256sum] = "915b6a321ada12eba7bf578c20c9fe5e41f55d532847cbd124
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
 
+TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
+
 RRECOMMENDS:${PN} = "adwaita-icon-theme"
 
 FILES:${PN} += " \
