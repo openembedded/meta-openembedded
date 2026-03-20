@@ -2,9 +2,9 @@ SUMMARY = "EFI executable for fwupd"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main"
+SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main;tag=${PV}"
 
-SRCREV = "cfd0be286a9b050c1aa4bfa3f0820256903a264a"
+SRCREV = "8572a93e81e7110b88445d1907fdd73982557347"
 
 DEPENDS = "gnu-efi python3-pefile-native"
 
@@ -29,9 +29,3 @@ EXTRA_OEMESON += "\
 
 # The compile assumes GCC at present
 TOOLCHAIN = "gcc"
-
-# Multiple errors like below with gcc14
-#| ../git/efi/fwupdate.c:611:20: error: passing argument 5 of 'fwup_log' from incompatible pointer type [-Wincompatible-pointer-types]
-#|   611 |         fwup_debug(L"n_updates: %d", n_updates);
-#|       |                    ^~~~~~~~~~~~~~~~
-TOOLCHAIN_OPTIONS += "-Wno-error=incompatible-pointer-types"
