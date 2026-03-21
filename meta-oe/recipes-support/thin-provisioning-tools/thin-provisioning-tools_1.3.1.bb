@@ -1,19 +1,21 @@
 SUMMARY = "Tools of dm-thin device-mapper"
 DESCRIPTION = "A suite of tools for manipulating the metadata of the dm-thin device-mapper target."
-HOMEPAGE = "https://github.com/jthornber/thin-provisioning-tools"
+HOMEPAGE = "https://github.com/device-mapper-utils/thin-provisioning-tools"
 LICENSE = "GPL-3.0-only"
 SECTION = "devel"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRC_URI = " \
-    git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
-    file://0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/libc-0.2.155 \
+    git://github.com/device-mapper-utils/thin-provisioning-tools;branch=main;protocol=https;tag=v${PV} \
     file://0001-Use-portable-atomics-crate.patch \
+    file://disable-cargo-metadata.patch \
+    ${@bb.utils.contains('TUNE_FEATURES', '32', \
+        'file://dms-no-layout-check.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/devicemapper-sys-0.3.3', \
+        '', d)} \
     "
 
-# v1.1.0
-SRCREV = "b745ab35057bdd0a4f1406938916621dcf2b7ef6"
+SRCREV = "8b663fb4c6fb8e52ca06cea57b986c5ba45f668d"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
@@ -28,7 +30,6 @@ BINDGEN_EXTRA_CLANG_ARGS:remove = "-mcpu=octeontx2+crypto"
 export BINDGEN_EXTRA_CLANG_ARGS
 
 require ${BPN}-crates.inc
-require ${BPN}-git-crates.inc
 
 do_install:append() {
 	install -d ${D}${sbindir}
