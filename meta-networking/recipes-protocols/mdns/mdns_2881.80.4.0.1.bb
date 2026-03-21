@@ -14,9 +14,10 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0006-make-Add-top-level-Makefile.patch \
            file://0001-Fix-build-with-gcc-15.patch \
            file://mdns.service \
+           file://0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch \
            "
-BRANCH = "main"
-SRCREV = "d4658af3f5f291311c6aee4210aa6d39bda82bbe"
+BRANCH = "rel/mDNSResponder-2881"
+SRCREV = "e2a1e56a2f8d29640908c48f4de3f1ba65d1af46"
 
 inherit github-releases manpages systemd update-rc.d
 
