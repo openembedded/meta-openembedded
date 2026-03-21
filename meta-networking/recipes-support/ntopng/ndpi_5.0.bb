@@ -21,6 +21,10 @@ do_configure:prepend() {
     (cd ${S} && ${S}/autogen.sh)
 }
 
+do_install:append() {
+    install -Dm 0644 ${B}/src/include/ndpi_define.h ${D}${includedir}/ndpi/ndpi_define.h
+}
+
 EXTRA_OEMAKE = " \
     libdir=${libdir} \
 "
