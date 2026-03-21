@@ -23,7 +23,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://lfs64.patch \
            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
           "
-SRC_URI[sha256sum] = "d61f23090cfc14f43e8a27c2d3ce7f80247e74481bb26a2d3a6308b8d194e167"
+SRC_URI[sha256sum] = "e4f9f2035d38345464ae8abaeaf68380d1ceadbafb4e84744ed2ed5b7aab64e7"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
 
