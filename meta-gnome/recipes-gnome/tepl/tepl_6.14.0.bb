@@ -22,7 +22,7 @@ inherit meson gobject-introspection gettext features_check pkgconfig
 
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-tepl.git;protocol=https;branch=main"
+SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-tepl.git;protocol=https;branch=main;tag=${PV}"
 SRCREV = "d60f7ded17b52ea42091c073ea81090e91f38620"
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
