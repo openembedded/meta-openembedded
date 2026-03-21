@@ -16,7 +16,7 @@ PROTOC_BRANCH = "${@d.getVar('PV').split('.', 2)[1]}.x"
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "b6f9284da830b69be787732ffdaa35049d20a088"
+SRCREV = "6e1998413a5bca7c058b85999667893f167434bc"
 
 SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH};protocol=https;tag=${PROTOC_VERSION} \
            file://run-ptest \
