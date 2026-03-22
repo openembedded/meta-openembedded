@@ -1,4 +1,4 @@
-From c98d9022377e88f8cc2d557a4ffd321e6f2dd320 Mon Sep 17 00:00:00 2001
+From a2d78f6716157d6e1e94d9864e351887d74d0b30 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@eng.windriver.com>
 Date: Tue, 18 Nov 2025 01:04:27 -0800
 Subject: [PATCH] doc/man: support reproducible builds
@@ -16,7 +16,7 @@ Signed-off-by: Hongxu Jia <hongxu.jia@eng.windriver.com>
  2 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/doc/Makefile b/doc/Makefile
-index 83dfa38b..17b63c85 100644
+index 83dfa38..17b63c8 100644
 --- a/doc/Makefile
 +++ b/doc/Makefile
 @@ -14,7 +14,7 @@ include $(BUILDRULES)
@@ -29,7 +29,7 @@ index 83dfa38b..17b63c85 100644
  install: default
  	$(INSTALL) -m 755 -d $(PKG_DOC_DIR)
 diff --git a/include/buildmacros b/include/buildmacros
-index 9183e5bc..6ba0d515 100644
+index 9183e5b..6ba0d51 100644
 --- a/include/buildmacros
 +++ b/include/buildmacros
 @@ -105,7 +105,7 @@ INSTALL_MAN = \
@@ -49,6 +49,3 @@ index 9183e5bc..6ba0d515 100644
 +			$(ZIP) -n --best -c < $$f > $$f.gz; \
  		fi; \
  	done
--- 
-2.49.0
-

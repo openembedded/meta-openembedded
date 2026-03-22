@@ -1,4 +1,4 @@
-From f62d3e5cc1d4e416b97778059f0b3c20d777a4c2 Mon Sep 17 00:00:00 2001
+From 471bbf39f6b9104d39f0b9c8d4a64328dd5ae58e Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 21 Dec 2022 17:40:11 -0800
 Subject: [PATCH] configure: Use AC_SYS_LARGERFILE autoconf macro
@@ -12,10 +12,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/configure.ac b/configure.ac
-index 5a6bf185..a6f556ec 100644
+index a8b8f7d..f8caa73 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -10,6 +10,9 @@ AC_PROG_INSTALL
+@@ -18,6 +18,9 @@ AC_PROG_INSTALL
  LT_INIT
  
  AC_PROG_CC
