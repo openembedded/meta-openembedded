@@ -17,7 +17,7 @@ SRC_URI = " \
     file://run-ptest \
 "
 
-SRCREV = "59f4fa568615396fbf381b073b220d1e8d61e4c2"
+SRCREV = "922d04b3568c6428a9fb905ddee3ef5a68db3108"
 
 
 inherit autotools ptest
@@ -46,6 +46,3 @@ do_install_ptest() {
     cp -rf ${S}/certs  ${D}${PTEST_PATH}
     cp -rf ${S}/tests  ${D}${PTEST_PATH}
 }
-
-CVE_STATUS[CVE-2025-11931] = "fixed-version: The currently used version (5.8.4) contains the fix already."
-CVE_STATUS[CVE-2025-12889] = "fixed-version: The currently used version (5.8.4) contains the fix already."
