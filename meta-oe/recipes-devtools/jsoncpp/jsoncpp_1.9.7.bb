@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
 
 PE = "1"
 
-SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
-SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
+SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https;tag=${PV}"
 
 
 inherit cmake
