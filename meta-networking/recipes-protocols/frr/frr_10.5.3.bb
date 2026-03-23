@@ -10,13 +10,13 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
 
 
-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.5;tag=frr-${PV} \
+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;nobranch=1;tag=frr-${PV} \
            file://frr.pam \
            file://CVE-2025-61099-61107-1.patch \
            file://CVE-2025-61099-61107-2.patch \
            file://CVE-2025-61099-61107-3.patch \
            "
-SRCREV = "fa68c0ca04f95125cb993b5cacb64fc1495348eb"
+SRCREV = "cd39d029a48a1e58929a7f31e7d61a594c2ecb42"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
