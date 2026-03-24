@@ -6,21 +6,21 @@ ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (Sphincs+) and many more"
 HOMEPAGE = "https://leancrypto.org"
 LICENSE = "BSD-3-Clause | GPL-2.0-only"
 LIC_FILES_CHKSUM = " \
-    file://LICENSE;md5=7e96f38306550c165071e7cab7b6b824 \
+    file://LICENSE;md5=4cc9ea7ae2518fb4fb0bbd9d1a60cbf4 \
     file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \
     file://LICENSE.gplv2;md5=eb723b61539feef013de476e68b5c50a \
     "
 SECTION = "libs"
-SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https \
-           file://0001-fix-strip-absolute-build-paths-from-DWARF-debug-info.patch \
+SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
            file://leancrypto-tests.sh \
            "
-# SRCREV tagged v1.6.0
-SRCREV = "38215249fbe3951d1992b12447fca3c0c5e7e245"
+# SRCREV tagged v1.7.0
+SRCREV = "e60fba94e8cabf1661a1da488b78b84a4fba56e9"
 
 inherit pkgconfig meson
 
 EXTRA_OEMESON = "-Dstrip=false"
+TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 
 PACKAGECONFIG ??= "secure-exec apps tests"
 PACKAGECONFIG[apps] = "-Dapps=enabled,-Dapps=disabled"
