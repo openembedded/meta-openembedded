@@ -5,23 +5,26 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "xfce4-dev-tools-native libxfce4util"
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+GTKDOC_MESON_OPTION = "gtk-doc"
+
 inherit xfce gtk-doc systemd
 
-SRC_URI[sha256sum] = "87b90df8f30144a292d70889e710c8619d8b8803f0e1db3280a4293367a42eae"
+SRC_URI += " file://0001-Handle-cases-where-there-are-no-plugins-gracefully.patch"
+SRC_URI[sha256sum] = "0f499f79a2a7ee49726a433584dd8a680d514101b72bd1b003360611ce1dc244"
 
 INSANE_SKIP:${PN} = "dev-so"
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[cover-thumbnailer] = "--enable-cover-thumbnailer,--disable-cover-thumbnailer,curl gdk-pixbuf"
-PACKAGECONFIG[desktop-thumbnailer] = "--enable-desktop-thumbnailer,--disable-desktop-thumbnailer,gdk-pixbuf"
-PACKAGECONFIG[font-thumbnailer] = "--enable-font-thumbnailer,--disable-font-thumbnailer,freetype gdk-pixbuf"
-PACKAGECONFIG[gstreamer-thumbnailer] = "--enable-gstreamer-thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
-PACKAGECONFIG[jpeg-thumbnailer] = "--enable-jpeg-thumbnailer,--disable-jpeg-thumbnailer,gdk-pixbuf"
-PACKAGECONFIG[odf-thumbnailer] = "--enable-odf-thumbnailer,--disable-odf-thumbnailer,gdk-pixbuf libxml2 libgsf"
-PACKAGECONFIG[pixbuf-thumbnailer] = "--enable-pixbuf-thumbnailer,--disable-pixbuf-thumbnailer,gdk-pixbuf"
-PACKAGECONFIG[poppler-thumbnailer] = "--enable-poppler-thumbnailer,--disable-poppler-thumbnailer,gdk-pixbuf poppler"
-
-EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
+PACKAGECONFIG[cover-thumbnailer] = "-Dcover-thumbnailer=enabled,-Dcover-thumbnailer=disabled,curl gdk-pixbuf"
+PACKAGECONFIG[desktop-thumbnailer] = "-Ddesktop-thumbnailer=enabled,-Ddesktop-thumbnailer=disabled,gdk-pixbuf"
+PACKAGECONFIG[font-thumbnailer] = "-Dfont-thumbnailer=enabled,-Dfont-thumbnailer=disabled,freetype gdk-pixbuf"
+PACKAGECONFIG[gstreamer-thumbnailer] = "-Dgst-thumbnailer=enabled,-Dgst-thumbnailer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[jpeg-thumbnailer] = "-Djpeg-thumbnailer=enabled,-Djpeg-thumbnailer=disabled,gdk-pixbuf"
+PACKAGECONFIG[odf-thumbnailer] = "-Dodf-thumbnailer=enabled,-Dodf-thumbnailer=disabled,gdk-pixbuf libxml2 libgsf"
+PACKAGECONFIG[pixbuf-thumbnailer] = "-Dpixbuf-thumbnailer=enabled,-Dpixbuf-thumbnailer=disabled,gdk-pixbuf"
+PACKAGECONFIG[poppler-thumbnailer] = "-Dpoppler-thumbnailer=enabled,-Dpoppler-thumbnailer=disabled,gdk-pixbuf poppler"
 
 do_install:append() {
     # Makefile seems to race on creation of symlink. So ensure creation here
