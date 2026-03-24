@@ -15,14 +15,12 @@ RDEPENDS:${PN}-ptest += "coreutils pcsc-lite-lib"
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "efa899d3deb8595a29fabb2a2251722f9d7e0d7f"
+SRCREV = "9b678b6d5a40ce01607d8c3b1b1416437c8416c4"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
            file://run-ptest \
            file://winpr-makecert-Build-with-install-RPATH.patch \
-           file://0001-Fixed-compilation-warnings.patch \
-           file://0001-Fix-const-qualifier-error.patch \
            file://0002-Do-not-install-tools-a-CMake-targets.patch \
-           file://0001-Fixed-compilation-warnings-in-ainput-channel.patch \
+           file://0001-Fix-compilation-error.patch \
            file://CVE-2024-32661.patch \
            file://CVE-2026-22854.patch \
            file://CVE-2026-22855.patch \
