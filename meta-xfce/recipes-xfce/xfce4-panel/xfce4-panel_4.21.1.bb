@@ -7,6 +7,10 @@ DEPENDS = "garcon exo gtk+3 cairo virtual/libx11 libxfce4windowing libxml2 \
            libwnck3 vala-native \
            "
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+GTKDOC_MESON_OPTION = "gtk-doc"
+
 inherit xfce gtk-doc gobject-introspection features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -14,10 +18,11 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
     file://0002-use-lxdm-to-replace-dm-tool.patch \
+    file://0001-build-Do-not-display-full-path-in-generated-headers.patch \
 "
-SRC_URI[sha256sum] = "5a7c8097527555640ab3d00307505c7c1b7302d11d92874f88842ea969483519"
+SRC_URI[sha256sum] = "c940dae515bef4af08a126011d2fd873ce99e815157ba8cef5332195bb60e51e"
 
-EXTRA_OECONF += "--disable-vala GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
+EXTRA_OEMESON += "-Dvala=disabled"
 
 python populate_packages:prepend() {
     plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
