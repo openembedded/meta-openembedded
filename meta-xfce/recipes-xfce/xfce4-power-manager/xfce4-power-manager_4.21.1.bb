@@ -11,18 +11,17 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[sha256sum] = "971391cef63352833bdd92df28957392e17e1f2b3d486c0f57294fd204d6ed29"
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
 
-EXTRA_OECONF = " \
-    GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
-    --enable-panel-plugins \
-"
+SRC_URI += "file://0001-build-Do-not-display-full-path-in-generated-headers.patch"
+SRC_URI[sha256sum] = "bb89be7b1be431b29e765e2c632e98fb20a688e495e4ef18495bd70c1524767a"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
                    "
-PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
-PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native"
+PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit"
+PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland-native"
 
 PACKAGES += "xfce4-powermanager-plugin"
 
