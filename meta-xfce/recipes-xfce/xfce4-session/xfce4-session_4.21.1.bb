@@ -6,18 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "libwnck3 libsm libxfce4ui libxfce4windowing virtual/libx11"
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+
 inherit xfce update-alternatives features_check
 
-SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
-SRC_URI[sha256sum] = "dbf00672c5316a30b7001fe852e6a5ba9f889afeab8a247545a160d4302f1fa2"
+SRC_URI += "file://0001-meson.build-hard-code-path-to-iceauth.patch"
+SRC_URI[sha256sum] = "a8fe873fdb20366a44f1345400bfb29c2ff0cfe89dfefd852e2575464b80567c"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
-PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
-
-EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
-                GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources"
+PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit"
 
 ALTERNATIVE:${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
