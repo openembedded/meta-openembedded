@@ -5,25 +5,24 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "exo garcon libxi virtual/libx11 xrandr libxcursor libxklavier upower"
 
+XFCE_COMPRESS_TYPE = "xz"
+XFCEBASEBUILDCLASS = "meson"
+
 inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "fd0d602853ea75d94024e5baae2d2bf5ca8f8aa4dad7bfd5d08f9ff8afee77b2"
-
-EXTRA_OECONF += " \
-    GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
-    --enable-maintainer-mode --disable-debug \
-"
+SRC_URI += "file://0001-build-Do-not-display-full-path-in-generated-headers.patch"
+SRC_URI[sha256sum] = "e57a33d0bb9d63d0ef6f469c2d42cbf66e37d9127cc204de411b7385274e26d0"
 
 PACKAGECONFIG ??= " \
     notify \
     ${@bb.utils.contains('DISTRO_FEATURES','alsa','sound-setter', bb.utils.contains('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
 "
-PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
-PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra sound-theme-freedesktop"
-PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native"
+PACKAGECONFIG[notify] = "-Dlibnotify=enabled,-Dlibnotify=disabled,libnotify"
+PACKAGECONFIG[sound-setter] = "-Dsound-settings=true,-Dsound-settings=false,libcanberra,libcanberra sound-theme-freedesktop"
+PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland-native"
 
 FILES:${PN} += " \
     ${libdir}/xfce4 \
