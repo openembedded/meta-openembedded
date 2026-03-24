@@ -53,6 +53,9 @@ LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', ''
 CXXFLAGS:append:mipsarcho32 = " -latomic"
 CXXFLAGS:append:riscv32 = " -latomic"
 
+# The ptests are not buildable now that pkgconf is being used, disable until fixed.
+PTEST_ENABLED = "0"
+
 do_compile_ptest() {
 	mkdir -p "${B}/${TEST_SRC_DIR}"
 
