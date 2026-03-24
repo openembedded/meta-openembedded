@@ -144,7 +144,8 @@ do_configure:prepend() {
 
 # flex hardcodes the input file in #line directives leading to TMPDIR contamination of debug sources.
 do_compile:append() {
-    find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${TMPDIR}|${TARGET_DBGSRC_DIR}/|g'
+    find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${B}|${TARGET_DBGSRC_DIR}|g'
+    find ${B} -name '*.c' -or -name '*.h' | xargs sed -i -e 's|${S}|${TARGET_DBGSRC_DIR}|g'
 }
 
 # needed for shared-lib package config
