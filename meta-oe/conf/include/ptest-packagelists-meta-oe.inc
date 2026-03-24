@@ -77,6 +77,7 @@ PTESTS_SLOW_META_OE = "\
     fftw \
     libusb-compat \
     mariadb \
+    postgresql \
     re2 \
     rocksdb \
 "
