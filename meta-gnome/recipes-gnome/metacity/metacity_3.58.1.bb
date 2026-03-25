@@ -24,8 +24,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gsettings gettext upstream-version-is-even features_check
 
-SRC_URI[archive.sha256sum] = "7554997104b26ff0e79a02b37a2ba189bdf4e7ccd54226f0faf4b1a59006c901"
-SRC_URI += "file://0001-drop-zenity-detection.patch"
+SRC_URI[archive.sha256sum] = "e430c8a92409ef2f91a4dabd50a71e3d3bbcc474a3dec1caec3813b381d7d1b0"
 
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
 # enable as neccessary until new warnings are dealt with
@@ -35,6 +34,7 @@ FILES:${PN} += " \
     ${datadir}/themes \
     ${datadir}/gnome-control-center \
     ${datadir}/gnome\
+    ${systemd_user_unitdir} \
 "
 
 RDEPENDS:${PN} += "gsettings-desktop-schemas"
