@@ -48,6 +48,12 @@ do_install_ptest() {
     done
 }
 
+do_install_ptest:powerpc64() {
+}
+
+do_install_ptest:powerpc64le() {
+}
+
 EXTRA_OECMAKE = " \
     -DCMAKE_ENABLE_EXPORTS=1 \
     -DCMAKE_BUILD_TYPE=Release \
@@ -55,6 +61,9 @@ EXTRA_OECMAKE = " \
     -DENABLE_MAN=OFF \
     -DBISON_FLAGS='--file-prefix-map=${WORKDIR}=' \
 "
+
+PACKAGES:remove:powerpc64 = "${PN}-ptest"
+PACKAGES:remove:powerpc64le = "${PN}-ptest"
 
 RDEPENDS:${PN}-ptest += "bash bpftool python3"
 
