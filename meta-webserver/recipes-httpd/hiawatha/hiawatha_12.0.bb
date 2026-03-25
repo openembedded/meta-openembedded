@@ -11,7 +11,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-${PV}.tar.gz \
            file://hiawatha.service \
           "
 
-SRC_URI[sha256sum] = "f895a35234a3efdda78187acd7ec6da9cc6cb69b3dd186d1c3f474989c418dec"
+SRC_URI[sha256sum] = "57b61a6d2640e72601d5ba0a063d6f1639613b910287871216f7ea06c75bfb96"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
