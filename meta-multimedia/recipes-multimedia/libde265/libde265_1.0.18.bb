@@ -9,7 +9,7 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
 SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "f3d916c8e63e510bda1f9cf5e8710259c22afece"
+SRCREV = "36ad04841c209cb8b3577ec2723d431b6bf7efa0"
 
 
 inherit cmake pkgconfig
