@@ -52,14 +52,12 @@ PTESTS_FAST_META_OE = "\
     onig \
     oprofile \
     pegtl \
-    protobuf \
     pv \
     sdbus-c++ \
     tomlplusplus \
     uriparser \
     utf8proc \
     uthash \
-    xmlsec1 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'xrdp', '', d)} \
     zeromq \
 "
