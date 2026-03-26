@@ -9,7 +9,7 @@ DEPENDS = "libxml2 bzip2 glib-2.0 zlib"
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gobject-introspection gettext gtk-doc
 
-SRC_URI[archive.sha256sum] = "74d60abba15bd3ea5ad17da5b924d8e36f649a25c3dc77adbabd2a3628a02131"
+SRC_URI[archive.sha256sum] = "9d21d30df1d12feaf03e181afd6067f65e3048ab69cb6ad174a3c5b72b92d297"
 SRC_URI += " file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
 
 PACKAGECONFIG ??= ""
