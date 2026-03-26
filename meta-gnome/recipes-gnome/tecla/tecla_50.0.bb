@@ -14,5 +14,5 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 inherit gnomebase pkgconfig  features_check
 
 SRC_URI = "https://download.gnome.org/sources/tecla/${@oe.utils.trim_version('${PV}', 1)}/tecla-${PV}.tar.xz"
-SRC_URI[sha256sum] = "2ca424e402baf60cd6b13777703b701ebb1faf8f3d0f2f971144d823f651249f"
+SRC_URI[sha256sum] = "2542acb24850082e0ccf6aa17af9651db71d22f0e233fdbf5ed0cffe2e45bc06"
 
