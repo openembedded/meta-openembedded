@@ -1,12 +1,12 @@
 SUMMARY = "Crypto and TLS for C++11"
 HOMEPAGE = "https://botan.randombit.net"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://license.txt;md5=3f911cecfc74a2d9f1ead9a07bd92a6e"
+LIC_FILES_CHKSUM = "file://license.txt;md5=ed13158b71912fb101b89310b23b921f"
 SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
            file://run-ptest"
-SRC_URI[sha256sum] = "fde194236f6d5434f136ea0a0627f6cc9d26af8b96e9f1e1c7d8c82cd90f4f24"
+SRC_URI[sha256sum] = "e8dd48556818da2c03a9a30932ad05db9e50b12fec90809301ecc64ea51bd11e"
 
 S = "${UNPACKDIR}/Botan-${PV}"
 
