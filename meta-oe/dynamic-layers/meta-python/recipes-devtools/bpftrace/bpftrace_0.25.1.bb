@@ -15,11 +15,11 @@ DEPENDS += "bison-native \
             "
 DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native', '', d)}"
 
-SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.24.x;protocol=https;tag=v${PV} \
+SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.25.x;protocol=https;tag=v${PV} \
            file://run-ptest \
            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
 "
-SRCREV = "4c1f02a43f993758d445952ccd96e552752defec"
+SRCREV = "e491811e5d648288c01f42ce087967b271f504a0"
 
 inherit bash-completion cmake ptest pkgconfig
 
@@ -58,6 +58,7 @@ EXTRA_OECMAKE = " \
     -DCMAKE_ENABLE_EXPORTS=1 \
     -DCMAKE_BUILD_TYPE=Release \
     -DUSE_SYSTEM_BPF_BCC=ON \
+    -DUSE_SYSTEM_LIBBPF=ON \
     -DENABLE_MAN=OFF \
     -DBISON_FLAGS='--file-prefix-map=${WORKDIR}=' \
 "
