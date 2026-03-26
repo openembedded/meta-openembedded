@@ -7,12 +7,13 @@ BUGTRACKER = "https://github.com/linuxwacom/libwacom/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
 
-SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
-SRCREV = "f5b92814320d0a5745b50b7b36103843ad23e299"
+SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https;tag=${BP}"
+SRCREV = "44df53b14b008a8252427aa6b41128efada43b3a"
 
 DEPENDS = " \
     libxml2-native \
     libgudev \
+    libevdev \
 "
 
 
