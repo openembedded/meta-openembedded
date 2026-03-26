@@ -3,7 +3,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "b19c35fcae9688ac01ef75bad5db27300c2537eb4ee00ed07e05d8456a0d4931"
+SRC_URI[sha256sum] = "85c7a46279ac8f226e1059275221e6b3d0e370d2bb6bd0500f9780781615bcea"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
