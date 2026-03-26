@@ -27,10 +27,8 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SHPV = "${@gnome_verdir("${PV}")}"
 
-SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz \
-           file://0001-gegl-Add-gegl-arm.def-file.patch \
-          "
-SRC_URI[sha256sum] = "92b05855e2190868949d70cea6e9a50b163a6a441242e740a6263975379f993b"
+SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
+SRC_URI[sha256sum] = "5002309b9a701260658e8b3a61540fd5673887cef998338e1992524a33b23ae3"
 
 PACKAGECONFIG ??= "gexiv2 libraw librsvg pango poppler sdl2"
 PACKAGECONFIG:class-native = "librsvg"
