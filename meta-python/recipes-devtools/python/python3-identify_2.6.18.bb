@@ -6,7 +6,7 @@ PYPI_PACKAGE = "identify"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "f816b0b596b204c9fdf076ded172322f2723cf958d02f9c3587504834c8ff04d"
+SRC_URI[sha256sum] = "873ac56a5e3fd63e7438a7ecbc4d91aca692eb3fefa4534db2b7913f3fc352fd"
 
 RDEPENDS:${PN} = " \
 	python3-ukkonen \
