@@ -18,7 +18,7 @@ SRC_URI:append = " \
 	file://0001-fix-reproducibility.patch \
 	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
 "
-SRC_URI[archive.sha256sum] = "d42f408dc3fb28fe54f5a9abbf5f1decf5818db9c2e9ec51c09464bdfd0c14b9"
+SRC_URI[archive.sha256sum] = "c6774761a8b9f4a06f6812f1c8078bee2e937d65e376c3d2338b78993e5f4666"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
@@ -38,6 +38,7 @@ PACKAGECONFIG ??= " \
     tiff \
     raw \
     xml \
+    zip \
     ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
     battery \
 "
@@ -62,6 +63,7 @@ PACKAGECONFIG[png]        = "-Dpng=enabled,-Dpng=disabled,libpng"
 PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
 PACKAGECONFIG[raw]       = "-Draw=enabled,-Draw=disabled,libraw"
 PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
+PACKAGECONFIG[zip]        = "-Dzip=enabled,-Dzip=disabled,libzip"
 PACKAGECONFIG[landlock]        = "-Dlandlock=enabled,-Dlandlock=disabled"
 
 # For security reasons it is strongly recommended to set add meta-security in
@@ -69,7 +71,7 @@ PACKAGECONFIG[landlock]        = "-Dlandlock=enabled,-Dlandlock=disabled"
 PACKAGECONFIG[seccomp] = "-Dseccomp=true,-Dseccomp=false,libseccomp"
 
 EXTRA_OEMESON += " \
-    -Dman=false \
+    -Dman=false -Dfunctional_tests=false \
     -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
     -Dsystemd_user_services_dir=${systemd_user_unitdir} \
 "
