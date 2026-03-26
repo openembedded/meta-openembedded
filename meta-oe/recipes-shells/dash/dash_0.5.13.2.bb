@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
 inherit autotools update-alternatives
 
 SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
-SRC_URI[sha256sum] = "d9271bce09c127d9866e25c011582ddc75ab988958a04bc4d8553a3b8f30e370"
+SRC_URI[sha256sum] = "e7136826b1eed6ce3193e8affa2f70b1b2b9168dd91ffa7ddb4f46e9e62054fe"
 
 CVE_PRODUCT = "dash:dash"
 
