@@ -11,7 +11,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
     ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'file://0001-Install-polkit-action-unconditionally-executable-pke.patch', '', d)} \
 "
-SRC_URI[sha256sum] = "f584ed4be7fd09c2cf6a784778a8540970d985f0ac8e5a7bd0628528a3ab5609"
+SRC_URI[sha256sum] = "67388ac405f9fe92a40636cb03b0e1e0bb6403ad89ccc174b2ff190ef6f32349"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/gparted/files/gparted/"
 UPSTREAM_CHECK_REGEX = "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
