@@ -7,7 +7,7 @@ DEPENDS = "glib-2.0 gtk+3 libxml2"
 
 inherit gobject-introspection features_check gtk-doc gnomebase
 
-SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gtksourceview.git;protocol=https;branch=main"
+SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gtksourceview.git;protocol=https;branch=main;tag=${PV}"
 SRCREV = "a7bdc39f9fbc10c49ea7468ac1e5bf77385da0c0"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
