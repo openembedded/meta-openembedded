@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=a05fdd79b87a410b617
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "596bd413513b5151af645eef1a718470e0ac9c2233135a0428eb1ffc2995d95f"
+SRC_URI[sha256sum] = "d3f509c4ec2f75d3ea6621b96aef61329a23711c11efb2222c837db1370433e9"
 
 S = "${UNPACKDIR}/IO-Compress-${PV}"
 
