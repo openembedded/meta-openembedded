@@ -8,8 +8,8 @@ SECTION = "console/utils"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
 
-SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https"
-SRCREV = "7489280a7a1247f23543343aba4e95bf2f2e8fa6"
+SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https;tag=${PV}"
+SRCREV = "991e2c4264b843f61e502712f497103472a1b6e7"
 
 DEPENDS = "libtinyxml2 libarchive"
 inherit cmake pkgconfig
