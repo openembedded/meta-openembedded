@@ -6,7 +6,7 @@ HOMEPAGE = "https://pypi.org/project/mpmath/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a6607bd72611b702183473dfb4e6198b"
 
-SRC_URI[sha256sum] = "d272b40c031ba0ee385e7e5fc735b48560d9838a0d7fbca109919efd23580a22"
+SRC_URI[sha256sum] = "efd6d1b75f09d69524a67609949812668b28e81ecbfe0ab449ced8c13e92642e"
 
 CVE_PRODUCT = "mpmath"
 
