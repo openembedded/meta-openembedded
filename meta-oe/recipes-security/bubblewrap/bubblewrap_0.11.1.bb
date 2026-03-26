@@ -8,7 +8,7 @@ DEPENDS = "libcap"
 SRC_URI = " \
     https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz \
 "
-SRC_URI[sha256sum] = "988fd6b232dafa04b8b8198723efeaccdb3c6aa9c1c7936219d5791a8b7a8646"
+SRC_URI[sha256sum] = "c1b7455a1283b1295879a46d5f001dfd088c0bb0f238abb5e128b3583a246f71"
 
 inherit meson bash-completion github-releases manpages pkgconfig
 
