@@ -22,7 +22,7 @@ GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
            file://run-ptest \
            "
-SRC_URI[sha256sum] = "54e3387dee1ff16031a0679aca2b60da90ab7f4a26c211822333c7f23000abee"
+SRC_URI[sha256sum] = "af8d080b9585e7fd1faba8f022967e1c268ae62e20ecf32ee7b364c1e307570b"
 
 S = "${UNPACKDIR}/libostree-${PV}"
 
@@ -212,7 +212,7 @@ RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-utils glibc-localedata-en-us"
 
 RRECOMMENDS:${PN}:append:class-target = " kernel-module-overlay"
 
-SYSTEMD_SERVICE:${PN} = "ostree-remount.service ostree-finalize-staged.path"
+SYSTEMD_SERVICE:${PN} = "ostree-remount.service"
 SYSTEMD_SERVICE:${PN}-switchroot = "ostree-prepare-root.service"
 
 BBCLASSEXTEND = "native nativesdk"
