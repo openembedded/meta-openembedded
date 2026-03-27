@@ -64,12 +64,12 @@ index 000000000..f7e8ac7d0
 +# Minimal Rules Required for adbd service
 +allow adbd_t self:capability sys_resource;
 +
++domain_interactive_fd(adbd_t)
 +dev_rw_usbfs(adbd_t)
 +files_read_etc_files(adbd_t)
++files_rw_etc_runtime_files(adbd_t)
 +term_use_ptmx(adbd_t)
 +term_use_generic_ptys(adbd_t)
-+
-+
 +
 -- 
 2.43.0
