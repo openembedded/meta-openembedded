@@ -1,7 +1,7 @@
 SUMMARY = "Graph Visualization Tools"
 HOMEPAGE = "http://www.graphviz.org"
-LICENSE = "EPL-1.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=9109f5fc16cf963fb3cdd32781b3ce04"
+LICENSE = "EPL-2.0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d9fc0efef5228704e7f5b37f27192723"
 
 DEPENDS = " \
     bison-native \
@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
-SRC_URI[sha256sum] = "fe76529477c22c0cf833ec5a35b430cf710f4705afc465d86292bf13560be584"
+SRC_URI[sha256sum] = "043877c0857d8d46067cd2f18809d54fc876c399f0ecd438f60ea7f4d8037451"
 
 UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
