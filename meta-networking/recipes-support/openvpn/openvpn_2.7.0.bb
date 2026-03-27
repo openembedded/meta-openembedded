@@ -9,6 +9,7 @@ inherit autotools systemd update-rc.d pkgconfig ptest
 
 SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
+           file://0001-tests-skip-test-execution-when-cross-compiling.patch \
            file://openvpn \
            file://run-ptest \
           "
@@ -47,7 +48,7 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 
 RDEPENDS:${PN}:append = " bash"
-RDEPENDS:${PN}-ptest:append = " make bash"
+RDEPENDS:${PN}-ptest:append = " bash"
 
 do_install:append() {
     install -d ${D}/${sysconfdir}/init.d
@@ -71,21 +72,21 @@ do_install:append() {
 }
 
 do_compile_ptest () {
-    for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;`; do
+    for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l check_PROGRAMS {} \;`; do
         dir=`dirname ${x}`
         case $dir in
             *example*)   
                 echo "Skipping directory: $dir"
                 ;;
             *)           
-                oe_runmake -C ${dir} buildtest-TESTS
+                oe_runmake -C ${dir} check-am
                 ;;
         esac
     done
 }
 
 do_install_ptest() {
-    for x in $(find ${B}/tests/unit_tests -name Makefile -exec grep -l buildtest-TESTS {} \;); do
+    for x in $(find ${B}/tests/unit_tests -name Makefile -exec grep -l check_PROGRAMS {} \;); do
         dir=$(dirname ${x})
 
         if [[ "$dir" == *example* ]]; then
@@ -94,21 +95,23 @@ do_install_ptest() {
 
         target_dir="${D}/${PTEST_PATH}/unit_tests/$(basename ${dir})"
         mkdir -p ${target_dir}
-        cp -f ${dir}/Makefile ${target_dir}/        
-        sed -i "s/^Makefile:/MM:/g" ${target_dir}/Makefile
-        sed -i 's/^#TESTS = $(am__EXEEXT_4)/TESTS = $(am__EXEEXT_4)/' ${target_dir}/Makefile
 
-        for testfile in $(find ${dir} -name "*testdriver"); do
+        for testfile in $(find ${dir} -name "*testdriver" -type f -executable); do
             cp -rf ${testfile} ${target_dir}/
         done
     done
-    sed -i 's|find ./|find ${PTEST_PATH}|g' ${D}${PTEST_PATH}/run-ptest
+
+    # Install test input data files needed by user_pass and misc tests
+    cp -rf ${S}/tests/unit_tests/openvpn/input ${D}/${PTEST_PATH}/unit_tests/openvpn/
+
+    # Install COPYRIGHT.GPL needed by test_list
+    # test_list references srcdir/../../../COPYRIGHT.GPL
+    # srcdir=./unit_tests/openvpn -> resolves to ../COPYRIGHT.GPL from ptest cwd
+    # which is ${libdir}/openvpn/COPYRIGHT.GPL
+    cp -f ${S}/COPYRIGHT.GPL ${D}/${libdir}/openvpn/
+
     sed -i 's|${top_builddir}/src/openvpn|${sbindir}|g' ${S}/tests/t_lpback.sh
     cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}
-    cp -f ${B}/tests/Makefile ${D}/${PTEST_PATH}
-    sed -i "s/^Makefile:/MM:/g" ${D}/${PTEST_PATH}/Makefile
-    sed -i "s/^test_scripts = t_client.sh t_lpback.sh t_cltsrv.sh/test_scripts = t_lpback.sh/g" ${D}/${PTEST_PATH}/Makefile
-    
 }
 
 PACKAGES =+ " ${PN}-sample "
@@ -116,6 +119,7 @@ PACKAGES =+ " ${PN}-sample "
 RRECOMMENDS:${PN} = "kernel-module-tun"
 
 FILES:${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
+FILES:${PN}-ptest += "${libdir}/openvpn/COPYRIGHT.GPL"
 FILES:${PN} += "${systemd_system_unitdir}/openvpn-server@.service \
                 ${systemd_system_unitdir}/openvpn-client@.service \
                 ${nonarch_libdir}/tmpfiles.d \
