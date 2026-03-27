@@ -72,5 +72,7 @@ FILES:${PN}-doc += "${datadir}/dlt-filetransfer"
 
 do_install:append() {
     rm -f ${D}${bindir}/dlt-test-*
-    sed -i -e 's:${RECIPE_SYSROOT}::g' ${D}/usr/lib/pkgconfig/automotive-dlt.pc
+    if [ -f ${D}${libdir}/pkgconfig/automotive-dlt.pc ]; then
+        sed -i -e 's:${RECIPE_SYSROOT}::g' ${D}${libdir}/pkgconfig/automotive-dlt.pc
+    fi
 }
