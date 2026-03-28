@@ -11,14 +11,12 @@ HOMEPAGE = "https://canopenterm.de"
 BUGTRACKER = "https://github.com/CANopenTerm/CANopenTerm/issues"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5f8a62fabd50ce3f1d7794bc849ae7a5"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=bd2edc721b4a0289efe949bdbe7dda79"
 
-DEPENDS = "cjson libinih libsdl3 lua libsocketcan pocketpy"
+DEPENDS = "canvenient cjson isocline libinih libsdl3 lua pocketpy"
 
-SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main \
-           file://0001-cmake-Do-not-pin-to-c89-constructs-on-linux.patch"
-
-SRCREV  = "b0555360e5e8b444a2a9e14088fd253412184eb8"
+SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
+SRCREV  = "6024d99d1d34f8e3fec20a2150fc44380cf40fb2"
 
 
 inherit cmake ptest
@@ -27,4 +25,4 @@ EXTRA_OECMAKE += "-DBUILD_YOCTO=ON"
 
 FILES:${PN} += "${bindir}/CANopenTerm ${bindir}/codb2json ${datadir}"
 
-RDEPENDS:${PN} = "cjson libinih libsdl3 lua libsocketcan pocketpy"
+RDEPENDS:${PN} = "canvenient cjson libinih libsdl3 lua pocketpy"
