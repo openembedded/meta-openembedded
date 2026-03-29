@@ -28,8 +28,7 @@ RDEPENDS:${PN} = "iso-codes"
 
 EXTRA_OEMESON += "-Dtests=false"
 
-SRC_URI += "file://0001-meson.build-dont-look-for-flatpak-http_backend-varia.patch"
-SRC_URI[archive.sha256sum] = "b610b6932a8d666432bc58d6c78c4568cd63d442ae736db8be2c4ca01bbc946c"
+SRC_URI[archive.sha256sum] = "3515e2015f235b6abb7a342806008acb1f184c29d9c4ced3581f8ed4c1f1c241"
 
 PACKAGECONFIG ?= "flatpak"
 PACKAGECONFIG[flatpak] = "-Dflatpak=true,-Dflatpak=false,flatpak ostree"
