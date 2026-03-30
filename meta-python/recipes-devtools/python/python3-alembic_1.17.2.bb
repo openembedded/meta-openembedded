@@ -1,4 +1,5 @@
 DESCRIPTION = "A database migration tool for SQLAlchemy"
+HOMEPAGE = "https://pypi.org/project/alembic/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d2ee18d90dcc02d96b76e9e953629936"
 
