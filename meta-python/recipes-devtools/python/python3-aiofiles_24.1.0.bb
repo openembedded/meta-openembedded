@@ -1,6 +1,6 @@
 SUMMARY = "File support for asyncio"
 DESCRIPTION = "Asynchronous local file IO library for asyncio and Python"
-HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+HOMEPAGE = "https://github.com/Tinche/aiofiles"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
 
