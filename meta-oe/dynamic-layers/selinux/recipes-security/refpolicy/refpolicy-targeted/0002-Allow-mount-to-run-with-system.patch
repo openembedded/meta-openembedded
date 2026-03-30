@@ -1,0 +1,29 @@
+From aae163bded7e04386707fae5d14909b484a5e222 Mon Sep 17 00:00:00 2001
+From: Gargi Misra <gmisra@qti.qualcomm.com>
+Date: Fri, 27 Mar 2026 12:00:18 +0530
+Subject: [PATCH] refpolicy-targeted: Allow mount to run with system role
+
+type=SELINUX_ERR msg=audit(44.591:158): op=security_compute_sid invalid_context="system_u:system_r:unconfined_mount_t:s0" scontext=system_u:system_r:unconfined_t:s0 tcontext=system_u:object_r:mount_exec_t:s0 tclass=process
+
+Upstream-Status: Inappropriate [meta-oe specific]
+
+Signed-off by: Gargi Misra <gmisra@qti.qualcomm.com>
+---
+ policy/modules/system/unconfined.te | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/policy/modules/system/unconfined.te b/policy/modules/system/unconfined.te
+index 1c98f5e85..26085d7d8 100644
+--- a/policy/modules/system/unconfined.te
++++ b/policy/modules/system/unconfined.te
+@@ -39,6 +39,7 @@ logging_send_syslog_msg(unconfined_t)
+ logging_run_auditctl(unconfined_t, unconfined_r)
+ 
+ mount_run_unconfined(unconfined_t, unconfined_r)
++mount_run_unconfined(unconfined_t, system_r)
+ 
+ seutil_run_setfiles(unconfined_t, unconfined_r)
+ seutil_run_semanage(unconfined_t, unconfined_r)
+-- 
+2.43.0
+
