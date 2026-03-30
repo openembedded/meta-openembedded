@@ -14,6 +14,9 @@ SRC_URI[sha256sum] = "2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f33
 
 CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
 
+# CVE-2024-7254 is Java/ruby/kotlin specific and does not affect the Python/C++ implementation.
+CVE_CHECK_IGNORE += "CVE-2024-7254"
+
 # http://errors.yoctoproject.org/Errors/Details/184715/
 # Can't find required file: ../src/google/protobuf/descriptor.proto
 CLEANBROKEN = "1"
