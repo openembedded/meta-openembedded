@@ -6,17 +6,17 @@ in mind. Dovecot is an excellent choice for both small and large \
 installations. It's fast, simple to set up, requires no special \
 administration and it uses very little memory."
 SECTION = "mail"
-LICENSE = "LGPL-2.1-only & MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2956560272e5b31d9d64f03111732048"
+LICENSE = "LGPL-2.1-only & MIT & Unicode-3.0 & BSD-3-Clause & PD"
+LIC_FILES_CHKSUM = "file://COPYING;md5=cb805cc6bdb95ba8fc2398a55fd50877"
 
-SRC_URI = "http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
+SRC_URI = "https://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
            file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch \
            file://dovecot.service \
            file://dovecot.socket \
            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
-           file://0001-lib-regex-remove-LIBPCRE_LIBS-from.patch \
+           file://0001-adapt-lua_newstate-to-new-api.patch \
            "
-SRC_URI[sha256sum] = "2cd62e4d22b9fc1c80bd38649739950f0dbda34fbc3e62624fb6842264e93c6e"
+SRC_URI[sha256sum] = "e0b30330fe51e47ecfcf641bc16041184d91bdd0ac3db789b7cef54e3a75ac9b"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
@@ -29,6 +29,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam systemd', d)}
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
 PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
+PACKAGECONFIG[lua] = "--with-lua=yes, --without-lua, lua"
 PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
 
 # From native build in armv7a-hf/eglibc
