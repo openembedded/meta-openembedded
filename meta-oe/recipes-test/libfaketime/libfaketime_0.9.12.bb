@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "6714b98794a9e8a413bf90d2927abf5d888ada99"
+SRCREV = "3ccdd344aadf1e317156fa5fb7c881f2c4404778"
 
 SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;tag=v${PV};protocol=https \
            file://0001-Add-const-qualifiers-to-fix-build-with-ISO-C23.patch \
