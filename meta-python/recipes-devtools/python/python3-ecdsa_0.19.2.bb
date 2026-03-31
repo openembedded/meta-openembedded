@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=66ffc5e30f76cbb5358fe54b645e5a1d"
 
 PYPI_PACKAGE = "ecdsa"
-SRC_URI[sha256sum] = "478cba7b62555866fcb3bb3fe985e06decbdb68ef55713c4e5ab98c57d508e61"
+SRC_URI[sha256sum] = "62635b0ac1ca2e027f82122b5b81cb706edc38cd91c63dda28e4f3455a2bf930"
 
 CVE_PRODUCT = "python-ecdsa_project:python-ecdsa tlsfuzzer:ecdsa"
 
