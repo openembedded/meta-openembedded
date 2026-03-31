@@ -17,15 +17,17 @@ DEPENDS = "\
     libtsm \
     libxkbcommon \
     udev \
+    zlib \
 "
 
 SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "9ce1dc0dc639e54e243a21d93e13f502a746f0a8"
+SRCREV = "03e50c7db0489daaa41b5f62946fd6aaeab63a6e"
 
 inherit meson pkgconfig systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
 
+PACKAGECONFIG[font_freetype] = "-Dfont_freetype=enabled, -Dfont_freetype=disabled, fontconfig freetype"
 PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
 PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
 PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
