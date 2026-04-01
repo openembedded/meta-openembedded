@@ -16,9 +16,9 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
 # out-of-tree builds.
 B = "${S}"
 
-SRCREV = "dc50022844dfad0a0e195d54b8499fcf242fff0c"
+SRCREV = "b555312d70d7ff017f866649a7e7167af4eb8fca"
 
-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.16-branch;protocol=https \
+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.16-branch;protocol=https;tag=v${PV} \
            file://0001-do-not-build-tests-sub-directory.patch \
            file://0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
            file://0003-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
