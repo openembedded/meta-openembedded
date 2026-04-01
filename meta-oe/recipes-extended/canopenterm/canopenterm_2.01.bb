@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=bd2edc721b4a0289efe949bdbe7dda79"
 
 DEPENDS = "canvenient cjson isocline libinih libsdl3 lua pocketpy"
 
-SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main"
-SRCREV  = "6024d99d1d34f8e3fec20a2150fc44380cf40fb2"
+SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=main;tag=v${PV}"
+SRCREV  = "4196097f71c7e59b27e9d8ac3c6cf58f44fa9f19"
 
 
 inherit cmake ptest
