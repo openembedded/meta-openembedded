@@ -27,7 +27,7 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/7.0/${BPN}-${PV}.tar.gz 
     file://0001-Fix-configure.ac.patch \
     file://zabbix-agent.service \
 "
-SRC_URI[sha256sum] = "43ea5fcb1e5db25e74bdc83ea8936d79b8093b614af4e889417485bc74f061e2"
+SRC_URI[sha256sum] = "6f8ae990b9b25767e4fffbcb5cc7c455d674e2a392dc21478488a5d1c0e7d597"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
