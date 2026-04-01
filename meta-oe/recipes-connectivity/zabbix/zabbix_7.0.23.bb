@@ -56,6 +56,7 @@ EXTRA_OECONF = " \
     --with-libpthread \
     --with-libevent \
     --with-libpcre=${STAGING_EXECPREFIXDIR} \
+    --with-libpcre-lib=${STAGING_LIBDIR} \
     --with-iconv=${STAGING_EXECPREFIXDIR} \
 "
 CFLAGS:append = " -lldap -llber -pthread"
