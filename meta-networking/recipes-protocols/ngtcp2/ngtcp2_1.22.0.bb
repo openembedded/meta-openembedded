@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=de0966c8ff4f62661a3da92967a75434"
 
 SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=main;tag=v${PV};name=ngtcp2"
-SRCREV = "9e32add590fc74707b62f61aa5e0aa5c6f8a2c60"
+SRCREV = "2a441e8540d192b0707989b146ce80efcae5f0d6"
 
 DEPENDS = "brotli libev nghttp3"
 
