@@ -22,7 +22,7 @@ LIC_FILES_CHKSUM = "\
 DEPENDS = "xkeyboard-config"
 
 SRC_URI = "git://github.com/kmscon/libtsm;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "b052e48cc776be1cdb940be2dcc1603457c01c96"
+SRCREV = "6cdacfc452bf29d98e297fe3a96e55e94a88ce3e"
 
 inherit meson pkgconfig
 
