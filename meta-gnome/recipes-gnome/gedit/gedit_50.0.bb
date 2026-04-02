@@ -24,7 +24,7 @@ def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
 SRC_URI = "git://gitlab.gnome.org/World/gedit/gedit.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "684abd8299139e1a3b87446da501ad034e78c840"
+SRCREV = "25d0bf0c3c40b0866fc23ec875f0af6c67f728ef"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
