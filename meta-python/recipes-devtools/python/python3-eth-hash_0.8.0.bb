@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ethereum/eth-hash"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3ef06eb4d4373222e59a338e2eb9a795"
 
-SRC_URI[sha256sum] = "d2411a403a0b0a62e8247b4117932d900ffb4c8c64b15f92620547ca5ce46be5"
+SRC_URI[sha256sum] = "b009752b620da2e9c7668014849d1f5fadbe4f138603f1871cc5d4ca706896b1"
 
 inherit pypi python_setuptools_build_meta
 
