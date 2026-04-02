@@ -13,7 +13,7 @@ inherit xfce gobject-introspection features_check mime-xdg perlnative gtk-doc
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "85f2c7fba6e891eb0df04b94139d519778130ecde95a6e629ac611d8cc9c6a7c"
+SRC_URI[sha256sum] = "eddbd4bab29c73718734e0bfcf650ceea8b4fcc8cb2cbb0b24fe22b286a2be00"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[pcre] = "-Dpcre2=enabled,-Dpcre2=disabled,libpcre2"
