@@ -24,10 +24,8 @@ RDEPENDS:${PN} += "\
 "
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/C/CH/CHRISN/Net-SSLeay-${PV}.tar.gz \
-           file://0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch \
-           file://0001-test-32_x509_get_cert_info-allow-single-colon.patch \
            file://run-ptest"
-SRC_URI[sha256sum] = "9d7be8a56d1bedda05c425306cc504ba134307e0c09bda4a788c98744ebcd95d"
+SRC_URI[sha256sum] = "ab213691685fb2a576c669cbc8d9266f8165a31563ad15b7c4030b94adfc0753"
 
 S = "${UNPACKDIR}/Net-SSLeay-${PV}"
 
