@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
 
-SRCREV = "f137b19257abe27b4700b5ab0f5303a1461f6c70"
+SRCREV = "3f967abe9ef454bd494055612a067f2128944df2"
 PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;destsuffix=${S};tag=v${PV}"
 
 SRC_URI:append = " file://run-ptest"
