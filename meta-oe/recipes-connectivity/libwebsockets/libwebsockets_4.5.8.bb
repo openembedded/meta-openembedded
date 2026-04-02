@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d391cc7929bcba238f9ba6805f7574"
 DEPENDS = "zlib"
 DEPENDS:append:class-native = " libcap-native"
 
-SRCREV = "94b9bdbfec2a89464505fc8cc379f33d4e334018"
+SRCREV = "fbb0baf6af9c4324f0f1591734c78b0089b599d4"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.5-stable;tag=v${PV}"
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
