@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=924546dab2bef90e370d7c0c090ddcf0"
 
 DEPENDS += "libpng zlib"
 
-SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https"
-SRCREV = "8fe5a738541a04642885fb7a75b2b5b9c5b416fa"
+SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "3467749fd1c0ab6ca6ed424d053b1ea53c1bf67c"
 
 
 inherit cmake
