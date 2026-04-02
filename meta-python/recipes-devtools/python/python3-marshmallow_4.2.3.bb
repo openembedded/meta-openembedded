@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
                     file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
 
-SRC_URI[sha256sum] = "ba40340683a2d1c15103647994ff2f6bc2c8c80da01904cbe5d96ee4baa78d9f"
+SRC_URI[sha256sum] = "3e3fef6b3603721a25a723b8caedfa488369bddaf9bc03b40b9442c90aebd22b"
 
 CVE_PRODUCT = "marshmallow"
 
