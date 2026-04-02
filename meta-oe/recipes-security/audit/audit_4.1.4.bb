@@ -7,12 +7,12 @@ SECTION = "base"
 LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;protocol=https;tag=v${PV} \
            file://0001-Fixed-swig-host-contamination-issue.patch \
            file://auditd \
           "
 
-SRCREV = "dfda9708910e4e72412e68d638087b29522df386"
+SRCREV = "07eea50408d28c953d4048dfef3da6556ce4b569"
 
 inherit autotools python3targetconfig update-rc.d systemd
 
