@@ -9,10 +9,13 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
 
 SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https;tag=${PV}"
-SRCREV = "991e2c4264b843f61e502712f497103472a1b6e7"
+SRCREV = "52919b145d04953a91cf846f3db3d8cee8d989ac"
 
 DEPENDS = "libtinyxml2 libarchive"
 inherit cmake pkgconfig
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[libkcapi]  = "-DUSE_KERNEL_CRYPTO_API=ON, -DUSE_KERNEL_CRYPTO_API=OFF, libkcapi"
 
 FILES:${PN} = "${bindir}"
 
