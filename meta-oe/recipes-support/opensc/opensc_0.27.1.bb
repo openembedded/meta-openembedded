@@ -11,8 +11,8 @@ LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 DEPENDS = "openssl"
 
-SRCREV = "043343d2df7b09d1938bc3dc313d86a96be457cc"
-SRC_URI = "git://github.com/OpenSC/OpenSC;branch=0.26.1;protocol=https"
+SRCREV = "19868984dc4dc697af6a86d65ab32a1f19a43ea4"
+SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https"
 
 CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
 
