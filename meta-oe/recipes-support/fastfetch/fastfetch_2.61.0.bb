@@ -17,7 +17,6 @@ inherit cmake pkgconfig
 
 EXTRA_OECMAKE += "\
     -DENABLE_SYSTEM_YYJSON=ON \
-    -DENABLE_DIRECTX_HEADERS=OFF \
 "
 
 PACKAGECONFIG ??= "\
