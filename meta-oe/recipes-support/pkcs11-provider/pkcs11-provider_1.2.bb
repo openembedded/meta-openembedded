@@ -15,7 +15,7 @@ DEPENDS = "\
     p11-kit \
 "
 
-SRCREV = "acb7086e44849d019956233348046c4f07c0670b"
+SRCREV = "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
 
 SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
 
