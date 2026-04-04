@@ -4,21 +4,19 @@ HOMEPAGE = "http://sourceforge.net/projects/ez-ipupdate/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7783169b4be06b54e86730eb01bc3a31"
 
-SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+SRC_URI = "${DEBIAN_MIRROR}/main/e/${BPN}/${BPN}_${PV}.orig.tar.gz \
            file://Makefile.am.patch \
-           file://cache_file.c.patch \
-           file://conf_file.c.patch \
            file://wformat.patch \
            file://0001-ez-ipupdate-Include-time.h-for-time-API-prototype.patch \
            file://CVE-2003-0887.patch \
+		   file://0001-configure-Check-for-string.h-system-header.patch \
            "
-SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
-SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
+SRC_URI[sha256sum] = "bf5b8d11ffe055c5891d0ab64bbfa86e99cbda645d40f346146b939fec8d962d"
 
 inherit autotools pkgconfig
 
-do_install:append(){
-    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
-}
+#do_install:append(){
+#    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
+#}
 
-FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
+#FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
