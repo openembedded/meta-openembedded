@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=51549db0941829faeedcc86efec2f4c0"
 
 SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=main;tag=v${PV};name=libavif"
 SRC_URI += "git://github.com/kmurray/libargparse.git;protocol=https;nobranch=1;name=libargparse;subdir=${S}/ext/libargparse"
+SRC_URI += "git://chromium.googlesource.com/libyuv/libyuv;protocol=https;nobranch=1;name=libyuv;subdir=${S}/ext/libyuv"
 SRCREV_libavif = "6543b22b5bc706c53f038a16fe515f921556d9b3"
 SRCREV_libargparse = "ee74d1b53bd680748af14e737378de57e2a0a954"
+SRCREV_libyuv = "6067afde563c3946eebd94f146b3824ab7a97a9c"
 SRCREV_FORMAT = "libavif"
 
 DEPENDS = "nasm-native"
@@ -18,7 +20,7 @@ inherit cmake pkgconfig
 EXTRA_OECMAKE += " \
     -DAVIF_BUILD_MAN_PAGES=OFF \
     -DAVIF_CODEC_RAV1E=OFF \
-    -DAVIF_LIBYUV=OFF \
+    -DAVIF_LIBYUV=LOCAL \
 "
 
 PACKAGECONFIG ?= "dav1d gdk-pixbuf"
