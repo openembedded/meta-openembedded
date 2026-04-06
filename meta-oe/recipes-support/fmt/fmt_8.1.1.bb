@@ -4,7 +4,7 @@ HOMEPAGE = "https://fmt.dev"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
 
-SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https \
+SRC_URI = "git://github.com/fmtlib/fmt;branch=main;protocol=https \
            file://run-ptest"
 SRCREV = "b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9"
 
