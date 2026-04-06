@@ -22,6 +22,7 @@ SRC_URI = "http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
            file://CVE-2025-30189-5.patch \
            file://CVE-2025-30189-6.patch \
            file://CVE-2025-30189-7.patch \
+           file://CVE-2025-59031.patch \
            "
 SRC_URI[sha256sum] = "fb188603f419ed7aaa07794a8692098c3ec2660bb9c67d0efe24948cbb32ae00"
 
