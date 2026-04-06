@@ -11,6 +11,8 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
            file://run-ptest \
            file://CVE-2026-3731_p1.patch \
            file://CVE-2026-3731_p2.patch \
+           file://CVE-2026-0968_p1.patch \
+           file://CVE-2026-0968_p2.patch \
           "
 
 SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
