@@ -9,6 +9,10 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
            file://pkgconfig.patch \
            file://fix-package-check-for-libxml2.patch \
            file://run-ptest \
+           file://0001-Temporarily-disable-no_redirect.patch \
+           file://0002-Re-enabling-no_redirect-with-more-debugging.patch \
+           file://0003-no_redirect-Switch-to-using-double_serve_sstring.patch \
+           file://0004-test-redirect.c-Cleanup.patch \
           "
 
 SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"

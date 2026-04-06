@@ -1,0 +1,45 @@
+From f7a3d8f1366c7df6578d79af3b5d28a316011be0 Mon Sep 17 00:00:00 2001
+From: Joe Orton <jorton@redhat.com>
+Date: Thu, 7 Mar 2019 09:56:57 +0000
+Subject: [PATCH 1/4] Temporarily disable redirect.c:no_redirect
+
+Upstream-Status: Backport
+[https://github.com/notroj/neon/commit/f7a3d8f1366c7df6578d79af3b5d28a316011be0]
+Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+---
+ test/redirect.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/redirect.c b/test/redirect.c
+index c93b388..920c481 100644
+--- a/test/redirect.c
++++ b/test/redirect.c
+@@ -162,6 +162,7 @@ static int fail_loop(void)
+ }
+ #endif
+ 
++#if 0
+ /* ensure that ne_redirect_location returns NULL when no redirect has
+  * been encountered, or redirect hooks aren't registered. */
+ static int no_redirect(void)
+@@ -187,6 +188,7 @@ static int no_redirect(void)
+     ne_session_destroy(sess);
+     return OK;
+ }
++#endif
+ 
+ ne_test tests[] = {
+     T(lookup_localhost),
+@@ -194,7 +196,9 @@ ne_test tests[] = {
+     T(non_absolute),
+     T(relative_1),
+     T(relative_2),
++#if 0
+     T(no_redirect),
++#endif
+     T(NULL) 
+ };
+ 
+-- 
+2.34.1
+

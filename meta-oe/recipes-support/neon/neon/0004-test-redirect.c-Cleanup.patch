@@ -1,0 +1,49 @@
+From 9e836bb63bf41fd78e12175cd7b35bfb07a031e3 Mon Sep 17 00:00:00 2001
+From: Joe Orton <jorton@redhat.com>
+Date: Mon, 8 Apr 2019 10:35:42 +0100
+Subject: [PATCH 4/4] * test/redirect.c: Cleanup.
+
+Upstream-Status: Backport
+[https://github.com/notroj/neon/commit/9e836bb63bf41fd78e12175cd7b35bfb07a031e3]
+Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+---
+ test/redirect.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/test/redirect.c b/test/redirect.c
+index 42deadb..682097d 100644
+--- a/test/redirect.c
++++ b/test/redirect.c
+@@ -165,10 +165,9 @@ static int fail_loop(void)
+ }
+ #endif
+ 
+-#if 01
+-
+ #define RESP1 "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
+ #define RESP2 "HTTP/1.0 302 Get Ye Away\r\n" "Location: /blah\r\n" "\r\n"
++
+ /* ensure that ne_redirect_location returns NULL when no redirect has
+  * been encountered, or redirect hooks aren't registered. */
+ static int no_redirect(void)
+@@ -197,7 +196,6 @@ static int no_redirect(void)
+     ne_session_destroy(sess);
+     return OK;
+ }
+-#endif
+ 
+ ne_test tests[] = {
+     T(lookup_localhost),
+@@ -205,9 +203,7 @@ ne_test tests[] = {
+     T(non_absolute),
+     T(relative_1),
+     T(relative_2),
+-#if 1
+     T(no_redirect),
+-#endif
+     T(NULL) 
+ };
+ 
+-- 
+2.34.1
+

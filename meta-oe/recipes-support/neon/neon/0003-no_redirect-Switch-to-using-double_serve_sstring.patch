@@ -1,0 +1,48 @@
+From 1e562888d85efc492c434474c8d90cef3aaa8b18 Mon Sep 17 00:00:00 2001
+From: Joe Orton <jorton@redhat.com>
+Date: Mon, 8 Apr 2019 10:32:27 +0100
+Subject: [PATCH 3/4] * test/redirect.c (no_redirect): Switch to using
+ double_serve_sstring.
+
+Upstream-Status: Backport
+[https://github.com/notroj/neon/commit/1e562888d85efc492c434474c8d90cef3aaa8b18]
+Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+---
+ test/redirect.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/test/redirect.c b/test/redirect.c
+index e7ecc19..42deadb 100644
+--- a/test/redirect.c
++++ b/test/redirect.c
+@@ -166,17 +166,23 @@ static int fail_loop(void)
+ #endif
+ 
+ #if 01
++
++#define RESP1 "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
++#define RESP2 "HTTP/1.0 302 Get Ye Away\r\n" "Location: /blah\r\n" "\r\n"
+ /* ensure that ne_redirect_location returns NULL when no redirect has
+  * been encountered, or redirect hooks aren't registered. */
+ static int no_redirect(void)
+ {
+     ne_session *sess;
+     const ne_uri *loc;
++    struct double_serve_args resp;
++
++    resp.first.data = RESP1;
++    resp.first.len = strlen(RESP1);
++    resp.second.data = RESP2;
++    resp.second.len = strlen(RESP2);
+ 
+-    CALL(session_server(&sess, single_serve_string, 
+-                        "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
+-                        "HTTP/1.0 302 Get Ye Away\r\n"
+-                        "Location: /blah\r\n" "\r\n"));
++    CALL(session_server(&sess, double_serve_sstring, &resp));
+     ONN("redirect non-NULL before register", ne_redirect_location(sess));
+     ne_redirect_register(sess);
+     ONN("initial redirect non-NULL", ne_redirect_location(sess));
+-- 
+2.34.1
+

@@ -1,0 +1,50 @@
+From 0f8dec6c8e7d672f74bb5f81fc7c6bd0d5c56619 Mon Sep 17 00:00:00 2001
+From: Joe Orton <jorton@redhat.com>
+Date: Mon, 8 Apr 2019 10:22:52 +0100
+Subject: [PATCH 2/4] * test/redirect: Try re-enabling no_redirect with more
+ debugging.
+
+Upstream-Status: Backport
+[https://github.com/notroj/neon/commit/0f8dec6c8e7d672f74bb5f81fc7c6bd0d5c56619]
+Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
+---
+ test/redirect.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/test/redirect.c b/test/redirect.c
+index 920c481..e7ecc19 100644
+--- a/test/redirect.c
++++ b/test/redirect.c
+@@ -64,7 +64,10 @@ static int serve_redir(ne_socket *sock, void *ud)
+ static int process_redir(ne_session *sess, const char *path,
+                          const ne_uri **redir)
+ {
+-    ONN("did not get NE_REDIRECT", any_request(sess, path) != NE_REDIRECT);
++    int ret = any_request(sess, path);
++    ONV(ret != NE_REDIRECT,
++        ("request got %d (%s) rather than NE_REDIRECT",
++         ret, ne_get_error(sess)));
+     *redir = ne_redirect_location(sess);
+     return OK;
+ }
+@@ -162,7 +165,7 @@ static int fail_loop(void)
+ }
+ #endif
+ 
+-#if 0
++#if 01
+ /* ensure that ne_redirect_location returns NULL when no redirect has
+  * been encountered, or redirect hooks aren't registered. */
+ static int no_redirect(void)
+@@ -196,7 +199,7 @@ ne_test tests[] = {
+     T(non_absolute),
+     T(relative_1),
+     T(relative_2),
+-#if 0
++#if 1
+     T(no_redirect),
+ #endif
+     T(NULL) 
+-- 
+2.34.1
+
