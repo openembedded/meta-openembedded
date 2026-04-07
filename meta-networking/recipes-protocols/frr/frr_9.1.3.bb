@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
 SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.1 \
            file://frr.pam \
            file://0001-zebra-Mimic-GNU-basename-API-for-non-glibc-library-e.patch \
+           file://0002-tools-update-frr-reload.py-path-to-usr-libexec-frr.patch \
            file://CVE-2024-55553.patch \
            file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_1.patch \
            file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_2.patch \

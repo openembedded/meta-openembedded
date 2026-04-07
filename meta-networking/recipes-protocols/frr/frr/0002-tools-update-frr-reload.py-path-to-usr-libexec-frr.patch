@@ -1,0 +1,25 @@
+From: Sławomir Błaszczyk <bslawomir330@gmail.com>
+Date: Tue, 07 Apr 2026 13:54:00 +0200
+Subject: [PATCH] tools: update frr-reload.py path to /usr/libexec/frr/
+
+Upstream-Status: Submitted [https://github.com/openembedded/meta-openembedded/pull/1044]
+---
+ tools/frr-reload | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/frr-reload b/tools/frr-reload
+index 75b31d0622..eb784da3d6 100755
+--- a/tools/frr-reload
++++ b/tools/frr-reload
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+
+-if test -e /usr/lib/frr/frr-reload.py; then
+-   exec /usr/lib/frr/frr-reload.py --reload /etc/frr/frr.conf
++if test -e /usr/libexec/frr/frr-reload.py; then
++   exec /usr/frrexec/frr-reload.py --reload /etc/frr/frr.conf
+ fi
+ >&2 echo "Please install frr-pythontools package. Required for reload"
+ exit 1
+--
+2.41.0
