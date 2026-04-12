@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/tailscale/tailscale.git;protocol=https;branch=releas
            file://default \
            file://tailscaled.init \
            "
-SRCREV = "7648989bc54738b1e40dde74fa822984a63cbc05"
+SRCREV = "2de4d317a8c2595904f1563ebd98fdcf843da275"
 SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
 require ${BPN}-go-mods.inc
 
@@ -22,7 +22,10 @@ GO_LINKSHARED = ""
 GOBUILDFLAGS:prepend = "-tags=${@','.join(d.getVar('PACKAGECONFIG_CONFARGS').split())} "
 GO_EXTRA_LDFLAGS = "-X tailscale.com/version.longStamp=${PV}-${SRCREV_SHORT} -X tailscale.com/version.shortStamp=${PV}"
 
-inherit go-mod \
+# Pass build tags so go list in update-modules discovers all conditional deps
+export GOFLAGS = "-tags=${@','.join(d.getVar('PACKAGECONFIG_CONFARGS').split())}"
+
+inherit go-mod go-mod-update-modules \
     ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'update-rc.d', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
 
