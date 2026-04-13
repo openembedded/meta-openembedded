@@ -1,0 +1,48 @@
+From ff1a6be09b6856b34b30b00542a06819402094c6 Mon Sep 17 00:00:00 2001
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Mon, 13 Apr 2026 17:16:43 +0200
+Subject: [PATCH] fix test parameterization
+
+The patch for CVE-2025-68131 backported the tests in a way
+that inserted a new, not-parameterized test between another
+parameterized test and this test's parameters. Due to this
+the parameters were associated with the incorrect test, failing
+the execution.
+
+Fix that.
+
+Upstream-Status: Backport [https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ tests/test_decoder.py | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/tests/test_decoder.py b/tests/test_decoder.py
+index cc3af11..f9b7a11 100644
+--- a/tests/test_decoder.py
++++ b/tests/test_decoder.py
+@@ -709,11 +709,6 @@ def test_reserved_special_tags(impl, data, expected):
+     assert exc_info.value.args[0] == "Undefined Reserved major type 7 subtype 0x" + expected
+ 
+ 
+-@pytest.mark.parametrize('data, expected', [
+-    ('c400', '4'), ('c500', '5')
+-    ],
+-)
+-
+ class TestDecoderReuse:
+     """
+     Tests for correct behavior when reusing CBORDecoder instances.
+@@ -775,6 +770,12 @@ class TestDecoderReuse:
+         assert result == ["hello", "hello"]
+         assert result[0] is result[1]  # Same object reference
+ 
++
++@pytest.mark.parametrize('data, expected', [
++    ('c400', '4'), ('c500', '5')
++    ],
++)
++
+ def test_decimal_payload_unpacking(impl, data, expected):
+     with pytest.raises(impl.CBORDecodeValueError) as exc_info:
+         impl.loads(unhexlify(data))

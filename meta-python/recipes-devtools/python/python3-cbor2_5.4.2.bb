@@ -11,6 +11,7 @@ inherit pypi python_setuptools_build_meta ptest
 SRC_URI += " \
         file://run-ptest \
         file://CVE-2025-68131.patch \
+        file://0001-fix-test-parameterization.patch \
 "
 
 # not vulnerable yet, vulnerability was introduced in v5.6.0
