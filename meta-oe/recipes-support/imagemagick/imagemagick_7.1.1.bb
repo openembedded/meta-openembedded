@@ -29,6 +29,34 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
            file://CVE-2025-68618.patch \
            file://CVE-2025-68950.patch \
            file://CVE-2025-69204.patch \
+           file://CVE-2026-24481.patch \
+           file://CVE-2026-25638.patch \
+           file://CVE-2026-25794.patch \
+           file://CVE-2026-25795.patch \
+           file://CVE-2026-25796.patch \
+           file://CVE-2026-25797_1.patch \
+           file://CVE-2026-25797_2.patch \
+           file://CVE-2026-25798.patch \
+           file://CVE-2026-25799.patch \
+           file://CVE-2026-25897.patch \
+           file://CVE-2026-25898_1.patch \
+           file://CVE-2026-25898_2.patch \
+           file://CVE-2026-25965.patch \
+           file://CVE-2026-25966.patch \
+           file://CVE-2026-25967.patch \
+           file://CVE-2026-25968.patch \
+           file://CVE-2026-25969.patch \
+           file://CVE-2026-25970_pre1.patch \
+           file://CVE-2026-25970.patch \
+           file://CVE-2026-25982.patch \
+           file://CVE-2026-25985.patch \
+           file://CVE-2026-25986.patch \
+           file://CVE-2026-25987.patch \
+           file://CVE-2026-25988.patch \
+           file://CVE-2026-26066.patch \
+           file://CVE-2026-26283.patch \
+           file://CVE-2026-26284.patch \
+           file://CVE-2026-26983.patch \
            "
 SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
 
