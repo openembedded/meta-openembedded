@@ -190,3 +190,5 @@ USERADD_PARAM:${PN} = " \
     --home ${NGINX_WWWDIR} \
     --groups www-data \
     --user-group ${NGINX_USER}"
+
+CVE_PRODUCT = "nginx:nginx f5:nginx_open_source f5:nginx"
