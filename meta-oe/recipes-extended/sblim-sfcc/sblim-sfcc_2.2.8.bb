@@ -2,7 +2,7 @@ SUMMARY = "Small Footprint CIM Client Library"
 DESCRIPTION = "Small Footprint CIM Client Library Runtime Libraries"
 HOMEPAGE = "http://www.sblim.org"
 
-SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
+SRC_URI = "${SOURCEFORGE_MIRROR}/sblim/${BPN}/${BPN}-${PV}.tar.bz2 \
            file://0001-cimxml-Include-sys-select.h-for-fd_set.patch \
            "
 
