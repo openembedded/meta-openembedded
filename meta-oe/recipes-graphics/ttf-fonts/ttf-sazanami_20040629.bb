@@ -11,7 +11,7 @@ SRC_DISTRIBUTE_LICENSES += "${PN}"
 RPROVIDES:${PN} = "virtual-japanese-font"
 PR = "r9"
 
-SRC_URI = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2"
+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/sazanami-fonts/sazanami-20040629.tar.bz2/ceef10579a75c92483171f3bd7f77df2/sazanami-20040629.tar.bz2"
 S = "${WORKDIR}/sazanami-20040629"
 
 PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
