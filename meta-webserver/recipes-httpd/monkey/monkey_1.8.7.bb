@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 
 SECTION = "net"
 
-SRC_URI = "git://github.com/monkey/monkey;branch=master;protocol=https \
+SRC_URI = "git://github.com/monkey/monkey;branch=master;protocol=https;tag=v${PV} \
            file://0001-fastcgi-Use-value-instead-of-address-of-sin6_port.patch \
            file://0001-include-Fix-location-of-mk_core.h-etal.patch \
            file://monkey.service \
            file://monkey.init"
 
-SRCREV = "94af273244369e1a8426d0d1f6376475aff90db9"
+SRCREV = "0fd3bbd657c6d6339315709ef068493c572b973c"
 
 UPSTREAM_CHECK_COMMITS = "1"
 
@@ -51,6 +51,10 @@ do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -Dm 644 ${UNPACKDIR}/monkey.service ${D}/${systemd_unitdir}/system/monkey.service
     fi
+
+    # QA Issue: monkey installs files in /var/volatile, but it is expected to be empty [empty-dirs]
+    # these folders are supposed to be recreated at runtime
+    find ${D}/var -type d -empty -delete
 }
 
 INITSCRIPT_NAME = "monkey"
