@@ -5,7 +5,7 @@ being useful purely as a system analysis tool."
 HOMEPAGE = "http://tomoyo.sourceforge.jp/"
 SECTION = "System Environment/Kernel"
 
-SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${BP}-20170102.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/tomoyo/53357/${BP}-20170102.tar.gz"
 SRC_URI[sha256sum] = "00fedfac5e514321250bbe69eaccc732c8a8158596f77a785c2e3ae9f9968283"
 
 S = "${WORKDIR}/${BPN}"
