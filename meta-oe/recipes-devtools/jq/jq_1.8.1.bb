@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cf7fcb0a1def4a7ad62c028f7d0dca47"
 
 SRCREV = "4467af7068b1bcd7f882defff6e7ea674c5357f4"
 
-SRC_URI = " \
-    git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
-    file://run-ptest \
-    file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
-"
+SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
+           file://run-ptest \
+           file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
+           file://CVE-2026-32316.patch \
+           "
 
 inherit autotools ptest
 
