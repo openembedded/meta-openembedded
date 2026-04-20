@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
            file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
            file://CVE-2026-32316.patch \
            file://CVE-2026-33947.patch \
+           file://CVE-2026-33948.patch \
            "
 
 inherit autotools ptest
