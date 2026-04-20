@@ -11,7 +11,11 @@ SRC_URI = "git://github.com/monkey/monkey;branch=master;protocol=https;tag=v${PV
            file://0001-fastcgi-Use-value-instead-of-address-of-sin6_port.patch \
            file://0001-include-Fix-location-of-mk_core.h-etal.patch \
            file://monkey.service \
-           file://monkey.init"
+           file://monkey.init \
+           file://0001-server-http-fix-malformed-request-crash-paths.patch \
+           file://0002-server-scheduler-guard-protocol-close-callback.patch \
+           file://0003-server-parser-harden-boundary-checks.patch \
+           "
 
 SRCREV = "0fd3bbd657c6d6339315709ef068493c572b973c"
 
