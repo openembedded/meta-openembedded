@@ -44,4 +44,6 @@ FILES:${PN}-test = " \
     ${PYTHON_SITEPACKAGES_DIR}/*/test \
 "
 
+CVE_PRODUCT = "tornadoweb:tornado"
+
 BBCLASSEXTEND  += "native nativesdk"
