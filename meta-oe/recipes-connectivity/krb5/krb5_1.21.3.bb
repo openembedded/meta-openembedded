@@ -22,6 +22,8 @@ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
            file://0001-Eliminate-old-style-function-declarations.patch;patchdir=.. \
+           file://0001-Fix-more-non-prototype-functions.patch;patchdir=.. \
+           file://0002-Avoid-strict-prototype-compiler-errors.patch;patchdir=.. \
            file://crosscompile_nm.patch \
            file://etc/init.d/krb5-kdc \
            file://etc/init.d/krb5-admin-server \
