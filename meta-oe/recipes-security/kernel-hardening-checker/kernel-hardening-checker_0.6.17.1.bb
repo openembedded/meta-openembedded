@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;br
 	   file://0001-pyproject.toml-fix-up-license-information.patch \
 	   file://0002-pyproject.toml-relax-setuptool-version-requirement.patch"
 
-SRCREV = "0ebece346f187e7d3589883cc1d194fcd1c3cda8"
+SRCREV = "afc376f2a935994793343cfeb05953583cc30191"
 
 S = "${WORKDIR}/git"
 
