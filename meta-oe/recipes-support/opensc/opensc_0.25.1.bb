@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https \
            file://0001-PR-Fixes-for-uninitialized-memory-issues.patch \
            file://CVE-2024-8443-0001.patch \
            file://CVE-2024-8443-0002.patch \
+           file://CVE-2025-49010.patch \
          "
 DEPENDS = "virtual/libiconv openssl"
 
