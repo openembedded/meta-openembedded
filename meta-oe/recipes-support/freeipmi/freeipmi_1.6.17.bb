@@ -23,3 +23,4 @@ inherit pkgconfig autotools
 
 EXTRA_OECONF = "--without-random-device"
 
+CVE_STATUS[CVE-2026-33554] = "fixed-version: fixed since 1.6.17"
