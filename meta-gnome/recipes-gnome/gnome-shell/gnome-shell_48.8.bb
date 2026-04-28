@@ -34,7 +34,7 @@ GIR_MESON_OPTION = ""
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 SRC_URI += "file://0001-shell-app-usage.c-only-include-x11-headers-if-HAVE_X.patch"
-SRC_URI[archive.sha256sum] = "2dff328d5f7e29f8c897bc21caac7d2d443be3c63ae84d7623dec800f23493c3"
+SRC_URI[archive.sha256sum] = "cb9b7d86cf362530e648e68caaf109a32af4e832874a26791ca8789773efd233"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
