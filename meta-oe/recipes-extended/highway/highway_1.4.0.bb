@@ -9,7 +9,7 @@ inherit cmake
 SRC_URI = "git://github.com/google/highway.git;protocol=https;branch=master \
            file://0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch"
 
-SRCREV = "c34a36fb145de0a922a6e719b217033e1ff2eece"
+SRCREV = "2607d3b5b0113992fe84d3848859eae13b3b52c1"
 PV .= "+git"
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=0 -DCMAKE_BUILD_TYPE=Release"
