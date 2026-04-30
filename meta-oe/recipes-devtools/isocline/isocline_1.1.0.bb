@@ -9,7 +9,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8d05469c537534c7405c82c81a526bcd"
 
 SRC_URI = "git://github.com/daanx/isocline.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "74d34bc453f5b91f1f8d8ded2840e1553623d135"
+SRCREV = "d55a58139badbe83d61c5d89954fa5bddcabe6d7"
 
 
 inherit cmake
