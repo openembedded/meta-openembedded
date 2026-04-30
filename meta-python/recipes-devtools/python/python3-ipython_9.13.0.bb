@@ -3,7 +3,7 @@ HOMEPAGE = "https://ipython.org"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
 
-SRC_URI[sha256sum] = "01daa83f504b693ba523b5a407246cabde4eb4513285a3c6acaff11a66735ee4"
+SRC_URI[sha256sum] = "7e834b6afc99f020e3f05966ced34792f40267d64cb1ea9043886dab0dde5967"
 
 RDEPENDS:${PN} = "\
     python3-setuptools \
