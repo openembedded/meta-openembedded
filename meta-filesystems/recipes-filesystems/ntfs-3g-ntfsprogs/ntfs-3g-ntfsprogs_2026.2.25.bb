@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRC_URI = "git://github.com/tuxera/ntfs-3g;protocol=https;branch=edge;tag=${PV} \
            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
-           file://0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch \
-"
-SRCREV = "78414d93613532fd82f3a82aba5d4a1c32898781"
+           "
+SRCREV = "d1cb9e825d059ef5db0ccd30d5bce202edbd69dc"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
