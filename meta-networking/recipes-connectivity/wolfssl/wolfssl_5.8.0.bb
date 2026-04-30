@@ -44,6 +44,8 @@ SRC_URI = " \
     file://CVE-2026-5446-1.patch \
     file://CVE-2026-5446-2.patch \
     file://CVE-2026-5447.patch \
+    file://CVE-2026-5772-1.patch \
+    file://CVE-2026-5772-2.patch \
 "
 
 SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
