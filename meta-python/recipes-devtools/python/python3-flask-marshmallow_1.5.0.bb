@@ -8,7 +8,7 @@ inherit pypi python_flit_core
 PYPI_PACKAGE = "flask_marshmallow"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "98c90a253052c72d2ddddc925539ac33bbd780c6fba86478ffe18e3b89d8b471"
+SRC_URI[sha256sum] = "7c06b56e41647eccdb3cd57c25b109f19191b4c62509362bd64920cdf601a066"
 
 RDEPENDS:${PN} += "\
     python3-flask \
