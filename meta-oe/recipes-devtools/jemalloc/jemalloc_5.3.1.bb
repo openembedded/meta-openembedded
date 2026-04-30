@@ -13,13 +13,11 @@ SECTION = "libs"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=ea061f8731d5e6a5761dfad951ef5f5f"
 
-SRC_URI = "git://github.com/jemalloc/jemalloc.git;branch=dev;protocol=https \
+SRC_URI = "git://github.com/jemalloc/jemalloc.git;branch=master;protocol=https;tag=${PV} \
            file://run-ptest \
            "
-SRCREV = "630434bb0ac619f7beec927569782d924c459385"
+SRCREV = "81034ce1f1373e37dc865038e1bc8eeecf559ce8"
 PV_LONG := "${PV}-171-g${SRCREV}"
-PV .= "+git"
-
 
 inherit autotools ptest
 
