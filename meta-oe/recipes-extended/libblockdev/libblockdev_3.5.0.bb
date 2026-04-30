@@ -12,10 +12,10 @@ inherit autotools gobject-introspection pkgconfig lib_package
 
 DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
 
-SRC_URI = "git://github.com/storaged-project/libblockdev;branch=master;protocol=https \
+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=master;protocol=https;tag=${PV} \
            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
            "
-SRCREV = "c1053b3643f0b4f3d4549ac8f3ae85fdecbb2c72"
+SRCREV = "065d6910a0e915dbe633356da7bad9c4b3a2e2b9"
 
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
