@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
 
 inherit autotools pkgconfig klibc
 
-SRCREV = "4594fc1f4496a0ed55cabd31fbeba4e3fbf05602"
-SRC_URI = "git://git.infraroot.at/mtd-utils.git;protocol=https;branch=master \
+SRCREV = "053ee1038e5dedae61a88cadfb7bdfe9894d8bb6"
+SRC_URI = "git://git.infraroot.at/mtd-utils.git;protocol=https;branch=master;tag=v${PV} \
              file://0001-libmissing.h-fix-klibc-build-when-using-glibc-toolch.patch \
              file://0003-Makefile.am-only-build-ubi-utils.patch \
              file://0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch \
