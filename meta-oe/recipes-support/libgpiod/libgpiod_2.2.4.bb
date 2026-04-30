@@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
 
 SRC_URI += "file://gpio-manager.init"
 
-SRC_URI[sha256sum] = "70012b0262e4b90f140431efa841ca89643b02ea6c09f507e23cec664a51b71a"
+SRC_URI[sha256sum] = "13207176b0eb9b3e0f02552d5f49f5a6a449343ce47416158bb484d9d3019592"
 
 # Enable all project features for ptest
 PACKAGECONFIG[tests] = " \
