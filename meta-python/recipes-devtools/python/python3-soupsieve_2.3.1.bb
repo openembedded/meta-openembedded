@@ -8,10 +8,10 @@ SRC_URI[sha256sum] = "b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829
 
 inherit pypi python_setuptools_build_meta ptest
 
-SRC_URI += " \
-        file://run-ptest \
-        file://update_tests_for_latest_libxml.patch \
-"
+SRC_URI += "file://run-ptest \
+           file://update_tests_for_latest_libxml.patch \
+           file://0001-Adjustments-for-changes-in-HTML-parser-285.patch \
+           "
 
 RDEPENDS:${PN}-ptest += " \
         ${PYTHON_PN}-pytest \
