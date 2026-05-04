@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "25bf13842a5c55f4a5ab1523e005b3b11b9ac38e"
+SRCREV = "b3b4f7ef914b84964a56500cfec83f21dc513e6a"
 SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main;tag=${PV}"
 
 DEPENDS += "kmod"
