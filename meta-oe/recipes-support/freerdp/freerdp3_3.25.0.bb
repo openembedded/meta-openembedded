@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
 
 inherit pkgconfig cmake ptest
 
-SRCREV = "3028b706908f81767d9b9c744a90778c28f57d61"
+SRCREV = "90e7f064dc3ab8672b8ec714059d8cd51be0743f"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
            file://run-ptest"
 
@@ -68,6 +68,8 @@ do_configure:prepend() {
     sed -i 's|="\${CMAKE_CURRENT_BINARY_DIR}|="${PTEST_PATH}/test|' ${S}/winpr/libwinpr/utils/test/CMakeLists.txt
     sed -i 's|="\${CMAKE_CURRENT_SOURCE_DIR}|="${PTEST_PATH}/test|' ${S}/libfreerdp/codec/test/CMakeLists.txt
     sed -i 's|="\${CMAKE_CURRENT_BINARY_DIR}|="${PTEST_PATH}/test|' ${S}/libfreerdp/codec/test/CMakeLists.txt
+    sed -i 's|="\${CMAKE_CURRENT_BINARY_DIR}|="${PTEST_PATH}/test|' ${S}/server/proxy/test/CMakeLists.txt
+    sed -i 's|="\${CMAKE_CURRENT_SOURCE_DIR}|="${PTEST_PATH}/test|' ${S}/server/proxy/test/CMakeLists.txt
 
 }
 
@@ -89,6 +91,7 @@ do_install_ptest() {
     cp -r ${S}/resources ${D}${PTEST_PATH}
     cp -r ${S}/libfreerdp/codec/test/planar ${D}${PTEST_PATH}/test/
     cp -r ${S}/libfreerdp/codec/test/interleaved ${D}${PTEST_PATH}/test/
+    cp -r ${S}/server/proxy/test/conf ${D}${PTEST_PATH}/test/
 
     cd ${B}
     # the test definitions, how to execute the tests
