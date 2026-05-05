@@ -8,13 +8,13 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
-SRCREV_opcua = "f63e2a819aff6e468242dc2e54ccbd5b75d63654"
+SRCREV_opcua = "dfd44a234645ed29cc6d190048bc8ae80c5454cd"
 SRCREV_mdnsd = "488d24fb9d427aec77df180268f0291eeee7fb8b"
-SRCREV_ua-nodeset = "d1bb6a22125bd7cd986272b1ee98a18a91d76fff"
+SRCREV_ua-nodeset = "257db9ad98ee7ba4b67d3500b54bfc9d744a36af"
 SRCREV_mqtt-c = "0f4c34c8cc00b16cfee094745d68b8cdbaecd8e0"
 
 SRC_URI = " \
-    git://github.com/open62541/open62541.git;name=opcua;branch=1.4;protocol=https \
+    git://github.com/open62541/open62541.git;name=opcua;branch=1.5;protocol=https \
     git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mdnsd \
     git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=latest;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/ua-nodeset \
     git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mqtt-c \
@@ -59,4 +59,5 @@ do_configure:prepend:toolchain-clang:riscv32() {
 
 do_install:append(){
     sed -i 's|${RECIPE_SYSROOT}|\$\{CMAKE_SYSROOT\}|g' ${D}${libdir}/cmake/open62541/open62541Targets.cmake
+    sed -i -e 's|-l[^ ]*/lib\([^ /]*\)\.so|-l\1|g' ${D}${libdir}/pkgconfig/open62541.pc
 }
