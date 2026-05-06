@@ -13,7 +13,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "b7854fd07d42168f099b5ce30d1702e0e0875bf5"
+SRCREV = "183e37362f57ff3ce7493abf0bc6f1b57b931f55"
 
 PE = "1"
 
@@ -25,12 +25,18 @@ PACKAGES =+ "${PN}-compliance ${PN}-gst ${PN}-pycamera"
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
 "
-PACKAGECONFIG[dng] = ",,tiff"
+
+PACKAGECONFIG[dng] = "-Dapps-output-dng=enabled,-Dapps-output-dng=disabled,tiff"
+PACKAGECONFIG[dw] = "-Dlibdw=enabled,-Dlibdw=disabled,elfutils,libdw"
 PACKAGECONFIG[compliance] = "-Dlc-compliance=enabled,-Dlc-compliance=disabled,gtest"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
-PACKAGECONFIG[opengl] = ",,virtual/libgl virtual/egl"
+PACKAGECONFIG[jpeg] = "-Dcam-jpeg=enabled,-Dcam-jpeg=disabled,libjpeg-turbo"
+PACKAGECONFIG[kms] = "-Dcam-output-kms=enabled,-Dcam-output-kms=disabled,libdrm"
+PACKAGECONFIG[opengl] = "-Dsoftisp-gpu=enabled,-Dsoftisp-gpu=disabled,virtual/libgl virtual/egl"
 PACKAGECONFIG[python] = "-Dpycamera=enabled,-Dpycamera=disabled,python3-pybind11"
 PACKAGECONFIG[raspberrypi] = ",,libpisp"
+PACKAGECONFIG[sdl] = "-Dcam-output-sdl2=enabled,-Dcam-output-sdl2=disabled,virtual/libsdl2"
+PACKAGECONFIG[unwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
 PACKAGECONFIG[vimc] = ",,"
 PACKAGECONFIG[virtual] = ",,libyuv libjpeg-turbo"
 
