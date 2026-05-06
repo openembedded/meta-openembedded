@@ -11,10 +11,9 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
-        file://0001-libcamera-Do-not-assume-libc-with-clang.patch \
 "
 
-SRCREV = "3c17d1fbb2bd93f221afee788ebf0d7394032e4d"
+SRCREV = "b7854fd07d42168f099b5ce30d1702e0e0875bf5"
 
 PE = "1"
 
@@ -23,10 +22,13 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native'
 
 PACKAGES =+ "${PN}-compliance ${PN}-gst ${PN}-pycamera"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= " \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+"
 PACKAGECONFIG[dng] = ",,tiff"
 PACKAGECONFIG[compliance] = "-Dlc-compliance=enabled,-Dlc-compliance=disabled,gtest"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[opengl] = ",,virtual/libgl virtual/egl"
 PACKAGECONFIG[python] = "-Dpycamera=enabled,-Dpycamera=disabled,python3-pybind11"
 PACKAGECONFIG[raspberrypi] = ",,libpisp"
 PACKAGECONFIG[vimc] = ",,"
@@ -46,10 +48,11 @@ LIBCAMERA_PIPELINES:aarch64 ??= "${ARM_PIPELINES}"
 
 EXTRA_OEMESON = " \
     -Dpipelines=${LIBCAMERA_PIPELINES} \
-    -Dv4l2=true \
+    -Dv4l2=enabled \
     -Dcam=enabled \
     -Dtest=false \
     -Ddocumentation=disabled \
+    -Drpi-awb-nn=disabled \
 "
 
 RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
