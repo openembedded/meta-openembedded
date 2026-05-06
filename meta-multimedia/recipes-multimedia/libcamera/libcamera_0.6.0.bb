@@ -21,10 +21,11 @@ PE = "1"
 DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
 
-PACKAGES =+ "${PN}-gst ${PN}-pycamera"
+PACKAGES =+ "${PN}-compliance ${PN}-gst ${PN}-pycamera"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[dng] = ",,tiff"
+PACKAGECONFIG[compliance] = "-Dlc-compliance=enabled,-Dlc-compliance=disabled,gtest"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
 PACKAGECONFIG[raspberrypi] = ",,libpisp"
@@ -47,7 +48,6 @@ EXTRA_OEMESON = " \
     -Dpipelines=${LIBCAMERA_PIPELINES} \
     -Dv4l2=true \
     -Dcam=enabled \
-    -Dlc-compliance=disabled \
     -Dtest=false \
     -Ddocumentation=disabled \
 "
@@ -82,6 +82,7 @@ do_package_recalculate_ipa_signatures() {
 }
 
 FILES:${PN} += " ${libexecdir}/libcamera/v4l2-compat.so"
+FILES:${PN}-compliance = "${bindir}/lc-compliance"
 FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
 FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
 
