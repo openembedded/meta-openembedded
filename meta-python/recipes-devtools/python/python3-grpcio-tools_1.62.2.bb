@@ -21,3 +21,5 @@ do_compile:prepend() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_PRODUCT += "grpc:grpc"

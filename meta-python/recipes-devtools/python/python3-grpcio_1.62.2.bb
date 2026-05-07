@@ -51,3 +51,5 @@ CLEANBROKEN = "1"
 BBCLASSEXTEND = "native nativesdk"
 
 CCACHE_DISABLE = "1"
+
+CVE_PRODUCT += "grpc:grpc"
