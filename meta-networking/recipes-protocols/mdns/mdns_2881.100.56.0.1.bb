@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0001-Fix-build-with-gcc-15.patch \
            file://mdns.service \
            file://0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch \
+           file://0001-mDNSPosix-Rework-mbedtls-for-compatibility-with-mbed.patch \
            "
 BRANCH = "rel/mDNSResponder-2881"
 SRCREV = "ea3902cfeff86a04b4c684753c80e425edbd1a21"
@@ -47,7 +48,8 @@ EXTRA_OEMAKE = "os=linux 'CC=${CCLD}' 'LD=${CCLD}' 'LINKOPTS=${LDFLAGS}' STRIP=:
 
 # MDNS_VERSIONSTR_NODTS disables __DATE__ and __TIME__ in the version string,
 # which are fixed anyway for build reproducibility.
-TARGET_CPPFLAGS += "-DMDNS_VERSIONSTR_NODTS"
+TARGET_CPPFLAGS += "-DmDNSResponderVersion=${PV} \
+                    -DMDNS_VERSIONSTR_NODTS"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
