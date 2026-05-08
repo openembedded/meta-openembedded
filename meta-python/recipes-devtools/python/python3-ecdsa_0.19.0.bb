@@ -13,6 +13,8 @@ SRC_URI += " \
 	file://CVE-2026-33936.patch \
 "
 
+CVE_PRODUCT = "python-ecdsa_project:python-ecdsa tlsfuzzer:ecdsa"
+
 RDEPENDS:${PN}-ptest += " \
 	python3-hypothesis \
 	python3-pytest \
