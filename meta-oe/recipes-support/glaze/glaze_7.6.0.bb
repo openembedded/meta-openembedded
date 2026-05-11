@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4d29875d83fbbf50485c846dbbbed8"
 
 SRC_URI = "git://github.com/stephenberry/glaze;protocol=https;branch=main;tag=v${PV}"
 
-SRCREV = "dbf6caec935b768546587a413e45d033480c4483"
+SRCREV = "e4d8b406bc509cf236a11bc455fad29a024d5fb2"
 
 inherit cmake
 
