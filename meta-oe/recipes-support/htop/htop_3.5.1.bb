@@ -9,7 +9,7 @@ DEPENDS = "ncurses libnl"
 SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https;tag=${PV} \
            file://0001-configure.ac-Remove-usr-include-libnl3.patch \
 "
-SRCREV = "a21f043b253a6dfa89df1ff4130fe7d2e505000f"
+SRCREV = "82841011ac3e2ec6ee4d3dbdf80f8d26797abbc6"
 
 
 inherit autotools pkgconfig
