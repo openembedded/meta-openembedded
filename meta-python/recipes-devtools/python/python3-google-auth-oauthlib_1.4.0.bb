@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI += "file://0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch"
-SRC_URI[sha256sum] = "14c22c7b3dd3d06dbe44264144409039465effdd1eef94f7ce3710e486cc4bfa"
+SRC_URI[sha256sum] = "18b5e28880eb8eba9065c436becdc0ee8e4b59117a73a510679c82f70cd363d2"
 
 inherit pypi setuptools3 ptest
 PYPI_PACKAGE = "google_auth_oauthlib"
