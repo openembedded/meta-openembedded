@@ -6,7 +6,7 @@ SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
            file://run-ptest"
-SRC_URI[sha256sum] = "c1cd7152519f4188591fa4f6ddeb116bc1004491f5f3c58aa99b00582eb8a137"
+SRC_URI[sha256sum] = "5370f98dc15f8c222ee1ce52cd61c8756a53be0dc57cc4c1b0714d5a09ad74fb"
 
 S = "${UNPACKDIR}/Botan-${PV}"
 
