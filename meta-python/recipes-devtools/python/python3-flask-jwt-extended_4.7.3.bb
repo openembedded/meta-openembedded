@@ -8,7 +8,7 @@ inherit pypi setuptools3
 PYPI_PACKAGE = "flask_jwt_extended"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-SRC_URI[sha256sum] = "8085d6757505b6f3291a2638c84d207e8f0ad0de662d1f46aa2f77e658a0c976"
+SRC_URI[sha256sum] = "a8318a3d983d1f360724b901889f1947ffee418e2a3950b48e99c70923b6615e"
 
 RDEPENDS:${PN} += "\
     python3-werkzeug \
