@@ -3,14 +3,11 @@ HOMEPAGE = "https://github.com/ipython/traitlets"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=13bed0ee6f46a6f6dbf1f9f9572f250a"
 
-SRC_URI[sha256sum] = "9ed0579d3502c94b4b3732ac120375cda96f923114522847de4b3bb98b96b6b7"
+SRC_URI[sha256sum] = "4fead733f81cf1c4c938e06f8ca4633896833c9d89eff878159457f4d4392971"
 
 inherit pypi python_hatchling ptest
 
-SRC_URI += "\
-        file://0001-start-testing-on-3.14-and-3.14t-929.patch \
-        file://run-ptest \
-"
+SRC_URI += "file://run-ptest"
 
 RDEPENDS:${PN}-ptest += " \
         python3-argcomplete \
