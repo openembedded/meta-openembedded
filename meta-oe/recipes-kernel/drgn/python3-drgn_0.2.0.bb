@@ -6,7 +6,7 @@ LICENSE = " LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7c83d30e99508d6b790eacdd3abab846"
 
 SRC_URI = "git://github.com/osandov/drgn.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "26dd4435315e6735cfa7f4ab0713bb1533a94750"
+SRCREV = "818b5a7e8a4db82a1e0326667e7afaec5bf5fd19"
 
 
 DEPENDS = "\
