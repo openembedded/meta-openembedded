@@ -16,7 +16,7 @@ SRC_URI = " \
     file://0001-Make-themes-build-optional.patch \
 "
 
-SRC_URI[sha256sum] = "f3f7841358c98f5e7b06a9eedbdd5e6882fd9f38bbd14a767fb083e3b55b1c34"
+SRC_URI[sha256sum] = "6ee1068216c5047923fabf0f6aa583e9d77cab383077358df3fc22f2ee398bb0"
 
 PLYMOUTH_RUNSTATEDIR ??= "${base_prefix}/run"
 PLYMOUTH_RELEASE_FILE ??= "${sysconfdir}/system-release"
