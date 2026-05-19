@@ -10,6 +10,6 @@ inherit setuptools3_legacy
 
 SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master"
 
-SRCREV = "f0fcc3ce1943dce9cf958f4a2f7398daff619c9f"
+SRCREV = "35376b77be9f3e39a81fb19c6d8d86fe17b54c2a"
 
 FILES:${PN} += "${datadir}/python-meh"
