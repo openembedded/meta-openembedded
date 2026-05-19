@@ -2,7 +2,7 @@ SUMMARY = "A streaming multipart parser for Python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "9870a6a8c5a20a5bf4f07c017bd1489006ff8836cff097b6933355ee2b49b602"
+SRC_URI[sha256sum] = "8550da197eac0f7ab748961fc9509b999fa2662ea25cef857f05249f6893c0f8"
 
 inherit pypi python_hatchling ptest-python-pytest
 
