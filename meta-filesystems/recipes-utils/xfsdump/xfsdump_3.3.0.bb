@@ -14,7 +14,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
            file://remove-install-as-user.patch \
            file://0001-include-libgen.h-for-basename-API-prototype.patch \
            "
-SRC_URI[sha256sum] = "2914dbbe1ebc88c7d93ad88e220aa57dabc43d216e11f06221c01edf3cc10732"
+SRC_URI[sha256sum] = "9ca3e91055945f8a70bd4d465d5464f631630c65462896eda479d7371fd61db7"
 
 inherit autotools-brokensep
 
