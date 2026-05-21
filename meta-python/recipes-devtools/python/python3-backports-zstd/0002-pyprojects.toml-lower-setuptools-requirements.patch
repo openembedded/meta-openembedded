@@ -1,0 +1,31 @@
+From 2ab6ba1d48a3d0e13382e346ba0a638548a5513e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?J=C3=A9r=C3=A9mie=20Dautheribes=20=28Schneider=20Electric?=
+ =?UTF-8?q?=29?= <jeremie.dautheribes@bootlin.com>
+Date: Tue, 19 May 2026 14:06:43 +0000
+Subject: [PATCH] pyprojects.toml: lower setuptools requirements
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Scarthgap provides setuptools v69, so adjust the requirement
+accordingly.
+
+Upstream-Status: Inappropriate [specific to OE LTS version]
+Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 18e6816..b5953e2 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -30,7 +30,7 @@ Source = "https://github.com/rogdham/backports.zstd"
+ #
+ 
+ [build-system]
+-requires = ["setuptools>=80"]
++requires = ["setuptools>=69"]
+ build-backend = "setuptools.build_meta"
+ 
+ [tool.setuptools.packages.find]

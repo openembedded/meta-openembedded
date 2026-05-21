@@ -1,0 +1,38 @@
+From 1114b0d2b60056a3690be1f7629c112cf28ce367 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?J=C3=A9r=C3=A9mie=20Dautheribes=20=28Schneider=20Electric?=
+ =?UTF-8?q?=29?= <jeremie.dautheribes@bootlin.com>
+Date: Fri, 15 May 2026 13:39:15 +0000
+Subject: [PATCH] pyproject.toml: make license entries compatible with
+ setputools v69
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The pypropject.toml uses license and license-files entries that are only
+compatible with seuptools >= v77, while Yocto Scarthgap only provides
+setuptools v69.
+
+This is the only detected impact, otherwise the do_compile/do_package work
+fine.
+
+Upstream-Status: Inappropriate [specific to OE LTS version]
+Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
+---
+ pyproject.toml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index ec9a1ea..18e6816 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -5,8 +5,8 @@ authors = [{ name = "Rogdham", email = "contact@rogdham.net" }]
+ description = "Backport of compression.zstd"
+ readme = { file = "README.md", content-type = "text/markdown" }
+ keywords = ["backport", "backports", "pep-784", "zstd"]
+-license = "PSF-2.0"
+-license-files = ["LICENSE.txt", "LICENSE_zstd.txt"]
++license = { text = "PSF-2.0" }
++#license-files = ["LICENSE.txt"]
+ classifiers = [
+     "Development Status :: 5 - Production/Stable",
+     "Intended Audience :: Developers",
