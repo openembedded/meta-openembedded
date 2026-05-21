@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
 
 inherit pkgconfig cmake ptest
 
-SRCREV = "90e7f064dc3ab8672b8ec714059d8cd51be0743f"
+SRCREV = "3f6d7cb1f8973cc84c66b258a9a61c4e2b2f30a6"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
            file://run-ptest"
 
