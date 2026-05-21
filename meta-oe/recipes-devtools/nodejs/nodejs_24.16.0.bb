@@ -1,7 +1,8 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0 & BlueOak-1.0.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b195f4ea4368177a2fd84b879f09cba8"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9f816753e8bdfe4576cb87159a0cd60c"
+FILESEXTRAPATHS:prepend := "${THISDIR}/nodejs-24:"
 
 CVE_PRODUCT = "nodejs node.js"
 
@@ -22,24 +23,19 @@ COMPATIBLE_HOST:powerpc64le = "null"
 
 SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Do-not-use-glob-in-deps.patch \
-           file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
-           file://0004-v8-don-t-override-ARM-CFLAGS.patch \
-           file://system-c-ares.patch \
-           file://0001-liftoff-Correct-function-signatures.patch \
-           file://libatomic.patch \
-           file://0001-deps-disable-io_uring-support-in-libuv.patch \
-           file://0001-positional-args.patch \
-           file://0001-custom-env.patch \
-           file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
+           file://0002-v8-don-t-override-ARM-CFLAGS.patch \
+           file://0003-system-c-ares.patch \
+           file://0004-liftoff-Correct-function-signatures.patch \
+           file://0005-libatomic.patch \
+           file://0006-deps-disable-io_uring-support-in-libuv.patch \
+           file://0007-positional-args.patch \
+           file://0008-custom-env.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
-           file://0001-Using-native-binaries.patch \
+           file://0009-Using-native-binaries.patch \
            "
-SRC_URI:append:toolchain-clang:powerpc64le = " \
-           file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-           "
-SRC_URI[sha256sum] = "f3e6a578db1ab335a4a72785c1e87ad18a2cf6d2fc25747a1d741fb34af0bd0f"
+SRC_URI[sha256sum] = "2ff84a6de70b6165290111b0fc656ded1ad207a799816fe720cc7c31232df30f"
 
 S = "${UNPACKDIR}/node-v${PV}"
 
@@ -211,11 +207,3 @@ python __anonymous () {
 }
 
 BBCLASSEXTEND = "native"
-
-CVE_STATUS[CVE-2026-21710] = "fixed-version: fixed since v22.22.2"
-CVE_STATUS[CVE-2026-21712] = "cpe-incorrect: only v24 and v25 are affected"
-CVE_STATUS[CVE-2026-21713] = "fixed-version: fixed since v22.22.2"
-CVE_STATUS[CVE-2026-21714] = "fixed-version: fixed since v22.22.2"
-CVE_STATUS[CVE-2026-21715] = "fixed-version: fixed since v22.22.2"
-CVE_STATUS[CVE-2026-21716] = "fixed-version: fixed since v22.22.2"
-CVE_STATUS[CVE-2026-21717] = "fixed-version: fixed since v22.22.2"

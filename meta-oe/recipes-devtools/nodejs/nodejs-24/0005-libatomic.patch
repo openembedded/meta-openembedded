@@ -23,11 +23,9 @@ Added libatomic library explicitly to x86 targets.
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
  node.gyp                 | 13 ++++++++++++-
- tools/v8_gypfiles/v8.gyp | 15 ++++++++++++---
- 2 files changed, 24 insertions(+), 4 deletions(-)
+ tools/v8_gypfiles/v8.gyp | 29 ++++++++++++++++++++++++-----
+ 2 files changed, 36 insertions(+), 6 deletions(-)
 
-diff --git a/node.gyp b/node.gyp
-index b425f443..f296f35c 100644
 --- a/node.gyp
 +++ b/node.gyp
 @@ -503,7 +503,18 @@
@@ -50,37 +48,38 @@ index b425f443..f296f35c 100644
        }],
      ],
    },
-diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index b23263cf..dcabf4ca 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1348,9 +1348,18 @@
+@@ -1324,10 +1324,24 @@
          # Platforms that don't have Compare-And-Swap (CAS) support need to link atomic library
-         # to implement atomic memory access
-         ['v8_current_cpu in ["mips64", "mips64el", "ppc", "arm", "riscv64", "loong64"]', {
+         # to implement atomic memory access.
+         # Clang needs it for some atomic operations (https://clang.llvm.org/docs/Toolchain.html#atomics-library).
+-        ['(OS=="linux" and clang==1) or (v8_current_cpu in ["mips64", "mips64el", "arm", "riscv64", "loong64"])', {
 -          'link_settings': {
 -            'libraries': ['-latomic', ],
 -          },
++        ['(OS=="linux" and clang==1) or \
++          (v8_current_cpu in ["mips64", "mips64el", "arm", "riscv64", "loong64"])', {
 +          'target_conditions': [
 +             ['_toolset=="host"', {
 +               'conditions': [
 +                 ['"<!(echo $HOST_AND_TARGET_SAME_WIDTH)"=="0"', {
-+                   'libraries': ['-latomic'],
++                   'link_settings': {
++                     'libraries': ['-latomic'],
++                   },
 +                 }],
 +               ],
 +             }],
 +             ['_toolset=="target"', {
-+               'libraries': ['-latomic', ],
++               'link_settings': {
++                 'libraries': ['-latomic', ],
++               },
 +             }],
 +           ],
          }],
        ],
      },  # v8_base_without_compiler
-diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index cb82d4f15bc..65cb123b7bf 100644
---- a/tools/v8_gypfiles/v8.gyp
-+++ b/tools/v8_gypfiles/v8.gyp
-@@ -1820,6 +1820,13 @@
+@@ -1793,6 +1805,13 @@
          ['enable_lto=="true"', {
            'ldflags': [ '-fno-lto' ],
          }],
