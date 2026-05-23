@@ -1,7 +1,7 @@
-From ba079b8d6a50796db41bb0ddf4c22bfe022ef898 Mon Sep 17 00:00:00 2001
+From c0f5c3d176baf893658e9534256887633e18e3c4 Mon Sep 17 00:00:00 2001
 From: "Richard W.M. Jones" <rjones@redhat.com>
 Date: Sun, 20 Nov 2016 15:04:52 +0000
-Subject: [PATCH 1/5] Add support for RISC-V.
+Subject: [PATCH] Add support for RISC-V.
 
 The architecture is sufficiently similar to aarch64 that simply
 extending the existing aarch64 macro works.
@@ -38,6 +38,3 @@ index c9fa84c..9b491e8 100644
  
  
  /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
--- 
-2.25.1
-

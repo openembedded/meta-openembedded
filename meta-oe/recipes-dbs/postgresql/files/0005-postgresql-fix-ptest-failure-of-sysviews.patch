@@ -1,7 +1,7 @@
-From 1a8b94140988d2ee5ff987b0bb3e7c3e936b8c01 Mon Sep 17 00:00:00 2001
+From 83a2f0e9989269516f344fd665fa26c9828b5599 Mon Sep 17 00:00:00 2001
 From: Manoj Saun <manojsingh.saun@windriver.com>
 Date: Wed, 22 Mar 2023 08:07:26 +0000
-Subject: [PATCH 5/5] postgresql: fix ptest failure of sysviews
+Subject: [PATCH] postgresql: fix ptest failure of sysviews
 
 The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
 in pg_config table which reduces the count of rows from pg_config and leads to
@@ -44,6 +44,3 @@ index 351e469..84c113e 100644
  
  -- We expect no cursors in this test; see also portals.sql
  select count(*) = 0 as ok from pg_cursors;
--- 
-2.25.1
-
