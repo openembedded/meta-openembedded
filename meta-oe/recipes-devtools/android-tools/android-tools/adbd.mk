@@ -5,16 +5,12 @@ SOURCES = \
 	adb/adbconnection/adbconnection_server.cpp \
 	adb/daemon/auth.cpp \
 	adb/daemon/file_sync_service.cpp \
-	adb/daemon/file_sync_service.h \
 	adb/daemon/framebuffer_service.cpp \
-	adb/daemon/framebuffer_service.h \
 	adb/daemon/jdwp_service.cpp \
 	adb/daemon/main.cpp \
 	adb/daemon/restart_service.cpp \
-	adb/daemon/restart_service.h \
 	adb/daemon/services.cpp \
 	adb/daemon/shell_service.cpp \
-	adb/daemon/shell_service.h \
 	adb/daemon/usb_ffs.cpp \
 	adb/daemon/usb_legacy.cpp \
 	adb/daemon/usb.cpp \
@@ -41,7 +37,14 @@ SOURCES = \
 	diagnose_usb/diagnose_usb.cpp \
 	libasyncio/AsyncIO.cpp \
 
+HEADERS = \
+        adb/daemon/file_sync_service.h \
+        adb/daemon/framebuffer_service.h \
+        adb/daemon/restart_service.h \
+        adb/daemon/shell_service.h
+
 SOURCES := $(foreach source, $(SOURCES), system/core/$(source))
+HEADERS := $(foreach header, $(HEADERS), system/core/$(header))
 
 SOURCES += \
     frameworks/native/libs/adbd_auth/adbd_auth.cpp
@@ -79,9 +82,9 @@ ifneq ($(filter armel mipsel,$(DEB_HOST_ARCH)),)
   LDFLAGS += -latomic
 endif
 
-build: $(SOURCES)
+build: $(SOURCES) $(HEADERS)
 	mkdir --parents debian/out/system/core
-	$(CXX) $^ -o debian/out/system/core/adbd $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
+	$(CXX) $(SOURCES) -o debian/out/system/core/adbd $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
 
 clean:
 	$(RM) debian/out/system/core/adbd
