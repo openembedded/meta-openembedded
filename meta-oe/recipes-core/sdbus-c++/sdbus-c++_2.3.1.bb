@@ -16,7 +16,7 @@ PACKAGECONFIG[with-tests] = "-DSDBUSCPP_BUILD_TESTS=ON -DSDBUSCPP_INSTALL_TESTS=
 
 DEPENDS += "expat"
 
-SRCREV = "28b78822cfc5fbec4bd9906168493e9985f586ed"
+SRCREV = "ca073434d2c03c2b619f7e23f285cebbf32c7e46"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV} \
            file://0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch \
            file://run-ptest"
