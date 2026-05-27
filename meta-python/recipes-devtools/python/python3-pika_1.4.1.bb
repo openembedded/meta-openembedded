@@ -8,7 +8,7 @@ HOMEPAGE = "https://pika.readthedocs.io"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=678ec81495ba50edf81e84e4f1aa69f3"
 
-SRC_URI[sha256sum] = "84aa6d0cf60bbdb79d5780544a4a4e1799392760127bf9de2a03d3c3b92f5f1a"
+SRC_URI[sha256sum] = "e851f3e4992adfbf8eb64e9b86d94e3382f92ba0200055abedbb29676b8e713b"
 
 inherit pypi python_setuptools_build_meta
 
