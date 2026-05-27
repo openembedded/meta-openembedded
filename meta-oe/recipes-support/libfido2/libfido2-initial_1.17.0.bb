@@ -6,10 +6,10 @@ HOMEPAGE = "https://developers.yubico.com/libfido2"
 LICENSE = "BSD-2-Clause"
 SECTION = "libs/network"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=20be19aaa222f71738712b26f7f8717b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=81b68c65611c3a2eaac9e44814284719"
 
 SRC_URI = "https://developers.yubico.com/${BPN}/Releases/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "8c2b6fb279b5b42e9ac92ade71832e485852647b53607c43baaafbbcecea04e4"
+SRC_URI[sha256sum] = "c1012c8871d71b65872fd5ff1a9d6b0838a55683a03e85ba97479ce57129c736"
 
 inherit nopackages
 
