@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/tailscale/tailscale"
 SECTION = "networking"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=a672713a9eb730050e491c92edf7984d"
+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=cadeae10a8856ddfdb129866b75b33e3"
 require ${BPN}-licenses.inc
 
 MAJOR_MINOR = "${@oe.utils.trim_version('${PV}', 2)}"
@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/tailscale/tailscale.git;protocol=https;branch=releas
            file://default \
            file://tailscaled.init \
            "
-SRCREV = "2de4d317a8c2595904f1563ebd98fdcf843da275"
+SRCREV = "8f2c8d6a14419e95fb9d02d6bf6113893daef5c3"
 SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
 require ${BPN}-go-mods.inc
 
