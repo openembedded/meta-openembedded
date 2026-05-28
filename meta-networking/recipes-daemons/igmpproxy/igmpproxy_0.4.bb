@@ -5,8 +5,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=432040ff3a55670c1dec0c32b209ad69"
 
 SRC_URI = "https://github.com/pali/igmpproxy/releases/download/${PV}/${BP}.tar.gz"
-SRC_URI[md5sum] = "5565874d9631103109a72452cecb5ce7"
-SRC_URI[sha256sum] = "d1fc244cb2fbbf99f720bda3e841fe59ece9b6919073790b4b892739b1b844eb"
+SRC_URI[sha256sum] = "afa4b75a823b82f71ce99f33eae4e8136b906ae8a5ede5caaad93bac38cdae24"
 
 UPSTREAM_CHECK_URI = "https://github.com/pali/${BPN}/releases"
 
