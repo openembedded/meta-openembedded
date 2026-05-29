@@ -67,6 +67,7 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
 PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
 PACKAGECONFIG[native] = "--enable-native,--disable-native,,"
 PACKAGECONFIG[examples] = "--enable-example-modules,--disable-example-modules,,"
+PACKAGECONFIG[scl-syslogconf-awk] = "--enable-scl-syslogconf-awk,--disable-scl-syslogconf-awk,,gawk"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/${BPN}
@@ -108,7 +109,7 @@ do_install:append() {
 }
 
 FILES:${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools ${systemd_unitdir}/system/multi-user.target.wants/*"
-RDEPENDS:${PN} += "gawk ${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
 
 FILES:${PN}-jconf += " \
 ${datadir}/${BPN}/include/scl/cim \
