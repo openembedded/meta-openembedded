@@ -23,7 +23,9 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://syslog-ng-tmp.conf \
            file://syslog-ng.service-the-syslog-ng-service.patch \
            file://0001-Fix-buildpaths-warning.patch \
-"
+           file://0001-feat-Add-option-in-cmake-to-remove-awk.patch \
+           file://0002-feat-Add-option-in-autotools-to-remove-awk.patch \
+           "
 SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
 
 SRC_URI[sha256sum] = "37ea0d4588533316de122df4e1b249867b0a0575f646c7478d0cc4d747462943"
