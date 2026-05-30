@@ -13,9 +13,8 @@ DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack openssl"
 
 SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;downloadfilename=${BP}.tar.gz \
            file://miniupnpd.service \
-           file://0001-Add-OpenEmbedded-cross-compile-case.patch \
            "
-SRC_URI[sha256sum] = "218fad7af31f3c22fb4c9db28a55a2a8b5067d41f5b38f52008a057a00d2206d"
+SRC_URI[sha256sum] = "f9c34ed3632fb60cd248dd5897bd98479a103a75688b056ca2f069e68ab32987"
 
 UPSTREAM_CHECK_URI = "https://miniupnp.tuxfamily.org/files/"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar"
