@@ -6,8 +6,7 @@ SECTION = "net"
 DEPENDS = "gd sqlite3"
 
 SRC_URI = "https://github.com/vergoh/vnstat/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "fe2928a81243cc8a532a357f97221736"
-SRC_URI[sha256sum] = "89276e0a7281943edb554b874078278ad947dc312938a2451e03eb80679f7ff7"
+SRC_URI[sha256sum] = "c9fe19312d1ec3ddfbc4672aa951cf9e61ca98dc14cad3d3565f7d9803a6b187"
 
 inherit autotools pkgconfig systemd
 
