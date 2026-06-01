@@ -27,6 +27,7 @@ PTESTS_FAST_META_OE = "\
     imagemagick \
     jemalloc \
     jq \
+    lcms \
     leveldb \
     libcereal \
     libdbi-perl \
