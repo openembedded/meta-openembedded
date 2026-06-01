@@ -46,6 +46,8 @@ PACKAGECONFIG[tests] = "-DUNIT_TESTING=1, -DUNIT_TESTING=0, cmocka"
 
 ARM_INSTRUCTION_SET:armv5 = "arm"
 
+CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: The vulnerability is Windows specific"
+
 EXTRA_OECMAKE = " \
     -DWITH_PCAP=1 \
     -DWITH_SFTP=1 \
