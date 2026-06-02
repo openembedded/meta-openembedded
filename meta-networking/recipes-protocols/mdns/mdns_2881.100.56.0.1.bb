@@ -27,7 +27,10 @@ PACKAGECONFIG ?= "tls \
 PACKAGECONFIG[debug] = "DEBUG=1,DEBUG=0"
 PACKAGECONFIG[ipv6] = "HAVE_IPV6=1,HAVE_IPV6=0"
 PACKAGECONFIG[manpages] = ""
+PACKAGECONFIG[idlesleepcontrol] = ""
+PACKAGECONFIG[spc] = ""
 PACKAGECONFIG[tls] = ",tls=no,mbedtls"
+PACKAGECONFIG[unicast] = ""
 
 CVE_PRODUCT = "apple:mdnsresponder"
 
@@ -48,8 +51,15 @@ EXTRA_OEMAKE = "os=linux 'CC=${CCLD}' 'LD=${CCLD}' 'LINKOPTS=${LDFLAGS}' STRIP=:
 
 # MDNS_VERSIONSTR_NODTS disables __DATE__ and __TIME__ in the version string,
 # which are fixed anyway for build reproducibility.
+#
+# IDLESLEEPCONTROL_DISABLED - disables sleep control for Bonjour Sleep Proxy clients
+# UNICAST_DISABLED - disables unicast DNS functionality, including Wide Area Bonjour
+# SPC_DISABLED - disables Bonjour Sleep Proxy client
 TARGET_CPPFLAGS += "-DmDNSResponderVersion=${PV} \
-                    -DMDNS_VERSIONSTR_NODTS"
+                    -DMDNS_VERSIONSTR_NODTS \
+                    ${@bb.utils.contains('PACKAGECONFIG','idlesleepcontrol','','-DIDLESLEEPCONTROL_DISABLED', d)} \
+                    ${@bb.utils.contains('PACKAGECONFIG','unicast','','-DUNICAST_DISABLED', d)} \
+                    ${@bb.utils.contains('PACKAGECONFIG','spc','','-DSPC_DISABLED', d)}"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
