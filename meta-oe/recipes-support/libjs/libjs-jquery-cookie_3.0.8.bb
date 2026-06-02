@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e16cf0e247d84f8999bf55865a9c98cf"
 
 SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main;tag=v${PV}"
 
-SRCREV = "17bacba0171dd022728d8fdeba3203c60791bf58"
-
+SRCREV = "d7a10966e3f2cbcbfa96e34e7544d23aab9e3372"
 
 JQUERYCOOKIEDIR = "${datadir}/javascript/jquery-cookie"
 JQUERYCOOKIEDOCDIR = "${docdir}/libjs-jquery-cookie"
