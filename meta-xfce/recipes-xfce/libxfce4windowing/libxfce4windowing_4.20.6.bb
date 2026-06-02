@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 DEPENDS = "xfce4-dev-tools-native glib-2.0 gtk+3"
 
 XFCEBASEBUILDCLASS = "meson"
-SRC_URI[sha256sum] = "6b4e19a66db650c9c8a88f00bbf266e9ced0070b7dbc0aaeea05be0fc6a2eb4d"
+SRC_URI[sha256sum] = "2d06b6a567c965afbca1a51419fc728fd83bd0460e30ab62c34564d5e0aac9e3"
 
 inherit features_check gobject-introspection gtk-doc xfce vala gettext
 
