@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=c2d9643b4523fdf462
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "a288796f54515a40b02f548d8bcfb47c1e846e6460748d81856798c463b35cf5"
+SRC_URI[sha256sum] = "d66b00328e8cb3f57adfb54f43c6acb6d09c2215808c242725ece530fc7f9fdf"
 
 S = "${UNPACKDIR}/moteus-${PV}"
 
