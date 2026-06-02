@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "0c84efd9548d545f63ac0060c1e4d39bb9b14db8b3c0652338aecc07b5
 
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
+CVE_PRODUCT = "pydantic:pydantic"
+
 RDEPENDS:${PN} += "\
     python3-annotated-types \
     python3-core \
