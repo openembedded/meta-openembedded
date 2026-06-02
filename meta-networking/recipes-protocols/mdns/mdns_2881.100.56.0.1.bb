@@ -77,6 +77,10 @@ do_install () {
 	install -d ${D}${INIT_D_DIR}
 
 	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mdnsd ${D}${sbindir}
+	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSClientPosix ${D}${bindir}
+	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSNetMonitor ${D}${bindir}
+	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSProxyResponderPosix ${D}${bindir}
+	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSResponderPosix ${D}${bindir}
 
 	install -m 0644 ${B}/mDNSPosix/${MDNS_BUILDDIR}/libdns_sd.so ${D}${libdir}/libdns_sd.so.1
 	ln -s libdns_sd.so.1 ${D}${libdir}/libdns_sd.so
@@ -117,12 +121,17 @@ pkg_prerm:${PN}-libnss-mdns () {
 SYSTEMD_SERVICE:${PN} = "mdns.service"
 INITSCRIPT_NAME = "mdns"
 
-PACKAGE_BEFORE_PN = "${PN}-libnss-mdns"
+PACKAGE_BEFORE_PN = "${PN}-libnss-mdns ${PN}-clients"
 
 RRECOMMENDS:${PN}:append:libc-glibc = " ${PN}-libnss-mdns"
 
 FILES_SOLIBSDEV = "${libdir}/libdns_sd.so"
 FILES:${PN}-libnss-mdns = "${sysconfdir}/nss_mdns.conf ${libdir}/libnss_mdns*.so*"
 RPROVIDES:${PN}-libnss-mdns = "libnss-mdns"
+
+FILES:${PN}-clients = "${bindir}/mDNSClientPosix \
+                       ${bindir}/mDNSNetMonitor \
+                       ${bindir}/mDNSProxyResponderPosix \
+                       ${bindir}/mDNSResponderPosix"
 
 RPROVIDES:${PN} += "libdns-sd"
