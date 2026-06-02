@@ -6,7 +6,7 @@ PYPI_PACKAGE = "zope_interface"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "9dbee7925a23aa6349738892c911019d4095a96cff487b743482073ecbc174a8"
+SRC_URI[sha256sum] = "7a3ba1c5877f0f3e3906b02ddf793abed2becc2948116414ce0e1dd820b68d6d"
 PACKAGES =. "${PN}-test "
 
 RPROVIDES:${PN} += "zope-interfaces"
