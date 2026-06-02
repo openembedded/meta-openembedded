@@ -12,8 +12,8 @@ DEPENDS += "opencl-headers"
 
 PROVIDES = "virtual/libopencl1"
 
-SRCREV = "ad770a1b64c6b8d5f2ed4e153f22e4f45939f27f"
-SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
+SRCREV = "b7bd2803acc779c03d96588e9ca9e9568a18698a"
+SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https;tag=v${PV}"
 
 EXTRA_OECMAKE:append = " \
     -DOPENCL_ICD_LOADER_HEADERS_DIR=${STAGING_INCDIR} \
