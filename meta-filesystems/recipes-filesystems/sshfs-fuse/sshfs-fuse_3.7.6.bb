@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 fuse3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https;tag=sshfs-${PV}"
-SRCREV = "9e35c39ba83f54a49a9df4bf0a629f26c60cc38c"
+SRCREV = "7a2d988775446ebe7af9b01c99b3b8e86bddb05a"
 
 inherit meson pkgconfig ptest
 
