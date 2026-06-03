@@ -4,9 +4,7 @@ LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=036a54229112040a743509a86b30c80c"
 
 SRC_URI = " \
-  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz \
-  file://0001-cmake-always-install-SDL2_net.pc.patch \
-"
+  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz"
 S = "${UNPACKDIR}/SDL2_net-${PV}"
 
 inherit cmake pkgconfig
