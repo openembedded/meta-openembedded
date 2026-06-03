@@ -15,7 +15,9 @@ DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 
 PATCHTOOL = "git"
 
-SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0;protocol=https \
+FREERADIUS_TAG = "release_${@d.getVar('PV').replace('.', '_')}"
+
+SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;tag=${FREERADIUS_TAG};lfs=0;protocol=https \
     file://freeradius \
     file://volatiles.58_radiusd \
     file://radiusd.service \
@@ -40,9 +42,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "4e4cbbd93ff3b469a773c964c7b5b6f53d01457a"
-
-PV .= "+git"
+SRCREV = "23811c830f1230ad466b3fc597e5676c045f8e0c"
 
 UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
 
