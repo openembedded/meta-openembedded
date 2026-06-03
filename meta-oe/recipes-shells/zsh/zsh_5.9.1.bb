@@ -8,10 +8,10 @@ SECTION = "base/shell"
 LICENSE = "zsh"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 
-DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
+DEPENDS = "ncurses bison-native libcap libpcre2 gdbm groff-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba10ab863842d45acd5"
+SRC_URI[sha256sum] = "5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c5c416b5042e58d8280d"
 
 inherit autotools gettext update-alternatives manpages
 
@@ -23,7 +23,6 @@ EXTRA_OECONF = " \
     --enable-fndir=${datadir}/${BPN}/${PV}/functions \
     --enable-site-fndir=${datadir}/${BPN}/site-functions \
     --with-term-lib='ncursesw ncurses' \
-    --with-tcsetpgrp \
     --enable-cap \
     --enable-multibyte \
     --disable-gdbm \
