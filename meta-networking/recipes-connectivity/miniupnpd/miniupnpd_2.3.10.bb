@@ -5,7 +5,7 @@ the network."
 
 SECTION = "networking"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a1ed15843ce66639bcf9f109cf247870"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9526418307cb153aee96a4f9b33bd1c7"
 
 inherit gettext pkgconfig systemd
 
@@ -26,6 +26,7 @@ EXTRA_OEMAKE = "-f Makefile.linux"
 
 do_configure() {
     echo "${@d.getVar('DISTRO_VERSION')}" > ${S}/os.openembedded
+    ./configure
     CONFIG_OPTIONS="--leasefile --vendorcfg ${PACKAGECONFIG_CONFARGS}" oe_runmake --always-make config.h
 }
 
