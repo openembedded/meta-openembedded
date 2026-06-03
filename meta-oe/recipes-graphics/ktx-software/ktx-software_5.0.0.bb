@@ -6,10 +6,10 @@ LICENSE = "Apache-2.0 & BSD-1-Clause & BSD-2-Clause & BSD-3-Clause & BSL-1.0 \
 	   & CC-BY-3.0 & CC-BY-4.0 & CC0-1.0 & Zlib & MIT & HI-Trademark & fmt & \
 	   Kodak & PNGSuite & ETCSLA & Cesium-Trademark-Terms"
 
-LIC_FILES_CHKSUM = "file://REUSE.toml;md5=45910de791d599e6ba472f6fa506f391"
+LIC_FILES_CHKSUM = "file://REUSE.toml;md5=9f87c97ba36aab42411bf93c094a61f2"
 
 SRC_URI = "git://github.com/KhronosGroup/KTX-Software.git;protocol=https;branch=main;lfs=0"
-SRCREV = "beef80159525d9fb7abb8645ea85f4c4f6842e8f"
+SRCREV = "6269d2752ed04446c2d4749f54f3aad4f94555b5"
 
 inherit cmake
 
