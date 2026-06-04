@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-DEPENDS = "rsync-native llvm-native"
+DEPENDS = "rsync-native llvm-native libcap"
 
 S = "${UNPACKDIR}"
 
@@ -161,7 +161,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 FILES:${PN} += "/usr/kernel-selftest"
 
-RDEPENDS:${PN} += "python3 perl perl-module-io-handle"
+RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc"
 
 INSANE_SKIP:${PN} += "libdir"
 
