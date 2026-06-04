@@ -26,3 +26,4 @@ CVE_PRODUCT += "grpc:grpc"
 
 CVE_STATUS[CVE-2026-33186] = "cpe-incorrect: this CVE is for golang version of grpc"
 CVE_STATUS[CVE-2024-7246] = "not-applicable-config: the vulnerable gRPC C-core HPACK parser code is not present in grpcio-tools"
+CVE_STATUS[CVE-2024-11407] = "not-applicable-config: CVE affects gRPC C++ server zero-copy transport code, which is not present in grpcio-tools"
