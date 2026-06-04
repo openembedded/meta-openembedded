@@ -23,3 +23,5 @@ do_compile:prepend() {
 BBCLASSEXTEND = "native nativesdk"
 
 CVE_PRODUCT += "grpc:grpc"
+
+CVE_STATUS[CVE-2026-33186] = "cpe-incorrect: this CVE is for golang version of grpc"
