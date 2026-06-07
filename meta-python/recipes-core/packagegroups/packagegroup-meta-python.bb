@@ -343,7 +343,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python3-pystemd", "", d)} \
     python3-pytest-asyncio \
     python3-pytest-benchmark \
-    python3-pytest-cache \
     python3-pytest-forked \
     python3-pytest-helpers-namespace \
     python3-pytest-html \
