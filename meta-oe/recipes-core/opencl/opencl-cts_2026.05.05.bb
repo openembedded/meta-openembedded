@@ -7,16 +7,15 @@ inherit pkgconfig cmake features_check
 
 REQUIRED_DISTRO_FEATURES = "opencl"
 
-DEPENDS += "opencl-headers virtual/libopencl1 spirv-tools-native"
+DEPENDS += "opencl-headers virtual/libopencl1 spirv-headers spirv-tools-native"
 RDEPENDS:${PN} += "python3-core python3-io"
 
 
-SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
-	   file://0001-Ignore-Compiler-Warnings.patch"
+SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0"
 
-SRCREV = "e96edaef8b582c2412a2aab4b82f5c88af88617d"
+SRCREV = "0979549a997090c0569da4c4e995422b8f73f1fe"
 
-EXTRA_OECMAKE:append = " -DENABLE_WERROR=OFF -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
+EXTRA_OECMAKE:append = " --compile-no-warning-as-error -DSPIRV_INCLUDE_DIR=${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
 
 PACKAGECONFIG = " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl gles', '', d)} \
