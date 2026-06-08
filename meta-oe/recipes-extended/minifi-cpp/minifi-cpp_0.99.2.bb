@@ -4,8 +4,8 @@ data collection approach that supplements the core tenets of NiFi in dataflow \
 management, focusing on the collection of data at the source of its creation."
 HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
 SECTION = "console/network"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=4c5fc3bbd872752266d21f5f167ce297"
+LICENSE = "Apache-2.0 & MIT & BSD-2-Clause & BSD-3-Clause & BSL-1.0 & Zlib & ISC"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb72a6f151096df9e2f5f01b6bf9d735"
 
 SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=main \
            git://github.com/martinmoene/expected-lite.git;protocol=https;branch=master;name=expected-lite;destsuffix=${S}/thirdparty/expected-lite-src \
@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;name=asio;destsuffix=${S}/thirdparty/asio-src \
            git://github.com/fmtlib/fmt.git;protocol=https;branch=master;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
            git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.15.3;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
+           git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=${S}/thirdparty \
            https://download.libsodium.org/libsodium/releases/libsodium-1.0.19.tar.gz;name=libsodium;subdir=${S}/thirdparty \
            file://0001-Do-not-use-bundled-packages.patch \
@@ -26,17 +27,16 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0005-generateVersion.sh-set-correct-buildrev.patch \
            file://0006-CMakeLists.txt-do-not-use-ccache.patch \
            file://0007-libsodium-aarch64-set-compiler-attributes-after-including-arm_.patch \
-           file://0008-MINIFICPP-2553-CMP0065-OLD-removed-in-cmake-4.0-remo.patch \
            file://0001-Add-missing-include-for-malloc-free.patch;patchdir=thirdparty/fmt-src \
            file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
 
-# minifi-cpp: 0.99.1
-SRCREV = "78d53ed154c71f1fabbaff0366d44ed3b32754e6"
-# expected-lite: 0.6.3
-SRCREV_expected-lite = "c8ffab649ba56e43c731b7017a69ddaebe2e1893"
+# minifi-cpp: 0.99.2
+SRCREV = "92fb88dca9aaff75b5c6795d25d6e437649c1c77"
+# expected-lite: 0.9.0
+SRCREV_expected-lite = "e45e8d5f295d54efe9cace331b9e9f5efa8a84c3"
 # range-v3: 0.12.0
 SRCREV_range-v3 = "a81477931a8aa2ad025c6bda0609f38e09e4d7ec"
 # magic-enum: 0.9.6
@@ -47,14 +47,16 @@ SRCREV_argparse = "af442b4da0cd7a07b56fa709bd16571889dc7fda"
 SRCREV_gsl-lite = "755ba124b54914e672737acace6a9314f59e8d6f"
 # date: 3.0.3
 SRCREV_date = "5bdb7e6f31fac909c090a46dbd9fea27b6e609a4"
-# asio: 1.29.0
-SRCREV_asio = "814f67e730e154547aea3f4d99f709cbdf1ea4a0"
-# fmt: 11.1.4
-SRCREV_fmt = "123913715afeb8a437e6388b4473fcc4753e1c9a"
+# asio: 1.34.2
+SRCREV_asio = "ed6aa8a13d51dfc6c00ae453fc9fb7df5d6ea963"
+# fmt: 11.2.0
+SRCREV_fmt = "40626af88bd7df9a5fb80be7b25ac85b122d6c21"
 # spdlog: 1.15.3
 SRCREV_spdlog = "6fa36017cfd5731d617e1a934f0e5ea9c4445b13"
+# jsoncons: 1.3.2
+SRCREV_jsoncons = "64b9da1e9f15eeff4ec9d6bc856538db542118f2"
 
-SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog"
+SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog_jsoncons"
 
 # ossp-uuid: 1.6.2
 SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
@@ -64,7 +66,7 @@ SRC_URI[libsodium.sha256sum] = "018d79fe0a045cca07331d37bd0cb57b2e838c51bc48fd83
 
 inherit pkgconfig cmake systemd
 
-DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp zstd lz4"
+DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp zstd lz4 pugixml"
 
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 
@@ -95,6 +97,8 @@ EXTRA_OECMAKE = " \
                  -DENABLE_KAFKA=OFF \
                  -DENABLE_BZIP2=ON \
                  -DENABLE_LZMA=ON \
+                 -DENABLE_COUCHBASE=OFF \
+                 -DENABLE_LLAMACPP=OFF \
                  -DSKIP_TESTS=ON \
                  -DMINIFI_OPENSSL_SOURCE=SYSTEM \
                  -DMINIFI_LIBCURL_SOURCE=SYSTEM \
@@ -103,6 +107,7 @@ EXTRA_OECMAKE = " \
                  -DMINIFI_LIBXML2_SOURCE=SYSTEM \
                  -DMINIFI_CATCH2_SOURCE=SYSTEM \
                  -DMINIFI_ZLIB_SOURCE=SYSTEM \
+                 -DMINIFI_PUGIXML_SOURCE=SYSTEM \
                  -DMINIFI_FMT_SOURCE=BUILD \
                  -DMINIFI_SPDLOG_SOURCE=BUILD \
                  -DFETCHCONTENT_SOURCE_DIR_GSL-LITE=${S}/thirdparty/gsl-lite-src \
@@ -114,6 +119,7 @@ EXTRA_OECMAKE = " \
                  -DFETCHCONTENT_SOURCE_DIR_ARGPARSE=${S}/thirdparty/argparse-src \
                  -DFETCHCONTENT_SOURCE_DIR_FMT=${S}/thirdparty/fmt-src \
                  -DFETCHCONTENT_SOURCE_DIR_SPDLOG=${S}/thirdparty/spdlog-src \
+                 -DFETCHCONTENT_SOURCE_DIR_JSONCONS=${S}/thirdparty/jsoncons-src \
                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DENABLE_SYSTEMD=ON', '-DENABLE_SYSTEMD=OFF', d)} \
                  -DBUILD_IDENTIFIER=${PV} \
                 "
@@ -147,19 +153,19 @@ do_compile:prepend() {
 do_install() {
     DESTDIR='${WORKDIR}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
     MINIFI_BIN=${bindir}
-    MINIFI_HOME=${sysconfdir}/minifi
-    MINIFI_RUN=${localstatedir}/lib/minifi
-    MINIFI_LOG=${localstatedir}/log/minifi
+    MINIFI_HOME=${sysconfdir}/nifi-minifi-cpp
+    MINIFI_RUN=${localstatedir}/lib/nifi-minifi-cpp
+    MINIFI_LOG=${localstatedir}/log/nifi-minifi-cpp
 
     install -m 755 -d ${D}${MINIFI_BIN}
-    install -m 755 -d ${D}${MINIFI_HOME}/conf
-    install -m 755 -d ${D}${localstatedir}/lib/minifi
+    install -m 755 -d ${D}${MINIFI_HOME}
+    install -m 755 -d ${D}${MINIFI_RUN}
 
-    for i in encrypt-config minifi minifi.sh minificontroller; do
+    for i in minifi-encrypt-config minifi minifi.sh minifi-controller; do
         install -m 755 ${WORKDIR}/minifi-install/usr/bin/${i} ${D}${MINIFI_BIN}
     done
     for i in config.yml minifi-log.properties minifi.properties minifi-uid.properties; do
-        install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}/conf
+        install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}
     done
 
     install -m 755 -d ${D}${libdir}/minifi-extensions
@@ -175,19 +181,19 @@ do_install() {
     sed -i "s|bin_dir=.*|bin_dir=${MINIFI_BIN}|g" ${D}${MINIFI_BIN}/minifi.sh
 
     sed -i "s|#appender.rolling.directory=.*|appender.rolling.directory=${MINIFI_LOG}|g" \
-        ${D}${MINIFI_HOME}/conf/minifi-log.properties
+        ${D}${MINIFI_HOME}/minifi-log.properties
     sed -i "s|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default=${MINIFI_RUN}/provenance_repository|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
+        ${D}${MINIFI_HOME}/minifi.properties
     sed -i "s|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default=${MINIFI_RUN}/flowfile_repository|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
+        ${D}${MINIFI_HOME}/minifi.properties
     sed -i "s|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=${MINIFI_RUN}/content_repository|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
-    sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/conf/config.yml|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
+        ${D}${MINIFI_HOME}/minifi.properties
+    sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/config.yml|g" \
+        ${D}${MINIFI_HOME}/minifi.properties
     sed -i "s|nifi.python.processor.dir=.*|nifi.python.processor.dir=${libexecdir}/minifi-python|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
+        ${D}${MINIFI_HOME}/minifi.properties
     sed -i "s|nifi.extension.path=.*|nifi.extension.path=${libdir}/minifi-extensions/*|g" \
-        ${D}${MINIFI_HOME}/conf/minifi.properties
+        ${D}${MINIFI_HOME}/minifi.properties
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -m 755 -d ${D}${sysconfdir}/tmpfiles.d
