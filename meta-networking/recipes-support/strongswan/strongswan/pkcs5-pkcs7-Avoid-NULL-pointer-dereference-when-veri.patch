@@ -1,0 +1,58 @@
+From: Tobias Brunner <tobias@strongswan.org>
+Date: Wed, 25 Mar 2026 10:28:45 +0100
+Subject: pkcs5/pkcs7: Avoid NULL pointer dereference when verifying padding
+
+Can be triggered via empty PKCS#7 encrypted- or enveloped-data content
+in IKEv1 CERT payload.
+
+Fixes: 4076e3ee9121 ("Extract PKCS#5 handling from pkcs8 plugin to separate helper class")
+Fixes: d7aa09104f08 ("Implement PKCS#7 enveloped-data parsing and decryption")
+Fixes: CVE-2026-35329
+
+CVE: CVE-2026-35329
+Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit/8dae5605a79666c6def907efd8c872c91d93de5b]
+                          [https://github.com/strongswan/strongswan/commit/4da84019ccec87fea161797af2901244fa5f170e]
+Patch is refreshed as per the source code version 5.9.14
+Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
+===
+diff --git a/src/libstrongswan/crypto/pkcs5.c b/src/libstrongswan/crypto/pkcs5.c
+index e48a9ad..134ccd3 100644
+--- a/src/libstrongswan/crypto/pkcs5.c
++++ b/src/libstrongswan/crypto/pkcs5.c
+@@ -113,6 +113,11 @@ static bool verify_padding(crypter_t *crypter, chunk_t *blob)
+ {
+ 	uint8_t padding, count;
+ 
++	if (!blob->len)
++	{
++                return FALSE;
++       }
++
+ 	padding = count = blob->ptr[blob->len - 1];
+ 
+ 	if (padding > crypter->get_block_size(crypter))
+diff --git a/src/libstrongswan/plugins/pkcs7/pkcs7_enveloped_data.c b/src/libstrongswan/plugins/pkcs7/pkcs7_enveloped_data.c
+index 8b26bad..3d601d6 100644
+--- a/src/libstrongswan/plugins/pkcs7/pkcs7_enveloped_data.c
++++ b/src/libstrongswan/plugins/pkcs7/pkcs7_enveloped_data.c
+@@ -182,10 +182,17 @@ static bool decrypt(private_key_t *private, chunk_t key, chunk_t iv, int oid,
+  */
+ static bool remove_padding(private_pkcs7_enveloped_data_t *this)
+ {
+-	u_char *pos = this->content.ptr + this->content.len - 1;
+-	u_char pattern = *pos;
+-	size_t padding = pattern;
++	u_char *pos, pattern;
++	size_t padding;
+ 
++	if (!this->content.len)
++       {
++		return FALSE;
++	}
++
++	pos = this->content.ptr + this->content.len - 1;
++	pattern = *pos;
++	padding = pattern;
+ 	if (padding > this->content.len)
+ 	{
+ 		DBG1(DBG_LIB, "padding greater than data length");
