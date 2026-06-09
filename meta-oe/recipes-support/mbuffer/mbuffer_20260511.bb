@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "console/network"
 
 SRC_URI = " \
-    http://www.maier-komor.de/software/mbuffer/mbuffer-20140310.tgz \
+    http://www.maier-komor.de/software/mbuffer/mbuffer-${PV}.tgz \
 "
 
 UPSTREAM_CHECK_URI = "http://www.maier-komor.de/mbuffer.html"
 
-SRC_URI[sha256sum] = "ab90b6fdce16db2bf08bcda0bc5d2bfb053a9a163d2a24f95fbf246460549b99"
+SRC_URI[sha256sum] = "13bab36f39408f7a08fb368913290ad0f117c934bab602094e18fcc123ec5783"
 
 inherit autotools
 
