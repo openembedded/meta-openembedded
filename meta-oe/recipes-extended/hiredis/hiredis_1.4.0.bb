@@ -5,10 +5,10 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
 
 SRC_URI = " \
-    git://github.com/redis/hiredis;protocol=https;branch=master \
+    git://github.com/redis/hiredis;protocol=https;branch=master;tag=v${PV} \
     file://run-ptest \
     "
-SRCREV = "ccad7ebaf99310957004661d1c5f82d2a33ebd10"
+SRCREV = "67c88a05bb97c40d5c29d0680e51828627e4f362"
 
 inherit cmake ptest
 
