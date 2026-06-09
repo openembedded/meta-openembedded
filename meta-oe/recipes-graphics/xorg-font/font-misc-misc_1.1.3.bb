@@ -13,4 +13,5 @@ inherit features_check
 # depends on bdftopcf-native -> virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "b8e77940e4e1769dc47ef1805918d8c9be37c708735832a07204258bacc11794"
+SRC_URI_EXT = "xz"
+SRC_URI[sha256sum] = "79abe361f58bb21ade9f565898e486300ce1cc621d5285bec26e14b6a8618fed"
