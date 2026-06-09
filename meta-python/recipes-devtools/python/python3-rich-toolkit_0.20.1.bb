@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/patrick91/rich-toolkit"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://pyproject.toml;md5=29c91c89ee62891477a1476375143bef;beginline=6;endline=6"
 
-SRC_URI[sha256sum] = "dc2e8c515ef9fbb4894e62bd41a2d2960dd7c2f505b5084894604d5ccfee3f09"
+SRC_URI[sha256sum] = "c7336ae281f435c785acecaedc4b71d4b663dc73d9c8079fea96372527e822a4"
 
 inherit pypi python_hatchling ptest-python-pytest
 
