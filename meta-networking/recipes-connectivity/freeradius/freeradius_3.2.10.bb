@@ -42,7 +42,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;tag=$
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
-SRCREV = "23811c830f1230ad466b3fc597e5676c045f8e0c"
+SRCREV = "9071ea041b9172e52eabbba91619afaf3a238795"
 
 UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
 
