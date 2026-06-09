@@ -6,15 +6,15 @@ faster than shelling out to a system's diff executable for small files, \
 and generally slower on larger files."
 SECTION = "libs"
 
-HOMEPAGE = "https://metacpan.org/release/OVID/Text-Diff-1.41"
+HOMEPAGE = "https://metacpan.org/release/NEILB/Text-Diff-1.45"
 
 LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9e795454c53c99fe48b8180eb5917b10"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEILB/Text-Diff-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
+SRC_URI[sha256sum] = "e8baa07b1b3f53e00af3636898bbf73aec9a0ff38f94536ede1dbe96ef086f04"
 
 S = "${UNPACKDIR}/Text-Diff-${PV}"
 
