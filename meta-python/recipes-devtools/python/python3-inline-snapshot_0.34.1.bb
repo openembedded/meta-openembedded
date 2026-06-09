@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7a35eb90dfdf03953dd2074d0fdba1d4"
 
 DEPENDS = "python3-hatchling-native"
-SRC_URI[sha256sum] = "bb814ada843aba77356516dce5e07857bb76591c4258296a087a7cbe9e0d70f7"
+SRC_URI[sha256sum] = "f8af37876c42069b7c0ed73f64357ace482955c3225ebcd27f243197ecfbcb65"
 
 inherit pypi python_hatchling
 
