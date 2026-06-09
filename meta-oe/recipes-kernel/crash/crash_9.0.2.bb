@@ -1,6 +1,5 @@
 require crash.inc
 
-
 BBCLASSEXTEND = "native cross"
 
 EXTRA_OEMAKE:class-cross = 'RPMPKG="${PV}" \
