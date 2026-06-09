@@ -10,7 +10,7 @@ DEPENDS = "\
     python3-aiohttp-native \
 "
 
-SRC_URI[sha256sum] = "147de8cb164f3fc9d7196967f109ab3c0b93ea3463ab50631e56438eab7b5adc"
+SRC_URI[sha256sum] = "3aa9c9fe26e543eaccc7eb0add381c685ba3ed3e2fed0af74540f63bcd31458d"
 
 PYPI_PACKAGE = "pytest_aiohttp"
 
