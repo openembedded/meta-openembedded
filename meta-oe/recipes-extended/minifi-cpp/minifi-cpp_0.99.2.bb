@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
            file://0007-libsodium-aarch64-set-compiler-attributes-after-including-arm_.patch \
            file://0001-Add-missing-include-for-malloc-free.patch;patchdir=thirdparty/fmt-src \
            file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
+           file://0001-Fix-build-with-gcc-16.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
