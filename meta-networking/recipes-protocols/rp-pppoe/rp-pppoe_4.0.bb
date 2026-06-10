@@ -2,23 +2,20 @@ SUMMARY = "A user-mode PPPoE client and server suite for Linux"
 HOMEPAGE = "http://www.roaringpenguin.com/products/pppoe"
 SECTION = "net"
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
+LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=aaa8b7bfb03da19eee6187365c352a80"
 
 
 SRC_URI = "https://downloads.uls.co.za/rp-pppoe/rp-pppoe-${PV}.tar.gz \
            file://top-autoconf.patch \
            file://configure_in_cross.patch \
-           file://update-config.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
            file://configure.patch \
            file://pppoe-server.default \
            file://pppoe-server.init \
            file://pppoe-server.service \
-           file://0001-ppoe-Dont-include-linux-if_ether.h.patch \
-           file://0002-Enable-support-for-the-kernel-module.patch \
            "
 
-SRC_URI[sha256sum] = "b1f318bc7e4e5b0fd8a8e23e8803f5e6e43165245a5a10a7162a92a6cf17829a"
+SRC_URI[sha256sum] = "41ac34e5db4482f7a558780d3b897bdbb21fae3fef4645d2852c3c0c19d81cea"
 
 inherit autotools-brokensep update-rc.d systemd
 
