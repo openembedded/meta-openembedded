@@ -11,14 +11,14 @@ HOMEPAGE = "https://metacpan.org/pod/Data::HexDump"
 SECTION = "libs"
 
 LICENSE = "Artistic-1.0"
-LIC_FILES_CHKSUM = "file://lib/Data/HexDump.pm;beginline=215;endline=217;md5=bf1cd9373f8d1f85fe091ee069a480e9"
+LIC_FILES_CHKSUM = "file://lib/Data/HexDump.pm;beginline=277;endline=279;md5=bf1cd9373f8d1f85fe091ee069a480e9"
 
 DEPENDS = "perl"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/F/FT/FTASSIN/Data-HexDump-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEILB/Data-HexDump-${PV}.tar.gz \
            file://run-ptest \
 "
-SRC_URI[sha256sum] = "1a9d843e7f667c1c6f77c67af5d77e7462ff23b41937cb17454d03535cd9be70"
+SRC_URI[sha256sum] = "bc36f404438ac36ad2b9295539227d36f99cd1623f1e347af77c594c40ccbcf8"
 
 S = "${UNPACKDIR}/Data-HexDump-${PV}"
 
