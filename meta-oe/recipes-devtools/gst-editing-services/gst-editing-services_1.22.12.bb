@@ -18,7 +18,7 @@ inherit meson pkgconfig upstream-version-is-even gobject-introspection features_
 EXTRA_OEMESON = "-Dvalidate=disabled"
 
 SRC_URI = "http://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-${PV}.tar.xz"
-SRC_URI[sha256sum] = "fec56a2c37a253cd048d288d4c7eda6eff191022b09db975e07a2c105d1b521e"
+SRC_URI[sha256sum] = "792339135ce713088663cc5d44e0aea8217793e88fabfd11571e7abf4a429f2c"
 
 PACKAGES += "gst-validate-launcher libges"
 
