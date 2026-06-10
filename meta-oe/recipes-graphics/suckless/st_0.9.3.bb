@@ -7,7 +7,7 @@ inherit pkgconfig features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "6b215d4f472b21d6232f30f221117a777e24bcfee68955ddefb7426467f9494b"
+SRC_URI[sha256sum] = "9ed9feabcded713d4ded38c8cebf36a3b08f0042ef7934a0e2b2409da56e649b"
 
 DEPENDS += "libx11 libxft fontconfig ncurses-native"
 
