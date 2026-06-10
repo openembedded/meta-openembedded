@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "664cf165d66ea217b2f49cd96a7865ecf90c9d0616599cc2aba8cad481d907bb"
+SRC_URI[sha256sum] = "2bab0cf913eeb60a24c6575d60e3c167cd03e63b4f7d17965915844e005dd895"
 
 inherit autotools bash-completion
 
