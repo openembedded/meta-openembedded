@@ -11,7 +11,7 @@ SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
 
 DEPENDS = "flex-native bison-native bdwgc readline"
 
-SRC_URI[sha256sum] = "8aaf36e61e367a53140ea40e2559e9ec512e779c42bee34e7ac24b34ba119bde"
+SRC_URI[sha256sum] = "a84cb9175d50d45a411f2481fd0662b83cb32ce517316b889cfb570819579373"
 
 inherit autotools gettext pkgconfig
 
