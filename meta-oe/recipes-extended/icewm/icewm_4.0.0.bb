@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
 SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
            "
-SRC_URI[sha256sum] = "c64b1b7c8ee262a3c4796be57349a3198998564d70ed26f11e724e1b73d48394"
+SRC_URI[sha256sum] = "b8b22a2f0460c51f92ba785102bd122707966a618bb872c95fa6e6801d620cd1"
 
 UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -21,7 +21,7 @@ EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
                 --enable-shape"
 
 DEPENDS = "asciidoc-native fontconfig fribidi gdk-pixbuf imlib2 libxft libxpm libxrandr \
-    libxinerama libice libsm libx11 libxext libxrender libxcomposite libxdamage \
+    libxinerama libice libsm libx11 libxext libxrender libxcomposite libxcursor libxdamage \
     libxfixes"
 DEPENDS:append = " qemu-native"
 RDEPENDS:${PN} = "perl fribidi imlib2 imlib2-loaders"
