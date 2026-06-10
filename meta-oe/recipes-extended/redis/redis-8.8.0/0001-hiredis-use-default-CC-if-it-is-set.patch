@@ -31,11 +31,10 @@ Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
  1 file changed, 2 deletions(-)
 
 diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
-index bd2106b..9ce768d 100644
 --- a/deps/hiredis/Makefile
 +++ b/deps/hiredis/Makefile
-@@ -36,8 +36,6 @@ endef
- export REDIS_TEST_CONFIG
+@@ -41,8 +41,6 @@
+ HIREDIS_LDFLAGS=
  
  # Fallback to gcc when $CC is not in $PATH.
 -CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
