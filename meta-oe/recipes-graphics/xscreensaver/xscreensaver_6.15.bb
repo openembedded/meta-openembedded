@@ -11,7 +11,7 @@ SRC_URI = "https://www.jwz.org/${BPN}/${BP}.tar.gz \
 "
 MIRRORS += "https://www.jwz.org/${BPN} https://ftp.osuosl.org/pub/blfs/conglomeration/${BPN}"
 
-SRC_URI[sha256sum] = "787014b29f0c5793ecc2d93e1109a049ff48ab0c29b851dab34f683ceef6b152"
+SRC_URI[sha256sum] = "d2e687e56263fbfd8fca1fb9cc7c9331fd4f096ab57d3f7482565fe012c362d3"
 
 UPSTREAM_CHECK_URI = "https://www.jwz.org/xscreensaver/download.html"
 
