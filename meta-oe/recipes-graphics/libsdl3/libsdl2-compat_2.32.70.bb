@@ -11,7 +11,7 @@ LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca6eaff208365238403badb97aa6b3d2"
 
 SRC_URI = "http://www.libsdl.org/release/sdl2-compat-${PV}.tar.gz"
-SRC_URI[sha256sum] = "b2fa522e7bb08113534904b3dc2d2f7ff7b0c259224d86c12374d5b4a4027930"
+SRC_URI[sha256sum] = "998fa62557eb46ffe7e5c3e2c123bc332f7df9d9f593b3ceed88ed1158428a44"
 S = "${UNPACKDIR}/sdl2-compat-${PV}"
 
 DEPENDS += "libsdl3"
