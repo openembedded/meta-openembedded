@@ -23,7 +23,7 @@ CACHED_CONFIGUREVARS:append:libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE
 UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
 UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
 
-SRC_URI[sha256sum] = "e4092faeab77bdc9b32db1113e4215948ee768e26c4666db3b5a60b35f2c9105"
+SRC_URI[sha256sum] = "bbd02ee87a55676063a63e5bc819e0227de2666b47307b2a0134414cdf42368e"
 
 CVE_PRODUCT = "netscape_portable_runtime"
 
