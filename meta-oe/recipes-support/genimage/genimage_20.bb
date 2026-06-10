@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 DEPENDS = "libconfuse"
 
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/genimage-${PV}.tar.xz"
-SRC_URI[sha256sum] = "7ec4fcb865662a8b2ff20284819044ffa84137bf3ca16fb749701291bc01f108"
+SRC_URI[sha256sum] = "397545be2fa52d482c5fba9a11897c61324bfc559ea0efb700b9edba7a807b55"
 
 EXTRA_OECONF = "--enable-largefile"
 
