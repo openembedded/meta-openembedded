@@ -11,10 +11,10 @@ HOMEPAGE = "http://logcheck.org/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
-SRC_URI = "https://snapshot.debian.org/archive/debian/20230718T155737Z/pool/main/l/${BPN}/${BPN}_${PV}.tar.xz \
+SRC_URI = "https://snapshot.debian.org/archive/debian/20250829T211924Z/pool/main/l/${BPN}/${BPN}_${PV}.tar.xz \
            file://99_logcheck \
 "
-SRC_URI[sha256sum] = "ad83ae80bd780bdae5eefd40ad59a3e97b85ad3a4962aa7c00d98ed3bdffcdd0"
+SRC_URI[sha256sum] = "cc160cbcac28f39388e8b96e462c4e62d005453b6957f1f0eaa8c093ff9cf3df"
 
 inherit useradd
 
@@ -25,7 +25,7 @@ GROUPADD_PARAM:${PN} = "-r ${BPN}"
 
 do_install() {
     # Fix QA Issue
-    sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
+    sed -i '/install -d $(DESTDIR)\/run\/lock\/logcheck/s/^/#/' Makefile
 
     # "make install" do not install the manpages. Install them manually.
     install -m 755 -d ${D}${mandir}/man1
