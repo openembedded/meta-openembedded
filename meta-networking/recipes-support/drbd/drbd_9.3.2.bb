@@ -11,7 +11,7 @@ DEPENDS = "virtual/kernel"
 SRC_URI = "https://pkg.linbit.com//downloads/drbd/9/${BP}.tar.gz \
            file://check_existence_of_modules_before_installing.patch \
            "
-SRC_URI[sha256sum] = "f59ee795188f21d4a62c5319c371ebad65ab3fb9b55e5212c3f1dd558978a843"
+SRC_URI[sha256sum] = "5ad57634d4b6c118e92080ab5b66e01969ebb251d9ca01562d23598bf3b166fe"
 
 inherit module
 
