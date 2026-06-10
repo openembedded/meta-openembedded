@@ -3,10 +3,10 @@ DESCRIPTION = "libdvdcss is a simple library designed for accessing DVDs like a 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "https://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.bz2"
+SRC_URI = "https://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.xz"
 
 inherit autotools
 
 EXTRA_OECONF = " --disable-doc "
 
-SRC_URI[sha256sum] = "233cc92f5dc01c5d3a96f5b3582be7d5cee5a35a52d3a08158745d3d86070079"
+SRC_URI[sha256sum] = "529463e4d1befef82e5c6e470db7661a2db0343e092a2fb0d6c037cab8a5c399"
