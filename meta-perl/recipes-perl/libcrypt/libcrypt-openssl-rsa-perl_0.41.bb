@@ -4,10 +4,10 @@ HOMEPAGE = "https://metacpan.org/pod/Crypt::OpenSSL::RSA"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
+SRC_URI = "${CPAN_MIRROR}/authors/id/T/TI/TIMLEGGE/Crypt-OpenSSL-RSA-${PV}.tar.gz \
 "
 
-SRC_URI[sha256sum] = "917f7312532f8f4af4f3acbf6ba10e0151f8577d2ef1f38e1035229be86eb6f4"
+SRC_URI[sha256sum] = "82fa839897b88e9c245b6265f3be26d3bc879cae4c7a8151fad4a307c3366822"
 
 DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
 
