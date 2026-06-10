@@ -51,13 +51,22 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov-symlinks \
 "
 SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
-SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
+SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
 
 UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 do_install() {
-    oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
+    # Pass the runtime PREFIX and the staging DESTDIR separately. lcov's
+    # Makefile bakes the runtime --bindir/--libdir ($(PREFIX)/...) into the
+    # installed perl modules and manpages, so folding ${D} into PREFIX would
+    # embed the build path and trip the buildpaths QA check.
+    oe_runmake install PREFIX=${prefix} DESTDIR=${D} CFG_DIR=${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
+
+    # The upstream test suite is shipped under ${datadir}/lcov/tests and is
+    # not needed at runtime. Its shell scripts pull in unwanted file-rdeps on
+    # /bin/bash, /usr/bin/bash and /bin/env, so drop it from the package.
+    rm -rf ${D}${datadir}/lcov/tests
 }
 
 BBCLASSEXTEND = "native nativesdk"
