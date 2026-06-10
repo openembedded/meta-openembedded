@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
            file://0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch \
            "
-SRC_URI[sha256sum] = "b1c83045efc26076307751e0662d580277f5f9bf89cf027231a7812003c3a4e8"
+SRC_URI[sha256sum] = "8ee10fb48d4aa20c484a75d6852883710286ed2975c314bda6d0b0383908cbfe"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 
