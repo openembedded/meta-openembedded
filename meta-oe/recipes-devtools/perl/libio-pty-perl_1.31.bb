@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;beginline=11;endline=15;md5=1810a9b670f4c8593
 
 SRC_URI = "https://cpan.metacpan.org/authors/id/T/TO/TODDR/IO-Tty-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "b15309fc85623893289cb9b2b88dfa9ed1e69156b75f29938553a45be6d730af"
+SRC_URI[sha256sum] = "d597af221628571cbecf35b44520148c44798dfc8a9867774e60453f79d25ff7"
 
 S = "${UNPACKDIR}/IO-Tty-${PV}"
 
