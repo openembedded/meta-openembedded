@@ -11,7 +11,7 @@ inherit gnomebase useradd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/NetworkManager-openconnect-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "5dedaa785d82d8e239ddd082bfac5250c691e964464be1807b6827263633cdcc"
+SRC_URI[sha256sum] = "844b6bf64ecadb97b4a68c776db89aa5e6ee7e59bd24b0180228406863136464"
 
 S = "${UNPACKDIR}/NetworkManager-openconnect-${PV}"
 
