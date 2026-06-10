@@ -30,7 +30,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
 SRC_URI:append:libc-musl = " \
     file://disable-omfile-outchannel.patch \
 "
-SRC_URI[sha256sum] = "93c50025d90b6c795fa350d56a3d832bfce45043ea9bd68240d9c2a9394bc629"
+SRC_URI[sha256sum] = "2a04b1cd6f0a5e2b60eec231acce3cf9927c4ed02bc5fbbe5dc4c35fcf887b64"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -41,7 +41,10 @@ CVE_STATUS[CVE-2015-3243] = "fix-file-included: The shipped default rsyslog.conf
 inherit autotools pkgconfig systemd update-rc.d ptest
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_cc_c23=no"
-EXTRA_OECONF += "--enable-imfile-tests ${ATOMICS}"
+# impstats-push is a new (default-on) feature that needs protoc-c
+# (protobuf-c-compiler), libprotobuf-c and snappy; it is not wired up
+# in this recipe, so disable it explicitly.
+EXTRA_OECONF += "--enable-imfile-tests --disable-impstats-push ${ATOMICS}"
 ATOMICS = "ap_cv_atomic_builtins_64=yes ap_cv_atomic_builtins=yes"
 ATOMICS:mipsarch = ""
 ATOMICS:powerpc = ""
