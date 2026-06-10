@@ -13,9 +13,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 # FIXME: When upgrading to libpeas 2, g-i is no longer needed.
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
-SRC_URI = "https://download.gnome.org/sources/libpeas/1.36/libpeas-${PV}.tar.xz;name=archive"
+SRC_URI = "https://download.gnome.org/sources/libpeas/1.38/libpeas-${PV}.tar.xz;name=archive"
 SRC_URI += "file://0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patch"
-SRC_URI[archive.sha256sum] = "297cb9c2cccd8e8617623d1a3e8415b4530b8e5a893e3527bbfd1edd13237b4c"
+SRC_URI[archive.sha256sum] = "e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9"
 S = "${UNPACKDIR}/libpeas-${PV}"
 
 PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
