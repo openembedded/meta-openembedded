@@ -6,7 +6,7 @@ LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a36207309d382da27cd66fdaae922e3c"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz"
-SRC_URI[sha256sum] = "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
+SRC_URI[sha256sum] = "6540716a1a3b2b9711635108da14b26baea488881d4a682121c0bddbba6b74cb"
 
 DEPENDS += "ncurses"
 
