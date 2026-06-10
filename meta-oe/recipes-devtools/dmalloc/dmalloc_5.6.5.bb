@@ -13,7 +13,7 @@ file/line number reporting, and general logging of statistics."
 HOMEPAGE = "http://dmalloc.com/"
 LICENSE = "CC-BY-SA-3.0"
 
-LIC_FILES_CHKSUM = "file://dmalloc.c;beginline=4;endline=17;md5=83d13664f87f1f1a3b6b2b6f6eba85aa"
+LIC_FILES_CHKSUM = "file://dmalloc.c;beginline=4;endline=17;md5=26436803f036fe80336e29531eca3169"
 
 SECTION = "libs"
 
@@ -28,7 +28,7 @@ SRC_URI = "http://dmalloc.com/releases/dmalloc-${PV}.tgz \
            file://0001-undefined-strdup-macro.patch \
 "
 
-SRC_URI[sha256sum] = "d3be5c6eec24950cb3bd67dbfbcdf036f1278fae5fd78655ef8cdf9e911e428a"
+SRC_URI[sha256sum] = "480e3414ab6cedca837721c756b7d64b01a84d2d0e837378d98444e2f63a7c01"
 
 ARM_INSTRUCTION_SET = "arm"
 
