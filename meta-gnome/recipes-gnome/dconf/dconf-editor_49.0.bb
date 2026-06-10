@@ -13,8 +13,8 @@ DEPENDS = " \
 
 inherit gnomebase vala gsettings bash-completion pkgconfig gtk-icon-cache
 
-SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/45/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive"
-SRC_URI[archive.sha256sum] = "1180297678eedae6217cc514a2638c187d2f1d1ef2720cb9079b740c429941dd"
+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/49/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive"
+SRC_URI[archive.sha256sum] = "90a8ccfadf51dff31e0028324fb9a358b2d26c5ae861a71c7dbf9f4dd9bdd399"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
