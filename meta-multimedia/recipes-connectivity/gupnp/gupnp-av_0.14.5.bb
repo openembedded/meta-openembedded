@@ -10,7 +10,7 @@ inherit gi-docgen meson pkgconfig gobject-introspection vala ptest
 
 SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz \
            file://run-ptest"
-SRC_URI[sha256sum] = "21d974b3275cb5dcf5b8aa1d9a3fc80e7edca706935f6fbd004c79787138f8c7"
+SRC_URI[sha256sum] = "93918fcf5af529fda5b3d2d9fc3b77cd93df88064939b82f249f5577d8de1c02"
 
 do_configure:prepend(){
     # set ABS_TOP_SRCDIR to ${PTEST_PATH instead of the source-dir on the host}
