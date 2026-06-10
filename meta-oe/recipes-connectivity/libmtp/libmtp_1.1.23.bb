@@ -18,9 +18,7 @@ DEPENDS = "libusb1 gettext-native"
 DEPENDS:append:class-target = " ${BPN}-native"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
-SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch \
-                                file://0002-util-mtp-hotplug.c-Enable-stack-memory-protection.patch"
-SRC_URI[sha256sum] = "f4c1ceb3df020a6cb851110f620c14fe399518c494ed252039cbfb4e34335135"
+SRC_URI[sha256sum] = "74a2b6e8cb4a0304e95b995496ea3ac644c29371649b892b856e22f12a0bdeed"
 
 UPSTREAM_CHECK_URI = "https://github.com/libmtp/libmtp/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -32,6 +30,12 @@ EXTRA_OECONF += " \
     --enable-largefile \
     --with-udev=${nonarch_base_libdir}/udev \
 "
+
+# Upstream 1.1.23 gained native crossbuild support: with this enabled the
+# build uses the host (native) mtp-hotplug (HOST_MTP_HOTPLUG) instead of the
+# just-built target binary to generate the udev rules/hwdb. libmtp-native
+# provides mtp-hotplug on PATH.
+EXTRA_OECONF:append:class-target = " --enable-crossbuilddir=${nonarch_base_libdir}/udev"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[doxygen] = "--enable-doxygen,--disable-doxygen,doxygen-native"
