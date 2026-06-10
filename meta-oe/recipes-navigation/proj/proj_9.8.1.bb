@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 DEPENDS = "sqlite3 sqlite3-native"
 
 SRC_URI = "https://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "65705ecd987b50bf63e15820ce6bd17c042feaabda981249831bd230f6689709"
+SRC_URI[sha256sum] = "af5b731c145c1d13c4e3b4eeb7d167e94e845e440f71e3496b4ed8dae0291960"
 
 inherit bash-completion cmake lib_package pkgconfig
 
