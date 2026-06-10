@@ -7,8 +7,8 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2"
-SRC_URI[md5sum] = "42ec1793c386702bc2734ffbc8a5cff1"
-SRC_URI[sha256sum] = "8a07cbf4df09b107fe3fc41d133ee2f6cea6ef4c33ccf06c8448ad058cd96b7e"
+
+SRC_URI[sha256sum] = "adceaef1bd21a38d07c973233fab603813c431f0a8dcbd23239fa9a41ae17b6e"
 
 inherit autotools gettext pkgconfig
 
