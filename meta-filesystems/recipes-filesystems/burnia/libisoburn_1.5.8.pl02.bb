@@ -6,7 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
                     file://COPYRIGHT;md5=43cfe25a7e4a65f722d6253fa0649bb1"
 
 SRC_URI = "http://files.libburnia-project.org/releases/libisoburn-${PV}.tar.gz"
-SRC_URI[sha256sum] = "2b80a6f73dd633a5d243facbe97a15e5c9a07644a5e1a242c219b9375a45f71b"
+SRC_URI[sha256sum] = "a977b03dc3686d9fdca600458b1578f9cac2b875609bd5ec21f5ada55f20ec50"
+
+# The patchlevel (.pl02) tarball unpacks into a directory without the
+# patchlevel suffix.
+S = "${UNPACKDIR}/libisoburn-${@d.getVar('PV').split('.pl')[0]}"
 
 DEPENDS = "libisofs libburn"
 # This replaces the xorriso recipe
