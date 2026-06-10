@@ -6,13 +6,13 @@ connections). It supports every remote-mail protocol now in use on the Internet:
 RPOP, APOP, KPOP, all flavors of IMAP, ETRN, and ODMR. It can even support IPv6 and IPSEC."
 SECTION = "mail"
 LICENSE = "GPL-2.0-only & MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=61ae62fe6df00649035f6b096c24c0f1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1d97f83179a23f8039e1de1420382e4d"
 
 DEPENDS = "openssl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
            "
-SRC_URI[sha256sum] = "a5109295ec3319e0e45edd009d2d977042a8326ab52c6a817a82fa987103e4f3"
+SRC_URI[sha256sum] = "efe01690d22bda359a579c77e2b0072658a092bff490ec0478a212c6b7d0eb70"
 
 inherit autotools gettext pkgconfig python3-dir python3native
 
