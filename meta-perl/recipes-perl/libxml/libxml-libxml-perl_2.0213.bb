@@ -22,23 +22,17 @@ RDEPENDS:${PN} += "\
     zlib \
 "
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
-    file://disable-libxml2-check.patch \
-    file://fix-CATALOG-conditional-compile.patch \
-    file://using-DOCB-conditional.patch \
-    file://0001-libxml-mm-Fix-function-prototypes-in-function-pointe.patch \
+SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/XML-LibXML-${PV}.tar.gz;name=libxml \
+    file://0001-Makefile.PL-link-against-system-libxml2-without-Alien.patch \
 "
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
 "
-SRC_URI[libxml.md5sum] = "dce687dd8b7e82d1c359fd74b1852f64"
-SRC_URI[libxml.sha256sum] = "f0bca4d0c2da35d879fee4cd13f352014186cedab27ab5e191f39b5d7d4f46cf"
+SRC_URI[libxml.sha256sum] = "2af21c5d61ac34ea26a5fabf15ba5a5841e648f7189db3e33b6f28b5489802ab"
 
 S = "${UNPACKDIR}/XML-LibXML-${PV}"
 
-inherit cpan ptest-perl
-
-EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR}/libxml2 LIBS=-L${STAGING_LIBDIR}"
+inherit cpan ptest-perl pkgconfig
 
 BBCLASSEXTEND = "native"
 
@@ -70,8 +64,3 @@ do_install_ptest() {
 	cp -r ${B}/test ${D}${PTEST_PATH}
 	chown -R root:root ${D}${PTEST_PATH}
 }
-
-# See issues:
-# https://github.com/shlomif/perl-XML-LibXML/issues/84 - libxml incompatibility
-# https://github.com/shlomif/perl-XML-LibXML/issues/91 - looking for new maintainer
-SKIP_RECIPE[libxml-libxml-perl] ?= "Not compatible with latest libxml"
