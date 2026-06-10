@@ -11,7 +11,7 @@ SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
            file://run-ptest \
            "
 
-SRC_URI[sha256sum] = "f98ce3c74300be05eddf05dccbdca498b14d40c289f773195dd1a559cffa5856"
+SRC_URI[sha256sum] = "a99b7262525a454d1065cf76dd17240fd808dfc4ef15636990ff83a5d0d9e740"
 
 inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest gettext
 
