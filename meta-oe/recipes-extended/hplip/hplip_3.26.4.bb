@@ -16,7 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://0001-Fix-installing-ipp-usb-quirk.patch \
            file://0001-Drop-using-register-storage-classifier.patch \
            file://0001-Fix-upstream-CFLAGS-override.patch"
-SRC_URI[sha256sum] = "1cf6d6c28735435c8eb6646e83bcfb721e51c4b1f0e8cf9105a6faf96dc9ad25"
+SRC_URI[sha256sum] = "b9c61252754f35b4a237396ca8961e7b3e0c56db76d66a6712b7bf3e30e69463"
 
 CVE_PRODUCT = "hplip linux_imaging_and_printing"
 
