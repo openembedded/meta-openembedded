@@ -5,12 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "ncurses libxml2 bison-native flex-native"
 
 SRC_URI = "http://files.inria.fr/pacap/${BPN}/${BP}.tar.gz \
-           file://0001-Fix-parallel-build-problems-by-Adrian-Bunk.patch \
-           file://0002-fix-reproducibility-of-build-process.patch \
            file://0001-Fix-build-when-S-B.patch \
-           file://0001-Fix-a-lot-of-Werror-format-security-errors-with-mvwp.patch \
            "
-SRC_URI[sha256sum] = "51c4449c95bba34f16b429729c2f58431490665d8093efaa8643b2e1d1084182"
+SRC_URI[sha256sum] = "a14b1b59ea4856844e27bc4e22129b7906b8815afaf50a25ac60998dafcc93a7"
 
 UPSTREAM_CHECK_URI = "https://team.inria.fr/pacap/software/tiptop/"
 
