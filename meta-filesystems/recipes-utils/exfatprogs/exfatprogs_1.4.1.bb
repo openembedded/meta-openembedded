@@ -18,7 +18,9 @@ SRC_URI[sha256sum] = "85c133e8802cbc1191bff2477a67b376192dfb9f94bb254c05dbae79fd
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
 
-inherit autotools ptest
+inherit autotools ptest pkgconfig
+
+DEPENDS += "util-linux"
 
 RPROVIDES:${PN} = "exfat-utils"
 RCONFLICTS:${PN} = "exfat-utils"
