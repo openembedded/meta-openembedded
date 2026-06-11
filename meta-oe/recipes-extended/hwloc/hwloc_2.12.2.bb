@@ -4,8 +4,8 @@ DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
  architectures."
 HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
 SECTION = "base"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=79179bb373cd55cbd834463a514fb714"
+LICENSE = "BSD-3-Clause & ISC"
+LIC_FILES_CHKSUM = "file://COPYING;md5=883e49a2e0f7142a345f9b0c01a380e7"
 
 SRC_URI = "https://www.open-mpi.org/software/${BPN}/v2.12/downloads/${BP}.tar.bz2"
 SRC_URI[sha256sum] = "563e61d70febb514138af0fac36b97621e01a4aacbca07b86e7bd95b85055ba0"
