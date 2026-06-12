@@ -35,4 +35,6 @@ echo "$conf" > configs/c.1/strings/0x409/configuration
 ln -s functions/ffs.usb0 configs/c.1
 
 mkdir -p /dev/usb-ffs/adb
-mount -t functionfs usb0 /dev/usb-ffs/adb
+ADB_UID=$(id -u adb)
+ADB_GID=$(id -g adb)
+mount -t functionfs usb0 /dev/usb-ffs/adb -o "uid=$ADB_UID,gid=$ADB_GID"
