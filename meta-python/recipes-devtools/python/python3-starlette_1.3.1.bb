@@ -2,11 +2,10 @@ SUMMARY = "Starlette is a lightweight ASGI framework/toolkit, which is ideal for
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
 
-SRC_URI[sha256sum] = "9b9b5ebb992e67d6093741e63c2f59e4f6fff986f81163c087867bd7b924b3f6"
+SRC_URI[sha256sum] = "05d0213193f2fbaae60e2ecb593b4add4262ad4e46536b54abe36f11a71724e0"
 
 inherit pypi python_hatchling ptest
 
-PYPI_PACKAGE = "starlette"
 CVE_PRODUCT = "starlette"
 
 SRC_URI += " \
@@ -30,6 +29,7 @@ RDEPENDS:${PN}-ptest += " \
         python3-typing-extensions \
         python3-unittest-automake-output \
         python3-pyyaml \
+        python3-httpx2 \
 "
 
 do_install_ptest() {
