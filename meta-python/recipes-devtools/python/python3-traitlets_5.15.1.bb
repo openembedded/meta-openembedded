@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ipython/traitlets"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=13bed0ee6f46a6f6dbf1f9f9572f250a"
 
-SRC_URI[sha256sum] = "4fead733f81cf1c4c938e06f8ca4633896833c9d89eff878159457f4d4392971"
+SRC_URI[sha256sum] = "7b1c07854fe25acb39e009bae49f11b79ff6cbb2f27999104e9110e7a6b53722"
 
 inherit pypi python_hatchling ptest
 
