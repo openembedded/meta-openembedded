@@ -1,0 +1,44 @@
+From 2840cf0b89497f545fae2eed7ece3f3c5fc558e3 Mon Sep 17 00:00:00 2001
+From: Naveen Saini <naveen.kumar.saini@intel.com>
+Date: Mon, 17 Oct 2022 15:50:34 +0800
+Subject: [PATCH 2/4] Makefile: It does not detect libbpf header from sysroot
+
+So adding sysroot headers path.
+
+Upstream-Status: OE-Specific
+
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+---
+ lib/common.mk       | 2 +-
+ lib/libxdp/Makefile | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/common.mk b/lib/common.mk
+index 56c0406..ab0bad8 100644
+--- a/lib/common.mk
++++ b/lib/common.mk
+@@ -55,7 +55,7 @@ LIBXDP_SOURCES := $(wildcard $(LIBXDP_DIR)/*.[ch] $(LIBXDP_DIR)/*.in)
+ KERN_USER_H ?= $(wildcard common_kern_user.h)
+ 
+ CFLAGS += -I$(HEADER_DIR) -I$(LIB_DIR)/util $(ARCH_INCLUDES)
+-BPF_CFLAGS += -I$(HEADER_DIR) $(ARCH_INCLUDES)
++BPF_CFLAGS += -I$(HEADER_DIR) $(ARCH_INCLUDES) -I${STAGING_INCDIR}/
+ 
+ BPF_HEADERS := $(wildcard $(HEADER_DIR)/bpf/*.h) $(wildcard $(HEADER_DIR)/xdp/*.h)
+ 
+diff --git a/lib/libxdp/Makefile b/lib/libxdp/Makefile
+index 358b751..8f459d8 100644
+--- a/lib/libxdp/Makefile
++++ b/lib/libxdp/Makefile
+@@ -30,7 +30,7 @@ PC_FILE := $(OBJDIR)/libxdp.pc
+ TEMPLATED_SOURCES := xdp-dispatcher.c
+ 
+ CFLAGS += -I$(HEADER_DIR)
+-BPF_CFLAGS += -I$(HEADER_DIR)
++BPF_CFLAGS += -I$(HEADER_DIR) -I${STAGING_INCDIR}/
+ 
+ 
+ ifndef BUILD_STATIC_ONLY
+-- 
+2.25.1
+
