@@ -8,12 +8,12 @@ SECTION = "libs"
 LICENSE = "OpenSSL & ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ca501bc96ce9ed0814e2c592c3f9593"
 
-SRC_URI = " \
-    https://deb.debian.org/debian/pool/main/a/android-platform-external-boringssl/android-platform-external-boringssl_${PV}.orig.tar.xz \
-    file://boringssl-go-stub \
-    file://boringssl-gtest-stub.cc \
-    file://0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch \
-"
+SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-external-boringssl/android-platform-external-boringssl_${PV}.orig.tar.xz \
+           file://boringssl-go-stub \
+           file://boringssl-gtest-stub.cc \
+           file://0001-cmake-add-SOVERSION-0-to-crypto-and-ssl-shared-libra.patch \
+           file://0001-Avoid-redefining-constants-introduced-in-glibc-2.41.patch;patchdir=.. \
+           "
 SRC_URI[md5sum] = "83d24d2f3136ba6a486b5464369b91b4"
 SRC_URI[sha256sum] = "f9223e8c15ad5d9e3f1cd50861f4c272658864661e2332bea5d60952aa0930cd"
 
