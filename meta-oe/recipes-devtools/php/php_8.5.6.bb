@@ -2,7 +2,7 @@ SUMMARY = "A server-side, HTML-embedded scripting language"
 HOMEPAGE = "https://www.php.net"
 SECTION = "console/network"
 
-LICENSE = "PHP-3.0"
+LICENSE = "PHP-3.01"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fd469cce1a919f0cc95bab7afb28d19d"
 
 BBCLASSEXTEND = "native"
