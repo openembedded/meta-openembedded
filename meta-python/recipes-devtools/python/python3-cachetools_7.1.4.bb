@@ -10,10 +10,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=079933dfba36eb60b5e3512ca0ab61ae"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
+DEPENDS += " \
+	python3-setuptools-scm-native \
+"
+
 RDEPENDS:${PN} += " \
 	python3-math \
 "
 
-SRC_URI[sha256sum] = "7042c0e4eea87812f04744ce6ee9ed3de457875eb1f82d8a206c46d6e48b6734"
+SRC_URI[sha256sum] = "437f55a4e0c1b01a4f3077cc470e6991d47430970e36fbcb77e2be0df4fc1cd6"
 
 BBCLASSEXTEND = "native nativesdk"
