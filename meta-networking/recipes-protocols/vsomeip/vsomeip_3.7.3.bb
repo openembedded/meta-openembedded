@@ -13,15 +13,11 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=
            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
            file://0003-Do-not-specify-PIE-flag-explicitly.patch \
-           file://0004-Fix-build-with-boost-1.89.patch \
-           file://0005-Replace-address-from_string-with-make_address.patch \
-           file://0006-Fix-scanning-64-bit-integer-types.patch \
-           file://0007-Do-not-treat-warnings-as-errors-with-clang.patch \
-           file://0008-Replace-io_service-with-io_context.patch \
-           file://0009-cached_event_tests-CMakeLists.txt-update-cmake_minim.patch \
+           file://0004-Fix-scanning-64-bit-integer-types.patch \
+           file://0005-Do-not-treat-warnings-as-errors-with-clang.patch \
           "
 
-SRCREV = "f58ba578c8c04e02dcf08d3ebcb9a71ca1e203ea"
+SRCREV = "6171fdfe109a3af8fb64190136029aadd1fa0c6f"
 SRC_URI[gtest.sha256sum] = "65fab701d9829d38cb77c14acdc431d2108bfdbf8979e40eb8ae567edf10b27c"
 
 COMPATIBLE_HOST:mips = "null"
@@ -37,6 +33,8 @@ EXTRA_OECMAKE = "-DINSTALL_LIB_DIR:PATH=${baselib} \
                  -DINSTALL_CMAKE_DIR:PATH=${baselib}/cmake/vsomeip3 \
                  -DGTEST_ROOT=${S}/googletest-${GTEST_VER} \
                 "
+
+EXTRA_OECMAKE:append:toolchain-clang = " -DCMAKE_CXX_COMPILER_CLANG_SCAN_DEPS=${STAGING_BINDIR_NATIVE}/clang-scan-deps"
 
 # For vsomeip-test
 EXTRA_OECMAKE += "-DTEST_IP_MASTER=10.0.3.1 \
@@ -65,10 +63,6 @@ do_install:append() {
     install -d ${D}/opt/${PN}-test/test/test/common
     cp -rf ${S}/test/common/examples_policies \
         ${D}/opt/${PN}-test/test/test/common/
-
-    install -d ${D}/opt/${PN}-test/test/common
-    install -m 0755 ${B}/test/common/libvsomeip_utilities.so \
-        ${D}/opt/${PN}-test/test/common/
 
     for d in unit_tests network_tests; do
         install -d ${D}/opt/${PN}-test/test/$d
