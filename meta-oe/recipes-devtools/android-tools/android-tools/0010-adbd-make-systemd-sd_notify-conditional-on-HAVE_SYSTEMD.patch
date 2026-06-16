@@ -1,4 +1,4 @@
-From 8874be8b9a3906c5720d75320b176b51523b6c15 Mon Sep 17 00:00:00 2001
+From c5f5f6c1a5de768e3559fb0b261065f1766ac3c3 Mon Sep 17 00:00:00 2001
 From: Etienne Cordonnier <ecordonnier@snap.com>
 Date: Fri, 12 Jun 2026 15:54:47 +0200
 Subject: [PATCH] adbd: make systemd sd_notify conditional on HAVE_SYSTEMD
@@ -31,7 +31,7 @@ index e755f20..a3f88f1 100644
    debian/out/system/libadb.a \
    debian/out/system/libcrypto_utils.a \
 diff --git a/packages/modules/adb/daemon/main.cpp b/packages/modules/adb/daemon/main.cpp
-index f177abf..789c25b 100644
+index 0b4a909..ac37461 100644
 --- a/packages/modules/adb/daemon/main.cpp
 +++ b/packages/modules/adb/daemon/main.cpp
 @@ -49,7 +49,7 @@
@@ -43,7 +43,7 @@ index f177abf..789c25b 100644
  #include <systemd/sd-daemon.h>
  #endif
  
-@@ -365,7 +365,7 @@ int adbd_main(int server_port) {
+@@ -368,7 +368,7 @@ int adbd_main(int server_port) {
      init_jdwp();
      D("adbd_main(): post init_jdwp()");
  
