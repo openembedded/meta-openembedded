@@ -44,6 +44,7 @@ COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:mipsarchn64 = "null"
 COMPATIBLE_HOST:mipsarchn32 = "null"
 
+CXXFLAGS += "-std=gnu++17"
 
 EXTRA_OEMAKE = 'RPMPKG="${PV}" \
                 GDB_TARGET="${TARGET_SYS}" \
