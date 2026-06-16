@@ -1,9 +1,9 @@
-DESCRIPTION = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
+
 HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 
-SRC_URI[sha256sum] = "e487fae93ad408e6f47641ee4dfe389864fd7bec92e547ea8498fc13f43e83ab"
+SRC_URI[sha256sum] = "822360704230d9533d8d9475399613525968aa2f0b5bd2a3ccc9f18c88fd541c"
 
 SRC_URI += "file://run-ptest"
 
@@ -36,3 +36,10 @@ RDEPENDS:${PN}-ptest += "\
                         python3-sqlalchemy \
                         python3-trio \
 "
+
+do_install_ptest:append() {
+    install -d ${D}${PTEST_PATH}/scripts
+    cp -rf ${S}/scripts/* ${D}${PTEST_PATH}/scripts/
+    rm -rf ${D}${PTEST_PATH}/scripts/tests
+    echo "import sys; from pathlib import Path; sys.path.insert(0, str(Path(__file__).parent))" > ${D}${PTEST_PATH}/conftest.py
+}
