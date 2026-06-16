@@ -1,6 +1,6 @@
 require libgpiod.inc
 
-inherit systemd update-rc.d useradd gobject-introspection
+inherit meson systemd update-rc.d useradd gobject-introspection
 
 LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
 LIC_FILES_CHKSUM = " \
@@ -15,20 +15,36 @@ SRC_URI += " \
     file://gpio-manager.init \
 "
 
-SRC_URI[sha256sum] = "13207176b0eb9b3e0f02552d5f49f5a6a449343ce47416158bb484d9d3019592"
+SRC_URI[sha256sum] = "cb71db463aec2604ac520c95bf04eff1839d86bdc9a2dfd67ef879fbb10426ea"
+
+# Always build tools - they don't have any additional
+# requirements over the library.
+EXTRA_OEMESON = "-Dtools=enabled"
 
 # Enable all project features for ptest
 PACKAGECONFIG[tests] = " \
-    --enable-tests --enable-tools --enable-bindings-cxx --enable-bindings-glib --enable-gpioset-interactive --enable-dbus, \
-    --disable-tests, \
+    -Dtests=enabled -Dtools=enabled -Dbindings-cxx=enabled -Dbindings-glib=enabled -Dgpioset-interactive=enabled -Ddbus=enabled, \
+    -Dtests=disabled, \
     kmod util-linux glib-2.0 catch2 libedit glib-2.0-native libgudev, \
     bash ${VIRTUAL-RUNTIME_dbus} glib-2.0-utils libgpiod-manager-cfg shunit2 \
 "
-PACKAGECONFIG[gpioset-interactive] = "--enable-gpioset-interactive,--disable-gpioset-interactive,libedit"
-PACKAGECONFIG[glib] = "--enable-bindings-glib,--disable-bindings-glib,glib-2.0 glib-2.0-native"
-PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,glib-2.0 glib-2.0-native libgudev,${VIRTUAL-RUNTIME_dbus}"
+PACKAGECONFIG[cxx] = "-Dbindings-cxx=enabled,-Dbindings-cxx=disabled"
+PACKAGECONFIG[gpioset-interactive] = "-D=gpioset-interactive=enabled,-Dgpioset-interactive=disabled,libedit"
+PACKAGECONFIG[glib] = "-Dbindings-glib=enabled,-Dbindings-glib=disabled,glib-2.0 glib-2.0-native"
+PACKAGECONFIG[dbus] = "-Ddbus=enabled,-Ddbus=disabled,glib-2.0 glib-2.0-native libgudev,${VIRTUAL-RUNTIME_dbus}"
 
-PACKAGES =+ "${PN}-gpiosim ${PN}-glib ${PN}-manager ${PN}-manager-cfg ${PN}-cli"
+GIR_MESON_ENABLE_FLAG = "enabled"
+GIR_MESON_DISABLE_FLAG = "disabled"
+
+PACKAGES =+ " \
+    ${PN}-gpiosim \
+    ${PN}-glib \
+    ${PN}-manager \
+    ${PN}-manager-cfg \
+    ${PN}-cli \
+    libgpiotools \
+    libgpiodbus \
+"
 FILES:${PN}-tools += "${bindir}/gpionotify"
 FILES:${PN}-gpiosim += "${libdir}/libgpiosim.so.*"
 FILES:${PN}-gpiosim-dev += "${includedir}/gpiosim.h"
@@ -38,7 +54,6 @@ FILES:${PN}-glib += " \
 "
 FILES:${PN}-manager += " \
     ${bindir}/gpio-manager \
-    ${libdir}/libgpiodbus.so.* \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_system_unitdir}/gpio-manager.service', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${sysconfdir}/init.d/gpio-manager', '', d)} \
 "
@@ -48,9 +63,16 @@ FILES:${PN}-manager-cfg += " \
     ${nonarch_base_libdir}/udev/rules.d/90-gpio.rules \
 "
 FILES:${PN}-cli += "${bindir}/gpiocli"
+FILES:libgpiotools += "${libdir}/libgpiotools.so.*"
+FILES:libgpiodbus += "${libdir}/libgpiodbus.so.*"
 
-RDEPENDS:${PN}-manager += "${VIRTUAL-RUNTIME_dbus} ${PN}-manager-cfg"
-RDEPENDS:${PN}-cli += "${PN}-manager"
+RDEPENDS:${PN}-manager += " \
+    ${VIRTUAL-RUNTIME_dbus} \
+    ${PN}-manager-cfg \
+    libgpiodbus \
+"
+RDEPENDS:${PN}-cli += "${PN}-manager libgpiodbus"
+RDEPENDS:${PN}-tools += "libgpiotools"
 
 SYSTEMD_PACKAGES = "${PN}-manager"
 
@@ -60,12 +82,12 @@ python __anonymous() {
     pn = d.getVar("PN")
 
     if "systemd" in distro_features and "dbus" in packageconfig:
-        d.appendVar("EXTRA_OECONF", " --enable-systemd")
+        d.appendVar("EXTRA_OEMESON", " -Dsystemd=enabled")
         # We need to set it conditionally or else the systemd class will look
         # for the file that we don't install with systemd support disabled.
         d.setVar("SYSTEMD_SERVICE:{}-manager".format(pn), "gpio-manager.service")
     else:
-        d.appendVar("EXTRA_OECONF", " --disable-systemd")
+        d.appendVar("EXTRA_OECONF", " -Dsystemd=disabled")
 
     # Disable gobject introspection set by the bbclass if we don't want it.
     if not any(cfg in ["glib", "dbus", "ptest"] for cfg in packageconfig):
@@ -86,10 +108,6 @@ RDEPENDS:${PN}-ptest += " \
 RRECOMMENDS:${PN}-gpiosim += "kernel-module-gpio-sim kernel-module-configfs"
 INSANE_SKIP:${PN}-ptest += "buildpaths"
 
-do_compile:prepend() {
-    export GIR_EXTRA_LIBS_PATH="${B}/lib/.libs"
-}
-
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
@@ -98,13 +116,17 @@ do_install:append() {
 }
 
 do_install_ptest:append() {
-    install -m 0755 ${B}/bindings/cxx/tests/.libs/gpiod-cxx-test ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/tests/gpiod-test ${D}${PTEST_PATH}/tests/
+    for tool in ${FILES:${PN}-tools}; do
+        install ${B}/tools/$(basename $tool) ${D}${PTEST_PATH}/tests/
+    done
+    install -m 0755 ${B}/bindings/cxx/tests/gpiod-cxx-test ${D}${PTEST_PATH}/tests/
     install -m 0755 ${S}/tools/gpio-tools-test.bash ${D}${PTEST_PATH}/tests/
     install -m 0644 ${S}/tests/scripts/gpiod-bash-test-helper.inc ${D}${PTEST_PATH}/tests/
     install -m 0644 ${S}/tests/gpiosim/gpiosim.h ${D}${includedir}/gpiosim.h
-    install -m 0755 ${B}/bindings/glib/tests/.libs/gpiod-glib-test ${D}${PTEST_PATH}/tests/
-    install -m 0755 ${B}/dbus/tests/.libs/gpiodbus-test ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/bindings/glib/tests/gpiod-glib-test ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/dbus/tests/gpiodbus-test ${D}${PTEST_PATH}/tests/
     install -m 0755 ${S}/dbus/client/gpiocli-test.bash ${D}${PTEST_PATH}/tests/
-    install -m 0755 ${B}/dbus/manager/.libs/gpio-manager ${D}${PTEST_PATH}/tests/
-    install -m 0755 ${B}/dbus/client/.libs/gpiocli ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/dbus/manager/gpio-manager ${D}${PTEST_PATH}/tests/
+    install -m 0755 ${B}/dbus/client/gpiocli ${D}${PTEST_PATH}/tests/
 }
