@@ -154,19 +154,19 @@ do_compile:prepend() {
 do_install() {
     DESTDIR='${WORKDIR}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
     MINIFI_BIN=${bindir}
-    MINIFI_HOME=${sysconfdir}/nifi-minifi-cpp
-    MINIFI_RUN=${localstatedir}/lib/nifi-minifi-cpp
-    MINIFI_LOG=${localstatedir}/log/nifi-minifi-cpp
+    MINIFI_HOME=${sysconfdir}/minifi
+    MINIFI_RUN=${localstatedir}/lib/minifi
+    MINIFI_LOG=${localstatedir}/log/minifi
 
     install -m 755 -d ${D}${MINIFI_BIN}
-    install -m 755 -d ${D}${MINIFI_HOME}
-    install -m 755 -d ${D}${MINIFI_RUN}
+    install -m 755 -d ${D}${MINIFI_HOME}/conf
+    install -m 755 -d ${D}${localstatedir}/lib/minifi
 
     for i in minifi-encrypt-config minifi minifi.sh minifi-controller; do
         install -m 755 ${WORKDIR}/minifi-install/usr/bin/${i} ${D}${MINIFI_BIN}
     done
     for i in config.yml minifi-log.properties minifi.properties minifi-uid.properties; do
-        install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}
+        install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}/conf
     done
 
     install -m 755 -d ${D}${libdir}/minifi-extensions
@@ -182,19 +182,19 @@ do_install() {
     sed -i "s|bin_dir=.*|bin_dir=${MINIFI_BIN}|g" ${D}${MINIFI_BIN}/minifi.sh
 
     sed -i "s|#appender.rolling.directory=.*|appender.rolling.directory=${MINIFI_LOG}|g" \
-        ${D}${MINIFI_HOME}/minifi-log.properties
+        ${D}${MINIFI_HOME}/conf/minifi-log.properties
     sed -i "s|nifi.provenance.repository.directory.default=.*|nifi.provenance.repository.directory.default=${MINIFI_RUN}/provenance_repository|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
+        ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.flowfile.repository.directory.default=.*|nifi.flowfile.repository.directory.default=${MINIFI_RUN}/flowfile_repository|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
+        ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=${MINIFI_RUN}/content_repository|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
-    sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/config.yml|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
+        ${D}${MINIFI_HOME}/conf/minifi.properties
+    sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/conf/config.yml|g" \
+        ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.python.processor.dir=.*|nifi.python.processor.dir=${libexecdir}/minifi-python|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
+        ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.extension.path=.*|nifi.extension.path=${libdir}/minifi-extensions/*|g" \
-        ${D}${MINIFI_HOME}/minifi.properties
+        ${D}${MINIFI_HOME}/conf/minifi.properties
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -m 755 -d ${D}${sysconfdir}/tmpfiles.d
