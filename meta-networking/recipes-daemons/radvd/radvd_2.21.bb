@@ -14,14 +14,14 @@ DEPENDS = "flex-native bison-native libdaemon libbsd"
 LICENSE = "radvd"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
 
-SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
+SRC_URI = "https://github.com/radvd-project/radvd/releases/download/v${PV}/radvd-${PV}.tar.gz \
            file://radvd.init \
            file://radvd.service \
            file://volatiles.03_radvd \
            file://radvd.default \
            file://radvd.conf \
            "
-SRC_URI[sha256sum] = "af37c5a81d59f3bdc00d83056606ffa1810d4550beed6caa4f81181246494220"
+SRC_URI[sha256sum] = "09e5cf7712397463fd35ebca71f3c05f7d31cff9246513f12d03a359c40b089c"
 
 UPSTREAM_CHECK_URI = "https://github.com/radvd-project/radvd/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
@@ -60,7 +60,7 @@ do_install:append () {
 
     # Documentation
     install -m 0755 -d ${D}${docdir}/radvd
-    for i in radvd.conf.example README; do \
+    for i in radvd.conf.example README.md; do \
         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
     done
 }
