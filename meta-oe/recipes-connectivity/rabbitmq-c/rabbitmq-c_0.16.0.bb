@@ -3,9 +3,9 @@ HOMEPAGE = "https://github.com/alanxz/rabbitmq-c"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7e12f6e40e662e039e2f02b4893011ec"
 LICENSE = "MIT"
 
-SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https;tag=v${PV} \
 "
-SRCREV = "84b81cd97a1b5515d3d4b304796680da24c666d8"
+SRCREV = "800d57c9ca7352181167ec3c6aba66b8518c321c"
 
 
 DEPENDS = "popt openssl"
