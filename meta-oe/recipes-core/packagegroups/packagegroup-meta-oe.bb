@@ -654,7 +654,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia = "\
     libass \
     libcdio \
     libcdio-paranoia \
-    libdvdread \
     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libmad", "", d)} \
     libmikmod \
     libmms \
