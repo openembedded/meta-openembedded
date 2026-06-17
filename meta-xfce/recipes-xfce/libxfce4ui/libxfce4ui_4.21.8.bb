@@ -19,10 +19,8 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','opengl', "", d)}"
 
 # TODO: Check if 0001-... can go
-SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
-            file://0001-build-Do-not-display-full-path-in-generated-headers.patch \
-            "
-SRC_URI[sha256sum] = "a72a7af39cf183819bcfb61b1747d425261e966ccb172b2fc28f1494f524bd17"
+SRC_URI += " file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
+SRC_URI[sha256sum] = "e6caafc6fe5e07765e22dd849a19b21e5aa44f51c66fa1d7db74b94330bd457b"
 
 EXTRA_OEMESON = "-Dvala=disabled -Dvendor-info=${DISTRO}"
 
