@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/bumble"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7a775f1b11285b6abedd76748d176125"
 
-SRC_URI[sha256sum] = "78fb156548dd738a28ecba539e7aaa138117516a8811482e9801bcd35a4fbbbd"
+SRC_URI[sha256sum] = "1064d45e8370fc2b1bb684c0efd59534407ea16c3a2811985ed50a886fa3b674"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
@@ -25,6 +25,7 @@ RDEPENDS:${PN} += "\
 	python3-pyserial-asyncio \
 	python3-pyusb \
 	python3-websockets \
+        python3-libusb1 \
 "
 RDEPENDS:${PN}-ptest += "\
 	python3-pytest-asyncio \
