@@ -150,9 +150,12 @@ do_configure () {
                ${PACKAGECONFIG_CONFARGS}
 }
 
+do_compile:prepend:class-target() {
+    install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
+}
+
 do_compile () {
     install -D ${RECIPE_SYSROOT_NATIVE}/etc/ssl/openssl.cnf ${B}/deps/openssl/nodejs-openssl.cnf
-    install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
     oe_runmake BUILDTYPE=Release
 }
 
@@ -199,6 +202,13 @@ python set_gyp_variables () {
 }
 
 python __anonymous () {
+    # do_create_v8_qemu_wrapper is not needed for the native build, so make sure it
+    # gets deleted otherwise target info ends up in its signature making the native
+    # build target specific.
+    if bb.data.inherits_class('native', d):
+        bb.build.deltask('do_create_v8_qemu_wrapper', d)
+        return
+
     # 32 bit target and 64 bit host (x86-64 or aarch64) have different bit width
     if d.getVar("SITEINFO_BITS") == "32" and "64" in d.getVar("BUILD_ARCH"):
         d.setVar("HOST_AND_TARGET_SAME_WIDTH", "0")
