@@ -6,13 +6,13 @@ HOMEPAGE = "https://metacpan.org/dist/URI"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9944b87af51186f848ae558344aded9f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a4fff76c97b0801ffb7096967487beac"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/URI-${PV}.tar.gz \
            file://0001-Skip-TODO-test-cases-that-fail.patch \
            "
 
-SRC_URI[sha256sum] = "de64c779a212ff1821896c5ca2bb69e74767d2674cee411e777deea7a22604a8"
+SRC_URI[sha256sum] = "89648964ce5ae006726951f42f718576fbefe9e98a41bd2212d57386163092d2"
 
 S = "${UNPACKDIR}/URI-${PV}"
 
