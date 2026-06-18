@@ -11,7 +11,6 @@ inherit module
 SRCREV = "61fe107ff96a22e7df0029877529b7ce6da36850"
 SRC_URI = "git://github.com/crash-utility/crash;protocol=https;branch=master;subpath=memory_driver;destsuffix=${BP} \
            file://0001-hacked-Makefile-for-module.bbclass.patch;striplevel=2 \
-           file://0002-add-sparse-support.patch;striplevel=2 \
            "
 PV = "9.0.2+git"
 
@@ -25,6 +24,3 @@ RPROVIDES:${PN} += "kernel-module-crash-memory-driver"
 # MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "kernel-module-crash-memory-driver"
 #    to autoload it:
 # KERNEL_MODULE_AUTOLOAD += "crash"
-
-# in case we use sparse in the kernel module makefile
-DEPENDS = "sparse-native"
