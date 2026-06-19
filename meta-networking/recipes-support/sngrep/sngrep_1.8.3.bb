@@ -7,7 +7,7 @@ LICENSE = "GPL-3.0-or-later & OpenSSL"
 LIC_FILES_CHKSUM = "\
     file://LICENSE;md5=d32239bcb673463ab874e80d47fae504 \
     file://LICENSE.OpenSSL;md5=e39170c41c6f83de36426dbf49a03632 \
-    file://README;beginline=100;endline=124;md5=758a88cf2b27572df05996a3810066b3 \
+    file://README;beginline=102;endline=126;md5=758a88cf2b27572df05996a3810066b3 \
 "
 
 DEPENDS = "\
@@ -16,7 +16,8 @@ DEPENDS = "\
 "
 
 SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master"
-SRCREV = "dad1033640f249fa4994f976cf6ee96826c15702"
+SRCREV = "c77bd75a52d1aac96ae9d1603f2b7dfbe7e90ffd"
+PV .= "+git"
 
 
 inherit cmake pkgconfig
@@ -29,7 +30,7 @@ PACKAGECONFIG ?= "\
 
 PACKAGECONFIG[openssl] = "-DWITH_OPENSSL=ON,-DWITH_OPENSSL=OFF,openssl"
 PACKAGECONFIG[gnutls] = "-DWITH_GNUTLS=ON,-DWITH_GNUTLS=OFF,gnutls libgcrypt"
-PACKAGECONFIG[pcre] = "-DWITH_PCRE=OFF,-DWITH_PCRE=OFF,libpcre"
+PACKAGECONFIG[pcre2] = "-DWITH_PCRE2=OFF,-DWITH_PCRE2=OFF,libpcre2"
 PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
 PACKAGECONFIG[unicode] = "-DWITH_UNICODE=ON,-DWITH_UNICODE=OFF"
 PACKAGECONFIG[ipv6] = "-DUSE_IPV6=ON,-DUSE_IPV6=OFF"
