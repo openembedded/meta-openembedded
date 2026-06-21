@@ -348,7 +348,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     indent \
     iotop \
     isomd5sum \
-    jansson \
     jpnevulator \
     libblockdev \
     libcec \
