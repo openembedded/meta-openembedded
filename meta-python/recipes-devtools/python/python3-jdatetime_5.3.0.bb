@@ -3,15 +3,14 @@ HOMEPAGE = "https://github.com/slashmili/python-jalali"
 LICENSE = "Python-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
 
-SRC_URI[sha256sum] = "c81d5898717b82b609a3ce2a73f8b8d3230b0c757e5c0de9d6b1acfdc224f551"
+SRC_URI[sha256sum] = "d20eb9fc2a00e86493a6156b2a0e4e579f23379e8fea186a0e603fd36a130227"
 
-PYPI_PACKAGE = "jdatetime"
-
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 CLEANBROKEN = "1"
 
 RDEPENDS:${PN} += " \
-        python3-modules \
+    python3-modules \
+    python3-jalali-core \
 "
 
