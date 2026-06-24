@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "3acfae100c7b855a4c76520ee0f95cadcace3f4254f16b7d4887f178fc95d4a0"
+SRC_URI[sha256sum] = "b27385d6845089bdb91285d94b06c2a5cf1c37f8173a3c4e10824cc1ffadeaba"
 
 S = "${UNPACKDIR}/node-v${PV}"
 
