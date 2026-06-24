@@ -20,6 +20,10 @@ EXTRA_OECONF = "--disable-gui \
                 --with-libreadline-prefix=${STAGING_INCDIR} \
                 "
 
+# The bundled jitter sub-configure runs a gnulib AC_RUN_IFELSE test for
+# strcasecmp which aborts under cross compilation; provide the cached result.
+CACHED_CONFIGUREVARS += "gl_cv_func_strcasecmp_works=yes"
+
 PACKAGECONFIG[mi] = "--enable-mi,--disable-mi,json-c"
 
 PACKAGES =+ "${PN}-emacs ${PN}-vim"
