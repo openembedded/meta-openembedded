@@ -27,15 +27,18 @@ RDEPENDS:${PN} = "bubblewrap rtkit ${PORTAL_BACKENDS} fuse3-utils"
 inherit meson pkgconfig python3native features_check
 
 SRC_URI = " \
-	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=xdg-desktop-portal-1.20;name=main;tag=${PV} \
+	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=xdg-desktop-portal-1.22;name=main;tag=${PV} \
 	git://gitlab.gnome.org/GNOME/libglnx.git;protocol=https;branch=master;name=libglnx;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/libglnx \
+	git://gitlab.gnome.org/GNOME/gvdb.git;protocol=https;branch=main;name=gvdb;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/gvdb \
 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
 "
 
-SRCREV_main = "f5aec228c9eb0c9a70eadd6424d92c0ca8a78247"
+SRCREV_main = "1d20fadc304f6601452b5db65ed91197dba77041"
 
 # this revision comes from subprojects/libglnx.wrap file of the main source repo
-SRCREV_libglnx = "ccea836b799256420788c463a638ded0636b1632"
+SRCREV_libglnx = "ff64d52116ae74f0d25e24f089db28921ea171ff"
+# this revision comes from subprojects/gvdb.wrap file of the main source repo
+SRCREV_gvdb = "c6f2359cc1d00f16e0a0e2527fa0bc1882b8b5ab"
 
 SRCREV_FORMAT = "main"
 
