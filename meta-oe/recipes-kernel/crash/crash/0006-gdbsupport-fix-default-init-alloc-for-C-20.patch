@@ -1,0 +1,82 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 Jun 2026 00:00:00 +0000
+Subject: [PATCH] gdbsupport: fix default-init-alloc for C++20
+
+std::allocator::construct() and std::allocator::destroy() were
+deprecated in C++17 and removed in C++20. gdb-10.2's
+gdbsupport/default-init-alloc.h pulls them into scope with
+
+  using A::construct;
+
+where A defaults to std::allocator<T>. With GCC 16 (which defaults to
+C++20 or newer) std::vector instantiations such as gdb::def_vector<char>
+(= std::vector<char, gdb::default_init_allocator<char>>) fail to build:
+
+  default-init-alloc.h:52:12: error: 'construct' has not been declared
+    in 'class std::allocator<char>'
+
+Note that def-vector.h instantiates default_init_allocator with the
+explicit std::allocator<T> base, so changing only the template's default
+allocator argument is not sufficient to fix this.
+
+Pull in "using A::construct;" only for standards older than C++17 (where
+std::allocator still provides construct()), and for C++17 and later add a
+variadic construct() overload that forwards to
+std::allocator_traits<A>::construct().  This both keeps non-default
+construction working and avoids referring to the removed
+std::allocator::construct() member.  The existing default-init
+construct(U*) overload is preserved unchanged.
+
+This patch only touches the bundled gdb-10.2 sources downloaded by the
+crash recipe.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ gdbsupport/default-init-alloc.h | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+--- a/gdb-10.2/gdbsupport/default-init-alloc.h
++++ b/gdb-10.2/gdbsupport/default-init-alloc.h
+@@ -18,6 +18,8 @@
+ #ifndef COMMON_DEFAULT_INIT_ALLOC_H
+ #define COMMON_DEFAULT_INIT_ALLOC_H
+
++#include <memory>
++
+ namespace gdb {
+
+ /* An allocator that default constructs using default-initialization
+@@ -48,8 +50,13 @@ public:
+     typedef default_init_allocator<U, alloc_> other;
+   };
+
+-  /* Make the base allocator's construct method(s) visible.  */
++  /* Make the base allocator's construct method(s) visible.  std::allocator
++     lost its construct() member in C++20, so only pull it in for older
++     standards; for C++20 and later we forward non-default construction to
++     std::allocator_traits below instead.  */
++#if __cplusplus < 201703L
+   using A::construct;
++#endif
+
+   /* .. and provide an override/overload for the case of default
+      construction (i.e., no arguments).  This is where we construct
+@@ -60,6 +67,16 @@ public:
+   {
+     ::new ((void *) ptr) U; /* default-init */
+   }
++
++  /* Forward all other construct() calls to the base allocator.  This
++     replaces the "using A::construct;" pulled in above for standards
++     where std::allocator still provides construct().  */
++  template <typename U, typename... Args>
++  void construct (U *ptr, Args&&... args)
++  {
++    std::allocator_traits<A>::construct (static_cast<A &> (*this), ptr,
++					 std::forward<Args> (args)...);
++  }
+ };
+
+ } /* namespace gdb */

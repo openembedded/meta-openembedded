@@ -27,6 +27,7 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://0004-tools.c-do-not-use-keywords-nullptr-as-a-variable-in.patch \
            file://0005-Fix-build-failure-on-32bit-machine-i686.patch \
            file://0001-Use-CC-env-var-to-get-compiler-version.patch \
+           file://0006-gdbsupport-fix-default-init-alloc-for-C-20.patch \
            "
 SRCREV = "f13853cef53f5c5463a51021edbc81977e2b1405"
 
