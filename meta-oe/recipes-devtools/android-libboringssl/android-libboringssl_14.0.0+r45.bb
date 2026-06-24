@@ -23,7 +23,12 @@ S = "${UNPACKDIR}/android-platform-external-boringssl-${PV}/src"
 
 inherit cmake
 
-CFLAGS:append = " -Wno-discarded-qualifiers"
+# -Wno-discarded-qualifiers is a GCC spelling; clang names this warning
+# -Wno-incompatible-pointer-types-discards-qualifiers. BoringSSL compiles with
+# -Werror -Werror=unknown-warning-option, so an unknown -W option breaks every
+# configure try_compile (including the pthread/Threads detection).
+CFLAGS:append:toolchain-gcc = " -Wno-discarded-qualifiers"
+CFLAGS:append:toolchain-clang = " -Wno-incompatible-pointer-types-discards-qualifiers"
 
 OECMAKE_TARGET_COMPILE = "crypto ssl"
 
