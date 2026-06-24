@@ -9,14 +9,16 @@ DEPENDS = "glib-2.0-native intltool-native libxml2 networkmanager openconnect"
 GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase useradd
 
-SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/NetworkManager-openconnect-${PV}.tar.xz"
+SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/NetworkManager-openconnect-${PV}.tar.xz \
+           file://0001-configure-only-require-webkit2gtk-when-building-the-a.patch \
+"
 
 SRC_URI[sha256sum] = "844b6bf64ecadb97b4a68c776db89aa5e6ee7e59bd24b0180228406863136464"
 
 S = "${UNPACKDIR}/NetworkManager-openconnect-${PV}"
 
 # meta-gnome in layers is required using gnome:
-PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 gcr3 libnma libsecret,"
+PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 gcr3 libnma libsecret webkitgtk3,"
 PACKAGECONFIG[gtk4] = "--with-gtk4,--without-gtk4,gtk4,"
 
 do_configure:append() {
@@ -35,6 +37,7 @@ USERADD_PARAM:${PN} = "--system nm-openconnect"
 FILES:${PN} += " \
     ${libdir}/NetworkManager/*.so \
     ${nonarch_libdir}/NetworkManager/VPN/nm-openconnect-service.name \
+    ${datadir}/dbus-1/system.d \
 "
 
 FILES:${PN}-staticdev += " \
