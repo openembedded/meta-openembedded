@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0 & BlueOak-1.0.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9f816753e8bdfe4576cb87159a0cd60c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=76c62fa4c329393e905512b36f8378b7"
 FILESEXTRAPATHS:prepend := "${THISDIR}/nodejs-24:"
 
 CVE_PRODUCT = "nodejs node.js"
@@ -35,7 +35,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
 SRC_URI:append:class-target = " \
            file://0009-Using-native-binaries.patch \
            "
-SRC_URI[sha256sum] = "a7ab562ed2369a29c68b72fa00e3103bcdfe37063dff799c6acc8e404e275fcd"
+SRC_URI[sha256sum] = "e94afde24db08e0c564ee7110a2d5aab51ee0059382c9fd8233c54eec47b28f9"
 
 S = "${UNPACKDIR}/node-v${PV}"
 
