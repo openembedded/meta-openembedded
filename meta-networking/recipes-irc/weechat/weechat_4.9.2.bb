@@ -10,7 +10,7 @@ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz"
 
 SRC_URI[sha256sum] = "d1389a9e521bda0c4ebfa108e2abf885ee6c5150c385299f5dca0181a43a0914"
 
-inherit cmake pkgconfig
+inherit cmake pkgconfig python3targetconfig
 
 PACKAGECONFIG ??= " ncurses python"
 PACKAGECONFIG[ncurses] = "-DENABLE_NCURSES=ON,-DENABLE_NCURSES=OFF,ncurses"
@@ -20,6 +20,14 @@ EXTRA_OECMAKE:append = " -DENABLE_PHP=OFF -DENABLE_TCL=OFF -DENABLE_LUA=OFF \
                          -DENABLE_JAVASCRIPT=OFF -DENABLE_RUBY=OFF \
                          -DENABLE_GUILE=OFF -DENABLE_PERL=OFF -DENABLE_ASPELL=ON \
                          -DLIBDIR=${libdir}"
+
+# CMake's FindPython queries the (native) interpreter for the Development.Embed
+# component, which then fails to locate the cross (target) libpython/headers.
+# Point it explicitly at the target sysroot library and include directory.
+EXTRA_OECMAKE:append = " \
+    -DPython_INCLUDE_DIR=${STAGING_INCDIR}/python${PYTHON_BASEVERSION} \
+    -DPython_LIBRARY=${STAGING_LIBDIR}/libpython${PYTHON_BASEVERSION}.so \
+"
 
 do_configure:prepend(){
     #  Make sure we get dependencies from recipe-sysroot
