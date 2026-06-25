@@ -11,7 +11,10 @@ EXTRA_OEMAKE:class-cross = 'RPMPKG="${PV}" \
 EXTRA_OEMAKE:append:class-native = " LDFLAGS='${BUILD_LDFLAGS}'"
 EXTRA_OEMAKE:append:class-cross = " LDFLAGS='${BUILD_LDFLAGS}'"
 
-DEPENDS:append:class-cross = " zlib-native"
+# gdb 16.2 (bundled, built for the build host in the cross case) needs gmp and
+# mpfr, and crash links readline/ncurses. Unlike native.bbclass, cross.bbclass
+# does not remap DEPENDS to their -native variants, so list them explicitly.
+DEPENDS:append:class-cross = " zlib-native readline-native ncurses-native gmp-native mpfr-native"
 
 do_install:class-target () {
     oe_runmake DESTDIR=${D} install
