@@ -90,13 +90,6 @@ do_compile:prepend() {
     # 2. Copy the official clean GNU tarball source footprint into the active workspace mapping
     cp -rf ${UNPACKDIR}/gdb/gdb-16.2 ${B}/gdb-16.2
 
-    # 3. Initialize the localized tracking repository required by the crash build architecture
-    cd ${B}/gdb-16.2/
-    git init
-    git add .
-    git commit -m "initial commit"
-    cd ${B}
-
     bbnote "Writing dynamic target layout architecture context: ${ARCH_UPPER}"
     echo "${ARCH_UPPER}" > ${B}/gdb-16.2/crash.target
 
@@ -110,10 +103,6 @@ do_compile:prepend() {
     cd ${B}
     bbnote "Applying the native upstream crash integration patch onto the GDB source tree..."
     patch -p0 --fuzz=3 < gdb-16.2.patch
-    cd ${B}/gdb-16.2/
-    git add .
-    git commit -m "after upstream crash gdb-16.2.patch"
-    cd ${B}
 }
 
 do_compile() {
