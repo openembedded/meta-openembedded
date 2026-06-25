@@ -11,6 +11,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
 
 inherit autotools pkgconfig gettext gobject-introspection vala gtk-doc
 
+# GCC 14+ promotes -Wincompatible-pointer-types to an error. This 0.24.2
+# release predates the stricter C rules (e.g. g_ptr_array_new_full callback
+# casts in protocol.c).
+CFLAGS += "-Wno-error=incompatible-pointer-types"
+
 # Respect GI_DATA_ENABLED value when enabling vala-bindings:
 # configure: error: GObject-Introspection must be enabled for Vala bindings
 EXTRA_OECONF = "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '--enable-vala-bindings', '--disable-vala-bindings', d)}"
