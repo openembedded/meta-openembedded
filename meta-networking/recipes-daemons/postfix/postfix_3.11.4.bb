@@ -29,7 +29,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
            file://0001-Fix-build-with-musl.patch \
            "
 
-SRC_URI[sha256sum] = "bd11dcc463d7045e40f2c11cc00216489c73b58cc40b3d06c54265b088a173e1"
+SRC_URI[sha256sum] = "226ec59a18e43e277691005e31496f7608b9ba9210be600a267fb217a4a6cee9"
 
 UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
 UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
