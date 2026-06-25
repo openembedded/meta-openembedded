@@ -4,7 +4,7 @@ HOMEPAGE = "https://www.sqlalchemy.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=53a9111717b305b0fae0d704a24925c3"
 
-SRC_URI[sha256sum] = "af5607d11ef90fd6a5c0549fe0045dce1663d427426bcfb506dcb5346a85a3b9"
+SRC_URI[sha256sum] = "804dccd8a4a6242c4e30ad961e540e18a588f6527202f2d6791b01845d59fdc9"
 
 inherit pypi python_setuptools_build_meta cython
 
