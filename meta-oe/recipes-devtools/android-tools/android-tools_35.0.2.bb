@@ -55,6 +55,7 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
            file://0008-adb-GCC-compatibility-fixes-for-usb_linux-and-sysdep.patch \
            file://0009-libbase-include-stdint.h-in-hex.cpp.patch \
            file://0010-adbd-make-systemd-sd_notify-conditional-on-HAVE_SYSTEMD.patch \
+           file://0011-adb-drop-non-portable-is_standard_layout-assertion.patch \
            "
 
 SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
@@ -79,7 +80,12 @@ SYSTEMD_PACKAGES = "${PN}-adbd"
 SYSTEMD_SERVICE:${PN}-adbd = "android-tools-adbd.service"
 
 CFLAGS:append = " -fPIC -std=gnu2x"
-CXXFLAGS:append = " -fPIC -std=gnu++20 -D_Nonnull= -D_Nullable= -I${STAGING_INCDIR}/boringssl"
+# The bundled fmtlib 10.2.0 validates FMT_STRING() inside a consteval
+# basic_format_string constructor whose parse path evaluates "it - begin()",
+# which current C++ frontends reject as a non-constant subexpression. Define
+# FMT_CONSTEVAL to empty so format-string checking falls back to fmt's runtime
+# path instead of the broken compile-time one.
+CXXFLAGS:append = " -fPIC -std=gnu++20 -D_Nonnull= -D_Nullable= -I${STAGING_INCDIR}/boringssl -DFMT_CONSTEVAL="
 LDFLAGS:append = " -fPIC -L${STAGING_LIBDIR}/android"
 
 
