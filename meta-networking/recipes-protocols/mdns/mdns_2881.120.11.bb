@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
            file://0001-mDNSPosix-Rework-mbedtls-for-compatibility-with-mbed.patch \
            "
 BRANCH = "rel/mDNSResponder-2881"
-SRCREV = "ea3902cfeff86a04b4c684753c80e425edbd1a21"
+SRCREV = "641cdf73ef46e1824895cbc44ad8ac7647da2479"
 
 inherit github-releases manpages systemd update-rc.d
 
