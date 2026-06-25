@@ -13,6 +13,10 @@ SRC_URI = "http://www.fefe.de/${BPN}/${BP}.tar.xz \
           "
 SRC_URI[sha256sum] = "d4330d373ac9581b397bc24a22ad1f7f5d58a7fe36d9d239fe352ceffc5d304b"
 
+# GCC 14+ promotes -Wincompatible-pointer-types to an error. libowfat 0.34
+# passes read()/write() directly where a typeless op pointer is expected.
+CFLAGS += "-Wno-error=incompatible-pointer-types"
+
 EXTRA_OEMAKE = "\
     DIET= \
     CC='${BUILD_CC} ${BUILD_CPPFLAGS} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}' \
