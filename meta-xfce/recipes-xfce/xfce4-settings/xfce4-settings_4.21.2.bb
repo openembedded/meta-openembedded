@@ -12,8 +12,7 @@ inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://0001-build-Do-not-display-full-path-in-generated-headers.patch"
-SRC_URI[sha256sum] = "e57a33d0bb9d63d0ef6f469c2d42cbf66e37d9127cc204de411b7385274e26d0"
+SRC_URI[sha256sum] = "064f72fb5ead25d9bd1724bea803f1017fc2287b32dc55eacf4f6e3d78e2b7e8"
 
 PACKAGECONFIG ??= " \
     notify \
