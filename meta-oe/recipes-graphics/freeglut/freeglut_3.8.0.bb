@@ -36,4 +36,7 @@ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 do_install:append() {
     # Remove buildpaths
     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
+    if [ -f "${D}${libdir}/libfreeglut-gles.so" ]; then
+        ln -sf libfreeglut-gles.so ${D}${libdir}/libglut.so
+    fi
 }
