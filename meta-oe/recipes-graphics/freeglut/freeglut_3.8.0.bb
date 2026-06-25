@@ -26,7 +26,7 @@ PACKAGECONFIG[x11] = ",,virtual/libx11 libice libxmu libglu libxrandr libxext"
 # error by clang16+ and this is not really a problem
 CFLAGS += "-Wno-implicit-function-declaration"
 
-PROVIDES += "mesa-glut"
+PROVIDES += "mesa-glut virtual/freeglut"
 
 DEPENDS = "virtual/libgl libxi"
 
