@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=622e3d340933e3857b7561f37a2f412b"
 
 inherit pypi python_setuptools_build_meta python_pep517 cython pkgconfig
 
-SRC_URI[sha256sum] = "0a59031969c4ba51a5ec1b67f3c5c24f641a6a3f8119a86edad56debcb9084d9"
+SRC_URI[sha256sum] = "88399a9494b88603230bba300f4ba9ad63fece5ed514ca3633d555a0c6a42b24"
 
 DEPENDS = " \
     fuse3 \
