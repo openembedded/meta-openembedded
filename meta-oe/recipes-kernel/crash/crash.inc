@@ -58,7 +58,7 @@ EXTRA_OEMAKE = ' \
                     --target=${TARGET_SYS} \
                     --disable-gdbserver \
                     --disable-gprofng \
-                    --with-sysroot=${STAGING_DIR_TARGET} \
+                    --with-sysroot=/ \
                     ac_cv_type_gregset_t=yes \
                     ac_cv_type_fpregset_t=yes \
                     ac_cv_header_sys_procfs_h=yes" \
@@ -121,10 +121,3 @@ do_install:prepend () {
 RDEPENDS:${PN} += "liblzma"
 
 ARM_INSTRUCTION_SET = "arm"
-
-# WARNING: crash-9.0.2-r0 do_package_qa: QA Issue: File /usr/bin/crash in package crash contains reference to TMPDIR [buildpaths]
-#
-# WARNING: crash-cross-canadian-aarch64-9.0.2-r0 do_package_qa: QA Issue: File /opt/phytec-ampliphy-resy-systemd/6.0.98-devel/sysroots/x86_64-resysdk-linux/usr/bin/aarch64-resy-linux/crash in package crash-cross-canadian-aarch64 contains reference to TMPDIR [buildpaths]
-#
-ERROR_QA:remove = "buildpaths"
-WARN_QA:append = " buildpaths"

@@ -37,7 +37,7 @@ EXTRA_OEMAKE:class-cross-canadian = ' \
                     --target=${TARGET_SYS} \
                     --disable-gdbserver \
                     --disable-gprofng \
-                    --with-sysroot=${STAGING_DIR_TARGET} \
+                    --with-sysroot=/ \
                     ac_cv_type_gregset_t=yes \
                     ac_cv_type_fpregset_t=yes \
                     ac_cv_header_sys_procfs_h=yes" \
