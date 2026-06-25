@@ -6,18 +6,25 @@ BPN = "crash"
 
 require crash.inc
 
-DEPENDS:append = " \
+# cross-canadian.bbclass does not remap DEPENDS to their nativesdk variants, so
+# override (rather than append to) the target DEPENDS pulled in from crash.inc.
+# Leaving the target zlib/readline/ncurses/gmp/mpfr in place would stage a real
+# target usr/lib into the recipe sysroot and clash with the nativesdk toolchain
+# (e.g. clang-glue, which provides usr/lib as a symlink) during
+# do_prepare_recipe_sysroot.
+DEPENDS = " \
     nativesdk-ncurses \
     nativesdk-expat \
     nativesdk-gettext \
     nativesdk-gmp \
     nativesdk-mpfr \
-    nativesdk-readline \
     nativesdk-zlib \
     virtual/nativesdk-cross-cc \
     virtual/nativesdk-cross-binutils \
-    virtual/nativesdk-compilerlibs \
     virtual/nativesdk-libc \
+    coreutils-native \
+    bison-native \
+    flex-native \
 "
 
 RDEPENDS:${PN} = "nativesdk-liblzma"
@@ -43,9 +50,11 @@ EXTRA_OEMAKE:class-cross-canadian = ' \
                     ac_cv_header_sys_procfs_h=yes" \
 '
 
-# Force the SDK cross-compiler during the command execution phase
+# Build with the SDK cross-compiler. Use the toolchain-aware ${CC}/${CXX}
+# rather than a hardcoded ${HOST_PREFIX}gcc so this also works for clang based
+# SDKs (TOOLCHAIN = "clang"), which provide no ...-gcc.
 do_compile() {
-    oe_runmake ${EXTRA_OEMAKE} CC="${HOST_PREFIX}gcc ${HOST_CC_ARCH}" CXX="${HOST_PREFIX}g++ ${HOST_CC_ARCH}" RECIPE_SYSROOT=${RECIPE_SYSROOT}
+    oe_runmake ${EXTRA_OEMAKE} CC="${CC}" CXX="${CXX}" RECIPE_SYSROOT=${RECIPE_SYSROOT}
 }
 
 # To ship crash into your sdk, you should create/update a packagegroup-cross-canadian.bbappend and

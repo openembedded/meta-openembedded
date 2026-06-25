@@ -99,6 +99,13 @@ do_compile:prepend() {
     sed -i -e 's/#define TARGET_CFLAGS_MIPS_ON_X86_64.*/#define TARGET_CFLAGS_MIPS_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
     sed -i 's/&gt;/>/g' ${S}/Makefile
 
+    # The crash gdb merge step re-enters the top-level crash Makefile from gdb's
+    # link rule ("make -C ../.. ... library") without passing the compiler, so
+    # crash's own objects fall back to the Makefile default $(CROSS_COMPILE)gcc.
+    # That only happens to work when a ${cross}-gcc exists; on clang toolchains
+    # (and any gcc-less SDK) it fails. Forward CC/CXX through that recursion.
+    sed -i 's|GDB_FLAGS=-DGDB_16_2 library|GDB_FLAGS=-DGDB_16_2 CC="$(CC)" CXX="$(CXX)" library|' ${S}/gdb-16.2.patch
+
     # 5. Return to the active workspace build root to merge downstream additions
     cd ${B}
     bbnote "Applying the native upstream crash integration patch onto the GDB source tree..."
