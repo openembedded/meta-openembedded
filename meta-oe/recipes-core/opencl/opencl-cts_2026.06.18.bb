@@ -13,7 +13,7 @@ RDEPENDS:${PN} += "python3-core python3-io"
 
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0"
 
-SRCREV = "0979549a997090c0569da4c4e995422b8f73f1fe"
+SRCREV = "8d8f3d272dbd3f0a84156be7890835c4b6deff8e"
 
 EXTRA_OECMAKE:append = " --compile-no-warning-as-error -DSPIRV_INCLUDE_DIR=${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
 
