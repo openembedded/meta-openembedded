@@ -26,5 +26,9 @@ PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STA
 do_install:append() {
 	rm -rf ${D}${libdir}/charset.alias
 }
+PACKAGES =+ "${PN}-zsh-completion"
+
 FILES:${PN} += "${datadir}/icons/hicolor"
+FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
+
 RDEPENDS:${PN} = "perl bash readline"
