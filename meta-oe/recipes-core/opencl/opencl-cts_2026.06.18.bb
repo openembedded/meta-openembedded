@@ -11,11 +11,16 @@ DEPENDS += "opencl-headers virtual/libopencl1 spirv-headers spirv-tools-native"
 RDEPENDS:${PN} += "python3-core python3-io"
 
 
-SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0"
+SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
+           file://0001-test_unary_fn-Remove-unused-variable-j.patch \
+           file://0002-command_buffer_printf-Fix-out-of-bounds-pattern-arra.patch \
+           file://0003-c11_atomics-Remove-Wno-format-flag.patch \
+           file://0001-commonfns-fix-type-mismatches-across-function-templa.patch \
+           file://0002-commonfns-Remove-Wno-format-flag.patch "
 
 SRCREV = "8d8f3d272dbd3f0a84156be7890835c4b6deff8e"
 
-EXTRA_OECMAKE:append = " --compile-no-warning-as-error -DSPIRV_INCLUDE_DIR=${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
+EXTRA_OECMAKE:append = " -DSPIRV_INCLUDE_DIR=${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
 
 PACKAGECONFIG = " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl gles', '', d)} \
@@ -24,8 +29,6 @@ PACKAGECONFIG = " \
 PACKAGECONFIG[opengl] = "-DGL_IS_SUPPORTED=ON,-DGL_IS_SUPPORTED=OFF,virtual/libgl glew virtual/freeglut"
 PACKAGECONFIG[gles] = "-DGLES_IS_SUPPORTED=ON,-DGLES_IS_SUPPORTED=OFF,virtual/egl virtual/libgles2"
 PACKAGECONFIG[vulkan] = "-DVULKAN_IS_SUPPORTED=ON,-DVULKAN_IS_SUPPORTED=OFF,vulkan-headers glslang-native"
-
-SECURITY_STRINGFORMAT:remove = "-Werror=format-security"
 
 do_install() {
         install -d ${D}${bindir}/opencl_test_conformance
