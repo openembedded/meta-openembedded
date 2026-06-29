@@ -10,12 +10,12 @@ DEPENDS = "python3-pcpp-native"
 PV .= "+git"
 
 SRC_URI = "\
-    git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.4;name=demo \
-    git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.4;tag=v9.4.0;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+    git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.5;name=demo \
+    git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.5;tag=v9.5.0;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
 "
 
-SRCREV_demo = "71050624acd8a52ab7d365d0d12acf9bf5fe41db"
-SRCREV_lvgl = "c016f72d4c125098287be5e83c0f1abed4706ee5"
+SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"
+SRCREV_lvgl = "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
 SRCREV_FORMAT = "demo_lvgl"
 
 inherit cmake pkgconfig
