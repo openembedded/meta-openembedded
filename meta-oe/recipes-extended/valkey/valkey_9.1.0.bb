@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
 DEPENDS = "readline lua ncurses"
 
-SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=${PV} \
+SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version(d.getVar('PV'), 2)};protocol=https;tag=${PV} \
            file://valkey.conf \
            file://init-valkey-server \
            file://valkey.service \
@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=$
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            "
-SRCREV = "1cbee84ba69b54c3510597965fc4320ce716a6f4"
+SRCREV = "c9e8005e9d0ec817e26c7db318861cb821409249"
 
 RPROVIDES:${PN} = "virtual-redis"
 
