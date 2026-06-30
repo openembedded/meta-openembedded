@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/elementpath"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c04ab6ce886cc843af8941bb199406ba"
 
-SRC_URI[sha256sum] = "43d67a38700153eb45349c6e14a4d4b3a06e390c31df06539f730a96baf9a7fc"
+SRC_URI[sha256sum] = "35e98cc2e26332305a49b32eaaebfb7289d1963c88d3989ff5ccb02c46809820"
 
 PYPI_PACKAGE = "elementpath"
 
