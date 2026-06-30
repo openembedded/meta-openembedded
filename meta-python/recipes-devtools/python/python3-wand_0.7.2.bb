@@ -4,9 +4,9 @@ LICENSE = "MIT"
 SECTION = "devel/python"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2a2b05e6331064556e971cfa0efca0bf"
 
-SRC_URI[sha256sum] = "2325eae60fb21b88e293d5ec8dcdedf2644a0c00eb75024c9b47975e1e902e80"
+SRC_URI[sha256sum] = "0387fd08848d00cadd1d885fcb19a17dd4250df2029e5338b6b668b7fed64b5b"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "wand"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
