@@ -5,8 +5,8 @@ SECTION = "net"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-SRCREV = "b315d06ddb0dad16a52fe91e5831b4030ce37010"
-SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https"
+SRCREV = "b5cde07e76f994f6f93701462c90e25bb774ab74"
+SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https;tag=${PV}"
 
 
 inherit autotools pkgconfig
