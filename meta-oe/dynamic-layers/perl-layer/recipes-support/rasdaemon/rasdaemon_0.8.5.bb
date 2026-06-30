@@ -3,11 +3,11 @@ HOMEPAGE = "https://github.com/mchehab/rasdaemon"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
-SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https;tag=v${PV} \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "5a1efb8f324498df8cbaaa5adff0e9db96f648a9"
+SRCREV = "769593be915b4f00a9a7d56569df99bc0cff249a"
 
 DEPENDS = "libtraceevent pciutils"
 RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
