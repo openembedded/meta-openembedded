@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32431d1b650010945da4e078011c8fa"
 
 PYPI_PACKAGE = "fastnumbers"
 
-SRC_URI[sha256sum] = "183fa021cdc052edaeede5c23e3086461deb7562b567614edf71b29515f5fa4b"
+SRC_URI[sha256sum] = "07266a2fca9e08eeb5a6c70be4c8db3637db9b930ea5198facbbb9b0b31d4d03"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
