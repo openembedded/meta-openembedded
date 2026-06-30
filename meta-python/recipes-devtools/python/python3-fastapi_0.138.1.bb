@@ -3,7 +3,7 @@ HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 
-SRC_URI[sha256sum] = "d445a4877636ad191e7053e08c9bf98cb921a6756776848400bb773d1740c061"
+SRC_URI[sha256sum] = "96e3702dce09ee0dce48856135620d3d865ca684a79fe7513fd7b13a12f82862"
 
 SRC_URI += "file://run-ptest"
 
