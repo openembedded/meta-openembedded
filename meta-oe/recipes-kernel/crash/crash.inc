@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=http
            file://gdb_build_jobs_and_not_write_crash_target.patch \
            file://0001-symbol-fix-S-cannot-work-with-kaslr-detection.patch \
            file://0001-Use-CC-env-var-to-get-compiler-version.patch \
+           file://0001-Makefile-support-cross-compiling-for-32-bit-arm.patch \
           "
 # 0001-Use-CC-env-var-to-get-compiler-version.patch:
 # to get the right compiler info into ./crash --buildinfo
