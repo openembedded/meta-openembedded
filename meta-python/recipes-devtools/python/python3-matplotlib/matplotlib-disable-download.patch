@@ -8,8 +8,11 @@ Update patch to fit on 3.7.2.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 
+Update to look for downloads in downloads/ directoory instead of build.
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+
 diff --git a/setup.py b/setup.py
-index 0bea13fa6f..f39d8fc871 100644
+index 0bea13f..f39d8fc 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -327,13 +327,7 @@ setup(  # Finally, pass this all along to setuptools to do the heavy lifting.
@@ -28,7 +31,7 @@ index 0bea13fa6f..f39d8fc871 100644
          ':python_version<"3.10"': [
              "importlib-resources>=3.2.0",
 diff --git a/setupext.py b/setupext.py
-index a898d642d6..474172ff8f 100644
+index a898d64..9a4bb85 100644
 --- a/setupext.py
 +++ b/setupext.py
 @@ -66,40 +66,7 @@ def get_from_cache_or_download(url, sha):
@@ -73,3 +76,30 @@ index a898d642d6..474172ff8f 100644
  
  
  def get_and_extract_tarball(urls, sha, dirname):
+@@ -117,7 +84,7 @@ def get_and_extract_tarball(urls, sha, dirname):
+     dirname : path-like
+         Directory where the tarball is extracted.
+     """
+-    toplevel = Path("build", dirname)
++    toplevel = Path("downloads", dirname)
+     if not toplevel.exists():  # Download it or load it from cache.
+         try:
+             import certifi  # noqa
+@@ -677,7 +644,7 @@ class FreeType(SetupPackage):
+             else:
+                 msbuild_platform = 'Win32'
+             base_path = Path(
+-                f"build/freetype-{LOCAL_FREETYPE_VERSION}/builds/windows"
++                f"downloads/freetype-{LOCAL_FREETYPE_VERSION}/builds/windows"
+             )
+             vc = 'vc2010'
+             sln_path = base_path / vc / "freetype.sln"
+@@ -775,7 +742,7 @@ class Qhull(SetupPackage):
+         shutil.copyfile(toplevel / "COPYING.txt", "LICENSE/LICENSE_QHULL")
+ 
+         for ext in self._extensions_to_update:
+-            qhull_path = Path(f'build/qhull-{LOCAL_QHULL_VERSION}/src')
++            qhull_path = Path(f'downloads/qhull-{LOCAL_QHULL_VERSION}/src')
+             ext.include_dirs.insert(0, str(qhull_path))
+             ext.sources.extend(
+                 map(str, sorted(qhull_path.glob('libqhull_r/*.c'))))
