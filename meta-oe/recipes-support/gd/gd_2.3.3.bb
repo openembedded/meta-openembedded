@@ -23,7 +23,7 @@ SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
 
 inherit autotools binconfig gettext pkgconfig
 
-PACKAGECONFIG ?= "jpeg freetype"
+PACKAGECONFIG ?= "jpeg png zlib tiff freetype"
 
 PACKAGECONFIG[avif] = "--with-avif,--without-avif"
 PACKAGECONFIG[fontconfig] = "--with-fontconfig,--without-fontconfig"
