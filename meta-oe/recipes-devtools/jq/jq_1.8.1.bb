@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
            file://CVE-2026-41256.patch \
            file://CVE-2026-41257.patch \
            file://CVE-2026-43894.patch \
+           file://CVE-2026-43896.patch \
            "
 
 inherit autotools ptest
