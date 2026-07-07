@@ -14,8 +14,27 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
 
 SRC_URI[sha256sum] = "5e3cf357939da8d4ceefe3c7f305afcf9b47cba66cfd95e7768ca43b38445e14"
 
+SRC_URI += " file://run-ptest"
+
 DEPENDS = "curl"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_setuptools_build_meta ptest
+
+RDEPENDS:${PN}-ptest += " \
+    python3-pytest \
+    python3-core \
+    python3-flask \
+    python3-numpy \
+    python3-flaky \
+    python3-setuptools \
+    python3-unittest \
+    python3-unittest-automake-output \
+"
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/tests
+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+    cp -f ${S}/setup.py ${D}${PTEST_PATH}
+}
 
 BBCLASSEXTEND  += "native nativesdk"
