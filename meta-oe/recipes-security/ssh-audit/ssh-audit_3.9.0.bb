@@ -2,9 +2,9 @@ SUMMARY = "An SSH server and client configuration auditing tool"
 HOMEPAGE = "https://github.com/jtesta/ssh-audit"
 BUGTRACKER = "https://github.com/jtesta/ssh-audit/issues"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8745b0cfd015df0e3199253390de8935"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2638d424730ffece235019c6a623c6fa"
 
-SRC_URI[sha256sum] = "b76e36ac9844f45d64986c9f293a4b46766a10412dc29fb43bd52d0f6661a5b0"
+SRC_URI[sha256sum] = "f1225d0364b3cb61c7dfb1f5065a6958dbb814d98b2c1dd2a779ba2cdef41f61"
 
 PYPI_PACKAGE = "ssh_audit"
 
