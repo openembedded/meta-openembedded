@@ -8,7 +8,7 @@ inherit gnomebase
 # All the recipe does is stage python and shell script, some autotools files; nothing is compiled.
 inherit allarch
 
-SRC_URI[archive.sha256sum] = "494abfce781418259b1e9d8888c73af4de4b6f3be36cc75d9baa8baa0f2a7a39"
+SRC_URI[archive.sha256sum] = "b189ee636e839d12c00dabefae099fd488ab2358dec24d264761c011950b02a9"
 
 BBCLASSEXTEND = "native nativesdk"
 
