@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/bumble"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7a775f1b11285b6abedd76748d176125"
 
-SRC_URI[sha256sum] = "1064d45e8370fc2b1bb684c0efd59534407ea16c3a2811985ed50a886fa3b674"
+SRC_URI[sha256sum] = "43bd0ba5830d74ded82a369b535d2d98a8b2a41945540b1fe874bb14259dc5a2"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
