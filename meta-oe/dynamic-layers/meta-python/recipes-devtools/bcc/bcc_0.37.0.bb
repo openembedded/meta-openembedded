@@ -22,16 +22,11 @@ RDEPENDS:${PN}-ptest = "kernel-devsrc packagegroup-core-buildessential cmake bas
 SRC_URI = "gitsm://github.com/iovisor/bcc;branch=master;protocol=https;lfs=0;tag=v${PV} \
            file://0001-CMakeLists.txt-override-the-PY_CMD_ESCAPED.patch \
            file://0001-Vendor-just-enough-extra-headers-to-allow-libbpf-to-.patch \
-           file://0001-Add-ARM64-syscall-prefix-detection-in-C-API.patch \
-           file://0002-Add-riscv-syscall-prefix-detection-in-C-API.patch \
-           file://0003-folly-tracing-Remove-x86-specific-naming-from-tracin.patch \
-           file://0004-folly-tracing-Add-ARM-and-AArch64-support-to-static-.patch \
-           file://0001-Fix-build-with-LLVM-22.patch \
            file://run-ptest \
            file://ptest_wrapper.sh \
            "
 
-SRCREV = "b9f1b2ab025e3ac95b6aaa1cb20bf222a7b8804e"
+SRCREV = "306a2819f73d9525430693e6399d58caf6e12b3b"
 
 PACKAGECONFIG ??= "examples"
 PACKAGECONFIG:remove:libc-musl = "examples"
