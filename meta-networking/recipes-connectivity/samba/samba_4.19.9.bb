@@ -26,6 +26,24 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
            file://CVE-2026-3012_p1.patch \
            file://CVE-2026-3012_p2.patch \
+           file://CVE-2026-4408_p1.patch \
+           file://CVE-2026-4408_p2.patch \
+           file://CVE-2026-4408_p3.patch \
+           file://CVE-2026-4408_p4.patch \
+           file://CVE-2026-4408_p5.patch \
+           file://CVE-2026-4408_p6.patch \
+           file://CVE-2026-4408_p7.patch \
+           file://CVE-2026-4408_p8.patch \
+           file://CVE-2026-4408_p9.patch \
+           file://CVE-2026-4408_p10.patch \
+           file://CVE-2026-4408_p11.patch \
+           file://CVE-2026-4408_p12.patch \
+           file://CVE-2026-4408_p13.patch \
+           file://CVE-2026-4408_p14.patch \
+           file://CVE-2026-4408_p15.patch \
+           file://CVE-2026-4408_p16.patch \
+           file://CVE-2026-4408_p17.patch \
+           file://CVE-2026-4408_p18.patch \
            "
 
 SRC_URI:append:libc-musl = " \
