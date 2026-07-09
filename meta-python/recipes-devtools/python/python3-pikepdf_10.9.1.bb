@@ -9,6 +9,11 @@ SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
 
 inherit pypi python_setuptools_build_meta
 
+# pikepdf uses the C++20 language but no C++20 named modules. CMake's module
+# dependency scanning (clang-scan-deps) does not work in the cross environment,
+# so turn it off.
+export CMAKE_ARGS = "-DCMAKE_CXX_SCAN_FOR_MODULES=OFF"
+
 PYPI_PACKAGE = "pikepdf"
 
 CVE_PRODUCT = "pikepdf"
@@ -16,6 +21,8 @@ CVE_PRODUCT = "pikepdf"
 DEPENDS += " \
 	python3-pybind11-native \
         python3-nanobind-native \
+	python3-scikit-build-core-native \
+	ninja-native \
 	qpdf \
 "
 
