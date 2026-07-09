@@ -13,25 +13,30 @@ SRC_URI = " \
 	git://github.com/Sonicadvance1/cpp-optparse.git;name=cpp-optparse;subdir=${S}/Source/Common/cpp-optparse;protocol=https;nobranch=1 \
 	git://github.com/FEX-Emu/drm-headers.git;name=fex-drm;subdir=${S}/External/drm-headers;protocol=https;nobranch=1 \
 	git://github.com/Cyan4973/xxHash.git;name=xxhash;subdir=${S}/External/xxhash;protocol=https;nobranch=1 \
-	git://github.com/FEX-Emu/jemalloc.git;name=jemalloc;subdir=${S}/External/jemalloc;protocol=https;nobranch=1 \
+	git://github.com/fmtlib/fmt.git;name=fmt;subdir=${S}/External/fmt;protocol=https;nobranch=1 \
 	git://github.com/FEX-Emu/jemalloc.git;name=jemalloc-glibc;subdir=${S}/External/jemalloc_glibc;protocol=https;nobranch=1 \
 	git://github.com/ericniebler/range-v3.git;name=range-v3;subdir=${S}/External/range-v3;protocol=https;nobranch=1 \
-	git://github.com/FEX-Emu/robin-map.git;name=robin-map;subdir=${S}/External/robin-map;protocol=https;nobranch=1 \
+	git://github.com/FEX-Emu/rpmalloc.git;name=rpmalloc;subdir=${S}/External/rpmalloc;protocol=https;nobranch=1 \
+	git://github.com/martinus/unordered_dense.git;name=unordered-dense;subdir=${S}/External/unordered_dense;protocol=https;nobranch=1 \
+	file://0001-LinkerGC-Do-not-strip-binaries-at-link-time.patch \
 "
 
 SRCREV_FORMAT = "fex"
-SRCREV_fex = "1188c90c10569ca800d7a99c11e59cfeab5e2cc9"
+SRCREV_fex = "1cc4b93e7a71c883ec021b71359f136394dc1f3c"
 SRCREV_cpp-optparse = "9f94388a339fcbb0bc95c17768eb786c85988f6e"
 SRCREV_fex-drm = "3e49836995c1dcb3df709440ad2f270b569c6a5f"
 SRCREV_xxhash = "e626a72bc2321cd320e953a0ccf1584cad60f363"
-SRCREV_jemalloc = "97d986993dc735a2022856e7e9fdfa1180e8527a"
+SRCREV_fmt = "407c905e45ad75fc29bf0f9bb7c5c2fd3475976f"
 SRCREV_jemalloc-glibc = "8436195ad5e1bc347d9b39743af3d29abee59f06"
-SRCREV_robin-map = "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
+SRCREV_rpmalloc = "1d85c246cd827ead6865f4f880d4fef53f2b1864"
+SRCREV_unordered-dense = "3234af2c03549bc85656bfd3a86993bf1cd8aef1"
 SRCREV_range-v3 = "ca1388fb9da8e69314dda222dc7b139ca84e092f"
 
+# fmt is built from the bundled External/fmt submodule rather than the system
+# copy: FEX-2607 formats std::byte spans via fmt::join, which its pinned fmt
+# 12.1.0 supports but oe-core's newer fmt (12.2.0) rejects.
 DEPENDS = " \
     catch2 \
-    fmt \
     libdrm  \
     nasm-native \
     vulkan-headers \
@@ -42,6 +47,7 @@ PACKAGECONFIG[qt] = "-DBUILD_FEXCONFIG=ON,-DBUILD_FEXCONFIG=OFF,qtbase qttools-n
 
 EXTRA_OECMAKE += " \
 	-DBUILD_TESTING=OFF \
+	-DENABLE_CCACHE=OFF \
 	-DENABLE_VIXL_DISASSEMBLER=OFF \
 	-DENABLE_VIXL_SIMULATOR=OFF \
 	-DDATA_DIRECTORY=${datadir} \
