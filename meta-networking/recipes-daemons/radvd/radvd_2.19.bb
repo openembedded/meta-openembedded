@@ -21,6 +21,8 @@ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
            file://radvd.default \
            file://radvd.conf \
            file://0001-Reverts-the-include.h-change-in-46883f8a1a02fe42040d.patch \
+           file://CVE-2026-48715_dep.patch \
+           file://CVE-2026-48715.patch \
            "
 SRC_URI[sha256sum] = "c36470706fec3a9e6bed394ffea08acaff5dac647848d26b96bb9b9c65d58da0"
 
