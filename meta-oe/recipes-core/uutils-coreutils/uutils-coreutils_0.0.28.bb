@@ -18,6 +18,8 @@ COMPATIBLE_HOST:libc-musl = "null"
 SRCREV = "1d9e1626377cbaea3b21842a3525a62ba60f905f"
 S = "${WORKDIR}/git"
 
+CFLAGS:append = " -fdebug-prefix-map=${CARGO_HOME}=${TARGET_DBGSRC_DIR}/cargo_home"
+
 require ${BPN}-crates.inc
 
 PROVIDES = "coreutils"
