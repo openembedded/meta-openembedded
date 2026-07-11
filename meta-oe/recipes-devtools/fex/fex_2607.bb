@@ -34,7 +34,10 @@ SRCREV_range-v3 = "ca1388fb9da8e69314dda222dc7b139ca84e092f"
 
 # fmt is built from the bundled External/fmt submodule rather than the system
 # copy: FEX-2607 formats std::byte spans via fmt::join, which its pinned fmt
-# 12.1.0 supports but oe-core's newer fmt (12.2.0) rejects.
+# 12.1.0 supports but oe-core's newer fmt (12.2.0) rejects. FEX only falls
+# back to the bundled copy when find_package(fmt) fails, so
+# CMAKE_DISABLE_FIND_PACKAGE_fmt is set below to stop it from picking up
+# fmt-native (a transitive native dependency) from the native sysroot.
 DEPENDS = " \
     catch2 \
     libdrm  \
@@ -50,6 +53,7 @@ EXTRA_OECMAKE += " \
 	-DENABLE_CCACHE=OFF \
 	-DENABLE_VIXL_DISASSEMBLER=OFF \
 	-DENABLE_VIXL_SIMULATOR=OFF \
+	-DCMAKE_DISABLE_FIND_PACKAGE_fmt=ON \
 	-DDATA_DIRECTORY=${datadir} \
 	-DQT_HOST_PATH:PATH=${RECIPE_SYSROOT_NATIVE}${prefix_native} \
 "
