@@ -19,15 +19,17 @@ DEPENDS = " \
 "
 
 XFCEBASEBUILDCLASS = "meson"
+XFCE_COMPRESS_TYPE = "xz"
 
 inherit xfce features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "1d9bd76015fb6e9aca05e73cd998c7c66ed4fc8c10b626e08fc2eb7c39df3f7b"
+SRC_URI[sha256sum] = "10a463b9bc474159622d861c1bf7f098e7848af15a453ac0275a3b92a8565c4e"
 
 PACKAGECONFIG ??= "notify"
 PACKAGECONFIG[notify] = "-Dnotifications=enabled,-Dnotifications=disabled,libnotify"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,"
+PACKAGECONFIG[video-backdrop] = "-Dvideo-backdrop=true,-Dvideo-backdrop=false,gstreamer1.0"
 
 FILES:${PN} += "${datadir}/backgrounds"
