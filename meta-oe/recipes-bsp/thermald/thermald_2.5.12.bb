@@ -12,13 +12,9 @@ DEPENDS += "autoconf-archive-native"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ea8831610e926e2e469075b52bf08848"
 
-SRC_URI = "git://github.com/intel/thermal_daemon/;branch=master;protocol=https \
-           file://0001-Refactor-Intel-specific-logic-into-separate-files.patch \
-           file://0002-Invoke-parser_init-before-platform_match.patch \
-           file://0003-Add-ARM-backend-and-enable-ARM-platform-detection.patch \
-           "
+SRC_URI = "git://github.com/intel/thermal_daemon/;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "5269afcf3e021e4e1b672b4640a0358f4ae5821b"
+SRCREV = "9996a1a1cdd01d32cd411459368a177f463d0047"
 
 inherit pkgconfig autotools systemd gtk-doc
 
