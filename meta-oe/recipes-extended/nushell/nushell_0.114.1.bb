@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "crate://crates.io/nu/${PV};name=nu"
-SRC_URI[nu.sha256sum] = "d976a48ba1dec6203834990d18a76050f05522160a375e53ef6620a864f69471"
+SRC_URI[nu.sha256sum] = "a840c40450e4ab0b95c81aa3ef965f31a5da47f6e6823f00da5edfe9fcdf05c9"
 
 S = "${CARGO_VENDORING_DIRECTORY}/nu-${PV}"
 
