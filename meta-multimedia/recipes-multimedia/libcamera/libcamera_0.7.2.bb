@@ -13,11 +13,11 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "183e37362f57ff3ce7493abf0bc6f1b57b931f55"
+SRCREV = "191e202178f02430b5942397c70d215cdd2056fa"
 
 PE = "1"
 
-DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
+DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml libyuv"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
 
 PACKAGES =+ "${PN}-compliance ${PN}-gst ${PN}-pycamera"
@@ -38,7 +38,6 @@ PACKAGECONFIG[raspberrypi] = ",,libpisp"
 PACKAGECONFIG[sdl] = "-Dcam-output-sdl2=enabled,-Dcam-output-sdl2=disabled,virtual/libsdl2"
 PACKAGECONFIG[unwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
 PACKAGECONFIG[vimc] = ",,"
-PACKAGECONFIG[virtual] = ",,libyuv libjpeg-turbo"
 
 ARM_PIPELINES = "imx8-isi,mali-c55,simple,uvcvideo"
 # Raspberry Pi requires the meta-raspberrypi layer
@@ -46,7 +45,6 @@ ARM_PIPELINES = "imx8-isi,mali-c55,simple,uvcvideo"
 # which lists the supported values by arch.
 ARM_PIPELINES .= "${@bb.utils.contains('PACKAGECONFIG', 'raspberrypi', ',rpi/pisp,rpi/vc4', '', d)}"
 ARM_PIPELINES .= "${@bb.utils.contains('PACKAGECONFIG', 'vimc', ',vimc', '', d)}"
-ARM_PIPELINES .= "${@bb.utils.contains('PACKAGECONFIG', 'virtual', ',virtual', '', d)}"
 
 LIBCAMERA_PIPELINES ??= "auto"
 LIBCAMERA_PIPELINES:arm ??= "${ARM_PIPELINES}"
