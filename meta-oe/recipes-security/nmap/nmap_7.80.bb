@@ -13,6 +13,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
            file://0001-Make-ndiff-support-python3.patch \
            file://0001-configure.ac-make-ndiff-depend-on-python3.patch \
            file://nmap-rename-enum-PCAP_SOCKET.patch \
+           file://CVE-2026-58058.patch \
            "
 
 SRC_URI[md5sum] = "d37b75b06d1d40f27b76d60db420a1f5"
