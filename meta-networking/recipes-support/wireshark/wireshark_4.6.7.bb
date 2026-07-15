@@ -31,7 +31,7 @@ SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-bu
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
 
-SRC_URI[sha256sum] = "27e7ff780cd68a7466082be82ca26c06a002e74a71646ef3a6e4683e444c1a86"
+SRC_URI[sha256sum] = "242929b8c10ba89a8d3bcad7ff2eba8effb648d30f48e270d2e5e6ff94d88613"
 
 PE = "1"
 
