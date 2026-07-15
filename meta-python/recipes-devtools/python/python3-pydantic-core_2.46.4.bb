@@ -116,7 +116,7 @@ SRC_URI += "crate://crates.io/ahash/0.8.12 \
            crate://crates.io/zerovec/0.10.4 \
            crate://crates.io/zerovec-derive/0.10.3 \
            "
-SRC_URI[sha256sum] = "08daa51ea16ad373ffd5e7606252cc32f07bc72b28284b6bc9c6df804816476e"
+SRC_URI[sha256sum] = "62f875393d7f270851f20523dd2e29f082bcc82292d66db2b64ea71f64b6e1c1"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
