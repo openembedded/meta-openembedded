@@ -5,10 +5,10 @@ HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/xlsatoms/"
 DESCRIPTION = "Xlsatoms lists the interned atoms defined on an X11 server"
 SECTION = "x11/app"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2b08d9e2e718ac83e6fe2b974d4b5fd8"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b5c50f6b3acc044e9a0cca8b74c8eb93"
 
 DEPENDS += "libxmu"
 BBCLASSEXTEND = "native"
 
 SRC_URI_EXT = "xz"
-SRC_URI[sha256sum] = "f4bfa15f56c066d326a5d5b292646708f25b9247506840b9047cd2687dcc71b7"
+SRC_URI[sha256sum] = "9ac9400328fbeffe15c9d94a90dedb90d09dcaa9d51482efabc55b33a736e317"
