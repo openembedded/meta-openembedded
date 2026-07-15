@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
 DEPENDS = "yyjson"
 
 SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "0e90f3a7d4ac5a7857a968a6f52ea1205be5f404"
+SRCREV = "08698098579bb8b043b0a343159b8018f5cea4fc"
 
 inherit cmake pkgconfig
 
