@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
 
 inherit python_hatchling ptest-python-pytest
 
-SRCREV = "bd2d0dd0137dfa1a8fdff2529b9dfb1547980150"
+SRCREV = "cf67d4b3193c3fe43ede18612ed62785eee11382"
 PV .= "+git"
-SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=v2.12-fixes"
+SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=v2.13-fixes"
 DEPENDS += "python3-hatch-fancy-pypi-readme-native"
 
 CVE_PRODUCT = "pydantic:pydantic"
