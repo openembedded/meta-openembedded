@@ -8,6 +8,6 @@ SRC_URI += " \
 	file://blst-0001-Support-64-bit-limbs-on-no-asm-platforms.patch \
 "
 
-SRC_URI[sha256sum] = "a0c61c5fd573af0267bcb435ef0f499911289ceb05e863480779ea284a3bb928"
+SRC_URI[sha256sum] = "d7bef6b425dca6995457fc59fc5b30211d9b28cbbeee0e7a7bef1372e13f29ca"
 
 inherit pypi setuptools3
