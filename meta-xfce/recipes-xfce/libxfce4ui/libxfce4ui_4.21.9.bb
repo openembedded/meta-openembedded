@@ -20,7 +20,7 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','openg
 
 # TODO: Check if 0001-... can go
 SRC_URI += " file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
-SRC_URI[sha256sum] = "e6caafc6fe5e07765e22dd849a19b21e5aa44f51c66fa1d7db74b94330bd457b"
+SRC_URI[sha256sum] = "d2072e0c3c27e39e1c38050c660f34806e34e8b1abba660684db586f8c4f7142"
 
 EXTRA_OEMESON = "-Dvala=disabled -Dvendor-info=${DISTRO}"
 
