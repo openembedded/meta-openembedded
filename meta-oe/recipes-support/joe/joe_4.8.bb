@@ -4,7 +4,10 @@ HOMEPAGE = "http://joe-editor.sourceforge.net/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz"
+SRC_URI = " \
+    ${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz \
+    file://0001-Fix-assign-to-stdin-use-freopen-instead-issue.patch \
+"
 
 PACKAGECONFIG ??= "curses"
 PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-terminfo"
