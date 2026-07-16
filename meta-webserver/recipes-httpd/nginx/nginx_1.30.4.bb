@@ -2,6 +2,6 @@ require nginx.inc
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
 
-SRC_URI[sha256sum] = "e5823dc6f45610993def93ebf6cfce68264af4958c77e874b7d20f3709001b8f"
+SRC_URI[sha256sum] = "4261dc90e9e47c1c4041276e9aaa3d48ebe2e664f728e14fa95ae6c67d57a08b"
 
 inherit upstream-version-is-even
