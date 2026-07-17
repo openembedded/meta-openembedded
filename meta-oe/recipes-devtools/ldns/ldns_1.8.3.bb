@@ -3,7 +3,11 @@ HOMEPAGE = "https://nlnetlabs.nl/ldns"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34330f15b2b4abbbaaa7623f79a6a019"
 
-SRC_URI = "https://www.nlnetlabs.nl/downloads/ldns/ldns-${PV}.tar.gz"
+SRC_URI = "https://www.nlnetlabs.nl/downloads/ldns/ldns-${PV}.tar.gz \
+           file://CVE-2026-10846_p1.patch \
+           file://CVE-2026-10846_p2.patch \
+           file://CVE-2026-10846_p3.patch \
+           "
 SRC_URI[sha256sum] = "c3f72dd1036b2907e3a56e6acf9dfb2e551256b3c1bbd9787942deeeb70e7860"
 
 DEPENDS = "openssl"
