@@ -2,12 +2,12 @@ SUMMARY = "Library to instrument executable formats"
 DESCRIPTION = "LIEF: Library to Instrument Executable Formats"
 HOMEPAGE = "https://github.com/lief-project/LIEF"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9ab5db472ff936b441055522f5000547"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c43f89548372352eb04f30367ec7a0f3"
 SECTION = "libs"
 
-SRCREV = "03aca30b53db2f336b36f90843061bb3f840ff5a"
+SRCREV = "d05b3499b6934137e917c009a4df0a9dc8cb11c5"
 SRC_URI = " \
-    git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.17.x;tag=${PV} \
+    git://github.com/lief-project/LIEF.git;protocol=https;branch=main;tag=${PV} \
     file://0001-build-requirements.txt-Allow-newer-versions.patch \
     file://0002-api-python-config-default.toml-Debug.patch \
 "
