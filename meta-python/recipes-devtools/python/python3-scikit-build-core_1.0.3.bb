@@ -12,7 +12,8 @@ inherit pypi python_hatchling
 SRC_URI += " \
 	file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch \
 	file://0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch \
+	file://0001-src-scikit_build_core-Don-t-use-module.patch \
 "
-SRC_URI[sha256sum] = "562e0bbc9de1a354c87825ccf732080268d6582a0200f648e8c4a2dcb1e3736d"
+SRC_URI[sha256sum] = "a4d7a05978ee37975c37743510c8991e2debce7ef83afb0a07c0c576fd4f16e8"
 
 BBCLASSEXTEND = "native nativesdk"
