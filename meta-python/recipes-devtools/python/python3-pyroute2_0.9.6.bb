@@ -1,5 +1,5 @@
 SUMMARY = "A pure Python netlink and Linux network configuration library"
-LICENSE = "GPL-2.0-or-later | Apache-2.0"
+LICENSE = "Apache-2.0 OR GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"

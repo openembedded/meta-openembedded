@@ -1,7 +1,7 @@
 DESCRIPTION = "Font Awesome icons packaged for setuptools (easy_install) / pip."
 HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Font-Awesome"
 SECTION = "devel/python"
-LICENSE = "OFL-1.0 & MIT & CC-BY-4.0"
+LICENSE = "CC-BY-4.0 AND MIT AND OFL-1.0"
 LIC_FILES_CHKSUM = "file://xstatic/pkg/font_awesome/data/LICENSE.txt;md5=57f9201afe70f877988912a7b233de47"
 
 PYPI_PACKAGE = "xstatic_font_awesome"

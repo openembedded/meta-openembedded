@@ -1,7 +1,7 @@
 DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
 SECTION = "network"
 HOMEPAGE = "https://transmissionbt.com/"
-LICENSE = "MIT & GPL-2.0-only"
+LICENSE = "GPL-2.0-only AND MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d54f298b276b8cc5f20168e43a0e8103"
 
 DEPENDS = "curl libevent libpsl gnutls openssl libtool intltool-native glib-2.0-native"

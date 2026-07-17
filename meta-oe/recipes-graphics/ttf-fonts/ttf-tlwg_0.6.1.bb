@@ -2,7 +2,7 @@ require ttf.inc
 
 SUMMARY = "Thai Linux Working Group Fonts"
 HOMEPAGE = "http://linux.thai.net/projects/fonts-tlwg"
-LICENSE = "GPL-2.0-only & TLWG"
+LICENSE = "GPL-2.0-only AND LicenseRef-TLWG"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/fonts-tlwg-${PV}/COPYING;md5=3d20cd7eadf4afd5460c0adb32e387fd"
 
 SRC_URI = "http://linux.thai.net/pub/ThaiLinux/software/fonts-tlwg/fonts-tlwg-${PV}.tar.xz;name=source \

@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=http
 SRCREV = "31af04ec84378724cb6256814d4ffde359a7123b"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
-LICENSE = "BSD-2-Clause | GPL-2.0-only"
+LICENSE = "BSD-2-Clause OR GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
 		   file://COPYING.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 

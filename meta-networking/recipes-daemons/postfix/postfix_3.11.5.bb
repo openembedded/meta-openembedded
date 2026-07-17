@@ -11,7 +11,7 @@ DEPENDS = "db icu libpcre2 libnsl2 m4-native openssl postfix-native \
     ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
 "
 
-LICENSE = "IPL-1.0 | EPL-2.0"
+LICENSE = "EPL-2.0 OR IPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b181651ad99a7dc4cc8c4ce2f491ed1a"
 
 SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \

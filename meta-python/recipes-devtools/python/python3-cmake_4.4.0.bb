@@ -1,5 +1,5 @@
 SUMMARY = "CMake is an open-source, cross-platform family of tools designed to build, test and package software"
-LICENSE = "BSD-3-Clause & Apache-2.0"
+LICENSE = "Apache-2.0 AND BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE_BSD_3;md5=9134cb61aebbdd79dd826ccb9ae6afcd \
 	file://LICENSE_Apache_20;md5=19cbd64715b51267a47bf3750cc6a8a5 \

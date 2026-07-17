@@ -1,7 +1,7 @@
 SUMMARY = "Library for reading mod-like audio files"
 HOMEPAGE = "http://modplug-xmms.sf.net"
 
-LICENSE = "PD"
+LICENSE = "LicenseRef-PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9182faa1f7c316f7b97d404bcbe3685"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz \

@@ -8,7 +8,7 @@ SECTION = "libs"
 
 HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.06/source/README"
 
-LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d31370658947ae050eef27aca9"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/K/KE/KENTNL/HTML-Tree-${PV}.tar.gz \

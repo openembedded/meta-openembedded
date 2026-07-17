@@ -4,7 +4,7 @@ HOMEPAGE    = "https://pipewire.org/"
 BUGTRACKER  = "https://gitlab.freedesktop.org/pipewire/pipewire/issues"
 SECTION     = "multimedia"
 
-LICENSE = "MIT & LGPL-2.1-or-later & GPL-2.0-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.1-or-later AND MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=2158739e172e58dc9ab1bdd2d6ec9c72 \
     file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a \

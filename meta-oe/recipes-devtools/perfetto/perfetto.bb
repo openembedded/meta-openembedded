@@ -1,4 +1,4 @@
-LICENSE = "Apache-2.0 & BSD-3-Clause & MIT & Zlib"
+LICENSE = "Apache-2.0 AND BSD-3-Clause AND MIT AND Zlib"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c0c9924c5c63b4834b8b1959816c8e3b \
                     file://buildtools/libcxx/LICENSE.TXT;md5=55d89dd7eec8d3b4204b680e27da3953 \

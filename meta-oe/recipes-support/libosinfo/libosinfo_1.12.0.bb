@@ -1,7 +1,7 @@
 SUMMARY = "API for managing information about operating systems, hypervisors and the (virtual) hardware devices."
 HOMEPAGE = "https://libosinfo.org"
 
-LICENSE = "LGPL-2.1-only & GPL-2.0-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2b0e9926530c269f5ae95560370195af"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 

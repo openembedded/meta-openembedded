@@ -8,7 +8,7 @@ lease algorithms: delta leases and paxos leases."
 HOMEPAGE = "https://pagure.io/sanlock"
 SECTION = "utils"
 
-LICENSE = "LGPL-2.0-or-later & GPL-2.0-only & GPL-2.0-or-later"
+LICENSE = "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://README.license;md5=60487bf0bf429d6b5aa72b6d37a0eb22"
 
 SRC_URI = "git://codeberg.org/sanlock/sanlock.git;protocol=https;branch=master;tag=${BPN}-${PV} \

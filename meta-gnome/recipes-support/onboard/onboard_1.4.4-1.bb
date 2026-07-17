@@ -5,7 +5,7 @@ that cannot use a hardware keyboard. It has been designed with simplicity \
 in mind and can be used right away without the need of any configuration, \
 as it can read the keyboard layout from the X server."
 
-LICENSE = "GPL-3.0-or-later & BSD-3-Clause"
+LICENSE = "BSD-3-Clause AND GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e \
                     file://COPYING.BSD3;md5=f56403ae5b2d6b82ad136d753c05a82e \
                    "

@@ -1,6 +1,6 @@
 DESCRIPTION = "open62541 is an implementation of OPC UA (OPC Unified Architecture)"
 HOMEPAGE = "https://github.com/open62541/open62541.git"
-LICENSE = "MPL-2.0 & BSD-3-Clause & MIT"
+LICENSE = "BSD-3-Clause AND MIT AND MPL-2.0"
 LIC_FILES_CHKSUM = "\
     file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad \
     file://deps/mdnsd/LICENSE;md5=3bb4047dc4095cd7336de3e2a9be94f0 \

@@ -7,7 +7,7 @@ BUGTRACKER = "http://bugzilla.libsdl.org/"
 
 SECTION = "libs"
 
-LICENSE = "Zlib & BSD-2-Clause"
+LICENSE = "BSD-2-Clause AND Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=036a54229112040a743509a86b30c80c \
                     file://src/hidapi/LICENSE.txt;md5=7c3949a631240cb6c31c50f3eb696077 \
                     file://src/hidapi/LICENSE-bsd.txt;md5=b5fa085ce0926bb50d0621620a82361f \

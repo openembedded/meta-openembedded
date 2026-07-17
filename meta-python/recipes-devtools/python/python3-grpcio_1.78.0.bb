@@ -1,7 +1,7 @@
 DESCRIPTION = "Google gRPC"
 HOMEPAGE = "https://www.grpc.io/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
+LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND MIT AND MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
     file://third_party/utf8_range/utf8_validity.h;beginline=1;endline=5;md5=db08ddb5817e660489678e7c3653805a \

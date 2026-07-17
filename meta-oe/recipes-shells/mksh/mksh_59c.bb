@@ -2,7 +2,7 @@ DESCRIPTION = "The MirBSD Korn Shell - an enhanced version of the public domain 
 HOMEPAGE = "http://www.mirbsd.org/mksh.htm"
 SECTION = "base/shell"
 
-LICENSE = "${@bb.utils.contains("TCLIBC", "glibc", "MirOS & ISC", "MirOS", d)}"
+LICENSE = "${@bb.utils.contains("TCLIBC", "glibc", "MirOS AND ISC", "MirOS", d)}"
 LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=6efc2c249328e4d2bd3e595d5b1f9d31 \
                     file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
                    "

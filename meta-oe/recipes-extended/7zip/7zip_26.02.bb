@@ -1,6 +1,6 @@
 SUMMARY = "7-zip is a commandline utility handling 7z archives."
 HOMEPAGE = "http://www.7-zip.org/"
-LICENSE = "LGPL-2.1-or-later & unRAR & PD & BSD-2-Clause & BSD-3-Clause"
+LICENSE = "BSD-2-Clause AND BSD-3-Clause AND LGPL-2.1-or-later AND UnRAR AND LicenseRef-PD"
 LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
                     file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
                     file://DOC/License.txt;md5=a4ae6e492874f0008c7600c2ef80daa4 \

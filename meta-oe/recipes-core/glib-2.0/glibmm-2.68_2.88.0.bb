@@ -1,7 +1,7 @@
 SUMMARY = "C++ bindings for the glib library"
 HOMEPAGE = "http://www.gtkmm.org/"
 SECTION = "libs"
-LICENSE = "LGPL-2.1-only & GPL-2.0-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4bf661c1e3793e55c8d1051bc5e0ae21 \
                     file://COPYING.tools;md5=570a9b3749dd0463a1778803b12a6dce"
 

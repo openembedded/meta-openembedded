@@ -4,7 +4,7 @@ This library provides interface for terminal emulators such as \
 screen and xterm to record user sessions to utmp and wtmp files."
 HOMEPAGE = "ftp://ftp.altlinux.org/pub/people/ldv/utempter"
 SECTION = "System Environment/Libraries"
-LICENSE = "GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-only & MIT"
+LICENSE = "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-only AND MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
 SRCREV = "63825e2244629d44dae21132b1065d7ecc0491c0"

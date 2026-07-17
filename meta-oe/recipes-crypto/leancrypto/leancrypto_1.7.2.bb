@@ -4,7 +4,7 @@ PQC-resistant cryptographic algorithms. It is lean, has minimal dependencies, \
 supports stack-only operation and provides optimized implementations for \
 ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (Sphincs+) and many more"
 HOMEPAGE = "https://leancrypto.org"
-LICENSE = "BSD-3-Clause | GPL-2.0-only"
+LICENSE = "BSD-3-Clause OR GPL-2.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=4cc9ea7ae2518fb4fb0bbd9d1a60cbf4 \
     file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \

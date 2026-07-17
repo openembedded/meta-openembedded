@@ -1,6 +1,6 @@
 SUMMARY = "Glade - A User Interface Designer"
 HOMEPAGE = "https://glade.gnome.org"
-LICENSE = "GPL-2.0-only & LGPL-2.0-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
                     file://COPYING.GPL;md5=4641e94ec96f98fabc56ff9cc48be14b \
                     file://COPYING.LGPL;md5=81227099add6b483afd7b1d4fc4e93b7"

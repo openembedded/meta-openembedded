@@ -2,7 +2,7 @@ SUMMARY = "Cache and memory benchmarking tool"
 DESCRIPTION = "RAMspeed is a micro-benchmark for measuring cache and memory bandwidth"
 HOMEPAGE = "https://github.com/cruvolo/ramspeed"
 
-LICENSE = "Alasir"
+LICENSE = "LicenseRef-Alasir"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=92cffec6695a20eab8d0e4770f4e9353"
 LICENSE_FLAGS = "commercial"
 

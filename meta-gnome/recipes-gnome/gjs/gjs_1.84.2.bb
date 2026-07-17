@@ -1,5 +1,5 @@
 SUMMARY = "Javascript bindings for GNOME"
-LICENSE = "MIT & LGPL-2.0-or-later"
+LICENSE = "LGPL-2.0-or-later AND MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
 
 

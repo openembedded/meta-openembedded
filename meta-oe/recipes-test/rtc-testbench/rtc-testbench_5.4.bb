@@ -6,7 +6,7 @@ TSN-enabled Ethernet networks. It generates and mirrors cyclic traffic using \
 AF_PACKET or AF_XDP with eBPF, supporting protocols like PROFINET and OPC UA PubSub."
 
 HOMEPAGE = "https://github.com/Linutronix/RTC-Testbench"
-LICENSE = "BSD-2-Clause & (GPL-2.0-only | BSD-2-Clause)"
+LICENSE = "BSD-2-Clause AND (BSD-2-Clause OR GPL-2.0-only)"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=f39e57686080f8752e19c4cd3e04e351 \
     file://LICENSES/BSD-2-Clause.txt;md5=9e16594a228301089d759b4f178db91f \

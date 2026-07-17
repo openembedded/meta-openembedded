@@ -6,7 +6,7 @@ DESCRIPTION = "\
 HOMEPAGE = "https://www.webkitgtk.org/"
 BUGTRACKER = "https://bugs.webkit.org/"
 
-LICENSE = "BSD-2-Clause & LGPL-2.0-or-later"
+LICENSE = "BSD-2-Clause AND LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
                     file://Source/WebCore/LICENSE-APPLE;md5=4646f90082c40bcf298c285f8bab0b12 \
                     file://Source/WebCore/LICENSE-LGPL-2;md5=36357ffde2b64ae177b2494445b79d21 \

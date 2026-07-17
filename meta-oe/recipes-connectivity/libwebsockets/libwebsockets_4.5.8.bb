@@ -1,6 +1,6 @@
 SUMMARY = "Canonical libwebsockets.org websocket library"
 HOMEPAGE = "https://libwebsockets.org/"
-LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0 & OFL-1.1"
+LICENSE = "Apache-2.0 AND BSD-3-Clause AND MIT AND OFL-1.1 AND Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b5d391cc7929bcba238f9ba6805f7574"
 
 DEPENDS = "zlib"

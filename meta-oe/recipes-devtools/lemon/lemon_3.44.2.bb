@@ -1,6 +1,6 @@
 DESCRIPTION = "The Lemon Parser Generator"
 HOMEPAGE = "https://sqlite.org/src/file/doc/lemon.html"
-LICENSE = "PD"
+LICENSE = "LicenseRef-PD"
 SECTION = "devel"
 
 LIC_FILES_CHKSUM = "file://tool/lemon.c;endline=8;md5=c7551a78fa3fdecd96d1ad6761d205ee"

@@ -1,6 +1,6 @@
 SUMMARY = "Linux applications to manage, test and develop devices supporting DMTF Security Protocol and Data Model (SPDM) "
 HOMEPAGE = "https://github.com/westerndigitalcorporation/spdm-utils"
-LICENSE = "Apache-2.0 & MIT"
+LICENSE = "Apache-2.0 AND MIT"
 LIC_FILES_CHKSUM = "\
     file://LICENSE-MIT;md5=b377b220f43d747efdec40d69fcaa69d \
     file://LICENSE-APACHE;md5=22a53954e4e0ec258dfce4391e905dac \

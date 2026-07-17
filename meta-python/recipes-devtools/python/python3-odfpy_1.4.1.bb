@@ -27,7 +27,7 @@ The source code is at https://github.com/eea/odfpy \
 Visit https://github.com/eea/odfpy/wiki for documentation and examples. \
 \
 The code at https://joinup.ec.europa.eu/software/odfpy/home is obsolete."
-LICENSE = "Apache-2.0 | (GPL-2.0-or-later & LGPL-2.0-or-later)"
+LICENSE = "GPL-2.0-or-later AND LGPL-2.0-or-later OR Apache-2.0"
 LIC_FILES_CHKSUM = " \
 	file://APACHE-LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
 	file://GPL-LICENSE-2.txt;md5=751419260aa954499f7abaabaa882bbe \

@@ -2,7 +2,7 @@ SUMMARY = "This library aims to be a friendly, portable C implementation of the 
 HOMEPAGE = "https://github.com/AOMediaCodec/libavif"
 SECTION = "libs"
 # Most is the code is under BSD-2, but libyuv is under BSD-3, and iccjpeg is under IJG
-LICENSE = "BSD-2-Clause & BSD-3-Clause & IJG"
+LICENSE = "BSD-2-Clause AND BSD-3-Clause AND IJG"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=51549db0941829faeedcc86efec2f4c0"
 
 SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=main;tag=v${PV};name=libavif"

@@ -3,7 +3,7 @@ DESCRIPTION = "GNU Parallel is a command-line tool for executing jobs in paralle
 It allows users to run multiple commands simultaneously, making it easier to process large batches of tasks."
 
 HOMEPAGE = "https://www.gnu.org/software/parallel/"
-LICENSE = "CC-BY-SA-4.0 & GFDL-1.3-or-later & GPL-3.0-or-later"
+LICENSE = "CC-BY-SA-4.0 AND GFDL-1.3-or-later AND GPL-3.0-or-later"
 
 LIC_FILES_CHKSUM = " \
     file://LICENSES/CC-BY-SA-4.0.txt;md5=7130783469368ceb248a4f03e89ea4b8 \

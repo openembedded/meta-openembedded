@@ -5,7 +5,7 @@ DESCRIPTION = "jq is like sed for JSON data, you can use it to slice and \
 HOMEPAGE = "https://jqlang.github.io/jq/"
 BUGTRACKER = "https://github.com/jqlang/jq/issues"
 SECTION = "utils"
-LICENSE = "MIT & BSD-2-Clause"
+LICENSE = "BSD-2-Clause AND MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cf7fcb0a1def4a7ad62c028f7d0dca47"
 
 SRCREV = "4467af7068b1bcd7f882defff6e7ea674c5357f4"

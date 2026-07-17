@@ -5,7 +5,7 @@ DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also 
 HOMEPAGE = "http://www.zsh.org"
 SECTION = "base/shell"
 
-LICENSE = "zsh"
+LICENSE = "LicenseRef-zsh"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 
 DEPENDS = "ncurses bison-native libcap libpcre2 gdbm groff-native"

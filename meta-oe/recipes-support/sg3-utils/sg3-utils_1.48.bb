@@ -5,7 +5,7 @@ DESCRIPTION = "This package contains low level utilities for devices that use th
 HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
 SECTION = "console/admin"
 
-LICENSE = "GPL-2.0-or-later & BSD-2-Clause"
+LICENSE = "BSD-2-Clause AND GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f685699d3ac82f108aa880043fa3feb7"
 
 SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"

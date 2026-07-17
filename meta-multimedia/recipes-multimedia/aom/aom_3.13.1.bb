@@ -1,7 +1,7 @@
 SUMMARY = "Alliance for Open Media - AV1 Codec Library"
 DESCRIPTION = "Alliance for Open Media AV1 codec library"
 
-LICENSE = "BSD-2-Clause & AOM-Patent-License-1.0"
+LICENSE = "BSD-2-Clause AND LicenseRef-AOM-Patent-License-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
                     file://PATENTS;md5=a111d47497d3bb49e04eef71377eb8ba \
                    "

@@ -1,6 +1,6 @@
 SUMMARY = "i.MX code signing tool"
 DESCRIPTION = "Code signing support that integrates the HABv4 and AHAB library for i.MX processors"
-LICENSE = "BSD-3-Clause & Apache-2.0"
+LICENSE = "Apache-2.0 AND BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "\
     file://LICENSE.bsd3;md5=14aba05f9fa6c25527297c8aac95fcf6 \

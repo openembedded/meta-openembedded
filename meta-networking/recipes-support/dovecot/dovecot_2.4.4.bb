@@ -6,7 +6,7 @@ in mind. Dovecot is an excellent choice for both small and large \
 installations. It's fast, simple to set up, requires no special \
 administration and it uses very little memory."
 SECTION = "mail"
-LICENSE = "LGPL-2.1-only & MIT & Unicode-3.0 & BSD-3-Clause & PD"
+LICENSE = "BSD-3-Clause AND LGPL-2.1-only AND MIT AND Unicode-3.0 AND LicenseRef-PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb805cc6bdb95ba8fc2398a55fd50877"
 
 SRC_URI = "https://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \

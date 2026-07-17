@@ -1,7 +1,7 @@
 SUMMARY = "Filesystem and Disk Benchmarking Tool"
 HOMEPAGE = "http://www.iozone.org/"
 SECTION = "console/tests"
-LICENSE = "iozone3"
+LICENSE = "LicenseRef-iozone3"
 LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
     file://iozone.c;beginline=317;endline=323;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
 "

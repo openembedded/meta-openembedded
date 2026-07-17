@@ -1,6 +1,6 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
-LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0 & BlueOak-1.0.0"
+LICENSE = "Apache-2.0 AND Artistic-2.0 AND BSD-2-Clause AND BSD-3-Clause AND BlueOak-1.0.0 AND ISC AND MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=76c62fa4c329393e905512b36f8378b7"
 FILESEXTRAPATHS:prepend := "${THISDIR}/nodejs-24:"
 

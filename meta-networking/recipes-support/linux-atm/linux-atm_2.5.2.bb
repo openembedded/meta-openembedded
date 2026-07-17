@@ -1,7 +1,7 @@
 SUMMARY = "Drivers and tools to support ATM networking under Linux"
 HOMEPAGE = "http://linux-atm.sourceforge.net/"
 SECTION = "libs"
-LICENSE = "GPL-2.0-only & LGPL-2.0-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.0-only"
 
 DEPENDS = "flex flex-native"
 RRECOMMENDS:${PN} = "kernel-module-atm-tcp"

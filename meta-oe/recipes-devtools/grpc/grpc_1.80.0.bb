@@ -3,7 +3,7 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
 (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)"
 HOMEPAGE = "https://github.com/grpc/grpc"
 SECTION = "libs"
-LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
+LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND MIT AND MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9 \
     file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \

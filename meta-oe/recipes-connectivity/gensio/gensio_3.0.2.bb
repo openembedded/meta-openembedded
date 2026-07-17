@@ -1,6 +1,6 @@
 SUMMARY = "A library to abstract stream I/O like serial port, TCP, telnet, etc"
 HOMEPAGE = "https://github.com/cminyard/gensio"
-LICENSE = "GPL-2.0-only & LGPL-2.1-only"
+LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     "

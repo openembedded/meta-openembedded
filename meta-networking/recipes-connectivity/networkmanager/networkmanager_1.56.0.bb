@@ -13,7 +13,7 @@ for modem connections and certain types of VPN."
 HOMEPAGE = "https://wiki.gnome.org/Projects/NetworkManager"
 SECTION = "net/misc"
 
-LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
+LICENSE = "GPL-2.0-or-later AND LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
