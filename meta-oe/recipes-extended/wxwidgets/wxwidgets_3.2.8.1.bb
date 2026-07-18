@@ -6,7 +6,7 @@ BUGTRACKER = "https://trac.wxwidgets.org/"
 # WXwindows licence is a modified version of LGPL explicitly allowing not
 # distributing the sources of an application using the library even in the
 # case of static linking.
-LICENSE = "wxWindows"
+LICENSE = "LGPL-2.0-or-later WITH WxWindows-exception-3.1"
 LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
