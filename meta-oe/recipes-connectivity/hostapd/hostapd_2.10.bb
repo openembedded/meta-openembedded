@@ -63,3 +63,5 @@ do_install() {
 }
 
 CONFFILES:${PN} += "${sysconfdir}/hostapd.conf"
+
+CVE_STATUS[CVE-2026-58374] = "fixed-version: EHT/IEEE 802.11be/Wi-Fi 7 support introduced in v2.11"
