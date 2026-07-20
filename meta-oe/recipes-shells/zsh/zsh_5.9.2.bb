@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 DEPENDS = "ncurses bison-native libcap libpcre2 gdbm groff-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "5d20bec03f981dc4e9a09ec245e7415388ff641f79c5c5c416b5042e58d8280d"
+SRC_URI[sha256sum] = "36fa734374b44783582cec09bcd67822e2f992c779ec1624ab5596df078d2f81"
 
 inherit autotools gettext update-alternatives manpages
 
