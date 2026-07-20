@@ -3,7 +3,9 @@ HOMEPAGE = "http://crossbar.io/autobahn"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=49165a577911c4178e915dc26e2802a3"
 
-SRC_URI[sha256sum] = "66b27e066a8ea265541eb07fd964e3116e2b8f51d797eea8a46b55c07fd81a07"
+SRC_URI += "file://0001-Skip-march-guessing-for-external-cross-toolchains.patch"
+
+SRC_URI[sha256sum] = "c6949a2c6eb95fb1c218837dbda0a59abbbebafb8b11098551c01a7061dfd245"
 
 CVE_PRODUCT = "autobahn"
 
