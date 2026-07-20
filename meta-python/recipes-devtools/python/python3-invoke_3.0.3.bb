@@ -3,9 +3,9 @@ HOMEPAGE = "https://www.pyinvoke.org/"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a8815068973f31b78c328dc067e297ab"
 
-SRC_URI[sha256sum] = "515bf49b4a48932b79b024590348da22f39c4942dff991ad1fb8b8baea1be707"
+SRC_URI[sha256sum] = "437b6a622223824380bfb4e64f612711a6b648c795f565efc8625af66fb57f0c"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
         python3-fcntl \
