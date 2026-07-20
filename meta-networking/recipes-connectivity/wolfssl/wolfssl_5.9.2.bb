@@ -17,7 +17,7 @@ SRC_URI = " \
     file://run-ptest \
 "
 
-SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
+SRCREV = "a82476d144290bf6a786607a16c224acff63d882"
 
 
 inherit autotools ptest
@@ -45,6 +45,9 @@ do_install_ptest() {
     cp -rf ${B}/tests/. ${D}${PTEST_PATH}/test
     cp -rf ${S}/certs  ${D}${PTEST_PATH}
     cp -rf ${S}/tests  ${D}${PTEST_PATH}
+
+    # Remove symlinks pointing to build directory (symlink-to-sysroot QA)
+    find ${D}${PTEST_PATH} -type l -delete
 }
 
 CVE_STATUS[CVE-2026-0819] = "fixed-version: fixed in 5.9.0"
