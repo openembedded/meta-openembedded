@@ -5,6 +5,14 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/${VBOX_NAME}/COPYING;md5=217590d3a513571b94632edf5fa1169a"
 
 DEPENDS = "virtual/kernel"
+# Besides the kernel modules, this recipe also builds a userspace utility
+# (utils/mount.vboxsf). module.bbclass sets INHIBIT_DEFAULT_DEPS=1, which drops
+# BASE_DEFAULT_DEPS ("virtual/cross-cc virtual/compilerlibs virtual/libc") and
+# only re-adds virtual/cross-cc + virtual/cross-binutils. As a result the target
+# libc headers/crt objects are never staged into recipe-sysroot, so the userspace
+# compile fails with "errno.h: No such file or directory". Restore the libc and
+# compiler-runtime deps needed to compile and link the userspace utility.
+DEPENDS += "virtual/compilerlibs virtual/libc"
 
 inherit module kernel-module-split
 
