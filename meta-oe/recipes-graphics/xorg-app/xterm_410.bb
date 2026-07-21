@@ -30,8 +30,8 @@ B = "${S}"
 CFLAGS += "-D_GNU_SOURCE"
 
 do_configure() {
-    gnu-configize --force
-    sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
+    gnu-configize --force ${S}
+    sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i ${S}/configure
     oe_runconf
 }
 
