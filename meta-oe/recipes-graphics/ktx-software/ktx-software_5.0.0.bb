@@ -2,9 +2,13 @@ SUMMARY = "KTX (Khronos Texture) Library and Tools "
 DESCRIPTION = "KTX (Khronos Texture) is a lightweight container for textures for OpenGL, Vulkan and other GPU APIs."
 HOMEPAGE = "https://github.com/KhronosGroup/KTX-Software"
 
-LICENSE = "Apache-2.0 & BSD-1-Clause & BSD-2-Clause & BSD-3-Clause & BSL-1.0 \
-	   & CC-BY-3.0 & CC-BY-4.0 & CC0-1.0 & Zlib & MIT & HI-Trademark & fmt & \
-	   Kodak & PNGSuite & ETCSLA & Cesium-Trademark-Terms"
+LICENSE = " \
+    Apache-2.0 AND BSD-1-Clause AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 \
+    AND CC-BY-3.0 AND CC-BY-4.0 AND CC0-1.0 AND MIT AND Zlib \
+    AND LicenseRef-Cesium-Trademark-Terms AND LicenseRef-ETCSLA \
+    AND LicenseRef-HI-Trademark AND LicenseRef-Kodak \
+    AND LicenseRef-PNGSuite AND LicenseRef-fmt \
+"
 
 LIC_FILES_CHKSUM = "file://REUSE.toml;md5=9f87c97ba36aab42411bf93c094a61f2"
 
