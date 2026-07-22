@@ -12,9 +12,9 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "4b3e853ab468a95d8a035efa8fc4298a6c6318a3"
+SRCREV = "7e00642c40123e0b3f949e74c3945872c17a407e"
 
-SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
+SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https;tag=${PV} \
            file://0001-Makefile-Do-not-set-Werror.patch \
            file://initd.debian \
            file://99_iscsi-initiator-utils \
