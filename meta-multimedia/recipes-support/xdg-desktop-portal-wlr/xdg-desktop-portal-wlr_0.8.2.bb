@@ -14,12 +14,11 @@ DEPENDS = " \
 "
 
 inherit meson pkgconfig features_check manpages
+
 REQUIRED_DISTRO_FEATURES = "opengl wayland"
 
-SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master"
-
-PV .= "+git"
-SRCREV = "256eb4a9f6ecffd64289d6501d036c2094b47db6"
+SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;nobranch=1;tag=v${PV}"
+SRCREV = "01171a150b705cf07066ebc0fb7e1ff537027bec"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'basu', d)}"
 
