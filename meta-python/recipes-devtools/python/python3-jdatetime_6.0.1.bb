@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
 
 # The PyPI package omits some files for testing like tests/__init__.py
 # so use the GitHub source instead.
-SRCREV = "ea119aab729d4c48f797f3663a692680c93fb9f5"
+SRCREV = "8a5acc4aa0cef2f39a0ad089b7ca7e4b89626994"
 SRC_URI = " \
-    git://github.com/slashmili/jdatetime;branch=main;protocol=https \
+    git://github.com/slashmili/jdatetime;branch=main;protocol=https;tag=v${PV} \
     file://run-ptest \
 "
 
