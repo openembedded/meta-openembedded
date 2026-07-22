@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/fastapi/typer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
 
-SRC_URI[sha256sum] = "c244a6bd558886fe3f8780efb6bdd28bb9aff005a94eedebaa5cb32926fe2f7e"
+SRC_URI[sha256sum] = "629bd12ea5d13a17148125d9a264f949eb171fb3f120f9b04d85873cab054fa5"
 
 inherit pypi python_pdm ptest
 
