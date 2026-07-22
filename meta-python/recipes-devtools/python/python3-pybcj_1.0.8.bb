@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
 # The PyPI package omits files for testing
 # so use the GitHub source instead.
-SRCREV = "0735ad15fa001748dc3a13f36be2fe7a4971cf79"
+SRCREV = "33f1194ac7950ed7002b7361df8b03dc16bc1168"
 SRC_URI = " \
-    git://github.com/miurahr/pybcj;branch=main;protocol=https \
+    git://github.com/miurahr/pybcj;branch=main;protocol=https;tag=v${PV} \
     file://run-ptest \
 "
 
