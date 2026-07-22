@@ -28,7 +28,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
            "
 
-SRC_URI[sha256sum] = "8221897d96b42495d68d2a730a65edf1b83c7358cdc45f84bed4146eb9212574"
+SRC_URI[sha256sum] = "1ebaec340fea1b80a9c88d276f07bed0886cc4f000753cf310223affb427754b"
 
 UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.8(\.\d+)+).tar.gz"
 
