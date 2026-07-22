@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 BRANCH = "master"
 SRC_URI = "git://github.com/clarkwang/sexpect;branch=${BRANCH};protocol=https;tag=v${PV}"
-SRCREV = "d3645392424d47532be90fcbc0abf3148324785b"
+SRCREV = "108b189f34d627b3fb14574b26f71664fdf698de"
 
 
 inherit cmake
