@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/facelessuser/soupsieve"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=74851a2f1e5c07496dcb452af6a6bf54"
 
-SRC_URI[sha256sum] = "e121fd02e975c695e4e9e8774a5ee35d74714b59307868dcc5319ad2d9e3328e"
+SRC_URI[sha256sum] = "acee8417325c5653e1377dc31eccad59eb82cbc65942afe6174c53b3aaad63fc"
 
 inherit pypi python_hatchling ptest-python-pytest
 
