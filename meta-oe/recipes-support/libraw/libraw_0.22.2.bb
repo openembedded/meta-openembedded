@@ -3,7 +3,7 @@ LICENSE = "CDDL-1.0 OR LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1d66195044cfbe4327c055d1c9c1a229"
 
 SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.22-stable;protocol=https;tag=${PV}"
-SRCREV = "b860248a89d9082b8e0a1e202e516f46af9adb29"
+SRCREV = "b93f6e45c194f5df9b02a43b1af9a54b4f41f33f"
 
 inherit autotools pkgconfig
 
