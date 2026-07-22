@@ -23,6 +23,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
            file://CVE-2026-2291.patch \
            file://CVE-2026-4890.patch \
            file://CVE-2026-12725.patch \
+           file://CVE-2026-12969.patch \
 "
 SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
 
