@@ -2,7 +2,7 @@ SUMMARY = "TOMOYO Linux tools"
 DESCRIPTION = "TOMOYO Linux is a Mandatory Access Control (MAC) implementation \
 for Linux that can be used to increase the security of a system, while also \
 being useful purely as a system analysis tool."
-HOMEPAGE = "http://tomoyo.sourceforge.jp/"
+HOMEPAGE = "https://tomoyo.sourceforge.net/"
 SECTION = "System Environment/Kernel"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/tomoyo/${BP}.tar.gz"
