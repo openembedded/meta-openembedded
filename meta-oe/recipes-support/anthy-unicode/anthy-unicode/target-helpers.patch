@@ -1,9 +1,18 @@
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [cross-compile specific]
 
-diff -Nurp anthy-9100h.org/calctrans/Makefile.am anthy-9100h/calctrans/Makefile.am
---- anthy-9100h.org/calctrans/Makefile.am	2007-10-27 23:02:59.000000000 +0900
-+++ anthy-9100h/calctrans/Makefile.am	2014-11-11 17:14:42.152999991 +0900
-@@ -15,31 +15,31 @@ dict_source_files = anthy.cand_info anth
+For the target build, do not compile or run the dictionary-generation helpers
+(mkfiledic, mkdepgraph, mkworddic, calctrans, proccorpus) locally -- they are
+built by anthy-unicode-native and installed into the native sysroot. Drop the
+"./" prefix from the dictionary rules so the helpers are taken from PATH, and
+disable the local build of the helpers that also provide libraries.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+diff --git a/calctrans/Makefile.am b/calctrans/Makefile.am
+index a48867a..b47b6af 100644
+--- a/calctrans/Makefile.am
++++ b/calctrans/Makefile.am
+@@ -15,31 +15,31 @@ dict_source_files = anthy.cand_info anthy.trans_info anthy.corpus_array anthy.co
  
  update_params:
  	rm -f parsed_data2
@@ -47,19 +56,20 @@ diff -Nurp anthy-9100h.org/calctrans/Makefile.am anthy-9100h/calctrans/Makefile.
  
  noinst_DATA = $(dict_source_files)
  CLEANFILES = $(dict_source_files) parsed_data parsed_data2 anthy.feature_info
-diff -Nurp anthy-9100h.org/depgraph/Makefile.am anthy-9100h/depgraph/Makefile.am
---- anthy-9100h.org/depgraph/Makefile.am	2008-11-29 21:46:14.000000000 +0900
-+++ anthy-9100h/depgraph/Makefile.am	2014-11-11 17:12:03.813999991 +0900
+diff --git a/depgraph/Makefile.am b/depgraph/Makefile.am
+index 468f90c..1f3de05 100644
+--- a/depgraph/Makefile.am
++++ b/depgraph/Makefile.am
 @@ -9,11 +9,11 @@ CLEANFILES = anthy.dep
  EXTRA_DIST = indepword.txt $(DEPWORDS)
  
  # Generate the dictionary
 -noinst_PROGRAMS = mkdepgraph
 -mkdepgraph_SOURCES = mkdepgraph.c
--mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
+-mkdepgraph_LDADD =  ../src-main/libanthy-unicode.la ../src-worddic/libanthydic-unicode.la
 +#noinst_PROGRAMS = mkdepgraph
 +#mkdepgraph_SOURCES = mkdepgraph.c
-+#mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
++#mkdepgraph_LDADD =  ../src-main/libanthy-unicode.la ../src-worddic/libanthydic-unicode.la
  
 -anthy.dep : mkdepgraph $(DEPWORDS)
 -	./mkdepgraph
@@ -67,9 +77,10 @@ diff -Nurp anthy-9100h.org/depgraph/Makefile.am anthy-9100h/depgraph/Makefile.am
 +	mkdepgraph
  
  noinst_DATA = anthy.dep
-diff -Nurp anthy-9100h.org/mkanthydic/Makefile.am anthy-9100h/mkanthydic/Makefile.am
---- anthy-9100h.org/mkanthydic/Makefile.am	2007-04-14 18:01:10.000000000 +0900
-+++ anthy-9100h/mkanthydic/Makefile.am	2014-11-11 17:10:34.792999991 +0900
+diff --git a/mkanthydic/Makefile.am b/mkanthydic/Makefile.am
+index dfabff6..d1109cc 100644
+--- a/mkanthydic/Makefile.am
++++ b/mkanthydic/Makefile.am
 @@ -3,12 +3,12 @@ noinst_SCRIPTS =
  CLEANFILES = anthy.dic
  INCLUDES = -I$(top_srcdir)/ -DSRCDIR=\"$(srcdir)\"
@@ -88,19 +99,20 @@ diff -Nurp anthy-9100h.org/mkanthydic/Makefile.am anthy-9100h/mkanthydic/Makefil
  
  
  # To install 
-diff -Nurp anthy-9100h.org/mkworddic/Makefile.am anthy-9100h/mkworddic/Makefile.am
---- anthy-9100h.org/mkworddic/Makefile.am	2009-01-23 12:31:31.000000000 +0900
-+++ anthy-9100h/mkworddic/Makefile.am	2014-11-11 17:13:31.946999992 +0900
-@@ -26,14 +26,14 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gc
+diff --git a/mkworddic/Makefile.am b/mkworddic/Makefile.am
+index d9b262e..6a8a54c 100644
+--- a/mkworddic/Makefile.am
++++ b/mkworddic/Makefile.am
+@@ -26,14 +26,14 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gcanna.ctd \
  	    @top_srcdir@/mkworddic/udict
  
  # Generate the dictionary
 -noinst_PROGRAMS = mkworddic
 -mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
--mkworddic_LDADD = ../src-worddic/libanthydic.la
+-mkworddic_LDADD = ../src-worddic/libanthydic-unicode.la
 +#noinst_PROGRAMS = mkworddic
 +#mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
-+#mkworddic_LDADD = ../src-worddic/libanthydic.la
++#mkworddic_LDADD = ../src-worddic/libanthydic-unicode.la
  
  noinst_DATA = anthy.wdic
  

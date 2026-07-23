@@ -705,7 +705,7 @@ RDEPENDS:packagegroup-meta-oe-shells = "\
 
 RDEPENDS:packagegroup-meta-oe-support = "\
     ace-cloud-editor \
-    anthy \
+    anthy-unicode \
     asio \
     atop \
     augeas \
