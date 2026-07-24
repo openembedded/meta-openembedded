@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://meson.build;beginline=3;endline=3;md5=f42198707d793be58b274d34fd5238c3 \
 "
 
-PV = "1.4.7"
+PV = "1.4.8"
 SRC_URI = "https://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "de02d9910634ae159547585cec414e450f711c27235453b4f9b38a9f2361a653"
+SRC_URI[sha256sum] = "21500bd68975312a7f0f3ce6019d9f75f42aacaa75ca7115ec720b5445406896"
 
