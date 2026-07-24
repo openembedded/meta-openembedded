@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=3b83ef96387f14655fc854dd
 
 SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX}"
 
-SRCREV = "1a501b7691e153969fa64e9ca58706454b160b18"
+SRCREV = "9addf01e40eae111f59c822141a47aa87caf04b6"
 
 require ${BPN}-licenses.inc
 require ${BPN}-go-mods.inc
