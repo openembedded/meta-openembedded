@@ -27,7 +27,7 @@ SRC_URI = " \
     file://0002-automake-make-example-programs-installable.patch \
     file://run-ptest \
 "
-SRCREV = "c497eff1ae8c4cfd4fdff370f04c78fa0584f4f3"
+SRCREV = "4831748a1439aec81e9cbb9984b1b0289c1c7051"
 
 UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
 
