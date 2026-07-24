@@ -9,7 +9,7 @@ DEPENDS = "ncurses libnl"
 SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https;tag=${PV} \
            file://0001-configure.ac-Remove-usr-include-libnl3.patch \
 "
-SRCREV = "82841011ac3e2ec6ee4d3dbdf80f8d26797abbc6"
+SRCREV = "393b224603620e62a693628ac50b9f4e4424a851"
 
 
 inherit autotools pkgconfig
@@ -25,9 +25,6 @@ PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
 PACKAGECONFIG[affinity] = "--enable-affinity,--disable-affinity,,,,hwloc"
 PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
 PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc,,,affinity"
-PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
-PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
-PACKAGECONFIG[ancient-vserver] = "--enable-ancient-vserver,--disable-ancient-vserver"
 PACKAGECONFIG[capabilities] = "--enable-capabilities,--disable-capabilities,libcap"
 PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
 PACKAGECONFIG[sensors] = "--enable-sensors,--disable-sensors,lmsensors,lmsensors-libsensors"
