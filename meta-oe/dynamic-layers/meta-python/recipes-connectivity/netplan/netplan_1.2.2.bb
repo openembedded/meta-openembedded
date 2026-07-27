@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https 
 
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
-SRCREV = "f758e3f6415aa68b7cf28991bc5b3e9631297d6d"
+SRCREV = "e9dd90a96727bc6b7264c36526b39d1dacccc00f"
 
 
 DEPENDS = "glib-2.0 libyaml util-linux-libuuid \
