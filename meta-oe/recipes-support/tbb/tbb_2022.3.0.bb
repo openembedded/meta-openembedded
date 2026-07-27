@@ -30,7 +30,9 @@ EXTRA_OECMAKE += " \
                     -DTBB_DISABLE_HWLOC_AUTOMATIC_SEARCH=OFF \
                 "
 
-RDEPENDS:${PN} += "libhwloc"
+# hwloc is only a build dependency for target builds, so libhwloc can only be
+# a runtime dependency there too (hwloc has no native/nativesdk variants).
+RDEPENDS:${PN}:append:class-target = " libhwloc"
 RDEPENDS:${PN}-ptest += "cmake libhwloc"
 
 # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
