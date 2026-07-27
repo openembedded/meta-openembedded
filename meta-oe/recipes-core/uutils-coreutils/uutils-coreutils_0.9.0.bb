@@ -18,6 +18,13 @@ require ${BPN}-crates.inc
 PROVIDES = "coreutils"
 RPROVIDES:${PN} = "coreutils"
 
+# This recipe is a drop-in replacement for coreutils and cannot coexist with it,
+# so only build it in world/universe when it is the selected provider. Otherwise
+# both recipes end up in the same task graph as explicit targets (PREFERRED_PROVIDER
+# only disambiguates dependencies, not targets) and bitbake warns that multiple
+# .bb files provide coreutils.
+EXCLUDE_FROM_WORLD = "${@'0' if d.getVar('PREFERRED_PROVIDER_coreutils') == 'uutils-coreutils' else '1'}"
+
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
 PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
 PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
