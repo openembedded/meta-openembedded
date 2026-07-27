@@ -410,7 +410,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     tmate \
     tmux \
     triggerhappy \
-    uml-utilities \
     upm \
     vlock \
     volume-key \
