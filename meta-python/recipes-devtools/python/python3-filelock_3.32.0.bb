@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c6acbdf7bb74caa37512c3a5ca6857b"
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "9e0c4e88ebe90833c1beafd3a547ccbc0bf7f491cd3858c3ec7aed63efe02163"
+SRC_URI[sha256sum] = "7be2ad23a14607ccc71808e68fe30848aeace7058ace17852f68e2a68e310402"
 
 BBCLASSEXTEND = "native nativesdk"
 
