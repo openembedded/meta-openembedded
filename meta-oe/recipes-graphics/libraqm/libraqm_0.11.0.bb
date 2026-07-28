@@ -11,10 +11,10 @@ BUGTRACKER = "https://github.com/HOST-Oman/libraqm/issues"
 SECTION = "graphics"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=7dc444a99e2824eac906383266fe4fa6"
+LIC_FILES_CHKSUM = "file://COPYING;md5=af4502a870b471d3ac78abacb7abfa37"
 
 SRC_URI = "git://github.com/HOST-Oman/libraqm.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "3a6b891a3db0e0db1364aa38088422f68d8d81e6"
+SRCREV = "08ee1537e63f93bf926498e12b12ed15ee383216"
 
 DEPENDS = "freetype fribidi harfbuzz"
 
