@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
 
-SRC_URI[sha256sum] = "13495348ec6f80d22c8c1654906ffeae336d485fea476544642ea24b120d9e13"
+SRC_URI[sha256sum] = "754048c76c03afa7de83eee8f4bcee3cf668cbb7d995f54a4e9678db7f110308"
 
 inherit pypi setuptools3 ptest-python-pytest
 
