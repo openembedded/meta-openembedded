@@ -9,7 +9,7 @@ SRC_URI += " \
         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
         file://run-ptest \
 "
-SRC_URI[sha256sum] = "f90fa030b569a92654b9d690665a073841df33d57487be53db583a9a0867a553"
+SRC_URI[sha256sum] = "e28f103ca8091fb7012b99c44243d7366c29863713b8e34a220c3322b7a07051"
 
 PYPI_PACKAGE = "google_auth"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
