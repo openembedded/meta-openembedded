@@ -15,7 +15,7 @@ RDEPENDS:${PN} = "python3-greenlet \
 
 SRC_URI += "file://0001-_setuputils.py-Do-not-add-sys_inc_dir.patch"
 
-SRC_URI[sha256sum] = "1655eb04c1e20d71b2aa4a3c7528162dd58ff6cc46a037af1f01f534c80fefba"
+SRC_URI[sha256sum] = "5b333a556e38a302b1b8c80525bef16d437e16f1e7767947789406841856a102"
 
 CVE_PRODUCT = "gevent"
 
