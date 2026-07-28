@@ -2,7 +2,7 @@ SUMMARY = "The next generation HTTP client."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=166cfc32dc0986f87a7e950553b52e5e"
 
-SRC_URI[sha256sum] = "32e0734b61eb0824b3f56a9e98d6d92d381a3ef12c0045aa917ee63df6c411ef"
+SRC_URI[sha256sum] = "1932a768737e3666291582833da748cc4e563c337cf96706fccc04fa6e58764a"
 
 inherit pypi python_hatchling
 
