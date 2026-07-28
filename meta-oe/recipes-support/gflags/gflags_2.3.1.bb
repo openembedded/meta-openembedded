@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
 
 SRC_URI = "git://github.com/gflags/gflags.git;branch=main;protocol=https;tag=v${PV}"
-SRCREV = "33bb3461e10864b5406353d3a1fb7ff34c2314b8"
+SRCREV = "8f30ebfb2b206a8bd3a97ffe3b59009a952343e6"
 
 inherit cmake
 
