@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/amoffat/sh"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
 
-SRC_URI[sha256sum] = "402af9087bf8a5557562913ca83d715bfa0646cb93865c5d60c5578b07b17871"
+SRC_URI[sha256sum] = "a250aef68509ed93419c9a1d90b0647cd5cbe26107ba94d3717ef5b6d595ffd9"
 
 inherit pypi python_hatchling
 
