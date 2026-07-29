@@ -10,7 +10,7 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
 
 SRCBRANCH ?= "master"
 
-SRCREV = "09ba05865dacd2824b5b40ab75a4b9545fcc1366"
+SRCREV = "3e3370e3cc66912f88235c43a3b926ea8fc35313"
 SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
 SRCREV_FORMAT = "default_common"
 SRC_URI = " \
@@ -23,6 +23,7 @@ SRC_URI = " \
 EXTRA_OECONF += " \
     --disable-graphviz \
     --enable-gtk-doc=no \
+    --disable-fatal-warnings \
 "
 
 FILES:${PN} += "\
