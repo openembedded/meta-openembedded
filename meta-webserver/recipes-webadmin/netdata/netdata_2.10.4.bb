@@ -6,10 +6,16 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
 DEPENDS += "\
+    bison-native \
+    curl \
+    flex-native \
     json-c \
     libuv \
     libyaml \
     lz4 \
+    openssl \
+    protobuf \
+    protobuf-native \
     util-linux \
     zlib \
     "
@@ -17,11 +23,13 @@ DEPENDS += "\
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
+    file://0003-Do-not-record-the-configure-command-line-in-the-binar.patch \
+    file://0004-libsensors-do-not-emit-line-directives-in-generated-s.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
     "
-SRC_URI[sha256sum] = "8073eee2392f92daa1f8bb5cf13fb988b8c3b52ff9574b50706ff69bdbdb51ce"
+SRC_URI[sha256sum] = "d1ae949863925d626b1d42a53000bcca2c239718e0b0ddc6a3f3f5029b21cdfe"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
 UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>(?!1\.99)\d+(?:\.\d+)*)"
@@ -63,10 +71,8 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata \
     ${@bb.utils.contains('PACKAGECONFIG','docker','--groups docker','',d)} --user-group netdata"
 
-PACKAGECONFIG ??= "openssl freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG ??= "freeipmi ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[brotli] = ",,brotli"
-PACKAGECONFIG[cloud] = "-DENABLE_CLOUD=ON,-DENABLE_CLOUD=OFF,"
-PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON,-DENABLE_OPENSSL=OFF,openssl"
 PACKAGECONFIG[freeipmi] = "-DENABLE_PLUGIN_FREEIPMI=ON,-DENABLE_PLUGIN_FREEIPMI=OFF,freeipmi"
 PACKAGECONFIG[nfacct] = "-DENABLE_PLUGIN_NFACCT=ON,-DENABLE_PLUGIN_NFACCT=OFF,libmnl"
 # needs meta-virtualization
@@ -75,14 +81,28 @@ PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
 PACKAGECONFIG[docker] = ",,virtual/docker, virtual/docker"
 PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
-# WebUI (packageconfig not set: v0, v1 & v2)
-PACKAGECONFIG[webui_v0] = ",,,,,webui_v1 webui_v2"
-PACKAGECONFIG[webui_v1] = ",,,,,webui_v0 webui_v2"
-PACKAGECONFIG[webui_v2] = ",,,,,webui_v0 webui_v1"
+# The local agent dashboard is not shipped in the release tarball; enabling it
+# makes CMake download https://app.netdata.cloud/agent.tar.gz at configure
+# time, which cannot work in an offline build. Off by default.
+PACKAGECONFIG[dashboard] = "-DENABLE_DASHBOARD=ON,-DENABLE_DASHBOARD=OFF"
 
-# ebpf doesn't compile (or detect) the cross compilation well
-EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
-                  -DENABLE_ACLK=OFF -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
+# ebpf doesn't compile (or detect) the cross compilation well.
+# Several 2.x features fetch sources at configure time, which cannot work in
+# an offline build, so they are disabled here:
+#  - ENABLE_PLUGIN_OTEL / ENABLE_PLUGIN_OTEL_SIGNAL_VIEWER pull Rust/Corrosion
+#    via CMake FetchContent.
+#  - ENABLE_PLUGIN_SCRIPTS requires Go (as does ENABLE_PLUGIN_GO).
+#  - ENABLE_ML FetchContent-downloads dlib.
+#  - ENABLE_LIBBACKTRACE ExternalProject-downloads libbacktrace.
+# Protobuf is detected unconditionally and needs the native protoc.
+EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
+                  -DENABLE_PLUGIN_OTEL=OFF -DENABLE_PLUGIN_OTEL_SIGNAL_VIEWER=OFF \
+                  -DENABLE_PLUGIN_SCRIPTS=OFF \
+                  -DENABLE_ML=OFF \
+                  -DENABLE_LIBBACKTRACE=OFF \
+                  -DProtobuf_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
+                  -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
+                  -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
 
 do_compile:append() {
     # Go dependencies are protected with read-only permissions, but would prevent cleaning
@@ -127,23 +147,16 @@ do_install:append() {
     install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
     install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
 
-    # webUI
-    if  "${@bb.utils.contains('PACKAGECONFIG', 'webui_v0', 'true', 'false', d)}"; then
-        rm -rf ${D}${datadir}/netdata/web/v1
-        rm -rf ${D}${datadir}/netdata/web/v2
-        install -m 0644 ${D}${datadir}/netdata/web/v0/index.html ${D}${datadir}/netdata/web/
-    fi
-    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v1', 'true', 'false', d)}"; then
-        rm -rf ${D}${datadir}/netdata/web/v0
-        rm -rf ${D}${datadir}/netdata/web/v2
-        install -m 0644 ${D}${datadir}/netdata/web/v1/index.html ${D}${datadir}/netdata/web/
-    fi
-    if "${@bb.utils.contains('PACKAGECONFIG', 'webui_v2', 'true', 'false', d)}"; then
-        rm -rf ${D}${datadir}/netdata/web/v0
-        rm -rf ${D}${datadir}/netdata/web/v1
-        install -m 0644 ${D}${datadir}/netdata/web/v2/index.html ${D}${datadir}/netdata/web/
-    fi
-    chown -R netdata:netdata ${D}${datadir}/netdata/web
+    # BUILD_FOR_PACKAGING installs its own sysusers.d/tmpfiles.d snippets, but
+    # user creation is handled by useradd.bbclass and tmpfiles by our own
+    # netdata-volatiles.conf above, so drop the upstream ones to avoid
+    # shipping duplicate/unmanaged files.
+    rm -rf ${D}${nonarch_libdir}/sysusers.d ${D}${nonarch_libdir}/tmpfiles.d
+
+    # 2.x ships a gzipped copy of CMakeCache.txt purely so that
+    # "netdata -W buildinfo" can report it; it is full of host build paths.
+    # It carries no runtime value in a cross build, so drop it.
+    rm -f ${D}${datadir}/netdata/build-info-cmake-cache.gz
 }
 
 FILES:${PN} += "\
