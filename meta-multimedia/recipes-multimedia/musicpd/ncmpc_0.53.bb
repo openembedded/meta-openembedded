@@ -9,6 +9,7 @@ DEPENDS += " \
     ncurses \
     libpcre2 \
     libmpdclient \
+    fmt \
 "
 
 RDEPENDS:${PN} += "python3-core"
@@ -33,4 +34,4 @@ PACKAGECONFIG[outputs_screen] = "-Doutputs_screen=true,-Doutputs_screen=false"
 PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 
 SRC_URI = "git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https"
-SRCREV = "f81f875fc5785383d24f54fb9bd3cf06efd915a4"
+SRCREV = "b6b1116709a6981d432cd2455bff4c35e4b96213"
