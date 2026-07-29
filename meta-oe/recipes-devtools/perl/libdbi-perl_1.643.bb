@@ -13,6 +13,10 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz \
            file://CVE-2014-10402.patch \
            file://CVE-2026-9698.patch \
            file://CVE-2026-10879.patch \
+           file://CVE-2026-14380_p1.patch \
+           file://CVE-2026-14380_p2.patch \
+           file://CVE-2026-14380_p3.patch \
+           file://CVE-2026-14380_p4.patch \
            "
 SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
 SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
@@ -43,6 +47,7 @@ RDEPENDS:${PN}:class-target = " \
     perl-module-exporter-heavy \
     perl-module-dynaloader \
     perl-module-io-dir \
+    perl-module-load \
     perl-module-scalar-util \
     perl-module-universal \
 "
