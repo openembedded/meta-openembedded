@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2909fcf6f09ffff8430463d91c08c4e1"
 
 SRC_URI = "git://github.com/cisco/libsrtp.git;branch=2_x_dev;protocol=https;tag=v${PV}"
-SRCREV = "ee1a77c9f9dc02c42bda9901038c500c5efe4cfa"
+SRCREV = "24b3bf8f19b6f5ab4cd2bcceb4f4064efca86fd5"
 
 
 PACKAGECONFIG ?= ""
