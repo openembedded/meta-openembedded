@@ -7,10 +7,10 @@ SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master;tag
            file://0001-fix-build-against-fmt-12-include-fmt-format.h.patch \
            file://0002-include-cstring-for-std-strerror-std-memcpy.patch \
            "
-SRCREV = "7846f3dd5d0f848a60d0c3146c3b7290881a8992"
+SRCREV = "a6a2bb2991d197a52755a488fc943566d654d3bd"
 
 
-DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2 icu jsoncpp"
+DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2 icu jsoncpp cxxopts"
 
 SYSTEMD_SERVICE:${PN} = "gerbera.service"
 
@@ -28,5 +28,6 @@ PACKAGECONFIG[exiv2] = "-DWITH_EXIV2=TRUE,-DWITH_EXIV2=FALSE,exiv2"
 PACKAGECONFIG[matroska] = "-DWITH_MATROSKA=TRUE,-DWITH_MATROSKA=FALSE,libebml libmatroska"
 PACKAGECONFIG[magic] = "-DWITH_MAGIC=TRUE,-DWITH_MAGIC=FALSE,file"
 PACKAGECONFIG[js] = "-DWITH_JS=TRUE,-DWITH_JS=FALSE,duktape"
+PACKAGECONFIG[zip] = "-DWITH_ZIP=TRUE,-DWITH_ZIP=FALSE,libzippp libzip"
 
 SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
