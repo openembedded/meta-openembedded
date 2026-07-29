@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=0a6446108c96d0819d21e40b48109507"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://setup.sh \
-           file://init-exclude.patch \
            file://net-generic.patch \
            file://remove-startup-option.patch \
            file://disable-version-check.patch \
@@ -19,7 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://mysql-config-fix.patch \
            file://webmin.service \
             "
-SRC_URI[sha256sum] = "220015eaff2b666b9bbdf2ce2bc676de72d33e5cc5f35b800b0fa14934bdb95a"
+SRC_URI[sha256sum] = "9acc680d3d45cee876f36fc8810ce68bb6e44a0365e245a4298a180e0d016696"
 UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
 UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
 
@@ -91,6 +90,7 @@ do_install() {
         | tar --no-same-owner -xpf - -C ${D}${libexecdir}/webmin
 
     rm -f ${D}${libexecdir}/webmin/webmin-init
+    rm -f ${D}${libexecdir}/webmin/webmin-openrc-init
     rm -f ${D}${libexecdir}/webmin/ajaxterm/ajaxterm/configure.initd.gentoo
     rm -rf ${D}${libexecdir}/webmin/patches
 
