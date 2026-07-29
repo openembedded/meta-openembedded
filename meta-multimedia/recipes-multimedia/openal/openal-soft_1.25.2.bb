@@ -7,10 +7,16 @@ inherit cmake pkgconfig
 
 DEPENDS = "zlib libsndfile1"
 
-SRCREV = "dc7d7054a5b4f3bec1dc23a42fd616a0847af948"
-SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master \
-           file://0001-Add-missing-include-for-malloc-free.patch \
-          "
+SRCREV = "b2c48f7718ef3fcf67921a8b6534c4914e328970"
+SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
+
+# openal-soft 1.25.x annotates realtime-critical mixer functions with
+# [[clang::nonblocking]] and, even with ALSOFT_WERROR=OFF, hardcodes
+# -Werror=function-effects for CXX. clang-22's function-effects analysis
+# then fails the build on calls into non-nonblocking std::variant::emplace.
+# Pre-seed the feature-detection cache var so neither -Wfunction-effects
+# nor its -Werror promotion is added.
+EXTRA_OECMAKE:append:toolchain-clang = " -DHAVE_WFUNCTION_EFFECTS=OFF"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pipewire pulseaudio', d)}"
 PACKAGECONFIG[alsa] = "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"
