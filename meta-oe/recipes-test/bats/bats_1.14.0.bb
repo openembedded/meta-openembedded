@@ -9,9 +9,7 @@ SRC_URI = "\
   git://github.com/bats-core/bats-core.git;branch=master;protocol=https;tag=v${PV} \
   "
 
-# v1.13.0
-SRCREV = "3bca150ec86275d6d9d5a4fd7d48ab8b6c6f3d87"
-
+SRCREV = "eb7f42f8d608ac693d7a4b67474f6714ea68cfc5"
 
 # Numerous scripts assume ${baselib} == lib, which is not true.
 #
