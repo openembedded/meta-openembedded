@@ -4,7 +4,7 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE = "https://github.com/openzfs/zfs"
 
-SRCREV = "1c702dda346a59e05cfd3029569bbb1d5d91c54b"
+SRCREV = "83020cf8259d057d4cc9102010c05f07ffdfc136"
 SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.4-release;tag=${BP} \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
