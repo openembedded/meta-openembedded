@@ -9,7 +9,7 @@ inherit meson
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/libmpdclient;branch=master;protocol=https;tag=v${PV} \
 "
-SRCREV = "5073329989bf52676d8c446176a1d29ed3ffccca"
+SRCREV = "ee11992a793e16bcbd81eeef38d0cf20c0396cd3"
 
 PACKAGECONFIG ??= "tcp"
 PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"
