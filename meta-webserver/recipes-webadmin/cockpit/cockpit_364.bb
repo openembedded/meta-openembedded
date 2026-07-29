@@ -2,14 +2,14 @@ SUMMARY = "Admin interface for Linux machines"
 DESCRIPTION = "Cockpit makes it easy to administer your GNU/Linux servers via a web browser"
 
 LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1.txt;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "72098a51f85c4a63f2e276af119920a5faca978b57652df562b409b5941b5146"
+SRC_URI[sha256sum] = "514cea072e1ef137323ab92bdb07a66bbb5106ecd584e7a046294cf0170cb690"
 
 inherit gettext pkgconfig autotools systemd features_check python3targetconfig
 
