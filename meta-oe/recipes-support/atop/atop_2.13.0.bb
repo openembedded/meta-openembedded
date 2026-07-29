@@ -22,7 +22,7 @@ SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
            file://fix-permissions.patch \
            file://sysvinit-implement-status.patch \
            "
-SRC_URI[sha256sum] = "4fdbe67c5dfaf89405639e18599f4eae77978073ffa54f3c78c368ab54bd12f6"
+SRC_URI[sha256sum] = "ea182f84c9f52ca922e5af4f17dff97ff424400a4f2f92393317a6af66e6a874"
 
 UPSTREAM_CHECK_URI = "https://atoptool.nl/downloadatop.php"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+).tar"
