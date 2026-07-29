@@ -2,17 +2,17 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
-SRCREV = "92c428db1fe3fa4f7bd2593788bc9b71403d59ae"
-SRCREV_unionmount = "c6ab621ac19f2b96d34cd98f244e611750e2bb23"
+SRCREV = "acb6d4cb84205a8e3f19ca470cfcf7bf6d93a509"
+SRCREV_unionmount = "f48a57d2a7db5f86ff3dbc4444c3c3041e182d7d"
 SRCREV_FORMAT = "default_unionmount"
 
 SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;tag=v${PV} \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
-           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
            file://0001-include-libgen.h-for-basename-API-prototype.patch \
            file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch \
            file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
+           file://0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch \
            "
 
 
