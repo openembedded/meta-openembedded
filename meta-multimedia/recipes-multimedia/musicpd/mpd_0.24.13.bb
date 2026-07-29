@@ -20,9 +20,8 @@ DEPENDS += " \
 
 SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https;tag=v${PV} \
            file://mpd.conf.in \
-           file://0001-libfmt-12.2.0-support-use-fmt-format.h-not-fmt-core.h.patch \
            "
-SRCREV = "7a9afa059e95668c912f779219ee8fe1e44dd2aa"
+SRCREV = "e9a65d66ef2a64ac6881e6e9e316e8665dcfd4a3"
 
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_user_unitdir}', '-Dsystemd=disabled', d)} \
