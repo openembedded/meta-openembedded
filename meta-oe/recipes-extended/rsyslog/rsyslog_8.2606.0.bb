@@ -30,7 +30,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
 SRC_URI:append:libc-musl = " \
     file://disable-omfile-outchannel.patch \
 "
-SRC_URI[sha256sum] = "2a04b1cd6f0a5e2b60eec231acce3cf9927c4ed02bc5fbbe5dc4c35fcf887b64"
+SRC_URI[sha256sum] = "2574b3f3068e6955eb94ef5643e2b6a5b8585cc8eaa77209ff5cbc1e2e5f71e5"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -71,6 +71,10 @@ PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
 PACKAGECONFIG[uuid] = "--enable-uuid,--disable-uuid,util-linux,"
 PACKAGECONFIG[libgcrypt] = "--enable-libgcrypt,--disable-libgcrypt,libgcrypt,"
 PACKAGECONFIG[testbench] = "--enable-testbench --enable-omstdout,--disable-testbench --disable-omstdout,,"
+# libyaml became enabled-by-default in 8.2606.0; 8.2604.0 did not build it, so
+# leave it out of the default PACKAGECONFIG to pass --disable-libyaml and
+# preserve prior behavior.
+PACKAGECONFIG[libyaml] = "--enable-libyaml,--disable-libyaml,libyaml,"
 
 # default no in configure
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
