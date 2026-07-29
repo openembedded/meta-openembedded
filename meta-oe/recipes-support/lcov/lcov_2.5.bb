@@ -8,6 +8,13 @@ LCOV supports statement, function and branch coverage measurement."
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
+# lcov 2.5's "make install" target now depends on a Sphinx-generated doc step
+# (docs/_build/man and docs/_build/html); the pre-built man pages shipped by
+# 2.4 are gone. lcov 2.4 packaged man pages, so preserve that by building them
+# with Sphinx at build time. The html step (install forces "man html") uses the
+# sphinx_rtd_theme, hence the theme dependency too.
+DEPENDS += "python3-sphinx-native python3-sphinx-rtd-theme-native"
+
 RDEPENDS:${PN} += " \
     libjson-perl \
     perl \
@@ -51,7 +58,7 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov-symlinks \
 "
 SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
-SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
+SRC_URI[sha256sum] = "7e5e5a154bd5f3557659c328cab376764e7abd238bb403c424472c296b175126"
 
 UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
