@@ -52,6 +52,7 @@ RDEPENDS:packagegroup-meta-oe = "\
 
 RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     bonnie++ \
+    coremark-pro \
     cpupower \
     dbench \
     dhrystone \
@@ -66,14 +67,20 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     mbw \
     memtester \
     nbench-byte \
+    osbench \
     phoronix-test-suite \
     qperf \
+    ramspeed \
+    ramspeed-smp \
     rtla \
     s-suite \
+    sockperf \
     stressapptest \
     tinymembench \
     tiobench \
     whetstone \
+    wrk \
+    wrk2 \
 "
 RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7a = " cpuburn-arm sysbench"
 RDEPENDS:packagegroup-meta-oe-benchmarks:append:armv7ve = " cpuburn-arm sysbench"
