@@ -13,13 +13,19 @@ SRC_URI = " \
     file://0001-Enable-system-malloc-on-all-linux.patch \
     file://0002-Add-debian-csh-scripts.patch \
 "
-SRC_URI[sha256sum] = "e3270ce9667fd5bd2a046687659fcf5fd6a6781326f806ebd724f1e1c9cd4185"
+SRC_URI[sha256sum] = "4208cf4630fb64d91d81987f854f9570a5a0e8a001a92827def37d0ed8f37364"
 
-EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
+# tcsh 6.24.16 changed the "gethost" build-host helper rule to use
+# CPPFLAGS_FOR_BUILD/CFLAGS_FOR_BUILD/LDFLAGS_FOR_BUILD instead of the target
+# CPPFLAGS/CFLAGS/LDFLAGS it used through 6.24.12. Those *_FOR_BUILD flags do
+# not carry the "-I. -I$(srcdir)" include paths the target CPPFLAGS had, so the
+# generated config.h (in the build dir) is not found. Supply the build-host
+# flags, including the include dirs, so gethost compiles with the native gcc.
+EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}' CFLAGS_FOR_BUILD='${BUILD_CFLAGS}' CPPFLAGS_FOR_BUILD='-I. -I${S} ${BUILD_CPPFLAGS}' LDFLAGS_FOR_BUILD='${BUILD_LDFLAGS}'"
 inherit autotools
 
 do_compile:prepend() {
-    oe_runmake CC_FOR_GETHOST='${BUILD_CC}' CFLAGS='${BUILD_CFLAGS}' LDFLAGS='${BUILD_LDFLAGS}' gethost
+    oe_runmake gethost
 }
 
 do_install:append () {
