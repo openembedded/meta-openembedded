@@ -22,7 +22,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=22b3189b9b79f1de35860dcc299bb6bc"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
            "
-SRC_URI[sha256sum] = "fd32c1255c0114d55929b496a15a6a6f48231f108be23f50ad3b8abc2e734ccf"
+SRC_URI[sha256sum] = "e044ce5926491e649f96c943482bf56bc268389fcb5d2edc4bcc4e94ceff09aa"
 
 UPSTREAM_CHECK_URI = "https://github.com/cfengine/masterfiles/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
