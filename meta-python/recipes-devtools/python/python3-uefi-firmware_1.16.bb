@@ -11,7 +11,13 @@ SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch
 
 SRCREV = "e202e576cefd1fefb3f510237bbd0aea8aedca07"
 
-inherit setuptools3
+DEPENDS += "python3-setuptools-scm-native"
+
+inherit python_setuptools_build_meta
+
+# The tarball is built from a git tag, so let setuptools_scm use ${PV}
+# instead of deriving a version from the checkout.
+export SETUPTOOLS_SCM_PRETEND_VERSION = "${PV}"
 
 RDEPENDS:${PN} += " \
     python3-ctypes \
