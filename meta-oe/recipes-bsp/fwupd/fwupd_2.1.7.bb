@@ -40,8 +40,8 @@ PACKAGECONFIG ??= "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
+    ${@bb.utils.contains_any('TARGET_ARCH', 'i386 i486 i586 i686 x86_64', 'hsi', '', d)} \
     gnutls \
-    hsi \
     plugin_modem_manager \
 "
 
@@ -49,6 +49,10 @@ PACKAGECONFIG[bluetooth] = "-Dbluez=enabled,-Dbluez=disabled"
 PACKAGECONFIG[firmware-packager] = "-Dfirmware-packager=true,-Dfirmware-packager=false"
 PACKAGECONFIG[fish-completion] = "-Dfish_completion=true,-Dfish_completion=false"
 PACKAGECONFIG[gnutls] = "-Dgnutls=enabled,-Dgnutls=disabled,gnutls"
+# HSI is only implemented for x86. Since 2.1.x meson.build gates it with
+# .require() rather than .disable_auto_if(), so asking for it anywhere else is a
+# hard error ("Feature hsi cannot be enabled") instead of being quietly ignored,
+# hence the architecture check on the default above.
 PACKAGECONFIG[hsi] = "-Dhsi=enabled,-Dhsi=disabled"
 PACKAGECONFIG[libdrm] = "-Dlibdrm=enabled,-Dlibdrm=disabled,libdrm"
 PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
