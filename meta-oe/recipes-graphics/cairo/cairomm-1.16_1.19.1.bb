@@ -8,7 +8,7 @@ inherit gnomebase
 DEPENDS += "boost cairo libsigc++-3"
 
 SRC_URI = "https://www.cairographics.org/releases/cairomm-${PV}.tar.xz"
-SRC_URI[sha256sum] = "e0e996a979ee52c840dca3ee74f5d005e3259b94ddce58f255d3b6f47c8cb41d"
+SRC_URI[sha256sum] = "06881a0167d84962c74db318427c5be663d30b8ea5c60740a9dc36a9c1961b54"
 
 S = "${UNPACKDIR}/cairomm-${PV}"
 
