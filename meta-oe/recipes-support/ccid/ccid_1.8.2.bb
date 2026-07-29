@@ -8,7 +8,7 @@ RDEPENDS:${PN} = "pcsc-lite"
 
 SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.xz"
 
-SRC_URI[sha256sum] = "531dc29e7c1b9e22e1918f0767b625d52ce8a98f266eb2144c5cf5dbd29c0f67"
+SRC_URI[sha256sum] = "d74294e23d436546c3e719c95a4da180b17f5e7ffdd36efca53f75351cb0de75"
 
 inherit meson pkgconfig
 
