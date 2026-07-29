@@ -5,8 +5,8 @@ SUMMARY = "Gstreamer editing services"
 HOMEPAGE = "http://cgit.freedesktop.org/gstreamer/gst-editing-services/"
 
 LICENSE = "GPL-2.0-or-later AND LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
-                    file://COPYING.LIB;md5=6762ed442b3822387a51c92d928ead0d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=69333daa044cb77e486cc36129f7a770 \
+                    file://COPYING.LIB;md5=69333daa044cb77e486cc36129f7a770"
 
 DEPENDS = "flex-native gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad python3-pygobject"
 
@@ -18,7 +18,7 @@ inherit meson pkgconfig upstream-version-is-even gobject-introspection features_
 EXTRA_OEMESON = "-Dvalidate=disabled"
 
 SRC_URI = "http://gstreamer.freedesktop.org/src/gst-editing-services/gst-editing-services-${PV}.tar.xz"
-SRC_URI[sha256sum] = "792339135ce713088663cc5d44e0aea8217793e88fabfd11571e7abf4a429f2c"
+SRC_URI[sha256sum] = "6f7eb55e58718dde5b5869f619ed90ebf3b0cfa0376c169c1b83fc773811914a"
 
 PACKAGES += "gst-validate-launcher libges"
 
