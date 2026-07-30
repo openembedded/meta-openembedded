@@ -16,9 +16,9 @@ global warming, discover sources of gravitational waves, and many other types \
 of scientific and mathematical research."
 
 HOMEPAGE = "http://boinc.berkeley.edu/"
-LICENSE = "GPL-3.0-only AND LGPL-2.0-or-later"
+LICENSE = "GPL-3.0-only AND LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                    file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6"
+                    file://COPYING.LESSER;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
 SECTION = "applications"
 DEPENDS = "curl \
            jpeg \
@@ -33,12 +33,11 @@ DEPENDS = "curl \
 CVE_PRODUCT = "boinc_client"
 CVE_STATUS[CVE-2013-2018] = "fixed-version: fixed in version 7.0.45 and later"
 
-SRCREV = "4774e1cbe0ad13cb9a6f7fffbb626a417316f61d"
-BRANCH = "client_release/7/7.20"
+SRCREV = "3422898505b74c637a4b530a94b63be90bdf025b"
+BRANCH = "client_release/8/8.2"
 SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
            file://boinc-AM_CONDITIONAL.patch \
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
-           file://0001-Do-not-undefine-_FILE_OFFSET_BITS.patch \
 "
 
 inherit gettext autotools pkgconfig features_check systemd
