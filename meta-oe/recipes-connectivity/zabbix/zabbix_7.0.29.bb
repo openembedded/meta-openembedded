@@ -29,7 +29,7 @@ SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/7.0/${BPN}-${PV}.tar.gz 
 "
 SRC_URI[sha256sum] = "184d03454d7ff2d49fa1d292082ad335bce907ba22e30d54035d05329708ce32"
 
-inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
+inherit autotools-brokensep pkgconfig systemd useradd
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE:${PN} = "zabbix-agent.service"
@@ -41,7 +41,7 @@ USERADD_PARAM:${PN} = "-r -g zabbix -d /var/lib/zabbix \
     -s /sbin/nologin -c \"Zabbix Monitoring System\" zabbix \
 "
 
-KERNEL_VERSION = "${@get_kernelversion_headers('${STAGING_KERNEL_DIR}')}"
+KERNEL_VERSION = "${@oe.kernel.get_version_headers('${STAGING_KERNEL_DIR}')}"
 
 EXTRA_OECONF = " \
     --enable-dependency-tracking \
