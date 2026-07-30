@@ -78,6 +78,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     stressapptest \
     tinymembench \
     tiobench \
+    unixbench \
     whetstone \
     wrk \
     wrk2 \
