@@ -35,7 +35,8 @@ CVE_STATUS[CVE-2013-2018] = "fixed-version: fixed in version 7.0.45 and later"
 
 SRCREV = "3422898505b74c637a4b530a94b63be90bdf025b"
 BRANCH = "client_release/8/8.2"
-SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
+TAG = "client_release/8.2/8.2.15"
+SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH};tag=${TAG} \
            file://boinc-AM_CONDITIONAL.patch \
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
 "
