@@ -33,6 +33,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
            file://0011-replace-__FILE__-with-__FILE_NAME__.patch \
            file://0001-configure-Include-unistd.h-for-getpid-API.patch \
            file://0001-Replace-std-bind2nd-with-generic-lambda.patch \
+           file://0001-Fix-build-with-binutils-2.47.patch \
 "
 SRC_URI[sha256sum] = "7ba06f99d7c188389d20d1d5e53ee690c7733f87aa9af62bd664fa0ca235a412"
 
