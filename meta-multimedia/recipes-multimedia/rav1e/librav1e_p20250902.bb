@@ -7,6 +7,7 @@ inherit cargo_c pkgconfig cargo-update-recipe-crates
 
 require ${PN}-crates.inc
 
+DEPENDS = "libgit2"
 DEPENDS:append:x86 = " nasm-native"
 DEPENDS:append:x86-64 = " nasm-native"
 
