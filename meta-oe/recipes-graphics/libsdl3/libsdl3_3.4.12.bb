@@ -14,7 +14,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=036a54229112040a743509a86b30c80c \
                     file://src/video/yuv2rgb/LICENSE;md5=79f8f3418d91531e05f0fc94ca67e071 \
                     "
 
-SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
+SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz \
+           file://0001-cmake-Pass-_GNU_SOURCE-via-CMAKE_REQUIRED_DEFINITION.patch \
+"
 
 S = "${UNPACKDIR}/SDL3-${PV}"
 
