@@ -1,9 +1,10 @@
-
+SUMMARY = "FastAPI framework"
+DESCRIPTION = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 
-SRC_URI[sha256sum] = "f338951b82fd74ca8f843163aec43ea1a1ce84d515415a50fa98fa25572a5544"
+SRC_URI[sha256sum] = "e8822fc40db1e1858054d7a949a888695bc9bdce70139178e33bd2871a453ca1"
 
 SRC_URI += "file://run-ptest"
 
