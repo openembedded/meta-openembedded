@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4bf661c1e3793e55c8d1051bc5e0ae21"
 DEPENDS = "glib-2.0"
 
 SRC_URI = " \
-    git://github.com/FluidSynth/fluidsynth.git;name=fluidsynth;branch=master;protocol=https \
+    git://github.com/FluidSynth/fluidsynth.git;name=fluidsynth;nobranch=1;protocol=https;tag=v${PV} \
     git://github.com/kthohr/gcem.git;name=gcem;subdir=${S}/gcem;protocol=https;nobranch=1 \
     git://github.com/Signalsmith-Audio/basics.git;name=signalsmith-audio-basics;subdir=${S}/signalsmith-audio-basics;protocol=https;nobranch=1 \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
