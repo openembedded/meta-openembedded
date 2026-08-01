@@ -18,8 +18,10 @@ DEPENDS += " \
     gdm \
 "
 
-SRC_URI[archive.sha256sum] = "d8f6e2c659668c77df82c3dd95ba04fcef8c40c228e2c22605f9a17a9161ec83"
+SRC_URI[archive.sha256sum] = "7e8bca43a81a134c666b3a78baf2affb0c5d30efb1bca653887fc41b31dd5e64"
 
 PACKAGECONFIG[eds] = "--enable-eds,--disable-eds,evolution-data-server"
 
 RDEPENDS:${PN} += "gdm-base"
+
+FILES:${PN} += " ${systemd_user_unitdir}"
