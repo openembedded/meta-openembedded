@@ -8,7 +8,7 @@ inherit cmake pkgconfig
 DEPENDS = "zlib libsndfile1"
 
 SRCREV = "b2c48f7718ef3fcf67921a8b6534c4914e328970"
-SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master;tag=${PV}"
 
 # openal-soft 1.25.x annotates realtime-critical mixer functions with
 # [[clang::nonblocking]] and, even with ALSOFT_WERROR=OFF, hardcodes
