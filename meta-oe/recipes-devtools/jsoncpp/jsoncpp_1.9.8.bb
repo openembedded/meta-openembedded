@@ -13,10 +13,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
 
 PE = "1"
 
-SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+SRCREV = "8519b8381f3c741ad1421f88237b1deda0b11412"
 SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https;tag=${PV} \
-           file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch \
-           file://71d46ca38e90dc902e8178ba484af4f27fa11947.patch \
            file://run-ptest \
            "
 
