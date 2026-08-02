@@ -4,7 +4,9 @@ LICENSE = "BSD-3-Clause AND LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ab2826b41ca0ff4030d38cc39791d1c8"
 SECTION = "inputmethods"
 
-SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
+SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2 \
+    file://0001-sigscheme-GC-protect-the-objects-used-by-require.patch \
+"
 SRC_URI:append:class-target = "\
     file://uim-module-manager.patch \
 "
