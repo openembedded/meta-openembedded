@@ -9,18 +9,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 DEPENDS = "libnfnetlink"
 PROVIDES = "ulogd"
 
-PV .= "+git"
-
 SRC_URI = "git://git.netfilter.org/ulogd2;branch=master \
            file://ulogd.init \
            file://ulogd.service \
 "
-SRCREV = "79aa980f2df9dda0c097e8f883a62f414b9e5138"
+SRCREV = "1fe54ec39a071ea3b06e6883e542dfdcf40d2840"
 
 
 inherit autotools manpages pkgconfig systemd update-rc.d
 
-PACKAGECONFIG ?= "dbi json nfacct nfct nflog pcap sqlite3 ulog"
+PACKAGECONFIG ?= "dbi json nfacct nfct nflog pcap sqlite3"
 PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
 PACKAGECONFIG[json] = "--enable-json,--disable-json,jansson"
 PACKAGECONFIG[manpages] = ""
@@ -31,7 +29,6 @@ PACKAGECONFIG[nflog] = "--enable-nflog,--disable-nflog,libnetfilter-log"
 PACKAGECONFIG[pcap] = "--enable-pcap,--disable-pcap,libpcap"
 PACKAGECONFIG[pgsql] = "--enable-pgsql,--disable-pgsql,postgresql"
 PACKAGECONFIG[sqlite3] = "--enable-sqlite3,--disable-sqlite3,sqlite3"
-PACKAGECONFIG[ulog] = "--enable-ulog,--disable-ulog"
 
 do_install:append () {
 	install -d ${D}${sysconfdir}
