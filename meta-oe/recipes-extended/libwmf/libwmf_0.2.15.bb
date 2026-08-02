@@ -16,8 +16,8 @@ inherit features_check autotools pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master"
-SRCREV = "9e4737f2293c0d127bda92e5b01896df10571424"
+SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "d00b314cc5fbed48fe79fd3acdcf42324d2f4b8e"
 
 
 do_install:append() {
