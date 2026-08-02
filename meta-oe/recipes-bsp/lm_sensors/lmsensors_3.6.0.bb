@@ -17,8 +17,11 @@ SRC_URI = "git://github.com/lm-sensors/lm-sensors.git;protocol=https;branch=mast
            file://0001-Fix-building-with-GCC-14.patch \
 "
 SRCREV = "1667b850a1ce38151dae17156276f981be6fb557"
-
+# Upstream release tags look like "V3-6-2". The checker only converts "_" to
+# "." (not "-"), so the parsed version stays dash-separated and cannot be
+# compared against the dotted PV; marked unknown until that can resolve.
 UPSTREAM_CHECK_GITTAGREGEX = "V(?P<pver>\d+(-\d+)+)"
+UPSTREAM_VERSION_UNKNOWN = "1"
 
 inherit update-rc.d systemd
 

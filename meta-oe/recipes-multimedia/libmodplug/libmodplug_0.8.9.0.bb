@@ -8,6 +8,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz \
            file://0001-fastmix-Drop-register-storage-class-keyword.patch"
 
 SRC_URI[sha256sum] = "457ca5a6c179656d66c01505c0d95fafaead4329b9dbaa0f997d00a3508ad9de"
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/modplug-xmms/files/libmodplug/"
+UPSTREAM_CHECK_REGEX = "libmodplug-(?P<pver>\d+(\.\d+)+)\.tar"
 
 inherit autotools pkgconfig
 

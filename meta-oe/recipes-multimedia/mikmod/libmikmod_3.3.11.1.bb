@@ -9,6 +9,8 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
 "
 SRC_URI[sha256sum] = "ad9d64dfc8f83684876419ea7cd4ff4a41d8bcd8c23ef37ecb3a200a16b46d19"
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mikmod/files/libmikmod/"
+UPSTREAM_CHECK_REGEX = "/(?P<pver>\d+(\.\d+)+)/"
 
 inherit autotools binconfig lib_package
 

@@ -8,6 +8,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
            "
 SRC_URI[sha256sum] = "b79afe73db241f762ddb611fe11184cbf6da44ba99f90721515daa2f978ff38e"
 
+# Releases live in per-version subdirectories on SourceForge and the tarball
+# itself is not listed on any single browsable page, so match the directory names
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/soci/files/soci/"
+UPSTREAM_CHECK_REGEX = "soci-(?P<pver>\d+(\.\d+)+)/"
+
 TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
               -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
               -DSOCI_TEST_MYSQL_CONNSTR:STRING="db=soci_test user=oe password=oe"'

@@ -12,6 +12,11 @@ SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/fonts-vlgo
 
 SRC_URI[sha256sum] = "c201dd3fa73492a2551a339fe235608d3be771237fd5868a526f1b3eb3164d93"
 
+# The Launchpad +sourcefiles URL has no browsable listing; the Debian pool
+# carries the same orig tarballs and is indexable.
+UPSTREAM_CHECK_URI = "https://deb.debian.org/debian/pool/main/f/fonts-vlgothic/"
+UPSTREAM_CHECK_REGEX = "fonts-vlgothic_(?P<pver>\d+)\.orig\.tar"
+
 S = "${UNPACKDIR}/VLGothic"
 
 do_install:append () {

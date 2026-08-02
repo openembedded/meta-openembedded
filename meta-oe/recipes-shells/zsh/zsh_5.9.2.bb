@@ -13,6 +13,11 @@ DEPENDS = "ncurses bison-native libcap libpcre2 gdbm groff-native"
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.xz"
 SRC_URI[sha256sum] = "36fa734374b44783582cec09bcd67822e2f992c779ec1624ab5596df078d2f81"
 
+# The SourceForge download mirror has no browsable listing; check the per-release
+# directories in the project's file area instead.
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/zsh/files/zsh/"
+UPSTREAM_CHECK_REGEX = "zsh/(?P<pver>\d+(\.\d+)+)/"
+
 inherit autotools gettext update-alternatives manpages
 
 EXTRA_AUTORECONF += "--exclude=aclocal"

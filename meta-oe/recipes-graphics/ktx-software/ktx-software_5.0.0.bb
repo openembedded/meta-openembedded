@@ -15,6 +15,12 @@ LIC_FILES_CHKSUM = "file://REUSE.toml;md5=9f87c97ba36aab42411bf93c094a61f2"
 SRC_URI = "git://github.com/KhronosGroup/KTX-Software.git;protocol=https;branch=main;lfs=0"
 SRCREV = "6269d2752ed04446c2d4749f54f3aad4f94555b5"
 
+# Upstream tags are "v<ver>". PV 5.0.0 is really the v5.0.0-rc1 tag pinned
+# above, and the checker skips rc/alpha/beta tags, so the newest resolvable
+# release (4.4.2) is always lower than PV until 5.0.0 final is tagged.
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_VERSION_UNKNOWN = "1"
+
 inherit cmake
 
 # BASISU does not work with avx

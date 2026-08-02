@@ -10,6 +10,11 @@ SRC_URI = " \
 SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
 SRC_URI[ucd-license.sha256sum] = "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
 
+# The tarball name (UCD.zip) carries no version, so check the per-release
+# directories in the Public/zipped/ index instead.
+UPSTREAM_CHECK_URI = "https://www.unicode.org/Public/zipped/"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
+
 inherit allarch
 
 S = "${UNPACKDIR}"

@@ -9,6 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
 SECTION = "libs"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/libdbi/libdbi-${PV}.tar.gz"
+# SourceForge download area tops out at libdbi-0.8.2; PV 0.9.0 exists only
+# outside the browsable files area, so no checkable listing maps to PV.
+UPSTREAM_VERSION_UNKNOWN = "1"
 
 inherit autotools
 

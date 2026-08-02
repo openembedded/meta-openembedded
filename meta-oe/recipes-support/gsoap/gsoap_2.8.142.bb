@@ -9,6 +9,9 @@ SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
            file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
 SRC_URI[sha256sum] = "6d7196bd6591ec2977474c681e351b4a33eb5c2d64c9e2e6727b004f330b3752"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/${BPN}2/files/"
+UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)\.zip"
+
 inherit autotools
 
 BBCLASSEXTEND = "native"

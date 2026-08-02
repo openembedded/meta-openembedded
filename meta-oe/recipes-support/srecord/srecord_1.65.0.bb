@@ -13,7 +13,8 @@ SRC_URI = " \
 SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
 S = "${UNPACKDIR}/${BP}-Source"
 
-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/srecord/1.65/"
+UPSTREAM_CHECK_REGEX = "srecord-(?P<pver>\d+(\.\d+)+)-Source\.tar\.gz"
 
 DEPENDS = "boost libgcrypt"
 

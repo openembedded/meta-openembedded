@@ -30,6 +30,9 @@ SRC_URI = "\
 "
 SRC_URI[sha256sum] = "fd92a1a9faa10fb81bbf752c7ee1e257f17e1ec4c2964f8a47adf8a3eaa7df41"
 
+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/i/${DEBIAN_PKG_NAME}/"
+UPSTREAM_CHECK_REGEX = "${DEBIAN_PKG_NAME}_(?P<pver>\d+(\.\d+)+)\+dfsg\d*\.orig\.tar\.xz"
+
 S = "${UNPACKDIR}/${DEBIAN_PKG_NAME}-${DEBIAN_PKG_VERSION}"
 
 OECMAKE_SOURCEPATH = "${S}/src"

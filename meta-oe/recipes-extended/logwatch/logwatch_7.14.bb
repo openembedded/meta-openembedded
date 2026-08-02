@@ -13,6 +13,8 @@ RDEPENDS:${PN} = "perl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "2fc66eca83419053991484b7d6e778f46b03704ce778893473d7a9cb7dd915f9"
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/logwatch/files/"
+UPSTREAM_CHECK_REGEX = "logwatch-(?P<pver>\d+(\.\d+)+)/"
 
 do_install() {
     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts/services

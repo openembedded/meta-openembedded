@@ -24,6 +24,10 @@ SRC_URI:append:class-target = " \
 SRC_URI[archive.sha256sum] = "458d94769625e73d5f6232500f49cbadcb2b183380d43d2266a0f9701aeb9c5b"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 
+# Tarballs live in per-version subdirectories, the listing above them has no filenames
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/gnuplot/files/gnuplot/"
+UPSTREAM_CHECK_REGEX = "gnuplot/(?P<pver>\d+(\.\d+)+)/"
+
 # for building docs (they deserve it) we need *doc2* tools native
 BBCLASSEXTEND = "native"
 DEPENDS:class-native = "readline-native"

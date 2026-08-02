@@ -14,6 +14,10 @@ PV = "1.1.2+git"
 SRCREV = "01c94c77f59404924f1c46d99c4e5e0c7817281b"
 SRC_URI = "git://github.com/libimobiledevice/usbmuxd;protocol=https;branch=master"
 
+# The recipe deliberately tracks master ahead of the last release (1.1.1), so
+# tag-based checks always report a regression; track new commits instead.
+UPSTREAM_CHECK_COMMITS = "1"
+
 
 EXTRA_OECONF += "--without-preflight"
 

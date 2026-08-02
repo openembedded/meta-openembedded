@@ -17,7 +17,7 @@ SRC_URI:append:class-native = " file://native-helpers.patch"
 SRC_URI[sha256sum] = "666e91b92c76eb5bee7ee88dca1478eb55122c2af2641f055d4e51cf9d904860"
 
 UPSTREAM_CHECK_URI = "https://github.com/fujiwarat/anthy-unicode/releases"
-UPSTREAM_CHECK_REGEX = "anthy-unicode-(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
 
 DEPENDS:class-target = "anthy-unicode-native"
 RDEPENDS:${PN}:class-target = "libanthy-unicode0"

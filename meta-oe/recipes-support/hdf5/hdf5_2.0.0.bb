@@ -19,6 +19,9 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v2_0/v2_0_0/downloads/${BP
            "
 SRC_URI[sha256sum] = "f4c2edc5668fb846627182708dbe1e16c60c467e63177a75b0b9f12c19d7efed"
 
+UPSTREAM_CHECK_URI = "https://support.hdfgroup.org/releases/hdf5/"
+UPSTREAM_CHECK_REGEX = "\./(?P<pver>\d+(\.\d+)+)/index\.html"
+
 FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
 
 EXTRA_OECMAKE = " \

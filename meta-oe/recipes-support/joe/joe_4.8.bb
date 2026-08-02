@@ -15,3 +15,7 @@ PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-termin
 inherit autotools-brokensep mime-xdg
 
 SRC_URI[sha256sum] = "6995b28ee20dcdbbcb5a45a4c110642dc96d67748aea27450c74cdb4dd07cc20"
+
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/joe-editor/files/JOE%20sources/"
+UPSTREAM_CHECK_REGEX = "joe-(?P<pver>\d+(\.\d+)+)/"
+

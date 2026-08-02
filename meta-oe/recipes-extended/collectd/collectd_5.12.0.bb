@@ -18,6 +18,10 @@ SRC_URI = "${GITHUB_BASE_URI}download/${BP}/${BP}.tar.bz2 \
            "
 SRC_URI[sha256sum] = "5bae043042c19c31f77eb8464e56a01a5454e0b39fa07cf7ad0f1bfc9c3a09d6"
 
+# Release tags are "collectd-<pver>", which the github-releases default regex
+# ("releases/tag/v?...") does not match.
+UPSTREAM_CHECK_REGEX = "releases/tag/collectd-(?P<pver>\d+(\.\d+)+)$"
+
 inherit autotools python3native update-rc.d pkgconfig systemd github-releases
 
 SYSTEMD_SERVICE:${PN} = "collectd.service"

@@ -20,6 +20,12 @@ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BPN}-commu
            "
 SRC_URI[sha256sum] = "878e52c4a6cc3bd28048b527a920fba86ce4cd99c5760adc42417a811efa6e6b"
 
+# The S3 tarball bucket denies listing, so track the release tags of the
+# upstream git repository instead. Tarballs are published as
+# cfengine-community-<pver>.tar.gz for every 3.x.y tag.
+UPSTREAM_CHECK_URI = "https://github.com/cfengine/core/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>3(\.\d+)+)$"
+
 inherit autotools-brokensep systemd
 
 export EXPLICIT_VERSION = "${PV}"

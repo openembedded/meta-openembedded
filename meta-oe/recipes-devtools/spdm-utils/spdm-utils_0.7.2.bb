@@ -16,6 +16,10 @@ SRC_URI += "git://github.com/westerndigitalcorporation/spdm-utils.git;protocol=h
 include spdm-utils-crates.inc
 
 SRCREV = "8805327c9ac0d354c6ef891ccdd0527bbecf80e0"
+# Tags are "vX.Y.Z"; PV 0.7.2 is a post-v0.7.1 snapshot, so the newest tag stays
+# below PV until v0.7.2 is cut. Regex is correct for that point.
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_VERSION_UNKNOWN = "1"
 
 PV .= "+git"
 

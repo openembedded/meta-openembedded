@@ -11,6 +11,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz \
 
 SRC_URI[sha256sum] = "754ab0a7e28033dbea81308ef424bc7df4d6e2fe31b60cc536b61b51fefbd8fb"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/${BPN}/files/"
+UPSTREAM_CHECK_REGEX = "iperf-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
+
 S = "${UNPACKDIR}/iperf-${PV}"
 
 inherit autotools pkgconfig

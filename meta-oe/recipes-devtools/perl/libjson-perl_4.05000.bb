@@ -12,6 +12,11 @@ DEPENDS += "perl"
 SRC_URI = "git://github.com/makamaka/JSON.git;protocol=https;branch=master"
 
 SRCREV = "39bc0e567c202762a575fed2844ebdb941c3ca09"
+# Upstream tags are plain "X.YZ" (e.g. 4.11); PV mirrors them padded (4.05 -> 4.05000).
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+# PV uses CPAN zero-padded versioning (4.05000) which cannot be compared
+# against upstream's plain tags (4.11); the regex resolves but vercmp mis-sorts.
+UPSTREAM_VERSION_UNKNOWN = "1"
 
 
 inherit cpan

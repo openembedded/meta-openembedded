@@ -12,6 +12,10 @@ inherit python3native python3targetconfig
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
 SRC_URI[sha256sum] = "f2ec8e7eeef0500591706d374555f0ceb118822068e75fa3b32be07dd2184f6c"
 
+# Constrain the version to digits-and-dots, otherwise the auto-derived regex
+# also matches the X.Yrc0 pre-releases in the same directory and picks those.
+UPSTREAM_CHECK_REGEX = "mercurial-(?P<pver>\d+(\.\d+)+)\.tar"
+
 S = "${UNPACKDIR}/mercurial-${PV}"
 
 BBCLASSEXTEND = "native"

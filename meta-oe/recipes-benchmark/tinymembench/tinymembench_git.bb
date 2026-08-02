@@ -9,6 +9,9 @@ LIC_FILES_CHKSUM = "file://main.c;endline=22;md5=879b9bbb60851454885b5fa47eb6b34
 PV = "0.4.9+git"
 
 SRCREV = "a2cf6d7e382e3aea1eb39173174d9fa28cad15f3"
+# Upstream tags are "vX.Y" (newest v0.4); PV 0.4.9+git is ahead of the last tag.
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_VERSION_UNKNOWN = "1"
 SRC_URI = "git://github.com/ssvb/tinymembench.git;branch=master;protocol=https \
            file://0001-asm-Delete-.func-.endfunc-directives.patch \
            "
