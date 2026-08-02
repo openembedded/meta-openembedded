@@ -8,8 +8,7 @@ HOMEPAGE = "https://github.com/epsilonrt/mbpoll"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 DEPENDS = "libmodbus (>=3.1.4)"
 
-SRC_URI = "git://github.com/epsilonrt/mbpoll;protocol=https;branch=master \
-        file://0001-allow-build-with-cmake-4.patch"
-SRCREV = "a0bd6c08d3d15b086f2104477295c0705aed366a"
+SRC_URI = "git://github.com/epsilonrt/mbpoll;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "d541211d0e2451888de11c82fb1604c3d6285b1a"
 
 inherit pkgconfig cmake
