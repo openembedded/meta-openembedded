@@ -9,9 +9,9 @@ SRC_URI = "git://github.com/ngtcp2/nghttp3;protocol=https;branch=main;tag=v${PV}
            git://github.com/ngtcp2/sfparse;protocol=https;branch=main;name=sfparse;subdir=${S}/lib/sfparse \
 "
 
-SRCREV_nghttp3 = "d326f4c1eb3f6a780d77793b30e16756c498f913"
+SRCREV_nghttp3 = "dbfc24286138cb0b6490160e7ca87fe1ce6722a0"
 SRCREV_munit = "11e8e3466b2d6a8bdfd4b05a3d1ee7805c5d3442"
-SRCREV_sfparse = "ff7f230e7df2844afef7dc49631cda03a30455f3"
+SRCREV_sfparse = "4b313cfd2e1b389ae632b36dcd50402307289af2"
 
 SRCREV_FORMAT = "nghttp3"
 
