@@ -18,8 +18,15 @@ SRC_URI:append = " \
 PYPI_PACKAGE = "typer"
 
 RDEPENDS:${PN} += "\
-    python3-click \
-    python3-typing-extensions \
+    python3-annotated-doc \
+    python3-datetime \
+    python3-difflib \
+    python3-io \
+    python3-math \
+    python3-rich \
+    python3-shell \
+    python3-shellingham \
+    python3-threading \
 "
 # python3-misc for webbrowser module
 RDEPENDS:${PN}-ptest += "\
@@ -32,8 +39,6 @@ RDEPENDS:${PN}-ptest += "\
     python3-pytest-cov \
     python3-pytest-sugar \
     python3-pytest-xdist \
-    python3-rich \
-    python3-shellingham \
     python3-toml \
     python3-unittest-automake-output \
 "
