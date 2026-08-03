@@ -14,6 +14,7 @@ SRC_URI = "https://archive.apache.org/dist/${BPN}/${PV}/${BP}.tar.gz \
            file://0001-THRIFT-5842-Add-missing-cstdint-include-for-int64_t-.patch \
            file://CVE-2026-55971.patch \
            file://CVE-2026-58023.patch \
+           file://CVE-2026-48144.patch \
            "
 SRC_URI[sha256sum] = "b5d8311a779470e1502c027f428a1db542f5c051c8e1280ccd2163fa935ff2d6"
 
