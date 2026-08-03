@@ -9,8 +9,8 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1-only OR MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
-SRCREV = "e907d6a342e80b70874f93abd440b92b8a40b7bc"
+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https;tag=${BP}"
+SRCREV = "d41bf9220ec39277ff235379e9089d9e0fd6c2a5"
 
 
 DEPENDS:append:libc-musl = " libucontext"
