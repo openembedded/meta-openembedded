@@ -58,6 +58,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     dhrystone \
     fio \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "glmark2", "", d)} \
+    hackbench \
     iozone3 \
     iperf2 \
     iperf3 \
