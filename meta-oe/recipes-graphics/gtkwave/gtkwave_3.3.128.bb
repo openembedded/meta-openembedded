@@ -3,10 +3,10 @@ DESCRIPTION = "gtkwave is a viewer for VCD (Value Change Dump) files which are u
 HOMEPAGE = "http://gtkwave.sourceforge.net/"
 
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c5b1819073ecce49dec65a690b638c48"
 
 SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
-SRC_URI[sha256sum] = "f19da2db43b27bbcc669725843451945a68c3a4ce232562e341d6f63b80b55e4"
+SRC_URI[sha256sum] = "817e197fc1808f8aac3543c2c2f9683cb01368c91192b8eae5af58070ef1d1f8"
 S = "${UNPACKDIR}/${BPN}-gtk3-${PV}"
 
 DEPENDS = " \
