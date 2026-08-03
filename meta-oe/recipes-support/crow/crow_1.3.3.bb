@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e08502e395a6f7c037ddfe7d2915f58e"
 
 SRC_URI = "git://github.com/CrowCpp/Crow.git;protocol=https;branch=v1.3;tag=v${PV}"
-SRCREV = "f8c060c51feeca2c65828fb6f538603db4392d55"
+SRCREV = "7375d3dc1ffb8719778cdb29fb1c73141ce684e8"
 
 inherit cmake
 
