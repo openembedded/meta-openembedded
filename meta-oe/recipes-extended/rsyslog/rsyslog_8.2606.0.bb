@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
  encryption protected syslog relay chains while at the same time being\
  very easy to setup for the novice user."
 
-DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging"
+DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging autoconf-archive-native"
 HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "Apache-2.0 AND GPL-3.0-only AND LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
