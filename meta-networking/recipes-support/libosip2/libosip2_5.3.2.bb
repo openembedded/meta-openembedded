@@ -10,6 +10,6 @@ LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://src/osip2/osip.c;beginline=1;endline=19;md5=22ca0da0e41276c50c81b733953c208d"
 
 SRC_URI = "${GNU_MIRROR}/osip/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "fe82fe841608266ac15a5c1118216da00c554d5006e2875a8ac3752b1e6adc79"
+SRC_URI[sha256sum] = "16186f6f5540936b62c3aaca6e8409e1af25cd22abc3882b393be215f49d3b00"
 
 inherit autotools
