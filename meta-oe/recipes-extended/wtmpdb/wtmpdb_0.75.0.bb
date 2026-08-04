@@ -5,10 +5,9 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
 SECTION = "libs"
 
-SRCREV = "493e9704dbc50f141d5fbd41c823311e79d7e8d3"
+SRCREV = "a6f185a241ee633cbba600029ec153feb2665cf8"
 
-SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https \
-           file://0001-include-libgen.h-for-basename.patch"
+SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https"
 
 
 inherit meson pkgconfig systemd features_check
