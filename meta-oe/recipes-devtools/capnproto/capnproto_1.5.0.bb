@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
 
 SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https;tag=v${PV} \
            file://0001-Export-binaries-only-for-native-build.patch"
-SRCREV = "8b892a8a11a632f5d52b877a49728808a142379a"
+SRCREV = "373e61ec89e2359f1c362e9b2eadc552f4779306"
 
 S = "${UNPACKDIR}/${BP}/c++"
 
