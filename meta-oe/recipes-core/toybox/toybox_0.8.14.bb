@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
 
 inherit cml1 update-alternatives
 
-SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "9d4c124d7d731a2db399f6278baa2b42c2e3511f610c6ad30cc3f1a52581334b"
+SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+           file://0001-kconfig-use-HOSTCC-to-build-the-config-frontends.patch \
+           "
+SRC_URI[sha256sum] = "827e4cdfd69f5da973e00e2a59b30b3c9857fb7fae74c362fd0b4f96be7929b0"
 
 SECTION = "base"
 
