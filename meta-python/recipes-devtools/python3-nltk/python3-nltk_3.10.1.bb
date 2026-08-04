@@ -24,4 +24,4 @@ RRECOMMENDS:${PN} = "\
 
 inherit setuptools3 pypi
 
-SRC_URI[sha256sum] = "4fbac1d98203cbcd1b5d94a2877fb822300072d80604a5e7fae49d2c5f84e8c1"
+SRC_URI[sha256sum] = "86a1b41d9ca0d35a2cb72fa60af4c9aaba9fe405b717161fd94cecd69f467007"
