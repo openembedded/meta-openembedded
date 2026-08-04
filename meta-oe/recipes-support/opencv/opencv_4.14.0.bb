@@ -10,15 +10,15 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "fe38fc608f6acb8b68953438a62305d8318f4fcd"
-SRCREV_contrib = "d99ad2a188210cc35067c2e60076eed7c2442bc3"
+SRCREV_opencv = "0654a42e19215ef25b1d367d822f3c630447e7c7"
+SRCREV_contrib = "a8e9acd62cabd30419dba83007f2ac0d07de5e2c"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
 SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
 # kleidicv must match version of OpenCV
-SRCREV_kleidicv = "1e8fe7008c2292657b9689d70ea5d30db0e57767"
+SRCREV_kleidicv = "b1dbf474b8685b97a64d03e828b359fbdc050d1f"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv_kleidicv"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
