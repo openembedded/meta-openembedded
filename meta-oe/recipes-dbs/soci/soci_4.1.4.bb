@@ -6,7 +6,7 @@ SECTION = "libs"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
            "
-SRC_URI[sha256sum] = "b79afe73db241f762ddb611fe11184cbf6da44ba99f90721515daa2f978ff38e"
+SRC_URI[sha256sum] = "d9bccc834546afab4ab13774c4c80a140b9effe63a1c01819d68c4c29a96df3d"
 
 # Releases live in per-version subdirectories on SourceForge and the tarball
 # itself is not listed on any single browsable page, so match the directory names
