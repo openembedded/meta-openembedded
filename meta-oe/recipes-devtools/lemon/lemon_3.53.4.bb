@@ -5,9 +5,9 @@ SECTION = "devel"
 
 LIC_FILES_CHKSUM = "file://tool/lemon.c;endline=8;md5=c7551a78fa3fdecd96d1ad6761d205ee"
 
-SRC_URI = "git://github.com/sqlite/sqlite;protocol=https;branch=branch-3.44"
+SRC_URI = "git://github.com/sqlite/sqlite;protocol=https;branch=branch-3.53"
 
-SRCREV = "c8f9803dc32bfee78a9ca2b1abbe39499729219b"
+SRCREV = "b09c88c14082339b66c7b7158d609a771e64ca69"
 
 
 do_compile() {
