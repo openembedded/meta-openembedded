@@ -7,21 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
 
 SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "27463ee72d83295444262d503130fb0f8cc227e0"
+SRCREV = "74b88c154d634c4fc6ee32a6a9e49f1da75725f8"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 CVE_PRODUCT = ""
 
-PACKAGECONFIG ??= "instrumentation aligned"
+PACKAGECONFIG ??= "instrumentation"
 
 PACKAGECONFIG:remove:mipsarch = "instrumentation"
 PACKAGECONFIG:remove:powerpc = "instrumentation"
 PACKAGECONFIG:remove:riscv32 = "instrumentation"
 
 PACKAGECONFIG[instrumentation] = "--enable-instrumentation,--disable-instrumentation,"
-PACKAGECONFIG[aligned] = "--enable-aligned,--disable-aligned,"
 
 inherit autotools pkgconfig
-
-EXTRA_OECONF = "--with-posix-fallocate"
