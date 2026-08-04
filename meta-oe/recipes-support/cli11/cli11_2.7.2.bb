@@ -1,14 +1,14 @@
 DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
 HOMEPAGE = "https://github.com/CLIUtils/CLI11"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=27559a6fd853c4b46ec4dea16597460c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=744e78b25a90f01b35b087d9fb985ed4"
 
 DEPENDS = "catch2"
 
 SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https;tag=v${PV} \
            file://remove_tmpdir_from_test_binary.patch \
            file://run-ptest"
-SRCREV = "bfffd37e1f804ca4fae1caae106935791696b6a9"
+SRCREV = "919ce47dad39520a6e9a695d3e2d222c6920a445"
 
 inherit cmake ptest
 
