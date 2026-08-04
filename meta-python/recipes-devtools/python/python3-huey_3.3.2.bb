@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
 
 PYPI_PACKAGE = "huey"
 
-SRC_URI[sha256sum] = "e0c2a1542e6c3acb894821cde895cf9dbf72e42deb25f55b2d44096aa30f8f24"
+SRC_URI[sha256sum] = "f8fd7610baec0fdf9359b0e033a02566ccbba9c865139086ba644e03c426e4af"
 
 RDEPENDS:${PN} += " \
 	python3-datetime \
