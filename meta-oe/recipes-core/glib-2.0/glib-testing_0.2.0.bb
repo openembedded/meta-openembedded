@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://gitlab.gnome.org/pwithnall/libglib-testing.git;protocol=https;branch=main"
 
-PV = "0.1.1"
-SRCREV = "e326f73a7139c5e54fcf926896ae6e4cc899a1a7"
+PV = "0.2.0"
+SRCREV = "605ca3b43c7e57b443ce43325c2f2ce1fd29ed82"
 
 inherit  meson pkgconfig
 
