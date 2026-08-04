@@ -21,7 +21,7 @@ SRC_URI:append:class-target = " \
     file://0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch \
 "
 
-SRC_URI[archive.sha256sum] = "458d94769625e73d5f6232500f49cbadcb2b183380d43d2266a0f9701aeb9c5b"
+SRC_URI[archive.sha256sum] = "73237f37f03306d68bfae133a9a50d5e9341384e198d5ab37eeca9ab534deed8"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 
 # Tarballs live in per-version subdirectories, the listing above them has no filenames
