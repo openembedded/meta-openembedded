@@ -1,9 +1,9 @@
 SUMMARY = "IPython: Productive Interactive Computing"
 HOMEPAGE = "https://ipython.org"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+LIC_FILES_CHKSUM = "file://COPYING.rst;md5=954609b5a3603364bc25989a92e38d67"
 
-SRC_URI[sha256sum] = "da2819ce2aa83135257df830660b1176d986c3d2876db24df01974fa955b2756"
+SRC_URI[sha256sum] = "d2f92587b1ef51d84f934dffe05fabb9255f0038ed0a21426f2ea761e39ad09a"
 
 RDEPENDS:${PN} = "\
     python3-setuptools \
