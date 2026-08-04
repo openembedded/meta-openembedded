@@ -11,9 +11,7 @@ GTKDOC_MESON_OPTION = "gtk-doc"
 
 inherit xfce gobject-introspection mime-xdg perlnative gtk-doc
 
-SRC_URI[sha256sum] = "eddbd4bab29c73718734e0bfcf650ceea8b4fcc8cb2cbb0b24fe22b286a2be00"
-
-SRC_URI += "file://0001-Properly-guard-gdkx.h-include.patch"
+SRC_URI[sha256sum] = "5412d3feb14b4c47ccea8b00e9a9e3dcc1ea0e86e305abcee344f2fe82518bf8"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[pcre] = "-Dpcre2=enabled,-Dpcre2=disabled,libpcre2"
