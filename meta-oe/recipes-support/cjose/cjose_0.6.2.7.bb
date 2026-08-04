@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7249e2f9437adfb8c88d870438042f0e"
 
 SRC_URI = "git://github.com/OpenIDC/cjose;protocol=https;branch=version-0.6.2.x;tag=v${PV}"
 
-SRCREV = "8d94c3ad3237ab6a83d2e92fa541542b1b92c023"
+SRCREV = "10af8915a666b50caa5500cdc3f2523b916be720"
 
 DEPENDS = "openssl libcheck jansson"
 
