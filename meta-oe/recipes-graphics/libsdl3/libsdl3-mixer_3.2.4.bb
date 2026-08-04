@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=df8f4d887d3997f6e9cf81bb7f43dbf7"
 DEPENDS = "libsdl3"
 
 SRC_URI = "git://github.com/libsdl-org/SDL_mixer.git;protocol=https;branch=release-3.2.x;tag=release-${PV}"
-SRCREV = "a5e1890afc5115ffd16cefdbb4d50f74bf4970ce"
+SRCREV = "72a81869b45e249e8e67102db4e98dd2441f05a1"
 
 inherit cmake pkgconfig
 
