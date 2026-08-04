@@ -10,7 +10,7 @@ inherit meson pkgconfig
 
 DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
 
-SRCREV = "b3d8fc43e9cb531d958c17ef2cd93b374bc14e8a"
+SRCREV = "6576434737de042cdd0f6e62f34f04818306c73b"
 SRCBRANCH = "v259-stable"
 SRC_URI = "git://github.com/systemd/systemd.git;protocol=https;branch=${SRCBRANCH};tag=v${PV} \
            file://static-libsystemd-pkgconfig.patch \
