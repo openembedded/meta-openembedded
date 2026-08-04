@@ -4,13 +4,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 
 SRC_URI = " \
-    git://github.com/OpenIDC/liboauth2;protocol=https;branch=master;tag=v${PV} \
-    file://0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-int.patch \
-    file://0002-Fix-use-of-strchr-with-new-GCC.patch \
-    file://0001-build-guard-coverage-linker-flag-behind-CODE_COVERAG.patch \
-    "
+    git://github.com/OpenIDC/liboauth2;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "12571b6d6568c2db7d5f080f60ecb55795c0db19"
+SRCREV = "5aeae56ab2c0ae1ff1c70bc13e0628b134ece70c"
 
 DEPENDS = "libpcre2 jansson curl openssl cjose"
 
