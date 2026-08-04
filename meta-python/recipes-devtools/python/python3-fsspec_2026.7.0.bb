@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/fsspec/filesystem_spec"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b38a11bf4dcdfc66307f8515ce1fbaa6"
 
-SRC_URI[sha256sum] = "f5bac145310fe30e16e1471bd6840b2d990d609e872251d7e674241822abf01a"
+SRC_URI[sha256sum] = "c803c40f4cf860b49dea58ee3e1c33cb9c790520e233537e1340049f89b82a88"
 
 inherit pypi python_hatchling ptest
 
