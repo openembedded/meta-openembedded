@@ -8,7 +8,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
 SRC_URI = "git://github.com/gentoo/pax-utils;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "d279ca563775105859f1f8c8467b8244d758cc62"
+SRCREV = "a19d74326cf0dfc5eea93a5f0bc23dc3a5a959b5"
 
 RDEPENDS:${PN} += "bash"
 
