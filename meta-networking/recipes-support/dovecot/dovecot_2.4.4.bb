@@ -16,7 +16,7 @@ SRC_URI = "https://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
            file://0001-adapt-lua_newstate-to-new-api.patch \
            "
-SRC_URI[sha256sum] = "ff0be85228122f250627b19e67505fdb7fb2f72a702ef6bf35f27fce54c072e5"
+SRC_URI[sha256sum] = "670f98d55a29b02ae6a97281e51374e553b94496480ab0a07439571ab30ca8c3"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
