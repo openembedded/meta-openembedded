@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4b365c2155d66e550e1447075d6744a5"
 
 SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-SRC_URI[sha256sum] = "b7637334527201fdfd6dd6a02e67aceffb0e5e60155bbd89175647a80301c92c"
+SRC_URI[sha256sum] = "6ffcb593207be92584df15b32466ed64bbec99109f007c82205f0194572411a1"
 
 S = "${UNPACKDIR}/opus-${PV}"
 
