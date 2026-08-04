@@ -3,7 +3,7 @@ HOMEPAGE = "https://twine.readthedocs.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
 
-SRC_URI[sha256sum] = "e5ed0d2fd70c9959770dce51c8f39c8945c574e18173a7b81802dab51b4b75cf"
+SRC_URI[sha256sum] = "85cdb29c518efef867360ae4acd4b0dfd61c8654a22fca08e6f8539f05022177"
 
 inherit pypi python_setuptools_build_meta
 
