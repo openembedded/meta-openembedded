@@ -6,7 +6,7 @@ ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (Sphincs+) and many more"
 HOMEPAGE = "https://leancrypto.org"
 LICENSE = "BSD-3-Clause OR GPL-2.0-only"
 LIC_FILES_CHKSUM = " \
-    file://LICENSE;md5=4cc9ea7ae2518fb4fb0bbd9d1a60cbf4 \
+    file://LICENSE;md5=b00845406d87e919d7995d9b51e06861 \
     file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \
     file://LICENSE.gplv2;md5=eb723b61539feef013de476e68b5c50a \
     "
@@ -14,7 +14,7 @@ SECTION = "libs"
 SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
            file://leancrypto-tests.sh \
            "
-SRCREV = "8a3e942baa3388ec9597c35005264ef9aefbf97c"
+SRCREV = "9bb22cb06aa1733969efdb81155838145405dd81"
 
 inherit pkgconfig meson
 
