@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 DEPENDS = "nlohmann-json"
 SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "6175aa0b213eea053247e43b4f35b8d201fa356e"
+SRCREV = "6f65c3eded2bb4656c8d675cad43bbe694c531c7"
 
 inherit cmake pkgconfig lib_package
 
