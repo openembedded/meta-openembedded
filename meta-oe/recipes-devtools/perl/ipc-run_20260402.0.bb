@@ -6,11 +6,11 @@ styles are both supported and may be mixed."
 HOMEPAGE = "https://metacpan.org/release/IPC-Run"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0ebd37caf53781e8b7223e6b99b63f4e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0cec6aceee7559197f14caccd0f4c2f9"
 DEPENDS = "perl"
 
-SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=master;protocol=https"
-SRCREV = "ad56c3b5f5a211d32bbb8ac29f180d707ee58c1b"
+SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=main;protocol=https"
+SRCREV = "a8232b0a3e0e713696bf6bb8f970c561d0fe3d8f"
 
 
 inherit cpan
