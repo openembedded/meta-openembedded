@@ -1,14 +1,14 @@
 SUMMARY = "Snowball compiler and stemming algorithms"
 HOMEPAGE = "https://snowballstem.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=19139aaf3c8c8fa1ca6edd59c072fb9f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=07c3b61d971c3df6e19ce439cfe1fb8c"
 
 DEPENDS:append:class-target = " ${BPN}-native"
 
-SRC_URI = "git://github.com/snowballstem/snowball.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/snowballstem/snowball.git;branch=main;protocol=https;tag=v${PV} \
            file://0001-Build-so-lib.patch \
            "
-SRCREV = "48a67a2831005f49c48ec29a5837640e23e54e6b"
+SRCREV = "cd195b51e948a902a4312f023f4a14392516a543"
 
 LIBVER = "0.0.0"
 
