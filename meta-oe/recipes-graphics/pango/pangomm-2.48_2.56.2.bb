@@ -1,15 +1,15 @@
 SUMMARY = "C++ bindings for the pango library"
 SECTION = "libs"
 LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
-                    file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4bf661c1e3793e55c8d1051bc5e0ae21 \
+                    file://COPYING.tools;md5=570a9b3749dd0463a1778803b12a6dce"
 
 DEPENDS = "mm-common cairomm-1.16 glibmm-2.68 pango"
 
 GNOMEBN = "pangomm"
 inherit gnomebase
 
-SRC_URI[archive.sha256sum] = "539f5aa60e9bdc6b955bb448e2a62cc14562744df690258040fbb74bf885755d"
+SRC_URI[archive.sha256sum] = "f1e984c85a85b6a0e61616366521f51dd8282a072bb45d15b5084762b62f4c0e"
 
 S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
