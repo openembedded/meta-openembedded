@@ -15,7 +15,7 @@ SRC_URI = "git://codeberg.org/sanlock/sanlock.git;protocol=https;branch=master;t
            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
            file://0001-add-missing-system-header-string.h.patch \
            "
-SRCREV = "995685ac3ad8909cb7562e74dd13e3b450833d9c"
+SRCREV = "4d185bd9ab97c9e94f661b3436e4bfe749720f13"
 
 CVE_STATUS[CVE-2012-5638] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 
