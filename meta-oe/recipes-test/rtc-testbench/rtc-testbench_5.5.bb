@@ -16,7 +16,7 @@ SRC_URI = " \
     git://github.com/Linutronix/RTC-Testbench.git;tag=v${PV};nobranch=1;protocol=https \
     file://0001-CMakeLists.txt-make-BPF-clang-and-include-paths-conf.patch \
 "
-SRCREV = "bf016fdf422094f1ef65c0d88f148f46663ebbd8"
+SRCREV = "b7541b4b93b4d9fe6f395bc53d3cb50401d406a4"
 
 DEPENDS += " \
     libyaml \
