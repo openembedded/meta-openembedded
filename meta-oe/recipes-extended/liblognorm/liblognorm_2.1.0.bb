@@ -8,10 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ca016db57e008528dace002188c73dad"
 
 DEPENDS = "libfastjson libestr"
 
-SRC_URI = "git://github.com/rsyslog/liblognorm;branch=stable;protocol=https;tag=v${PV} \
-           file://0001-Add-asprintf-to-autoconf-function-check-macro.patch \
-           "
-SRCREV = "3804548e3541747bde3e82a78d2c2dcd865296dd"
+SRC_URI = "git://github.com/rsyslog/liblognorm;branch=stable;protocol=https;tag=v${PV}"
+SRCREV = "71dcbaf806a0e464aded2efb98651ff89aec8a36"
 
 inherit autotools pkgconfig
 
