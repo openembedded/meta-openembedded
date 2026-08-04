@@ -6,8 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3d6b07c89629cff2990d2e8e1f4c2382"
 
 DEPENDS = "ncurses openssl"
 
-SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "abe2a1d2367a118469a7b94bc4dd856aaf856eec"
+SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master;tag=v${PV} \
+           file://0001-lib-diag-do-not-use-a-variable-length-array-in-a-str.patch \
+           "
+SRCREV = "d995512f3bf1ceb98eefada813642d5ba5d62cd1"
 
 
 inherit autotools-brokensep pkgconfig
