@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 DEPENDS = "libusb1 glib-2.0"
 
-SRCREV = "2d373432e604960c1dcc14fb97098febe4d64025"
+SRCREV = "41c79583a4eecaf6cfe938278554210c718c85d2"
 
-SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
+SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https;tag=${BP}"
 
 
 inherit meson pkgconfig
