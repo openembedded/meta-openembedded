@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main"
 
-SRCREV = "596d92cac33e64ec9b0176401395e6a4abc2266a"
+SRCREV = "cb5593a2be9c26c8865f46bf29723c1ce93890aa"
 
 
 RDEPENDS:${PN} += " \
