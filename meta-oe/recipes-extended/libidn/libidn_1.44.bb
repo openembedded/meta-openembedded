@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=11cc2d3ee574f9d6b7ee797bdce4d423\
                     file://COPYING.LESSERv2;md5=4fbd65380cdd255951079008b364516c \
                     file://COPYING.LESSERv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
                     file://COPYINGv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://lib/idna.h;endline=28;md5=82ce5c462ff87f37c7c0d3a92f8d2f6b \
-                    file://src/idn.c;endline=19;md5=21b4efac8525241da4d38dc1c2e3a461 \
+                    file://lib/idna.h;endline=28;md5=125a92599dac82ffe99800efc5cc03bc \
+                    file://src/idn.c;endline=19;md5=c6ef5ce9b4a04f1e2ac007e42bc86575 \
                    "
 
 DEPENDS = "virtual/libiconv autoconf-archive"
@@ -19,7 +19,7 @@ SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
            file://dont-depend-on-help2man.patch \
            "
 
-SRC_URI[sha256sum] = "bdc662c12d041b2539d0e638f3a6e741130cdb33a644ef3496963a443482d164"
+SRC_URI[sha256sum] = "499608bab3a65650a0ea52888c13a8deebe3f71408e319acd9ec52e02eb13959"
 
 # command tool is under GPLv3+, while libidn itself is under LGPLv2.1+ or LGPLv3
 # so package command into a separate package
