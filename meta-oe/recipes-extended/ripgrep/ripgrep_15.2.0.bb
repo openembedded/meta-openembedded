@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "crate://crates.io/ripgrep/${PV};name=ripgrep"
-SRC_URI[ripgrep.sha256sum] = "f388c4955f85477c28a8667355819844a06614b083c23517f0e86bd1d6d82b73"
+SRC_URI[ripgrep.sha256sum] = "a30750b6d0743bfdd2656ebbaf4555aa278c43144b84bc389bcbfa399485ec71"
 S = "${CARGO_VENDORING_DIRECTORY}/ripgrep-${PV}"
 
 inherit cargo cargo-update-recipe-crates
