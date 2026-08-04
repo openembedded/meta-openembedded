@@ -8,7 +8,7 @@ inherit setuptools3
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "b7d29d671223cdc80e8b992df212d152ad88e6c961d4426c3fb2fefe8dd86fdf"
+SRC_URI[sha256sum] = "7425d0afa180f0092db903abb1526a130b36858980aad90b3694f48e41420155"
 
 inherit pypi ptest
 
