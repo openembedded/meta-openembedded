@@ -54,6 +54,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     bonnie++ \
     coremark-pro \
     cpupower \
+    cyclictest \
     dbench \
     dhrystone \
     fio \
