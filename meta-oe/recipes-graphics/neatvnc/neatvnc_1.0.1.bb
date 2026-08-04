@@ -4,13 +4,9 @@ HOMEPAGE = "https://github.com/any1/neatvnc"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
 
-SRC_URI = "git://github.com/any1/neatvnc;branch=v0.9;protocol=https \
-           file://0001-meson-Use-new-pkgconfig-for-aml1.patch \
-           file://0001-Add-method-to-listen-on-multiple-fds.patch \
-           file://0001-Use-aml-v1.patch \
-          "
+SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV}"
 
-SRCREV = "3295c11b934a83dbcb44beabf3f21a8b885a2d11"
+SRCREV = "4d6d09b544d84b836cf1906735354b4e694a0c1c"
 
 
 DEPENDS = "libdrm pixman aml zlib"
