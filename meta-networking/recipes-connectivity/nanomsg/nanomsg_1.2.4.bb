@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
 
 SECTION = "libs/networking"
 
-SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master;tag=${PV} \
            file://run-ptest \
           "
 
-SRCREV = "ccd7f20c1b756f7041598383baffcdc326246db7"
+SRCREV = "e6d0b8ddfc780eb89f8f6ef305e92c19e76bed6b"
 
 inherit cmake pkgconfig ptest
 
