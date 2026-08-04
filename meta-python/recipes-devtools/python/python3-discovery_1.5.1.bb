@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
 PYPI_PACKAGE = "python_discovery"
 
-SRC_URI[sha256sum] = "3e014c6327154d3dda27939a9a0dc9c5c000439f1906d3f303b48f984bd2ecef"
+SRC_URI[sha256sum] = "e2ea8b884cd1701f386eda8cf327b87743f1dc21b7f784470799537d95635384"
 
 inherit pypi python_hatchling ptest-python-pytest
 
