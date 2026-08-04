@@ -7,7 +7,7 @@ DEPENDS = "e2fsprogs gssdp libsoup-3.0 libxml2"
 
 inherit gnomebase pkgconfig vala gobject-introspection ptest
 SRC_URI += "file://run-ptest"
-SRC_URI[archive.sha256sum] = "2edb6ee3613558e62f538735368aee27151b7e09d4e2e2c51606833da801869b"
+SRC_URI[archive.sha256sum] = "a1ee07b7b12673c32d7fc73ca158a50c1a4dc69ab35b65e94d24d38ac875345e"
 
 SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
 
