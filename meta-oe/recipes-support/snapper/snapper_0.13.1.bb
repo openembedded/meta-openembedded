@@ -9,7 +9,7 @@ DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib
 inherit autotools-brokensep pkgconfig gettext manpages
 
 SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
-SRCREV = "3a3bd97083976d28538d402284ff947b4aab5b8f"
+SRCREV = "8cfc33817b91dbf7194d7fd043dc378026d01db5"
 
 EXTRA_OECONF += "--disable-zypp"
 
@@ -26,6 +26,8 @@ export MKDIR_BIN = "${bindir}/mkdir"
 export TOUCH_BIN = "${bindir}/touch"
 export CP_BIN = "${bindir}/cp"
 export REALPATH_BIN = "${bindir}/realpath"
+export SHA256SUM_BIN = "${bindir}/sha256sum"
+export LS_BIN = "${bindir}/ls"
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/sysconfig
