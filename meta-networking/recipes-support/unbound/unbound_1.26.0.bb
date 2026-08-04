@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
            file://run-ptest \
            "
 
-SRCREV = "c33ad1b1a21e48bfe4f140e90252a9be1b0c5745"
+SRCREV = "a45da353d3feb5d8fc00685fa1ceda3816d5108f"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
