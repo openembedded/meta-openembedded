@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
 RDEPENDS:${PN} = "perl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "2fc66eca83419053991484b7d6e778f46b03704ce778893473d7a9cb7dd915f9"
+SRC_URI[sha256sum] = "5913783d52fe02a18fd796acee2335eeca43cb17e913eca33e2f211e64f2fcdb"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/logwatch/files/"
 UPSTREAM_CHECK_REGEX = "logwatch-(?P<pver>\d+(\.\d+)+)/"
 
