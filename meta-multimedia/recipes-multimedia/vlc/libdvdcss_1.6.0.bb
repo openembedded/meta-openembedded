@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "https://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.xz"
-SRC_URI[sha256sum] = "529463e4d1befef82e5c6e470db7661a2db0343e092a2fb0d6c037cab8a5c399"
+SRC_URI[sha256sum] = "7ea556c846b7bfc32d47b41cae56d1863a6b6d5f706bb162778d6f298490977c"
 
 inherit meson pkgconfig manpages
 
