@@ -5,8 +5,8 @@ LICENSE = "BSD-3-Clause AND MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
                     file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
 
-SRCREV = "ed44bd4c6cce224e2d64533d197bea6ca4fee266"
-SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https"
+SRCREV = "18cfd388ac47a9e00978b34d6c20341f3e2cdb56"
+SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=${PV}"
 
 DEPENDS += "zlib libpng python3-native"
 
