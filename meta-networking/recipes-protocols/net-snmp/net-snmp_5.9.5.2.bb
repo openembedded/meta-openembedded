@@ -24,6 +24,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://0009-net-snmp-fix-for-disable-des.patch \
            file://0010-net-snmp-Reproducibility-Don-t-check-build-host-for.patch \
            file://0011-ac_add_search_path.m4-keep-consistent-between-32bit-.patch \
+           file://0012-apps-Makefile.in-Link-libraries-explicitly.patch \
            file://netsnmp-swinst-crash.patch \
            "
 SRC_URI[sha256sum] = "16707719f833184a4b72835dac359ae188123b06b5e42817c00790d7dc1384bf"
