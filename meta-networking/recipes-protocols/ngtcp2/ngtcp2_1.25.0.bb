@@ -4,8 +4,8 @@ BUGTRACKER = "https://github.com/ngtcp2/ngtcp2/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=de0966c8ff4f62661a3da92967a75434"
 
-SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=release-1.22;tag=v${PV}"
-SRCREV = "716e64b05f4a3709dfc0b0522cf9fd4456d055e5"
+SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "f9e9ff01ad2c8116bc09de4f644b0028a61486a6"
 
 DEPENDS = "brotli libev nghttp3"
 
