@@ -1,9 +1,10 @@
-SUMMARY = "Read and write PDFs with Python, powered by qpdf"
+SUMMARY = "Read, write, repair, and transform PDFs in Python, powered by qpdf"
+DESCRIPTION = "A Python library for reading and writing PDF, powered by QPDF"
 HOMEPAGE = "https://github.com/pikepdf/pikepdf"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "9f134806b2fe608ccb21379a664ddcefeac3f6944100d343b350299d3c69754e"
+SRC_URI[sha256sum] = "4bebc59ac74411064e7c97a4036174023e22ccbecd22b78750ab76551eb38988"
 
 SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
 
