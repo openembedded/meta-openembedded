@@ -47,6 +47,16 @@ PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind"
 # Gets going with gcc-15 but See if it can be removed with next upgrade
 CFLAGS:append = " -std=gnu17"
 
+# The release tarball ships the bison/flex generated sources and maintainer
+# mode is disabled by default, so make(1) must never consider them outdated.
+# Patches touching src/parser.y (or src/lexer.l) make the shipped src/parser.c
+# look stale, which fires the "NOT building parser.c!" no-op rule. From then on
+# make looks for the file in ${B} instead of resolving it via VPATH and the
+# build fails with "cc1: fatal error: src/parser.c: No such file or directory".
+do_configure:prepend() {
+	touch ${S}/src/parser.c ${S}/src/parser.h ${S}/src/lexer.c ${S}/src/lexer.h
+}
+
 do_configure:append() {
 	sed -i -e "/^ac_cs_config=/ s:${WORKDIR}::g" ${B}/config.status
 }
