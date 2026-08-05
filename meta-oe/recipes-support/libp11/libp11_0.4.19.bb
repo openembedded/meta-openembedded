@@ -9,7 +9,9 @@ LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
 DEPENDS = "libtool openssl"
 
-SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https;tag=${BPN}-${PV}"
+SRC_URI = "git://github.com/OpenSC/libp11.git;branch=master;protocol=https;tag=${BPN}-${PV} \
+           file://0001-Add-missing-p11_ver.h-file-to-installed-headers.patch \
+           "
 
 SRCREV = "ae5756ccf5cb7929bb8edc986a9e6a65584406bd"
 
