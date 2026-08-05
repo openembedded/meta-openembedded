@@ -20,34 +20,30 @@ DEPENDS = "\
     zlib \
 "
 
-SRC_URI = "\
-    git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV} \
-    file://0001-fix-zlib-cross-compiling-errors.patch \
-"
-SRCREV = "a8832afb1dcca5bb4c0476d4c13c7239fecbd93a"
+SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "c9d0e23336c6bb7645a1f5f48a4a82f1d5a589d9"
 
 inherit meson pkgconfig systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
 
+PACKAGECONFIG[dbus] = "-Ddbus=enabled, -Ddbus=disabled, dbus"
 PACKAGECONFIG[font_freetype] = "-Dfont_freetype=enabled, -Dfont_freetype=disabled, fontconfig freetype"
 PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
-PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
+PACKAGECONFIG[libseat] = "-Dlibseat=enabled, -Dlibseat=disabled, seatd"
 PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
 PACKAGECONFIG[video_drm2d] = "-Dvideo_drm2d=enabled, -Dvideo_drm2d=disabled, libdrm"
 
 EXTRA_OEMESON = "\
-    -Delogind=disabled \
+    -Ddocs=disabled \
     -Dextra_debug=false \
     -Dfont_unifont=enabled \
-    -Dsession_dummy=enabled \
-    -Dsession_terminal=enabled \
     -Dtests=false \
     -Dvideo_fbdev=enabled \
 "
 
 SYSTEMD_SERVICE:${PN} = "kmscon.service"
-FILES:${PN} += "${systemd_system_unitdir}/kmsconvt@.service"
+FILES:${PN} += "${systemd_system_unitdir}/kmsconvt@.service ${datadir}/terminfo"
 
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
