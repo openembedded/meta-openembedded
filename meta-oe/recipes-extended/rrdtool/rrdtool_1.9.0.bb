@@ -97,9 +97,14 @@ do_configure() {
         ${B}/bindings/Makefile
 
     #redo the perl bindings
+    # perl-shared/Makefile.PL only links against the in-tree librrd when
+    # ABS_TOP_BUILDDIR is set, which is what bindings/Makefile.am does. Without
+    # it the standalone branch pkg-config probes for an installed librrd and
+    # dies with "pkg-config could not find librrd", so export them here too.
     (
     cd ${S}/bindings/perl-shared;
-    perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
+    ABS_TOP_SRCDIR="${S}" ABS_TOP_BUILDDIR="${B}" ABS_SRCDIR="${S}/bindings/perl-shared" \
+        perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
 
     cd ../../bindings/perl-piped;
     perl Makefile.PL INSTALLDIRS="vendor";
