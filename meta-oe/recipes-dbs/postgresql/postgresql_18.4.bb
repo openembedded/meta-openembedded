@@ -10,9 +10,8 @@ SRC_URI += "\
    file://0004-config_info.c-not-expose-build-info.patch \
    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
    file://0001-tcl.m4-Recognize-tclsh9.patch \
-   file://0001-Add-missing-include-in-Cluster.pm.patch \
    "
 
-SRC_URI[sha256sum] = "078a03516dcdbdb705fecaf415ea3d13a956c589e46f09fed68a06fb00598c90"
+SRC_URI[sha256sum] = "81a81ec695fb0c7901407defaa1d2f7973617154cf27ba74e3a7ab8e64436094"
 
 CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Doesn't apply to our configuration of postgresql so we can safely ignore it."
