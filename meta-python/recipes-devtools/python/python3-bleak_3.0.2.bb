@@ -8,13 +8,9 @@ SRC_URI:append = " \
 	file://0001-bleak-Support-newer-uv_build-versions.patch \
 "
 
-inherit pypi python_poetry_core ptest-python-pytest
+inherit pypi python_uv_build ptest-python-pytest
 
 SRC_URI[sha256sum] = "c2229cb8238d5876b4bd05c74bf7a1aea1f88da39d2e51ac9dfd5cc319d5265f"
-
-DEPENDS += "\
-	python3-uv-build-native \
-"
 
 RDEPENDS:${PN}-ptest += " \
 	python3-asyncio \
