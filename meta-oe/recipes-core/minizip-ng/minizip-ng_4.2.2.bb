@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master 
            file://run-ptest \
 "
 
-SRCREV = "f3ed731e27a97e30dffe076ed5e0537daae5c1bd"
+SRCREV = "7b2387161c542fa9f427352dcdef76097d0d692b"
 
 
 RCONFLICTS:${PN} += "minizip"
@@ -19,8 +19,12 @@ DEPENDS = "xz openssl bzip2"
 
 inherit cmake pkgconfig ptest
 
+# MZ_PPMD (new default-on feature since 4.2.x) git-clones ip7z/7zip over the
+# network at configure time via CMake FetchContent; disable it, there's no
+# network access in the build sandbox and nothing in this recipe needs it.
 EXTRA_OECMAKE = "-DMZ_FORCE_FETCH_LIBS=OFF \
                  -DBUILD_SHARED_LIBS=ON \
+                 -DMZ_PPMD=OFF \
 "
 
 PACKAGECONFIG ??= "zlib ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'test', '', d)}"
@@ -30,8 +34,9 @@ PACKAGECONFIG[test] = "-DMZ_BUILD_TESTS=ON -DMZ_BUILD_UNIT_TESTS=ON, -DMZ_BUILD_
 
 
 do_install:append () {
-    # remove absolute paths
-    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/minizip.cmake
+    # remove absolute paths (4.2.x renamed this generated file from
+    # minizip.cmake to minizip-config.cmake)
+    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/minizip/minizip-config.cmake
 }
 
 do_install_ptest() {
