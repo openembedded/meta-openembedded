@@ -6,14 +6,8 @@ SECTION = "devel/lib"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3d8fb7158bf7e2600ba3191428dc4ef"
 
-PV = "0.6.2+git"
-
-SRC_URI = " \
-           git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
-           file://0001-Check-for-C-standard-version-23-for-__fallthrough__.patch \
-           file://0002-allow-build-with-cmake-4.patch \
-"
-SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
+SRC_URI = "git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "503799885b5517ea9d316c17e35471178c09e35a"
 
 inherit cmake
 
