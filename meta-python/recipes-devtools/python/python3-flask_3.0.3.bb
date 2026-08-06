@@ -23,3 +23,5 @@ RDEPENDS:${PN} = " \
     python3-profile \
     python3-werkzeug \
 "
+
+SRC_URI += "file://CVE-2026-27205.patch"
