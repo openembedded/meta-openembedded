@@ -18,16 +18,14 @@ DEPENDS += " \
     tiff \
 "
 
-SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2.8-hotfix;protocol=https;tag=v${PV} \
+SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https;tag=v${PV} \
            file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
            file://0002-fix-libdir-for-multilib.patch \
-           file://0003-create-links-with-relative-path.patch \
            file://0004-don-not-append-system-name-to-lib-name.patch \
-           file://0005-wx-config-fix-libdir-for-multilib.patch \
            file://0006-Fix-locale-on-musl.patch \
            file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
            "
-SRCREV = "896e4f587615b832ce27b8325357cb504997e1d3"
+SRCREV = "749625e0ea4d70d1f75494aa52231d835531a618"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
@@ -40,9 +38,6 @@ EXTRA_OECMAKE += " \
     -DwxUSE_LIBPNG=sys \
     -DwxUSE_LIBTIFF=sys \
     -DwxUSE_REGEX=builtin \
-    -DwxBUILD_INSTALL_RUNTIME_DIR=${libdir} \
-    -DwxBUILD_INSTALL_LIBRARY_DIR=${libdir} \
-    -DwxBUILD_INSTALL_PLATFORM_SUBDIR=${libdir} \
 "
 EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
 
@@ -110,14 +105,16 @@ do_compile:append() {
 }
 
 do_install:append() {
-    # do not ship bindir if empty
-    rmdir --ignore-fail-on-non-empty ${D}${bindir}
+    # do not ship bindir if empty (may not exist at all)
+    if [ -d ${D}${bindir} ]; then
+        rmdir --ignore-fail-on-non-empty ${D}${bindir}
+    fi
 
     # fix host contamination
     sed -i -e "s#${STAGING_DIR_NATIVE}##g" \
            -e "s#${STAGING_DIR_TARGET}##g" \
            ${D}${libdir}/wx/config/*-unicode-3.2 \
-           ${D}${libdir}/cmake/wxWidgets/wxWidgetsTargets.cmake
+           ${D}${libdir}/cmake/wxWidgets-3.2/wxWidgetsTargets.cmake
 }
 
 FILES:${PN} += " \
