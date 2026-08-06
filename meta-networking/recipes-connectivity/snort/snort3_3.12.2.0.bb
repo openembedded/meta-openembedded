@@ -10,10 +10,9 @@ DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind l
 SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master;tag=${PV} \
            file://0001-cmake-Check-for-HP-libunwind.patch \
            file://0001-cmake-Pass-noline-flag-to-flex.patch \
-		   file://0001-Fix-build-on-c23.patch \
 		  "
 
-SRCREV = "892f9f3b04d604797851d60e89d6cfe640a047cd"
+SRCREV = "14aeb09f5a0856812dbe08ead3c21f99e8860aa0"
 
 PACKAGES =+ "${PN}-scripts"
 
