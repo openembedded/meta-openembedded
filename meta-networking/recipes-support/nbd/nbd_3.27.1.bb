@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "autoconf-archive bison-native glib-2.0 libnl zlib bison-native"
 
-SRC_URI = "https://github.com/NetworkBlockDevice/${BPN}/releases/download/${BP}/${BP}.tar.xz \
+SRC_URI = "git://github.com/NetworkBlockDevice/${BPN}.git;branch=master;protocol=https \
            "
-SRC_URI[sha256sum] = "422a02adcdbab01c622307c6babeda5c84ca6c6f2d4e0b29936e6ae9b6a7662f"
+SRCREV = "f96f7fca3b37f4254c26c95f5c6c9dae70e030a1"
 
 inherit autotools pkgconfig
 
