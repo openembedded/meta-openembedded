@@ -3,17 +3,15 @@ HOMEPAGE = "http://packages.qa.debian.org/s/ssmtp.html"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.bz2 \
-           file://ssmtp-bug584162-fix.patch \
+SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.gz \
            file://build-ouside_srcdir.patch \
            file://use-DESTDIR.patch \
-           file://0001-ssmtp-Correct-the-null-pointer-assignment-to-char-po.patch \
            file://0001-include-libgen.h-for-basename.patch \
            file://0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
            "
 
-SRC_URI[md5sum] = "65b4e0df4934a6cd08c506cabcbe584f"
-SRC_URI[sha256sum] = "22c37dc90c871e8e052b2cab0ad219d010fa938608cd66b21c8f3c759046fa36"
+SRC_URI[md5sum] = "f9894703fcc559f63cffacfea08f9b75"
+SRC_URI[sha256sum] = "6e639eafce4c8a3b7782c2a8a2d467be097c5896eae86fcde0f608666ea88249"
 
 inherit autotools update-alternatives
 
