@@ -7,7 +7,7 @@ DEPENDS = "lzo lz4 openssl libcap-ng ${@bb.utils.contains('DISTRO_FEATURES', 'pa
 
 inherit autotools systemd update-rc.d pkgconfig ptest
 
-SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+SRC_URI = "https://github.com/OpenVPN/openvpn/releases/download/v${PV}/${BP}.tar.gz \
            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
            file://openvpn \
            file://run-ptest \
@@ -15,7 +15,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 
-SRC_URI[sha256sum] = "c6864b3c7d4e059c7d6ce22d1b5fa646c8b379a06af872eeb9792b6083a44ac4"
+SRC_URI[sha256sum] = "10e24a9385f23cc38cc5cf448f3ca0769f939bc4cbecc4f4647d7e006e52db74"
 
 CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
 
