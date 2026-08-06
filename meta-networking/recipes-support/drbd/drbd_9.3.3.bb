@@ -9,9 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 DEPENDS = "virtual/kernel"
 
 SRC_URI = "https://pkg.linbit.com//downloads/drbd/9/${BP}.tar.gz \
-           file://check_existence_of_modules_before_installing.patch \
            "
-SRC_URI[sha256sum] = "5ad57634d4b6c118e92080ab5b66e01969ebb251d9ca01562d23598bf3b166fe"
+SRC_URI[sha256sum] = "a7bfb016070c31df1c738569ca8cc5e5fc337dd449147f7bf62e746d87d38f21"
 
 inherit module
 
