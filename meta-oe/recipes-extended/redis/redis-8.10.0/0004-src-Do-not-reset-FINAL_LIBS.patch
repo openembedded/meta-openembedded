@@ -15,20 +15,23 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Reworked for 8.0.0
 Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
 
+Rebased on 8.10.0: context shifted by 1 line (offset only).
+
 ---
  src/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/Makefile b/src/Makefile
-index 5dbbefc..15fbe09 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -152,7 +152,7 @@ endif
-
+@@ -152,7 +152,7 @@
+ 
  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
  FINAL_LDFLAGS=$(LDFLAGS) $(OPT) $(REDIS_LDFLAGS) $(DEBUG)
 -FINAL_LIBS=-lm
 +FINAL_LIBS+=-lm
- DEBUG=-g -ggdb
-
- # Linux ARM32 needs -latomic at linking time
+ 
+ # Replication compression (opt-in via BUILD_COMPRESSION=yes). When enabled the
+ # replication stream can be compressed with libzstd; when disabled libzstd is
+--
+2.34.1

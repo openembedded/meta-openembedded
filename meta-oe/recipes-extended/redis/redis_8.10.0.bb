@@ -16,7 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
           "
-SRC_URI[sha256sum] = "1d1e423c9c808de3cb01dd3300d2b8d305b7691382e31a847ec17b66d3157477"
+SRC_URI[sha256sum] = "f1baa4b28befd417aa6577ebeedde9e9fc7814cfcc299b2a6d2fd99ef7420a6c"
 
 RPROVIDES:${PN} = "virtual-redis"
 
@@ -45,6 +45,14 @@ TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 
 do_compile:prepend() {
     oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
+}
+
+# 8.10.0's default "all"/"build" goal also builds the bundled modules
+# (redisbloom, redisearch, redisjson, redistimeseries), which pull in their own
+# vendored build systems and a python3 interpreter this recipe has never needed.
+# Build the core server only, the way scripts/build.sh does it internally.
+do_compile() {
+    oe_runmake -C src all
 }
 
 do_install() {
