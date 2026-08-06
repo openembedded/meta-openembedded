@@ -8,7 +8,7 @@ RDEPENDS:${PN} = "bash perl"
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=https;tag=v${PV} \
            file://0001-cmake-Allow-SYSTEMCTL_BIN-to-be-overridden-from-envi.patch \
 "
-SRCREV = "31af04ec84378724cb6256814d4ffde359a7123b"
+SRCREV = "f272237493ef309984036f7b85655e11104c61c8"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
 LICENSE = "BSD-2-Clause OR GPL-2.0-only"
