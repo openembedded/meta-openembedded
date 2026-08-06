@@ -12,7 +12,7 @@ DEPENDS = "openssl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
            "
-SRC_URI[sha256sum] = "efe01690d22bda359a579c77e2b0072658a092bff490ec0478a212c6b7d0eb70"
+SRC_URI[sha256sum] = "da99f8c573c4d9e63f493c7e24447126aea25b53b4c076ec79266874e29b1975"
 
 inherit autotools gettext pkgconfig python3-dir python3native
 
