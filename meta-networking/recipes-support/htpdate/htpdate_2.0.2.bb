@@ -11,10 +11,10 @@ DESCRIPTION = "The  HTTP Time Protocol (HTP) is used to synchronize a computer's
 HOMEPAGE = "https://github.com/twekkel/htpdate"
 BUGTRACKER = "https://github.com/twekkel/htpdate/issues"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://htpdate.c;beginline=26;endline=30;md5=2b6cdb94bd5349646d7e33f9f501eef7"
+LIC_FILES_CHKSUM = "file://htpdate.c;beginline=25;endline=29;md5=2b6cdb94bd5349646d7e33f9f501eef7"
 
-SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.gz"
-SRC_URI[sha256sum] = "88c52fe475308ee95f560fd7cf68c75bc6e9a6abf56be7fed203a7f762fe7ab2"
+SRC_URI = "git://github.com/twekkel/htpdate.git;branch=master;protocol=https"
+SRCREV = "c3666d6d107662081339a1a24cab092810d7cd00"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
