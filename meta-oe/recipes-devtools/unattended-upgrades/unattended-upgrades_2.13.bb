@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 
 SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=master \
            file://0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch \
-           file://0001-setup.py-Disable-autodection-of-modules.patch \
            "
 
-SRCREV = "5aff8fa2b5b60b7c11bbfb39c884477e72d11d02"
+SRCREV = "221b1a688ee291fd7e0d116dccb57073b921619a"
 
 
 inherit setuptools3_legacy
