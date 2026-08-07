@@ -1,4 +1,4 @@
-From 71d92a24da61eab1e3697cc83ebc387b57bb6c3b Mon Sep 17 00:00:00 2001
+From c94f05e81555aa0ff4b203198830c8779ad0c652 Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Fri, 8 Feb 2013 20:22:19 -0600
 Subject: [PATCH] lua: update Makefile to use environment build settings
@@ -16,6 +16,7 @@ Signed-off-by: Armin Kuster <akust808@gmail.com>
 
 updated to work wtih 6.2.1
 Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
  deps/Makefile         |  1 -
  deps/lua/Makefile     |  1 -

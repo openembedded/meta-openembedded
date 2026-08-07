@@ -1,4 +1,4 @@
-From 577335d0309c852d9f6099c255d5a80603fcbdb9 Mon Sep 17 00:00:00 2001
+From 3be5a588bf8ef420b9e95ccdeb6879fd6dee035a Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Wed, 6 Feb 2013 20:51:02 -0600
 Subject: [PATCH] hack to force use of libc malloc
@@ -15,6 +15,7 @@ Signed-off-by: Venture Research <tech@ventureresearch.com>
 
 Update to work with 4.0.8
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
  src/Makefile | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)

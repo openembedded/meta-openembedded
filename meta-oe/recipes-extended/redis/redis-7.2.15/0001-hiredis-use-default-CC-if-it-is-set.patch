@@ -1,4 +1,4 @@
-From 2fec7733df9a6224875f3ecd3aaafc2857a546c0 Mon Sep 17 00:00:00 2001
+From 47f7923c89362328d9c447898b5b3a4661b86b99 Mon Sep 17 00:00:00 2001
 From: Venture Research <tech@ventureresearch.com>
 Date: Fri, 8 Feb 2013 17:39:52 -0600
 Subject: [PATCH] hiredis: use default CC if it is set
@@ -22,6 +22,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
 Reworked for 6.0.4
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
  deps/hiredis/Makefile | 2 --
  1 file changed, 2 deletions(-)

@@ -1,4 +1,4 @@
-From 8984a5df54fc80de1c99b311f117d28c2a42d959 Mon Sep 17 00:00:00 2001
+From 82749b35860ef3c317f85af4d7c5f45473355692 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 26 Oct 2020 21:32:22 -0700
 Subject: [PATCH] Define correct gregs for RISCV32
@@ -9,6 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Updated patch for 6.2.8
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
  src/debug.c | 26 ++++++++++++++++++++++++--
  1 file changed, 24 insertions(+), 2 deletions(-)

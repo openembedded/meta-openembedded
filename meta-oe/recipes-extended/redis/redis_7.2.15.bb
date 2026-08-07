@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
            file://0006-Define-correct-gregs-for-RISCV32.patch \
           "
-SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d0196bc"
+SRC_URI[sha256sum] = "7bf7975331511fdb788e85dae63964b128fccee1df026a10db57444babc9c9c4"
 
 inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
 
