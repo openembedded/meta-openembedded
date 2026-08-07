@@ -3,6 +3,9 @@ require nginx.inc
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
 
 SRC_URI:append = " \
+                  file://CVE-2024-7347-1.patch \
+                  file://CVE-2024-7347-2.patch \
+                  file://CVE-2025-23419.patch \
                   file://CVE-2023-44487.patch \
                   file://CVE-2026-28755.patch \
                   file://CVE-2026-27651.patch \

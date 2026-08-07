@@ -23,10 +23,7 @@ SRC_URI = " \
     file://nginx.service \
     file://nginx-fix-pidfile.patch \
     file://0001-configure-libxslt-conf.patch \
-    file://CVE-2024-7347-1.patch \
-    file://CVE-2024-7347-2.patch \
     file://CVE-2025-53859.patch \
-    file://CVE-2025-23419.patch \
     file://CVE-2026-1642.patch \
     file://CVE-2026-27784.patch \
 "
