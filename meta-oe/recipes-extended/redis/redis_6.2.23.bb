@@ -19,7 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://CVE-2025-27151.patch \
            "
 
-SRC_URI[sha256sum] = "6383b32ba8d246f41bbbb83663381f5a5f4c4713235433cec22fc4a47e9b6d5f"
+SRC_URI[sha256sum] = "f06cffd69f4016986508017469cf64c16e25b1282927ea9360e7c2d1839eb8e7"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
