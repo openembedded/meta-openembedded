@@ -12,6 +12,15 @@ SRCREV = "cd195b51e948a902a4312f023f4a14392516a543"
 
 LIBVER = "0.0.0"
 
+# GNUmakefile hardcodes its own CFLAGS= assignment (patched to add -fPIC for
+# the shared lib build), which as a plain makefile variable overrides the
+# CFLAGS bitbake exports in the environment -- including the
+# -ffile-prefix-map flags from DEBUG_PREFIX_MAP. Without those, -g debug
+# info embeds the absolute build-tree path, tripping the buildpaths QA
+# check. Pass CFLAGS on the make command line instead, which does take
+# precedence over the makefile's own assignment.
+EXTRA_OEMAKE += "'CFLAGS=${CFLAGS} -fPIC'"
+
 inherit lib_package
 
 do_compile:prepend:class-target() {
