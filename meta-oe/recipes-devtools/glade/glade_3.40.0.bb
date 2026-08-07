@@ -14,6 +14,7 @@ inherit features_check gettext pkgconfig gnomebase gobject-introspection mime-xd
 # cairo would at least needed to be built with xlib.
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
+SRC_URI += "file://0001-gladeui-enum-types-templates-use-basename-instead-o.patch"
 SRC_URI[archive.sha256sum] = "31c9adaea849972ab9517b564e19ac19977ca97758b109edc3167008f53e3d9c"
 
 # Man pages are generated with xsltproc pulling the docbook stylesheets over
