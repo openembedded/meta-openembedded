@@ -30,7 +30,10 @@ INSANE_SKIP += "pep517-backend"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-export WX_CONFIG = "'${RECIPE_SYSROOT_NATIVE}${bindir}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
+# --baselib came from an out-of-tree wx-config patch that wxwidgets dropped in
+# 3.2.11; wx-config now rejects it. It is not needed either, as the wxwidgets
+# recipe rewrites libdir in wx-config to an absolute ${STAGING_LIBDIR}.
+export WX_CONFIG = "'${RECIPE_SYSROOT_NATIVE}${bindir}/wx-config --prefix=${STAGING_EXECPREFIXDIR}'"
 
 RDEPENDS:${PN} = "\
     python3-difflib \
