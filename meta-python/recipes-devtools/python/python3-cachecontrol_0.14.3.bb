@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6572692148079ebbbd800be4b9f36c6d"
 
 SRC_URI[sha256sum] = "73e7efec4b06b20d9267b441c1f733664f989fb8688391b670ca812d70795d11"
 
-inherit pypi python_poetry_core
+inherit pypi python_flit_core
 
 RDEPENDS:${PN} += "\
     python3-crypt \
