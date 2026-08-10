@@ -1,7 +1,7 @@
 SUMMARY = "RAMspeed/SMP cache and memory benchmarking tool"
 DESCRIPTION = "RAMspeed/SMP measures cache and memory bandwidth on multiprocessor systems."
 HOMEPAGE = "https://github.com/cruvolo/ramspeed-smp"
-LICENSE = "Alasir"
+LICENSE = "LicenseRef-Alasir"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=92cffec6695a20eab8d0e4770f4e9353"
 
 SRC_URI = "git://github.com/cruvolo/ramspeed-smp.git;protocol=https;branch=master"
