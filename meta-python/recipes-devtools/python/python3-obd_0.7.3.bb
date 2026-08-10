@@ -1,4 +1,5 @@
-DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"HOMEPAGE = "https://github.com/brendan-w/python-OBD"
+DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"
+HOMEPAGE = "https://github.com/brendan-w/python-OBD"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://README.md;md5=176d0f9ad45c10895296260d426fa862"
 
