@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=53dbfa56f61b90215a
 PYPI_PACKAGE = "pyrad"
 SRC_URI[sha256sum] = "e039c48a026c988d49276bd7c75795f55e0e4c2788f7ddf09419ce0e191a154d"
 
-inherit pypi python_poetry_core
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     python3-crypt \
