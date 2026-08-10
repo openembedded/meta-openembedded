@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=30fa74de63728af31f13dc3bb8cb1756"
 
 SRC_URI[sha256sum] = "ca0aa2c60d418dd2558767db59953ab5954fb5b87dc0b50cecd60566b0b4e2da"
 
-inherit pypi python_setuptools_build_meta ptest-python-pytest
+inherit pypi python_flit_core ptest-python-pytest
 
 PYPI_PACKAGE = "python_xmp_toolkit"
 
