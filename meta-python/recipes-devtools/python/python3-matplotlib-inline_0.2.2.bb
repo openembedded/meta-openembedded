@@ -8,6 +8,6 @@ SRC_URI[sha256sum] = "72f3fe8fce36b70d4a5b612f899090cd0401deddc4ea90e1572b9f4bfb
 PYPI_PACKAGE = "matplotlib_inline"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_flit_core
 
 RDEPENDS:${PN} = "python3-traitlets"
