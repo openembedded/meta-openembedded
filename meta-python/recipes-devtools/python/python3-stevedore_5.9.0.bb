@@ -9,6 +9,4 @@ DEPENDS += "python3-pbr-native"
 
 inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += "python3-pbr python3-six"
-
 BBCLASSEXTEND = "native"
