@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "c6949a2c6eb95fb1c218837dbda0a59abbbebafb8b11098551c01a7061
 
 CVE_PRODUCT = "autobahn"
 
-inherit pypi python_hatchling python_setuptools_build_meta
+inherit pypi python_hatchling
 
 DEPENDS += " \
     python3-cffi-native \
