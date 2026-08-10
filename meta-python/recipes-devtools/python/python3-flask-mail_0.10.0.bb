@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "44083e7b02bbcce792209c06252f8569dd5a325a7aaa76afe7330422bd
 PYPI_PACKAGE = "flask_mail"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_flit_core
 
 RDEPENDS:${PN} = " \
     python3-blinker \
