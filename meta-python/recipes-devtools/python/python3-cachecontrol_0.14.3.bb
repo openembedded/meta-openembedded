@@ -11,7 +11,7 @@ RDEPENDS:${PN} += "\
     python3-crypt \
     python3-datetime \
     python3-email \
-    python3-lockfile \
+    python3-filelock \
     python3-json \
     python3-logging \
     python3-msgpack \
