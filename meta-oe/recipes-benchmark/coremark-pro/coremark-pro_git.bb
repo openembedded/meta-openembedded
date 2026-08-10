@@ -1,7 +1,7 @@
 SUMMARY = "EEMBC CoreMark-Pro CPU benchmark"
 DESCRIPTION = "CoreMark-Pro is a comprehensive CPU benchmark suite from EEMBC that evaluates processor performance using integer, floating-point, and real-world workloads."
 HOMEPAGE = "https://www.eembc.org/coremark-pro/"
-LICENSE = "Apache-2.0 & LicenseRef-EEMBC-AUA"
+LICENSE = "Apache-2.0 AND LicenseRef-EEMBC-AUA"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c84d8f508b20d579641ad151a79a8bf3"
 
 SRC_URI = "git://github.com/eembc/coremark-pro.git;branch=main;protocol=https"
