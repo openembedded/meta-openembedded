@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main;tag=${PV_TAG} \
            file://0001-include-libgen.h-for-basename.patch \
            "
 
-SRCREV = "539014d16099ee8d46318b49e9014332e2dc7ef3"
-PV = "2.03.41"
+SRCREV = "56bef2d3430fcc5d5b00f64c099251ea824ad16f"
+PV = "2.03.42"
 PV_TAG = "v${@d.getVar('PV').replace('.', '_')}"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
