@@ -2,23 +2,19 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://hostapd/README;beginline=5;endline=47;md5=8e2c69e491b28390f9de0df1f64ebd6d"
+LIC_FILES_CHKSUM = "file://hostapd/README;beginline=5;endline=47;md5=4d666937756a064d6d90d128a32c3571"
 
 DEPENDS = "libnl openssl"
 
 SRC_URI = " \
     http://w1.fi/releases/hostapd-${PV}.tar.gz \
-    file://0001-Include-base64-for-hostapd-CONFIG_SAE_PK-builds.patch \
-    file://0002-hostapd-Fix-clearing-up-settings-for-color-switch.patch \
     file://defconfig \
     file://init \
     file://hostapd.service \
-    file://CVE-2025-24912-01.patch \
-    file://CVE-2025-24912-02.patch \
 "
 
 
-SRC_URI[sha256sum] = "2b3facb632fd4f65e32f4bf82a76b4b72c501f995a4f62e330219fe7aed1747a"
+SRC_URI[sha256sum] = "f43502561c28ba47ab77e18e1a973d07361c68cc8b14178e619bd5796b70eabd"
 
 inherit update-rc.d systemd pkgconfig features_check
 
