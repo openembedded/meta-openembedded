@@ -1,5 +1,5 @@
 DESCRIPTION = "Google Authentication Library"
-HOMEPAGE = "https://github.com/googleapis/google-auth-library-python"
+HOMEPAGE = "https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
@@ -9,7 +9,7 @@ SRC_URI += " \
         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
         file://run-ptest \
 "
-SRC_URI[sha256sum] = "e28f103ca8091fb7012b99c44243d7366c29863713b8e34a220c3322b7a07051"
+SRC_URI[sha256sum] = "40e229fc901f0a305b553050e5fce562d509bee0435be053abfa91582b51b90c"
 
 PYPI_PACKAGE = "google_auth"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
