@@ -7,6 +7,8 @@ inherit pypi python_hatchling
 
 SRC_URI[sha256sum] = "a0cb88a46f32dc874e04ee956e4c2764aba2aa228f650b06788ba6bda2962ab5"
 
+CVE_PRODUCT = "encode:httpx"
+
 DEPENDS += "\
     python3-hatch-fancy-pypi-readme-native \
 "
