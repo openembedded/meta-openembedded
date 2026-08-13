@@ -7,6 +7,8 @@ SRC_URI[sha256sum] = "0017591a5477066e90d26b0e696ddc143baafd87b588cfac8100bc6be9
 
 inherit pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 DEPENDS += "\
     python3-hatch-vcs-native \
 "
