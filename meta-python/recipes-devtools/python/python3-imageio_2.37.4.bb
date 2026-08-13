@@ -9,4 +9,6 @@ SRC_URI[sha256sum] = "e45cbc5e83502047fb138f7f585f7f105a136a57eea5f4b3cfc6ce1b52
 
 inherit pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 RDEPENDS:${PN} = "python3-numpy python3-pillow"
