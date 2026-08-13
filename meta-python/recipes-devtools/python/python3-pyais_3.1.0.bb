@@ -9,6 +9,8 @@ SRCREV = "293bc44c1e8740dd60f489205cc9edd72fd672f9"
 
 inherit python_setuptools_build_meta ptest-python-pytest
 
+DEPENDS += "python3-wheel-native"
+
 PYPI_PACKAGE = "pyais"
 
 do_install_ptest:append() {
