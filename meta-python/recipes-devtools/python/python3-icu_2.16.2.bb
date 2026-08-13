@@ -16,6 +16,8 @@ SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
 
 inherit pkgconfig pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 # it's lowercase pyicu instead of ${PYPI_PACKAGE} in this version
 S = "${UNPACKDIR}/pyicu-${PV}"
 
