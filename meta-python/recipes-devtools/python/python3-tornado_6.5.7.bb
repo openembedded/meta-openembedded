@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "66c513a76cda70d53907bc27cf1447557699c2e95aa48ba27a442ff61c
 
 inherit pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 # Requires _compression which is currently located in misc
 RDEPENDS:${PN} += " \
     python3-asyncio \
