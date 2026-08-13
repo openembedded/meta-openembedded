@@ -13,6 +13,8 @@ CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.46.2) contains 
 
 inherit pypi siteinfo python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 DEPENDS += "openssl swig-native"
 RDEPENDS:${PN} += "\
   python3-datetime \
