@@ -20,6 +20,8 @@ RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 inherit python_setuptools_build_meta cython
 inherit pypi
 
+DEPENDS += "python3-wheel-native"
+
 CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
 
 # unbundling abseil-cpp needs work on dynamic linker issue
