@@ -9,6 +9,8 @@ DEPENDS += "python3-setuptools-scm-native"
 
 inherit python_setuptools_build_meta pypi
 
+DEPENDS += "python3-wheel-native"
+
 # The sdist has no git metadata for setuptools_scm to look at.
 export SETUPTOOLS_SCM_PRETEND_VERSION = "${PV}"
 
