@@ -70,3 +70,5 @@ do_install_ptest () {
 BBCLASSEXTEND = "native nativesdk"
 
 CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: only affects Windows due to loading configuration from C:\etc"
+#Reference: https://www.libssh.org/security/advisories/CVE-2026-15370.txt
+CVE_STATUS[CVE-2026-15370] = "fixed-version: vulnerable SFTP server longname construction handling was introduced in 0.11.0 and is not present in 0.10.6"
