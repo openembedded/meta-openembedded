@@ -16,3 +16,5 @@ RDEPENDS:${PN} += " \
 
 inherit pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
