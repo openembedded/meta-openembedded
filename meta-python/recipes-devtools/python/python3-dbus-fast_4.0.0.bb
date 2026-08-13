@@ -11,6 +11,8 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 inherit pypi python_poetry_core cython
 
+DEPENDS += "python3-wheel-native"
+
 RDEPENDS:${PN} += " \
     python3-core (>=3.7) \
     python3-async-timeout \
