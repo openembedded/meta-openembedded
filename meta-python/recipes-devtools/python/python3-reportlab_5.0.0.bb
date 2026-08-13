@@ -10,4 +10,6 @@ CVE_PRODUCT = "reportlab"
 CVE_STATUS[CVE-2020-28463] = "fixed-version: has been fixed since 3.5.55"
 inherit pypi python_setuptools_build_meta
 
+DEPENDS += "python3-wheel-native"
+
 BBCLASSEXTEND = "native nativesdk"
