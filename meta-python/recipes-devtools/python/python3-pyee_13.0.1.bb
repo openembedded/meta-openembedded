@@ -7,6 +7,8 @@ SRC_URI[sha256sum] = "0b931f7c14535667ed4c7e0d531716368715e860b988770fc7eb8578d1
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
+DEPENDS += "python3-wheel-native"
+
 RDEPENDS:${PN} += "python3-typing-extensions"
 
 PYPI_PACKAGE = "pyee"
