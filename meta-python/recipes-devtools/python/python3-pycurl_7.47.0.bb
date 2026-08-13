@@ -20,6 +20,8 @@ DEPENDS = "curl"
 
 inherit pypi python_setuptools_build_meta ptest
 
+DEPENDS += "python3-wheel-native"
+
 RDEPENDS:${PN}-ptest += " \
     python3-pytest \
     python3-core \
