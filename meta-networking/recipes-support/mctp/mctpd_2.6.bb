@@ -2,7 +2,7 @@ require mctp.inc
 
 SUMMARY = "Management Component Transport Protocol (MCTP) control protocol daemon"
 
-inherit systemd features_check
+inherit systemd features_check useradd
 
 do_install:append () {
     install -d ${D}${systemd_system_unitdir}
@@ -16,6 +16,9 @@ do_install:append () {
 }
 
 SYSTEMD_SERVICE:${PN} = "mctpd.service mctp.target mctp-local.target"
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "-r -U -s /bin/false mctpd"
 
 DEPENDS += "systemd"
 REQUIRED_DISTRO_FEATURES = "systemd"
