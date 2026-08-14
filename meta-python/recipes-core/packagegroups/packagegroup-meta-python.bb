@@ -151,6 +151,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-geojson \
     python3-geomet \
     python3-gevent \
+    python3-glances \
     python3-gmpy2 \
     python3-gmqtt \
     python3-gnupg \
