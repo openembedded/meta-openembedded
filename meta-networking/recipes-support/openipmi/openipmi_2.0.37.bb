@@ -29,6 +29,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://ipmi-init-fix-the-arguments.patch \
            file://include_sys_types.patch \
            file://0001-Makefile.am-Pass-BUILD_CFLAGS-to-BUILD_CC.patch \
+           file://0002-swig-python-OpenIPMI_lang.i-add-py2-py3-C-API-compa.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
