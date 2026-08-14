@@ -35,13 +35,10 @@ PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
 export PYTHONPATH
 
 do_compile:append() {
-    # Fix absolute paths in generated files
-    find ${B} -name "*.c" -o -name "*.cpp" | xargs -r \
-        sed -i 's|${WORKDIR}/pandas-${PV}/|${TARGET_DBGSRC_DIR}/|g'
-}
-
-do_install:prepend() {
-	sed -i -e 's;${S};;g' ${B}/pandas/_libs/sparse.cpython-*/pandas/_libs/sparse.pyx.c
+    # Cython embeds the path of the .pyx it was generated from into the
+    # generated C sources, which are shipped in the -dbg package
+    find ${B} \( -name "*.c" -o -name "*.cpp" \) -print0 | xargs -0 -r \
+        sed -i 's|${S}/|${TARGET_DBGSRC_DIR}/|g'
 }
 
 EXTRA_OEMESON:append:class-target = " -Dnumpy_inc_dir=${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include "
