@@ -17,6 +17,7 @@ inherit pkgconfig pypi python_mesonpy cython
 DEPENDS += " \
     python3-numpy \
     python3-versioneer-native \
+    python3-wheel-native \
 "
 
 CFLAGS:append:toolchain-clang = " -Wno-error=deprecated-declarations"
