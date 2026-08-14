@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740a
 SRC_URI[sha256sum] = "178e290f558ddf0379aaefd34c0a8ddb21f21502594e588f928dda85f1ad202b"
 
 SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
+SRC_URI += "file://0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch"
 
 CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
 CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.46.2) contains the fix already"
