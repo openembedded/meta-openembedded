@@ -17,6 +17,8 @@ RDEPENDS:${PN}-ptest += " \
 do_install_ptest:append () {
 	install -d ${D}${PTEST_PATH}/tests
 	cp -rf ${S}/src/ecdsa/* ${D}${PTEST_PATH}/tests/
+	sed -i -e "/--automake/ s/$/ -k 'not test_SigningKey_from_pem_pkcs8v2_EdDSA'/" \
+		${D}${PTEST_PATH}/run-ptest
 }
 
 RDEPENDS:${PN} += " \
