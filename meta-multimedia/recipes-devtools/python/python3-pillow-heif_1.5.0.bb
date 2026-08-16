@@ -13,6 +13,6 @@ inherit pypi python_setuptools_build_meta
 SRC_URI += "file://0001-setup.py-support-cross-compiling.patch"
 SRC_URI[sha256sum] = "16b11a37b762ff42da2d36527bb5cb14bd9194c24c389ee911155d6e23c53065"
 
-DEPENDS += "libheif"
+DEPENDS += "libheif python3-wheel-native"
 
 RDEPENDS:${PN} += "python3-pillow"
