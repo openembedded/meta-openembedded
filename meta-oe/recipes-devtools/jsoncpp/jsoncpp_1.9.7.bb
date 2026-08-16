@@ -13,8 +13,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
 
 PE = "1"
 
-SRCREV = "5defb4ed1a4293b8e2bf641e16b156fb9de498cc"
-SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
+SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https \
+           file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch \
+"
 
 S = "${WORKDIR}/git"
 

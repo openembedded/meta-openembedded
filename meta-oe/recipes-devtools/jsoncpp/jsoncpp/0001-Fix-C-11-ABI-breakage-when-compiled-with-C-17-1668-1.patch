@@ -1,0 +1,525 @@
+From 2e27e4d666798437b95bf3600b4a58450cc4ae20 Mon Sep 17 00:00:00 2001
+From: Jordan Bayles <bayles.jordan@gmail.com>
+Date: Thu, 9 Apr 2026 10:37:08 -0700
+Subject: [PATCH] Fix C++11 ABI breakage when compiled with C++17 #1668 (#1675)
+
+* ci: suppress Node 20 deprecation and missing python-version warnings
+
+- Injects `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true` in all workflows to
+  opt-in to Node.js 24 and suppress the deprecation warnings from
+  multiple GitHub Actions.
+- Specifies `python-version: '3.x'` for `actions/setup-python@v5` in
+  `meson.yml` to fix the missing input warning.
+
+* Fix C++11 ABI breakage when compiled with C++17 (#1668)
+
+When JSONCPP_HAS_STRING_VIEW was defined, the library dropped the
+`const char*` and `const String&` overloads for `operator[]`, `get`,
+`removeMember`, and `isMember`, breaking ABI compatibility for projects
+consuming the library with C++11.
+
+This change unconditionally declares and defines the legacy overloads
+so they are always exported, restoring compatibility.
+
+* ci: add ABI compatibility matrix workflow
+
+This adds a new GitHub Actions workflow to verify ABI compatibility across C++ standard boundaries. It explicitly tests the scenario where JsonCpp is built with one standard (e.g., C++11) and consumed by an application built with a newer one (e.g., C++23), and vice versa.
+
+To facilitate testing the specific `std::string_view` boundary that is conditionally compiled, a new `stringView` demo application has been added to the `example/` directory and is consumed directly by the CI matrix to ensure standard library symbols link correctly across standard versions, build types (shared/static), and operating systems.
+
+* fix: inline std::string_view methods to prevent ABI breaks
+
+This commit completely eliminates the ABI breakage that occurs across C++ standard boundaries when using `std::string_view`.
+
+Previously, when the library was built with C++17+, CMake would leak `JSONCPP_HAS_STRING_VIEW=1` as a PUBLIC definition. A C++11 consumer would receive this definition, attempt to parse the header, and fail with compiler errors because `std::string_view` is not available in their environment.
+
+Conversely, if the library was built in C++11 (without `string_view` symbols), a C++17 consumer would naturally define `JSONCPP_HAS_STRING_VIEW` based on `__cplusplus` inside `value.h`. The consumer would then call the declared `string_view` methods, resulting in linker errors because the methods weren't compiled into the library.
+
+By moving all `std::string_view` overloads directly into `value.h` as `inline` methods that delegate to the fundamental `const char*, const char*` methods:
+1. The consumer's compiler dictates whether the overloads are visible (via `__cplusplus >= 201703L`).
+2. The consumer compiles the inline wrappers locally, removing any reliance on the library's exported symbols for `std::string_view`.
+3. CMake no longer needs to pollute the consumer's environment with PUBLIC compile definitions.
+
+* run clang format
+
+* finish clang format
+
+(cherry picked from commit c67034e4b4c722579ee15fddb8e4af8f04252b08)
+
+Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncpp/commit/c67034e4b4c722579ee15fddb8e4af8f04252b08]
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ .github/workflows/abi-compatibility.yml | 79 +++++++++++++++++++++++++
+ example/BUILD.bazel                     |  6 ++
+ example/CMakeLists.txt                  |  1 +
+ example/stringView/stringView.cpp       | 29 +++++++++
+ include/json/value.h                    | 54 +++++++++++------
+ src/lib_json/CMakeLists.txt             |  9 ---
+ src/lib_json/json_value.cpp             | 66 ---------------------
+ 7 files changed, 151 insertions(+), 93 deletions(-)
+ create mode 100644 .github/workflows/abi-compatibility.yml
+ create mode 100644 example/stringView/stringView.cpp
+
+diff --git a/.github/workflows/abi-compatibility.yml b/.github/workflows/abi-compatibility.yml
+new file mode 100644
+index 0000000..881c4e8
+--- /dev/null
++++ b/.github/workflows/abi-compatibility.yml
+@@ -0,0 +1,79 @@
++name: ABI Compatibility
++
++on: [check_run, push, pull_request]
++
++env:
++  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
++
++jobs:
++  abi-compatibility:
++    runs-on: ${{ matrix.os }}
++
++    strategy:
++      fail-fast: false
++      matrix:
++        os: [ubuntu-latest, windows-latest, macos-latest]
++        shared_libs: [ON, OFF]
++        include:
++          - jsoncpp_std: 11
++            app_std: 23
++          - jsoncpp_std: 23
++            app_std: 11
++
++    steps:
++      - name: checkout project
++        uses: actions/checkout@v4
++
++      - name: build and install JsonCpp (C++${{ matrix.jsoncpp_std }})
++        shell: bash
++        run: |
++          mkdir build-jsoncpp
++          cd build-jsoncpp
++          cmake .. -DCMAKE_CXX_STANDARD=${{ matrix.jsoncpp_std }} \
++                   -DCMAKE_CXX_STANDARD_REQUIRED=ON \
++                   -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install-jsoncpp \
++                   -DBUILD_SHARED_LIBS=${{ matrix.shared_libs }} \
++                   -DJSONCPP_WITH_TESTS=OFF
++          cmake --build . --config Release
++          cmake --install . --config Release
++
++      - name: create example app
++        shell: bash
++        run: |
++          mkdir example-app
++          cat << 'EOF' > example-app/CMakeLists.txt
++          cmake_minimum_required(VERSION 3.10)
++          project(abi_test)
++
++          find_package(jsoncpp REQUIRED CONFIG)
++
++          add_executable(abi_test stringView.cpp)
++          target_link_libraries(abi_test PRIVATE JsonCpp::JsonCpp)
++          EOF
++
++          cp $GITHUB_WORKSPACE/example/stringView/stringView.cpp example-app/stringView.cpp
++
++      - name: build example app (C++${{ matrix.app_std }})
++        shell: bash
++        run: |
++          cd example-app
++          mkdir build
++          cd build
++          cmake .. -DCMAKE_CXX_STANDARD=${{ matrix.app_std }} \
++                   -DCMAKE_CXX_STANDARD_REQUIRED=ON \
++                   -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/install-jsoncpp
++          cmake --build . --config Release
++
++      - name: run example app
++        shell: bash
++        run: |
++          if [ "$RUNNER_OS" == "Windows" ]; then
++            export PATH=$GITHUB_WORKSPACE/install-jsoncpp/bin:$PATH
++            ./example-app/build/Release/abi_test.exe
++          elif [ "$RUNNER_OS" == "macOS" ]; then
++            export DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/install-jsoncpp/lib:$DYLD_LIBRARY_PATH
++            ./example-app/build/abi_test
++          else
++            export LD_LIBRARY_PATH=$GITHUB_WORKSPACE/install-jsoncpp/lib:$LD_LIBRARY_PATH
++            ./example-app/build/abi_test
++          fi
+diff --git a/example/BUILD.bazel b/example/BUILD.bazel
+index ebbd0b5..3581308 100644
+--- a/example/BUILD.bazel
++++ b/example/BUILD.bazel
+@@ -33,3 +33,9 @@ cc_binary(
+     srcs = ["stringWrite/stringWrite.cpp"],
+     deps = ["//:jsoncpp"],
+ )
++
++cc_binary(
++    name = "stringView",
++    srcs = ["stringView/stringView.cpp"],
++    deps = ["//:jsoncpp"],
++)
+diff --git a/example/CMakeLists.txt b/example/CMakeLists.txt
+index 230d1bd..0666db7 100644
+--- a/example/CMakeLists.txt
++++ b/example/CMakeLists.txt
+@@ -4,6 +4,7 @@ set(EXAMPLES
+     readFromStream
+     stringWrite
+     streamWrite
++    stringView
+ )
+ add_definitions(-D_GLIBCXX_USE_CXX11_ABI)
+ 
+diff --git a/example/stringView/stringView.cpp b/example/stringView/stringView.cpp
+new file mode 100644
+index 0000000..b5e33e9
+--- /dev/null
++++ b/example/stringView/stringView.cpp
+@@ -0,0 +1,29 @@
++#include "json/json.h"
++#include <cstdlib>
++#include <iostream>
++
++#if defined(JSONCPP_HAS_STRING_VIEW)
++#include <string_view>
++#endif
++
++/**
++ * \brief Example using std::string_view with JsonCpp.
++ */
++int main() {
++  Json::Value root;
++  root["key"] = "value";
++
++#if defined(JSONCPP_HAS_STRING_VIEW)
++  std::cout << "Has string_view support" << std::endl;
++  std::string_view sv("key");
++  if (root.isMember(sv)) {
++    std::cout << root[sv].asString() << std::endl;
++  }
++#else
++  std::cout << "No string_view support" << std::endl;
++  if (root.isMember("key")) {
++    std::cout << root["key"].asString() << std::endl;
++  }
++#endif
++  return EXIT_SUCCESS;
++}
+diff --git a/include/json/value.h b/include/json/value.h
+index f32f456..2007e6b 100644
+--- a/include/json/value.h
++++ b/include/json/value.h
+@@ -357,7 +357,8 @@ public:
+   Value(const StaticString& value);
+   Value(const String& value);
+ #ifdef JSONCPP_HAS_STRING_VIEW
+-  Value(std::string_view value);
++  inline Value(std::string_view value)
++      : Value(value.data(), value.data() + value.length()) {}
+ #endif
+   Value(bool value);
+   Value(std::nullptr_t ptr) = delete;
+@@ -405,7 +406,14 @@ public:
+   /** Get string_view of string-value.
+    *  \return false if !string. (Seg-fault if str is NULL.)
+    */
+-  bool getString(std::string_view* str) const;
++  inline bool getString(std::string_view* str) const {
++    char const* begin;
++    char const* end;
++    if (!getString(&begin, &end))
++      return false;
++    *str = std::string_view(begin, static_cast<size_t>(end - begin));
++    return true;
++  }
+ #endif
+   Int asInt() const;
+   UInt asUInt() const;
+@@ -496,12 +504,19 @@ public:
+ #ifdef JSONCPP_HAS_STRING_VIEW
+   /// Access an object value by name, create a null member if it does not exist.
+   /// \param key may contain embedded nulls.
+-  Value& operator[](std::string_view key);
++  inline Value& operator[](std::string_view key) {
++    return resolveReference(key.data(), key.data() + key.length());
++  }
+   /// Access an object value by name, returns null if there is no member with
+   /// that name.
+   /// \param key may contain embedded nulls.
+-  const Value& operator[](std::string_view key) const;
+-#else
++  inline const Value& operator[](std::string_view key) const {
++    Value const* found = find(key.data(), key.data() + key.length());
++    if (!found)
++      return nullSingleton();
++    return *found;
++  }
++#endif
+   /// Access an object value by name, create a null member if it does not exist.
+   /// \note Because of our implementation, keys are limited to 2^30 -1 chars.
+   /// Exceeding that will cause an exception.
+@@ -516,7 +531,6 @@ public:
+   /// that name.
+   /// \param key may contain embedded nulls.
+   const Value& operator[](const String& key) const;
+-#endif
+   /** \brief Access an object value by name, create a null member if it does not
+    * exist.
+    *
+@@ -533,8 +547,10 @@ public:
+ #ifdef JSONCPP_HAS_STRING_VIEW
+   /// Return the member named key if it exist, defaultValue otherwise.
+   /// \note deep copy
+-  Value get(std::string_view key, const Value& defaultValue) const;
+-#else
++  inline Value get(std::string_view key, const Value& defaultValue) const {
++    return get(key.data(), key.data() + key.length(), defaultValue);
++  }
++#endif
+   /// Return the member named key if it exist, defaultValue otherwise.
+   /// \note deep copy
+   Value get(const char* key, const Value& defaultValue) const;
+@@ -542,7 +558,6 @@ public:
+   /// \note deep copy
+   /// \param key may contain embedded nulls.
+   Value get(const String& key, const Value& defaultValue) const;
+-#endif
+   /// Return the member named key if it exist, defaultValue otherwise.
+   /// \note deep copy
+   /// \note key may contain embedded nulls.
+@@ -588,13 +603,14 @@ public:
+   /// \pre type() is objectValue or nullValue
+   /// \post type() is unchanged
+ #if JSONCPP_HAS_STRING_VIEW
+-  void removeMember(std::string_view key);
+-#else
++  inline void removeMember(std::string_view key) {
++    removeMember(key.data(), key.data() + key.length(), nullptr);
++  }
++#endif
+   void removeMember(const char* key);
+   /// Same as removeMember(const char*)
+   /// \param key may contain embedded nulls.
+   void removeMember(const String& key);
+-#endif
+   /** \brief Remove the named map member.
+    *
+    *  Update 'removed' iff removed.
+@@ -602,13 +618,14 @@ public:
+    *  \return true iff removed (no exceptions)
+    */
+ #if JSONCPP_HAS_STRING_VIEW
+-  bool removeMember(std::string_view key, Value* removed);
+-#else
++  inline bool removeMember(std::string_view key, Value* removed) {
++    return removeMember(key.data(), key.data() + key.length(), removed);
++  }
++#endif
+   bool removeMember(String const& key, Value* removed);
+   /// Same as removeMember(const char* begin, const char* end, Value* removed),
+   /// but 'key' is null-terminated.
+   bool removeMember(const char* key, Value* removed);
+-#endif
+   /// Same as removeMember(String const& key, Value* removed)
+   bool removeMember(const char* begin, const char* end, Value* removed);
+   /** \brief Remove the indexed array element.
+@@ -622,15 +639,16 @@ public:
+ #ifdef JSONCPP_HAS_STRING_VIEW
+   /// Return true if the object has a member named key.
+   /// \param key may contain embedded nulls.
+-  bool isMember(std::string_view key) const;
+-#else
++  inline bool isMember(std::string_view key) const {
++    return isMember(key.data(), key.data() + key.length());
++  }
++#endif
+   /// Return true if the object has a member named key.
+   /// \note 'key' must be null-terminated.
+   bool isMember(const char* key) const;
+   /// Return true if the object has a member named key.
+   /// \param key may contain embedded nulls.
+   bool isMember(const String& key) const;
+-#endif
+   /// Same as isMember(String const& key)const
+   bool isMember(const char* begin, const char* end) const;
+ 
+diff --git a/src/lib_json/CMakeLists.txt b/src/lib_json/CMakeLists.txt
+index 03e9335..a0695e9 100644
+--- a/src/lib_json/CMakeLists.txt
++++ b/src/lib_json/CMakeLists.txt
+@@ -131,9 +131,6 @@ if(BUILD_SHARED_LIBS)
+ 
+     target_compile_features(${SHARED_LIB} PUBLIC ${REQUIRED_FEATURES})
+ 
+-    if(JSONCPP_HAS_STRING_VIEW)
+-        target_compile_definitions(${SHARED_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
+-    endif()
+ 
+     target_include_directories(${SHARED_LIB} PUBLIC
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+@@ -168,9 +165,6 @@ if(BUILD_STATIC_LIBS)
+ 
+     target_compile_features(${STATIC_LIB} PUBLIC ${REQUIRED_FEATURES})
+ 
+-    if(JSONCPP_HAS_STRING_VIEW)
+-        target_compile_definitions(${STATIC_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
+-    endif()
+ 
+     target_include_directories(${STATIC_LIB} PUBLIC
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+@@ -198,9 +192,6 @@ if(BUILD_OBJECT_LIBS)
+ 
+     target_compile_features(${OBJECT_LIB} PUBLIC ${REQUIRED_FEATURES})
+ 
+-    if(JSONCPP_HAS_STRING_VIEW)
+-        target_compile_definitions(${OBJECT_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
+-    endif()
+ 
+     target_include_directories(${OBJECT_LIB} PUBLIC
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+diff --git a/src/lib_json/json_value.cpp b/src/lib_json/json_value.cpp
+index 74f7789..a8eb72d 100644
+--- a/src/lib_json/json_value.cpp
++++ b/src/lib_json/json_value.cpp
+@@ -441,14 +441,6 @@ Value::Value(const String& value) {
+       value.data(), static_cast<unsigned>(value.length()));
+ }
+ 
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-Value::Value(std::string_view value) {
+-  initBasic(stringValue, true);
+-  value_.string_ = duplicateAndPrefixStringValue(
+-      value.data(), static_cast<unsigned>(value.length()));
+-}
+-#endif
+-
+ Value::Value(const StaticString& value) {
+   initBasic(stringValue);
+   value_.string_ = const_cast<char*>(value.c_str());
+@@ -656,21 +648,6 @@ bool Value::getString(char const** begin, char const** end) const {
+   return true;
+ }
+ 
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-bool Value::getString(std::string_view* str) const {
+-  if (type() != stringValue)
+-    return false;
+-  if (value_.string_ == nullptr)
+-    return false;
+-  const char* begin;
+-  unsigned length;
+-  decodePrefixedString(this->isAllocated(), this->value_.string_, &length,
+-                       &begin);
+-  *str = std::string_view(begin, length);
+-  return true;
+-}
+-#endif
+-
+ String Value::asString() const {
+   switch (type()) {
+   case nullValue:
+@@ -1190,17 +1167,6 @@ Value* Value::demand(char const* begin, char const* end) {
+                       "objectValue or nullValue");
+   return &resolveReference(begin, end);
+ }
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-const Value& Value::operator[](std::string_view key) const {
+-  Value const* found = find(key.data(), key.data() + key.length());
+-  if (!found)
+-    return nullSingleton();
+-  return *found;
+-}
+-Value& Value::operator[](std::string_view key) {
+-  return resolveReference(key.data(), key.data() + key.length());
+-}
+-#else
+ const Value& Value::operator[](const char* key) const {
+   Value const* found = find(key, key + strlen(key));
+   if (!found)
+@@ -1221,7 +1187,6 @@ Value& Value::operator[](const char* key) {
+ Value& Value::operator[](const String& key) {
+   return resolveReference(key.data(), key.data() + key.length());
+ }
+-#endif
+ 
+ Value& Value::operator[](const StaticString& key) {
+   return resolveReference(key.c_str());
+@@ -1261,18 +1226,12 @@ Value Value::get(char const* begin, char const* end,
+   Value const* found = find(begin, end);
+   return !found ? defaultValue : *found;
+ }
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-Value Value::get(std::string_view key, const Value& defaultValue) const {
+-  return get(key.data(), key.data() + key.length(), defaultValue);
+-}
+-#else
+ Value Value::get(char const* key, Value const& defaultValue) const {
+   return get(key, key + strlen(key), defaultValue);
+ }
+ Value Value::get(String const& key, Value const& defaultValue) const {
+   return get(key.data(), key.data() + key.length(), defaultValue);
+ }
+-#endif
+ 
+ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
+   if (type() != objectValue) {
+@@ -1288,31 +1247,13 @@ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
+   value_.map_->erase(it);
+   return true;
+ }
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-bool Value::removeMember(std::string_view key, Value* removed) {
+-  return removeMember(key.data(), key.data() + key.length(), removed);
+-}
+-#else
+ bool Value::removeMember(const char* key, Value* removed) {
+   return removeMember(key, key + strlen(key), removed);
+ }
+ bool Value::removeMember(String const& key, Value* removed) {
+   return removeMember(key.data(), key.data() + key.length(), removed);
+ }
+-#endif
+-
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-void Value::removeMember(std::string_view key) {
+-  JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
+-                      "in Json::Value::removeMember(): requires objectValue");
+-  if (type() == nullValue)
+-    return;
+ 
+-  CZString actualKey(key.data(), unsigned(key.length()),
+-                     CZString::noDuplication);
+-  value_.map_->erase(actualKey);
+-}
+-#else
+ void Value::removeMember(const char* key) {
+   JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
+                       "in Json::Value::removeMember(): requires objectValue");
+@@ -1323,7 +1264,6 @@ void Value::removeMember(const char* key) {
+   value_.map_->erase(actualKey);
+ }
+ void Value::removeMember(const String& key) { removeMember(key.c_str()); }
+-#endif
+ 
+ bool Value::removeIndex(ArrayIndex index, Value* removed) {
+   if (type() != arrayValue) {
+@@ -1353,18 +1293,12 @@ bool Value::isMember(char const* begin, char const* end) const {
+   Value const* value = find(begin, end);
+   return nullptr != value;
+ }
+-#ifdef JSONCPP_HAS_STRING_VIEW
+-bool Value::isMember(std::string_view key) const {
+-  return isMember(key.data(), key.data() + key.length());
+-}
+-#else
+ bool Value::isMember(char const* key) const {
+   return isMember(key, key + strlen(key));
+ }
+ bool Value::isMember(String const& key) const {
+   return isMember(key.data(), key.data() + key.length());
+ }
+-#endif
+ 
+ Value::Members Value::getMemberNames() const {
+   JSON_ASSERT_MESSAGE(
