@@ -7,6 +7,7 @@ SRCREV = "c6768d3f1a45fbfad6a4ff9e167ca4f71dd5c991"
 SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v${PV} \
            file://0001-Adjust-test-expectations-for-ptest.patch \
            file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
+           file://0003-astroid-4.1.2-endlineno.patch \
            file://run-ptest \
            "
 
