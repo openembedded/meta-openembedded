@@ -46,4 +46,6 @@ RDEPENDS:${PN}-ptest += "\
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+    # references the unshipped top-level 'scripts' package used by typer's release tooling
+    rm -f ${D}${PTEST_PATH}/tests/test_prepare_release.py
 }
