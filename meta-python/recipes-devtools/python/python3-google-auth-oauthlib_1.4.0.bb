@@ -16,6 +16,7 @@ SRC_URI += " \
 
 RDEPENDS:${PN}-ptest += " \
         python3-click \
+        python3-cryptography \
         python3-mock \
         python3-pytest \
         python3-unittest-automake-output \
