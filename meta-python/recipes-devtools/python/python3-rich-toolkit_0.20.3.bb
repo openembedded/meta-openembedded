@@ -15,3 +15,7 @@ RDEPENDS:${PN} = "\
     python3-typing-extensions \
     python3-inline-snapshot \
 "
+
+RDEPENDS:${PN}-ptest += "\
+    python3-pydantic \
+"
