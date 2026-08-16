@@ -28,6 +28,15 @@ RDEPENDS:${PN} += " \
 RDEPENDS:${PN}-ptest += " \
     python3-pytest-asyncio \
     python3-pytest-mock \
+    python3-pytest-timeout \
     python3-virtualenv \
     python3-discovery \
 "
+
+# tests/ imports itself as "tests.*" and pulls in "capabilities" from the
+# sibling tasks/ dir; pyproject.toml's [tool.pytest] pythonpath=[".", "tasks"]
+# is what upstream relies on to make both resolve.
+do_install_ptest:append() {
+    cp -rf ${S}/tasks ${D}${PTEST_PATH}/
+    cp -f ${S}/pyproject.toml ${D}${PTEST_PATH}/
+}
