@@ -10,8 +10,9 @@ DEPENDS += "python3-wheel-native"
 
 SRC_URI[sha256sum] = "681a2d0eefd721998f90642762b8e75c2159ec531b20ad5e437245ea7b06a107"
 
-# python3-misc for 'this' module
+# python3-misc for 'this' module, python3-image for colorsys (test_deferred_patching)
 RDEPENDS:${PN}-ptest += " \
+	python3-image \
 	python3-misc \
 "
 
