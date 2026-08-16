@@ -18,4 +18,5 @@ RDEPENDS:${PN}-ptest += " \
     python3-covdefaults \
     python3-coverage \
     python3-pytest-mock \
+    python3-python-dotenv \
 "
