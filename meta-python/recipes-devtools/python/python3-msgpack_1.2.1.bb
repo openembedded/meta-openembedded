@@ -12,4 +12,9 @@ RDEPENDS:${PN}:append:class-target = " \
     python3-io \
 "
 
+# python3-misc for tracemalloc (used by test/test_except.py)
+RDEPENDS:${PN}-ptest += " \
+    python3-misc \
+"
+
 BBCLASSEXTEND = "native nativesdk"
