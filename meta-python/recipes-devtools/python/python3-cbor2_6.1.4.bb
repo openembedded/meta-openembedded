@@ -13,7 +13,9 @@ require ${BPN}-crates.inc
 
 RDEPENDS:${PN}-ptest += " \
     python3-hypothesis \
+    python3-tzdata \
     python3-unixadmin \
+    python3-zoneinfo \
 "
 RDEPENDS:${PN} += " \
     python3-datetime \
