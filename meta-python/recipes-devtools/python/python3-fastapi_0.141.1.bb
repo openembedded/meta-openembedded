@@ -42,5 +42,10 @@ do_install_ptest:append() {
     install -d ${D}${PTEST_PATH}/scripts
     cp -rf ${S}/scripts/* ${D}${PTEST_PATH}/scripts/
     rm -rf ${D}${PTEST_PATH}/scripts/tests
+    cp -rf ${S}/docs_src ${D}${PTEST_PATH}/
     echo "import sys; from pathlib import Path; sys.path.insert(0, str(Path(__file__).parent))" > ${D}${PTEST_PATH}/conftest.py
+    # these docs examples need python3-pydantic-settings, which meta-python
+    # doesn't package
+    rm -rf ${D}${PTEST_PATH}/docs_src/settings/app02_an_py310
+    rm -rf ${D}${PTEST_PATH}/docs_src/settings/app02_py310
 }
