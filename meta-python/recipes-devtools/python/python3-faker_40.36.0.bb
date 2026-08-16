@@ -36,7 +36,9 @@ RDEPENDS:${PN} += "\
     "
 
 RDEPENDS:${PN}-ptest += "\
+    python3-codecs \
     python3-freezegun \
+    python3-misc \
     python3-validators \
 "
 
