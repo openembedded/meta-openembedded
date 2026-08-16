@@ -29,6 +29,15 @@ do_install_ptest:append() {
     cp -rf ${S}/data/* ${D}${PTEST_PATH}/data/
     install -d ${D}${PTEST_PATH}/test
     cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
+    # test_dict_empty round-trips a 4096x4096 nested structure through JSON,
+    # materializing ~16.7M real dict objects on loads() (~900MB+ RSS) which
+    # gets OOM-killed on the memory-constrained qemu ptest target.
+    # test_fake.py instantiates Faker with 9 locales at once, pulling in a
+    # similarly large amount of locale provider data, for what is a
+    # Unicode-robustness smoke test rather than core JSON logic.
+    sed -i \
+        -e "/--automake/ s/$/ --ignore=test\/test_fake.py -k 'not test_dict_empty'/" \
+        ${D}${PTEST_PATH}/run-ptest
 }
 
 RDEPENDS:${PN}-ptest += "\
