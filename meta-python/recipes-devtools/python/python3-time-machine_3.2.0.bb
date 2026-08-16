@@ -26,7 +26,13 @@ do_install_ptest:append() {
     # instant of a slim tzfile and returns a 0 (UTC) offset, so the epoch maps to
     # 0 instead of 21600. Python's own zoneinfo reads the same file correctly, so
     # this is a dateutil/slim-tzdata limitation, not a time_machine bug.
-    sed -i -e "/--automake/ s|\$| --deselect tests/test_time_machine.py::test_destination_datetime_tzinfo_non_zoneinfo|" \
+    #
+    # test_marker_function/_and_fixture/_class/_module use the "testdir" fixture,
+    # provided by pytest's builtin pytester plugin. That plugin isn't autoloaded;
+    # upstream's pyproject.toml sets [tool.pytest.ini_options] addopts = "-p
+    # pytester", but that file isn't shipped into the ptest tree, so the fixture
+    # is unavailable and those 4 tests error out. Pass -p pytester directly.
+    sed -i -e "/--automake/ s|\$| -p pytester --deselect tests/test_time_machine.py::test_destination_datetime_tzinfo_non_zoneinfo|" \
         ${D}${PTEST_PATH}/run-ptest
 }
 
