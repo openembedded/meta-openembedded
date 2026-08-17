@@ -81,7 +81,7 @@ FILES:${PN} += "\
 
 FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
                       ${datadir}/installed-tests/"
-RDEPENDS:${PN}-ptest += "gnome-desktop-testing python3 dbus"
+RDEPENDS:${PN}-ptest += "gnome-desktop-testing python3 ${VIRTUAL-RUNTIME_dbus}"
 
 # ESP mounting, not strictly necessary
 RRECOMMENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'udisks2', '', d)}"
