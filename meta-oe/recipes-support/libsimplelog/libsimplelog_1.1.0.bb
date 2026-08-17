@@ -23,7 +23,7 @@ EXTRA_OECMAKE += "-DUNIX_LINUX=1 -D__LINUX__=1 -D_GNU_SOURCE=1"
 # You can use as below without any problem
 # EXTRA_OECMAKE += "-DUNIX_LINUX=1"
 
-# Drop 0001-allow-build-with-cmake-4.patch as it is now integrated upstream. 
-# Please see branch "main", commit "4827c4325063266f6d2a7e133a9d3a9050ff6a3c" by 
+# Drop 0001-allow-build-with-cmake-4.patch as it is now integrated upstream.
+# Please see branch "main", commit "4827c4325063266f6d2a7e133a9d3a9050ff6a3c" by
 # Author: Alper Ak <alperyasinak1@gmail.com>
 

@@ -58,7 +58,7 @@ do_install_ptest() {
     rm -f ${testsdir}/Memory*
     # test requires at least 3GB free on /tmp
     rm -f ${testsdir}/Integrity_-_Large_file_support.test
-    # fails due to our prompt: 
+    # fails due to our prompt:
     rm -f ${testsdir}/Terminal_-_Detect_width.test
     #
     # sed -i -e 's@\$SRCDIR/@./@g' ${D}${PTEST_PATH}/run-ptest

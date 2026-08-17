@@ -37,7 +37,7 @@ RDEPENDS:${PN} += " \
     perl-module-getopt-std \
     perl-module-list-util \
     perl-module-load \
-    perl-module-metadata \    
+    perl-module-metadata \
     perl-module-mro \
     perl-module-overload \
     perl-module-overload-numbers \

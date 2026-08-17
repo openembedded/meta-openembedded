@@ -44,7 +44,7 @@ EXTRA_OECONF:class-target = "\
                 --disable-sharp \
                 "
 EXTRA_OECONF:class-nativesdk = "\
-                --with-expatincludedir=${STAGING_INCDIR} \ 
+                --with-expatincludedir=${STAGING_INCDIR} \
                 --with-expatlibdir=${STAGING_LIBDIR} \
                 --without-included-ltdl \
                 --disable-java \
