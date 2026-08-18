@@ -11,6 +11,9 @@ DEPENDS = "asio fmt llhttp expected-lite"
 SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v${PV}/${BP}.tar.bz2"
 SRC_URI[sha256sum] = "4a0429e2ea4ece200228226f0c628ecf9ac111cb6a6b12ad857de84c0576bf80"
 
+UPSTREAM_CHECK_URI = "https://github.com/Stiffstream/restinio/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+
 S = "${UNPACKDIR}/${BP}/dev"
 
 inherit cmake
