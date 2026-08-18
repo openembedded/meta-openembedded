@@ -14,7 +14,9 @@ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
            file://0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch \
            "
 SRC_URI[sha256sum] = "a0faef8e401c143487b131b526df7541c1e33d9b8814642fa9dfe8bb250a9632"
-UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
+
+UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
 DEPENDS = "libnfnetlink openssl"
 
