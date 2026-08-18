@@ -14,7 +14,9 @@ DEPENDS = "virtual/libiconv"
 SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "275c29ef47be9992f62a35fcc96f7ca05c06d2fd05c9298b8dee9f743f75b089"
+SRC_URI[sha256sum] = "d4f00ddd29eecb9594bda7be76c13aaa2de1dadc18391c3e905f728ec9af8822"
+
+UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\+release\.autotools\.tar\.gz"
 
 S = "${UNPACKDIR}/libopenmpt-${PV}+release.autotools"
 
