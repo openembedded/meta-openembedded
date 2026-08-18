@@ -10,10 +10,12 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e \
                     file://COPYING.BSD3;md5=f56403ae5b2d6b82ad136d753c05a82e \
                    "
 
-SRC_URI = "git://github.com/onboard-osk/onboard.git;protocol=https;branch=main;tag=${PV} \
+SRC_URI = "git://github.com/onboard-osk/onboard.git;protocol=https;branch=main;tag=v${PV} \
            file://0002-toggle-onboard-hoverclick-use-bin-sh-default-shell-i.patch \
           "
-SRCREV = "02b19e2aee88e4bf2cdc7094813ddd4a6c05d1e7"
+SRCREV = "5fa181edca5daf2450a63ca842a913cc0255c030"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+(-\d+)?)(\^\{\})$"
 
 inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime-xdg
 
