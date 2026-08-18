@@ -86,6 +86,7 @@ do_install_ptest() {
     cp -r ${B}/Testing ${D}${PTEST_PATH}
     # test data
     cp ${S}/winpr/libwinpr/utils/test/*bmp ${D}${PTEST_PATH}/test/
+    cp -r ${S}/winpr/libwinpr/utils/test/cmdline-tests ${D}${PTEST_PATH}/test/
     cp ${S}/libfreerdp/codec/test/*bmp ${D}${PTEST_PATH}/test/
     cp -r ${S}/client/common/test/* ${D}${PTEST_PATH}/test/
     cp -r ${S}/resources ${D}${PTEST_PATH}
