@@ -12,6 +12,8 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=release-4.3.5-patches;protoc
            "
 SRCREV = "851533c3cf63d16984d370ce39d586ecb3694971"
 
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+(?:[a-z]))"
+
 # patch releases often use alphabetical suffixes
 CVE_VERSION_SUFFIX = "alphabetical"
 
