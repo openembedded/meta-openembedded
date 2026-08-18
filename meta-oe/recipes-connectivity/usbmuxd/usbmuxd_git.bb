@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=ebb5c50ab7cab4baeffba14977030c07 \
 
 DEPENDS = "udev libusb1 libplist libimobiledevice-glue"
 
-inherit autotools pkgconfig gitpkgv systemd
+inherit autotools pkgconfig gitpkgv systemd useradd
 
 PKGV = "${GITPKGVTAG}"
 PV = "1.1.2+git"
@@ -22,5 +22,18 @@ UPSTREAM_CHECK_COMMITS = "1"
 EXTRA_OECONF += "--without-preflight"
 
 FILES:${PN} += "${base_libdir}/udev/rules.d/"
+FILES:${PN} += "${nonarch_libdir}/sysusers.d"
 
 SYSTEMD_SERVICE:${PN} = "usbmuxd.service"
+
+# 39-usbmuxd.rules carries OWNER="usbmux"; from systemd v258 udev drops the
+# whole rule line when the user does not exist, so the daemon is never
+# started. Create the account, and ship a sysusers.d fragment so it is also
+# recreated on systems whose /etc predates this recipe.
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "--system --no-create-home --shell /bin/false --user-group usbmux"
+
+do_install:append() {
+    install -d ${D}${nonarch_libdir}/sysusers.d
+    printf 'u usbmux - "usbmux daemon"\n' > ${D}${nonarch_libdir}/sysusers.d/usbmuxd.conf
+}
