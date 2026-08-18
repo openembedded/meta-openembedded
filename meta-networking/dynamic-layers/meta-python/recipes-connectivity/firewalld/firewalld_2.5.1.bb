@@ -10,7 +10,10 @@ SRC_URI = "\
     file://firewalld.init \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "5215ba30236ee1e3df2c2292465a9ff605b9c445dcab2e37da4961cb27c7f36e"
+SRC_URI[sha256sum] = "50fd01cf0b696a1cb7ca722e972d6173b0c5aa6ab13892b00842ae52172b081e"
+
+UPSTREAM_CHECK_URI = "https://github.com/firewalld/firewalld/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native nftables"
