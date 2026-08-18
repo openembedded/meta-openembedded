@@ -43,6 +43,15 @@ EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 
+# The bundled xxHash marks its XXH3 vector paths always_inline but only reaches
+# them through function pointers. It drops the inline hints on its own when
+# __NO_INLINE__ is defined (-O0, -fno-inline) but never for -Og, and recent GCC
+# no longer resolves those indirect calls at -Og, so deps/xxhash fails to
+# build. Upstream xxHash closed this as not fixable in code and documents
+# XXH_NO_INLINE_HINTS as the supported way to compile with -Og. This is the
+# same workaround oe-core applies to the standalone xxhash recipe.
+CFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+
 do_compile:prepend() {
     oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
 }
