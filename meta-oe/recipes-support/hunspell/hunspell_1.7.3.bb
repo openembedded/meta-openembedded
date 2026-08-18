@@ -34,6 +34,11 @@ do_install_ptest() {
     sed -i 's|alias analyze=.*ANALYZE.*|alias analyze="$ANALYZE"|' ${D}${PTEST_PATH}/tests/test.sh
 }
 
-RDEPENDS:${PN}-ptest += "bash glibc-gconv-iso8859-2"
+RDEPENDS:${PN}-ptest += " \
+    bash \
+    glibc-gconv-iso8859-1 \
+    glibc-gconv-iso8859-2 \
+    glibc-gconv-iso8859-15 \
+"
 
 BBCLASSEXTEND = "native"
