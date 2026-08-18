@@ -12,8 +12,9 @@ SRCREV = "9ec6da187f840d8e804d42b9b7867f79d5d6adc2"
 inherit cmake ptest
 
 do_install_ptest () {
-    install -d ${D}${PTEST_PATH}/src/test/pegtl/data
+    install -d ${D}${PTEST_PATH}/src/test/pegtl
+    install -d ${D}${PTEST_PATH}/src/test/data
     install -m 0755 ${B}/src/test/pegtl-test-* ${D}${PTEST_PATH}/src/test/pegtl
-    install ${S}/src/test/file_*.txt ${D}${PTEST_PATH}/src/test/pegtl
-    install ${S}/src/test/data/*.json ${D}${PTEST_PATH}/src/test/pegtl/data
+    install -m 0644 ${S}/src/test/file_*.txt ${D}${PTEST_PATH}/src/test/
+    install -m 0644 ${S}/src/test/data/* ${D}${PTEST_PATH}/src/test/data/
 }
