@@ -40,9 +40,12 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd"
 
 SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
-SRC_URI[sha256sum] = "e4a1524af73c25f0ebc5badcf5d5bea79024d801850bb051baf25feff320ed00"
+SRC_URI[sha256sum] = "b7987aa4d6899584bbc9ff9a698d1adc1b557bcec09168ebebb624585f3cdf77"
 
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
+
+UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-control-center/-/tags"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
