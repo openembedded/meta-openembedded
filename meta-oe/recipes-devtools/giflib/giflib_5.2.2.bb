@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.gz \
            file://0001-Makefile-fix-typo-in-soname-argument.patch \
            file://CVE-2026-23868.patch \
            file://CVE-2025-31344.patch \
+           file://CVE-2026-26740.patch \
            "
 
 SRC_URI[logo.sha256sum] = "1a54383986adad1521d00e003b4c482c27e8bc60690be944a1f3319c75abc2c9"
