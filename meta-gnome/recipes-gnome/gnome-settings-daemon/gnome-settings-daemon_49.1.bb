@@ -28,6 +28,9 @@ GIR_MESON_OPTION = ""
 SRC_URI += "file://0001-gsd-smartcard-enum-types.c.in-fix-reproducibility-is.patch"
 SRC_URI[archive.sha256sum] = "2a9957fc4f91c3b9127b49484179bef485120d9c1c208e44d44e6a746e6cc1c1"
 
+UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/tags"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd x11', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
