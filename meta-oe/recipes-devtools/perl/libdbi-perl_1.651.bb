@@ -53,6 +53,7 @@ RDEPENDS:${PN}-ptest += " \
     perl-module-file-copy \
     perl-module-file-path \
     perl-module-lib \
+    perl-module-load \
     perl-module-perlio \
     perl-module-perlio-encoding \
     perl-module-perlio-scalar \
@@ -61,6 +62,7 @@ RDEPENDS:${PN}-ptest += " \
     perl-module-storable \
     perl-module-test-more \
     perl-module-test2-ipc-driver \
+    perl-module-test2-util-sig \
     perl-module-threads \
     perl-module-utf8 \
     "
