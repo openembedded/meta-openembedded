@@ -41,6 +41,7 @@ SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH};tag=${TA
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
 "
 
+UPSTREAM_CHECK_GITTAGREGEX = "client_release/8.2/(?P<pver>\d+(\.\d+)+)"
 inherit gettext autotools pkgconfig features_check systemd
 
 REQUIRED_DISTRO_FEATURES += "opengl"
