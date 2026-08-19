@@ -8,7 +8,7 @@ DEPENDS = "osinfo-db-tools-native"
 
 SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https;tag=v${PV}"
 
-SRCREV = "70fe571c605541e7be76b50f430c1cd13959c5b9"
+SRCREV = "ae7a0bfe36940a7dde23fcd95ce60c0608cb7e33"
 
 
 inherit allarch autotools-brokensep
