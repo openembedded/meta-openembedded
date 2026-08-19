@@ -1,10 +1,10 @@
 SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
 HOMEPAGE = "https://www.chronox.de/libkcapi/index.html"
 LICENSE = "BSD-3-Clause OR GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fed53d2ab12f2d813d4177dcf4792528"
 
-SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
-SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
+SRCREV = "df40ea48ecbf1afc6d3efa5494673fa73bd40826"
+SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https;tag=v${PV} \
           "
 
 inherit autotools
