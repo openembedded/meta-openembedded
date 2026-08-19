@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
 
 SRC_URI += "file://d19ad6cc086684ee74db250f5fd35227c98e678a.patch"
-SRC_URI[sha256sum] = "e91010caa1880bb511de6ce2ed2186ef3493e0762a4d3ee93e97a0fcccdaaa28"
+SRC_URI[sha256sum] = "721b86b77fca33a735598292022ac6feef99747bf48f52defdada6b572acd5af"
 
 CVE_PRODUCT = "eventlet"
 
