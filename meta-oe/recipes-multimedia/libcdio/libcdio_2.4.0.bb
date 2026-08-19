@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2"
 
-SRC_URI[sha256sum] = "53e83d284667535a767fd2d31edad1a6701591960459df373a10f1f21e80a7ed"
+SRC_URI[sha256sum] = "8e6a305f81e45a78b41ce696d34497cc208d97075469d7304c11a6d44bf006ac"
 
 inherit autotools pkgconfig github-releases
 
