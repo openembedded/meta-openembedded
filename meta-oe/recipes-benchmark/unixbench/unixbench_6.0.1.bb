@@ -5,10 +5,12 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = " \
-    git://github.com/kdlucas/byte-unixbench.git;protocol=https;nobranch=1 \
+    git://github.com/kdlucas/byte-unixbench.git;protocol=https;branch=master;tag=v${PV} \
     file://0001-skip-make-checks.patch \
 "
 SRCREV = "e949d4402f76b4bc9b7b114418faace882f0ef12"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 do_configure[noexec] = "1"
 
