@@ -7,7 +7,7 @@ inherit pypi python_pep517 python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "b815f2aed2288718cfe2a14c76421a00bc4f0918ea32b45dd1645c999fdda69d"
+SRC_URI[sha256sum] = "071823a1e904508a6fd9aaf8cc2f9a92697e1dfa270000b4d1130015b56f4137"
 
 RDEPENDS:${PN} += " \
     python3-mailbox \
