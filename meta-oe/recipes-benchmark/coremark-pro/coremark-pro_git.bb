@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c84d8f508b20d579641ad151a79a8bf3"
 SRC_URI = "git://github.com/eembc/coremark-pro.git;branch=main;protocol=https"
 SRCREV = "4832cc67b0926c7a80a4b7ce0ce00f4640ea6bec"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 # Apply patch to allow cross-compilation
 SRC_URI += "file://0001-allow-toolchain-override.patch"
 
