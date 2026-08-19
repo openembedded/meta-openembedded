@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRC_URI = "git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git;protocol=https;branch=main"
 SRCREV = "d232f528fd131b7d840e79a3756d1dbdaa9b1b60"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 DEPENDS = "numactl"
 
 # Filter out unsupported compiler flags
