@@ -5,9 +5,9 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=020090a00b69dd2af9ab82eb0003ea2c"
 SECTION = "libs"
 
-SRCREV = "a6f185a241ee633cbba600029ec153feb2665cf8"
+SRCREV = "89c0861f74e576c5ad0ec9f5302aa635a4e50dc6"
 
-SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https"
+SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https;tag=v${PV}"
 
 
 inherit meson pkgconfig systemd features_check
