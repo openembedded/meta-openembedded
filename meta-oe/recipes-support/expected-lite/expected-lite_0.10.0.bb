@@ -9,7 +9,7 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/martinmoene/expected-lite.git;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "182165b584dad130afaf4bcd25b8629799baea38"
+SRCREV = "3583e95bad46f5af7d8a826632bc68a6f7281551"
 
 inherit cmake
 
