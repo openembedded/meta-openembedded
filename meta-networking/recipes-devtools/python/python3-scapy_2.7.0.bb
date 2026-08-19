@@ -19,6 +19,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRCREV = "1de09fe85fe5c9d60ea5c6de130374e170b5bc28"
 SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v${PV} \
            file://0001-python3-scapy-skip-ICMP-regression-tests-in-ptest.patch \
+           file://0002-main-initialize-banner-for-the-default-Python-shell.patch \
            file://run-ptest"
 
 UPSTREAM_CHECK_COMMITS = "1"
