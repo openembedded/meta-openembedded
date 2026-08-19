@@ -14,7 +14,7 @@ DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack openssl"
 SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;downloadfilename=${BP}.tar.gz \
            file://miniupnpd.service \
            "
-SRC_URI[sha256sum] = "f9c34ed3632fb60cd248dd5897bd98479a103a75688b056ca2f069e68ab32987"
+SRC_URI[sha256sum] = "91994b127da735b2c97f19992e34420648c0e8c4ace8a4bcb0596e7685c48678"
 
 UPSTREAM_CHECK_URI = "https://miniupnp.tuxfamily.org/files/"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar"
