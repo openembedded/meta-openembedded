@@ -8,8 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1a1b7dfe4016fcf67ae4715f167a0043"
 
 DEPENDS = "luajit luajit-native openssl"
 
-SRC_URI = "git://github.com/wg/wrk.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/wg/wrk.git;protocol=https;branch=master;tag=${PV}"
 SRCREV = "a211dd5a7050b1f9e8a9870b95513060e72ac4a0"
+
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
 # Use system luajit and openssl instead of bundled deps/
 # luajit headers install to a versioned subdir, point include path explicitly
