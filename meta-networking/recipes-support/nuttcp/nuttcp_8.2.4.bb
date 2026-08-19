@@ -15,8 +15,8 @@ UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
 SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
            file://nuttcp@.service \
            file://nuttcp.socket"
-SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
-SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
+
+SRC_URI[sha256sum] = "06a9de5be3e021130a65548072fba75296c9b8b425b10da062bf733278d5e9d0"
 
 S = "${UNPACKDIR}"
 
