@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/AmpereTravis/wrk2-aarch64.git;protocol=https;branch=
            file://0001-load-wrk-lua-from-filesystem.patch"
 SRCREV = "59c09ad4442329ade4343e1ade683c4d12b0b370"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 do_configure() {
     sed -i \
     -e 's|LIBS := -lluajit|LIBS := -lluajit-5.1|' \
