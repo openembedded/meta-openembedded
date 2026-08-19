@@ -2,7 +2,7 @@ SUMMARY = "A generator framework based on a common modern IDL"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eee61e10a40b0e3045ee5965bcd9a8b5"
 
-SRC_URI[sha256sum] = "e47be09989e3bf1c3201740501a07d9cd631fb29fb442445e343c94af7b480cb"
+SRC_URI[sha256sum] = "df31014fbe95b3d910d059ce1a8e827d57d234aca3a5c42094d6ad096fd8f39e"
 
 inherit pypi setuptools3
 
