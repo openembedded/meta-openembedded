@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pytest-dev/pytest-timeout/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d8048cd156eda3df2e7f111b0ae9ceff"
 
-SRC_URI[sha256sum] = "7e68e90b01f9eff71332b25001f85c75495fc4e3a836701876183c4bcfd0540a"
+SRC_URI[sha256sum] = "68c9d82dfe95fa65712e107010c9344e7d8b4afe8c975a7be0d273d939583a93"
 
 PYPI_PACKAGE = "pytest_timeout"
 UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
