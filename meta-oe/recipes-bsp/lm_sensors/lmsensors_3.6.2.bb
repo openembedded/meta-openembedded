@@ -1,7 +1,7 @@
 SUMMARY = "Hardware health monitoring applications"
 HOMEPAGE = "https://hwmon.wiki.kernel.org/"
 LICENSE = "GPL-2.0-or-later AND LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = " \
@@ -10,13 +10,12 @@ DEPENDS = " \
     virtual/libiconv \
 "
 
-SRC_URI = "git://github.com/lm-sensors/lm-sensors.git;protocol=https;branch=master \
+UPSTREAM_TAG = "V${@d.getVar('PV').replace('.', '-')}"
+SRC_URI = "git://github.com/lm-sensors/lm-sensors.git;protocol=https;branch=master;tag=${UPSTREAM_TAG} \
            file://fancontrol.init \
            file://sensord.init \
-           file://0001-Change-PIDFile-path-from-var-run-to-run.patch \
-           file://0001-Fix-building-with-GCC-14.patch \
 "
-SRCREV = "1667b850a1ce38151dae17156276f981be6fb557"
+SRCREV = "5c3ba50f806dea27c3b1e368966191c735459111"
 # Upstream release tags look like "V3-6-2". The checker only converts "_" to
 # "." (not "-"), so the parsed version stays dash-separated and cannot be
 # compared against the dotted PV; marked unknown until that can resolve.
@@ -128,6 +127,7 @@ PACKAGES =+ "${PN}-pwmconfig ${PN}-pwmconfig-doc"
 # isadump and isaset helper program
 PACKAGES =+ "${PN}-isatools ${PN}-isatools-doc"
 
+PACKAGES =+ "${PN}-zsh-completion"
 
 # libsensors files
 FILES:${PN}-libsensors = "${libdir}/libsensors.so.* ${sysconfdir}/sensors3.conf ${sysconfdir}/sensors.d"
@@ -172,3 +172,5 @@ RDEPENDS:${PN}-pwmconfig = "${PN}-fancontrol bash"
 # isadump and isaset helper program files
 FILES:${PN}-isatools = "${sbindir}/isa*"
 FILES:${PN}-isatools-doc = "${mandir}/man8/isa*"
+
+FILES:${PN}-zsh-completion = "${datadir}/zsh"
