@@ -7,7 +7,7 @@ inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "d66b00328e8cb3f57adfb54f43c6acb6d09c2215808c242725ece530fc7f9fdf"
+SRC_URI[sha256sum] = "a10a097100984ec16dfed7848bae1ee83e29cc00cd0bb3138cb599b697315820"
 
 S = "${UNPACKDIR}/moteus-${PV}"
 
