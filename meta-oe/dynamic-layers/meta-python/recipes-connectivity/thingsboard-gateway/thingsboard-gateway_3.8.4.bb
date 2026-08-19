@@ -7,7 +7,7 @@ HOMEPAGE = "https://thingsboard.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-SRCREV = "7f7e0bf061bf92c2feb12b5098620f118dce364b"
+SRCREV = "a735a2d654a218c007b5db7759ceed44794253f9"
 PYPI_SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
 PYPI_PACKAGE = "thingsboard-gateway"
 
