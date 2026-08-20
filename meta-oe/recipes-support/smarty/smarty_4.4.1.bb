@@ -25,4 +25,4 @@ do_install() {
 }
 FILES:${PN} = "${datadir}/php/smarty3/"
 
-CVE_PRODUCT = "smarty:smarty"
+CVE_PRODUCT = "smarty:smarty smarty-php:smarty"
