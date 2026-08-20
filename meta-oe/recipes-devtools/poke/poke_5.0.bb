@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "${GNU_MIRROR}/poke/poke-${PV}.tar.gz \
           file://0003-configure.ac-HELP2MAN-replace-by-true-when-cross-com.patch \
+          file://0001-fix-format-security.patch \
           "
 
 DEPENDS = "flex-native bison-native bdwgc readline"
 
-SRC_URI[sha256sum] = "a84cb9175d50d45a411f2481fd0662b83cb32ce517316b889cfb570819579373"
+SRC_URI[sha256sum] = "6873d59abe821c8111b88623ea7ad9e090892fa95c75562606dd88374e2f5b8f"
 UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/poke/"
 UPSTREAM_CHECK_REGEX = "poke-(?P<pver>\d+(\.\d+)+)\.tar"
 
