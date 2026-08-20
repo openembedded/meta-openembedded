@@ -13,6 +13,7 @@ SRC_URI += " \
     file://0001-setup.py-Do-not-strip-debugging-symbols.patch \
     file://CVE-2026-32875.patch \
     file://CVE-2026-32874.patch \
+    file://CVE-2026-44660.patch \
 "
 
 DEPENDS += "python3-setuptools-scm-native"
