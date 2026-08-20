@@ -9,7 +9,13 @@ inherit pypi python_setuptools_build_meta ptest
 
 BBCLASSEXTEND = "native nativesdk"
 
-SRC_URI += "file://run-ptest"
+SRC_URI += " \
+    file://CVE-2026-32640_p1.patch \
+    file://CVE-2026-32640_p2.patch \
+    file://CVE-2026-32640_p3.patch \
+    file://CVE-2026-32640_p4.patch \
+    file://run-ptest \
+"
 
 RDEPENDS:${PN} += " \
 	python3-math \
