@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https \
            file://CVE-2025-66215-2.patch \
            file://CVE-2025-66215-3.patch \
            file://CVE-2025-66215-4.patch \
+           file://CVE-2026-40528.patch \
          "
 DEPENDS = "virtual/libiconv openssl"
 
