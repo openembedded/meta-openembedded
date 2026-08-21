@@ -11,6 +11,9 @@ SRC_URI += " \
     "
 SRC_URI[sha256sum] = "514cea072e1ef137323ab92bdb07a66bbb5106ecd584e7a046294cf0170cb690"
 
+UPSTREAM_CHECK_URI = "https://github.com/cockpit-project/cockpit/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)*)"
+
 inherit gettext pkgconfig autotools systemd features_check python3targetconfig
 
 DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd python3-pip-native python3-setuptools-native"
