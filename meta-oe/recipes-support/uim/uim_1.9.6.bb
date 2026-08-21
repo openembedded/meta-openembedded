@@ -13,7 +13,7 @@ SRC_URI:append:class-target = "\
 SRC_URI[sha256sum] = "67f0e5fa4292a533edc6f98b842df60c531a89cf82d0336a4e1ab72202ab8c83"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
 
 DEPENDS = "anthy-unicode fontconfig libxft libxt glib-2.0 ncurses intltool libedit autoconf-archive-native"
 DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native"
