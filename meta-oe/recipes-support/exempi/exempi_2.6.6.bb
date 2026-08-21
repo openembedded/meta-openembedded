@@ -8,6 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f816aac8b22d16134477b8e156f0a0f4"
 SRC_URI = "https://libopenraw.freedesktop.org/download/${BPN}-${PV}.tar.xz"
 SRC_URI[sha256sum] = "900fb9957be2095c78e5111b99c49378adac58161a358f52f93c55126f34eb8f"
 
+UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/libopenraw/exempi/-/tags"
+UPSTREAM_CHECK_REGEX = "tags/(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools pkgconfig
 
 DEPENDS = "expat zlib"
