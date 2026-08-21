@@ -18,6 +18,7 @@ inherit meson systemd pkgconfig perlnative
 
 EXTRA_OEMESON = " \
     -Dlibusb=false \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemdunit=system', '', d)} \
     -Dusbdropdir=${libdir}/pcsc/drivers \
 "
 
@@ -38,7 +39,10 @@ RPROVIDES:${PN}:append:class-native = " pcsc-lite-lib-native"
 
 FILES:${PN} = "${sbindir}/pcscd \
                ${datadir}/polkit-1 \
-               ${nonarch_libdir}/systemd/user \
+               ${systemd_system_unitdir}/pcscd.service \
+               ${systemd_system_unitdir}/pcscd.socket \
+               ${libdir}/sysusers.d \
+               ${exec_prefix}/sysusers.d \
                ${sysconfdir}/default/pcscd"
 FILES:${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
 FILES:${PN}-dev = "${includedir} \
@@ -54,12 +58,18 @@ FILES:${PN}-spy-dev = "${libdir}/libpcscspy.la \
 
 do_install:append() {
     rm -rf ${D}${datadir}/metainfo
-    # pcsc-lite installs pcscd-sysusers.conf into systemd's sysusersdir when
-    # the systemd pkg-config variable is available (${libdir}/sysusers.d),
-    # and falls back to ${exec_prefix}/sysusers.d otherwise. Drop both so the
-    # file is not left unpackaged (installed-vs-shipped QA).
-    rm -rf ${D}${libdir}/sysusers.d
-    rm -rf ${D}${exec_prefix}/sysusers.d
+    # In sysvinit environments, remove all systemd-related files
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'false', 'true', d)}; then
+        # pcsc-lite installs pcscd-sysusers.conf into systemd's sysusersdir when
+        # the systemd pkg-config variable is available (${libdir}/sysusers.d),
+        # and falls back to ${exec_prefix}/sysusers.d otherwise. Drop both so the
+        # file is not left unpackaged (installed-vs-shipped QA).
+        rm -rf ${D}${libdir}/sysusers.d
+        rm -rf ${D}${exec_prefix}/sysusers.d
+
+        rm -rf ${D}${systemd_system_unitdir}
+        rm -rf ${D}${libdir}/systemd
+    fi
 }
 
 RPROVIDES:${PN} += "${PN}-systemd"
