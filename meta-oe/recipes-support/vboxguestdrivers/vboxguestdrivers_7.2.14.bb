@@ -32,7 +32,18 @@ S:task-patch = "${UNPACKDIR}/${BP}"
 export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
 export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
 
-EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${@(oe.kernel.get_version_file('${STAGING_KERNEL_BUILDDIR}') or '').split('.')[0]}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
+# The Makefile uses KERN_MAJ to decide whether vboxvideo is built. It defaults to
+# the *host* kernel version (uname -r), so pass the target one instead.
+KERN_MAJ = "${@(oe.kernel.get_version_file(d.getVar('STAGING_KERNEL_BUILDDIR')) or '').split('.')[0]}"
+
+# VirtualBox only ships the out-of-tree vboxvideo DRM module for kernels older
+# than 7.x - from 7.x on the in-tree drivers/gpu/drm/vboxvideo driver is used
+# instead. Mirror that decision so the compile check, the install step and the
+# packaging stay in sync with what "make all" actually produced.
+VBOX_VIDEO_MODULE = "${@'vboxvideo' if (d.getVar('KERN_MAJ') or '').isdigit() and int(d.getVar('KERN_MAJ')) < 7 else ''}"
+VBOX_MODULES = "vboxguest vboxsf ${VBOX_VIDEO_MODULE}"
+
+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KERN_MAJ='${KERN_MAJ}' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
 
 # otherwise 5.2.22 builds just vboxguest
 MAKE_TARGETS = "all"
@@ -72,18 +83,20 @@ do_configure:prepend() {
 do_compile() {
     oe_runmake all
     oe_runmake 'LD=${CC}' 'EXTRA_CFLAGS=-I${STAGING_KERNEL_BUILDDIR}/include/' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
-    if ! [ -e vboxguest.ko -a -e vboxsf.ko -a -e vboxvideo.ko ] ; then
-        echo "ERROR: One of vbox*.ko modules wasn't built"
-        exit 1
-    fi
+    for m in ${VBOX_MODULES} ; do
+        if ! [ -e $m.ko ] ; then
+            echo "ERROR: kernel module $m.ko wasn't built"
+            exit 1
+        fi
+    done
 }
 
 module_do_install() {
     MODULE_DIR=${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/misc
     install -d $MODULE_DIR
-    install -m 644 vboxguest.ko $MODULE_DIR
-    install -m 644 vboxsf.ko $MODULE_DIR
-    install -m 644 vboxvideo.ko $MODULE_DIR
+    for m in ${VBOX_MODULES} ; do
+        install -m 644 $m.ko $MODULE_DIR
+    done
 }
 
 do_install:append() {
@@ -91,10 +104,11 @@ do_install:append() {
     install -m 755 ${S}/utils/mount.vboxsf ${D}${base_sbindir}
 }
 
-PACKAGES += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
-RRECOMMENDS:${PN} += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
+VBOX_MODULE_PACKAGES = "${@' '.join('kernel-module-' + m for m in d.getVar('VBOX_MODULES').split())}"
+PACKAGES += "${VBOX_MODULE_PACKAGES}"
+RRECOMMENDS:${PN} += "${VBOX_MODULE_PACKAGES}"
 
 FILES:${PN} = "${base_sbindir}"
 
 # autoload if installed
-KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
+KERNEL_MODULE_AUTOLOAD += "${VBOX_MODULES}"
