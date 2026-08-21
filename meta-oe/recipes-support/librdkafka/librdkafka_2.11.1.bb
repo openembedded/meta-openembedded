@@ -7,8 +7,10 @@ LICENSE = "BSD-2-Clause"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=40b04809b5d6f648f20f45143cbcb1ad"
 
-SRC_URI = "git://github.com/edenhill/librdkafka;protocol=https;branch=master"
+SRC_URI = "git://github.com/edenhill/librdkafka;protocol=https;branch=master;tag=v${PV}"
 SRCREV = "69b1865efdc0118cd017760d038d34e52fb3f0d0"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 DEPENDS = "zlib openssl zstd curl"
 
