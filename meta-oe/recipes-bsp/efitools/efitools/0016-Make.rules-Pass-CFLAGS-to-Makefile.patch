@@ -1,0 +1,31 @@
+From 39f96d9b98a21618f4a36e5bb8d4bb6c4da6497f Mon Sep 17 00:00:00 2001
+From: Mingli Yu <mingli.yu@windriver.com>
+Date: Thu, 17 Aug 2023 15:11:25 +0800
+Subject: [PATCH] Make.rules: Pass CFLAGS to Makefile
+
+Make sure the right debug directory remapping options are passed to
+the compiler.
+
+Upstream-Status: Pending
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ Make.rules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.rules b/Make.rules
+index 0316ce5..1aa4465 100644
+--- a/Make.rules
++++ b/Make.rules
+@@ -15,7 +15,7 @@ $(error unknown architecture $(ARCH))
+ endif
+ INCDIR	   = -I$(TOPDIR)include/ -I$(INCDIR_PREFIX)/usr/include -I$(INCDIR_PREFIX)/usr/include/efi -I$(INCDIR_PREFIX)/usr/include/efi/$(ARCH) -I$(INCDIR_PREFIX)/usr/include/efi/protocol
+ cppflags   = -DCONFIG_$(ARCH) -D_GNU_SOURCE
+-cflags	   = -O2 -g $(ARCH3264) -fpic -Wall -fshort-wchar -fno-strict-aliasing -fno-merge-constants -fno-stack-protector -ffreestanding -fno-stack-check
++cflags	   = $(CFLAGS) -O2 -g $(ARCH3264) -fpic -Wall -fshort-wchar -fno-strict-aliasing -fno-merge-constants -fno-stack-protector -ffreestanding -fno-stack-check
+ ldflags	   = -nostdlib
+ CRTOBJ		= crt0-efi-$(ARCH).o
+ CRTPATHS	= /lib /lib64 /lib/efi /lib64/efi /usr/lib /usr/lib64 /usr/lib/efi /usr/lib64/efi /usr/lib/gnuefi /usr/lib64/gnuefi
+-- 
+2.25.1
+

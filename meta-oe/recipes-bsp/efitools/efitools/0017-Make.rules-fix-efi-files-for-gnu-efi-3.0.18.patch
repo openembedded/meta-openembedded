@@ -1,0 +1,37 @@
+From 5b60e0d67332354bd873754627c3994ce1bf26bb Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Thu, 6 Jun 2024 22:16:52 +0800
+Subject: [PATCH] Make.rules: fix efi files for gnu-efi 3.0.18
+
+With commit [1] and [2] in gnu-efi 3.0.18, For efi files, the .dynsym
+section was dropped and the .rodata section was splitted out from lds
+files. These changes make LockDown.efi no longer work. Referring to
+gnu-efi 3.0.18, copy .rodata section and remove .dynsym section to efi
+files.
+
+[1] https://sourceforge.net/p/gnu-efi/code/ci/1be024100e80885cfbc840e322673cb850b57316
+[2] https://sourceforge.net/p/gnu-efi/code/ci/b3e80c38bcab002bef2b9e66b7037fbb1980e173
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ Make.rules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.rules b/Make.rules
+index 90f444a..2c08e48 100644
+--- a/Make.rules
++++ b/Make.rules
+@@ -65,7 +65,7 @@ ifeq ($(ARCH),aarch64)
+ endif
+ 
+ %.efi: %.so
+-	$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .dynsym \
++	$(OBJCOPY) -j .text -j .sdata -j .data -j .dynamic -j .rodata \
+ 		   -j .rel -j .rela -j .rel.* -j .rela.* -j .rel* -j .rela* \
+ 		   -j .reloc $(FORMAT) $*.so $@
+ %.so: %.o
+-- 
+2.25.1
+
