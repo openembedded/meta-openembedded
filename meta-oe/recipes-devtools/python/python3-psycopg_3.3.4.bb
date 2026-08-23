@@ -7,7 +7,7 @@ features offered by PostgreSQL."
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3000208d539ec061b899bce1d9ce9404"
 
-SRC_URI[sha256sum] = "5e9a47458b3c1583326513b2556a2a9473a1001a56c9efe9e587245b43148dd9"
+SRC_URI[sha256sum] = "e21207764952cff81b6b8bdacad9a3939f2793367fdac2987b3aac36a651b5bc"
 
 inherit pypi python_setuptools_build_meta
 
