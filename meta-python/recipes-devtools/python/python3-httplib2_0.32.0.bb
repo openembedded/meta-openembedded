@@ -14,4 +14,4 @@ RDEPENDS:${PN} += "\
     python3-pyparsing \
 "
 
-CVE_PRODUCT = "httplib2"
+CVE_PRODUCT = "httplib2_project:httplib2"
