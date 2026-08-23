@@ -15,7 +15,7 @@ SRC_URI = " \
         '', d)} \
     "
 
-SRCREV = "8b663fb4c6fb8e52ca06cea57b986c5ba45f668d"
+SRCREV = "b61de422f87f06ca7526d0b378de4412ad2c760c"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cargo cargo-update-recipe-crates
