@@ -28,7 +28,10 @@ RDEPENDS:${PN} = "iso-codes"
 
 EXTRA_OEMESON += "-Dtests=false"
 
-SRC_URI[archive.sha256sum] = "3515e2015f235b6abb7a342806008acb1f184c29d9c4ced3581f8ed4c1f1c241"
+SRC_URI[archive.sha256sum] = "b1318e68f02bb3902fcd8f904d56f03f534ea5098f65e4c6bb9c2c924da7f823"
+
+UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-software/-/tags"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 PACKAGECONFIG ?= "flatpak"
 PACKAGECONFIG[flatpak] = "-Dflatpak=true,-Dflatpak=false,flatpak ostree"
