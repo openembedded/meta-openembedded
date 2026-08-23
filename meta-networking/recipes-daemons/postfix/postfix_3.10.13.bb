@@ -29,7 +29,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
            file://0001-makedefs-Account-for-linux-7.x-version.patch \
            "
 
-SRC_URI[sha256sum] = "f9ff299f92e4179706537bda288971f4b6eff7e70aa912d03da3cd1b6ffd842e"
+SRC_URI[sha256sum] = "de6526fb11bbf20fcfa5aa4b67e88cc6b246cad614a9bcb4b006f457ba3788bc"
 
 UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
 UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
