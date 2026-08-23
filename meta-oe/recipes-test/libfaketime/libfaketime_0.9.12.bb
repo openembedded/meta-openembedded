@@ -26,3 +26,5 @@ do_install () {
 
 FILES:${PN} = "${bindir}/faketime ${libdir}/faketime/lib*${SOLIBS}"
 FILES:${PN}-dev += "${libdir}/faketime/lib*${SOLIBSDEV}"
+
+BBCLASSEXTEND = "native"
