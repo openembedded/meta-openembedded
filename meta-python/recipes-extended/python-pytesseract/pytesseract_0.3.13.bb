@@ -11,6 +11,6 @@ RDEPENDS:${PN}:append = " python3-packaging tesseract"
 
 PYPI_PACKAGE = "pytesseract"
 
-inherit pypi setuptools3 
+inherit pypi setuptools3
 
 BBCLASSEXTEND = "native"

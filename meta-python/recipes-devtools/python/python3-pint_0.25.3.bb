@@ -20,7 +20,7 @@ RDEPENDS:${PN} += " \
 	python3-packaging \
 	python3-platformdirs \
 "
-# python3-misc for timeit.py 
+# python3-misc for timeit.py
 RDEPENDS:${PN}-ptest += " \
 	python3-appdirs \
 	python3-attrs \

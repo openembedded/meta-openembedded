@@ -14,7 +14,7 @@ SRC_URI += " \
 "
 
 # psutil/jinja2/packaging are oe-core; fastapi/uvicorn/defusedxml are
-# meta-python. 
+# meta-python.
 RDEPENDS:${PN} += " \
     python3-psutil \
     python3-packaging \
