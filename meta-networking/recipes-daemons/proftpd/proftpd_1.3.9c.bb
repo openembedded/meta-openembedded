@@ -128,7 +128,7 @@ do_install () {
         -e 's|-ffile-prefix-map=[^ ]*||g' \
         -e 's|-fdebug-prefix-map=[^ ]*||g' \
         -e 's|-fmacro-prefix-map=[^ ]*||g' \
-        -i ${D}/${bindir}/prxs ${D}${includedir}/proftpd/Make.rules ${D}${includedir}/proftpd/config.h 
+        -i ${D}/${bindir}/prxs ${D}${includedir}/proftpd/Make.rules ${D}${includedir}/proftpd/config.h
 
     # ftpmail perl script, which reads the proftpd log file and sends
     # automatic email notifications once an upload finishs,

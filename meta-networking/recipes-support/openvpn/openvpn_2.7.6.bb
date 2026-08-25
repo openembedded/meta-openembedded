@@ -74,10 +74,10 @@ do_compile_ptest () {
     for x in `find ${B}/tests/unit_tests -name Makefile -exec grep -l check_PROGRAMS {} \;`; do
         dir=`dirname ${x}`
         case $dir in
-            *example*)   
+            *example*)
                 echo "Skipping directory: $dir"
                 ;;
-            *)           
+            *)
                 oe_runmake -C ${dir} check-am
                 ;;
         esac
