@@ -65,8 +65,7 @@ do_compile() {
 }
 
 do_install() {
-    export PREFIX=${D}/${prefix}
-    oe_runmake install
+    oe_runmake install PREFIX=${D}${prefix}
     install -d ${D}/${sysconfdir}/redis
     install -m 0644 ${UNPACKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
     install -d ${D}/${sysconfdir}/init.d
