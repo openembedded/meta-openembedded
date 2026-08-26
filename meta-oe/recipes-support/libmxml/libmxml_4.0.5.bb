@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 HOMEPAGE = "https://www.msweet.org/mxml/"
 BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
 
-SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https"
-SRCREV = "0d5afc4278d7a336d554602b951c2979c3f8f296"
+SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "18d5c7dd9c71ebc1d3f21fe1e0614300babdda84"
 
 # Package does not support out of tree builds.
 inherit autotools-brokensep
