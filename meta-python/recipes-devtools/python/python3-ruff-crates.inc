@@ -20,6 +20,7 @@ SRC_URI += " \
     crate://crates.io/anstyle-wincon/3.0.10 \
     crate://crates.io/anyhow/1.0.104 \
     crate://crates.io/approx/0.5.1 \
+    crate://crates.io/ar_archive_writer/0.5.3 \
     crate://crates.io/arc-swap/1.9.2 \
     crate://crates.io/argfile/1.0.0 \
     crate://crates.io/arrayvec/0.7.8 \
@@ -237,6 +238,7 @@ SRC_URI += " \
     crate://crates.io/num-traits/0.2.19 \
     crate://crates.io/objc2/0.6.3 \
     crate://crates.io/objc2-encode/4.1.0 \
+    crate://crates.io/object/0.39.1 \
     crate://crates.io/once_cell/1.21.4 \
     crate://crates.io/once_cell_polyfill/1.70.1 \
     crate://crates.io/oorandom/11.1.5 \
@@ -284,6 +286,7 @@ SRC_URI += " \
     crate://crates.io/proc-macro-error2/2.0.1 \
     crate://crates.io/proc-macro-utils/0.10.0 \
     crate://crates.io/proc-macro2/1.0.107 \
+    crate://crates.io/psm/0.1.32 \
     crate://crates.io/ptr_meta/0.3.1 \
     crate://crates.io/ptr_meta_derive/0.3.1 \
     crate://crates.io/pyproject-toml/0.13.7 \
@@ -353,6 +356,7 @@ SRC_URI += " \
     crate://crates.io/snapbox/1.0.0 \
     crate://crates.io/snapbox-macros/1.0.0 \
     crate://crates.io/stable_deref_trait/1.2.0 \
+    crate://crates.io/stacker/0.1.25 \
     crate://crates.io/static_assertions/1.1.0 \
     crate://crates.io/statrs/0.18.0 \
     crate://crates.io/strip-ansi-escapes/0.2.1 \
@@ -523,6 +527,7 @@ SRC_URI[anstyle-svg-0.1.11.sha256sum] = "26b9ec8c976eada1b0f9747a3d7cc4eae3bef10
 SRC_URI[anstyle-wincon-3.0.10.sha256sum] = "3e0633414522a32ffaac8ac6cc8f748e090c5717661fddeea04219e2344f5f2a"
 SRC_URI[anyhow-1.0.104.sha256sum] = "330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"
 SRC_URI[approx-0.5.1.sha256sum] = "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6"
+SRC_URI[ar_archive_writer-0.5.3.sha256sum] = "73cd58deff2140a0a8eae87e417bd01db68a33e148aa93d1e8cd837e55e312b6"
 SRC_URI[arc-swap-1.9.2.sha256sum] = "c049c0be4daef0b145cb3555416b3b8ef5b7888a38aea1a3a155801fe7b0810b"
 SRC_URI[argfile-1.0.0.sha256sum] = "99489a733dea0d2930bfa59c243146a8513ce7b0991b9d006647687cc61f53e7"
 SRC_URI[arrayvec-0.7.8.sha256sum] = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
@@ -740,6 +745,7 @@ SRC_URI[nu-ansi-term-0.50.1.sha256sum] = "d4a28e057d01f97e61255210fcff094d74ed04
 SRC_URI[num-traits-0.2.19.sha256sum] = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
 SRC_URI[objc2-0.6.3.sha256sum] = "b7c2599ce0ec54857b29ce62166b0ed9b4f6f1a70ccc9a71165b6154caca8c05"
 SRC_URI[objc2-encode-4.1.0.sha256sum] = "ef25abbcd74fb2609453eb695bd2f860d389e457f67dc17cafc8b8cbc89d0c33"
+SRC_URI[object-0.39.1.sha256sum] = "2e5a6c098c7a3b6547378093f5cc30bc54fd361ce711e05293a5cc589562739b"
 SRC_URI[once_cell-1.21.4.sha256sum] = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
 SRC_URI[once_cell_polyfill-1.70.1.sha256sum] = "a4895175b425cb1f87721b59f0f286c2092bd4af812243672510e1ac53e2e0ad"
 SRC_URI[oorandom-11.1.5.sha256sum] = "d6790f58c7ff633d8771f42965289203411a5e5c68388703c06e14f24770b41e"
@@ -787,6 +793,7 @@ SRC_URI[proc-macro-error-attr2-2.0.0.sha256sum] = "96de42df36bb9bba5542fe9f1a054
 SRC_URI[proc-macro-error2-2.0.1.sha256sum] = "11ec05c52be0a07b08061f7dd003e7d7092e0472bc731b4af7bb1ef876109802"
 SRC_URI[proc-macro-utils-0.10.0.sha256sum] = "eeaf08a13de400bc215877b5bdc088f241b12eb42f0a548d3390dc1c56bb7071"
 SRC_URI[proc-macro2-1.0.107.sha256sum] = "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9"
+SRC_URI[psm-0.1.32.sha256sum] = "4dcd034599e63b970727f70d79e02d62390a4a84f7c6b827c27c46d5ac3fa622"
 SRC_URI[ptr_meta-0.3.1.sha256sum] = "0b9a0cf95a1196af61d4f1cbdab967179516d9a4a4312af1f31948f8f6224a79"
 SRC_URI[ptr_meta_derive-0.3.1.sha256sum] = "7347867d0a7e1208d93b46767be83e2b8f978c3dad35f775ac8d8847551d6fe1"
 SRC_URI[pyproject-toml-0.13.7.sha256sum] = "f6d755483ad14b49e76713b52285235461a5b4f73f17612353e11a5de36a5fd2"
@@ -856,6 +863,7 @@ SRC_URI[smallvec-1.15.2.sha256sum] = "8ed6a63f02c8539c91a8685a86f4099661ba3da017
 SRC_URI[snapbox-1.0.0.sha256sum] = "71d70a71b68054cbe88708f77abfc4bd2daf75028f8f55f4f1cff63565df89ea"
 SRC_URI[snapbox-macros-1.0.0.sha256sum] = "d248cef42e1456ab2f7149c0376985351b7d849ea9ad2a957bf15ddfebf1fdf9"
 SRC_URI[stable_deref_trait-1.2.0.sha256sum] = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
+SRC_URI[stacker-0.1.25.sha256sum] = "707f49d46706bacf8a2b00d51dace3f9de527c13eec3778f570c411f89e69967"
 SRC_URI[static_assertions-1.1.0.sha256sum] = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 SRC_URI[statrs-0.18.0.sha256sum] = "2a3fe7c28c6512e766b0874335db33c94ad7b8f9054228ae1c2abd47ce7d335e"
 SRC_URI[strip-ansi-escapes-0.2.1.sha256sum] = "2a8f8038e7e7969abb3f1b7c2a811225e9296da208539e0f79c5251d6cac0025"
