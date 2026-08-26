@@ -39,4 +39,6 @@ RDEPENDS:${PN} += " \
     python3-datetime \
 "
 
+CVE_PRODUCT = "agronholm:cbor2"
+
 BBCLASSEXTEND = "native nativesdk"
