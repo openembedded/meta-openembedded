@@ -13,6 +13,8 @@ SRC_URI += "file://CVE-2024-52304.patch \
            file://CVE-2025-69228.patch \
            "
 
+CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
+
 PYPI_PACKAGE = "aiohttp"
 inherit python_setuptools_build_meta pypi
 
