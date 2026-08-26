@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=373fede350846fdffd23648fba504635"
 SRC_URI += "file://CVE-2026-40072.patch"
 SRC_URI[sha256sum] = "1b535272a40da3d8d2b120856edb53b84b0c08bcc8fe1a5bbd5f816fd72f4ec6"
 
+CVE_PRODUCT = "ethereum:web3.py apeworx:web3.py"
+
 inherit pypi setuptools3
 
 RDEPENDS:${PN} += " \
