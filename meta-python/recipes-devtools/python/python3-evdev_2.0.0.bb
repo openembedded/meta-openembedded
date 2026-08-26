@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gvalkov/python-evdev"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d7bd1cc4c71b706c7e2d4053aef50f2a"
 
-SRC_URI[sha256sum] = "2c140e01ac8437758fa23fe5c871397412461f42d421aa20241dc8fe8cfccbc9"
+SRC_URI[sha256sum] = "442fb3f4c8dfc9e61e901133c356220c02d663eca8f34722e0cecdd637eba504"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
