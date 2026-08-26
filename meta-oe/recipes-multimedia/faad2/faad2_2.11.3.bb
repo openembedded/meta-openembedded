@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
 
 LICENSE_FLAGS = "commercial"
 
-PV .= "+git"
-
-SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
-SRCREV = "673a22a3c7c33e96e2ff7aae7c4d2bc190dfbf92"
+SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https;tag=${PV}"
+SRCREV = "6918ebb51b8f7e86278da15884bd7114e4b9661e"
 
 
 inherit cmake
