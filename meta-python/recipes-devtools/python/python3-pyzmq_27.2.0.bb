@@ -29,7 +29,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
 SRC_URI:append = " \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "ac0765e3d44455adb6ddbf4417dcce460fc40a05978c08efdf2948072f6db540"
+SRC_URI[sha256sum] = "54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest cython
 
