@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=05d17535846895e23ea4c79b16a9e904"
 
 SRC_URI = "git://github.com/obgm/libcoap.git;branch=release-4.3.5-patches;protocol=https;tag=v${PV} \
            file://run-ptest \
+           file://0001-OpenSSL-Support-4.0-and-later-builds.patch \
            "
 SRCREV = "851533c3cf63d16984d370ce39d586ecb3694971"
 
