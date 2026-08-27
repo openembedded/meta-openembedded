@@ -39,6 +39,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;tag=$
     file://0016-version.c-don-t-print-build-flags.patch \
     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
     file://0018-Fix-permissions-after-generating-certificates-with-m.patch \
+    file://0001-Use-ASN1_STRING-functions-for-OpenSSL-4.0-compat.patch \
 "
 
 raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
