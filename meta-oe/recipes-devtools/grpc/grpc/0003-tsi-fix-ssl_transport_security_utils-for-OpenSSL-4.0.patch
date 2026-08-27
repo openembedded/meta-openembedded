@@ -9,6 +9,8 @@ auto* for X509_NAME and const for ASN1_OCTET_STRING.
 
 Upstream-Status: Submitted [https://github.com/grpc/grpc/pull/41932]
 
+Note: Our fix for areas not covered by the upstream PR.
+
 Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
 ---
  src/core/tsi/ssl_transport_security_utils.cc | 10 +++++-----
