@@ -39,6 +39,7 @@ TAG = "client_release/8.2/8.2.15"
 SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH};tag=${TAG} \
            file://boinc-AM_CONDITIONAL.patch \
            file://0001-scripts-Do-not-check-for-files-on-build-host.patch \
+           file://0001-Fix-build-with-OpenSSL-4.0.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "client_release/8.2/(?P<pver>\d+(\.\d+)+)"
