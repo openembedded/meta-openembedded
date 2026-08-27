@@ -14,7 +14,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=008a5b65f5d167bd0f646530ad3d3293 \
                     file://COPYING.GPL;md5=8a71d0475d08eee76d8b6d0c6dbec543 \
                     file://COPYING.BSD;md5=66b7a37c3c10483c1fd86007726104d7 \
                     "
-SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https \
+           file://0001-crypto-openssl-use-ASN1_TIME_to_tm.patch \
+           "
 
 # master
 SRCREV = "286b4415b95f298ab35d62508a37c2aefc055037"
