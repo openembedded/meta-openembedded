@@ -36,6 +36,10 @@
 #    FITIMAGE_IMAGE_bootscript[type] ?= "bootscript"
 #    FITIMAGE_IMAGE_bootscript[file] ?= "boot.scr"
 #
+#    Add a kernel command line as an optional property of the configuration
+#    node
+#    FITIMAGE_CMDLINE ?= "root=/dev/mydisk"
+#
 # Valid options for the [type] varflag are: "kernel", "fdt", "fdto", "fdtapply", "ramdisk", "bootscript".
 #
 # To enable signing, set
@@ -85,6 +89,8 @@ FITIMAGE_ENCRYPT_ALGO ?= "rsa2048"
 FITIMAGE_ENCRYPT_ALGO[doc] = "Signature algorithm to use"
 FITIMAGE_CONFIG_PREFIX ?= "conf-"
 FITIMAGE_CONFIG_PREFIX[doc] = "Prefix to use for FIT configuration node name"
+FITIMAGE_CMDLINE ?= ""
+FITIMAGE_CMDLINE[doc] = "Kernel command line to embed in the FIT configuration node"
 
 FITIMAGE_LOADADDRESS ??= ""
 FITIMAGE_ENTRYPOINT  ??= ""
@@ -286,6 +292,7 @@ def fitimage_emit_subsection_signature(d, fd, sign_images_list):
 #
 def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcount, bootscriptid, compatible, dtbcount):
     sign = d.getVar("FITIMAGE_SIGN")
+    cmdline = d.getVar("FITIMAGE_CMDLINE")
     conf_default = None
     conf_prefix = d.getVar('FITIMAGE_CONFIG_PREFIX') or ""
 
@@ -300,6 +307,8 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
          conf_desc += ", setup"
     if bootscriptid:
          conf_desc += ", u-boot script"
+    if cmdline:
+         conf_desc += ", command line"
     if dtbcount == 1:
         conf_default = d.getVar('FITIMAGE_DEFAULT_CONFIG') or f'{conf_prefix}{dtb}'
 
@@ -314,6 +323,8 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
         fd.write(f'\t\t\tramdisk = "ramdisk-{ramdiskcount}";\n')
     if bootscriptid:
         fd.write(f'\t\t\tbootscr = "bootscr-{bootscriptid}";\n')
+    if cmdline:
+        fd.write(f'\t\t\tcmdline = "{cmdline}";\n')
     if compatible:
         fd.write(f'\t\t\tcompatible = "{compatible}";\n')
 
