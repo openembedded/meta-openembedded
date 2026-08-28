@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
 
 PROVIDES += "gmock gtest"
 
-SRC_URI = "git://github.com/google/googletest.git;branch=v1.17.x;protocol=https \
+SRC_URI = "git://github.com/google/googletest.git;branch=v1.18.x;protocol=https \
            file://run-ptest \
-          "
-SRCREV = "52eb8108c5bdec04579160ae17225d66034bd723"
+           "
+SRCREV = "063de7e9578f82b369302001269680b4b1553359"
 
 inherit cmake pkgconfig ptest
 
