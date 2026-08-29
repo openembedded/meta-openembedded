@@ -23,6 +23,7 @@ SRC_URI = "gitsm://github.com/iovisor/bcc;branch=master;protocol=https;lfs=0;tag
            file://0001-CMakeLists.txt-override-the-PY_CMD_ESCAPED.patch \
            file://0001-Vendor-just-enough-extra-headers-to-allow-libbpf-to-.patch \
            file://0001-tests-cc-Allow-overriding-the-runtime-location-of-te.patch \
+           file://0001-src-cc-Fix-MCContext-constructor-for-LLVM-23.patch \
            file://run-ptest \
            file://ptest_wrapper.sh \
            "
