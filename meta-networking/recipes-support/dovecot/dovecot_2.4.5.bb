@@ -7,7 +7,7 @@ installations. It's fast, simple to set up, requires no special \
 administration and it uses very little memory."
 SECTION = "mail"
 LICENSE = "BSD-3-Clause AND LGPL-2.1-only AND MIT AND Unicode-3.0 AND LicenseRef-PD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=cb805cc6bdb95ba8fc2398a55fd50877"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6c8f8f4ffb5ada82caf5dd7004cbfe95"
 
 SRC_URI = "https://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
            file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch \
@@ -16,7 +16,7 @@ SRC_URI = "https://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
            file://0001-adapt-lua_newstate-to-new-api.patch \
            "
-SRC_URI[sha256sum] = "670f98d55a29b02ae6a97281e51374e553b94496480ab0a07439571ab30ca8c3"
+SRC_URI[sha256sum] = "868c2686a61b5f8e00a3e4721789b1ab46e6528fd773a5fbed07a6ecba7731e6"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
