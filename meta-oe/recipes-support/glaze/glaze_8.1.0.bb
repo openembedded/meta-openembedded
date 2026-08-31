@@ -9,9 +9,14 @@ SRCREV = "07e5ef2e2d4c53fdfd8603a61be37053b5a27bc5"
 
 inherit cmake
 
-EXTRA_OECMAKE = "-Dglaze_BUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF -Dglaze_ENABLE_FUZZING=OFF -Dglaze_DEVELOPER_MODE=OFF"
-
-FILES:${PN}-dev += "${datadir}/${BPN}/*.cmake"
+EXTRA_OECMAKE = " \
+    -Dglaze_BUILD_EXAMPLES=OFF \
+    -DBUILD_TESTING=OFF \
+    -Dglaze_ENABLE_FUZZING=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=${prefix} \
+    -DDESTDIR=${D} \
+"
 
 # Glaze is a header-only C++ library, so the main package will be empty.
 ALLOW_EMPTY:${PN} = "1"
