@@ -219,6 +219,12 @@ do_install() {
     install -m0755 ${S}/debian/out/system/lib*.so.* ${D}${libdir}/android/
 }
 
+do_install:append:class-native() {
+    install -d ${D}${bindir}
+    install -m0755 ${S}/system/tools/mkbootimg/mkbootimg.py ${D}${bindir}
+    install -m0755 ${S}/system/tools/mkbootimg/unpack_bootimg.py ${D}${bindir}
+}
+
 PACKAGES =+ "${PN}-adbd"
 RDEPENDS:${PN}:class-target = "android-tools-conf-configfs 7zip android-libboringssl"
 RDEPENDS:${PN}-adbd += "${PN}"
