@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "edea7d15772ceeb29db4aff55e482d4bcfb6ae160ce144f2682de02f6d
 
 SRC_URI += "file://CVE-2024-52304.patch \
            file://CVE-2025-53643.patch \
+           file://CVE-2025-69224.patch \
            file://CVE-2025-69225.patch \
            file://CVE-2025-69226.patch \
            file://CVE-2025-69228.patch \
@@ -17,6 +18,15 @@ CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affect
 
 PYPI_PACKAGE = "aiohttp"
 inherit python_setuptools_build_meta pypi
+
+DEPENDS += "python3-cython-native"
+
+do_configure:prepend() {
+    cython3 -3 -Werror \
+        -I ${S}/aiohttp \
+        -o ${S}/aiohttp/_http_parser.c \
+        ${S}/aiohttp/_http_parser.pyx
+}
 
 RDEPENDS:${PN} = "\
     python3-aiohappyeyeballs \
