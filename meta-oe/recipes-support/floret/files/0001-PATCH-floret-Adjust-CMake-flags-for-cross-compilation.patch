@@ -1,0 +1,42 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Varun Singhal <varusing@qti.qualcomm.com>
+Date: Tue, 27 Jan 2026 21:37:55 +0530
+Subject: [PATCH] floret: Adjust CMake flags for cross-compilation
+
+- Update cmake_minimum_required from 2.8.9 to 3.5
+- Add missing #include <cstdint> to args.cc for GCC 15.x
+
+Upstream-Status: Inappropriate [cross-compilation fix for Yocto/OE]
+Signed-off-by: Varun Singhal <varusing@qti.qualcomm.com>
+---
+ CMakeLists.txt | 2 +-
+ src/args.cc    | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,7 @@
+ # LICENSE file in the root directory of this source tree.
+ #
+ 
+-cmake_minimum_required(VERSION 2.8.9)
++cmake_minimum_required(VERSION 3.5)
+ project(floret)
+ 
+ # The version number.
+
+diff --git a/src/args.cc b/src/args.cc
+--- a/src/args.cc
++++ b/src/args.cc
+@@ -14,6 +14,7 @@
+ #include <stdexcept>
+ #include <string>
+ #include <unordered_map>
++#include <cstdint>
+ 
+ namespace fasttext {
+ 
+ Args::Args() {
+-- 
+2.43.0
