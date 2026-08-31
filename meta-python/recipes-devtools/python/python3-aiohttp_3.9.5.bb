@@ -16,6 +16,7 @@ SRC_URI += "file://CVE-2024-52304.patch \
            file://CVE-2025-69229_p2.patch \
            file://CVE-2025-69227.patch \
            file://CVE-2025-69223.patch \
+           file://CVE-2026-22815.patch \
            "
 
 CVE_STATUS[CVE-2026-34515] = "not-applicable-platform: Vulnerability only affects applications running on Windows"
