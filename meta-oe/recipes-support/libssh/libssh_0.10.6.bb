@@ -40,6 +40,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
            file://CVE-2026-59846.patch \
            file://CVE-2026-59848.patch \
            file://CVE-2026-59848-regression.patch \
+           file://CVE-2026-59850.patch \
           "
 SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
 
