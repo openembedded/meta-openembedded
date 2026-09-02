@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
 
-SRC_URI[sha256sum] = "0548198fff07ccf4faf469520bce1c2eceb1ce3e62891921138dec10907f9d00"
+SRC_URI[sha256sum] = "077f0964087883176ff6ab9b074694cae29f8c708273b13ca62c183c6ed716cd"
 
 inherit pypi python_setuptools_build_meta
 
