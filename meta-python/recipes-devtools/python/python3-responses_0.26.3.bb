@@ -7,7 +7,7 @@ inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "9c9259b46a8349197edebf43cfa68a87e1a2802ef503ff8b2fecbabc0b45afd8"
+SRC_URI[sha256sum] = "b0c11ca8131b8b227b8d5108e6ed39772222bd5aab030ed430e8f99057c4c409"
 
 RDEPENDS:${PN} += " \
 	python3-mock \
