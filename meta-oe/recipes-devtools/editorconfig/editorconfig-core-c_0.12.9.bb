@@ -15,3 +15,5 @@ DEPENDS = "pcre2"
 do_install:append() {
     sed -i -e 's|${STAGING_DIR_HOST}||g' ${D}${libdir}/cmake/EditorConfig/EditorConfigTargets.cmake
 }
+
+CVE_STATUS[CVE-2024-53849] = "fixed-version: fixed since v0.12.7"
