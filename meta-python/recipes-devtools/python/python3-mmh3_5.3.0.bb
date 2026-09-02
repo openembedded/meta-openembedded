@@ -8,6 +8,6 @@ inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "bbea5b775f0ac84945191fb83f845a6fd9a21a03ea7f2e187defac7e401616ad"
+SRC_URI[sha256sum] = "95832419b87b882bec9dcd7d041d74887ba7745b3659c14be1ae1db5cfa35cad"
 
 BBCLASSEXTEND = "native nativesdk"
