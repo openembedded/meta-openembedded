@@ -12,7 +12,7 @@ DEPENDS = "tcl virtual/libx11 libxt zip-native"
 SRC_URI = "git://github.com/peadar/pstack;branch=master;tag=v${PV};protocol=https \
            file://0001-reader.h-include-cstdint-for-uintmax_t-intmax_t.patch \
           "
-SRCREV = "a7b64eca7a0a57b6f38de770388013a4fb3be739"
+SRCREV = "b78d16e9497fd36350e4e8bd37f31f8dab5b5651"
 
 PACKAGES =+ "${PN}-lib"
 
