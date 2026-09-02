@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.bz2 \
+    file://CVE-2026-4948.patch \
     file://firewalld.init \
     file://run-ptest \
 "
