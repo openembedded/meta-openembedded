@@ -19,8 +19,17 @@ CXXFLAGS:append:mips = " -latomic"
 CXXFLAGS:append:powerpc = " -latomic"
 CXXFLAGS:append:riscv32 = " -latomic"
 
+# The build produces static archives only. Compile them position independent so
+# they can be linked into shared libraries; without this any consumer that does
+# so fails on the thread-local in kj/exception.c++, which non-PIC code compiles
+# to the local-exec TLS model:
+#
+#   libkj.a(exception.c++.o): relocation R_X86_64_TPOFF32 against
+#   `kj::(anonymous namespace)::threadLocalCallback' can not be used when making
+#   a shared object; local-exec is incompatible with -shared
 EXTRA_OECMAKE += "\
     -DBUILD_TESTING=OFF \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
 "
 
 FILES:${PN}-compiler = "${bindir}"
