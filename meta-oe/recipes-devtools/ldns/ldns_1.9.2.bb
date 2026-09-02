@@ -15,7 +15,7 @@ inherit autotools-brokensep
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[drill] = "--with-drill,--without-drill"
 
-EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR}"
+EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR} --disable-gost"
 
 do_install:append() {
     sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
