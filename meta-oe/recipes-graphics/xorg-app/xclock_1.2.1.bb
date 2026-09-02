@@ -7,4 +7,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2356ccad6224ad00334a72040730eb4b"
 DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
 
 SRC_URI_EXT = "xz"
-SRC_URI[sha256sum] = "410f0372f8381efd9a8282d8227122bab882d7cffe2f7f8f886dd9876d5fc875"
+SRC_URI[sha256sum] = "e326cac20f7ad2af5412b9c4b70b1c3d392e08cd3cc6246e0a77b7c3935a4851"
