@@ -11,6 +11,7 @@ RDEPENDS:${PN} += "python3-core python3-misc python3-resource python3-shell pyth
 
 SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=next;protocol=https;tag=v${PV} \
            file://CVE-2026-56651.patch \
+           file://CVE-2026-56652.patch \
 "
 
 SRCREV = "b74503e2dfbca8ef01c284d40aa77dc82be308b9"
