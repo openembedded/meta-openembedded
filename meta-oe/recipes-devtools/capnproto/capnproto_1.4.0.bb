@@ -32,3 +32,4 @@ BBCLASSEXTEND = "native nativesdk"
 
 CVE_STATUS[CVE-2026-32239] = "fixed-version: fixed in 1.4.0"
 CVE_STATUS[CVE-2026-32240] = "fixed-version: fixed in 1.4.0"
+CVE_STATUS[CVE-2026-59704] = "cpe-incorrect: the vulnerability is in Cap, which is a different project"
