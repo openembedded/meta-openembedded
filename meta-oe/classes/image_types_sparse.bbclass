@@ -16,11 +16,13 @@ CONVERSION_CMD:sparse = " \
     case '${type}' in \
         ext*) \
             bbnote 'Running e2fsprogs-derived ext2simg_android..' ; \
-            ext2simg_android '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.simg' || bberror 'ext2simg_android failed' \
+            ext2simg_android '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.simg' || bberror 'ext2simg_android failed' ;\
+            ln -sf '${IMAGE_NAME}.${type}.simg' '${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${type}.simg'; \
             ;; \
         *) \
             bbnote 'Generating sparse image for non-ext filesystem...'; \
             img2simg -s '${IMAGE_NAME}.${type}' '${IMAGE_NAME}.${type}.sparse' ${SPARSE_BLOCK_SIZE}; \
+            ln -sf '${IMAGE_NAME}.${type}.sparse' '${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${type}.sparse'; \
             ;; \
     esac; \
     if [ "${DELETE_RAWIMAGE_AFTER_SPARSE_CMD}" = "1" ]; then \
