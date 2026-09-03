@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
 DEPENDS += "python3-wheel-native"
 
 # Use different filename to prevent conflicts with thrift itself
-PYPI_SRC_URI:append = ";downloadfilename=${BP}.${PYPI_PACKAGE_EXT}"
+PYPI_ARCHIVE_NAME_PREFIX = "python-"
 
 RDEPENDS:${PN} += "\
     python3-logging \
