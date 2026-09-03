@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master;
            file://CVE-2026-3949.patch \
            file://CVE-2026-32738.patch \
            file://CVE-2026-32739.patch \
+           file://CVE-2026-32740.patch \
            "
 
 SRCREV = "62f1b8c76ed4d8305071fdacbe74ef9717bacac5"
