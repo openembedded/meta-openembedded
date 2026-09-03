@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/pywbem/nocasedict"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742"
 
-SRC_URI[sha256sum] = "6f2b608602b0568cd06ff46e2a0f231d2a0c247d6dc120672c381cb29169e1e7"
+SRC_URI[sha256sum] = "ebe159ca847304949120650aabef6698ff26c4528c55760487759283632ce7e8"
 
 inherit pypi python_setuptools_build_meta
 
