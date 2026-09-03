@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.6;protocol=https;
            file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
            file://CVE-2026-18582.patch \
            file://CVE-2026-18583.patch \
+           file://CVE-2026-19108.patch \
 "
 
 
