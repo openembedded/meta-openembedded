@@ -1,14 +1,22 @@
-This patch fixes configure with python 3.14
+From 459a43a9b1f767cde9a8bbb6016b5f9d17890370 Mon Sep 17 00:00:00 2001
+From: x <a@b.c>
+Date: Wed, 2 Sep 2026 20:23:13 +0000
+Subject: [PATCH] Replace deprecated ast.Str and ast.Index with ast.Constant
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+ast.Str and ast.Index were removed in Python 3.12, which makes mozbuild fail
+to read moz.build files when the build host provides a newer python3.
 
-Upstream-Status: Backport [https://github.com/mozilla-firefox/firefox/commit/d497aa4f770ca02f6083e93b94996a8fe32c2ff4]
+Upstream-Status: Backport [https://phabricator.services.mozilla.com/D261512]
+---
+ python/mozbuild/mozbuild/frontend/reader.py        | 14 +++++++-------
+ .../mozbuild/mozbuild/vendor/rewrite_mozbuild.py   |  6 ++----
+ 2 files changed, 9 insertions(+), 11 deletions(-)
 
 diff --git a/python/mozbuild/mozbuild/frontend/reader.py b/python/mozbuild/mozbuild/frontend/reader.py
-index 5cb627b..c2dcafe 100644
+index 9f6292cb9..89bf9995c 100644
 --- a/python/mozbuild/mozbuild/frontend/reader.py
 +++ b/python/mozbuild/mozbuild/frontend/reader.py
-@@ -470,7 +470,7 @@ class TemplateFunction(object):
+@@ -470,7 +470,7 @@ class TemplateFunction:
              return c(
                  ast.Subscript(
                      value=c(ast.Name(id=self._global_name, ctx=ast.Load())),
@@ -17,7 +25,7 @@ index 5cb627b..c2dcafe 100644
                      ctx=node.ctx,
                  )
              )
-@@ -1035,8 +1035,8 @@ class BuildReader(object):
+@@ -1039,8 +1039,8 @@ class BuildReader:
                  else:
                      # Others
                      assert isinstance(target.slice, ast.Index)
@@ -25,10 +33,10 @@ index 5cb627b..c2dcafe 100644
 -                    key = target.slice.value.s
 +                    assert isinstance(target.slice.value, ast.Constant)
 +                    key = target.slice.value.value
- 
-             return name, key
- 
-@@ -1044,11 +1044,11 @@ class BuildReader(object):
+             elif isinstance(target, ast.Attribute):
+                 assert isinstance(target.attr, str)
+                 key = target.attr
+@@ -1051,11 +1051,11 @@ class BuildReader:
              value = node.value
              if isinstance(value, ast.List):
                  for v in value.elts:
@@ -45,7 +53,7 @@ index 5cb627b..c2dcafe 100644
          assignments = []
  
 diff --git a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py b/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
-index 1590267..151d27c 100644
+index cfcc0f18b..de06b5881 100644
 --- a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
 +++ b/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
 @@ -327,15 +327,13 @@ def assignment_node_to_source_filename_list(code, node):

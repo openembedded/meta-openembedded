@@ -6,23 +6,22 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc9b6ecd19a14a54a628edaaf23733bf"
 SRC_URI = " \
     https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz \
     file://0001-Cargo.toml-do-not-abort-on-panic.patch \
-    file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
-    file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch \
-    file://0004-use-asm-sgidefs.h.patch \
-    file://0005-Add-RISCV32-support.patch \
-    file://0006-util.configure-fix-one-occasionally-reproduced-confi.patch \
-    file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
-    file://0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch \
-    file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch \
-    file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch \
-    file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
-    file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch \
-    file://0013-Fix-build-error-with-musl.patch \
-    file://D261512.1755672843.patch \
+    file://0002-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch \
+    file://0003-use-asm-sgidefs.h.patch \
+    file://0004-Add-RISCV32-support.patch \
+    file://0005-util.configure-fix-one-occasionally-reproduced-confi.patch \
+    file://0006-Rewrite-cargo-host-linker-in-python3.patch \
+    file://0007-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch \
+    file://0008-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch \
+    file://0009-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch \
+    file://0010-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch \
+    file://0011-Fix-build-error-with-musl.patch \
+    file://0012-Replace-deprecated-ast.Str-and-ast.Index-with-ast.Co.patch \
 "
-SRC_URI[sha256sum] = "93b9ef6229f41cb22ff109b95bbf61a78395a0fe4b870192eeca22947cb09a53"
 
-UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs128"
+SRC_URI[sha256sum] = "358bb03c550f95172f1e31694e4287da3411560df91e931cb25210efdf90e524"
+
+UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs140"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 S = "${UNPACKDIR}/firefox-${PV}"
@@ -70,6 +69,7 @@ ICU:mipsarch = ""
 ICU:powerpc:toolchain-clang = ""
 
 LDFLAGS:append:riscv32 = " -latomic"
+SECURITY_STRINGFORMAT = ""
 
 do_configure() {
     cd ${B}
@@ -86,9 +86,9 @@ do_configure() {
 }
 do_configure[cleandirs] += "${B}"
 
-# The main build system is a Makefile that call cargo downstream.
-# We inherit cargo to get the environnement but need to switch back to
-# base_do_compile to do the Makefile base compilation.
+# The main build system is a Makefile that calls cargo downstream.
+# We inherit cargo to get the environment but need to switch back to
+# base_do_compile to do the Makefile based compilation.
 do_compile() {
     base_do_compile
 }
@@ -107,6 +107,12 @@ do_install:append() {
     sed -e 's@${STAGING_DIR_HOST}@@g' \
         -i ${D}${bindir}/js${MAJ_VER}-config
     rm -f ${D}${libdir}/libjs_static.ajs
+    # The installed SpiderMonkey headers require the consumer to define XP_UNIX
+    # or XP_WIN; mozilla/UniquePtrExtensions.h #errors out otherwise. js.pc.in
+    # ships only -isystem, and js-confdefs.h (which carries -DXP_UNIX in the
+    # internal build) is deliberately not in EXPORTS, so declare it here.
+    sed -i -e 's|^Cflags: |Cflags: -DXP_UNIX |' \
+        ${D}${libdir}/pkgconfig/mozjs-${MAJ_VER}.pc
 }
 
 INSANE_SKIP += "32bit-time"
