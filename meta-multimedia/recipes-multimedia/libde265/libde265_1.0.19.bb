@@ -22,3 +22,6 @@ PACKAGECONFIG[libsdl] = "-DENABLE_SDL=ON,-DENABLE_SDL=OFF,virtual/libsdl2"
 FILES:${PN} += "${libdir}/libde265.so"
 FILES:${PN}-dev = "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
 INSANE_SKIP:${PN} = "dev-so"
+
+CVE_STATUS[CVE-2026-45382] = "fixed-version: fixed in v1.0.19"
+CVE_STATUS[CVE-2026-45383] = "fixed-version: fixed in v1.0.19"
