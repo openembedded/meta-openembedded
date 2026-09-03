@@ -20,6 +20,9 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.6;protocol=https;
            file://CVE-2026-18582.patch \
            file://CVE-2026-18583.patch \
            file://CVE-2026-19108.patch \
+           file://CVE-2026-19206-1.patch \
+           file://CVE-2026-19206-2.patch \
+           file://CVE-2026-19206-3.patch \
 "
 
 
