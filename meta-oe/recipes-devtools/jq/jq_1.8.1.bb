@@ -30,6 +30,8 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
            file://CVE-2026-39956.patch \
            "
 
+CVE_STATUS[CVE-2025-49014] = "fixed-version: fixed in v1.8.1"
+
 inherit autotools ptest
 
 UPSTREAM_CHECK_GITTAGREGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
