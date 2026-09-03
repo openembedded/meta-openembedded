@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
 
 SRC_URI += "file://0001-pyproject.toml-relax-setuptools-upper-bound.patch"
-SRC_URI[sha256sum] = "673611bbd43f0810bec0b0f028ddeaaa501190339cac411f347ac76917c3ae7b"
+SRC_URI[sha256sum] = "6117b84ea48435e5356dc737f5121485c30920ba43375fa7b434fd753df0eac3"
 
 DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 
@@ -21,4 +21,10 @@ RDEPENDS:${PN} += " \
 "
 
 RDEPENDS:${PN}-ptest:append:libc-glibc  = " glibc-charmap-gb18030 glibc-charmaps"
+
+do_install_ptest:append() {
+    install -d ${D}${PTEST_PATH}/data
+    install -m 0644 ${S}/data/* ${D}${PTEST_PATH}/data/
+}
+
 BBCLASSEXTEND = "native nativesdk"
