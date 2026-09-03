@@ -3,16 +3,23 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = " \
-    colord \
-    graphene \
-    gtk4 \
-    gdk-pixbuf \
+    atk \
     cairo \
-    pango \
+    colord \
+    fribidi \
+    gdk-pixbuf \
+    glycin \
+    graphene \
     gsettings-desktop-schemas \
-    json-glib \
+    gtk4 \
+    harfbuzz \
+    lcms \
     libdisplay-info \
+    libdrm \
     libei \
+    libxkbcommon \
+    pango \
+    pixman \
     python3-argcomplete-native \
     python3-docutils-native \
     virtual/egl \
@@ -20,14 +27,12 @@ DEPENDS = " \
     wayland \
     wayland-native \
     wayland-protocols \
-    libxcvt-native \
     "
-
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
 SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
-SRC_URI[archive.sha256sum] = "ec102aa3cbb0e39001206627aca3055314555f70609de5e6c2b7efcd1fa90f20"
+SRC_URI[archive.sha256sum] = "273d33c875abcb4b6cbea3f4ec045d18155fbc510c3521fc7e47926371310988"
 
 REQUIRED_DISTRO_FEATURES = "wayland polkit"
 ANY_OF_DISTRO_FEATURES = "opengl vulkan"
@@ -37,38 +42,53 @@ ANY_OF_DISTRO_FEATURES = "opengl vulkan"
 LOGIND ?= "systemd"
 REQUIRED_DISTRO_FEATURES += "systemd"
 
-# profiler requires sysprof 3.34 which is not willing to build atow
 PACKAGECONFIG ??= " \
     native-backend \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 opengl glx sm xwayland startup-notification', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'logind udev', '', d)} \
-    gnome-desktop \
     egl \
+    gles2 \
+    opengl \
+    fonts \
+    bash-completion \
+    gnome-desktop \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'logind udev', '', d)} \
 "
+
+PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev libxcvt-native"
+PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, virtual/libgl"
+PACKAGECONFIG[gles2] = "-Dgles2=true, -Dgles2=false, virtual/libgles2"
+PACKAGECONFIG[egl] = "-Degl=true, -Degl=false, virtual/egl"
+PACKAGECONFIG[egl-device] = "-Degl_device=true, -Degl_device=false"
+PACKAGECONFIG[wayland-eglstream] = "-Dwayland_eglstream=true, -Dwayland_eglstream=false, wayland-eglstream-protocols"
+PACKAGECONFIG[udev] = "-Dudev=true, -Dudev=false, udev"
+PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
+PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
+PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
+PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
+PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcanberra"
+PACKAGECONFIG[profiler] = "-Dprofiler=true, -Dprofiler=false, sysprof"
+PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
+PACKAGECONFIG[xwayland] = "-Dxwayland=true, -Dxwayland=false, libxcb libxi xcomposite libxcursor xdamage xext libxkbfile libxfixes xkeyboard-config virtual/libx11 xinerama xau xwayland"
+# 'auto' would probe the xwayland pkg-config for -initfd support in the sysroot.
+PACKAGECONFIG[xwayland-initfd] = "-Dxwayland_initfd=enabled, -Dxwayland_initfd=disabled"
+PACKAGECONFIG[fonts] = "-Dfonts=true, -Dfonts=false, pango harfbuzz fribidi"
+PACKAGECONFIG[bash-completion] = "-Dbash_completion=true, -Dbash_completion=false, bash-completion"
+PACKAGECONFIG[docs] = "-Ddocs=true, -Ddocs=false, gi-docgen-native"
+PACKAGECONFIG[devkit] = "-Ddevkit=enabled, -Ddevkit=disabled, gtk4"
 
 EXTRA_OEMESON += " \
     -Dtests=disabled \
+    -Dinstalled_tests=false \
+    -Dcogl_tests=false \
+    -Dclutter_tests=false \
+    -Dmutter_tests=false \
+    -Dkvm_tests=false \
+    -Dtty_tests=false \
+    -Dcatch=false \
+    -Dverbose=true \
 "
 
-# combi-config - see meson_options.txt for more details
-PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev"
-PACKAGECONFIG[glx] = "-Dglx=true, -Dglx=false"
-PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false,virtual/libgl"
-PACKAGECONFIG[egl] = "-Degl=true,-Degl=false,virtual/egl"
-PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
-# Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
-PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
-PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
-PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
-PACKAGECONFIG[udev] = "-Dudev=true, -Dudev=false"
-PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
-PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcanberra"
-PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
-PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
-PACKAGECONFIG[x11] = "-Dx11=true, -Dx11=false, virtual/libx11"
-PACKAGECONFIG[xwayland] = "-Dxwayland=true, -Dxwayland=false, libxcb libxi xcomposite libxcursor xdamage xext libxkbfile libxfixes xkeyboard-config virtual/libx11 xinerama xau xwayland"
-
-MUTTER_API_NAME = "mutter-16"
+MUTTER_API_NAME = "mutter-18"
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
@@ -112,4 +132,3 @@ FILES:${PN}-dev += " \
 "
 
 RDEPENDS:${PN} += "${PN}-gsettings gsettings-desktop-schemas"
-
