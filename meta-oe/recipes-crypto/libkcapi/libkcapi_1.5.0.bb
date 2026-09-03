@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https
            file://CVE-2026-71226-2.patch \
            file://CVE-2026-71226-3.patch \
            file://CVE-2026-71227.patch \
+           file://CVE-2026-71225.patch \
           "
 
 inherit autotools
