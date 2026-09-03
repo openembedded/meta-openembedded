@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "adde34c08f40b63411be6f1d17e235550a0090494871e6481c312989d7f4a2d4"
+SRC_URI[archive.sha256sum] = "68fc74306f88f697a6bcdb8243cb32a9ec0cd3f6e2bb92249b24b60fc57450b6"
 
 EXTRA_OEMESON += " \
     -Dextension_set=all \
@@ -20,4 +20,5 @@ FILES:${PN} += " \
     ${datadir}/gnome-session \
     ${datadir}/wayland-sessions \
     ${datadir}/xsessions \
+    ${systemd_user_unitdir} \
 "
