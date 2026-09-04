@@ -9,7 +9,6 @@ SRC_URI[sha256sum] = "4bf5f880c99406f52a3cfc2633e42d9dc67615e69d8a509d74867d3bad
 
 RDEPENDS:${PN}:append = " python3-packaging tesseract"
 
-PYPI_PACKAGE = "pytesseract"
 
 inherit pypi setuptools3
 

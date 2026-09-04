@@ -15,7 +15,6 @@ SRC_URI:append = " \
     file://run-ptest \
 "
 
-PYPI_PACKAGE = "typer"
 
 RDEPENDS:${PN} += "\
     python3-annotated-doc \

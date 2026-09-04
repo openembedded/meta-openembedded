@@ -33,7 +33,6 @@ LIC_FILES_CHKSUM = " \
 	file://GPL-LICENSE-2.txt;md5=751419260aa954499f7abaabaa882bbe \
 "
 
-PYPI_PACKAGE = "odfpy"
 
 inherit pypi ptest-python-pytest setuptools3
 SRC_URI[sha256sum] = "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec"

@@ -13,7 +13,6 @@ SRC_URI[sha256sum] = "ad452099f4695ffd8855113f453348200d195ee9fa341a09e197d66ee7
 
 inherit pypi setuptools3 ptest
 
-PYPI_PACKAGE = "oletools"
 PYPI_PACKAGE_EXT = "zip"
 
 RDEPENDS:${PN}-ptest += " \

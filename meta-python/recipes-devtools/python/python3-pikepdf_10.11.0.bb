@@ -15,7 +15,6 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 # so turn it off.
 export CMAKE_ARGS = "-DCMAKE_CXX_SCAN_FOR_MODULES=OFF"
 
-PYPI_PACKAGE = "pikepdf"
 
 CVE_PRODUCT = "pikepdf"
 

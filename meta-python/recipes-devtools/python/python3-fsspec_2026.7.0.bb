@@ -7,7 +7,6 @@ SRC_URI[sha256sum] = "c803c40f4cf860b49dea58ee3e1c33cb9c790520e233537e1340049f89
 
 inherit pypi python_hatchling ptest
 
-PYPI_PACKAGE = "fsspec"
 
 DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
 

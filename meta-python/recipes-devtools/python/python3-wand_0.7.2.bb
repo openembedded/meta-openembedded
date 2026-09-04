@@ -10,7 +10,6 @@ SRC_URI[sha256sum] = "0387fd08848d00cadd1d885fcb19a17dd4250df2029e5338b6b668b7fe
 
 inherit pypi python_setuptools_build_meta ptest
 
-PYPI_PACKAGE = "wand"
 
 FILES:${PN}-doc += "${datadir}/README.rst"
 

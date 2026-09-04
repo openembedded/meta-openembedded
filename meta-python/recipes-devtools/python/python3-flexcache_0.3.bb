@@ -8,7 +8,6 @@ SRC_URI[sha256sum] = "18743bd5a0621bfe2cf8d519e4c3bfdf57a269c15d1ced3fb4b64e0ff4
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 DEPENDS += "python3-wheel-native"
-PYPI_PACKAGE = "flexcache"
 
 PTEST_PYTEST_DIR = "flexcache/testsuite"
 

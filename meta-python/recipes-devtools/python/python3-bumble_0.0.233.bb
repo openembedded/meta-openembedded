@@ -37,5 +37,3 @@ RDEPENDS:${PN}-ptest += "\
 # runtime dependencies to the bitbake packages which include them:
 #    libusb-package
 #    pyee
-
-PYPI_PACKAGE = "bumble"

@@ -2,7 +2,6 @@ SUMMARY = "Implementation of bounded Levenshtein distance (Ukkonen)"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7e49a187324d5a1a6c4ba2b9c3fd4033"
 
-PYPI_PACKAGE = "ukkonen"
 
 inherit python_setuptools_build_meta
 

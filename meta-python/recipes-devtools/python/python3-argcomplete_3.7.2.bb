@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=2ee41112a44fe7014dce33e26468ba93"
 
 SRC_URI[sha256sum] = "aad8b69a0b9969edb62db0d1752354c0d50717b10e0cbb00e2a958381b9fc6b9"
 
-PYPI_PACKAGE = "argcomplete"
 
 inherit pypi python_hatchling
 

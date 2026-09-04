@@ -4,7 +4,6 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=941ee9cd1609382f946352712a319b4b"
 
-PYPI_PACKAGE = "brotli"
 
 CVE_PRODUCT = "brotli"
 

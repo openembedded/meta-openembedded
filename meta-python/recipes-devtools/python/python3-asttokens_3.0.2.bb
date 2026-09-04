@@ -3,7 +3,6 @@ HOMEPAGE = "https://github.com/gristlabs/asttokens"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3d9b931fa23ab1cacd0087f9e2ee12c0"
 
-PYPI_PACKAGE = "asttokens"
 
 inherit pypi python_setuptools_build_meta
 

@@ -12,7 +12,6 @@ SRC_URI += "file://0001-ptest-disable-failing-tests.patch \
 
 inherit pypi python_hatchling ptest-python-pytest
 
-PYPI_PACKAGE = "uvicorn"
 CVE_PRODUCT = "encode:uvicorn"
 CVE_STATUS[CVE-2020-7694] = "fixed-version: The vulnerability has been fixed since 0.11.7"
 

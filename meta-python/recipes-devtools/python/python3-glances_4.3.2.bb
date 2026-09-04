@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=852ecadc0ac7e6f4d7144d5544a3815b"
 
 SRC_URI[sha256sum] = "736faa7faea3bcd58afffd6443974b4ed4b498627a71ce5d6c9640b7b5ddbd94"
 
-PYPI_PACKAGE = "glances"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 

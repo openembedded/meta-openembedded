@@ -10,7 +10,6 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 DEPENDS += "python3-wheel-native"
 
-PYPI_PACKAGE = "flexparser"
 
 PTEST_PYTEST_DIR = "flexparser/testsuite"
 

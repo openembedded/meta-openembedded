@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5c3c6ebdec7792ae12df8d1c0a46b26a"
 
 inherit pypi setuptools3
 
-PYPI_PACKAGE = "colorlog"
 
 SRC_URI[sha256sum] = "2a7924c1dadf18b22a0eb8b06d1c7b01d5341707ec1641eb6fcc4fde0c3e8e5f"
 

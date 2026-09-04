@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "ninja-native cmake-native python3-scikit-build-native python3-scikit-build-core-native"
 
-PYPI_PACKAGE = "cmake"
 PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
 
 inherit pypi python_setuptools_build_meta

@@ -15,5 +15,3 @@ RDEPENDS:${PN} += " \
 SRC_URI[sha256sum] = "e7d5a5c26cd0dc37b164ebefc609f388de24f8593b659191e12d85f8f9d5eb58"
 
 inherit pypi setuptools3
-
-PYPI_PACKAGE = "colorzero"

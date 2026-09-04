@@ -7,7 +7,6 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 SRC_URI += "file://run-ptest"
 SRC_URI[sha256sum] = "1c72b39f09457db3c05ce1d19158c2cbef4c32b8bedd02c155e49282b7ea7459"
 
-PYPI_PACKAGE = "send2trash"
 
 RDEPENDS:${PN} += "\
     python3-io \

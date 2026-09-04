@@ -13,7 +13,6 @@ inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-PYPI_PACKAGE = "exhale"
 
 RDEPENDS:${PN} = "\
     python3-beautifulsoup4 \

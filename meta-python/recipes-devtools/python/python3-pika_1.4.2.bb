@@ -20,7 +20,6 @@ SRC_URI = "\
 
 inherit python_setuptools_build_meta ptest-python-pytest
 
-PYPI_PACKAGE = "pika"
 
 DEPENDS += " \
     python3-setuptools-scm-native \

@@ -10,5 +10,3 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 DEPENDS += "python3-wheel-native"
 
 RDEPENDS:${PN} += "python3-typing-extensions"
-
-PYPI_PACKAGE = "pyee"

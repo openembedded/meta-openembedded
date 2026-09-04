@@ -11,7 +11,6 @@ inherit python_setuptools_build_meta ptest-python-pytest
 
 DEPENDS += "python3-wheel-native"
 
-PYPI_PACKAGE = "pyais"
 
 do_install_ptest:append() {
 	install -d ${D}${PTEST_PATH}/examples/
