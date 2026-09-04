@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2a861642858e0858af9dd4e4716bae0"
 
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "8f1aff338f693be4c5ae0a1c928b17d728940e03386018615b25cdcd4abd6df3"
+SRC_URI[sha256sum] = "b5543c81e01eea9445f1248879855b727c949d5af27c0390fbb8796f782783e9"
 
 inherit pypi python_setuptools_build_meta python3native
 
@@ -19,6 +19,7 @@ RDEPENDS:${PN} += "\
     python3-json \
     python3-numbers \
     python3-rich-argparse \
+    python3-prompt-toolkit \
 "
 
 BBCLASSEXTEND = "native nativesdk"
