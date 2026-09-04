@@ -8,7 +8,7 @@ DEPENDS = "glib-2.0"
 inherit gnomebase gobject-introspection vala gi-docgen
 
 SRC_URI += "file://disable-lgi-check.patch"
-SRC_URI[archive.sha256sum] = "1e9a9d69761d2109eff5b7c11d8c96b4867ccfaca2b921eded49401192769ec9"
+SRC_URI[archive.sha256sum] = "589eca89b437006edf3755478df037c740a2a84cfa5d202dbad6095e828e2488"
 
 PACKAGECONFIG ?= "python3 gjs lua51 ${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection', 'vala', '', d)}"
 PACKAGECONFIG:remove:riscv32 = "lua51"
@@ -17,7 +17,7 @@ PACKAGECONFIG:remove:powerpc64 = "lua51"
 PACKAGECONFIG:remove:powerpc64le = "lua51"
 
 PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject,python3-pygobject"
-PACKAGECONFIG[gjs] = "-Dgjs=true,-Dgjs=false,gjs mozjs-128"
+PACKAGECONFIG[gjs] = "-Dgjs=true,-Dgjs=false,gjs mozjs-140"
 PACKAGECONFIG[lua51] = "-Dlua51=true,-Dlua51=false,luajit luajit-native,lua-lgi"
 PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
 
