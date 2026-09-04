@@ -8,11 +8,6 @@ SRC_URI[sha256sum] = "bb359253d8ced6635a3881c17ebcbbc0e0b65ca23b555a9bd03c92a3cb
 
 inherit pypi python_setuptools_build_meta
 
-DEPENDS += "\
-    python3-pytest-runner-native \
-    python3-wheel-native \
-"
-
 PACKAGES =+ "${PN}-tests"
 
 FILES:${PN}-tests += " \
