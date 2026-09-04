@@ -10,10 +10,6 @@ PYPI_PACKAGE = "paho_mqtt"
 
 SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
 
-UPSTREAM_CHECK_PYPI_PACKAGE = "paho_mqtt"
-
-S = "${UNPACKDIR}/paho_mqtt-${PV}"
-
 DEPENDS += "python3-pytest-runner-native"
 
 do_install:append() {
