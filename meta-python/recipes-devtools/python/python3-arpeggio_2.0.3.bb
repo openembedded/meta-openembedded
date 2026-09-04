@@ -9,10 +9,4 @@ PYPI_PACKAGE = "Arpeggio"
 
 inherit pypi setuptools3
 
-# setup.py of Arpeggio needs this.
-DEPENDS += "\
-    python3-pytest-runner-native \
-    python3-wheel-native \
-"
-
 BBCLASSEXTEND = "native nativesdk"
