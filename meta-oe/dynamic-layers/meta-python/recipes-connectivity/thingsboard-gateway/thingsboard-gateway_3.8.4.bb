@@ -7,10 +7,10 @@ HOMEPAGE = "https://thingsboard.io/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
+SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
 SRCREV = "a735a2d654a218c007b5db7759ceed44794253f9"
-PYPI_SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
 
-inherit pypi setuptools3
+inherit setuptools3
 
 RDEPENDS:${PN} += " python3-jsonpath-rw \
                     python3-regex \
