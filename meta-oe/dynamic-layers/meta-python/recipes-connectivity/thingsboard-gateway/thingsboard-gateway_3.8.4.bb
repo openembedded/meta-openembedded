@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 SRCREV = "a735a2d654a218c007b5db7759ceed44794253f9"
 PYPI_SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
-PYPI_PACKAGE = "thingsboard-gateway"
 
 inherit pypi setuptools3
 
