@@ -10,8 +10,6 @@ PYPI_PACKAGE = "paho_mqtt"
 
 SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1723834"
 
-DEPENDS += "python3-pytest-runner-native"
-
 do_install:append() {
         install -d -m0755 ${D}${datadir}/${BPN}/examples
         cp --preserve=mode,timestamps -R ${S}/examples/* ${D}${datadir}/${BPN}/examples
