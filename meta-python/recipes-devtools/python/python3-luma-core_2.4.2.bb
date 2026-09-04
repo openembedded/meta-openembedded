@@ -11,7 +11,6 @@ DEPENDS += "python3-wheel-native"
 SRC_URI[sha256sum] = "963c264164d4374f549d57db09599e0ca458cea1bd05e16939897619be4e6dbd"
 
 PYPI_PACKAGE = "luma.core"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} += " \
 	python3-pillow \

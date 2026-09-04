@@ -8,7 +8,6 @@ inherit pypi python_setuptools_build_meta
 DEPENDS += "python3-wheel-native"
 
 PYPI_PACKAGE = "Flask-HTTPAuth"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 SRC_URI[sha256sum] = "66568a05bc73942c65f1e2201ae746295816dc009edd84b482c44c758d75097a"
 

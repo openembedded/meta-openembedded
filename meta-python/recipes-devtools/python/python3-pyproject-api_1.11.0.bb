@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 SRC_URI[sha256sum] = "b8807d85a293e6c9f133e6575946fed45f1d42b22d58c780b33aa2421a799549"
 
 PYPI_PACKAGE = "pyproject_api"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling

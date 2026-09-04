@@ -11,7 +11,6 @@ DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 PYPI_PACKAGE = "charset_normalizer"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} += " \
 	python3-core \

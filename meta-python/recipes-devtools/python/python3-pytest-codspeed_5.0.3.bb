@@ -9,6 +9,5 @@ SRC_URI[sha256sum] = "91afef90e6a96b013495e4702ef5d6358614a449e71008cdc194ef6687
 inherit pypi python_setuptools_build_meta
 
 PYPI_PACKAGE = "pytest_codspeed"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} = "python3-cffi python3-filelock python3-pytest python3-rich python3-statistics"

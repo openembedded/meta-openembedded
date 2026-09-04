@@ -9,8 +9,6 @@ SRC_URI[sha256sum] = "13b2beaad985e05e2d6407ee4c4f35590b11f8d693a258a561055cac8f
 S = "${UNPACKDIR}/annotated_types-${PV}"
 PYPI_PACKAGE = "annotated_types"
 
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
-
 inherit pypi python_hatchling
 
 RDEPENDS:${PN} = "python3-typing-extensions"

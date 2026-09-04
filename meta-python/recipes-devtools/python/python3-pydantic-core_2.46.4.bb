@@ -123,7 +123,6 @@ DEPENDS = "python3-maturin-native python3-typing-extensions"
 inherit pypi cargo-update-recipe-crates python_maturin ptest-python-pytest
 
 PYPI_PACKAGE = "pydantic_core"
-UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
 
 RDEPENDS:${PN} += " \
     python3-compression \
