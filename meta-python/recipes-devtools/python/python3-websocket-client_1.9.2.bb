@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "0fcb57545848be86992e128218fd96dd87a6769ffdb1a968dff79632b8
 
 PYPI_PACKAGE = "websocket_client"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} = "\
     python3-six \
