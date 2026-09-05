@@ -29,6 +29,7 @@ do_configure:prepend () {
 
 EXTRA_OECONF = " \
                  --with-systemdsystemunitdir=${systemd_system_unitdir} \
+                 --disable-werror \
                  "
 
 FILES:${PN} += "${datadir}/dbus-1"
