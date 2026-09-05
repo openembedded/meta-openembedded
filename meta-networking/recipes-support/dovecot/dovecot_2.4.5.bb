@@ -20,6 +20,9 @@ SRC_URI[sha256sum] = "868c2686a61b5f8e00a3e4721789b1ab46e6528fd773a5fbed07a6ecba
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+# clang 23 takes hours to compile the lib-json tests, drop when
+# https://github.com/llvm/llvm-project/issues/221391 is fixed
+CFLAGS:append:toolchain-clang = " -mllvm -enable-dfa-jump-thread=false"
 LDFLAGS += "-ltirpc"
 
 inherit autotools pkgconfig systemd useradd gettext multilib_header
