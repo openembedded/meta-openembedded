@@ -61,7 +61,7 @@ export SYSTEM_DEPS_GLYCIN_2_NO_PKG_CONFIG = "1"
 export SYSTEM_DEPS_GLYCIN_2_LIB = "glycin-2"
 export SYSTEM_DEPS_GLYCIN_2_SEARCH_NATIVE = "${B}/libglycin"
 
-PACKAGECONFIG ??= "libglycin thumbnailer image-rs heif jxl svg \
+PACKAGECONFIG ??= "libglycin thumbnailer image-rs jxl svg \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gtk4', '', d)}"
 
 PACKAGECONFIG[libglycin] = "-Dlibglycin=true,-Dlibglycin=false"
