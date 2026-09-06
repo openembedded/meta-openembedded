@@ -4,13 +4,12 @@ LICENSE = "CDDL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
 HOMEPAGE = "https://github.com/openzfs/zfs"
 
-SRCREV = "83020cf8259d057d4cc9102010c05f07ffdfc136"
+SRCREV = "71a9f9578616a90c3c14bb59629fb4d31bfd68d1"
 SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.4-release;tag=${BP} \
            file://0001-Define-strndupa-if-it-does-not-exist.patch \
            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
            file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
 "
-
 
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.
