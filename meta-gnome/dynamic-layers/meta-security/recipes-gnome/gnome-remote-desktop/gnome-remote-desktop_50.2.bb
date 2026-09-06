@@ -8,7 +8,7 @@ inherit gnomebase pkgconfig gettext gsettings features_check useradd
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI[archive.sha256sum] = "7800f388301eeb8147b0be55e8fa7cbd7521066a48a06115cc0ead9f0cea188a"
+SRC_URI[archive.sha256sum] = "31df628f4113573f136ffc8dc001763aed633cd85bed21e58bc61f8a17df091f"
 
 DEPENDS = " \
     asciidoc-native \
@@ -17,6 +17,7 @@ DEPENDS = " \
     libepoxy \
     cairo \
     glib-2.0 \
+    krb5 \
     pipewire \
     polkit \
     libnotify \
