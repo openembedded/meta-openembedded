@@ -34,7 +34,7 @@ RDEPENDS:${PN} = "glib-2.0-dev libvirt-virsh qemu-common qemu-system-x86-64 geni
 
 inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
 
-SRC_URI[archive.sha256sum] = "fa47266da6f5ef7a904c5b8769d4d871bccd4e6b639a363c3235438d7b0e757a"
+SRC_URI[archive.sha256sum] = "fd6a5de18d1090946ca99f1f5a34aa3e15dc8183f6a72226e8d1504a13672d67"
 
 GIR_MESON_OPTION = ""
 VALA_MESON_OPTION = ""
