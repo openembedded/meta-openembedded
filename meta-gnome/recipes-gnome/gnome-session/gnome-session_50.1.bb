@@ -14,15 +14,12 @@ inherit gnomebase gettext gsettings upstream-version-is-even mime mime-xdg manpa
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
-SRC_URI[archive.sha256sum] = "b424a90cfe51de4941b791a5102aeaadb2c62c185522a21f71cb485270053fe1"
+SRC_URI[archive.sha256sum] = "6289b6afa44d3e4c999ce5761ff8b2c10ba309f55f9425f2b13f98208c81f6fb"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-session/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-
 PACKAGECONFIG[docbook] = "-Ddocbook=true, -Ddocbook=false"
-PACKAGECONFIG[x11] = "-Dx11=true, -Dx11=false,virtual/libx11"
 PACKAGECONFIG[manpages] = "-Dman=true, -Dman=false,xmlto-native libxslt-native"
 
 FILES:${PN} += " \
