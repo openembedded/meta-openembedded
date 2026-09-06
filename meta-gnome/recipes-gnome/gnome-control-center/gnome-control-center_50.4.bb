@@ -40,17 +40,16 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd"
 
 SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
-SRC_URI[sha256sum] = "b7987aa4d6899584bbc9ff9a698d1adc1b557bcec09168ebebb624585f3cdf77"
+SRC_URI[sha256sum] = "5856c73999bedf45e74f73bac3d61e2b5ec1689f8bcf1943737baeee8204fb11"
 
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-control-center/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
-PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+PACKAGECONFIG ??= "ibus"
 PACKAGECONFIG[cups] = ",,cups,cups system-config-printer cups-pk-helper"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
-PACKAGECONFIG[x11] = "-Dx11=true, -Dx11=false, virtual/libx11"
 PACKAGECONFIG[file-share] = ",,,gnome-user-share"
 PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
 PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
