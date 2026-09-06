@@ -15,7 +15,7 @@ DEPENDS = " \
     freetype \
     gdk-pixbuf-native \
     gegl \
-    gexiv2 \
+    gexiv2-0.14 \
     glib-2.0 \
     glib-2.0-native \
     gtk+3 \
