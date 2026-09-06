@@ -70,3 +70,4 @@ FILES:${PN} += " \
 FILES:${PN}-dev += "${datadir}/gettext"
 
 RDEPENDS:${PN} += "gsettings-desktop-schemas tecla"
+RCONFLICTS:${PN} += "gnome-online-accounts-gtk"
