@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "x11/gnome"
 
 DEPENDS = " \
+    blueprint-compiler-native \
     yelp-tools-native \
     gtk4 \
     libsoup-3.0 \
@@ -29,7 +30,9 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-SRC_URI[archive.sha256sum] = "07b627136bbfddb6142b324acc30440911f77f5137009103276a2d35ffd39510"
+export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
+
+SRC_URI[archive.sha256sum] = "8053d6891565e882874b65c1db51c5bf310005eb788b8bac3546390743350a90"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
