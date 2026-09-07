@@ -47,3 +47,5 @@ do_install_ptest () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: issue only applies on Windows"
