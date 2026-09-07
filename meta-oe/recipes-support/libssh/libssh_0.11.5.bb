@@ -49,3 +49,12 @@ do_install_ptest () {
 BBCLASSEXTEND = "native nativesdk"
 
 CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: issue only applies on Windows"
+CVE_STATUS[CVE-2026-15370] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59843] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59844] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59845] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59846] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59847] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59848] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59849] = "fixed-version: fixed in v0.11.5"
+CVE_STATUS[CVE-2026-59850] = "fixed-version: fixed in v0.11.5"
