@@ -7,6 +7,7 @@ SRC_URI[sha256sum] = "03fcca123df3652e23d945112d683d2f605f313637611b7d4adf31056f
 
 SRC_URI += "file://CVE-2026-47180.patch \
             file://CVE-2026-47183.patch \
+            file://CVE-2026-47184.patch \
 "
 
 inherit pypi python_poetry_core cython
