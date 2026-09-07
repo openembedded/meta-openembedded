@@ -28,6 +28,7 @@ SRC_URI = " \
     file://CVE-2026-6094-3.patch \
     file://CVE-2026-6094-4.patch \
     file://CVE-2026-6094-5.patch \
+    file://CVE-2026-6291.patch \
 "
 
 SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
