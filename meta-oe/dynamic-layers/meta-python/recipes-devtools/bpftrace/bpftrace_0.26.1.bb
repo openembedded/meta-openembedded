@@ -3,9 +3,7 @@ HOMEPAGE = "https://github.com/iovisor/bpftrace"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS += "bison-native \
-            flex-native \
-            gzip-native \
+DEPENDS += "gzip-native \
             elfutils \
             bpftool-native \
             bcc \
@@ -13,15 +11,16 @@ DEPENDS += "bison-native \
             libbpf \
             xxd-native \
             "
-DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native', '', d)}"
+DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native zip-native', '', d)}"
 
-SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.25.x;protocol=https;tag=v${PV} \
+SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.26.x;protocol=https;tag=v${PV} \
            file://run-ptest \
-           file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patch \
            file://0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch \
            file://0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch \
+           file://0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch \
+           file://0005-CMakeLists-Add-support-for-LLVM-23.patch \
 "
-SRCREV = "e491811e5d648288c01f42ce087967b271f504a0"
+SRCREV = "1bac8a8daad6e0aa579980e877d0c9d5fc296593"
 
 inherit bash-completion cmake ptest pkgconfig
 
@@ -64,7 +63,6 @@ EXTRA_OECMAKE = " \
     -DUSE_SYSTEM_BPF_BCC=ON \
     -DUSE_SYSTEM_LIBBPF=ON \
     -DENABLE_MAN=OFF \
-    -DBISON_FLAGS='--file-prefix-map=${WORKDIR}=' \
 "
 
 PACKAGES:remove:powerpc64 = "${PN}-ptest"
