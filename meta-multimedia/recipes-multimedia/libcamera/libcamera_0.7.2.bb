@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
+        file://0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch \
 "
 
 SRCREV = "191e202178f02430b5942397c70d215cdd2056fa"
