@@ -17,6 +17,7 @@ SRC_URI = " \
     file://run-ptest \
     file://CVE-2026-10098-1.patch \
     file://CVE-2026-10098-2.patch \
+    file://CVE-2026-10512.patch \
 "
 
 SRCREV = "1d363f3adceba9d1478230ede476a37b0dcdef24"
