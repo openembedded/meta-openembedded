@@ -22,6 +22,8 @@ SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
            file://CVE-2026-45112.patch \
            file://CVE-2026-55969.patch \
            file://CVE-2026-55970.patch \
+           file://CVE-2026-48586-01.patch \
+           file://CVE-2026-48586-02.patch \
            "
 SRC_URI[sha256sum] = "794a0e455787960d9f27ab92c38e34da27e8deeda7a5db0e59dc64a00df8a1e5"
 
