@@ -74,3 +74,5 @@ INITSCRIPT_PARAMS = "defaults 87"
 SYSTEMD_SERVICE:${PN} = "valkey.service"
 
 CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
+CVE_STATUS[CVE-2026-56684] = "fixed-version: fixed in v9.0.5"
+CVE_STATUS[CVE-2026-63639] = "fixed-version: fixed in v9.0.5"
