@@ -88,7 +88,9 @@ FITIMAGE_HASH_ALGO[doc] = "Hash algorithm to use"
 FITIMAGE_ENCRYPT_ALGO ?= "rsa2048"
 FITIMAGE_ENCRYPT_ALGO[doc] = "Signature algorithm to use"
 FITIMAGE_CONFIG_PREFIX ?= "conf-"
-FITIMAGE_CONFIG_PREFIX[doc] = "Prefix to use for FIT configuration node name"
+FITIMAGE_CONFIG_PREFIX[doc] = "Prefix to use for bootable FIT configuration node name"
+FITIMAGE_CONFIG_FDTO_PREFIX ?= ""
+FITIMAGE_CONFIG_FDTO_PREFIX[doc] = "Prefix to use for fdto FIT configuration node name"
 FITIMAGE_CMDLINE ?= ""
 FITIMAGE_CMDLINE[doc] = "Kernel command line to embed in the FIT configuration node"
 
@@ -347,9 +349,11 @@ def fitimage_emit_section_config(d, fd, dtb, kernelcount, ramdiskcount, setupcou
 #
 def fitimage_emit_section_config_fdto(d, fd, dtb, compatible):
     sign = d.getVar("FITIMAGE_SIGN")
+    conf_prefix = d.getVar('FITIMAGE_CONFIG_FDTO_PREFIX') or ""
+
     bb.note("Adding overlay config section to ITS file")
 
-    fd.write(f'\t\t{dtb} {{\n')
+    fd.write(f'\t\t{conf_prefix}{dtb} {{\n')
     fd.write(f'\t\t\tdescription = "Device Tree Overlay";\n')
     fd.write(f'\t\t\tfdt = "fdt-{dtb}";\n')
     if compatible:
