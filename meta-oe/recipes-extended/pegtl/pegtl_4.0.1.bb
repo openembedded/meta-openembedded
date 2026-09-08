@@ -4,6 +4,7 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=4.x \
+           file://0001-internal-declare-match_no_control-inline-instead-of-.patch \
            file://run-ptest \
            "
 
