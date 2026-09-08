@@ -53,7 +53,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-bitstruct \
     python3-blinker \
     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python3-blivet", "", d)} \
-    python3-booleanpy \
     python3-cachecontrol \
     python3-cached-property \
     python3-cachetools \
