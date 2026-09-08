@@ -59,6 +59,9 @@ do_configure:prepend() {
 	cp -r ${STAGING_KERNEL_DIR}/tools/include/linux/compiler.h ${S}
 	cp -r ${STAGING_KERNEL_DIR}/tools/include/linux/compiler_types.h ${S}
 	cp -r ${STAGING_KERNEL_DIR}/tools/include/linux/compiler-gcc.h ${S}
+	if [ -f "${STAGING_KERNEL_DIR}/tools/include/linux/compiler-context-analysis.h" ]; then
+		cp -r ${STAGING_KERNEL_DIR}/tools/include/linux/compiler-context-analysis.h ${S}
+	fi
 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
 }
 
@@ -68,8 +71,9 @@ do_compile() {
 	sed -i 's#<linux/compiler.h>#"compiler.h"#' build_bug.h
 	sed -i 's#<linux/compiler_types.h>#"compiler_types.h"#' compiler.h
 	sed -i 's#<linux/compiler-gcc.h>#"compiler-gcc.h"#' compiler_types.h
-	'TMPCHECK='grep "<vdso/const.h>" bits.h'' || true
-	if [ -n $TMPCHECK ]; then
+	sed -i 's#<linux/compiler-context-analysis.h>#"compiler-context-analysis.h"#' compiler_types.h
+	TMPCHECK=$(grep "<vdso/const.h>" bits.h || true)
+	if [ -n "$TMPCHECK" ]; then
 		sed -i 's#<vdso/const.h>#"const.h"#' bits.h
 		sed -i 's#<uapi/linux/const.h>#<linux/const.h>#' const.h
 	else
