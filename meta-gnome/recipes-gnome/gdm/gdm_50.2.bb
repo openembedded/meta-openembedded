@@ -78,7 +78,4 @@ FILES:${PN} += " \
     ${systemd_unitdir} ${systemd_user_unitdir} \
 "
 
-RDEPENDS:${PN} += "${PN}-base"
-# gdm relies on dbus-run-session provided by dbus
-RCONFLICTS:${PN} += "dbus-broker"
-RDEPENDS:${PN} += "dbus"
+RDEPENDS:${PN} += "${PN}-base ${VIRTUAL-RUNTIME_dbus}"
