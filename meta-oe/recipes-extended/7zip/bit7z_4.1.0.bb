@@ -8,24 +8,25 @@ SRC_URI = " \
     ${@bb.utils.contains('PTEST_ENABLED', '1', d.getVar('SRC_URI_PTEST'), 'file://0001-cmake-disable-dependency-inclusion.patch', d)} \
 "
 
-SRCREV = "9a43c9fb96003141dcb49c82843382a52afec86a"
+SRCREV = "c81c6c1cbf44e148cd4b06f4bb69d7ea1e299742"
 
 # ptest dependencies and their revisions
 SRC_URI_PTEST = " \
     git://github.com/rikyoz/filesystem.git;protocol=https;branch=glibcxx_wchar_streams_workaround;name=filesystem;destsuffix=filesystem \
-    git://github.com/rikyoz/bit7z-test-data.git;protocol=https;branch=main;name=testdata;destsuffix=testdata \
+    git://github.com/rikyoz/bit7z-test-data.git;protocol=https;branch=main;tag=v${TAG_testdata};name=testdata;destsuffix=testdata \
     git://github.com/rikyoz/Catch2.git;protocol=https;branch=single-header-v2.x;name=catch2;destsuffix=catch2 \
     https://github.com/cpm-cmake/CPM.cmake/releases/download/v${TAG_CPM}/CPM.cmake;downloadfilename=CPM_${TAG_CPM}.cmake \
     file://run-ptest \
     file://0001-cmake-disable-filesystem-gitclone.patch \
+    file://0002-tests-CMakeLists.txt-Remove-reference-to-TMPDIR.patch \
 "
 SRCREV_FORMAT = "${@bb.utils.contains('PTEST_ENABLED', '1', 'default_filesystem_testdata_catch2', 'default', d)}"
 SRCREV_filesystem = "b99c2aebd5ddd6fb2f190731ba80b949fc3842b5"
-SRCREV_testdata = "077e407b1c07b7443626b5902eeb4819388bf656"
+SRCREV_testdata = "4a24af69edf59cd6e737e84e6477ce752ef77bdd"
+TAG_testdata = "1.18.2"
 SRCREV_catch2 = "27d8db1770dd5cd3688656095f242474431584a1"
-SRCHASH_CPM = "2020b4fc42dba44817983e06342e682ecfc3d2f484a581f11cc5731fbe4dce8a"
-TAG_CPM = "0.42.0"
-SRC_URI[sha256sum] = "${SRCHASH_CPM}"
+TAG_CPM = "0.42.3"
+SRC_URI[sha256sum] = "a609e875fd532b067174250f6abbc3dac22fe2d64869783fb1e80bda1625c844"
 
 
 inherit cmake ptest
@@ -34,7 +35,8 @@ DEPENDS = "7zip"
 
 EXTRA_OECMAKE += "-DBIT7Z_CUSTOM_7ZIP_PATH=${STAGING_INCDIR}/7zip"
 
-CXXFLAGS:append = " -Wno-error=array-bounds"
+CXXFLAGS:append = " -Wno-error=array-bounds -Wno-sfinae-incomplete"
+CXXFLAGS:append = " -I${B}/cpm_cache/ghc_filesystem/include"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
 PACKAGECONFIG[tests] = " \
@@ -47,9 +49,18 @@ PACKAGECONFIG[tests] = " \
 do_configure:prepend() {
     # verify that all dependencies have correct version
     grep -q ${SRCREV_filesystem} ${S}/cmake/Dependencies.cmake || bbfatal "ERROR: dependency version mismatch, please update 'SRCREV_filesystem'!"
-    grep -q ${SRCREV_testdata} ${S}/tests/CMakeLists.txt || bbfatal "ERROR: dependency version mismatch, please update 'SRCREV_testdata'!"
+
+    FOUND_VERSION=$(grep -A5 "NAME bit7z_test_data" ${S}/tests/CMakeLists.txt | grep -oP 'VERSION \K[0-9.]+' | head -1 | tr -d '[:space:]')
+    if [ "${TAG_testdata}" != "${FOUND_VERSION}" ]; then
+        bbfatal "ERROR: dependency version mismatch, please update 'TAG_testdata'!"
+    fi
+
     grep -q ${SRCREV_catch2} ${S}/tests/CMakeLists.txt || bbfatal "ERROR: dependency version mismatch, please update 'SRCREV_catch2'!"
-    grep -q ${SRCHASH_CPM} ${S}/cmake/Dependencies.cmake || bbfatal "ERROR: dependency version mismatch, please update 'SRCHASH_CPM'!"
+
+    FOUND_VERSION=$(grep -oP 'CPM_DOWNLOAD_VERSION\s+\K[0-9.]+' ${S}/cmake/Dependencies.cmake | tr -d '[:space:]')
+    if [ "${TAG_CPM}" != "${FOUND_VERSION}" ]; then
+        bbfatal "ERROR: dependency version mismatch, please update 'TAG_CPM'!"
+    fi
 
     if ${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)}; then
         # use cache instead of download for CPM (CMake's missing package manager)
@@ -73,7 +84,7 @@ do_install() {
 do_install_ptest() {
     install -m 0755 ${S}/bin/*/* ${D}${PTEST_PATH}
     install -d ${D}${PTEST_PATH}/data
-    cp -r ${UNPACKDIR}/testdata/test_archives ${UNPACKDIR}/testdata/test_filesystem ${B}/tests/data/test_filesystem ${D}${PTEST_PATH}/data
+    cp -r ${UNPACKDIR}/testdata/test_archives ${UNPACKDIR}/testdata/test_filesystem ${B}/cpm_cache/bit7z_test_data/test_filesystem ${D}${PTEST_PATH}/data
 }
 
 # this package contains static library so main package is empty, but ptest package rdepends on it
