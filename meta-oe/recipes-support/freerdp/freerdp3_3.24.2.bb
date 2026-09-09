@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${
            file://run-ptest \
            file://CVE-2026-40254-1.patch \
            file://CVE-2026-40254-2.patch \
+           file://CVE-2026-55191.patch \
 "
 
 
