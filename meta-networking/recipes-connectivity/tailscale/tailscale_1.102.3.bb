@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/tailscale/tailscale.git;protocol=https;branch=releas
            file://default \
            file://tailscaled.init \
            "
-SRCREV = "8f2c8d6a14419e95fb9d02d6bf6113893daef5c3"
+SRCREV = "53a0d659afa51835dd7a9283873cca44261454f8"
 SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
 require ${BPN}-go-mods.inc
 
