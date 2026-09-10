@@ -35,8 +35,15 @@ DEPENDS = "7zip"
 
 EXTRA_OECMAKE += "-DBIT7Z_CUSTOM_7ZIP_PATH=${STAGING_INCDIR}/7zip"
 
-CXXFLAGS:append = " -Wno-error=array-bounds -Wno-sfinae-incomplete"
-CXXFLAGS:append = " -I${B}/cpm_cache/ghc_filesystem/include"
+CXXFLAGS:append = " -Wno-error=array-bounds"
+# -Wsfinae-incomplete is a GCC 15+ diagnostic, clang does not know the option
+# and errors out on it because the testsuite build enables -Werror.
+CXXFLAGS:append:toolchain-gcc = " -Wno-sfinae-incomplete"
+# Use -isystem, the same way upstream declares this include directory
+# (target_include_directories(ghc_filesystem SYSTEM INTERFACE ...) in
+# cmake/Dependencies.cmake). With a plain -I the warnings coming out of
+# ghc/filesystem.hpp are reported and the testsuite build enables -Werror.
+CXXFLAGS:append = " -isystem ${B}/cpm_cache/ghc_filesystem/include"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
 PACKAGECONFIG[tests] = " \
