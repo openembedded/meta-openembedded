@@ -1,0 +1,219 @@
+From 6818d5f0514a4e34bf3a8a52e41a20778d5cd3b9 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Thu, 20 Jul 2023 12:36:14 +0800
+Subject: [PATCH] fix segfault for efitools commands
+
+Segfault occurs when missing argument in some options.
+
+e.g.
+$ sign-efi-sig-list -g
+Segmentation fault
+
+$ cert-to-efi-hash-list -s
+Segmentation fault
+
+$ efi-readvar -s
+Segmentation fault
+
+$ efi-updatevar -d
+Segmentation fault
+
+This is because argv[2] is not checked for NULL before using it. Add
+check to avoid the segfault.
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ cert-to-efi-hash-list.c | 22 ++++++++++++++++------
+ cert-to-efi-sig-list.c  | 11 ++++++++---
+ efi-readvar.c           | 11 ++++++++---
+ efi-updatevar.c         | 26 ++++++++++++++++++--------
+ flash-var.c             | 15 ++++++++++-----
+ sign-efi-sig-list.c     | 11 ++++++++---
+ 6 files changed, 68 insertions(+), 28 deletions(-)
+
+diff --git a/cert-to-efi-hash-list.c b/cert-to-efi-hash-list.c
+index 8a5468a..ead82f1 100644
+--- a/cert-to-efi-hash-list.c
++++ b/cert-to-efi-hash-list.c
+@@ -76,13 +76,23 @@ main(int argc, char *argv[])
+ 			help(progname);
+ 			exit(0);
+ 		} else if (strcmp("-g", argv[1]) == 0) {
+-			str_to_guid(argv[2], &owner);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				str_to_guid(argv[2], &owner);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else if (strcmp("-s", argv[1]) == 0) {
+-			sha = atoi(argv[2]);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				sha = atoi(argv[2]);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else if (strcmp("-t", argv[1]) == 0) {
+ 			timestampstr = argv[2];
+ 			argv += 2;
+diff --git a/cert-to-efi-sig-list.c b/cert-to-efi-sig-list.c
+index fe65e15..d06cac9 100644
+--- a/cert-to-efi-sig-list.c
++++ b/cert-to-efi-sig-list.c
+@@ -61,9 +61,14 @@ main(int argc, char *argv[])
+ 			help(progname);
+ 			exit(0);
+ 		} else if (strcmp("-g", argv[1]) == 0) {
+-			str_to_guid(argv[2], &owner);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				str_to_guid(argv[2], &owner);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else {
+ 			break;
+ 		}
+diff --git a/efi-readvar.c b/efi-readvar.c
+index 816b306..2f6584a 100644
+--- a/efi-readvar.c
++++ b/efi-readvar.c
+@@ -132,9 +132,14 @@ main(int argc, char *argv[])
+ 			argv += 2;
+ 			argc -= 2;
+ 		} else if (strcmp(argv[1], "-s") == 0) {
+-			sscanf(argv[2], "%d-%d", &sig, &entry);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				sscanf(argv[2], "%d-%d", &sig, &entry);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else if (strcmp(argv[1], "-o") == 0) {
+ 			file = argv[2];
+ 			argv += 2;
+diff --git a/efi-updatevar.c b/efi-updatevar.c
+index 4247105..5f626be 100644
+--- a/efi-updatevar.c
++++ b/efi-updatevar.c
+@@ -85,7 +85,7 @@ main(int argc, char *argv[])
+ 			attributes |= EFI_VARIABLE_APPEND_WRITE;
+ 			argv += 1;
+ 			argc -= 1;
+-		} if (strcmp(argv[1], "-e") == 0) {
++		} else if (strcmp(argv[1], "-e") == 0) {
+ 			esl_mode = 1;
+ 			argv += 1;
+ 			argc -= 1;
+@@ -98,12 +98,17 @@ main(int argc, char *argv[])
+ 			argv += 2;
+ 			argc -= 2;
+ 		} else if (strcmp(argv[1], "-g") == 0) {
+-			if (str_to_guid(argv[2], &guid)) {
+-				fprintf(stderr, "Invalid GUID %s\n", argv[2]);
++			if (argv[2]) {
++				if (str_to_guid(argv[2], &guid)) {
++					fprintf(stderr, "Invalid GUID %s\n", argv[2]);
++					exit(1);
++				}
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
+ 				exit(1);
+ 			}
+-			argv += 2;
+-			argc -= 2;
+ 		} else if (strcmp(argv[1], "-c") == 0) {
+ 			crt_file = argv[2];
+ 			argv += 2;
+@@ -113,9 +118,14 @@ main(int argc, char *argv[])
+ 			argv += 2;
+ 			argc -= 2;
+ 		} else if (strcmp(argv[1], "-d") == 0) {
+-			sscanf(argv[2], "%d-%d", &delsig, &delentry);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				sscanf(argv[2], "%d-%d", &delsig, &delentry);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else if (strcmp(argv[1], "--engine") == 0) {
+ 			engine = argv[2];
+ 			argv += 2;
+diff --git a/flash-var.c b/flash-var.c
+index aa10ae6..7c31cf1 100644
+--- a/flash-var.c
++++ b/flash-var.c
+@@ -59,13 +59,18 @@ main(int argc, char *argv[])
+ 			help(progname);
+ 			exit(0);
+ 		} else if (strcmp(argv[1], "-g") == 0) {
+-			if (str_to_guid(argv[2], &guid)) {
+-				fprintf(stderr, "Invalid GUID %s\n", argv[2]);
++			if (argv[2]) {
++				if (str_to_guid(argv[2], &guid)) {
++					fprintf(stderr, "Invalid GUID %s\n", argv[2]);
++					exit(1);
++				}
++				owner = &guid;
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
+ 				exit(1);
+ 			}
+-			owner = &guid;
+-			argv += 2;
+-			argc -= 2;
+ 		} else if (strcmp("-t", argv[1]) == 0) {
+ 			timestampstr = argv[2];
+ 			argv += 2;
+diff --git a/sign-efi-sig-list.c b/sign-efi-sig-list.c
+index 94bd7d4..147fcfb 100644
+--- a/sign-efi-sig-list.c
++++ b/sign-efi-sig-list.c
+@@ -88,9 +88,14 @@ main(int argc, char *argv[])
+ 			help(progname);
+ 			exit(0);
+ 		} else if (strcmp("-g", argv[1]) == 0) {
+-			str_to_guid(argv[2], &vendor_guid);
+-			argv += 2;
+-			argc -= 2;
++			if (argv[2]) {
++				str_to_guid(argv[2], &vendor_guid);
++				argv += 2;
++				argc -= 2;
++			} else {
++				usage(progname);
++				exit(1);
++			}
+ 		} else if (strcmp("-r", argv[1]) == 0) {
+ 			rsasig = 1;
+ 			argv += 1;
+-- 
+2.25.1
+
