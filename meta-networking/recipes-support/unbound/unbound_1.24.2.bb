@@ -12,6 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;tag=release-${PV} \
            file://run-ptest \
            file://CVE-2026-33278.patch \
+           file://CVE-2026-42944-1.patch \
+           file://CVE-2026-42944-2.patch \
            "
 
 SRCREV = "f6269baa605d31859f28770e01a24e3677e5f82c"
