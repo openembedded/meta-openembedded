@@ -35,8 +35,25 @@ PACKAGECONFIG[libs-only] = "-Dlibs-only=true,-Dlibs-only=false"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 --shell /bin/nologin polkitd"
 
-SYSTEMD_SERVICE:${PN} = "${BPN}.service"
+# Package the systemd service into a separate package to be able
+# to exclude the polkit service in favor of alternative implementations
+SYSTEMD_PACKAGES += "${PN}-service"
+SYSTEMD_SERVICE:${PN}-service = "${BPN}.service"
 SYSTEMD_AUTO_ENABLE = "disable"
+
+PACKAGES =+ "${PN}-service"
+RDEPENDS:${PN}-service += "polkit"
+FILES:${PN}-service += " \
+    ${systemd_system_unitdir} \
+    ${sysconfdir}/systemd/system/polkit-virtual-provider.service \
+"
+
+# Package also the dbus configuration into a separate package
+PACKAGES =+ "${PN}-dbus"
+RDEPENDS:${PN}-dbus += "polkit"
+FILES:${PN}-dbus += "\
+    ${datadir}/dbus-1 \
+"
 
 do_install:append() {
 	#Fix up permissions on polkit rules.d to work with rpm4 constraints
