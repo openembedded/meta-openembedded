@@ -30,6 +30,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;t
            file://CVE-2026-44687.patch \
            file://CVE-2026-50045.patch \
            file://CVE-2026-50046.patch \
+           file://CVE-2026-50243.patch \
            "
 
 SRCREV = "f6269baa605d31859f28770e01a24e3677e5f82c"
