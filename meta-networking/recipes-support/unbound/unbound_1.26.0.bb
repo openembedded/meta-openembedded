@@ -10,6 +10,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
 
 SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master;tag=release-${PV} \
+           file://0001-configure-do-not-assume-GOST-works-when-cross-compili.patch \
            file://run-ptest \
            "
 
