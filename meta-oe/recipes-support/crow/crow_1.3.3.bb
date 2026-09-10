@@ -12,7 +12,9 @@ SRCREV = "7375d3dc1ffb8719778cdb29fb1c73141ce684e8"
 
 inherit cmake
 
-DEPENDS = "asio"
+PACKAGECONFIG[boost] = "-DCROW_USE_BOOST=ON,-DCROW_USE_BOOST=OFF,boost"
+
+DEPENDS = "${@bb.utils.contains('PACKAGECONFIG', 'boost', '', 'asio', d)}"
 
 EXTRA_OECMAKE = "\
     -DCROW_BUILD_EXAMPLES=OFF \
