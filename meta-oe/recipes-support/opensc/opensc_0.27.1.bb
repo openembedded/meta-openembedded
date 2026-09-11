@@ -29,11 +29,15 @@ EXTRA_OECONF = " \
 "
 EXTRA_OEMAKE = "DESTDIR=${D}"
 
+# Point OBJC at the full CC, helps computing AC_PROG_OBJC correctly
+export OBJC = "${CC}"
+
 PACKAGECONFIG ??= "pcsc"
 
 PACKAGECONFIG[openct] = "--enable-openct,--disable-openct,openct"
 PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite,pcsc-lite pcsc-lite-lib"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+PACKAGECONFIG[notify] = "--enable-notify,--disable-notify,glib-2.0"
 
 FILES:${PN} += "\
     ${libdir}/opensc-pkcs11.so \
