@@ -74,11 +74,14 @@ PACKAGECONFIG[jxl] = ",,libjxl"
 PACKAGECONFIG[raw] = ",,"
 PACKAGECONFIG[svg] = ",,librsvg cairo"
 
-def glycin_loaders(d):
+def glycin_loader_list(d):
     known = (("heif", "glycin-heif"), ("image-rs", "glycin-image-rs"),
              ("jxl", "glycin-jxl"), ("raw", "glycin-raw"), ("svg", "glycin-svg"))
     enabled = d.getVar("PACKAGECONFIG").split()
-    loaders = [name for flag, name in known if flag in enabled]
+    return [name for flag, name in known if flag in enabled]
+
+def glycin_loaders(d):
+    loaders = glycin_loader_list(d)
     if not loaders:
         return "-Dglycin-loaders=false"
     return "-Dglycin-loaders=true -Dloaders=" + ",".join(loaders)
@@ -101,6 +104,8 @@ FILES:${PN}-thumbnailer = "${bindir}/glycin-thumbnailer \
                            ${datadir}/thumbnailers \
                            "
 
-RDEPENDS:${PN}-loaders += "${@bb.utils.contains('PACKAGECONFIG', 'thumbnailer', '${PN}-thumbnailer', '', d)}"
+RDEPENDS:${PN} += "${@d.getVar('PN') + '-loaders' if glycin_loader_list(d) else ''}"
+RDEPENDS:${PN}[vardeps] += "PACKAGECONFIG"
+RRECOMMENDS:${PN}-loaders += "${@bb.utils.contains('PACKAGECONFIG', 'thumbnailer', '${PN}-thumbnailer', '', d)}"
 RDEPENDS:${PN}-thumbnailer += "${PN}"
 
