@@ -129,6 +129,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-xmltodict \
     python3-xxhash \
     python3-yarl \
+    tomcli \
 "
 
 PTESTS_SLOW_META_PYTHON = "\
