@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "bc36f404438ac36ad2b9295539227d36f99cd1623f1e347af77c594c40
 
 S = "${UNPACKDIR}/Data-HexDump-${PV}"
 
-inherit cpan ptest update-alternatives
+inherit cpan ptest
 
 do_install_ptest () {
     install -d ${D}${PTEST_PATH}/t
@@ -32,8 +32,3 @@ do_install_ptest () {
 RDEPENDS:${PN}-ptest += "perl-module-exporter perl-module-carp perl-module-filehandle"
 
 BBCLASSEXTEND = "native"
-
-ALTERNATIVES_PRIORITY = "100"
-ALTERNATIVE:${PN} = "hexdump"
-ALTERNATIVE_LINK_NAME[hexdump] = "${bindir}/hexdump"
-
