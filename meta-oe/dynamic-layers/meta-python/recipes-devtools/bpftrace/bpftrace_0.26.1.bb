@@ -28,6 +28,17 @@ inherit bash-completion cmake ptest pkgconfig
 
 export DEBUG_PREFIX_MAP
 
+# cmake/BuildBPF.cmake compiles the BPF data source with the plain gcc it finds
+# in PATH, i.e. the build host's compiler (see its own commentary for why it has
+# to be gcc), and 0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch
+# hands it DEBUG_PREFIX_MAP so the embedded objects do not leak build paths.
+# -fcanon-prefix-map, which DEBUG_PREFIX_MAP_EXTRA adds for the gcc toolchain,
+# only exists in GCC >= 13: the target compiler always has it, the build host's
+# gcc may not, and then the build dies with
+#   gcc: error: unrecognized command-line option '-fcanon-prefix-map'
+# The -ffile-prefix-map= rewrites are all this needs, so drop the extra.
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
+
 PACKAGECONFIG ?= " \
         ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
         ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)} \
