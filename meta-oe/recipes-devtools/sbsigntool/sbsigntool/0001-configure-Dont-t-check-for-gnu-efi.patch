@@ -1,0 +1,54 @@
+From c946d67ec9c4c8f7f078afc7d4f352ba3e288213 Mon Sep 17 00:00:00 2001
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 10 Mar 2021 15:51:49 +0200
+Subject: [PATCH] configure: Dont't check for gnu-efi
+
+The configure.ac is searching the gnu-efi libs in hardcoded paths making
+the configure fail.
+We explictly include the paths in our .bb recipe, so let's get rid of
+the check
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ configure.ac | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 8a5340a..f6536da 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -17,9 +17,9 @@ AC_PROG_MKDIR_P
+ AC_CHECK_TOOL(OBJCOPY, [objcopy])
+ AC_CHECK_TOOL(STRIP, [strip])
+ 
+- AC_CHECK_HEADER([bfd.h], [],
+-  AC_MSG_ERROR([bfd.h not found.]
+-[bfd.h is usually distributed in a binutils development package.]))
++ #AC_CHECK_HEADER([bfd.h], [],
++  #AC_MSG_ERROR([bfd.h not found.]
++#[bfd.h is usually distributed in a binutils development package.]))
+ 
+ if test $cross_compiling = no; then
+   AM_MISSING_PROG(HELP2MAN, help2man)
+@@ -78,12 +78,11 @@ for path in /lib /lib64 /usr/lib /usr/lib64 /usr/lib32 /lib/efi /lib64/efi /usr/
+        CRTPATH=$path
+     fi
+ done
+-if test -z "$CRTPATH"; then
+-   AC_MSG_ERROR([cannot find the gnu-efi crt path])
+-fi
++#if test -z "$CRTPATH"; then
++   #AC_MSG_ERROR([cannot find the gnu-efi crt path])
++#fi
+ 
+-EFI_CPPFLAGS="-I/usr/include/efi -I/usr/include/efi/$EFI_ARCH \
+- -DEFI_FUNCTION_WRAPPER"
++EFI_CPPFLAGS="-DEFI_FUNCTION_WRAPPER"
+ CPPFLAGS_save="$CPPFLAGS"
+ CPPFLAGS="$CPPFLAGS $EFI_CPPFLAGS"
+ AC_CHECK_HEADERS([efi.h], [], [], $EFI_INCLUDES)
+-- 
+2.25.1
+
