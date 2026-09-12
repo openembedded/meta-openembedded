@@ -19,6 +19,11 @@ MM_PATCH = "file://0001-selftests-mm-pass-down-full-CC-and-CFLAGS-to-check_c.pat
 SRC_URI += "file://run-ptest \
             file://COPYING \
             file://0001-selftests-timers-Fix-clock_adjtime-for-newer-32-bit-.patch \
+            file://0001-selftests-filelock-zero-initialize-struct-flock-in-o.patch \
+            file://0001-selftests-filelock-fix-the-test-plan-count-in-ofdloc.patch \
+            file://0001-selftests-cgroup-memcontrol-keep-anon-page-touches-f.patch \
+            file://0001-selftests-filesystems-idmapped_tmpfile-chown-the-lay.patch \
+            file://0001-selftests-proc-include-fcntl.h-in-proc-pidns.patch \
             ${@bb.utils.contains('PACKAGECONFIG', 'mm', '${MM_PATCH}', '', d)} \
             "
 
@@ -219,7 +224,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 FILES:${PN} += "/usr/kernel-selftest"
 
-RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc"
+# coreutils provides timeout(1) with --foreground, which the kselftest runner
+# needs to enforce per-test timeouts; busybox has no timeout applet by default.
+# mount_setattr_test creates an ext4 image with mkfs.ext4.
+RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc coreutils e2fsprogs-mke2fs"
 
 INSANE_SKIP:${PN} += "libdir"
 
