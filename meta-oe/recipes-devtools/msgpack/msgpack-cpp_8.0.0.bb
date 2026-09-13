@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/msgpack/msgpack-c/releases/download/cpp-${PV}/msgp
 SRC_URI[sha256sum] = "4a3c0c0ac55ef4456c2d0b93c21b5d105aa3a8f21ef8fa9758550feaf989b92f"
 
 UPSTREAM_CHECK_URI = "https://github.com/msgpack/msgpack-c/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+) C++"
 
 S = "${UNPACKDIR}/msgpack-cxx-${PV}"
 
