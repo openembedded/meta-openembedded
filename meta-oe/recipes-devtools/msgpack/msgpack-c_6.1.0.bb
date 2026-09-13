@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
 SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https"
 SRCREV = "445880108a1d171f755ff6ac77e03fbebbb23729"
 
+UPSTREAM_CHECK_GITTAGREGEX = "c-(?P<pver>\d+(\.\d+)+)"
+
 inherit cmake pkgconfig
 
 EXTRA_OECMAKE += "-DMSGPACK_BUILD_TESTS=off"
