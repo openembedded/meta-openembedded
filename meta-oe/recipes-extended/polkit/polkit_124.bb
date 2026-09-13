@@ -9,6 +9,9 @@ SRC_URI = "\
      git://github.com/polkit-org/polkit.git;protocol=https;branch=main \
      file://CVE-2025-7519.patch \
      file://meson-build-Support-openembedded-OS-for-PAM-config.patch \
+     file://CVE-2026-4897-01.patch \
+     file://CVE-2026-4897-02.patch \
+     file://CVE-2026-85498.patch \
 "
 
 S = "${WORKDIR}/git"
