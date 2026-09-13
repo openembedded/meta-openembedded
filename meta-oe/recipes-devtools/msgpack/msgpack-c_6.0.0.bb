@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
                    "
 
 SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https \
+           file://CVE-2026-72854.patch \
            "
 SRCREV = "8160ede5e20fd3019a77eea46d9c72cf6163f802"
 
