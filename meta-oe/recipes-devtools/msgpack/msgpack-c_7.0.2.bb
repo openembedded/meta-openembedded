@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
                    "
 
-SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https"
-SRCREV = "445880108a1d171f755ff6ac77e03fbebbb23729"
+SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https;tag=c-${PV}"
+SRCREV = "e17beb371b59459a13b48e166a11e123bda5bf93"
 
 UPSTREAM_CHECK_GITTAGREGEX = "c-(?P<pver>\d+(\.\d+)+)"
 
