@@ -41,3 +41,7 @@ FILES:${PN}-test = " \
 CVE_PRODUCT = "tornadoweb:tornado"
 
 BBCLASSEXTEND  += "native nativesdk"
+
+CVE_STATUS[CVE-2026-49853] = "fixed-version: fixed since v6.5.6"
+CVE_STATUS[CVE-2026-49854] = "fixed-version: fixed since v6.5.6"
+CVE_STATUS[CVE-2026-49855] = "fixed-version: fixed since v6.5.6"
