@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "e20d4a9b0b8585fdf63b10d30066c7c94c5d7a7ec47c889a2d83a3caa9
 
 SRC_URI += "file://CVE-2026-54284-1.patch \
             file://CVE-2026-54284-2.patch \
+            file://CVE-2026-59893.patch \
 "
 
 CVE_PRODUCT = "sqlparse"
