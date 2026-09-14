@@ -10,6 +10,7 @@ SRC_URI += "file://CVE-2026-54284-1.patch \
             file://CVE-2026-54284-2.patch \
             file://CVE-2026-59893.patch \
             file://CVE-2026-59894.patch \
+            file://CVE-2026-71491.patch \
 "
 
 CVE_PRODUCT = "sqlparse"
