@@ -228,6 +228,7 @@ do_install:append:class-native() {
 PACKAGES =+ "${PN}-adbd"
 RDEPENDS:${PN}:class-target = "android-tools-conf-configfs 7zip android-libboringssl"
 RDEPENDS:${PN}-adbd += "${PN}"
+RRECOMMENDS:${PN}-adbd += "kernel-module-libcomposite kernel-module-usb-f-fs"
 PRIVATE_LIBS:${PN} = "liblog.so.0 libbase.so.0 libcutils.so.0"
 
 inherit useradd
