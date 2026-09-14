@@ -17,3 +17,5 @@ RDEPENDS:${PN} += " \
 	python3-dnspython \
 	python3-greenlet \
 "
+
+CVE_STATUS[CVE-2023-29483] = "fixed-version: fixed since v0.35.2"
