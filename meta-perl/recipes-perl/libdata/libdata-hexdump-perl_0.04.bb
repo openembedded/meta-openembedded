@@ -14,6 +14,7 @@ LICENSE = "Artistic-1.0"
 LIC_FILES_CHKSUM = "file://lib/Data/HexDump.pm;beginline=277;endline=279;md5=bf1cd9373f8d1f85fe091ee069a480e9"
 
 DEPENDS = "perl"
+RDEPENDS:${PN} += "perl-module-parent"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEILB/Data-HexDump-${PV}.tar.gz \
            file://run-ptest \
