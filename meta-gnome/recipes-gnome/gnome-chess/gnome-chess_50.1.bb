@@ -28,6 +28,6 @@ inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check
 
 GIR_MESON_OPTION = ""
 
-SRCREV = "079ef83fe6c538be9178b03999724d5f4649bc69"
+SRCREV = "b999e7d82b3c492436aa98827c0c6d64fa4a57f3"
 
 FILES:${PN} += "${datadir}"
