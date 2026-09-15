@@ -12,7 +12,7 @@ inherit gnomebase
 
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
-SRC_URI[archive.sha256sum] = "5a026e5602085307c7dcb72b71b07261c40f80914277bef5f8d7f2ecab739bec"
+SRC_URI[archive.sha256sum] = "2b61780203aed98e701d3ea57c8f353e7c8ada9706a79be782f6c5153dd035c0"
 
 FILES:${PN} = "${libdir}/lib*.so.*"
 FILES:${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
