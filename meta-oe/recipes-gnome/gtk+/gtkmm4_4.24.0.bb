@@ -16,7 +16,7 @@ inherit gnomebase features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "2e8a21b4b0725f620e33aaee0cd343ed121b533275b632896619b1c89e96de67"
+SRC_URI[archive.sha256sum] = "7fd9cea356e7d3b74bf7d2a51d7e0e6763f3f9f1cddc5e77c8b0b5b7fa9d5e5a"
 
 EXTRA_OEMESON = "-Dbuild-demos=false"
 
