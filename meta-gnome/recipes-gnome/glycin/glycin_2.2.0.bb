@@ -13,11 +13,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MPL-2.0;md5=f75d2927d3c1ed2414ef72048f5ad640 
 
 inherit cargo_common cargo-update-recipe-crates meson pkgconfig gettext gobject-introspection
 
-SRC_URI = "git://gitlab.gnome.org/GNOME/glycin.git;protocol=https;branch=2.1;tag=${PV} \
-           file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch \
-           file://0002-libglycin-Read-cargo-artifacts-from-the-per-target-s.patch \
-           "
-SRCREV = "62c5096eaac2c92dab84c2eb896936d8da3dd9c1"
+SRC_URI = "git://gitlab.gnome.org/GNOME/glycin.git;protocol=https;branch=main;tag=${PV}"
+SRCREV = "a5c2d58d6ae0bd7233f6705781b17dd083ebde73"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/glycin/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
