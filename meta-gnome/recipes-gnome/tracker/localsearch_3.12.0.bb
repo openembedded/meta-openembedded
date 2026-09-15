@@ -16,6 +16,7 @@ inherit gnomebase gsettings gobject-introspection vala bash-completion features_
 
 SRC_URI:append = " \
 	file://0001-build-add-an-option-to-disable-the-uninstalled-helper.patch \
+	file://0002-indexer-declare-the-generated-D-Bus-header-as-a-depe.patch \
 "
 SRC_URI[archive.sha256sum] = "4bf45440ce7a899f2eca4d20343d31fc620fa2a3fe53bb929de244305330e930"
 
