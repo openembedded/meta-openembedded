@@ -17,12 +17,17 @@ DEPENDS = " \
     libdisplay-info \
     libdrm \
     libei \
+    libgudev \
+    libinput \
+    libxcvt-native \
     libxkbcommon \
     pango \
     pixman \
     python3-argcomplete-native \
     python3-docutils-native \
+    udev \
     virtual/egl \
+    virtual/libgbm \
     virtual/libgles2 \
     wayland \
     wayland-native \
@@ -32,7 +37,7 @@ DEPENDS = " \
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
 SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
-SRC_URI[archive.sha256sum] = "273d33c875abcb4b6cbea3f4ec045d18155fbc510c3521fc7e47926371310988"
+SRC_URI[archive.sha256sum] = "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
 
 REQUIRED_DISTRO_FEATURES = "wayland polkit"
 ANY_OF_DISTRO_FEATURES = "opengl vulkan"
@@ -40,10 +45,10 @@ ANY_OF_DISTRO_FEATURES = "opengl vulkan"
 # systemd can be replaced by libelogind (not available atow - make systemd
 # mandatory distro feature)
 LOGIND ?= "systemd"
+DEPENDS += "${LOGIND}"
 REQUIRED_DISTRO_FEATURES += "systemd"
 
 PACKAGECONFIG ??= " \
-    native-backend \
     egl \
     gles2 \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'opengl', '', d)} \
@@ -51,17 +56,11 @@ PACKAGECONFIG ??= " \
     bash-completion \
     gnome-desktop \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xwayland', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'logind udev', '', d)} \
 "
 
-PACKAGECONFIG[native-backend] = "-Dnative_backend=true -Dudev=true, -Dnative_backend=false -Dudev=false, libdrm virtual/libgbm libinput ${LOGIND} virtual/egl virtual/libgles2 udev libxcvt-native"
 PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=false, virtual/libgl"
 PACKAGECONFIG[gles2] = "-Dgles2=true, -Dgles2=false, virtual/libgles2"
 PACKAGECONFIG[egl] = "-Degl=true, -Degl=false, virtual/egl"
-PACKAGECONFIG[egl-device] = "-Degl_device=true, -Degl_device=false"
-PACKAGECONFIG[wayland-eglstream] = "-Dwayland_eglstream=true, -Dwayland_eglstream=false, wayland-eglstream-protocols"
-PACKAGECONFIG[udev] = "-Dudev=true, -Dudev=false, udev"
-PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
 PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
 PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
 PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
@@ -88,7 +87,7 @@ EXTRA_OEMESON += " \
     -Dverbose=true \
 "
 
-MUTTER_API_NAME = "mutter-18"
+MUTTER_API_NAME = "mutter-${@oe.utils.trim_version('${PV}', 1)}"
 
 do_install:prepend() {
     sed -i -e 's|${B}/||g' ${B}/cogl/cogl/cogl-enum-types.c
