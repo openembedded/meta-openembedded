@@ -31,8 +31,7 @@ GIR_MESON_OPTION = ""
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 SRC_URI += "file://0001-shell-app-usage.c-only-include-x11-headers-if-HAVE_X.patch"
-SRC_URI += "file://0002-calendar-server-Fix-build-failure-with-libical-4.patch"
-SRC_URI[archive.sha256sum] = "c531939539db316a41aef23670370abd1330d3254f84bcb0f9f4dae5d6e362cf"
+SRC_URI[archive.sha256sum] = "2179bab13af353427065096af8bf3d30da7b86e0c516e5ba86a14998af9575f6"
 
 PACKAGECONFIG ??= " \
     camera-monitor \
@@ -44,7 +43,6 @@ PACKAGECONFIG ??= " \
 "
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
 PACKAGECONFIG[camera-monitor] = "-Dcamera_monitor=true, -Dcamera_monitor=false, pipewire"
-PACKAGECONFIG[extensions-app] = "-Dextensions_app=true, -Dextensions_app=false"
 PACKAGECONFIG[extensions-tool] = "-Dextensions_tool=true, -Dextensions_tool=false, gnome-autoar json-glib libsoup-3.0"
 PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false, networkmanager libsecret, networkmanager"
 PACKAGECONFIG[portal-helper] = "-Dportal_helper=true, -Dportal_helper=false"
@@ -97,9 +95,6 @@ RDEPENDS:${PN} += " \
 	gsettings-desktop-schemas \
 	librsvg-gtk \
 "
-
-# The extensions app is a GJS application and pulls libadwaita at runtime only.
-RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'extensions-app', 'libadwaita', '', d)}"
 
 PACKAGES =+ "${PN}-tools ${PN}-gsettings"
 FILES:${PN}-tools = "${bindir}/*-tool"
