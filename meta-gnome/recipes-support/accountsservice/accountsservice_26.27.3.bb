@@ -15,18 +15,10 @@ inherit meson gobject-introspection gtk-doc features_check systemd vala pkgconfi
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
-SRC_URI = " \
-	https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-	file://accountsservice-23.13.9-c99-fixes.patch \
-	file://00b6e12ad4044d33cc54c71c75773c5a653dad09.patch \
-"
-SRC_URI:append:libc-musl = " \
-	file://0002-musl-add-missing-fgetspent_r.patch \
-"
+SRC_URI = "git://gitlab.freedesktop.org/${BPN}/${BPN}.git;protocol=https;branch=main;tag=${PV}"
+SRCREV = "4e254d9624cc48224c9920b9509df0b144f7be0c"
 
 EXTRA_OEMESON:append:libc-musl = " -Dwtmpfile=/var/log/wtmp -Dtests=false"
-
-SRC_URI[sha256sum] = "adda4cdeae24fa0992e7df3ffff9effa7090be3ac233a3edfdf69d5a9c9b924f"
 
 UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/accountsservice/accountsservice/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
