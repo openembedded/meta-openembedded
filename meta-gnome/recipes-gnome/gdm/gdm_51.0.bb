@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "8a4679e47cddfe8b0a1bd9d3836042deb68fb3e1b0e7e62dfd0631dc5b6fc541"
+SRC_URI[archive.sha256sum] = "2ce5acf5a438b8f6dc1d14fd777a911be5eeb2f7ab9a7c4600166205b15d6536"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
@@ -30,6 +30,7 @@ PACKAGECONFIG[x11] = "-Dx11-support=true,-Dx11-support=false,xau"
 EXTRA_OEMESON = " \
     -Ddefault-pam-config=openembedded \
     -Dpam-mod-dir=${base_libdir}/security \
+    -Dpam-services-dir=${sysconfdir}/pam.d \
     --cross-file=${WORKDIR}/meson-${PN}.cross \
 "
 
