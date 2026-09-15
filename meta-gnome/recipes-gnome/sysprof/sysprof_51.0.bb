@@ -21,10 +21,8 @@ DEPENDS += " \
 SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch \
            file://0002-meson-Do-not-invoke-the-commands-to-update-the-icon-.patch \
            file://0003-libsysprof-Check-for-unw_set_caching_policy-before-u.patch \
-           file://0004-sysprof-greeter-fix-environ-with-shadowing.patch \
-           file://0005-Make-elf-loader-search-for-debug-links-in-.debug-dir.patch \
            "
-SRC_URI[archive.sha256sum] = "54f157fdfef1edf1e2f22e542c462d90e1c21fca8c30eba4127cee739039bbe2"
+SRC_URI[archive.sha256sum] = "f2c8d9c5c8294ce3fdc8be7d9f4be56a72ed71522cb54987f1723a8cfd91637d"
 
 # reason: gtk4 requires opengl distro feature
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'gtk', 'opengl', '', d)}"
@@ -45,6 +43,7 @@ FILES_SOLIBSDEV = "${libdir}/libsysprof-6.so"
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'sysprofd', 'sysprof3.service', '', d)}"
 
 FILES:${PN} += " \
+    ${datadir}/dbus-1/services \
     ${datadir}/dbus-1/system-services \
     ${datadir}/dbus-1/system.d \
     ${datadir}/dbus-1/interfaces \
