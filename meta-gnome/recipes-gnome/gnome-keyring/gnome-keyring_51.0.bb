@@ -20,7 +20,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gettext
 
-SRC_URI[archive.sha256sum] = "cbd72062c53c9702bc2c4733991ad5f051ca682882b30905a2829bcf1a8ecc7c"
+SRC_URI[archive.sha256sum] = "2aebaa2d474cc31507c87a7bbbdb3e16dbe26b1cfef9f206457f3f9df43558b0"
 SRC_URI += "file://0001-meson-allow-setting-the-paths-to-ssh-agent-and-ssh-add-by-option.patch"
 
 PACKAGECONFIG ??= " \
