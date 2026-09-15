@@ -19,7 +19,7 @@ inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_check get
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "a4138aa754b4584c46de91fad1d685e27b12bc2457de761863b6be02d84c4862"
+SRC_URI[archive.sha256sum] = "8887b03427230ac0816d4b0c801ce6628ad1fc9139ed3072914e9faa881ba868"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
