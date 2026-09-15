@@ -18,7 +18,7 @@ DEPENDS = " \
     vte \
 "
 
-SRC_URI[archive.sha256sum] = "e4950207f0547e6a6c0f18eebfcf6e1a10461eab0f2fae0aae512b1044c7ac6e"
+SRC_URI[archive.sha256sum] = "f40d13903b1f067f0c02e0812f78df8ec25d8cd129794e7e46bd56ca0c156f2f"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"
