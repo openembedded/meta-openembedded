@@ -3,14 +3,15 @@ DESCRIPTION = "Rygel is a home media solution (UPnP AV MediaServer) that \
 allow you to easily share audio, video and pictures to other devices. \
 Additionally, media player software may use Rygel to become a MediaRenderer \
 that may be controlled remotely by a UPnP or DLNA Controller."
-HOMEPAGE = "http://live.gnome.org/Rygel"
+HOMEPAGE = "https://rygel-project.org"
 
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 \
            gstreamer1.0-plugins-base libgee libsoup libmediaart-2.0 \
-           libunistring sqlite3 intltool-native gst-editing-services"
+           libunistring sqlite3 intltool-native gst-editing-services \
+           python3-pyyaml-native python3-docutils-native"
 
 RDEPENDS:${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
 RRECOMMENDS:${PN} = "rygel-plugin-media-export"
@@ -20,7 +21,7 @@ inherit gnomebase features_check vala gobject-introspection gettext systemd
 # gobject-introspection is mandatory for libmediaart-2.0 and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
-SRC_URI[archive.sha256sum] = "20e57b70b15a865d77dc38f9f786abc52c64b111fe5f938a62c28d712df1331d"
+SRC_URI[archive.sha256sum] = "b61512c99307e2de7081f96b002427bbf23b25d5b0c3f6ae8d7798caebce4a86"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
@@ -28,11 +29,10 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
 EXTRA_OEMESON = "-Dengines=gstreamer -Dplugins=${@strip_comma('${RYGEL_PLUGINS}')}"
 PACKAGECONFIG:append = "${@bb.utils.contains_any("DISTRO_FEATURES", "opengl vulkan", " gtk4", "", d)}"
 
-PACKAGECONFIG ?= "external mpris ruih gst-launch media-export"
+PACKAGECONFIG ?= "external mpris gst-launch media-export"
 
 PACKAGECONFIG[external] = ""
 PACKAGECONFIG[mpris] = ""
-PACKAGECONFIG[ruih] = ""
 PACKAGECONFIG[media-export] = ""
 PACKAGECONFIG[gst-launch] = ""
 PACKAGECONFIG[localsearch] = ""
