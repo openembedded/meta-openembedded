@@ -27,7 +27,7 @@ SRC_URI += "file://0001-Support-building-against-libical-4.0.patch"
 
 export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
-SRC_URI[archive.sha256sum] = "4b75df071a52d98fb35e647d018030129d24d9007790d02457746c98617aeab0"
+SRC_URI[archive.sha256sum] = "77c290450c40834392cdea2c40451561e98f43d5dae93cd9e915051a6708dc30"
 
 FILES:${PN} += " \
     ${datadir}/gnome-shell \
