@@ -14,7 +14,7 @@ inherit gnomebase gettext gsettings upstream-version-is-even mime mime-xdg manpa
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
-SRC_URI[archive.sha256sum] = "6289b6afa44d3e4c999ce5761ff8b2c10ba309f55f9425f2b13f98208c81f6fb"
+SRC_URI[archive.sha256sum] = "5195c4f60542a953ab6ebd288f3785b8e7746292d8c167e0c99d353438a184d1"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-session/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
