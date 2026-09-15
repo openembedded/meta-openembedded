@@ -8,7 +8,7 @@ inherit gnomebase pkgconfig gettext gsettings features_check useradd
 
 REQUIRED_DISTRO_FEATURES = "opengl polkit"
 
-SRC_URI[archive.sha256sum] = "31df628f4113573f136ffc8dc001763aed633cd85bed21e58bc61f8a17df091f"
+SRC_URI[archive.sha256sum] = "c7954b34da5766288ea19b56026421c9c1fe2c23ef379e57ec209dc0cf13df2b"
 
 DEPENDS = " \
     asciidoc-native \
