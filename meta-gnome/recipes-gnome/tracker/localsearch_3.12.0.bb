@@ -16,9 +16,8 @@ inherit gnomebase gsettings gobject-introspection vala bash-completion features_
 
 SRC_URI:append = " \
 	file://0001-build-add-an-option-to-disable-the-uninstalled-helper.patch \
-	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
 "
-SRC_URI[archive.sha256sum] = "7b39a6c28a8acf2b172f15b2fb5ee7c7a3764c447c2f4a14caa239b7ebe61942"
+SRC_URI[archive.sha256sum] = "4bf45440ce7a899f2eca4d20343d31fc620fa2a3fe53bb929de244305330e930"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
