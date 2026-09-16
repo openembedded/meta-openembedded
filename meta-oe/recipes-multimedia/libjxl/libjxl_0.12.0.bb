@@ -30,6 +30,16 @@ EXTRA_OECMAKE = " \
 	-DJPEGXL_ENABLE_TOOLS=OFF \
 "
 
+# Whether to build the SVE targets is decided by a compiler capability probe
+# using __attribute__((target("+sve"))), which succeeds on any aarch64 compiler
+# no matter what the tune supports. On a tune without SVE that compiles code
+# which can never run, and gcc crashes on the SVE2_128 target:
+#   enc_transforms-inl.h:799:1: internal compiler error:
+#   in simplify_gen_subreg_concatn, at lower-subreg.cc:744
+# Tie the targets to the tune instead.
+EXTRA_OECMAKE:append:aarch64 = " ${@bb.utils.contains('TUNE_FEATURES', 'sve', '', '-DJPEGXL_ENABLE_HWY_SVE=OFF -DJPEGXL_ENABLE_HWY_SVE_256=OFF', d)}"
+EXTRA_OECMAKE:append:aarch64 = " ${@bb.utils.contains('TUNE_FEATURES', 'sve2', '', '-DJPEGXL_ENABLE_HWY_SVE2=OFF -DJPEGXL_ENABLE_HWY_SVE2_128=OFF', d)}"
+
 PACKAGECONFIG ?= "mime gdk-pixbuf-loader sizeless-vectors"
 # libjxl/0.10.2/recipe-sysroot/usr/include/hwy/ops/rvv-inl.h:591:17: error: use
 # of undeclared identifier '__riscv_vsetvlmax_e8mf8'
