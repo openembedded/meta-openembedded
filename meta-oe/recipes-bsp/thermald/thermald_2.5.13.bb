@@ -17,7 +17,7 @@ SRC_URI = " \
     file://0001-thd_gddv-fix-building-on-32-bit-systems.patch \
 "
 
-SRCREV = "9996a1a1cdd01d32cd411459368a177f463d0047"
+SRCREV = "5fdc5bbca7f8c3f5bb2ad6540e8211a159a88a3a"
 
 inherit pkgconfig autotools systemd gtk-doc
 
