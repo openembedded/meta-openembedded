@@ -40,17 +40,10 @@ EXTRA_OECMAKE = " \
 EXTRA_OECMAKE:append:aarch64 = " ${@bb.utils.contains('TUNE_FEATURES', 'sve', '', '-DJPEGXL_ENABLE_HWY_SVE=OFF -DJPEGXL_ENABLE_HWY_SVE_256=OFF', d)}"
 EXTRA_OECMAKE:append:aarch64 = " ${@bb.utils.contains('TUNE_FEATURES', 'sve2', '', '-DJPEGXL_ENABLE_HWY_SVE2=OFF -DJPEGXL_ENABLE_HWY_SVE2_128=OFF', d)}"
 
-PACKAGECONFIG ?= "mime gdk-pixbuf-loader sizeless-vectors"
-# libjxl/0.10.2/recipe-sysroot/usr/include/hwy/ops/rvv-inl.h:591:17: error: use
-# of undeclared identifier '__riscv_vsetvlmax_e8mf8'
-#  591 | HWY_RVV_FOREACH(HWY_RVV_LANES, Lanes, setvlmax_e, _ALL)
-#      |                 ^
-PACKAGECONFIG:remove:riscv64 = "sizeless-vectors"
-PACKAGECONFIG:remove:riscv32 = "sizeless-vectors"
+PACKAGECONFIG ?= "mime gdk-pixbuf-loader"
 PACKAGECONFIG[gdk-pixbuf-loader] = "-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=ON,-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=OFF,gdk-pixbuf"
 PACKAGECONFIG[gimp] = "-DJPEGXL_ENABLE_PLUGIN_GIMP210=ON,-DJPEGXL_ENABLE_PLUGIN_GIMP210=OFF,gimp"
 PACKAGECONFIG[mime] = "-DJPEGXL_ENABLE_PLUGIN_MIME=ON,-DJPEGXL_ENABLE_PLUGIN_MIME=OFF"
-PACKAGECONFIG[sizeless-vectors] = "-DJPEGXL_ENABLE_SIZELESS_VECTORS=ON,-DJPEGXL_ENABLE_SIZELESS_VECTORS=OFF"
 
 # lcms/src/cmsps2.c
 # error: out of range pc-relative fixup value
