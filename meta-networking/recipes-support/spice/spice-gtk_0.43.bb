@@ -8,24 +8,23 @@ LIC_FILES_CHKSUM = " \
 	file://subprojects/keycodemapdb/LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
 "
 
-SRCREV = "f04479c16f0969fb394ebe74b6eff74e560a42f0"
+SRCREV = "f028f45a573926736223548887e18ac65dabb50b"
 
-SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;branch=master"
+SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;branch=master;tag=v${PV}"
 
 CVE_STATUS[CVE-2012-4425] = "fixed-version: fixed since 0.15.3"
 
-DEPENDS = "python3-six-native python3-pyparsing-native spice-protocol glib-2.0 pixman openssl jpeg zlib json-glib libcap-ng gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS = "python3-pyparsing-native spice-protocol glib-2.0 pixman openssl jpeg zlib json-glib libcap-ng gstreamer1.0 gstreamer1.0-plugins-base udev"
 DEPENDS:append:libc-musl = " libucontext"
 
-inherit meson pkgconfig vala gobject-introspection features_check gtk-doc
+inherit meson pkgconfig vala gobject-introspection features_check gi-docgen
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 GIR_MESON_ENABLE_FLAG = 'enabled'
 GIR_MESON_DISABLE_FLAG = 'disabled'
-GTKDOC_MESON_OPTION = 'gtk_doc'
-GTKDOC_MESON_ENABLE_FLAG = 'enabled'
-GTKDOC_MESON_DISABLE_FLAG = 'disabled'
+GIDOCGEN_MESON_ENABLE_FLAG = 'enabled'
+GIDOCGEN_MESON_DISABLE_FLAG = 'disabled'
 
 do_configure:prepend() {
 	echo ${PV} > ${S}/.tarball-version
