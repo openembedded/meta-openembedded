@@ -19,15 +19,15 @@ HOMEPAGE = "http://www.zabbix.com/"
 SECTION = "Applications/Internet"
 LICENSE = "AGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb1e647870add0502f8f010b19de32af"
-DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
+DEPENDS  = "libevent libpcre2 openldap virtual/libiconv zlib"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/7.0/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/7.4/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
     file://zabbix-agent.service \
 "
-SRC_URI[sha256sum] = "184d03454d7ff2d49fa1d292082ad335bce907ba22e30d54035d05329708ce32"
+SRC_URI[sha256sum] = "efde5f6f19896f0200bb5245e3866035667271c7b1e84626d26095f24a6fbb42"
 
 inherit autotools-brokensep pkgconfig systemd useradd
 
@@ -55,8 +55,8 @@ EXTRA_OECONF = " \
     --with-zlib \
     --with-libpthread \
     --with-libevent \
-    --with-libpcre=${STAGING_EXECPREFIXDIR} \
-    --with-libpcre-lib=${STAGING_LIBDIR} \
+    --with-libpcre2=${STAGING_EXECPREFIXDIR} \
+    --with-libpcre2-lib=${STAGING_LIBDIR} \
     --with-iconv=${STAGING_EXECPREFIXDIR} \
 "
 CFLAGS:append = " -lldap -llber -pthread"
