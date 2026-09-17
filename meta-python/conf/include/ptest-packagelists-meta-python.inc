@@ -102,6 +102,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-service-identity \
     python3-setproctitle \
     python3-simpleeval \
+    python3-six \
     python3-smpplib \
     python3-soupsieve \
     python3-sqlparse \
