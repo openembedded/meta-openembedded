@@ -8,13 +8,15 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \
            "
 SRC_URI[sha256sum] = "bfc54f7bab59fbc921012014a8032e4cba4abd46db47d46b76416a8c0b2815c8"
 
-DEPENDS = "tiff"
-
 BBCLASSEXTEND = "native nativesdk"
 
 S = "${UNPACKDIR}/lcms2-${PV}"
 
 inherit autotools sourceforge-releases lib_package ptest
+
+PACKAGECONFIG ??= "jpeg tiff"
+PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
+PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
 
 do_compile_ptest() {
     oe_runmake -C ${B}/testbed testcms
