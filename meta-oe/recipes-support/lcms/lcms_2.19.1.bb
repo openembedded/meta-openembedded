@@ -14,7 +14,7 @@ BBCLASSEXTEND = "native nativesdk"
 
 S = "${UNPACKDIR}/lcms2-${PV}"
 
-inherit autotools sourceforge-releases ptest
+inherit autotools sourceforge-releases lib_package ptest
 
 do_compile_ptest() {
     oe_runmake -C ${B}/testbed testcms
