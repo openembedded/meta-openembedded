@@ -15,6 +15,5 @@ DEPENDS += "python3-hatch-vcs-native"
 
 RDEPENDS:${PN} += " \
 	python3-dnspython \
-	python3-six \
 	python3-greenlet \
 "

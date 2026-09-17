@@ -22,7 +22,6 @@ RDEPENDS:${PN} += "\
     python3-pickle \
     python3-json \
     python3-threading \
-    python3-six \
     python3-attrs \
     python3-bidict \
     "

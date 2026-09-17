@@ -42,7 +42,6 @@ RDEPENDS:${PN} = "\
     python3-pip \
     python3-pprint \
     python3-pycairo \
-    python3-six \
     python3-xml \
     python3-cairocffi \
 "
