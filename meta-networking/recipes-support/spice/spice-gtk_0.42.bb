@@ -14,34 +14,8 @@ SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;bra
 
 CVE_STATUS[CVE-2012-4425] = "fixed-version: fixed since 0.15.3"
 
-
-DEPENDS = " \
-	${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
-	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland wayland-native wayland-protocols', '', d)} \
-	acl \
-	cyrus-sasl \
-	gstreamer1.0 \
-	gstreamer1.0-plugins-base \
-	gtk+3 \
-	jpeg \
-	json-glib \
-	libcap-ng \
-	libepoxy \
-	libopus \
-	libusb1 \
-	libva \
-	lz4 \
-	pixman \
-	python3-pyparsing-native \
-	python3-six-native \
-	spice-protocol \
-	usbredir \
-	usbutils \
-	zlib \
-"
+DEPENDS = "python3-six-native python3-pyparsing-native spice-protocol glib-2.0 pixman openssl jpeg zlib json-glib libcap-ng gstreamer1.0 gstreamer1.0-plugins-base"
 DEPENDS:append:libc-musl = " libucontext"
-
-RDEPENDS:${PN} = "python3-pyparsing python3-six hwdata"
 
 inherit meson pkgconfig vala gobject-introspection features_check gtk-doc
 
@@ -57,9 +31,19 @@ do_configure:prepend() {
 	echo ${PV} > ${S}/.tarball-version
 }
 
-PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d)} smartcard"
-PACKAGECONFIG[vapi] = "-Dvapi=enabled,-Dvapi=disabled"
+GTK_DEPS = "gtk+3 libepoxy libva ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native wayland-protocols wayland', '', d)}"
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+                   ${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d)} \
+				   gtk lz4 opus sasl smartcard usbredir"
+PACKAGECONFIG[gtk] = "-Dgtk=enabled,-Dgtk=disabled,${GTK_DEPS}"
+PACKAGECONFIG[lz4] = "-Dlz4=enabled,-Dlz4=disabled,lz4"
+PACKAGECONFIG[opus] = "-Dopus=enabled,-Dopus=disabled,libopus"
+PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit acl"
+PACKAGECONFIG[sasl] = "-Dsasl=enabled,-Dsasl=disabled,cyrus-sasl"
 PACKAGECONFIG[smartcard] = "-Dsmartcard=enabled,-Dsmartcard=disabled,libcacard"
+PACKAGECONFIG[usbredir] = "-Dusbredir=enabled,-Dusbredir=disabled,usbredir libusb1"
+PACKAGECONFIG[vapi] = "-Dvapi=enabled,-Dvapi=disabled"
 PACKAGECONFIG[webdav] = "-Dwebdav=enabled,-Dwebdav=disabled,phodav libsoup"
 
 EXTRA_OEMESON = "-Dpie=true -Dusb-ids-path=${datadir}/hwdata/usb.ids "
@@ -68,3 +52,5 @@ EXTRA_OEMESON:append:libc-musl = " -Dcoroutine=libucontext"
 LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--undefined-version', '', d)}"
 
 FILES:${PN} += "${datadir}"
+
+RDEPENDS:${PN} = "hwdata"
