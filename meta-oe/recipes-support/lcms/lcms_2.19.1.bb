@@ -28,6 +28,4 @@ do_install_ptest() {
     install -m 0644 ${S}/testbed/*.icc ${D}${PTEST_PATH}/
 }
 
-RDEPENDS:${PN}-ptest += "bash"
-
 CVE_PRODUCT += "littlecms:little_cms_color_engine"
