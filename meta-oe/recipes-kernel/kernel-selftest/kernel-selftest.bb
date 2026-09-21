@@ -23,7 +23,6 @@ SRC_URI += "file://run-ptest \
             file://0001-selftests-filelock-fix-the-test-plan-count-in-ofdloc.patch \
             file://0001-selftests-cgroup-memcontrol-keep-anon-page-touches-f.patch \
             file://0001-selftests-filesystems-idmapped_tmpfile-chown-the-lay.patch \
-            file://0001-selftests-proc-include-fcntl.h-in-proc-pidns.patch \
             ${@bb.utils.contains('PACKAGECONFIG', 'mm', '${MM_PATCH}', '', d)} \
             "
 
