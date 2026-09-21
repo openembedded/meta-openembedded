@@ -9,18 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded477
                     file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
                     file://LICENSES/CC-BY-4.0.txt;md5=9b33bbd06fb58995fb0e299cd38d1838"
 
-SRC_URI = "git://github.com/nerves-project/boardid/;protocol=https;branch=main"
+SRC_URI = "git://github.com/nerves-project/boardid/;protocol=https;branch=main;tag=v${PV}"
 
-PV = "1.15.0"
 SRCREV = "2ccf22a8be22d7597e16fb225c1173876674f7a4"
-
-do_configure () {
-	:
-}
-
-do_compile () {
-	oe_runmake
-}
 
 do_install () {
         install -d ${D}${bindir}
