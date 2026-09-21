@@ -14,7 +14,7 @@ SECTION = "libs"
 SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
            file://leancrypto-tests.sh \
            "
-SRCREV = "9bb22cb06aa1733969efdb81155838145405dd81"
+SRCREV = "0110b781707c7bdde88482933811387b744d21eb"
 
 inherit pkgconfig meson
 
