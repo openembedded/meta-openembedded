@@ -4,14 +4,18 @@ HOMEPAGE = "https://pywbemtools.readthedocs.io/en/stable/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 
-SRC_URI[sha256sum] = "7fb1c32e358d55c2c6966a071c8ecc0ca81de3d32944a67cc646c57b1a7a337a"
+SRC_URI[sha256sum] = "537f848a90b3f40531984ec296387eaa1892905b5ed8d3fe7d6d4c737f25fce9"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
+
+DEPENDS += " \
+    python3-setuptools-scm-native \
+    python3-wheel-native \
+"
 
 RDEPENDS:${PN}:append:class-target = " \
     python3-ply \
     python3-pyyaml \
-    python3-six \
     python3-pywbem \
     python3-click \
     python3-requests \
@@ -24,9 +28,11 @@ RDEPENDS:${PN}:append:class-target = " \
     python3-click-spinner \
     python3-asciitree \
     python3-tabulate \
-    python3-pydicti \
     python3-nocaselist \
-    python3-custom-inherit \
+    python3-toposort \
+    python3-psutil \
+    python3-pyparsing \
+    python3-urllib3 \
 "
 
 BBCLASSEXTEND = "native"
