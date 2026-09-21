@@ -18,7 +18,6 @@ FILES:${PN}-tests += " \
 RDEPENDS:${PN}:append:class-target = " \
     python3-lazy-object-proxy \
     python3-logging \
-    python3-six \
     python3-wrapt \
     python3-setuptools \
     python3-typing-extensions \
