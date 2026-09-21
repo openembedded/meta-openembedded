@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "4bebc59ac74411064e7c97a4036174023e22ccbecd22b78750ab76551eb38988"
+SRC_URI[sha256sum] = "4b73f926ebae81f04bf14527af330bd00bb268be767e0f189f7c4c3e4ad7ae0a"
 
 SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
 
@@ -47,6 +47,17 @@ RDEPENDS:${PN}-ptest += " \
 
 do_install_ptest:append() {
     install -m 0644 ${S}/pyproject.toml ${D}${PTEST_PATH}/
+    install -m 0644 ${S}/LICENSE.txt ${D}${PTEST_PATH}/
+    install -d ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/README.md ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/GCC-exception-3.1.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/GPL-3.0.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/libjpeg-turbo-README.ijg.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/libjpeg-turbo.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/microsoft-visual-cpp-runtime.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/openssl.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/qpdf.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -m 0644 ${S}/third-party-licenses/zlib.txt ${D}${PTEST_PATH}/third-party-licenses/
 }
 
 BBCLASSEXTEND = "native nativesdk"
