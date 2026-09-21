@@ -9,7 +9,7 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
 
 SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https;tag=${PV}"
-SRCREV = "52919b145d04953a91cf846f3db3d8cee8d989ac"
+SRCREV = "c7b1bec0f40217d17e315226552e461a4a816abc"
 
 DEPENDS = "libtinyxml2 libarchive"
 inherit cmake pkgconfig
