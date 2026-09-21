@@ -21,7 +21,11 @@ DEPENDS = " \
 inherit gnomebase gsettings gettext
 
 SRC_URI[archive.sha256sum] = "2aebaa2d474cc31507c87a7bbbdb3e16dbe26b1cfef9f206457f3f9df43558b0"
-SRC_URI += "file://0001-meson-allow-setting-the-paths-to-ssh-agent-and-ssh-add-by-option.patch"
+SRC_URI += "file://0001-meson-allow-setting-the-paths-to-ssh-agent-and-ssh-add-by-option.patch \
+            file://0002-gkd-secret-service-destroy-the-dispatch-table-before.patch \
+            file://0003-gkd-secret-unlock-do-not-use-the-service-after-dispo.patch \
+            file://0004-gkd-secret-session-drop-the-duplicate-session-unref.patch \
+            "
 
 PACKAGECONFIG ??= " \
     libcap-ng \
@@ -35,6 +39,7 @@ PACKAGECONFIG[ssh-agent] = "-Dssh-agent=true -Dssh-agent-path=${bindir}/ssh-agen
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
 
 EXTRA_OEMESON = " \
+    -Ddebug-mode=false \
     -Dmanpage=false \
     -Dpkcs11-config=${datadir}/p11-kit/modules \
     -Dpkcs11-modules=${libdir}/pkcs11 \
