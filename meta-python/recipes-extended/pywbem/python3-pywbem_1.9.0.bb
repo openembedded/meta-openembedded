@@ -23,7 +23,6 @@ inherit pypi python_setuptools_build_meta update-alternatives
 DEPENDS += " \
     python3-ply-native \
     python3-pyyaml-native \
-    python3-six-native \
     python3-wheel-native \
     python3-setuptools-scm-native \
 "
@@ -38,7 +37,6 @@ RDEPENDS:${PN} += "\
     python3-ply \
     python3-pyyaml \
     python3-requests \
-    python3-six \
     python3-stringold \
     python3-threading \
     python3-unixadmin \
