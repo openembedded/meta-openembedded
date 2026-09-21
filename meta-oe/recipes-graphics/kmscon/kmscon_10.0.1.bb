@@ -23,6 +23,8 @@ DEPENDS = "\
 SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
 SRCREV = "c9d0e23336c6bb7645a1f5f48a4a82f1d5a589d9"
 
+SRC_URI += "file://0001-terminal-open-the-pty-only-once-a-display-is-attached.patch"
+
 inherit meson pkgconfig systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
