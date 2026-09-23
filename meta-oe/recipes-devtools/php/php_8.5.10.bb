@@ -34,6 +34,8 @@ S = "${UNPACKDIR}/php-${PV}"
 
 SRC_URI[sha256sum] = "d79bd4f3a9248e5cb5833766ba0d51cd35dd01b8727f23f30bcdba6fabc51d3e"
 
+CVE_PRODUCT = "php:php php_group:php"
+
 CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
 CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
 CVE_STATUS_PHP = " \
