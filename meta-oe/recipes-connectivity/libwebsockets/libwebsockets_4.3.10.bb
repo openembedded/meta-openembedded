@@ -10,6 +10,7 @@ S = "${WORKDIR}/git"
 SRCREV = "2288cf200bc1c28680765bd4f07e437356106c2d"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
           file://CVE-2026-10650.patch \
+          file://CVE-2026-19773.patch \
           "
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
