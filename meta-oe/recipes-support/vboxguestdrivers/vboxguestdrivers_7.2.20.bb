@@ -24,7 +24,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://Makefile.utils \
     file://0001-vboxvideo-let-the-build-decide-if-drm_fb_helper_alloc.patch \
 "
-SRC_URI[sha256sum] = "06db4060caadc70346335c0a731ca6667cdabf206de289c64f3f96f2d341b9d0"
+SRC_URI[sha256sum] = "5c2138213b72f36c129b92c2c267f2a40e9c98513f4c86a584327f09f9be706d"
 
 S ?= "${UNPACKDIR}/vbox_module"
 S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
