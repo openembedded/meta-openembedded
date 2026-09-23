@@ -48,6 +48,11 @@ PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=true,-Dsystemd-use
 PACKAGECONFIG[dbus] = ""
 PACKAGECONFIG[test] = "-Dtests=true,-Dtests=false"
 
+# The dbus tests spawn a private bus through GTestDBus, which needs the
+# dbus-daemon binary. It is missing when dbus-broker provides the bus.
+WP_DBUS_TESTS = "${@'true' if d.getVar('VIRTUAL-RUNTIME_dbus') == 'dbus' else 'false'}"
+EXTRA_OEMESON += "-Ddbus-tests=${WP_DBUS_TESTS}"
+
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
 
@@ -170,4 +175,6 @@ FILES:${PN}-modules = ""
 RRECOMMENDS:${PN}-modules += "${PN}-modules-meta"
 
 FILES:${PN}-ptest += "${datadir}/wireplumber/scripts/lib/test-utils.lua ${datadir}/wireplumber/scripts/testlib.lua"
-RDEPENDS:${PN}-ptest += "pipewire-modules-protocol-native ${PN}-scripts"
+RDEPENDS:${PN}-ptest += "pipewire-modules-protocol-native ${PN}-scripts \
+    ${@'dbus' if d.getVar('WP_DBUS_TESTS') == 'true' else ''} \
+"
