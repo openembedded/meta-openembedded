@@ -40,4 +40,6 @@ EXTRA_OECONF:append:class-target = "\
 do_configure:prepend() {
     touch ${S}/ChangeLog
     touch ${S}/ABOUT-NLS
+    # Remove vapigen.m4 bundled with sources so that the one shipped by vala is used instead.
+    rm -f ${S}/m4/vapigen.m4
 }
