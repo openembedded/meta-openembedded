@@ -49,3 +49,5 @@ do_configure:prepend() {
 }
 
 SYSTEMD_SERVICE:${PN} = "ntopng.service"
+
+CVE_STATUS[CVE-2026-84989] = "cpe-incorrect: This vulnerability was introduced in v6.7"
