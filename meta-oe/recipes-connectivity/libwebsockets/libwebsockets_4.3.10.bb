@@ -1,16 +1,14 @@
 SUMMARY = "Canonical libwebsockets.org websocket library"
 HOMEPAGE = "https://libwebsockets.org/"
 LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f35efc0af624eea4864849b05ae9c7db"
 
 DEPENDS = "zlib"
 DEPENDS:append:class-native = " libcap-native"
 
 S = "${WORKDIR}/git"
-SRCREV = "4415e84c095857629863804e941b9e1c2e9347ef"
+SRCREV = "2288cf200bc1c28680765bd4f07e437356106c2d"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
-          file://CVE-2025-11677.patch \
-          file://CVE-2025-11678.patch \
           file://CVE-2026-10650.patch \
           "
 
