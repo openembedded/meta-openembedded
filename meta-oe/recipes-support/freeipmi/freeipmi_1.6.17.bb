@@ -21,6 +21,7 @@ SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz \
            file://CVE-2026-85507.patch \
            file://CVE-2026-85506.patch \
            file://CVE-2026-85505.patch \
+           file://CVE-2026-85504.patch \
 "
 SRC_URI[sha256sum] = "16783d10faa28847a795cce0bf86deeaa72b8fbe71d1f0dc1101d13a6b501ec1"
 
