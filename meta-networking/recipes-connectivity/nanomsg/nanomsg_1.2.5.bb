@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master;tag
            file://run-ptest \
           "
 
-SRCREV = "e6d0b8ddfc780eb89f8f6ef305e92c19e76bed6b"
+SRCREV = "85856cb785ba6dd38c5e9757298a54d1bca55580"
 
 inherit cmake pkgconfig ptest
 
