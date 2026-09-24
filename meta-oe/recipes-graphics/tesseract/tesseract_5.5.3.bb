@@ -9,6 +9,7 @@ SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
 SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
            file://CVE-2026-88052.patch \
            file://CVE-2026-88048.patch \
+           file://CVE-2026-88049.patch \
 "
 
 DEPENDS = "leptonica"
