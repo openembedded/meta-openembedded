@@ -13,6 +13,9 @@ SRC_URI = "git://git.netfilter.org/ulogd2;branch=master \
            file://ulogd.init \
            file://ulogd.service \
 "
+
+# See https://www.netfilter.org/mirrors.html#git
+PREMIRRORS:append = " git://git.netfilter.org/ulogd2 git://repo.or.cz/ulogd2.git;protocol=https"
 SRCREV = "1fe54ec39a071ea3b06e6883e542dfdcf40d2840"
 
 
