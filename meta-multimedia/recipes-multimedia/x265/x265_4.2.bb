@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
 DEPENDS = "nasm-native gnutls zlib libpcre numactl"
 
 SRC_URI = " \
-    https://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz \
+    https://download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz \
     file://0001-json11.cpp-Include-cstdint.patch \
     file://0001-x265-fix-build-with-cmake-4.patch \
 "
-SRC_URI[sha256sum] = "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
+SRC_URI[sha256sum] = "40b1ea0453e0309f0eba934e0ddf533f8f6295966679e8894e8f1c1c8d5e1210"
 S = "${UNPACKDIR}/x265_${PV}/source"
 
 inherit lib_package cmake pkgconfig
