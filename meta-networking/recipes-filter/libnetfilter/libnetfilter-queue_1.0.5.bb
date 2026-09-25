@@ -11,6 +11,9 @@ SRCREV = "2ff321690b8dafeca99ee8e9cafac71e36f292b9"
 SRC_URI = "git://git.netfilter.org/libnetfilter_queue;branch=master \
            "
 
+# See https://www.netfilter.org/mirrors.html#git
+PREMIRRORS:append = " git://git.netfilter.org/libnetfilter_queue git://repo.or.cz/libnetfilter_queue.git;protocol=https"
+
 
 inherit autotools pkgconfig
 
