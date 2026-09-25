@@ -17,9 +17,14 @@ PACKAGECONFIG ??= " \
     dconf vala \
     ${@bb.utils.contains_any('DISTRO_FEATURES', [ 'wayland', 'x11' ], 'gtk3 gtk4', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libnotify', '', d)} \
 "
 
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'gtk4', 'opengl', '', d)}"
+
+do_compile:prepend() {
+    export GIR_EXTRA_LIBS_PATH="${B}/src/.libs"
+}
 
 do_configure:prepend() {
     # run native unicode-parser

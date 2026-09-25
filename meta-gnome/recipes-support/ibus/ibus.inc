@@ -5,24 +5,22 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
 
-PV = "1.5.26"
+PV = "1.5.34"
 
-DEPENDS = "unicode-ucd"
+DEPENDS = "unicode-ucd libx11-native"
 
 SRC_URI = " \
-    git://github.com/ibus/ibus.git;branch=main;protocol=https \
+    git://github.com/ibus/ibus.git;branch=main;protocol=https;tag=${PV} \
     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
-    file://0001-makefile-don-t-gzip-the-man-pages.patch \
-    file://0002-util-IMdkit-Fix-incompatible-pointer-types-in-Transp.patch \
-    file://0001-src-Fix-declaration-errors-with-GCC-15.patch \
 "
-SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
+SRCREV = "1f7af28437afd62a6d145bfc81035e698a37411d"
 
 PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
 PACKAGECONFIG[dconf] = "--enable-dconf,--disable-dconf,dconf"
 PACKAGECONFIG[gtk2] = "--enable-gtk2,--disable-gtk2,gtk+"
 PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3,gtk+3"
 PACKAGECONFIG[gtk4] = "--enable-gtk4,--disable-gtk4,gtk4"
+PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
 PACKAGECONFIG[systemd] = "--enable-systemd-services,--disable-systemd-services,systemd"
 PACKAGECONFIG[wayland]  = "--enable-wayland,--disable-wayland,wayland"
 PACKAGECONFIG[vala]  = "--enable-vala,--disable-vala"
@@ -42,4 +40,8 @@ do_configure:prepend() {
     touch ${S}/ABOUT-NLS
     # Remove vapigen.m4 bundled with sources so that the one shipped by vala is used instead.
     rm -f ${S}/m4/vapigen.m4
+}
+
+do_compile:prepend() {
+    cp ${STAGING_DATADIR_NATIVE}/X11/locale/en_US.UTF-8/Compose ${B}/src/Compose
 }

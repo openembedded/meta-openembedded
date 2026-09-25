@@ -21,6 +21,7 @@ do_compile() {
     # necessary step by step
     oe_runmake ibusenumtypes.h
     oe_runmake ibusmarshalers.h
+    oe_runmake ibusresources.h
     oe_runmake ibusenumtypes.c
     oe_runmake unicode-parser
 }
