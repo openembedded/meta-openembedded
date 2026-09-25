@@ -368,7 +368,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     liblognorm \
     libmodbus \
     libplist \
-    libpwquality \
     libqb \
     librelp \
     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "libreport", "", d)} \
