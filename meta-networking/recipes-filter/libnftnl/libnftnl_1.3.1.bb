@@ -7,6 +7,9 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
            file://0001-configure.ac-Add-serial-tests.patch \
            file://run-ptest \
            "
+
+# See https://www.netfilter.org/mirrors.html#git
+PREMIRRORS:append = " git://git.netfilter.org/libnftnl git://repo.or.cz/libnftnl.git;protocol=https"
 SRCREV = "0f48d7638800bb48c863e6b7e5f2fe92972bb31c"
 
 
