@@ -54,7 +54,7 @@
 SIGNING_PKCS11_URI ?= ""
 SIGNING_PKCS11_MODULE ?= ""
 
-DEPENDS += "softhsm-native pkcs11-provider-native libp11-native opensc-native openssl-native extract-cert-native"
+DEPENDS += "softhsm-native pkcs11-provider-native libp11-native opensc-native openssl-native"
 
 def signing_class_prepare(d):
     import os.path
@@ -440,7 +440,9 @@ signing_extract_cert_der() {
     local role="${1}"
     local output="${2}"
 
-    extract-cert "$(signing_get_uri $role)" "${output}"
+    signing_extract_cert_pem "${role}" "${output}.tmp-pem"
+    openssl x509 -in "${output}.tmp-pem" -outform der -out "${output}"
+    rm "${output}.tmp-pem"
 }
 
 # signing_extract_cert_pem <role> <pem>
@@ -451,9 +453,7 @@ signing_extract_cert_pem() {
     local role="${1}"
     local output="${2}"
 
-    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
-    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
-    rm "${output}.tmp-der"
+    openssl storeutl -certs -out "${output}" "$(signing_get_uri $role)"
 }
 
 # signing_create_uri_pem <role> <pem>
