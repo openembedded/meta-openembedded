@@ -10,7 +10,7 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
 
 # See https://www.netfilter.org/mirrors.html#git
 PREMIRRORS:append = " git://git.netfilter.org/libnftnl git://repo.or.cz/libnftnl.git;protocol=https"
-SRCREV = "0f48d7638800bb48c863e6b7e5f2fe92972bb31c"
+SRCREV = "3d7184970506df2c09868dc6ef3c21aba383db63"
 
 
 inherit autotools pkgconfig ptest
