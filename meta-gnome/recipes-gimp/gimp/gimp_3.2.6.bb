@@ -66,7 +66,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.2/${BP}.tar.xz \
            file://0004-meson.build-dont-check-for-python3-pygobject-gexiv2-.patch \
            file://0005-docs-meson.build-disable-gimprc-man-build.patch \
 "
-SRC_URI[sha256sum] = "7312bc53e9c6d2d0056ca7b93f1c6b98707946dd934f714c21b8746ecb601588"
+SRC_URI[sha256sum] = "40b15e90ad0c0c631b76da3c467ea9847fa5c24f37413ac5b492804860a28cd8"
 
 PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
