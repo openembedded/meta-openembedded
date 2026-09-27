@@ -8,7 +8,7 @@ SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https;tag=${BP}
            file://0001-Fix-build-error-with-OpenSSL-4.patch \
            "
 
-SRCREV = "59af2206c62724eec0d8c43d3c1c0b70610ca1d9"
+SRCREV = "6bd91573cebd1e4ee954ebd4eb6db5b654e0e412"
 
 inherit cmake pkgconfig
 
