@@ -4,11 +4,13 @@ SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2f1963e0bb88c93463af750daf9ba0c2"
 
-DEPENDS = "libusb jpeg"
+DEPENDS = "libusb"
 
-SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https \
-        file://0001-allow-build-with-cmake-4.patch"
+SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
+SRCREV = "4e9fc773914377ec0bcf2f31621f56da5a0fa09f"
 
 inherit cmake pkgconfig
+
+PACKAGECONFIG ?= "jpeg"
+PACKAGECONFIG[jpeg] = "-DDISABLE_JPEG=OFF,-DDISABLE_JPEG=ON,jpeg"
