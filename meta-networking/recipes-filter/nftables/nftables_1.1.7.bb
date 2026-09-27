@@ -12,10 +12,9 @@ DEPENDS = "libmnl libnftnl bison-native \
            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
-           file://0001-build-support-SOURCE_DATE_EPOCH-for-build-time-stamp.patch \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "372931bda8556b310636a2f9020adc710f9bab66f47efe0ce90bff800ac2530c"
+SRC_URI[sha256sum] = "a6fbf060d8d4fff001517a2b94f356bb4366bfbf0ba366366f9d27cc38caa58f"
 
 UPSTREAM_CHECK_URI = "https://www.netfilter.org/pub/nftables/"
 UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar\.xz"
@@ -116,9 +115,6 @@ do_install_ptest() {
     cp -rf ${B}/src/.libs/* ${D}${PTEST_PATH}/src/.libs
     cp -rf ${B}/src/.libs/nft ${D}${PTEST_PATH}/src/
     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}/${TESTDIR}
-    sed -i 's#/usr/bin/python#/usr/bin/python3#' ${D}${PTEST_PATH}/${TESTDIR}/json_echo/run-test.py
-    sed -i 's#/usr/bin/env python#/usr/bin/env python3#' ${D}${PTEST_PATH}/${TESTDIR}/py/nft-test.py
-    sed -i 's#exec python -c#exec python3 -c#' ${D}${PTEST_PATH}/${TESTDIR}/shell/helpers/json-pretty.sh
     # handle multilib
     sed -i s:@libdir@:${libdir}:g ${D}${PTEST_PATH}/run-ptest
 }
