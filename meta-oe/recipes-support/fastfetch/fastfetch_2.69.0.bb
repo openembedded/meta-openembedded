@@ -11,11 +11,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
 DEPENDS = "yyjson"
 
 SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "08698098579bb8b043b0a343159b8018f5cea4fc"
+SRCREV = "0c3b852bf7bad2837a814c7a31bf332092048a2b"
 
 inherit cmake pkgconfig
 
 EXTRA_OECMAKE += "\
+    ${@bb.utils.contains_any('PACKAGECONFIG', 'chafa imagemagick sixel', '-DENABLE_IMAGE_LOGO=ON', '-DENABLE_IMAGE_LOGO=OFF', d)} \
     -DENABLE_SYSTEM_YYJSON=ON \
     -DENABLE_EET=OFF \
     -DENABLE_QUICKJS=OFF \
@@ -47,6 +48,7 @@ PACKAGECONFIG[lua] = "-DENABLE_LUA=ON,-DENABLE_LUA=OFF,lua"
 PACKAGECONFIG[opencl] = "-DENABLE_OPENCL=ON,-DENABLE_OPENCL=OFF,opencl-headers virtual/libopencl1"
 PACKAGECONFIG[pulseaudio] = "-DENABLE_PULSE=ON,-DENABLE_PULSE=OFF,pulseaudio"
 PACKAGECONFIG[rpm] = "-DENABLE_RPM=ON,-DENABLE_RPM=OFF,rpm"
+PACKAGECONFIG[sixel] = "-DENABLE_SIXEL=ON,-DENABLE_SIXEL=OFF,"
 PACKAGECONFIG[sqlite3] = "-DENABLE_SQLITE3=ON,-DENABLE_SQLITE3=OFF,sqlite3"
 PACKAGECONFIG[va-drm] = "-DENABLE_VADRM=ON,-DENABLE_VADRM=OFF,libva"
 PACKAGECONFIG[va-x11] = "-DENABLE_VAX11=ON,-DENABLE_VAX11=OFF,libva"
