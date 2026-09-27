@@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-cachetools \
     python3-cbor2 \
     python3-configobj \
+    python3-construct \
     python3-pyconnman \
     python3-click \
     python3-dasbus \
