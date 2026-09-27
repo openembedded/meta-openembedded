@@ -10,7 +10,7 @@ SRC_URI = "\
     file://firewalld.init \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "50fd01cf0b696a1cb7ca722e972d6173b0c5aa6ab13892b00842ae52172b081e"
+SRC_URI[sha256sum] = "99d7468c22f6cafd8c72aa53173a632f2ca29cb19aec913e8ed45b6102af322d"
 
 UPSTREAM_CHECK_URI = "https://github.com/firewalld/firewalld/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
