@@ -337,7 +337,6 @@ signing_import_install() {
 
 signing_prepare() {
     export OPENSSL_MODULES="${STAGING_LIBDIR_NATIVE}/ossl-modules"
-    export OPENSSL_ENGINES="${STAGING_LIBDIR_NATIVE}/engines-3"
     export OPENSSL_CONF="${STAGING_LIBDIR_NATIVE}/openssl-provider-signing.cnf"
     export SSL_CERT_DIR="${STAGING_LIBDIR_NATIVE}/ssl-3/certs"
     export SSL_CERT_FILE="${STAGING_LIBDIR_NATIVE}/ssl-3/cert.pem"
@@ -346,12 +345,6 @@ signing_prepare() {
         echo "Using '${OPENSSL_MODULES}' for OpenSSL run-time modules"
     else
         echo "Missing OpenSSL module directory at '${OPENSSL_MODULES}'"
-        return 1
-    fi
-    if [ -d ${OPENSSL_ENGINES} ]; then
-        echo "Using '${OPENSSL_ENGINES}' for OpenSSL run-time PKCS#11 modules"
-    else
-        echo "Missing OpenSSL PKCS11 engine directory at '${OPENSSL_ENGINES}'"
         return 1
     fi
 
