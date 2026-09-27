@@ -15,7 +15,7 @@ SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b28513e7b696027d3d2b8dbf117f9fe5"
 
-DEPENDS = "libxcrypt"
+DEPENDS = "virtual/crypt"
 
 inherit autotools ptest systemd useradd
 
