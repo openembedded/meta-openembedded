@@ -11,13 +11,12 @@ inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
 
 DEPENDS = "libnl libconfig readline"
 
-SRCREV = "f1dd9eb961fab06723d2bedb2f7e2b81e45ee9ab"
-PV .= "+git"
-SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=branch-1.1 \
+SRCREV = "da26ebdc2606619aae4b231a85e5d0cc19a5efee"
+
+SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=branch-${@oe.utils.trim_version('${PV}', 2)};tag=v${PV} \
            file://0001-Fix-musl-libc-build-issue.patch \
            file://0001-autotools-Add-include-path-to-generated-version.h.patch \
            file://0001-autotools-Add-option-to-disable-installation-of-syst.patch \
-           file://0004-clif-Include-string.h-for-mem-function-prototypes.patch \
            "
 
 # Enable install of systemd conf files.
