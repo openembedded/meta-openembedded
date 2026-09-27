@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=cadeae10a8856ddfdb129866
 require ${BPN}-licenses.inc
 
 MAJOR_MINOR = "${@oe.utils.trim_version('${PV}', 2)}"
-SRC_URI = "git://github.com/tailscale/tailscale.git;protocol=https;branch=release-branch/${MAJOR_MINOR};destsuffix=${GO_SRCURI_DESTSUFFIX} \
+SRC_URI = "git://github.com/tailscale/tailscale.git;protocol=https;branch=release-branch/${MAJOR_MINOR};destsuffix=${GO_SRCURI_DESTSUFFIX};tag=v${PV} \
            file://default \
            file://tailscaled.init \
            "
-SRCREV = "53a0d659afa51835dd7a9283873cca44261454f8"
+SRCREV = "bbcd7d1fc2054b9189ebc1531acf74bd880ca0c8"
 SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
 require ${BPN}-go-mods.inc
 
