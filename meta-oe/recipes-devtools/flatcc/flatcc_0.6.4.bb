@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3d8fb7158bf7e2600ba3191428dc4ef"
 
 SRC_URI = "git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "503799885b5517ea9d316c17e35471178c09e35a"
+SRCREV = "fec0275c0d0c5b6f495ab48d51fcde521d72b5fc"
 
 inherit cmake
 
