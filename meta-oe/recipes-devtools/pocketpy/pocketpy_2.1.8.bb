@@ -21,6 +21,7 @@ inherit cmake
 
 EXTRA_OECMAKE = "\
     -DPK_ENABLE_OS=ON \
+    -DPK_BUILD_WITH_UNITY=OFF \
 "
 
 CFLAGS += "-fPIC"
