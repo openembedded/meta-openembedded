@@ -23,6 +23,7 @@ SRC_URI = "\
     git://github.com/bstansell/conserver;protocol=https;branch=master;tag=v${PV} \
     file://conserver.service \
     file://run-ptest \
+    file://0001-test-don-t-let-reinitcheck-race-the-console-down-tes.patch \
 "
 SRCREV = "fe9aac337554f95721dc9f3da721092a81092089"
 
