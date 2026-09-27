@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
 
 DEPENDS = "gmp libidn zlib"
 
-SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
+SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=main;tag=v${PV} \
            file://run-ptest \
 "
 
-SRCREV = "dab30db5108ef4bb5b6f9135e0428b57be7c4085"
+SRCREV = "bedc657e519568b25f611c8efc83eab6ac1068e9"
 
 CVE_PRODUCT = "rsyslog:librelp"
 
