@@ -23,8 +23,8 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
 # Both dependencies are mutually exclusive
 # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
-SRCREV = "aae267021b1ac256f8b9038d0ef528c3798cc137"
-BRANCH = "v1.83.x"
+SRCREV = "3252a89f10d8e92997862167ca7d095ecda85973"
+BRANCH = "v1.84.x"
 SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=v${PV} \
            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
            file://0001-credentials-Fix-OpenSSL-3.0-4.0-compatibility.patch \
