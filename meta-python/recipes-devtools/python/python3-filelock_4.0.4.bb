@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "2bde2e4cf732e0153406d8a7bc80620ecf5e621fe0d25e41143c4e3b4733ff30"
+SRC_URI[sha256sum] = "90999ed63a26ccf86b93b959ab10cf1017f422d816be454ed54cbed263e71ab5"
 
 BBCLASSEXTEND = "native nativesdk"
 
@@ -21,6 +21,7 @@ DEPENDS += "\
 
 RDEPENDS:${PN} += " \
     python3-core \
+    python3-crypt \
     python3-logging \
     python3-asyncio \
 "
