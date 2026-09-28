@@ -13,7 +13,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
-SRC_URI[sha256sum] = "12227b3dcd34c5097bbda25984b192ea0bd5e11dce479358d9ef70415a38e4b6"
+SRC_URI[sha256sum] = "de2cd848c927e267f37d1aa6b52631857055b0a1fc76c0e10e173723d83abeae"
 S = "${UNPACKDIR}/${BPN}-v${PV}"
 
 UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
