@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
 BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
 
 SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "18d5c7dd9c71ebc1d3f21fe1e0614300babdda84"
+SRCREV = "874e249a0d3b506e883210b7ceece5316a8489d4"
 
 # Package does not support out of tree builds.
 inherit autotools-brokensep
