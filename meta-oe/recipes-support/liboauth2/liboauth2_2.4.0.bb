@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SRC_URI = " \
     git://github.com/OpenIDC/liboauth2;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "5aeae56ab2c0ae1ff1c70bc13e0628b134ece70c"
+SRCREV = "85da4346435aec77f2ff11b529f2c1e8e5033c44"
 
 DEPENDS = "libpcre2 jansson curl openssl cjose"
 
