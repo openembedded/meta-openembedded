@@ -54,4 +54,4 @@ FILES:${PN} += " \
     ${libdir}/sushi \
 "
 
-RDEPENDS:${PN} += "gjs glycin-gtk4 gtksourceview5 libadwaita webkitgtk"
+RDEPENDS:${PN} += "gjs glycin-gtk4 gstreamer1.0-plugins-base gtksourceview5 libadwaita webkitgtk"
