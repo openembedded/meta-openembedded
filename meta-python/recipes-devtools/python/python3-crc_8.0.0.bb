@@ -8,6 +8,6 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f94c07350a9f2e0ce3a246fed3b32353"
 
-SRC_URI[sha256sum] = "99dd540909a37ae4f62c65441df8ecb4e7f9af014fecaf4f331052a41d66c07d"
+SRC_URI[sha256sum] = "e1ef893b042c26c9f47fd32f3c17507b7d1bd81169acebaef908774856fdaa3e"
 
-inherit pypi python_poetry_core
+inherit pypi python_uv_build python_hatchling
