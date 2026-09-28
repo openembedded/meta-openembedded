@@ -31,64 +31,27 @@ EXTRA_OECMAKE = "\
     -DBUILD_SHARED_LIBS=ON \
 "
 
-do_install() {
-    install -d ${D}${libdir}
-    install -d ${D}${includedir}/floret
-    install -d ${D}${bindir}
-    install -d ${D}${libdir}/pkgconfig
-
-    # Install the shared library under its real SONAME, then recreate the
-    # unversioned dev symlink.  Installing through the libfloret.so symlink
-    # would leave ${libdir}/libfloret.so as an ELF file rather than a link,
-    # which makes debian.bbclass rename both ${PN} and ${PN}-dev to libfloret0
-    # (two packages with one name), causing do_create_package_spdx to fail.
+do_install:append() {
+    # cmake_do_install follows the libfloret.so build symlink and installs
+    # the ELF directly as ${libdir}/libfloret.so.  Re-install under the real
+    # SONAME and recreate the unversioned dev symlink so debian.bbclass sees
+    # a proper shared-library layout and does not rename both ${PN} and
+    # ${PN}-dev to the same package name, which would cause
+    # do_create_package_spdx to fail.
     if [ -e ${B}/libfloret.so ]; then
         soname=$(${OBJDUMP} -p ${B}/libfloret.so | awk '/SONAME/ { print $2 }')
+        rm -f ${D}${libdir}/libfloret.so
         install -m 0755 ${B}/libfloret.so ${D}${libdir}/$soname
         ln -sf $soname ${D}${libdir}/libfloret.so
     fi
-
-    # Install static library
-    if [ -f ${B}/libfloret.a ]; then
-        install -m 0644 ${B}/libfloret.a ${D}${libdir}/libfloret.a
-    fi
-
-    # Install floret CLI binary
-    if [ -f ${B}/floret ]; then
-        install -m 0755 ${B}/floret ${D}${bindir}/floret
-    fi
-
-    # Install headers
-    if [ -d ${S}/src ]; then
-        cp -r ${S}/src/*.h ${D}${includedir}/floret/
-    fi
-
-    # Generate and install pkg-config file
-    cat > ${D}${libdir}/pkgconfig/floret.pc << EOF
-prefix=/usr
-exec_prefix=\${prefix}
-libdir=\${exec_prefix}/lib
-includedir=\${prefix}/include
-
-Name: floret
-Description: fastText + Bloom embeddings for compact, full-coverage vectors
-Version: ${PV}
-Libs: -L\${libdir} -lfloret
-Cflags: -I\${includedir}/floret
-EOF
 }
 
 PACKAGES =+ "${PN}-cli"
 
 FILES:${PN}-cli       = "${bindir}/floret"
-FILES:${PN}-dev      += "${libdir}/libfloret.so ${includedir}/floret ${libdir}/pkgconfig/floret.pc"
-FILES:${PN}-staticdev = "${libdir}/libfloret.a"
+FILES:${PN}-dev      += "${libdir}/libfloret.so"
+FILES:${PN}-staticdev = "${libdir}/libfloret.a ${libdir}/libfloret_pic.a"
 FILES:${PN}          += "${libdir}/libfloret.so.*"
-
-INSANE_SKIP:${PN}           += "buildpaths"
-INSANE_SKIP:${PN}-dev       += "buildpaths"
-INSANE_SKIP:${PN}-staticdev += "buildpaths"
-INSANE_SKIP:${PN}-cli       += "buildpaths"
 
 SUMMARY:${PN}           = "floret runtime library"
 SUMMARY:${PN}-cli       = "floret command-line tool for training Bloom embeddings"
