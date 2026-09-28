@@ -1,0 +1,76 @@
+From 6682e9ca667271b8ba148a301b4a2f9ac78be2b9 Mon Sep 17 00:00:00 2001
+From: Armin Novak <armin.novak@thincast.com>
+Date: Mon, 28 Sep 2026 11:57:22 +0200
+Subject: [PATCH] [winpr,tools] link only winpr public
+
+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/6682e9ca667271b8ba148a301b4a2f9ac78be2b9]
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ winpr/tools/CMakeLists.txt          | 18 +++++++++++++-----
+ winpr/tools/makecert/CMakeLists.txt |  6 +++---
+ 2 files changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/winpr/tools/CMakeLists.txt b/winpr/tools/CMakeLists.txt
+index 5719c1c65..225b70744 100644
+--- a/winpr/tools/CMakeLists.txt
++++ b/winpr/tools/CMakeLists.txt
+@@ -28,7 +28,8 @@ set(WINPR_TOOLS_API_VERSION "${WINPR_TOOLS_VERSION_MAJOR}")
+ 
+ set(WINPR_TOOLS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+ set(WINPR_TOOLS_SRCS "")
+-set(WINPR_TOOLS_LIBS "")
++set(WINPR_TOOLS_PUBLIC_LIBS "")
++set(WINPR_TOOLS_PRIVATE_LIBS "")
+ set(WINPR_TOOLS_INCLUDES "")
+ set(WINPR_TOOLS_DEFINITIONS "")
+ 
+@@ -64,11 +65,18 @@ macro(winpr_tools_include_directory_add)
+   endif()
+ endmacro()
+ 
+-macro(winpr_tools_library_add)
++macro(winpr_tools_library_public_add)
+   foreach(_lib ${ARGN})
+-    list(APPEND WINPR_TOOLS_LIBS "${_lib}")
++    list(APPEND WINPR_TOOLS_PUBLIC_LIBS "${_lib}")
+   endforeach()
+-  set(WINPR_TOOLS_LIBS ${WINPR_TOOLS_LIBS} PARENT_SCOPE)
++  set(WINPR_TOOLS_PUBLIC_LIBS ${WINPR_TOOLS_PUBLIC_LIBS} PARENT_SCOPE)
++endmacro()
++
++macro(winpr_tools_library_private_add)
++  foreach(_lib ${ARGN})
++    list(APPEND WINPR_TOOLS_PRIVATE_LIBS "${_lib}")
++  endforeach()
++  set(WINPR_TOOLS_PRIVATE_LIBS ${WINPR_TOOLS_PRIVATE_LIBS} PARENT_SCOPE)
+ endmacro()
+ 
+ macro(winpr_tools_definition_add)
+@@ -89,7 +97,7 @@ addtargetwithresourcefile(${MODULE_NAME} FALSE "${WINPR_VERSION}" WINPR_TOOLS_SR
+ 
+ add_compile_definitions(${WINPR_DEFINITIONS})
+ target_include_directories(${MODULE_NAME} INTERFACE $<INSTALL_INTERFACE:include/winpr${WINPR_VERSION_MAJOR}>)
+-target_link_libraries(${MODULE_NAME} PUBLIC ${WINPR_TOOLS_LIBS})
++target_link_libraries(${MODULE_NAME} PRIVATE ${WINPR_TOOLS_PRIVATE_LIBS} PUBLIC ${WINPR_TOOLS_PUBLIC_LIBS})
+ 
+ installwithrpath(
+   TARGETS
+diff --git a/winpr/tools/makecert/CMakeLists.txt b/winpr/tools/makecert/CMakeLists.txt
+index 37b831125..0af1fcc08 100644
+--- a/winpr/tools/makecert/CMakeLists.txt
++++ b/winpr/tools/makecert/CMakeLists.txt
+@@ -31,11 +31,11 @@ endif()
+ winpr_tools_module_add(${${MODULE_PREFIX}_SRCS})
+ 
+ if(OPENSSL_FOUND)
+-  list(APPEND ${MODULE_PREFIX}_LIBS ${OPENSSL_LIBRARIES})
++  winpr_tools_library_private_add(${OPENSSL_LIBRARIES})
+ endif()
+ 
+ if(MBEDTLS_FOUND)
+-  list(APPEND ${MODULE_PREFIX}_LIBS ${MBEDTLS_LIBRARIES})
++  winpr_tools_library_private_add(${MBEDTLS_LIBRARIES})
+ endif()
+ 
+-winpr_tools_library_add(${${MODULE_PREFIX}_LIBS} winpr)
++winpr_tools_library_public_add(winpr)
