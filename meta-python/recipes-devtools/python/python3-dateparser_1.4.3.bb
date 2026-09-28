@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/scrapinghub/dateparser"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3d3ed25571191e7aa3f55d0a6efe0051"
 
-SRC_URI[sha256sum] = "bed2a3fd9bad8f2fb2d72b57748bada260b3a9349a264c22ffc23c3249d7049a"
+SRC_URI[sha256sum] = "bab8c43a746266e68142f4926e69438ce551441aa88e54e78bb6410bf3ee7000"
 
 inherit pypi python_setuptools_build_meta
 
