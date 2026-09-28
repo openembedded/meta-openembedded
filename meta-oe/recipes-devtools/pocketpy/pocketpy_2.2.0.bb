@@ -13,8 +13,10 @@ BUGTRACKER = "https://github.com/pocketpy/pocketpy/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=224889df377610675315e194ac59276c"
 
-SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "a2f16e5f1f5fcc3b3d2cc1bdacfc3a027dfe2d76"
+SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main;tag=v${PV} \
+           file://0001-time-include-threads.h-for-c11_thrd__yield.patch \
+           "
+SRCREV = "6cbece9ebc98c19fa2c189dc6963b421c22c40ae"
 
 
 inherit cmake
