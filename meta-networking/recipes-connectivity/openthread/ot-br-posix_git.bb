@@ -17,6 +17,7 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
            file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
            file://default-cxx-std.patch \
            file://0001-x509_crt-Zero-initialize-mbedtls_x509_time-at-declar.patch;patchdir=third_party/openthread/repo \
+           file://0001-posix-backtrace-Reference-sCrashCallback-on-non-gli.patch;patchdir=third_party/openthread/repo \
            "
 
 SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
