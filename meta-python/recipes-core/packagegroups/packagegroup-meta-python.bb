@@ -39,6 +39,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-asttokens \
     python3-async-timeout \
     python3-asyncio-glib \
+    python3-asyncvarlink \
     python3-attr \
     python3-autobahn \
     python3-automat \
