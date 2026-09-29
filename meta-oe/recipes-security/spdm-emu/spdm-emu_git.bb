@@ -6,7 +6,9 @@ HOMEPAGE = "https://github.com/DMTF/spdm-emu"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ed4cfe4688e1ac2cc2e6748766571949"
 
-SRC_URI = "gitsm://github.com/DMTF/spdm-emu;protocol=https;branch=main"
+SRC_URI = "gitsm://github.com/DMTF/spdm-emu;protocol=https;branch=main \
+           file://0001-spdm_emu_mctp_kernel-provide-AF_MCTP-fallback-for-mu.patch \
+           "
 
 SRCREV = "ea77f25410cc01098320c0b44b3e150192ec4d5e"
 # Upstream release tags are "X.Y.Z" (newest 3.8.0).
