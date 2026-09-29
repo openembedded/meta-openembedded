@@ -279,6 +279,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pid \
     python3-pika \
     python3-pillow \
+    python3-ping3 \
     python3-pint \
     python3-pkcs11 \
     python3-pkgconfig \
