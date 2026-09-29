@@ -61,10 +61,10 @@ FILES:${PN}-dbus += "\
 "
 
 do_install:append() {
-	#Fix up permissions on polkit rules.d to work with rpm4 constraints
+	# Match the ownership and mode set by polkit's own tmpfiles.d entry
 	if ${@bb.utils.contains('PACKAGECONFIG', 'libs-only', 'false', 'true', d)}; then
-		chmod 700 ${D}/${sysconfdir}/polkit-1/rules.d
-		chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+		chmod 750 ${D}/${sysconfdir}/polkit-1/rules.d
+		chown root:polkitd ${D}/${sysconfdir}/polkit-1/rules.d
 	fi
 
 	# Polkit unconditionally installs a systemd service, remove it on SysVinit
