@@ -16,7 +16,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ce16d1d2b4c556959d654417007b713"
 DEPENDS = "zlib"
 
 SRC_URI = "git://github.com/explosion/floret.git;protocol=https;branch=main;tag=v${PV} \
-           file://0001-PATCH-floret-Adjust-CMake-flags-for-cross-compilation.patch"
+           file://0001-PATCH-floret-Adjust-CMake-flags-for-cross-compilation.patch \
+           file://0002-args.h-add-missing-cstdint-include-for-int64_t.patch \
+           "
 
 SRCREV = "775638223bee4fabc420cc8234632557452558e0"
 
