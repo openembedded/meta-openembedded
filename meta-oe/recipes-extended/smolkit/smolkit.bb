@@ -22,5 +22,6 @@ PV = "${VERSION}+git"
 
 SRC_URI = "\
     git://github.com/bmwcarit/${BPN}.git;protocol=https;branch=main;tag=v${VERSION} \
+    file://0001-SystemUserLookup.h-include-sys-types.h-for-uid_t-pi.patch \
 "
 SRCREV = "46bbfd5c922a8d03a534398ee129ded822dfcafe"
