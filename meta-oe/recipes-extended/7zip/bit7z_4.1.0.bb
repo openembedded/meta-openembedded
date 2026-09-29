@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=48a3fe23ed1353e0995dadfda05ffdb6"
 
 SRC_URI = " \
     git://github.com/rikyoz/bit7z.git;protocol=https;branch=master;tag=v${PV} \
+    file://0003-internal-replace-glibc-LFS64-names-with-portable-PO.patch \
     ${@bb.utils.contains('PTEST_ENABLED', '1', d.getVar('SRC_URI_PTEST'), 'file://0001-cmake-disable-dependency-inclusion.patch', d)} \
 "
 
