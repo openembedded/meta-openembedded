@@ -13,6 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
 
 SRC_URI += " \
     file://gpio-manager.init \
+    file://fix_gpiodbus_license.patch \
 "
 
 SRC_URI[sha256sum] = "e3a358a90a9204ff16f92b6f4028ed91460b1926f10589eb54b3566484650a30"
