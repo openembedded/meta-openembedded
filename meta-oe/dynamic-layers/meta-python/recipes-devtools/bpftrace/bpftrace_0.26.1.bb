@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.26.x;protocol=http
            file://0005-CMakeLists-Add-support-for-LLVM-23.patch \
            file://0001-tests-pass-C-linker-flags-and-sysroot-to-raw-compile.patch \
            file://0006-tests-do-not-embed-build-paths-in-split-DWARF-test-pr.patch \
+           file://0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch \
 "
 SRCREV = "1bac8a8daad6e0aa579980e877d0c9d5fc296593"
 
