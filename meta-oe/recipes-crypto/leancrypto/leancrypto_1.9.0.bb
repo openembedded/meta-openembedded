@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = " \
 SECTION = "libs"
 SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
            file://leancrypto-tests.sh \
+           file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
            "
 SRCREV = "0110b781707c7bdde88482933811387b744d21eb"
 
