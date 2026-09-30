@@ -3,13 +3,13 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=79808397c3355f163c012616125c9e26"
 SECTION = "libs"
 
-SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
+SRC_URI = "git://git.netfilter.org/libnftnl;protocol=https;branch=master;tag=${BP} \
            file://0001-configure.ac-Add-serial-tests.patch \
            file://run-ptest \
            "
 
 # See https://www.netfilter.org/mirrors.html#git
-PREMIRRORS:append = " git://git.netfilter.org/libnftnl git://repo.or.cz/libnftnl.git;protocol=https"
+PREMIRRORS:append = " git://git.netfilter.org/libnftnl git://repo.or.cz/libnftnl.git"
 SRCREV = "3d7184970506df2c09868dc6ef3c21aba383db63"
 
 
