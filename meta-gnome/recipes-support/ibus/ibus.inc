@@ -12,6 +12,8 @@ DEPENDS = "unicode-ucd libx11-native"
 SRC_URI = " \
     git://github.com/ibus/ibus.git;branch=main;protocol=https;tag=${PV} \
     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
+    file://0001-src-make-an-IBusText-own-an-updated-IBusAttrList-ref.patch \
+    file://0002-src-Fix-IBusAttrList-leak-when-converting-text.patch \
 "
 SRCREV = "1f7af28437afd62a6d145bfc81035e698a37411d"
 
