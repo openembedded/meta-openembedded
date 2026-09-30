@@ -12,8 +12,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "crate://crates.io/fd-find/${PV};name=fd-find"
-SRC_URI += "file://0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch;patchdir=../tikv-jemallocator-0.6.1"
-SRC_URI[fd-find.sha256sum] = "b95ed7d1f53e0446a7d47715801f6bee95f816c4aa33e25b5d89a2734ab00436"
+SRC_URI[fd-find.sha256sum] = "f35becce49c551724fd26d9824ec01d6578868cecbcc4e3d060658f9f8ad1e4d"
 S = "${CARGO_VENDORING_DIRECTORY}/fd-find-${PV}"
 
 inherit cargo cargo-update-recipe-crates
