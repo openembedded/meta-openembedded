@@ -4,10 +4,12 @@ LICENSE = "WTFPL"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
 
 SRC_URI = "\
-    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=${PV} \
+    git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=v${PV} \
 "
 
 SRCREV = "6e925bbbe747fbb58bc4a95a646907a2101741f6"
+
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit meson pkgconfig
 
