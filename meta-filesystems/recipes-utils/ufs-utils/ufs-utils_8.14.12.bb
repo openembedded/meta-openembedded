@@ -4,12 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 BRANCH ?= "dev"
 
-SRCREV = "bcf4b0dca8e58b8fc8265ba746a7b84af86fc365"
+SRCREV = "82157bb4f4e8f7934bf5ce13cdd7775616151e65"
 
 SRC_URI = "git://github.com/SanDisk-Open-Source/ufs-utils.git;protocol=https;branch=${BRANCH};tag=v${PV}"
-
-UPSTREAM_CHECK_COMMITS = "1"
-
 
 EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" CFLAGS="${CFLAGS}""
 
