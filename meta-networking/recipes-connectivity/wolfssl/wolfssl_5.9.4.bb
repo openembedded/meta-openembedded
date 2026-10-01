@@ -17,7 +17,7 @@ SRC_URI = " \
     file://run-ptest \
 "
 
-SRCREV = "a82476d144290bf6a786607a16c224acff63d882"
+SRCREV = "3c5eead44904df64e6a5a1f4ebdce377d35a849a"
 
 
 inherit autotools ptest
