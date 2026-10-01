@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=363055e71e77071107ba2bb9a54bd9a7"
 SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=rel/5.0;tag=v${PV} \
            file://run-ptest \
            "
-SRCREV = "417ef685eafd626db765f0027b7fc5a0057e0770"
+SRCREV = "fbd20b8e8c52cba04dbc869cc9068a7800a5665d"
 
 inherit cmake pkgconfig ptest
 
