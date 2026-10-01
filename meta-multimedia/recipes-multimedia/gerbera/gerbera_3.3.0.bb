@@ -4,10 +4,8 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
 
 SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master;tag=v${PV} \
-           file://0001-fix-build-against-fmt-12-include-fmt-format.h.patch \
-           file://0002-include-cstring-for-std-strerror-std-memcpy.patch \
            "
-SRCREV = "a6a2bb2991d197a52755a488fc943566d654d3bd"
+SRCREV = "28361d9e22812c9d7042a85b355a17c8f8495217"
 
 
 DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2 icu jsoncpp cxxopts"
