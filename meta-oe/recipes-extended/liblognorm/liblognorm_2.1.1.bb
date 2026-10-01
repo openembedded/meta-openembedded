@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ca016db57e008528dace002188c73dad"
 DEPENDS = "libfastjson libestr"
 
 SRC_URI = "git://github.com/rsyslog/liblognorm;branch=stable;protocol=https;tag=v${PV}"
-SRCREV = "71dcbaf806a0e464aded2efb98651ff89aec8a36"
+SRCREV = "88bd8d1817def038c540df310403b44ab8121ef7"
 
 inherit autotools pkgconfig
 
