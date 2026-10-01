@@ -19,6 +19,8 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
 
 SRC_URI[sha256sum] = "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
 
+CVE_STATUS[CVE-2016-1548] = "fixed-version: fixed at ntpsec upstream, since NTPsec_0_9_3 tag"
+
 UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
 
 inherit pkgconfig python3-dir python3targetconfig systemd update-alternatives update-rc.d useradd waf features_check
