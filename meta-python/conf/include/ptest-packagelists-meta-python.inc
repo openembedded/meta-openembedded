@@ -89,6 +89,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pytest-picked \
     python3-pytest-sugar \
     python3-pytoml \
+    python3-pytz \
     python3-pyyaml-include \
     python3-pydbus \
     python3-pyzmq \
