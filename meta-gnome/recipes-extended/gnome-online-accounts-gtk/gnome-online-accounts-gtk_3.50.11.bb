@@ -20,7 +20,7 @@ SRC_URI = " \
     git://github.com/xapp-project/gnome-online-accounts-gtk.git;protocol=https;branch=master;tag=${PV} \
     file://0001-Provide-the-org.gnome.Settings-launch-panel-interface.patch \
 "
-SRCREV = "b42482522bc9089c139ceda9b8a7d81a7a149cf9"
+SRCREV = "2796ab3cc4e5b29f64a92b239eb3f4b1eef190be"
 
 inherit meson pkgconfig gettext gtk-icon-cache
 
