@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https;tag=${P
            file://0001-configure.ac-check-for-CPP-prog.patch \
           "
 
-SRCREV = "d39cf41526626b4e5a130f115d931cd6cbdffc19"
+SRCREV = "926bd905501b792bd082d2200d1d1a84aa543e3a"
 
 RDEPENDS:${PN} = "libgcc"
 
