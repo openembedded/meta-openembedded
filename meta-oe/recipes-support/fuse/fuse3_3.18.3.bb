@@ -31,14 +31,25 @@ LDFLAGS:append:toolchain-clang:riscv32 = " -latomic"
 SRC_URI += " \
     file://run-ptest \
     file://fuse3.conf \
+    file://0001-test_syscalls-Do-not-print-strerror-0.patch \
 "
-#python3-compile for filecmp module
+# test/run-tests.py needs python3-asyncio for concurrent.futures,
+# python3-compile for filecmp, python3-io for socket/tempfile and
+# python3-shell for shlex. The test cases use dd status=none and
+# losetup --show, which busybox does not support.
 RDEPENDS:${PN}-ptest += " \
+    python3-asyncio \
     python3-compile \
-    python3-pytest \
-    python3-looseversion \
+    python3-core \
+    python3-ctypes \
+    python3-io \
+    python3-json \
+    python3-resource \
+    python3-shell \
     bash \
+    coreutils \
     file \
+    util-linux-losetup \
 "
 RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
@@ -66,6 +77,9 @@ do_install_ptest() {
     do
         cp -rf $e  ${D}${PTEST_PATH}/test
     done
+
+    # test/run-tests.py reads the build configuration from the build tree
+    install -m 0644 ${B}/fuse_config.h ${D}${PTEST_PATH}/
 }
 
 DEPENDS = "udev"
