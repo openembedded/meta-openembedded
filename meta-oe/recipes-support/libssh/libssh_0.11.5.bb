@@ -13,7 +13,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
 
 SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
 
-SRCREV = "ca9c055d7c78ce357346ac7c2b14047568d47aa1"
+SRCREV = "a09fdd00416e53b6ed436df6ff14339a4f884601"
 
 CVE_PRODUCT = "libssh:libssh"
 
