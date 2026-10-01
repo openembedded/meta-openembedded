@@ -12,7 +12,7 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "7e00642c40123e0b3f949e74c3945872c17a407e"
+SRCREV = "40f6b2944f8a8553ad57975d1f2bb512cc23d7d1"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https;tag=${PV} \
            file://0001-Makefile-Do-not-set-Werror.patch \
