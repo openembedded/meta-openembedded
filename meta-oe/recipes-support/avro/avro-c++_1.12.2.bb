@@ -10,7 +10,7 @@ DEPENDS = "boost fmt"
 SRC_URI = "git://github.com/apache/avro.git;branch=branch-1.12;protocol=https;name=avro-c++;tag=release-${PV} \
            "
 
-SRCREV_avro-c++ = "9110c693767c1dde2665b2b57939333478b12036"
+SRCREV_avro-c++ = "8fa2067f70e3012cb3fd9a8839cd97e8c7cc1772"
 
 S = "${UNPACKDIR}/${BP}/lang/c++"
 
