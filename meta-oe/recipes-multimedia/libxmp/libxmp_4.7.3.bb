@@ -6,5 +6,5 @@ LIC_FILES_CHKSUM = "file://README;beginline=59;md5=b25470e2863502c9ac9886f09c21a
 inherit cmake pkgconfig
 
 SRC_URI = "git://github.com/libxmp/libxmp.git;protocol=https;branch=master;tag=libxmp-${PV}"
-SRCREV = "a13276d27feabcf9ee4f982913f718ee05a65cb7"
+SRCREV = "1e0812137e4f9e15cc026c0c75af82d71d3cb5ad"
 
