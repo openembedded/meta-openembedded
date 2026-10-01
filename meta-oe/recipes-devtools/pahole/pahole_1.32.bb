@@ -9,7 +9,7 @@ DEPENDS = "elfutils zlib libbpf"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
 
-SRCREV = "1f2805b6eef104df3125143c949b391f6122e5b9"
+SRCREV = "fa725d687ce3a712ef296b46bc63ea57ef466014"
 SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master;tag=v${PV} \
            file://0001-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch \
            "
