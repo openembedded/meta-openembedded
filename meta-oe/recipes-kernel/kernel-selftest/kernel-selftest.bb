@@ -170,9 +170,9 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
     fi
     oe_runmake -C ${S} headers
     sed -i -e 's|^all: docs|all:|' ${S}/tools/testing/selftests/bpf/Makefile
-    sed -i -e '/mrecord-mcount/d' ${S}/Makefile
-    sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/Makefile
-    sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/scripts/Makefile.*
+    sed -i -e '/+=[[:space:]]*-mrecord-mcount/d' ${S}/Makefile
+    sed -i -e '/+=[[:space:]]*-Wno-alloc-size-larger-than/d' ${S}/Makefile
+    sed -i -e '/+=[[:space:]]*-Wno-alloc-size-larger-than/d' ${S}/scripts/Makefile.*
 
     # Add kernel headers to CFLAGS to fix PTP selftest compilation
     # Required for PTP_MASK_CLEAR_ALL and PTP_MASK_EN_SINGLE definitions
