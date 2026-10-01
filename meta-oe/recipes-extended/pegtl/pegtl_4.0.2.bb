@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=4.x \
            file://run-ptest \
            "
 
-SRCREV = "9ec6da187f840d8e804d42b9b7867f79d5d6adc2"
+SRCREV = "b60f6110abd37e502d202d13a6c565410c552c33"
 
 inherit cmake ptest
 
