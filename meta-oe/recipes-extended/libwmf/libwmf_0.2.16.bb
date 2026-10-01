@@ -3,8 +3,8 @@ SUMMARY = "Library for converting WMF files"
 HOMEPAGE = "https://github.com/caolanm/libwmf"
 SECTION = "libs"
 
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+LICENSE = "LGPL-2.1-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=41890f71f740302b785c27661123bff5"
 
 
 DEPENDS:class-native = "freetype-native libpng-native jpeg-native"
@@ -17,7 +17,7 @@ inherit features_check autotools pkgconfig
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "d00b314cc5fbed48fe79fd3acdcf42324d2f4b8e"
+SRCREV = "a916f30f6232cf3e28df285fcba5753ee5b1aa0f"
 
 
 do_install:append() {
