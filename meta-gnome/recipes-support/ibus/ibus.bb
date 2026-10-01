@@ -1,7 +1,6 @@
 require ${BPN}.inc
 
 DEPENDS += " \
-    ${BPN}-native \
     glib-2.0-native \
     glib-2.0 \
     dbus \
@@ -24,11 +23,6 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'gtk4', 'openg
 
 do_compile:prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/src/.libs"
-}
-
-do_configure:prepend() {
-    # run native unicode-parser
-    sed -i 's:$(builddir)/unicode-parser:unicode-parser:g' ${S}/src/Makefile.am
 }
 
 FILES:${PN} += " \
