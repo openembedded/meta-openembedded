@@ -16,14 +16,12 @@ DEPENDS = "\
     tiff-native \
 "
 
-PV = "3.0.0+git"
-
 SRC_URI = "\
-    git://github.com/freeswitch/spandsp.git;protocol=https;branch=master \
+    git://github.com/freeswitch/spandsp.git;protocol=https;branch=master;tag=v${PV} \
     file://0001-configure-Replace-manual-search-for-libxml-by-AC_CHE.patch \
     file://0002-configure-Use-AX_PROG_CC_FOR_BUILD-for-cross-compili.patch \
 "
-SRCREV = "797760168945c96e91af55bde9d4edaea2e654f9"
+SRCREV = "8f1e1646bdec99eac5fd2cd92c35563f736b9b89"
 
 inherit autotools
 
