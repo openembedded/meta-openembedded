@@ -8,6 +8,7 @@ DEPENDS = "gmp libidn zlib"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=main;tag=v${PV} \
            file://run-ptest \
+           file://0001-tests-skip-tls-ossl-connect-failure-vg.sh-without-li.patch \
 "
 
 SRCREV = "bedc657e519568b25f611c8efc83eab6ac1068e9"
