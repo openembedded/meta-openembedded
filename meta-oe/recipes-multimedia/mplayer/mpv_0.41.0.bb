@@ -26,6 +26,7 @@ SRCREV = "41f6a645068483470267271e1d09966ca3b9f413"
 SRC_URI = " \
     git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
     file://0001-opengl-context-require-swap_buffers-param-for-FenceS.patch \
+    file://0002-hwdec_drmprime_overlay-make-the-framebuffer-the-whole-frame.patch \
 "
 
 inherit meson pkgconfig mime-xdg
