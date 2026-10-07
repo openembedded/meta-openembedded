@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
 
 SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "94a27cbbc7820198d7adc17a2be8d457fb267753"
+SRCREV = "0ae663525dcbc9e996feb2a867e43bc85f960938"
 
 
 INHIBIT_DEFAULT_DEPS = "1"
