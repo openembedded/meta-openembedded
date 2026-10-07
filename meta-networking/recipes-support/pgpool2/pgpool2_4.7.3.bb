@@ -16,7 +16,7 @@ SRC_URI = "https://www.pgpool.net/source/pgpool-II-${PV}.tar.gz \
 	   file://pgpool.sysconfig \
 	   file://pgpool.service \
            "
-SRC_URI[sha256sum] = "e72b9d0ff3620f7da7e33a58dda44b77919d056752dc9bd86b2985c4988d1938"
+SRC_URI[sha256sum] = "4bf9df3e13feb8e64bee486b4ea54c9076296c2d9406165b0b68d32086fce250"
 
 S = "${UNPACKDIR}/pgpool-II-${PV}"
 
