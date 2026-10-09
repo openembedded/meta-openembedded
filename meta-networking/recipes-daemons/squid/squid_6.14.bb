@@ -28,6 +28,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
            file://CVE-2026-47729.patch \
            file://CVE-2026-50012-01.patch \
            file://CVE-2026-50012-02.patch \
+           file://CVE-2026-61642.patch \
            "
 
 SRC_URI[sha256sum] = "9eafe06f58a199b918e79d33d8aa03afb9ae0c11d18974dca0b44c2669cab6dd"
