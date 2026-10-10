@@ -7,6 +7,7 @@ SRC_URI[sha256sum] = "513a3784104839770d690e04339a8b4d33439fcd5dd99f2e4580f9fc10
 SRC_URI += " \
     file://run-ptest \
     file://0001-drop-the-six-dependency.patch \
+    file://0002-tests-match-parse-1.22.2-float-pattern-in-test_numbe.patch \
 "
 
 inherit pypi ptest python_setuptools_build_meta
