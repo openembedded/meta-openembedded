@@ -26,6 +26,7 @@ SRCREV = "68fc8e1b2601e816e3a4ef95e3d8e700677509b9"
 SRC_URI += " \
     file://0001-uterm-treat-platform-display-controllers-as-primary-GPUs.patch \
     file://0002-vt_libseat-Fix-build-error-due-to-logging-changes.patch \
+    file://0003-font_psf-Fix-declaration-after-label-for-pre-C23-compilers.patch \
 "
 
 inherit meson pkgconfig systemd
