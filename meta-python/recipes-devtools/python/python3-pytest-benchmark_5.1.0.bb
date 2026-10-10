@@ -9,6 +9,18 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE_SDIST = "pytest-benchmark"
 
-RDEPENDS:${PN} += "python3-core python3-py-cpuinfo python3-pytest python3-aspectlib"
+RDEPENDS:${PN} += "\
+    python3-aspectlib \
+    python3-core \
+    python3-datetime \
+    python3-json \
+    python3-misc \
+    python3-netclient \
+    python3-numbers \
+    python3-profile \
+    python3-py-cpuinfo \
+    python3-pytest \
+    python3-statistics \
+"
 
 BBCLASSEXTEND = "native nativesdk"
