@@ -6,5 +6,7 @@ SRC_URI[sha256sum] = "6c20565aa2325cb82216ae804f4a4ff1875179014759a381c42ddc8e11
 
 inherit upstream-version-is-even
 
+# Remove following entries when upgrading recipe to 1.32
 CVE_STATUS[CVE-2026-42055] = "fixed-version: Fixed since 1.30.3"
 CVE_STATUS[CVE-2026-48142] = "fixed-version: Fixed since 1.30.3"
+CVE_STATUS[CVE-2026-90439] = "fixed-version: Fixed since 1.30.5"
