@@ -9,10 +9,6 @@ PYPI_PACKAGE_SDIST = "googleapis-common-protos"
 
 SRC_URI[sha256sum] = "27c5abdffc4911f28101e635de1533fb4cfd2c37fbaa9174587c799fac90aa87"
 
-# Avoid replace("-", "_") from:
-# https://git.openembedded.org/openembedded-core/commit/?id=98049bf86b615b10c43b3ceb9dbc73580cb76952
-PYPI_PACKAGE_SDIST = "${PYPI_PACKAGE}"
-
 RDEPENDS:${PN} += "\
     python3-grpcio \
     python3-protobuf \

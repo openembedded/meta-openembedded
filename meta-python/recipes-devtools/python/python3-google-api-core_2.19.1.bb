@@ -9,10 +9,6 @@ PYPI_PACKAGE_SDIST = "google-api-core"
 
 SRC_URI[sha256sum] = "f4695f1e3650b316a795108a76a1c416e6afb036199d1c1f1f110916df479ffd"
 
-# Avoid replace("-", "_") from:
-# https://git.openembedded.org/openembedded-core/commit/?id=98049bf86b615b10c43b3ceb9dbc73580cb76952
-PYPI_PACKAGE_SDIST = "${PYPI_PACKAGE}"
-
 RDEPENDS:${PN} += "\
     python3-asyncio \
     python3-datetime \
