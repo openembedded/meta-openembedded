@@ -380,7 +380,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
     libusbmuxd \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
     libyang \
-    libzip \
     linuxconsole \
     lockfile-progs \
     logwatch \
