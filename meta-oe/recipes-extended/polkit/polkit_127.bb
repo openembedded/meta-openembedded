@@ -48,7 +48,7 @@ SYSTEMD_SERVICE:${PN}-service = "${BPN}.service"
 PACKAGES =+ "${PN}-service"
 RDEPENDS:${PN}-service += "polkit"
 FILES:${PN}-service += " \
-    ${systemd_system_unitdir} \
+    ${systemd_system_unitdir}/polkit.service \
     ${sysconfdir}/systemd/system/polkit-virtual-provider.service \
 "
 
