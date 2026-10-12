@@ -3,16 +3,15 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
 HOMEPAGE = "https://thrift.apache.org/"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=bdfca4cb0874071cc3e42d2ae3b05a77 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=62cd1eea65d163fffe0873a5c410a7ec \
                     file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
 
 DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
 
 SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
-           file://0001-TSSLSocket-fix-build-with-OpenSSL-4.0.patch \
            "
-SRC_URI[sha256sum] = "e0fa5839a4c5c1d631b0931cf2c554ebbfa4e2fee3a9fb3ffd4f82ce4396c6e4"
+SRC_URI[sha256sum] = "66da4707214c54c94bac082103dc67adaf9e08925662700f269170a7b534b214"
 
 BBCLASSEXTEND = "native nativesdk"
 
