@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
            file://0001-Remove-treating-warning-as-errors.patch \
            file://7z_wrapper.sh \
            "
-SRCREV = "0766b733fe3e06dd2a7f9a3cfbf2108ac73abd17"
+SRCREV = "9128b80e3a471108678e2b3ec3c985861c8d7b0f"
 
 UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
 
