@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/OpenVPN/openvpn/releases/download/v${PV}/${BP}.tar
            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
            file://openvpn \
            file://run-ptest \
+           file://CVE-2026-88964.patch \
           "
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
