@@ -1,6 +1,6 @@
 # Copyright (c) 2022, Snap Inc.
 # Released under the MIT license (see COPYING.MIT for the terms)
-SUMMARY = "coreutils ~ GNU coreutils (updated); implemented as universal (cross-platform) utils, written in Rust"
+SUMMARY = "Cross-platform Rust reimplementation of the GNU coreutils"
 HOMEPAGE = "https://github.com/uutils/coreutils"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e74349878141b240070458d414ab3b64"
