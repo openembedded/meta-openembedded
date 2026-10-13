@@ -7,10 +7,9 @@ SECTION = "devel/python"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRC_URI = "git://github.com/helmutg/asyncvarlink.git;protocol=https;branch=main"
-SRCREV = "3e16139f72c7374f2ca3640045ef7162c98e7a4c"
+SRC_URI[sha256sum] = "0270e352d5c8d5348b90f547a4215bfb37a6b829b84341822f80273e830dadd4"
 
-inherit python_flit_core ptest-python-pytest
+inherit pypi python_flit_core ptest-python-pytest
 
 RDEPENDS:${PN} = "\
     python3-asyncio \
