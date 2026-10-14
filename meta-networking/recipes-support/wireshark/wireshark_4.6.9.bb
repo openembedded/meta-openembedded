@@ -106,12 +106,14 @@ do_install:append:class-target() {
     rm -fr ${D}${usrlib}/${BPN}/cmake
 }
 
-PACKAGE_BEFORE_PN += "tshark"
+PACKAGE_BEFORE_PN += "dumpcap tshark"
+
+FILES:dumpcap = "${bindir}/dumpcap ${mandir}/man1/dumpcap.*"
 
 FILES:tshark = "${bindir}/tshark ${mandir}/man1/tshark.*"
+RDEPENDS:tshark = "wireshark"
 
 FILES:${PN} += "${datadir}*"
-
-RDEPENDS:tshark = "wireshark"
+RDEPENDS:${PN} += "dumpcap"
 
 BBCLASSEXTEND = "native"
