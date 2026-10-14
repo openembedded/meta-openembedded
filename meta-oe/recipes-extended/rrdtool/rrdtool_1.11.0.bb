@@ -6,11 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
 
 DEPENDS = "libpng zlib glib-2.0 libxml2 groff-native python3-setuptools-native"
 
-SRCREV = "f9a021cc9872d8f8fe8137353eabdd8819288791"
-PV = "1.10.3"
+SRCREV = "ddc7ca72314c3149abcafb90993ca9e7dc1287a4"
 
 SRC_URI = "\
-    git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
+    git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master;tag=v${PV} \
 "
 
 
