@@ -10,9 +10,8 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
            file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
            file://0002-Fix-building-with-libc.patch \
            file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
-           file://0004-libdnet-fix-PF_PACKET-conftest-nested-function.patch \
            "
-SRC_URI[sha256sum] = "df512492ffd108e53a27a06f26d8635bbe89e0e569455dc8ffef058c035d51b2"
+SRC_URI[sha256sum] = "a5d507f29437bef3bedd4771ff9aaa8fc1c2a109ddba1f5b1cf12027456929be"
 
 UPSTREAM_CHECK_REGEX = "nmap-(?P<pver>\d+(\.\d+)+)\.tar"
 
@@ -70,3 +69,5 @@ do_install:append() {
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR} ${datadir}/ncat"
 
 RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'ndiff', 'python3-difflib python3-asyncio python3-xml', '', d)}"
+
+OEQA_BUILDPATHS_SKIP = "${HOME}"
