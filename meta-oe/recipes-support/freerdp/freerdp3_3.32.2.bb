@@ -8,9 +8,8 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
 
 inherit pkgconfig cmake ptest
 
-SRCREV = "bf217a504e54cc719880c228e82353382cd7d4fa"
+SRCREV = "97eff6ddfbbfaa8e42a126d362686bd001ff8bdc"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;nobranch=1;protocol=https;tag=${PV} \
-           file://0001-winpr-tools-link-only-winpr-public.patch \
            file://run-ptest"
 
 
