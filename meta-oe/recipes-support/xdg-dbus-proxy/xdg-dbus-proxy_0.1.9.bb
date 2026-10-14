@@ -16,7 +16,7 @@ SRC_URI = " \
     file://run-ptest \
     "
 
-SRCREV = "6a170fa77e3cbecb48f9dd2478fe5c0a119eb467"
+SRCREV = "72b40c8f6d9d585cfbdb249690724f740d207087"
 
 CVE_STATUS[CVE-2026-34080] = "fixed-version: fixed in 0.1.7"
 
