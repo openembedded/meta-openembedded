@@ -4,11 +4,11 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = " \
-    git://github.com/flatpak/flatpak;protocol=https;branch=main;tag=${PV} \
+    git://github.com/flatpak/flatpak;protocol=https;branch=flatpak-1.18.x;tag=${PV} \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "5de2b58bdafde88515d9d6b9189bd1cfd3b88c46"
+SRCREV = "a02d0ba48abe9aacc377de15699e5d8c024b5669"
 
 
 inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
