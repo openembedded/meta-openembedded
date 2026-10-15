@@ -10,7 +10,7 @@ LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
 
 SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV}"
-SRCREV = "bb05ec54eec57f8397cb13fb9161372a281a1219"
+SRCREV = "dc19fcc7da58e8cf84ba1ec417e24b04609feb23"
 
 DEPENDS += "xmlto-native"
 
@@ -19,19 +19,17 @@ PACKAGECONFIG ??= "\
     video \
 "
 
-inherit autotools pkgconfig gettext \
+inherit meson pkgconfig gettext \
     ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'gtk', 'gobject-introspection', '', d)}
 
-PACKAGECONFIG[x11] = ",, libxext libxv"
-PACKAGECONFIG[video] = "--enable-video, --disable-video, v4l-utils libv4l"
-PACKAGECONFIG[jpeg] = "--with-jpeg, --without-jpeg, jpeg"
-PACKAGECONFIG[python] = "--with-python=auto, --without-python, python3"
-PACKAGECONFIG[gtk] = "--with-gtk=auto, --without-gtk, gtk+3"
-PACKAGECONFIG[qt] = "--with-qt, --without-qt, qtbase qtbase-native qtx11extras qtsvg, qtbase"
-PACKAGECONFIG[imagemagick] = "--with-imagemagick, --without-imagemagick, imagemagick"
-
-EXTRA_OECONF += "--enable-pthread"
+PACKAGECONFIG[x11] = "-Dx11=enabled -Dxv=enabled -Dxshm=enabled,-Dx11=disabled -Dxv=disabled -Dxshm=disabled,libx11 libxext libxv"
+PACKAGECONFIG[video] = "-Dvideo=true,-Dvideo=false,v4l-utils libv4l"
+PACKAGECONFIG[jpeg] = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
+PACKAGECONFIG[python] = "-Dpython=python3,-Dpython=no,python3"
+PACKAGECONFIG[gtk] = "-Dgtk=gtk3,-Dgtk=no,gtk+3"
+PACKAGECONFIG[qt] = "-Dqt=true,-Dqt=false,qtbase qtbase-native qtx11extras qtsvg,qtbase"
+PACKAGECONFIG[imagemagick] = "-Dimagemagick=enabled -Dgraphicsmagick=disabled,-Dimagemagick=disabled -Dgraphicsmagick=disabled,imagemagick"
 
 FILES:${PN} += "${bindir} \
     ${@bb.utils.contains('DEPENDS', 'python3-native', '${libdir}', '', d)} \
