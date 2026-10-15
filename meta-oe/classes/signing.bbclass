@@ -143,7 +143,7 @@ signing_import_cert_from_der() {
 
     # check wether the cert_name/role needs to be defined first,
     # or do so otherwise
-    local uri=$(siging_get_uri $cert_name)
+    local uri=$(signing_get_uri $cert_name)
     if [ -z "$uri" ]; then
         signing_import_define_role "$cert_name"
     fi
@@ -246,7 +246,7 @@ signing_import_cert_from_pem() {
 
     # check wether the cert_name/role needs to be defined first,
     # or do so otherwise
-    local uri=$(siging_get_uri $cert_name)
+    local uri=$(signing_get_uri $cert_name)
     if [ -z "$uri" ]; then
         signing_import_define_role "$cert_name"
     fi
