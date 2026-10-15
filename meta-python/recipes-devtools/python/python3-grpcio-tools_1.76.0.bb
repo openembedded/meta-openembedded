@@ -26,3 +26,4 @@ do_compile:prepend() {
 BBCLASSEXTEND = "native nativesdk"
 
 CVE_PRODUCT += "grpc:grpc"
+CVE_STATUS[CVE-2023-33953] = "fixed-version: Fixed since 1.56.2"
