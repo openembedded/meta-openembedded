@@ -70,6 +70,7 @@ RDEPENDS:${PN}-ptest += " \
 "
 
 CVE_PRODUCT = "pillow"
+CVE_STATUS[CVE-2026-55798] = "not-applicable-platform: The CVE affects WindowsViewer/cmd.exe; the Linux target uses UnixViewer"
 
 
 RPROVIDES:${PN} += "python3-imaging"
