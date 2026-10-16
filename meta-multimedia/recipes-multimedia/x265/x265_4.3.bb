@@ -1,6 +1,6 @@
 SUMMARY = "H.265/HEVC video encoder"
 DESCRIPTION = "A free software library and application for encoding video streams into the H.265/HEVC format."
-HOMEPAGE = "https://bitbucket.org/multicoreware/x265_git"
+HOMEPAGE = "https://github.com/Multicorewareinc/x265"
 
 LICENSE = "GPL-2.0-only"
 LICENSE_FLAGS = "commercial"
@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
 DEPENDS = "nasm-native gnutls zlib libpcre numactl"
 
 SRC_URI = " \
-    https://download.videolan.org/pub/pub/videolan/${BPN}/${BPN}_${PV}.tar.gz \
-    file://0001-json11.cpp-Include-cstdint.patch \
-    file://0001-x265-fix-build-with-cmake-4.patch \
+    git://github.com/Multicorewareinc/x265.git;protocol=https;branch=master;tag=${PV} \
+    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch \
+    file://0002-x265-fix-build-with-cmake-4.patch \
 "
-SRC_URI[sha256sum] = "40b1ea0453e0309f0eba934e0ddf533f8f6295966679e8894e8f1c1c8d5e1210"
-S = "${UNPACKDIR}/x265_${PV}/source"
+SRCREV = "e9b88125dc21393b3fd8d68e98083bdfb89778a8"
+S = "${UNPACKDIR}/x265-${PV}/source"
 
 inherit lib_package cmake pkgconfig
 
@@ -30,4 +30,3 @@ PACKAGECONFIG[10bit] = "-DHIGH_BIT_DEPTH=ON,-DHIGH_BIT_DEPTH=OFF"
 
 FILES:${PN} += "${libdir}/libhdr10plus.so"
 FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig ${libdir}/libx265.so"
-
