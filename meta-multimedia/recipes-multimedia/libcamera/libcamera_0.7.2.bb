@@ -95,10 +95,8 @@ FILES:${PN}-compliance = "${bindir}/lc-compliance"
 FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
 FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
 
-# libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
-# both 32 and 64 bit file APIs.
-GLIBC_64BIT_TIME_FLAGS = ""
-
+# v4l2-compat.so is built with 32-bit file and time APIs on purpose, so it
+# can wrap both the 32 and 64-bit calls. The rest of libcamera uses 64-bit time.
 INSANE_SKIP += "32bit-time"
 
 CXXFLAGS += "-Wno-error=array-bounds"
