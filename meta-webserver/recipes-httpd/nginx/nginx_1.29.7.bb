@@ -3,6 +3,8 @@ require nginx.inc
 SRC_URI:append = " \
     file://CVE-2026-40701.patch \
     file://CVE-2026-42934.patch \
+    file://CVE-2026-42946_p1.patch \
+    file://CVE-2026-42946_p2.patch \
 "
 
 # 1.28.x branch is the current stable branch, the recommended default
