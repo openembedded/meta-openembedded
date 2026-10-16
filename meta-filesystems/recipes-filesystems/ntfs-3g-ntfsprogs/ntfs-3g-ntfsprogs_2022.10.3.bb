@@ -13,6 +13,7 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
            file://CVE-2026-46572_CVE-2026-42617_p3.patch \
            file://CVE-2026-46571.patch \
            file://CVE-2026-46570.patch \
+           file://CVE-2026-46569.patch \
 "
 S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
 SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
