@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Revert-stop-using-deprecated-ares_query.patch \
            file://run-ptest \
            file://CVE-2026-48617.patch \
+           file://CVE-2026-48619.patch \
            "
 SRC_URI:append:class-target = " \
            file://0001-Using-native-binaries.patch \
