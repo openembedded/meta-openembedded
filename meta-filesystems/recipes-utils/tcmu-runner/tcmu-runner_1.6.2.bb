@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/open-iscsi/tcmu-runner.git;protocol=https;branch=mai
            file://0001-CMakeLists-generate-gdbus-code-with-a-relative-path.patch \
            file://0002-qcow-fix-cache-count-reset-loops.patch \
            file://0003-target-alua-initialize-list_for_each-iterator-variables.patch \
+           file://0004-tcmur_cmd_handler-fix-min-type-mismatch-on-32-bit.patch \
            "
 
 inherit cmake pkgconfig systemd
