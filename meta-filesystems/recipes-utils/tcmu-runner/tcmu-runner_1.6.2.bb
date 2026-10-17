@@ -15,16 +15,20 @@ SRC_URI = "git://github.com/open-iscsi/tcmu-runner.git;protocol=https;branch=mai
 
 inherit cmake pkgconfig systemd
 
-DEPENDS = "gtk4 libnl gperftools glib-2.0-native"
+DEPENDS = "gtk4 libnl glib-2.0-native"
 
 EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 		 -Dwith-rbd=false \
 		 -Dwith-glfs=false \
                 "
 
-PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} tcmalloc"
+PACKAGECONFIG:remove:mipsarch = "tcmalloc"
+PACKAGECONFIG:remove:riscv32 = "tcmalloc"
+PACKAGECONFIG:remove:riscv64 = "tcmalloc"
 
 PACKAGECONFIG[systemd] = "-DSUPPORT_SYSTEMD=ON,,"
+PACKAGECONFIG[tcmalloc] = "-Dwith-tcmalloc=ON,-Dwith-tcmalloc=OFF,gperftools"
 
 SYSTEMD_SERVICE:${PN} = "tcmu-runner.service"
 SYSTEMD_AUTO_ENABLE = "enable"
