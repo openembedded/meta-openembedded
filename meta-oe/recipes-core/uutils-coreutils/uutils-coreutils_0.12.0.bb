@@ -33,7 +33,7 @@ CARGO_BUILD_FLAGS += "--features unix --features feat_external_libstdbuf"
 
 # The code which follows is strongly inspired from the GNU coreutils bitbake recipe:
 
-# df mktemp nice printenv base32 base64 get a special treatment and are not included in this
+# df mktemp nice printenv base32 base64 are not included in this, see base_bindir_progs_extra
 bindir_progs = "[ arch basename cksum comm csplit cut dir dircolors dirname du \
                 env expand expr factor fmt fold groups head hostid id install \
                 join link logname md5sum mkfifo nl nohup nproc od paste pathchk \
@@ -57,13 +57,16 @@ ALTERNATIVE_PRIORITY = "100"
 # Higher than net-tools (which uses 100)
 ALTERNATIVE_PRIORITY[hostname] = "110"
 
-ALTERNATIVE:${PN} = "${bindir_progs} ${base_bindir_progs} ${sbindir_progs} base32 base64 nice printenv mktemp df"
+# Like GNU coreutils, these are linked in ${base_bindir} rather than ${bindir}.
+base_bindir_progs_extra = "base32 base64 df mktemp nice printenv"
+
+ALTERNATIVE:${PN} = "${bindir_progs} ${base_bindir_progs} ${sbindir_progs} ${base_bindir_progs_extra}"
 
 # Use the multicall binary named "coreutils" for symlinks
 ALTERNATIVE_TARGET = "${bindir}/coreutils"
 
 python __anonymous() {
-    for prog in d.getVar('base_bindir_progs').split():
+    for prog in (d.getVar('base_bindir_progs') + ' ' + d.getVar('base_bindir_progs_extra')).split():
         d.setVarFlag('ALTERNATIVE_LINK_NAME', prog, '%s/%s' % (d.getVar('base_bindir'), prog))
 
     for prog in d.getVar('sbindir_progs').split():
