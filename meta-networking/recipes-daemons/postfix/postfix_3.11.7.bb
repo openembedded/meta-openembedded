@@ -249,3 +249,5 @@ FILES:${PN}-bin += "${localstatedir} ${bindir}/* ${sbindir}/* \
 FILES:${PN}-cfg = "${sysconfdir}"
 FILES:${PN}-dbg += "${libexecdir}/postfix/.debug"
 ALLOW_EMPTY:${PN} = "1"
+
+CVE_STATUS[CVE-2023-32182] = "not-applicable-platform: this vulnerability is Suse specific"
