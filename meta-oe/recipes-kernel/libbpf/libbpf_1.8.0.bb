@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master;tag=v
 SRCREV = "85c0d575a447651bbeb8e2376eacd64c30dce9a6"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
 
 S = "${UNPACKDIR}/${BP}/src"
 
