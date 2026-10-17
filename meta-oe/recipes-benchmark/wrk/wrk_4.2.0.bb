@@ -32,3 +32,5 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 wrk ${D}${bindir}/wrk
 }
+
+COMPATIBLE_HOST:riscv32 = "null"
