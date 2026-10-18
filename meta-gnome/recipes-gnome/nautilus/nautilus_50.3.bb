@@ -58,3 +58,5 @@ FILES:${PN} += " \
 # mandatory - not checked during configuration:
 # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
 RDEPENDS:${PN} += "localsearch bubblewrap"
+
+COMPATIBLE_HOST:riscv32 = "null"
