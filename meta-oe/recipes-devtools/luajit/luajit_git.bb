@@ -3,13 +3,17 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=a2c43bf4a9ea63755af2131b0ae59ff3"
 HOMEPAGE = "http://luajit.org"
 
-SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+FORK ?= "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1"
+FORK:riscv64 = "git://github.com/plctlab/LuaJIT.git;protocol=https;branch=v2.1-riscv64"
+SRC_URI = "${FORK} \
            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
            file://0001-Use-builtin-for-clear_cache.patch \
            "
 
 PV = "2.1"
 SRCREV = "659a61693aa3b87661864ad0f12eee14c865cd7f"
+SRCREV:riscv64 = "2c509ee67e20772bce3a11ce8f53b6b14b4980bb"
+
 # The v2.1 branch is rolling with no tags; track commits.
 UPSTREAM_CHECK_COMMITS = "1"
 
@@ -111,10 +115,9 @@ FILES:${PN}-dev += "${libdir}/libluajit-5.1.a \
 "
 FILES:luajit-common = "${datadir}/${BPN}-${PV}"
 
-# ppc64/riscv64/riscv32 is not supported in this release
+# ppc64/riscv32 is not supported in this release
 COMPATIBLE_HOST:powerpc64 = "null"
 COMPATIBLE_HOST:powerpc64le = "null"
-COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
 
 CVE_STATUS[CVE-2024-25176] = "fixed-version: The used revision contains the fix already."
