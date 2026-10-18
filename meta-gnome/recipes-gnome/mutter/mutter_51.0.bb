@@ -8,7 +8,6 @@ DEPENDS = " \
     colord \
     fribidi \
     gdk-pixbuf \
-    glycin \
     graphene \
     gsettings-desktop-schemas \
     gtk4 \
