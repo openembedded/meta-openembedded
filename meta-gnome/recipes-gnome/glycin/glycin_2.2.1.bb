@@ -106,3 +106,4 @@ RDEPENDS:${PN}[vardeps] += "PACKAGECONFIG"
 RRECOMMENDS:${PN}-loaders += "${@bb.utils.contains('PACKAGECONFIG', 'thumbnailer', '${PN}-thumbnailer', '', d)}"
 RDEPENDS:${PN}-thumbnailer += "${PN}"
 
+COMPATIBLE_HOST:riscv32 = "null"
