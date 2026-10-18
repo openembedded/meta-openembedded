@@ -55,3 +55,5 @@ FILES:${PN} += " \
 "
 
 RDEPENDS:${PN} += "gjs glycin-gtk4 gstreamer1.0-plugins-base gtksourceview5 libadwaita webkitgtk"
+
+COMPATIBLE_HOST:riscv32 = "null"
