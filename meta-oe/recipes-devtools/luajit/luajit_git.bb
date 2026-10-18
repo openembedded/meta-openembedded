@@ -44,6 +44,7 @@ LUA_TARGET_OS = "Unknown"
 LUA_TARGET_OS:darwin = "Darwin"
 LUA_TARGET_OS:linux = "Linux"
 LUA_TARGET_OS:linux-gnueabi = "Linux"
+LUA_TARGET_OS:linux-musl = "Linux"
 LUA_TARGET_OS:mingw32 = "Windows"
 
 # We don't want the lua buildsystem's compiler optimizations, or its
