@@ -73,3 +73,5 @@ FILES:${PN} += " \
 "
 
 RDEPENDS:${PN} += "glycin-loaders"
+
+COMPATIBLE_HOST:riscv32 = "null"
