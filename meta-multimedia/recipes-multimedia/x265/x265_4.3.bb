@@ -10,8 +10,8 @@ DEPENDS = "nasm-native gnutls zlib libpcre numactl"
 
 SRC_URI = " \
     git://github.com/Multicorewareinc/x265.git;protocol=https;branch=master;tag=${PV} \
-    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch \
-    file://0002-x265-fix-build-with-cmake-4.patch \
+    file://0001-fix-dynamicHDR10-undefined-uint8_t.patch;patchdir=.. \
+    file://0002-x265-fix-build-with-cmake-4.patch;patchdir=.. \
 "
 SRCREV = "e9b88125dc21393b3fd8d68e98083bdfb89778a8"
 S = "${UNPACKDIR}/x265-${PV}/source"
