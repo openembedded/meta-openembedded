@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0002-lib-libxdp-Makefile-use-cp-fRd-to-preserve-symlinks-.patch \
     file://0003-lib-util-avoid-struct-ethhdr-redefinition-on-musl.patch \
     file://0004-xdp-filter-xdp-dump-avoid-struct-ethhdr-redefinitio.patch \
+    file://0005-lib-libxdp-Embed-BPF-objects-with-.incbin-instead-of.patch \
 "
 SRCREV = "8fbad9f0af621a22aa87ff2520b3735915b1f0fd"
 
