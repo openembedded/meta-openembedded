@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag
            file://CVE-2026-57163.patch \
            file://CVE-2026-57164.patch \
            file://CVE-2026-57165.patch \
+           file://CVE-2026-57166.patch \
            "
 SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
 
