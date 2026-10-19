@@ -9,7 +9,9 @@ SECTION = "graphics"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5e9ee833a2118adc7d8b5ea38e5b1cef"
 
-SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV}"
+SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${PV} \
+           file://0001-test-meson.build-better-detect-if-libc-has-argp.patch \
+           "
 SRCREV = "dc19fcc7da58e8cf84ba1ec417e24b04609feb23"
 
 DEPENDS += "xmlto-native"
