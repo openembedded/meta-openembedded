@@ -35,7 +35,9 @@ DEPENDS = " \
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch"
+SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch \
+            file://0002-build-Build-remote-selection-source-without-remote-desktop.patch \
+            "
 SRC_URI[archive.sha256sum] = "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
 
 REQUIRED_DISTRO_FEATURES = "wayland polkit"
