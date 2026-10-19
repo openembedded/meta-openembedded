@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/google/bumble"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7a775f1b11285b6abedd76748d176125"
 
-SRC_URI[sha256sum] = "f6b55ae688806c7ac41e8c0f63df912e106f49050c9250c226a95ccea69d79ec"
+SRC_URI[sha256sum] = "cea9fbd8b8a9ff78567bc4a97b35d54c72fcf10109476a24518d01394fbbd982"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
@@ -37,3 +37,9 @@ RDEPENDS:${PN}-ptest += "\
 # runtime dependencies to the bitbake packages which include them:
 #    libusb-package
 #    pyee
+
+do_install_ptest:append() {
+    ln -sf ${PYTHON_SITEPACKAGES_DIR}/bumble/apps ${D}${PTEST_PATH}/apps
+    ln -sf ${PYTHON_SITEPACKAGES_DIR}/bumble/tools ${D}${PTEST_PATH}/tools
+    printf '[pytest]\nasyncio_mode = auto\npythonpath = .\n' > ${D}${PTEST_PATH}/pytest.ini
+}
