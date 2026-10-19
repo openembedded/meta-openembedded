@@ -118,3 +118,5 @@ RDEPENDS:python3-pjsua2 = "python3-core"
 # and ${PN}-staticdev (the .a files) by bitbake's own default FILES
 # patterns - ${PN} itself ships nothing.
 ALLOW_EMPTY:${PN} = "1"
+
+CVE_STATUS[CVE-2026-26967] = "fixed-version: fixed in v2.17"
