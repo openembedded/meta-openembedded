@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://copying;md5=b4563b57c98bc23c8cecbc0b6d9546e9"
 
 SRC_URI = "git://github.com/Mellanox/sockperf;branch=sockperf_v2;protocol=https \
            file://0001-src-fix-missing-includes-for-musl-struct-timeval-ss.patch \
+           file://0002-Add-RISC-V-support.patch \
            "
 SRCREV = "3c65ad99cd385e18f8a2a655c19826e81a4d17e8"
 
