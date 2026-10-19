@@ -16,6 +16,11 @@ CARGO_BUILD_FLAGS += " --workspace"
 
 export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}/libclang.so"
 
+# rice-c/build.rs runs bindgen, point libclang at the target sysroot instead
+# of the build host headers in /usr/include
+BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
+export BINDGEN_EXTRA_CLANG_ARGS
+
 # rice-c/build.rs builds the internal rice-proto C library in-tree (via
 # "cargo cinstall") and then locates it through system-deps + pkg-config.
 # The generated rice-proto.pc carries an absolute prefix pointing at the
