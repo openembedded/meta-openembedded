@@ -17,6 +17,8 @@ SRC_URI = "git://github.com/tuxera/ntfs-3g;protocol=https;branch=edge;tag=${PV} 
            file://CVE-2026-46569.patch \
            file://CVE-2026-42618_p1.patch \
            file://CVE-2026-42618_p2.patch \
+           file://CVE-2026-42616_p1.patch \
+           file://CVE-2026-42616_p2.patch \
 "
 SRCREV = "78414d93613532fd82f3a82aba5d4a1c32898781"
 
