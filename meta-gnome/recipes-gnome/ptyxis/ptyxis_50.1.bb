@@ -19,6 +19,7 @@ DEPENDS = " \
     vte \
 "
 
+SRC_URI += "file://0001-application-Define-W_EXITCODE-if-libc-lacks-it.patch"
 SRC_URI[archive.sha256sum] = "73f4b76480644b2840415859a51d20cd7487b0619714f8defcd38212c3ddcffe"
 
 FILES:${PN} += "${datadir}"
