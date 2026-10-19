@@ -3,7 +3,9 @@ HOMEPAGE = "https://github.com/mkuoppal/tiobench"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
-SRC_URI = "git://github.com/mkuoppal/tiobench.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/mkuoppal/tiobench.git;protocol=https;branch=master \
+           file://0001-Allow-large-file-support-with-musl.patch \
+           "
 
 SRCREV = "11c965c8c0f37927423fb4ea590df6c093cf2f1e"
 
