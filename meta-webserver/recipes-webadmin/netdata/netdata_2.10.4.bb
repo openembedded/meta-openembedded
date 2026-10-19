@@ -167,3 +167,5 @@ FILES:${PN} += "\
     "
 
 RDEPENDS:${PN} = "bash python3-core zlib"
+
+CVE_STATUS[CVE-2026-83602] = "fixed-version: fixed in v2.10.4"
