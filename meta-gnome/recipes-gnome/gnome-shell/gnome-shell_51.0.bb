@@ -9,6 +9,7 @@ DEPENDS = " \
     gcr \
     gdk-pixbuf \
     gjs \
+    glycin \
     gnome-autoar \
     gnome-desktop \
     gsettings-desktop-schemas \
