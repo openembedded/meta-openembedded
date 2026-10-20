@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
 
 SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
            file://frr.pam \
+           file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
            "
 SRCREV = "c8efb33af96f9f1220d0fdda6ac049f9126edd6f"
 
