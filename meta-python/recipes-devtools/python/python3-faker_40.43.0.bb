@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
 
-SRC_URI[sha256sum] = "a92dff7f310e61fb544c61720e15edb2e7448bc33d15a321a99e9ab7b94abf54"
+SRC_URI[sha256sum] = "02fae4327c03a4a6315e1b428a3878f435bfc276c93435ea349b95c0c9372361"
 
 inherit pypi setuptools3 ptest-python-pytest
 
@@ -33,6 +33,7 @@ RDEPENDS:${PN} += "\
     python3-unittest \
     python3-xml \
     python3-zoneinfo \
+    python3-stdnum \
     "
 
 RDEPENDS:${PN}-ptest += "\
