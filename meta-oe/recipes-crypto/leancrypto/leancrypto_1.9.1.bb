@@ -14,6 +14,7 @@ SECTION = "libs"
 SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
            file://leancrypto-tests.sh \
            file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
+           file://0002-Linker-script-Handle-a-missing-.init-section.patch \
            "
 SRCREV = "65eb4e7e84e3a5499460a66b1623ccf6c59628b1"
 
