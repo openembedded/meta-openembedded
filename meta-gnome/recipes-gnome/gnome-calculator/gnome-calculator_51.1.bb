@@ -32,7 +32,7 @@ REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
-SRC_URI[archive.sha256sum] = "5bfb4c53eec61feb6c03faf85218804e87413ecb647e08fde6379bf2b1839190"
+SRC_URI[archive.sha256sum] = "03edf5972adc020b7e872233caba42f759e9879fc4b96f014580f136179c4fa0"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
