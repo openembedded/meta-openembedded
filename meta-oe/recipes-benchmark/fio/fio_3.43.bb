@@ -24,6 +24,7 @@ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
 SRC_URI = " \
     git://git.kernel.dk/fio.git;branch=master;tag=${BP} \
+    file://0001-configure-Link-with-libatomic-when-64-bit-atomics-ne.patch \
 "
 SRCREV = "d2dcd7e053d1902d2420f151c83990e6acdd9f8c"
 
