@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
 
-SRC_URI[sha256sum] = "36763b5b95c2a0dcfdf1abc48e48156ee425b21efe2f0e787c2dd5a95c0e5e79"
+SRC_URI[sha256sum] = "239b5f9b2a53006cd54f83cf8495ee742083708ead947882c8dd2786de79f39b"
 
 
 inherit pypi python_setuptools_build_meta
