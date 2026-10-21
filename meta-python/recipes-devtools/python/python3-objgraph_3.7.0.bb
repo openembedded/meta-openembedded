@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e48a556235f55ad7d4234475657f68a7"
 
 SRC_URI:append = " file://run-ptest"
-SRC_URI[sha256sum] = "00b9f2f40f7422e3c7f45a61c4dafdaf81f03ff0649d6eaec866f01030e51ad8"
+SRC_URI[sha256sum] = "b6ef4b244217410509b257970413b01a979d54df48d2d4055b6941e8679ddbbb"
 
 inherit pypi setuptools3 ptest-python-pytest
 
