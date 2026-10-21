@@ -25,7 +25,7 @@ DEPENDS = " \
 REQUIRED_DISTRO_FEATURES = "alsa polkit pulseaudio systemd gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "7c6249118ddfffc4bb34d6b3edaa86b3ea02a1ad2b7711d79480749906767665"
+SRC_URI[archive.sha256sum] = "e7de8d30ae2d63c7a9a21f8f0247219275cbc1d7f5ed09205e4a47642666f6ae"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
