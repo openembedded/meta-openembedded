@@ -14,3 +14,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 inherit meson pkgconfig
 
 DEPENDS:append:libc-musl = " fts"
+
+do_configure:prepend() {
+	sed -i '/Custom targets for testing overlay function/,/command : .*permanent...changes/ d' ${S}/meson.build
+}
