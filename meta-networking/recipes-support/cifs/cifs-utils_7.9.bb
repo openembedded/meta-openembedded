@@ -4,7 +4,7 @@ SECTION = "otherosfs"
 LICENSE = "GPL-3.0-only AND LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "be9d47cc3c8f3842e8c6418885525130eeae87ed"
+SRCREV = "0f211c3b9a7ebe326abea12d306f621067b62f29"
 SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master;tag=${BP}"
 
 DEPENDS += "libtalloc"
