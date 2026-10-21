@@ -44,7 +44,7 @@ PACKAGECONFIG:class-native = "libpcap gnutls ssl libssh"
 PACKAGECONFIG[libcap] = "-DENABLE_CAP=ON,-DENABLE_CAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON, libcap"
 PACKAGECONFIG[libpcap] = "-DENABLE_PCAP=ON,-DENABLE_PCAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON , libpcap"
 PACKAGECONFIG[libsmi] = "-DENABLE_SMI=ON,-DENABLE_SMI=OFF,libsmi"
-PACKAGECONFIG[libnl] = ",,libnl"
+PACKAGECONFIG[libnl] = "-DENABLE_NETLINK=ON,-DENABLE_NETLINK=OFF,libnl"
 PACKAGECONFIG[portaudio] = "-DENABLE_PORTAUDIO=ON,-DENABLE_PORTAUDIO=OFF, portaudio-v19"
 PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON,-DENABLE_GNUTLS=OFF, gnutls"
 PACKAGECONFIG[ssl] = ",,openssl"
@@ -64,8 +64,7 @@ PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON -DUSE_qt6=OFF, -DENAB
 
 inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
 
-EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
-                  -DBUILD_mmdbresolve=OFF \
+EXTRA_OECMAKE += "-DBUILD_mmdbresolve=OFF \
                   -DBUILD_randpktdump=OFF \
                   -DBUILD_androiddump=OFF \
                   -DBUILD_dcerpcidl2wrs=OFF \
