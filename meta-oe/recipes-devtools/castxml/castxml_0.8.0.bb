@@ -2,10 +2,8 @@ SUMMARY = "C-family abstract syntax tree XML output tool."
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "2d52b47cfd88b703d3247f77bb7c3ad7372bc9cb"
-SRC_URI = "git://github.com/CastXML/CastXML;protocol=https;branch=master;tag=v${PV} \
-           file://0001-Port-to-LLVM-Clang-23.patch \
-           "
+SRCREV = "6ebb3df6e88ae562ca54aa09c8eb5ef679b5f2cb"
+SRC_URI = "git://github.com/CastXML/CastXML;protocol=https;branch=master;tag=v${PV}"
 
 DEPENDS = "clang"
 
