@@ -19,9 +19,7 @@ DEPENDS += " \
     gnome-panel \
 "
 
-SRC_URI += "file://ibus.patch"
-
-SRC_URI[archive.sha256sum] = "7a8d5c03310e4dfadd18a65e00a37741032afeea5418dd6804a975c4b0980045"
+SRC_URI[archive.sha256sum] = "aaa23e7042477e741f24279b468b9d20af4ec195ee43b3d312cdaaf84d98c321"
 
 do_install:append() {
     # no oe-layer has compiz -> remove dead session
