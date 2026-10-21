@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
 
 DEPENDS += "gmp mpfr libmpc python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "313f35e9fe6b9ddf72759b14dac25166fe5757c970403e4bbf87a70ab2be07df"
+SRC_URI[sha256sum] = "f20b7e2f8fd16f8d6846bb5b73359c3cc5aa41ec5cf266321d362f547c8fd097"
 
 SRC_URI += "file://0001-Avoid-do_configure-requires-check-error.patch"
 
