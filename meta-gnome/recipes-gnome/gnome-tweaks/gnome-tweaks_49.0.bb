@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-3.0;md5=9eef91148a9b14ec7f9df333daebc746 \
 "
 
-DEPENDS = "libhandy"
-
+DEPENDS = "glib-2.0 gtk4 libadwaita libgudev python3-pygobject gsettings-desktop-schemas"
 
 inherit gnomebase gtk-icon-cache gobject-introspection features_check
 
@@ -17,12 +16,7 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "cffd3b33a399577fbb4491ce8fbd02f54c5924f1056f30114e8d420290ef23fc"
-SRC_URI += " \
-    file://0001-Make-python-path-configurable.patch \
-"
-
-EXTRA_OEMESON = "-Dpython_site_dir=${PYTHON_SITEPACKAGES_DIR}"
+SRC_URI[archive.sha256sum] = "b3909bdcb4905b68427d6ab581e01f436dff8e5c0a389b1e0b14500f18806ebb"
 
 # The optimised .pyc files contain buildpaths, delete them and leave the
 # normal ones to be packaged.
@@ -31,8 +25,9 @@ do_install:append() {
 }
 
 FILES:${PN} += " \
+    ${datadir}/dbus-1 \
     ${datadir}/metainfo \
     ${PYTHON_SITEPACKAGES_DIR} \
 "
 
-RDEPENDS:${PN} += "gnome-shell python3-core python3-logging libhandy"
+RDEPENDS:${PN} += "gnome-shell python3-core python3-logging python3-pygobject gtk4 libadwaita gnome-desktop libgudev libnotify"
