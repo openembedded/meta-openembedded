@@ -32,7 +32,7 @@ GIR_MESON_OPTION = ""
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 SRC_URI += "file://0001-shell-app-usage.c-only-include-x11-headers-if-HAVE_X.patch"
-SRC_URI[archive.sha256sum] = "2179bab13af353427065096af8bf3d30da7b86e0c516e5ba86a14998af9575f6"
+SRC_URI[archive.sha256sum] = "c1eb08d9651a567ed5d9b2791371f1898e657cf45e75e1d88adefbab807977d6"
 
 PACKAGECONFIG ??= " \
     camera-monitor \
