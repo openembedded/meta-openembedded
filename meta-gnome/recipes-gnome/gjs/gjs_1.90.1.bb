@@ -10,7 +10,7 @@ inherit meson pkgconfig gettext gobject-introspection features_check
 SRC_URI = "${GNOME_MIRROR}/${BPN}/${@oe.utils.trim_version("${PV}", 2)}/${BP}.tar.xz;name=archive"
 SRC_URI += "file://0001-Support-cross-builds-a-bit-better.patch"
 SRC_URI += "file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch"
-SRC_URI[archive.sha256sum] = "47e9f22b1d4aca841c6c492b449b6de32ff680972183e26fe7b98a45c5c3fee1"
+SRC_URI[archive.sha256sum] = "05ceaa80f48e3782e5c44938572fad863e02b8c4a6c55657a99aa81db8ce9efa"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
