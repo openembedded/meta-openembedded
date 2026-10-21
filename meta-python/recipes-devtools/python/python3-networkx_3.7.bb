@@ -1,9 +1,9 @@
 DESCRIPTION = "Python package for creating and manipulating graphs and networks"
 HOMEPAGE = "http://networkx.github.io/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7592b173aee2da0e062f9cfa0378e9d"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4ccf59069a708419c8b37163831a4228"
 
-SRC_URI[sha256sum] = "26b7c357accc0c8cde558ad486283728b65b6a95d85ee1cd66bafab4c8168509"
+SRC_URI[sha256sum] = "fd77a511bd90f39f3d016351345b52cf5319b813bdca01de3f755d3cca62e96a"
 
 inherit pypi python_setuptools_build_meta
 
