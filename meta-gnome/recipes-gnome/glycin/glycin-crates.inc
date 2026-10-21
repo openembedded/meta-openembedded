@@ -117,7 +117,7 @@ SRC_URI += " \
     crate://crates.io/gobject-sys/0.22.6 \
     crate://crates.io/gufo/0.5.0 \
     crate://crates.io/gufo-common/2.0.0 \
-    crate://crates.io/gufo-exif/0.5.0 \
+    crate://crates.io/gufo-exif/0.5.3 \
     crate://crates.io/gufo-jpeg/0.5.1 \
     crate://crates.io/gufo-png/0.5.0 \
     crate://crates.io/gufo-svg/0.5.0 \
@@ -437,7 +437,7 @@ SRC_URI[glib-sys-0.22.8.sha256sum] = "030967459f9f676851872c6304adea7825c6d462ec
 SRC_URI[gobject-sys-0.22.6.sha256sum] = "22a861859b887a79cf461359c192c97a57d8fb0229dd291232e57aa11f6fa72c"
 SRC_URI[gufo-0.5.0.sha256sum] = "6a16d7faeeb03e2925ac6b0f40630b15b1992d08c50add402f35fde495e44f64"
 SRC_URI[gufo-common-2.0.0.sha256sum] = "d583cdde9eb6985dbb6e596d27677e5d353d5eee44763cbf7c7ead3147d337bf"
-SRC_URI[gufo-exif-0.5.0.sha256sum] = "e99100988e312c22c6f209663b289e727db3918d06fbcbbc2315149457b42b75"
+SRC_URI[gufo-exif-0.5.3.sha256sum] = "4183c4b2bf6cfd58823cf02b2e8a4d955da3605f8e1b98adbd3456a97e35ae16"
 SRC_URI[gufo-jpeg-0.5.1.sha256sum] = "383907a5c532bff484b2914d649e368e98ce6426829458353fe40070225b07a5"
 SRC_URI[gufo-png-0.5.0.sha256sum] = "e5c3065acab6cf458afbe53f73462a0dbf17348a2af3c889183f8714b3bff6fc"
 SRC_URI[gufo-svg-0.5.0.sha256sum] = "c536908b63d5952fa5e8ebdfaff406b92bb8096d3cbbd402afd112340383ad93"
