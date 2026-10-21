@@ -30,7 +30,7 @@ REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
 
 SRC_URI += "file://0001-libsushi-guard-the-X11-Window-field-when-GDK_WINDOW.patch"
 
-SRC_URI[archive.sha256sum] = "d326ec69fc004be3a5fc048f7ecf2c8eb828b7d8b682f1e7a2ba01a5e72993e1"
+SRC_URI[archive.sha256sum] = "928c0155bd5664098bdb4d591806e70e8219a4b66bf46c95382f72589e4e9a6e"
 
 export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
