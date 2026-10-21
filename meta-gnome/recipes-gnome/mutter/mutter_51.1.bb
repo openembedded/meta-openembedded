@@ -38,7 +38,7 @@ inherit gnomebase gsettings gobject-introspection gettext features_check
 SRC_URI += "file://0001-Dont-use-system-sysprof-dbus-folder.patch \
             file://0002-build-Build-remote-selection-source-without-remote-desktop.patch \
             "
-SRC_URI[archive.sha256sum] = "5d28f3ae225692428fcafb96500d673f34328b698b86960c9c1460d0b1d983b3"
+SRC_URI[archive.sha256sum] = "0d311d87901dbcb94518fb89304febe30852ce5d8a4befa9f87e85c68eceefde"
 
 REQUIRED_DISTRO_FEATURES = "wayland polkit"
 ANY_OF_DISTRO_FEATURES = "opengl vulkan"
