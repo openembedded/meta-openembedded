@@ -11,7 +11,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e4d13123d158ecd203b5b9ffe50a0c76"
 
 SRC_URI = "git://github.com/folkertvanheusden/multitail.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "247e7ff727d9a8bed410f1bbf86f247c059546d9"
+SRCREV = "1bf273ec425a047d278023d6c197a939243a9eb3"
 
 DEPENDS = "ncurses"
 
@@ -32,6 +32,4 @@ PACKAGECONFIG[utf8] = "-DUTF8_SUPPORT=ON,-DUTF8_SUPPORT=OFF"
 do_install:append() {
     mv -v ${D}${prefix}/etc ${D}${sysconfdir}
     mv -v ${D}${sysconfdir}/multitail.conf.new ${D}${sysconfdir}/multitail.conf
-    # These are example files to illustrate input conversion
-    mv -v ${D}${sysconfdir}/multitail/conversion-scripts ${D}${docdir}/multitail-${PV}
 }
