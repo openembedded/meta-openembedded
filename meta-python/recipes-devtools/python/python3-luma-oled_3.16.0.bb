@@ -10,7 +10,7 @@ inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "16925fe668f484803df0683add800b19e5dd7316a1d64eb06ec2ae817473901e"
+SRC_URI[sha256sum] = "9e5df928b11c4622872d0da25dd90186ca5e4c1cf1c01b562e7cda86f877f437"
 
 RDEPENDS:${PN} += " \
 	python3-luma-core \
