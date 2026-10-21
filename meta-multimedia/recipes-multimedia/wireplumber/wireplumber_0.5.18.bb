@@ -164,6 +164,8 @@ RRECOMMENDS:${PN} += "pipewire ${PN}-scripts ${PN}-modules-meta"
 
 FILES:${PN} += "${systemd_user_unitdir} ${systemd_system_unitdir} ${datadir}/zsh"
 
+SYSTEMD_SERVICE:${PN} = "wireplumber.service"
+
 FILES:libwireplumber = " \
     ${libdir}/libwireplumber-*.so.* \
 "
