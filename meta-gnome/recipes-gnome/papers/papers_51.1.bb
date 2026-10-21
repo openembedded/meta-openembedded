@@ -15,10 +15,10 @@ GTKIC_VERSION = "4"
 GIR_MESON_ENABLE_FLAG = "enabled"
 GIR_MESON_DISABLE_FLAG = "disabled"
 
-SRC_URI = "git://gitlab.gnome.org/GNOME/papers.git;protocol=https;branch=main;tag=${PV} \
+SRC_URI = "git://gitlab.gnome.org/GNOME/papers.git;protocol=https;branch=gnome-51;tag=${PV} \
            file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch \
            "
-SRCREV = "6ca6e7ec685343cd4664f6253ab0f42d31e51bb3"
+SRCREV = "2c3976fb832605e2a6165dd6dacc4412cb5dfa3e"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/papers/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
