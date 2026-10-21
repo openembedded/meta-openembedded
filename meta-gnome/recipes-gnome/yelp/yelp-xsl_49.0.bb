@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LGPL;md5=a6f89e2100d9b6cdffcea4f398e37343 \
 "
 
-GNOMEBASEBUILDCLASS = "autotools"
 inherit gnomebase gettext itstool
 
-DEPENDS += "libxml2"
+DEPENDS += "libxml2 libxslt-native"
+DEPENDS:append:class-native = " gettext-native"
 
-SRC_URI[archive.sha256sum] = "238be150b1653080ce139971330fd36d3a26595e0d6a040a2c030bf3d2005bcd"
+SRC_URI[archive.sha256sum] = "59d43a8f8fe67b784f14f9a04dd4a7a092a7f4a64a65e71b90fe02a47a50fbec"
 
 RDEPENDS:${PN}:append:class-target = " libxml2 itstool"
 
