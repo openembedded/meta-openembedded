@@ -1,0 +1,63 @@
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 09:00:00 -0700
+Subject: [PATCH] examples/server: Do not truncate file sizes on 32-bit
+ targets
+
+FileEntry::len is a uint64_t, but it is used for mmap() and as the size
+of the resp_data std::span, both of which take a size_t. On targets
+where size_t is 32 bits, such as riscv32, clang rejects the narrowing in
+the span initializer:
+
+  examples/server.cc:236:54: error: non-constant-expression cannot be
+  narrowed from type 'uint64_t' (aka 'unsigned long long') to
+  'size_type' (aka 'unsigned int') in initializer list [-Wc++11-narrowing]
+
+The value is already truncated earlier, where st_size is cast to size_t
+before mmap(), so a file larger than the address space would be served
+with the wrong length.
+
+Store the length as a size_t, and fail open_file() with
+Error::INTEGER_OVERFLOW when the file is too large to map, instead of
+truncating its size.
+
+Upstream-Status: Submitted [https://github.com/ngtcp2/ngtcp2/pull/2330]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ examples/server.cc | 7 +++++++
+ examples/server.h  | 2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+--- a/examples/server.cc
++++ b/examples/server.cc
+@@ -31,6 +31,8 @@
+ #include <memory>
+ #include <fstream>
+ #include <iomanip>
++#include <limits>
++#include <utility>
+ 
+ #include <unistd.h>
+ #include <getopt.h>
+@@ -216,6 +218,11 @@
+     close(fd);
+   } else {
+     fe.fd = fd;
++    // A file larger than the address space cannot be mapped.
++    if (std::cmp_greater(st.st_size, std::numeric_limits<size_t>::max())) {
++      close(fd);
++      return std::unexpected{Error::INTEGER_OVERFLOW};
++    }
+     fe.len = static_cast<size_t>(st.st_size);
+     if (fe.len) {
+       fe.map = mmap(nullptr, fe.len, PROT_READ, MAP_SHARED, fd, 0);
+--- a/examples/server.h
++++ b/examples/server.h
+@@ -68,7 +68,7 @@
+ };
+ 
+ struct FileEntry {
+-  uint64_t len{};
++  size_t len{};
+   void *map{};
+   int fd{};
+   uint8_t flags{};
