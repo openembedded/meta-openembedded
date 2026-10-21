@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
 SRC_URI = "https://www.pgpool.net/source/pgpool-II-${PV}.tar.gz \
 	   file://0001-Fix-build-error-when-build-this-file.patch \
 	   file://define_SIGNAL_ARGS.patch \
+	   file://0002-configure-Check-the-size-of-long-and-long-long.patch \
 	   file://pgpool.sysconfig \
 	   file://pgpool.service \
            "
