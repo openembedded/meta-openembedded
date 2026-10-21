@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=http
            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
            file://0002-DataTest-disable-testSQLChannel-test.patch \
            file://0003-quill-rdtsc-fallback-for-32-bit-powerpc.patch \
+           file://0004-CheckAtomic-Keep-atomic-test-programs-from-being-opt.patch \
            file://run-ptest \
            "
 SRCREV = "6a5667f432e1c5fe5591025ab03a2f8df37116b4"
