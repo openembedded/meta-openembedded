@@ -6,7 +6,7 @@ the PKCS#11 Cryptographic Token Interface\
 This code targets version 3.1 of the interface but should be backwards \
 compatible to previous versions as well.\
 "
-HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
+HOMEPAGE = "https://github.com/openssl-projects/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
@@ -15,11 +15,9 @@ DEPENDS = "\
     p11-kit \
 "
 
-SRCREV = "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
+SRCREV = "b55b94344af87a058fd84d6e15390760a5585b1d"
 
-SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
-
-SRC_URI += "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
+SRC_URI = "git://github.com/openssl-projects/${BPN}.git;branch=main;protocol=https;tag=v${PV}"
 
 inherit meson pkgconfig
 
