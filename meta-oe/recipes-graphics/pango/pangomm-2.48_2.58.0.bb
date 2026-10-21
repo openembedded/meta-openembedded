@@ -9,7 +9,7 @@ DEPENDS = "mm-common cairomm-1.16 glibmm-2.68 pango"
 GNOMEBN = "pangomm"
 inherit gnomebase
 
-SRC_URI[archive.sha256sum] = "f1e984c85a85b6a0e61616366521f51dd8282a072bb45d15b5084762b62f4c0e"
+SRC_URI[archive.sha256sum] = "217514c1a65035c2fce6e69e33b0d92bafa2594cc474e995a4473441b10f3a33"
 
 S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
 
