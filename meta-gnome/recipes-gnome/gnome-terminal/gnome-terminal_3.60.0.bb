@@ -23,7 +23,7 @@ SRC_URI = " \
 	git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=https;nobranch=1 \
 	file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
 "
-SRCREV = "965cb9307713c618253918633416fcad86bcc5d2"
+SRCREV = "5d1d01d8bad69d33b0048f7791ebb6b0c7fb9f21"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"
