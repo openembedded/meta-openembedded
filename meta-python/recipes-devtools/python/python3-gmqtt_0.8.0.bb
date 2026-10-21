@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/wialon/gmqtt"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=903f1792621a3b35ee546da75d139177"
 
-SRC_URI[sha256sum] = "bedfec7bac26b6b4ce1f0c4c32cff3d663526a54c882d323d41560fc3b9b44a2"
+SRC_URI[sha256sum] = "61fb7641109f57ca29f73d2d8f2cb487de49d76338ef8c68228db961b6e9696a"
 
 inherit pypi setuptools3
 
