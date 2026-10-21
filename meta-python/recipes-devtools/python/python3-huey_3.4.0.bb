@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
 
 
-SRC_URI[sha256sum] = "6de196c6ece2e38b5173f7510600091ab035c0e86b0958d0e5b38a82b9984666"
+SRC_URI[sha256sum] = "ac9b02e741f13da4092ea19bcaafc73669e97d3153914d2fed2868df144f6dfa"
 
 RDEPENDS:${PN} += " \
 	python3-datetime \
