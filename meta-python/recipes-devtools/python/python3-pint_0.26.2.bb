@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
 
 inherit pypi python_hatchling ptest-python-pytest
 
-SRC_URI[sha256sum] = "f8f5df6cf65314d74da1ade1bf96f8e3e4d0c41b51577ac53c49e7d44ca5acee"
+SRC_URI[sha256sum] = "391e5d2fc01fdb121c113b8eb47386688575542c1f5144c465ff318bf5133573"
 
 DEPENDS += "python3-hatch-vcs-native"
 
