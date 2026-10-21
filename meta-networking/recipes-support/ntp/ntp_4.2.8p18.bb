@@ -21,6 +21,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://0001-colcomp-sntp-libpkgver-colcomp.c-Convert-K-R-functio.patch \
            file://0001-Makefile.am-Don-t-build-deprecated-ntpdate.patch \
            file://0001-ntp_crypto-use-the-ASN1_STRING-accessors.patch \
+           file://0001-libntp-Use-time_t-for-the-stime-argument.patch \
            file://ntpd \
            file://ntp.conf \
            file://ntpd.service \
