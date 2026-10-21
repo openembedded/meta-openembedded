@@ -1,0 +1,4 @@
+require python3-django.inc
+inherit python_setuptools_build_meta
+
+SRC_URI[sha256sum] = "a1e92451ccb8b514e91bbb3b6d186d20b4030558f116b5d9de6535455ff210b7"
