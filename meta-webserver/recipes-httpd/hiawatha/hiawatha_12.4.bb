@@ -7,6 +7,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
 SECTION = "net"
 
 SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-${PV}.tar.gz \
+           file://0001-cmake-Link-with-libatomic-when-64-bit-atomics-need-i.patch \
            file://hiawatha-init \
            file://hiawatha.service \
           "
