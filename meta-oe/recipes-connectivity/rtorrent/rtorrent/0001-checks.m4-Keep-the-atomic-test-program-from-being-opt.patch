@@ -1,0 +1,57 @@
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Wed, 21 Oct 2026 13:00:00 -0700
+Subject: [PATCH] checks.m4: Keep the atomic test program from being optimized
+ away
+
+TORRENT_CHECK_ATOMIC decides whether -latomic is needed by linking a
+program that loads from a local std::atomic<uint64_t>. The atomic never
+escapes, so with -O2 in CXXFLAGS clang folds the load to a constant and
+no __atomic_* call is emitted. The check then reports that -latomic is
+not required even on targets that need it for 64-bit atomics, such as
+riscv32, and linking fails later:
+
+  ld.lld: error: undefined symbol: __atomic_load_8
+
+Make the atomic global and modify it with fetch_add() so the atomic
+operations are emitted at any optimization level.
+
+Upstream-Status: Submitted [https://github.com/rakshasa/rtorrent/pull/2072]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ scripts/checks.m4 | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+--- a/scripts/checks.m4
++++ b/scripts/checks.m4
+@@ -99,13 +99,17 @@
+ ])
+ 
+ 
++# The atomic is global and modified with a read-modify-write operation,
++# otherwise the compiler can optimize the operations away and the program
++# links without libatomic even on targets that need it.
+ AC_DEFUN([TORRENT_CHECK_ATOMIC], [
+   AC_MSG_CHECKING([whether 64-bit atomic operations require -latomic])
+   AC_LANG_PUSH(C++)
+ 
+   AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <cstdint>
+-                                    #include <atomic>]],
+-                                    [[std::atomic<uint64_t> x(0);
++                                    #include <atomic>
++                                    std::atomic<uint64_t> x(0);]],
++                                    [[x.fetch_add(1);
+                                     return x.load();]])],
+     [
+       AC_MSG_RESULT([no])
+@@ -116,8 +120,9 @@
+       LIBS="$LIBS -latomic"
+ 
+       AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <cstdint>
+-                                        #include <atomic>]],
+-                                        [[std::atomic<uint64_t> x(0);
++                                        #include <atomic>
++                                        std::atomic<uint64_t> x(0);]],
++                                        [[x.fetch_add(1);
+                                         return x.load();]])],
+         [
+           AC_MSG_RESULT([yes])
