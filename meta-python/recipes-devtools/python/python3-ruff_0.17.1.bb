@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e679ca4f742cbfa29ab6a499529c2d39"
 
 DEPENDS += "python3-maturin-native"
 
-SRC_URI[sha256sum] = "9247bf92b5f04d825c8639a4fe423ec2e4222acd9222e58412b0dab7e442798b"
+SRC_URI[sha256sum] = "5bb796c5112e9fb9527f2ef2faa0a130d6312d19de92bcfaddd70dbb2d41020f"
 
 inherit pypi python_setuptools3_rust cargo-update-recipe-crates
 
