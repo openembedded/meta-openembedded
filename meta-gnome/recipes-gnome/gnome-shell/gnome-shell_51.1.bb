@@ -102,3 +102,5 @@ FILES:${PN}-tools = "${bindir}/*-tool"
 RDEPENDS:${PN}-tools = "python3-core"
 
 CVE_STATUS[CVE-2021-3982] = "not-applicable-config: OE doesn't set CAP_SYS_NICE capability"
+
+COMPATIBLE_HOST:riscv32 = "null"
