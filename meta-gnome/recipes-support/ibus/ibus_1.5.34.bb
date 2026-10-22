@@ -41,6 +41,7 @@ EXTRA_OECONF = " \
     --disable-python2 \
     --with-python=${bindir}/python3 \
     --with-ucd-dir=${STAGING_DATADIR}/unicode/ucd \
+    PKG_CONFIG_FOR_BUILD=${STAGING_BINDIR_NATIVE}/pkg-config-native \
 "
 
 do_configure:prepend() {
