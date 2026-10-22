@@ -18,6 +18,7 @@ DEPENDS = "zlib"
 SRC_URI = "git://github.com/explosion/floret.git;protocol=https;branch=main;tag=v${PV} \
            file://0001-PATCH-floret-Adjust-CMake-flags-for-cross-compilation.patch \
            file://0002-args.h-add-missing-cstdint-include-for-int64_t.patch \
+           file://0003-cmake-Link-with-libatomic-when-64-bit-atomics-need-i.patch \
            "
 
 SRCREV = "775638223bee4fabc420cc8234632557452558e0"
