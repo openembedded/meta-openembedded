@@ -13,6 +13,7 @@ SRC_URI = " \
     file://0001-fix-dynamicHDR10-undefined-uint8_t.patch;patchdir=.. \
     file://0002-x265-fix-build-with-cmake-4.patch;patchdir=.. \
     file://0003-riscv64-Fix-case-of-STRIDE_SHIFT-macro-invocation.patch;patchdir=.. \
+    file://0004-cmake-Link-with-libatomic-when-64-bit-atomics-need-i.patch;patchdir=.. \
 "
 SRCREV = "e9b88125dc21393b3fd8d68e98083bdfb89778a8"
 S = "${UNPACKDIR}/x265-${PV}/source"
