@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "libgit2 sqlite3"
 
 SRC_URI = "crate://crates.io/nu/${PV};name=nu"
-SRC_URI[nu.sha256sum] = "ce8b0012733f646693ff5a203face7b0337135ffa809f119dfadd8c9f1f9a176"
+SRC_URI[nu.sha256sum] = "62e21f2d6a14430ae2701a4e6f11be42d40a11204c204bef32a8b9879f79e767"
 
 S = "${CARGO_VENDORING_DIRECTORY}/nu-${PV}"
 
