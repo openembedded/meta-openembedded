@@ -29,6 +29,7 @@ RDEPENDS:${PN} += " \
     python3-dateutil-zoneinfo \
     python3-pytz \
     python3-profile \
+    python3-zoneinfo \
 "
 
 PYTHONPATH:prepend:class-target = "${RECIPE_SYSROOT}${PYTHON_SITEPACKAGES_DIR}:"
