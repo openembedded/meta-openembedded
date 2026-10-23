@@ -3,7 +3,7 @@ HOMEPAGE = "https://www.grpc.io/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND MIT AND MPL-2.0"
 LIC_FILES_CHKSUM = " \
-    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
+    file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9 \
     file://third_party/utf8_range/utf8_validity.h;beginline=1;endline=5;md5=db08ddb5817e660489678e7c3653805a \
     file://third_party/xxhash/xxhash.h;beginline=1;endline=34;md5=d41d564db2353fc80a713956d85b1690 \
 "
@@ -14,7 +14,7 @@ SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            file://0001-Fix-OpenSSL-4.0-compatibility.patch \
            file://abseil-ppc-fixes.patch \
            "
-SRC_URI[sha256sum] = "7382b95189546f375c174f53a5fa873cef91c4b8005faa05cc5b3beea9c4f1c5"
+SRC_URI[sha256sum] = "446e7876b9b991fa124c1d414899fa7cf95f89a3e71237ea0161863dc0b2c09f"
 
 RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 
