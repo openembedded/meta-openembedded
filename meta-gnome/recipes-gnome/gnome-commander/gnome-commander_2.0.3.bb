@@ -24,7 +24,9 @@ REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
 SRC_URI[archive.sha256sum] = "e51178f3256de45324ffd928a4a144fa859a865662bf295129f0188d8d243b57"
-SRC_URI += "file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch"
+SRC_URI += "file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch \
+            file://0002-weak_ref-Use-a-Mutex-for-the-object-id-counter.patch \
+"
 
 require ${BPN}-crates.inc
 
