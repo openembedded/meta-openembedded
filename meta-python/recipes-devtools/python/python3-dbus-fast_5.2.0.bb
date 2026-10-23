@@ -3,14 +3,11 @@ HOMEPAGE = "https://github.com/bluetooth-devices/dbus-fast"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=729e372b5ea0168438e4fd4a00a04947"
 
-SRC_URI += "file://0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch"
-SRC_URI[sha256sum] = "e1d3ee49a4a81524d7caaa2d5a31fc71075a1c977b661df958cee24bef86b8fe"
+SRC_URI[sha256sum] = "a4a5dddc04b1ade5eb7650d791e2f6fb7c1334595593473914e78a2526ecddda"
 
 inherit pypi python_poetry_core cython
 
+# Remove when https://github.com/Bluetooth-Devices/dbus-fast/issues/825 is closed
 DEPENDS += "python3-wheel-native"
 
-RDEPENDS:${PN} += " \
-    python3-core (>=3.7) \
-    python3-async-timeout \
-"
+RDEPENDS:${PN} += "python3-core"
