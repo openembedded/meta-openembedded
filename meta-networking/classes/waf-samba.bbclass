@@ -65,10 +65,15 @@ def get_waf_parallel_make(d):
 # to help generate the cross answer when adding new board support.
 CROSS_METHOD ?= "answer"
 
+WAF_CROSS_ANSWERS_PATH ?= "${THISDIR}/../../files/waf-cross-answers"
+
+# The cross-answers file is read from the layer rather than through
+# SRC_URI, so add it to the checksums to reconfigure when it changes.
+do_configure[file-checksums] += "${WAF_CROSS_ANSWERS_PATH}/cross-answers-${TARGET_ARCH}.txt:True"
+
 do_configure() {
 
     # Prepare the cross-answers file
-    WAF_CROSS_ANSWERS_PATH="${THISDIR}/../../files/waf-cross-answers"
     CROSS_ANSWERS="${B}/cross-answers-${TARGET_ARCH}.txt"
     if [ -e ${CROSS_ANSWERS} ]; then
         rm -f ${CROSS_ANSWERS}
