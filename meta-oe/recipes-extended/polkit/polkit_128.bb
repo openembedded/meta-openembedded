@@ -7,6 +7,7 @@ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
 
 SRC_URI = "\
     git://github.com/polkit-org/polkit.git;protocol=https;branch=main;tag=${PV} \
+    file://0001-ConsoleKit-Handle-session-IDs-from-ConsoleKit2-2.0.patch \
 "
 
 SRCREV = "e6373dc19975d8583568c6cd7025d03e682ca956"
