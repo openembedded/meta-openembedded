@@ -40,4 +40,6 @@ RDEPENDS:${PN}-ptest += " \
 do_install_ptest:append() {
     cp -rf ${S}/tasks ${D}${PTEST_PATH}/
     cp -f ${S}/pyproject.toml ${D}${PTEST_PATH}/
+    # test_documented_cache_lock_name checks snippets in docs/how-to.rst
+    install -Dm 0644 ${S}/docs/how-to.rst ${D}${PTEST_PATH}/docs/how-to.rst
 }
