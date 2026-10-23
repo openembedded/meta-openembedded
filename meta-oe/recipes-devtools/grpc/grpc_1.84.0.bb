@@ -31,6 +31,7 @@ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=
            file://0002-tsi-fix-OpenSSL-4.0-const-and-opaque-compatibility.patch \
            file://0003-tsi-fix-ssl_transport_security_utils-for-OpenSSL-4.0.patch \
            file://0004-tsi-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch \
+           file://0001-security-Update-gRPC-repo-roots.-43699.patch \
            "
 
 inherit cmake pkgconfig
