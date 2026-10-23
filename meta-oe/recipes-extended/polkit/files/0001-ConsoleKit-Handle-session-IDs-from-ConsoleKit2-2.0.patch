@@ -1,0 +1,128 @@
+From af70c70eca49f736b18bc20dd8f372d0bc206536 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 23 Oct 2026 07:03:46 -0700
+Subject: [PATCH] ConsoleKit: Handle session IDs from ConsoleKit2 2.0
+
+ConsoleKit2 2.0 changed its D-Bus API to follow systemd-logind: session
+and seat IDs are no longer D-Bus object paths, so "Session1" instead of
+"/org/freedesktop/ConsoleKit/Session1". GetSessionForUnixProcess still
+returns an object path, but the session database written to
+/var/run/ConsoleKit/database is keyed by the bare ID.
+
+Take the basename of the object path returned by
+GetSessionForUnixProcess so that database lookups by session ID work
+again, and rebuild the object path from the ID when calling methods on
+the session object.
+
+Based on the FreeBSD ports patch:
+https://github.com/freebsd/freebsd-ports/commit/12b84b980b45573c93be5382a274dbe872a1eb73
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/polkit/polkitunixsession.c                  | 12 ++++++++++--
+ src/polkitbackend/polkitbackendsessionmonitor.c | 16 ++++++++++++----
+ 2 files changed, 22 insertions(+), 6 deletions(-)
+
+diff --git a/src/polkit/polkitunixsession.c b/src/polkit/polkitunixsession.c
+index 5811c3c..f611f5b 100644
+--- a/src/polkit/polkitunixsession.c
++++ b/src/polkit/polkitunixsession.c
+@@ -360,6 +360,7 @@ polkit_unix_session_exists_sync (PolkitSubject   *subject,
+   PolkitUnixSession *session = POLKIT_UNIX_SESSION (subject);
+   GDBusConnection *connection;
+   GVariant *result;
++  gchar *session_path = NULL;
+   gboolean ret;
+ 
+   ret = FALSE;
+@@ -368,9 +369,13 @@ polkit_unix_session_exists_sync (PolkitSubject   *subject,
+   if (connection == NULL)
+     goto out;
+ 
++  /* ConsoleKit2 >= 2.0 uses session IDs rather than D-Bus object paths */
++  if (!g_variant_is_object_path (session->session_id))
++    session_path = g_build_path ("/", "/org/freedesktop/ConsoleKit", session->session_id, NULL);
++
+   result = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.ConsoleKit",           /* name */
+-                                        session->session_id,                    /* object path */
++                                        session_path ? session_path : session->session_id, /* object path */
+                                         "org.freedesktop.ConsoleKit.Session",   /* interface name */
+                                         "GetUser",                              /* method */
+                                         NULL, /* parameters */
+@@ -386,6 +391,7 @@ polkit_unix_session_exists_sync (PolkitSubject   *subject,
+   g_variant_unref (result);
+ 
+  out:
++  g_free (session_path);
+   if (connection != NULL)
+     g_object_unref (connection);
+   return ret;
+@@ -468,6 +474,7 @@ polkit_unix_session_initable_init (GInitable     *initable,
+   PolkitUnixSession *session = POLKIT_UNIX_SESSION (initable);
+   GDBusConnection *connection;
+   GVariant *result;
++  const gchar *session_path;
+   gboolean ret;
+ 
+   connection = NULL;
+@@ -498,7 +505,8 @@ polkit_unix_session_initable_init (GInitable     *initable,
+   if (result == NULL)
+     goto out;
+ 
+-  g_variant_get (result, "(o)", &session->session_id);
++  g_variant_get (result, "(&o)", &session_path);
++  session->session_id = g_path_get_basename (session_path);
+   g_variant_unref (result);
+ 
+   ret = TRUE;
+diff --git a/src/polkitbackend/polkitbackendsessionmonitor.c b/src/polkitbackend/polkitbackendsessionmonitor.c
+index c2cb5da..ee99708 100644
+--- a/src/polkitbackend/polkitbackendsessionmonitor.c
++++ b/src/polkitbackend/polkitbackendsessionmonitor.c
+@@ -384,7 +384,8 @@ polkit_backend_session_monitor_get_session_for_subject (PolkitBackendSessionMoni
+ 
+   if (POLKIT_IS_UNIX_PROCESS (subject))
+     {
+-      const gchar *session_id;
++      const gchar *session_path;
++      gchar *session_id;
+       GVariant *result;
+       result = g_dbus_connection_call_sync (monitor->system_bus,
+                                             "org.freedesktop.ConsoleKit",
+@@ -399,14 +400,18 @@ polkit_backend_session_monitor_get_session_for_subject (PolkitBackendSessionMoni
+                                             error);
+       if (result == NULL)
+         goto out;
+-      g_variant_get (result, "(&o)", &session_id);
++      /* ConsoleKit2 >= 2.0 uses session IDs rather than D-Bus object paths */
++      g_variant_get (result, "(&o)", &session_path);
++      session_id = g_path_get_basename (session_path);
+       session = polkit_unix_session_new (session_id);
++      g_free (session_id);
+       g_variant_unref (result);
+     }
+   else if (POLKIT_IS_SYSTEM_BUS_NAME (subject))
+     {
+       guint32 pid;
+-      const gchar *session_id;
++      const gchar *session_path;
++      gchar *session_id;
+       GVariant *result;
+ 
+       result = g_dbus_connection_call_sync (monitor->system_bus,
+@@ -438,8 +443,11 @@ polkit_backend_session_monitor_get_session_for_subject (PolkitBackendSessionMoni
+                                             error);
+       if (result == NULL)
+         goto out;
+-      g_variant_get (result, "(&o)", &session_id);
++      /* ConsoleKit2 >= 2.0 uses session IDs rather than D-Bus object paths */
++      g_variant_get (result, "(&o)", &session_path);
++      session_id = g_path_get_basename (session_path);
+       session = polkit_unix_session_new (session_id);
++      g_free (session_id);
+       g_variant_unref (result);
+     }
+   else
