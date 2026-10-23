@@ -10,6 +10,7 @@ SRC_URI = "\
     file://CVE-2026-4897-01.patch \
     file://CVE-2026-4897-02.patch \
     file://CVE-2026-85498.patch \
+    file://0001-ConsoleKit-Handle-session-IDs-from-ConsoleKit2-2.0.patch \
 "
 
 SRCREV = "9e4894c969eecf26a3ba762f4f7a268aa0fb3e51"
