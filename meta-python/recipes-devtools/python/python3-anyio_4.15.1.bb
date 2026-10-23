@@ -24,4 +24,5 @@ RDEPENDS:${PN} += "\
     python3-numbers \
     python3-io \
     python3-asyncio \
+    python3-typing-extensions \
 "
