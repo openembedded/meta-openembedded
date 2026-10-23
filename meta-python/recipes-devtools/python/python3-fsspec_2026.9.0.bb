@@ -10,6 +10,14 @@ inherit python_hatchling ptest-python-pytest
 
 DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
 
+RDEPENDS:${PN} += "\
+    python3-asyncio \
+    python3-ctypes \
+    python3-json \
+    python3-logging \
+    python3-threading \
+"
+
 RDEPENDS:${PN}-ptest += "\
     python3-pytest \
     python3-pytest-mock \
@@ -28,6 +36,9 @@ do_install_ptest:append() {
     cp -rf ${S}/fsspec/tests/* ${D}${PTEST_PATH}/tests/
     cp -rf ${S}/fsspec/implementations/tests ${D}${PTEST_PATH}/implementations/
     touch ${D}${PTEST_PATH}/implementations/__init__.py
+    # Top-level conftest provides shared fixtures such as "m" and the
+    # autouse instance cache cleaner
+    install -m 0644 ${S}/fsspec/conftest.py ${D}${PTEST_PATH}/
     # Tests import helpers via fsspec.tests / fsspec.implementations.tests,
     # which aren't in the installed package
     grep -rlE 'fsspec\.(implementations\.)?tests' ${D}${PTEST_PATH} \
