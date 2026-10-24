@@ -17,7 +17,7 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
            file://0001-wscript-Add-BISONFLAGS-support.patch \
            "
 
-SRC_URI[sha256sum] = "6fb191cddaf607e7754b1f6915a1a61dc4018b3e4eef3d2ffacec961c9682949"
+SRC_URI[sha256sum] = "8023beb9a0c86a93f0bf94d43fd388c71a6fa54d80bcbd747d899915191bb592"
 
 UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
 
