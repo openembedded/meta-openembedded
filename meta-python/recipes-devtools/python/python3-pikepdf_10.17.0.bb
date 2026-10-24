@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "4b73f926ebae81f04bf14527af330bd00bb268be767e0f189f7c4c3e4ad7ae0a"
+SRC_URI[sha256sum] = "de4ccaae83628e86c1fd473b384c09c6ff1dd35a583a8dacbf61d2aa4bea843b"
 
 SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
 
@@ -30,6 +30,8 @@ RDEPENDS:${PN} += " \
     qpdf \
     python3-pillow \
     python3-lxml \
+    python3-jsonschema \
+    python3-fonttools \
 "
 
 RDEPENDS:${PN}-ptest += " \
@@ -58,6 +60,8 @@ do_install_ptest:append() {
     install -m 0644 ${S}/third-party-licenses/openssl.txt ${D}${PTEST_PATH}/third-party-licenses/
     install -m 0644 ${S}/third-party-licenses/qpdf.txt ${D}${PTEST_PATH}/third-party-licenses/
     install -m 0644 ${S}/third-party-licenses/zlib.txt ${D}${PTEST_PATH}/third-party-licenses/
+    install -d ${D}${PTEST_PATH}/misc
+    install -m 0644 ${S}/misc/pdfa_differential.py ${D}${PTEST_PATH}/misc/
 }
 
 BBCLASSEXTEND = "native nativesdk"
