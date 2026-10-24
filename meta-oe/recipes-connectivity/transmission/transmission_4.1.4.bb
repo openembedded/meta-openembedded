@@ -14,8 +14,7 @@ SRC_URI = " \
 	file://transmission-daemon \
 "
 
-# Transmission release 4.1.3
-SRCREV = "838877323facc4cc2b677fe817e203779c437bb1"
+SRCREV = "a6d907d9ea2313143af714d7830feb6c1b60b84c"
 
 
 inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
