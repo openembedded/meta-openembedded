@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https;tag=v
            file://0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch \
            "
 
-SRCREV = "15ccae27deb9aa1dc8e46ea0ed218a673ccc5732"
+SRCREV = "62899bd053c39b70380464e8f64dbcfce92579aa"
 
 inherit autotools pkgconfig
 
