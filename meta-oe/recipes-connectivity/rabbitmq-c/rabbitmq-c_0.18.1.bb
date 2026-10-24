@@ -5,7 +5,7 @@ LICENSE = "MIT"
 
 SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https;tag=v${PV} \
 "
-SRCREV = "b0b5f3774a216bcae9f31645c4ab581f718bd211"
+SRCREV = "dc22a7fa21522788310ec7f3f49bc3f028150b22"
 
 
 DEPENDS = "popt openssl"
