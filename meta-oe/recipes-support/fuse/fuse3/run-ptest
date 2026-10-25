@@ -7,6 +7,10 @@
 # so print it as is and add the ptest result line after it.
 cd "$(dirname "$0")"
 
+# The mount/blkdev-fsname-* tests attach a loop device, and the loop driver
+# is not loaded on demand when /dev/loop-control has not been created yet.
+modprobe -q loop
+
 # Some test filesystems mirror the real tree but cannot follow symlinks, so
 # keep the run directory off paths like /var/tmp, which is a symlink to
 # volatile/tmp. run-tests.py creates the directory and removes it when done.

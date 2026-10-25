@@ -51,7 +51,7 @@ RDEPENDS:${PN}-ptest += " \
     file \
     util-linux-losetup \
 "
-RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
+RRECOMMENDS:${PN}-ptest += " kernel-module-cuse kernel-module-loop"
 
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/test
