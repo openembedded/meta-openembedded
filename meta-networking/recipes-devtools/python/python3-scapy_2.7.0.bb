@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https;tag=v$
            file://0002-main-initialize-banner-for-the-default-Python-shell.patch \
            file://0003-libpcap-load-libpcap-even-when-find_library-cannot-l.patch \
            file://0004-test-don-t-depend-on-libc-formatting-of-IPv4-compati.patch \
+           file://0005-test-skip-live-whois-tests-in-ptest.patch \
            file://run-ptest"
 
 UPSTREAM_CHECK_COMMITS = "1"
