@@ -63,7 +63,7 @@ do_install_ptest() {
 }
 
 do_install_ptest:append:libc-musl() {
-        sed -i -e "s/ and not test_process_teardown'/ and not test_process_teardown and not test_close_all_fds'/" \
+        sed -i -e "s/ and not test_retry_poll'/ and not test_retry_poll and not test_close_all_fds'/" \
             ${D}${PTEST_PATH}/run-ptest
         grep -q "not test_close_all_fds'" ${D}${PTEST_PATH}/run-ptest || bbfatal "failed to skip test_close_all_fds in run-ptest"
 }
