@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b38a11bf4dcdfc66307f8515ce1fbaa6"
 SRC_URI = "git://github.com/fsspec/filesystem_spec;protocol=https;branch=master;tag=${PV}"
 SRCREV = "0f76baaae4a227b085b18e8469e6cc1792a95ade"
 
+SRC_URI += "file://run-ptest"
+
 inherit python_hatchling ptest-python-pytest
 
 DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
