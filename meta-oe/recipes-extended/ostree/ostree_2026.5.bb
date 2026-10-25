@@ -22,7 +22,7 @@ GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
            file://run-ptest \
            "
-SRC_URI[sha256sum] = "b26c9016eb03bb4ee52cc00c642d56e00fc79ae7faac6bf4aa317d7451339ef7"
+SRC_URI[sha256sum] = "1829428ed2d982dc684211ff18525b57ea627056a68fa5b04f674f0ca6c9c19b"
 
 S = "${UNPACKDIR}/libostree-${PV}"
 
