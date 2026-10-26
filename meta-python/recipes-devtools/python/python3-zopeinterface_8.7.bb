@@ -7,7 +7,7 @@ PYPI_PACKAGE = "zope-interface"
 inherit pypi python_setuptools_build_meta
 
 DEPENDS += "python3-wheel-native"
-SRC_URI[sha256sum] = "b40ef9b4873afb5d0dec02b8d2dfde1cf18c72337b60c99cb735961e0bac05c0"
+SRC_URI[sha256sum] = "0b47b62e8d0d99b24bcdd32f4f2120425e5019c3bee2ad69a0e1d75737487a96"
 PACKAGES =. "${PN}-test "
 
 RPROVIDES:${PN} += "zope-interfaces"
