@@ -1,12 +1,12 @@
 SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args etc."
+DESCRIPTION = "multidict implementation"
 HOMEPAGE = "https://github.com/aio-libs/multidict/"
-
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b4fef6e4b0828c2401fb983363985b39"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b5e9e27554f71f0f132919037cb967b2"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
-SRC_URI[sha256sum] = "ec6652a1bee61c53a3e5776b6049172c53b6aaba34f18c9ad04f82712bac623d"
+SRC_URI[sha256sum] = "e8af3e6f1bdbc31fd762b094133b478b89988eaebc63cbe82b1d9e3bbd15cede"
 
 RDEPENDS:${PN}-ptest += " \
     python3-objgraph \
