@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 SRC_URI += " \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "1849a238f6f396da19762269de72cb1814ab44416fa73a8686deac10b0d87a0f"
+SRC_URI[sha256sum] = "e36576e0985e01027e999891e7a966c67822d40c89ef1b4c8b6e22737e3590b4"
 
 inherit pypi python_setuptools_build_meta ptest
 
