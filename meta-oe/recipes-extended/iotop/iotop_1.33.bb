@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=26b36b714daebf72b11715ba73efbad4"
 DEPENDS = "ncurses"
 
 SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "57890d671ba69ebc4a619a1cfe7d76cdd3d836a8"
+SRCREV = "ef5088a660f0b112369fff7643b844fb1e98c2ea"
 
 
 inherit pkgconfig
