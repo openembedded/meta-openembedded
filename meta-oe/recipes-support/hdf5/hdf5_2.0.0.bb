@@ -35,6 +35,10 @@ EXTRA_OECMAKE = " \
     -DCMAKE_INSTALL_PREFIX='${prefix}' \
     -DHDF5_INSTALL_LIB_DIR='${baselib}' \
 "
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[cpp] = "-DHDF5_BUILD_CPP_LIB=ON,-DHDF5_BUILD_CPP_LIB=OFF"
+
 EXTRA_OECMAKE:prepend:class-target = "-DCMAKE_CROSSCOMPILING_EMULATOR=${WORKDIR}/qemuwrapper "
 
 gen_emu() {
@@ -60,9 +64,14 @@ do_install:append() {
     # Used for generating config files on target
     oe_multilib_header H5pubconf.h
     sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' ${D}${bindir}/h5cc
+    if ${@bb.utils.contains('PACKAGECONFIG', 'cpp', 'true', 'false', d)}; then
+        sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' ${D}${bindir}/h5c++
+    fi
 }
 
-MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc"
+MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc \
+                     ${@bb.utils.contains('PACKAGECONFIG', 'cpp', '${PN}:${bindir}/h5c++', '', d)} \
+"
 
 BBCLASSEXTEND = "native"
 
