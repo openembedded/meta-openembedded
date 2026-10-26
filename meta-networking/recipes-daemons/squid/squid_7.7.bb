@@ -117,7 +117,7 @@ do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         # Install service unit file
         install -d ${D}/${systemd_unitdir}/system
-        install ${S}/tools/systemd/squid.service ${D}/${systemd_unitdir}/system
+        install -m 0644 ${S}/tools/systemd/squid.service ${D}/${systemd_unitdir}/system
         sed -i 's:/var/run/:/run/:g' ${D}/${systemd_unitdir}/system/squid.service
 
         # Configure tmpfiles.d
