@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/python-semver/python-semver"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3ce011bad2c5218ddd4973952a6db93a"
 
-SRC_URI[sha256sum] = "afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602"
+SRC_URI[sha256sum] = "14bc073439513d7773662a338f4db9829cf16c12b74b9568e2d2689975fbd7fc"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
