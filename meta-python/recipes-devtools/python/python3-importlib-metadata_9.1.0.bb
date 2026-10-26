@@ -7,11 +7,7 @@ inherit pypi python_setuptools_build_meta
 
 SRC_URI[sha256sum] = "9607fb24f95d4e0b1c17d57ec4604357d76d3f0d154f19fd4861f2e31c8e4065"
 
-S = "${UNPACKDIR}/importlib_metadata-${PV}"
-
 DEPENDS += "python3-setuptools-scm-native python3-coherent-licensed-native"
-RDEPENDS:${PN} += "python3-zipp"
-RDEPENDS:${PN}:append:class-target = " python3-misc"
-RDEPENDS:${PN}:append:class-nativesdk = " python3-misc"
+RDEPENDS:${PN} += "python3-misc python3-zipp"
 
 BBCLASSEXTEND = "native nativesdk"
