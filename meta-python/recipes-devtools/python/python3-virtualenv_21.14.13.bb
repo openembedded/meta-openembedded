@@ -1,12 +1,10 @@
-# SPDX-License-Identifier: MIT
-# Copyright (C) 2023 iris-GmbH infrared & intelligent sensors
-
 SUMMARY = "A tool for creating isolated virtual python environments."
+DESCRIPTION = "Virtual Python Environment builder"
 HOMEPAGE = "https://github.com/pypa/virtualenv"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=36ef9437b761b314fa717c786c5ca460"
 
-SRC_URI[sha256sum] = "1dc49c790072a9072cb1803f9bd62aa69cd583077cada32390f75505cdc64c9b"
+SRC_URI[sha256sum] = "de5307ba4b9a0001d9c8ea02832d38f63ca432880f416c1bface61c4323fd905"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
