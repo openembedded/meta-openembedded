@@ -1,9 +1,10 @@
 SUMMARY = "Python Data Validation for Humans"
+DESCRIPTION = "Python Data Validation for Humans"
 HOMEPAGE = "https://python-validators.github.io/validators"
 LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=78327e3919fcd4e9a4a07299899c634c"
-SRC_URI[sha256sum] = "992d6c48a4e77c81f1b4daba10d16c3a9bb0dbb79b3a19ea847ff0928e70497a"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=728e6b6dd8ebb4906421b89b00645e6e"
+SRC_URI[sha256sum] = "92ad9ed00bbed320b784cec0ea90b213cf08904cf605b3d0852cfa4108e32a2c"
 
 CVE_PRODUCT = "validators"
 
