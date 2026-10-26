@@ -1,10 +1,27 @@
 #!/bin/sh
 
-# ctest result lines look like: "  1/142 Test   #1: test_tick_count .....   Passed    0.01 sec"
-# anything other than Passed/Skipped/Disabled (Failed, Timeout, Exception, Not Run) is a FAIL
+# Running under QEMU (x86 and UEFI arm64 report it via DMI, arm/arm64/riscv
+# virt machines have a fw-cfg node, ppc64 pseries a qemu compatible)
+is_qemu() {
+    [ "$(cat /sys/class/dmi/id/sys_vendor 2>/dev/null)" = "QEMU" ] && return 0
+    for f in /proc/device-tree/fw-cfg@*; do
+        [ -e "$f" ] && return 0
+    done
+    grep -qs qemu /proc/device-tree/compatible
+}
+
 # test_scheduler_mix hangs intermittently on every architecture
 # https://github.com/uxlfoundation/oneTBB/issues/1281
-ctest -E '^test_scheduler_mix$' | awk '/Test +#[0-9]+:/ {
+SKIP='test_scheduler_mix'
+# test_resumable_tasks switches fibers ~6 million times; emulated, it runs
+# silently for longer than the ptest-runner timeout (~790s on qemuriscv64)
+if is_qemu; then
+    SKIP="$SKIP|test_resumable_tasks"
+fi
+
+# ctest result lines look like: "  1/142 Test   #1: test_tick_count .....   Passed    0.01 sec"
+# anything other than Passed/Skipped/Disabled (Failed, Timeout, Exception, Not Run) is a FAIL
+ctest -E "^($SKIP)\$" | awk '/Test +#[0-9]+:/ {
     if ($0 ~ /Passed/) res = "PASS"
     else if ($0 ~ /Skipped|Disabled/) res = "SKIP"
     else res = "FAIL"
