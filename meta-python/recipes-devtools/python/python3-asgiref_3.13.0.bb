@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
 
-SRC_URI[sha256sum] = "59dcb51c272ad209d59bed5708a64a333083e86017d7fcdd67498eeab7784340"
+SRC_URI[sha256sum] = "034cc8cbf72d00553b4be256703ac545120b4e50af13b49dec99da899aeeecb4"
 
 export BUILD_SYS
 export HOST_SYS
