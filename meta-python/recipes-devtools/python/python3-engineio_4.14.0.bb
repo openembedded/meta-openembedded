@@ -15,6 +15,9 @@ RDEPENDS:${PN} += " \
 	python3-logging \
 	python3-compression \
 	python3-asyncio \
+	python3-io \
+	python3-simple-websocket \
+	python3-threading \
 "
 
 SRC_URI[sha256sum] = "eaa1e386baf9c2c7959eef7f9d9165c5ea910c5b392f5316e78d29ed073cb43d"
