@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/csernazs/pytest-httpserver"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7f54416ccc5478427995b27e5ef38e92"
 
-SRC_URI[sha256sum] = "dc3d82e1fe00e491829d8939c549bf4bd9b39a260f87113c619b9d517c2f8ff1"
+SRC_URI[sha256sum] = "d07744ce2efaafa0575ed3081d416b999c773b09e84aa95065138bedc3e12352"
 
 inherit pypi python_poetry_core ptest-python-pytest
 
