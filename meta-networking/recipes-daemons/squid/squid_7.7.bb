@@ -122,7 +122,7 @@ do_install:append() {
 
         # Configure tmpfiles.d
         install -d ${D}${sysconfdir}/tmpfiles.d
-        echo "d ${localstatedir}/run/${BPN} 0755 squid squid -" >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+        echo "d ${runtimedir}/${BPN} 0755 squid squid -" >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
         echo "d ${localstatedir}/log/${BPN} 0750 squid squid -" >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
     fi
 
