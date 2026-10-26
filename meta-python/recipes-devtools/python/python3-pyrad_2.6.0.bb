@@ -1,9 +1,10 @@
 SUMMARY = "RADIUS tools"
+DESCRIPTION = "Python RADIUS Implementation"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=53dbfa56f61b90215a9f8f0d527c043d"
+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=c97c15f70e2734c8ce7c0d636e662aa8"
 
-SRC_URI[sha256sum] = "e039c48a026c988d49276bd7c75795f55e0e4c2788f7ddf09419ce0e191a154d"
+SRC_URI[sha256sum] = "26d23ca80cde9f50d5ef0167d4c7f2bbfe218d85e207f2c0ca31dddd00a5deee"
 
 inherit pypi python_setuptools_build_meta
 
