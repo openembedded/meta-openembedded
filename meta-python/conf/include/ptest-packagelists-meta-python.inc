@@ -103,6 +103,7 @@ PTESTS_FAST_META_PYTHON = "\
     python3-serpent \
     python3-service-identity \
     python3-setproctitle \
+    python3-simple-websocket \
     python3-simpleeval \
     python3-six \
     python3-smpplib \
