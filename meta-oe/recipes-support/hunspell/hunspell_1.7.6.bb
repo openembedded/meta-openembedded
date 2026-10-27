@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LESSER;md5=c96ca6c1de8adc025adfada81d06fba5 \
 "
 
-SRCREV = "e8342700b4dde06130cdbba75f7e6500ffa58864"
+SRCREV = "15faca15532b34db3106d50f162e5edc2503d6d6"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=v${PV} \
            file://run-ptest \
 "
