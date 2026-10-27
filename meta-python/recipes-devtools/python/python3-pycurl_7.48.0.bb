@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
                     file://COPYING-MIT;md5=be42e1b1e58c8d59c2901fd747bfc55d \
                     "
 
-SRC_URI[sha256sum] = "5e3cf357939da8d4ceefe3c7f305afcf9b47cba66cfd95e7768ca43b38445e14"
+SRC_URI[sha256sum] = "b70961a76c412cd34f9cc2c9558e63f89fb37045c59eee396c585b52973be280"
 
 SRC_URI += " file://run-ptest"
 
