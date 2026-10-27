@@ -17,15 +17,11 @@ SRC_URI += "file://add-back-option-build-base.patch \
            "
 SRC_URI[sha256sum] = "44e836d1bccd99c38790bb034b6ecf70d9060f6734320560f7c4b0d006144793"
 
-inherit pypi setuptools3 cython pkgconfig features_check
+inherit pypi python_setuptools_build_meta cython pkgconfig features_check
 
-# wxPython declares setuptools.build_meta in pyproject.toml, but it cannot be
-# built through pyproject-build: the sdist ships a build.py in its top level
-# directory, which shadows the "build" module pyproject-build itself imports:
-#   from build.__main__ import entrypoint
-#   ModuleNotFoundError: No module named 'build.__main__'; 'build' is not a package
-# Keep driving setup.py directly until upstream stops colliding with that name.
-INSANE_SKIP += "pep517-backend"
+# pyproject.toml pins sip == 6.12.0, which is only needed to regenerate the
+# wrapper sources; the sdist already ships them.
+PEP517_BUILD_OPTS = "--skip-dependency-check"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
