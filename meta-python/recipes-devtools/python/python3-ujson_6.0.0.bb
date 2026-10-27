@@ -4,7 +4,7 @@ DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pu
 LICENSE = "BSD-3-Clause AND TCL"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1e3768cfe2662fa77c49c9c2d3804d87"
 
-SRC_URI[sha256sum] = "d62e3d7625384c08082abad81a077af587fdef2761bb14c3822f4234b8d07d75"
+SRC_URI[sha256sum] = "80e23393feb707582e0ad495c397a4477b646d08094d2df64f7316f9fafd8aae"
 
 CVE_PRODUCT = "ultrajson:ultrajson ultrajson_project:ultrajson"
 
