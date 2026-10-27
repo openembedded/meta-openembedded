@@ -238,7 +238,3 @@ INSANE_SKIP:${PN} += "already-stripped"
 
 SECURITY_CFLAGS = ""
 COMPATIBLE_HOST:libc-musl = 'null'
-
-# It has native clang/llvm dependency, poky distro is reluctant to include them as deps
-# this helps with world builds on AB
-EXCLUDE_FROM_WORLD = "1"
