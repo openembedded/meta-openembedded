@@ -13,6 +13,7 @@ DEPENDS = "libdrm pixman aml zlib"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[tls] = "-Dtls=enabled,-Dtls=disabled,gnutls"
+PACKAGECONFIG[nettle] = "-Dnettle=enabled,-Dnettle=disabled,nettle hogweed gmp"
 PACKAGECONFIG[jpeg] = "-Djpeg=enabled,-Djpeg=disabled,libjpeg-turbo"
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false,libpng"
 PACKAGECONFIG[benchmarks] = "-Dbenchmarks=true,-Dbenchmarks=false,libpng"
