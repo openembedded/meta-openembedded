@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            "
-SRCREV = "7f1dffedff6de73058b2c2a389422b6ecd56c8fb"
+SRCREV = "29173b67508b2de4c0f0ed551f3b47cf19fc3ca8"
 
 RPROVIDES:${PN} = "virtual-redis"
 
