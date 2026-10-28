@@ -113,6 +113,14 @@ do_compile:prepend:class-target () {
     sed -i -e "s:CMAKE_SYSROOT:CMAKE_SYSROOT_PLACE_HOLDER:g" ${S}/libmariadb/mariadb_config/mariadb_config.c.in
 }
 
+do_configure:prepend() {
+    # The parser is regenerated in ${B} with bison-native, but sql/*.cc
+    # would still #include the stale headers next to them in ${S}, whose
+    # #line directives carry /home/buildbot/... paths into the debug info.
+    rm -f ${S}/sql/yy_mariadb.cc ${S}/sql/yy_mariadb.hh \
+          ${S}/sql/yy_oracle.cc ${S}/sql/yy_oracle.hh
+}
+
 do_configure:append() {
     # handle distros with different values of ${libexecdir}
     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
