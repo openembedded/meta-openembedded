@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
 DEPENDS = "yyjson"
 
 SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "0c3b852bf7bad2837a814c7a31bf332092048a2b"
+SRCREV = "17bb3fd2384bd814b421d73b8c8b8d08e06cfa26"
 
 inherit cmake pkgconfig
 
@@ -25,7 +25,7 @@ PACKAGECONFIG ??= "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'egl', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'glx', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcb xrandr', '', d)} \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'opencl pulseaudio vulkan wayland', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'opencl vulkan wayland', d)} \
     dbus \
     drm \
     sqlite3 \
@@ -34,7 +34,6 @@ PACKAGECONFIG ??= "\
 PACKAGECONFIG[chafa] = "-DENABLE_CHAFA=ON,-DENABLE_CHAFA=OFF,chafa"
 PACKAGECONFIG[dbus] = "-DENABLE_DBUS=ON,-DENABLE_DBUS=OFF,dbus"
 PACKAGECONFIG[dconf] = "-DENABLE_DCONF=ON,-DENABLE_DCONF=OFF,dconf"
-PACKAGECONFIG[ddcutil] = "-DENABLE_DDCUTIL=ON,-DENABLE_DDCUTIL=OFF,ddcutil"
 PACKAGECONFIG[drm] = "-DENABLE_DRM=ON,-DENABLE_DRM=OFF,libdrm"
 PACKAGECONFIG[egl] = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF,virtual/egl"
 PACKAGECONFIG[elf] = "-DENABLE_ELF=ON,-DENABLE_ELF=OFF,elfutils"
@@ -45,8 +44,6 @@ PACKAGECONFIG[glx] = "-DENABLE_GLX=ON,-DENABLE_GLX=OFF,virtual/libgles2"
 PACKAGECONFIG[imagemagick] = "-DENABLE_IMAGEMAGICK7=ON -DENABLE_IMAGEMAGICK6=OFF,-DENABLE_IMAGEMAGICK7=OFF -DENABLE_IMAGEMAGICK6=OFF,imagemagick"
 PACKAGECONFIG[lua] = "-DENABLE_LUA=ON,-DENABLE_LUA=OFF,lua"
 PACKAGECONFIG[opencl] = "-DENABLE_OPENCL=ON,-DENABLE_OPENCL=OFF,opencl-headers virtual/libopencl1"
-PACKAGECONFIG[pulseaudio] = "-DENABLE_PULSE=ON,-DENABLE_PULSE=OFF,pulseaudio"
-PACKAGECONFIG[quickjs] = "-DENABLE_QUICKJS=ON,-DENABLE_QUICKJS=OFF,quickjs"
 PACKAGECONFIG[rpm] = "-DENABLE_RPM=ON,-DENABLE_RPM=OFF,rpm"
 PACKAGECONFIG[sixel] = "-DENABLE_SIXEL=ON,-DENABLE_SIXEL=OFF,"
 PACKAGECONFIG[sqlite3] = "-DENABLE_SQLITE3=ON,-DENABLE_SQLITE3=OFF,sqlite3"
