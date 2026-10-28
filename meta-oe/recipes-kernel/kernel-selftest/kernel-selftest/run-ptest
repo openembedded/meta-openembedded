@@ -7,9 +7,22 @@
 # move to their own process group, escape the per-test timeout and keep the
 # runner blocked (and silent) until they finish, so ptest-runner kills the
 # whole suite. Skip it.
-/usr/kernel-selftest/run_kselftest.sh -s -S ftrace:ftracetest-ktap -S filesystems:file_stressor
-if [ $? == 0 ]; then
-    echo "PASS: kernel-selftest"
-else
-    echo "[FAIL]: kernel-selftest"
-fi
+#
+# Turn the runner's per-test TAP lines ("ok 3 selftests: cgroup: test_core",
+# "not ok 4 ... # exit=1", "ok 5 ... # SKIP") into PASS:/FAIL:/SKIP: lines
+# that ptest log parsers understand, keeping the original output too.
+/usr/kernel-selftest/run_kselftest.sh -s -S ftrace:ftracetest-ktap -S filesystems:file_stressor 2>&1 | awk '
+{ print; fflush() }
+/^(not )?ok [0-9]+ selftests: / {
+    res = "PASS"
+    if ($0 ~ /^not ok/)
+        res = "FAIL"
+    else if ($0 ~ /# SKIP/)
+        res = "SKIP"
+    name = $0
+    sub(/^(not )?ok [0-9]+ selftests: /, "", name)
+    sub(/ *#.*$/, "", name)
+    sub(/: /, ":", name)
+    print res ": " name
+    fflush()
+}'
