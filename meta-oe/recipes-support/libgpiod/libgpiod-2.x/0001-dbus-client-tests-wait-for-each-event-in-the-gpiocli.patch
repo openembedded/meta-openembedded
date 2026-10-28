@@ -1,0 +1,82 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 15:37:49 -0800
+Subject: [PATCH] dbus: client: tests: wait for each event in the gpiocli
+ monitor tests
+
+test_monitor_all_lines_on_request and test_monitor_multiple_lines_by_name
+pull one line up, a second line up and the first line down again in
+quick succession and only then read the monitor output. gpio-sim raises
+the line interrupts through irq_sim, so two changes of the same line
+that happen before the interrupt is handled are delivered as one
+interrupt, and as edge detection is set to both edges the kernel derives
+the edge type from the line value read in the handler. The rising edge
+on the first line is then lost and only a falling edge is reported,
+timestamped after the rising edge on the second line:
+
+  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
+  match '[0-9]+ rising\s+"foo"'
+
+  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
+  match '[0-9]+ rising\s+"foo"'
+
+The tests fail intermittently, in 12 and 13 of 20 runs respectively, in a
+qemux86-64 guest.
+
+Wait for each event before triggering the next one, like the gpiomon
+tests in gpio-tools-test.bash do. In test_monitor_multiple_lines_by_name,
+matching the next line of output instead of searching all of it also
+makes the test verify that the change of line bar, which is not
+monitored, is ignored.
+
+Fixes: a5ab76da1e0a ("dbus: add the D-Bus daemon, command-line client and tests")
+Upstream-Status: Submitted [https://lore.kernel.org/linux-gpio/20261125234308.4052324-1-raj.khem@gmail.com/]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ dbus/client/gpiocli-test.bash | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
+index 5160f57..ebddcbf 100755
+--- a/dbus/client/gpiocli-test.bash
++++ b/dbus/client/gpiocli-test.bash
+@@ -1376,14 +1376,14 @@ test_monitor_multiple_lines_by_name() {
+ 	dut_run gpiocli monitor foo xyz
+ 
+ 	gpiosim_set_pull sim0 1 pull-up
++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
++
+ 	gpiosim_set_pull sim0 5 pull-up # This should be ignored
+ 	gpiosim_set_pull sim0 11 pull-up
+-	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ rising\\s+\"xyz\""
+ 
+-	dut_read
+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
+-	output_regex_match "[0-9]+ rising\\s+\"xyz\""
+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
++	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
+ 
+ 	gpiodbus_release_request "$request"
+ }
+@@ -1421,13 +1421,13 @@ test_monitor_all_lines_on_request() {
+ 	dut_run gpiocli monitor -r "$request"
+ 
+ 	gpiosim_set_pull sim0 1 pull-up
++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
++
+ 	gpiosim_set_pull sim0 4 pull-up
+-	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ rising\\s+4"
+ 
+-	dut_read
+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
+-	output_regex_match "[0-9]+ rising\\s+4"
+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
++	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
+ 
+ 	gpiodbus_release_request "$request"
+ }

@@ -25,6 +25,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
 
 SRC_URI += " \
     file://gpio-manager.init \
+    file://0001-dbus-client-tests-wait-for-each-event-in-the-gpiocli.patch \
 "
 
 SRC_URI[sha256sum] = "dc48fb87cd72019745acb201599caf559556b5d913844df0ed011067d19e9a6b"
