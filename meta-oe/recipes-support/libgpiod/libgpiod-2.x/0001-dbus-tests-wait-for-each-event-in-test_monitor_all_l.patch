@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 28 Oct 2026 07:55:33 -0700
+Subject: [PATCH] dbus: tests: wait for each event in
+ test_monitor_all_lines_on_request
+
+The test pulls line 1 up, line 4 up and line 1 down again in quick
+succession and only then reads the monitor output. gpio-sim raises the
+line interrupts through irq_sim, so two changes of the same line that
+happen before the interrupt is handled are delivered as one interrupt,
+and as edge detection is set to both edges the kernel derives the edge
+type from the line value read in the handler. The rising edge on line 1
+is then lost and only a falling edge is reported, timestamped after the
+rising edge on line 4:
+
+  ASSERT: '41610700648 falling "foo" 41610665414 rising  4' did not
+  match '[0-9]+ rising\s+"foo"'
+
+This fails intermittently, in 12 of 20 runs in a qemux86-64 guest.
+
+Wait for each event before triggering the next one, like the gpiomon
+tests in gpio-tools-test.bash do.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ dbus/client/gpiocli-test.bash | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
+index 5160f57..ede69c9 100755
+--- a/dbus/client/gpiocli-test.bash
++++ b/dbus/client/gpiocli-test.bash
+@@ -1421,13 +1421,13 @@ test_monitor_all_lines_on_request() {
+ 	dut_run gpiocli monitor -r "$request"
+ 
+ 	gpiosim_set_pull sim0 1 pull-up
++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
++
+ 	gpiosim_set_pull sim0 4 pull-up
+-	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ rising\\s+4"
+ 
+-	dut_read
+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
+-	output_regex_match "[0-9]+ rising\\s+4"
+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
++	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
+ 
+ 	gpiodbus_release_request "$request"
+ }
