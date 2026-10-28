@@ -5,11 +5,11 @@ SECTION = "libs/networking"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
 
-SRC_URI = "git://github.com/nanomsg/nng.git;branch=stable;protocol=https \
+SRC_URI = "git://github.com/nanomsg/nng.git;branch=main;protocol=https \
            file://run-ptest \
           "
 
-SRCREV = "73f715235967afc783e0b99c52d015dc10897fda"
+SRCREV = "0912dcbd63f2f44324fa974e9fc9695c7621abb9"
 
 inherit cmake pkgconfig ptest
 
@@ -23,7 +23,8 @@ PACKAGECONFIG[mbedtls] = "-DNNG_ENABLE_TLS=ON,-DNNG_ENABLE_TLS=OFF,mbedtls"
 
 do_install_ptest(){
     install -d ${D}/${PTEST_PATH}/tests
-    find ${B}/tests -type f -executable -exec install {} ${D}${PTEST_PATH}/tests/ \;
+    find ${B}/src -type f -executable -name '*_test' -exec install {} ${D}${PTEST_PATH}/tests/ \;
+    install ${B}/tests/cplusplus_pair ${D}${PTEST_PATH}/tests/
 }
 
 PACKAGES =+ "${PN}-tools"
