@@ -249,5 +249,4 @@ RDEPENDS:packagegroup-meta-networking-support:remove:libc-musl = "ypbind-mt"
 
 EXCLUDE_FROM_WORLD = "1"
 # Empty packages, only devel headers and libs
-# nngpp
 # Use ntp and not chrony or ntimed
