@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://crash.c;beginline=1;endline=25;md5=c278eae78e2bf99783
 
 inherit module
 
-SRCREV = "61fe107ff96a22e7df0029877529b7ce6da36850"
+SRCREV = "a507c2f2036e43c62053a9f5ece0289dcb6f05fb"
 SRC_URI = "git://github.com/crash-utility/crash;protocol=https;branch=master;subpath=memory_driver;destsuffix=${BP} \
            file://0001-hacked-Makefile-for-module.bbclass.patch;striplevel=2 \
            "
-PV = "9.0.2+git"
+PV = "9.0.3+git"
 
 # The inherit of module.bbclass will automatically name module packages with
 # "kernel-module-" prefix as required by the oe-core build environment.
