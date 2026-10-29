@@ -1,18 +1,18 @@
 SUMMARY = "A 802.1ab implementation (LLDP) to help you locate neighbors of all your equipments"
 SECTION = "net/misc"
 LICENSE = "ISC"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=31864e0b3df438284c0adef04a6897e5"
 
 DEPENDS = "libbsd libevent"
 
 SRC_URI = "\
-    http://media.luffy.cx/files/${BPN}/${BP}.tar.gz \
+    git://github.com/lldpd/lldpd.git;branch=master;protocol=https;tag=${PV} \
     file://lldpd.init.d \
     file://lldpd.default \
     file://run-ptest \
     "
 
-SRC_URI[sha256sum] = "9587940ed2314a86774c5499f3dfb13a8eb86232a62d243a83a1f09886848e03"
+SRCREV = "d092902333a89e228b144a1c9b4c41df3b0761e8"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
 
