@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
 
 SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV}"
 
-SRCREV = "4d6d09b544d84b836cf1906735354b4e694a0c1c"
+SRCREV = "783437adc56c2d7ce2cac1ec584acad798594267"
 
 
 DEPENDS = "libdrm pixman aml zlib"
