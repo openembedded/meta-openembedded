@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${
            file://0001-Use-automake-output-for-tests.patch \
            file://0001-Allow-test-data-path-configuration.patch \
            "
-SRCREV = "2cd987a731236037b6b78cbff897d08685a8ef49"
+SRCREV = "b0859fc61fea5dedfc898aece6b15893ddf4314e"
 
 inherit cmake gettext ptest
 
