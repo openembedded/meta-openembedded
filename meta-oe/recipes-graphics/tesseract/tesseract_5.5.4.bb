@@ -5,15 +5,8 @@ BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "db0ec62f81b0737fbbe184d8fea40af5738f8eef"
+SRCREV = "7e548e6eff172f38f97664afe7f7ce40db36c8d6"
 SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https;tag=${PV} \
-           file://CVE-2026-88052.patch \
-           file://CVE-2026-88048.patch \
-           file://CVE-2026-88049.patch \
-           file://CVE-2026-88050.patch \
-           file://CVE-2026-88047.patch \
-           file://CVE-2026-88051.patch \
-           file://CVE-2026-88054.patch \
 "
 
 DEPENDS = "leptonica"
