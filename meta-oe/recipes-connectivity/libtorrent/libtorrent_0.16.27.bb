@@ -7,9 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
 
 SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV} \
-           file://0001-checks.m4-Keep-the-atomic-test-program-from-being-opt.patch \
            "
-SRCREV = "21daa3b96a3b8cfe14961545b5115de7ed12da95"
+SRCREV = "47114f095b3476ed4ccd8dbee6f027f5905adce7"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
