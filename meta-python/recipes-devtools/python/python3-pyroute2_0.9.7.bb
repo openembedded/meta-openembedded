@@ -20,6 +20,7 @@ RDEPENDS:${PN} += " \
     python3-pickle \
     python3-pkgutil \
     python3-pprint \
+    python3-resource \
     python3-shell \
     python3-sqlite3 \
     python3-unittest \
