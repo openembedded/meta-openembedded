@@ -4,7 +4,7 @@ HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 
-SRC_URI[sha256sum] = "e8822fc40db1e1858054d7a949a888695bc9bdce70139178e33bd2871a453ca1"
+SRC_URI[sha256sum] = "6a22c1e2e6e32e0633ee7e170f00009a29b8228b16feb219ee42f32fd8d88a8f"
 
 SRC_URI += "file://run-ptest"
 
@@ -22,14 +22,17 @@ RDEPENDS:${PN} += "\
     python3-annotated-doc \
     python3-fastapi-cli \
     python3-json \
+    python3-opentelemetry-api \
     python3-pydantic \
     python3-starlette \
     python3-typing-extensions \
 "
 
 RDEPENDS:${PN}-ptest += "\
+                        git \
                         python3-coverage \
                         python3-httpx \
+                        python3-opentelemetry-sdk \
                         python3-orjson \
                         python3-dirty-equals \
                         python3-pytest-httpx \
