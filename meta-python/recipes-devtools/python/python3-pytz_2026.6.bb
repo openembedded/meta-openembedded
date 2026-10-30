@@ -7,7 +7,7 @@ inherit pypi setuptools3 ptest-python-pytest
 
 PTEST_PYTEST_DIR = "pytz/tests"
 
-SRC_URI[sha256sum] = "fa23724b9c486543b9ff54a327ee7569ac83ade54bb9afd0fc18676620401c86"
+SRC_URI[sha256sum] = "3b0fc2727707663d6e517936f444fd8a8b240f1fc32f4bf7ee03274245945284"
 
 RDEPENDS:${PN}:class-target += "\
     python3-datetime \
