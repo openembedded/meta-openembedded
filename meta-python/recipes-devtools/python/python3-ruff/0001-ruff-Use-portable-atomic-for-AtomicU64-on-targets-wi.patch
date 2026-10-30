@@ -1,4 +1,4 @@
-From d2c053cc5d1906f1276ce323531c626f6e199e26 Mon Sep 17 00:00:00 2001
+From 3db4e7361ecdafec16b5ea23a2a21e62bc5d87bd Mon Sep 17 00:00:00 2001
 From: Khem Raj <khem.raj@oss.qualcomm.com>
 Date: Wed, 21 Oct 2026 18:00:00 -0700
 Subject: [PATCH] ruff: Use portable-atomic for AtomicU64 on targets without
@@ -31,7 +31,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  4 files changed, 58 insertions(+), 4 deletions(-)
 
 diff --git a/Cargo.lock b/Cargo.lock
-index 08da4b1..f6ae6ce 100644
+index 84eda7b..4444142 100644
 --- a/Cargo.lock
 +++ b/Cargo.lock
 @@ -3123,6 +3123,7 @@ dependencies = [
@@ -43,7 +43,7 @@ index 08da4b1..f6ae6ce 100644
   "regex",
   "rkyv",
 diff --git a/Cargo.toml b/Cargo.toml
-index ae31696..57a66fb 100644
+index f5f3f6c..288535a 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
 @@ -172,6 +172,7 @@ pathdiff = { version = "0.2.1", default-features = false }
@@ -55,7 +55,7 @@ index ae31696..57a66fb 100644
  proc-macro2 = { version = "1.0.79", default-features = false, features = ["proc-macro"] }
  pyproject-toml = { version = "0.13.4", default-features = false }
 diff --git a/crates/ruff/Cargo.toml b/crates/ruff/Cargo.toml
-index a7cd6cd..b7ca393 100644
+index d88c322..a0de836 100644
 --- a/crates/ruff/Cargo.toml
 +++ b/crates/ruff/Cargo.toml
 @@ -77,6 +77,9 @@ tikv-jemallocator = { workspace = true }
