@@ -4,11 +4,16 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2b6a85414b7d058ab1c58e11611c21b2"
 
-SRC_URI[sha256sum] = "178703fa98c07d8eecd5ae569e7e8d159e493ebb6eeb534a8fe973fbc4e40ef0"
+SRC_URI[sha256sum] = "e83a0ed91f2dadeeb50236d673736fe2edc6fcc0a1c1e13d461192d4b23d5bcc"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
-RDEPENDS:${PN} += " \
+DEPENDS += "\
+    python3-wheel-native \
+    python3-setuptools-scm-native \
+"
+
+RDEPENDS:${PN} += "\
     python3-eth-typing \
     python3-eth-utils \
     python3-parsimonious \
