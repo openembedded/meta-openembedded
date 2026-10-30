@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
 
-SRC_URI[sha256sum] = "22a417f4d7b00149f0af82ef7c491f8ecc4b1d5454633fd319b386f5eb806f92"
+SRC_URI[sha256sum] = "48d9c22affe4ac419b4dd0691fa929d759e1f99574be41826785f2dbf3da63a5"
 
 
 inherit pypi python_setuptools_build_meta
