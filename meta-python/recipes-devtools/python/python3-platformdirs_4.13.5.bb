@@ -7,7 +7,9 @@ SRC_URI[sha256sum] = "05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb4754
 
 inherit pypi python_hatchling ptest-python-pytest
 
-SRC_URI += "file://run-ptest"
+SRC_URI += "file://run-ptest \
+            file://0001-test-unix-use-host-strerror-in-warning-tests-630.patch \
+            "
 
 DEPENDS += " \
     python3-hatch-vcs-native \
