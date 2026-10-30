@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
 
-SRC_URI[sha256sum] = "ea1619f3d6108a1c3ecd0f81c952ff2dffd023b244704f6f7a17c4f4dca75f73"
+SRC_URI[sha256sum] = "c9f9059ae9028902065d5fc4478728749e27815f5548e6b249f963350d812e8e"
 
 
 inherit pypi python_setuptools_build_meta
