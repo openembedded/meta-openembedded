@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus"
 
-SRCREV = "8fa27cabdc6c0c1350c69c026af5850ef0af1e26"
+SRCREV = "4287f31510771fc999f8a58a024c81ca10b8d55f"
 BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
 SRC_URI += "file://0001-pipewire-compress-offload.patch"
