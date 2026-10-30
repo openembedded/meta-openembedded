@@ -20,4 +20,4 @@ RDEPENDS:${PN} += " \
 	python3-threading \
 "
 
-SRC_URI[sha256sum] = "eaa1e386baf9c2c7959eef7f9d9165c5ea910c5b392f5316e78d29ed073cb43d"
+SRC_URI[sha256sum] = "1a412e798a90c64fabe7b20798939ae6d4a03f34da8a33d5a21a25a8bbbc3612"
