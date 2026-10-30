@@ -6,7 +6,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 PTEST_PYTEST_DIR = "test"
 
-SRC_URI[sha256sum] = "32edb81a2b5eb7cd7c9d941b2bfbbb082fd2cd09e0e725930316af6b708db186"
+SRC_URI[sha256sum] = "475c44e12f2a5de766a8448783f149c9b33f3f49b88953c6cd739a77d93c732c"
 
 RDEPENDS:${PN}:append:class-target = " \
     python3-io \
