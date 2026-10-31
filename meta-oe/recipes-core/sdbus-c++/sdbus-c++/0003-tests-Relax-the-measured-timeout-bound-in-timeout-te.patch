@@ -1,0 +1,52 @@
+From 623714493ba8144b38be6157f55e32acb0e51021 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 31 Oct 2026 11:37:50 -0700
+Subject: [PATCH 2/2] tests: Relax the measured timeout bound in timeout tests
+
+ThrowsTimeoutErrorWhenMethodTimesOut and
+ThrowsTimeoutErrorWhenClientSideAsyncMethodTimesOut call a method that
+takes 1 second with a 1 microsecond timeout, and then assert that the
+timeout error arrived within 50 ms. On an emulated (qemu TCG) aarch64
+machine with a busy host this takes longer, e.g.
+
+  Value of: measuredTimeout
+  Expected: is <= 0.05s
+    Actual: 0.0567641s
+
+Allow 500 ms instead. That is still well below the 1 second the operation
+takes, so the tests still check that the client side timeout fired.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ tests/integrationtests/DBusAsyncMethodsTests.cpp | 2 +-
+ tests/integrationtests/DBusMethodsTests.cpp      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/integrationtests/DBusAsyncMethodsTests.cpp b/tests/integrationtests/DBusAsyncMethodsTests.cpp
+index 14942ba..ea05c3e 100644
+--- a/tests/integrationtests/DBusAsyncMethodsTests.cpp
++++ b/tests/integrationtests/DBusAsyncMethodsTests.cpp
+@@ -82,7 +82,7 @@ TYPED_TEST(AsyncSdbusTestObject, ThrowsTimeoutErrorWhenClientSideAsyncMethodTime
+         ASSERT_THAT(e.getName(), AnyOf("org.freedesktop.DBus.Error.Timeout", "org.freedesktop.DBus.Error.NoReply"));
+         ASSERT_THAT(e.getMessage(), AnyOf("Connection timed out", "Method call timed out"));
+         auto measuredTimeout = std::chrono::steady_clock::now() - start;
+-        ASSERT_THAT(measuredTimeout, Le(50ms));
++        ASSERT_THAT(measuredTimeout, Le(500ms)); // Well below the 1s operation time, with headroom for slow (e.g. emulated) machines
+     }
+     catch(...)
+     {
+diff --git a/tests/integrationtests/DBusMethodsTests.cpp b/tests/integrationtests/DBusMethodsTests.cpp
+index 3066317..695d797 100644
+--- a/tests/integrationtests/DBusMethodsTests.cpp
++++ b/tests/integrationtests/DBusMethodsTests.cpp
+@@ -197,7 +197,7 @@ TYPED_TEST(SdbusTestObject, ThrowsTimeoutErrorWhenMethodTimesOut)
+         ASSERT_THAT(e.getName(), AnyOf("org.freedesktop.DBus.Error.Timeout", "org.freedesktop.DBus.Error.NoReply"));
+         ASSERT_THAT(e.getMessage(), AnyOf("Connection timed out", "Operation timed out", "Method call timed out"));
+         auto measuredTimeout = std::chrono::steady_clock::now() - start;
+-        ASSERT_THAT(measuredTimeout, Le(50ms));
++        ASSERT_THAT(measuredTimeout, Le(500ms)); // Well below the 1s operation time, with headroom for slow (e.g. emulated) machines
+     }
+     catch(...)
+     {

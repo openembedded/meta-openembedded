@@ -19,6 +19,8 @@ DEPENDS += "expat"
 SRCREV = "ca073434d2c03c2b619f7e23f285cebbf32c7e46"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV} \
            file://0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch \
+           file://0002-tests-Use-a-longer-timeout-for-the-large-argument-me.patch \
+           file://0003-tests-Relax-the-measured-timeout-bound-in-timeout-te.patch \
            file://run-ptest"
 
 EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
