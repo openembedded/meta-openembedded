@@ -1,0 +1,33 @@
+From aec608f3643722f98098618f72fcc3c75a14c407 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 15:01:22 -0700
+Subject: [PATCH] selftests/lsm: skip correct_lsm_list_modules without
+ securityfs
+
+correct_lsm_list_modules compares the lsm_list_modules() result with
+/sys/kernel/security/lsm. When the kernel is built without
+CONFIG_SECURITYFS that file does not exist and the test fails:
+
+  lsm_list_modules_test.c:85:correct_lsm_list_modules:Expected 0 (0) == read_sysfs_lsms(sysfs_lsms, page_size) (-1)
+
+Skip the test in that case.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/lsm/lsm_list_modules_test.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tools/testing/selftests/lsm/lsm_list_modules_test.c b/tools/testing/selftests/lsm/lsm_list_modules_test.c
+index 54d59044ace1..f5108c0eb99e 100644
+--- a/tools/testing/selftests/lsm/lsm_list_modules_test.c
++++ b/tools/testing/selftests/lsm/lsm_list_modules_test.c
+@@ -82,6 +82,8 @@ TEST(correct_lsm_list_modules)
+ 
+ 	ASSERT_NE(NULL, sysfs_lsms);
+ 	ASSERT_NE(NULL, syscall_lsms);
++	if (access("/sys/kernel/security/lsm", R_OK))
++		SKIP(return, "/sys/kernel/security/lsm is not available");
+ 	ASSERT_EQ(0, read_sysfs_lsms(sysfs_lsms, page_size));
+ 
+ 	count = lsm_list_modules(syscall_lsms, &size, 0);

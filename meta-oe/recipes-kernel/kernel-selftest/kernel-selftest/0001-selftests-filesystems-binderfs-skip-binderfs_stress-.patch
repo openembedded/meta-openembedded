@@ -1,0 +1,65 @@
+From 35b394922e4f715f31a2a7361adf38f32c00ddaf Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 15:03:06 -0700
+Subject: [PATCH] selftests/filesystems/binderfs: skip binderfs_stress
+ without binderfs
+
+binderfs_test_privileged and binderfs_test_unprivileged skip when the
+kernel has no binderfs, but binderfs_stress mounts it in a child process
+and fails:
+
+  binderfs_test.c:417:binderfs_stress:No such device - Failed to mount binderfs, ...
+  binderfs_test.c:491:binderfs_stress:wait_for_pid() failed
+  not ok 1 global.binderfs_stress
+
+Check /proc/filesystems first and skip the test if binderfs is not
+available.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ .../filesystems/binderfs/binderfs_test.c      | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/tools/testing/selftests/filesystems/binderfs/binderfs_test.c b/tools/testing/selftests/filesystems/binderfs/binderfs_test.c
+index cd82c89f558f..913102d3c620 100644
+--- a/tools/testing/selftests/filesystems/binderfs/binderfs_test.c
++++ b/tools/testing/selftests/filesystems/binderfs/binderfs_test.c
+@@ -36,6 +36,27 @@
+ 		fd = -EBADF;        \
+ 	}
+ 
++static bool binderfs_supported(void)
++{
++	char line[256];
++	bool found = false;
++	FILE *f;
++
++	f = fopen("/proc/filesystems", "re");
++	if (!f)
++		return false;
++
++	while (fgets(line, sizeof(line), f)) {
++		if (!strcmp(line, "nodev\tbinder\n")) {
++			found = true;
++			break;
++		}
++	}
++	fclose(f);
++
++	return found;
++}
++
+ static void change_mountns(struct __test_metadata *_metadata)
+ {
+ 	int ret;
+@@ -388,6 +409,9 @@ TEST(binderfs_stress)
+ 	char binderfs_mntpt[] = P_tmpdir "/binderfs_XXXXXX",
+ 		device_path[sizeof(P_tmpdir "/binderfs_XXXXXX/") + BINDERFS_MAX_NAME];
+ 
++	if (!binderfs_supported())
++		SKIP(return, "The Android binderfs filesystem is not available");
++
+ 	ret = socketpair(PF_LOCAL, SOCK_STREAM | SOCK_CLOEXEC, 0, syncfds);
+ 	ASSERT_EQ(ret, 0) {
+ 		TH_LOG("%s - Failed to create socket pair", strerror(errno));
