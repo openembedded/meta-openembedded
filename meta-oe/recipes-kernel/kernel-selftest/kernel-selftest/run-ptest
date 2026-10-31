@@ -8,10 +8,101 @@
 # runner blocked (and silent) until they finish, so ptest-runner kills the
 # whole suite. Skip it.
 #
+# ptrace:vmaccess and tty:tty_tiocsti_test check for kernel changes that are
+# not in mainline: PTRACE_ATTACH failing with EAGAIN during a multi-threaded
+# exec instead of blocking (the attach test always times out), and TIOCSTI
+# checking the credentials of the file opener rather than the caller. Skip
+# them.
+#
+# landlock:fs_bench only reports timings, and walking its 10000 nested
+# directories takes about 90 seconds in qemu, twice the default timeout.
+SKIP="-S ftrace:ftracetest-ktap -S filesystems:file_stressor \
+      -S ptrace:vmaccess -S tty:tty_tiocsti_test -S landlock:fs_bench"
+
+# sysmap_is_sealed can't tell at runtime whether the kernel seals the system
+# mappings, so skip it when the running kernel's config says it doesn't.
+if [ -r /proc/config.gz ] && \
+   zcat /proc/config.gz | grep -q '^# CONFIG_MSEAL_SYSTEM_MAPPINGS is not set'; then
+    SKIP="$SKIP -S mseal_system_mappings:sysmap_is_sealed"
+fi
+
+# Tests that fail, rather than skip, when the kernel lacks a feature they
+# need (the options are in each collection's "config" file). Skip a test when
+# the running kernel has any of its options neither built in nor as a module.
+NEEDS_CONFIG="
+landlock:audit_test AUDIT
+landlock:fs_test AUDIT
+landlock:net_test AUDIT
+landlock:ptrace_test AUDIT
+landlock:scoped_abstract_unix_test AUDIT
+net:bridge_vlan_dump.sh BRIDGE_VLAN_FILTERING
+net:busy_poll_test.sh NETDEVSIM
+net:cmsg_so_mark.sh IPV6_MULTIPLE_TABLES
+net:cmsg_so_priority.sh NET_ACT_GACT
+net:cmsg_time.sh NET_SCH_ETF
+net:ecmp_rehash.sh NET_ACT_GACT
+net:fdb_notify.sh MACVLAN VXLAN
+net:fib_nexthops.sh VXLAN
+net:fib_rule_tests.sh IPV6_MULTIPLE_TABLES NET_VRF
+net:fq_band_pktlimit.sh NET_SCH_FQ
+net:gre_gso.sh IPV6_GRE
+net:gre_ipv6_lladdr.sh IPV6_MULTIPLE_TABLES
+net:icmp_redirect.sh NET_VRF
+net:ip_local_port_range.sh MPTCP
+net:ipvtap_test.sh IPVTAP
+net:l2tp.sh L2TP_V3 L2TP_ETH L2TP_IP
+net:link_netns.py IPVLAN IPV6_GRE MACSEC MACVLAN MACVTAP NETKIT
+net:netdev-l2addr.sh NETDEVSIM
+net:netns-name.sh NETDEVSIM
+net:nk_qlease.py NETDEVSIM NETKIT
+net:nl_netdev.py NETDEVSIM
+net:protodown.sh MACVLAN VXLAN
+net:rtnetlink.sh IPV6_GRE MACSEC MACVLAN NET_VRF VXLAN
+net:srv6_end_dx4_netfilter_test.sh LWTUNNEL
+net:srv6_end_dx6_netfilter_test.sh LWTUNNEL
+net:tap MACVTAP
+net:test_bpf.sh TEST_BPF
+net:test_neigh.sh NET_ACT_GACT NET_CLS_MATCHALL
+net:test_vxlan_fdb_changelink.sh VXLAN
+net:test_vxlan_vnifilter_notify.sh VXLAN
+net:test_vxlan_vnifiltering.sh VXLAN
+net:tfo_passive.sh NETDEVSIM
+net:tls TLS
+net:tun GENEVE
+net:txtimestamp.sh IFB
+net:udpgro_frglist.sh NET_CLS_BPF
+net:vlan_bridge_binding.sh BRIDGE_VLAN_FILTERING
+net:vrf-xfrm-tests.sh NET_VRF XFRM_INTERFACE
+net:vrf_route_leaking.sh NET_VRF
+"
+if [ -r /proc/config.gz ]; then
+    KCONFIG=$(zcat /proc/config.gz)
+    SKIP="$SKIP $(echo "$NEEDS_CONFIG" | while read -r test options; do
+        for option in $options; do
+            if ! echo "$KCONFIG" | grep -q "^CONFIG_$option=[ym]"; then
+                echo "-S $test"
+                break
+            fi
+        done
+    done)"
+fi
+
+# udpgro.sh and udpgro_fwd.sh set up NAT with iptables, which fails when it
+# uses the legacy backend and the kernel only has nftables.
+if ! iptables -t nat -n -L >/dev/null 2>&1; then
+    SKIP="$SKIP -S net:udpgro.sh -S net:udpgro_fwd.sh"
+fi
+
+# tc-testing's tdc.py needs scapy (in meta-networking) and exits at once
+# without it.
+if ! python3 -c 'import scapy' >/dev/null 2>&1; then
+    SKIP="$SKIP -S tc-testing:tdc.sh"
+fi
+
 # Turn the runner's per-test TAP lines ("ok 3 selftests: cgroup: test_core",
 # "not ok 4 ... # exit=1", "ok 5 ... # SKIP") into PASS:/FAIL:/SKIP: lines
 # that ptest log parsers understand, keeping the original output too.
-/usr/kernel-selftest/run_kselftest.sh -s -S ftrace:ftracetest-ktap -S filesystems:file_stressor 2>&1 | awk '
+/usr/kernel-selftest/run_kselftest.sh -s $SKIP 2>&1 | awk '
 { print; fflush() }
 /^(not )?ok [0-9]+ selftests: / {
     res = "PASS"
