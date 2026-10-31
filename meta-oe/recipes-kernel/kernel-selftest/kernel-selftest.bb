@@ -5,6 +5,9 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS = "rsync-native llvm-native libcap"
+# net: libbpf (elfutils, zlib), YNL code generation (python3-pyyaml-native,
+# python3-jsonschema-native), reuseport_bpf_numa (numactl) and tcp_mmap (openssl)
+DEPENDS += "elfutils numactl openssl python3-jsonschema-native python3-pyyaml-native zlib"
 
 S = "${UNPACKDIR}"
 
@@ -49,7 +52,7 @@ PACKAGECONFIG[mm] = ",,libcap liburing numactl, libgcc bash"
 do_patch[depends] += "virtual/kernel:do_shared_workdir"
 do_compile[depends] += "virtual/kernel:do_install"
 
-inherit module-base kernel-arch ptest siteinfo
+inherit module-base kernel-arch ptest python3native siteinfo
 
 DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
 
@@ -123,7 +126,7 @@ EXTRA_OEMAKE = '\
     CC="${CC} ${DEBUG_PREFIX_MAP}" \
     AR="${AR}" \
     LD="${LD}" \
-    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
+    CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${STAGING_KERNEL_BUILDDIR}=/usr/src/kernel -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
     DESTDIR="${D}" \
     V=1 \
 '
@@ -136,6 +139,8 @@ EXTRA_OEMAKE:append:toolchain-clang = "\
 CLEANBROKEN = "1"
 
 KERNEL_SELFTEST_SRC ?= "Makefile \
+                        Documentation/netlink \
+                        MAINTAINERS \
                         include \
                         kernel \
                         lib \
@@ -187,6 +192,13 @@ do_install() {
     if [ -e ${D}/usr/kernel-selftest/bpf/test_offload.py ]; then
         sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
     fi
+    # net/lib installs the whole tools/net/ynl tree, including its build
+    # artifacts and the bytecode from running it at build time; only the
+    # python library is used at runtime.
+    if [ -d ${D}/usr/kernel-selftest/net/lib/ynl ]; then
+        find ${D}/usr/kernel-selftest/net/lib/ynl \( -name '*.a' -o -name '*.o' -o -name '*.d' \) -delete
+        find ${D}/usr/kernel-selftest/net/lib/ynl -name __pycache__ -type d -prune -exec rm -rf {} +
+    fi
     chown root:root  -R ${D}/usr/kernel-selftest
 }
 
@@ -227,6 +239,8 @@ FILES:${PN} += "/usr/kernel-selftest"
 # needs to enforce per-test timeouts; busybox has no timeout applet by default.
 # mount_setattr_test creates an ext4 image with mkfs.ext4.
 RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc coreutils e2fsprogs-mke2fs"
+# The net python tests load netlink specs with the YNL library.
+RDEPENDS:${PN} += "python3-pyyaml"
 
 INSANE_SKIP:${PN} += "libdir"
 
