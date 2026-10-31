@@ -1,0 +1,127 @@
+From 192a749bd2e9ca16fd709a48636239955c169291 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 15:10:03 -0700
+Subject: [PATCH] selftests/gpio: skip the gpio-cdev-uaf v1 tests without
+ CONFIG_GPIO_CDEV_V1
+
+The linehandle and lineevent tests use GPIO_GET_LINEHANDLE_IOCTL and
+GPIO_GET_LINEEVENT_IOCTL, which the kernel only provides with
+CONFIG_GPIO_CDEV_V1. Without it they fail with EINVAL and the whole test
+fails:
+
+  failed to get handle FD
+  failed to test handle ioctl
+  GPIO gpio-cdev-uaf test FAIL
+
+Exit with KSFT_SKIP in that case and let the script carry on with the
+uAPI v2 tests.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/gpio/gpio-cdev-uaf.c  | 20 ++++++++++++++----
+ tools/testing/selftests/gpio/gpio-cdev-uaf.sh | 21 +++++++++++++++----
+ 2 files changed, 33 insertions(+), 8 deletions(-)
+
+diff --git a/tools/testing/selftests/gpio/gpio-cdev-uaf.c b/tools/testing/selftests/gpio/gpio-cdev-uaf.c
+index 765d3cc4f0ef..ef81e5c2b8be 100644
+--- a/tools/testing/selftests/gpio/gpio-cdev-uaf.c
++++ b/tools/testing/selftests/gpio/gpio-cdev-uaf.c
+@@ -17,6 +17,8 @@
+ #include <sys/types.h>
+ #include <unistd.h>
+ 
++#include "kselftest.h"
++
+ #define CONFIGFS_DIR "/sys/kernel/config/gpio-sim"
+ #define PROCFS_DIR "/proc"
+ 
+@@ -201,7 +203,7 @@ static int test_ioctl(int fd)
+ 
+ int main(int argc, char **argv)
+ {
+-	int cfd, fd, ret;
++	int cfd, fd, ret = EXIT_FAILURE;
+ 	int (*test_func)(int);
+ 
+ 	if (argc != 3) {
+@@ -249,7 +251,12 @@ int main(int argc, char **argv)
+ 
+ 		req.lines = 1;
+ 		if (ioctl(cfd, GPIO_GET_LINEHANDLE_IOCTL, &req) == -1) {
+-			fprintf(stderr, "failed to get handle FD\n");
++			if (errno == EINVAL) {
++				ret = KSFT_SKIP;
++				fprintf(stderr, "GPIO uAPI v1 is not available\n");
++			} else {
++				fprintf(stderr, "failed to get handle FD\n");
++			}
+ 			goto err_close_chip;
+ 		}
+ 
+@@ -259,7 +266,12 @@ int main(int argc, char **argv)
+ 		struct gpioevent_request req = {0};
+ 
+ 		if (ioctl(cfd, GPIO_GET_LINEEVENT_IOCTL, &req) == -1) {
+-			fprintf(stderr, "failed to get event FD\n");
++			if (errno == EINVAL) {
++				ret = KSFT_SKIP;
++				fprintf(stderr, "GPIO uAPI v1 is not available\n");
++			} else {
++				fprintf(stderr, "failed to get event FD\n");
++			}
+ 			goto err_close_chip;
+ 		}
+ 
+@@ -288,5 +300,5 @@ int main(int argc, char **argv)
+ err_close_chip:
+ 	close(cfd);
+ 	close_chip("chip", "bank");
+-	return EXIT_FAILURE;
++	return ret;
+ }
+diff --git a/tools/testing/selftests/gpio/gpio-cdev-uaf.sh b/tools/testing/selftests/gpio/gpio-cdev-uaf.sh
+index 6e47533019cf..dd7c702af873 100755
+--- a/tools/testing/selftests/gpio/gpio-cdev-uaf.sh
++++ b/tools/testing/selftests/gpio/gpio-cdev-uaf.sh
+@@ -17,6 +17,19 @@ skip() {
+ 	exit 4
+ }
+ 
++# The linehandle and lineevent tests need the GPIO uAPI v1
++# (CONFIG_GPIO_CDEV_V1); gpio-cdev-uaf exits with 4 if it is not available.
++test_v1() {
++	$BASE_DIR/gpio-cdev-uaf $1 $2
++	case $? in
++	0|4)
++		;;
++	*)
++		fail "failed to test $1 $2"
++		;;
++	esac
++}
++
+ # Load the gpio-sim module. This will pull in configfs if needed too.
+ modprobe gpio-sim || skip "unable to load the gpio-sim module"
+ # Make sure configfs is mounted at /sys/kernel/config. Wait a bit if needed.
+@@ -40,16 +53,16 @@ $BASE_DIR/gpio-cdev-uaf chip ioctl || fail "failed to test chip ioctl"
+ echo "2. linehandle"
+ 
+ echo "2.1. ioctl"
+-$BASE_DIR/gpio-cdev-uaf handle ioctl || fail "failed to test handle ioctl"
++test_v1 handle ioctl
+ 
+ echo "3. lineevent"
+ 
+ echo "3.1. read"
+-$BASE_DIR/gpio-cdev-uaf event read || fail "failed to test event read"
++test_v1 event read
+ echo "3.2. poll"
+-$BASE_DIR/gpio-cdev-uaf event poll || fail "failed to test event poll"
++test_v1 event poll
+ echo "3.3. ioctl"
+-$BASE_DIR/gpio-cdev-uaf event ioctl || fail "failed to test event ioctl"
++test_v1 event ioctl
+ 
+ echo "4. linereq"
+ 

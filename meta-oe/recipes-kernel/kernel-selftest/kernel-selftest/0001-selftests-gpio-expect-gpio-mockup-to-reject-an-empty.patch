@@ -1,0 +1,52 @@
+From d033bebce48e7900680e325789e1b55186a7cc04 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:57:35 -0700
+Subject: [PATCH] selftests/gpio: expect gpio-mockup to reject an empty
+ range
+
+Since commit 446e8c31d0fc ("gpio: mockup: reject invalid
+gpio_mockup_ranges widths") the module refuses to load with a zero-width
+range, but the "no lines defined" test still expects it to load and
+create no gpiochips:
+
+  2.1 no lines defined
+  test failed: insert gpio-mockup failed with error 1
+
+Check that the module load fails instead.
+
+Fixes: 446e8c31d0fc ("gpio: mockup: reject invalid gpio_mockup_ranges widths")
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/gpio/gpio-mockup.sh | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/tools/testing/selftests/gpio/gpio-mockup.sh b/tools/testing/selftests/gpio/gpio-mockup.sh
+index fc2dd4c24d06..51856c9ad7e1 100755
+--- a/tools/testing/selftests/gpio/gpio-mockup.sh
++++ b/tools/testing/selftests/gpio/gpio-mockup.sh
+@@ -271,6 +271,15 @@ test_no_line()
+ 	[ ! -e "$GPIO_DEBUGFS/$1/$2" ] || fail "unexpected line $1:$2"
+ }
+ 
++# Check that loading the module with the gpio_mockup_ranges parameter $1 fails.
++insmod_fail_test()
++{
++	if modprobe -q $module "gpio_mockup_ranges=$1"; then
++		remove_module
++		fail "insert $module with ranges <$1> should fail"
++	fi
++}
++
+ # Load the module and check that the expected number of gpiochips, with the
+ # expected number of lines, are created and are functional.
+ #
+@@ -378,7 +387,7 @@ if [ "$full_test" ]; then
+ fi
+ echo "2.  Module load error tests"
+ echo "2.1 no lines defined"
+-insmod_test "0,0"
++insmod_fail_test "0,0"
+ if [ "$full_test" ]; then
+ 	echo "2.2 ignore range overlap"
+ 	insmod_test "0,32,0,1" 32

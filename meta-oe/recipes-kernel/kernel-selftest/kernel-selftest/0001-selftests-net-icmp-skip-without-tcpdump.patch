@@ -1,0 +1,30 @@
+From bd02c9f9ff8b78eada28d6d6c8a23b0d044d10ba Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 17:19:28 -0700
+Subject: [PATCH] selftests: net: icmp: skip without tcpdump
+
+icmp.sh captures the ICMP reply with tcpdump. Without it the capture
+file stays empty and the test fails with "got ICMP response from ,
+should be 192.0.0.8".
+
+Skip the test when tcpdump is not installed.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/net/icmp.sh | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tools/testing/selftests/net/icmp.sh b/tools/testing/selftests/net/icmp.sh
+index 0714e8b34d12..eff9da3238b4 100755
+--- a/tools/testing/selftests/net/icmp.sh
++++ b/tools/testing/selftests/net/icmp.sh
+@@ -20,6 +20,8 @@
+ 
+ source lib.sh
+ 
++require_command tcpdump
++
+ H1_IP=172.16.0.1/32
+ H1_IP6=2001:db8:1::1
+ RT1=172.16.1.0/24
