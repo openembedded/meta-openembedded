@@ -1,0 +1,45 @@
+From ce9bcf34e00ffbf49712edf1523e5b6c48978204 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:57:59 -0700
+Subject: [PATCH] selftests/splice: skip the kernfs checks without
+ test_module
+
+short_splice_read.sh uses test_module's sysfs files for its kernfs
+checks. When the kernel is built without CONFIG_TEST_LKM there is no
+such module, and the test fails even though all the other checks pass:
+
+  modprobe: FATAL: Module test_module not found in directory /lib/modules/...
+  FAIL: test_module kernel module load should work
+
+Skip the kernfs checks when the module is not available.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/splice/short_splice_read.sh | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/tools/testing/selftests/splice/short_splice_read.sh b/tools/testing/selftests/splice/short_splice_read.sh
+index 4710e09f49fa..b6249046a580 100755
+--- a/tools/testing/selftests/splice/short_splice_read.sh
++++ b/tools/testing/selftests/splice/short_splice_read.sh
+@@ -124,10 +124,15 @@ expect_success "proc_handler: proc_dostring() splice" test_splice /proc/sys/kern
+ expect_success "proc_handler: special read splice" test_splice /proc/sys/kernel/version
+ 
+ ### /sys/ has no splice interface; these should all fail.
+-if ! [ -d /sys/module/test_module/sections ] ; then
+-	expect_success "test_module kernel module load" modprobe test_module
++if [ -d /sys/module/test_module/sections ] || modinfo test_module >/dev/null 2>&1 ; then
++	if ! [ -d /sys/module/test_module/sections ] ; then
++		expect_success "test_module kernel module load" modprobe test_module
++	fi
++	expect_success "kernfs attr splice" test_splice /sys/module/test_module/coresize
++	expect_success "kernfs binattr splice" test_splice /sys/module/test_module/sections/.init.text
++else
++	echo "" >&2
++	echo "SKIP: kernfs splice tests, test_module (CONFIG_TEST_LKM) is not available" >&2
+ fi
+-expect_success "kernfs attr splice" test_splice /sys/module/test_module/coresize
+-expect_success "kernfs binattr splice" test_splice /sys/module/test_module/sections/.init.text
+ 
+ exit $ret

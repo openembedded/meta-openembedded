@@ -1,0 +1,34 @@
+From a24b4ff5908c55fa77e1c63192769d8b0449c82d Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:56:28 -0700
+Subject: [PATCH] selftests/sched: install cs_prctl_test from the output
+ directory
+
+cs_prctl_test is built, so it belongs in TEST_GEN_PROGS. Listing it in
+TEST_PROGS makes "make install" copy it from the source directory, which
+only works for in-tree builds. With O= the binary is in the output
+directory and nothing gets installed:
+
+  rsync: [sender] link_stat ".../selftests/sched/cs_prctl_test" failed: No such file or directory (2)
+
+and run_kselftest.sh then reports "file cs_prctl_test is missing".
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/sched/Makefile | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/tools/testing/selftests/sched/Makefile b/tools/testing/selftests/sched/Makefile
+index 099ee9213557..f5228cfd3eb6 100644
+--- a/tools/testing/selftests/sched/Makefile
++++ b/tools/testing/selftests/sched/Makefile
+@@ -8,7 +8,6 @@ CFLAGS += -O2 -Wall -g -I./ $(KHDR_INCLUDES) -Wl,-rpath=./ \
+ 	  $(CLANG_FLAGS)
+ LDLIBS += -lpthread
+ 
+-TEST_GEN_FILES := cs_prctl_test
+-TEST_PROGS := cs_prctl_test
++TEST_GEN_PROGS := cs_prctl_test
+ 
+ include ../lib.mk

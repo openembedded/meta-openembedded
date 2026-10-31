@@ -26,6 +26,24 @@ SRC_URI += "file://run-ptest \
             file://0001-selftests-filelock-fix-the-test-plan-count-in-ofdloc.patch \
             file://0001-selftests-cgroup-memcontrol-keep-anon-page-touches-f.patch \
             file://0001-selftests-filesystems-idmapped_tmpfile-chown-the-lay.patch \
+            file://0001-selftests-core-fix-unshare_test-with-large-fs.nr_ope.patch \
+            file://0001-selftests-proc-proc-empty-vm-treat-pkey_alloc-ENOSPC.patch \
+            file://0001-selftests-proc-read-tolerate-tasks-exiting-during-th.patch \
+            file://0001-selftests-sched-install-cs_prctl_test-from-the-outpu.patch \
+            file://0001-selftests-sched-skip-cs_prctl_test-when-core-schedul.patch \
+            file://0001-selftests-gpio-expect-gpio-mockup-to-reject-an-empty.patch \
+            file://0001-selftests-gpio-skip-the-gpio-cdev-uaf-v1-tests-witho.patch \
+            file://0001-selftests-splice-skip-the-kernfs-checks-without-test.patch \
+            file://0001-selftests-syscall_user_dispatch-build-sud_benchmark-.patch \
+            file://0001-selftests-lsm-check-lsm_get_self_attr-errno-before-a.patch \
+            file://0001-selftests-lsm-skip-correct_lsm_list_modules-without-.patch \
+            file://0001-selftests-cgroup-skip-the-cpu.max-tests-without-CONF.patch \
+            file://0001-selftests-filesystems-binderfs-skip-binderfs_stress-.patch \
+            file://0001-selftests-kvm-skip-nx_huge_pages_test.sh-without-KVM.patch \
+            file://0001-selftests-watchdog-skip-when-there-is-no-watchdog-de.patch \
+            file://0001-selftests-net-udpgro_fwd-don-t-hang-when-the-iperf3-.patch \
+            file://0001-selftests-net-udpgro_fwd-skip-the-UDP-tunnel-tests-w.patch \
+            file://0001-selftests-net-icmp-skip-without-tcpdump.patch \
             ${@bb.utils.contains('PACKAGECONFIG', 'mm', '${MM_PATCH}', '', d)} \
             "
 

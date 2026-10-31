@@ -1,0 +1,52 @@
+From 7b89e7979ca943a760a87943fa9e26a459ad5457 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 16:52:35 -0700
+Subject: [PATCH] selftests: net: udpgro_fwd: skip the UDP tunnel tests
+ without vxlan
+
+The last three tests of each address family run over a vxlan tunnel.
+When the kernel can't create vxlan devices they can't pass, and before
+the previous fix they hung the whole test.
+
+Probe for vxlan support once and report those tests as skipped when it
+is missing.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/net/udpgro_fwd.sh | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/tools/testing/selftests/net/udpgro_fwd.sh b/tools/testing/selftests/net/udpgro_fwd.sh
+index 854b65c752e9..839170257230 100755
+--- a/tools/testing/selftests/net/udpgro_fwd.sh
++++ b/tools/testing/selftests/net/udpgro_fwd.sh
+@@ -227,6 +227,13 @@ run_bench() {
+ 	fi
+ }
+ 
++# the UDP tunnel tests need vxlan support in the kernel
++have_vxlan=yes
++ip netns add "$BASE"
++ip -n "$BASE" link add dev vxlan_probe type vxlan id 1 dstport 4789 \
++	2>/dev/null || have_vxlan=no
++ip netns del "$BASE"
++
+ for family in 4 6; do
+ 	BM_NET=$BM_NET_V4
+ 	OL_NET=$OL_NET_V4
+@@ -276,6 +283,14 @@ for family in 4 6; do
+ 	run_bench "UDP GRO fwd perf" $BM_NET$DST
+ 	cleanup
+ 
++	if [ "$have_vxlan" = no ]; then
++		for msg in "GRO frag list over UDP tunnel" \
++			   "GRO fwd over UDP tunnel" "GSO after GRO"; do
++			printf "%-40s skip - vxlan not supported\n" "$msg"
++		done
++		continue
++	fi
++
+ 	create_vxlan_pair
+ 	ip netns exec $NS_DST ethtool -K veth$DST generic-receive-offload on
+ 	ip netns exec $NS_DST ethtool -K veth$DST rx-gro-list on

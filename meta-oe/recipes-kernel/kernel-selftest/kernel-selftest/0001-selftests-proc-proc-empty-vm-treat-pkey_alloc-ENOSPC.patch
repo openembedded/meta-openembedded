@@ -1,0 +1,35 @@
+From d41aa0d89994e56d629a4f22526c3310e0b1a6ae Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:51:52 -0700
+Subject: [PATCH] selftests/proc: proc-empty-vm: treat pkey_alloc()
+ ENOSPC as no pkey support
+
+On x86, mm_pkey_alloc() returns -1 when OSPKE is not enabled, which
+pkey_alloc() reports as ENOSPC. This happens on any CPU without PKU, for
+example QEMU's Skylake-Client model, and with nopku, and the test then
+bails out before checking anything:
+
+  protection_key_support: error: rv -1, errno 28
+
+Treat ENOSPC the same as the other "not supported" errors.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/proc/proc-empty-vm.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tools/testing/selftests/proc/proc-empty-vm.c b/tools/testing/selftests/proc/proc-empty-vm.c
+index b3f898aab4ab..cc619539e336 100644
+--- a/tools/testing/selftests/proc/proc-empty-vm.c
++++ b/tools/testing/selftests/proc/proc-empty-vm.c
+@@ -77,6 +77,9 @@ static int protection_key_support(void)
+ 	} else if (rv == -1 && errno == EINVAL) {
+ 		// ospke=n
+ 		return 0;
++	} else if (rv == -1 && errno == ENOSPC) {
++		// ospke=n on x86 since mm_pkey_alloc() checks arch_pkeys_enabled()
++		return 0;
+ 	} else {
+ 		fprintf(stderr, "%s: error: rv %ld, errno %d\n", __func__, rv, errno);
+ 		exit(EXIT_FAILURE);
