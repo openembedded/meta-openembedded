@@ -1,0 +1,40 @@
+From 1c000e89c9a1ebe914ef8a581de7a2fbab629fd9 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 31 Oct 2026 10:45:54 -0700
+Subject: [PATCH 1/2] tests: Use a longer timeout for the large argument method
+ call
+
+CallsMethodWithLargeArgument sends a map of 400000 strings (about 30 MB)
+in one synchronous method call with the default 25 second D-Bus method
+call timeout. Marshalling, transferring and unmarshalling that much data
+takes 13-16 seconds on an idle emulated (qemu TCG) aarch64 machine and
+more than 40 seconds when the host is busy, so the test fails with
+org.freedesktop.DBus.Error.Timeout.
+
+Call the method with an explicit 120 second timeout instead.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ tests/integrationtests/DBusMethodsTests.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/tests/integrationtests/DBusMethodsTests.cpp b/tests/integrationtests/DBusMethodsTests.cpp
+index 345cf4e..3066317 100644
+--- a/tests/integrationtests/DBusMethodsTests.cpp
++++ b/tests/integrationtests/DBusMethodsTests.cpp
+@@ -309,7 +309,12 @@ TYPED_TEST(SdbusTestObject, CallsMethodWithLargeArgument)
+         //totalSize += sizeof(int) + collection[i].size();
+     }
+     //printf("Sending large message with collection of size %zu bytes\n", totalSize);
+-    this->m_proxy->sendLargeMessage(collection);
++    // Marshalling and transferring ~30 MB takes long on slow (e.g. emulated) machines,
++    // so don't let the call run into the default 25s method call timeout
++    this->m_proxy->getProxy().callMethod("sendLargeMessage")
++                             .onInterface("org.sdbuscpp.integrationtests")
++                             .withTimeout(120s)
++                             .withArguments(collection);
+ }
+ 
+ TYPED_TEST(SdbusTestObject, CanSendCallsAndReceiveRepliesWithLargeData)
