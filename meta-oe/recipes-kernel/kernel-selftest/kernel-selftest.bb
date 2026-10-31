@@ -241,6 +241,14 @@ FILES:${PN} += "/usr/kernel-selftest"
 RDEPENDS:${PN} += "python3 perl perl-module-io-handle bash libcap libgcc coreutils e2fsprogs-mke2fs"
 # The net python tests load netlink specs with the YNL library.
 RDEPENDS:${PN} += "python3-pyyaml"
+# Tools the net selftests use; busybox ip and ping lack most of the options
+# they need.
+RDEPENDS:${PN}-ptest += "bc ethtool iperf3 iproute2 iproute2-bridge iproute2-nstat \
+                         iproute2-ss iproute2-tc iptables iputils-arping iputils-ping iputils-ping6 jq socat \
+                         util-linux-taskset"
+# Many selftests modprobe the modules they need (gpio-mockup, netdevsim, vrf,
+# the tc qdiscs, classifiers and actions, ...) and fail without them.
+RRECOMMENDS:${PN} += "kernel-modules"
 
 INSANE_SKIP:${PN} += "libdir"
 
