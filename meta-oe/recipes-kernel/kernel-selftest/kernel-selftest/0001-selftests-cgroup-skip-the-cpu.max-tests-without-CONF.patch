@@ -1,0 +1,69 @@
+From 889f34043a639015b2f844801a6e83bd3eaafe32 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 15:02:43 -0700
+Subject: [PATCH] selftests/cgroup: skip the cpu.max tests without
+ CONFIG_CFS_BANDWIDTH
+
+The cpu controller only provides cpu.max when the kernel is built with
+CONFIG_CFS_BANDWIDTH. Without it, test_cpucg_max and
+test_cpucg_max_nested fail to write the file and report a failure:
+
+  not ok 8 test_cpucg_max
+  not ok 9 test_cpucg_max_nested
+
+Skip both tests when cpu.max does not exist.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/cgroup/test_cpu.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/tools/testing/selftests/cgroup/test_cpu.c b/tools/testing/selftests/cgroup/test_cpu.c
+index 8f96bfd..5fbdd24 100644
+--- a/tools/testing/selftests/cgroup/test_cpu.c
++++ b/tools/testing/selftests/cgroup/test_cpu.c
+@@ -654,6 +654,7 @@ static int test_cpucg_max(const char *root)
+ 	long usage_usec, n_periods, remainder_usec, expected_usage_usec;
+ 	char *cpucg;
+ 	char quota_buf[32];
++	char buf[64];
+ 
+ 	snprintf(quota_buf, sizeof(quota_buf), "%ld", quota_usec);
+ 
+@@ -664,6 +665,12 @@ static int test_cpucg_max(const char *root)
+ 	if (cg_create(cpucg))
+ 		goto cleanup;
+ 
++	/* cpu.max needs CONFIG_CFS_BANDWIDTH */
++	if (cg_read(cpucg, "cpu.max", buf, sizeof(buf))) {
++		ret = KSFT_SKIP;
++		goto cleanup;
++	}
++
+ 	if (cg_write(cpucg, "cpu.max", quota_buf))
+ 		goto cleanup;
+ 
+@@ -718,6 +725,7 @@ static int test_cpucg_max_nested(const char *root)
+ 	long usage_usec, n_periods, remainder_usec, expected_usage_usec;
+ 	char *parent, *child;
+ 	char quota_buf[32];
++	char buf[64];
+ 
+ 	snprintf(quota_buf, sizeof(quota_buf), "%ld", quota_usec);
+ 
+@@ -735,6 +743,12 @@ static int test_cpucg_max_nested(const char *root)
+ 	if (cg_create(child))
+ 		goto cleanup;
+ 
++	/* cpu.max needs CONFIG_CFS_BANDWIDTH */
++	if (cg_read(parent, "cpu.max", buf, sizeof(buf))) {
++		ret = KSFT_SKIP;
++		goto cleanup;
++	}
++
+ 	if (cg_write(parent, "cpu.max", quota_buf))
+ 		goto cleanup;
+ 
+-- 
+2.0

@@ -1,0 +1,70 @@
+From bfc5fb89d1ec500baf6fecfb2affb9e729166509 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:52:54 -0700
+Subject: [PATCH] selftests/proc: read: tolerate tasks exiting during the
+ walk
+
+The test walks all of /proc, including the directories of other tasks.
+If one of them exits in the middle of the walk, reading its directories
+fails: proc_pident_readdir() and friends return ENOENT for a dead task,
+and proc_tgid_net_readdir() returns EINVAL once the task's network
+namespace can't be found. xreaddir() asserts on any error:
+
+  read: proc.h:49: xreaddir: Assertion `de || errno == 0' failed.
+
+Any short-lived process on the system, like systemd's userdbd workers,
+makes the test fail randomly. Treat those errors as the end of the
+directory.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/proc/read.c | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
+
+diff --git a/tools/testing/selftests/proc/read.c b/tools/testing/selftests/proc/read.c
+index 35ee78dff144..e8b1f6feb1ba 100644
+--- a/tools/testing/selftests/proc/read.c
++++ b/tools/testing/selftests/proc/read.c
+@@ -74,19 +74,38 @@ static void f_lnk(DIR *d, const char *filename)
+ 	assert((0 <= rv && rv <= sizeof(buf)) || rv == -1);
+ }
+ 
++/*
++ * Like xreaddir(), but a task can exit while its /proc/PID directory is
++ * being walked. Reading its directories then fails with ENOENT, or with
++ * EINVAL for /proc/PID/net, which ends the directory.
++ */
++static struct dirent *xreaddir_task(DIR *d)
++{
++	struct dirent *de;
++
++	errno = 0;
++	de = readdir(d);
++	assert(de || errno == 0 || errno == ENOENT || errno == EINVAL);
++	return de;
++}
++
+ static void f(DIR *d, unsigned int level)
+ {
+ 	struct dirent *de;
+ 
+-	de = xreaddir(d);
++	de = xreaddir_task(d);
++	if (!de)
++		return;
+ 	assert(de->d_type == DT_DIR);
+ 	assert(streq(de->d_name, "."));
+ 
+-	de = xreaddir(d);
++	de = xreaddir_task(d);
++	if (!de)
++		return;
+ 	assert(de->d_type == DT_DIR);
+ 	assert(streq(de->d_name, ".."));
+ 
+-	while ((de = xreaddir(d))) {
++	while ((de = xreaddir_task(d))) {
+ 		assert(!streq(de->d_name, "."));
+ 		assert(!streq(de->d_name, ".."));
+ 

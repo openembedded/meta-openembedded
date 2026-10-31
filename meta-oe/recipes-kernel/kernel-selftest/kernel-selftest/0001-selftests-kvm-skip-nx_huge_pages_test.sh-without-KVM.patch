@@ -1,0 +1,36 @@
+From f5789245c843627b4982f3ded204186b4914dedb Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 15:03:17 -0700
+Subject: [PATCH] selftests/kvm: skip nx_huge_pages_test.sh without KVM
+
+The script reads the kvm module parameters with "set -e" in effect, so on
+a kernel without KVM it exits with an error instead of skipping:
+
+  cat: /sys/module/kvm/parameters/nx_huge_pages: No such file or directory
+  not ok 1 selftests: kvm: nx_huge_pages_test.sh # exit=1
+
+The other KVM tests skip when /dev/kvm is missing. Skip this one as well
+when the nx_huge_pages parameter does not exist.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/kvm/x86/nx_huge_pages_test.sh | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/tools/testing/selftests/kvm/x86/nx_huge_pages_test.sh b/tools/testing/selftests/kvm/x86/nx_huge_pages_test.sh
+index caad084b8bfd..0bacd025b601 100755
+--- a/tools/testing/selftests/kvm/x86/nx_huge_pages_test.sh
++++ b/tools/testing/selftests/kvm/x86/nx_huge_pages_test.sh
+@@ -8,6 +8,11 @@
+ 
+ set -e
+ 
++if [ ! -f /sys/module/kvm/parameters/nx_huge_pages ]; then
++	echo "KVM is not available"
++	exit 4 # KSFT_SKIP=4
++fi
++
+ NX_HUGE_PAGES=$(cat /sys/module/kvm/parameters/nx_huge_pages)
+ NX_HUGE_PAGES_RECOVERY_RATIO=$(cat /sys/module/kvm/parameters/nx_huge_pages_recovery_ratio)
+ NX_HUGE_PAGES_RECOVERY_PERIOD=$(cat /sys/module/kvm/parameters/nx_huge_pages_recovery_period_ms)

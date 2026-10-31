@@ -1,0 +1,35 @@
+From 5bd11503bf3a582f3be9eef427b2d3384ff03ba2 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:59:30 -0700
+Subject: [PATCH] selftests/syscall_user_dispatch: build sud_benchmark
+ with a frame pointer
+
+On x86-64, handle_sigsys() returns from the SIGSYS handler by hand: it
+runs "leaveq; add $0x8, %rsp" and then issues rt_sigreturn from inside
+the dispatcher region. That relies on the handler having a frame pointer,
+which is only the case when the test is built without optimization. With
+CFLAGS="-O2" the frame pointer is omitted, rt_sigreturn finds a bogus
+frame and the test crashes:
+
+  sud_benchmark[3299] bad frame in rt_sigreturn frame:... sp:1 ...
+
+Always build sud_benchmark with -fno-omit-frame-pointer.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/syscall_user_dispatch/Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/tools/testing/selftests/syscall_user_dispatch/Makefile b/tools/testing/selftests/syscall_user_dispatch/Makefile
+index 03c120270953..1f60b49c2d45 100644
+--- a/tools/testing/selftests/syscall_user_dispatch/Makefile
++++ b/tools/testing/selftests/syscall_user_dispatch/Makefile
+@@ -7,3 +7,7 @@ CFLAGS += -Wall -I$(LINUX_HDR_PATH)
+ 
+ TEST_GEN_PROGS := sud_test sud_benchmark
+ include ../lib.mk
++
++# handle_sigsys() unwinds its own stack frame with inline assembly to return
++# through rt_sigreturn, which only works if it has a frame pointer.
++$(OUTPUT)/sud_benchmark: CFLAGS += -fno-omit-frame-pointer

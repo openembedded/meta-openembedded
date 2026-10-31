@@ -1,0 +1,33 @@
+From c0649196a87bf5d80336ba9ff703f06c8e50d954 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 16:51:47 -0700
+Subject: [PATCH] selftests: net: udpgro_fwd: don't hang when the iperf3
+ client fails
+
+run_test_csum() starts a one-shot iperf3 server and waits for it after
+running the client. If the client can't connect, e.g. because the vxlan
+devices could not be created, the server never gets a client and the
+test blocks in wait until the kselftest timeout kills it.
+
+Kill the server when the client fails, so the test reports the failure
+and moves on.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/net/udpgro_fwd.sh | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tools/testing/selftests/net/udpgro_fwd.sh b/tools/testing/selftests/net/udpgro_fwd.sh
+index 9b722c1e4b0f..854b65c752e9 100755
+--- a/tools/testing/selftests/net/udpgro_fwd.sh
++++ b/tools/testing/selftests/net/udpgro_fwd.sh
+@@ -177,6 +177,8 @@ run_test_csum() {
+ 	local spid="$!"
+ 	ip netns exec "$NS_SRC" iperf3 -c "$dst" -t 2 >/dev/null
+ 	local retc="$?"
++	# the server only exits after serving a client
++	[ "$retc" -ne 0 ] && kill "$spid" 2>/dev/null
+ 	wait "$spid"
+ 	local rets="$?"
+ 	if [ "$rets" -ne 0 ] || [ "$retc" -ne 0 ]; then

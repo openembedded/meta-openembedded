@@ -1,0 +1,55 @@
+From 36be863d675f80ed11b96a87ebecb08c65904d4f Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 14:56:28 -0700
+Subject: [PATCH] selftests/sched: skip cs_prctl_test when core
+ scheduling is unavailable
+
+PR_SCHED_CORE fails with EINVAL when the kernel is built without
+CONFIG_SCHED_CORE, and with ENODEV when SMT is not active, e.g. in a VM
+without SMT siblings. The test then fails on its first prctl() call:
+
+  -1 = prctl(62, 1, 0, 2, 0)
+  (cs_prctl_test.c:287) -
+
+Probe for core scheduling first and skip the test if it is unavailable.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tools/testing/selftests/sched/cs_prctl_test.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/tools/testing/selftests/sched/cs_prctl_test.c b/tools/testing/selftests/sched/cs_prctl_test.c
+index 52d97fae4dbd..e504138cf632 100644
+--- a/tools/testing/selftests/sched/cs_prctl_test.c
++++ b/tools/testing/selftests/sched/cs_prctl_test.c
+@@ -32,6 +32,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++#include "kselftest.h"
++
+ #if __GLIBC_PREREQ(2, 30) == 0
+ #include <sys/syscall.h>
+ static pid_t gettid(void)
+@@ -231,6 +233,7 @@ void _validate(int line, int val, char *msg)
+ 
+ int main(int argc, char *argv[])
+ {
++	unsigned long cookie;
+ 	int keypress = 0;
+ 	int num_threads = 3;
+ 	int delay = 0;
+@@ -270,6 +273,12 @@ int main(int argc, char *argv[])
+ 	if (keypress)
+ 		delay = -1;
+ 
++	if (prctl(PR_SCHED_CORE, PR_SCHED_CORE_GET, getpid(), PIDTYPE_PID,
++		  (unsigned long)&cookie) && (errno == EINVAL || errno == ENODEV)) {
++		printf("core scheduling is not available: %s\n", strerror(errno));
++		return KSFT_SKIP;
++	}
++
+ 	srand(time(NULL));
+ 
+ 	/* put into separate process group */
