@@ -15,7 +15,10 @@ SRCREV = "dc1efd89948a9ca4c78c3a4b9a6ac891019a8c69"
 
 require ${BPN}-crates.inc
 
-PROVIDES = "coreutils"
+# Only claim coreutils when selected, separately for each of the target, native
+# and nativesdk variants. Unlike world, universe builds every recipe, so an
+# unconditional PROVIDES makes both recipes provide coreutils in the same build.
+PROVIDES = "${@'coreutils' if d.getVar('PREFERRED_PROVIDER_' + d.getVar('PN').replace('uutils-', '')) == d.getVar('PN') else ''}"
 RPROVIDES:${PN} = "coreutils"
 
 # This recipe is a drop-in replacement for coreutils and cannot coexist with it,
