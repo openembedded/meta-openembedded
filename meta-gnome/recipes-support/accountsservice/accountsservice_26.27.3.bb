@@ -13,7 +13,8 @@ DEPENDS = " \
 
 inherit meson gobject-introspection gtk-doc features_check systemd vala pkgconfig
 
-REQUIRED_DISTRO_FEATURES = "polkit"
+# libaccountsservice needs libsystemd or libelogind for its session tracking
+REQUIRED_DISTRO_FEATURES = "polkit systemd"
 
 SRC_URI = "git://gitlab.freedesktop.org/${BPN}/${BPN}.git;protocol=https;branch=main;tag=${PV}"
 SRCREV = "4e254d9624cc48224c9920b9509df0b144f7be0c"
