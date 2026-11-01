@@ -19,7 +19,7 @@ GIR_MESON_OPTION = ""
 
 inherit  meson pkgconfig gobject-introspection gettext features_check useradd
 
-REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
+REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection systemd"
 
 PACKAGECONFIG ?= "ui"
 PACKAGECONFIG[ui] = ",,,malcontent-ui"
