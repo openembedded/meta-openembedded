@@ -14,7 +14,9 @@ DEPENDS = "\
   sdbus-c++ \
 "
 
-PROVIDES += "polkit"
+# Only claim polkit when selected, universe builds both recipes otherwise and
+# bitbake reports that multiple .bb files provide polkit.
+PROVIDES += "${@'polkit' if d.getVar('PREFERRED_PROVIDER_polkit') == 'smolkit' else ''}"
 RPROVIDES:${PN} = "polkit"
 
 VERSION = "0.3.0"
