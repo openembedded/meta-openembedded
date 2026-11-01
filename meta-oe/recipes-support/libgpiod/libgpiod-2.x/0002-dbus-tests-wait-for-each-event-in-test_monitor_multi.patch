@@ -1,0 +1,54 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 1 Nov 2026 03:45:13 +0000
+Subject: [PATCH] dbus: tests: wait for each event in
+ test_monitor_multiple_lines_by_name
+
+The test pulls line foo up, line xyz up and line foo down again in quick
+succession and only then reads the monitor output, which is the same
+race test_monitor_all_lines_on_request had. Two changes of the same line
+that happen before the gpio-sim interrupt is handled are delivered as
+one interrupt, and as edge detection is set to both edges the kernel
+derives the edge type from the line value read in the handler. The
+rising edge on foo is then lost and only a falling edge is reported,
+timestamped after the rising edge on xyz:
+
+  ASSERT: '45056166795 falling "foo" 45056147828 rising  "xyz"' did not
+  match '[0-9]+ rising\s+"foo"'
+
+This fails intermittently, in 13 of 20 runs in a qemux86-64 guest.
+
+Wait for each event before triggering the next one. Matching the next
+line of output instead of searching all of it also makes the test
+verify that the change of line bar, which is not monitored, is ignored.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ dbus/client/gpiocli-test.bash | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/dbus/client/gpiocli-test.bash b/dbus/client/gpiocli-test.bash
+index ede69c9..ebddcbf 100755
+--- a/dbus/client/gpiocli-test.bash
++++ b/dbus/client/gpiocli-test.bash
+@@ -1376,14 +1376,14 @@ test_monitor_multiple_lines_by_name() {
+ 	dut_run gpiocli monitor foo xyz
+ 
+ 	gpiosim_set_pull sim0 1 pull-up
++	dut_regex_match "[0-9]+ rising\\s+\"foo\""
++
+ 	gpiosim_set_pull sim0 5 pull-up # This should be ignored
+ 	gpiosim_set_pull sim0 11 pull-up
+-	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ rising\\s+\"xyz\""
+ 
+-	dut_read
+-	output_regex_match "[0-9]+ rising\\s+\"foo\""
+-	output_regex_match "[0-9]+ rising\\s+\"xyz\""
+-	output_regex_match "[0-9]+ falling\\s+\"foo\""
++	gpiosim_set_pull sim0 1 pull-down
++	dut_regex_match "[0-9]+ falling\\s+\"foo\""
+ 
+ 	gpiodbus_release_request "$request"
+ }
