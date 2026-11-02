@@ -57,7 +57,9 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov \
     gcov-symlinks \
 "
-SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
+SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz \
+           file://0001-docs-Do-not-run-sphinx-build-goals-in-parallel.patch \
+           "
 SRC_URI[sha256sum] = "67a45db99b8ef0260c3fac9a2e3749fd8fa350a15e235dd3c29b356d97755c75"
 
 UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
