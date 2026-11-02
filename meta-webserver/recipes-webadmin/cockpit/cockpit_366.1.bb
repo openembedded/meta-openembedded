@@ -9,7 +9,7 @@ SRC_URI += " \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "bf0a8c37eca303282a85777e049fce67fe2002743fabfb3e85f9de24855b099a"
+SRC_URI[sha256sum] = "514723bdac652ec1fb55d0288ae775799e784708f34a5db66b9d8984c4ac4735"
 
 UPSTREAM_CHECK_URI = "https://github.com/cockpit-project/cockpit/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)*)"
