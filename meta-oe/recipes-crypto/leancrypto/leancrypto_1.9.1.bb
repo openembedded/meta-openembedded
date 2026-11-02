@@ -3,21 +3,15 @@ DESCRIPTION = "leancrypto is a cryptographic library that exclusively contains \
 PQC-resistant cryptographic algorithms. It is lean, has minimal dependencies, \
 supports stack-only operation and provides optimized implementations for \
 ML-KEM (Kyber), ML-DSA (Dilithium), SLH-DSA (Sphincs+) and many more"
-HOMEPAGE = "https://leancrypto.org"
-LICENSE = "BSD-3-Clause OR GPL-2.0-only"
-LIC_FILES_CHKSUM = " \
-    file://LICENSE;md5=581f53c96a634ae7f241516370a8f1ee \
-    file://LICENSE.bsd;md5=66a5cedaf62c4b2637025f049f9b826f \
-    file://LICENSE.gplv2;md5=eb723b61539feef013de476e68b5c50a \
-    "
 SECTION = "libs"
-SRC_URI = "git://github.com/smuellerDD/leancrypto.git;branch=master;protocol=https;tag=v${PV} \
-           file://leancrypto-tests.sh \
-           file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
-           file://0002-Linker-script-Handle-a-missing-.init-section.patch \
-           file://0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch \
-           "
-SRCREV = "65eb4e7e84e3a5499460a66b1623ccf6c59628b1"
+
+require leancrypto.inc
+
+SRC_URI += "file://leancrypto-tests.sh \
+            file://0001-secure_execution_linux-drop-redundant-linux-prctl.h-.patch \
+            file://0002-Linker-script-Handle-a-missing-.init-section.patch \
+            file://0003-FIPS-checker-builder-Use-OBJCOPY-and-report-failures.patch \
+"
 
 inherit pkgconfig meson
 
