@@ -26,7 +26,10 @@ inherit autotools
 PACKAGECONFIG ?= "openssl"
 
 PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sctp_h=no,lksctp-tools"
-PACKAGECONFIG[openssl] = "--with-openssl=${RECIPE_SYSROOT}${prefix},--without-openssl,openssl"
+PACKAGECONFIG[openssl] = "--with-openssl=${OPENSSL_ROOT},--without-openssl,openssl"
+
+OPENSSL_ROOT = "${RECIPE_SYSROOT}${prefix}"
+OPENSSL_ROOT:class-native = "${RECIPE_SYSROOT_NATIVE}${prefix_native}"
 
 CFLAGS += "-D_GNU_SOURCE"
 
