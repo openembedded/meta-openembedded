@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/idan/oauthlib"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2699a9fb0d71d5eafd75d8d7c302f7df"
 
-SRC_URI[sha256sum] = "efb274799819440f95b4ab3b818869f1ce9ae26c5beacba0201d1a1b76b54f86"
+SRC_URI[sha256sum] = "3d73febdb6faa00f277c81fb04be7b7586fb96fc3b7f0b9c772dada69a25ede7"
 
 CVE_PRODUCT = "oauthlib"
 
