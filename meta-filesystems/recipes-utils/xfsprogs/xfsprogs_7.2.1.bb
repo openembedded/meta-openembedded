@@ -13,7 +13,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://0003-doc-man-support-reproducible-builds.patch \
            "
 
-SRC_URI[sha256sum] = "501dfa363cd8e19997a4a1a71f70ded88241b45e9db233e8875c23b80520cc83"
+SRC_URI[sha256sum] = "c45f5fd81fdebcdae61938fcfdff86c9960b39fc89a06df633730d93876cd27d"
 
 inherit autotools-brokensep pkgconfig
 
