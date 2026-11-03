@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/seznam/python-fastjsonschema"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"
 
-SRC_URI[sha256sum] = "72064e12356a7d6ef02165be2946b9abadbdf238536e07eb587e3dbaa33099cf"
+SRC_URI[sha256sum] = "8330c91b027dcf941efcb7b1f0998515ff95d177ea15bbabdfe8671965620901"
 
 inherit ptest-python-pytest pypi setuptools3
 
