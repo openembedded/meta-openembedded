@@ -115,7 +115,6 @@ PTESTS_FAST_META_PYTHON = "\
     python3-time-machine \
     python3-tokenize-rt \
     python3-tomli-w \
-    python3-tomlkit \
     python3-trustme \
     python3-typeguard \
     python3-typing-inspection \
