@@ -10,7 +10,7 @@ inherit cml1 update-alternatives
 SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
            file://0001-kconfig-use-HOSTCC-to-build-the-config-frontends.patch \
            "
-SRC_URI[sha256sum] = "827e4cdfd69f5da973e00e2a59b30b3c9857fb7fae74c362fd0b4f96be7929b0"
+SRC_URI[sha256sum] = "44e2bab43dfe2c171743297631ce558c6d9ed38b87a66fd751cef617574b375e"
 
 SECTION = "base"
 
