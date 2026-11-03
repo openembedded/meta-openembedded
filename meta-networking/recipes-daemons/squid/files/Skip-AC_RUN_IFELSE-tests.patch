@@ -1,4 +1,4 @@
-From 822fd6630617040a713df5eb876d68051a716a0f Mon Sep 17 00:00:00 2001
+From 4fbe7889eb6276dfde8b6be12da0cd8f2362d4f9 Mon Sep 17 00:00:00 2001
 From: Jim Somerville <Jim.Somerville@windriver.com>
 Date: Tue, 14 Oct 2014 02:56:08 -0400
 Subject: [PATCH] Skip AC_RUN_IFELSE tests

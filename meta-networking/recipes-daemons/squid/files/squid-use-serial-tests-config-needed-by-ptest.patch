@@ -1,4 +1,4 @@
-From 5ce613e9f0c4725aaa82d9a62f76c809e375fe49 Mon Sep 17 00:00:00 2001
+From 0635fa18502c0f63e528feaea0f8034a76792ce2 Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Tue, 19 Jul 2016 01:56:23 -0400
 Subject: [PATCH] squid: use serial-tests config needed by ptest
@@ -14,7 +14,7 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 850fdaf..10968b3 100644
+index f625147..e7b5130 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -10,7 +10,7 @@ AC_PREREQ(2.61)

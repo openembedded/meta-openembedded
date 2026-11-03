@@ -1,4 +1,4 @@
-From 9f6eb086ee1d525cf404189893fccfb8a03235bb Mon Sep 17 00:00:00 2001
+From 2cae2beb8b6f4f9c88d5b3e7d05fadd6d8addf4f Mon Sep 17 00:00:00 2001
 From: Patrick Wicki <patrick.wicki@siemens.com>
 Date: Wed, 22 Nov 2023 15:35:44 +0100
 Subject: [PATCH] squid: make squid-conf-tests run on target device

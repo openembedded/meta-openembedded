@@ -22,7 +22,7 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
            file://squid.nm \
            "
 
-SRC_URI[sha256sum] = "e3bd613b91b1c498ec2992276063342a85cd6edddd5521294e04f44bc055da9b"
+SRC_URI[sha256sum] = "52cd716f568faccbd3e237d77fd3518cbfe1548dfa2ebd8871b5a112e8ab0063"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce \
                     file://errors/COPYRIGHT;md5=41d117978dbffedc893e8eeca12537d0 \
