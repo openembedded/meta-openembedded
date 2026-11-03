@@ -30,6 +30,7 @@ SRC_URI = "\
     file://0015-fix-openssl-4-engine-api-removal.patch \
     file://0016-fix-openssl-4-const-subject-name.patch \
     file://0017-cst-port-pkcs11-signing-from-engine-to-provider.patch \
+    file://0018-openssl_helper-Use-ASN1_STRING_get_length-with-OpenS.patch \
 "
 SRC_URI[sha256sum] = "fd92a1a9faa10fb81bbf752c7ee1e257f17e1ec4c2964f8a47adf8a3eaa7df41"
 
