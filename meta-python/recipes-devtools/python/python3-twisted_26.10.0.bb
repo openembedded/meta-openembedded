@@ -6,7 +6,7 @@ HOMEPAGE = "https://twisted.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ff950f7bafa004a86f478dc9eaf8106f"
 
-SRC_URI[sha256sum] = "dbfd0fe1ee409d0243fdd7a6a6ff14f4948cec1fd78e0376291f805e1501fae9"
+SRC_URI[sha256sum] = "5f0355403e507fc23ceea85e9dbb4bc59335aabde41dd324e8b8cea180dd38de"
 
 CVE_PRODUCT = "twisted:twisted"
 
