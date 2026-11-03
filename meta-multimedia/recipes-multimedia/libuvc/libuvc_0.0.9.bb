@@ -8,7 +8,7 @@ DEPENDS = "libusb"
 
 SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https;tag=v${PV}"
 
-SRCREV = "4e9fc773914377ec0bcf2f31621f56da5a0fa09f"
+SRCREV = "448d78b9aa4f54172c1ca5b5d1b4a6b9b93f7957"
 
 inherit cmake pkgconfig
 
