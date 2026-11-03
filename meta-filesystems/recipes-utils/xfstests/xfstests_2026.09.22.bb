@@ -2,7 +2,7 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
-SRCREV = "acb6d4cb84205a8e3f19ca470cfcf7bf6d93a509"
+SRCREV = "22348afe338c0f6d540c0d7ef0db749eaa51b218"
 SRCREV_unionmount = "f48a57d2a7db5f86ff3dbc4444c3c3041e182d7d"
 SRCREV_FORMAT = "default_unionmount"
 

@@ -1,3 +1,4 @@
+From 9e4189b57d453c649defb59d9b86bf94c42956bf Mon Sep 17 00:00:00 2001
 From: Khem Raj <khem.raj@oss.qualcomm.com>
 Date: Tue, 29 Sep 2026 02:03:26 +0000
 Subject: [PATCH] rw_hint: add fallback define for RWH_WRITE_LIFE_NOT_SET
@@ -14,6 +15,11 @@ macro values.
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
+ src/rw_hint.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/rw_hint.c b/src/rw_hint.c
+index d4290e4a..4371e2b8 100644
 --- a/src/rw_hint.c
 +++ b/src/rw_hint.c
 @@ -7,6 +7,10 @@

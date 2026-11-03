@@ -1,3 +1,4 @@
+From 48d2f10ee9a796d1be3b587e81216858b91cb3ec Mon Sep 17 00:00:00 2001
 From: Khem Raj <khem.raj@oss.qualcomm.com>
 Date: Tue, 29 Sep 2026 02:03:26 +0000
 Subject: [PATCH] fs-monitor: include linux/types.h for __s32/__u32
@@ -12,6 +13,11 @@ unless <linux/types.h> is included directly.
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
+ src/fs-monitor.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/fs-monitor.c b/src/fs-monitor.c
+index dd91a5d7..d4cb41e8 100644
 --- a/src/fs-monitor.c
 +++ b/src/fs-monitor.c
 @@ -12,6 +12,7 @@
