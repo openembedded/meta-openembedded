@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 SRC_URI = "git://github.com/thingsboard/${BPN};protocol=https;branch=master;tag=${PV}"
-SRCREV = "c51e032432a1f9fe8fa47af9683e077da98e41c0"
+SRCREV = "4401209296528b6f51e6e172d3be932694e1e6b6"
 
 inherit setuptools3
 
