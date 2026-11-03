@@ -16,6 +16,7 @@ SRC_URI:append = " \
     file://CVE-2026-42533_p5.patch \
     file://CVE-2026-56434.patch \
     file://CVE-2026-95101.patch \
+    file://CVE-2026-97629.patch \
 "
 
 # 1.28.x branch is the current stable branch, the recommended default
