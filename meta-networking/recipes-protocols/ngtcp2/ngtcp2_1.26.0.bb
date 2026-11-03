@@ -5,9 +5,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=de0966c8ff4f62661a3da92967a75434"
 
 SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=main;tag=v${PV} \
-           file://0001-examples-server-Do-not-truncate-file-sizes-on-32-bit.patch \
            "
-SRCREV = "f9e9ff01ad2c8116bc09de4f644b0028a61486a6"
+SRCREV = "6a22a4d7a111f6b52391910e40ad3681a09cfb9c"
 
 DEPENDS = "brotli libev nghttp3"
 
