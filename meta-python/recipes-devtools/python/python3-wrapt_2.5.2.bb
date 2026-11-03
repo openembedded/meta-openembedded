@@ -8,7 +8,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
 
 DEPENDS += "python3-wheel-native"
 
-SRC_URI[sha256sum] = "f595bb0185aab3e9dc31950c95d914f56ea8278810c3b928f3426e12ed6d27bc"
+SRC_URI[sha256sum] = "551cb49e88b3722faad780303833bc4fa70685fb1773270fb98b40d39d9fddbf"
 
 # python3-misc for 'this' module, python3-image for colorsys (test_deferred_patching)
 RDEPENDS:${PN}-ptest += " \
