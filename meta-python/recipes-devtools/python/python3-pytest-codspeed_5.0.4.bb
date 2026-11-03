@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2856cbe664e8843cd4fd4c1d1d85c2c3"
 
 DEPENDS = "python3-cffi-native"
-SRC_URI[sha256sum] = "91afef90e6a96b013495e4702ef5d6358614a449e71008cdc194ef668778b92f"
+SRC_URI[sha256sum] = "5098065fb9f91d80a7a81752d1970153e44036fe36ce0b6a7afa6bf7881b9d3e"
 
 inherit pypi python_setuptools_build_meta
 
