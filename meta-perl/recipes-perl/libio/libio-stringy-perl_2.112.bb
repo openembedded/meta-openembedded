@@ -9,10 +9,10 @@ LICENSE = "Artistic-1.0 OR GPL-1.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
 
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/D/DS/DSKOLL/IO-stringy-${PV}.tar.gz"
-SRC_URI[sha256sum] = "8c67fd6608c3c4e74f7324f1404a856c331dbf48d9deda6aaa8296ea41bf199d"
+SRC_URI = "${CPAN_MIRROR}/authors/id/C/CA/CAPOEIRAB/IO-Stringy-${PV}.tar.gz"
+SRC_URI[sha256sum] = "872328f5a665c79e24a777b35e4f7fc395a1912d5e142879ffda83e8c102f765"
 
-S = "${UNPACKDIR}/IO-stringy-${PV}"
+S = "${UNPACKDIR}/IO-Stringy-${PV}"
 
 inherit cpan
 
