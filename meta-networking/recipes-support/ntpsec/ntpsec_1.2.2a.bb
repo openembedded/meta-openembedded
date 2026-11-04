@@ -15,6 +15,7 @@ DEPENDS += "bison-native \
 SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
            file://volatiles.ntpsec \
            file://0001-wscript-Add-BISONFLAGS-support.patch \
+           file://CVE-2026-121506.patch \
            "
 
 SRC_URI[sha256sum] = "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
