@@ -112,6 +112,9 @@ signing_import_prepare() {
 
     echo "directories.tokendir = $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
     echo "objectstore.backend = db" >> "$SOFTHSM2_CONF"
+    echo "log.level = ERROR" >> "$SOFTHSM2_CONF"
+    echo "slots.removable = false" >> "$SOFTHSM2_CONF"
+    echo "slots.mechanisms = ALL" >> "$SOFTHSM2_CONF"
     rm -rf "$SOFTHSM2_DIR"
     mkdir -p "$SOFTHSM2_DIR"
 
@@ -353,6 +356,9 @@ signing_prepare() {
 
     echo "directories.tokendir = $SOFTHSM2_DIR" > "$SOFTHSM2_CONF"
     echo "objectstore.backend = db" >> "$SOFTHSM2_CONF"
+    echo "log.level = ERROR" >> "$SOFTHSM2_CONF"
+    echo "slots.removable = false" >> "$SOFTHSM2_CONF"
+    echo "slots.mechanisms = ALL" >> "$SOFTHSM2_CONF"
 
     cat > "${OPENSSL_CONF}" <<EOF
 openssl_conf = openssl_init
