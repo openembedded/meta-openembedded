@@ -6,10 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d1d99ab4e0f1be7992a891906e47add2"
 DEPENDS = "zlib"
 DEPENDS:append:class-native = " libcap-native"
 
-SRCREV = "2491a1b101283cf7886d05033345b7e821825319"
-SRCBRANCH = "v${@oe.utils.trim_version("${PV}", 2)}-stable"
+SRCREV = "5f39aa483715b813f4d85a692fcb361b5d8d0c1b"
+#SRCBRANCH = "v${@oe.utils.trim_version("${PV}", 2)}-stable"
+SRCBRANCH = "main"
 SRC_URI = " \
     git://github.com/warmcat/libwebsockets.git;protocol=https;branch=${SRCBRANCH};tag=v${PV} \
+    file://0001-cmake-remove-source-dir-from-installed-lws_config.h.patch \
 "
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
