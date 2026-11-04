@@ -7,14 +7,10 @@ SRC_URI = "\
     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "6e925bbbe747fbb58bc4a95a646907a2101741f6"
+SRCREV = "950d0cf35e4f917b6836565d76e38bcf7fcf2d5f"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit meson pkgconfig
 
 DEPENDS:append:libc-musl = " fts"
-
-do_configure:prepend() {
-	sed -i '/Custom targets for testing overlay function/,/command : .*permanent...changes/ d' ${S}/meson.build
-}
