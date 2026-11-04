@@ -11,6 +11,10 @@ CARGO_SRC_DIR = "rust"
 
 require ${BPN}-crates.inc
 
+do_install_ptest:append() {
+    install -Dm 0644 ${S}/docs/usage.rst ${D}${PTEST_PATH}/docs/usage.rst
+}
+
 RDEPENDS:${PN}-ptest += " \
     python3-hypothesis \
     python3-tzdata \
