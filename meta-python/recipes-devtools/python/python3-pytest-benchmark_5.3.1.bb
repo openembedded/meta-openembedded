@@ -1,13 +1,11 @@
 SUMMARY = "A ``pytest`` fixture for benchmarking code. It will group the tests into rounds that are calibrated to the chosen timer."
 HOMEPAGE = "https://github.com/ionelmc/pytest-benchmark"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d606e94f56c21c8e0cdde0b622dcdf57"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1d907de309286ace60c424a81666867d"
 
-SRC_URI[sha256sum] = "9ea661cdc292e8231f7cd4c10b0319e56a2118e2c09d9f50e1b3d150d2aca105"
+SRC_URI[sha256sum] = "c1ee70a58f9bfb1ac955cc634247a340b0df7bcb949071cfca396f16c6fc3516"
 
-inherit pypi setuptools3
-
-PYPI_PACKAGE_SDIST = "pytest-benchmark"
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += "\
     python3-aspectlib \
