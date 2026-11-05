@@ -30,7 +30,6 @@ EXTRA_OECONF = " \
     --with-term-lib='ncursesw ncurses' \
     --enable-cap \
     --enable-multibyte \
-    --disable-dynamic \
     zsh_cv_shared_environ=yes \
 "
 
@@ -44,6 +43,8 @@ ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
 ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
 ALTERNATIVE_PRIORITY = "90"
 
+PACKAGECONFIG ??= "static"
+PACKAGECONFIG[static] = "--disable-dynamic,--enable-dynamic"
 # Needed for manpages.bbclass, but they're always installed
 PACKAGECONFIG[manpages] = ""
 
