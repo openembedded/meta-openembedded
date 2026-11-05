@@ -1,0 +1,119 @@
+From ac3ff04ceae5f4daea43a15e447a26b70cfab548 Mon Sep 17 00:00:00 2001
+From: Bart Van Assche <bvanassche@acm.org>
+Date: Thu, 20 Aug 2026 19:33:49 -0700
+Subject: [PATCH] libsnmp, snmpd: Enable TCP_NODELAY on TCP sockets to reduce
+ latency
+
+SNMP and subagent protocols (AgentX, SMUX) operate primarily as
+synchronous request-response protocols, transmitting small frames
+that are significantly smaller than the Maximum Segment Size (MSS).
+Without TCP_NODELAY, Nagle's algorithm coalesces packets when there
+is unacknowledged data in flight. In combination with receiver delayed
+ACK timers (typically 40 to 200 ms), this introduces artificial
+latency stalls during request-response cycles and multi-packet
+exchanges (such as TLS handshakes and AgentX transactions).
+
+Introduce netsnmp_set_tcp_nodelay() in snmpSocketBaseDomain to set or
+clear the TCP_NODELAY socket option across POSIX and Windows platforms.
+
+Enable TCP_NODELAY on all TCP-based transports and connections where
+disabling Nagle's algorithm reduces latency:
+- snmpTCPDomain: client-side connect and server-side accept
+- snmpTCPIPv6Domain: client-side connect and server-side accept
+- snmpSSHDomain: client-side connect
+- smux: server-side accept
+
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/ac3ff04ceae5f4daea43a15e447a26b70cfab548]
+Backport prerequisite for the CVE-2026-89147 fix; diff limited to the files needed by that backport.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ agent/mibgroup/smux/smux.c                    |  2 +
+ .../net-snmp/library/snmpSocketBaseDomain.h   |  1 +
+ snmplib/transports/snmpSocketBaseDomain.c     | 38 +++++++++++++++++++
+ 3 files changed, 41 insertions(+)
+
+diff --git a/agent/mibgroup/smux/smux.c b/agent/mibgroup/smux/smux.c
+index f4656c9f0d..63b67a7e85 100644
+--- a/agent/mibgroup/smux/smux.c
++++ b/agent/mibgroup/smux/smux.c
+@@ -64,6 +64,7 @@
+ #include <net-snmp/net-snmp-includes.h>
+ #include <net-snmp/agent/net-snmp-agent-includes.h>
+ #include <net-snmp/library/snmpIPv4BaseDomain.h>
++#include <net-snmp/library/snmpSocketBaseDomain.h>
+ #include <net-snmp/library/tools.h>
+ 
+ #include "smux.h"
+@@ -652,6 +653,7 @@ smux_accept(NETSNMP_SOCKET sd)
+         snmp_log_perror("[smux_accept] accept failed");
+         return NETSNMP_INVALID_SOCKET;
+     } else {
++        netsnmp_set_tcp_nodelay(fd, 1);
+         DEBUGMSGTL(("smux", "[smux_accept] accepted fd %" NETSNMP_FMT_SKT " from %s:%d\n",
+                  fd, inet_ntoa(in_socket.sin_addr),
+                  ntohs(in_socket.sin_port)));
+diff --git a/include/net-snmp/library/snmpSocketBaseDomain.h b/include/net-snmp/library/snmpSocketBaseDomain.h
+index 300fc5f7ba..8b6fac1a9d 100644
+--- a/include/net-snmp/library/snmpSocketBaseDomain.h
++++ b/include/net-snmp/library/snmpSocketBaseDomain.h
+@@ -19,6 +19,7 @@ extern          "C" {
+                                 int size);
+     int netsnmp_set_non_blocking_mode(NETSNMP_SOCKET sock,
+                                       int non_blocking_mode);
++    int netsnmp_set_tcp_nodelay(NETSNMP_SOCKET sock, int nodelay);
+ 
+ #ifdef __cplusplus
+ }
+diff --git a/snmplib/transports/snmpSocketBaseDomain.c b/snmplib/transports/snmpSocketBaseDomain.c
+index 6a23d29f62..8629f3916f 100644
+--- a/snmplib/transports/snmpSocketBaseDomain.c
++++ b/snmplib/transports/snmpSocketBaseDomain.c
+@@ -30,6 +30,12 @@
+ #ifdef HAVE_SYS_SOCKET_H
+ #include <sys/socket.h>
+ #endif
++#ifdef HAVE_NETINET_IN_H
++#include <netinet/in.h>
++#endif
++#ifdef HAVE_NETINET_TCP_H
++#include <netinet/tcp.h>
++#endif
+ #include <errno.h>
+ 
+ #include <net-snmp/types.h>
+@@ -361,3 +367,35 @@ netsnmp_set_non_blocking_mode(NETSNMP_SOCKET sock, int non_blocking_mode)
+         return -1;
+ #endif
+ }
++
++/**
++ * Sets or clears the TCP_NODELAY option on a socket.
++ *
++ * @param[in] sock Socket descriptor (Unix) or socket handle (Windows).
++ * @param[in] nodelay Non-zero to enable TCP_NODELAY (disable Nagle's algorithm),
++ *                    zero to disable TCP_NODELAY (enable Nagle's algorithm).
++ *
++ * @return zero upon success and a negative value upon error.
++ */
++int
++netsnmp_set_tcp_nodelay(NETSNMP_SOCKET sock, int nodelay)
++{
++    int rc = -1;
++
++#if defined(TCP_NODELAY)
++    if (NETSNMP_IS_VALID_SOCKET(sock)) {
++        rc = setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (void *)&nodelay,
++                        sizeof(nodelay));
++        if (rc < 0) {
++            DEBUGMSGTL(("socket:nodelay",
++                        "could not set TCP_NODELAY to %d on socket %" NETSNMP_FMT_SKT ": %s\n",
++                        nodelay, sock, strerror(errno)));
++        } else {
++            DEBUGMSGTL(("socket:nodelay",
++                        "set TCP_NODELAY to %d on socket %" NETSNMP_FMT_SKT "\n",
++                        nodelay, sock));
++        }
++    }
++#endif
++    return rc;
++}

@@ -1,0 +1,26 @@
+From da5728052f7f1a4ca6764fdf1f740f222175d60a Mon Sep 17 00:00:00 2001
+From: Bart Van Assche <bvanassche@acm.org>
+Date: Mon, 29 Jan 2024 14:57:24 -0800
+Subject: [PATCH] CHANGES: Remove more redundant redeclarations
+
+Prepare for enabling -Wredundant-decls.
+
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/da5728052f7f1a4ca6764fdf1f740f222175d60a]
+Backport prerequisite for the CVE-2026-89147 fix; diff limited to agent/mibgroup/smux/.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ agent/mibgroup/smux/smux.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/agent/mibgroup/smux/smux.c b/agent/mibgroup/smux/smux.c
+index 747b6a8eb..078c4c6fa 100644
+--- a/agent/mibgroup/smux/smux.c
++++ b/agent/mibgroup/smux/smux.c
+@@ -81,7 +81,6 @@ int             smux_listen_sd = -1;
+ static struct timeval smux_rcv_timeout;
+ static long   smux_reqid;
+ 
+-void            init_smux(void);
+ static u_char  *smux_open_process(int, u_char *, size_t *, int *);
+ static u_char  *smux_rreq_process(int, u_char *, size_t *);
+ static u_char  *smux_close_process(int, u_char *, size_t *);

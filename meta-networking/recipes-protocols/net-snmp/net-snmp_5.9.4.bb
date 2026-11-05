@@ -31,6 +31,13 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://netsnmp-swinst-crash.patch \
            file://net-snmp-5.9.4-kernel-6.7.patch \
            file://CVE-2025-68615.patch \
+           file://0001-CHANGES-Remove-more-redundant-redeclarations.patch \
+           file://0002-fix-1098-as-suggested-by-Aisle-Research-to-prevent.patch \
+           file://0003-libsnmp-snmpd-Rename-socket-descriptor-arguments.patch \
+           file://0004-Windows-Fix-64-bit-compatibility-issues.patch \
+           file://0005-libsnmp-Move-transport-include-directives.patch \
+           file://0006-libsnmp-snmpd-Enable-TCP_NODELAY-on-TCP-sockets-to.patch \
+           file://CVE-2026-89147.patch \
           "
 SRC_URI[sha256sum] = "8b4de01391e74e3c7014beb43961a2d6d6fa03acc34280b9585f4930745b0544"
 

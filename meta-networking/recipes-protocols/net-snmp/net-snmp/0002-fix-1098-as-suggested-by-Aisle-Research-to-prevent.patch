@@ -1,0 +1,25 @@
+From f77a116425433316d67ada69afc1aaf81868ddac Mon Sep 17 00:00:00 2001
+From: Wes Hardaker <opensource@hardakers.net>
+Date: Sun, 31 May 2026 06:19:12 -0700
+Subject: [PATCH] fix #1098 as suggested by Aisle Research to prevent smux
+ crashes
+
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/f77a116425433316d67ada69afc1aaf81868ddac]
+Backport prerequisite for the CVE-2026-89147 fix.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ agent/mibgroup/smux/smux.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/agent/mibgroup/smux/smux.c b/agent/mibgroup/smux/smux.c
+index ddecf7ac4..cde96a23d 100644
+--- a/agent/mibgroup/smux/smux.c
++++ b/agent/mibgroup/smux/smux.c
+@@ -1103,6 +1103,7 @@ smux_rreq_process(int sd, u_char * ptr, size_t * len)
+              * unregister the mib 
+              */
+             unregister_mib(rptr->sr_name, rptr->sr_name_len);
++            rptr->reginfo = NULL;
+             /*
+              * find a replacement 
+              */

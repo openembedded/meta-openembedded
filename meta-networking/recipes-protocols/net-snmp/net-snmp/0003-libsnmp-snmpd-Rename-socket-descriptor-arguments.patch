@@ -1,0 +1,240 @@
+From ebbf55dc38c2539b11b0951cc497cbd36ff15e4f Mon Sep 17 00:00:00 2001
+From: Bart Van Assche <bvanassche@acm.org>
+Date: Thu, 30 Jul 2026 09:16:01 -0700
+Subject: [PATCH] libsnmp, snmpd: Rename socket descriptor arguments
+
+Rename socket descriptor arguments (typically 'int fd' or 'int s')
+to 'int sock' across various transport domains and MIB groups to
+improve code clarity and consistency. This change helps distinguish
+socket descriptors from general file descriptors.
+
+The refactoring covers:
+- Transport domains (UDP, IPv4, IPv6, IP Base, Socket Base) where
+  arguments in functions like recvfrom, sendto, and sockopt_set
+  were renamed.
+- SMUX processing functions in agent/mibgroup/smux/smux.c.
+- Interface helpers and ioctl wrappers in if-mib, ip-mib, and mibII.
+
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/ebbf55dc38c2539b11b0951cc497cbd36ff15e4f]
+Backport prerequisite for the CVE-2026-89147 fix; diff limited to the files needed by that backport.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ agent/mibgroup/smux/smux.c                    | 64 +++++++++----------
+ .../net-snmp/library/snmpSocketBaseDomain.h   |  2 +-
+ 2 files changed, 33 insertions(+), 33 deletions(-)
+
+diff --git a/agent/mibgroup/smux/smux.c b/agent/mibgroup/smux/smux.c
+index cde96a23d6..16b0e8f66f 100644
+--- a/agent/mibgroup/smux/smux.c
++++ b/agent/mibgroup/smux/smux.c
+@@ -734,7 +734,7 @@ smux_accept(int sd)
+ }
+ 
+ int
+-smux_process(int fd)
++smux_process(int sock)
+ {
+     int             length, tmp_length;
+     u_char          data[SMUXMAXPKTSIZE];
+@@ -743,7 +743,7 @@ smux_process(int fd)
+ 
+     do
+     {
+-       length = recvfrom(fd, (char *) data, SMUXMAXPKTSIZE, MSG_PEEK, NULL,
++       length = recvfrom(sock, (char *) data, SMUXMAXPKTSIZE, MSG_PEEK, NULL,
+                          NULL);
+     }
+     while((length == -1) && ((errno == EINTR) || (errno == EAGAIN)));
+@@ -752,7 +752,7 @@ smux_process(int fd)
+     {
+        if (length < 0)
+            snmp_log_perror("[smux_process] peek failed");
+-       smux_peer_cleanup(fd);
++       smux_peer_cleanup(sock);
+        return -1;
+     }
+ 
+@@ -775,7 +775,7 @@ smux_process(int fd)
+     do
+     {
+        length = tmp_length;
+-       length = recvfrom(fd, (char *) data, length, 0, NULL, NULL);
++       length = recvfrom(sock, (char *) data, length, 0, NULL, NULL);
+     }
+     while((length == -1) && ((errno == EINTR) || (errno == EAGAIN)));
+ 
+@@ -786,16 +786,16 @@ smux_process(int fd)
+          */
+         DEBUGMSGTL(("smux",
+                     "[smux_process] peer on fd %d died or timed out\n",
+-                    fd));
+-        smux_peer_cleanup(fd);
++                    sock));
++        smux_peer_cleanup(sock);
+         return -1;
+     }
+ 
+-    return smux_pdu_process(fd, data, length);
++    return smux_pdu_process(sock, data, length);
+ }
+ 
+ static int
+-smux_pdu_process(int fd, u_char * data, size_t length)
++smux_pdu_process(int sock, u_char * data, size_t length)
+ {
+     int             error;
+     size_t          len;
+@@ -817,37 +817,37 @@ smux_pdu_process(int fd, u_char * data, size_t length)
+                     (int) type));
+         switch (type) {
+         case SMUX_OPEN:
+-            smux_send_close(fd, SMUXC_PROTOCOLERROR);
++            smux_send_close(sock, SMUXC_PROTOCOLERROR);
+             DEBUGMSGTL(("smux",
+                         "[smux_pdu_process] peer on fd %d sent duplicate open?\n",
+-                        fd));
+-            smux_peer_cleanup(fd);
++                        sock));
++            smux_peer_cleanup(sock);
+             error = -1;
+             break;
+         case SMUX_CLOSE:
+-            ptr = smux_close_process(fd, ptr, &len);
+-            smux_peer_cleanup(fd);
++            ptr = smux_close_process(sock, ptr, &len);
++            smux_peer_cleanup(sock);
+             error = -1;
+             break;
+         case SMUX_RREQ:
+-            ptr = smux_rreq_process(fd, ptr, &len);
++            ptr = smux_rreq_process(sock, ptr, &len);
+             break;
+         case SMUX_RRSP:
+             error = -1;
+-            smux_send_close(fd, SMUXC_PROTOCOLERROR);
+-            smux_peer_cleanup(fd);
++            smux_send_close(sock, SMUXC_PROTOCOLERROR);
++            smux_peer_cleanup(sock);
+             DEBUGMSGTL(("smux",
+                         "[smux_pdu_process] peer on fd %d sent RRSP!\n",
+-                        fd));
++                        sock));
+             break;
+         case SMUX_SOUT:
+             error = -1;
+-            smux_send_close(fd, SMUXC_PROTOCOLERROR);
+-            smux_peer_cleanup(fd);
++            smux_send_close(sock, SMUXC_PROTOCOLERROR);
++            smux_peer_cleanup(sock);
+             DEBUGMSGTL(("smux", "This shouldn't have happened!\n"));
+             break;
+         case SMUX_TRAP:
+-            DEBUGMSGTL(("smux", "Got trap from peer on fd %d\n", fd));
++            DEBUGMSGTL(("smux", "Got trap from peer on fd %d\n", sock));
+             if (ptr)
+             {
+                DEBUGMSGTL(("smux", "[smux_pdu_process] call smux_trap_process.\n"));
+@@ -863,8 +863,8 @@ smux_pdu_process(int fd, u_char * data, size_t length)
+              */
+             break;
+         default:
+-            smux_send_close(fd, SMUXC_PACKETFORMAT);
+-            smux_peer_cleanup(fd);
++            smux_send_close(sock, SMUXC_PACKETFORMAT);
++            smux_peer_cleanup(sock);
+             DEBUGMSGTL(("smux", "[smux_pdu_process] Wrong type %d\n",
+                         (int) type));
+             error = -1;
+@@ -875,7 +875,7 @@ smux_pdu_process(int fd, u_char * data, size_t length)
+ }
+ 
+ static u_char  *
+-smux_open_process(int fd, u_char * ptr, size_t * len, int *fail)
++smux_open_process(int sock, u_char * ptr, size_t * len, int *fail)
+ {
+     u_char          type;
+     long            version;
+@@ -946,7 +946,7 @@ smux_open_process(int fd, u_char * ptr, size_t * len, int *fail)
+                     "u, type %d\n", *len, (int) type));
+     }
+     passwd[string_len] = '\0';
+-    if (!smux_auth_peer(oid_name, oid_name_len, passwd, fd)) {
++    if (!smux_auth_peer(oid_name, oid_name_len, passwd, sock)) {
+         snmp_log(LOG_WARNING,
+                  "refused smux peer: oid %s, descr %s\n",
+                  oid_print, descr);
+@@ -961,7 +961,7 @@ smux_open_process(int fd, u_char * ptr, size_t * len, int *fail)
+ }
+ 
+ static void
+-smux_send_close(int fd, int reason)
++smux_send_close(int sock, int reason)
+ {
+     u_char          outpacket[3], *ptr;
+ 
+@@ -973,20 +973,20 @@ smux_send_close(int fd, int reason)
+ 
+     if (snmp_get_do_debugging())
+         DEBUGMSGTL(("smux",
+-                    "[smux_close] sending close to fd %d, reason %d\n", fd,
++                    "[smux_close] sending close to fd %d, reason %d\n", sock,
+                     reason));
+ 
+     /*
+      * send a response back 
+      */
+-    if (sendto(fd, (char *) outpacket, 3, 0, NULL, 0) < 0) {
++    if (sendto(sock, (char *) outpacket, 3, 0, NULL, 0) < 0) {
+         snmp_log_perror("[smux_snmp_close] send failed");
+     }
+ }
+ 
+ 
+ static int
+-smux_auth_peer(oid * name, size_t namelen, char *passwd, int fd)
++smux_auth_peer(oid * name, size_t namelen, char *passwd, int sock)
+ {
+     int             i;
+     char            oid_print[SMUXMAXSTRLEN];
+@@ -1015,7 +1015,7 @@ smux_auth_peer(oid * name, size_t namelen, char *passwd, int fd)
+                 /*
+                  * matched, mark the auth 
+                  */
+-                Auths[i]->sa_active_fd = fd;
++                Auths[i]->sa_active_fd = sock;
+                 return 1;
+             }
+         }
+@@ -1032,7 +1032,7 @@ smux_auth_peer(oid * name, size_t namelen, char *passwd, int fd)
+  * Need to catch signal when snmpd goes down and send close pdu to gated 
+  */
+ static u_char  *
+-smux_close_process(int fd, u_char * ptr, size_t * len)
++smux_close_process(int sock, u_char * ptr, size_t * len)
+ {
+     long            down = 0;
+     int             length = *len;
+@@ -1047,8 +1047,8 @@ smux_close_process(int fd, u_char * ptr, size_t * len)
+ 
+     DEBUGMSGTL(("smux",
+                 "[smux_close_process] close from peer on fd %d reason %ld\n",
+-                fd, down));
+-    smux_peer_cleanup(fd);
++                sock, down));
++    smux_peer_cleanup(sock);
+ 
+     return NULL;
+ }
+diff --git a/include/net-snmp/library/snmpSocketBaseDomain.h b/include/net-snmp/library/snmpSocketBaseDomain.h
+index 06001727fc..951fb21c84 100644
+--- a/include/net-snmp/library/snmpSocketBaseDomain.h
++++ b/include/net-snmp/library/snmpSocketBaseDomain.h
+@@ -15,7 +15,7 @@ extern          "C" {
+  * Prototypes
+  */
+     int netsnmp_socketbase_close(netsnmp_transport *t);
+-    int netsnmp_sock_buffer_set(int s, int optname, int local, int size);
++    int netsnmp_sock_buffer_set(int sock, int optname, int local, int size);
+     int netsnmp_set_non_blocking_mode(int sock, int non_blocking_mode);
+ 
+ #ifdef __cplusplus

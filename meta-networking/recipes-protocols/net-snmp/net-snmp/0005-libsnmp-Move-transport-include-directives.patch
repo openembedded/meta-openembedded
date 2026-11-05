@@ -1,0 +1,27 @@
+From b1efa55e0289623f3149afd447f3d54dec315a9e Mon Sep 17 00:00:00 2001
+From: Bart Van Assche <bvanassche@acm.org>
+Date: Sun, 16 Aug 2026 12:52:10 -0700
+Subject: [PATCH] libsnmp: Move transport include directives
+
+Remove the transport include directives from include/net-snmp/session_api.h
+and move these into the source files that need these include directives.
+
+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/b1efa55e0289623f3149afd447f3d54dec315a9e]
+Backport prerequisite for the CVE-2026-89147 fix; diff limited to agent/mibgroup/smux/.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ agent/mibgroup/smux/smux.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/agent/mibgroup/smux/smux.c b/agent/mibgroup/smux/smux.c
+index 88f8bb72f5..f4656c9f0d 100644
+--- a/agent/mibgroup/smux/smux.c
++++ b/agent/mibgroup/smux/smux.c
+@@ -63,6 +63,7 @@
+ 
+ #include <net-snmp/net-snmp-includes.h>
+ #include <net-snmp/agent/net-snmp-agent-includes.h>
++#include <net-snmp/library/snmpIPv4BaseDomain.h>
+ #include <net-snmp/library/tools.h>
+ 
+ #include "smux.h"
