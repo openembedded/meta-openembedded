@@ -9,6 +9,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI = "file://CVE-2026-88029.patch \
+           file://CVE-2026-106435.patch \
+           file://CVE-2026-106435-regression.patch \
           "
 
 SRC_URI[sha256sum] = "400074090b9a631f120b42c61b222fd743490c133a5d2f99c0208cefcccc964e"
