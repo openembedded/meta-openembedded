@@ -55,3 +55,4 @@ CVE_PRODUCT = "virtualenv"
 
 # The batch activator only supports Windows interpreters.
 CVE_STATUS[CVE-2026-102937] = "${@'not-applicable-platform: Windows cmd.exe batch activation is not selected for Linux interpreters' if (d.getVar('TARGET_OS') or '').startswith('linux') else ''}"
+CVE_STATUS[CVE-2026-113718] = "not-applicable-config: Xonsh activation was introduced in virtualenv 21.3.0 and is absent from 21.2.1"
