@@ -15,6 +15,7 @@ SRC_URI += "file://CVE-2026-91990.patch \
             file://CVE-2026-103262.patch \
             file://CVE-2026-103263.patch \
             file://CVE-2026-103263-dependent.patch \
+            file://CVE-2026-115927.patch \
 "
 
 inherit pypi python_setuptools_build_meta
