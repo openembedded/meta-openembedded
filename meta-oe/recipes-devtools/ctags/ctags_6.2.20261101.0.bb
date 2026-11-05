@@ -33,3 +33,6 @@ PACKAGECONFIG[yaml] = "--enable-yaml,--disable-yaml,libyaml"
 PACKAGECONFIG[manpages] = ",,python3-docutils-native"
 
 BBCLASSEXTEND = "native"
+
+# calls sphinx-build during clean
+CLEANBROKEN = "1"
