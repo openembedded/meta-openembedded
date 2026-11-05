@@ -44,7 +44,8 @@ ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
 ALTERNATIVE_PRIORITY = "90"
 
 PACKAGECONFIG ??= "static"
-PACKAGECONFIG[static] = "--disable-dynamic,--enable-dynamic"
+PACKAGECONFIG[static] = "--disable-dynamic,--enable-dynamic zsh_cv_sys_dynamic_rtld_global=yes zsh_cv_sys_dynamic_execsyms=yes"
+PACKAGECONFIG[gdbm] = "--enable-gdbm,--disable-gdbm,gdbm,,,static"
 # Needed for manpages.bbclass, but they're always installed
 PACKAGECONFIG[manpages] = ""
 
