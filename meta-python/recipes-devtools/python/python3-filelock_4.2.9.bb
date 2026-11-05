@@ -9,13 +9,14 @@ CVE_PRODUCT = "tox-dev:filelock"
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "c6d8663535e1650ee430507b4ffbac7b464dd64b7647ea0112a9f406499d163d"
+SRC_URI[sha256sum] = "96530b7c538d4ea08493ab067247aab7948c54d8cd622cce711c97cccc5d9896"
 
 BBCLASSEXTEND = "native nativesdk"
 
 inherit pypi python_hatchling ptest-python-pytest
 
 DEPENDS += "\
+    python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
 "
 
