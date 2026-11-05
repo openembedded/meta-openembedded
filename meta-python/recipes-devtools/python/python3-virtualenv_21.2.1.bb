@@ -52,3 +52,6 @@ RDEPENDS:${PN} += " \
 "
 
 CVE_PRODUCT = "virtualenv"
+
+# The batch activator only supports Windows interpreters.
+CVE_STATUS[CVE-2026-102937] = "${@'not-applicable-platform: Windows cmd.exe batch activation is not selected for Linux interpreters' if (d.getVar('TARGET_OS') or '').startswith('linux') else ''}"
