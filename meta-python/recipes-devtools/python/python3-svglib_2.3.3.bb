@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
 
 CVE_PRODUCT = "svglib"
 
-SRC_URI[sha256sum] = "625b62cf440ab57f5def42d5be47a0d6b73c02711ef86ab1545650a98ac1ad5f"
+SRC_URI[sha256sum] = "1aef52f3dc651416119b55716e673995d2c9f90c86a07df0b2bcf6de26c7e0ff"
 
 inherit pypi python_hatchling
 
