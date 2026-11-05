@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=49165a577911c4178e915dc26e2802a3"
 
 SRC_URI += "file://0001-Skip-march-guessing-for-external-cross-toolchains.patch"
 
-SRC_URI[sha256sum] = "6c69fca89106567060941c5568e67a5369738813d883db4e3d62b76f0a2c497e"
+SRC_URI[sha256sum] = "1a081ca27ad5a0a04d3c7ca07b2caa6d324b8004383e36ae6eede1d5053e23b0"
 
 CVE_PRODUCT = "autobahn"
 
