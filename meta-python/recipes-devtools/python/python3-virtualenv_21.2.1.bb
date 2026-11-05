@@ -21,6 +21,8 @@ SRC_URI += " \
     file://CVE-2026-113726-dependent.patch \
     file://CVE-2026-113726.patch \
     file://CVE-2026-113725.patch \
+    file://CVE-2026-113723.patch \
+    file://CVE-2026-115586.patch \
 "
 
 BBCLASSEXTEND = "native nativesdk"
