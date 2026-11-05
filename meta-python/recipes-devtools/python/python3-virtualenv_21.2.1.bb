@@ -10,6 +10,10 @@ SRC_URI[sha256sum] = "b66ffe81301766c0d5e2208fc3576652c59d44e7b731fc5f5ed701c9b5
 
 SRC_URI += " \
     file://CVE-2026-102938.patch \
+    file://CVE-2026-102930-dependent.patch \
+    file://CVE-2026-102930_p1.patch \
+    file://CVE-2026-102930_p2.patch \
+    file://CVE-2026-102930_p3.patch \
 "
 
 BBCLASSEXTEND = "native nativesdk"
@@ -26,6 +30,7 @@ RDEPENDS:${PN} += " \
     python3-json \
     python3-misc \
     python3-modules \
+    python3-packaging \
     python3-platformdirs \
 "
 
