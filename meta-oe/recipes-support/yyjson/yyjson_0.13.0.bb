@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c8ae1b99922935413d4c596f50b59545"
 
 SRC_URI = "git://github.com/ibireme/yyjson.git;protocol=https;branch=master;tag=${PV}"
-SRCREV = "8b4a38dc994a110abaec8a400615567bd996105f"
+SRCREV = "6447536015f3d600f3d65323b10976103b337ca7"
 
 
 inherit cmake
