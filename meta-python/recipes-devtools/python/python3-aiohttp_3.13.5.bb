@@ -31,6 +31,7 @@ SRC_URI += " \
     file://CVE-2026-111748_p2.patch \
     file://CVE-2026-111063_p1.patch \
     file://CVE-2026-111063_p2.patch \
+    file://CVE-2026-111064.patch \
 "
 
 CVE_PRODUCT = "aiohttp:aiohttp"
