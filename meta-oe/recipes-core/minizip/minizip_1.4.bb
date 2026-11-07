@@ -8,13 +8,11 @@ LIC_FILES_CHKSUM = "file://zip.h;beginline=14;endline=30;md5=b7d2930a7332b2bc68f
 
 GITHUB_BASE_URI ?= "https://github.com/madler/zlib/releases/"
 
-SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/zlib-${PV}.tar.xz \
-           file://0001-Add-dependency-to-ints.h-in-minizip-Makefile.am.patch;patchdir=../.. \
-           "
+SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/zlib-${PV}.tar.xz"
 
 S = "${UNPACKDIR}/zlib-${PV}/contrib/minizip"
 
-SRC_URI[sha256sum] = "d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3"
+SRC_URI[sha256sum] = "4f11c512053d7bab8d9e9b89bde3575add3e4c50a383b42ef6cb837035fc5a7c"
 
 PACKAGECONFIG ??= "demos"
 PACKAGECONFIG[demos] = "--enable-demos=yes,,,"
