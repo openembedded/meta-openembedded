@@ -21,7 +21,7 @@ GIR_MESON_OPTION = ""
 
 inherit gnomebase gsettings pkgconfig gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "27970ad4f58eb0a48fb01bffb89a8f472503641c3573eb6d788ad4042de01120"
+SRC_URI[archive.sha256sum] = "390ae9e7540f71db28a3dc64319a8f687f4d88bd4d5f1ff816b7a9f2249ab4aa"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[plymouth] = "-Dplymouth=enabled,-Dplymouth=disabled,plymouth"
