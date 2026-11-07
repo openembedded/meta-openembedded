@@ -10,7 +10,7 @@ SRC_URI = " \
 
 UPSTREAM_CHECK_URI = "http://www.maier-komor.de/mbuffer.html"
 
-SRC_URI[sha256sum] = "13bab36f39408f7a08fb368913290ad0f117c934bab602094e18fcc123ec5783"
+SRC_URI[sha256sum] = "ed9b717f9517b0ad0a0c1fb42c809dfb615db442833b7b5c8442e224b45d86bf"
 
 inherit autotools
 
