@@ -9,7 +9,7 @@ DEPENDS = "\
 "
 
 SRC_URI = "https://feh.finalrewind.org/feh-${PV}.tar.bz2"
-SRC_URI[sha256sum] = "97e89bb2cf5ada41e8c8e916ea4d7d64c51faaae4847f00fcc088fa06e1b5ca1"
+SRC_URI[sha256sum] = "785cd3bf51e05f6bb86ab0d649b7ed20e31892eb635bc5a25c963bf934088445"
 
 inherit mime-xdg features_check
 # depends on virtual/libx11
