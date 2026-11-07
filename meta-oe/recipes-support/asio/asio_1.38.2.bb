@@ -17,9 +17,9 @@ inherit autotools ptest
 
 ALLOW_EMPTY:${PN} = "1"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=92db288d8a7d89bb9c5821c447c3052c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=068306999fcd4c4f2ba32622dae406ac"
 
-SRC_URI[sha256sum] = "7bf4dbe3c1ccd9cc4c94e6e6be026dcc2110f9201d286bb9500dc85d69825524"
+SRC_URI[sha256sum] = "c04e0e66ac29741faad763a56f3c50196421d4b968009fc237c53314769bf8ad"
 
 # Releases live in per-version directories named "<pver> (Stable)" / "<pver> (Development)",
 # so match only the stable ones.
