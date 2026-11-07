@@ -8,4 +8,4 @@ DEPENDS = "glib-2.0"
 
 inherit gnomebase gobject-introspection vala
 
-SRC_URI[archive.sha256sum] = "3e123fa2a34f6dfd99897ebe5fec3dfa35d9cf4b192c28fe7fc90c5aafafcf5b"
+SRC_URI[archive.sha256sum] = "935e3768a7e549a40ffc8a26c0de719c6c36ad9c055a13ecefe3ea9a9bc9feab"
