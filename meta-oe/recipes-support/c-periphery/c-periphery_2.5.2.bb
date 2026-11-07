@@ -9,7 +9,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e88456d0a60de4c71ff4d787c212f253"
 
 SRC_URI = "git://github.com/vsergeev/c-periphery;protocol=https;branch=master;tag=v${PV}"
-SRCREV = "f4c9a7f644b2cd53a1e6d19585e59e852416d4b0"
+SRCREV = "e7ed35f5736215550414ce14c8b4dfb31bdefa6d"
 
 
 inherit cmake
