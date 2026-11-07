@@ -8,7 +8,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
 
 SRC_URI = "https://github.com/oracle/ktls-utils/releases/download/${BP}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "acd9e1851e492e7e16b879b30fc800f4a98d4214fa534ebb7e24d379f5984770"
+SRC_URI[sha256sum] = "5ad3efcc0f50d147adc9583df1a2c1790eddfe29a9c6e6f0b82d71a5c3490739"
 
 # Release tags are "ktls-utils-<ver>"; the lookahead keeps -rc tags out.
 UPSTREAM_CHECK_URI = "https://github.com/oracle/ktls-utils/releases"
