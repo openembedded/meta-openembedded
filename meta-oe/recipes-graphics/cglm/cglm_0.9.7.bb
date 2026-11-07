@@ -8,9 +8,9 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8dc95c4110ba741c43832734b51b7de7"
 
-SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
-# Tag v0.9.6
-SRCREV = "144d1e7c29b3b0c6dede7917a0476cc95248559c"
+SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https;tag=v${PV}"
+
+SRCREV = "888aca08d5bdf38e873ec23d6cac42d7f23a669c"
 
 
 PACKAGECONFIG[build_tests] = "-Dbuild_tests=true,-Dbuild_tests=false,"
