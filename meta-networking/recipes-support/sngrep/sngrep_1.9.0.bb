@@ -16,9 +16,8 @@ DEPENDS = "\
 "
 
 SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master;tag=v${PV} \
-           file://CVE-2026-90558.patch \
 "
-SRCREV = "9c370866afaf5ccb258bf03848b2d22f30cf61bd"
+SRCREV = "76b19854eea88bb0ca6df64f33fe8bec08130e6f"
 
 inherit cmake pkgconfig
 
