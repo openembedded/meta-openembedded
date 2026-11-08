@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
 
-SRC_URI += "file://0001-pyproject.toml-relax-build-requirements.patch"
-SRC_URI[sha256sum] = "f05a1c8d727d4f104c8c731688053033e05157f2ab81bc8eef50ec0c62f9373c"
+SRC_URI[sha256sum] = "9b75553770c8007bc146ca7b5ad30dd165c71bb1335a0ea6659a514087a63c67"
 
 inherit pypi python_setuptools_build_meta
 
