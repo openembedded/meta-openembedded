@@ -15,8 +15,11 @@ DEPENDS += " \
 "
 
 RDEPENDS:${PN} += " \
+    python3-anyio \
     python3-core \
-    python3-logging \
     python3-h2 \
+    python3-httpcore2 \
     python3-idna \
+    python3-logging \
+    python3-truststore \
 "
