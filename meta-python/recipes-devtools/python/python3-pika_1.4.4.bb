@@ -8,13 +8,11 @@ HOMEPAGE = "https://pika.readthedocs.io"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=678ec81495ba50edf81e84e4f1aa69f3"
 
-SRC_URI[sha256sum] = "8cfc8b33a5cb16e733bd60cffca9732c0d1d761ecd80a89f34ed7df2cd38d6d6"
-
 # The PyPI package omits some files for testing like tests/__init__.py
 # so use the GitHub source instead.
-SRCREV = "3c9b50d4167e436c73cecae8127e3c5b266b2fce"
+SRCREV = "60fee4203a30d5dfa0500857cea6a65ef571d46c"
 SRC_URI = "\
-    git://github.com/pika/pika;branch=1.4.x;protocol=https \
+    git://github.com/pika/pika;branch=1.4.x;protocol=https;tag=${PV} \
     file://run-ptest \
 "
 
