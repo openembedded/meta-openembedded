@@ -19,9 +19,10 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://slapd.service \
     file://remove-user-host-pwd-from-version.patch \
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
+    file://0001-libldap-Only-export-SASL-symbols-when-built-with-Cyr.patch \
 "
 
-SRC_URI[sha256sum] = "d693b49517a42efb85a1a364a310aed16a53d428d1b46c0d31ef3fba78fcb656"
+SRC_URI[sha256sum] = "aad731aa22118ff327b9b4ddfc4b6f18ef9476586205da88a532e90940b523d2"
 
 DEPENDS = "util-linux groff-native"
 
@@ -62,7 +63,7 @@ EXTRA_OECONF += "--enable-crypt"
 # The backend must be set by the configuration.  This controls the
 # required database.
 #
-# Backends="asyncmeta dnssrv ldap mdb meta null passwd perl relay sock sql wt"
+# Backends="asyncmeta dnssrv ldap mdb meta null passwd relay sock wt"
 #
 # Note that multiple backends can be built.  The ldbm backend requires a
 # build-time choice of database API. To use the gdbm (or other) API the
@@ -91,22 +92,11 @@ PACKAGECONFIG[null] = "--enable-null=mod,--enable-null=no,"
 #--enable-passwd       enable passwd backend no|yes|mod no
 PACKAGECONFIG[passwd] = "--enable-passwd=mod,--enable-passwd=no,"
 
-#--enable-perl         enable perl backend no|yes|mod no
-#  This requires a loadable perl dynamic library, if enabled without
-#  doing something appropriate (building perl?) the build will pick
-#  up the build machine perl - not good (inherit perlnative?)
-PACKAGECONFIG[perl] = "--enable-perl=mod,--enable-perl=no,perl"
-
 #--enable-relay        enable relay backend no|yes|mod [yes]
 PACKAGECONFIG[relay] = "--enable-relay=mod,--enable-relay=no,"
 
 #--enable-sock         enable sock backend no|yes|mod [no]
 PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
-
-#--enable-sql          enable sql backend no|yes|mod no
-# sql requires some sql backend which provides sql.h, sqlite* provides
-# sqlite.h (which may be compatible but hasn't been tried.)
-PACKAGECONFIG[sql] = "--enable-sql=mod,--enable-sql=no,sqlite3"
 
 #--enable-wt           enable wt backend no|yes|mod no
 # back-wt is marked currently as experimental
