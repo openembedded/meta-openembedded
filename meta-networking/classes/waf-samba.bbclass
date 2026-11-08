@@ -24,6 +24,10 @@ CONFIGUREOPTS = " --prefix=${prefix} \
 # avoids build breaks when using no-static-libs.inc
 DISABLE_STATIC = ""
 
+# wafsamba version scripts name symbols that may not exist (_end, __bss_start,
+# _edata, and symbols from older ABI versions); lld rejects those by default
+LDFLAGS += "-Wl,--undefined-version"
+
 def get_waf_parallel_make(d):
     pm = d.getVar('PARALLEL_MAKE')
     if pm:
