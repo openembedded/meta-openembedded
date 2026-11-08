@@ -17,15 +17,16 @@ BBCLASSEXTEND = "native nativesdk"
 PTEST_PYTEST_DIR = "pint"
 
 RDEPENDS:${PN} += " \
+	python3-flexcache \
+	python3-flexparser \
 	python3-packaging \
 	python3-platformdirs \
+	python3-typing-extensions \
 "
 # python3-misc for timeit.py
 RDEPENDS:${PN}-ptest += " \
 	python3-appdirs \
 	python3-attrs \
-	python3-flexcache \
-	python3-flexparser \
 	python3-misc \
 	python3-pytest-benchmark \
 	python3-pytest-subtests \
