@@ -3,12 +3,9 @@ HOMEPAGE = "https://www.pylint.org/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 
-SRCREV = "ecb84baf74ae152a511e5fdada5000c85250a48f"
+SRCREV = "e75de10c69103381c875601f638d4b977ff0fcaf"
 SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v${PV} \
            file://0001-Adjust-test-expectations-for-ptest.patch \
-           file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
-           file://0003-astroid-4.1.2-endlineno.patch \
-           file://0004-checkers-variables-do-not-pass-asname-to-Import.infer.patch \
            file://run-ptest \
            "
 
