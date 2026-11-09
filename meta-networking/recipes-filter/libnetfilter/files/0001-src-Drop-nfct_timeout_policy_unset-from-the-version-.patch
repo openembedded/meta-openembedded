@@ -1,0 +1,28 @@
+From 9872a9f41511c7fcca82e4bc262eb8414cd878cf Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:29 -0800
+Subject: [PATCH] src: Drop nfct_timeout_policy_unset from the version script
+
+nfct_timeout_policy_unset() has never been implemented, so linkers that
+check the version script, like lld, fail with:
+
+  error: version script assignment of 'LIBNETFILTER_CTTIMEOUT_1.0' to symbol 'nfct_timeout_policy_unset' failed: symbol not defined
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/libnetfilter_cttimeout.map | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/libnetfilter_cttimeout.map b/src/libnetfilter_cttimeout.map
+index 1c854cc..65713ad 100644
+--- a/src/libnetfilter_cttimeout.map
++++ b/src/libnetfilter_cttimeout.map
+@@ -7,7 +7,6 @@ global:
+   nfct_timeout_attr_set_u16;
+   nfct_timeout_attr_unset;
+   nfct_timeout_policy_attr_set_u32;
+-  nfct_timeout_policy_unset;
+   nfct_timeout_policy_attr_to_name;
+   nfct_timeout_nlmsg_build_hdr;
+   nfct_timeout_nlmsg_build_payload;

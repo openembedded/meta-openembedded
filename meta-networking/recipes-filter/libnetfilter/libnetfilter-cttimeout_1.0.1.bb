@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 DEPENDS = "libmnl"
 
 SRC_URI = "https://www.netfilter.org/projects/libnetfilter_cttimeout/files/libnetfilter_cttimeout-${PV}.tar.bz2 \
-          "
+           file://0001-src-Drop-nfct_timeout_policy_unset-from-the-version-.patch \
+           "
 
 SRC_URI[md5sum] = "ac64b55952b79cb9910db95ce8883940"
 SRC_URI[sha256sum] = "0b59da2f3204e1c80cb85d1f6d72285fc07b01a2f5678abf5dccfbbefd650325"
