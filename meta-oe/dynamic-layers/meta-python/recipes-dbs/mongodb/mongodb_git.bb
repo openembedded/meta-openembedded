@@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
 
 inherit scons dos2unix siteinfo python3native systemd useradd
 
-PV = "4.4.29"
-#v4.4.29
-SRCREV = "89d6ffe6fc67b36fd47aff6425087003966588e3"
+PV = "4.4.30"
+#v4.4.30
+SRCREV = "1ae4c9990dbc5711f3500748f0c3f8b5d375d8c0"
 SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
            file://0001-Use-long-long-instead-of-int64_t.patch \
