@@ -17,4 +17,9 @@ inherit autotools pkgconfig
 
 EXTRA_OECONF = "--enable-shared"
 
+do_configure:prepend() {
+    # Not implemented by tremor, lld fails when the version script names them
+    sed -i -e '/vorbis_comment_add/d' ${S}/Version_script.in
+}
+
 ARM_INSTRUCTION_SET = "arm"
