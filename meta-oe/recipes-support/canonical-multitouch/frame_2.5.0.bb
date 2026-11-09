@@ -13,7 +13,9 @@ inherit autotools pkgconfig features_check
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'opengl', '', d)}"
 
 SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz \
-           file://pessimizing-move.patch"
+           file://pessimizing-move.patch \
+           file://0001-Drop-the-X11-symbols-from-the-version-script-without.patch \
+           "
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/frame/trunk"
 
