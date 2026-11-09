@@ -1,0 +1,233 @@
+From a78265d465723a7c7b6354c04756d8cbf3045e72 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:30 -0800
+Subject: [PATCH] juju: Do not use variable length arrays in structs
+
+Variable length arrays in structs are a GCC extension which clang does
+not support:
+
+  error: fields must have a constant size: 'variable length array in structure' extension will never be supported
+
+The kernel event structs already end with a flexible array member for
+the payload, so allocate the same amount of stack with alloca() and use
+the payload member instead.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ dc1394/juju/capture.c | 19 ++++++-----
+ dc1394/juju/control.c | 76 +++++++++++++++++++++++--------------------
+ 2 files changed, 51 insertions(+), 44 deletions(-)
+
+diff --git a/dc1394/juju/capture.c b/dc1394/juju/capture.c
+index e9da6e3..36e6031 100644
+--- a/dc1394/juju/capture.c
++++ b/dc1394/juju/capture.c
+@@ -22,6 +22,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <alloca.h>
+ #include <string.h>
+ #include <sys/types.h>
+ #include <netinet/in.h>
+@@ -319,10 +320,10 @@ dc1394_juju_capture_dequeue (platform_camera_t * craw,
+ 		return DC1394_CAPTURE_IS_NOT_SET;
+ 	}
+ 
+-    struct {
+-        struct fw_cdev_event_iso_interrupt i;
+-		__u32 headers[craw->packets_per_frame*2 + 16]; // HPK 20161209
+-    } iso;
++    /* the iso headers follow struct fw_cdev_event_iso_interrupt */
++    size_t iso_size = sizeof (struct fw_cdev_event_iso_interrupt) +
++        (craw->packets_per_frame*2 + 16) * sizeof (__u32); // HPK 20161209
++    struct fw_cdev_event_iso_interrupt *iso = alloca (iso_size);
+ 
+     if ( (policy<DC1394_CAPTURE_POLICY_MIN) || (policy>DC1394_CAPTURE_POLICY_MAX) )
+         return DC1394_INVALID_CAPTURE_POLICY;
+@@ -344,13 +345,13 @@ dc1394_juju_capture_dequeue (platform_camera_t * craw,
+             return DC1394_SUCCESS;
+         }
+ 
+-        len = read (craw->iso_fd, &iso, sizeof iso);
++        len = read (craw->iso_fd, iso, iso_size);
+         if (len < 0) {
+             dc1394_log_error("Juju: dequeue failed to read a response: %m");
+             return DC1394_FAILURE;
+         }
+ 
+-        if (iso.i.type == FW_CDEV_EVENT_ISO_INTERRUPT)
++        if (iso->type == FW_CDEV_EVENT_ISO_INTERRUPT)
+             break;
+     }
+ 
+@@ -358,7 +359,7 @@ dc1394_juju_capture_dequeue (platform_camera_t * craw,
+     f = craw->frames + craw->current;
+ 
+     dc1394_log_debug("Juju: got iso event, cycle 0x%04x, header_len %d",
+-            iso.i.cycle, iso.i.header_length);
++            iso->cycle, iso->header_length);
+ 
+     f->frame.frames_behind = 0;
+     f->frame.timestamp = 0;
+@@ -368,14 +369,14 @@ dc1394_juju_capture_dequeue (platform_camera_t * craw,
+         /* Current bus time in usec as retrieved by the ioctl */
+         uint32_t bus_time = bus_time_to_usec(tm.cycle_timer);
+         /* Bus time of the interrupt packet (end of frame) */
+-        uint32_t dma_time = iso.i.cycle;
++        uint32_t dma_time = iso->cycle;
+         /* Estimated usec between start of frame and end of frame */
+         uint32_t diff =
+             (craw->frames[0].frame.packets_per_frame - 1) * 125;
+ 
+         /* If per-packet timestamps are available in the headers use them */
+         if (craw->header_size >= 8) {
+-            uint8_t * b = (uint8_t *)(iso.i.header + 1);
++            uint8_t * b = (uint8_t *)(iso->header + 1);
+             /* Bus time of the first frame in the packet */
+             dma_time = (b[2] << 8) | b[3];
+             dc1394_log_debug("Juju: using cycle 0x%04x (diff was %d)",
+diff --git a/dc1394/juju/control.c b/dc1394/juju/control.c
+index 4a4acbb..26ed292 100644
+--- a/dc1394/juju/control.c
++++ b/dc1394/juju/control.c
+@@ -22,6 +22,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <alloca.h>
+ #include <errno.h>
+ #include <unistd.h>
+ #include <string.h>
+@@ -280,41 +281,46 @@ typedef struct _juju_response_info {
+ static int
+ juju_handle_event (platform_camera_t * cam)
+ {
+-    union {
+-        struct {
+-            struct fw_cdev_event_response r;
+-            __u32 buffer[cam->max_response_quads];
+-        } response;
++    union juju_event {
++        struct fw_cdev_event_response response;
+         struct fw_cdev_event_bus_reset reset;
+         struct fw_cdev_event_iso_resource resource;
+-    } u;
++    } *u;
++    size_t size;
+     int len, i;
+     juju_response_info *resp_info;
+     juju_iso_info *iso_info;
+ 
+-    len = read (cam->fd, &u, sizeof u);
++    /* the response data follows struct fw_cdev_event_response */
++    size = sizeof (struct fw_cdev_event_response) +
++           cam->max_response_quads * sizeof (__u32);
++    if (size < sizeof *u)
++        size = sizeof *u;
++    u = alloca (size);
++
++    len = read (cam->fd, u, size);
+     if (len < 0) {
+         dc1394_log_error("juju: Read failed: %m");
+         return -1;
+     }
+ 
+-    switch (u.reset.type) {
++    switch (u->reset.type) {
+     case FW_CDEV_EVENT_BUS_RESET:
+-        cam->generation = u.reset.generation;
+-        cam->node_id = u.reset.node_id;
++        cam->generation = u->reset.generation;
++        cam->node_id = u->reset.node_id;
+         dc1394_log_debug ("juju: Bus reset, gen %d, node 0x%x",
+                 cam->generation, cam->node_id);
+         break;
+ 
+     case FW_CDEV_EVENT_RESPONSE:
+-        if (!u.response.r.closure) {
++        if (!u->response.closure) {
+             dc1394_log_warning ("juju: Unsolicited response, rcode %x len %d",
+-                    u.response.r.rcode, u.response.r.length);
++                    u->response.rcode, u->response.length);
+             break;
+         }
+-        resp_info = u64_to_ptr(u.response.r.closure);
+-        resp_info->rcode = u.response.r.rcode;
+-        resp_info->actual_num_quads = u.response.r.length/4;
++        resp_info = u64_to_ptr(u->response.closure);
++        resp_info->rcode = u->response.rcode;
++        resp_info->actual_num_quads = u->response.length/4;
+         resp_info->got_response = 1;
+         if (resp_info->rcode || !resp_info->data)
+             break;
+@@ -326,48 +332,48 @@ juju_handle_event (platform_camera_t * cam)
+ 
+         len = MIN(resp_info->actual_num_quads, resp_info->num_quads);
+         for (i = 0; i < len; i++)
+-            resp_info->data[i] = ntohl (u.response.r.data[i]);
++            resp_info->data[i] = ntohl (u->response.data[i]);
+         break;
+ 
+     case FW_CDEV_EVENT_ISO_RESOURCE_ALLOCATED:
+-        if (!u.resource.closure) {
++        if (!u->resource.closure) {
+             dc1394_log_warning ("juju: Spurious ISO allocation event: "
+-                    "handle %d, chan %d, bw %d", u.resource.handle,
+-                    u.resource.channel, u.resource.bandwidth);
++                    "handle %d, chan %d, bw %d", u->resource.handle,
++                    u->resource.channel, u->resource.bandwidth);
+             break;
+         }
+-        iso_info = u64_to_ptr(u.resource.closure);
+-        if (iso_info->handle != u.resource.handle)
++        iso_info = u64_to_ptr(u->resource.closure);
++        if (iso_info->handle != u->resource.handle)
+             dc1394_log_warning ("juju: ISO alloc handle was %d, expected %d",
+-                    u.resource.handle, iso_info->handle);
++                    u->resource.handle, iso_info->handle);
+         dc1394_log_debug ("juju: Allocated handle %d: chan %d bw %d",
+-                u.resource.handle, u.resource.channel, u.resource.bandwidth);
++                u->resource.handle, u->resource.channel, u->resource.bandwidth);
+         iso_info->got_alloc = 1;
+-        iso_info->channel = u.resource.channel;
+-        iso_info->bandwidth = u.resource.bandwidth;
++        iso_info->channel = u->resource.channel;
++        iso_info->bandwidth = u->resource.bandwidth;
+         break;
+ 
+     case FW_CDEV_EVENT_ISO_RESOURCE_DEALLOCATED:
+-        if (!u.resource.closure) {
++        if (!u->resource.closure) {
+             dc1394_log_warning ("juju: Spurious ISO deallocation event: "
+-                    "handle %d, chan %d, bw %d", u.resource.handle,
+-                    u.resource.channel, u.resource.bandwidth);
++                    "handle %d, chan %d, bw %d", u->resource.handle,
++                    u->resource.channel, u->resource.bandwidth);
+             break;
+         }
+-        iso_info = u64_to_ptr(u.resource.closure);
+-        if (iso_info->handle != u.resource.handle)
++        iso_info = u64_to_ptr(u->resource.closure);
++        if (iso_info->handle != u->resource.handle)
+             dc1394_log_warning ("juju: ISO dealloc handle was %d, expected %d",
+-                    u.resource.handle, iso_info->handle);
++                    u->resource.handle, iso_info->handle);
+         dc1394_log_debug ("juju: Deallocated handle %d: chan %d bw %d",
+-                u.resource.handle, u.resource.channel, u.resource.bandwidth);
++                u->resource.handle, u->resource.channel, u->resource.bandwidth);
+         iso_info->got_dealloc = 1;
+-        iso_info->channel = u.resource.channel;
+-        iso_info->bandwidth = u.resource.bandwidth;
++        iso_info->channel = u->resource.channel;
++        iso_info->bandwidth = u->resource.bandwidth;
+         break;
+ 
+     default:
+         dc1394_log_warning ("juju: Unhandled event type %d",
+-                u.reset.type);
++                u->reset.type);
+         break;
+     }
+ 

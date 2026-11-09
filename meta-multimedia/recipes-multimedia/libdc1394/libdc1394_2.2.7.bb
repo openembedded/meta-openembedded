@@ -13,7 +13,8 @@ DEPENDS += "libusb1 libraw1394 libsdl \
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://install_examples.patch \
-          "
+           file://0001-juju-Do-not-use-variable-length-arrays-in-structs.patch \
+           "
 SRC_URI[sha256sum] = "537ceb78dd3cef271a183f4a176191d1cecf85f025520e6bd3758b0e19e6609f"
 inherit autotools pkgconfig
 
