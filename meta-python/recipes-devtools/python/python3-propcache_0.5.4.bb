@@ -21,4 +21,9 @@ RDEPENDS:${PN}-ptest += " \
 	python3-statistics \
 "
 
+do_install_ptest:append() {
+	# tests the in-tree build backend, which is not installed
+	rm -f ${D}${PTEST_PATH}/tests/test_pep517_backend.py
+}
+
 BBCLASSEXTEND += "native nativesdk"
