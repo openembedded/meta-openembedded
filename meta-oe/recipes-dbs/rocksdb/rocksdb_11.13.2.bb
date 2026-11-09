@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "3b446089141659fad25328c5ea3e7ed283df46e4"
-SRCBRANCH = "11.1.fb"
+SRCREV = "17b624b5c0d41bd42db5cf88aa867f3b26eaf1fa"
+SRCBRANCH = "11.13.fb"
 
-SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https;tag=v${PV} \
+SRC_URI = "git://github.com/meta/${BPN}.git;branch=${SRCBRANCH};protocol=https;tag=v${PV} \
            file://0001-cmake-Add-check-for-atomic-support.patch \
            file://0002-cmake-Use-exported-target-for-bz2.patch \
            file://0003-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
@@ -18,10 +18,8 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=htt
            file://0006-Implement-timer-for-arm-v6.patch \
            file://0007-Fix-declaration-scope-of-LE_LOAD32-in-crc32c.patch \
            file://static_library_as_option.patch \
-           file://0001-CMakeLists.txt-Make-the-test-discovery-occur-on-targ.patch \
            file://run-ptest \
            file://0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch \
-           file://0001-checkpoint.h-Add-missing-includes-cstdint.patch \
            file://0001-Findzstd.cmake-support-pkg-config-based-zstd-detecti.patch \
           "
 
