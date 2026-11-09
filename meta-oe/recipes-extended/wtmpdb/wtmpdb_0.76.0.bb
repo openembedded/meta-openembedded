@@ -7,7 +7,9 @@ SECTION = "libs"
 
 SRCREV = "89c0861f74e576c5ad0ec9f5302aa635a4e50dc6"
 
-SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https;tag=v${PV}"
+SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https;tag=v${PV} \
+           file://0001-pam_wtmpdb-Drop-pam_sm_chauthtok-from-the-version-sc.patch \
+           "
 
 
 inherit meson pkgconfig systemd features_check

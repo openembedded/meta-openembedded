@@ -1,0 +1,28 @@
+From 37f2e346c259e946258f95d89bf310fe463d2d92 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:30 -0800
+Subject: [PATCH] pam_wtmpdb: Drop pam_sm_chauthtok from the version script
+
+pam_wtmpdb does not implement pam_sm_chauthtok(), so linkers that check
+the version script, like lld, fail with:
+
+  error: version script assignment of 'global' to symbol 'pam_sm_chauthtok' failed: symbol not defined
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/pam_wtmpdb.map | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/pam_wtmpdb.map b/src/pam_wtmpdb.map
+index 369b047..dcc94d8 100644
+--- a/src/pam_wtmpdb.map
++++ b/src/pam_wtmpdb.map
+@@ -2,7 +2,6 @@
+   global:
+     pam_sm_acct_mgmt;
+     pam_sm_authenticate;
+-    pam_sm_chauthtok;
+     pam_sm_close_session;
+     pam_sm_open_session;
+     pam_sm_setcred;
