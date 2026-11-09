@@ -56,6 +56,7 @@ RDEPENDS:${PN}-ptest += "\
     python3-pytz \
     python3-rich \
     python3-sqlalchemy \
+    python3-time-machine \
     python3-unixadmin \
     python3-ruff \
     python3-pytest-examples \
