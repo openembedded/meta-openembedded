@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ibus/ibus/wiki"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
-DEPENDS = "unicode-ucd libx11 glib-2.0-native glib-2.0 dbus iso-codes"
+DEPENDS = "unicode-ucd libx11-native glib-2.0-native glib-2.0 dbus iso-codes"
 
 SRC_URI = " \
     git://github.com/ibus/ibus.git;branch=main;protocol=https;tag=${PV} \
@@ -39,6 +39,12 @@ EXTRA_OEMESON = " \
     -Demoji-dict=false \
     -Ducd-dir=${STAGING_DATADIR}/unicode/ucd \
 "
+
+# gen-internal-compose-table reads ./Compose before the X11 locale data,
+# which is not in the sysroot without x11
+do_compile:prepend() {
+    cp ${STAGING_DATADIR_NATIVE}/X11/locale/en_US.UTF-8/Compose ${B}/Compose
+}
 
 do_install:append() {
     sed -i -e 's|${PYTHON}|${bindir}/python3|' ${D}${bindir}/ibus-setup
