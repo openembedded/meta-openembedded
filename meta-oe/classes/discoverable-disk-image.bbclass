@@ -134,4 +134,3 @@ oe_image_systemd_repart_make_ddi() {
 }
 
 IMAGE_CMD:ddi = "oe_image_systemd_repart_make_ddi"
-do_image_ddi[deptask] += "do_unpack"
