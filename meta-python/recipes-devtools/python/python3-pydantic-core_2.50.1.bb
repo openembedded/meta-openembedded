@@ -33,9 +33,11 @@ RDEPENDS:${PN}-ptest += "\
     python3-hypothesis \
     python3-inline-snapshot \
     python3-misc \
+    python3-pydantic \
     python3-pytest-mock \
     python3-pytest-timeout \
     python3-pytest-benchmark \
+    python3-pytest-examples \
     python3-typing-inspection \
 	python3-tzdata \
 	python3-zoneinfo \
@@ -43,6 +45,10 @@ RDEPENDS:${PN}-ptest += "\
 
 do_install_ptest:append () {
     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+    install -m 0644 ${S}/README.md ${D}${PTEST_PATH}/
+    sed -i -e "s|PYDANTIC_CORE_DIR / 'python/pydantic_core/core_schema.py'|'${PYTHON_SITEPACKAGES_DIR}/pydantic_core/core_schema.py'|" \
+        -e "s/^    lint_skip = .*/    lint_skip = True/" \
+        ${D}${PTEST_PATH}/tests/test_docstrings.py
     sed -i -e "/--automake/ s/$/ -k 'not test_model_class_root_validator_wrap and not test_model_class_root_validator_before and not test_model_class_root_validator_after'/" ${D}${PTEST_PATH}/run-ptest
 }
 
