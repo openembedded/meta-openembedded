@@ -77,6 +77,7 @@ do_install_ptest() {
     install -m 644 ${S}/src/config/wireplumber.conf ${D}${PTEST_PATH}/data/config/
     install -Dm 644 ${S}/tests/wplua/scripts/lib/testlib.lua ${D}${datadir}/wireplumber/scripts/lib/testlib.lua
     install -Dm 644 ${S}/tests/scripts/scripts/lib/test-utils.lua ${D}${datadir}/wireplumber/scripts/lib/test-utils.lua
+    install -Dm 644 ${S}/tests/scripts/scripts/lib/suspend-test-utils.lua ${D}${datadir}/wireplumber/scripts/lib/suspend-test-utils.lua
 
     # this is not a test
     rm -rf ${D}${PTEST_PATH}/examples
@@ -176,7 +177,7 @@ FILES:${PN}-scripts += "${datadir}/wireplumber/scripts/*"
 FILES:${PN}-modules = ""
 RRECOMMENDS:${PN}-modules += "${PN}-modules-meta"
 
-FILES:${PN}-ptest += "${datadir}/wireplumber/scripts/lib/test-utils.lua ${datadir}/wireplumber/scripts/testlib.lua"
+FILES:${PN}-ptest += "${datadir}/wireplumber/scripts/lib/test-utils.lua ${datadir}/wireplumber/scripts/lib/suspend-test-utils.lua ${datadir}/wireplumber/scripts/testlib.lua"
 RDEPENDS:${PN}-ptest += "pipewire-modules-protocol-native ${PN}-scripts \
     ${@'dbus' if d.getVar('WP_DBUS_TESTS') == 'true' else ''} \
 "
