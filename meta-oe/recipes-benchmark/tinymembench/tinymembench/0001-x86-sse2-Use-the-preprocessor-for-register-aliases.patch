@@ -1,0 +1,69 @@
+From a0c69f4ab35712592194cd3839d78bfecdd4992c Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:31 -0800
+Subject: [PATCH] x86-sse2: Use the preprocessor for register aliases
+
+clang's integrated assembler can not infer the operand size from a
+register that is aliased with .set:
+
+  x86-sse2.S:124:9: error: ambiguous operand size for instruction 'add'
+
+The aliases are the same for all functions, so define them with the
+preprocessor instead, which works with both GNU as and clang.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ x86-sse2.S | 31 +++++++++++++++++++------------
+ 1 file changed, 19 insertions(+), 12 deletions(-)
+
+diff --git a/x86-sse2.S b/x86-sse2.S
+index 409031b..2ab9e38 100644
+--- a/x86-sse2.S
++++ b/x86-sse2.S
+@@ -28,26 +28,33 @@
+ 
+ #define PREFETCH_DISTANCE 256
+ 
+-.macro asm_function_helper function_name
+-    .global \function_name
+-\function_name:
++/*
++ * Use the preprocessor for the register aliases, clang's integrated
++ * assembler can not infer the operand size from a register set with .set
++ */
+ #ifdef __amd64__
+   #ifdef _WIN64
+-    .set DST,  rcx
+-    .set SRC,  rdx
+-    .set SIZE, r8
++    #define DST  rcx
++    #define SRC  rdx
++    #define SIZE r8
+   #else
+-    .set DST,  rdi
+-    .set SRC,  rsi
+-    .set SIZE, rdx
++    #define DST  rdi
++    #define SRC  rsi
++    #define SIZE rdx
+   #endif
+ #else
++    #define DST  eax
++    #define SRC  ecx
++    #define SIZE edx
++#endif
++
++.macro asm_function_helper function_name
++    .global \function_name
++\function_name:
++#ifndef __amd64__
+     mov  eax,  [esp + 4]
+     mov  ecx,  [esp + 8]
+     mov  edx,  [esp + 12]
+-    .set DST,  eax
+-    .set SRC,  ecx
+-    .set SIZE, edx
+ #endif
+ .endm
+ 

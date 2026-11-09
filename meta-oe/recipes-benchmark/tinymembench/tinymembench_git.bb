@@ -12,6 +12,7 @@ SRCREV = "a2cf6d7e382e3aea1eb39173174d9fa28cad15f3"
 UPSTREAM_CHECK_COMMITS = "1"
 SRC_URI = "git://github.com/ssvb/tinymembench.git;branch=master;protocol=https \
            file://0001-asm-Delete-.func-.endfunc-directives.patch \
+           file://0001-x86-sse2-Use-the-preprocessor-for-register-aliases.patch \
            "
 
 
