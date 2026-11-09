@@ -36,6 +36,9 @@ COMPATIBLE_HOST:libc-musl = "null"
 
 inherit autotools-brokensep pkgconfig
 
+# Relies on C++ that clang rejects
+TOOLCHAIN = "gcc"
+
 TARGET_CFLAGS:append = " -fno-tree-dce -fno-optimize-sibling-calls"
 
 LDFLAGS:append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"

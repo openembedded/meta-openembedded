@@ -6,6 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
 
 inherit pkgconfig
 
+# wvstreams headers rely on C++ that clang rejects
+TOOLCHAIN = "gcc"
+
 DEPENDS = "wvstreams"
 RDEPENDS:${PN} = "ppp"
 
