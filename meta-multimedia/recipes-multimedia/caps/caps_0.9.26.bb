@@ -16,6 +16,9 @@ EXTRA_OEMAKE = " \
     CFLAGS='${CFLAGS} -ffast-math -funroll-loops -fPIC -DPIC' \
     ARCH='' \
 "
+# Relies on GCC vector extensions and the register keyword
+TOOLCHAIN = "gcc"
+
 do_compile() {
     oe_runmake all
 }
