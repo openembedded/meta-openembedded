@@ -1,0 +1,50 @@
+From ef439367ab9ead953b128971cf85349669802441 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:30 -0800
+Subject: [PATCH] Drop the X11 symbols from the version script without X11
+
+When the X11 backend is disabled, the frame_x11_* functions are not
+built, and linkers that check the version script, like lld, fail with:
+
+  error: version script assignment of 'FRAME_2.2' to symbol 'frame_x11_new' failed: symbol not defined
+
+Generate a version script without them in that case.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/Makefile.am | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 0d1f547..3664644 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,4 +1,12 @@
++if HAVE_XINPUT
+ version_script = $(srcdir)/libframe.ver
++else
++# The X11 backend is not built, so its symbols must not be in the version script
++version_script = libframe-nox11.ver
++libframe-nox11.ver: $(srcdir)/libframe.ver
++	$(AM_V_GEN)sed -e '/frame_x11_/d' $(srcdir)/libframe.ver > $@
++CLEANFILES = libframe-nox11.ver
++endif
+ 
+ lib_LTLIBRARIES = libframe.la
+ 
+@@ -7,6 +15,8 @@ libframe_la_LDFLAGS = \
+ 	-Wl,-z,defs -Wl,--as-needed \
+ 	-Wl,--version-script=$(version_script)
+ 
++libframe_la_DEPENDENCIES = $(version_script)
++
+ libframe_la_LIBADD = \
+ 	-lm \
+ 	$(COVERAGE_LIBS) \
+@@ -69,4 +79,4 @@ libframe_la_SOURCES += \
+ 	x11/window_x11.cpp
+ endif
+ 
+-EXTRA_DIST = $(version_script)
++EXTRA_DIST = $(srcdir)/libframe.ver
