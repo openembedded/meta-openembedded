@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6ede793c8b5508eab1acfad7c0c4e335"
 
-SRC_URI[sha256sum] = "28bd0baa208f4ea481a386e9eefdd3a65663fada34233432301a0c221d741d1d"
+SRC_URI[sha256sum] = "830315497af9bbd75924c2218cd3b64f0bde0e808ee316aabb5d9288836c0c43"
 
 SRC_URI += "file://run-ptest"
 
