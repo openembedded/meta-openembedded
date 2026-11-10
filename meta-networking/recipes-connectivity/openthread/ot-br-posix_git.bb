@@ -27,6 +27,8 @@ inherit pkgconfig cmake systemd
 # Use -std=c++20 for fixing
 # recipe-sysroot/usr/include/c++/15.1.0/ciso646:46:4: error: #warning "<ciso646> is deprecated in C++17, use <version> to detect implementation-specific macros" [-Werror=cpp]
 CXXFLAGS += "-std=c++20 -Wno-error=attributes"
+# musl CMSG_NXTHDR mixes size_t and ptrdiff_t
+CXXFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
 LDFLAGS:append:riscv32 = " -latomic"
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF \
