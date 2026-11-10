@@ -1,0 +1,45 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Tue, 10 Nov 2026 06:06:10 -0800
+Subject: [PATCH] librdmacm: Allow librspreload version script entries the libc
+ lacks
+
+librspreload.map exports fcntl, fcntl64, sendfile and sendfile64, but
+which of them preload.c ends up defining depends on the libc. On musl
+there are no LFS64 symbols, so the fcntl64() and sendfile64() wrappers
+are not built, while on glibc with _FILE_OFFSET_BITS=64 the fcntl() and
+sendfile() wrappers are emitted as fcntl64 and sendfile64. Linkers that
+check the version script, like lld, then fail, e.g. on musl:
+
+  error: version script assignment of 'global' to symbol 'fcntl64' failed: symbol not defined
+  error: version script assignment of 'global' to symbol 'sendfile64' failed: symbol not defined
+
+Pass --undefined-version for the preload module when the linker
+supports it, so whichever of these names are defined get exported.
+
+Upstream-Status: Submitted [https://github.com/linux-rdma/rdma-core/pull/1853]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ buildlib/rdma_functions.cmake | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/buildlib/rdma_functions.cmake b/buildlib/rdma_functions.cmake
+index 6e0c7d2e..95709537 100644
+--- a/buildlib/rdma_functions.cmake
++++ b/buildlib/rdma_functions.cmake
+@@ -131,6 +131,15 @@ function(rdma_rspreload_module DEST VERSION_SCRIPT)
+   set_target_properties(${DEST} PROPERTIES LINK_FLAGS ${CMAKE_SHARED_LINKER_FLAGS})
+   set_target_properties(${DEST} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${BUILD_LIB}")
+   rdma_set_library_map(${DEST} ${VERSION_SCRIPT})
++  # Which of fcntl/fcntl64 and sendfile/sendfile64 get defined depends on the
++  # libc: musl has no LFS64 symbols, while glibc with _FILE_OFFSET_BITS=64
++  # emits the plain wrappers under the 64 names. Let linkers that check the
++  # version script (lld) skip the names that do not exist.
++  RDMA_CHECK_C_LINKER_FLAG("-Wl,--undefined-version" SUPPORTS_UNDEFINED_VERSION)
++  if (SUPPORTS_UNDEFINED_VERSION)
++    set_property(TARGET ${DEST} APPEND_STRING PROPERTY
++      LINK_FLAGS " -Wl,--undefined-version")
++  endif()
+ endfunction()
+ 
+ # Create a special provider with exported symbols in it The shared provider
