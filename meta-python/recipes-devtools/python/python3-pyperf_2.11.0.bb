@@ -13,7 +13,7 @@ Features: \
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8"
 
-SRC_URI[sha256sum] = "dd93ccfda79214725293e95f1fa6e00cb4a64adcf1326039486d4e1f91caaa62"
+SRC_URI[sha256sum] = "e53813a2d97dc5a89760cf660dbd1b6a142558fcb6d32b3529c8a6b2d03dbdf8"
 
 inherit pypi python_setuptools_build_meta
 
