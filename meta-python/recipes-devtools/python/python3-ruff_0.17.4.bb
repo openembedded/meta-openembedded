@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e679ca4f742cbfa29ab6a499529c2d39"
 
 SRC_URI += "file://0001-ruff-Use-portable-atomic-for-AtomicU64-on-targets-wi.patch"
 
-SRC_URI[sha256sum] = "a57049c8addb3662073859bb55a7ad35aa54f8a7c9ed268911d1333c5aadaaa9"
+SRC_URI[sha256sum] = "f32d178b50e826e00f6c6c1be3f56333068acb9b67fe167143527fa9b81e890d"
 
 inherit pypi python_maturin cargo-update-recipe-crates
 
