@@ -1,0 +1,58 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Yuhong Zhang <danielzhangyh@gmail.com>
+Date: Thu, 9 Jul 2020 15:43:33 +0000
+Subject: [PATCH] SERVER-49099 Remove the Node::swap() function in Biggie
+
+The Node and Head swap() friends and the copy-and-swap assignment
+operators built on them are unused and do not compile: Node::swap()
+does not exist and Node has no trieKey, depth, data or children
+members (they are _-prefixed). This went unnoticed because they are
+in a class template that never instantiates them.
+
+Upstream-Status: Backport [https://github.com/mongodb/mongo/commit/77ffbcb4f5673b154fe64872cba9f34ce97bc55d]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/db/storage/biggie/store.h | 21 ---------------------
+ 1 file changed, 21 deletions(-)
+
+diff --git a/src/mongo/db/storage/biggie/store.h b/src/mongo/db/storage/biggie/store.h
+index a09b5b4..aeaa337 100644
+--- a/src/mongo/db/storage/biggie/store.h
++++ b/src/mongo/db/storage/biggie/store.h
+@@ -809,18 +809,6 @@ private:
+ 
+         virtual ~Node() = default;
+ 
+-        friend void swap(Node& first, Node& second) {
+-            std::swap(first.trieKey, second.trieKey);
+-            std::swap(first.depth, second.depth);
+-            std::swap(first.data, second.data);
+-            std::swap(first.children, second.children);
+-        }
+-
+-        Node& operator=(const Node other) {
+-            swap(*this, other);
+-            return *this;
+-        }
+-
+         bool isLeaf() const {
+             for (auto child : _children) {
+                 if (child != nullptr)
+@@ -855,17 +843,8 @@ private:
+                 _nextVersion->_hasPreviousVersion = false;
+         }
+ 
+-        friend void swap(Head& first, Head& second) {
+-            Node::swap(first, second);
+-        }
+-
+         Head(Head&& other) : Node(std::move(other)) {}
+ 
+-        Head& operator=(const Head other) {
+-            swap(*this, other);
+-            return *this;
+-        }
+-
+         bool hasPreviousVersion() const {
+             return _hasPreviousVersion;
+         }

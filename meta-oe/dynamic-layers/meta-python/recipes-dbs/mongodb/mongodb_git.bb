@@ -40,6 +40,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
            file://0002-SConstruct-Pass-call-to-CheckLibWithHeader-as-a-keyw.patch \
            file://0003-boost-Fix-build-with-clang-23.patch \
            file://0004-ssl-Fix-build-with-OpenSSL-4.patch \
+           file://0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch \
            "
 SRC_URI:append:libc-musl = "\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
