@@ -19,6 +19,7 @@ EXTRA_OECMAKE += "\
     ${@bb.utils.contains_any('PACKAGECONFIG', 'chafa imagemagick', '-DENABLE_IMAGE_LOGO=ON', '-DENABLE_IMAGE_LOGO=OFF', d)} \
     -DENABLE_SYSTEM_YYJSON=ON \
     -DENABLE_EET=OFF \
+    -DBINARY_LINK_TYPE=dynamic \
 "
 
 PACKAGECONFIG ??= "\
