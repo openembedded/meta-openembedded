@@ -5,7 +5,7 @@ HOMEPAGE = "https://nicolargo.github.io/glances/"
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=852ecadc0ac7e6f4d7144d5544a3815b"
 
-SRC_URI[sha256sum] = "a1e5ed5a6488964a576d550a420c91af6f2c7c2d8df8e9fbe67c98eb38bacf3b"
+SRC_URI[sha256sum] = "c197954341ee5a7f8657e87456884b1f52af4bc966f6ab3f1d4c37cf580f5fa0"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 
