@@ -1,4 +1,4 @@
-From f54475de5f883ab6d021af78b1f33f34e6cd43eb Mon Sep 17 00:00:00 2001
+From 38c9eb8ee27b1c4fba6035cf346c8efde7cdcd20 Mon Sep 17 00:00:00 2001
 From: Leon Anavi <leon.anavi@konsulko.com>
 Date: Wed, 8 Jul 2026 11:45:11 +0000
 Subject: [PATCH] pyproject.toml: Do not strip
@@ -19,7 +19,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/pyproject.toml b/pyproject.toml
-index a2843de..950a3c2 100644
+index 769a26c..29cb347 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
 @@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
