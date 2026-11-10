@@ -12,7 +12,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3a8e7dc09bb720460f28c9d3796afa5"
 
 SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
-           file://0001-Only-export-getipnodebyname-and-freehostent-where-th.patch \
+           file://0001-Only-export-interposed-functions-that-exist-on-the-p.patch \
            "
 SRC_URI[sha256sum] = "1973c7732f1f9f0a4c0ccf2c1ce462c7c25060b25643ea90f9b98f53a813faec"
 

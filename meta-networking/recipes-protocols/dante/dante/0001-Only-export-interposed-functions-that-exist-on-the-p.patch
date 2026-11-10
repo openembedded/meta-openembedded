@@ -1,0 +1,44 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 08:37:30 -0800
+Subject: [PATCH] Only export interposed functions that exist on the platform
+
+dlib only interposes getipnodebyname() and freehostent() when the
+platform has getipnodebyname() (Solaris), and rresvport() when it is
+available (not on Android or musl), but they are always listed in the
+exported symbols, so linkers that check the version script, like lld,
+fail with:
+
+  error: version script assignment of 'global' to symbol 'freehostent' failed: symbol not defined
+  error: version script assignment of 'global' to symbol 'rresvport' failed: symbol not defined
+
+Leave them out of the symbol list when configure did not find them.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ mapfile.m4 | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/mapfile.m4 b/mapfile.m4
+index 644a94b..dc964f8 100644
+--- a/mapfile.m4
++++ b/mapfile.m4
+@@ -12,8 +12,16 @@ PLDDIRS="dlib/" #preloading (standard, non-Rfoo functions)
+ if test x"$sol64" = xt; then
+    PLDDIRS="$PLDDIRS dlib64/"
+ fi
++#only export interposed functions that exist on this platform
++PLDEXCLUDE="-e ^$" #skip blank lines
++if test x"$ac_cv_func_getipnodebyname" != xyes; then
++    PLDEXCLUDE="$PLDEXCLUDE -e ^freehostent$ -e ^getipnodebyname$"
++fi
++if test x"$ac_cv_func_rresvport" != xyes; then
++    PLDEXCLUDE="$PLDEXCLUDE -e ^rresvport$"
++fi
+ for symdir in $PLDDIRS; do
+-    cat include/symbols_preload.txt >> $symdir/$MAPFILE
++    grep -v $PLDEXCLUDE include/symbols_preload.txt >> $symdir/$MAPFILE
+ 
+     #platform dependent symbols
+     case $host in
