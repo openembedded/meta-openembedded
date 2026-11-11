@@ -1,0 +1,57 @@
+From 49b8283544ae5c897f4cf186e174f98a9dc6e1c6 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2026 07:56:45 -0800
+Subject: [PATCH] ld.hugetlbfs: Use --image-base with LLD
+
+LLD does not implement the GNU ld -Ttext-segment option and errors out:
+
+  ld.lld: error: -Ttext-segment is not supported. Use --image-base if you intend to set the base address
+
+which breaks linking the --hugetlbfs-align testcases when LD is lld. Detect
+LLD and pass the equivalent --image-base instead. LLD reads the value with
+base auto-detection, so emit the address with a 0x prefix, which GNU ld also
+accepts.
+
+Upstream-Status: Submitted [https://github.com/libhugetlbfs/libhugetlbfs/pull/118]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+---
+ ld.hugetlbfs | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/ld.hugetlbfs b/ld.hugetlbfs
+index d4a6306..11db0cf 100755
+--- a/ld.hugetlbfs
++++ b/ld.hugetlbfs
+@@ -126,6 +126,12 @@ armelf*_linux_eabi|aarch64elf*|aarch64linux*)
+ 	SLICE_SIZE=$HPAGE_SIZE ;;
+ esac
+ 
++# LLD does not implement -Ttext-segment, --image-base is its equivalent
++TEXTSEG="-Ttext-segment="
++if ${LD} --version 2>/dev/null | grep -q "^LLD"; then
++	TEXTSEG="--image-base="
++fi
++
+ if [ "$HTLB_ALIGN" == "slice" ]; then
+ 	HTLBOPTS="-zcommon-page-size=$SLICE_SIZE -zmax-page-size=$SLICE_SIZE"
+ 	HTLBOPTS="$HTLBOPTS -lhugetlbfs"
+@@ -134,13 +140,13 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
+ 	# otherwise it will be NULL.
+ 	case "$EMU" in
+ 	armelf*_linux_eabi|aarch64elf*|aarch64linux*)
+-		printf -v TEXTADDR "%x" "$SLICE_SIZE"
+-		HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR" ;;
+-	elf_i386)		HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
++		printf -v TEXTADDR "0x%x" "$SLICE_SIZE"
++		HTLBOPTS="$HTLBOPTS ${TEXTSEG}$TEXTADDR" ;;
++	elf_i386)		HTLBOPTS="$HTLBOPTS ${TEXTSEG}0x08000000" ;;
+ 	elf64ppc|elf64lppc)
+ 		if [ "$MMU_TYPE" == "Hash" ] ; then
+-			printf -v TEXTADDR "%x" "$SLICE_SIZE"
+-			HTLBOPTS="$HTLBOPTS -Ttext-segment=$TEXTADDR"
++			printf -v TEXTADDR "0x%x" "$SLICE_SIZE"
++			HTLBOPTS="$HTLBOPTS ${TEXTSEG}$TEXTADDR"
+ 		fi ;;
+ 	esac
+ fi
