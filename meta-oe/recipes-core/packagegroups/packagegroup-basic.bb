@@ -47,6 +47,6 @@ RRECOMMENDS:${PN} = "\
     \
     tzdata \
     \
-    cpufrequtils \
+    cpupower \
     htop \
 "
