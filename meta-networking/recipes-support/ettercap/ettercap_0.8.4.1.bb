@@ -23,6 +23,10 @@ RDEPENDS:${PN} += "bash ethtool libgcc"
 
 SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV} \
            file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
+           file://CVE-2026-125400-06_1.patch \
+           file://CVE-2026-125400-06_2.patch \
+           file://CVE-2026-125400-06_3.patch \
+           file://CVE-2026-125400-06_4.patch \
            "
 
 SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
