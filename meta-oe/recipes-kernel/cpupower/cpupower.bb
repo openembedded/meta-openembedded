@@ -11,7 +11,9 @@ inherit kernelsrc kernel-arch bash-completion
 
 do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
 
-EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
+EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH} \
+                unitdir=${systemd_system_unitdir} \
+                SYSTEMD=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
@@ -27,7 +29,7 @@ do_install() {
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES =+ "${PN}-systemd"
 
-FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_unitdir}"
+FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_system_unitdir}"
 
 RDEPENDS:${PN} = "bash"
 
