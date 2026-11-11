@@ -41,6 +41,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4;protocol=https \
            file://0003-boost-Fix-build-with-clang-23.patch \
            file://0004-ssl-Fix-build-with-OpenSSL-4.patch \
            file://0005-SERVER-49099-Remove-the-Node-swap-function-in-Biggie.patch \
+           file://oe-buildinfo.vars \
            "
 SRC_URI:append:libc-musl = "\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
@@ -87,6 +88,7 @@ EXTRA_OESCONS = "PREFIX=${prefix} \
                  TARGET_ARCH=${MONGO_ARCH} \
                  MONGO_VERSION=${PV} \
                  OBJCOPY=${OBJCOPY} \
+                 --variables-files=${UNPACKDIR}/oe-buildinfo.vars \
                  --ssl \
                  --disable-warnings-as-errors \
                  --use-system-zlib \
