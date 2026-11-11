@@ -1,0 +1,43 @@
+#!/bin/sh
+# pg_config for cross builds, the real one is a target binary.
+# Build paths are answered inside the sysroot, install paths as on the target.
+
+sysroot=$(cd "$(dirname "$0")" && pwd -P)
+sysroot=${sysroot%@CROSSSCRIPTS@}
+
+value() {
+	case $1 in
+	--bindir) echo "@BINDIR@" ;;
+	--docdir) echo "@DOCDIR@" ;;
+	--htmldir) echo "@DOCDIR@" ;;
+	--includedir) echo "$sysroot@INCLUDEDIR@" ;;
+	--pkgincludedir) echo "$sysroot@PKGINCLUDEDIR@" ;;
+	--includedir-server) echo "$sysroot@PKGINCLUDEDIR@/server" ;;
+	--libdir) echo "$sysroot@LIBDIR@" ;;
+	--pkglibdir) echo "@PKGLIBDIR@" ;;
+	--localedir) echo "@LOCALEDIR@" ;;
+	--mandir) echo "@MANDIR@" ;;
+	--sharedir) echo "@SHAREDIR@" ;;
+	--sysconfdir) echo "@SYSCONFDIR@" ;;
+	--pgxs) echo "$sysroot@PKGLIBDIR@/pgxs/src/makefiles/pgxs.mk" ;;
+	--version) echo "PostgreSQL @VERSION@" ;;
+	*)
+		echo "pg_config: $1 is not available in a cross build" >&2
+		exit 1
+		;;
+	esac
+}
+
+all="bindir docdir htmldir includedir pkgincludedir includedir-server \
+	libdir pkglibdir localedir mandir sharedir sysconfdir pgxs version"
+
+if [ $# -eq 0 ]; then
+	for opt in $all; do
+		printf '%s = %s\n' "$(echo "$opt" | tr a-z A-Z)" "$(value "--$opt")"
+	done
+	exit 0
+fi
+
+for arg; do
+	value "$arg"
+done

@@ -30,6 +30,7 @@ SRC_URI = "https://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
     file://postgresql-setup \
     file://postgresql.service \
     file://run-ptest \
+    file://pg_config \
 "
 
 LEAD_SONAME = "libpq.so"
@@ -284,14 +285,63 @@ do_install:append() {
     install -m 0644 ${UNPACKDIR}/postgresql.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@BINDIR@,${bindir},g' \
         ${D}${systemd_unitdir}/system/postgresql.service
-    # Remove the build path
+    # Make the installed PGXS makefiles usable from extension recipes: take
+    # the toolchain from the environment and drop the build paths. PostgreSQL
+    # 18 skips pg_config when prefix is set, the first expression undoes that.
     if [ -f ${D}${libdir}/${BPN}/pgxs/src/Makefile.global ]; then
-        sed -i -e 's#${RECIPE_SYSROOT}##g' \
-               -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
-               -e 's#${WORKDIR}##g' \
-               -e 's#${TMPDIR}##g' \
-             ${D}${libdir}/${BPN}/pgxs/src/Makefile.global
+        sed -i \
+            -e 's#^ifneq (,$(if $(PGXS),,1)$(prefix))$#ifndef PGXS#' \
+            -e 's#^CC = .*#CC := $(CC)#' \
+            -e 's#^CXX = .*#CXX := $(CXX)#' \
+            -e 's#^CPP = .*#CPP := $(CPP)#' \
+            -e 's#^LD = .*#LD := $(LD)#' \
+            -e 's# -fcanon-prefix-map##g' \
+            -e 's# -f\(file\|debug\|macro\)-prefix-map=[^ ]*##g' \
+            -e 's#^CFLAGS = \(.*\)#CFLAGS := \1 $(CFLAGS)#' \
+            -e 's#^CXXFLAGS = \(.*\)#CXXFLAGS := \1 $(CXXFLAGS)#' \
+            -e 's#^LDFLAGS = \(.*\)#LDFLAGS := \1 $(LDFLAGS)#' \
+            -e '/^CFLAGS :=/s# -I${STAGING_INCDIR}/${PYTHON_DIR}##' \
+            -e 's#${RECIPE_SYSROOT}${includedir}#$(includedir)#g' \
+            -e 's#${RECIPE_SYSROOT}${libdir}#$(libdir)#g' \
+            -e 's#${STAGING_BINDIR_NATIVE}/perl-native/perl#perl#g' \
+            -e 's#${STAGING_BINDIR_NATIVE}/python3-native/python3#python3#g' \
+            -e 's#${STAGING_BINDIR_NATIVE}/##g' \
+            -e 's#${TMPDIR}/hosttools/##g' \
+            -e 's#${RECIPE_SYSROOT_NATIVE}##g' \
+            -e 's#${RECIPE_SYSROOT}##g' \
+            -e 's#${WORKDIR}##g' \
+            -e 's#${TMPDIR}##g' \
+            ${D}${libdir}/${BPN}/pgxs/src/Makefile.global
+        # PGXS installs headers and libraries into directories pg_config
+        # reports inside the sysroot, strip the sysroot there
+        sed -i -e '/^pgxsdir = /a pg_sysroot := $(patsubst %$(pgxsdir)/src/makefiles/pgxs.mk,%,$(PGXS))' \
+            ${D}${libdir}/${BPN}/pgxs/src/Makefile.global
+        sed -i -e 's#$(DESTDIR)$(includedir_server)#$(DESTDIR)$(includedir_server:$(pg_sysroot)%=%)#g' \
+            ${D}${libdir}/${BPN}/pgxs/src/makefiles/pgxs.mk
+        sed -i -e 's#$(DESTDIR)$(libdir)#$(DESTDIR)$(libdir:$(pg_sysroot)%=%)#g' \
+            ${D}${libdir}/${BPN}/pgxs/src/Makefile.shlib
     fi
+}
+
+# pg_config is a target binary, stage a script for extension builds
+SYSROOT_PREPROCESS_FUNCS += "postgresql_sysroot_preprocess"
+postgresql_sysroot_preprocess() {
+    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
+    sed -e 's,@CROSSSCRIPTS@,${bindir_crossscripts},g' \
+        -e 's,@BINDIR@,${bindir},g' \
+        -e 's,@DOCDIR@,${docdir}/${BPN},g' \
+        -e 's,@INCLUDEDIR@,${includedir},g' \
+        -e 's,@PKGINCLUDEDIR@,${includedir}/${BPN},g' \
+        -e 's,@LIBDIR@,${libdir},g' \
+        -e 's,@PKGLIBDIR@,${libdir}/${BPN},g' \
+        -e 's,@LOCALEDIR@,${datadir}/locale,g' \
+        -e 's,@MANDIR@,${mandir},g' \
+        -e 's,@SHAREDIR@,${datadir}/${BPN},g' \
+        -e 's,@SYSCONFDIR@,${sysconfdir}/${BPN},g' \
+        -e 's,@VERSION@,${PV},g' \
+        ${UNPACKDIR}/pg_config \
+        > ${SYSROOT_DESTDIR}${bindir_crossscripts}/pg_config
+    chmod 0755 ${SYSROOT_DESTDIR}${bindir_crossscripts}/pg_config
 }
 
 SSTATE_SCAN_FILES += "Makefile.global"
