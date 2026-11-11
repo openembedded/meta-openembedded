@@ -22,6 +22,8 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
            file://iscsi-initiator.service \
            file://iscsi-initiator-targets.service \
            file://set_initiatorname \
+           file://CVE-2026-44943.patch \
+           file://CVE-2026-44944.patch \
            "
 S = "${WORKDIR}/git"
 
