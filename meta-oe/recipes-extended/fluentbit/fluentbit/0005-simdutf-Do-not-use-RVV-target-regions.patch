@@ -1,0 +1,42 @@
+From e20d9dd911c83790316f66277320851cdc0c96b8 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2026 11:41:05 -0800
+Subject: [PATCH] simdutf: Do not use RVV target regions
+
+With clang >= 19 simdutf enables its RVV kernel through target regions on
+riscv64 even when the baseline -march has no V extension. clang 23 rejects
+the RVV types in the function templates of that region:
+
+  simdutf.cpp:4941:57: error: RISC-V type 'vuint16m1_t' (aka '__rvv_uint16m1_t') requires the 'zve32x' extension
+
+Upstream simdutf no longer defines SIMDUTF_HAS_RVV_TARGET_REGION, so the
+RVV kernel is only built when the compiler targets V. Backport that hunk to
+the bundled amalgamation.
+
+Upstream-Status: Backport [https://github.com/simdutf/simdutf/commit/37be90689b18]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ lib/simdutf-amalgamation-5.5.0/src/simdutf/simdutf.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/lib/simdutf-amalgamation-5.5.0/src/simdutf/simdutf.h b/lib/simdutf-amalgamation-5.5.0/src/simdutf/simdutf.h
+index 4b534c1..a0945ae 100644
+--- a/lib/simdutf-amalgamation-5.5.0/src/simdutf/simdutf.h
++++ b/lib/simdutf-amalgamation-5.5.0/src/simdutf/simdutf.h
+@@ -156,11 +156,11 @@
+ // RISC-V 64-bit
+ #define SIMDUTF_IS_RISCV64 1
+ 
+-#if __clang_major__ >= 19
+-// Does the compiler support target regions for RISC-V
+-#define SIMDUTF_HAS_RVV_TARGET_REGION 1
+-#endif
+-
++//#if __riscv_v_intrinsic >= 1000000
++//  #define SIMDUTF_HAS_RVV_INTRINSICS 1
++//  #define SIMDUTF_HAS_RVV_TARGET_REGION 1
++//#elif ...
++// Check for special compiler versions that implement pre v1.0 intrinsics
+ #if __riscv_v_intrinsic >= 11000
+ #define SIMDUTF_HAS_RVV_INTRINSICS 1
+ #endif
