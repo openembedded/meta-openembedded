@@ -1,0 +1,46 @@
+From 4661c86d9a64bf4057bc80fc9e6a4aed83754b5e Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2026 11:41:05 -0800
+Subject: [PATCH] wrappers: Do not export _init and _fini
+
+_init and _fini come from crti.o on some architectures. The dynamic loader
+finds them through DT_INIT/DT_FINI, not by symbol lookup, so there is no
+reason to export them from the wrappers.
+
+On architectures without crti.o _init/_fini, e.g. riscv64, they are not
+defined at all, and lld, which defaults to --no-undefined-version, fails:
+
+  ld.lld: error: version script assignment of 'global' to symbol '_init' failed: symbol not defined
+  ld.lld: error: version script assignment of 'global' to symbol '_fini' failed: symbol not defined
+
+Upstream-Status: Submitted [https://github.com/apitrace/apitrace/pull/1004]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ wrappers/egltrace.version | 2 --
+ wrappers/glxtrace.version | 2 --
+ 2 files changed, 4 deletions(-)
+
+diff --git a/wrappers/egltrace.version b/wrappers/egltrace.version
+index 0e7e62b..f4154be 100644
+--- a/wrappers/egltrace.version
++++ b/wrappers/egltrace.version
+@@ -1,7 +1,5 @@
+ {
+     global:
+-        _init;
+-        _fini;
+         egl[A-Z]*;
+         gl[A-Z]*;
+         dlopen;
+diff --git a/wrappers/glxtrace.version b/wrappers/glxtrace.version
+index 0546a05..68cd8d1 100644
+--- a/wrappers/glxtrace.version
++++ b/wrappers/glxtrace.version
+@@ -1,7 +1,5 @@
+ {
+     global:
+-        _init;
+-        _fini;
+         gl[A-Z]*;
+         dlopen;
+ 	_exit;
