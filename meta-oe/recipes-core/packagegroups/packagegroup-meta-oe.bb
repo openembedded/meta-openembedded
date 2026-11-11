@@ -213,6 +213,7 @@ RDEPENDS:packagegroup-meta-oe-dbs = "\
     libdbi \
     lmdb \
     mariadb \
+    pg-cron \
     postgresql \
     psqlodbc \
     rocksdb \
