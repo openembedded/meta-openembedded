@@ -4,15 +4,16 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 HOMEPAGE = "https://wammu.eu/"
 
-SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
+SRC_URI = "https://github.com/gammu/gammu/releases/download/${PV}/Gammu-${PV}.tar.gz \
     file://gammurc \
     file://gammu-smsdrc \
-    file://0001-allow-build-with-cmake-4.patch \
 "
 
-SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"
+S = "${UNPACKDIR}/Gammu-${PV}"
 
-UPSTREAM_CHECK_URI = "https://dl.cihar.com/${BPN}/releases"
+SRC_URI[sha256sum] = "92478c1c6d8df193f3d5e36648fd05fc3eff26254034f025cad2a0ffba5aec23"
+
+UPSTREAM_CHECK_URI = "https://github.com/gammu/gammu/releases"
 
 DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
 
