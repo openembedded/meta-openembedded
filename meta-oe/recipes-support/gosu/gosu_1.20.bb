@@ -9,9 +9,9 @@ SRC_URI = "git://${GO_IMPORT}.git;destsuffix=src/${GO_IMPORT};branch=master;prot
            git://github.com/moby/sys;name=user;destsuffix=src/github.com/moby/sys;branch=main;protocol=https \
            git://github.com/golang/sys;name=sys;destsuffix=src/golang.org/x/sys;branch=master;protocol=https \
 "
-SRCREV = "6456aaa0f3c854d199d0f037f068eb97515b7513"
-#v0.1.0
-SRCREV_user = "c0711cde08c8fa33857a2c28721659267f49b5e2"
+SRCREV = "29b939aa5bd4dc588af765b8248f6e39150d2565"
+#v0.4.1
+SRCREV_user = "85a71bbe1faa36c552a960e6a5f3d0cfb632fbbe"
 #v0.1.0
 SRCREV_sys = "95e765b1cc43ac521bd4fd501e00774e34401449"
 
