@@ -4,13 +4,12 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
 DEPENDS = "sg3-utils libaio"
 
-SRCREV = "df991fa788e22cd8b8e3013cfae306988c19c3d0"
+SRCREV = "4922507af70c65e4c6e35489f1651f841d01ebaf"
 
 SRC_URI = "git://github.com/fujita/tgt.git;branch=master;protocol=https \
 	      file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch \
         file://0001-usr-Makefile-WARNING-fix.patch \
         file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
-        file://musl-__wordsize.patch \
 "
 SRC_URI += "file://tgtd.init \
             file://tgtd.service \
