@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=bed161b82a1ecab65ff7ba3c3b960439"
 
 SRC_URI = "git://${GO_IMPORT};protocol=https;nobranch=1;tag=v${PV};destsuffix=${GO_SRCURI_DESTSUFFIX}"
-SRCREV = "687d264b689b8c49a67e2e52a8a5e0caa01c04ce"
+SRCREV = "e982ff36668f5130d94b4f70409babb3d964df42"
 
 require ${BPN}-licenses.inc
 require ${BPN}-go-mods.inc
