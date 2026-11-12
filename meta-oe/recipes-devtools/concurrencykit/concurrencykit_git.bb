@@ -7,12 +7,11 @@ LICENSE = "Apache-2.0 AND BSD-2-Clause"
 HOMEPAGE = "http://concurrencykit.org"
 SECTION = "base"
 
-PV = "0.7.0+git"
-SRCREV = "6e8e5bec2e2f8cef2072a68579cbb07ababf3331"
+PV = "0.7.2"
+SRCREV = "981e14290df3d4339974eade5d8820dafd506b58"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
 SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
-           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch \
-           file://0001-build-Use-ilp32d-abi-on-riscv32-and-lp64d-on-rv64.patch"
+           file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch"
 
 
 COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
@@ -38,4 +37,9 @@ do_compile () {
 
 do_install () {
     oe_runmake 'DESTDIR=${D}' install
+}
+
+do_install:append () {
+    # ck.pc is installed with cp -p, keeping the build user as owner
+    chown root:root ${D}${libdir}/pkgconfig/ck.pc
 }
