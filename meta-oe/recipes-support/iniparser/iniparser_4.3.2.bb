@@ -4,9 +4,9 @@ HOMEPAGE = "https://gitlab.com/iniparser/iniparser"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8474d3b745f77e203f1fc82fb0bb7678"
 SRCBRANCH = "main"
-SRCREV = "4bef811283e0ec1658c60e09950bd5a1ddc92e4b"
+SRCREV = "4fff3f22b63819d30ad5c2e4d7c7df9ec272cffc"
 
-SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
+SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH};lfs=0"
 
 inherit cmake
 
