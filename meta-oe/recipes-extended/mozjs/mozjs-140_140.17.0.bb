@@ -20,7 +20,7 @@ SRC_URI = " \
     file://0013-libc-Enable-getrandom-on-all-musl-platforms.patch \
 "
 
-SRC_URI[sha256sum] = "358bb03c550f95172f1e31694e4287da3411560df91e931cb25210efdf90e524"
+SRC_URI[sha256sum] = "4d6ed3b18b2069c55bab12d8ba95da6013ac0b036d8a031df8b9f39a25d05c33"
 
 UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs140"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
