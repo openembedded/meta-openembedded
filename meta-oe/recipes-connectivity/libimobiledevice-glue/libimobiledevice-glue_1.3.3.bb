@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.libimobiledevice.org/"
 
 DEPENDS = "libplist"
 
-SRCREV = "aef2bf0f5bfe961ad83d224166462d87b1df2b00"
+SRCREV = "ecc0f1ba4fca96f3d7ef060b6c53f2e0bcfe829f"
 SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
 
 inherit autotools pkgconfig
