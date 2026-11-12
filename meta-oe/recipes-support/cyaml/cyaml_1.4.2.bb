@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fe6f0e49348c87bddd5d27803dceaaf0"
 DEPENDS = " \
     libyaml \
 "
-SRCREV = "07ff8654a270ec9b410acd3152b60de9e9f941af"
+SRCREV = "d05365e474e56d34c8d4b25599a333c0635eeebf"
 
-SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main-v1;tag=v${PV}"
 
 
 inherit pkgconfig
