@@ -9,10 +9,8 @@ inherit autotools pkgconfig systemd github-releases
 
 SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
            file://corosync.conf \
-           file://CVE-2026-35091.patch \
-           file://CVE-2026-35092.patch \
            "
-SRC_URI[sha256sum] = "be361c827f99b215b3bd3fa2fb071c03dac6831c2a351963d938caef62604bc8"
+SRC_URI[sha256sum] = "be92a882ec738b17528777d344f54c6784245fb7b9dec20fcd9022adaac12bfe"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 LICENSE = "BSD-3-Clause"
