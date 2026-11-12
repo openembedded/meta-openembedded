@@ -12,14 +12,18 @@ rather than the Bitbake-generated one.
 
 Signed-off-by: Sui Chen <suichen6@gmail.com>
 Signed-off-by: Etienne Cordonnier <ecordonnier@snap.com>
----
 Upstream-Status: Pending
+---
+ gn/BUILD.gn                  |  1 -
+ gn/standalone/BUILD.gn       | 20 ++++++++++----------
+ gn/standalone/BUILDCONFIG.gn |  5 +++--
+ 3 files changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/gn/BUILD.gn b/gn/BUILD.gn
-index 6f2ad9fd..05e4030b 100644
+index 24204c14..27fb036b 100644
 --- a/gn/BUILD.gn
 +++ b/gn/BUILD.gn
-@@ -137,7 +137,6 @@ group("default_deps") {
+@@ -139,7 +139,6 @@ group("default_deps") {
    deps = [ ":gen_buildflags" ]
    if (perfetto_build_standalone) {
      public_deps = [
@@ -28,10 +32,10 @@ index 6f2ad9fd..05e4030b 100644
        "//gn/standalone/sanitizers:deps",
      ]
 diff --git a/gn/standalone/BUILD.gn b/gn/standalone/BUILD.gn
-index 7ecaae60..3edb470b 100644
+index 4c7a09e8..26fdbec1 100644
 --- a/gn/standalone/BUILD.gn
 +++ b/gn/standalone/BUILD.gn
-@@ -541,16 +541,16 @@ config("android_liblog") {
+@@ -602,13 +602,13 @@ config("android_liblog") {
  }
  
  # Checks that tools/install-build-deps has been run since it last changed.
@@ -55,11 +59,8 @@ index 7ecaae60..3edb470b 100644
 +#    "--android",
 +#  ]
 +#}
- 
- # TODO(https://github.com/google/perfetto/issues/5353): Remove this after
- # updating emscripten.
 diff --git a/gn/standalone/BUILDCONFIG.gn b/gn/standalone/BUILDCONFIG.gn
-index 2e27f2f1..7037d35e 100644
+index 88fff1b5..a05a92ab 100644
 --- a/gn/standalone/BUILDCONFIG.gn
 +++ b/gn/standalone/BUILDCONFIG.gn
 @@ -64,8 +64,9 @@ declare_args() {
@@ -74,5 +75,3 @@ index 2e27f2f1..7037d35e 100644
  }
  default_configs = [
    "//gn/standalone:default",
--- 
-2.43.0

@@ -5,6 +5,6 @@ HOMEPAGE = "https://github.com/google/perfetto"
 SRC_URI = "git://github.com/google/perfetto.git;protocol=https;name=perfetto;nobranch=1 \
 	"
 
-SRCREV_perfetto = "da1d152cff27890903d158fe96751de3aab883cc"
+SRCREV_perfetto = "1e9c61e9844affd7dccd3d42d9ea9f3a3d10cf6d"
 SRCREV_FORMAT = "perfetto"
-PV = "57.2"
+PV = "59.1"
