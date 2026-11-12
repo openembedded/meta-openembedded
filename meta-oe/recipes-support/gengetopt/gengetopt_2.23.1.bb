@@ -6,9 +6,11 @@ HOMEPAGE = "https://www.gnu.org/software/gengetopt/gengetopt.html"
 LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
 
-SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
+SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz \
+           file://0001-gnulib-Do-not-expand-glibc-C23-qualifier-generic-macros.patch \
+           "
 
-SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
+SRC_URI[sha256sum] = "3b9def48422bd45f78af95936200b7f9287369a3db76c4907c42fe10f4922ab6"
 
 # ftpmirror.gnu.org redirects to a random mirror, several of which serve a
 # non-Apache index the auto-derived regex cannot parse. Pin the check to the
