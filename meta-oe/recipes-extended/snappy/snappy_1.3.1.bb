@@ -11,7 +11,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
 
 SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main"
-SRCREV = "6af9287fbdb913f0794d0148c6aa43b58e63c8e3"
+SRCREV = "9c28114a38866f6deeaa826db918293bc28ae410"
 
 inherit cmake pkgconfig
 
