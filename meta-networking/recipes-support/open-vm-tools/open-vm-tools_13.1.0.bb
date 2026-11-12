@@ -52,7 +52,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
 SRC_URI:append:libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.patch;patchdir=.. \
 "
 
-SRCREV = "f8fbcd0bf3b5869e2822542c398a51ddf7bd5f7a"
+SRCREV = "50cede15e10a21ab919f5ad2961ae0a1840a1911"
 
 S = "${UNPACKDIR}/${BP}/open-vm-tools"
 
@@ -66,13 +66,13 @@ inherit autotools pkgconfig systemd update-rc.d
 SYSTEMD_SERVICE:${PN} = "vmtoolsd.service"
 
 EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs \
-         --disable-tests --without-gtkmm --without-pam \
+         --disable-tests --without-gtkmm3 --without-gtkmm4 --without-pam \
          --disable-vgauth --disable-deploypkg --disable-containerinfo \
          --without-root-privileges --without-kernel-modules --with-tirpc \
          --with-udev-rules-dir=${nonarch_base_libdir}/udev/rules.d"
 
-NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
-X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+ gdk-pixbuf"
+NO_X11_FLAGS = "--without-x --without-gtk3 --without-gtk4"
+X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+3 gdk-pixbuf"
 PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
 
 # fuse gets implicitly detected; there is no --without-fuse option.
