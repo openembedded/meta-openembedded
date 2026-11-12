@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe
            file://frr.pam \
            file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
            "
-SRCREV = "c8efb33af96f9f1220d0fdda6ac049f9126edd6f"
+SRCREV = "f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1"
 
 UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
 
