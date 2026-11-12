@@ -16,24 +16,22 @@ Signed-off-by: Dengke Du <dengke.du@windriver.com>
 
 Upstream-Status: Pending
 ---
- lib/log/log.c      | 6 ++++++
- tools/lvmcmdline.c | 6 +++---
+ lib/log/log.c      |    6 ++++++
+ tools/lvmcmdline.c |    6 +++---
  2 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/lib/log/log.c b/lib/log/log.c
-index 90905e629..ed69662d0 100644
 --- a/lib/log/log.c
 +++ b/lib/log/log.c
-@@ -165,6 +165,7 @@ static void _check_and_replace_standard_log_streams(FILE *old_stream, FILE *new_
+@@ -165,6 +165,7 @@
   * Close and reopen standard stream on file descriptor fd.
   */
  int reopen_standard_stream(FILE **stream, const char *mode)
 +#ifdef __GLIBC__
  {
- 	int fd, fd_copy, new_fd;
+ 	int fd, fd_copy, new_fd, ret;
  	const char *name;
-@@ -211,6 +212,11 @@ int reopen_standard_stream(FILE **stream, const char *mode)
- 	*stream = new_stream;
+@@ -228,6 +229,11 @@
+ 
  	return 1;
  }
 +#else
@@ -44,11 +42,9 @@ index 90905e629..ed69662d0 100644
  
  void init_log_fn(lvm2_log_fn_t log_fn)
  {
-diff --git a/tools/lvmcmdline.c b/tools/lvmcmdline.c
-index 22ae1e3bb..b0928bc04 100644
 --- a/tools/lvmcmdline.c
 +++ b/tools/lvmcmdline.c
-@@ -3427,7 +3427,7 @@ static int _check_standard_fds(void)
+@@ -3425,7 +3425,7 @@
  	int err = is_valid_fd(STDERR_FILENO);
  
  	if (!is_valid_fd(STDIN_FILENO) &&
@@ -57,7 +53,7 @@ index 22ae1e3bb..b0928bc04 100644
  		if (err)
  			perror("stdin stream open");
  		else
-@@ -3437,7 +3437,7 @@ static int _check_standard_fds(void)
+@@ -3435,7 +3435,7 @@
  	}
  
  	if (!is_valid_fd(STDOUT_FILENO) &&
@@ -66,7 +62,7 @@ index 22ae1e3bb..b0928bc04 100644
  		if (err)
  			perror("stdout stream open");
  		/* else no stdout */
-@@ -3445,7 +3445,7 @@ static int _check_standard_fds(void)
+@@ -3443,7 +3443,7 @@
  	}
  
  	if (!is_valid_fd(STDERR_FILENO) &&
