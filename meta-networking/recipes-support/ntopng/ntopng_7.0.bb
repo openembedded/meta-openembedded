@@ -11,16 +11,13 @@ RDEPENDS:${PN} = "bash redis"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "d3a1229954dd783af06c9fd2dcd9ce926826a228"
-SRC_URI = "gitsm://github.com/ntop/ntopng;protocol=https;branch=6.6-stable \
+SRCREV = "b4f7acda2feb75b9e2b93c06898e9ed3ae4bfef5"
+SRC_URI = "gitsm://github.com/ntop/ntopng;protocol=https;branch=7.0-stable \
            file://0001-configure.ac.in-fix-host-contamination.patch \
            file://0001-Makefile.in-don-t-use-the-internal-lua.patch \
            file://0001-configure.ac.in-Allow-dynamic-linking-against-ndpi-3.patch \
            file://0001-luaengine-Use-lua-5.5-API-signature-for-lua_newstate.patch \
            file://ntopng.service \
-           file://0001-Fix-build-with-OpenSSL-4.0.patch \
-           file://CVE-2026-84990.patch \
-           file://CVE-2026-86090-CVE-2026-86091.patch \
            "
 
 # don't use the lua under thirdparty as it supports cross compiling badly

@@ -14,12 +14,14 @@ ipe-sysroot/usr/lib/libm.a(e_logf.o): in function `logf_ifunc_selector':
 Upstream-Status: Submitted [https://github.com/ntop/ntopng/pull/6318]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- configure.ac.in | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ configure.ac.in | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
 
+diff --git a/configure.ac.in b/configure.ac.in
+index 9d284c4..1404ccb 100644
 --- a/configure.ac.in
 +++ b/configure.ac.in
-@@ -235,8 +235,9 @@ AC_ARG_WITH(ndpi-includes,
+@@ -232,8 +232,9 @@ AC_ARG_WITH(ndpi-includes,
        NDPI_CUST_INC="-I$withval -I$withval/../lib/third_party/include"
     ])
  
@@ -31,7 +33,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  NDPI_LIB_DEP=
  
  AS_VAR_IF(with_dynamic_ndpi, no, [
-@@ -267,11 +268,6 @@ AC_MSG_CHECKING(for nDPI source)
+@@ -264,11 +265,6 @@ AC_MSG_CHECKING(for nDPI source)
        fi
  ])
  
@@ -43,7 +45,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  if test ! -z "$NDPI_CUST_INC" ; then :
    NDPI_INC=$NDPI_CUST_INC
  fi
-@@ -280,12 +276,6 @@ if test ! -z "$NDPI_CUST_LIB" ; then :
+@@ -277,12 +273,6 @@ if test ! -z "$NDPI_CUST_LIB" ; then :
    NDPI_LIB=$NDPI_CUST_LIB
  fi
  
@@ -53,6 +55,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 -  echo "and try again"
 -  exit 1
 -fi
- dnl finish: nDPI handling
  
- AC_ARG_WITH(json-c-static,
+ AC_MSG_CHECKING(for nDPI Pro)
+ if test -d "../ndpi-pro"; then

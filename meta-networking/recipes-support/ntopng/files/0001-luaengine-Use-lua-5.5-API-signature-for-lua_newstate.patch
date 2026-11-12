@@ -15,17 +15,19 @@ a third parameter.
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- src/LuaEngine.cpp | 64 +++++++++++++++++++++++------------------------
- 1 file changed, 32 insertions(+), 32 deletions(-)
+ src/LuaEngine.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/src/LuaEngine.cpp b/src/LuaEngine.cpp
+index 377712a..aeece85 100644
 --- a/src/LuaEngine.cpp
 +++ b/src/LuaEngine.cpp
 @@ -154,7 +154,7 @@ LuaEngine::LuaEngine() {
    is_system_vm = false;
    mem_used = 0;
-   
+ 
 -  L = lua_newstate(l_alloc, this);
 +  L = lua_newstate(l_alloc, this, luaL_makeseed(NULL));
  
    if (!L) {
-     ntop->getTrace()->traceEvent(TRACE_ERROR, "Unable to create a new Lua state.");
+     ntop->getTrace()->traceEvent(TRACE_ERROR,

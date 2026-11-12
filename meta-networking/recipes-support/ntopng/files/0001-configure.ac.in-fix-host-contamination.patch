@@ -11,12 +11,14 @@ Upstream-Status: Inappropriate [OE specific]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- configure.ac.in | 43 +++----------------------------------------
- 1 file changed, 3 insertions(+), 40 deletions(-)
+ configure.ac.in | 127 +++-----------------------------------------------------
+ 1 file changed, 5 insertions(+), 122 deletions(-)
 
+diff --git a/configure.ac.in b/configure.ac.in
+index b6ed6ce..9d284c4 100644
 --- a/configure.ac.in
 +++ b/configure.ac.in
-@@ -83,30 +83,6 @@ if test "$with_dynamic_ndpi" = "yes"; th
+@@ -89,36 +89,6 @@ if test "$with_dynamic_ndpi" = "yes"; then
    AC_DEFINE([HAVE_DYNAMIC_NDPI], [1], [Define if using dynamic linking with nDPI])
  fi
  
@@ -28,14 +30,20 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 -        CC=clang
 -        CXX="clang++ -fno-color-diagnostics -fPIE -stdlib=libc++"
 -    else
--       if test -x "/usr/bin/clang-10"; then
+-       if test -x "$(command -v clang)"; then
+-           CLANG_VERSION=$(echo -n | clang -dM -E - | sed  -n 's/^#define __clang_major__ \([0-9]\+\).*$/\1/gp')
+-       elif test -x "/usr/bin/clang-10"; then
 -           CLANG_VERSION=10
 -       elif test -x "/usr/bin/clang-13"; then
 -           CLANG_VERSION=13
 -       elif test -x "/usr/bin/clang-14"; then
 -           CLANG_VERSION=14
+-       elif test -x "/usr/bin/clang-19"; then
+-           CLANG_VERSION=19
+-       elif test -x "/usr/bin/clang-20"; then
+-           CLANG_VERSION=20
 -       else
--           echo "Could not find clang. Please install clang-14 clang-tools-14"
+-           echo "Could not find clang. Please install clang clang-tools"
 -           exit 1
 -       fi
 -
@@ -47,7 +55,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  CFLAGS="${CFLAGS} -I${HERE} -I${HERE}/include"
  CXXFLAGS="${CXXFLAGS} -I${HERE} -I${HERE}/include"
  
-@@ -122,7 +98,7 @@ fi
+@@ -134,7 +104,7 @@ fi
  
  if test -f /proc/device-tree/model; then
    IS_RASPBERRY=`cat /proc/device-tree/model | grep -a -e "Orange Pi" -e Raspberry | wc -l`
@@ -56,7 +64,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
    if test "$IS_RASPBERRY" = "1"; then
      CFLAGS="${CFLAGS} -DHAVE_EMBEDDED_SUPPORT"
      CXXFLAGS="${CXXFLAGS} -DHAVE_EMBEDDED_SUPPORT"
-@@ -158,39 +134,6 @@ MAKE=make
+@@ -170,39 +140,6 @@ MAKE=make
  BIN_PATH=/usr/bin
  LIBPCAP=-lpcap
  
@@ -96,7 +104,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  dnl> Remove spaces
  OS="${OS#"${OS%%[![:space:]]*}"}"
  
-@@ -237,31 +180,6 @@ if test "${with_nedge+set}" = set; then
+@@ -251,31 +188,6 @@ if test "${with_nedge+set}" = set; then
    LIBS="${LIBS} -lnetfilter_queue -lnfnetlink -lnetfilter_conntrack"
  fi
  
@@ -125,10 +133,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 -  fi
 -fi
 -
- if test -d "pro"; then
-   NTOPCLOUD_LIB=
-   NTOPCLOUD_HOME="../ntopcloud"
-@@ -317,10 +235,6 @@ AC_ARG_WITH(ndpi-includes,
+ JE=../jemalloc/lib/libjemalloc.a
+ if ! test -f "${JE}"; then
+  JE=
+@@ -320,10 +232,6 @@ AC_ARG_WITH(ndpi-includes,
        NDPI_CUST_INC="-I$withval -I$withval/../lib/third_party/include"
     ])
  
@@ -139,7 +147,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  NDPI_INC=`echo $NDPI_CFLAGS | sed -e "s/[ ]*$//"`
  NDPI_LIB=
  NDPI_LIB_DEP=
-@@ -387,7 +301,7 @@ fi
+@@ -399,7 +307,7 @@ fi
  pkg-config --exists libssl
  if test "$?" -ne 1; then
    AC_DEFINE_UNQUOTED(NO_SSL_DL, 1, [has openssl])
@@ -148,7 +156,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
    SSL_LIB="`pkg-config --libs libssl` -lssl -lcrypto"
  else
    dnl Workaround for MacOS Brew
-@@ -408,10 +322,6 @@ else
+@@ -420,10 +328,6 @@ else
      SSL_INC="-I/usr/local/opt/openssl/include"
      SSL_LIB="-L/usr/local/opt/openssl/lib -lssl -lcrypto"
    dnl Workaround for FreeBSD
@@ -159,7 +167,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
    else
      echo "Please install openssl-dev(el) package prerequisite"
      exit -1
-@@ -433,13 +343,6 @@ fi
+@@ -447,13 +351,6 @@ fi
  AC_MSG_CHECKING(for ntopng professional edition)
  
  REDIS_SERVICE="redis.service"
@@ -173,7 +181,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  
  SERVICE_ALIAS=
  SERVICE_REQUIRES=
-@@ -497,7 +400,7 @@ fi
+@@ -514,7 +411,7 @@ fi
  echo "Using clickhouse-cpp stored at ${CLICKHOUSE_HOME}"
  
  dnl> fi dnl> test $SYSTEM = "Linux"
@@ -182,7 +190,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  AC_DEFINE_UNQUOTED(NTOPNG_PRO_GIT_RELEASE, "r${PRO_GIT_RELEASE}", [ntopng professional release])
  AC_DEFINE_UNQUOTED(NTOPNG_PRO_GIT_DATE, "${PRO_GIT_DATE}", [ntopng professional date])
  DUMMY=`cd ./pro; ${MAKE} build`
-@@ -531,21 +434,7 @@ if test -f ".git/index"; then
+@@ -548,21 +445,7 @@ if test -f ".git/index"; then
  fi
  
  if test $SYSTEM = "Linux"; then
@@ -205,7 +213,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  else
  dnl> wget -O config.guess 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
    if test $SYSTEM = "FreeBSD"; then
-@@ -575,7 +464,7 @@ AS_VAR_IF(with_hiredis, yes, [
+@@ -592,7 +475,7 @@ AS_VAR_IF(with_hiredis, yes, [
      else
        pkg-config --exists hiredis
        if test "$?" -ne 1; then
