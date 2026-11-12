@@ -53,7 +53,7 @@ RDEPENDS:packagegroup-meta-oe = "\
 RDEPENDS:packagegroup-meta-oe-benchmarks = "\
     bonnie++ \
     coremark-pro \
-    cpupower \
+    cpupower-bench \
     dbench \
     dhrystone \
     fio \

@@ -27,11 +27,12 @@ do_install() {
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-PACKAGES =+ "${PN}-systemd"
+PACKAGES =+ "${PN}-bench ${PN}-systemd"
 
+FILES:${PN}-bench = "${sbindir}/cpufreq-bench ${bindir}/cpufreq-bench_plot.sh ${sysconfdir}/cpufreq-bench.conf"
 FILES:${PN}-systemd = "${sysconfdir}/cpupower-service.conf ${systemd_system_unitdir}"
 
-RDEPENDS:${PN} = "bash"
+RDEPENDS:${PN}-bench = "bash"
 
 python do_package:prepend() {
     d.setVar('PKGV', d.getVar("KERNEL_VERSION").split("-")[0])
