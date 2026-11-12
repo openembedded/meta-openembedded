@@ -10,7 +10,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
 
 DEPENDS = "yyjson"
 
-SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
+SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV} \
+           file://0001-CMake-Only-use-copy-dt-needed-entries-if-the-linker-.patch \
+           file://0002-users-Map-endutxent-to-endutent-when-utmpx.h-is-unav.patch \
+           file://0003-CMake-links-libxcb-and-libX11-explicitly-when-not-us.patch \
+           "
 SRCREV = "8c9d9c0449dd515e0088c4a60a38d2dc40c5ccd0"
 
 inherit cmake pkgconfig

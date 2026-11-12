@@ -1,0 +1,37 @@
+From ded9ccd14cb81e19a3d9335f21f68bf76f0c5ebe Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2026 17:50:38 -0800
+Subject: [PATCH 1/3] CMake: Only use --copy-dt-needed-entries if the linker
+ supports it
+
+LLD does not implement --copy-dt-needed-entries. With
+BINARY_LINK_TYPE=dynamic the flag is added to CMAKE_EXE_LINKER_FLAGS
+before the configure checks run, so every check that links (utmpx.h,
+glob, wordexp, pthread_timedjoin_np, ...) fails and fastfetch is built
+with those features silently disabled.
+
+Check that the linker accepts the flag before adding it.
+
+Upstream-Status: Submitted [https://github.com/fastfetch-cli/fastfetch/pull/2714]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a2723050..93cb984f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1732,7 +1732,11 @@ if(NOT BINARY_LINK_TYPE STREQUAL "dlopen")
+     message(STATUS "Enabling custom link type: ${BINARY_LINK_TYPE}")
+     target_compile_definitions(libfastfetch PUBLIC FF_DISABLE_DLOPEN=1)
+     if(NOT WIN32)
+-        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--copy-dt-needed-entries")
++        include(CheckLinkerFlag)
++        check_linker_flag(C "-Wl,--copy-dt-needed-entries" HAVE_LINKER_COPY_DT_NEEDED_ENTRIES)
++        if(HAVE_LINKER_COPY_DT_NEEDED_ENTRIES)
++            set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--copy-dt-needed-entries")
++        endif()
+     endif()
+ endif()
+ 

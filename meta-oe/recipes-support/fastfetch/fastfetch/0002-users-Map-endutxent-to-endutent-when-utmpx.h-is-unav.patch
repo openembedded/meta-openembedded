@@ -1,0 +1,29 @@
+From e1bd0ad4ce45a612db3db27687836036a3e76581 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Nov 2026 17:50:39 -0800
+Subject: [PATCH 2/3] users: Map endutxent to endutent when utmpx.h is
+ unavailable
+
+The utmp.h fallback maps setutxent and getutxent but not endutxent,
+which is called unconditionally, so the build fails with:
+
+error: use of undeclared identifier 'endutxent'; did you mean 'endutent'?
+
+Upstream-Status: Submitted [https://github.com/fastfetch-cli/fastfetch/pull/2714]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/detection/users/users_linux.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/detection/users/users_linux.c b/src/detection/users/users_linux.c
+index e304b29c..d39fb765 100644
+--- a/src/detection/users/users_linux.c
++++ b/src/detection/users/users_linux.c
+@@ -15,6 +15,7 @@
+     #define utmpx utmp
+     #define setutxent setutent
+     #define getutxent getutent
++    #define endutxent endutent
+ #endif
+ #if __linux__ || __GNU__
+     #include <netinet/in.h>
