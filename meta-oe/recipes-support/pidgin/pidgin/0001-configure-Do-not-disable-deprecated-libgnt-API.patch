@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] configure: Do not disable deprecated libgnt API
+
+libgnt 2.15.0 deprecated gnt_util_parse_xhtml_to_textview(), which finch
+still uses, so building with -DGNT_DISABLE_DEPRECATED fails with:
+
+  finch/gntnotify.c:96:9: error: call to undeclared function 'gnt_util_parse_xhtml_to_textview'
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+--- a/configure.ac
++++ b/configure.ac
+@@ -1262,7 +1262,7 @@
+ 
+ AC_ARG_ENABLE(fortify, [AC_HELP_STRING([--disable-fortify], [compile without FORTIFY_SOURCE support])], , enable_fortify=yes)
+ 
+-DEBUG_CFLAGS="$DEBUG_CFLAGS -DPURPLE_DISABLE_DEPRECATED -DPIDGIN_DISABLE_DEPRECATED -DFINCH_DISABLE_DEPRECATED -DGNT_DISABLE_DEPRECATED"
++DEBUG_CFLAGS="$DEBUG_CFLAGS -DPURPLE_DISABLE_DEPRECATED -DPIDGIN_DISABLE_DEPRECATED -DFINCH_DISABLE_DEPRECATED"
+ if test "x$GCC" = "xyes"; then
+ 	dnl We enable -Wall later.
+ 	dnl If it's set after the warning CFLAGS in the compiler invocation, it counteracts the -Wno... flags.

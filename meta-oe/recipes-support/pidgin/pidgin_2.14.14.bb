@@ -10,6 +10,7 @@ inherit autotools gettext pkgconfig gconf perlnative python3native
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
+    file://0001-configure-Do-not-disable-deprecated-libgnt-API.patch \
 "
 
 SRC_URI[sha256sum] = "0ffc9994def10260f98a55cd132deefa8dc4a9835451cc0e982747bd458e2356"
