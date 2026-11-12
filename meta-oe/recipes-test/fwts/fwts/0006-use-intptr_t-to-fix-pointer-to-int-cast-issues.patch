@@ -8,37 +8,17 @@ converting a void* to uintptr_t and back again
 will yield the original pointer value
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
 Upstream-Status: Pending
+---
+ src/lib/src/fwts_mmap.c   | 2 +-
+ src/lib/src/fwts_smbios.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- src/lib/src/fwts_acpi_tables.c | 4 ++--
- src/lib/src/fwts_mmap.c        | 2 +-
- src/lib/src/fwts_smbios.c      | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
-
---- a/src/lib/src/fwts_acpi_tables.c
-+++ b/src/lib/src/fwts_acpi_tables.c
-@@ -171,7 +171,7 @@ static fwts_acpi_table_rsdp *fwts_acpi_g
- 		return NULL;
- 	}
- 
--	if ((mem = fwts_mmap((off_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
-+	if ((mem = fwts_mmap((uintptr_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
- 		return NULL;
- 
- 	if (fwts_safe_memcpy(rsdp, mem, sizeof(fwts_acpi_table_rsdp)) != FWTS_OK) {
-@@ -484,7 +484,7 @@ static int fwts_acpi_load_tables_from_fi
- 	if ((rsdp = fwts_acpi_get_rsdp(fw, rsdp_addr, &rsdp_len)) == NULL)
- 		return FWTS_ERROR;
- 
--	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(off_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
-+	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(uintptr_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
- 
- 	/* Load any tables from XSDT if it's valid */
- 	if (rsdp->xsdt_address) {
+diff --git a/src/lib/src/fwts_mmap.c b/src/lib/src/fwts_mmap.c
+index 6df5a18..98cbe29 100644
 --- a/src/lib/src/fwts_mmap.c
 +++ b/src/lib/src/fwts_mmap.c
-@@ -82,7 +82,7 @@ int fwts_munmap(void *mem, const size_t
+@@ -81,7 +81,7 @@ int fwts_munmap(void *mem, const size_t size)
  	off_t offset;
  
  	page_size = fwts_page_size();
@@ -47,9 +27,11 @@ Upstream-Status: Pending
  
  	if (munmap((void *)((uint8_t *)mem - offset), size + offset) < 0)
  		return FWTS_ERROR;
+diff --git a/src/lib/src/fwts_smbios.c b/src/lib/src/fwts_smbios.c
+index 836c169..4bd80bb 100644
 --- a/src/lib/src/fwts_smbios.c
 +++ b/src/lib/src/fwts_smbios.c
-@@ -78,7 +78,7 @@ static void *fwts_smbios_find_entry_uefi
+@@ -77,7 +77,7 @@ static void *fwts_smbios_find_entry_uefi(
  	if ((addr = fwts_scan_efi_systab(smbios)) != NULL) {
  		fwts_smbios_entry *mapped_entry;
  
