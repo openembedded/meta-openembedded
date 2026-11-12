@@ -11,7 +11,7 @@ DEPENDS = "highway brotli"
 SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1;tag=v${PV} \
            "
 
-SRCREV = "a7a9c787341cf703dede03c2009fa460cae5e5df"
+SRCREV = "5a7da83447212fe4900fc29ce97430b881caa67e"
 
 EXTRA_OECMAKE = " \
 	-DCMAKE_BUILD_TYPE=Release \
