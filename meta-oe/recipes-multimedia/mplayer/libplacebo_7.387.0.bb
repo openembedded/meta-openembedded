@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 DEPENDS += "fastfloat glad-native python3-mako-native python3-jinja2-native vulkan-headers"
 
 SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=release;tag=v${PV}"
-SRCREV = "cee9b076f2c63104ccfd497fa79c39a867293ec4"
+SRCREV = "275f7dea27924cdd34ab2e6c20e448b6bc4fab65"
 
 inherit meson pkgconfig
 
