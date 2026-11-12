@@ -1,6 +1,6 @@
 LICENSE = "Apache-2.0 AND BSD-3-Clause AND MIT AND Zlib"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b06e43f2e368eb8663632d529232353 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0b17e8eda713c18363c16102cacd41f3 \
                     file://buildtools/libcxx/LICENSE.TXT;md5=55d89dd7eec8d3b4204b680e27da3953 \
                     file://buildtools/libcxxabi/LICENSE.TXT;md5=7b9334635b542c56868400a46b272b1e \
                     file://buildtools/libunwind/LICENSE.TXT;md5=f66970035d12f196030658b11725e1a1 \
@@ -23,7 +23,7 @@ SRC_URI:append = " \
            git://android.googlesource.com/platform/bionic.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/bionic;name=bionic \
            git://chromium.googlesource.com/chromium/src/third_party/zlib.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zlib;name=zlib \
            git://android.googlesource.com/platform/external/lzma.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/lzma;name=lzma \
-           git://android.googlesource.com/platform/external/zstd.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zstd;name=zstd \
+           git://github.com/facebook/zstd.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zstd;name=zstd \
            git://chromium.googlesource.com/external/github.com/google/re2.git;nobranch=1;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/re2;name=re2 \
            \
            file://0001-Remove-check_build_deps-build-steps.patch \
@@ -43,7 +43,7 @@ SRCREV_libcxx = "852bc6746f45add53fec19f3a29280e69e358d44"
 SRCREV_libcxxabi = "a37a3aa431f132b02a58656f13984d51098330a2"
 SRCREV_libunwind = "419b03c0b8f20d6da9ddcb0d661a94a97cdd7dad"
 SRCREV_zlib = "6f9b4e61924021237d474569027cfb8ac7933ee6"
-SRCREV_zstd = "77211fcc5e08c781734a386402ada93d0d18d093"
+SRCREV_zstd = "f8745da6ff1ad1e7bab384bd1f9d742439278e99"
 SRCREV_re2 = "927f5d53caf8111721e734cf24724686bb745f55"
 
 SRCREV_FORMAT .= "_bionic_core_lzma_libprocinfo_logging_unwinding_protobuf_abseil_libbase_libcxx_libcxxabi_libunwind_zlib_zstd_re2"
