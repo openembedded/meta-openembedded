@@ -9,12 +9,12 @@ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=http
            file://0001-cmake-Allow-SYSTEMCTL_BIN-to-be-overridden-from-envi.patch \
            file://0002-mana-Link-with-libatomic-when-64-bit-atomics-need-it.patch \
 "
-SRCREV = "58e40801bfed5a8befc0881594820fa0a0baa4a1"
+SRCREV = "0fa90c60fbc274edb3495f30c1afd02b3f5fd38e"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
 LICENSE = "BSD-2-Clause OR GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
-		   file://COPYING.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+		   file://COPYING.GPL2;md5=570a9b3749dd0463a1778803b12a6dce"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_INSTALL_SYSTEMD_SERVICEDIR=${systemd_system_unitdir} \
