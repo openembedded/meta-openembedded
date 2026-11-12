@@ -9,6 +9,7 @@ SRCREV = "18cfd388ac47a9e00978b34d6c20341f3e2cdb56"
 SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=${PV} \
            file://0001-zstd-disable-the-x86-64-BMI2-assembly-fast-loops.patch \
            file://0002-wrappers-Do-not-export-_init-and-_fini.patch \
+           file://CVE-2026-126050.patch \
            "
 
 DEPENDS += "zlib libpng python3-native"
