@@ -10,54 +10,26 @@ compiler complains about. Fix by using "%s" as format.
 
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Regenerated for 16s: pass every non-literal format string through "%s".
 ---
- lmon16n.c | 88 +++++++++++++++++++++++++++----------------------------
+ lmon16s.c | 88 +++++++++++++++++++++++++++++++--------------------------------
  1 file changed, 44 insertions(+), 44 deletions(-)
 
-diff --git a/lmon16n.c b/lmon16n.c
-index 8a5d35c..cec409a 100644
---- a/lmon16n.c
-+++ b/lmon16n.c
-@@ -5489,20 +5489,20 @@ int main(int argc, char **argv)
- 		    /*
- 		     *mvwprintw(padsmp,2, 0, "CPU  User%%  Sys%% Wait%% Idle|0          |25         |50          |75       100|");
- 		     */
--		    mvwprintw(padsmp, 1, 0, cpu_line);
--		    mvwprintw(padsmp, 2, 0, "CPU  ");
-+		    mvwprintw(padsmp, 1, 0, "%s", cpu_line);
-+		    mvwprintw(padsmp, 2, 0, "%s", "CPU  ");
- 		    COLOUR wattrset(padsmp, COLOR_PAIR(2));	/* Green */
--		    mvwprintw(padsmp, 2, 4, "User%%");
-+		    mvwprintw(padsmp, 2, 4, "%s", "User%%");
- 		    COLOUR wattrset(padsmp, COLOR_PAIR(1));	/* Red */
--		    mvwprintw(padsmp, 2, 9, "  Sys%%");
-+		    mvwprintw(padsmp, 2, 9, "%s", "  Sys%%");
- 		    COLOUR wattrset(padsmp, COLOR_PAIR(4));	/* Blue */
--		    mvwprintw(padsmp, 2, 15, " Wait%%");
-+		    mvwprintw(padsmp, 2, 15, "%s", " Wait%%");
- 		    if (p->cpu_total.steal != q->cpu_total.steal) {
- 			COLOUR wattrset(padsmp, COLOR_PAIR(5));
--			mvwprintw(padsmp, 2, 22, "Steal");
-+			mvwprintw(padsmp, 2, 22, "%s", "Steal");
- 		    } else {
- 			COLOUR wattrset(padsmp, COLOR_PAIR(0));
--			mvwprintw(padsmp, 2, 22, " Idle");
-+			mvwprintw(padsmp, 2, 22, "%s", " Idle");
- 		    }
- 		    COLOUR wattrset(padsmp, COLOR_PAIR(0));
- 		    mvwprintw(padsmp, 2, 27,
-@@ -5593,8 +5593,8 @@ int main(int argc, char **argv)
- 			/* lparcfg gathered above */
- 			if (lparcfg.smt_mode > 1
- 			    && i % lparcfg.smt_mode == 0) {
--			    mvwprintw(padsmp, 3 + i, 27, "*");
--			    mvwprintw(padsmp, 3 + i, 77, "*");
-+			    mvwprintw(padsmp, 3 + i, 27, "%s", "*");
-+			    mvwprintw(padsmp, 3 + i, 77, "%s", "*");
- 			}
- #endif
+diff --git a/lmon16s.c b/lmon16s.c
+index fa739c1..5db3169 100644
+--- a/lmon16s.c
++++ b/lmon16s.c
+@@ -5479,7 +5479,7 @@ int main(int argc, char **argv)
+ 		if (cursed) {
+ 		    BANNER(padsmp, "CPU Utilisation");
  
-@@ -5611,7 +5611,7 @@ int main(int argc, char **argv)
+-		    mvwprintw(padsmp, 1, 0, cpu_line);
++		    mvwprintw(padsmp, 1, 0, "%s", cpu_line);
+ 		    mvwprintw(padsmp, 2, 0, "CPU  ");
+ 		    COLOUR wattrset(padsmp, COLOR_PAIR(2));	/* Green */
+ 		    mvwprintw(padsmp, 2, 4, "User%%");
+@@ -5599,7 +5599,7 @@ int main(int argc, char **argv)
  				    100.0);
  		    }
  		}		/* for (i = 0; i < cpus; i++) */
@@ -66,8 +38,8 @@ index 8a5d35c..cec409a 100644
  #ifdef POWER
  		/* proc_lparcfg called above in previous ifdef
  		 */
-@@ -5687,7 +5687,7 @@ int main(int argc, char **argv)
- 				 100.0);
+@@ -5670,7 +5670,7 @@ int main(int argc, char **argv)
+ 				 (double) cpu_steal / (double) cpu_sum * 100.0);
  		    }
  
 -		    CURSE mvwprintw(padsmp, i + 5, 0, cpu_line);
@@ -75,10 +47,10 @@ index 8a5d35c..cec409a 100644
  		    i = i + 2;
  		}		/* if (cpus > 1 || !cursed) */
  		smp_first_time = 0;
-@@ -5697,17 +5697,17 @@ int main(int argc, char **argv)
- 		if (cursed) {
- 		    int rows = 0;
- 		    BANNER(padwide, "CPU Utilisation Wide View");
+@@ -5692,17 +5692,17 @@ int main(int argc, char **argv)
+ 		    const char wide10[] = " 10%%-|                                                                |-10%%";
+ 		    const char wide11[] = " CPU +1--------+10-------+20-------+30-------+40-------+50-------+60--+--0%%";
+ 
 -		    mvwprintw(padwide, 1, 0, wide1);
 -		    mvwprintw(padwide, 2, 0, wide2);
 -		    mvwprintw(padwide, 3, 0, wide3);
@@ -88,8 +60,8 @@ index 8a5d35c..cec409a 100644
 -		    mvwprintw(padwide, 7, 0, wide7);
 -		    mvwprintw(padwide, 8, 0, wide8);
 -		    mvwprintw(padwide, 9, 0, wide9);
--		    mvwprintw(padwide, 10, 0, wide10);
--		    mvwprintw(padwide, 11, 0, wide_1_64);
+-		    mvwprintw(padwide,10, 0, wide10);
+-		    mvwprintw(padwide,11, 0, wide11);
 +		    mvwprintw(padwide, 1, 0, "%s", wide1);
 +		    mvwprintw(padwide, 2, 0, "%s", wide2);
 +		    mvwprintw(padwide, 3, 0, "%s", wide3);
@@ -99,12 +71,12 @@ index 8a5d35c..cec409a 100644
 +		    mvwprintw(padwide, 7, 0, "%s", wide7);
 +		    mvwprintw(padwide, 8, 0, "%s", wide8);
 +		    mvwprintw(padwide, 9, 0, "%s", wide9);
-+		    mvwprintw(padwide, 10, 0, "%s", wide10);
-+		    mvwprintw(padwide, 11, 0, "%s", wide_1_64);
++		    mvwprintw(padwide,10, 0, "%s", wide10);
++		    mvwprintw(padwide,11, 0, "%s", wide11);
  		    mvwprintw(padwide, 1, 6, "CPU(s)=%d", cpus);
  		    if (wide_first_time) {
  			mvwprintw(padwide, 3, 7,
-@@ -5747,17 +5747,17 @@ int main(int argc, char **argv)
+@@ -5742,16 +5742,16 @@ int main(int argc, char **argv)
  			rows = 12;
  		    }
  		    if (cpus > 63) {
@@ -118,7 +90,6 @@ index 8a5d35c..cec409a 100644
 -			mvwprintw(padwide, rows + 7, 0, wide8);
 -			mvwprintw(padwide, rows + 8, 0, wide9);
 -			mvwprintw(padwide, rows + 9, 0, wide10);
--			mvwprintw(padwide, rows + 10, 0, wide_65_128);
 +			mvwprintw(padwide, rows + 0, 0, "%s", wide1);
 +			mvwprintw(padwide, rows + 1, 0, "%s", wide2);
 +			mvwprintw(padwide, rows + 2, 0, "%s", wide3);
@@ -129,11 +100,10 @@ index 8a5d35c..cec409a 100644
 +			mvwprintw(padwide, rows + 7, 0, "%s", wide8);
 +			mvwprintw(padwide, rows + 8, 0, "%s", wide9);
 +			mvwprintw(padwide, rows + 9, 0, "%s", wide10);
-+ 			mvwprintw(padwide, rows + 10, 0, "%s", wide_65_128);
+ 			mvwprintw(padwide, rows + 10, 0,
+ 				  " CPU +65---+70-------+80-------+90-------+100------+110------+120-----+--0%%");
  			if (wide_first_time) {
- 			    mvwprintw(padwide, rows + 3, 7,
- 				      " Please wait gathering CPU statistics");
-@@ -5804,17 +5804,17 @@ int main(int argc, char **argv)
+@@ -5800,16 +5800,16 @@ int main(int argc, char **argv)
  			rows = 23;
  		    }
  		    if (cpus > 127) {
@@ -147,7 +117,6 @@ index 8a5d35c..cec409a 100644
 -			mvwprintw(padwide, rows + 7, 0, wide8);
 -			mvwprintw(padwide, rows + 8, 0, wide9);
 -			mvwprintw(padwide, rows + 9, 0, wide10);
--			mvwprintw(padwide, rows + 10, 0,wide_129_192);
 +			mvwprintw(padwide, rows + 0, 0, "%s", wide1);
 +			mvwprintw(padwide, rows + 1, 0, "%s", wide2);
 +			mvwprintw(padwide, rows + 2, 0, "%s", wide3);
@@ -158,7 +127,40 @@ index 8a5d35c..cec409a 100644
 +			mvwprintw(padwide, rows + 7, 0, "%s", wide8);
 +			mvwprintw(padwide, rows + 8, 0, "%s", wide9);
 +			mvwprintw(padwide, rows + 9, 0, "%s", wide10);
-+			mvwprintw(padwide, rows + 10, 0, "%s", wide_129_192);
+ 			mvwprintw(padwide, rows + 10, 0,
+ 				  " CPU +129--------+140------+150------+160------+170------+180------+190--0%%");
  			if (wide_first_time) {
- 			    mvwprintw(padwide, rows + 3, 7,
- 				      " Please wait gathering CPU statistics");
+@@ -8253,23 +8253,23 @@ I/F Name Recv=KB/s Trans=KB/s packin packout insize outsize Peak->Recv Trans
+ 		case 5:
+ 		    if(cursed) {
+ 		        if (show_args == ARGS_ONLY) {
+-			    mvwprintw(padtop, 1, y, head1_top_argonly);
+-			    mvwprintw(padtop, 2, y, head2_top_argonly);
++			    mvwprintw(padtop, 1, y, "%s", head1_top_argonly);
++			    mvwprintw(padtop, 2, y, "%s", head2_top_argonly);
+ 		        } else if (COLS > 119) {
+ 			    if (show_topmode == 5) {
+-			        mvwprintw(padtop, 1, y, head1_top_wide_mode5);
+-			        mvwprintw(padtop, 2, y, head2_top_wide_mode5);
++			        mvwprintw(padtop, 1, y, "%s", head1_top_wide_mode5);
++			        mvwprintw(padtop, 2, y, "%s", head2_top_wide_mode5);
+ 			    } else{
+-			        mvwprintw(padtop, 1, y, head1_top_wide_modex);
+-			        mvwprintw(padtop, 2, y, head2_top_wide_modex);
++			        mvwprintw(padtop, 1, y, "%s", head1_top_wide_modex);
++			        mvwprintw(padtop, 2, y, "%s", head2_top_wide_modex);
+ 			    }
+ 		        } else {
+ 			    if (show_topmode == 5) {
+-			        mvwprintw(padtop, 1, y, head1_top_thin_mode5);
+-			        mvwprintw(padtop, 2, y, head2_top_thin_mode5);
++			        mvwprintw(padtop, 1, y, "%s", head1_top_thin_mode5);
++			        mvwprintw(padtop, 2, y, "%s", head2_top_thin_mode5);
+ 			    } else {
+-			        mvwprintw(padtop, 1, y, head1_top_thin_modex);
+-			        mvwprintw(padtop, 2, y, head2_top_thin_modex);
++			        mvwprintw(padtop, 1, y, "%s", head1_top_thin_modex);
++			        mvwprintw(padtop, 2, y, "%s", head2_top_thin_modex);
+ 		            }
+ 		        }
+                     } /* cursed */
