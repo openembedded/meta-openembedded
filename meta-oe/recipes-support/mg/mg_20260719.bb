@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://version.c;md5=a8e0b53d89d277bf3b40878ac568bedd"
 DEPENDS = "ncurses libbsd"
 SECTION = "console/editors"
 
-SRCREV = "f21c2ba36772ffa68d9cfa55305e427d37903b4a"
+SRCREV = "42f8b027f6efcff5c15e49bcebd959479e291594"
 SRC_URI = "git://github.com/hboetes/mg;branch=master;protocol=https \
            file://0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch \
            file://0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch \
