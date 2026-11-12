@@ -1,0 +1,40 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] oss-fuzz: enc: Skip the DES key when DES is disabled
+
+The encryption fuzzer refers to xmlSecOpenSSLKeyDataDesId
+unconditionally, so it fails to build with --disable-des:
+
+  oss-fuzz/xmlsec_enc_target.c:108:13: error: use of undeclared identifier 'xmlSecOpenSSLKeyDataDesId'
+
+Guard it with XMLSEC_NO_DES like the rest of the apps.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+--- a/apps/oss-fuzz/xmlsec_enc_target.c
++++ b/apps/oss-fuzz/xmlsec_enc_target.c
+@@ -104,10 +104,20 @@
+     int i;
+ 
+     for (i = 0; i < G_SYM_NKEYS; ++i) {
+-        xmlSecKeyDataId id = g_sym_keys[i].is_des ?
++        xmlSecKeyDataId id;
++        xmlSecKeyPtr key;
++
++#ifndef XMLSEC_NO_DES
++        id = g_sym_keys[i].is_des ?
+             xmlSecOpenSSLKeyDataDesId :
+             xmlSecOpenSSLKeyDataAesId;
+-        xmlSecKeyPtr key = xmlSecKeyReadMemory(id,
++#else /* XMLSEC_NO_DES */
++        if (g_sym_keys[i].is_des) {
++            continue;
++        }
++        id = xmlSecOpenSSLKeyDataAesId;
++#endif /* XMLSEC_NO_DES */
++        key = xmlSecKeyReadMemory(id,
+             (const xmlSecByte*)g_sym_keys[i].material,
+             g_sym_keys[i].size);
+ 

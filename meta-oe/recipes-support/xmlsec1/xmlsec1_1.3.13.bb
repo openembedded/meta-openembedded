@@ -8,7 +8,7 @@ HOMEPAGE = "http://www.aleksey.com/xmlsec/"
 DEPENDS = "libtool libxml2 libxslt zlib"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9d595462ce402837a45beefc1ef6c70a"
 
 SECTION = "libs"
 
@@ -18,11 +18,11 @@ SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz
            file://0003-xmlsec1-add-new-recipe.patch \
            file://0005-nss-nspr-fix-for-multilib.patch \
            file://0006-xmlsec1-Fix-configure-QA-error-caused-by-host-lookup.patch \
-           file://0008-unit_tests-guard-xmlDebugDumpDocument-with-LIBXML_DEB.patch \
+           file://0009-oss-fuzz-enc-Skip-the-DES-key-when-DES-is-disabled.patch \
            file://run-ptest \
            "
 
-SRC_URI[sha256sum] = "24045199af12d93fe5fdbbbf7e386e823e4842071e9432e2b90ac108b889a923"
+SRC_URI[sha256sum] = "7e500061eed734c55d74c786998e7562e55b1aaa72a2dff8ce3130b4c5b832d5"
 
 UPSTREAM_CHECK_URI = "https://github.com/lsh123/xmlsec/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
