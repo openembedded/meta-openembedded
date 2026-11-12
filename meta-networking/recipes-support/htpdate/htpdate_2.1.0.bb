@@ -14,7 +14,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://htpdate.c;beginline=25;endline=29;md5=2b6cdb94bd5349646d7e33f9f501eef7"
 
 SRC_URI = "git://github.com/twekkel/htpdate.git;branch=master;protocol=https"
-SRCREV = "c3666d6d107662081339a1a24cab092810d7cd00"
+SRCREV = "b5be47f4ddefc9001a0a6ad9ee6734cbd869f311"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
