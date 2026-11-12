@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
 SECTION = "libs"
 DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
 
-SRCREV = "176bc1064a8e85f95eda2cb1e53b1ce5d471d857"
+SRCREV = "9f327a94a3f6cff6e3eb56a17bbd1a6b53d6434a"
 SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1;tag=v${PV}"
 
 BB_GIT_SHALLOW_EXTRA_REFS = "refs/tags/v${PV}"
@@ -27,5 +27,6 @@ inherit autotools pkgconfig
 CFLAGS:append:toolchain-clang = " -Wno-sign-compare"
 
 PACKAGECONFIG[man] = "enable_man="yes", --disable-man, "
+PACKAGECONFIG[wireshark] = "--enable-wireshark-dissector,--disable-wireshark-dissector,wireshark"
 
 PACKAGECONFIG:remove = "man"
