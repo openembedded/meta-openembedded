@@ -20,3 +20,5 @@ do_install:append () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
+
+CVE_PRODUCT = "google:brotli"
