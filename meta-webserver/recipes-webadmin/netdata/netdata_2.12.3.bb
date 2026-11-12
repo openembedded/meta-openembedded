@@ -25,11 +25,21 @@ SRC_URI = "\
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://0003-Do-not-record-the-configure-command-line-in-the-binar.patch \
     file://0004-libsensors-do-not-emit-line-directives-in-generated-s.patch \
+    file://0005-build-allow-using-a-local-SQLite-source-tree.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
+    https://www.sqlite.org/${SQLITE_YEAR}/sqlite-src-${SQLITE_VERSION_NUMBER}.zip;name=sqlite \
     "
-SRC_URI[sha256sum] = "d1ae949863925d626b1d42a53000bcca2c239718e0b0ddc6a3f3f5029b21cdfe"
+SRC_URI[sha256sum] = "6eb14deed1d7611c8f8969b2954432e91e631b2e45f762421873044561d80dd9"
+
+# netdata bundles its own SQLite and CMake's ExternalProject would
+# download it during do_compile. Fetch and unpack it with bitbake
+# instead and point CMake at the local source tree.
+# Must match packaging/cmake/Modules/NetdataSQLite.cmake.
+SQLITE_YEAR = "2026"
+SQLITE_VERSION_NUMBER = "3530400"
+SRC_URI[sqlite.sha256sum] = "d18fa15aec74d8c17e1463f861095adc01b5ad190256acb4f91d22f0368d232b"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
 UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>(?!1\.99)\d+(?:\.\d+)*)"
@@ -100,6 +110,7 @@ EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
                   -DENABLE_PLUGIN_SCRIPTS=OFF \
                   -DENABLE_ML=OFF \
                   -DENABLE_LIBBACKTRACE=OFF \
+                  -DNETDATA_SQLITE_SOURCE_DIR=${UNPACKDIR}/sqlite-src-${SQLITE_VERSION_NUMBER} \
                   -DProtobuf_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
                   -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
                   -DENABLE_PLUGIN_SYSTEMD_UNITS=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \

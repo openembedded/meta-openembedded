@@ -1,0 +1,85 @@
+From 09e668b36a7e79a09c331857f994874d2714cfbc Mon Sep 17 00:00:00 2001
+From: vkalintiris <vasilis@netdata.cloud>
+Date: Thu, 8 Oct 2026 19:47:44 +0300
+Subject: [PATCH] cmake: allow SQLite offline builds
+
+The bundled SQLite build uses ExternalProject_Add() to download its
+source tarball at build time from a URL hardcoded to
+https://www.sqlite.org in the CMake file.
+
+This breaks the netdata recipe in meta-openembedded/meta-webserver,
+because Yocto and OpenEmbedded builds require all sources to be
+fetched before the build starts and do not allow network access
+during it.
+
+Add NETDATA_SQLITE_SOURCE_DIR, pointing to an already-unpacked
+SQLite source tree, which replaces the download step.
+
+This is the SQLite part of upstream commit 09e668b build:
+restructure the CMake build system (#23589). The full commit does
+not apply to 2.12.x, so the cache variable that upstream declares
+in the new NetdataOptions.cmake module is declared in
+NetdataSQLite.cmake here.
+
+Fixes:
+
+--- LOG END ---
+error: downloading 'https://www.sqlite.org/2026/sqlite-src-3530400.zip' failed
+status_code: 6
+status_string: "Could not resolve hostname"
+log:
+--- LOG BEGIN ---
+getaddrinfo(3) failed for www.sqlite.org:443
+
+Upstream-Status: Backport [https://github.com/netdata/netdata/commit/09e668b36a7e79a09c331857f994874d2714cfbc]
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ packaging/cmake/Modules/NetdataSQLite.cmake | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
+
+diff --git a/packaging/cmake/Modules/NetdataSQLite.cmake b/packaging/cmake/Modules/NetdataSQLite.cmake
+--- a/packaging/cmake/Modules/NetdataSQLite.cmake
++++ b/packaging/cmake/Modules/NetdataSQLite.cmake
+@@ -3,10 +3,10 @@
+ #
+ # Handle bundling of SQLite.
+ #
+-# This fetches the SQLite source tree (via tarball or git clone),
+-# generates the amalgamation at build time (with --enable-update-limit
+-# so the parser supports UPDATE/DELETE ... LIMIT), then compiles it as
+-# a separate static library that links into libnetdata.
++# This fetches the SQLite source tree (via tarball, git clone, or a local
++# source directory), generates the amalgamation at build time (with
++# --enable-update-limit so the parser supports UPDATE/DELETE ... LIMIT), then
++# compiles it as a separate static library that links into libnetdata.
+ 
+ include(ExternalProject)
+ 
+@@ -19,6 +19,12 @@ set(SQLITE_GIT_SHA "b09c88c14082339b66c7b7158d609a771e64ca69") # tag is: version
+ 
+ option(SQLITE_USE_GIT "Fetch SQLite sources via git clone instead of tarball" OFF)
+ 
++# STRING rather than PATH on purpose: CACHE PATH resolves a relative value
++# against the invocation directory. Takes precedence over SQLITE_USE_GIT.
++set(NETDATA_SQLITE_SOURCE_DIR "" CACHE STRING
++    "Path to an unpacked SQLite source tree to use instead of downloading one")
++mark_as_advanced(NETDATA_SQLITE_SOURCE_DIR SQLITE_USE_GIT)
++
+ function(netdata_bundle_sqlite3)
+         message(STATUS "Preparing SQLite ${SQLITE_VERSION}")
+ 
+@@ -28,7 +34,13 @@ function(netdata_bundle_sqlite3)
+ 
+         file(MAKE_DIRECTORY "${sqlite_OUTPUT_DIR}")
+ 
+-        if(SQLITE_USE_GIT)
++        if(NETDATA_SQLITE_SOURCE_DIR)
++                # Offline builds: an already-unpacked SQLite source tree replaces
++                # the download step entirely (#23510).
++                message(STATUS "Using local SQLite sources: ${NETDATA_SQLITE_SOURCE_DIR}")
++                set(sqlite_SOURCE_DIR "${NETDATA_SQLITE_SOURCE_DIR}")
++                set(SQLITE_FETCH_ARGS "")
++        elseif(SQLITE_USE_GIT)
+                 message(STATUS "Fetching SQLite via git clone")
+                 set(SQLITE_FETCH_ARGS
+                         GIT_REPOSITORY https://github.com/sqlite/sqlite.git

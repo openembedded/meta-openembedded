@@ -3,38 +3,30 @@ From: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
 Date: Tue, 1 Oct 2024 17:01:33 +0200
 Subject: [PATCH] Do not hardcode systemd unit directories
 
-Refreshed for netdata v2.10.4 (context shifted; same intent preserved).
+Refreshed for netdata v2.12.3: upstream now routes all systemd unit
+installs through NETDATA_SYSTEMD_UNIT_DEST, so override that variable
+instead of each DESTINATION.
 
 Upstream-Status: Inappropriate [oe-core specific]
 Signed-off-by: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
 ---
- CMakeLists.txt | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ CMakeLists.txt | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d6dafd9..530298e 100644
+index 1cd0e75..510dacf 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -3642,7 +3642,7 @@ if(BUILD_FOR_PACKAGING)
-         install(FILES
-                 ${CMAKE_BINARY_DIR}/system/systemd/netdata.service
-                 COMPONENT netdata
--                DESTINATION lib/systemd/system)
-+                DESTINATION $ENV{systemd_system_unitdir})
-         install(FILES
-                 ${CMAKE_BINARY_DIR}/system/systemd/sysusers/netdata.conf
-                 COMPONENT user
-@@ -3739,11 +3739,11 @@ if(NOT OS_WINDOWS)
-     install(FILES
-             ${CMAKE_BINARY_DIR}/system/systemd/netdata-updater.service
-             COMPONENT netdata
--            DESTINATION lib/systemd/system)
-+            DESTINATION $ENV{systemd_system_unitdir})
-     install(FILES
-             system/systemd/netdata-updater.timer
-             COMPONENT netdata
--            DESTINATION lib/systemd/system)
-+            DESTINATION $ENV{systemd_system_unitdir})
-   endif()
- endif()
+@@ -4352,11 +4352,7 @@ install(FILES
  
+ # RPM distros ship systemd units in %{_unitdir} (/usr/lib/systemd/system);
+ # the DEB layout (and the historical default) uses /lib/systemd/system.
+-if(NETDATA_PACKAGING_FORMAT STREQUAL "rpm")
+-        set(NETDATA_SYSTEMD_UNIT_DEST "usr/lib/systemd/system")
+-else()
+-        set(NETDATA_SYSTEMD_UNIT_DEST "lib/systemd/system")
+-endif()
++set(NETDATA_SYSTEMD_UNIT_DEST "$ENV{systemd_system_unitdir}")
+ 
+ # The spec packages the systemd-235-compatible unit variant on EL 7 and
+ # Amazon Linux 2.
