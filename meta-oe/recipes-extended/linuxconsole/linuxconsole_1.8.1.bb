@@ -12,14 +12,13 @@ DEPENDS = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
-    file://0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch \
     file://51-these-are-not-joysticks-rm.rules \
     file://60-joystick.rules \
     file://inputattachctl \
     file://inputattach.service \
 "
 
-SRC_URI[sha256sum] = "bd4d4b7e37da02fc67e47ddf20b6f1243c0a7af7b02b918d5e72138ea8727547"
+SRC_URI[sha256sum] = "4da29745c782b7db18f5f37c49e77bf163121dd3761e2fc7636fa0cbf35c2456"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxconsole/files/"
 UPSTREAM_CHECK_REGEX = "linuxconsoletools-(?P<pver>\d+(\.\d+)+)\.tar"
 
