@@ -10,10 +10,10 @@ file://LICENSE;md5=d8b4ca15d239dc1485ef495c8f1bcc72 \
 
 SRC_URI = "git://github.com/mfontanini/cppkafka;protocol=https;branch=master \
 "
-SRCREV = "91ac543cbd2228588dcf24a6ca357f8be0f4e5ab"
+SRCREV = "9c5ea0e332486961e612deacc6e3f0c1874c688d"
 
-BASEPV = "0.4.0"
-PV = "${BASEPV}+git"
+BASEPV = "0.4.1"
+PV = "${BASEPV}"
 
 DEPENDS = "librdkafka curl boost chrpath-replacement-native"
 
