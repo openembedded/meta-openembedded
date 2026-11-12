@@ -18,7 +18,7 @@ DEPENDS += "attr tokyocabinet bison-native openssl libpcre2 librsync"
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BPN}-community-${PV}.tar.gz \
            file://set-path-of-default-config-file.patch \
            "
-SRC_URI[sha256sum] = "03722ab589c00b4e823ee22eb0afef5611b82e4f764fccc37ad3b18a3732c49e"
+SRC_URI[sha256sum] = "83ce77165543884de90a1ee69ae8728fd4a7c6a41e6b470dc5df48b48107d6c7"
 
 # The S3 tarball bucket denies listing, so track the release tags of the
 # upstream git repository instead. Tarballs are published as

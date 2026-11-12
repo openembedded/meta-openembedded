@@ -10,14 +10,12 @@ Set the path of default configure file.
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 
 ---
- misc/init.d/cfengine3.in | 12 ++++--------
+ misc/init.d/cfengine3.in |   12 ++++--------
  1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/misc/init.d/cfengine3.in b/misc/init.d/cfengine3.in
-index c584817..12f5803 100644
 --- a/misc/init.d/cfengine3.in
 +++ b/misc/init.d/cfengine3.in
-@@ -101,14 +101,10 @@ if [ -z "$LOCKDIR" ]; then
+@@ -106,14 +106,10 @@
  fi
  
  # default control file
@@ -34,5 +32,5 @@ index c584817..12f5803 100644
 +if [ -e "$INIT_FUNCTIONS" ]; then
 +    . "$INIT_FUNCTIONS"
  fi
+ DEFAULT=${CFTEST_DEFAULT:-$DEFAULT}
  
- if [ -f $DEFAULT ]; then
