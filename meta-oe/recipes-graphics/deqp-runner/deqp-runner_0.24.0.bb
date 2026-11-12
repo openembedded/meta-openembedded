@@ -14,7 +14,7 @@ SRC_URI += " \
     file://0001-cargo-Update-tempfile-to-latest-3.x.patch \
     file://0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/libc-0.2.171 \
 "
-SRC_URI[deqp-runner-0.20.3.sha256sum] = "2de4b135ed68a7f821deeedebb4084d33058b0307f1f9935e2c960430f7532e8"
+SRC_URI[deqp-runner-0.24.0.sha256sum] = "06bc5432359b2150cde819f2e324995c1ce3b29ce060af9d5cb9526d1481f5e2"
 
 require deqp-runner-crates.inc
 
