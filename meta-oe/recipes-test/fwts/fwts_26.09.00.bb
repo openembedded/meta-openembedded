@@ -3,21 +3,17 @@ DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to 
 HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
 
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=2443b6d0c5731b9be596f49c34669c33"
 
-SRC_URI = "http://fwts.ubuntu.com/release/fwts-V${PV}.tar.gz;subdir=${BP} \
+SRC_URI = "git://github.com/fwts/fwts.git;protocol=https;branch=master;tag=V${PV} \
            file://0001-Add-correct-printf-qualifier-for-off_t.patch \
-           file://0003-Remove-Werror-from-build.patch \
            file://0004-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
            file://0005-Undefine-PAGE_SIZE.patch \
            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
-           file://0001-libfwtsiasl-Disable-parallel-builds-of-lex-bison-fil.patch \
-           file://0001-Makefile.am-Add-missing-link-with-zlib.patch \
            "
-SRC_URI[sha256sum] = "4af4e1e0f1ae9313297af722d744ba47a81c81bc5bdeab3f4f40837a39e4b808"
+SRCREV = "f06eeafe26509961bfdffa60feb855623d79224e"
 
-# fwts.ubuntu.com no longer serves a browsable release listing (port 80/443
-# both refuse/time out), so track the upstream git release tags instead.
+# fwts.ubuntu.com no longer serves releases, use the upstream git tags.
 UPSTREAM_CHECK_URI = "https://github.com/fwts/fwts/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/V(?P<pver>\d+(\.\d+)+)"
 
@@ -39,3 +35,5 @@ FILES:${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
 FILES:${PN}-staticdev += "${libdir}/fwts/lib*a"
 
 RDEPENDS:${PN} += "dtc"
+
+EXTRA_OECONF += "--disable-werror"
