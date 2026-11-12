@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] libmpathutil: Drop undefined get_persistent_runner from
+ version script
+
+get_persistent_runner is listed in libmpathutil.version but is not
+defined anywhere, which fails linking with lld, as it defaults to
+--no-undefined-version:
+
+  ld.lld: error: version script assignment of 'LIBMPATHUTIL_6.0' to symbol 'get_persistent_runner' failed: symbol not defined
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+--- a/libmpathutil/libmpathutil.version
++++ b/libmpathutil/libmpathutil.version
+@@ -73,7 +73,6 @@
+ 	free_strvec;
+ 	get_linux_version_code;
+ 	get_monotonic_time;
+-	get_persistent_runner;
+ 	get_runner;
+ 	get_strbuf_buf__;
+ 	get_next_string;
