@@ -9,12 +9,8 @@ DEPENDS = "binutils-native elfutils-native"
 
 inherit native bash-completion
 
-SRC_URI = "\
-    ${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz \
-    file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch \
-    file://0002-tools-linux-types.h-Add-128-bit-integer-types-for-ar.patch \
-"
-SRC_URI[sha256sum] = "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab48516bcc1befbcd83"
+SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${@d.getVar('PV').split('.')[0]}.x/linux-${PV}.tar.xz"
+SRC_URI[sha256sum] = "b11b6df8295e8e991ff040b71aaa4994a8b55caa23b6b092907f195b5840fd1f"
 
 S = "${UNPACKDIR}/linux-${PV}"
 
