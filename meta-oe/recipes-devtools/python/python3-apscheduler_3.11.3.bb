@@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/agronholm/apscheduler"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f0e423eea5c91e7aa21bdb70184b3e53"
 
-SRC_URI[sha256sum] = "e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08f0744a96d4bd4cef4a"
+SRC_URI[sha256sum] = "cd2fcc9330039a81a5893472ad49facf23a6d5604cbe1d918c835c6de7834d5a"
 
-PYPI_PACKAGE_SDIST = "APScheduler"
+PYPI_PACKAGE_SDIST = "apscheduler"
 
 inherit pypi python_setuptools_build_meta
 
