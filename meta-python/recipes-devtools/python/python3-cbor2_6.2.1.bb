@@ -3,7 +3,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "3b08ba9f3a556186515000949d478e47e6d55322f9d86bdaef5b4e3d27d48298"
+SRC_URI[sha256sum] = "086c1588bd407a46739da704b5ee7d15225dc998d9582a0519fc6c9a114b25f7"
 
 inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
 
