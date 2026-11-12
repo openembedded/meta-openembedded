@@ -11,13 +11,12 @@ inherit meson pkgconfig
 # SRC_URI = "hg://keep.imfreedom.org/${BPN};module=${BPN}
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/pidgin/${BPN}/${PV}/${BP}.tar.xz \
-    file://0001-meson-use-pkg-config-to-find-ncursesw-panelw.patch \
 "
-SRC_URI[sha256sum] = "57f5457f72999d0bb1a139a37f2746ec1b5a02c094f2710a339d8bcea4236123"
+SRC_URI[sha256sum] = "6dce3d4f2fb33c242d8223ddda5f1042f3dfb0ad7c395d4e33a73f92423a58a3"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/pidgin/files/libgnt/"
 UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
 
-EXTRA_OEMESON = "-Dpython2=false -Ddoc=false"
+EXTRA_OEMESON = "-Ddoc=false"
 
 FILES:${PN} += "${libdir}/gnt/s.so ${libdir}/gnt/irssi.so"
