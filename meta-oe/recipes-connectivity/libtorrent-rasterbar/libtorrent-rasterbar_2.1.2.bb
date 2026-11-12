@@ -8,11 +8,9 @@ DEPENDS = "boost openssl"
 
 SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https;tag=v${PV} \
 	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal \
-           file://0001-Fix-Python3-site-packages-path-to-fix-package-QA-Iss.patch \
-           file://0001-Add-support-for-OpenSSL-4.0.patch \
            "
 
-SRCREV = "740a0b9aeabe00e762cc0efe4a0f27593db2550b"
+SRCREV = "6da363d2994f17c0b3c0450d124cf73a31a73847"
 SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
 SRCREV_FORMAT .= "_try_signal"
 
@@ -21,7 +19,7 @@ inherit cmake pkgconfig python3targetconfig
 
 CVE_PRODUCT = "libtorrent"
 
-EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -Dwebtorrent=OFF"
 
 PACKAGECONFIG ??= "python3"
 PACKAGECONFIG[python3] = "-Dpython-bindings=ON,-Dpython-bindings=OFF,python3-distutils-extra-native"
