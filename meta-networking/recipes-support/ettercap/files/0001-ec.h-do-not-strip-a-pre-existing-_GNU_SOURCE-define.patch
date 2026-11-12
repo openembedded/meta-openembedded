@@ -24,13 +24,16 @@ intact for the remainder of the translation unit.
 
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+
 ---
  include/ec.h | 8 ++++++--
  1 file changed, 6 insertions(+), 2 deletions(-)
 
+diff --git a/include/ec.h b/include/ec.h
+index 5536982..9723755 100644
 --- a/include/ec.h
 +++ b/include/ec.h
-@@ -20,19 +20,23 @@
+@@ -20,20 +20,24 @@
  
  #if !defined (__USE_GNU)   /* for memmem(), strsignal(), etc etc... */
     #define __USE_GNU
@@ -44,6 +47,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
     #define _REENTRANT      /* for strtok_r() */
  #endif
  #include <string.h>
+ #include <unistd.h>        /* for setresuid() and setresgid() */
 -#if defined (__USE_GNU)
 +#if defined (EC_UNDEF_USE_GNU)
     #undef __USE_GNU
@@ -55,4 +59,4 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +   #undef EC_UNDEF_GNU_SOURCE
  #endif
  #include <strings.h>
- #include <unistd.h>
+ #include <time.h>

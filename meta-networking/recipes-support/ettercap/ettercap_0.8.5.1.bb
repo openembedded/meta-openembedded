@@ -25,7 +25,7 @@ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag
            file://0001-ec.h-do-not-strip-a-pre-existing-_GNU_SOURCE-define.patch \
            "
 
-SRCREV = "0dc8409779f3a09cbfff4434b9a4d7b33480d88d"
+SRCREV = "832524f3c4c215f1007fe9f190dbf052ee965b55"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_SKIP_RPATH=TRUE \
