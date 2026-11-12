@@ -1,4 +1,4 @@
-From 3d1ddf162616978eeb9af8e2f64d4b3b63dba0f6 Mon Sep 17 00:00:00 2001
+From 1737c66707c3d7cbbd355c05af2e1b479568bd57 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 2 Mar 2022 14:51:13 +0800
 Subject: [PATCH] Fix pkgconfig dir for multilib
@@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index aa4ad1cc..27e7b517 100644
+index b160ac4..7b2aaa8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -670,7 +670,7 @@ endif()
+@@ -575,7 +575,7 @@ endif()
  # create pkg-config file
  if(NOT WIN32)
          configure_file(${VSOMEIP_NAME}.pc.in ${PROJECT_BINARY_DIR}/${VSOMEIP_NAME}.pc @ONLY)
@@ -23,6 +23,3 @@ index aa4ad1cc..27e7b517 100644
  endif()
  
  ##############################################################################
--- 
-2.34.1
-

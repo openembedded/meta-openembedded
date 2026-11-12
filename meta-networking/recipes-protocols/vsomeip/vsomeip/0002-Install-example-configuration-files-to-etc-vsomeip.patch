@@ -1,4 +1,4 @@
-From 17f606e9ede2e3a1871c98dffff89e5285dd8c21 Mon Sep 17 00:00:00 2001
+From 05ffeb652a838a07346c3eeb8c312fb861d415e4 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 9 Mar 2022 11:48:44 +0800
 Subject: [PATCH] Install example configuration files to /etc/vsomeip
@@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 27e7b517..67ecb365 100644
+index 7b2aaa8..332f8f2 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -586,7 +586,7 @@ install (
+@@ -490,7 +490,7 @@ install (
  )
  
  install (
@@ -23,6 +23,3 @@ index 27e7b517..67ecb365 100644
  )
  
  # Add all targets to the build-tree export set
--- 
-2.34.1
-

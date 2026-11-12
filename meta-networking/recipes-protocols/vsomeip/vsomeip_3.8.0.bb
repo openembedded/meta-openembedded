@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=
            file://0005-Do-not-treat-warnings-as-errors-with-clang.patch \
           "
 
-SRCREV = "6171fdfe109a3af8fb64190136029aadd1fa0c6f"
+SRCREV = "f1518b369f5ee9684fd01af0f9d147fb04523060"
 SRC_URI[gtest.sha256sum] = "65fab701d9829d38cb77c14acdc431d2108bfdbf8979e40eb8ae567edf10b27c"
 
 COMPATIBLE_HOST:mips = "null"
@@ -49,8 +49,10 @@ RDEPENDS:${PN}-test = "bash lsof"
 
 OECMAKE_TARGET_COMPILE += "vsomeip_ctrl examples build_tests"
 
-do_compile:prepend() {
-    sed -i -e 's#${S}/build#/opt/${PN}-test#g' ${S}/test/unit_tests/security_policy_manager_impl_tests/policy_manager_impl_unit_test_macro.hpp
+# Point the policy manager unit test at its installed location instead of ${B}
+do_configure:prepend() {
+    sed -i -e 's#UNIT_TEST_BUILD_DIR_PATH="${CMAKE_CURRENT_BINARY_DIR}"#UNIT_TEST_BUILD_DIR_PATH="/opt/${PN}-test/test/unit_tests/security_policy_manager_impl_tests"#' \
+        ${S}/test/unit_tests/security_policy_manager_impl_tests/CMakeLists.txt
 }
 
 do_install:append() {
