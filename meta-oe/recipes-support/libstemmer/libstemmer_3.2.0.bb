@@ -8,7 +8,7 @@ DEPENDS:append:class-target = " ${BPN}-native"
 SRC_URI = "git://github.com/snowballstem/snowball.git;branch=main;protocol=https;tag=v${PV} \
            file://0001-Build-so-lib.patch \
            "
-SRCREV = "cd195b51e948a902a4312f023f4a14392516a543"
+SRCREV = "6389c79f91cd67ed2de3ebdcf84ec8c2d2d23c11"
 
 LIBVER = "0.0.0"
 
