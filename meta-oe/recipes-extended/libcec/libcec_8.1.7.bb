@@ -1,15 +1,15 @@
 SUMMARY = "USB CEC Adaptor communication Library"
 HOMEPAGE = "http://libcec.pulse-eight.com/"
 
-LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=b3a719e97f49e4841e90573f9b1a98ac"
+LICENSE = "GPL-2.0-or-later AND MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7e2296699f9e8b8a60c83540688ae774"
 
 DEPENDS = "p8platform udev ncurses swig-native python3"
 
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
 DEPENDS:append:rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
 
-SRCREV = "0b7bb7bcb64ed256c9e427420e21247bb7fa20a5"
+SRCREV = "d68c4b2c7b1e657be827856ec5d9ca90d8d988c7"
 SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https;tag=${BPN}-${PV} \
            file://0001-Enhance-reproducibility.patch \
           "
