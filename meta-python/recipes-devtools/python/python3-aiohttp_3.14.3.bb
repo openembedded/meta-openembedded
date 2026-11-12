@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "9491196535a88924a60afd5b5f434b5b203b6cc616250878dbdb223a8f
 
 SRC_URI += "file://CVE-2026-111063.patch \
             file://CVE-2026-111065.patch \
+            file://CVE-2026-111066.patch \
 "
 
 CVE_PRODUCT = "aiohttp:aiohttp"
