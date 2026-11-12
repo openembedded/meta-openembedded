@@ -23,7 +23,7 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
  1 file changed, 34 insertions(+), 6 deletions(-)
 
 diff --git a/libmultipath/dict.c b/libmultipath/dict.c
-index a06a6138..a734ba9b 100644
+index 0e947b1..c477522 100644
 --- a/libmultipath/dict.c
 +++ b/libmultipath/dict.c
 @@ -189,6 +189,34 @@ set_str_noslash(vector strvec, void *ptr, const char *file, int line_nr)
@@ -61,7 +61,7 @@ index a06a6138..a734ba9b 100644
  static int
  set_yes_no(vector strvec, void *ptr, const char *file, int line_nr)
  {
-@@ -1854,7 +1882,7 @@ ble_ ## option ## _handler (struct config *conf, vector strvec,		\
+@@ -1801,7 +1829,7 @@ ble_ ## option ## _handler (struct config *conf, vector strvec,		\
  	if (!conf->option)						\
  		return 1;						\
  									\
@@ -70,7 +70,7 @@ index a06a6138..a734ba9b 100644
  	if (!buff)							\
  		return 1;						\
  									\
-@@ -1874,7 +1902,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec, \
+@@ -1821,7 +1849,7 @@ ble_ ## option ## _ ## name ## _handler (struct config *conf, vector strvec, \
  	if (!conf->option)						\
  		return 1;						\
  									\
@@ -79,7 +79,7 @@ index a06a6138..a734ba9b 100644
  	if (!buff)							\
  		return 1;						\
  									\
-@@ -1980,16 +2008,16 @@ device_handler(struct config *conf, vector strvec, const char *file,
+@@ -1927,16 +1955,16 @@ device_handler(struct config *conf, vector strvec, const char *file,
  	return 0;
  }
  

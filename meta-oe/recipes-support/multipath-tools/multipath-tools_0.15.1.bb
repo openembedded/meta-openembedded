@@ -29,7 +29,7 @@ DEPENDS = "libdevmapper \
 
 LICENSE = "GPL-2.0-only"
 
-SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=stable-0.12.y \
+SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;nobranch=1;tag=${PV} \
            file://multipathd.oe \
            file://multipath.conf.example \
            file://0001-RH-fixup-udev-rules-for-redhat.patch \
@@ -45,11 +45,12 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
            file://0011-fix-bug-of-do_compile-and-do_install.patch \
            file://0012-add-explicit-dependency-on-libraries.patch \
            file://0013-libdmmp-Makefile-Add-target-docs-man-dmmp_strerror.3.patch \
+           file://0014-libmpathutil-Drop-undefined-get_persistent_runner-from-ver.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
-SRCREV = "5bd1163d187520b958d78b85c7b239561dc86192"
+SRCREV = "d53932bdbee02f440518ea384e63d7c4d3f66685"
 
 
 inherit systemd pkgconfig
