@@ -9,14 +9,17 @@ SECTION = "devel"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=884d48c2aa7b82e1ad4a33909fab24b6"
 
-SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master;tag=${BPN}_${PV} \
+SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;nobranch=1;tag=${BPN}_${PV} \
            file://0001-CMakeLists-do-not-use-vendored-libcurl.patch \
            "
-SRCREV = "e7027dcb867dae7aebc8fd0a78ab13f05a4557f2"
+SRCREV = "1c79dcf115bcf2c8ad632dadbc749c5e25c52cb1"
 
 
 DEPENDS = "curl libyaml libusb1 openssl libftdi"
 
 inherit cmake pkgconfig
+
+# CMakeLists.txt still declares cmake_minimum_required(VERSION 3.4)
+EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
 BBCLASSEXTEND = "native nativesdk"
