@@ -11,17 +11,16 @@ Use $(DESTDIR) as installation prefix for
 /usr/share/usb-ipp/quirk/HPLIP.conf.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
----
 Upstream-Status: Pending
-
+---
  Makefile.am | 7 +++----
  1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index e10364d..f520225 100644
+index 6280bfa..2ab18ce 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -703,10 +703,9 @@ if !DISBALE_IMAGEPROCESSOR_BUILD
+@@ -719,10 +719,9 @@ if !DISBALE_IMAGEPROCESSOR_BUILD
  		ln -sf $(libdir)/libImageProcessor-x86_32.so $(libdir)/libImageProcessor.so ; \
  	fi
  endif #DISABLE_IMAGEPROCESSOR
@@ -35,6 +34,3 @@ index e10364d..f520225 100644
  if !HPLIP_CLASS_DRIVER
  #	   If scanner build, add hpaio entry to sane dll.conf.
  	if [ "$(scan_build)" = "yes" ]; then \
--- 
-2.39.2
-
