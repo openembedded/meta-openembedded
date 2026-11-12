@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "crate://crates.io/fd-find/${PV};name=fd-find"
-SRC_URI[fd-find.sha256sum] = "f35becce49c551724fd26d9824ec01d6578868cecbcc4e3d060658f9f8ad1e4d"
+SRC_URI[fd-find.sha256sum] = "f7e6acb754467c87dddb589ea068a0b07249da8b99231fec1c329419c9cfc72e"
 S = "${CARGO_VENDORING_DIRECTORY}/fd-find-${PV}"
 
 inherit cargo cargo-update-recipe-crates
