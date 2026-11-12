@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
 
 DEPENDS = "zlib openssl"
 
-SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11;tag=${BPN}-${PV} \
+SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.12;tag=${BPN}-${PV} \
            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
            file://run-ptest \
           "
 
 SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
 
-SRCREV = "a09fdd00416e53b6ed436df6ff14339a4f884601"
+SRCREV = "07430deb9b97b751ec5ea5a7fc307f40bf042e0a"
 
 CVE_PRODUCT = "libssh:libssh"
 

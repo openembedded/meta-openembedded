@@ -10,22 +10,20 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- tests/CMakeLists.txt | 2 ++
+ tests/CMakeLists.txt |    2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-index 89b95d08..e481534c 100644
 --- a/tests/CMakeLists.txt
 +++ b/tests/CMakeLists.txt
-@@ -96,6 +96,7 @@ set(TEST_TARGET_LIBRARIES
+@@ -138,6 +138,7 @@
  
  add_subdirectory(unittests)
  
 +if (CLIENT_TESTING OR SERVER_TESTING)
  # OpenSSH Capabilities are required for all unit tests
  find_program(SSH_EXECUTABLE NAMES ssh)
- if (SSH_EXECUTABLE)
-@@ -345,6 +346,7 @@ endif (WITH_PKCS11_URI)
+ find_program(SSH_KEYGEN_EXECUTABLE NAMES ssh-keygen)
+@@ -440,6 +441,7 @@
  file(COPY gss/kdcsetup.sh DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/gss FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
  
  message(STATUS "TORTURE_ENVIRONMENT=${TORTURE_ENVIRONMENT}")
@@ -33,6 +31,3 @@ index 89b95d08..e481534c 100644
  
  configure_file(tests_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/tests_config.h)
  
--- 
-2.25.1
-
