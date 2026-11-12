@@ -15,7 +15,7 @@ DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=master;protocol=https;tag=${PV} \
            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
            "
-SRCREV = "065d6910a0e915dbe633356da7bad9c4b3a2e2b9"
+SRCREV = "ced1904d3ae8a18c89a13b76d68f1908c3f103d4"
 
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
