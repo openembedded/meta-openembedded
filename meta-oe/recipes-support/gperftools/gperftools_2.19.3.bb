@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "d837a42788ba591d5d791c3b686f2738e7a93562"
+SRCREV = "f21715726a385adba7ce3a9db2df6e18b5b6bc5c"
 SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https;tag=gperftools-${PV}"
 
 inherit autotools
