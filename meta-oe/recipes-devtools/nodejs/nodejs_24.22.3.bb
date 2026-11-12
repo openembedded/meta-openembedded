@@ -36,7 +36,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
 SRC_URI:append:class-target = " \
            file://0009-Using-native-binaries.patch \
            "
-SRC_URI[sha256sum] = "8fe2ec1723bb9f8d0b683907c82708debbeda64af21cb2aa214c4241eed0a061"
+SRC_URI[sha256sum] = "48ca3aa8a9b02133356922ef4fc80200e00598c80a4ef446f7c39a459222593d"
 
 S = "${UNPACKDIR}/node-v${PV}"
 
