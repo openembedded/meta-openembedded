@@ -14,12 +14,12 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 9241ce5..b24e291 100644
+index bed885a..c852de2 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -1,7 +1,7 @@
- ## Process this file with automake to produce Makefile.in -*-Makefile-*-
+@@ -2,7 +2,7 @@
  AUTOMAKE_OPTIONS = foreign
+ AM_DISTCHECK_DVI_TARGET =
  
 -SUBDIRS = config m4 term src docs man demo share
 +SUBDIRS = docs

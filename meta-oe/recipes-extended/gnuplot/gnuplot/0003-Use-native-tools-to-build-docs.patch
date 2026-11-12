@@ -13,17 +13,16 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
----
 Upstream-Status: Pending
-
- docs/Makefile.am | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+---
+ docs/Makefile.am | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/docs/Makefile.am b/docs/Makefile.am
-index b20918a..47406eb 100644
+index 4b1bc4f..643ee66 100644
 --- a/docs/Makefile.am
 +++ b/docs/Makefile.am
-@@ -175,7 +175,7 @@
+@@ -184,7 +184,7 @@ gpinsetfigure.tex: no_figures
  	$(AM_V_GEN) touch $@
  
  gnuplot.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
@@ -32,8 +31,8 @@ index b20918a..47406eb 100644
  
  pdf: pdf_figures
  	$(MAKE) gnuplot.pdf
-@@ -255,7 +255,7 @@
-
+@@ -264,7 +264,7 @@ allterm-ja.h: $(CORETERM) $(LUA_HELP)
+ 
  gnuplot-ja.pdf: gnuplot-ja.doc title-ja.tex pdf_figures allterm-ja.h doc2tex$(EXEEXT)
  	iconv -f EUC-JP -t UTF-8 gnuplot-ja.doc > ja.doc
 -	./doc2tex$(EXEEXT) -figures -japanese ja.doc | sed 's/titlepag.tex/title-ja.tex/' > gnuplot-ja.tex
@@ -41,8 +40,7 @@ index b20918a..47406eb 100644
  	lualatex gnuplot-ja
  	lualatex gnuplot-ja
  	makeindex gnuplot-ja
-
-@@ -268,7 +268,7 @@ gnuplot.ps: gnuplot.dvi
+@@ -277,7 +277,7 @@ gnuplot-ja.pdf: gnuplot-ja.doc title-ja.tex pdf_figures allterm-ja.h doc2tex$(EX
  hlp: gnuplot.hlp
  
  gnuplot.hlp: doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc
@@ -51,7 +49,7 @@ index b20918a..47406eb 100644
  
  doc2hlp_SOURCES = doc2hlp.c termdoc.c
  
-@@ -276,14 +276,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
+@@ -285,14 +285,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
  gih: gnuplot.gih
  
  gnuplot.gih: doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc
@@ -68,7 +66,7 @@ index b20918a..47406eb 100644
  
  alldoc2gih_SOURCES = doc2gih.c termdoc.c
  alldoc2gih_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
-@@ -298,7 +298,7 @@ $(srcdir)/windows/wgnuplot.hhk
+@@ -307,7 +307,7 @@ $(srcdir)/windows/wgnuplot.hhk
  wxhelp/wgnuplot.hhc wxhelp/wgnuplot.hhk wxhelp/*.html windows/*.png
  
  wxhelp/wgnuplot.html: doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc 
@@ -77,80 +75,7 @@ index b20918a..47406eb 100644
  
  doc2wxhtml_SOURCES = windows/doc2html.c termdoc.c xref.c allterm.h
  doc2wxhtml_CPPFLAGS = -DALL_TERM_DOC -DWXHELP -I../src $(AM_CPPFLAGS)
-@@ -318,7 +318,7 @@
- 	$(AM_V_at) [ -d html ] || mkdir -p html
- 	$(AM_V_at) rm -f html/Overview.html html/Plotting_Styles.html html/Commands.html html/Terminals.html
- 	$(AM_V_at) rm -f html/NewFeatures.html
--	$(AM_V_GEN)./doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
-+	$(AM_V_GEN) doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
- 	$(AM_V_GEN) sort -k 3 html/index.hhk > html/index.html
- 
- svg_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
-@@ -372,7 +372,7 @@ install-info: gnuplot.info
- ipf: gnuplot.ipf
- 
- gnuplot.ipf: doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc
--	$(AM_V_GEN) ./doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ipf
-+	$(AM_V_GEN) doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ipf
- 
- doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
- 
-@@ -380,7 +380,7 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
- rtf: gnuplot.rtf
- 
- gnuplot.rtf: doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc
--	$(AM_V_GEN) ./doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rtf
-+	$(AM_V_GEN) doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rtf
- 
- doc2rtf_SOURCES = doc2rtf.c termdoc.c xref.c
- 
-@@ -386,7 +386,7 @@
- 
- # this is how to check the gnuplot.doc file
- check-local: checkdoc$(EXEEXT)
--	$(AM_V_at)./checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
-+	$(AM_V_at)checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
- 	if test $$? -eq 0; then \
-          echo "PASS: gnuplot.doc"; \
- 	else \
---- ./docs/Makefile.am.orig	2025-10-06 20:44:25.315270887 +0200
-+++ ./docs/Makefile.am	2025-10-06 21:22:31.287527296 +0200
-@@ -268,7 +268,7 @@
- hlp: gnuplot.hlp
- 
- gnuplot.hlp: doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc
--	$(AM_V_GEN)./doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.hlp
-+	$(AM_V_GEN)doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.hlp
- 
- doc2hlp_SOURCES = doc2hlp.c termdoc.c
- 
-@@ -276,14 +276,14 @@
- gih: gnuplot.gih
- 
- gnuplot.gih: doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc
--	$(AM_V_GEN)./doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.gih
-+	$(AM_V_GEN)doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.gih
- 
- doc2gih_SOURCES = doc2gih.c termdoc.c
- 
- # To include all terminals in the .gih file
- allgih: alldoc2gih$(EXEEXT) $(srcdir)/gnuplot.doc
- 	@echo "generate gnuplot.gih with all terminals"
--	$(AM_V_at)./alldoc2gih$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.gih
-+	$(AM_V_at)alldoc2gih$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.gih
- 
- alldoc2gih_SOURCES = doc2gih.c termdoc.c
- alldoc2gih_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
-@@ -298,7 +298,7 @@
- wxhelp/wgnuplot.hhc wxhelp/wgnuplot.hhk wxhelp/*.html windows/*.png
- 
- wxhelp/wgnuplot.html: doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc 
--	$(AM_V_GEN) ./doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc wxhelp/
-+	$(AM_V_GEN) doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc wxhelp/
- 
- doc2wxhtml_SOURCES = windows/doc2html.c termdoc.c xref.c allterm.h
- doc2wxhtml_CPPFLAGS = -DALL_TERM_DOC -DWXHELP -I../src $(AM_CPPFLAGS)
-@@ -318,7 +318,7 @@
+@@ -327,7 +327,7 @@ html: allterm.h doc2web$(EXEEXT) $(srcdir)/gnuplot.doc svg_figures webp_figures
  	$(AM_V_at) [ -d html ] || mkdir -p html
  	$(AM_V_at) rm -f html/Overview.html html/Plotting_Styles.html html/Commands.html html/Terminals.html
  	$(AM_V_at) rm -f html/NewFeatures.html
@@ -159,7 +84,7 @@ index b20918a..47406eb 100644
  	$(AM_V_GEN) sort -k 3 html/index.hhk > html/index.html
  
  svg_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
-@@ -372,7 +372,7 @@
+@@ -381,7 +381,7 @@ install-info: gnuplot.info
  ipf: gnuplot.ipf
  
  gnuplot.ipf: doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc
@@ -168,7 +93,7 @@ index b20918a..47406eb 100644
  
  doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
  
-@@ -380,13 +380,13 @@
+@@ -389,13 +389,13 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
  rtf: gnuplot.rtf
  
  gnuplot.rtf: doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc
