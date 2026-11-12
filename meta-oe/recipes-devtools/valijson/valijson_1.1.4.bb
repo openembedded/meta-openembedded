@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
 
 SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https;tag=v${PV}"
-SRCREV = "5eac4b66f20b2c189ae40281c29e71cf39a958ec"
+SRCREV = "de232f2ac3798a3c8b2cc5f3b7ebf737e1c0dbd1"
 
 
 inherit cmake
