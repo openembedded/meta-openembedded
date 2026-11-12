@@ -13,9 +13,11 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  Cargo.lock | 4 ++++
  1 file changed, 4 insertions(+)
 
+diff --git a/Cargo.lock b/Cargo.lock
+index a621b2f..bc94b5a 100644
 --- a/Cargo.lock
 +++ b/Cargo.lock
-@@ -1629,6 +1629,7 @@
+@@ -1625,6 +1625,7 @@ dependencies = [
   "notify 9.0.0-rc.4",
   "parking_lot",
   "pathdiff",
@@ -23,15 +25,15 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
   "rayon",
   "regex",
   "regex-syntax",
-@@ -3732,6 +3733,7 @@
-  "os_pipe",
+@@ -3665,6 +3666,7 @@ dependencies = [
+  "parse_datetime",
   "pathdiff",
   "percent-encoding",
 + "portable-atomic",
   "print-positions",
-  "procfs",
   "pure-rust-locales",
-@@ -3812,6 +3814,7 @@
+  "quick-xml 0.42.0",
+@@ -3742,6 +3744,7 @@ dependencies = [
   "nu-protocol",
   "nu-utils",
   "parking_lot",
@@ -39,8 +41,8 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
   "serde",
   "serde_json",
   "windows-sys 0.61.2",
-@@ -5512,6 +5515,7 @@
-  "indexmap",
+@@ -5381,6 +5384,7 @@ dependencies = [
+  "libc",
   "pastey",
   "pin-project-lite",
 + "portable-atomic",

@@ -22,9 +22,11 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  src/state.rs        | 2 +-
  4 files changed, 15 insertions(+), 2 deletions(-)
 
+diff --git a/Cargo.toml b/Cargo.toml
+index 61635bf..f2324dc 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
-@@ -101,6 +101,11 @@
+@@ -101,6 +101,11 @@ default-features = false
  [dev-dependencies.typetag]
  version = "0.2"
  
@@ -34,11 +36,13 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +default-features = false
 +
  [target."cfg(unix)".dependencies.libc]
- version = "0.2.185"
+ version = "0.2.189"
  
+diff --git a/src/dap/protocol.rs b/src/dap/protocol.rs
+index ce4eee8..cec1ef6 100644
 --- a/src/dap/protocol.rs
 +++ b/src/dap/protocol.rs
-@@ -9,7 +9,9 @@
+@@ -9,7 +9,9 @@ use serde::{Deserialize, Serialize};
  use serde_json::Value as Json;
  use std::io::{BufRead, Write};
  use std::sync::Arc;
@@ -49,6 +53,8 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  
  #[derive(Debug, Deserialize)]
  pub struct Request {
+diff --git a/src/lib.rs b/src/lib.rs
+index 7139b3d..21b55dd 100644
 --- a/src/lib.rs
 +++ b/src/lib.rs
 @@ -35,6 +35,12 @@
@@ -64,9 +70,11 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  mod debugger;
  mod engine;
  mod eval_scratch;
+diff --git a/src/state.rs b/src/state.rs
+index e17e4e6..f08e7fa 100644
 --- a/src/state.rs
 +++ b/src/state.rs
-@@ -425,7 +425,7 @@
+@@ -425,7 +425,7 @@ pub(crate) struct UiReply {
  pub(crate) struct UiBridge {
      pub replies: Mutex<HashMap<u64, UiReply>>,
      pub cv: Condvar,
