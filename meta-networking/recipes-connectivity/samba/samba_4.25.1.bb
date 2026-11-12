@@ -28,10 +28,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
            file://0007-Deleted-settiong-of-python-to-fix-the-install-confli.patch \
-           file://0001-lib-replace-Implement-memset_explicit.patch \
-           file://0002-lib-replace-Add-test-for-memset_explicit.patch \
-           file://0003-Replace-memset_s-with-memset_explicit.patch \
-           file://0004-lib-replace-Remove-memset_s.patch \
            "
 
 SRC_URI:append:libc-musl = " \
@@ -39,7 +35,7 @@ SRC_URI:append:libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
            "
 
-SRC_URI[sha256sum] = "089fdeeaf83593d8f9a16847a86b6cad2fc90f7a893eb8d9d5f509bbecadc0d4"
+SRC_URI[sha256sum] = "7f367545bca69aa96897628f82f0f04d4b66b3bcb36cb978b9bb952c4b4c428d"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>\d+\.\d+(\.\d+)+).tar.gz"
 
