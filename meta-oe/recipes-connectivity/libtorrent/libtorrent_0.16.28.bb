@@ -8,7 +8,7 @@ DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
 
 SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV} \
            "
-SRCREV = "47114f095b3476ed4ccd8dbee6f027f5905adce7"
+SRCREV = "392030e0fddbe4e423d059d9322382cf44aaaaf6"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
