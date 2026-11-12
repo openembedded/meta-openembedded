@@ -13,14 +13,14 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- configure.ac | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ configure.ac | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index cdd831a..fdd192b 100644
+index a474af0..b88e525 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1061,11 +1061,15 @@
+@@ -1070,11 +1070,15 @@ if test "${enable_qt}" = yes ; then
    if test "x${with_qt}" != "xqt4"; then
      pkg_failed="not_tried"
      if test "x${with_qt}" != "xqt5"; then
@@ -37,7 +37,7 @@ index cdd831a..fdd192b 100644
        if test "x${QT6LOC}" != "x"; then
            UIC=${QT6LOC}/uic
            MOC=${QT6LOC}/moc
-@@ -1075,7 +1079,7 @@
+@@ -1084,7 +1088,7 @@ if test "${enable_qt}" = yes ; then
            MOC=moc-qt6
            RCC=rcc-qt6
        fi
@@ -46,7 +46,7 @@ index cdd831a..fdd192b 100644
        if test "x${QT6BIN}" != "x"; then
            LRELEASE=${QT6BIN}/lrelease
        elif test "x${LRELEASE}" = "x"; then
-@@ -1086,10 +1090,14 @@
+@@ -1095,10 +1099,14 @@ if test "${enable_qt}" = yes ; then
        AC_MSG_RESULT([The Qt terminal will use Qt6.])
        QTVER="6"
      else
