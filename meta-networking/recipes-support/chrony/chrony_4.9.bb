@@ -36,7 +36,7 @@ SRC_URI = "https://chrony-project.org/releases/chrony-${PV}.tar.gz \
     file://arm_eabi.patch \
 "
 
-SRC_URI[sha256sum] = "33ea8eb2a4daeaa506e8fcafd5d6d89027ed6f2f0609645c6f149b560d301706"
+SRC_URI[sha256sum] = "4924c6f530105bcd5b9e9e33c48a2ae1bfd889222c8480bc41601110efc864d0"
 
 DEPENDS = "pps-tools"
 

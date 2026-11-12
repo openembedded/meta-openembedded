@@ -27,18 +27,18 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 9 insertions(+), 6 deletions(-)
 
 diff --git a/sys_linux.c b/sys_linux.c
-index 8373e25..47b4459 100644
+index 1815398..2a2e104 100644
 --- a/sys_linux.c
 +++ b/sys_linux.c
-@@ -490,7 +490,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -431,7 +431,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+ #ifdef __NR_clock_settime64
+     SCMP_SYS(clock_settime64),
  #endif
-     SCMP_SYS(gettimeofday),
-     SCMP_SYS(settimeofday),
 -    SCMP_SYS(time),
  
      /* Process */
      SCMP_SYS(clone),
-@@ -500,7 +499,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -441,7 +440,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
      SCMP_SYS(exit),
      SCMP_SYS(exit_group),
      SCMP_SYS(getpid),
@@ -46,7 +46,7 @@ index 8373e25..47b4459 100644
      SCMP_SYS(getuid),
      SCMP_SYS(getuid32),
  #ifdef __NR_membarrier
-@@ -520,7 +518,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -461,7 +459,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
      /* Memory */
      SCMP_SYS(brk),
      SCMP_SYS(madvise),
@@ -54,7 +54,7 @@ index 8373e25..47b4459 100644
      SCMP_SYS(mmap2),
      SCMP_SYS(mprotect),
      SCMP_SYS(mremap),
-@@ -580,8 +577,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -521,8 +518,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
      SCMP_SYS(sendmsg),
      SCMP_SYS(sendto),
      SCMP_SYS(shutdown),
@@ -63,7 +63,7 @@ index 8373e25..47b4459 100644
  
      /* General I/O */
      SCMP_SYS(_newselect),
-@@ -605,7 +600,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -547,7 +542,6 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
  #ifdef __NR_futex_time64
      SCMP_SYS(futex_time64),
  #endif
@@ -71,7 +71,7 @@ index 8373e25..47b4459 100644
      SCMP_SYS(set_robust_list),
      SCMP_SYS(write),
      SCMP_SYS(writev),
-@@ -614,6 +608,15 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
+@@ -556,6 +550,15 @@ SYS_Linux_EnableSystemCallFilter(int level, SYS_ProcessContext context)
      SCMP_SYS(getrandom),
      SCMP_SYS(sysinfo),
      SCMP_SYS(uname),
