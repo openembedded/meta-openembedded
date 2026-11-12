@@ -22,11 +22,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=570a9b3749dd0463a1778803b12a6dce"
 # unbuildable "Nothing PROVIDES 'ffmpeg'" dependency.
 LICENSE_FLAGS = "commercial"
 
-SRCREV = "41f6a645068483470267271e1d09966ca3b9f413"
+SRCREV = "b0841e8c4d156b8403dc1876c4cbd9011eb583f3"
 SRC_URI = " \
     git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https;tag=v${PV} \
-    file://0001-opengl-context-require-swap_buffers-param-for-FenceS.patch \
-    file://0002-hwdec_drmprime_overlay-make-the-framebuffer-the-whole-frame.patch \
 "
 
 inherit meson pkgconfig mime-xdg
