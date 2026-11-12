@@ -8,11 +8,9 @@ DEPENDS = "libxml2 glib-2.0 swig python3"
 
 inherit autotools pkgconfig python3native python3targetconfig ptest
 
-SRCREV = "cf5897a71ea412ea2aeb1e2f6b5ea74d4fabfd8c"
+SRCREV = "678b1a34693b86ae1787fa470dcb7203ffd0ef3f"
 SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master;tag=${PV} \
            file://run-ptest \
-           file://0001-test-fix-operator-error.patch \
-           file://0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch \
 "
 
 CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
@@ -44,7 +42,9 @@ do_install_ptest(){
     install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
     install ${S}/test/*.test ${D}${PTEST_PATH}/test/
     install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/test/test/.libs/
-    install -m 0755 ${B}/test/.libs/integer_set_test ${D}${PTEST_PATH}/test/test/
+    for t in integer_set_test date_val_test xml_behavior_test bplist_behavior_test; do
+        install -m 0755 ${B}/test/.libs/$t ${D}${PTEST_PATH}/test/test/
+    done
     for t in $(find ${B}/test -type f -name 'plist*' \! -name '*.o'); do
         install -m 0755 $t ${D}${PTEST_PATH}/test/test/
     done
