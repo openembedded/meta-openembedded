@@ -14,11 +14,11 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 1bb1a52..4cebbd2 100644
+index 770c885..2af3b60 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
- AC_INIT(.autofs-5.1.9)
+ AC_INIT(.autofs-5.2.0)
  
  # for pkg-config macros
 -m4_include([/usr/share/aclocal/pkg.m4])
@@ -26,6 +26,3 @@ index 1bb1a52..4cebbd2 100644
  
  #
  # autofs installs by default in /usr
--- 
-2.25.1
-

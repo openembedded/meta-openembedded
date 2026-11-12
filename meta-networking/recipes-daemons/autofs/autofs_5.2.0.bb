@@ -19,9 +19,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://0007-Avoid-conflicts-between-sys-mount.h-and-linux-mount..patch \
            file://0008-include-libgen.h-for-basename.patch \
            file://0009-hash.h-include-sys-reg.h-instead-of-bits-reg.h.patch \
-           file://0010-autofs-5.1.9-Fix-incompatible-function-pointer-types.patch \
            "
-SRC_URI[sha256sum] = "46c30b763ef896f4c4a6df6d62aaaef7afc410e0b7f50d52dbfc6cf728cacd4f"
+SRC_URI[sha256sum] = "966bcacb571a7000a4d2afda0db5f7af84e4ef2444f04d7fc17898f1d2409c6b"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
