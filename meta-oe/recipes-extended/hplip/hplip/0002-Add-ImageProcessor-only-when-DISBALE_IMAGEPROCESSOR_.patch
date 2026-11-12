@@ -11,13 +11,13 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 5f75759..73421b1 100644
+index 778ef9d..6280bfa 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -597,7 +597,11 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilter.cpp prnt/hpcups/HPCupsFilter.h prnt/hp
- 	prnt/hpcups/ImageProcessor.h
- 
- hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS)
+@@ -601,7 +601,11 @@ hpcups_SOURCES = prnt/hpcups/HPCupsFilter.cpp prnt/hpcups/HPCupsFilter.h prnt/hp
+ hpcups_CPPFLAGS = -I$(srcdir)/prnt/hpcups -I$(srcdir)/prnt -I$(srcdir)/common -D_GNU_SOURCE
+ hpcups_CXXFLAGS = $(APDK_ENDIAN_FLAG) $(DBUS_CFLAGS) $(AM_CXXFLAGS)
+ hpcups_LDFLAGS = $(AM_LDFLAGS)
 -hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lImageProcessor -lcups -lcupsimage -lz $(DBUS_LIBS)
 +hpcups_LDADD = -L./prnt/hpcups/ -ljpeg -ldl -lcups -lcupsimage -lz $(DBUS_LIBS)
 +if !DISBALE_IMAGEPROCESSOR_BUILD
@@ -27,7 +27,7 @@ index 5f75759..73421b1 100644
  #else
  #hpcupsdir = $(cupsfilterdir)
  #hpcups_PROGRAMS = hpcups
-@@ -687,6 +692,7 @@
+@@ -703,6 +707,7 @@ endif #HPLIP_CLASS_DRIVER
  
  install-data-hook:
  if HPLIP_BUILD
@@ -35,7 +35,7 @@ index 5f75759..73421b1 100644
  	if [ \( "$(UNAME)" = "x86_64" -a  -d "$(libdir)/" \) ]; then \
  		cp prnt/hpcups/libImageProcessor-x86_64.so $(libdir)/ ; \
  		chmod 775 $(libdir)/libImageProcessor-x86_64.so ; \
-@@ -697,6 +703,7 @@
+@@ -713,6 +718,7 @@ if HPLIP_BUILD
  		chmod 775 $(libdir)/libImageProcessor-x86_32.so ; \
  		ln -sf $(libdir)/libImageProcessor-x86_32.so $(libdir)/libImageProcessor.so ; \
  	fi
@@ -43,6 +43,3 @@ index 5f75759..73421b1 100644
  	if [ -d "/usr/share/ipp-usb/quirks/" ]; then \
  		echo "ipp-usb directory exists"; \
  		cp prnt/ipp-usb/HPLIP.conf /usr/share/ipp-usb/quirks/ ; \
--- 
-2.37.3
-
