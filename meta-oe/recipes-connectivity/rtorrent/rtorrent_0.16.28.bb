@@ -8,7 +8,7 @@ DEPENDS = "autoconf-archive libsigc++-2.0 curl cppunit libtool libtorrent ncurse
 SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https;tag=v${PV} \
            "
 
-SRCREV = "cab23f12a4ecf43db046ed813bed3d835416338e"
+SRCREV = "0c23d278a7838402d4cec9689bf71e051332be67"
 
 inherit autotools pkgconfig
 
