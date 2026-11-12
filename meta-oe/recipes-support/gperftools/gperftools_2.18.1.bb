@@ -13,12 +13,6 @@ DEPENDS:append:libc-musl = " libucontext"
 SRCREV = "d837a42788ba591d5d791c3b686f2738e7a93562"
 SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https;tag=gperftools-${PV}"
 
-SRC_URI:append:libc-musl = " \
-        file://ppc-musl.patch \
-        file://0002-src-base-elf_mem_image.cc-fix-build-for-musl.patch \
-        file://0003-Makefile.am-disable-building-noinst-tests-for-musl.patch \
-        "
-
 inherit autotools
 
 
@@ -36,6 +30,8 @@ COMPATIBLE_HOST:riscv32 = "null"
 ARM_INSTRUCTION_SET:armv5 = "arm"
 ARM_INSTRUCTION_SET:toolchain-clang:arm = "arm"
 
+# Test programs fail to link against libucontext on musl + ppc64
+EXTRA_OECONF:append:libc-musl = " --disable-tests"
 EXTRA_OECONF:append:libc-musl:powerpc64le = " --disable-cpu-profiler"
 EXTRA_OECONF:append:libc-musl:powerpc = " --disable-cpu-profiler"
 PACKAGECONFIG ?= "libunwind static"
