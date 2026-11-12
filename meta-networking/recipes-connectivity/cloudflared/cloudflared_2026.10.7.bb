@@ -6,12 +6,14 @@ SECTION = "networking"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+require ${BPN}-licenses.inc
 
 SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX} \
            file://cloudflared.service \
            file://default \
            "
-SRCREV = "d2a87e9b93456ad7f82417400f4209d513668487"
+SRCREV = "872b241f94871665c1c157adefcf90c11f0ead96"
+require ${BPN}-go-mods.inc
 
 GO_IMPORT = "github.com/cloudflare/cloudflared"
 GO_INSTALL = "${GO_IMPORT}/cmd/cloudflared"
@@ -19,7 +21,7 @@ GO_LINKSHARED = ""
 SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
 GO_EXTRA_LDFLAGS = "-X main.Version=${PV}-${SRCREV_SHORT}"
 
-inherit go-mod systemd
+inherit go-mod go-mod-update-modules systemd
 
 SYSTEMD_SERVICE:${PN} = "cloudflared.service"
 
