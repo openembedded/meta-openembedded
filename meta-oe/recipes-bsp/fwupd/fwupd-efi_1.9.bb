@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main;tag=${PV}"
 
-SRCREV = "8572a93e81e7110b88445d1907fdd73982557347"
+SRCREV = "ffeaa10aed8e91f5b8feaefc51faf71b3d034fd3"
 
 DEPENDS = "gnu-efi python3-pefile-native"
 
