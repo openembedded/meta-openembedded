@@ -35,6 +35,10 @@ PACKAGECONFIG[postgresql] = "--with-pgsql-includedir=${STAGING_INCDIR}/postgresq
 EXTRA_OECONF += "--disable-static \
 	         --disable-rpath \
 	        "
+
+# Use the target libdir in pgpool_setup instead of the recipe sysroot one
+EXTRA_OEMAKE += "PGSQL_LIB_DIR=${libdir}"
+
 FILES:${PN} += "${datadir}/pgpool-II/ "
 
 do_configure:append() {
