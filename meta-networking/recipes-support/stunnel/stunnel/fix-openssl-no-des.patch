@@ -17,10 +17,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
  2 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/src/common.h b/src/common.h
-index ada7ff7..8484144 100644
+index 8c441ec..48d9c31 100644
 --- a/src/common.h
 +++ b/src/common.h
-@@ -489,7 +489,9 @@ extern char *sys_errlist[];
+@@ -537,7 +537,9 @@ extern char *sys_errlist[];
  #ifndef OPENSSL_NO_MD4
  #include <openssl/md4.h>
  #endif /* !defined(OPENSSL_NO_MD4) */
@@ -31,19 +31,19 @@ index ada7ff7..8484144 100644
  #include <openssl/dh.h>
  #endif /* !defined(OPENSSL_NO_DH) */
 diff --git a/src/protocol.c b/src/protocol.c
-index cddc381..ae0f374 100644
+index 7a2db00..dcdcbf6 100644
 --- a/src/protocol.c
 +++ b/src/protocol.c
-@@ -82,7 +82,7 @@ NOEXPORT void ldap_client_middle(CLI *);
- NOEXPORT void connect_server_early(CLI *);
- NOEXPORT const char *connect_client_init(SERVICE_OPTIONS *);
- NOEXPORT void connect_client_middle(CLI *);
+@@ -86,7 +86,7 @@ NOEXPORT void ldap_client_middle(CLI *c);
+ NOEXPORT void connect_server_early(CLI *c);
+ NOEXPORT const char *connect_client_init(SERVICE_OPTIONS *opt);
+ NOEXPORT void connect_client_middle(CLI *c);
 -#ifndef OPENSSL_NO_MD4
 +#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
- NOEXPORT void ntlm(CLI *);
+ NOEXPORT void ntlm(CLI *c);
  NOEXPORT char *ntlm1(void);
- NOEXPORT char *ntlm3(char *, char *, char *, char *);
-@@ -1392,7 +1392,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
+ NOEXPORT char *ntlm3(char *domain, char *user, char *password, char *phase2);
+@@ -1472,7 +1472,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
      fd_printf(c, c->remote_fd.fd, "Host: %s", c->opt->protocol_host);
      if(c->opt->protocol_username && c->opt->protocol_password) {
          if(!strcasecmp(c->opt->protocol_authentication, "ntlm")) {
@@ -52,7 +52,7 @@ index cddc381..ae0f374 100644
              ntlm(c);
  #else
              s_log(LOG_ERR, "NTLM authentication is not available");
-@@ -1435,7 +1435,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
+@@ -1515,7 +1515,7 @@ NOEXPORT void connect_client_middle(CLI *c) {
      str_free(line);
  }
  
