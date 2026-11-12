@@ -13,11 +13,12 @@ DEPENDS:append:class-target = " hwloc"
 PE = "1"
 
 BRANCH = "onetbb_2023"
-SRCREV = "3046c8b0c29df995980003ea24f4d78c80ec0c8d"
+SRCREV = "41158a44ab3fb7ac5df7f99ef82626c87607447f"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
            file://run-ptest \
            file://0001-test-Skip-conformance_resumable_tasks-when-resumable.patch \
            file://0002-test-malloc_overload-Only-use-glibc-malloc-extension.patch \
+           file://0001-tcm-test-Do-not-hardcode-the-build-directory-as-RPATH.patch \
           "
 
 LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--undefined-version', '', d)}"
@@ -79,12 +80,14 @@ do_install_ptest() {
 do_install_ptest:append:toolchain-gcc() {
     cp -rf ${B}/gnu* ${D}${PTEST_PATH}
     rm -rf ${D}${PTEST_PATH}/gnu*/libtbb*
+    rm -rf ${D}${PTEST_PATH}/gnu*/libtcm*
     rm -rf ${D}${PTEST_PATH}/gnu*/*.sh
 }
 
 do_install_ptest:append:toolchain-clang() {
     cp -rf ${B}/clang* ${D}${PTEST_PATH}
     rm -rf ${D}${PTEST_PATH}/clang*/libtbb*
+    rm -rf ${D}${PTEST_PATH}/clang*/libtcm*
     rm -rf ${D}${PTEST_PATH}/clang*/*.sh
 }
 
