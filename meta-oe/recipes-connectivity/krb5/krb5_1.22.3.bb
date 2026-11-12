@@ -14,18 +14,15 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=c1deab93872560046ba4411e77050d24"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=c6db3fa5ceaf04e691eece16e60a9ef2"
 
 inherit autotools-brokensep binconfig perlnative systemd update-rc.d pkgconfig
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
-           file://fix-strchr-conformance-to-C23.patch;striplevel=2 \
            file://crosscompile_nm.patch \
            file://0001-configure.ac-replace-K5_AC_INIT-with-explicit-AC_INI.patch;striplevel=2 \
-           file://0001-Improve-future-OpenSSL-compatibility.patch;striplevel=2 \
-           file://0002-Remove-OpenSSL-1.0-support.patch;striplevel=2 \
            file://0003-k5tls-fix-remaining-const-qualifiers-for-OpenSSL-4.0.patch;striplevel=2 \
            file://etc/init.d/krb5-kdc \
            file://etc/init.d/krb5-admin-server \
@@ -35,7 +32,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://krb5-admin-server.service \
 "
 
-SRC_URI[sha256sum] = "3243ffbc8ea4d4ac22ddc7dd2a1dc54c57874c40648b60ff97009763554eaf13"
+SRC_URI[sha256sum] = "fe90af8441ad9fa9b064b8e53077cefb782a96f8a68276b031dc54af1789ff0b"
 
 CVE_PRODUCT = "kerberos"
 CVE_VERSION = "5-${PV}"

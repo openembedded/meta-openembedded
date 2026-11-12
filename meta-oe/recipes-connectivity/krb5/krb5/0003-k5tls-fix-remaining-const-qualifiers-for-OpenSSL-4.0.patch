@@ -14,20 +14,14 @@ Note: Upstream fixed this by removing OpenSSL 1.0 support entirely
 these additional const qualifiers.
 
 Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
----
- plugins/tls/k5tls/openssl.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/src/plugins/tls/k5tls/openssl.c b/src/plugins/tls/k5tls/openssl.c
-index bbfa37f..6efe613 100644
+Rebased to 1.22.3, which already constifies the function parameters.
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
 --- a/src/plugins/tls/k5tls/openssl.c
 +++ b/src/plugins/tls/k5tls/openssl.c
-@@ -146,10 +146,10 @@ domain_match(const char *presented, size_t plen, const char *expected)
- 
- /* Fetch the list of subjectAltNames from a certificate. */
- static GENERAL_NAMES *
--get_cert_sans(X509 *x)
-+get_cert_sans(const X509 *x)
+@@ -162,7 +162,7 @@
+ get_cert_sans(const X509 *x)
  {
      int ext;
 -    X509_EXTENSION *san_ext;
@@ -35,33 +29,12 @@ index bbfa37f..6efe613 100644
  
      ext = X509_get_ext_by_NID(x, NID_subject_alt_name, -1);
      if (ext < 0)
-@@ -163,9 +163,9 @@ get_cert_sans(X509 *x)
- /* Fetch a CN value from the subjct name field, returning its length, or -1 if
-  * there is no subject name or it contains no CN value. */
+@@ -178,7 +178,7 @@
  static int
--get_cert_cn(X509 *x, char *buf, size_t bufsize)
-+get_cert_cn(const X509 *x, char *buf, size_t bufsize)
+ get_cert_cn(const X509 *x, char *buf, size_t bufsize)
  {
 -    X509_NAME *name;
 +    const X509_NAME *name;
  
      name = X509_get_subject_name(x);
      if (name == NULL)
-@@ -175,7 +175,7 @@ get_cert_cn(X509 *x, char *buf, size_t bufsize)
- 
- /* Return true if text matches any of the addresses we can recover from x. */
- static krb5_boolean
--check_cert_address(X509 *x, const char *text)
-+check_cert_address(const X509 *x, const char *text)
- {
-     char buf[1024];
-     GENERAL_NAMES *sans;
-@@ -234,7 +234,7 @@ check_cert_address(X509 *x, const char *text)
- 
- /* Return true if expected matches any of the names we can recover from x. */
- static krb5_boolean
--check_cert_servername(X509 *x, const char *expected)
-+check_cert_servername(const X509 *x, const char *expected)
- {
-     char buf[1024];
-     GENERAL_NAMES *sans;
