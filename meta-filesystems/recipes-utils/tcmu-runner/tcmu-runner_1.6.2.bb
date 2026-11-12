@@ -1,5 +1,5 @@
 SUMMARY = "A daemon that handles the userspace side of the LIO TCM-User backstore"
-LICENSE = "Apache-2.0 OR LGPLv2.1"
+LICENSE = "Apache-2.0 OR LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPLv2.1;md5=a7ef827a98fa240d37910ac4e8ce3f53 \
 	file://LICENSE.Apache2;md5=6c4db32a2fa8717faffa1d4f10136f47 \
