@@ -1,0 +1,41 @@
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] configure: Only try the OpenBSD libunwind location on OpenBSD
+
+When libunwind.h is not found, configure retries with
+-I/usr/include/c++/v1, which is where OpenBSD keeps it. On other
+systems this only makes the compiler look at a host directory. When
+cross-compiling with a gcc that has -Wpoison-system-directories, that
+is reported as "include location /usr/include/c++/v1 is unsafe for
+cross-compilation".
+
+Limit the fallback to OpenBSD hosts.
+
+Upstream-Status: Submitted [https://github.com/FRRouting/frr/pull/24383]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ configure.ac | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index 8778c24..cbd0767 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2629,6 +2629,8 @@ if test "$enable_backtrace" != "no" ; then
+           backtrace_ok=true
+         ])
+       ], [
++        case "$host_os" in
++        openbsd*)
+         # OpenBSD. no idea why the header file is under C++, but it is
+         ac_cflags_save="$CFLAGS"
+         CFLAGS="$CFLAGS -I/usr/include/c++/v1"
+@@ -2652,6 +2654,8 @@ if test "$enable_backtrace" != "no" ; then
+ 	  LIBS="$ac_libs_save"
+         ])
+         CFLAGS="$ac_cflags_save"
++        ;;
++        esac
+       ])
+     ])
+     if test "$enable_backtrace" = "libunwind" -a "$backtrace_ok" = "false"; then

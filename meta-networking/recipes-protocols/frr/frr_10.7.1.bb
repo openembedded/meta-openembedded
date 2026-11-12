@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
 SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe.utils.trim_version('${PV}', 2)};tag=frr-${PV} \
            file://frr.pam \
            file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
+           file://0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch \
            "
 SRCREV = "f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1"
 
