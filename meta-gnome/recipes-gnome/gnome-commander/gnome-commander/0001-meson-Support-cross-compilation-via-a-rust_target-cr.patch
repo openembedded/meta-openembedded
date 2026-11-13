@@ -1,61 +1,60 @@
 From 5547db8b4824facd025ae0df54bef300cb92c501 Mon Sep 17 00:00:00 2001
 From: Markus Volk <f_l_k@t-online.de>
-Date: Tue, 20 Oct 2026 21:41:48 +0200
+Date: Fri, 13 Nov 2026 09:30:00 +0100
 Subject: [PATCH] meson: Support cross-compilation via a rust_target cross
  property
 
 cargo is always invoked without --target and the binary is copied from
-the native artifact layout (src/<profile>/), so gnome-commander cannot
+the native artifact layout (gnome-commander/<profile>/), so it cannot
 be cross-compiled. Read the rust target triple from the cross file's
 [properties] (rust_target); when set, pass it as --target and read the
 binary from the per-target subdirectory cargo writes to.
 
-RUSTFLAGS is set in the cargo environment and replaces any RUSTFLAGS
-from the caller, which drops the flags a cross build needs (e.g. the
-target sysroot). Prepend the optional rust_flags cross property.
+cargo does not get the RUSTFLAGS a cross build needs (e.g. the target
+sysroot) from the caller; pass the optional rust_flags cross property.
 
 When neither property is set the build is unchanged.
 
 AI-Generated: Uses Claude Code (Claude Opus 5.5)
 Upstream-Status: Pending
 ---
- src/meson.build | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ gnome-commander/meson.build | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/src/meson.build b/src/meson.build
-index a81a723..b551583 100644
---- a/src/meson.build
-+++ b/src/meson.build
-@@ -23,6 +23,14 @@ cargo_options = [
-   '--target-dir', meson.project_build_root() / 'src',
+--- a/gnome-commander/meson.build
++++ b/gnome-commander/meson.build
+@@ -11,6 +11,14 @@
+   '--target-dir', meson.project_build_root() / 'gnome-commander',
  ]
  
 +cargo_build_target = meson.get_external_property('rust_target', '')
 +if cargo_build_target != ''
 +  cargo_options += [ '--target', cargo_build_target ]
-+  cargo_artifact_dir = 'src' / cargo_build_target
++  cargo_artifact_dir = 'gnome-commander' / cargo_build_target
 +else
-+  cargo_artifact_dir = 'src'
++  cargo_artifact_dir = 'gnome-commander'
 +endif
 +
  if profile == 'debug'
    rust_target = 'debug'
    message('Building in debug mode')
-@@ -34,7 +42,8 @@ endif
+@@ -26,6 +34,11 @@
+   'GLOBAL_PLUGIN_DIR=' + plugin_dir,
+ ]
  
- cargo_env = [
-   'CARGO_HOME=' + meson.project_build_root() / 'cargo-home',
--  'RUSTFLAGS=-L ' + (meson.project_build_root() / 'src')
-+  'RUSTFLAGS=' + meson.get_external_property('rust_flags', '')
-+        + ' -L ' + (meson.project_build_root() / 'src')
-         + ' -L ' + (meson.project_build_root() / 'libgcmd')
-         + ' -lgcmd'
-         + ' -C link-arg=-Wl,-rpath=' + rpath,
-@@ -59,7 +68,7 @@ commander = custom_target(
++cargo_rust_flags = meson.get_external_property('rust_flags', '')
++if cargo_rust_flags != ''
++  cargo_env += [ 'RUSTFLAGS=' + cargo_rust_flags ]
++endif
++
+ libgmcddialogs_dep = declare_dependency(
+   include_directories: [include_directories('.')],
+ )
+@@ -44,7 +57,7 @@
      cargo_env,
      cargo, 'build', cargo_options,
      '&&',
--    'cp', 'src' / rust_target / meson.project_name(), '@OUTPUT@',
+-    'cp', 'gnome-commander' / rust_target / meson.project_name(), '@OUTPUT@',
 +    'cp', cargo_artifact_dir / rust_target / meson.project_name(), '@OUTPUT@',
    ]
  )

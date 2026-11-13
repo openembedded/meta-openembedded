@@ -15,18 +15,14 @@ DEPENDS += " \
     vte \
 "
 
-CXXFLAGS += "-D_LIBCPP_ENABLE_CXX17_REMOVED_AUTO_PTR"
-
 inherit cargo_common cargo-update-recipe-crates gnomebase itstool gettext gnome-help features_check meson gtk-icon-cache mime-xdg gobject-introspection
 
 REQUIRED_DISTRO_FEATURES = "opengl gobject-introspection-data"
 
 GIR_MESON_OPTION = ""
 
-SRC_URI[archive.sha256sum] = "e51178f3256de45324ffd928a4a144fa859a865662bf295129f0188d8d243b57"
-SRC_URI += "file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch \
-            file://0002-weak_ref-Use-a-Mutex-for-the-object-id-counter.patch \
-"
+SRC_URI[archive.sha256sum] = "2b2d091bec52345dab27d72b04828f89a134f946bc0a9cbdb3a2b0d055a5e032"
+SRC_URI += "file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch"
 
 require ${BPN}-crates.inc
 
@@ -48,20 +44,8 @@ do_compile:prepend() {
 	install -m 0644 ${CARGO_HOME}/config.toml ${B}/cargo-home/config.toml
 }
 
-do_install:append() {
-	chrpath --delete ${D}${bindir}/gnome-commander
-}
-
 export CARGO_NET_OFFLINE = "1"
 export CARGO_BUILD_JOBS = "${@oe.utils.cpu_count()}"
 export CARGO_PROFILE_RELEASE_STRIP = "false"
 
-PACKAGECONFIG ??= "exiv2 taglib libgsf poppler"
-PACKAGECONFIG[exiv2] = "-Dexiv2=enabled,-Dexiv2=disabled,exiv2"
-PACKAGECONFIG[taglib] = "-Dtaglib=enabled,-Dtaglib=disabled,taglib"
-PACKAGECONFIG[libgsf] = "-Dlibgsf=enabled,-Dlibgsf=disabled,libgsf"
-PACKAGECONFIG[poppler] = "-Dpoppler=enabled,-Dpoppler=disabled,poppler"
-
-FILES_SOLIBSDEV = ""
-FILES:${PN} += "${libdir}/libgcmd.so ${datadir}/metainfo"
-INSANE_SKIP:${PN} += "dev-so"
+FILES:${PN} += "${datadir}/metainfo"
