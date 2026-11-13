@@ -1,0 +1,34 @@
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] misc: Use autofs_strerror_r() with non-glibc C libraries
+
+The open/close on exec functions moved to lib/misc.c expect the GNU
+strerror_r() that returns a char pointer. Unlike the rest of autofs,
+misc.c does not include automount.h, which maps strerror_r() to
+autofs_strerror_r() when not building with glibc, so the build fails with
+musl:
+
+  misc.c:96:8: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Wint-conversion]
+
+Do the same mapping in misc.c.
+
+Upstream-Status: Submitted [https://lore.kernel.org/autofs/20261113043743.2721837-1-raj.khem@gmail.com/]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ lib/misc.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+--- a/lib/misc.c
++++ b/lib/misc.c
+@@ -30,6 +30,11 @@
+ #include "log.h"
+ #include "misc.h"
+ 
++#ifndef __GLIBC__
++# define strerror_r(N,B,S) autofs_strerror_r(N,B,S)
++char *autofs_strerror_r(int errnum, char *buf, size_t buflen);  /* GNU */
++#endif
++
+ #define MAX_ERR_BUF	128
+ 
+ static pthread_mutex_t open_mutex = PTHREAD_MUTEX_INITIALIZER;
