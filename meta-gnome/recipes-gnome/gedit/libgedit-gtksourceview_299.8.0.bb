@@ -3,12 +3,12 @@ SECTION = "gnome"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1-or-later.txt;md5=310c7c93cf5181c6b0cc8229a1f3c6f6"
 
-DEPENDS = "glib-2.0 gtk+3 libxml2"
+DEPENDS = "glib-2.0 gtk+3 libgedit-amtk libgedit-gfls libxml2"
 
 inherit gobject-introspection features_check gtk-doc gnomebase
 
 SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gtksourceview.git;protocol=https;branch=main;tag=${PV}"
-SRCREV = "a7bdc39f9fbc10c49ea7468ac1e5bf77385da0c0"
+SRCREV = "80d2f107f915576f43a019abe26f13a9db21703c"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
