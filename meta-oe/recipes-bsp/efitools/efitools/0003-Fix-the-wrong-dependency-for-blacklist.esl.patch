@@ -1,0 +1,28 @@
+From 2d9f8f766278c092426c9c0f1db5a5fd77dfed8c Mon Sep 17 00:00:00 2001
+From: Lans Zhang <jia.zhang@windriver.com>
+Date: Tue, 15 Mar 2016 21:07:31 +0800
+Subject: [PATCH] Fix the wrong dependency for %-blacklist.esl
+
+Upstream-Status: Pending
+
+Signed-off-by: Lans Zhang <jia.zhang@windriver.com>
+---
+ Make.rules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.rules b/Make.rules
+index 66d63f0..fed93b9 100644
+--- a/Make.rules
++++ b/Make.rules
+@@ -75,7 +75,7 @@ endif
+ %.hash: %.efi hash-to-efi-sig-list
+ 	./hash-to-efi-sig-list $< $@
+ 
+-%-blacklist.esl: %.crt cert-to-efi-hash-list
++%-blacklist.esl: %.crt cert-to-efi-sig-list
+ 	./cert-to-efi-sig-list $< $@
+ 
+ %-hash-blacklist.esl: %.crt cert-to-efi-hash-list
+-- 
+2.25.1
+
