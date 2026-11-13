@@ -13,7 +13,7 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 
 inherit gnomebase gobject-introspection gtk-doc vala
 
-SRC_URI[archive.sha256sum] = "838c5306fc38bfaa2f23abe24262f4bf15771e3303fb5dcb74f5b9c7a615dabe"
+SRC_URI[archive.sha256sum] = "6c20bd16c87aba15869e56444424481f632ac302989a203e8ce4dcc73dea33a5"
 
 do_compile:prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/gnome-autoar/.libs"
