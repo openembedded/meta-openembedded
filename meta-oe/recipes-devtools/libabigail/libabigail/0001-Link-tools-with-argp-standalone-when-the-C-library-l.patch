@@ -1,0 +1,48 @@
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] Link tools with argp-standalone when the C library lacks argp
+
+The tools now parse their options with argp, which glibc provides but
+musl does not, so linking them fails there:
+
+  ld.lld: error: undefined symbol: argp_parse
+
+As is already done for fts, look for argp_parse in libargp when the C
+library does not have it, and link the tools with it.
+
+Upstream-Status: Submitted [https://inbox.sourceware.org/libabigail/20261113043746.2721849-1-raj.khem@gmail.com/]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ configure.ac      | 9 +++++++++
+ tools/Makefile.am | 2 +-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+--- a/configure.ac
++++ b/configure.ac
+@@ -373,6 +373,15 @@ dnl glibc and BSD include fts into their
+ dnl check if we need to explicitly link to the standalone musl-fts.
+ AC_SEARCH_LIBS([fts_open], [fts])
+ 
++dnl The tools use argp, which glibc provides but musl does not, so check
++dnl if we need to explicitly link to the standalone argp library.
++save_LIBS="$LIBS"
++LIBS=
++AC_SEARCH_LIBS([argp_parse], [argp], [ARGP_LIBS="$LIBS"],
++               [AC_MSG_ERROR([argp_parse not found])])
++LIBS="$save_LIBS"
++AC_SUBST(ARGP_LIBS)
++
+ dnl Older glibc had a broken fts that didn't work with Large File Systems.
+ dnl We want the version that can handler LFS, but include workaround if we
+ dnl get a bad one. Add define to CFLAGS (not AC_DEFINE it) since we need to
+--- a/tools/Makefile.am
++++ b/tools/Makefile.am
+@@ -19,7 +19,7 @@ else
+ endif
+ 
+ noinst_PROGRAMS = abisym abinilint
+-LDADD = $(abs_top_builddir)/src/libabigail.la
++LDADD = $(abs_top_builddir)/src/libabigail.la $(ARGP_LIBS)
+ AM_LDFLAGS = -lpthread
+ 
+ abidiff_SOURCES = abidiff.cc
