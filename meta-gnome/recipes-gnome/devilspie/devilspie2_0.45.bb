@@ -1,14 +1,13 @@
 DESCRIPTION = "Devilspie2 is a window matching utility, allowing the user to perform scripted actions on windows as they are created"
 HOMEPAGE = "http://www.gusnan.se/devilspie2"
-LICENSE = "GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
-                    file://GPL3.txt;md5=d32239bcb673463ab874e80d47fae504"
+LICENSE = "GPL-3.0-or-later"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-DEPENDS = "gtk+ glib-2.0 libwnck libxinerama lua virtual/libx11"
+DEPENDS = "gtk+3 glib-2.0 libwnck3 libxinerama lua virtual/libx11"
 
 PV .= "+git"
 
-SRCREV = "b9d7ad9c09a5fb17a1562ee1d892798c646e9ec9"
+SRCREV = "ab0a1a04315d683cbb086bd973e2bc78720832c2"
 
 SRC_URI = "git://github.com/dsalt/devilspie2;branch=master;protocol=https \
     file://default.lua \
@@ -21,8 +20,7 @@ inherit features_check pkgconfig gettext
 REQUIRED_DISTRO_FEATURES = "x11"
 
 do_compile() {
-    export GTK2=1
-    oe_runmake CC="${CC}" CPPFLAGS="${CPPFLAGS}" LDFLAGS=" -ldl -lm ${LDFLAGS}"
+    oe_runmake CC="${CC}" PREFIX="${prefix}" CPPFLAGS="${CPPFLAGS}" LDFLAGS=" -ldl -lm ${LDFLAGS}"
 }
 
 do_install() {
