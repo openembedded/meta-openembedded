@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://debian/copyright;md5=62b5f2ac0ede901fb245eefbe54c181f"
 
-SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=master \
+SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=main \
            file://0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch \
            "
 
