@@ -7,8 +7,8 @@ DEPENDS = "glib-2.0 gtk+3"
 
 inherit gobject-introspection features_check gtk-doc gnomebase
 
-SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gfls.git;branch=libgedit-gfls-0-4;protocol=https;tag=${PV}"
-SRCREV = "3e83903b8211b7b392758e548e2d33ab162a32c5"
+SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-gfls.git;branch=main;protocol=https;tag=${PV}"
+SRCREV = "8ff9380b1796aa141c07f335ac10a405f39f988f"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
