@@ -22,6 +22,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
                      -Ccmake.define.CMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
                      -Ccmake.define.CMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
                      -Ccmake.define.CMAKE_FIND_ROOT_PATH="${STAGING_DIR_NATIVE}" \
+                     -Ccmake.define.PKG_CONFIG_USE_CMAKE_PREFIX_PATH=OFF \
                      -Ccmake.build-type="RelWithDebInfo" \
                      -Cbuild-dir="${B}" \
 "
