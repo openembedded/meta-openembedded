@@ -1,0 +1,40 @@
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 12 Nov 2026 00:00:00 -0800
+Subject: [PATCH] ld.hugetlbfs: Add riscv64 support
+
+riscv64 was added to the Makefiles in 2.23, but ld.hugetlbfs has no
+case for its elf64lriscv emulation, so HPAGE_SIZE and SLICE_SIZE stay
+empty. Linking the HTLB_ALIGN=slice tests then passes
+"-zcommon-page-size= -zmax-page-size=", which LLD rejects:
+
+  ld.lld: error: invalid max-page-size:
+
+riscv64 uses 2MB (PMD) huge pages by default. Like aarch64, set the
+text segment address explicitly: with a 2MB max page size the default
+image base would otherwise be aligned down to 0.
+
+Upstream-Status: Submitted [https://github.com/libhugetlbfs/libhugetlbfs/pull/119]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ld.hugetlbfs | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/ld.hugetlbfs
++++ b/ld.hugetlbfs
+@@ -121,6 +121,7 @@ armelf*_linux_eabi|aarch64elf*|aarch64li
+ 	hpage_kb=$(cat /proc/meminfo  | grep Hugepagesize: | awk '{print $2}')
+ 	HPAGE_SIZE=$((hpage_kb * 1024))
+ 	SLICE_SIZE=$HPAGE_SIZE ;;
++elf64lriscv*)		HPAGE_SIZE=$((2*$MB)) SLICE_SIZE=$HPAGE_SIZE ;;
+ esac
+ 
+ # LLD does not implement -Ttext-segment, --image-base is its equivalent
+@@ -136,7 +137,7 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
+ 	# targeting the ARM platform one needs to explicitly set the text segment offset
+ 	# otherwise it will be NULL.
+ 	case "$EMU" in
+-	armelf*_linux_eabi|aarch64elf*|aarch64linux*)
++	armelf*_linux_eabi|aarch64elf*|aarch64linux*|elf64lriscv*)
+ 		printf -v TEXTADDR "0x%x" "$SLICE_SIZE"
+ 		HTLBOPTS="$HTLBOPTS ${TEXTSEG}$TEXTADDR" ;;
+ 	elf_i386)		HTLBOPTS="$HTLBOPTS ${TEXTSEG}0x08000000" ;;
