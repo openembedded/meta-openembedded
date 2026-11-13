@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "iso-codes"
 
 EXTRA_OEMESON += "-Dtests=false"
 
-SRC_URI[archive.sha256sum] = "834b6035e61e36dd72339eb3e15d299b472ae0b393467a5bb36bb0045e0ba123"
+SRC_URI[archive.sha256sum] = "6501b1d7e499bfb8009f08efa3339ca6369bc38ee335cc3dfb67da7b2ab71289"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/gnome-software/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
