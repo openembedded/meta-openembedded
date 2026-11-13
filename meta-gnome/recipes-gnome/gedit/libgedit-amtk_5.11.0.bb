@@ -7,7 +7,8 @@ DEPENDS = "glib-2.0 gtk+3"
 
 inherit gobject-introspection features_check gtk-doc gnomebase
 
-SRC_URI[archive.sha256sum] = "7fc3348bef242e08967bdbb9a6698cf39f7810f95051fd8132910f36ed2d6d15"
+SRC_URI = "git://gitlab.gnome.org/World/gedit/libgedit-amtk.git;branch=main;protocol=https;tag=${PV}"
+SRCREV = "fcd22592dbe2589df622c31cf8fe823470ad28b5"
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
