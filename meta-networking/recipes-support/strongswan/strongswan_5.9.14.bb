@@ -19,6 +19,8 @@ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
            file://tls-server-Only-accept-non-empty-ECDH-public-keys-wi.patch \
            file://libradius-Reject-undersized-attributes-in-enumerator.patch \
            file://CVE-2026-78135.patch \
+           file://CVE-2026-78130.patch \
+           file://CVE-2026-78132.patch \
            "
 
 SRC_URI[sha256sum] = "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e74693b54fc33678"
