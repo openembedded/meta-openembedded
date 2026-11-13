@@ -96,11 +96,11 @@ SRC_URI += " \
     crate://crates.io/glib/0.22.8 \
     crate://crates.io/glib-macros/0.22.6 \
     crate://crates.io/glib-sys/0.22.8 \
-    crate://crates.io/glycin/4.0.0 \
-    crate://crates.io/glycin-builtin/4.0.0 \
+    crate://crates.io/glycin/4.0.5 \
+    crate://crates.io/glycin-builtin/4.0.5 \
     crate://crates.io/glycin-common/2.0.0 \
-    crate://crates.io/glycin-core/4.0.0 \
-    crate://crates.io/glycin-external/4.0.0 \
+    crate://crates.io/glycin-core/4.0.5 \
+    crate://crates.io/glycin-external/4.0.5 \
     crate://crates.io/glycin-image-rs/2.2.0 \
     crate://crates.io/glycin-utils/5.0.0 \
     crate://crates.io/gobject-sys/0.22.6 \
@@ -111,9 +111,9 @@ SRC_URI += " \
     crate://crates.io/gtk4/0.11.4 \
     crate://crates.io/gtk4-macros/0.11.4 \
     crate://crates.io/gtk4-sys/0.11.4 \
-    crate://crates.io/gufo/0.5.0 \
+    crate://crates.io/gufo/0.5.4 \
     crate://crates.io/gufo-common/2.0.0 \
-    crate://crates.io/gufo-exif/0.5.0 \
+    crate://crates.io/gufo-exif/0.5.5 \
     crate://crates.io/gufo-jpeg/0.5.1 \
     crate://crates.io/gufo-png/0.5.0 \
     crate://crates.io/gufo-tiff/0.5.0 \
@@ -373,11 +373,11 @@ SRC_URI[gio-unix-sys-0.22.0.sha256sum] = "44bab97ce39112040216e268f074645f50b31c
 SRC_URI[glib-0.22.8.sha256sum] = "ddbcf514bd1881fc1b960e4e52b4e82873f4da3bceddbd58d42827b508888100"
 SRC_URI[glib-macros-0.22.6.sha256sum] = "506d23499707c7142898429757e8d9a3871d965239a2cb66dfa05052be6d6f19"
 SRC_URI[glib-sys-0.22.8.sha256sum] = "030967459f9f676851872c6304adea7825c6d462ec9b72554c733cf0c5952233"
-SRC_URI[glycin-4.0.0.sha256sum] = "dc9bb9cfa3d4db9eab0e2394f0e60fe4071fd31affd1704f2ecccc6bdd24c7b9"
-SRC_URI[glycin-builtin-4.0.0.sha256sum] = "b801b326426a0ccb61899174b0a08c2316defd323cfe78be9aa6232a2efdfeac"
+SRC_URI[glycin-4.0.5.sha256sum] = "7e5b54873fd0e4ea8fe447e4f2b8c670c485862b5d9d0d624dcc886bb3a89ecd"
+SRC_URI[glycin-builtin-4.0.5.sha256sum] = "c47ae9011448c83bfa8841543c41d3c3dd20759096a1b565e366fd39d54029f3"
 SRC_URI[glycin-common-2.0.0.sha256sum] = "f34692fa7314e5108eafaba7621460d958caba839a6d5040f1caba98d7b4a692"
-SRC_URI[glycin-core-4.0.0.sha256sum] = "9466e4f18a53312faee414ea85813d6674d4cb5badad059365c4882984b40201"
-SRC_URI[glycin-external-4.0.0.sha256sum] = "a7d335778b14437e1339d703afd1ce69e61df8ab5420882b4b7821b9a2ca9d4a"
+SRC_URI[glycin-core-4.0.5.sha256sum] = "fdade20eb67ac75b5c306a99c594155e1096ea7aa536741f64158afa1ffdeb36"
+SRC_URI[glycin-external-4.0.5.sha256sum] = "2c9b985c8fe1d1c2cdc91566faa52f5d3226506201a4121580ae8cfcb71992e5"
 SRC_URI[glycin-image-rs-2.2.0.sha256sum] = "3df0cbc11fe5d5523575b04f724c82d8d50e2c03830622b655e7d4015eba6472"
 SRC_URI[glycin-utils-5.0.0.sha256sum] = "68b112ddb84bd9c1453b119292e38788aa18015d5c12158c1d6fab1b9e353ee7"
 SRC_URI[gobject-sys-0.22.6.sha256sum] = "22a861859b887a79cf461359c192c97a57d8fb0229dd291232e57aa11f6fa72c"
@@ -388,9 +388,9 @@ SRC_URI[gsk4-sys-0.11.4.sha256sum] = "5b7c7eb2e681ee896646cfb8872b431f24d09f53ba
 SRC_URI[gtk4-0.11.4.sha256sum] = "98a0a0466484f64b07b5b8184d43fa46be78eb0b8e04ae4e179af31d770b76d9"
 SRC_URI[gtk4-macros-0.11.4.sha256sum] = "5ac7179400a36a04de039c24206bb841c5596992b907b43b23ee8d5bdc40d00e"
 SRC_URI[gtk4-sys-0.11.4.sha256sum] = "82b8f954786af0b1984425c4446b77f5ff6594346181316be3f850caab1c6f01"
-SRC_URI[gufo-0.5.0.sha256sum] = "6a16d7faeeb03e2925ac6b0f40630b15b1992d08c50add402f35fde495e44f64"
+SRC_URI[gufo-0.5.4.sha256sum] = "ce5dedcdb354f15280779ccfe04957c81bb15a0026b3d394dac9488689dad010"
 SRC_URI[gufo-common-2.0.0.sha256sum] = "d583cdde9eb6985dbb6e596d27677e5d353d5eee44763cbf7c7ead3147d337bf"
-SRC_URI[gufo-exif-0.5.0.sha256sum] = "e99100988e312c22c6f209663b289e727db3918d06fbcbbc2315149457b42b75"
+SRC_URI[gufo-exif-0.5.5.sha256sum] = "b7a91a52ac6ea8d25e0752b1f3552d7a8252dcdf0b0b8154d1118d5e2582129c"
 SRC_URI[gufo-jpeg-0.5.1.sha256sum] = "383907a5c532bff484b2914d649e368e98ce6426829458353fe40070225b07a5"
 SRC_URI[gufo-png-0.5.0.sha256sum] = "e5c3065acab6cf458afbe53f73462a0dbf17348a2af3c889183f8714b3bff6fc"
 SRC_URI[gufo-tiff-0.5.0.sha256sum] = "e9c77c38e7815b76e08b1943dc67517e02543504c14a29e071a4ddf9bee111ec"

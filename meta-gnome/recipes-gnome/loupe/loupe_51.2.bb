@@ -14,10 +14,10 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 
 GTKIC_VERSION = "4"
 
-SRC_URI = "git://gitlab.gnome.org/GNOME/loupe.git;protocol=https;branch=main;tag=${PV} \
+SRC_URI = "git://gitlab.gnome.org/GNOME/loupe.git;protocol=https;branch=gnome-51;tag=${PV} \
            file://0001-meson-Support-cross-compilation-via-a-rust_target-cr.patch \
            "
-SRCREV = "0ae0d797d11e18a045b2d383e47a097181b4062b"
+SRCREV = "ffce31a2d89fae1c0cd9bc68ff04c53ccd51a5cf"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/loupe/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
