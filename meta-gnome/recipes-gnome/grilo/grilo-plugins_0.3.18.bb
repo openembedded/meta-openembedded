@@ -13,7 +13,7 @@ DEPENDS = " \
 inherit gnomebase gnome-help vala
 
 SRC_URI += "file://0001-Avoid-running-trackertestutils.patch"
-SRC_URI[archive.sha256sum] = "fe6f4dbe586c6b8ba2406394e202f22d009d642a96eb3a54f32f6a21d084cdcb"
+SRC_URI[archive.sha256sum] = "8e3ce74ee717c3c322d0cb0f8df26bb0914028a5d016e28055ffb49cc9a46c5e"
 
 # gnome-online-accounts requires opengl by default, so lua-factory PACKAGECONFIG relies on opengl by default.
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'gobject-introspection-data', 'tracker', '', d)} \

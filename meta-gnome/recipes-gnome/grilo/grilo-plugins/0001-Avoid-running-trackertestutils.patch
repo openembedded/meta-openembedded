@@ -9,19 +9,22 @@ Content-Transfer-Encoding: 8bit
 It breaks configuration:
 | ../grilo-plugins-0.3.13/tests/tracker3/meson.build:5:0: ERROR: Program '/usr/lib/tracker-3.0/trackertestutils/tracker-sandbox' not found
 
+Without the testutils the tracker3 tests look for localsearch on the
+build host instead, so skip them altogether.
+
 Upstream-Status: Inappropriate [OE-Specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
 ---
- meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meson.build       | 2 +-
+ tests/meson.build | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index fca5f98..3c1aa06 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -98,7 +98,7 @@ totem_plparser_dep = dependency('totem-plparser', version: '>= 3.4.1', required:
+@@ -99,7 +99,7 @@
  totem_plparser_mini_dep = dependency('totem-plparser-mini', version: '>= 3.4.1', required: false)
  tracker_sparql_dep = dependency('tracker-sparql-2.0', version: '>= 2.3.0', required: false)
  tracker3_dep = dependency('tracker-sparql-3.0', required: false)
@@ -30,3 +33,14 @@ index fca5f98..3c1aa06 100644
  
  lua_pkg = [
    'lua',
+diff --git a/tests/meson.build b/tests/meson.build
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -39,6 +39,6 @@
+     subdir('local-metadata')
+ endif
+ 
+-if get_option('enable-tracker3') != 'no' and tracker3_dep.found()
++if get_option('enable-tracker3') != 'no' and tracker3_dep.found() and tracker3_testutils_dep.found()
+     subdir('tracker3')
+ endif
