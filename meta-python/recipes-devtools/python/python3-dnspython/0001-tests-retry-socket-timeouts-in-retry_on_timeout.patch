@@ -1,0 +1,47 @@
+From 0d751963d381da8adbbe4bcb9c0163e41f70eeca Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 22:41:22 -0800
+Subject: [PATCH] tests: retry socket timeouts in retry_on_timeout
+
+testQueryUDPFallbackWithSocket opens its TCP socket itself with a 2
+second socket timeout. When that connect is slow (e.g. on a loaded host
+or an emulated target) it raises the builtin TimeoutError rather than
+dns.exception.Timeout, so retry_on_timeout does not retry it and the
+test fails intermittently.
+
+Retry TimeoutError as well, and give the connect the same 4 second
+budget as the query itself.
+
+Upstream-Status: Submitted [https://github.com/rthalley/dnspython/pull/1423]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tests/test_query.py | 2 +-
+ tests/util.py       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/test_query.py b/tests/test_query.py
+index 1c949e6..a6f1a1b 100644
+--- a/tests/test_query.py
++++ b/tests/test_query.py
+@@ -230,7 +230,7 @@ class QueryTests(unittest.TestCase):
+                 udp_s.setblocking(0)
+                 with socket.socket(af, socket.SOCK_STREAM) as tcp_s:
+                     ll = dns.inet.low_level_address_tuple((address, 53))
+-                    tcp_s.settimeout(2)
++                    tcp_s.settimeout(4)
+                     tcp_s.connect(ll)
+                     tcp_s.setblocking(0)
+                     qname = dns.name.from_text(".")
+diff --git a/tests/util.py b/tests/util.py
+index a448f2d..84e16c0 100644
+--- a/tests/util.py
++++ b/tests/util.py
+@@ -144,7 +144,7 @@ def retry_on_timeout(f):
+                 f(*args, **kwargs)
+                 bad = False
+                 break
+-            except dns.exception.Timeout:
++            except (dns.exception.Timeout, TimeoutError):
+                 pass
+         if bad:
+             raise dns.exception.Timeout
