@@ -60,6 +60,12 @@ do_install:append() {
         rm -rf ${D}${libdir}/systemd
     fi
 
+    if ${@bb.utils.contains('PACKAGECONFIG', 'libseat', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/pam.d
+        mv ${D}${libdir}/pam.d/kmscon ${D}${sysconfdir}/pam.d/kmscon
+        rmdir ${D}${libdir}/pam.d
+    fi
+
     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', d)}; then
         mv ${D}${sysconfdir}/kmscon/kmscon.conf.example ${D}${sysconfdir}/kmscon/kmscon.conf
         sed -e "s@#drm@drm@g" \
