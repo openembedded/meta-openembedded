@@ -8,7 +8,7 @@ DEPENDS = "catch2"
 SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https;tag=v${PV} \
            file://remove_tmpdir_from_test_binary.patch \
            file://run-ptest"
-SRCREV = "919ce47dad39520a6e9a695d3e2d222c6920a445"
+SRCREV = "cbd58a3696887b34c70949aef21a71735a0c2ad5"
 
 inherit cmake ptest
 
