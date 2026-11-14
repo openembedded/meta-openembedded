@@ -1,0 +1,182 @@
+Upstream-Status: Submitted [https://github.com/cpprest-lts/cpprestsdk/pull/64]
+From 3d7f0bddff0971970b7692d86ee14873c0bc1755 Mon Sep 17 00:00:00 2001
+From: Gianfranco Costamagna <locutusofborg@debian.org>
+Date: Fri, 13 Nov 2026 13:46:50 +0100
+Subject: [PATCH] Add CMake option to skip network-dependent tests
+
+---
+ Release/CMakeLists.txt                             |  7 ++++++-
+ Release/tests/common/TestRunner/test_runner.cpp    |  5 +++++
+ .../tests/functional/http/client/CMakeLists.txt    |  2 +-
+ .../http/client/authentication_tests.cpp           |  4 ++--
+ .../http/client/connections_and_errors.cpp         |  2 +-
+ .../tests/functional/http/client/outside_tests.cpp | 14 +++++++-------
+ Release/tests/functional/websockets/CMakeLists.txt |  2 +-
+ 7 files changed, 23 insertions(+), 13 deletions(-)
+
+diff --git a/Release/CMakeLists.txt b/Release/CMakeLists.txt
+index 9fc12840e..46a80aaf8 100644
+--- a/Release/CMakeLists.txt
++++ b/Release/CMakeLists.txt
+@@ -18,6 +18,7 @@ enable_testing()
+ set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
+ set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
+ set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
++set(CPPREST_TEST_NETWORK ON CACHE BOOL "Run tests requiring external network access.")
+ set(CPPREST_EXCLUDE_BROTLI ON CACHE BOOL "Exclude Brotli compression functionality.")
+ set(CPPREST_EXPORT_DIR cmake/cpprestsdk CACHE STRING "Directory to install CMake config files.")
+ set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
+@@ -255,10 +256,14 @@ function(add_casablanca_test NAME SOURCES_VAR)
+       # so that they share one exception table and catch the wrong exception
+       target_link_libraries(${NAME} PRIVATE -Wl,-no_deduplicate)
+     endif()
++      set(_test_runner_args)
++      if(NOT CPPREST_TEST_NETWORK)
++        list(APPEND _test_runner_args /skip-network)
++      endif()
+     if (BUILD_SHARED_LIBS)
+       add_test(NAME ${NAME}
+         WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+-        COMMAND test_runner $<TARGET_FILE_NAME:${NAME}>
++        COMMAND test_runner ${_test_runner_args} $<TARGET_FILE_NAME:${NAME}>
+       )
+     endif()
+   endif()
+diff --git a/Release/tests/common/TestRunner/test_runner.cpp b/Release/tests/common/TestRunner/test_runner.cpp
+index abd280c6d..c9f710fb5 100644
+--- a/Release/tests/common/TestRunner/test_runner.cpp
++++ b/Release/tests/common/TestRunner/test_runner.cpp
+@@ -268,6 +268,11 @@ static bool matched_properties(const UnitTest::TestProperties& test_props)
+ #endif
+ #endif
+ 
++    if (UnitTest::GlobalSettings::Has("skip-network") && test_props.Has("NetworkRequired"))
++    {
++        return false;
++    }
++
+     // The 'Require' property on a test case is special.
+     // It requires a certain global setting to be fulfilled to execute.
+     if (test_props.Has("Requires"))
+diff --git a/Release/tests/functional/http/client/CMakeLists.txt b/Release/tests/functional/http/client/CMakeLists.txt
+index e21242a5c..d50a839c4 100644
+--- a/Release/tests/functional/http/client/CMakeLists.txt
++++ b/Release/tests/functional/http/client/CMakeLists.txt
+@@ -27,7 +27,7 @@ set(SOURCES
+ )
+ 
+ add_casablanca_test(httpclient_test SOURCES)
+-if(BUILD_SHARED_LIBS)
++if(BUILD_SHARED_LIBS AND CPPREST_TEST_NETWORK)
+   add_test(NAME httpclient_test_badssl
+     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+     COMMAND test_runner /badssl /select:@Requires=badssl $<TARGET_FILE_NAME:httpclient_test>
+diff --git a/Release/tests/functional/http/client/authentication_tests.cpp b/Release/tests/functional/http/client/authentication_tests.cpp
+index c90046be3..b857a43bc 100644
+--- a/Release/tests/functional/http/client/authentication_tests.cpp
++++ b/Release/tests/functional/http/client/authentication_tests.cpp
+@@ -676,9 +676,9 @@ SUITE(authentication_tests)
+         VERIFY_ARE_EQUAL(return_code, response.status_code());
+     }
+ 
+-    TEST(auth_no_data) { auth_test_impl(false); }
++    TEST(auth_no_data, "NetworkRequired", "true") { auth_test_impl(false); }
+ 
+-    TEST(unsuccessful_auth_with_basic_cred) { auth_test_impl(true); }
++    TEST(unsuccessful_auth_with_basic_cred, "NetworkRequired", "true") { auth_test_impl(true); }
+ 
+     TEST_FIXTURE(uri_address, set_user_options_asio_http)
+     {
+diff --git a/Release/tests/functional/http/client/connections_and_errors.cpp b/Release/tests/functional/http/client/connections_and_errors.cpp
+index 26a3b33e3..8b8b10e60 100644
+--- a/Release/tests/functional/http/client/connections_and_errors.cpp
++++ b/Release/tests/functional/http/client/connections_and_errors.cpp
+@@ -409,7 +409,7 @@ SUITE(connections_and_errors)
+ #endif
+ 
+     // Try to connect to a server on a closed port and cancel the operation.
+-    TEST_FIXTURE(uri_address, cancel_bad_port)
++    TEST_FIXTURE(uri_address, cancel_bad_port, "NetworkRequired", "true")
+     {
+         // http_client_asio had a bug where, when canceled, it would cancel only the
+         // current connection but then go and try the next address from the list of
+diff --git a/Release/tests/functional/http/client/outside_tests.cpp b/Release/tests/functional/http/client/outside_tests.cpp
+index b8147b1f8..29551a43c 100644
+--- a/Release/tests/functional/http/client/outside_tests.cpp
++++ b/Release/tests/functional/http/client/outside_tests.cpp
+@@ -41,7 +41,7 @@ namespace client
+ {
+ SUITE(outside_tests)
+ {
+-    TEST_FIXTURE(uri_address, outside_cnn_dot_com)
++    TEST_FIXTURE(uri_address, outside_cnn_dot_com, "NetworkRequired", "true")
+     {
+         handle_timeout([] {
+             // http://www.cnn.com redirects users from countries outside of the US to the "http://edition.cnn.com/" drop
+@@ -60,7 +60,7 @@ SUITE(outside_tests)
+         });
+     }
+ 
+-    TEST_FIXTURE(uri_address, outside_wikipedia_compressed_http_response)
++    TEST_FIXTURE(uri_address, outside_wikipedia_compressed_http_response, "NetworkRequired", "true")
+     {
+         if (web::http::compression::builtin::supported() == false)
+         {
+@@ -86,7 +86,7 @@ SUITE(outside_tests)
+         VERIFY_ARE_EQUAL(encoding, U("gzip"));
+     }
+ 
+-    TEST_FIXTURE(uri_address, outside_google_dot_com)
++    TEST_FIXTURE(uri_address, outside_google_dot_com, "NetworkRequired", "true")
+     {
+         // Use code.google.com instead of www.google.com, which redirects
+         http_client client(U("http://code.google.com"));
+@@ -98,7 +98,7 @@ SUITE(outside_tests)
+         }
+     }
+ 
+-    TEST_FIXTURE(uri_address, multiple_https_requests)
++    TEST_FIXTURE(uri_address, multiple_https_requests, "NetworkRequired", "true")
+     {
+         handle_timeout([&] {
+             // Use code.google.com instead of www.google.com, which redirects
+@@ -115,7 +115,7 @@ SUITE(outside_tests)
+     }
+ 
+ #if (defined(_MSC_VER) && (_MSC_VER >= 1900)) && !CPPREST_FORCE_PPLX
+-    TEST_FIXTURE(uri_address, multiple_https_requests_sync_scheduler)
++    TEST_FIXTURE(uri_address, multiple_https_requests_sync_scheduler, "NetworkRequired", "true")
+     {
+         struct sync_scheduler : public scheduler_interface
+         {
+@@ -148,7 +148,7 @@ SUITE(outside_tests)
+     }
+ #endif
+ 
+-    TEST_FIXTURE(uri_address, reading_google_stream)
++    TEST_FIXTURE(uri_address, reading_google_stream, "NetworkRequired", "true")
+     {
+         handle_timeout([&] {
+             // Use code.google.com instead of www.google.com, which redirects
+@@ -170,7 +170,7 @@ SUITE(outside_tests)
+         });
+     }
+ 
+-    TEST_FIXTURE(uri_address, no_transfer_encoding_content_length)
++    TEST_FIXTURE(uri_address, no_transfer_encoding_content_length, "NetworkRequired", "true")
+     {
+         handle_timeout([] {
+             http_client client(U("http://ws.audioscrobbler.com/2.0/") U(
+diff --git a/Release/tests/functional/websockets/CMakeLists.txt b/Release/tests/functional/websockets/CMakeLists.txt
+index 9a33589f5..ab7926c22 100644
+--- a/Release/tests/functional/websockets/CMakeLists.txt
++++ b/Release/tests/functional/websockets/CMakeLists.txt
+@@ -28,7 +28,7 @@ if (NOT CPPREST_EXCLUDE_WEBSOCKETS)
+   )
+ 
+   add_casablanca_test(websocketsclient_test SOURCES)
+-  if(BUILD_SHARED_LIBS)
++  if(BUILD_SHARED_LIBS AND CPPREST_TEST_NETWORK)
+     add_test(NAME websocketsclient_test_badssl
+       WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+       COMMAND test_runner /badssl /select:@Requires=badssl $<TARGET_FILE_NAME:websocketsclient_test>
