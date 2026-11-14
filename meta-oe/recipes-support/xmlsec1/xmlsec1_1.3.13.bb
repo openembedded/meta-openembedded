@@ -19,6 +19,7 @@ SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz
            file://0005-nss-nspr-fix-for-multilib.patch \
            file://0006-xmlsec1-Fix-configure-QA-error-caused-by-host-lookup.patch \
            file://0009-oss-fuzz-enc-Skip-the-DES-key-when-DES-is-disabled.patch \
+           file://0010-xmlsec-build-correctly-pass-crypto-cflags-to-fuzzer-programs.patch \
            file://run-ptest \
            "
 
