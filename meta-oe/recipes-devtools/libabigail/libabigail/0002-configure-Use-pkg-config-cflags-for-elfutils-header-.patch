@@ -1,0 +1,68 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sat, 14 Nov 2026 00:06:03 -0800
+Subject: [PATCH] configure: Use pkg-config cflags for elfutils header checks
+
+The elfutils header/declaration checks prepend -I$EU_INCLUDEDIR and
+-I${prefix}/include to CPPFLAGS.  EU_INCLUDEDIR comes from
+"pkg-config --variable=includedir", which is not prefixed with the
+sysroot, so both expand to -I/usr/include when cross compiling and the
+checks look at the build host headers instead of the target sysroot.
+
+Use $ELF_CFLAGS and $DW_CFLAGS from PKG_CHECK_MODULES instead.  These
+already point at the elfutils found via --with-elfutils or
+PKG_CONFIG_PATH, and pkg-config applies PKG_CONFIG_SYSROOT_DIR to them.
+
+	* configure.ac: Use $ELF_CFLAGS $DW_CFLAGS rather than
+	-I$EU_INCLUDEDIR and -I${prefix}/include when checking for
+	elfutils headers and declarations.
+
+Upstream-Status: Submitted [https://inbox.sourceware.org/libabigail/20261114080604.2989291-1-khem.raj@oss.qualcomm.com/]
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ configure.ac | 17 ++++-------------
+ 1 file changed, 4 insertions(+), 13 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a8509d7a..64fef76f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1105,7 +1105,7 @@ dnl By default, look for elfutils in the default system prefix.
+ if test x$ENABLE_MULTITHREADING != xno; then
+    saved_CPPFLAGS="$CPPFLAGS"
+    
+-   CPPFLAGS="-I$EU_INCLUDEDIR $CPPFLAGS"
++   CPPFLAGS="$ELF_CFLAGS $DW_CFLAGS $CPPFLAGS"
+    AC_CHECK_HEADER([elfutils/version.h],
+ 		   [HAS_ELFUTILS_VERSION=yes],
+ 		   [AC_MSG_NOTICE([could not find elfutils/version.h])])
+@@ -1210,15 +1210,8 @@ AM_CONDITIONAL([CTF_READER],[test "x$ENABLE_CTF" = "xyes"])
+ AM_CONDITIONAL([BTF_READER],[test "x$ENABLE_BTF" = "xyes"])
+ AM_CONDITIONAL([ENABLE_LIBABIGAIL_MULTITHREADING],[test "x$ENABLE_MULTITHREADING" = "xyes"])
+ 
+-use_prefixed_includedir=""
+-if test x$prefix != x; then
+-  use_prefixed_includedir=$prefix
+-fi
+-
+-if test x$use_prefixed_includedir != x; then
+-  saved_CPPFLAGS="$CPPFLAGS"
+-  CPPFLAGS="-I${prefix}/include $CPPFLAGS"
+-fi
++saved_CPPFLAGS="$CPPFLAGS"
++CPPFLAGS="$ELF_CFLAGS $DW_CFLAGS $CPPFLAGS"
+ 
+ dnl Check if several decls and constant are defined in dependant
+ dnl libraries
+@@ -1796,9 +1789,7 @@ if test x$HAS_DW_FORM_strx1 = xyes -a \
+ 	     [Define to 1 if dwarf.h has the DW_FORM_strx enumerators])
+ fi
+ 
+-if test x$use_prefixed_includedir != x; then
+-  CPPFLAGS="$saved_CPPFLAGS"
+-fi
++CPPFLAGS="$saved_CPPFLAGS"
+ 
+ 
+ dnl Set large files support
