@@ -28,6 +28,7 @@ PEP517_BUILD_OPTS = "--skip-dependency-check \
 "
 
 SRC_URI:append = " \
+    file://0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch \
     file://run-ptest \
 "
 SRC_URI[sha256sum] = "54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3"
