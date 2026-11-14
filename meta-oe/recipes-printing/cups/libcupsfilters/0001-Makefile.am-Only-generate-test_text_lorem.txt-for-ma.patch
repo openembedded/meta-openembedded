@@ -1,0 +1,49 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sat, 14 Nov 2026 08:23:08 -0800
+Subject: [PATCH] Makefile.am: Only generate test_text_lorem.txt for make check
+
+test_text_lorem.txt is listed in BUILT_SOURCES, so a plain "make" builds
+gen-lorem-text and runs it to regenerate the file.  When cross
+compiling, gen-lorem-text is built for the target and cannot be
+executed on the build host, failing the build with:
+
+  ./gen-lorem-text > cupsfilters/test_files/test_text_lorem.txt
+  /bin/bash: line 1: ./gen-lorem-text: cannot execute: required file not found
+
+The file is only used by testfilters during "make check", so build
+gen-lorem-text as a check program and the lorem text as check_DATA,
+which automake builds before running the tests.
+
+Upstream-Status: Submitted [https://github.com/OpenPrinting/libcupsfilters/pull/346]
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ Makefile.am | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 2689a60..4a14500 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -337,15 +337,17 @@ testfilters_LDFLAGS = \
+ 	-D_GNU_SOURCE \
+ 	-L/usr/lib
+ 
+-noinst_PROGRAMS = gen-lorem-text
++check_PROGRAMS += gen-lorem-text
+ gen_lorem_text_SOURCES = cupsfilters/gen-lorem-text.c
+ EXTRA_DIST += cupsfilters/gen-lorem-text.c
+ # Built by cupsfilters/test-pdftoraster-copy-height.sh under AddressSanitizer
+ # (not a check_PROGRAM, so it can skip when ASan is absent); named here so it
+ # ships in "make dist".
+ EXTRA_DIST += cupsfilters/test-pdftoraster-copy-height.c
+-# Generated deterministic lorem text for texttopdf tests
+-BUILT_SOURCES = cupsfilters/test_files/test_text_lorem.txt
++# Generated deterministic lorem text for texttopdf tests.  Only needed by
++# "make check"; gen-lorem-text cannot be run on the build host when cross
++# compiling.
++check_DATA = cupsfilters/test_files/test_text_lorem.txt
+ CLEANFILES   = cupsfilters/test_files/test_text_lorem.txt
+ 
+ cupsfilters/test_files/test_text_lorem.txt: gen-lorem-text
