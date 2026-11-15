@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/gnome/libchamplain.git;branch=master;protocol=https;
 # https://gitlab.gnome.org/GNOME/libchamplain/-/issues/61
 COMPATIBLE_HOST:armv4 = "null"
 COMPATIBLE_HOST:armv5 = "null"
-COMPATIBLE_HOST:armv7 = "null"
 COMPATIBLE_HOST:armv7a = "null"
 COMPATIBLE_HOST:armv7ve = "null"
 COMPATIBLE_HOST:riscv32 = "null"
