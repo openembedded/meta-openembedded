@@ -357,7 +357,7 @@ postgresql_fix_sources () {
 }
 PACKAGESPLITFUNCS =+ "postgresql_fix_sources"
 
-PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
+PACKAGES =+ "${PN}-client ${PN}-client-doc ${PN}-server-dev ${PN}-timezone \
     libecpg-compat libecpg-compat-dev \
     libecpg libecpg-dev libecpg-staticdev libecpg-doc \
     libpq libpq-dev libpq-staticdev \
