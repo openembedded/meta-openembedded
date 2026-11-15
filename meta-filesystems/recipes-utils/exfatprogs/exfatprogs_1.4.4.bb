@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
            file://0001-tests-upcase_table-use-dd-printf-instead-of-truncate.patch \
            file://run-ptest"
-SRC_URI[sha256sum] = "57226a8ec1bfbce06d68a42cde8cd980414a9457882e691fbce4a4f86c8d5f08"
+SRC_URI[sha256sum] = "102bbdfd934776c12c6d83743a31ec648f8c2f1ddfa1832b6e13b6efd09412cb"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
