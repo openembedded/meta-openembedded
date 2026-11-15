@@ -1,0 +1,18 @@
+#!/bin/sh
+
+cd "$(dirname "$0")"
+
+ctest --timeout 300 --output-on-failure 2>&1 | awk '
+/Test +#[0-9]+: / {
+    name = $0
+    sub(/.*Test +#[0-9]+: /, "", name)
+    sub(/ .*/, "", name)
+    if ($0 ~ /Passed/)
+        print "PASS: " name
+    else if ($0 ~ /Skipped/)
+        print "SKIP: " name
+    else
+        print "FAIL: " name
+    next
+}
+{ print }'
