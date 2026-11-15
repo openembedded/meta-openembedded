@@ -12,7 +12,7 @@ SRC_URI = "file://0001-c_comment_scanner-fix-function-prototypes.patch \
            file://0003-CMake-4-compatibility.patch;patchdir=cmark \
           "
 
-SRC_URI:append:class-target = "file://0004-Use-flex-with-noline-option-to-prevent.patch"
+SRC_URI:append:class-target = " file://0004-Use-flex-with-noline-option-to-prevent.patch"
 
 DEPENDS += "libxml2 glib-2.0 json-glib"
 
