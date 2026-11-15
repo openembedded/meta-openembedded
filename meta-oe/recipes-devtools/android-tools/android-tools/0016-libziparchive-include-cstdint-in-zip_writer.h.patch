@@ -1,0 +1,32 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 15:30:00 -0800
+Subject: [PATCH] libziparchive: include cstdint in zip_writer.h
+
+zip_writer.h uses uint16_t and uint32_t but relies on other headers to
+pull in their definitions. With GCC 16 libstdc++ they no longer do, and
+the native build fails:
+
+  zip_writer.h:81:5: error: 'uint16_t' does not name a type
+
+Include <cstdint> explicitly.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ system/libziparchive/include/ziparchive/zip_writer.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/system/libziparchive/include/ziparchive/zip_writer.h b/system/libziparchive/include/ziparchive/zip_writer.h
+index 268e8b6..aca7f4e 100644
+--- a/system/libziparchive/include/ziparchive/zip_writer.h
++++ b/system/libziparchive/include/ziparchive/zip_writer.h
+@@ -16,6 +16,7 @@
+ 
+ #pragma once
+ 
++#include <cstdint>
+ #include <cstdio>
+ #include <ctime>
+ 
