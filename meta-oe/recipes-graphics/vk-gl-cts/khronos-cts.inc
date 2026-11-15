@@ -6,8 +6,8 @@ SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl
            file://generate-srcuri.py \
            "
 
-SRC_URI:append:libc-musl = "file://fix-musl.patch"
-SRC_URI:append:toolchain-clang = "file://fix-clang-private-operator.patch"
+SRC_URI:append:libc-musl = " file://fix-musl.patch"
+SRC_URI:append:toolchain-clang = " file://fix-clang-private-operator.patch"
 
 SRCREV_FORMAT = "vk-gl-cts"
 
