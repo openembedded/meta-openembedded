@@ -37,7 +37,7 @@ SWIG_FEATURES:append:riscv32 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__ris
 SWIG_FEATURES:append:mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
 SWIG_FEATURES:append:powerpc64le = " -D__powerpc64__"
 SWIG_FEATURES:append:x86 = " -D__i386__"
-SWIG_FEATURES:append:x32 = " -D__ILP32__"
+SWIG_FEATURES:append:x86-x32 = " -D__ILP32__"
 
 export SWIG_FEATURES
 
