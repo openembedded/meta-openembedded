@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=30330812324ff9d9bd9ea645bb944427"
 
 DEPENDS = "util-macros-native font-util-native bdftopcf-native"
 RDEPENDS:${PN} = "encodings font-util"
-RDEPENDS:${PN}:class-native = "font-util-native"
 
 UPSTREAM_CHECK_REGEX = "font\-bitstream\-100dpi\-(?P<pver>\d+(\.\d+)+).tar.xz"
 
