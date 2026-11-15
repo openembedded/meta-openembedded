@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3ae87c50fd64b6f0942823686871e758"
 
 DEPENDS = "python3-cffi"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     libzstd (>= 1.4.0) \
     python3-cffi \
 "
