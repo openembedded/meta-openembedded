@@ -105,7 +105,6 @@ LDFLAGS:append = " -fPIC -L${STAGING_LIBDIR}/android"
 
 
 CC:append:class-native = " -I${STAGING_INCDIR}"
-CC:append:class-nativesdk = " -I${STAGING_INCDIR}"
 
 PREREQUISITE_core = ""
 PREREQUISITE_core:class-target = "liblog libbase libcutils libcrypto_utils libadb"
