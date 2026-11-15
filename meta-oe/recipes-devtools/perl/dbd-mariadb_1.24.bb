@@ -1,4 +1,4 @@
-DESPCRIPTION = "DBD::MariaDB is the Perl5 Database Interface driver for MariaDB and MySQL databases."
+DESCRIPTION = "DBD::MariaDB is the Perl5 Database Interface driver for MariaDB and MySQL databases."
 HOMEPAGE = "https://metacpan.org/dist/DBD-MariaDB"
 LICENSE = "GPL-1.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
@@ -13,8 +13,3 @@ RDEPENDS:${PN} = "libdbi-perl"
 S = "${UNPACKDIR}/DBD-MariaDB-${PV}"
 
 inherit cpan
-
-RDEPENDS:${PN}-ptest += " \
-	libtest-warnings-perl \
-	perl-module-test-more \
-"
