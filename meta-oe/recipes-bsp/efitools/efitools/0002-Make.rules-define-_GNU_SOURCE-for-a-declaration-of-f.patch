@@ -1,0 +1,28 @@
+From 410e12bf3f917581d1da54cdc760e4618f7589cf Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sat, 24 Jun 2023 14:58:14 +0800
+Subject: [PATCH] Make.rules: define _GNU_SOURCE for a declaration of function
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ Make.rules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.rules b/Make.rules
+index 65a634c..66d63f0 100644
+--- a/Make.rules
++++ b/Make.rules
+@@ -14,7 +14,7 @@ else
+ $(error unknown architecture $(ARCH))
+ endif
+ INCDIR	   = -I$(TOPDIR)include/ -I$(INCDIR_PREFIX)/usr/include -I$(INCDIR_PREFIX)/usr/include/efi -I$(INCDIR_PREFIX)/usr/include/efi/$(ARCH) -I$(INCDIR_PREFIX)/usr/include/efi/protocol
+-cppflags   = -DCONFIG_$(ARCH)
++cppflags   = -DCONFIG_$(ARCH) -D_GNU_SOURCE
+ cflags	   = -O2 -g $(ARCH3264) -fpic -Wall -fshort-wchar -fno-strict-aliasing -fno-merge-constants -fno-stack-protector -ffreestanding -fno-stack-check
+ ldflags	   = -nostdlib
+ CRTOBJ		= crt0-efi-$(ARCH).o
+-- 
+2.25.1
+
