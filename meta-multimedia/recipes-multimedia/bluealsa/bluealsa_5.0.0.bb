@@ -12,20 +12,22 @@ BUGTRACKER = "https://github.com/arkq/bluez-alsa/issues"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=143bc4e73f39cc5e89d6e096ac0315ba"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8e621f51a0d6b9221389a66da5118183"
 
 DEPENDS += "alsa-lib bluez5 dbus glib-2.0-native python3-packaging-native sbc"
 
-SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master;tag=v${PV}"
+SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master;tag=v${PV} \
+           file://0001-Fix-build-with-disable-dependency-checking.patch \
+           "
 
-SRCREV = "f11569451b98a765adf9abc081632bb013f89f57"
+SRCREV = "1935d6dcb8975f2d7a51aaafe61538d157224623"
 
 
-PACKAGECONFIG ??= "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG ??= "aplay ctl hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[a2dpconf] = "--enable-a2dpconf,--disable-a2dpconf"
 PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,fdk-aac"
 PACKAGECONFIG[aplay] = "--enable-aplay,--disable-aplay"
-PACKAGECONFIG[cli] = "--enable-cli,--disable-cli"
+PACKAGECONFIG[ctl] = "--enable-ctl,--disable-ctl"
 PACKAGECONFIG[coverage] = "--with-coverage,--without-coverage,lcov-native"
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
 PACKAGECONFIG[debug-time] = "--enable-debug-time,--disable-debug-time"
@@ -40,7 +42,7 @@ PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono,ofono"
 PACKAGECONFIG[payloadcheck] = "--enable-payloadcheck,--disable-payloadcheck"
 PACKAGECONFIG[rfcomm] = "--enable-rfcomm,--disable-rfcomm"
 PACKAGECONFIG[systemd] = "--enable-systemd --with-systemdsystemunitdir=${systemd_system_unitdir} \
-                          --with-systemdbluealsaargs='${SYSTEMD_BLUEALSA_ARGS}' --with-systemdbluealsaaplayargs='${SYSTEMD_BLUEALSA_APLAY_ARGS}',--disable-systemd,systemd"
+                          --with-systemdbluealsadargs='${SYSTEMD_BLUEALSA_ARGS}' --with-systemdbluealsaaplayargs='${SYSTEMD_BLUEALSA_APLAY_ARGS}',--disable-systemd,systemd"
 PACKAGECONFIG[test] = "--enable-test,--disable-test,libcheck libsndfile1"
 PACKAGECONFIG[upower] = "--enable-upower,--disable-upower,,upower"
 
@@ -58,7 +60,8 @@ PACKAGE_BEFORE_PN = "${PN}-aplay"
 
 FILES:${PN}-aplay += "${bindir}/bluealsa-aplay"
 FILES:${PN}-staticdev += "${libdir}/alsa-lib/*.a"
-FILES:${PN} += "${libdir}/alsa-lib/* ${datadir}/dbus-1/system.d"
+FILES:${PN} += "${libdir}/alsa-lib/* ${datadir}/alsa ${datadir}/dbus-1/system.d"
+FILES:${PN}-dev += "${datadir}/dbus-1/interfaces"
 
 RRECOMMENDS:${PN} = "${PN}-aplay"
 
@@ -68,7 +71,7 @@ SYSTEMD_SERVICE:${PN}-aplay = "bluealsa-aplay.service"
 
 SYSTEMD_AUTO_ENABLE:${PN}-aplay = "disable"
 
-# Choose bluez-alsa arguments to be used in bluealsa systemd service
+# Choose bluealsad arguments to be used in bluealsa systemd service
 # Usually could choose profiles with it: a2dp-source a2dp-sink hfp-hf hfp-ag hsp-hs hsp-ag hfp-ofono
 # Enable bluez-alsa arguments by default:
 SYSTEMD_BLUEALSA_ARGS ?= "-p a2dp-source -p a2dp-sink"

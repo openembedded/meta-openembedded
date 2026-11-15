@@ -1,0 +1,159 @@
+From 722886d22243488f9a8e0145050f05fcac3e8997 Mon Sep 17 00:00:00 2001
+From: borine <32966433+borine@users.noreply.github.com>
+Date: Sun, 4 Oct 2026 15:11:32 +0100
+Subject: [PATCH] Fix build with --disable-dependency-checking
+
+The directory src/dbus in the build tree was created only by the
+automake automatic dependency checking rules; so that if automatic
+dependency checking is disabled by configure (as is commonly done
+for one-time builds) then that directory did not exist and so the
+dbus-codegen commands all failed. This commit re-factors the
+automake files such that the src/dbus directory is now an explicit
+automake sub-directory, so that it is always created in the build
+by the configure command.
+
+Fixes #814
+
+Upstream-Status: Backport [https://github.com/arkq/bluez-alsa/commit/722886d22243488f9a8e0145050f05fcac3e8997]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ configure.ac         |  1 +
+ src/Makefile.am      | 30 ++++--------------------------
+ src/dbus/Makefile.am | 36 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 41 insertions(+), 26 deletions(-)
+ create mode 100644 src/dbus/Makefile.am
+
+diff --git a/configure.ac b/configure.ac
+index cd413ae..3e3ab7c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -498,6 +498,7 @@ AC_CONFIG_FILES([
+ 	src/Makefile
+ 	src/asound/Makefile
+ 	src/bluealsactl/Makefile
++	src/dbus/Makefile
+ 	src/dumper/Makefile
+ 	src/shared/Makefile
+ 	utils/Makefile
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 8b68826..1ae04e3 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -4,26 +4,14 @@
+ 
+ SUBDIRS = shared
+ # Make sure that shared library is built before anything else.
+-SUBDIRS += asound bluealsactl dumper
++SUBDIRS += asound bluealsactl dbus dumper
+ 
+ bin_PROGRAMS = bluealsad
+ noinst_LTLIBRARIES = libbluealsad.la
+ 
+ dbusconfdir = @DBUS_CONF_DIR@
+-dbusifacedir = @DBUS_IFACE_DIR@
+ dbusbluealsauser = @BLUEALSAD_USER@
+ dist_dbusconf_DATA = org.bluealsa.conf
+-dist_dbusiface_DATA = dbus/org.bluealsa.xml
+-
+-BUILT_SOURCES = \
+-	dbus/org.bluealsa.h \
+-	dbus/org.bluealsa.c \
+-	dbus/org.bluez.h \
+-	dbus/org.bluez.c \
+-	dbus/org.ofono.h \
+-	dbus/org.ofono.c
+-
+-CODEGEN_DEFS =
+ 
+ MOSTLYCLEANFILES = \
+ 	$(dist_dbusconf_DATA) \
+@@ -50,8 +38,8 @@ libbluealsad_la_SOURCES = \
+ 	bluez.c \
+ 	codec-sbc.c \
+ 	dbus.c \
+-	dbus/org.bluealsa.xml \
+-	dbus/org.bluez.xml \
++	dbus/org.bluealsa.c \
++	dbus/org.bluez.c \
+ 	error.c \
+ 	hci.c \
+ 	io.c \
+@@ -82,7 +70,6 @@ libbluealsad_la_SOURCES += \
+ endif
+ 
+ if ENABLE_ASHA
+-CODEGEN_DEFS += --define=ENABLE_GATT
+ libbluealsad_la_SOURCES += \
+ 	asha-g722.c \
+ 	asha.c \
+@@ -113,7 +100,6 @@ libbluealsad_la_SOURCES += \
+ endif
+ 
+ if ENABLE_MIDI
+-CODEGEN_DEFS += --define=ENABLE_GATT
+ libbluealsad_la_SOURCES += \
+ 	bt-midi.c \
+ 	bt-advertising.c \
+@@ -145,7 +131,7 @@ endif
+ if ENABLE_OFONO
+ libbluealsad_la_SOURCES += \
+ 	ofono.c \
+-	dbus/org.ofono.xml
++	dbus/org.ofono.c
+ endif
+ 
+ if ENABLE_UPOWER
+@@ -203,11 +189,3 @@ DBUSCONF_SUBS = \
+ 
+ .conf.in.conf:
+ 	$(SED) -e '$(DBUSCONF_SUBS)' < $< > $@
+-
+-.xml.h:
+-	$(srcdir)/dbus/dbus-codegen.py --output $@ $(CODEGEN_DEFS) \
+-		--interface-info-header --interface-skeleton-header $<
+-
+-.xml.c:
+-	$(srcdir)/dbus/dbus-codegen.py --output $@ $(CODEGEN_DEFS) \
+-		--interface-info-body --interface-skeleton-body $<
+diff --git a/src/dbus/Makefile.am b/src/dbus/Makefile.am
+new file mode 100644
+index 0000000..ee77c9c
+--- /dev/null
++++ b/src/dbus/Makefile.am
+@@ -0,0 +1,36 @@
++# BlueALSA - Makefile.am
++# SPDX-FileCopyrightText: 2016-2026 BlueALSA developers
++# SPDX-License-Identifier: MIT
++
++dbusifacedir = @DBUS_IFACE_DIR@
++dist_dbusiface_DATA = org.bluealsa.xml
++
++CODEGEN_DEFS =
++
++if ENABLE_ASHA
++CODEGEN_DEFS += --define=ENABLE_GATT
++endif
++
++if ENABLE_MIDI
++CODEGEN_DEFS += --define=ENABLE_GATT
++endif
++
++LOCAL_TARGETS = \
++	org.bluealsa.h \
++	org.bluealsa.c \
++	org.bluez.h \
++	org.bluez.c \
++	org.ofono.h \
++	org.ofono.c
++
++MOSTLYCLEANFILES = $(LOCAL_TARGETS)
++
++all-local: $(LOCAL_TARGETS)
++
++.xml.h:
++	$(srcdir)/dbus-codegen.py --output $@ $(CODEGEN_DEFS) \
++		--interface-info-header --interface-skeleton-header $<
++
++.xml.c:
++	$(srcdir)/dbus-codegen.py --output $@ $(CODEGEN_DEFS) \
++		--interface-info-body --interface-skeleton-body $<
