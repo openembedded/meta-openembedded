@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 fuse3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https;tag=sshfs-${PV}"
-SRCREV = "7a2d988775446ebe7af9b01c99b3b8e86bddb05a"
+SRCREV = "ab648e583fe6490f910ec37414408a01fc772227"
 
 inherit meson pkgconfig ptest
 
@@ -16,6 +16,8 @@ SRC_URI += " \
 #python3-compile for filecmp module
 RDEPENDS:${PN}-ptest += " \
         python3-compile \
+        python3-ctypes \
+        python3-shell \
         python3-pytest \
         python3-unittest-automake-output \
         bash \
