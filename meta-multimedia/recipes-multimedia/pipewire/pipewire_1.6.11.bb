@@ -17,6 +17,7 @@ BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https;tag=${PV}"
 SRC_URI += "file://0001-pipewire-compress-offload.patch"
 SRC_URI += "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-const-do-.patch"
+SRC_URI += "file://0003-spa-libcamera-device-0.8-compatibility.patch"
 
 inherit meson pkgconfig systemd gettext useradd
 
