@@ -5,7 +5,7 @@ LICENSE = "BSD-2-Clause AND LicenseRef-AOM-Patent-License-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
                     file://PATENTS;md5=a111d47497d3bb49e04eef71377eb8ba \
                    "
-SRCREV = "44d0a57786f432d933ff64b653347c66f4d0fa1d"
+SRCREV = "b141d9c45db236335351c8a4b2a14b3ade27c937"
 SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main;tag=v${PV}"
 inherit cmake pkgconfig
 
