@@ -1,0 +1,105 @@
+From 7b8bae1208159df9549773766775dcf4efd9ac02 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 00:22:52 -0800
+Subject: [PATCH] x86: detect AVX2/AVX-512 with CPUID instead of
+ __builtin_cpu_supports
+
+__builtin_cpu_supports() lowers to a PC-relative reference to the
+__cpu_model global from libgcc/compiler-rt. With clang and lld, linking
+libde265.so fails when __cpu_model resolves to the copy exported by
+libgcc_s.so:
+
+  ld.lld: error: relocation R_X86_64_PC32 cannot be used against symbol
+  '__cpu_model'; recompile with -fPIC
+
+Query CPUID and XCR0 directly, including the OS support checks for the
+YMM and ZMM state that __builtin_cpu_supports() performs.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ libde265/x86/sse.cc | 54 ++++++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 46 insertions(+), 8 deletions(-)
+
+diff --git a/libde265/x86/sse.cc b/libde265/x86/sse.cc
+index 735fd530..9055c10b 100644
+--- a/libde265/x86/sse.cc
++++ b/libde265/x86/sse.cc
+@@ -41,6 +41,42 @@
+ 
+ #if defined(__GNUC__) && !defined(__EMSCRIPTEN__)
+ #include <cpuid.h>
++
++#if HAVE_AVX2 || HAVE_AVX512
++// Query CPUID and XCR0 directly instead of using __builtin_cpu_supports().
++// The builtin references the __cpu_model global from libgcc/compiler-rt,
++// which cannot be linked into a shared library with clang+lld when
++// __cpu_model resolves to the copy exported by libgcc_s.so.
++static void get_avx_support(bool* avx2, bool* avx512)
++{
++  unsigned int eax, ebx, ecx, edx;
++
++  *avx2 = false;
++  *avx512 = false;
++
++  if (!__get_cpuid(1, &eax, &ebx, &ecx, &edx) ||
++      !(ecx & bit_OSXSAVE) || !(ecx & bit_AVX)) {
++    return;
++  }
++
++  // the OS must save the XMM and YMM state
++  unsigned int xcr0_lo, xcr0_hi;
++  __asm__ ("xgetbv" : "=a"(xcr0_lo), "=d"(xcr0_hi) : "c"(0));
++  if ((xcr0_lo & 0x06) != 0x06) {
++    return;
++  }
++
++  if (!__get_cpuid_count(7, 0, &eax, &ebx, &ecx, &edx)) {
++    return;
++  }
++
++  *avx2 = (ebx & bit_AVX2) != 0;
++
++  // AVX-512 additionally needs the opmask and ZMM state
++  *avx512 = (xcr0_lo & 0xe6) == 0xe6 &&
++            (ebx & bit_AVX512F) && (ebx & bit_AVX512BW);
++}
++#endif
+ #endif
+ 
+ void init_acceleration_functions_sse(struct acceleration_functions* accel)
+@@ -138,12 +174,13 @@ void init_acceleration_functions_sse(struct acceleration_functions* accel)
+ void init_acceleration_functions_avx2(struct acceleration_functions* accel)
+ {
+ #if HAVE_AVX2
+-  // __builtin_cpu_supports("avx2") handles the OSXSAVE / XGETBV (YMM-enabled)
+-  // checks internally, so this is safe to call on any CPU. This TU is *not*
+-  // compiled with -mavx2, so reaching here never executes an AVX2 instruction.
++  // get_avx_support() handles the OSXSAVE / XGETBV (YMM-enabled) checks, so
++  // this is safe to call on any CPU. This TU is *not* compiled with -mavx2,
++  // so reaching here never executes an AVX2 instruction.
+ #if defined(__GNUC__) && !defined(__EMSCRIPTEN__)
+-  __builtin_cpu_init();
+-  if (__builtin_cpu_supports("avx2")) {
++  bool avx2, avx512;
++  get_avx_support(&avx2, &avx512);
++  if (avx2) {
+     accel->transform_add_8[2] = transform_16x16_add_8_avx2;
+     accel->transform_add_8[3] = transform_32x32_add_8_avx2;
+     // NB: dequant intentionally stays on the SSE version. An AVX2 variant was
+@@ -160,10 +197,11 @@ void init_acceleration_functions_avx512(struct acceleration_functions* accel)
+ {
+ #if HAVE_AVX512
+ #if defined(__GNUC__) && !defined(__EMSCRIPTEN__)
+-  __builtin_cpu_init();
+-  // need AVX-512F + AVX-512BW (16-bit ops). __builtin_cpu_supports handles the
++  // need AVX-512F + AVX-512BW (16-bit ops). get_avx_support() handles the
+   // OS (XCR0/ZMM-enabled) check. This TU is not compiled with -mavx512*.
+-  if (__builtin_cpu_supports("avx512f") && __builtin_cpu_supports("avx512bw")) {
++  bool avx2, avx512;
++  get_avx_support(&avx2, &avx512);
++  if (avx512) {
+     accel->transform_add_8[3] = transform_32x32_add_8_avx512;
+   }
+ #endif

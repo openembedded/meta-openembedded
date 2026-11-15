@@ -9,12 +9,9 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
 
 SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV} \
-           file://CVE-2026-49295.patch \
-           file://CVE-2026-49337.patch \
-           file://CVE-2026-49346.patch \
-           file://CVE-2026-54240-CVE-2026-54241.patch \
-"
-SRCREV = "824b4138ecd51611d7073f1b50d5d6f982609b06"
+           file://0001-x86-detect-AVX2-AVX-512-with-CPUID-instead-of-__buil.patch \
+           "
+SRCREV = "ba62bf4cfb3242f3bf0a45617ff09e35236e4d82"
 
 
 inherit cmake pkgconfig
