@@ -2,17 +2,16 @@ SUMMARY = "File system QA test suite"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038"
 
-SRCREV = "22348afe338c0f6d540c0d7ef0db749eaa51b218"
+SRCREV = "71641219a506ac62bfa231592394265ca812670e"
 SRCREV_unionmount = "f48a57d2a7db5f86ff3dbc4444c3c3041e182d7d"
 SRCREV_FORMAT = "default_unionmount"
 
-SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;tag=v${PV} \
+SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=for-next;tag=v${PV} \
            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
            file://0001-include-libgen.h-for-basename-API-prototype.patch \
            file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch \
            file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
-           file://0001-locktest-do-not-tie-struct-delegation-to-the-F_GETDE.patch \
            file://0003-fs-monitor-include-linux-types.h-for-__s32-__u32.patch \
            file://0004-rw_hint-add-fallback-define-for-RWH_WRITE_LIFE_NOT_.patch \
            "
