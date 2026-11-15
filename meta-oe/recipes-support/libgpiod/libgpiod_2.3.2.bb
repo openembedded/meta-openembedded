@@ -59,7 +59,6 @@ PACKAGES =+ " \
 "
 FILES:${PN}-tools += "${bindir}/gpionotify"
 FILES:${PN}-gpiosim += "${libdir}/libgpiosim.so.*"
-FILES:${PN}-gpiosim-dev += "${includedir}/gpiosim.h"
 FILES:${PN}-glib += " \
     ${libdir}/libgpiod-glib.so.* \
     ${libdir}/girepository-1.0/* \
