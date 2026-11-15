@@ -176,7 +176,7 @@ FILES:libkrb5 = "${libdir}/libkrb5${SOLIBS} \
 FILES:libkrb5support = "${libdir}/libkrb5support${SOLIBS}"
 FILES:libverto = "${libdir}/libverto${SOLIBS}"
 
-RDEPENDS:${PN}-kadmin-server = "${PN}-kdc"
+RDEPENDS:${PN}-admin-server = "${PN}-kdc"
 RDEPENDS:${PN}-kpropd = "${PN}-kdc"
 
 INITSCRIPT_PACKAGES = "${PN}-admin-server ${PN}-kdc"
