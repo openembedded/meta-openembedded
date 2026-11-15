@@ -8,15 +8,21 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
 
-SRCREV = "79ff958ed1012e60faba84981481f76cea43c7f2"
-SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x;tag=release-${PV} \
+SRCREV = "fac0494691434c35243131f66a0b27ea0c29f700"
+SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=main;tag=release-${PV} \
           "
 
+inherit cmake pkgconfig
 
-inherit autotools pkgconfig
+EXTRA_OECMAKE = "\
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUPNP_BUILD_STATIC=OFF \
+    -DUPNP_BUILD_SAMPLES=OFF \
+    -DUPNP_ENABLE_TESTING=OFF \
+    -DUPNP_ENABLE_TESTING_INTEGRATION=OFF \
+    -DUPNP_MINISERVER_REUSEADDR=ON \
+    -DDOWNLOAD_AND_BUILD_DEPS=OFF \
+"
 
-EXTRA_OECONF += "--enable-reuseaddr"
-
-# Enable LFS support ( for samples )
-CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
-CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[openssl] = "-DUPNP_ENABLE_OPEN_SSL=ON,-DUPNP_ENABLE_OPEN_SSL=OFF,openssl"
