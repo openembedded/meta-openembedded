@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause OR BSD-3-Clause OR MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c4d720cdc9c6953091f65e8b01524bb4"
 
 SRC_URI += "file://0001-cython-Use-cythyon3-in-cmake-check.patch"
-SRC_URI[sha256sum] = "17d2971e998490def9554b6ba41886708422af5b4ae888723b1b077aab0fe8d4"
+SRC_URI[sha256sum] = "675778b309a22dfc9b7d37f7621976bba491d2a5f8c59696bd77fd6d07271355"
 
 inherit cmake pkgconfig pypi python3native cython
 
