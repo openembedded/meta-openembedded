@@ -5,7 +5,7 @@ SECTION = "devel/python"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/miurahr/py7zr.git;branch=master;protocol=https"
-SRCREV = "e278bc05cc937ecd1ee62bc6a058db3a21e66614"
+SRCREV = "c717d21171bdc66b6370040dc95a6ce9036f4d40"
 
 CVE_PRODUCT = "py7zr"
 
