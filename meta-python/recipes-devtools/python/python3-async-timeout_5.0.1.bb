@@ -8,11 +8,10 @@ HOMEPAGE = "https://github.com/aio-libs/async-timeout"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fa41f15bb5f23b6d3560c5845eb8d57"
 
-SRC_URI[sha256sum] = "4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f"
+SRC_URI[sha256sum] = "d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3"
 
 inherit pypi python_setuptools_build_meta
 
-PYPI_PACKAGE_SDIST = "async-timeout"
 
 DEPENDS += "python3-wheel-native"
 
