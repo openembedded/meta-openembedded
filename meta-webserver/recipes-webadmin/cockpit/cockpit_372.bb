@@ -2,14 +2,14 @@ SUMMARY = "Admin interface for Linux machines"
 DESCRIPTION = "Cockpit makes it easy to administer your GNU/Linux servers via a web browser"
 
 LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1.txt;md5=4fbd65380cdd255951079008b364516c"
+LIC_FILES_CHKSUM = "file://LICENSES/LGPL-2.1.txt;md5=4bf661c1e3793e55c8d1051bc5e0ae21"
 
 SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
     file://cockpit.pam \
     "
-SRC_URI[sha256sum] = "514723bdac652ec1fb55d0288ae775799e784708f34a5db66b9d8984c4ac4735"
+SRC_URI[sha256sum] = "a74d28489341e880f73224174dd21e0b48ce7e78999801369855f74d6df4a53b"
 
 UPSTREAM_CHECK_URI = "https://github.com/cockpit-project/cockpit/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)*)"
