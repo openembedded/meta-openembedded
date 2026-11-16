@@ -25,11 +25,11 @@ inherit xfce features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "10a463b9bc474159622d861c1bf7f098e7848af15a453ac0275a3b92a8565c4e"
+SRC_URI[sha256sum] = "a1b798d045c8b188af49503e2b015632b460cd179e1893cb3d2eec93eb59a33f"
 
 PACKAGECONFIG ??= "notify"
 PACKAGECONFIG[notify] = "-Dnotifications=enabled,-Dnotifications=disabled,libnotify"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,"
 PACKAGECONFIG[video-backdrop] = "-Dvideo-backdrop=true,-Dvideo-backdrop=false,gstreamer1.0"
 
-FILES:${PN} += "${datadir}/backgrounds"
+FILES:${PN} += "${datadir}/backgrounds ${datadir}/xfce4/applications"
