@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
 
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/C/CA/CAPOEIRAB/IO-Stringy-${PV}.tar.gz"
-SRC_URI[sha256sum] = "872328f5a665c79e24a777b35e4f7fc395a1912d5e142879ffda83e8c102f765"
+SRC_URI[sha256sum] = "51220fcaf9f66a639b69d251d7b0757bf4202f4f9debd45bdd341a6aca62fe4e"
 
 S = "${UNPACKDIR}/IO-Stringy-${PV}"
 
