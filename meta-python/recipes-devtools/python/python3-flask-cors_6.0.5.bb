@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=134f1026f0de92fd30
 CVE_PRODUCT = "flask-cors"
 
 inherit pypi python_setuptools_build_meta
-SRC_URI[sha256sum] = "6e118f3698249ae33e429760db98ce032a8bf9913638d085ca0f4c5534ad2423"
+
+DEPENDS += "python3-setuptools-scm-native"
+SRC_URI[sha256sum] = "30c5031552cd59f620ac0c8211dac45b345d3b2df310e7721879e4f46ef9c601"
 
 RDEPENDS:${PN} += "python3-flask"
