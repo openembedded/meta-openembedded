@@ -6,12 +6,13 @@ HOMEPAGE = "https://tox.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
-SRC_URI[sha256sum] = "a68602f64421b199016127364ee47347b958391d19c2b2e53fe95673a8fe98e9"
+SRC_URI[sha256sum] = "9f70b44ca2e31d91d8fe2e2917f505554950adc3961c0ee70bb42db16d903f62"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
 
 DEPENDS += "\
+    python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
     python3-docutils-native \
 "
