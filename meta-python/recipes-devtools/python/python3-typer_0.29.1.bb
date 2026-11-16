@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/fastapi/typer"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
 
-SRC_URI[sha256sum] = "69ab84ef79fd601cff071bbd2566d855ecadfd93adbc4b3360b9924359bdd857"
+SRC_URI[sha256sum] = "ab6eb3880bf67ce96147734717f9ec333c06f66e361f3ea947d0be43da39f242"
 
 inherit pypi python_pdm ptest
 
@@ -22,6 +22,7 @@ RDEPENDS:${PN} += "\
     python3-difflib \
     python3-io \
     python3-math \
+    python3-pydantic \
     python3-rich \
     python3-shell \
     python3-shellingham \
@@ -45,6 +46,6 @@ RDEPENDS:${PN}-ptest += "\
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-    # references the unshipped top-level 'scripts' package used by typer's release tooling
-    rm -f ${D}${PTEST_PATH}/tests/test_prepare_release.py
+    # reference the unshipped top-level 'scripts' package used by typer's release tooling
+    rm -f ${D}${PTEST_PATH}/tests/test_prepare_release.py ${D}${PTEST_PATH}/tests/test_docs_cleanup.py
 }
