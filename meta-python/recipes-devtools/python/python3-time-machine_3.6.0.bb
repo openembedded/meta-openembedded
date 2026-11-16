@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/adamchainz/time-machine"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fb9b93a440d3ef2fb6eeebfa59384c53"
 
-SRCREV = "1b7ac45defb26c72076dc202aba46967c8c28fa9"
+SRCREV = "7434cabf2b539f5cb0ecfcb1e05864424acb3ee1"
 PYPI_SRC_URI = "git://github.com/adamchainz/time-machine;protocol=https;branch=main;tag=${PV};destsuffix=time_machine-${PV}"
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
@@ -37,6 +37,7 @@ RDEPENDS:${PN}-ptest += "\
     python3-dateutil \
     python3-dateutil-zoneinfo \
     python3-freezegun \
+    python3-hypothesis \
     python3-tokenize-rt \
     tzdata \
 "
