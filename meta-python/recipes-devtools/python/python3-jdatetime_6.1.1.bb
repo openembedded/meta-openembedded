@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
 
 # The PyPI package omits some files for testing like tests/__init__.py
 # so use the GitHub source instead.
-SRCREV = "480b637d024555e1523b4652bd2b6c5b5fac33d4"
+SRCREV = "417d87bfc229987ce86b61992ae6d211a35c8f70"
 SRC_URI = " \
     git://github.com/slashmili/jdatetime;branch=main;protocol=https;tag=v${PV} \
     file://run-ptest \
@@ -25,6 +25,7 @@ RDEPENDS:${PN}-ptest += " \
     python3-core \
     python3-pickle \
     python3-unittest \
+    python3-tzdata \
     python3-zoneinfo \
     python3-unittest-automake-output \
 "
