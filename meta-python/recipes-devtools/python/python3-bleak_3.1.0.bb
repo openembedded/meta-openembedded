@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
 # The PyPI sdist ships no tests/ directory at all, so ptest has nothing to
 # run from it (pytest exits 5, "no tests collected"). Fetch the matching
 # git tag instead, which does include tests/, mirroring python3-pydantic.
-SRCREV = "bb49377d38afb3a9fac9022aaf2c8f59d4ef7cfe"
+SRCREV = "3075468a7c511b2b771a6aa50a896120f2a3a3de"
 PV .= "+git"
 SRC_URI = "git://github.com/hbldh/bleak;protocol=https;branch=develop \
 	file://run-ptest \
