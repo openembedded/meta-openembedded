@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/URI-${PV}.tar.gz \
            file://0001-Skip-TODO-test-cases-that-fail.patch \
            "
 
-SRC_URI[sha256sum] = "89648964ce5ae006726951f42f718576fbefe9e98a41bd2212d57386163092d2"
+SRC_URI[sha256sum] = "ef5d2ef099a1a24a6e83ffe543de73337805d3d39c00b84fa205d725ad1a1b63"
 
 S = "${UNPACKDIR}/URI-${PV}"
 
@@ -34,6 +34,7 @@ do_install:prepend() {
 RDEPENDS:${PN} += "\
     perl-module-integer \
     perl-module-mime-base64 \
+    perl-module-unicode-normalize \
 "
 
 RDEPENDS:${PN}-ptest += " \
