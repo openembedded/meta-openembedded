@@ -5,9 +5,8 @@ LIC_FILES_CHKSUM = "file://pycocotools/coco.py;beginline=45;endline=45;md5=12cb5
 
 inherit pypi python_setuptools_build_meta cython
 
-SRC_URI += "file://0001-downgrade-numpy-version-to-1.26.4.patch"
 
-SRC_URI[sha256sum] = "8f2bcedb786ba26c367a3680f9c4eb5b2ad9dccb2b34eaeb205e0a021e1dfb8d"
+SRC_URI[sha256sum] = "34254d76da85576fcaf5c1f3aa9aae16b8cb15418334ba4283b800796bd1993d"
 
 DEPENDS = "python3-numpy-native virtual/crypt python3-wheel-native"
 RDEPENDS:${PN} = "python3-matplotlib python3-pillow python3-profile"
