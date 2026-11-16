@@ -8,11 +8,11 @@ SECTION = "devel/python"
 HOMEPAGE = "http://pycurl.io/"
 
 LICENSE = "LGPL-2.1-only OR MIT"
-LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4bf661c1e3793e55c8d1051bc5e0ae21 \
                     file://COPYING-MIT;md5=be42e1b1e58c8d59c2901fd747bfc55d \
                     "
 
-SRC_URI[sha256sum] = "b70961a76c412cd34f9cc2c9558e63f89fb37045c59eee396c585b52973be280"
+SRC_URI[sha256sum] = "d4327da9dea72768f942f831bbaa5a64adca4d7c89f3141da7a833d3c600ab90"
 
 SRC_URI += " file://run-ptest"
 
@@ -37,6 +37,7 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
     cp -f ${S}/setup.py ${D}${PTEST_PATH}
+    install -m 0644 ${S}/README.rst ${D}${PTEST_PATH}/
 }
 
 BBCLASSEXTEND  += "native nativesdk"
