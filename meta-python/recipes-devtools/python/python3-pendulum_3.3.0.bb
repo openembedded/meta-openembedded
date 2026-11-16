@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=869e1c364438f234f09673c4039ed114"
 
 DEPENDS = "python3-maturin-native"
 
-SRCREV = "aea611d7a1c15ed0da56505c3f370fe4446ba733"
+SRCREV = "e06dacedc4cdea90fa1286b3965d180ab94cf251"
 PYPI_SRC_URI = "git://github.com/python-pendulum/pendulum;protocol=https;branch=master;tag=${PV};destsuffix=pendulum-${PV}"
 
 SRC_URI += "file://0001-rust-Cargo.toml-inhibit-strip.patch"
@@ -25,6 +25,10 @@ inherit pypi python_maturin cargo-update-recipe-crates ptest-python-pytest
 do_install_ptest:append() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+    # dateutil 4 tzfile objects carry a zoneinfo-style "key", so pendulum now
+    # keeps the "Europe/Paris" name instead of the "+02:00" offset the test expects
+    sed -i -e "/--automake/ s|\$| --deselect tests/test_main.py::test_instance_with_aware_datetime_any_tzinfo|" \
+        ${D}${PTEST_PATH}/run-ptest
 }
 
 RDEPENDS:${PN} += "python3-dateutil python3-tzdata"
