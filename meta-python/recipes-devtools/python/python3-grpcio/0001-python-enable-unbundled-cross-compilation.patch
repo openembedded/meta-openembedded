@@ -12,14 +12,12 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
  setup.py | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/setup.py b/setup.py
-index 39ca17e..bffa9fb 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -341,25 +341,25 @@ if BUILD_WITH_SYSTEM_OPENSSL:
+@@ -345,25 +345,25 @@
+     CORE_C_FILES = filter(
          lambda x: "third_party/boringssl" not in x, CORE_C_FILES
      )
-     CORE_C_FILES = filter(lambda x: "src/boringssl" not in x, CORE_C_FILES)
 -    SSL_INCLUDE = (os.path.join("/usr", "include", "openssl"),)
 +    SSL_INCLUDE = ()
  

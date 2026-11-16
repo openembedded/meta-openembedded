@@ -11,10 +11,10 @@ LIC_FILES_CHKSUM = " \
 DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
 
 SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
-           file://0001-Fix-OpenSSL-4.0-compatibility.patch \
            file://abseil-ppc-fixes.patch \
+           file://0001-abseil-raw_hash_set-include-immintrin.h-instead-of-b.patch \
            "
-SRC_URI[sha256sum] = "446e7876b9b991fa124c1d414899fa7cf95f89a3e71237ea0161863dc0b2c09f"
+SRC_URI[sha256sum] = "5f530287d5de5f7f66089ead81de44f6787162944dab3922efa65dfdff108a1d"
 
 RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 
