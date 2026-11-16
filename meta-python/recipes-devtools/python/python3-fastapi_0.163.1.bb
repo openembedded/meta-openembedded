@@ -4,7 +4,7 @@ HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=95792ff3fe8e11aa49ceb247e66e4810"
 
-SRC_URI[sha256sum] = "6a22c1e2e6e32e0633ee7e170f00009a29b8228b16feb219ee42f32fd8d88a8f"
+SRC_URI[sha256sum] = "3d364b02a68b67292e833ff2dfed3b8dc3aeadf73e271c15316c6c166668792f"
 
 SRC_URI += "file://run-ptest"
 
@@ -20,6 +20,7 @@ PACKAGECONFIG[swagger-ui] = ",,,swagger-ui"
 
 RDEPENDS:${PN} += "\
     python3-annotated-doc \
+    python3-anyio \
     python3-fastapi-cli \
     python3-json \
     python3-opentelemetry-api \
@@ -49,6 +50,5 @@ do_install_ptest:append() {
     echo "import sys; from pathlib import Path; sys.path.insert(0, str(Path(__file__).parent))" > ${D}${PTEST_PATH}/conftest.py
     # these docs examples need python3-pydantic-settings, which meta-python
     # doesn't package
-    rm -rf ${D}${PTEST_PATH}/docs_src/settings/app02_an_py310
-    rm -rf ${D}${PTEST_PATH}/docs_src/settings/app02_py310
+    rm -rf ${D}${PTEST_PATH}/docs_src/settings/app02*
 }
