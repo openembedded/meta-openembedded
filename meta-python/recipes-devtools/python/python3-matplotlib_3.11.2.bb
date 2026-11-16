@@ -14,19 +14,19 @@ DEPENDS = "\
     python3-setuptools-scm-native \
     freetype \
     libpng \
+    libraqm \
     python3-pybind11 \
     qhull \
 "
 
 SRC_URI += "file://run-ptest \
-            file://0001-Do-not-download-external-dependency-tarballs-via-mes.patch \
             file://0001-Change-types-for-width-height-to-match-definitions-i.patch \
             "
-SRC_URI[sha256sum] = "2299372c19d56bcd35cf05a2738308758d32b9eaed2371898d8f5bd33f084aa3"
+SRC_URI[sha256sum] = "cec596316640f2b394b8f0daa0ea61a8eae82d017b620b9f202befb972a59ea4"
 
 inherit pypi pkgconfig python3targetconfig meson ptest-python-pytest
 
-EXTRA_OEMESON += "-Dsystem-freetype=true -Dsystem-qhull=true"
+EXTRA_OEMESON += "-Dsystem-freetype=true -Dsystem-libraqm=true -Dsystem-qhull=true"
 
 # LTO with clang needs lld
 LDFLAGS:append:toolchain-clang = " -fuse-ld=lld"
