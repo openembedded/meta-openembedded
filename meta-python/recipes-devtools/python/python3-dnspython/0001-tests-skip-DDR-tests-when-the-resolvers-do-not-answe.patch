@@ -16,13 +16,14 @@ Skip the tests unless both resolvers return DDR SVCB records.
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- tests/test_ddr.py | 27 +++++++++++++++++++++++++--
+ tests/test_ddr.py |   27 +++++++++++++++++++++++++--
  1 file changed, 25 insertions(+), 2 deletions(-)
 
+diff --git a/tests/test_ddr.py b/tests/test_ddr.py
 --- a/tests/test_ddr.py
 +++ b/tests/test_ddr.py
-@@ -6,13 +6,36 @@
- 
+@@ -8,12 +8,35 @@
+ import dns._ddr
  import dns.asyncbackend
  import dns.asyncresolver
 +import dns.message
@@ -30,6 +31,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +import dns.query
 +import dns.rdatatype
  import dns.resolver
+ import dns.rrset
  import tests.util
  
  
@@ -53,13 +55,19 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +    return True
 +
 +
+ def _svcb_nameserver_kinds(svcb_text):
+     rrset = dns.rrset.from_text("_dns.resolver.arpa.", 7200, "IN", "SVCB", svcb_text)
+     answer = types.SimpleNamespace(nameserver="192.0.2.1", rrset=rrset)
+@@ -64,7 +87,7 @@
+ 
+ 
  @pytest.mark.skipif(
 -    not tests.util.is_internet_reachable(), reason="Internet not reachable"
 +    not _ddr_available(), reason="Internet not reachable or DDR not available"
  )
  @tests.util.retry_on_timeout
  def test_basic_ddr_sync():
-@@ -26,7 +49,7 @@
+@@ -78,7 +101,7 @@
  
  
  @pytest.mark.skipif(
