@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/pikepdf/pikepdf"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "cb555ebff93482e8a6eb55881488b469bbb2b5675161c1b93a0510a8642d98d0"
+SRC_URI[sha256sum] = "b32ee8b0ffe606059dbf3386ebe1dae6e2601098277e22e8c75c2ee982436b43"
 
 SRC_URI += "file://0001-pyproject.toml-Do-not-strip.patch"
 
