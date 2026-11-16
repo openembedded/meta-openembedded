@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 15 Nov 2026 23:26:55 -0800
+Subject: [PATCH] pyproject.toml: Relax the setuptools version bound
+
+setuptools is capped below 75 upstream; build with the setuptools
+version that OE ships.
+
+Upstream-Status: Inappropriate [OE-specific]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ pyproject.toml |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+ requires = [
+-    "setuptools >= 68,<75",
++    "setuptools >= 68",
+ ]
+ build-backend = 'setuptools.build_meta'

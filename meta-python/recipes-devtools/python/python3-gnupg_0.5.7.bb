@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dabe659eadd6d97325b1582e41cfc11"
 
 PYPI_PACKAGE = "python-gnupg"
 
-SRC_URI[sha256sum] = "5743e96212d38923fc19083812dc127907e44dbd3bcf0db4d657e291d3c21eac"
+SRC_URI += "file://0001-pyproject.toml-Relax-the-setuptools-version-bound.patch"
+SRC_URI[sha256sum] = "73ea46219f992b361eb1ce54cb0968101670654454916a3ee5df8bb9bf0cc8cc"
 
 CVE_PRODUCT = "python:python-gnupg"
 
 inherit pypi python_setuptools_build_meta
 
-S = "${UNPACKDIR}/python-gnupg-${PV}"
 
 DEPENDS += "python3-wheel-native"
 
