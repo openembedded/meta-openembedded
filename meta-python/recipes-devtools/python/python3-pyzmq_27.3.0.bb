@@ -31,7 +31,7 @@ SRC_URI:append = " \
     file://0001-test_log-wait-for-subscriptions-instead-of-sleeping.patch \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3"
+SRC_URI[sha256sum] = "bbedb3d1d99babc625f1dd9d7438acefd442b36b75073fd6bc1ef7c0a4b96d56"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest cython
 
