@@ -12,7 +12,7 @@ inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[sha256sum] = "064f72fb5ead25d9bd1724bea803f1017fc2287b32dc55eacf4f6e3d78e2b7e8"
+SRC_URI[sha256sum] = "2f620939359dc9737800adfcb88fa86cad89b02d83f182ad1704bbebcd86b609"
 
 PACKAGECONFIG ??= " \
     notify \
