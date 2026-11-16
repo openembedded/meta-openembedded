@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "96530b7c538d4ea08493ab067247aab7948c54d8cd622cce711c97cccc5d9896"
+SRC_URI[sha256sum] = "fcc3c0cb8bfe7f4b3bb0e231c04b15dbad068cb3c2515f343d8fde4dce93bd5d"
 
 BBCLASSEXTEND = "native nativesdk"
 
@@ -19,6 +19,11 @@ DEPENDS += "\
     python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
 "
+
+# python-sbom (an SBOM metadata hatch hook) isn't packaged in OE
+do_configure:prepend() {
+    sed -i -e '/python-sbom\[hatch\]/d' -e '/build.hooks.python-sbom/d' ${S}/pyproject.toml
+}
 
 RDEPENDS:${PN} += " \
     python3-core \
