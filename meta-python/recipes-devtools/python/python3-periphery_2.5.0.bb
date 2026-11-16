@@ -4,7 +4,8 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bf8adf497db13d58fece90db6850816c"
 
-SRC_URI[sha256sum] = "9b334a31832ba64f74aa72700ee5fd6452d79d1d1fa6a0b48333bdb716d91575"
+SRCREV = "e82b08df1cd0f438d8a88d7b82b58dc8afade531"
+PYPI_SRC_URI = "git://github.com/vsergeev/python-periphery;protocol=https;branch=master;tag=v${PV};destsuffix=${PYPI_PACKAGE_SDIST}-${PV}"
 
 inherit pypi setuptools3
 
