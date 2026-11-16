@@ -3,7 +3,7 @@ HOMEPAGE = "https://fastapi.tiangolo.com/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e0cf8d811ea2046529403707b266fb5a"
 
-SRC_URI[sha256sum] = "94f19bcde4bd6ae26328292ac864082543262b7ee9f5d11bd7224614c22fb958"
+SRC_URI[sha256sum] = "7eeb74cf83edd75d22a9289713db03d8a0be3ed7a8daa48a3703a12d4f2a4615"
 
 inherit pypi python_pdm
 
