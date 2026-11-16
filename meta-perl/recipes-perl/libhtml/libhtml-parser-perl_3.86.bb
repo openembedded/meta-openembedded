@@ -9,7 +9,7 @@ DEPENDS += "perl"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/HTML-Parser-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "fd42ba6abe07241cf0ad57be246c3980065f683e4465e59b46af9efebc8e0c71"
+SRC_URI[sha256sum] = "5305e1d5faa70ee0aa282d85a5c9aa93911e8c7afa590ad1ced5703a544e20f6"
 
 S = "${UNPACKDIR}/HTML-Parser-${PV}"
 
@@ -30,15 +30,24 @@ RDEPENDS:${PN} += "\
     libhtml-tagset-perl \
 "
 
+do_install:prepend() {
+    # needs HTTP::Headers, which is not packaged
+    rm -f ${B}/t/headparser-http.t
+}
+
 RDEPENDS:${PN}-ptest += "\
     liburi-perl \
     perl-module-config \
+    perl-module-extutils-makemaker \
+    perl-module-extutils-mm-unix \
     perl-module-file-spec \
     perl-module-filehandle \
     perl-module-io-file \
     perl-module-selectsaver \
     perl-module-test \
     perl-module-test-more \
+    perl-module-threads \
+    perl-module-utf8 \
 "
 
 BBCLASSEXTEND = "native"
