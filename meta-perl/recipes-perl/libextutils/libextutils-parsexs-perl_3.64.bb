@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=120;endline=129;md5=eb858f0e3b1b0bee
 
 SRCNAME = "ExtUtils-ParseXS"
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "d19a3f29288f0950ef8f1838db99270284ba475758246f0e5ab1113a9d9a7548"
+SRC_URI[sha256sum] = "014b7d1bac86616e0ad7c8476e0a6b6c21d98615ec10cb5bc400ba06ebc288ac"
 
 S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
