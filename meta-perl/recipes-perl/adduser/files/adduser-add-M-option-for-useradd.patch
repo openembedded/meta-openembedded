@@ -1,4 +1,4 @@
-From 55a0adfc416ad85dbc440eaa667d98c200a8ce62 Mon Sep 17 00:00:00 2001
+From 03c388835a10c67ca5ad5ec288a1a8b3e0c6fa40 Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Thu, 18 Dec 2014 17:23:37 +0800
 Subject: [PATCH] adduser: add -M option for useradd
@@ -15,31 +15,26 @@ Upstream-Status: Submitted [1]
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- adduser | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ adduser | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/adduser b/adduser
-index a5f83f3..f6cb52c 100755
+index 9f195bc..e7cad37 100755
 --- a/adduser
 +++ b/adduser
-@@ -435,7 +435,7 @@ if ($action eq "addsysuser") {
-     $undouser = $new_name;
-     my $useradd = &which('useradd');
-     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--		$shell, '-u', $new_uid, $new_name);
-+	        $shell, '-u', $new_uid, '-M', $new_name);
-     if(!$disabled_login) {
-         my $usermod = &which('usermod');
-         &systemcall($usermod, '-p', '*', $new_name);
-@@ -525,7 +525,7 @@ if ($action eq "adduser") {
-     $undouser = $new_name;
-     my $useradd = &which('useradd');
-     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--		$shell, '-u', $new_uid, $new_name);
-+               $shell, '-u', $new_uid, '-M', $new_name);
-     &invalidate_nscd();
- 
-     create_homedir (1); # copy skeleton data
--- 
-1.8.5.2
-
+@@ -742,6 +742,7 @@ if ($action eq "addsysuser") {
+         '-g', $ingroup_name,
+         '-s', $shell,
+         '-u', $new_uid,
++        '-M',
+         $new_name);
+     if( $ua_ret == RET_INVALID_NAME_FROM_USERADD ) {
+         $returnvalue = RET_INVALID_NAME_FROM_USERADD;
+@@ -1012,6 +1013,7 @@ if ($action eq "adduser") {
+         '-g', $primary_gid,
+         '-s', $shell,
+         '-u', $new_uid,
++        '-M',
+         $new_name);
+     if( $ret == RET_INVALID_NAME_FROM_USERADD ) {
+         $returnvalue = RET_INVALID_NAME_FROM_USERADD;

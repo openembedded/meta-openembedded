@@ -1,4 +1,4 @@
-From 75e949bf80bf5e3e5bd8f81b258095e662b705c4 Mon Sep 17 00:00:00 2001
+From cf91c9420d2305ed585675811ac5528fe03c6464 Mon Sep 17 00:00:00 2001
 From: Kai Kang <kai.kang@windriver.com>
 Date: Thu, 9 Jan 2020 13:51:28 +0800
 Subject: [PATCH] adduser: set default shell with /sbin/nologin
@@ -13,22 +13,51 @@ Upstream-Status: Inappropriate [OE specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- adduser | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ adduser | 6 +++---
+ deluser | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/adduser b/adduser
-index 0f24cc9..ab554d0 100755
+index e7cad37..62cbe72 100755
 --- a/adduser
 +++ b/adduser
-@@ -431,7 +431,7 @@ if ($action eq "addsysuser") {
-     printf gtx("Adding new user `%s' (UID %d) with group `%s' ...\n"),$new_name,$new_uid,$ingroup_name
- 	if $verbose;
-     $home_dir = $special_home || &homedir($new_name, $ingroup_name);
--    $shell = $special_shell || '/usr/sbin/nologin';
-+    $shell = $special_shell || '/sbin/nologin';
+@@ -729,7 +729,7 @@ if ($action eq "addsysuser") {
+     $home_dir = $special_home || $uid_pool{$new_name}{'home'} || '/nonexistent';
+     $no_create_home = $home_dir =~ /^\/+nonexistent(\/|$)/ ? 1 : $no_create_home;
+ 
+-    $shell = $special_shell || $uid_pool{$new_name}{'shell'} || '/usr/sbin/nologin';
++    $shell = $special_shell || $uid_pool{$new_name}{'shell'} || '/sbin/nologin';
      $undouser = $new_name;
-     my $useradd = &which('useradd');
-     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--- 
-2.17.1
-
+ 
+     my $useradd = which('useradd');
+@@ -1002,7 +1002,7 @@ if ($action eq "adduser") {
+     if( !$disabled_login ) {
+         $shell = $special_shell || $uid_pool{$new_name}{'shell'} || $config{"dshell"};
+     } else {
+-        $shell = $special_shell || $uid_pool{$new_name}{'shell'} || "/usr/sbin/nologin";
++        $shell = $special_shell || $uid_pool{$new_name}{'shell'} || "/sbin/nologin";
+     }
+     log_debug( "creating new user %s with home_dir %s and shell %s", $new_name, $home_dir, $shell );
+     $undouser = $new_name;
+@@ -1298,7 +1298,7 @@ sub unlock_user {
+     my $ret = existing_user_status(\%config, $user_name, undef);
+     if ($ret & EXISTING_FOUND) {
+         if ($ret & EXISTING_LOCKED) {
+-            my $default_shell = $system ? "/usr/sbin/nologin" : "/bin/bash";
++            my $default_shell = $system ? "/sbin/nologin" : "/bin/bash";
+ 
+             # Get current shell state if available
+             my $shell = get_state_value($user_name, "shell") // $default_shell;
+diff --git a/deluser b/deluser
+index 4b2d430..5a85580 100755
+--- a/deluser
++++ b/deluser
+@@ -339,7 +339,7 @@ if($action eq "deluser") {
+         acquire_lock();
+         set_state_value($user, "shell", $egpwn_shell);
+         set_state_value($user, "locked", 1);
+-        my $lock_ret = &systemcall('usermod', "-e", 1, "-f", 0, "-L", "-s", "/usr/sbin/nologin", $user);
++        my $lock_ret = &systemcall('usermod', "-e", 1, "-f", 0, "-L", "-s", "/sbin/nologin", $user);
+         if( $lock_ret == 0 ) {
+             log_info( mtx("user `%s' successfully locked.\n", $user) );
+         } else {
