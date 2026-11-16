@@ -2,13 +2,14 @@ SUMMARY = "RLP definitions for common Ethereum objects in Python"
 HOMEPAGE = "https://github.com/ethereum/eth-rlp"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3d7bdfe69b1ffbde073ca6e96f5c53f7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3ef06eb4d4373222e59a338e2eb9a795"
 
-SRC_URI[sha256sum] = "d5b408a8cd20ed496e8e66d0559560d29bc21cee482f893936a1f05d0dddc4a0"
+SRC_URI[sha256sum] = "9663e54a4a1c1c847d2d328c1d07e4174ec1c082953fbb42b60e61c501c4931c"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
-PYPI_PACKAGE_SDIST = "eth-rlp"
+DEPENDS += "python3-setuptools-scm-native python3-wheel-native"
+
 
 RDEPENDS:${PN} = " \
     python3-eth-utils \
