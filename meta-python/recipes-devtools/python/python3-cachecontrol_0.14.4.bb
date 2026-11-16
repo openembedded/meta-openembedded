@@ -3,9 +3,10 @@ HOMEPAGE = "https://pypi.org/project/CacheControl/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6572692148079ebbbd800be4b9f36c6d"
 
-SRC_URI[sha256sum] = "73e7efec4b06b20d9267b441c1f733664f989fb8688391b670ca812d70795d11"
+SRC_URI += "file://0001-pyproject.toml-Relax-the-uv_build-version-bound.patch"
+SRC_URI[sha256sum] = "e6220afafa4c22a47dd0badb319f84475d79108100d04e26e8542ef7d3ab05a1"
 
-inherit pypi python_flit_core
+inherit pypi python_uv_build
 
 RDEPENDS:${PN} += "\
     python3-crypt \
