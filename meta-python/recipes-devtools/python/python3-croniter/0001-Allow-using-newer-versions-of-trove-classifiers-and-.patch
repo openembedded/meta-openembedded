@@ -5,15 +5,14 @@ Subject: [PATCH] Allow using newer versions of build dependencies
 
 The pyproject.toml pins exact (==) versions of all build-system
 requirements. When building with --no-isolation (as OE does), pip uses
-the build dependencies already present in the sysroot, which are newer
-than the pinned versions, e.g.:
+the build dependencies already present in the sysroot, which differ
+from the pinned versions, e.g.:
 
   ERROR Missing dependencies:
-        packaging==26.0
-        hatchling==1.29.0
+        hatchling==1.33.0
 
-Relax the exact pins to >= so that the (newer) provided versions
-satisfy the requirements.
+Drop the exact pins so that the provided versions satisfy the
+requirements.
 
 Upstream-Status: Pending
 
@@ -24,21 +23,21 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/pyproject.toml b/pyproject.toml
-index 657cc21..d1b9ce3 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
 @@ -1,10 +1,10 @@
  [build-system]
  requires = [
--    "hatchling==1.30.1",
--    "packaging==26.2",
+-    "hatchling==1.33.0",
+-    "packaging==26.3",
 -    "pathspec==1.1.1",
--    "pluggy==1.6.0",
--    "trove-classifiers==2026.6.1.19",
-+    "hatchling>=1.30.1",
-+    "packaging>=26.2",
-+    "pathspec>=1.1.1",
-+    "pluggy>=1.6.0",
-+    "trove-classifiers>=2026.6.1.19",
+-    "pluggy==1.7.0",
+-    "trove-classifiers==2026.9.21.13",
++    "hatchling",
++    "packaging",
++    "pathspec",
++    "pluggy",
++    "trove-classifiers",
  ]
  build-backend = "hatchling.build"
+ 
