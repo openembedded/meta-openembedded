@@ -32,7 +32,7 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
            file://run-ptest \
            "
-SRCREV = "601ec2d2f254909f56e2ee961d2056e0d5bc4a97"
+SRCREV = "bca9c4b34ce2f00b582ddab2b8c948a8d45f3376"
 
 UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
 
