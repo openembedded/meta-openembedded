@@ -6,12 +6,13 @@ HOMEPAGE = "https://pyproject-api.readthedocs.io"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
 
-SRC_URI[sha256sum] = "2e83226079dc446a8e2357def7622c01c733284e39afc8e332d9f722fe0c2beb"
+SRC_URI[sha256sum] = "0795693708f631af4c665ab02a315edc0fb97471f1d52e4a6179ed60504e96bb"
 
 BBCLASSEXTEND = "native nativesdk"
 inherit pypi python_hatchling
 
 DEPENDS += "\
+    python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
 "
 
