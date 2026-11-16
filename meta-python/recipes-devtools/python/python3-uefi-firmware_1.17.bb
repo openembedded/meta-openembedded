@@ -4,12 +4,12 @@ UEFI firmware parser is a simple module and set of scripts for parsing, \
 extracting, and recreating UEFI firmware volumes. This includes parsing \
 modules for BIOS, OptionROM, Intel ME and other formats too."
 HOMEPAGE = "https://github.com/theopolis/uefi-firmware-parser"
-LICENSE = "BSD-2-Clause AND BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://setup.py;md5=f3ddb5c3a389eada068ddcf6b89f62b2"
+LICENSE = "MIT AND BSD-2-Clause AND BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7befe9c63bf87929cff5a8b0c5a62bfb"
 
-SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=master;tag=v${PV}"
+SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch=main;tag=v${PV}"
 
-SRCREV = "e202e576cefd1fefb3f510237bbd0aea8aedca07"
+SRCREV = "4942c4865da22000f4bb484830e26019ec061498"
 
 DEPENDS += "python3-setuptools-scm-native"
 
