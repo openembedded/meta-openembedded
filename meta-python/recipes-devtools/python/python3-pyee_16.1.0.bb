@@ -3,9 +3,9 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b2b1cc8797dff32cec5d783148fceab5"
 
 DEPENDS = "python3-setuptools-scm-native"
-SRC_URI[sha256sum] = "34de6fbc4d8f0880bb997efd0eb642ba01f02688e740cbd3aa3bee9db4b1c5ec"
+SRC_URI[sha256sum] = "fe092d3a2a66f0f6a277fb227b078d3d849318da9a9d5d2f6576143236e84e48"
 
-inherit pypi python_setuptools_build_meta ptest-python-pytest
+inherit pypi python_hatchling ptest-python-pytest
 
 DEPENDS += "python3-wheel-native"
 
