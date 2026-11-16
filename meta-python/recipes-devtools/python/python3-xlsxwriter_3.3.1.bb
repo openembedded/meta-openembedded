@@ -2,11 +2,10 @@ SUMMARY = "Python 2 and 3 compatibility library"
 HOMEPAGE = "https://xlsxwriter.readthedocs.io"
 SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a4bab8df34a9a138b4e0ca56b8559a05"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5249ec013d324b4f1e23d5b019e679ca"
 
-inherit pypi setuptools3
+inherit pypi python_setuptools_build_meta
 
-PYPI_PACKAGE_SDIST = "XlsxWriter"
 
 RDEPENDS:${PN} += " \
 	python3-crypt \
@@ -16,6 +15,6 @@ RDEPENDS:${PN} += " \
 	python3-io \
 "
 
-SRC_URI[sha256sum] = "97618759cb264fb6a93397f660cca156ffa9561743b1823dafb60dc4474e1902"
+SRC_URI[sha256sum] = "0867761912cceac76f97ffa76eeda18c623ae9217f601be8512f55b1af4bdb6e"
 
 BBCLASSEXTEND = "native nativesdk"
