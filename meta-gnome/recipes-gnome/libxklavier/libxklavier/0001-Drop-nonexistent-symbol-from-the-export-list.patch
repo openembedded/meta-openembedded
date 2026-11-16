@@ -1,0 +1,31 @@
+From 3d64d9c69a92e4f05957e79010ca0be04bd59779 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sun, 15 Nov 2026 17:09:44 -0800
+Subject: [PATCH] Drop nonexistent symbol from the export list
+
+libxklavier.public exports xkl_engine_VOID__FLAGS_INT_BOOLEAN, but
+marshal.list has no VOID:FLAGS,INT,BOOLEAN entry, so the marshaller is
+never generated. GNU ld ignores the unknown symbol, but lld fails:
+
+  error: version script assignment of 'global' to symbol
+  'xkl_engine_VOID__FLAGS_INT_BOOLEAN' failed: symbol not defined
+
+Upstream-Status: Inactive-Upstream [lastrelease: 2013]
+
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ libxklavier/libxklavier.public | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/libxklavier/libxklavier.public b/libxklavier/libxklavier.public
+index 11f27d5..2789e6b 100644
+--- a/libxklavier/libxklavier.public
++++ b/libxklavier/libxklavier.public
+@@ -83,7 +83,6 @@ xkl_engine_start_listen
+ xkl_engine_state_change_get_type
+ xkl_engine_stop_listen
+ xkl_engine_ungrab_key
+-xkl_engine_VOID__FLAGS_INT_BOOLEAN
+ xkl_engine_VOID__ENUM_INT_BOOLEAN
+ xkl_get_country_name
+ xkl_get_language_name
