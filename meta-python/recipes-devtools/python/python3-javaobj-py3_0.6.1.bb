@@ -5,13 +5,12 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
  representation is a standard data interchange format in Java world."
 HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d273d63619c9aeaf15cdaf76422c4f87"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[sha256sum] = "e4e3257ef2cf81a3339787a4d5cf924e54c91f095a723f6d2584dae61d4396ed"
+SRC_URI[sha256sum] = "088ff086c6aa2912f342754c43b0ca3a504fb869bb5e6f13395131e87744ef3c"
 
 inherit pypi setuptools3
 
-PYPI_PACKAGE_SDIST = "javaobj-py3"
 
 BBCLASSEXTEND = "native nativesdk"
 
