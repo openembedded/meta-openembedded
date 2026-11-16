@@ -3,14 +3,13 @@ DESCRIPTION = "A high level, “more Pythonic” interface to the PKCS#11 (Crypt
 HOMEPAGE = "https://pypi.org/project/python-pkcs11/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.rst;beginline=337;endline=358;md5=f68bda54505b4002e6ec86e08125ef79"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f68bda54505b4002e6ec86e08125ef79"
 
-SRC_URI[sha256sum] = "9737e0c24cabb8bc9d48bf8c57c3df2a70f8cdd96b70c50290803286f9e46bf7"
+SRC_URI[sha256sum] = "e0d7ccede3b3145a678d7c8c59b3c64dcebeb77c9146ad3394a4b1309c4ab2a2"
 
 PYPI_PACKAGE = "python-pkcs11"
-PYPI_PACKAGE_SDIST = "python-pkcs11"
 
-inherit pypi setuptools3 cython
+inherit pypi python_setuptools_build_meta cython
 
 BBCLASSEXTEND = "native"
 
