@@ -1,0 +1,27 @@
+From 28dd5e6f6c60970c1e6b0a06b04f627a9d104c97 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Nov 2026 12:01:23 -0800
+Subject: [PATCH] pyproject.toml: Drop the setuptools upper bound
+
+OE builds without build isolation against the setuptools from
+oe-core, which is newer than the upper bound.
+
+Upstream-Status: Inappropriate [OE-specific]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 1ee7782..cfe1e75 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -2,7 +2,7 @@
+ # https://github.com/zopefoundation/meta/tree/master/src/zope/meta/pure-python
+ [build-system]
+ requires = [
+-    "setuptools >= 78.1.1,< 82",
++    "setuptools >= 78.1.1",
+     "wheel",
+ ]
+ build-backend = "setuptools.build_meta"
