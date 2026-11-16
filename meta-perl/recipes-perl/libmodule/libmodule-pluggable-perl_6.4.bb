@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=322;endline=325;md5=086450ce010f6fda
 
 SRCNAME = "Module-Pluggable"
 SRC_URI = "${CPAN_MIRROR}/authors/id/S/SI/SIMONW/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "58512bb9c654746d0937770b98b559b30872d85ac24073485e5830890dd1b2a0"
+SRC_URI[sha256sum] = "970fd13accd3d538e637db080ebbd9898020c8b5591837c8493a39edd737922d"
 
 
 UPSTREAM_CHECK_REGEX = "Module\-Pluggable\-(?P<pver>(\d+\.\d+))"
