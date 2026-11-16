@@ -9,12 +9,12 @@ DEPENDS = "libwnck3 libsm libxfce4ui libxfce4windowing virtual/libx11 gdk-pixbuf
 XFCE_COMPRESS_TYPE = "xz"
 XFCEBASEBUILDCLASS = "meson"
 
-inherit xfce update-alternatives features_check
+inherit xfce update-alternatives features_check gobject-introspection
 
 SRC_URI += "file://0001-meson.build-hard-code-path-to-iceauth.patch \
             file://0001-meson.build-Make-gdk-pixbuf-csource-available.patch \
 "
-SRC_URI[sha256sum] = "a8fe873fdb20366a44f1345400bfb29c2ff0cfe89dfefd852e2575464b80567c"
+SRC_URI[sha256sum] = "1809216cb1c658cba50c56b70bcdc1bd073bd357980a4dc335d442eb559bf18a"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 

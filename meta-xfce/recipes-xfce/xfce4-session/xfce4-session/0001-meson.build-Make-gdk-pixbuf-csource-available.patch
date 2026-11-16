@@ -14,18 +14,18 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meson.build b/meson.build
-index 6f372e0..633a5c5 100644
+index 566dbd5..e989710 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -47,7 +47,7 @@ libxfce4util = dependency('libxfce4util-1.0', version: dependency_versions['libx
- libxfce4windowing = dependency('libxfce4windowing-0', version: dependency_versions['libxfce4windowing'])
+@@ -51,7 +51,7 @@ libxfce4windowing = dependency('libxfce4windowing-0', version: dependency_versio
  xfconf = dependency('libxfconf-0', version: dependency_versions['xfce4'])
  
+ xdt_gen_visibility = find_program('xdt-gen-visibility', required: true)
 -gdk_pixbuf_csource = find_program(gdk_pixbuf.get_variable(pkgconfig: 'gdk_pixbuf_csource'), required: true)
 +gdk_pixbuf_csource = find_program('gdk-pixbuf-csource', required: true)
+ sed = find_program('sed', required: true)
  
  # Feature: 'x11'
- x11_deps = []
 -- 
 2.49.0
 
