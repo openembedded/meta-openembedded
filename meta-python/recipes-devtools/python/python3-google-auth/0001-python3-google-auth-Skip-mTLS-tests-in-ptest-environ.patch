@@ -18,31 +18,30 @@ in the embedded ptest runtime without external certificate infrastructure.
 Upstream-Status: Inappropriate [ptest environment limitation]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- tests/transport/test_requests.py | 6 ++++++
- tests/transport/test_urllib3.py  | 2 ++
+ tests/transport/test_requests.py |    6 ++++++
+ tests/transport/test_urllib3.py  |    2 ++
  2 files changed, 8 insertions(+)
 
 diff --git a/tests/transport/test_requests.py b/tests/transport/test_requests.py
-index f14ccea..6a1cc55 100644
 --- a/tests/transport/test_requests.py
 +++ b/tests/transport/test_requests.py
-@@ -178,6 +178,7 @@ class TimeTickAdapterStub(AdapterStub):
+@@ -504,6 +504,7 @@
+ 
+ 
  class TestMutualTlsAdapter(object):
++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
      @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
      @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
-+    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
      def test_success(self, mock_proxy_manager_for, mock_init_poolmanager):
-         adapter = google.auth.transport.requests._MutualTlsAdapter(
-             pytest.public_cert_bytes, pytest.private_key_bytes
-@@ -189,6 +190,7 @@ class TestMutualTlsAdapter(object):
-         adapter.proxy_manager_for()
-         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
+@@ -530,6 +531,7 @@
+         assert adapter._ctx_poolmanager.verify_mode == ssl.CERT_NONE
+         assert adapter._ctx_proxymanager.verify_mode == ssl.CERT_NONE
  
 +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
      def test_invalid_cert_or_key(self):
          with pytest.raises(exceptions.MutualTLSChannelError):
              google.auth.transport.requests._MutualTlsAdapter(
-@@ -408,6 +410,7 @@ class TestAuthorizedSession(object):
+@@ -750,6 +752,7 @@
              "https://{}/".format(default_host)
          )
  
@@ -50,35 +49,34 @@ index f14ccea..6a1cc55 100644
      def test_configure_mtls_channel_with_callback(self):
          mock_callback = mock.Mock()
          mock_callback.return_value = (
-@@ -432,6 +435,7 @@ class TestAuthorizedSession(object):
+@@ -771,6 +774,7 @@
+             google.auth.transport.requests._MutualTlsAdapter,
+         )
+ 
++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
      @mock.patch(
          "google.auth.transport._mtls_helper.get_client_cert_and_key", autospec=True
      )
+@@ -1671,6 +1675,7 @@
+ 
+ 
+ class TestMutualTlsOffloadAdapter(object):
 +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-     def test_configure_mtls_channel_with_metadata(self, mock_get_client_cert_and_key):
-         mock_get_client_cert_and_key.return_value = (
-             True,
-@@ -888,6 +892,7 @@ class TestMutualTlsOffloadAdapter(object):
-         google.auth.transport._custom_tls_signer.CustomTlsSigner,
-         "attach_to_ssl_context",
-     )
+     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
+     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
+     @mock.patch.object(
+@@ -1701,6 +1706,7 @@
+         adapter.proxy_manager_for()
+         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
+ 
 +    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-     def test_success(
-         self,
-         mock_attach_to_ssl_context,
-@@ -921,6 +926,7 @@ class TestMutualTlsOffloadAdapter(object):
-         google.auth.transport._custom_tls_signer.CustomTlsSigner,
-         "attach_to_ssl_context",
-     )
-+    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-     def test_success_should_use_provider(
-         self,
-         mock_attach_to_ssl_context,
+     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
+     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
+     @mock.patch.object(
 diff --git a/tests/transport/test_urllib3.py b/tests/transport/test_urllib3.py
-index 3367403..88d0963 100644
 --- a/tests/transport/test_urllib3.py
 +++ b/tests/transport/test_urllib3.py
-@@ -94,12 +94,14 @@ class ResponseStub(object):
+@@ -94,12 +94,14 @@
  
  
  class TestMakeMutualTlsHttp(object):
@@ -93,6 +91,3 @@ index 3367403..88d0963 100644
      def test_crypto_error(self):
          with pytest.raises(exceptions.MutualTLSChannelError):
              google.auth.transport.urllib3._make_mutual_tls_http(
--- 
-2.43.0
-
