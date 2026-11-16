@@ -38,17 +38,16 @@ parametrized tests based on only some combinations failing.
 Upstream-Status: Inappropriate (embedded specific)
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- tests/protocols/test_websocket.py | 19 +++++++++++++++++++
+ tests/protocols/test_websocket.py |   19 +++++++++++++++++++
  1 file changed, 19 insertions(+)
 
 diff --git a/tests/protocols/test_websocket.py b/tests/protocols/test_websocket.py
-index 87a151d..85eb362 100644
 --- a/tests/protocols/test_websocket.py
 +++ b/tests/protocols/test_websocket.py
-@@ -204,6 +204,11 @@ async def test_close_connection(ws_protocol_cls: WSProtocol, http_protocol_cls:
+@@ -206,6 +206,11 @@
          assert not is_open
-
-
+ 
+ 
 +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-httptools]
 +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-h11]
 +# FAIL: tests/protocols/test_websocket.py:test_headers[websockets-sansio-httptools]
@@ -57,10 +56,10 @@ index 87a151d..85eb362 100644
  async def test_headers(ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int):
      class App(WebSocketResponse):
          async def websocket_connect(self, message: WebSocketConnectEvent):
-@@ -758,6 +763,13 @@ async def test_send_binary_data_to_server_bigger_than_default_on_websockets(
-                 assert ws.close_code == expected_result
-
-
+@@ -762,6 +767,13 @@
+         assert disconnect_code == expected_result
+ 
+ 
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[wsproto-httptools]
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[wsproto-h11]
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_exceeding_max_size[websockets-httptools]
@@ -71,10 +70,10 @@ index 87a151d..85eb362 100644
  async def test_fragmented_message_exceeding_max_size(
      ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int
  ):
-@@ -782,6 +794,13 @@ async def test_fragmented_message_exceeding_max_size(
+@@ -784,6 +796,13 @@
      assert exc_info.value.rcvd.code == 1009
-
-
+ 
+ 
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[wsproto-httptools]
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[wsproto-h11]
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-httptools]
@@ -82,6 +81,6 @@ index 87a151d..85eb362 100644
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-sansio-httptools]
 +# FAIL: tests/protocols/test_websocket.py:test_fragmented_message_reassembly[websockets-sansio-h11]
 +@pytest.mark.skip(reason="failing on Yocto/OpenEmbedded")
+ @pytest.mark.parametrize("opcode", [Opcode.TEXT, Opcode.BINARY])
  async def test_fragmented_message_reassembly(
-     ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int
- ):
+     ws_protocol_cls: WSProtocol, http_protocol_cls: HTTPProtocol, unused_tcp_port: int, opcode: Opcode

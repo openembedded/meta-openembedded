@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5c778842f66a649636561c423c0eec2e"
 RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
 
-SRC_URI[sha256sum] = "ebf4271aa580d9de97f93192d4595176df6e91f9aae919ca73e4fc07df1e66a3"
+SRC_URI[sha256sum] = "a2e33cbfaa0306f8e6b0c13e0cb89d7d7a2da3e62b90c66e18c33d9807b28620"
 
 SRC_URI += "file://0001-ptest-disable-failing-tests.patch \
             file://0002-ptest-skip-test_headers.patch \
@@ -27,7 +27,7 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-ptest += "\
     python3-a2wsgi \
-    python3-httpx \
+    python3-httpx2 \
     python3-pytest-mock \
     python3-pyyaml \
 "

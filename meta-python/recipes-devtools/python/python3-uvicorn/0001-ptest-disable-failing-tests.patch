@@ -9,16 +9,15 @@ Upstream-Status: Pending [https://github.com/Kludex/uvicorn/discussions/2759]
 
 Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- tests/protocols/test_websocket.py      | 3 +++
- tests/supervisors/test_multiprocess.py | 2 ++
- tests/test_config.py                   | 5 +++--
+ tests/protocols/test_websocket.py      |    3 +++
+ tests/supervisors/test_multiprocess.py |    2 ++
+ tests/test_config.py                   |    5 +++--
  3 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/tests/protocols/test_websocket.py b/tests/protocols/test_websocket.py
-index 2e1a33a..ae1e041 100644
 --- a/tests/protocols/test_websocket.py
 +++ b/tests/protocols/test_websocket.py
-@@ -685,6 +685,9 @@ MAX_WS_BYTES = 1024 * 1024 * 16
+@@ -694,6 +694,9 @@
  MAX_WS_BYTES_PLUS1 = MAX_WS_BYTES + 1
  
  
@@ -29,30 +28,28 @@ index 2e1a33a..ae1e041 100644
      "client_size_sent, server_size_max, expected_result",
      [
 diff --git a/tests/supervisors/test_multiprocess.py b/tests/supervisors/test_multiprocess.py
-index e1f594e..43002c3 100644
 --- a/tests/supervisors/test_multiprocess.py
 +++ b/tests/supervisors/test_multiprocess.py
-@@ -75,6 +75,7 @@ def test_multiprocess_run() -> None:
-     supervisor.join_all()
+@@ -86,6 +86,7 @@
+     thread.join()
  
  
 +@pytest.mark.skip(reason="fails on OpenEmbedded/Yocto")
  @new_console_in_windows
  def test_multiprocess_health_check() -> None:
      """
-@@ -121,6 +122,7 @@ def test_multiprocess_sigbreak() -> None:  # pragma: py-not-win32
+@@ -151,6 +152,7 @@
      supervisor.join_all()
  
  
 +@pytest.mark.skip(reason="failing on Yocto/OpenEmbedded")
  @pytest.mark.skipif(not hasattr(signal, "SIGHUP"), reason="platform unsupports SIGHUP")
- def test_multiprocess_sighup() -> None:
+ def test_multiprocess_sighup(monkeypatch: pytest.MonkeyPatch) -> None:
      """
 diff --git a/tests/test_config.py b/tests/test_config.py
-index 9c80ca4..fe4c2e8 100644
 --- a/tests/test_config.py
 +++ b/tests/test_config.py
-@@ -303,8 +303,9 @@ def test_asgi_version(app: ASGIApplication, expected_interface: Literal["2.0", "
+@@ -309,8 +309,9 @@
  @pytest.mark.parametrize(
      "use_colors, expected",
      [
@@ -64,6 +61,3 @@ index 9c80ca4..fe4c2e8 100644
          pytest.param(True, True, id="use_colors_enabled"),
          pytest.param(False, False, id="use_colors_disabled"),
      ],
--- 
-2.47.3
-
