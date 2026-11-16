@@ -1,3 +1,4 @@
 #!/bin/sh
 
-pytest --automake
+# reads portalocker/__init__.py from the source tree, which is not installed
+pytest --automake --deselect portalocker_tests/test_optional_redis.py::test_redislock_stub_import_and_raise_in_process
