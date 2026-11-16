@@ -4,7 +4,7 @@ HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=8099b0e569f862ece05740aef06c82a2"
 
-SRC_URI[sha256sum] = "604b9cdd7c1bb9e73e54a189643d56d08bf841691775122962430ee2ca3506fe"
+SRC_URI[sha256sum] = "5428f6601086a8f5e41aa70248b3b983443e7badf263551c5104ba2ec0c9d955"
 
 SRC_URI += "file://0001-setup.py-Make-the-cmd-available.patch"
 SRC_URI += "file://0002-_m2crypto.i-add-py2-py3-C-API-compat-macros.patch"

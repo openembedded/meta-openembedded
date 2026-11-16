@@ -22,14 +22,12 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  setup.py | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/setup.py b/setup.py
-index 792d7365b6ed..5b8a5d791793 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -208,8 +208,10 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+@@ -234,8 +234,10 @@
          if sys.platform != "win32":
              # generate src/SWIG/x509_v_flag.h to overcome weaknesses of swig
-             # https://todo.sr.ht/~mcepl/m2crypto/298
+             # https://codefloe.com/mcepl/m2crypto/issues/298
 -            with open("src/SWIG/x509_v_flag.h", "w", encoding="utf-8") as x509_v_h:
 -                cmd = [shutil.which(os.environ.get("CC", "gcc"))]
 +            with open(
@@ -39,6 +37,3 @@ index 792d7365b6ed..5b8a5d791793 100644
                  cflags = os.environ.get("CFLAGS")
                  if cflags is not None:
                      cmd += cflags.split()
--- 
-2.34.1
-
