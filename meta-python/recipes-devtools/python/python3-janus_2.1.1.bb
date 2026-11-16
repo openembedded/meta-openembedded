@@ -3,9 +3,10 @@ SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=23878c357ebb4c8ce1109be365043349"
 
-SRC_URI[sha256sum] = "0970f38e0e725400496c834a368a67ee551dc3b5ad0a257e132f5b46f2e77770"
+SRC_URI += "file://0001-pyproject.toml-Relax-the-uv_build-version-bound.patch"
+SRC_URI[sha256sum] = "da6197870a8c634fed91698b5fd9725c33b83cb693baabf264320d7773e53659"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi python_uv_build
 
 DEPENDS += "python3-wheel-native"
 
