@@ -10,12 +10,11 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
+        git://gitlab.freedesktop.org/camera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
         file://0001-ipa_data_serializer-Mark-vector-readPOD-overload-as-m.patch \
-        file://0002-libcamera-egl-Don-t-redefine-EGL_NO_X11.patch \
 "
 
-SRCREV = "191e202178f02430b5942397c70d215cdd2056fa"
+SRCREV = "df8e348d64b4932a0676256ed24f0da3ee9438bc"
 
 PE = "1"
 
@@ -64,10 +63,6 @@ EXTRA_OEMESON = " \
 RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
 
 inherit meson pkgconfig python3native
-
-do_configure:prepend() {
-    sed -i -e 's|py_compile=True,||' ${S}/utils/codegen/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
-}
 
 do_install:append() {
     chrpath -d ${D}${libdir}/libcamera.so
