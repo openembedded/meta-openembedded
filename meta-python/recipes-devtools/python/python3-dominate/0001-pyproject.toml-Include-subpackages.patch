@@ -1,0 +1,35 @@
+From 3447817e6a7253d3e43af5fd6248f472cb46d6bf Mon Sep 17 00:00:00 2001
+From: Leon Anavi <leon.anavi@konsulko.com>
+Date: Mon, 16 Nov 2026 11:02:29 +0200
+Subject: [PATCH] pyproject.toml: Include subpackages
+
+Extend tool.setuptools with "dominate.community".
+
+Fixes the following error when running tests in Yocto/OpenEmbedded
+setup with ptest-runner python3-dominate:
+
+E   ModuleNotFoundError: No module named 'dominate.community'
+
+Upstream-Status: Pending [https://github.com/Knio/dominate/pull/246]
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 2b1743f..f33862f 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -37,7 +37,7 @@ requires = ["setuptools>=75"]
+ build-backend = "setuptools.build_meta"
+ 
+ [tool.setuptools]
+-packages = ["dominate"]
++packages = ["dominate", "dominate.community"]
+ 
+ [tool.setuptools.package-data]
+ dominate = ["README.md"]
+-- 
+2.47.3
+
