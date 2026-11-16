@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/executablebooks/markdown-it-py"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a38a1697260a7ad7bf29f44b362db1fc"
 
-SRC_URI[sha256sum] = "04a21681d6fbb623de53f6f364d352309d4094dd4194040a10fd51833e418d49"
+SRC_URI[sha256sum] = "91a58fa5b72c71a40cf7177250fd767480d7a2bb3ac426ccfb76fb90305fdaaa"
 
 inherit pypi python_flit_core
 
