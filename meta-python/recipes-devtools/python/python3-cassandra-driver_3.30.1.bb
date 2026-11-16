@@ -8,13 +8,19 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SRCNAME = "cassandra-driver"
 
-SRC_URI += "file://0001-skip-verifying-the-availability-of-setuptools.patch"
-SRC_URI[sha256sum] = "ff6b82ee4533f6fd4474d833e693b44b984f58337173ee98ed76bce08721a636"
+SRC_URI[sha256sum] = "0c6a3e1428f7c6a9aa6c944b9c47a37cd2cdbeb5b5a82d42c33afdd56f14e398"
 
 inherit pypi python_setuptools_build_meta
 
+# Look for libev in the sysroot rather than in host directories
+do_configure:prepend() {
+    sed -i -e 's|^libev-includes = .*|libev-includes = ["${STAGING_INCDIR}"]|' \
+        -e 's|^libev-libs = .*|libev-libs = ["${STAGING_LIBDIR}"]|' ${S}/pyproject.toml
+}
+
 RDEPENDS:${PN} += "\
     python3-cython \
+    python3-deprecated \
     python3-geomet \
     python3-json \
     python3-misc \
@@ -24,5 +30,7 @@ RDEPENDS:${PN} += "\
 "
 
 DEPENDS += "\
-    python3-cython \
+    python3-cython-native \
+    python3-tomli-native \
+    libev \
 "
