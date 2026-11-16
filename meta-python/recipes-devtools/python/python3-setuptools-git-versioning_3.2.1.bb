@@ -3,7 +3,7 @@ HOMEPAGE = "https://setuptools-git-versioning.readthedocs.io"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=92e79e3a844e66731724600f3ac9c0d8"
 
-SRC_URI[sha256sum] = "27aa1ad0409b632ee49947ea592cc27e16fbb2a1605cc22efeb7c353fd790b31"
+SRC_URI[sha256sum] = "8cccd352642ed6435da35b8edaf56a2f764f061ef2edaf3ae6602806acc7105f"
 
 inherit pypi python_setuptools_build_meta
 
