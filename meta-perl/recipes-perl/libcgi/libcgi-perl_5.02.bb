@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "babc1ca72db188083a1c3812debe88c4473b943b1f7c662281cd57c580a8bdd9"
+SRC_URI[sha256sum] = "47637ad0413c527e00e1249d14dba0c234073ad4bef09746fafd73dd85ded665"
 
 S = "${UNPACKDIR}/CGI-${PV}"
 
@@ -26,6 +26,7 @@ RDEPENDS:${PN} += "\
 do_install:prepend() {
     # requires "-T" (taint) command line option
     rm -rf ${B}/t/push.t
+    rm -rf ${B}/t/taint.t
     rm -rf ${B}/t/utf8.t
     # tests building of docs
     rm -rf ${B}/t/compiles_pod.t
