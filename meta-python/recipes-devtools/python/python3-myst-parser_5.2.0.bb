@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/executablebooks/MyST-Parser"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a38a1697260a7ad7bf29f44b362db1fc"
 
-SRC_URI[sha256sum] = "ab69322dc6719dcc7f296479dbb70181b66df6ed315064f92dbc85c0e1bf2f02"
+SRC_URI[sha256sum] = "749cc02793f2be6b984b0b59b1fe33b6ed61d77644499b85db436d0d20117fa4"
 
 inherit pypi python_flit_core
 
