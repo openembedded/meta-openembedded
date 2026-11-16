@@ -3,15 +3,14 @@ HOMEPAGE = "https://github.com/platformdirs/platformdirs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4f5a41454746a9ed111e3d8723d17a"
 
-SRC_URI[sha256sum] = "05831adf87d392760f4b5c3a0a95579ab5a10b18b9b9bd43680dcb47544788a0"
+SRC_URI[sha256sum] = "32e9921db7385aa8169bee4fe9501923e5715ba9fb7ea3b9c69b0d8e0639f7a1"
 
 inherit pypi python_hatchling ptest-python-pytest
 
-SRC_URI += "file://run-ptest \
-            file://0001-test-unix-use-host-strerror-in-warning-tests-630.patch \
-            "
+SRC_URI += "file://run-ptest"
 
 DEPENDS += " \
+    python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
 "
 
