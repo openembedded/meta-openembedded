@@ -7,21 +7,17 @@ Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Jan Vermaete <jan.vermaete@oip.be>
 ---
- tests/test_asyncio.py | 1 +
+ tests/test_asyncio.py |    1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
-index 0b74476..2da0784 100644
 --- a/tests/test_asyncio.py
 +++ b/tests/test_asyncio.py
-@@ -192,6 +192,7 @@ class TestContextManager(unittest.TestCase):
-         else:
-             raise Exception
+@@ -365,6 +365,7 @@
+             await retrying(_test)
+         self.assertEqual(2, retrying.statistics["attempt_number"])
  
 +    @unittest.skip("Failing in ptest with qemu")
      @asynctest
-     async def test_sleeps(self):
+     async def test_sleeps(self) -> None:
          start = current_time_ms()
--- 
-2.43.0
-
