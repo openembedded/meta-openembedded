@@ -11,6 +11,6 @@ SRC_URI += " \
 	file://0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch \
 	file://0001-src-scikit_build_core-Don-t-use-module.patch \
 "
-SRC_URI[sha256sum] = "a4d7a05978ee37975c37743510c8991e2debce7ef83afb0a07c0c576fd4f16e8"
+SRC_URI[sha256sum] = "7893709119c5ab1be75cd10442383132c9433b9f104dacef5185949efbea7974"
 
 BBCLASSEXTEND = "native nativesdk"

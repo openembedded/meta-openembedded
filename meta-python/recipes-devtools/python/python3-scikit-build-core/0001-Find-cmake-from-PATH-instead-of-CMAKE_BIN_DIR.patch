@@ -21,11 +21,9 @@ Upstream-Status: Inappropriate [oe specific]
  src/scikit_build_core/program_search.py | 10 ----------
  1 file changed, 10 deletions(-)
 
-diff --git a/src/scikit_build_core/program_search.py b/src/scikit_build_core/program_search.py
-index 7995c14..f82cad3 100644
 --- a/src/scikit_build_core/program_search.py
 +++ b/src/scikit_build_core/program_search.py
-@@ -90,16 +90,6 @@ class Program(NamedTuple):
+@@ -119,16 +119,6 @@
  
  
  def _get_cmake_path(*, module: bool = True) -> Generator[Path, None, None]:
@@ -39,9 +37,6 @@ index 7995c14..f82cad3 100644
 -
 -            yield Path(CMAKE_BIN_DIR) / "cmake"
 -
-     candidates = ("cmake3", "cmake")
+     candidates = ("cmake", "cmake3")
      for candidate in candidates:
          cmake_path = shutil.which(candidate)
--- 
-2.51.1
-

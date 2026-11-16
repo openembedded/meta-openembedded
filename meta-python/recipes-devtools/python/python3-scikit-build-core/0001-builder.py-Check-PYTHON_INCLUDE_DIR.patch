@@ -11,22 +11,18 @@ Upstream-Status: Inappropriate [oe specific]
 Suggested-by: Stephan Kulow <stephan.kulow@siemens.com>
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- src/scikit_build_core/builder/builder.py | 2 +-
+ src/scikit_build_core/builder/builder.py |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/scikit_build_core/builder/builder.py b/src/scikit_build_core/builder/builder.py
-index 4be0cca..0fc54f4 100644
 --- a/src/scikit_build_core/builder/builder.py
 +++ b/src/scikit_build_core/builder/builder.py
-@@ -395,7 +395,7 @@ class Builder:
-             python_sabi_library = get_python_library(self.config.env, abi3t=True)
-         elif sabi == _SabiMode.ABI3:
-             python_sabi_library = get_python_library(self.config.env, abi3=True)
--        python_include_dir = get_python_include_dir()
-+        python_include_dir = os.getenv("PYTHON_INCLUDE_DIR") or get_python_include_dir()
-         numpy_include_dir = get_numpy_include_dir()
+@@ -402,7 +402,7 @@
+                 python_sabi_library = get_python_library(self.config.env, abi3t=True)
+             elif sabi == _SabiMode.ABI3:
+                 python_sabi_library = get_python_library(self.config.env, abi3=True)
+-            python_include_dir = get_python_include_dir()
++            python_include_dir = os.getenv("PYTHON_INCLUDE_DIR") or get_python_include_dir()
+             numpy_include_dir = get_numpy_include_dir()
  
-         # Warning for CPython 3.13.4 Windows bug
--- 
-2.47.3
-
+             # Classic Find Python
