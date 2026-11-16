@@ -8,7 +8,7 @@ HOMEPAGE = "http://code.google.com/p/imsettings/"
 SECTION = "Applications/System"
 
 LICENSE = "LGPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4bf661c1e3793e55c8d1051bc5e0ae21"
 
 inherit autotools gettext gtk-doc gobject-introspection features_check
 
@@ -20,7 +20,7 @@ SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main;tag=
            file://imsettings-gcc10.patch \
            file://0001-remove-man-page.patch \
           "
-SRCREV = "7fadd84fcbfe6c321dbe1c97b50cbb70efe20155"
+SRCREV = "e2d473f3a307d87d3f3bdac1412edd252165493b"
 
 
 do_configure:prepend() {
