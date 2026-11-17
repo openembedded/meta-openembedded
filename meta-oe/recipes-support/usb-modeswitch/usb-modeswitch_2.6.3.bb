@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=091556bd6d0154cd4c2d17a1bfc7380a"
 DEPENDS = "libusb1"
 
 SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "f7abd337784a9d1bd39cb8a587518aff6f2a43d916145eafd80b1b8b7146db66"
+SRC_URI[sha256sum] = "cddb987af80eca5bc9c364dc0ccd0e2b788de4d28626d017277a48c06b0453b6"
 
 inherit pkgconfig systemd
 
