@@ -11,6 +11,7 @@ DEPENDS += "python3-wheel-native"
 
 RDEPENDS:${PN}-ptest += " \
         python3-sqlite3 \
+        python3-zoneinfo \
 "
 
 RDEPENDS:${PN} = "\
