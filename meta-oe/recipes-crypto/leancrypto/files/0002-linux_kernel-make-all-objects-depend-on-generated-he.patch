@@ -1,0 +1,40 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Nov 2026 23:50:00 -0800
+Subject: [PATCH] linux_kernel: make all objects depend on generated headers
+
+Kbuild.autogen generates lc_memory_support.h, lc_hash.h and the
+algorithm size headers, but lists them as a prerequisite of only
+posix_support.o or leancrypto_kernel.o. Many other objects include
+them, e.g. internal/src/status.c includes small_stack_support.h, which
+includes lc_memory_support.h. With a parallel build such an object can
+be compiled before the header is generated:
+
+  ././../internal/api/small_stack_support.h:24:10: fatal error:
+    lc_memory_support.h: No such file or directory
+
+Building only ../internal/src/status.o from a clean tree reproduces it
+every time. Make every module object depend on all generated headers.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ linux_kernel/Kbuild | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/linux_kernel/Kbuild b/linux_kernel/Kbuild
+index 8194be9..3df5f17 100644
+--- a/linux_kernel/Kbuild
++++ b/linux_kernel/Kbuild
+@@ -22,3 +22,11 @@ include $(src)/Kbuild.slh-dsa
+ include $(src)/Kbuild.hqc
+ include $(src)/Kbuild.sntrup
+ include $(src)/Kbuild.asn1
++
++# The generated headers are included from objects all over the tree, not only
++# from those that list them as a prerequisite in Kbuild.autogen. Make every
++# module object depend on all of them, so that a parallel build does not
++# compile an object before the headers it includes exist.
++lc_generated_headers := $(addprefix $(obj)/,$(filter %.h,$(targets)))
++lc_module_objs := $(foreach m,$(obj-m:.o=),$(or $(strip $($(m)-y)),$(m).o))
++$(addprefix $(obj)/,$(lc_module_objs)): $(lc_generated_headers)

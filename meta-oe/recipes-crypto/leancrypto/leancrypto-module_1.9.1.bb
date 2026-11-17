@@ -3,7 +3,9 @@ DESCRIPTION = "Standalone Linux kernel module providing PQC-resistant algorithms
 
 require leancrypto.inc
 
-SRC_URI += "file://0001-linux_kernel-use-target-architecture-for-generated-headers.patch"
+SRC_URI += "file://0001-linux_kernel-use-target-architecture-for-generated-headers.patch \
+            file://0002-linux_kernel-make-all-objects-depend-on-generated-he.patch \
+            "
 
 inherit module
 
