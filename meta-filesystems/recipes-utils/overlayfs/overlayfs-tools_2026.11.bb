@@ -7,7 +7,7 @@ SRC_URI = "\
     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "950d0cf35e4f917b6836565d76e38bcf7fcf2d5f"
+SRCREV = "42582352e11b162895c06826f18a2246d8005ca9"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
