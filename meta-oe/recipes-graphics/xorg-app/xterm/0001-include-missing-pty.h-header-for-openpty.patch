@@ -1,4 +1,4 @@
-From e30ab2d73a21bc55511cbedbb9ae603246dbfcd1 Mon Sep 17 00:00:00 2001
+From 5e34d71052f1ea63363fe7937859dfa8d46dfb4c Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 16 May 2024 23:10:00 -0700
 Subject: [PATCH] include missing pty.h header for openpty()
@@ -18,9 +18,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  main.c | 1 +
  1 file changed, 1 insertion(+)
 
+diff --git a/main.c b/main.c
+index f9d0d14..dac48d7 100644
 --- a/main.c
 +++ b/main.c
-@@ -89,6 +89,7 @@
+@@ -68,6 +68,7 @@
  
  #define RES_OFFSET(field)	XtOffsetOf(XTERM_RESOURCE, field)
  
