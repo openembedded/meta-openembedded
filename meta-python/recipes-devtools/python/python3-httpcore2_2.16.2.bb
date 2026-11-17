@@ -5,7 +5,7 @@ HOMEPAGE = "https://github.com/pydantic/httpx2"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=77c5a523c15d4a5887b081bba41ca110"
 
-SRC_URI[sha256sum] = "c72cd0413563b17e1cd8354677dff887466f8ec2551679759e93126534428643"
+SRC_URI[sha256sum] = "6c519d0f7b44f7269fa9bbb4d2763db395a4a2370f046d8e8e0a4b38227815d2"
 
 inherit pypi python_hatchling
 
