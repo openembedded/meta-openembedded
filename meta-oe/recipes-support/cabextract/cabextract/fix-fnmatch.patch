@@ -1,5 +1,6 @@
-From - Mon Jun 11 00:00:00 2024
+From e1f0981b45923c50382e7bbbd2f581a9597d68fb Mon Sep 17 00:00:00 2001
 From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Tue, 17 Nov 2026 13:33:30 +0000
 Subject: [PATCH] Don't play with fnmatch.c replacement
 
 Currently fnmatch.c, even if it is selected, conditionally disables compilation
@@ -15,11 +16,14 @@ collect2: error: ld returned 1 exit status
 
 Upstream-Status: Submitted [https://github.com/kyz/libmspack/pull/51]
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+---
+ fnmatch.c | 7 -------
+ 1 file changed, 7 deletions(-)
 
-Index: cabextract-1.11/fnmatch.c
-===================================================================
---- cabextract-1.11.orig/fnmatch.c
-+++ cabextract-1.11/fnmatch.c
+diff --git a/fnmatch.c b/fnmatch.c
+index 868bdae..d2b6f05 100644
+--- a/fnmatch.c
++++ b/fnmatch.c
 @@ -49,11 +49,6 @@ static const char rcsid[] =
     it is simpler to just do this in the source for each such file.
  */

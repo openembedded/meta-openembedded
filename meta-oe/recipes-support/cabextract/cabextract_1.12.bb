@@ -11,7 +11,7 @@ SRC_URI = "\
     file://fix-fnmatch.patch \
 "
 
-SRC_URI[sha256sum] = "b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6"
+SRC_URI[sha256sum] = "8f39ad5f9c076b9c62c67dea4f8649e75dcc16899a2d8122ca32ba68262cb713"
 
 UPSTREAM_CHECK_URI = "https://github.com/kyz/libmspack/tags"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
