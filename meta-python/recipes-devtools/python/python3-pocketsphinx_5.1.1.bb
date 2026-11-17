@@ -5,7 +5,9 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause OR BSD-3-Clause OR MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c4d720cdc9c6953091f65e8b01524bb4"
 
-SRC_URI += "file://0001-cython-Use-cythyon3-in-cmake-check.patch"
+SRC_URI += "file://0001-cython-Use-cythyon3-in-cmake-check.patch \
+            file://0002-cmake-Do-not-emit-line-directives-in-generated-parse.patch \
+            "
 SRC_URI[sha256sum] = "675778b309a22dfc9b7d37f7621976bba491d2a5f8c59696bd77fd6d07271355"
 
 inherit cmake pkgconfig pypi python3native cython

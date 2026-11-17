@@ -1,0 +1,35 @@
+From 66df12e27503489ceeef95a24e35a94f4d230aff Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Nov 2026 23:26:33 -0800
+Subject: [PATCH] cmake: Do not emit #line directives in generated parser and
+ scanner
+
+flex and bison record the absolute path of their output files in #line
+directives. When the scanner and parser are regenerated at build time,
+the build directory ends up in the sources and in the debug info, which
+makes builds non-reproducible.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index e5c9e09..45b66df 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -135,11 +135,13 @@ find_package(BISON 3.0.0)
+ if(BISON_FOUND)
+   bison_target(JSGFParser lm/jsgf_parser.y
+     ${CMAKE_CURRENT_SOURCE_DIR}/lm/jsgf_parser.c
++    COMPILE_FLAGS --no-lines
+     DEFINES_FILE ${CMAKE_CURRENT_SOURCE_DIR}/lm/jsgf_parser.h)
+ endif()
+ find_package(FLEX)
+ if(FLEX_FOUND)
+   flex_target(JSGFScanner lm/_jsgf_scanner.l
+     ${CMAKE_CURRENT_SOURCE_DIR}/lm/jsgf_scanner.c
++    COMPILE_FLAGS --noline
+     DEFINES_FILE ${CMAKE_CURRENT_SOURCE_DIR}/lm/jsgf_scanner.h)
+ endif()
