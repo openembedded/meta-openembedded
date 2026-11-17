@@ -9,6 +9,7 @@
 PTESTS_FAST_META_FILESYSTEMS = "\
     e2tools \
     exfatprogs \
+    overlayfs-tools \
     unionfs-fuse \
 "
 
