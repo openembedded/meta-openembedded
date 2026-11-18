@@ -1,0 +1,44 @@
+From 059887c4e51ff49dd8d944eb6ca732a6cfd3043f Mon Sep 17 00:00:00 2001
+From: Kanksha Paturi <Kanksha.Paturi@windriver.com>
+Date: Tue, 10 Nov 2026 17:24:56 +0000
+Subject: [PATCH] deps: histogram: restrict AVX2 dispatch to x86_64
+
+The bundled hdr_histogram enables its AVX2 dispatch on 32-bit x86, but
+the AVX2 path uses _mm_extract_epi64(), which only exists on 64-bit
+x86. Building for 32-bit x86 (qemux86) fails with:
+
+  hdr_histogram.c:740: error: implicit declaration of function
+  '_mm_extract_epi64'
+
+Only the AVX2 dispatch guard is backported from the histogram 0.12.0
+update, not the whole commit.
+
+Upstream-Status: Backport [https://github.com/nodejs/node/commit/1271bb448ae46ca67ad6306b43e3aab2c5b36d3c]
+
+Signed-off-by: Kanksha Paturi <Kanksha.Paturi@windriver.com>
+---
+ deps/histogram/src/hdr_histogram.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/deps/histogram/src/hdr_histogram.c b/deps/histogram/src/hdr_histogram.c
+index a34de2c1b2..7a1531a71e 100644
+--- a/deps/histogram/src/hdr_histogram.c
++++ b/deps/histogram/src/hdr_histogram.c
+@@ -34,9 +34,14 @@
+ #  define HDR_UNLIKELY(x) (x)
+ #endif
+
+-/* Runtime-dispatched AVX2 path: keep the rest of this TU at the project's
+-   baseline ISA so the shipped binary does not silently require AVX2. */
+-#if (defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)) \
++/* Runtime-dispatched AVX2 path; rest of TU stays at baseline ISA so the binary
++   doesn't silently require AVX2. 64-bit x86 + GCC/Clang only:
++     - 32-bit x86: _mm_extract_epi64 unavailable in 32-bit codegen.
++     - _MSC_VER: __builtin_cpu_supports's __cpu_model isn't linked under MSVC;
++       clang-cl also defines __x86_64__/__clang__ so this exclusion is load-bearing.
++     - __INTEL_COMPILER: ICC classic. */
++#if !defined(HDR_DISABLE_AVX2) \
++    && defined(__x86_64__) \
+     && (defined(__GNUC__) || defined(__clang__)) && !defined(__INTEL_COMPILER) && !defined(_MSC_VER)
+ #  define HDR_HAS_AVX2_DISPATCH 1
+ #  include <immintrin.h>
