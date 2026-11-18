@@ -1,6 +1,6 @@
 SUMMARY = "Pylint is a Python source code analyzer"
 HOMEPAGE = "https://www.pylint.org/"
-LICENSE = "GPL-2.0-only"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 
 SRCREV = "edc8e376ba4affd43bc07571bdf3a90efc281ba7"
