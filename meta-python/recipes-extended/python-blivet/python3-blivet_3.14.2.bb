@@ -1,9 +1,10 @@
 DESCRIPTION = "A python module for system storage configuration"
 HOMEPAGE = "https://fedoraproject.org/wiki/blivet"
-LICENSE = "LGPL-2.0-or-later"
+LICENSE = "GPL-2.0-or-later AND LGPL-2.1-or-later"
 SECTION = "devel/python"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI += "\
            file://0002-run_program-support-timeout.patch \
