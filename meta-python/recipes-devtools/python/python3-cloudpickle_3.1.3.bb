@@ -10,6 +10,6 @@ HOMEPAGE = "https://github.com/cloudpipe/cloudpickle"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b4d59aa5e2cc777722aac17841237931"
 
-SRC_URI[sha256sum] = "7fda9eb655c9c230dab534f1983763de5835249750e85fbcef43aaa30a9a2414"
+SRC_URI[sha256sum] = "cbe9fde14429a5db009ea05ce94e5182cf998c97b96918d50c10f73f9c2f4f33"
 
 inherit pypi python_flit_core
