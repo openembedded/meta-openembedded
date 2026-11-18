@@ -7,7 +7,7 @@ for digital audio."
 
 HOMEPAGE = "https://www.iis.fraunhofer.de/en/ff/amm/impl.html"
 
-LICENSE = "LicenseRef-Fraunhofer-FDK-AAC-Codec-Library-for-Android AND LicenseRef-Fraunhofer-FDK-xHE-AAC-Encoder-for-Android"
+LICENSE = "FDK-AAC AND LicenseRef-Fraunhofer-FDK-xHE-AAC-Encoder-for-Android"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875 \
                     file://xhe-aac/NOTICE;md5=096ee69e4afc742d2f471c565d72ebb5"
@@ -24,5 +24,5 @@ inherit autotools
 PACKAGES =+ "libfdk-xhe-aac"
 FILES:libfdk-xhe-aac = "${libdir}/libfdk-xhe-aac${SOLIBS}"
 
-LICENSE:${PN} = "LicenseRef-Fraunhofer-FDK-AAC-Codec-Library-for-Android"
+LICENSE:${PN} = "FDK-AAC"
 LICENSE:libfdk-xhe-aac = "LicenseRef-Fraunhofer-FDK-xHE-AAC-Encoder-for-Android"
