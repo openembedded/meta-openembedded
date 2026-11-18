@@ -1,5 +1,5 @@
 SUMMARY = "Window navigation construction toolkit"
-LICENSE = "LGPL-2.0-only"
+LICENSE = "GPL-2.0-or-later AND GPL-3.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 
