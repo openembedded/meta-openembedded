@@ -7,7 +7,6 @@ SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.gz \
            file://build-ouside_srcdir.patch \
            file://use-DESTDIR.patch \
            file://0001-include-libgen.h-for-basename.patch \
-           file://0001-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
            "
 
 SRC_URI[md5sum] = "f9894703fcc559f63cffacfea08f9b75"
