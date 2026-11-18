@@ -1,6 +1,6 @@
 DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
 HOMEPAGE = "http://eigen.tuxfamily.org/"
-LICENSE = "Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND MPL-2.0 AND Minpack"
+LICENSE = "Apache-2.0 AND BSD-3-Clause AND GPL-2.0-or-later AND MPL-2.0 AND Minpack"
 # The GPL code is only used for benchmark tests and does not affect what is installed.
 LICENSE:${PN} = "Apache-2.0 AND BSD-3-Clause AND MPL-2.0 AND Minpack"
 LICENSE:${PN}-dbg = "Apache-2.0 AND BSD-3-Clause AND MPL-2.0 AND Minpack"
