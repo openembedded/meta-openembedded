@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fb9b93a440d3ef2fb6eeebfa59384c53"
 
 SRCREV = "7434cabf2b539f5cb0ecfcb1e05864424acb3ee1"
 PYPI_SRC_URI = "git://github.com/adamchainz/time-machine;protocol=https;branch=main;tag=${PV};destsuffix=time_machine-${PV}"
-SRC_URI += "file://0001-Fix-fuzz-test-failing-for-ambiguous-datetimes.patch"
+SRC_URI += "file://0001-Fix-fuzz-test-failing-for-ambiguous-datetimes.patch \
+            file://0002-Load-zone-files-explicitly-when-setting-TZ.patch \
+            "
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest
 

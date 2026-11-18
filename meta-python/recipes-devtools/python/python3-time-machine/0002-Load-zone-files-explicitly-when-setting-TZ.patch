@@ -1,0 +1,73 @@
+From 0a09d1e03836c12e5d7fa83238b78ea0cc3317d7 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Tue, 17 Nov 2026 21:16:34 -0800
+Subject: [PATCH] Load zone files explicitly when setting TZ
+
+travel() sets the TZ environment variable to the ZoneInfo key of the
+destination, so that the C library's local time matches the zone. POSIX
+leaves the meaning of a TZ value without a leading colon to the
+implementation when it is not a rule string, but keys like "EST5EDT",
+"CST6CDT", "GB-Eire", "NZ-CHAT" and "W-SU" are also valid POSIX rule
+strings. musl parses them as rules rather than loading the zone file, so
+time.localtime() and time.mktime() lose the zone's history and disagree
+with zoneinfo; for example, EST5EDT on 2000-01-01 was treated as
+daylight time. The fuzz tests catch this intermittently on musl in
+test_localtime_and_gmtime_match_datetime and test_naive_datetime_modes.
+
+Prefix the key with a colon, which glibc, musl and tzcode-based C
+libraries all read as "load this zone file". Leave "UTC" alone, so it
+keeps working without zone files installed. Do the same in the fuzz
+tests' local_timezone() helper.
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/time_machine/__init__.py | 12 +++++++++++-
+ tests/test_fuzz.py           |  4 +++-
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/src/time_machine/__init__.py b/src/time_machine/__init__.py
+index 7bedceb..e11a776 100644
+--- a/src/time_machine/__init__.py
++++ b/src/time_machine/__init__.py
+@@ -269,7 +269,7 @@ class Traveller:
+ 
+         if HAVE_TZSET and self._destination_tzname is not None:
+             self._orig_tz = os.environ.get("TZ")
+-            os.environ["TZ"] = self._destination_tzname
++            os.environ["TZ"] = _tz_environ_value(self._destination_tzname)
+             tzset()
+ 
+     def _stop(self) -> None:
+@@ -281,6 +281,16 @@ class Traveller:
+             tzset()
+ 
+ 
++def _tz_environ_value(tzname: str) -> str:
++    # A leading colon makes the C library load the named zone file. Without
++    # it, keys that are also valid POSIX TZ strings, such as "EST5EDT", may be
++    # parsed as POSIX rules instead (musl does this), losing the zone's
++    # history.
++    if tzname == "UTC":
++        return tzname
++    return ":" + tzname
++
++
+ traveller_stack: list[Traveller] = []
+ original_uuid_generate_time_safe = None
+ original_uuid_uuid_create = None
+diff --git a/tests/test_fuzz.py b/tests/test_fuzz.py
+index bcd40a7..736ebe2 100644
+--- a/tests/test_fuzz.py
++++ b/tests/test_fuzz.py
+@@ -603,7 +603,9 @@ def test_travel_to_string_variants(destination, style):
+ @contextmanager
+ def local_timezone(key: str) -> Iterator[None]:
+     try:
+-        with mock.patch.dict(os.environ, {"TZ": key}):
++        # A leading colon makes the C library load the named zone file, rather
++        # than parse keys like "EST5EDT" as POSIX rules.
++        with mock.patch.dict(os.environ, {"TZ": ":" + key}):
+             time.tzset()
+             yield
+     finally:
