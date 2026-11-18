@@ -15,6 +15,8 @@ UPSTREAM_CHECK_REGEX = "release-(?P<pver>\d+(\.\d+)+\+\d+(\.\d+)+)"
 
 inherit autotools pkgconfig github-releases
 
+EXTRA_OECONF += "--enable-ld-version-script"
+
 PACKAGES += "${PN}-utils"
 
 FILES:${PN} = "${libdir}/${BPN}${SOLIB}"
