@@ -26,6 +26,7 @@ EXTRA_OECONF += "--without-embedded-libevent \
                  --with-privsep-group=lldpd \
                  --with-systemdsystemunitdir=${systemd_system_unitdir} \
                  --without-sysusersdir \
+                 --enable-ld-version-script \
 "
 
 PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
