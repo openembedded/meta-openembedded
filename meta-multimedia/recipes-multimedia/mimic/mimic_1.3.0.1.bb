@@ -1,6 +1,6 @@
 SUMMARY = "A fast lightweight Text-to-speech engine"
 DESCRIPTION = "Mimic is a fast, lightweight Text-to-speech engine developed by Mycroft A.I. and VocaliD, based on Carnegie Mellon University’s Flite (Festival-Lite) software. Mimic takes in text and reads it out loud to create a high quality voice."
-HOMEPAGE = "https://mimic.mycroft.ai/"
+HOMEPAGE = "https://github.com/MycroftAI/mimic1"
 SECTION = "multimedia"
 
 # "Mimic is available under permissive BSD-like licenses"
