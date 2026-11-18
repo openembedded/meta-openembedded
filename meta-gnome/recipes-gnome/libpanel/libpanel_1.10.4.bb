@@ -1,5 +1,5 @@
 # your responsibility to verify that the values are complete and correct.
-LICENSE = "LGPL-2.1-only"
+LICENSE = "GPL-3.0-or-later AND LGPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
 
 GNOMEBASEBUILDCLASS = "meson"
