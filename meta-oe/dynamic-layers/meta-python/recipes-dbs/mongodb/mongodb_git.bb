@@ -1,5 +1,5 @@
 SUMMARY = "mongodb"
-LICENSE = "Apache-2.0 AND Zlib AND LicenseRef-SSPL-1"
+LICENSE = "Apache-2.0 AND Zlib AND SSPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE-Community.txt;md5=3a865f27f11f43ecbe542d9ea387dcf1 \
                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
