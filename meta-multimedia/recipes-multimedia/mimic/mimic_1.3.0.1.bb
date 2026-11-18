@@ -18,6 +18,9 @@ LICENSE = " \
 "
 LIC_FILES_CHKSUM = "file://COPYING;md5=a2c2c7371b58b9cdeae0dc68846fe9f1"
 
+# The flite and rateconv licenses are provided by meta-oe
+LICENSE_PATH += "${LAYERDIR_meta-oe}/licenses"
+
 DEPENDS = "curl-native libpcre2"
 
 SRCREV = "adf655da0399530ac1b586590257847eb61be232"
