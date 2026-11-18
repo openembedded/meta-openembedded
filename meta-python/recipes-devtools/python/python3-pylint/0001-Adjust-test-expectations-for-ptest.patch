@@ -6,7 +6,7 @@ Subject: [PATCH] Adjust test expectations for ptest
 Because of the way we install ptests, some first party imports
 became third party. Reflect that in the test case.
 
-Upstream-Status: Inappropriate (embedded specific)
+Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
 ---
  tests/functional/w/wrong_import_order.txt | 22 +++++++++++-----------

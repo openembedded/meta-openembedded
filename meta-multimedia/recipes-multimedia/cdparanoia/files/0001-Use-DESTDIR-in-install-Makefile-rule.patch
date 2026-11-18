@@ -7,7 +7,7 @@ This change allows to perform installations in a sysroot folder, which is requir
 the recipes inheriting yocto autotool class, and is an autotool standard:
 make install DESTDIR=~/mysysroot
 
-Upstream-Status: Inappropriate (the upstream project is dead)
+Upstream-Status: Inappropriate [the upstream project is dead]
 
 Signed-off-by: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
 ---

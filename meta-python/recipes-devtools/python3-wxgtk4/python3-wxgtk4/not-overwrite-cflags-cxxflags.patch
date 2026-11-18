@@ -8,7 +8,7 @@ Subject: [PATCH] Not overwrite CFLAGS and CXXFLAGS. It also avoid buildpaths
   /usr/lib64/python3.11/site-packages/wx/.debug/_xml.cpython-311-aarch64-linux-gnu.so
   in package python3-wxgtk4-dbg contains reference to TMPDIR [buildpaths]
 
-Upstream-Status: Pending [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---

@@ -19,7 +19,7 @@ Use XPUB sockets where the test creates the socket and wait for the
 subscription messages before publishing, and remove leftover handlers
 in tearDown.
 
-Upstream-Status: Submitted [Pending]
+Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---

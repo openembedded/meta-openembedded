@@ -18,7 +18,7 @@ proxy.Method(a, b, callback=func, callback_args=(x, y))
 
 Adapted from Fedora [https://src.fedoraproject.org/cgit/rpms/python-pydbus.git/]
 
-Upstream-Status: Inactive-Upstream (Last release 12/18/2016; Last commit 05/6/2018)
+Upstream-Status: Inactive-Upstream [lastrelease: 2016-12-18, lastcommit: 2018-05-06]
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---

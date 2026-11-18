@@ -3,7 +3,7 @@ From: Kai Kang <kai.kang@windriver.com>
 Date: Wed, 30 Mar 2022 17:39:33 +0800
 Subject: [PATCH] Add back default user options for cross build.
 
-Upstream-Status: Pending [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---

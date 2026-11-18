@@ -14,7 +14,6 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
-Upstream-Status: Pending
 
  test/NeXT.cpp | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)

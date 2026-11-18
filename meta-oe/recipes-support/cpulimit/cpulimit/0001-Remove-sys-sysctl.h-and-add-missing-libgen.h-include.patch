@@ -6,7 +6,7 @@ Subject: [PATCH] Remove sys/sysctl.h and add missing libgen.h include
 - sys/sysctl.h has been deprecated and should be removed
 - Adds missing libgen.h include when calling basename()
 
-Upstream-Status: Inactive-Upstream [2015]
+Upstream-Status: Inactive-Upstream [lastcommit: 2015]
 Signed-off-by: Portia <stephensportia@gmail.com>
 ---
  src/cpulimit.c      | 1 -

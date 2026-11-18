@@ -16,7 +16,7 @@ PyparsingDeprecationWarning: 'initChars' argument is deprecated, use 'init_chars
 PyparsingDeprecationWarning: 'infixNotation' deprecated - use 'infix_notation'
 PyparsingDeprecationWarning: 'scanString' deprecated - use 'scan_string'
 
-Upstream-Status: Pending [https://github.com/decalage2/oletools/pull/888]
+Upstream-Status: Submitted [https://github.com/decalage2/oletools/pull/888]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---

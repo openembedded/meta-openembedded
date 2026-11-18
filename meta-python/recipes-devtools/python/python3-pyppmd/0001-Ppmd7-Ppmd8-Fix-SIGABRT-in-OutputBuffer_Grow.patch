@@ -17,7 +17,7 @@ testdata2.ppmd in small chunks.
 
 This work was sponsored by GOVCERT.LU.
 
-Upstream-Status: Pending [https://github.com/miurahr/pyppmd/pull/131/]
+Upstream-Status: Submitted [https://github.com/miurahr/pyppmd/pull/131]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---

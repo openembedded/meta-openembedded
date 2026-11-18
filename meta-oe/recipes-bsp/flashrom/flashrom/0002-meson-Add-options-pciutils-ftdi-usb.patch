@@ -6,7 +6,7 @@ Subject: [PATCH] meson: Add options pciutils, ftdi, usb
 The options have been dropped in favor of an array option called programmer.
 Since this doesn't integrate well into yocto add back the old options.
 
-Upstream-Status: Inappropriate Just to fix yocto build system
+Upstream-Status: Inappropriate [OE build system specific]
 
 Change-Id: Ib697b9f7cc7fc553cfdeb75ae9d49a367badd286
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>

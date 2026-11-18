@@ -8,7 +8,7 @@ toolchain (Yocto/OpenEmbedded, Buildroot, ...). These already
 inject the correct target. Avoid issues such as an unknown value
 'x86-64-v2' for '-march' when cross compiling for ARM machine.
 
-Upstream-Status: Pending [https://github.com/crossbario/autobahn-python/pull/1934]
+Upstream-Status: Submitted [https://github.com/crossbario/autobahn-python/pull/1934]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---

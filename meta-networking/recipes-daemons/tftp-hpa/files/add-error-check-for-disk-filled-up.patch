@@ -7,7 +7,7 @@ Add error check when the write-buffer is finally flushed to the file,
 the caller can detect if the disk filled up (or had an i/o error) and
 return a NOSAPCE nak to the other side.
 
-Upstream-Status: Pending [Sent to http://www.syslinux.org/archives/2013-August/020765.html]
+Upstream-Status: Submitted [http://www.syslinux.org/archives/2013-August/020765.html]
 
 Signed-off-by: Ming Liu <ming.liu@windriver.com>
 Signed-off-by: Roy.Li <rongqing.li@windriver.com>

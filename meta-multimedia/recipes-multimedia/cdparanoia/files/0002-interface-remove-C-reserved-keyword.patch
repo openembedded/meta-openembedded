@@ -6,7 +6,7 @@ Subject: [PATCH] interface: remove C++ reserved keyword
 Because "private" was used in cdda_interface.h, this header file could not be
 compiled in C++.
 
-Upstream-Status: Inappropriate (the upstream project is dead)
+Upstream-Status: Inappropriate [the upstream project is dead]
 
 Signed-off-by: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
 ---

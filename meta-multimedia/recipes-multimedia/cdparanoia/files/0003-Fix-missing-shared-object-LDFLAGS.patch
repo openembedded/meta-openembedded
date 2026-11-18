@@ -3,7 +3,7 @@ From: Carlos Rafael Giani <dv@pseudoterminal.org>
 Date: Sat, 10 Sep 2016 21:15:18 +0200
 Subject: [PATCH] Fix missing shared object LDFLAGS
 
-Upstream-Status: Inappropriate (the upstream project is dead)
+Upstream-Status: Inappropriate [the upstream project is dead]
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---

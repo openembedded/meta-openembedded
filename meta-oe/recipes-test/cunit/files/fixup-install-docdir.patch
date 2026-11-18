@@ -6,7 +6,7 @@ The default configuration macros for CUnit install the documentation and
 header files in locations not consistent with the OE filesystem layout.
 So here we specify new locations which are consistent with OE filesystems.
 
-Upstream-Status: Inappropriate - configuration for OE build environment
+Upstream-Status: Inappropriate [configuration for OE build environment]
 
 Signed-off-by: Mike Holmes <mike.holmes@linaro.org>
 Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>

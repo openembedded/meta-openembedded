@@ -11,7 +11,7 @@ the protobuf 4.22x is using c++14 as default, this caused the mosh cannot compil
 | | ^~~~~~~~~~~~~~~~~~~~~~
 ....
 
-Upstream-Status: Pending [https://github.com/mobile-shell/mosh/pull/1266]
+Upstream-Status: Submitted [https://github.com/mobile-shell/mosh/pull/1266]
 
 Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
 ---

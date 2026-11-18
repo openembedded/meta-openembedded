@@ -10,7 +10,7 @@ setup with ptest-runner python3-dominate:
 
 E   ModuleNotFoundError: No module named 'dominate.community'
 
-Upstream-Status: Pending [https://github.com/Knio/dominate/pull/246]
+Upstream-Status: Submitted [https://github.com/Knio/dominate/pull/246]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---

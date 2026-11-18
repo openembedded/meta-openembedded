@@ -35,7 +35,7 @@ target. Skipped to match this recipe's existing precedent in
 0001-ptest-disable-failing-tests.patch, which also skips fully
 parametrized tests based on only some combinations failing.
 
-Upstream-Status: Inappropriate (embedded specific)
+Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  tests/protocols/test_websocket.py |   19 +++++++++++++++++++

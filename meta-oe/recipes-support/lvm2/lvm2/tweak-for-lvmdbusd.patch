@@ -9,7 +9,7 @@ dependencies. Deal with them in the package config setting in the recipe.
 Remove $(DESTDIR) from install destination that it is not suitable for oe. And
 no generate python cache files too.
 
-Upstream-Status: Pending [oe specific]
+Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---

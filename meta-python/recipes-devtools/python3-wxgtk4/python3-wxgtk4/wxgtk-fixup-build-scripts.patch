@@ -9,7 +9,7 @@ Subject: [PATCH] Fix issues in build scripts:
 * do not override self.install_lib with self.install_platlib which causes
   package issue when multilib is enabled.
 
-Upstream-Status: Pending [cross build specific]
+Upstream-Status: Inappropriate [cross build specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---

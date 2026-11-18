@@ -16,7 +16,7 @@ line 213.
 Ensure that it is always the empty string so that apache-websocket
 is able to find the required config files.
 
-Upstream-Status: Inappropriate (embedded-specific)
+Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---

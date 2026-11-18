@@ -7,7 +7,7 @@ Fall back to the installed oletools location for the directory with
 source code if the sibling "oletools" dir doesn't exist (e.g.
 packaged/ptest installs).
 
-Upstream-Status: Pending [https://github.com/decalage2/oletools/pull/889]
+Upstream-Status: Submitted [https://github.com/decalage2/oletools/pull/889]
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---

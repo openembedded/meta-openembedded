@@ -6,7 +6,7 @@ Subject: [PATCH] netserver: don't change permissions on /dev/null
 the (now default) suppress_debug=1 changes permissions on /dev/null
 to 0644. Don't do this.
 
-Upstream-Status: Pending [https://github.com/HewlettPackard/netperf/pull/27/commits/78c9ae7d9a6735575bc72dd28a19b2bc3a251981]
+Upstream-Status: Submitted [https://github.com/HewlettPackard/netperf/pull/27]
 Signed-off-by: Ashish Sharma <asharma@mvista.com>
 
 ---

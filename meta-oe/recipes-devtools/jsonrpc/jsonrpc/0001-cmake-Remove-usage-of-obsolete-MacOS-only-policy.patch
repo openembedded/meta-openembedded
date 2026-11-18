@@ -14,7 +14,7 @@ CMake Error at CMakeLists.txt:21 (cmake_policy):
   behavior or use an older version of CMake that still supports the old
   behavior.  Run cmake --help-policy CMP0042 for more information.
 
-Upstream-Status: Inactive-Upstream [2022-01-12]
+Upstream-Status: Inactive-Upstream [lastcommit: 2022-01-12]
 Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
 ---
  CMakeLists.txt | 5 -----
