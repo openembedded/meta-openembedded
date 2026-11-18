@@ -1,0 +1,31 @@
+From ef1f415170cfbb891a04af68852c9ea85c63d2c3 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Nov 2026 01:52:06 -0800
+Subject: [PATCH] neon.vers: Drop ne_sock_writev
+
+There is no ne_sock_writev() function; the vectored write API is
+ne_sock_fullwritev(), which is already listed in the same version
+node. GNU ld silently ignores the stale entry, but lld defaults to
+--no-undefined-version and fails the link:
+
+  ld.lld: error: version script assignment of 'NEON_0_29' to symbol
+  'ne_sock_writev' failed: symbol not defined
+
+Upstream-Status: Submitted [https://github.com/notroj/neon/pull/255]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/neon.vers | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/neon.vers b/src/neon.vers
+index c2a4dcb..ce5339a 100644
+--- a/src/neon.vers
++++ b/src/neon.vers
+@@ -3,7 +3,6 @@
+ 
+ NEON_0_29 {
+     ne_iaddr_raw;
+-    ne_sock_writev;
+     ne_sock_fullwritev;
+     ne_sock_set_error;
+     ne_sock_proxy;

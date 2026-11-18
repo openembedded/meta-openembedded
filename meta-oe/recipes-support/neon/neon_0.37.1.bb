@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a 
 SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
            file://pkgconfig.patch \
            file://0001-Disable-installing-documentation.patch \
+           file://0001-neon.vers-Drop-ne_sock_writev.patch \
            file://run-ptest \
            "
 
@@ -30,7 +31,7 @@ PACKAGECONFIG[openssl] = "--with-ssl=openssl,,openssl"
 PACKAGECONFIG[webdav] = "--enable-webdav,--disable-webdav,"
 PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
 
-EXTRA_OECONF += "--enable-shared --enable-threadsafe-ssl=posix"
+EXTRA_OECONF += "--enable-shared --enable-threadsafe-ssl=posix --enable-ld-version-script"
 
 do_configure:prepend() {
     echo "${PV}" > ${S}/.version
