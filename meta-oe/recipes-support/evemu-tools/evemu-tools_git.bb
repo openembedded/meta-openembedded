@@ -2,8 +2,9 @@ SUMMARY = "Kernel evdev device emulation"
 DESCRIPTION = "The evemu library and tools are used to describe devices, record data, create devices and replay data from kernel evdev devices."
 HOMEPAGE = "https://www.freedesktop.org/wiki/Evemu"
 
-LICENSE = "GPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
+LICENSE = "GPL-3.0-only AND LGPL-3.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+                    file://COPYING.GPL3;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
 DEPENDS = "libevdev"
 
