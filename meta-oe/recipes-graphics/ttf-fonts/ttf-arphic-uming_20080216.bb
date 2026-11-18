@@ -1,6 +1,6 @@
 SUMMARY = "Unicode Mingti (printed) TrueType Font"
 HOMEPAGE = "http://www.freedesktop.org/wiki/Software/CJKUnifonts"
-LICENSE = "LicenseRef-Arphic-Public-License"
+LICENSE = "Arphic-1999"
 LIC_FILES_CHKSUM = "file://license/english/ARPHICPL.TXT;md5=4555ed88e9a72fc9562af379d07c3350"
 
 RPROVIDES:${PN} = "virtual-chinese-font"

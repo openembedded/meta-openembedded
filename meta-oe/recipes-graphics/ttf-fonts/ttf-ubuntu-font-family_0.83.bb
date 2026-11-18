@@ -2,7 +2,7 @@ require ttf.inc
 
 SUMMARY = "Ubuntu Font Family - TTF Version"
 HOMEPAGE = "http://font.ubuntu.com"
-LICENSE = "LicenseRef-UFL"
+LICENSE = "Ubuntu-font-1.0"
 LIC_FILES_CHKSUM = "file://LICENCE.txt;md5=325a1a9029112a2405e743c7f816427b"
 
 SHA1SUM = "0cef8205"
