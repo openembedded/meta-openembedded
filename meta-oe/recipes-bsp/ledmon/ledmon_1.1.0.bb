@@ -5,8 +5,9 @@ DESCRIPTION = "The utilities are designed primarily to be used on storage server
 "
 HOMEPAGE = "https://github.com/intel/ledmon"
 
-LICENSE = "LGPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+LICENSE = "GPL-2.0-only AND LGPL-2.1-or-later"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+                    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "autoconf-archive-native sg3-utils udev pciutils"
 
