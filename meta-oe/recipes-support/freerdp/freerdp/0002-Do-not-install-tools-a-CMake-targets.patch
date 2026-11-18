@@ -7,7 +7,7 @@ The cli tools are installed manually and thus are missing in the sysroot
 folder. Do not export their targets because they do not exist and make
 CMake fail when searching for the library.
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: CLI tools are not staged in the sysroot]
 Signed-off-by: Andreas Cord-Landwehr <cordlandwehr@kde.org>
 ---
  winpr/tools/hash-cli/CMakeLists.txt     | 2 +-

@@ -11,7 +11,7 @@ In file included from ../mDNSCore/mDNS.c:76:
 ../mDNSShared/CommonServices.h:856:13: note: 'bool' is a keyword with '-std=c23' onwards
 ../mDNSShared/CommonServices.h:856:1: warning: useless type name in empty declaration
 
-Upstream-Status: Pending (An owner of this repository has limited the ability to open a pull request to users that are collaborators on this repository.)
+Upstream-Status: Denied [upstream does not accept external contributions]
 
 Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
 ---

@@ -8,7 +8,7 @@ Subject: [PATCH] meson: remove extraneous positional argument
 
 Closes #186
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-screenshot/-/commit/b60dad3c2536c17bd201f74ad8e40eb74385ed9f]
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
  data/meson.build | 2 --

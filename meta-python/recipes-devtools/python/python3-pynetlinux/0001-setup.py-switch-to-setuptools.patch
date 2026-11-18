@@ -9,8 +9,7 @@ removal in Python 3.12.
 Switch from 'distutils.core' to 'setuptools'. This also allows for the
 'wheel' binary archive format to be built with 'setup.py bdist_wheel'.
 
-Upstream-Status: Submitted
-[https://github.com/rlisagor/pynetlinux/pull/12]
+Upstream-Status: Submitted [https://github.com/rlisagor/pynetlinux/pull/12]
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---

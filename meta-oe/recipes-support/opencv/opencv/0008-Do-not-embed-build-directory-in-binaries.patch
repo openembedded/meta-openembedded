@@ -5,7 +5,7 @@ Subject: Do not embed build directory in binaries
 This makes the opencv core module build reproducibly.
 
 https://salsa.debian.org/science-team/opencv/-/raw/master/debian/patches/0008-Do-not-embed-build-directory-in-binaries.patch
-Upstream-Status: Backport
+Upstream-Status: Inappropriate [Debian reproducibility patch, drops build-tree data lookup; not upstream]
 Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
 ---
  modules/core/CMakeLists.txt                   | 10 ------

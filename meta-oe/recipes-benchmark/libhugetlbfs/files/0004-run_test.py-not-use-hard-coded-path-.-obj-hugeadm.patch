@@ -6,7 +6,7 @@ Subject: [PATCH] run_test.py: not use hard coded path ../obj/hugeadm
 Hard coded path makes the script impossible to run out of source tree.
 After 'make install', we can use hugeadm utility under DESTDIR.
 
-Upstream-Status: Submitted
+Upstream-Status: Pending
 
 Signed-off-by: Ting Liu <b28495@freescale.com>
 

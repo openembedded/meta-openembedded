@@ -3,7 +3,7 @@ fuse: add aarch64 support
 u64/u32 is not defined in sys/types.h, include linux/types.h like
 the kernel version of fuse.h does. Patch sent to upstream mailing list.
 
-Upstream-Status: Submitted
+Upstream-Status: Backport [https://github.com/libfuse/libfuse/commit/914871b20a901e3e1e981c92bc42b1c93b7ab81b]
 Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---

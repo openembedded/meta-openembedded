@@ -3,7 +3,7 @@ From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Sat, 21 Mar 2026 20:12:39 +0000
 Subject: [PATCH] mDNSShared: Make Apple Wireless Direct Link depend on macOS
 
-Upstream-Status: Inactive-Upstream [Upstream does not take patches]
+Upstream-Status: Denied [upstream does not accept external contributions]
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSShared/uds_daemon.c | 4 ++++

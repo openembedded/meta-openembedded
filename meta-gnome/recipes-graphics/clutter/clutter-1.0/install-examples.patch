@@ -1,7 +1,7 @@
 Install the examples to $libdir/clutter/.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: install examples for ${PN}-examples]
 
 Index: clutter-1.26.2/examples/Makefile.am
 ===================================================================

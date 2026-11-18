@@ -5,7 +5,7 @@ Subject: [PATCH] build: Fix build for newer versions of meson
 
 sendto/meson.build:24:5: ERROR: Function does not take positional arguments.
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gnome-bluetooth/-/commit/755fd758f866d3a3f7ca482942beee749f13a91e]
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
  sendto/meson.build | 1 -

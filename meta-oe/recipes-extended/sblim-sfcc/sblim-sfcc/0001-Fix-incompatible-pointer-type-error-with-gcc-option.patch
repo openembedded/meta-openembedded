@@ -32,8 +32,7 @@ Subject: Fix incompatible pointer type error with gcc option
 |    82 |     printf( "invokeMethod() rc=%d, msg=%s\n",
 |       |                                        ^~
 
-Upstream-Status: Backport
-[https://github.com/kkaempf/sblim-sfcc/commit/881fccbaf19e26cbef3da1bebe2b42b3a9de1147#diff-ad9eeee99837ead0f29c70cd5f3956178dc3d51bd79618affd53d72a31404d5f]
+Upstream-Status: Backport [https://github.com/kkaempf/sblim-sfcc/commit/55b4a9b7fbf05b4004d2efe034c996850ffc06fd https://github.com/kkaempf/sblim-sfcc/commit/881fccbaf19e26cbef3da1bebe2b42b3a9de1147]
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---

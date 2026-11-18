@@ -7,7 +7,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/NetworkManager-fortisslvpn/-/commit/084ef529c5fb816927ca54866f66b340265aa9f6]
 Signed-off-by: Eivind Næss <eivnaes@yahoo.com>
 ---
  Makefile.am                                   |  5 +-

@@ -3,7 +3,7 @@ From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Date: Mon, 26 Nov 2018 14:53:09 +0800
 Subject: [PATCH] Avoid bashisms in init scripts
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: avoid runtime dependency on bash]
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 

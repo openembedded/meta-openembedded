@@ -11,7 +11,7 @@ Add guard around features.h to fix missing include (here first error):
            ^~~~~~~~~~~~
  compilation terminated
 
-Upstream-Status: Submitted
+Upstream-Status: Backport [https://git.infraroot.at/mtd-utils.git/commit/?id=73b8c2e23412c9dc306ac251c6bf9ab6b8aaffeb]
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---

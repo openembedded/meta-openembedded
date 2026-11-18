@@ -5,7 +5,7 @@ Subject: [PATCH] tests/Makefile: install static 4G edge testcases
 
 TESTS_64 is empty, install will fail due to missing file operand
 
-Upstream-Status: Submitted
+Upstream-Status: Pending
 
 Signed-off-by: Ting Liu <b28495@freescale.com>
 ---

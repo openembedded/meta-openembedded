@@ -7,7 +7,7 @@ This removes the hand-crafted Makefile in favor of standardized autotools
 build configuration. This is done to allow for easy cross-compilation of
 this project.
 
-Upstream-Status: Submitted
+Upstream-Status: Submitted [https://github.com/Airblader/unclutter-xfixes/pull/51]
 
 Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---

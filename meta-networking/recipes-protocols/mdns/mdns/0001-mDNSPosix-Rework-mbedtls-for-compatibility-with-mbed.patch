@@ -3,7 +3,7 @@ From: Alex Kiernan <alex.kiernan@gmail.com>
 Date: Thu, 30 Apr 2026 08:21:19 +0100
 Subject: [PATCH] mDNSPosix: Rework mbedtls for compatibility with mbedtls4
 
-Upstream-Status: Inactive-Upstream [Upstream does not take patches]
+Upstream-Status: Denied [upstream does not accept external contributions]
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
  mDNSPosix/mbedtls.c | 21 +++++----------------

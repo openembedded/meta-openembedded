@@ -9,7 +9,7 @@ Adding the -n option to gzip while compressing the archive does
 not save the original time stamp by default hence making
 reproducible build.
 
-Upstream-Status: Inappropriate
+Upstream-Status: Pending
 
 Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
 Index: terminus-font-4.49.1/Makefile

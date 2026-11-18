@@ -5,7 +5,7 @@ Subject: [PATCH] ext: define FNM_EXTMATCH if not already defined
 
 On musl this constant is not defined. Define it locally if not present.
 
-Upstream-Status: Inappropriate
+Upstream-Status: Pending
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 

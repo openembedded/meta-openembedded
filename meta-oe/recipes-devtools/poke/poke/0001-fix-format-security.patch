@@ -3,7 +3,7 @@ From: Wang Mingyu <wangmy@fujitsu.com>
 Date: Thu, 20 Aug 2026 10:24:56 +0000
 Subject: [PATCH] fix format security
 
-Upstream-Status: Submitted
+Upstream-Status: Submitted [https://lists.gnu.org/archive/html/poke-devel/2026-08/msg00037.html]
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---

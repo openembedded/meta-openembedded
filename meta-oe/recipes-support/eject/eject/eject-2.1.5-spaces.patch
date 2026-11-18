@@ -1,6 +1,6 @@
 Kept to help with spaces in the mount path
 
-Upstream-Status: Backport
+Upstream-Status: Backport [eject CVS eject.c rev 1.11, via https://src.fedoraproject.org/rpms/eject/blob/3c2c0d449ce805931e752d160518dd48309a1bdd/f/eject-2.1.5-spaces.patch]
 
 Linux mangles spaces in mount points by changing them to an octal string
 of '\040'.  So lets scan the mount point and fix it up by replacing all

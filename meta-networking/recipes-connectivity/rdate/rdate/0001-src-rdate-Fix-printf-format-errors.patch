@@ -8,10 +8,9 @@ Fixes
 rdate.c:85:41: error: format not a string literal and no format arguments [-Werror=format-security]
 |    syslog(is_error?LOG_WARNING:LOG_INFO, buf);
 
+Upstream-Status: Backport [https://github.com/njh/rdate/commit/37e3c1b36848fc73bc4dd87b51be7cc7e91f0702]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-Upstream-Status: Submitted
-
  src/rdate.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 

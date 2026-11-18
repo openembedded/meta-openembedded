@@ -1,6 +1,6 @@
 This doesn't use automake so don't turn it on, as autoreconf will refuse to work.
 
-Upstream-Status: Submitted
+Upstream-Status: Pending
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 
 diff --git i/stable/configure.in w/stable/configure.in

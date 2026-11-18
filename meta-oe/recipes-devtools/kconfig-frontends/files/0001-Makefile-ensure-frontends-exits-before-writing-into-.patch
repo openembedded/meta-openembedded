@@ -6,7 +6,7 @@ Subject: [PATCH] Makefile: ensure frontends/ exits before writing into it
 As previously, if GCC dependencies are not being written and the build is out of
 tree then frontends/ won't exist so we need to create it.
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://gitlab.com/ymorin/kconfig-frontends/-/commit/780b0b8e48551ba49b011caeeb09101a09c14a61]
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 Signed-off-by: Yann E. MORIN <yann.morin.1998@free.fr>
 (cherry picked from commit f7986375129d1ada7dc6abeeec5b9d00ef6f7149)

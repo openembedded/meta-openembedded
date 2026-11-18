@@ -1,4 +1,4 @@
-Upstream-Status: Submitted
+Upstream-Status: Pending
 
 Package saftest run a test case to pass invalid session id to function
 saHpiResourceIdGet that expect return SA_ERR_HPI_INVALID_SESSION. But the check

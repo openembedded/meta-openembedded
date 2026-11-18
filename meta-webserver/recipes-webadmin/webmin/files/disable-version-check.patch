@@ -3,7 +3,7 @@ Disable OS version check in status screen
 The code is not able to accurately detect the correct distro/version at
 the moment.
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: webmin OS detection does not know OE distros]
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 

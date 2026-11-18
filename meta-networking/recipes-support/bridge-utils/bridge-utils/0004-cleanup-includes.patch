@@ -7,8 +7,7 @@ Use IWYU to only include necessary headers.
 Should resolve build issues for distros that need limits.h
 to find PATH_MAX.
 
-Upstream-Status: Backport
-[https://git.kernel.org/pub/scm/network/bridge/bridge-utils.git/commit/?h=main&id=1763c5b7f8f72d651d62337029c3bdfb269491e4]
+Upstream-Status: Backport [https://git.kernel.org/pub/scm/network/bridge/bridge-utils.git/commit/?id=1763c5b7f8f72d651d62337029c3bdfb269491e4]
 
 Signed-off-by: Stephen Hemminger <sthemmin@microsoft.com>
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>

@@ -1,7 +1,7 @@
 We don't need to build ninja so there's no need to use scikit-build-core,
 as we just need the python module with its one ninja() function.
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: ninja binary comes from the ninja recipe]
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 

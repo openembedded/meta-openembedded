@@ -6,7 +6,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: uses DEBUG_PREFIX_MAP exported by the recipe]
 
 Signed-off-by: João Marcos Costa <joaomarcos.costa@bootlin.com>
 ---

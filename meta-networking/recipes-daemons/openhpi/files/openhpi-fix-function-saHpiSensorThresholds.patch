@@ -8,8 +8,7 @@ TH.IsSupported == SAHPI_TRUE. So we should pass &tmp but not
 SensorThresholds as the argument to OH_CALL_ABI. Otherwise the TH will
 be set even if TH.IsSupported == SAHPI_FALSE.
 
-Upstream-Status: Submitted
-[https://github.com/open-hpi/openhpi/pull/2744/commits/77a78bb1ada56e55c5ba6d7a5987c214705bf035]
+Upstream-Status: Backport [https://github.com/open-hpi/openhpi/commit/77a78bb1ada56e55c5ba6d7a5987c214705bf035]
 
 Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>

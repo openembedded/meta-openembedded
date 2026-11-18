@@ -1,6 +1,6 @@
 libX11-1.5.99.901 has changed prototype of _XData32
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://github.com/libsdl-org/SDL-1.2/commit/5d79977ec7a6b58afa6e4817035aaaba186f7e9f]
 <http://bugzilla.libsdl.org/show_bug.cgi?id=1769>
 
 Signed-off-by: Saul Wold <sgw@linux.intel.com>

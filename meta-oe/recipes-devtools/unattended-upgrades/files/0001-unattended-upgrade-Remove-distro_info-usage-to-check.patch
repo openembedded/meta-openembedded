@@ -15,7 +15,7 @@ remove it because needs support into python3-distro-info [1].
 
 Signed-off-by: Aníbal Limón <anibal@rzerosystems.com>
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: python3-distro-info is not available]
 ---
 diff --git a/unattended-upgrade b/unattended-upgrade
 index b72e59e..8ff0c1c 100755

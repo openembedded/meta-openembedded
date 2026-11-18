@@ -19,7 +19,7 @@ In file included from ../Xsp/Xsp.c:6:
       |         ^~~~~~~~~~~~~~~
       |         XCloseDisplay
 
-Upstream-Status: Inactive-Upstream [seems to be unmaintained]
+Upstream-Status: Inactive-Upstream [lastrelease: 2005-05-17]
 Signed-off-by: mark.yang <mark.yang@lge.com>
 ---
  Xsp.c | 2 +-

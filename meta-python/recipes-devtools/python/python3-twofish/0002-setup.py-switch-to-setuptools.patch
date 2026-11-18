@@ -3,8 +3,7 @@ From: Tim Orling <tim.orling@konsulko.com>
 Date: Sun, 27 Feb 2022 11:02:36 -0800
 Subject: [PATCH] setup.py: switch to setuptools
 
-Upstream-Status: Submitted
-[https://github.com/keybase/python-twofish/pull/9]
+Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/9]
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---

@@ -9,7 +9,7 @@ so fix it to avoid following error.
 | ERROR Missing dependencies:
 |       setuptools<80,>=77
 
-Upstream-Status: Inappropriate
+Upstream-Status: Inappropriate [OE specific: relax setuptools upper bound]
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---

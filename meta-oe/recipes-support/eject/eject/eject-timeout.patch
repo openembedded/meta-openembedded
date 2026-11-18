@@ -1,6 +1,6 @@
 allow a longer timeout
 
-Upstream-Status: Backport
+Upstream-Status: Inappropriate [upstream eject is dead, superseded by util-linux eject; taken from Fedora]
 
 Signed-off-by: Morgan Little <morgan.little@windriver.com>
 

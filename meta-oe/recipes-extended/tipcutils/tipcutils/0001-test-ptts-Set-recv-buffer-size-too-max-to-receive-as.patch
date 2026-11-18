@@ -16,7 +16,7 @@ sysctl_rmem_max) in kernel.
 
 Signed-off-by: He Zhe <zhe.he@windriver.com>
 
-Upstream-Status: Backport
+Upstream-Status: Backport [https://sourceforge.net/p/tipc/tipcutils/ci/4e4c8c7a1cca2125e2bf2a67cbab0bdbd78fdb86/]
 
 Signed-off-by: Li Zhou <li.zhou@windriver.com>
 ---
