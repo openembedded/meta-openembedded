@@ -29,7 +29,7 @@ FILES:idn = "${bindir}/*"
 LICENSE:${PN} = "LGPL-2.1-or-later OR LGPL-3.0-only"
 LICENSE:idn = "GPL-3.0-or-later"
 
-EXTRA_OECONF = "--disable-csharp"
+EXTRA_OECONF = "--disable-csharp --enable-ld-version-script"
 
 do_install:append() {
 	rm -rf ${D}${datadir}/emacs
