@@ -3,7 +3,7 @@ RET=0
 
 cd test
 for t in $(find . -type f -executable); do
-    if ./$t; then
+    if timeout 300 ./$t; then
         echo PASS: $t
     else
         echo FAIL: $t

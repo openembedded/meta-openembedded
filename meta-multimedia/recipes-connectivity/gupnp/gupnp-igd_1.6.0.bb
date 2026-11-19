@@ -12,6 +12,8 @@ SRC_URI[archive.sha256sum] = "4099978339ab22126d4968f2a332b6d094fc44c78797860781
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
+RDEPENDS:${PN}-ptest += "coreutils"
+
 do_install_ptest(){
     cd ${B}/tests/gtest
     for t in $(find . -type f -executable); do
