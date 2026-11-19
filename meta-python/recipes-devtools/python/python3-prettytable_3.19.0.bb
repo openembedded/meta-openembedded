@@ -3,7 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c9a6829fcd174d9535b46211917c7671"
 
-SRC_URI[sha256sum] = "439217116152244369caf3d9f1caf2f9fe29b03bd79e88d2928c8e718c95d680"
+SRC_URI[sha256sum] = "0ecedd6d9a560b330503bef15791b77954fa46b7123203d91e463330b61959ba"
 
 inherit pypi ptest-python-pytest python_hatchling
 
