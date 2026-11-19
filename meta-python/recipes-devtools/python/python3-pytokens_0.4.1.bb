@@ -10,4 +10,6 @@ SRC_URI[sha256sum] = "292052fe80923aae2260c073f822ceba21f3872ced9a68bb7953b348e5
 
 DEPENDS += "python3-mypy-native"
 
+CFLAGS += "-Wno-error=deprecated-declarations"
+
 BBCLASSEXTEND = "native nativesdk"
