@@ -46,7 +46,7 @@ index 2300565..26d9e8c 100644
 -            version = m.__version__
 -        except AttributeError:
 +            module = importlib.util.module_from_spec(spec)
-+            spec.loader.load_module(module)
++            spec.loader.exec_module(module)
 +        except ImportError:
              found = False
 +
