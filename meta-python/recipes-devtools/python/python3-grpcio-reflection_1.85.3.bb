@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9"
 
 inherit pypi python_setuptools_build_meta
 
-SRC_URI[sha256sum] = "a3257f35cc817e372cfe330ba3411fc0c61f23b09a94dd2d8f91185955c5533c"
+SRC_URI[sha256sum] = "12433efd1fb76a2c34611843763330f43c26167419209a55a0383f6a85457e5a"
 
 DEPENDS += "python3-grpcio python3-wheel-native"
 
