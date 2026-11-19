@@ -1,0 +1,43 @@
+From: Markus Volk <f_l_k@t-online.de>
+Date: Sat, 19 Sep 2026 18:10:00 +0200
+Subject: [PATCH] cmake: allow omitting build paths from the binary
+
+The ":version" output embeds the full compiler path, the sysroot and all
+include directories, and VTERM_TEST_FILE embeds the build directory. Both
+end up in the installed nvim binary and make it non-reproducible.
+
+Add NVIM_OMIT_VERSION_CFLAGS to drop the compile flags from the version
+string and let VTERM_TEST_FILE be overridden from the command line.
+
+Upstream-Status: Inappropriate [OE specific]
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ CMakeLists.txt              | 4 +++-
+ cmake.config/CMakeLists.txt | 3 +++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -51,7 +51,9 @@
+ #-------------------------------------------------------------------------------
+ set(FUNCS_DATA ${PROJECT_BINARY_DIR}/funcs_data.mpack)
+ set(TOUCHES_DIR ${PROJECT_BINARY_DIR}/touches)
+-set(VTERM_TEST_FILE ${PROJECT_BINARY_DIR}/test/vterm_test_output)
++if(NOT VTERM_TEST_FILE)
++  set(VTERM_TEST_FILE ${PROJECT_BINARY_DIR}/test/vterm_test_output)
++endif()
+ 
+ file(GLOB DOCFILES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/runtime/doc/*.txt)
+ 
+--- a/cmake.config/CMakeLists.txt
++++ b/cmake.config/CMakeLists.txt
+@@ -184,6 +184,9 @@
+ append_target_expression(PREFIX "-I" PROPERTY INCLUDE_DIRECTORIES)
+ string(REPLACE ";" " " VERSION_STRING "${VERSION_STRING}")
+ string(REPLACE "  " " " VERSION_STRING "${VERSION_STRING}")
++if(NVIM_OMIT_VERSION_CFLAGS)
++  set(VERSION_STRING "")
++endif()
+ 
+ configure_file(versiondef.h.in auto/versiondef.h.gen)
+ 
