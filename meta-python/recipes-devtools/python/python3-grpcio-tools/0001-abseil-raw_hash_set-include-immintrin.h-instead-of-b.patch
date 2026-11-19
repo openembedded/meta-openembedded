@@ -1,7 +1,8 @@
-From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From f97638e64eb1deeb599ed33237adb71625789ed5 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jun 2026 00:00:00 +0000
-Subject: [PATCH] abseil: raw_hash_set: include <immintrin.h> instead of <bmi2intrin.h>
+Date: Wed, 24 Jun 2026 00:00:00 +0000
+Subject: [PATCH] abseil: raw_hash_set: include <immintrin.h> instead of
+ <bmi2intrin.h>
 
 Clang refuses a direct include of <bmi2intrin.h> and errors out with:
 
@@ -16,21 +17,23 @@ Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/d851fdd76
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- third_party/abseil-cpp/absl/container/internal/raw_hash_set.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../abseil-cpp/absl/container/internal/raw_hash_set.h       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/third_party/abseil-cpp/absl/container/internal/raw_hash_set.h b/third_party/abseil-cpp/absl/container/internal/raw_hash_set.h
+index a50a488..1964e7b 100644
 --- a/third_party/abseil-cpp/absl/container/internal/raw_hash_set.h
 +++ b/third_party/abseil-cpp/absl/container/internal/raw_hash_set.h
 @@ -225,9 +225,9 @@
  #include <ranges>  // NOLINT(build/c++20)
  #endif
-
+ 
 -#ifdef __BMI2__
 -#include <bmi2intrin.h>
 -#endif  // __BMI2__
 +#if defined(__i386__) || defined(__x86_64__)
 +#include <immintrin.h>
 +#endif
-
+ 
  namespace absl {
  ABSL_NAMESPACE_BEGIN
