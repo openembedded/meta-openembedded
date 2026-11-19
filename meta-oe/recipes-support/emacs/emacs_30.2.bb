@@ -4,7 +4,10 @@ HOMEPAGE = "https://www.gnu.org/software/emacs/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-SRC_URI = "${GNU_MIRROR}/emacs/${BP}.tar.xz"
+SRC_URI = " \
+    ${GNU_MIRROR}/emacs/${BP}.tar.xz \
+    file://0001-Support-Tree-sitter-version-0.26-and-later.patch \
+"
 UPSTREAM_CHECK_URI = "${GNU_MIRROR}/emacs/"
 
 SRC_URI:append:class-target = " \
@@ -21,6 +24,7 @@ PACKAGECONFIG[gnutls] = "--with-gnutls=yes,--with-gnutls=no,gnutls"
 PACKAGECONFIG[kerberos] = "--with-kerberos=yes,--with-kerberos=no,krb5"
 PACKAGECONFIG[libgmp] = "--with-libgmp=yes,--with-libgmp=no,gmp"
 PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
+PACKAGECONFIG[tree-sitter] = "--with-tree-sitter=yes,--with-tree-sitter=no,libtreesitter"
 
 PACKAGECONFIG ??= "gnutls kerberos libgmp"
 
