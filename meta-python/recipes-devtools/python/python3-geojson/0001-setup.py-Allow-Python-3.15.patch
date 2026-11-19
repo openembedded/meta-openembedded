@@ -1,0 +1,38 @@
+From b0ebb91bc05e240a1acee4133662e3cc2127a9e3 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 19 Nov 2026 10:21:40 -0800
+Subject: [PATCH] setup.py: Allow Python 3.15
+
+setup.py refuses to run on anything newer than 3.14, so the package
+cannot be built with Python 3.15. Raise the upper bound and add the
+classifier.
+
+Upstream-Status: Submitted [https://github.com/jazzband/geojson/pull/264]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ setup.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 05ce9cd..427c434 100644
+--- a/setup.py
++++ b/setup.py
+@@ -17,8 +17,8 @@ else:
+ 
+ 
+ major_version, minor_version = sys.version_info[:2]
+-if not (major_version == 3 and 10 <= minor_version <= 14):
+-    sys.stderr.write("Sorry, only Python 3.10 - 3.14 are "
++if not (major_version == 3 and 10 <= minor_version <= 15):
++    sys.stderr.write("Sorry, only Python 3.10 - 3.15 are "
+                      "supported at this time.\n")
+     exit(1)
+ 
+@@ -52,6 +52,7 @@ setup(
+         "Programming Language :: Python :: 3.12",
+         "Programming Language :: Python :: 3.13",
+         "Programming Language :: Python :: 3.14",
++        "Programming Language :: Python :: 3.15",
+         "Topic :: Scientific/Engineering :: GIS",
+     ]
+ )
