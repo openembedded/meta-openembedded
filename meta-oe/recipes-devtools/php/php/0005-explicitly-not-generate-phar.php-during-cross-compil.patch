@@ -1,4 +1,4 @@
-From 41c8c5821fc74efea8b086927a17aa3bc7aef6bb Mon Sep 17 00:00:00 2001
+From c99cba1ddfaea0839240220129727c8411ee46f0 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Tue, 18 Nov 2025 16:25:28 +0800
 Subject: [PATCH] explicitly not generate phar.php during cross-compile
@@ -30,6 +30,3 @@ index 09d577d7..2f85847c 100644
  
  $(builddir)/phar.php: $(srcdir)/build_precommand.php $(srcdir)/phar/*.inc $(srcdir)/phar/*.php $(SAPI_CLI_PATH)
  	-@(echo "Generating phar.php"; \
--- 
-2.34.1
-
