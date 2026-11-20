@@ -239,9 +239,9 @@ do_install:append:class-native() {
 }
 
 PACKAGES =+ "${PN}-adbd"
-RDEPENDS:${PN}:class-target = "android-tools-conf-configfs 7zip android-libboringssl"
-RDEPENDS:${PN}-adbd += "${PN}"
-RRECOMMENDS:${PN}-adbd += "kernel-module-libcomposite kernel-module-usb-f-fs"
+RDEPENDS:${PN}:class-target = "7zip android-libboringssl"
+RDEPENDS:${PN}-adbd += "${PN} ${@bb.utils.contains('PACKAGECONFIG', 'usbgadget', 'android-tools-conf', '', d)}"
+RRECOMMENDS:${PN}-adbd += "${@bb.utils.contains('PACKAGECONFIG', 'usbgadget', 'kernel-module-libcomposite kernel-module-usb-f-fs', '', d)}"
 PRIVATE_LIBS:${PN} = "liblog.so.0 libbase.so.0 libcutils.so.0"
 
 inherit useradd
@@ -260,9 +260,12 @@ FILES:${PN}-adbd = " \
 
 BBCLASSEXTEND = "native"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} usbgadget"
 # Apply Android's fs_config ownership/mode tables to files pushed by adbd to
 # /system, /vendor and /oem. Off by default: the tables describe Android
 # partition images and are meaningless on a generic Linux rootfs.
 PACKAGECONFIG[fs-config] = ""
 PACKAGECONFIG[systemd] = ",,systemd"
+# adbd over a USB gadget. Machines without a USB device controller (UDC) do not need them,
+# and can use adbd over TCP.
+PACKAGECONFIG[usbgadget] = ""
