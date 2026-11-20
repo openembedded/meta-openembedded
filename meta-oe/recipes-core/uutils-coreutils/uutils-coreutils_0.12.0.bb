@@ -88,5 +88,5 @@ do_compile:prepend() {
 
 do_install:append() {
     mkdir -p ${D}${libdir}/coreutils
-    cp ${B}/target/${CARGO_TARGET_SUBDIR}/deps/libstdbuf.so ${D}${libdir}/coreutils/libstdbuf.so
+    install -m 0755 ${B}/target/${CARGO_TARGET_SUBDIR}/build/uu_stdbuf_libstdbuf/*/out/libstdbuf.so ${D}${libdir}/coreutils/libstdbuf.so
 }
