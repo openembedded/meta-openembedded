@@ -26,11 +26,9 @@ require ${BPN}-crates.inc
 
 do_install () {
     install -d ${D}${rustlibdir}
-    # The cxx deps directory also contains dependency files (.d) generated
-    # during compilation. These files are only needed for incremental builds
-    # and are not required when installing the cxx libraries.
-    rm -f ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/deps/*.d
-    cp ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/deps/* ${D}${rustlibdir}
+    install -m 0644 ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/build/*/*/out/*.rlib \
+                    ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/build/*/*/out/*.rmeta \
+                    ${D}${rustlibdir}
 }
 
 BBCLASSEXTEND = "native"
