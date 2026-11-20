@@ -14,6 +14,7 @@ PV = "1.1.0"
 SRCREV = "cddd6be6c629ca96f2d2e74ee52daf12bbef1f83"
 SRC_URI = "git://github.com/pikhq/musl-nscd;branch=master;protocol=https \
            file://0001-nsswitch.y-Replace-empty-bison-extension.patch \
+           file://0001-Makefile-Create-object-directories-before-generating.patch \
           "
 
 UPSTREAM_CHECK_COMMITS = "1"
