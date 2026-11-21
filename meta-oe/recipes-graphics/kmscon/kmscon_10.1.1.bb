@@ -45,7 +45,9 @@ EXTRA_OEMESON = "\
     -Dvideo_fbdev=enabled \
 "
 
-SYSTEMD_SERVICE:${PN} = "kmscon.service"
+KMSCON_VT ?= "tty1"
+
+SYSTEMD_SERVICE:${PN} = "kmscon.service kmsconvt@${KMSCON_VT}.service"
 FILES:${PN} += "${systemd_system_unitdir}/kmsconvt@.service ${datadir}/terminfo"
 
 do_install:append() {
