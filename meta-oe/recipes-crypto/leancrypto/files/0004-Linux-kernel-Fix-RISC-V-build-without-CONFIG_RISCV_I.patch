@@ -1,0 +1,45 @@
+From 48afc009a1dcd588597f966fdaef7b2b6a36c0a6 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 20 Nov 2026 23:28:18 -0800
+Subject: [PATCH] Linux kernel: Fix RISC-V build without CONFIG_RISCV_ISA_V
+
+kernel_vector_begin() and kernel_vector_end() are only declared by
+<asm/vector.h> when the kernel is built with CONFIG_RISCV_ISA_V, so the
+RVV code fails to compile against such a kernel:
+
+  internal/api/ext_headers_riscv.h:28:26: error: implicit declaration of function 'kernel_vector_begin' [-Wimplicit-function-declaration]
+
+Without CONFIG_RISCV_ISA_V, may_use_simd() always returns false, so
+LC_CPU_FEATURE_RISCV_ASM_RVV is never set and the RVV code is never
+called. Make LC_VECTOR_ENABLE/LC_VECTOR_DISABLE no-ops in that case.
+
+Upstream-Status: Submitted [https://github.com/smuellerDD/leancrypto/pull/82]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ internal/api/ext_headers_riscv.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/internal/api/ext_headers_riscv.h b/internal/api/ext_headers_riscv.h
+index d63af536..dac4f386 100644
+--- a/internal/api/ext_headers_riscv.h
++++ b/internal/api/ext_headers_riscv.h
+@@ -25,8 +25,18 @@
+ #include <asm/vector.h>
+ #include <asm/simd.h>
+ 
++#ifdef CONFIG_RISCV_ISA_V
+ #define LC_VECTOR_ENABLE kernel_vector_begin()
+ #define LC_VECTOR_DISABLE kernel_vector_end()
++#else
++/*
++ * Without CONFIG_RISCV_ISA_V the kernel does not provide
++ * kernel_vector_begin/end, and may_use_simd() always returns false, so the
++ * RVV code paths are never selected.
++ */
++#define LC_VECTOR_ENABLE
++#define LC_VECTOR_DISABLE
++#endif
+ 
+ #else /* LINUX_KERNEL */
+ 
