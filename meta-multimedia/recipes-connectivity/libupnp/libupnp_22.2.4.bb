@@ -8,7 +8,7 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
 
-SRCREV = "fac0494691434c35243131f66a0b27ea0c29f700"
+SRCREV = "6c41983894f343ebaae78dc5f2a1f28581a4f88e"
 SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=main;tag=release-${PV} \
            file://run-ptest \
           "
