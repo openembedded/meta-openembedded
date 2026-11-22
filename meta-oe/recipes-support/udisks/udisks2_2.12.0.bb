@@ -1,6 +1,6 @@
 SUMMARY = "udisks provides dbus interfaces for disks and storage devices"
 LICENSE = "GPL-2.0-or-later AND LGPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1c2da9358c6aacac4e4fbf1cb106cc1d"
 
 DEPENDS = " \
     glib-2.0-native \
@@ -18,10 +18,10 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 RDEPENDS:${PN} = "acl"
 
 SRC_URI = " \
-    git://github.com/storaged-project/udisks.git;branch=2.11.x-branch;protocol=https \
+    git://github.com/storaged-project/udisks.git;branch=master;protocol=https \
     file://0001-Makefile.am-Dont-include-buildpath.patch \
 "
-SRCREV = "caffebe56d8208365cf0d62e0d05d31260d91156"
+SRCREV = "a0c93953d483f259164fb284d03691f11fe28009"
 
 CVE_PRODUCT = "udisks"
 
