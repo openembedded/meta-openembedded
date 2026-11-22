@@ -4,10 +4,9 @@ HOMEPAGE = "http://modplug-xmms.sf.net"
 LICENSE = "LicenseRef-PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9182faa1f7c316f7b97d404bcbe3685"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz \
-           file://0001-fastmix-Drop-register-storage-class-keyword.patch"
+SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "457ca5a6c179656d66c01505c0d95fafaead4329b9dbaa0f997d00a3508ad9de"
+SRC_URI[sha256sum] = "e4d9cb46da78a639d6eadb4ff3ab955f68c3099579b5310af64b37091e28957e"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/modplug-xmms/files/libmodplug/"
 UPSTREAM_CHECK_REGEX = "libmodplug-(?P<pver>\d+(\.\d+)+)\.tar"
 
