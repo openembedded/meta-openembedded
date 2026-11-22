@@ -13,8 +13,8 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;prot
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
            file://0001-fix-the-hardcoded-legacy-helper-path.patch \
            "
-SRCREV_drbd-utils = "e1e02e77e6d068f626cef7c3998ed08b0fde7669"
-SRCREV_drbd-headers = "bdf8650ea6e32d1c4518b7ad6c2d7469896d17ff"
+SRCREV_drbd-utils = "e25b7d4d17e53811c6fd57f3ae7add0b9028cced"
+SRCREV_drbd-headers = "4e1c1486d274c28878f1d2e98b6f9983f27fe9ca"
 
 SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
