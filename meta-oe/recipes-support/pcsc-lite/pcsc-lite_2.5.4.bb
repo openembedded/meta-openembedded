@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9637dc508442c2f458df6444fca97e09"
 DEPENDS = "autoconf-archive-native flex-native"
 
 SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.xz"
-SRC_URI[sha256sum] = "fe2bb733ecf95e52768907eb00da9f9f3daf180960283e514a05dcc090afa3bd"
+SRC_URI[sha256sum] = "23b1c644ab4f13269d3a9ff26734f473f622deff6ed60492171a9a25f603f078"
 
 inherit meson systemd pkgconfig perlnative useradd
 
