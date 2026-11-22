@@ -33,7 +33,7 @@ SRC_URI = "https://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/
            file://0006-Fix-nss-multilib-build-on-openSUSE-11.x-32bit.patch \
            file://0007-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
            "
-SRC_URI[sha256sum] = "4d752526b9846a1d962588cfbd09b7cc2a4f6a4effbd9157d58a30e8a2573065"
+SRC_URI[sha256sum] = "bb3b300b457f44da9a9486917c3b33bbc5935ae3cdf60aa759a6880889439c50"
 
 UPSTREAM_CHECK_URI = "https://ftp.mozilla.org/pub/security/nss/releases/"
 UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>\d+(\_\d+)+)"
@@ -207,7 +207,9 @@ do_install() {
     done
 
     install -d ${D}/${includedir}/nss3
-    install -m 644 -t ${D}/${includedir}/nss3 dist/public/nss/*
+    install -m 644 -t ${D}/${includedir}/nss3 dist/public/nss/*.h
+    install -d ${D}/${includedir}/nss3/mozpkix
+    install -m 644 -t ${D}/${includedir}/nss3/mozpkix dist/public/nss/mozpkix/*.h
 
     install -d ${D}/${bindir}
     for binary in ${TD}/${bindir}/*; do
