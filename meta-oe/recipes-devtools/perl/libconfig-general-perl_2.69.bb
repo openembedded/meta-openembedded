@@ -8,7 +8,7 @@ SRCNAME = "Config-General"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TL/TLINDEN/${SRCNAME}-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "473d65127b23dac0e8039c01e28bc4072cb9a6e93e81a1ea4893cea08c698db0"
+SRC_URI[sha256sum] = "6538a47e6950bca0b0b6ac4c69a7a5e915fc52cf060346d935f16570fec86d43"
 
 S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
