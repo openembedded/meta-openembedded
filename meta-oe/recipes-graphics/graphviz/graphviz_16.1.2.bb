@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
 SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
-SRC_URI[sha256sum] = "52e7fb9a57b52b5c67f41dba6504ba3231e118258779421cb8f4f99104de71f6"
+SRC_URI[sha256sum] = "9780938f03659e2effbbfbbaec94940108e794199b73196fa339ca911890e8c9"
 
 UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
