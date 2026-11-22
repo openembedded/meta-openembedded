@@ -34,6 +34,6 @@ inherit gnomebase gsettings gtk-icon-cache mime-xdg vala features_check
 REQUIRED_DISTRO_FEATURES = "opengl"
 
 SRC_URI += "file://0001-util.h-Include-stdbool.h-for-bool.patch"
-SRC_URI[archive.sha256sum] = "13cd9d6ce111262c25f4ff325bf36e9b806eec2d9b50be3c459cc2e69d4bbf69"
+SRC_URI[archive.sha256sum] = "37d17c8eab0010b001d7a6cda776d81c73fb169abc28f9a930e0afc57ac8978d"
 
 FILES:${PN} += "${datadir}/metainfo"
