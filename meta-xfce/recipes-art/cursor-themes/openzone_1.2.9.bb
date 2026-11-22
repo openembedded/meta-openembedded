@@ -1,24 +1,22 @@
 SUMMARY = "X11 Mouse Theme"
-HOMEPAGE = "http://xfce-look.org/content/show.php/OpenZone?content=111343"
+HOMEPAGE = "https://github.com/ducakar/openzone-cursors"
 SECTION = "x11/wm"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a4dd0d1066e1f1224b3bc4bbb206b754"
+LIC_FILES_CHKSUM = "file://COPYING;md5=15c85787ab411af36a78dfc20fdf7793"
+
+DEPENDS = "icon-slicer-native"
 
 inherit allarch gtk-icon-cache
 
-SRC_URI = "https://mirrors.dotsrc.org/mirrors/exherbo/111343-OpenZone-${PV}.tar.xz"
-SRC_URI[sha256sum] = "db6fa6d0798aceb56998ce81382fa2246c77911d56b3b06e6aadee4cf5b4816e"
+SRC_URI = "git://github.com/ducakar/openzone-cursors.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "18d11a476536fbf4d69bb981c4af934a44c95fc4"
 
-S = "${UNPACKDIR}/OpenZone"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
-do_compile() {
-}
-
+# The Makefile's install target moves the themes and keeps the build user's ownership
 do_install() {
     install -d ${D}${datadir}/icons
-    for theme in `find -name '*.tar.xz'`; do
-        tar -Jxf ${theme} -C ${D}${datadir}/icons
-    done
+    cp -R --no-preserve=ownership ${B}/OpenZone_* ${D}${datadir}/icons/
 }
 
 python populate_packages:prepend () {
