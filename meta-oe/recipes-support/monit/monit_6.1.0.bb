@@ -16,11 +16,11 @@ SRC_URI = " \
 	file://monitrc \
 "
 
-SRC_URI[sha256sum] = "ddacd2a8120aeb2351e4486ee04a17782b5004aee99f2041d829bc4dcf2a5b3b"
+SRC_URI[sha256sum] = "c28406dc922e64560095ec3ec99feb8eddd3f96e7b6eed22309a5865d1eab226"
 
 DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
 
-inherit autotools-brokensep systemd update-rc.d
+inherit autotools-brokensep bash-completion systemd update-rc.d
 # brokensep because | ../../monit-5.34.4/libmonit/src/util/Str.c:26:10: fatal error: Config.h: No such file or directory
 
 EXTRA_AUTORECONF += "-I config"
