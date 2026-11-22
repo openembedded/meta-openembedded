@@ -2,8 +2,8 @@ SUMMARY = "A server-side, HTML-embedded scripting language"
 HOMEPAGE = "https://www.php.net"
 SECTION = "console/network"
 
-LICENSE = "PHP-3.01"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=fd469cce1a919f0cc95bab7afb28d19d"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=31121fc749dab3726adb6deb79a59616"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native"
@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
 
 S = "${UNPACKDIR}/php-${PV}"
 
-SRC_URI[sha256sum] = "47d50c36016784a4a71f019cd7bfa29c31e4be0de22d3fa06095b280a6299e2f"
+SRC_URI[sha256sum] = "9e233e38999a89f351a33ae6a7276d1caf5addcba11e09e3bbe3a8d25f411ff1"
 
 CVE_PRODUCT = "php:php php_group:php"
 
@@ -62,7 +62,7 @@ COMMON_EXTRA_OECONF = "--enable-sockets \
                        --enable-pcntl \
                        --enable-shared \
                        --disable-rpath \
-                       --with-pic \
+                       --enable-pic \
                        --libdir=${PHP_LIBDIR} \
 "
 EXTRA_OECONF = "--enable-mbstring \
@@ -134,7 +134,7 @@ LDFLAGS:append:riscv64 = " -latomic"
 EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
 do_configure:prepend () {
-    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
+    rm -f ${S}/build/libtool.m4 ${S}/build/lt*.m4 ${S}/ltmain.sh ${S}/aclocal.m4
     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
 }
 
@@ -158,11 +158,9 @@ do_install:append:class-native() {
 }
 
 do_install:prepend() {
-    cat ${STAGING_DATADIR}/aclocal/libtool.m4 \
-    ${STAGING_DATADIR}/aclocal/lt~obsolete.m4 \
-    ${STAGING_DATADIR}/aclocal/ltoptions.m4 \
-    ${STAGING_DATADIR}/aclocal/ltsugar.m4 \
-    ${STAGING_DATADIR}/aclocal/ltversion.m4 > ${S}/build/libtool.m4
+    for m4 in libtool lt~obsolete ltoptions ltsugar ltversion; do
+        cp ${STAGING_DATADIR}/aclocal/$m4.m4 ${S}/build/
+    done
 }
 
 do_install:prepend:class-target() {
