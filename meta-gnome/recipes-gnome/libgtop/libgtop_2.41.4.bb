@@ -7,7 +7,7 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "775676df958e2ea2452f7568f28b2ea581063d312773dd5c0b7624c1b9b2da8c"
+SRC_URI[archive.sha256sum] = "d3c18158549218835a00517d9c454a2de825ac7808efe84101a8b7e2a8ab6663"
 
 UPSTREAM_CHECK_REGEX = "libgtop-(?P<pver>\d+(\.\d+)+).tar"
 
