@@ -10,7 +10,7 @@ DEPENDS = "binutils-native elfutils-native"
 inherit native bash-completion
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${@d.getVar('PV').split('.')[0]}.x/linux-${PV}.tar.xz"
-SRC_URI[sha256sum] = "b11b6df8295e8e991ff040b71aaa4994a8b55caa23b6b092907f195b5840fd1f"
+SRC_URI[sha256sum] = "8f293f83d54f0b7b9be56863ebc5e4ea79d73e530b4ae55c572be97ef39f0990"
 
 S = "${UNPACKDIR}/linux-${PV}"
 
