@@ -9,7 +9,7 @@ DEPENDS += "perl"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/HTML-Parser-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "5305e1d5faa70ee0aa282d85a5c9aa93911e8c7afa590ad1ced5703a544e20f6"
+SRC_URI[sha256sum] = "04342b30b3b1675041b28cfecb693a3d3a0c051587cc40b746a7f9a72a7e3b8a"
 
 S = "${UNPACKDIR}/HTML-Parser-${PV}"
 
