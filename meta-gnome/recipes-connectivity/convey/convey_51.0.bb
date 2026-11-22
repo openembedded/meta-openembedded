@@ -32,12 +32,12 @@ DEPENDS = " \
 inherit meson pkgconfig mime-xdg gsettings gtk-icon-cache gobject-introspection gnome-help vala features_check
 
 SRC_URI = " \
-    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=https;branch=main;tag=${PV}-1 \
+    git://gitlab.gnome.org/donnybeelo/convey.git;protocol=https;branch=main;tag=${PV} \
     file://0001-meson-do-not-store-build-paths-in-the-binary.patch \
     file://0002-meson-do-not-check-for-the-iso-xml-files-and-the-C.u.patch \
     file://0003-vala-unit-look-up-g-ir-compiler-with-find_program.patch \
 "
-SRCREV = "2a0b661bf1d7fde57b6dfcb7e09ce33d7b4b9f42"
+SRCREV = "d24c1da859fc9cc2cfb19872b1d8e972d4dc1a20"
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data opengl"
 
