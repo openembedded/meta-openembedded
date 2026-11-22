@@ -15,17 +15,17 @@ than leaking the build environment into the shipped binary.
 Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- CMakeLists.txt | 2 +-
+ packaging/cmake/Modules/NetdataSystemFiles.cmake | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -3397,7 +3397,7 @@
+--- a/packaging/cmake/Modules/NetdataSystemFiles.cmake
++++ b/packaging/cmake/Modules/NetdataSystemFiles.cmake
+@@ -43,7 +43,7 @@
          "-DCMAKE_SHARED_LINKER_FLAGS='${CMAKE_SHARED_LINKER_FLAGS}'"
  )
-
+ 
 -string(JOIN " " CONFIGURE_COMMAND "cmake" ${CONFIGURE_OPTIONS})
 +set(CONFIGURE_COMMAND "unavailable (stripped for reproducible builds)")
-
- if (NOT NETDATA_USER)
-         set(NETDATA_USER "netdata")
+ 
+ set(BUILD_INFO_CMAKE_CACHE_ARCHIVE_NAME "build-info-cmake-cache.gz")
+ set(BUILD_INFO_CMAKE_CACHE_ARCHIVE_PATH "usr/share/netdata")

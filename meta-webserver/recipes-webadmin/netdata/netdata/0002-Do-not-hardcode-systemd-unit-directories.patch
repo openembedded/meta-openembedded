@@ -3,30 +3,28 @@ From: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
 Date: Tue, 1 Oct 2024 17:01:33 +0200
 Subject: [PATCH] Do not hardcode systemd unit directories
 
-Refreshed for netdata v2.12.3: upstream now routes all systemd unit
-installs through NETDATA_SYSTEMD_UNIT_DEST, so override that variable
+Refreshed for netdata v2.13.0: upstream now routes all systemd unit
+installs through HOST_SYSTEMD_UNIT_DEST, so override that variable
 instead of each DESTINATION.
 
 Upstream-Status: Inappropriate [oe-core specific]
 Signed-off-by: Enguerrand de Ribaucourt <enguerrand.de-ribaucourt@savoirfairelinux.com>
 ---
- CMakeLists.txt | 6 +-----
+ packaging/cmake/Modules/NetdataInstallLayout.cmake | 6 +-----
  1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1cd0e75..510dacf 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -4352,11 +4352,7 @@ install(FILES
+--- a/packaging/cmake/Modules/NetdataInstallLayout.cmake
++++ b/packaging/cmake/Modules/NetdataInstallLayout.cmake
+@@ -88,11 +88,7 @@
  
- # RPM distros ship systemd units in %{_unitdir} (/usr/lib/systemd/system);
- # the DEB layout (and the historical default) uses /lib/systemd/system.
--if(NETDATA_PACKAGING_FORMAT STREQUAL "rpm")
--        set(NETDATA_SYSTEMD_UNIT_DEST "usr/lib/systemd/system")
+ # RPM distros ship systemd units in %{_unitdir} (/usr/lib/systemd/system); the
+ # DEB layout (and the historical default) uses /lib/systemd/system.
+-if(NETDATA_PACKAGE_KIND STREQUAL "rpm")
+-        set(HOST_SYSTEMD_UNIT_DEST "usr/lib/systemd/system")
 -else()
--        set(NETDATA_SYSTEMD_UNIT_DEST "lib/systemd/system")
+-        set(HOST_SYSTEMD_UNIT_DEST "lib/systemd/system")
 -endif()
-+set(NETDATA_SYSTEMD_UNIT_DEST "$ENV{systemd_system_unitdir}")
++set(HOST_SYSTEMD_UNIT_DEST "$ENV{systemd_system_unitdir}")
  
- # The spec packages the systemd-235-compatible unit variant on EL 7 and
- # Amazon Linux 2.
+ # Guards every rule that writes a HOST_* destination bar the one named below:
+ # this platform owns those directories, and this artifact is a native package

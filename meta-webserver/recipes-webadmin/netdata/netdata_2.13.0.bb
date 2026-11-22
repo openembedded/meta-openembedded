@@ -25,13 +25,12 @@ SRC_URI = "\
     file://0002-Do-not-hardcode-systemd-unit-directories.patch \
     file://0003-Do-not-record-the-configure-command-line-in-the-binar.patch \
     file://0004-libsensors-do-not-emit-line-directives-in-generated-s.patch \
-    file://0005-build-allow-using-a-local-SQLite-source-tree.patch \
     file://netdata.conf \
     file://netdata-volatiles.conf \
     ${@bb.utils.contains('PACKAGECONFIG', 'go', 'file://go.d.conf', '', d)} \
     https://www.sqlite.org/${SQLITE_YEAR}/sqlite-src-${SQLITE_VERSION_NUMBER}.zip;name=sqlite \
     "
-SRC_URI[sha256sum] = "6eb14deed1d7611c8f8969b2954432e91e631b2e45f762421873044561d80dd9"
+SRC_URI[sha256sum] = "510db7699c76c44f3d4bcebec854d5a29ecdc3cf3bfadfe78e27ee7ea87f8491"
 
 # netdata bundles its own SQLite and CMake's ExternalProject would
 # download it during do_compile. Fetch and unpack it with bitbake
@@ -90,7 +89,7 @@ PACKAGECONFIG[xenstat] = "-DENABLE_PLUGIN_XENSTAT=ON,-DENABLE_PLUGIN_XENSTAT=OFF
 PACKAGECONFIG[cups] = "-DENABLE_PLUGIN_CUPS=ON,-DENABLE_PLUGIN_CUPS=OFF,cups"
 PACKAGECONFIG[systemd] = "-DENABLE_PLUGIN_SYSTEMD_JOURNAL=ON,-DENABLE_PLUGIN_SYSTEMD_JOURNAL=OFF,systemd"
 PACKAGECONFIG[docker] = ",,virtual/docker, virtual/docker"
-PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON, -DENABLE_PLUGIN_GO=OFF"
+PACKAGECONFIG[go] = "-DENABLE_PLUGIN_GO=ON -DENABLE_PLUGIN_IPMI=ON -DENABLE_PLUGIN_DEM=ON,-DENABLE_PLUGIN_GO=OFF -DENABLE_PLUGIN_IPMI=OFF -DENABLE_PLUGIN_DEM=OFF"
 # The local agent dashboard is not shipped in the release tarball; enabling it
 # makes CMake download https://app.netdata.cloud/agent.tar.gz at configure
 # time, which cannot work in an offline build. Off by default.
@@ -112,7 +111,7 @@ EXTRA_OECMAKE += "-DENABLE_PLUGIN_EBPF=OFF \
                   -DENABLE_LIBBACKTRACE=OFF \
                   -DNETDATA_SQLITE_SOURCE_DIR=${UNPACKDIR}/sqlite-src-${SQLITE_VERSION_NUMBER} \
                   -DProtobuf_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/protoc \
-                  -DBUILD_FOR_PACKAGING=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
+                  -DNETDATA_PACKAGE_KIND=${@bb.utils.contains('DISTRO_FEATURES','systemd','deb','bundle',d)} \
                   -DENABLE_PLUGIN_SYSTEMD_UNITS=${@bb.utils.contains('DISTRO_FEATURES','systemd','ON','OFF',d)} \
                   -DENABLE_EXPORTER_PROMETHEUS_REMOTE_WRITE=OFF -DCMAKE_INSTALL_PREFIX='${base_prefix}'"
 
@@ -159,7 +158,7 @@ do_install:append() {
     install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
     install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
 
-    # BUILD_FOR_PACKAGING installs its own sysusers.d/tmpfiles.d snippets, but
+    # Native package builds install their own sysusers.d/tmpfiles.d snippets, but
     # user creation is handled by useradd.bbclass and tmpfiles by our own
     # netdata-volatiles.conf above, so drop the upstream ones to avoid
     # shipping duplicate/unmanaged files.
