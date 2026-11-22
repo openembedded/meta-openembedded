@@ -36,7 +36,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
 
 S = "${UNPACKDIR}/OpenIPMI-${PV}"
 
-SRC_URI[sha256sum] = "c62d38f5da7df4299ac3a652508e959537752440181e34c76b2aecebd7f301b9"
+SRC_URI[sha256sum] = "614097444340519eeeacb1d5d052103b1e6dd353e1141d7da524e09068442f5a"
 
 inherit autotools-brokensep pkgconfig perlnative update-rc.d systemd cpan-base python3targetconfig sourceforge-releases
 
@@ -67,6 +67,8 @@ FILES:${PN}-dbg += " \
     "
 
 do_configure () {
+    # The release tarball lacks ChangeLog, which automake's gnu strictness requires
+    touch ${S}/ChangeLog
     # Let's perform regular configuration first then handle perl issues.
     autotools_do_configure
 
