@@ -3,7 +3,7 @@ DESCRIPTION = "A flexible distributed key-value datastore that supports both cac
 HOMEPAGE = "http://valkey.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e1ca212fd1b16d6043cc4a7c52d56260"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version(d.getVar('PV'), 2)};protocol=https;tag=${PV} \
@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=${@oe.utils.trim_version
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://GNU_SOURCE-7.patch \
            "
-SRCREV = "29173b67508b2de4c0f0ed551f3b47cf19fc3ca8"
+SRCREV = "d23684e3ec302240754664417e3b99df23e8e4c9"
 
 RPROVIDES:${PN} = "virtual-redis"
 
