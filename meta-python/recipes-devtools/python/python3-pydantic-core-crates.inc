@@ -35,7 +35,7 @@ SRC_URI += " \
     crate://crates.io/idna_adapter/1.2.0 \
     crate://crates.io/indexmap/2.14.0 \
     crate://crates.io/itoa/1.0.11 \
-    crate://crates.io/jiter/0.18.0 \
+    crate://crates.io/jiter/0.19.0 \
     crate://crates.io/js-sys/0.3.77 \
     crate://crates.io/lexical-parse-float/1.0.6 \
     crate://crates.io/lexical-parse-integer/1.0.6 \
@@ -138,7 +138,7 @@ SRC_URI[idna-1.1.0.sha256sum] = "3b0875f23caa03898994f6ddc501886a45c7d3d62d04d2d
 SRC_URI[idna_adapter-1.2.0.sha256sum] = "daca1df1c957320b2cf139ac61e7bd64fed304c5040df000a745aa1de3b4ef71"
 SRC_URI[indexmap-2.14.0.sha256sum] = "d466e9454f08e4a911e14806c24e16fba1b4c121d1ea474396f396069cf949d9"
 SRC_URI[itoa-1.0.11.sha256sum] = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
-SRC_URI[jiter-0.18.0.sha256sum] = "49e31424b61d85292bd805dbf643c3ccc44f5f3871fb751209b889ee70585029"
+SRC_URI[jiter-0.19.0.sha256sum] = "4027f86130c7a1997f880ed407580e58514b867af49e7ce44370f80fa6ff999f"
 SRC_URI[js-sys-0.3.77.sha256sum] = "1cfaf33c695fc6e08064efbc1f72ec937429614f25eef83af942d0e227c3a28f"
 SRC_URI[lexical-parse-float-1.0.6.sha256sum] = "52a9f232fbd6f550bc0137dcb5f99ab674071ac2d690ac69704593cb4abbea56"
 SRC_URI[lexical-parse-integer-1.0.6.sha256sum] = "9a7a039f8fb9c19c996cd7b2fcce303c1b2874fe1aca544edc85c4a5f8489b34"

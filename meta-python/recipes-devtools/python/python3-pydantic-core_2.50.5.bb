@@ -13,7 +13,7 @@ require ${BPN}-crates.inc
 SRC_URI += "file://0001-Upgrade-radium-to-1.0.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/bitvec-1.0.1/"
 SRC_URI += "file://atomic.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/radium-1.1.0/"
 SRC_URI += "file://0001-cargo.toml-Update-bitvec-to-use-radium-1.x.patch"
-SRC_URI[sha256sum] = "aead3b74b68396bf0feab5d57e050b730ded7df55853c1e048a87e00aaf033c6"
+SRC_URI[sha256sum] = "1e740886083ff95530d694e6a3f09ed914bcf92a496d16acd307c6c3484fc36d"
 
 DEPENDS = "python3-maturin-native python3-typing-extensions"
 
