@@ -7,12 +7,9 @@ DEPENDS = "openssl websocketpp zlib boost brotli"
 
 EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake/cpprestsdk -DCPPREST_EXCLUDE_BROTLI=OFF -DWERROR=OFF"
 
-SRC_URI = "git://github.com/cpprest-lts/cpprestsdk.git;protocol=https;branch=cpprest-lts \
-           file://63.patch \
-           file://65.patch \
-           file://68.patch "
+SRC_URI = "git://github.com/cpprest-lts/cpprestsdk.git;protocol=https;branch=cpprest-lts"
 
-# tag 2.10.20+cpprest-lts
-SRCREV = "feadb5b7d01a09d124d6d6c7bfeee648c15b37d1"
+# tag 2.10.21+cpprest-lts
+SRCREV = "53a4b06ac33b67703ca62305dcb36083f93bbd1c"
 
 inherit cmake pkgconfig
