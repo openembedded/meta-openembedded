@@ -37,19 +37,14 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  Makefile.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile.in b/Makefile.in
-index e2f79c9..0e634a3 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -159,7 +159,7 @@ build-netutil: libnetutil/Makefile
+@@ -166,7 +166,7 @@
  	@echo Compiling libnetutil;
  	cd libnetutil && $(MAKE)
  
--build-ncat: $(NCATDIR)/Makefile build-nbase build-nsock $(NCATDIR)/ncat.h @PCAP_BUILD@
-+build-ncat: $(NCATDIR)/Makefile build-nbase build-nsock build-lua $(NCATDIR)/ncat.h @PCAP_BUILD@
+-build-ncat: $(NCATDIR)/Makefile @NBASE_BUILD@ @NSOCK_BUILD@ $(NCATDIR)/ncat.h @PCAP_BUILD@
++build-ncat: $(NCATDIR)/Makefile @NBASE_BUILD@ @NSOCK_BUILD@ @LUA_BUILD@ $(NCATDIR)/ncat.h @PCAP_BUILD@
  	cd $(NCATDIR) && $(MAKE)
  
  build-lua: $(LIBLUADIR)/Makefile
--- 
-2.47.1
-
