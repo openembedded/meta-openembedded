@@ -6,7 +6,7 @@
 RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
 
 python __anonymous() {
-    if d.getVar("PV") != "3.2.14.0":
+    if d.getVar("PV") != "3.2.14.1":
         bb.warn("-sources.inc out of date, run refresh_srcuri task")
 }
 
