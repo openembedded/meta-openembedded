@@ -18,7 +18,7 @@ SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "472e9426f7a1b18fa9d199666c15482d4ee51ea35e916ca53bb3ca25919edb10"
+SRC_URI[sha256sum] = "cb23ab505cabaf616dacfc199f710f883329e8782ca3aa67548bdb7181d62fab"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
