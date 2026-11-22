@@ -11,7 +11,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=570a9b3749dd0463a1778803b12a6dce"
 
-SRCREV = "7238b7b6753157d0c4ad739df3d87a958f78d70b"
+SRCREV = "63256e403abb7909df3d6bf7b54f52a8b21c0a94"
 
 SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master;protocol=https \
            file://atftpd.init \
