@@ -13,17 +13,16 @@ DEPENDS += "gzip-native \
             "
 DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native llvm-native zip-native', '', d)}"
 
-SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.26.x;protocol=https;tag=v${PV} \
+SRC_URI = "git://github.com/iovisor/bpftrace;branch=release/0.27.x;protocol=https;tag=v${PV} \
            file://run-ptest \
            file://0001-cmake-BuildBPF.cmake-introduce-DEBUG_PREFIX_MAP.patch \
            file://0003-cmake-BuildBPF.cmake-link-data-source-binary-without.patch \
-           file://0004-IRBuilderBPF-Fix-HasTerminator-on-LLVM-23.patch \
-           file://0005-CMakeLists-Add-support-for-LLVM-23.patch \
            file://0001-tests-pass-C-linker-flags-and-sysroot-to-raw-compile.patch \
            file://0006-tests-do-not-embed-build-paths-in-split-DWARF-test-pr.patch \
            file://0007-tests-testprogs-define-_GNU_SOURCE-for-pthread_setn.patch \
+           file://0008-tests-look-up-the-dwarf_origin-fixture-relative-to-t.patch \
 "
-SRCREV = "1bac8a8daad6e0aa579980e877d0c9d5fc296593"
+SRCREV = "24e9fe60faffcbed50b44428067fcd9b03770584"
 
 inherit bash-completion cmake ptest pkgconfig
 
@@ -53,6 +52,7 @@ do_install_ptest() {
         install -Dm 755 ${B}/tests/bpftrace_test ${D}${PTEST_PATH}/tests/bpftrace_test
         cp -rf ${B}/tests/runtime ${D}${PTEST_PATH}/tests
         cp -rf ${B}/tests/test* ${D}${PTEST_PATH}/tests
+        install -Dm 755 ${B}/tests/data/dwarf_origin ${D}${PTEST_PATH}/tests/data/dwarf_origin
     fi
     for f in testlibs/cmake_install.cmake \
              testprogs/cmake_install.cmake \

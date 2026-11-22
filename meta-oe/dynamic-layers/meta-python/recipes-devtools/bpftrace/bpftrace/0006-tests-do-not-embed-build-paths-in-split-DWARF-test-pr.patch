@@ -24,11 +24,9 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  tests/testprogs/CMakeLists.txt | 12 +++++++++---
  1 file changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/tests/testprogs/CMakeLists.txt b/tests/testprogs/CMakeLists.txt
-index 4cc9967..2b407b7 100644
 --- a/tests/testprogs/CMakeLists.txt
 +++ b/tests/testprogs/CMakeLists.txt
-@@ -160,11 +160,16 @@ list(APPEND testprogtargets
+@@ -160,11 +160,16 @@
    ${CMAKE_CURRENT_BINARY_DIR}/.debug/uprobe_separate_debug-stripped.debug)
  
  # Build a binary with split DWARF (.dwo files) to verify parsing of the split debug info format.
@@ -46,16 +44,16 @@ index 4cc9967..2b407b7 100644
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c
  )
  list(APPEND testprogtargets ${EXTERNAL_DEBUG_DIR}/dwo/uprobe_test-split)
-@@ -176,9 +181,10 @@ add_custom_command(
-   OUTPUT
-     ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
-     ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
--  COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split ${testprog_raw_ld_flags}
--  COMMAND ${LLVM_DWP} -e ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
-+  COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o uprobe_test-split ${testprog_raw_ld_flags}
-+  COMMAND ${LLVM_DWP} -e uprobe_test-split -o uprobe_test-split.dwp
-   COMMAND ${CMAKE_COMMAND} -E rm -f ${EXTERNAL_DEBUG_DIR}/dwp/*.dwo
-+  WORKING_DIRECTORY ${EXTERNAL_DEBUG_DIR}/dwp
-   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c
- )
- list(APPEND testprogtargets
+@@ -182,9 +187,10 @@
+     OUTPUT
+       ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
+       ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
+-    COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split ${testprog_raw_ld_flags}
+-    COMMAND ${LLVM_DWP} -e ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
++    COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o uprobe_test-split ${testprog_raw_ld_flags}
++    COMMAND ${LLVM_DWP} -e uprobe_test-split -o uprobe_test-split.dwp
+     COMMAND ${CMAKE_COMMAND} -E rm -f ${EXTERNAL_DEBUG_DIR}/dwp/*.dwo
++    WORKING_DIRECTORY ${EXTERNAL_DEBUG_DIR}/dwp
+     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c
+   )
+   list(APPEND testprogtargets

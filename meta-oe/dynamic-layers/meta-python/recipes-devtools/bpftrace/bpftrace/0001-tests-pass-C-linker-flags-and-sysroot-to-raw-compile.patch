@@ -26,7 +26,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 
 --- a/tests/testprogs/CMakeLists.txt
 +++ b/tests/testprogs/CMakeLists.txt
-@@ -17,6 +17,23 @@ test_and_add_testprog_cflag("-fno-omit-f
+@@ -17,6 +17,23 @@
  test_and_add_testprog_cflag("-mno-omit-leaf-frame-pointer")
  get_property(testprog_cflags GLOBAL PROPERTY testprog_cflags)
  
@@ -50,7 +50,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  file(GLOB testprog_sources CONFIGURE_DEPENDS *.c *.cpp)
  set(testprogtargets "")
  function(testprog_compile is_pie)
-@@ -85,7 +102,7 @@ endif()
+@@ -85,7 +102,7 @@
  find_program(LLVM_OBJCOPY llvm-objcopy REQUIRED)
  add_custom_command(
    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/false.bin
@@ -59,7 +59,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
    COMMAND ${LLVM_OBJCOPY} -S --only-section=.text --keep-symbol=main -O binary ${CMAKE_CURRENT_BINARY_DIR}/false.o ${CMAKE_CURRENT_BINARY_DIR}/false.bin
    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_CURRENT_BINARY_DIR}/false.o
    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-@@ -147,7 +164,7 @@ add_custom_command(
+@@ -147,7 +164,7 @@
    OUTPUT
      ${EXTERNAL_DEBUG_DIR}/dwo/uprobe_test-split
      ${EXTERNAL_DEBUG_DIR}/dwo/uprobe_test-split-uprobe_test.dwo
@@ -68,12 +68,12 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c
  )
  list(APPEND testprogtargets ${EXTERNAL_DEBUG_DIR}/dwo/uprobe_test-split)
-@@ -159,7 +176,7 @@ add_custom_command(
-   OUTPUT
-     ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
-     ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
--  COMMAND ${CMAKE_C_COMPILER} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
-+  COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split ${testprog_raw_ld_flags}
-   COMMAND ${LLVM_DWP} -e ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
-   COMMAND ${CMAKE_COMMAND} -E rm -f ${EXTERNAL_DEBUG_DIR}/dwp/*.dwo
-   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c
+@@ -165,7 +182,7 @@
+     OUTPUT
+       ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
+       ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
+-    COMMAND ${CMAKE_C_COMPILER} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split
++    COMMAND ${CMAKE_C_COMPILER} ${testprog_raw_cc_flags} -g -O0 -gsplit-dwarf ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split ${testprog_raw_ld_flags}
+     COMMAND ${LLVM_DWP} -e ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split -o ${EXTERNAL_DEBUG_DIR}/dwp/uprobe_test-split.dwp
+     COMMAND ${CMAKE_COMMAND} -E rm -f ${EXTERNAL_DEBUG_DIR}/dwp/*.dwo
+     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/uprobe_test.c

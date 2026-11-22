@@ -1,0 +1,65 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sat, 21 Nov 2026 00:00:00 -0800
+Subject: [PATCH] tests: make the dwarf_origin fixture usable in installed tests
+
+DWARF_ORIGIN_BINARY is set to the absolute path of the fixture in the
+build tree, so bpftrace_test embeds the build directory and cannot find
+the fixture once the tests are installed elsewhere. ctest runs
+bpftrace_test from the tests build directory, so a path relative to it
+works both there and in an installed copy of the tests directory.
+
+The fixture is also built with the build host gcc found by BuildBPF.cmake,
+so a cross build installs a host binary next to target tests. Its DWARF is
+hand written and architecture independent, so build it with the target C
+compiler and sysroot instead.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ tests/CMakeLists.txt      |  2 +-
+ tests/data/CMakeLists.txt | 16 ++++++++++++++--
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -65,7 +65,7 @@ add_subdirectory(data)
+ add_dependencies(bpftrace_test data_source_dwarf data_source_btf)
+ add_dependencies(bpftrace_test dwarf_origin_fixture)
+ target_compile_definitions(bpftrace_test PRIVATE
+-  DWARF_ORIGIN_BINARY="${CMAKE_CURRENT_BINARY_DIR}/data/dwarf_origin")
++  DWARF_ORIGIN_BINARY="data/dwarf_origin")
+ target_include_directories(bpftrace_test PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+ target_include_directories(bpftrace_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+ 
+--- a/tests/data/CMakeLists.txt
++++ b/tests/data/CMakeLists.txt
+@@ -1,13 +1,25 @@
+ include(BuildBPF)
+ include(Embed)
+ 
++# The fixture is installed with the tests, so build it with the target C
++# compiler and sysroot; GCC from BuildBPF.cmake is the build host compiler.
++set(dwarf_origin_cc_flags "")
++if(CMAKE_C_COMPILER_ARG1)
++  separate_arguments(_arg1 UNIX_COMMAND "${CMAKE_C_COMPILER_ARG1}")
++  list(APPEND dwarf_origin_cc_flags ${_arg1})
++endif()
++if(CMAKE_SYSROOT)
++  list(APPEND dwarf_origin_cc_flags "--sysroot=${CMAKE_SYSROOT}")
++endif()
++separate_arguments(dwarf_origin_ld_flags UNIX_COMMAND "${CMAKE_EXE_LINKER_FLAGS}")
++
+ # Define the DIE order explicitly: compiler-generated DWARF may put the
+ # abstract function first and leave inherited parameter names untested.
+ add_custom_command(
+   OUTPUT dwarf_origin
+-  COMMAND ${GCC} -no-pie ${CMAKE_CURRENT_SOURCE_DIR}/dwarf_origin.c
++  COMMAND ${CMAKE_C_COMPILER} ${dwarf_origin_cc_flags} -no-pie ${CMAKE_CURRENT_SOURCE_DIR}/dwarf_origin.c
+           ${CMAKE_CURRENT_SOURCE_DIR}/dwarf_origin.S
+-          -o ${CMAKE_CURRENT_BINARY_DIR}/dwarf_origin
++          -o ${CMAKE_CURRENT_BINARY_DIR}/dwarf_origin ${dwarf_origin_ld_flags}
+   DEPENDS dwarf_origin.c dwarf_origin.S
+   VERBATIM
+ )
