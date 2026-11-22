@@ -21,7 +21,6 @@ RDEPENDS:packagegroup-meta-filesystems = "\
     libisofs \
     libburn \
     libisoburn \
-    logfsprogs \
     fuse-exfat \
     owfs \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "smbnetfs", "", d)} \
