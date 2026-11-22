@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e4e583cb28b7e0c2ef8df4832706e96"
 # The release/v* tags carry the generated sources and live on the "release"
 # branch, which shares no history with "main".
 SRC_URI = "git://github.com/nodejs/llhttp.git;protocol=https;branch=release;tag=release/v${PV}"
-SRCREV = "0e815792b167a9bd8ace259b95b7da953776c288"
+SRCREV = "816485216511b86459b2e6478190e14c38c14891"
 
 inherit cmake
 
