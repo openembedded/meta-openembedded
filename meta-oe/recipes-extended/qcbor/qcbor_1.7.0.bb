@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9abe2371333f4ab0e62402a486f308a5"
 
 SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "930708bb86481e88879eb1d87fd4d664f1d69503"
+SRCREV = "7a2f7e66b3a61cf62444bf981a2c1efc0f5f6faa"
 
 
 inherit pkgconfig
