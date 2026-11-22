@@ -9,7 +9,7 @@ SRC_URI += " \
         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
         file://run-ptest \
 "
-SRC_URI[sha256sum] = "046c61a72d3a847d6df6417a7f0d5cf054e3b82bbcb54fb1e69d47880964049c"
+SRC_URI[sha256sum] = "f69f387dba9abe536fec87483a749485f2ef0c81bfa79f609d9873e57054a1a5"
 
 RDEPENDS:${PN}-ptest += " \
         python3-aioresponses \
