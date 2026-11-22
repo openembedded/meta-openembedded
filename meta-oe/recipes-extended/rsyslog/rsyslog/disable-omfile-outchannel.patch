@@ -9,10 +9,11 @@ Patch is also applied in void linux
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
---- a/tests/omfile-outchannel.sh	2021-03-09 05:51:07.000000000 -0600
-+++ b/tests/omfile-outchannel.sh	2022-05-26 15:55:23.358520256 -0500
-@@ -1,5 +1,9 @@
+--- a/tests/omfile-outchannel.sh
++++ b/tests/omfile-outchannel.sh
+@@ -1,6 +1,10 @@
  #!/bin/bash
+ # SPDX-License-Identifier: Apache-2.0
  # addd 2018-08-02 by RGerhards, released under ASL 2.0
 +
 +# This test fails for x86_64-musl, under GitHub's CI/CD. Disable for now.
