@@ -9,7 +9,7 @@ decorator, just because you can."
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fb3c386712bc6cfb52aae3692d1ebbd4"
 
-SRC_URI[sha256sum] = "4cbcdd55a6efadb9dbea26b858f4fb3264567b52d69ca0d25b721b553f60ea82"
+SRC_URI[sha256sum] = "d9883f1b8259e3bfc42565d0bc6fdc760012008552aa449f75efd2d48319b82b"
 
 inherit pypi python_setuptools_build_meta
 
