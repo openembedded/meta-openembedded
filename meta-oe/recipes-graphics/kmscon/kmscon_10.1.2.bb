@@ -21,7 +21,7 @@ DEPENDS = "\
 "
 
 SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
-SRCREV = "55e7127eff12608f1ea52eb456cd982c94bcd5ce"
+SRCREV = "bd3efdf5c33e2a7049621fb4973e25f72f83cfe8"
 
 SRC_URI += " \
 "
