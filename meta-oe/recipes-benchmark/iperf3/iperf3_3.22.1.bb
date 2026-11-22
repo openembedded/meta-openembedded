@@ -12,12 +12,12 @@ BUGTRACKER = "https://github.com/esnet/iperf/issues"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f2eb355b6d3b9d63b6b7a861cdc62440"
 
-SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https;tag=${PV} \
+SRC_URI = "git://github.com/esnet/iperf.git;branch=3.22.x;protocol=https;tag=${PV} \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
            file://0001-configure.ac-check-for-CPP-prog.patch \
           "
 
-SRCREV = "926bd905501b792bd082d2200d1d1a84aa543e3a"
+SRCREV = "acc0ed500fb2c421999948a72bb6a9e05af528d8"
 
 RDEPENDS:${PN} = "libgcc"
 
