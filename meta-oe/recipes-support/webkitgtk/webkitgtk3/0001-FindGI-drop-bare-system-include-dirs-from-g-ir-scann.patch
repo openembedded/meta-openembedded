@@ -40,7 +40,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 --- a/Source/cmake/FindGI.cmake
 +++ b/Source/cmake/FindGI.cmake
-@@ -297,6 +297,15 @@ function(GI_INTROSPECT namespace nsversion header)
+@@ -297,6 +297,15 @@
          if (NOT IS_ABSOLUTE "${incdir}")
              get_filename_component(incdir "${incdir}" REALPATH BASE_DIR "${target_srcdir}")
          endif ()
@@ -56,7 +56,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
          list(APPEND scanner_flags "-I${incdir}")
      endforeach ()
  
-@@ -337,6 +346,13 @@ function(GI_INTROSPECT namespace nsversion header)
+@@ -337,6 +346,13 @@
      # Generate .gir
      set(target_def "$<TARGET_PROPERTY:${opt_TARGET},COMPILE_DEFINITIONS>")
      set(target_inc "$<TARGET_PROPERTY:${opt_TARGET},INTERFACE_INCLUDE_DIRECTORIES>")
@@ -67,6 +67,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +    # compiler. The sysroot include path is added automatically, so dropping
 +    # them is safe.
 +    set(target_inc "$<FILTER:${target_inc},EXCLUDE,^/usr/(local/)?include$>")
-     add_custom_command(
-         OUTPUT "${gir_path}"
-         COMMENT "Generating ${gir_name}.gir"
+     set(scanner_env "CC=${CMAKE_C_COMPILER}" "CFLAGS=${CMAKE_C_FLAGS}")
+     if (ENABLED_COMPILER_SANITIZERS)
+         string(JOIN " " sanitizer_flags ${ENABLED_COMPILER_SANITIZERS})

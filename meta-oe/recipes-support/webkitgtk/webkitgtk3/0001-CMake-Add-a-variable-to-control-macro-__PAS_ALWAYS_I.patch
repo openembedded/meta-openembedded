@@ -44,11 +44,9 @@ Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
  Source/cmake/WebKitCompilerFlags.cmake              | 7 +++++++
  2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-index 5d5fb38c..a554f700 100644
 --- a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
 +++ b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-@@ -44,7 +44,7 @@ __PAS_BEGIN_EXTERN_C;
+@@ -45,7 +45,7 @@
  #define __SUSPICIOUS__
  #define __BROKEN__
  
@@ -57,14 +55,12 @@ index 5d5fb38c..a554f700 100644
  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE __attribute__((__always_inline__))
  #else
  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE
-diff --git a/Source/cmake/WebKitCompilerFlags.cmake b/Source/cmake/WebKitCompilerFlags.cmake
-index f5ec0a55..dfd741e7 100644
 --- a/Source/cmake/WebKitCompilerFlags.cmake
 +++ b/Source/cmake/WebKitCompilerFlags.cmake
-@@ -503,3 +503,10 @@ endif ()
- 
- # FIXME: Enable pre-compiled headers for all ports <https://webkit.org/b/139438>
- set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
+@@ -635,3 +635,10 @@
+     # (see comment #28 in the link above).
+     WEBKIT_PREPEND_GLOBAL_COMPILER_FLAGS(-mno-lxc1-sxc1)
+ endif ()
 +
 +# It fails to compile with `gcc -Og`
 +set(WEBKIT_NO_INLINE_HINTS OFF CACHE BOOL "Disable funtion attribute always_inline for WebKit")
