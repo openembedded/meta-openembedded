@@ -10,6 +10,7 @@ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
            file://0001-Define-createIdentifierRef-prototype-in-yang-complex.patch \
            file://0001-parser-yang-Define-_DEFAULT_SOURCE.patch \
            file://0001-Fix-build-failure-with-gcc-15.patch \
+           file://0001-lib-Makefile.am-order-the-scanners-after-the-bison-headers.patch \
           "
 
 SRC_URI[sha256sum] = "f21accdadb1bb328ea3f8a13fc34d715baac6e2db66065898346322c725754d3"

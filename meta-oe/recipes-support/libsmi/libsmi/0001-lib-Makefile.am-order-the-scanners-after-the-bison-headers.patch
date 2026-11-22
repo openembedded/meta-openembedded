@@ -1,0 +1,41 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sun, 22 Nov 2026 00:00:00 -0800
+Subject: [PATCH] lib/Makefile.am: order the scanners after the bison headers
+
+bison writes parser-*.tab.h together with parser-*.c, but only the smi
+rule names the header as an output, and that one as a second independent
+target, which can run bison twice. For sming and yang make has no rule
+for the header at all, so a scanner that includes it can be generated and
+compiled while bison is still rewriting it. Under parallel make this
+fails with errors such as "unknown type name 'YYSTYPE'" in
+scanner-yang.c.
+
+Make each header depend on its parser with no recipe of its own, so
+everything that needs a header waits for bison to finish.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ lib/Makefile.am | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+--- a/lib/Makefile.am
++++ b/lib/Makefile.am
+@@ -45,9 +45,14 @@
+ 		  	  parser-yang.c scanner-yang.c
+ libsmi_la_LDFLAGS	= -version-info @VERSION_LIBTOOL@
+ 
+-parser-smi.c parser-smi.tab.h: parser-smi.y scanner-smi.h parser-smi.h error.h
++parser-smi.c: parser-smi.y scanner-smi.h parser-smi.h error.h
+ 	$(BISON) --defines=parser-smi.tab.h -t -psmi -o parser-smi.c parser-smi.y
+ 
++# bison writes the .tab.h headers together with the parsers
++parser-smi.tab.h: parser-smi.c
++parser-sming.tab.h: parser-sming.c
++parser-yang.tab.h: parser-yang.c
++
+ parser-sming.c: parser-sming.y scanner-sming.h parser-sming.h error.h
+ 	$(BISON) --defines=parser-sming.tab.h -t -psming -o parser-sming.c parser-sming.y
+ 
