@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=m
            file://0001-unattended-upgrade-Remove-distro_info-usage-to-check.patch \
            "
 
-SRCREV = "221b1a688ee291fd7e0d116dccb57073b921619a"
+SRCREV = "1cba54a8ee9b7706e09f57937f1de251900a992e"
 
 
 inherit setuptools3_legacy
