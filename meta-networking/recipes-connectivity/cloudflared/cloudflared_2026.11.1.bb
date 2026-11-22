@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=mas
            file://cloudflared.service \
            file://default \
            "
-SRCREV = "872b241f94871665c1c157adefcf90c11f0ead96"
+SRCREV = "518d7f7969b764df628bb4b1088f0f154901dc4e"
 require ${BPN}-go-mods.inc
 
 GO_IMPORT = "github.com/cloudflare/cloudflared"

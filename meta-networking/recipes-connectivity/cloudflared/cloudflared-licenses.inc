@@ -53,11 +53,12 @@ LIC_FILES_CHKSUM += "\
     file://pkg/mod/github.com/tklauser/numcpus@v0.11.0/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
     file://pkg/mod/go.opentelemetry.io/auto/sdk@v1.2.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
     file://pkg/mod/go.opentelemetry.io/contrib/propagators@v0.22.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-    file://pkg/mod/go.opentelemetry.io/otel/metric@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-    file://pkg/mod/go.opentelemetry.io/otel/sdk@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-    file://pkg/mod/go.opentelemetry.io/otel/trace@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
-    file://pkg/mod/go.opentelemetry.io/otel@v1.45.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel/exporters/otlp/otlptrace@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel/log@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel/metric@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel/sdk@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel/trace@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
+    file://pkg/mod/go.opentelemetry.io/otel@v1.47.0/LICENSE;md5=24dad3abbe7a8f390afc8ab967bfefa7;spdx=Apache-2.0+AND+BSD-3-Clause \
     file://pkg/mod/go.opentelemetry.io/proto/otlp@v1.11.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
     file://pkg/mod/go.uber.org/automaxprocs@v1.6.0/LICENSE;md5=513f1cf32c6e4e3236a335fa13bb1c89;spdx=MIT \
     file://pkg/mod/golang.org/x/crypto@v0.58.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
@@ -70,7 +71,7 @@ LIC_FILES_CHKSUM += "\
     file://pkg/mod/google.golang.org/genproto/googleapis/api@v0.0.0-20260720211330-0afa2a65878a/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
     file://pkg/mod/google.golang.org/genproto/googleapis/rpc@v0.0.0-20260720211330-0afa2a65878a/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
     file://pkg/mod/google.golang.org/grpc@v1.83.2/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-    file://pkg/mod/google.golang.org/protobuf@v1.36.11/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
+    file://pkg/mod/google.golang.org/protobuf@v1.36.12/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
     file://pkg/mod/gopkg.in/natefinch/lumberjack.v2@v2.0.0/LICENSE;md5=574cdb55b81249478f5af5f789e9e29f;spdx=MIT \
     file://pkg/mod/gopkg.in/yaml.v2@v2.4.0/LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e;spdx=Apache-2.0 \
     file://pkg/mod/gopkg.in/yaml.v3@v3.0.1/LICENSE;md5=3c91c17266710e16afdbb2b6d15c761c;spdx=Apache-2.0 \

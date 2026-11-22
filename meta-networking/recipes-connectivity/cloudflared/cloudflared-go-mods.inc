@@ -49,11 +49,12 @@ SRC_URI += "\
     gomod://github.com/tklauser/numcpus;version=v0.11.0;sha256sum=7a7527e1f68059a77189ae875c294e5c310925fbb8ba5a6c794edd2b7e687267 \
     gomod://go.opentelemetry.io/auto/sdk;version=v1.2.1;sha256sum=a08a16fc0a7041cdb875f47a260a56000632212c85f65a302a043c76380c8335 \
     gomod://go.opentelemetry.io/contrib/propagators;version=v0.22.0;sha256sum=6fd7c359308ba4f6b81698cabdbe701b2c8d786de53387ce8ed7b69eed647e04 \
-    gomod://go.opentelemetry.io/otel;version=v1.45.0;sha256sum=65b5fc93c93f4eaef740b4bba81fd2543f248d5df85cf4d1ddf9ab459b30f7a2 \
-    gomod://go.opentelemetry.io/otel/exporters/otlp/otlptrace;version=v1.45.0;sha256sum=17e5b206e5ea76d8a1e4e8ef340d888894a0776fc1d66848530346347e0b47c3 \
-    gomod://go.opentelemetry.io/otel/metric;version=v1.45.0;sha256sum=8f30ef0039306bf3a4421b8c08e3fc8922d13503dce53b3438e860b3628faecd \
-    gomod://go.opentelemetry.io/otel/sdk;version=v1.45.0;sha256sum=ad0e63fa1cfc01dffec2a90a8f2d2c1bc0f55d0462940176dc41b7ada0d03258 \
-    gomod://go.opentelemetry.io/otel/trace;version=v1.45.0;sha256sum=32d7d64ea5991378184b03a9ed7b7822b17691a239508a6905fdd73819cb6c6f \
+    gomod://go.opentelemetry.io/otel;version=v1.47.0;sha256sum=275ce19c11b3f26830a4b3d884e6a59f3e4ef51e519ef3fc3bcbcc5e71f9b37d \
+    gomod://go.opentelemetry.io/otel/exporters/otlp/otlptrace;version=v1.47.0;sha256sum=a6a41ac372755156c3ba546b861f887052b9ea781d9fc6233e4db5d52a47d1bd \
+    gomod://go.opentelemetry.io/otel/log;version=v1.47.0;sha256sum=6f99ff1e779241c778d62872f651ea7bafce80246b5cfac321aa133f196ad811 \
+    gomod://go.opentelemetry.io/otel/metric;version=v1.47.0;sha256sum=cfa35ad1f540114d39a381cf8773ba7d2aab47f0fa42040d409e86dee9ab27f6 \
+    gomod://go.opentelemetry.io/otel/sdk;version=v1.47.0;sha256sum=c01b323e4173c1700ee0352533bdc26816d1e4fa33fb15a0c24b35f9978c4918 \
+    gomod://go.opentelemetry.io/otel/trace;version=v1.47.0;sha256sum=dfffa6cb848954b5d3413007b6553ad3e508a9fc992a81ab4bd9026c236229be \
     gomod://go.opentelemetry.io/proto/otlp;version=v1.11.0;sha256sum=790b98d472e7095511fa7feddd04e1d85bd844226e03ba482bd4105ef2217e09 \
     gomod://go.uber.org/automaxprocs;version=v1.6.0;sha256sum=964c6f548f7ee6df9fa3a9080d722c7950060bda0cb84ff9e2ae065f078813c4 \
     gomod://golang.org/x/crypto;version=v0.58.0;sha256sum=b0a45594cda20ddb4264d84aeff9b588b8570bf6a2833c51a0b821734a298d95 \
@@ -66,7 +67,7 @@ SRC_URI += "\
     gomod://google.golang.org/genproto/googleapis/api;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=df4e8023b2b9efa58561b12e3177f4fb6789e2a271a9e03baf6f6501c7961694 \
     gomod://google.golang.org/genproto/googleapis/rpc;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=03a9f622788b07abc4873b3b57bdd9a3e2c8ca248587a2196578dda0bf74ddd5 \
     gomod://google.golang.org/grpc;version=v1.83.2;sha256sum=84292905a694e17862d15abc123a6f7f7efa9e1e3a77e80120982ff95b2605ea \
-    gomod://google.golang.org/protobuf;version=v1.36.11;sha256sum=14983d36c56a814ed91b6d652f2b8f895baba1b84eb43b28a0b132c8637cd274 \
+    gomod://google.golang.org/protobuf;version=v1.36.12;sha256sum=68f8a3174aff42950fd9bd02c11b45c6986eb8060508d124d1c3dd6bf86b9be6 \
     gomod://gopkg.in/natefinch/lumberjack.v2;version=v2.0.0;sha256sum=8c268e36660d6ce36af808d74b9be80207c05463679703e93d857e954c637aaa \
     gomod://gopkg.in/yaml.v2;version=v2.4.0;sha256sum=ede49e27c4cca6cdd2ec719aed8ea4d363710cceb3d411e7a786fbdec0d391fd \
     gomod://gopkg.in/yaml.v3;version=v3.0.1;sha256sum=aab8fbc4e6300ea08e6afe1caea18a21c90c79f489f52c53e2f20431f1a9a015 \
