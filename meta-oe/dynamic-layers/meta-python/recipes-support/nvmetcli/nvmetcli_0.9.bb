@@ -6,7 +6,7 @@ file."
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
-inherit systemd setuptools3
+inherit systemd python_setuptools_build_meta
 
 # nvmet service will start and stop the NVMe Target configuration on boot and
 # shutdown from a saved NVMe Target configuration in the /etc/nvmet/config.json
@@ -19,7 +19,7 @@ SYSTEMD_AUTO_ENABLE ?= "disable"
 
 RDEPENDS:${PN} += "python3 python3-pyparsing python3-configshell-fb"
 
-SRCREV = "d323d5a3091af490502c5d025ec7361a3a2cfbd9"
+SRCREV = "afd82ca535db1aea565cbf9f9c667aeebf19cf15"
 SRC_URI = "git://git.infradead.org/users/hch/nvmetcli.git;branch=master"
 
 
