@@ -20,13 +20,15 @@ PE = "2"
 
 SRCREV_FORMAT = "breakpad_gtest_protobuf_lss"
 
-SRCREV_breakpad = "8988364bcddd9b194b0bf931c10bc125987330ed"
+SRCREV_breakpad = "f80f2888031b0570783011476a5e862fb7d848a1"
 #v1.11.0
 SRCREV_gtest = "e2239ee6043f73722e7aa812a459f54a28552929"
 SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
 SRCREV_lss = "9719c1e1e676814c456b55f5f070eabad6709d31"
 
-SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+
+SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https;tag=v${PV} \
            git://github.com/google/googletest.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/testing/gtest;name=gtest;branch=main;protocol=https \
            git://github.com/protocolbuffers/protobuf.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/third_party/protobuf/protobuf;name=protobuf;branch=main;protocol=https \
            git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/third_party/lss;name=lss \
@@ -37,7 +39,6 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=h
            file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch \
            file://mcontext.patch \
            file://0001-Remove-HAVE_GETCONTEXT-check-to-add-local-implementa.patch \
-           file://0001-Fixed-missing-include-for-std-find_if.patch \
            file://0001-module_factory-move-CreateModule-out-of-line-to-fix-.patch \
            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
