@@ -1,3 +1,5 @@
+require recipes-core/systemd/systemd.inc
+
 SUMMARY = "libsystemd static library"
 DESCRIPTION = "libsystemd static library built specifically as an integral component of sdbus-c++"
 
@@ -10,17 +12,14 @@ inherit meson pkgconfig
 
 DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
 
-SRCREV = "6576434737de042cdd0f6e62f34f04818306c73b"
-SRCBRANCH = "v259-stable"
-SRC_URI = "git://github.com/systemd/systemd.git;protocol=https;branch=${SRCBRANCH};tag=v${PV} \
-           file://static-libsystemd-pkgconfig.patch \
-           "
+SRC_URI += "file://static-libsystemd-pkgconfig.patch"
 
 PACKAGECONFIG ??= "gshadow idn"
 PACKAGECONFIG:remove:libc-musl = " gshadow idn"
 PACKAGECONFIG[gshadow] = "-Dgshadow=true,-Dgshadow=false"
 PACKAGECONFIG[idn] = "-Didn=true,-Didn=false"
 
+DEPENDS:append:libc-musl = " libucontext"
 CFLAGS:append:libc-musl = " -D__UAPI_DEF_ETHHDR=0 "
 
 # Enable systemd's in-tree musl support (mirrors oe-core's systemd recipe).
@@ -45,4 +44,9 @@ do_install () {
 
     install -d ${D}${libdir}/pkgconfig
     install ${B}/src/libsystemd/libsystemd.pc ${D}${libdir}/pkgconfig
+}
+
+# The static libsystemd uses getcontext/makecontext/swapcontext from libucontext on musl
+do_install:append:libc-musl () {
+    sed -i -e '/^Libs:/s/$/ -lucontext/' ${D}${libdir}/pkgconfig/libsystemd.pc
 }
