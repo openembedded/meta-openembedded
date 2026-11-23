@@ -16,7 +16,7 @@ PROTOC_BRANCH = "${@d.getVar('PV').split('.', 2)[1]}.x"
 DEPENDS = "zlib abseil-cpp jsoncpp"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "6e1998413a5bca7c058b85999667893f167434bc"
+SRCREV = "2c74169b34066ceb8ddb6b882fcb3fb32d737a55"
 
 SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH};protocol=https;tag=${PROTOC_VERSION} \
            file://run-ptest \
@@ -25,11 +25,11 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH}
            "
 
 # Upstream dropped the language-major prefix after v6.31.1: releases are now
-# tagged vNN.N (v33.6 == this recipe's 6.33.6, cf. PROTOC_VERSION above). Match
+# tagged vNN.N (v36.2 == this recipe's 7.36.2, cf. PROTOC_VERSION above). Match
 # those two-component tags so the real latest release is reported; the leading
-# "6." in PV means the comparison stays off-by-a-major, so this reads as UPDATE
+# C++ major in PV means the comparison stays off-by-a-major, so this reads as UPDATE
 # rather than MATCH even when current.
-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)$"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+)$"
 
 CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
 
