@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 03:07:50 -0800
+Subject: [PATCH] test: Build tipc_test_suite only when struct tipcc_addr is
+ available
+
+tipc_test_suite uses struct tipcc_addr and TIPCC_ADDR, which only exist
+in a linux/tipc.h carrying the out-of-tree TIPC "tipcc" address API.
+Mainline kernel headers do not have them, so the build fails with:
+
+  tipc_test.h:69:21: error: field has incomplete type 'struct tipcc_addr'
+
+libtipc and the tipcc_hello_world demo already guard their use with
+'#ifdef TIPCC_ADDR'. Check for it in configure and skip the test suite
+when it is missing.
+
+Upstream-Status: Submitted [tipc-discussion@lists.sourceforge.net, <20261125080050.2410104-1-raj.khem@gmail.com>]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ configure.ac     | 4 ++++
+ test/Makefile.am | 6 +++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 83e0ea5..d7a1558 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -32,6 +32,10 @@ LDFLAGS="$LDFLAGS ../../libtipc/libtipc.a -lpthread"
+ AC_CHECK_TYPE(struct tipc_sioc_ln_req, [tipc_lss=yes],[], [[#include <linux/tipc.h>]])
+ AM_CONDITIONAL(TIPC_LINK_STATE_SUBSCRITION, test "x$tipc_lss" = "xyes")
+ 
++# tipc_test_suite needs struct tipcc_addr, which mainline linux/tipc.h lacks
++AC_CHECK_DECL(TIPCC_ADDR, [tipcc_addr=yes], [], [[#include <linux/tipc.h>]])
++AM_CONDITIONAL(TIPCC_ADDR, test "x$tipcc_addr" = "xyes")
++
+ # Checks for TIPC GO API
+ AC_ARG_WITH(goapi,AS_HELP_STRING([--with-goapi],[Compile TIPC GO APIs examples]),[goapi=true],[])
+ if test "x$goapi" == "xtrue"; then
+diff --git a/test/Makefile.am b/test/Makefile.am
+index b45dfd2..edda891 100644
+--- a/test/Makefile.am
++++ b/test/Makefile.am
+@@ -1 +1,5 @@
+-SUBDIRS = group_test ptts multicast_blast overlapping_ranges iovec topsrv_stress rdm tipc_test_suite
++SUBDIRS = group_test ptts multicast_blast overlapping_ranges iovec topsrv_stress rdm
++
++if TIPCC_ADDR
++SUBDIRS += tipc_test_suite
++endif
