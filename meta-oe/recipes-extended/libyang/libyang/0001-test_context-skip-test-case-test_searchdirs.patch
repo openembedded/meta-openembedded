@@ -13,14 +13,14 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 deletion(-)
 
 diff --git a/tests/utests/basic/test_context.c b/tests/utests/basic/test_context.c
-index 116b2ce36..4e96f4e96 100644
+index f3dfcaad..fd3e3f31 100644
 --- a/tests/utests/basic/test_context.c
 +++ b/tests/utests/basic/test_context.c
-@@ -1110,7 +1110,6 @@ int
+@@ -1131,7 +1131,6 @@ int
  main(void)
  {
      const struct CMUnitTest tests[] = {
 -        UTEST(test_searchdirs),
-         UTEST(test_options),
          UTEST(test_models),
          UTEST(test_imports),
+         UTEST(test_includes),
