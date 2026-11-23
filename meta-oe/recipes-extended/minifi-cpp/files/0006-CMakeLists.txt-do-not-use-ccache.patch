@@ -1,38 +1,43 @@
-From bbe5c95ef1755c4804c4561c03cafedeb004cb36 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
-Date: Thu, 21 Mar 2024 10:18:39 +0800
+Date: Mon, 23 Nov 2026 08:03:07 -0800
 Subject: [PATCH] CMakeLists.txt: do not use ccache
 
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- CMakeLists.txt | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ CMakeLists.txt | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index fc1718dfd..70c94c2ff 100644
+index f9c6474c..6932d1dd 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -84,12 +84,12 @@ if (MINIFI_USE_REAL_ODBC_TEST_DRIVER)
+@@ -85,16 +85,16 @@ if (MINIFI_USE_REAL_ODBC_TEST_DRIVER)
  endif()
  
  # Use ccache if present
 -find_program(CCACHE_FOUND ccache)
 -if(CCACHE_FOUND)
--    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
--    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+-    if(NOT CMAKE_C_COMPILER_LAUNCHER)
+-        set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_FOUND}")
+-    endif()
+-    if(NOT CMAKE_CXX_COMPILER_LAUNCHER)
+-        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_FOUND}")
+-    endif()
 -    message("-- Found ccache: ${CCACHE_FOUND}")
 -endif(CCACHE_FOUND)
 +#find_program(CCACHE_FOUND ccache)
 +#if(CCACHE_FOUND)
-+#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-+#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
++#    if(NOT CMAKE_C_COMPILER_LAUNCHER)
++#        set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_FOUND}")
++#    endif()
++#    if(NOT CMAKE_CXX_COMPILER_LAUNCHER)
++#        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_FOUND}")
++#    endif()
 +#    message("-- Found ccache: ${CCACHE_FOUND}")
 +#endif(CCACHE_FOUND)
  
  # Check for exec info before we enable the backtrace features.
  CHECK_INCLUDE_FILE("execinfo.h" HAS_EXECINFO)
--- 
-2.34.1
-

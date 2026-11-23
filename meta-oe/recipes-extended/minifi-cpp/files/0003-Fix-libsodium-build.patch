@@ -1,6 +1,6 @@
-From d48ababf341708885ecf687ebc46bb1d84ca868d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
-Date: Tue, 19 Mar 2024 20:56:05 +0800
+Date: Mon, 23 Nov 2026 08:02:54 -0800
 Subject: [PATCH] Fix libsodium build
 
 * Specify correct configure options to fix libsodium cross build.
@@ -14,12 +14,14 @@ from 0.99.1 to 0.99.2; adapted the patch when upgrading libsodium
 from 1.0.19 to 1.0.20 because the top-level directory name inside the
 tarball changed from libsodium-stable to libsodium-1.0.20.]
 Signed-off-by: Li Zhou <li.zhou@windriver.com>
+[kr: Adapted for libsodium 1.0.22 used by minifi-cpp 1.1.0.]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
  cmake/BundledLibSodium.cmake | 6 ++----
  1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/cmake/BundledLibSodium.cmake b/cmake/BundledLibSodium.cmake
-index 001a90dad..87a3244fd 100644
+index 4232ed3e..f2045723 100644
 --- a/cmake/BundledLibSodium.cmake
 +++ b/cmake/BundledLibSodium.cmake
 @@ -60,14 +60,12 @@ function(use_bundled_libsodium SOURCE_DIR BINARY_DIR)
@@ -35,10 +37,7 @@ index 001a90dad..87a3244fd 100644
 -                URL_HASH ${LIBSODIUM_URL_HASH}
                  BUILD_IN_SOURCE true
 -                SOURCE_DIR "${BINARY_DIR}/thirdparty/libsodium-src"
-+                SOURCE_DIR "${SOURCE_DIR}/thirdparty/libsodium-1.0.20"
++                SOURCE_DIR "${SOURCE_DIR}/thirdparty/libsodium-1.0.22"
                  BUILD_COMMAND make
                  CMAKE_COMMAND ""
                  UPDATE_COMMAND ""
--- 
-2.34.1
-

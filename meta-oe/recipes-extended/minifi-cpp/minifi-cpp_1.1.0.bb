@@ -5,69 +5,65 @@ management, focusing on the collection of data at the source of its creation."
 HOMEPAGE = "https://nifi.apache.org/minifi/index.html"
 SECTION = "console/network"
 LICENSE = "Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND ISC AND MIT AND Zlib"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb72a6f151096df9e2f5f01b6bf9d735"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=50c0151bf7c3999dcb7de9652ec6e3a6"
 
-SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=main \
-           git://github.com/martinmoene/expected-lite.git;protocol=https;branch=master;name=expected-lite;destsuffix=${S}/thirdparty/expected-lite-src \
-           git://github.com/ericniebler/range-v3.git;protocol=https;branch=master;name=range-v3;destsuffix=${S}/thirdparty/range-v3-src \
-           git://github.com/Neargye/magic_enum.git;protocol=https;branch=master;name=magic-enum;destsuffix=${S}/thirdparty/magic-enum-src \
-           git://github.com/p-ranav/argparse.git;protocol=https;branch=master;name=argparse;destsuffix=${S}/thirdparty/argparse-src \
-           git://github.com/gsl-lite/gsl-lite.git;protocol=https;branch=master;name=gsl-lite;destsuffix=${S}/thirdparty/gsl-lite-src \
-           git://github.com/HowardHinnant/date.git;protocol=https;branch=master;name=date;destsuffix=${S}/thirdparty/date-src \
-           git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;name=asio;destsuffix=${S}/thirdparty/asio-src \
-           git://github.com/fmtlib/fmt.git;protocol=https;branch=main;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
-           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.15.3;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
-           git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
+SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=main;tag=rel/minifi-cpp-${PV} \
+           git://github.com/ericniebler/range-v3.git;protocol=https;branch=master;tag=0.12.0;name=range-v3;destsuffix=${S}/thirdparty/range-v3-src \
+           git://github.com/Neargye/magic_enum.git;protocol=https;branch=master;tag=v0.9.8;name=magic-enum;destsuffix=${S}/thirdparty/magic-enum-src \
+           git://github.com/p-ranav/argparse.git;protocol=https;branch=master;tag=v3.2;name=argparse;destsuffix=${S}/thirdparty/argparse-src \
+           git://github.com/gsl-lite/gsl-lite.git;protocol=https;branch=master;tag=v1.1.0;name=gsl-lite;destsuffix=${S}/thirdparty/gsl-lite-src \
+           git://github.com/HowardHinnant/date.git;protocol=https;branch=master;tag=v3.0.4;name=date;destsuffix=${S}/thirdparty/date-src \
+           git://github.com/chriskohlhoff/asio.git;protocol=https;branch=master;tag=asio-1-38-0;name=asio;destsuffix=${S}/thirdparty/asio-src \
+           git://github.com/fmtlib/fmt.git;protocol=https;branch=main;tag=12.1.0;name=fmt;destsuffix=${S}/thirdparty/fmt-src \
+           git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x;tag=v1.17.0;name=spdlog;destsuffix=${S}/thirdparty/spdlog-src \
+           git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;tag=v1.7.0;name=jsoncons;destsuffix=${S}/thirdparty/jsoncons-src \
            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=${S}/thirdparty \
-           https://download.libsodium.org/libsodium/releases/libsodium-1.0.20.tar.gz;name=libsodium;subdir=${S}/thirdparty \
+           https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz;name=libsodium;subdir=${S}/thirdparty \
            file://0001-Do-not-use-bundled-packages.patch \
            file://0002-Fix-osspuuid-build.patch \
            file://0003-Fix-libsodium-build.patch \
-           file://0004-Pass-noline-flag-to-flex.patch \
-           file://0005-generateVersion.sh-set-correct-buildrev.patch \
-           file://0006-CMakeLists.txt-do-not-use-ccache.patch \
-           file://0001-Add-missing-include-for-malloc-free.patch;patchdir=thirdparty/fmt-src \
            file://0001-generateVersion.sh-set-BUILD_DATE-to-SOURCE_DATE_EPO.patch \
-           file://0001-Fix-build-with-gcc-16.patch \
-           file://0007-StreamCallback.h-add-missing-cstdint-include-for-in.patch \
+           file://0005-generateVersion.sh-set-correct-buildrev.patch \
+           file://0004-Pass-noline-flag-to-flex.patch \
+           file://0006-CMakeLists.txt-do-not-use-ccache.patch \
            file://systemd-volatile.conf \
            file://sysvinit-volatile.conf \
           "
 
-# minifi-cpp: 0.99.2
-SRCREV = "92fb88dca9aaff75b5c6795d25d6e437649c1c77"
-# expected-lite: 0.9.0
-SRCREV_expected-lite = "e45e8d5f295d54efe9cace331b9e9f5efa8a84c3"
+# minifi-cpp: 1.1.0
+SRCREV = "1a4b84eb8b53eebcf7c92d83f6ae818f440e33ee"
+# The third-party revisions below are the versions pinned in cmake/*.cmake
 # range-v3: 0.12.0
 SRCREV_range-v3 = "a81477931a8aa2ad025c6bda0609f38e09e4d7ec"
-# magic-enum: 0.9.6
-SRCREV_magic-enum = "dd6a39d0ba1852cf06907e0f0573a2a10d23c2ad"
-# argparse: 3.0
-SRCREV_argparse = "af442b4da0cd7a07b56fa709bd16571889dc7fda"
-# gsl-lite: 0.41.0
-SRCREV_gsl-lite = "755ba124b54914e672737acace6a9314f59e8d6f"
-# date: 3.0.3
-SRCREV_date = "5bdb7e6f31fac909c090a46dbd9fea27b6e609a4"
-# asio: 1.34.2
-SRCREV_asio = "ed6aa8a13d51dfc6c00ae453fc9fb7df5d6ea963"
-# fmt: 11.2.0
-SRCREV_fmt = "40626af88bd7df9a5fb80be7b25ac85b122d6c21"
-# spdlog: 1.15.3
-SRCREV_spdlog = "6fa36017cfd5731d617e1a934f0e5ea9c4445b13"
-# jsoncons: 1.3.2
-SRCREV_jsoncons = "64b9da1e9f15eeff4ec9d6bc856538db542118f2"
+# magic-enum: 0.9.8
+SRCREV_magic-enum = "1384769c66bd16ec9bb1353f45fe8ec8ccc12dbd"
+# argparse: 3.2
+SRCREV_argparse = "3eda91b2e1ce7d569f84ba295507c4cd8fd96910"
+# gsl-lite: 1.1.0
+SRCREV_gsl-lite = "c767277c1cad4d4446ba30a13a48ed18ebf9754a"
+# date: 3.0.4
+SRCREV_date = "f94b8f36c6180be0021876c4a397a054fe50c6f2"
+# asio: 1.38.0
+SRCREV_asio = "03cf5f86a780dd102f1cdd3a59d1244d12143e46"
+# fmt: 12.1.0
+SRCREV_fmt = "407c905e45ad75fc29bf0f9bb7c5c2fd3475976f"
+# spdlog: 1.17.0
+SRCREV_spdlog = "79524ddd08a4ec981b7fea76afd08ee05f83755d"
+# jsoncons: 1.7.0
+SRCREV_jsoncons = "cb54cdc3134a62634466bf7bcd24f1a906f4ef25"
 
-SRCREV_FORMAT .= "_expected-lite_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog_jsoncons"
+SRCREV_FORMAT .= "_range-v3_magic-enum_argparse_gsl-lite_date_asio_fmt_spdlog_jsoncons"
 
 # ossp-uuid: 1.6.2
 SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
-# libsodium: 1.0.20
-SRC_URI[libsodium.sha256sum] = "ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19"
+# libsodium: 1.0.22
+SRC_URI[libsodium.sha256sum] = "adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^rel/minifi-cpp-(?P<pver>\d+(\.\d+)+)$"
 
 inherit pkgconfig cmake systemd
 
-DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp zstd lz4 pugixml"
+DEPENDS = "virtual/crypt bison-native flex-native flex openssl curl zlib xz bzip2 yaml-cpp pugixml"
 
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 
@@ -103,17 +99,17 @@ EXTRA_OECMAKE = " \
                  -DSKIP_TESTS=ON \
                  -DMINIFI_OPENSSL_SOURCE=SYSTEM \
                  -DMINIFI_LIBCURL_SOURCE=SYSTEM \
-                 -DMINIFI_ZSTD_SOURCE=SYSTEM \
-                 -DMINIFI_BZIP2_SOURCE=SYSTEM \
-                 -DMINIFI_LIBXML2_SOURCE=SYSTEM \
-                 -DMINIFI_CATCH2_SOURCE=SYSTEM \
                  -DMINIFI_ZLIB_SOURCE=SYSTEM \
+                 -DMINIFI_BZIP2_SOURCE=SYSTEM \
+                 -DMINIFI_LIBLZMA_SOURCE=SYSTEM \
+                 -DMINIFI_LIBARCHIVE_SOURCE=SYSTEM \
+                 -DMINIFI_YAMLCPP_SOURCE=SYSTEM \
                  -DMINIFI_PUGIXML_SOURCE=SYSTEM \
                  -DMINIFI_FMT_SOURCE=BUILD \
                  -DMINIFI_SPDLOG_SOURCE=BUILD \
+                 -DFETCHCONTENT_FULLY_DISCONNECTED=ON \
                  -DFETCHCONTENT_SOURCE_DIR_GSL-LITE=${S}/thirdparty/gsl-lite-src \
                  -DFETCHCONTENT_SOURCE_DIR_DATE_SRC=${S}/thirdparty/date-src \
-                 -DFETCHCONTENT_SOURCE_DIR_EXPECTED-LITE=${S}/thirdparty/expected-lite-src \
                  -DFETCHCONTENT_SOURCE_DIR_RANGE-V3_SRC=${S}/thirdparty/range-v3-src \
                  -DFETCHCONTENT_SOURCE_DIR_MAGIC_ENUM=${S}/thirdparty/magic-enum-src \
                  -DFETCHCONTENT_SOURCE_DIR_ASIO=${S}/thirdparty/asio-src \
@@ -122,19 +118,21 @@ EXTRA_OECMAKE = " \
                  -DFETCHCONTENT_SOURCE_DIR_SPDLOG=${S}/thirdparty/spdlog-src \
                  -DFETCHCONTENT_SOURCE_DIR_JSONCONS=${S}/thirdparty/jsoncons-src \
                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DENABLE_SYSTEMD=ON', '-DENABLE_SYSTEMD=OFF', d)} \
-                 -DBUILD_IDENTIFIER=${PV} \
+                 -DBUILD_IDENTIFIER=${MINIFI_BUILD_IDENTIFIER} \
                 "
 
-PACKAGECONFIG ??= "libarchive expression-language"
+# Used in the extension registration function name, so it must be an identifier
+MINIFI_BUILD_IDENTIFIER = "${@d.getVar('PV').replace('.', '_')}"
+
+PACKAGECONFIG ??= "libarchive"
 
 # rocksdb is not compatible with libc-musl:powerpc & armv5
 PACKAGECONFIG:remove:libc-musl:powerpc = "rocksdb"
 PACKAGECONFIG:remove:armv5 = "rocksdb"
 
 PACKAGECONFIG[libarchive] = "-DENABLE_LIBARCHIVE=ON,-DENABLE_LIBARCHIVE=OFF,libarchive"
-PACKAGECONFIG[expression-language] = "-DENABLE_EXPRESSION_LANGUAGE=ON, -DENABLE_EXPRESSION_LANGUAGE=OFF"
 PACKAGECONFIG[civetweb] = "-DENABLE_CIVET=ON -DMINIFI_CIVETWEB_SOURCE=SYSTEM,-DENABLE_CIVET=OFF,civetweb"
-PACKAGECONFIG[rocksdb] = "-DENABLE_ROCKSDB=ON -DBUILD_ROCKSDB=OFF -DMINIFI_ROCKSDB_SOURCE=SYSTEM,-DENABLE_ROCKSDB=OFF,rocksdb"
+PACKAGECONFIG[rocksdb] = "-DENABLE_ROCKSDB=ON -DBUILD_ROCKSDB=OFF,-DENABLE_ROCKSDB=OFF,rocksdb"
 
 SYSTEMD_PACKAGES = "minifi-cpp"
 SYSTEMD_SERVICE:${PN} = "minifi.service"
@@ -165,7 +163,7 @@ do_install() {
     for i in minifi-encrypt-config minifi minifi.sh minifi-controller; do
         install -m 755 ${WORKDIR}/minifi-install/usr/bin/${i} ${D}${MINIFI_BIN}
     done
-    for i in config.yml minifi-log.properties minifi.properties minifi-uid.properties; do
+    for i in minifi-log.properties minifi.properties minifi-uid.properties; do
         install -m 644 ${WORKDIR}/minifi-install/usr/conf/${i} ${D}${MINIFI_HOME}/conf
     done
 
@@ -189,6 +187,10 @@ do_install() {
         ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.database.content.repository.directory.default=.*|nifi.database.content.repository.directory.default=${MINIFI_RUN}/content_repository|g" \
         ${D}${MINIFI_HOME}/conf/minifi.properties
+    sed -i "s|nifi.asset.directory=.*|nifi.asset.directory=${MINIFI_RUN}/asset|g" \
+        ${D}${MINIFI_HOME}/conf/minifi.properties
+    sed -i "s|nifi.python.virtualenv.directory=.*|nifi.python.virtualenv.directory=${MINIFI_RUN}/minifi-python-env|g" \
+        ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.flow.configuration.file=.*|nifi.flow.configuration.file=${MINIFI_HOME}/conf/config.yml|g" \
         ${D}${MINIFI_HOME}/conf/minifi.properties
     sed -i "s|nifi.python.processor.dir=.*|nifi.python.processor.dir=${libexecdir}/minifi-python|g" \
@@ -204,7 +206,7 @@ do_install() {
         install -m 755 -d ${D}${systemd_system_unitdir}
         install -m 644 ${WORKDIR}/minifi-install/usr/bin/minifi.service ${D}${systemd_system_unitdir}
 
-        sed -i -e "s|^Environment=.*|Environment=MINIFI_HOME=${MINIFI_HOME}|g" ${D}${systemd_system_unitdir}/minifi.service
+        sed -i -e "s|^Environment=MINIFI_HOME=.*|Environment=MINIFI_HOME=${MINIFI_HOME}|g" ${D}${systemd_system_unitdir}/minifi.service
         sed -i -e "s|^ExecStart=.*|ExecStart=${MINIFI_BIN}/minifi|g" ${D}${systemd_system_unitdir}/minifi.service
     fi
 
