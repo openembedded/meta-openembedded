@@ -5,8 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3585a26c9cd9ec0cb36a7d65542878ca"
 
 DEPENDS = "libeigen"
 
-SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https \
+           file://0001-Support-Eigen3-5.0.0.patch \
+           "
 SRCREV = "85331393dc0dff09f6fb9903ab0c4bfa3e134b01"
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake
 
