@@ -27,7 +27,7 @@ SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls
            file://run-ptest \
            "
 
-SRCREV = "068ff080b369adfac81509f9b57b2afabaf82dc5"
+SRCREV = "82e69999f91126589a28b70dd75b69fbcabe2711"
 
 # Track the 3.6 LTS branch; 4.x is a new major series with API changes
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>3\.6(\.\d+)+)$"
