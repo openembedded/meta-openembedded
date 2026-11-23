@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
     python3-certifi \
 "
 
-SRC_URI[sha256sum] = "c38ac2d4b2435c11da821e173bb9d9088c98f41ae92f559ce0e424170a8e1a29"
+SRC_URI[sha256sum] = "daa5f0baa931dfd8c4d6844b4992764683a1abdcbad968c76703c34f0e244f13"
 
 inherit pypi setuptools3
