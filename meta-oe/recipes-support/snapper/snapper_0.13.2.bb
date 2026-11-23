@@ -3,13 +3,16 @@ HOMEPAGE = "https://github.com/openSUSE/snapper"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses zlib"
+DEPENDS = "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 ncurses openssl zlib"
 
 # Build separation is slightly broken
 inherit autotools-brokensep pkgconfig gettext manpages
 
-SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master"
-SRCREV = "8cfc33817b91dbf7194d7fd043dc378026d01db5"
+SRC_URI = "git://github.com/openSUSE/snapper.git;protocol=https;branch=master;tag=v${PV}"
+SRCREV = "43475845a712bc2327cec2ed641063df406705de"
+
+# The repository also carries yast-snapper tags
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 EXTRA_OECONF += "--disable-zypp"
 
@@ -24,6 +27,7 @@ export RM_BIN = "${bindir}/rm"
 export RMDIR_BIN = "${bindir}/rmdir"
 export MKDIR_BIN = "${bindir}/mkdir"
 export TOUCH_BIN = "${bindir}/touch"
+export CAT_BIN = "${bindir}/cat"
 export CP_BIN = "${bindir}/cp"
 export REALPATH_BIN = "${bindir}/realpath"
 export SHA256SUM_BIN = "${bindir}/sha256sum"
