@@ -2,7 +2,7 @@ DESCRIPTION = "TigerVNC remote display system"
 HOMEPAGE = "http://www.tigervnc.com/"
 LICENSE = "GPL-2.0-or-later"
 SECTION = "x11/utils"
-DEPENDS = "gettext-native xserver-xorg gnutls nettle jpeg pixman libxtst fltk libpam libx11 libxdamage libxfixes libxrandr xkbcomp"
+DEPENDS = "gettext-native util-macros-native xserver-xorg gnutls nettle jpeg pixman libxtst fltk1.3 libpam libx11 libxdamage libxfixes libxrandr xkbcomp"
 RDEPENDS:${PN} = "coreutils hicolor-icon-theme perl bash xkbcomp"
 
 LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
@@ -23,13 +23,15 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=master;protocol=https \
            file://0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
            file://0003-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
 "
+# x.y.90+ tags are betas
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+\.[0-8]?\d)$"
 
 # Keep sync with xorg-server in oe-core
 XORG_PN ?= "xorg-server"
-XORG_PV ?= "21.1.24"
+XORG_PV ?= "21.1.26"
 SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
 XORG_S = "${UNPACKDIR}/${XORG_PN}-${XORG_PV}"
-SRC_URI[xorg.sha256sum] = "1a4eb36ca65cc3b1b936566d677a9786e13c11cd5806e951ac55f3f5ce3984af"
+SRC_URI[xorg.sha256sum] = "c8609f9cdafde14de7ec7cb406dac9507add1d536df8d3c3e3d3d9c1cd864066"
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
@@ -75,6 +77,14 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb \
 "
 
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=${systemd_system_unitdir}', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
+
+# The viewer needs FLTK 1.3; point CMake's FindFLTK at the side-by-side fltk1.3 install
+EXTRA_OECMAKE += " \
+    -DFLTK_INCLUDE_DIR=${STAGING_INCDIR}/fltk1.3 \
+    -DFLTK_BASE_LIBRARY_RELEASE=${STAGING_LIBDIR}/fltk1.3/libfltk.so \
+    -DFLTK_IMAGES_LIBRARY_RELEASE=${STAGING_LIBDIR}/fltk1.3/libfltk_images.so \
+    -DFLTK_FORMS_LIBRARY_RELEASE=${STAGING_LIBDIR}/fltk1.3/libfltk_forms.so \
+"
 
 do_configure:append () {
     autotools_do_configure
