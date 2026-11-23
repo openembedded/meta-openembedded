@@ -15,6 +15,9 @@ RDEPENDS:${PN}-ptest += "coreutils pcsc-lite-lib"
 PE = "1"
 
 SRCREV = "9b678b6d5a40ce01607d8c3b1b1416437c8416c4"
+
+# 3.x is packaged as freerdp3
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>2(\.\d+)+)$"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
            file://run-ptest \
            file://winpr-makecert-Build-with-install-RPATH.patch \
