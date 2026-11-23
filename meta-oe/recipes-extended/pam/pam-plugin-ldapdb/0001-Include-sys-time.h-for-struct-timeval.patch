@@ -1,0 +1,32 @@
+From ac86beda314368dead44083a99cece306e72fed7 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 01:10:11 -0800
+Subject: [PATCH] Include sys/time.h for struct timeval
+
+pam_ldapdb.cpp uses struct timeval for the LDAP network timeout.
+glibc headers pull in <sys/time.h> indirectly, musl does not, so
+the build fails with:
+
+  pam_ldapdb.cpp:55:20: error: variable has incomplete type 'struct timeval'
+
+Include it explicitly.
+
+Upstream-Status: Submitted [https://github.com/smackysnacks/pam_ldapdb/pull/15]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ pam_ldapdb.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pam_ldapdb.cpp b/pam_ldapdb.cpp
+index 6b73ca5..cccc33b 100644
+--- a/pam_ldapdb.cpp
++++ b/pam_ldapdb.cpp
+@@ -3,6 +3,7 @@
+ #include <pwd.h>
+ #include <stdexcept>
+ #include <string>
++#include <sys/time.h>
+ #include <syslog.h>
+ #include <utility>
+ 
