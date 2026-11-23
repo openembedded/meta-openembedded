@@ -14,10 +14,11 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/${@oe
            file://frr.pam \
            file://0001-lib-Don-t-use-paths-in-bison-output-defines-directiv.patch \
            file://0002-configure-Only-try-the-OpenBSD-libunwind-location-on.patch \
+           file://0003-lib-Support-libyang-5.x-and-6.x-API.patch \
            "
 SRCREV = "f8c0b08dcb0c78f9e42b9b86ae70b049e4e617c1"
 
-UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+UPSTREAM_CHECK_GITTAGREGEX = "^frr-(?P<pver>\d+(\.\d+)+)$"
 
 CVE_PRODUCT = "frrouting"
 
