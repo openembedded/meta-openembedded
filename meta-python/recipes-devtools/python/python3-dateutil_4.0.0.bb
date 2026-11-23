@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "\
     python3-numbers \
     python3-stringold \
     python3-tzdata \
+    python3-zoneinfo \
 "
 
 BBCLASSEXTEND = "native nativesdk"
