@@ -8,65 +8,60 @@ LICENSE += "AND Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND ISC AND MIT"
 
 LIC_FILES_CHKSUM += "\
     file://pkg/mod/github.com/!wifx/gonetworkmanager/v2@v2.2.0/LICENSE;md5=6141b9302c8d2bf2b55e88f6b544aca4;spdx=MIT \
-    file://pkg/mod/github.com/adrianmo/go-nmea@v1.10.0/LICENSE;md5=6e0535478493248dd9a4800d34e3c5e4;spdx=MIT \
+    file://pkg/mod/github.com/adrianmo/go-nmea@v1.11.0/LICENSE;md5=6e0535478493248dd9a4800d34e3c5e4;spdx=MIT \
+    file://pkg/mod/github.com/antithesishq/antithesis-sdk-go@v0.8.0/LICENSE;md5=d4acd312580e85f1c3581f3db0284c3f;spdx=MIT \
     file://pkg/mod/github.com/apapsch/go-jsonmerge/v2@v2.0.0/LICENSE;md5=d28a9354af0254dfae10c119378968c3;spdx=MIT \
-    file://pkg/mod/github.com/beevik/ntp@v1.4.3/LICENSE;md5=4a1cd241543bc24ca646216d5070e3ba;spdx=BSD-2-Clause \
+    file://pkg/mod/github.com/beevik/ntp@v1.6.0/LICENSE;md5=6eb8be47a6e20b65c54e10079cf78fed;spdx=BSD-2-Clause \
     file://pkg/mod/github.com/blang/semver/v4@v4.0.0/LICENSE;md5=5a3ade42a900439691ebc22013660cae;spdx=MIT \
     file://pkg/mod/github.com/cavaliercoder/grab@v2.0.0+incompatible/LICENSE;md5=73a9fd187cdcda4e3009f73e69b5b348;spdx=BSD-3-Clause \
-    file://pkg/mod/github.com/creack/goselect@v0.1.3/LICENSE;md5=53145d9bb75251a18e111de5d23803e6;spdx=MIT \
-    file://pkg/mod/github.com/dim13/cobs@v0.1.0/LICENSE;md5=03347de97baa07892a6fd07d08c7d69f;spdx=ISC \
+    file://pkg/mod/github.com/dim13/cobs@v1.0.5/LICENSE;md5=03347de97baa07892a6fd07d08c7d69f;spdx=ISC \
     file://pkg/mod/github.com/donovanhide/eventsource@v0.0.0-20210830082556-c59027999da0/LICENCE;md5=b8c58c415ca3eaa2fd30f0e87a1f6d0b;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/dustin/go-humanize@v1.0.1/LICENSE;md5=8c6127b79304a5e0a5756d03c7a58766;spdx=MIT \
-    file://pkg/mod/github.com/fsnotify/fsnotify@v1.9.0/LICENSE;md5=8bae8b116e2cfd723492b02d9a212fe2;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/fsnotify/fsnotify@v1.10.1/LICENSE;md5=8bae8b116e2cfd723492b02d9a212fe2;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/fxamacker/cbor/v2@v2.9.6/LICENSE;md5=827f5a2fa861382d35a3943adf9ebb86;spdx=MIT \
     file://pkg/mod/github.com/go-audio/audio@v1.0.0/LICENSE;md5=754bb36ff8a144c2b48c0d94a7d4dc93;spdx=Apache-2.0 \
     file://pkg/mod/github.com/go-audio/riff@v1.0.0/LICENSE;md5=b56ab64450854def91d77fe6e243bbbf;spdx=Apache-2.0 \
     file://pkg/mod/github.com/go-audio/wav@v1.1.0/LICENSE;md5=754bb36ff8a144c2b48c0d94a7d4dc93;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/goccy/go-yaml@v1.17.1/LICENSE;md5=346470d8ac0a6ffe1eb8635a452cec2b;spdx=MIT \
-    file://pkg/mod/github.com/godbus/dbus/v5@v5.1.0/LICENSE;md5=09042bd5c6c96a2b9e45ddf1bc517eed;spdx=BSD-2-Clause \
-    file://pkg/mod/github.com/gofrs/uuid@v4.4.0+incompatible/LICENSE;md5=ae4ba217c6e20c2d8f48f69966b9121b;spdx=MIT \
+    file://pkg/mod/github.com/goccy/go-yaml@v1.19.2/LICENSE;md5=346470d8ac0a6ffe1eb8635a452cec2b;spdx=MIT \
+    file://pkg/mod/github.com/godbus/dbus/v5@v5.2.4/LICENSE;md5=09042bd5c6c96a2b9e45ddf1bc517eed;spdx=BSD-2-Clause \
+    file://pkg/mod/github.com/gofrs/uuid/v5@v5.5.1/LICENSE;md5=ae4ba217c6e20c2d8f48f69966b9121b;spdx=MIT \
     file://pkg/mod/github.com/golang/protobuf@v1.5.4/LICENSE;md5=939cce1ec101726fa754e698ac871622;spdx=BSD-3-Clause \
     file://pkg/mod/github.com/golang-jwt/jwt/v4@v4.5.2/LICENSE;md5=a21b708d8b320c68979c44ac9dba9b0d;spdx=MIT \
     file://pkg/mod/github.com/google/uuid@v1.6.0/LICENSE;md5=88073b6dd8ec00fe09da59e0b6dfded1;spdx=BSD-3-Clause \
     file://pkg/mod/github.com/gorilla/websocket@v1.5.3/LICENSE;md5=c007b54a1743d596f46b2748d9f8c044;spdx=BSD-2-Clause \
     file://pkg/mod/github.com/influxdata/influxdb-client-go/v2@v2.14.0/LICENSE;md5=d9c113dde7e4204f5f9d358891a4e443;spdx=MIT \
     file://pkg/mod/github.com/influxdata/line-protocol@v0.0.0-20210922203350-b1ad95c89adf/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6;spdx=MIT \
-    file://pkg/mod/github.com/jacobsa/go-serial@v0.0.0-20180131005756-15cf729a72d4/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/kevinburke/go-types@v0.0.0-20240719050749-165e75e768f7/LICENSE;md5=4204bfe0edce818653d44307464444b7;spdx=MIT \
-    file://pkg/mod/github.com/kevinburke/rest@v0.0.0-20240617045629-3ed0ad3487f0/LICENSE;md5=227f6afd9446fe7966184746a27f5242;spdx=MIT \
-    file://pkg/mod/github.com/kevinburke/twilio-go@v0.0.0-20240716172313-813590983ccc/LICENSE;md5=b791e6d3eb7e39934aeaedd48ce381f8;spdx=MIT \
+    file://pkg/mod/github.com/kevinburke/go-types@v1.3.0/LICENSE;md5=4204bfe0edce818653d44307464444b7;spdx=MIT \
+    file://pkg/mod/github.com/kevinburke/rest@v0.0.0-20260604005914-d145d8a0294b/LICENSE;md5=227f6afd9446fe7966184746a27f5242;spdx=MIT \
+    file://pkg/mod/github.com/kevinburke/twilio-go@v0.0.0-20260522200016-74f727d55757/LICENSE;md5=b791e6d3eb7e39934aeaedd48ce381f8;spdx=MIT \
     file://pkg/mod/github.com/kjx98/crc16@v0.0.0-20190915014410-d407ba22e1b5/LICENSE;md5=591778525c869cdde0ab5a1bf283cd81;spdx=BSD-3-Clause \
-    file://pkg/mod/github.com/klauspost/compress@v1.18.0/LICENSE;md5=d0fd9ebda39468b51ff4539c9fbb13a8;spdx=BSD-3-Clause \
-    file://pkg/mod/github.com/koding/websocketproxy@v0.0.0-20181220232114-7ed82d81a28c/LICENSE.md;md5=25aa8f754fcf7724a7cc932e6e402467;spdx=MIT \
-    file://pkg/mod/github.com/miekg/dns@v1.1.65/COPYRIGHT;md5=2ba6b7bd91e16af46a856eca87db2504;spdx=BSD-3-Clause \
-    file://pkg/mod/github.com/minio/highwayhash@v1.0.3/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/nats-io/jwt/v2@v2.7.4/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/nats-io/nats-server/v2@v2.11.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/nats-io/nats.go@v1.41.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/nats-io/nkeys@v0.4.11/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/klauspost/compress@v1.20.3/LICENSE;md5=d0fd9ebda39468b51ff4539c9fbb13a8;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/klauspost/compress@v1.20.3/s2/LICENSE;md5=2460814a2b25a7277556c2d89de915d1;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/miekg/dns@v1.1.73/COPYRIGHT;md5=2ba6b7bd91e16af46a856eca87db2504;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/minio/highwayhash@v1.0.4/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/nats-io/jwt/v2@v2.8.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/nats-io/nats-server/v2@v2.15.2/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/nats-io/nats.go@v1.55.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/nats-io/nkeys@v0.4.16/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
     file://pkg/mod/github.com/nats-io/nuid@v1.0.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/oapi-codegen/runtime@v1.1.1/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
-    file://pkg/mod/github.com/oklog/run@v1.1.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/oapi-codegen/runtime@v1.7.0/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/oklog/run@v1.2.0/LICENSE;md5=c19dbea2f4885137f8d45fede9891755;spdx=Apache-2.0 \
     file://pkg/mod/github.com/pkg/errors@v0.9.1/LICENSE;md5=6fe682a02df52c6653f33bd0f7126b5a;spdx=BSD-2-Clause \
-    file://pkg/mod/github.com/remyoudompheng/bigfft@v0.0.0-20230129092748-24d4a6f8daec/LICENSE;md5=591778525c869cdde0ab5a1bf283cd81;spdx=BSD-3-Clause \
     file://pkg/mod/github.com/shirou/gopsutil/v3@v3.24.5/LICENSE;md5=ae6de3dee02712a1e55b280671be53bf;spdx=BSD-3-Clause \
     file://pkg/mod/github.com/simpleiot/canparse@v0.0.0-20221213134514-84672be992d4/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327;spdx=Apache-2.0 \
     file://pkg/mod/github.com/simpleiot/mdns@v0.0.1/LICENSE;md5=448ff43c4a3e516543f6851bbd93e91c;spdx=MIT \
-    file://pkg/mod/github.com/tklauser/go-sysconf@v0.3.15/LICENSE;md5=d4eb2084b3083d2c275ec52ef4ba9ac1;spdx=BSD-3-Clause \
-    file://pkg/mod/github.com/tklauser/numcpus@v0.10.0/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
+    file://pkg/mod/github.com/tklauser/go-sysconf@v0.4.0/LICENSE;md5=d4eb2084b3083d2c275ec52ef4ba9ac1;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/tklauser/numcpus@v0.12.0/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57;spdx=Apache-2.0 \
     file://pkg/mod/github.com/ttacon/builder@v0.0.0-20170518171403-c099f663e1c2/LICENSE;md5=aafb066baab23d173788a374c4f1237c;spdx=MIT \
     file://pkg/mod/github.com/ttacon/libphonenumber@v1.2.1/LICENSE;md5=c50a0d1f6d5c976b3a49e7446b35dad4;spdx=MIT \
-    file://pkg/mod/go.bug.st/serial@v1.6.4/LICENSE;md5=6067cc6529e21146d9c556ee2f680c27;spdx=BSD-3-Clause \
-    file://pkg/mod/go.einride.tech/can@v0.12.2/LICENSE;md5=4b52f8fd14bd4d6b199350d4963091e5;spdx=MIT \
-    file://pkg/mod/golang.org/x/crypto@v0.37.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/exp@v0.0.0-20250408133849-7e4ce0ab07d0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/net@v0.39.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/sync@v0.13.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/sys@v0.32.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/text@v0.24.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/golang.org/x/time@v0.11.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
-    file://pkg/mod/google.golang.org/protobuf@v1.36.6/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
-    file://pkg/mod/modernc.org/libc@v1.63.0/COPYRIGHT-MUSL;md5=b03f1cc25363d094011f8f4fd8bcfb68;spdx=BSD-3-Clause \
-    file://pkg/mod/modernc.org/mathutil@v1.7.1/LICENSE;md5=2604a98416f52ae5aaceb3630431020c;spdx=BSD-3-Clause \
-    file://pkg/mod/modernc.org/memory@v1.10.0/LICENSE;md5=c4dac399c2cb8794cc72e762c9f07263;spdx=BSD-3-Clause \
-    file://pkg/mod/modernc.org/sqlite@v1.37.0/LICENSE;md5=3cd92e5f84bae63802a058f3ff54fbe7;spdx=BSD-3-Clause \
+    file://pkg/mod/github.com/warthog618/go-gpiocdev@v0.10.0/LICENSE;md5=b2cd159d37bfc3904adf7de1e8ecb7a0;spdx=MIT \
+    file://pkg/mod/github.com/x448/float16@v0.8.4/LICENSE;md5=de8f8e025d57fe7ee0b67f30d571323b;spdx=MIT \
+    file://pkg/mod/go.bug.st/serial@v1.8.0/LICENSE;md5=6d76123cc4ba1191dac3099b3828cdd4;spdx=BSD-3-Clause \
+    file://pkg/mod/go.einride.tech/can@v0.17.0/LICENSE;md5=4b52f8fd14bd4d6b199350d4963091e5;spdx=MIT \
+    file://pkg/mod/golang.org/x/crypto@v0.58.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/golang.org/x/net@v0.61.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/golang.org/x/sync@v0.24.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/golang.org/x/sys@v0.49.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/golang.org/x/text@v0.43.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/golang.org/x/time@v0.16.0/LICENSE;md5=7998cb338f82d15c0eff93b7004d272a;spdx=BSD-3-Clause \
+    file://pkg/mod/google.golang.org/protobuf@v1.36.12/LICENSE;md5=02d4002e9171d41a8fad93aa7faf3956;spdx=BSD-3-Clause \
 "

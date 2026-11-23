@@ -6,14 +6,14 @@ HOMEPAGE = "http://simpleiot.org"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX}"
+SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master;tag=v${PV};destsuffix=${GO_SRCURI_DESTSUFFIX}"
 
-SRCREV = "9addf01e40eae111f59c822141a47aa87caf04b6"
+SRCREV = "0d7ca333b4818c4176324ac258abb96828ea84d1"
+# v1.0.912 is a stray 2020 tag, not a release
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>(?!1\.0\.912$)\d+(\.\d+)+)$"
 
 require ${BPN}-licenses.inc
 require ${BPN}-go-mods.inc
-
-LIC_FILES_CHKSUM:remove:riscv64 = "file://pkg/mod/github.com/remyoudompheng/bigfft@v0.0.0-20230129092748-24d4a6f8daec/LICENSE;md5=591778525c869cdde0ab5a1bf283cd81;spdx=BSD-3-Clause"
 
 GO_IMPORT = "github.com/simpleiot/simpleiot"
 
@@ -29,7 +29,6 @@ GO_INSTALL = "${GO_IMPORT}/cmd/edge \
               ${GO_IMPORT}/cmd/siot \
               ${GO_IMPORT}/cmd/tof10120 \
               ${GO_IMPORT}/cmd/test-resp-reader-close \
-              ${GO_IMPORT}/gps \
              "
 
 inherit go-mod go-mod-update-modules pkgconfig systemd update-rc.d
@@ -47,6 +46,8 @@ do_install:append() {
     else
         install -Dm 0755 ${S}/src/${GO_IMPORT}/contrib/siot.init ${D}${sysconfdir}/init.d/siot
     fi
+    # release helper scripts would pull bash into ${PN}-dev
+    rm -rf ${D}${libdir}/go/src/${GO_IMPORT}/scripts
 }
 
 SYSTEMD_SERVICE:${PN} = "siot.service"
