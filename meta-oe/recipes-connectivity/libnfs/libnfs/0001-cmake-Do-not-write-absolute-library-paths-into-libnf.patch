@@ -1,0 +1,48 @@
+From a0a24106214fc7be8cc1321d8c4f27091cfceb2c Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 22:41:43 -0800
+Subject: [PATCH] cmake: do not write absolute library paths into libnfs.pc
+
+find_library() and find_package() return absolute paths, such as
+/usr/lib/libgnutls.so for GnuTLS or the GSSAPI library, and these went
+verbatim into Libs.private. That leaks the build machine's library
+directory (a cross-compile sysroot, for example) into the installed
+libnfs.pc, where it is wrong for every other consumer. Turn such paths
+into -l<name> by dropping the directory, a leading "lib" and the
+library suffix along with any version after it.
+
+Libs.private was also written with the CMake list separator, e.g.
+"/usr/lib/libgnutls.so;-ldl;/usr/lib/libgssapi_krb5.so" with TLS and
+Kerberos enabled, which pkg-config passes on as a single argument, so
+"pkg-config --static --libs libnfs" did not link. Separate the entries
+with spaces.
+
+Upstream-Status: Submitted [https://github.com/sahlberg/libnfs/pull/641]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ CMakeLists.txt | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 237ac86..2b8b9d8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -306,11 +306,16 @@ foreach(LIB ${SYSTEM_LIBRARIES})
+   if(LIB MATCHES "/([^/]+)\\.framework$")
+     list(APPEND PKG_LIBLIST "-framework ${CMAKE_MATCH_1}")
+   elseif(IS_ABSOLUTE ${LIB} AND EXISTS ${LIB})
+-    list(APPEND PKG_LIBLIST "${LIB}")
++    # find_library() paths are only valid on the build machine, use -l<name>
++    get_filename_component(LIBNAME ${LIB} NAME)
++    string(REGEX REPLACE "^lib" "" LIBNAME ${LIBNAME})
++    string(REGEX REPLACE "\\.(so|a|dylib|tbd|lib|dll\\.a)(\\..*)?$" "" LIBNAME ${LIBNAME})
++    list(APPEND PKG_LIBLIST "-l${LIBNAME}")
+   else()
+     list(APPEND PKG_LIBLIST "-l${LIB}")
+   endif()
+ endforeach()
++string(REPLACE ";" " " PKG_LIBLIST "${PKG_LIBLIST}")
+ configure_file(cmake/libnfs.pc.cmake
+                ${CMAKE_CURRENT_BINARY_DIR}/libnfs.pc @ONLY)
+ 
