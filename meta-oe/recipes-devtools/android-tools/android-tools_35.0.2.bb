@@ -61,12 +61,17 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/andr
            file://0014-daemon-auth-vendor-a-portable-b64_pton-for-non-glib.patch \
            file://0015-adbd-make-fs-config-opt-in-on-non-android-builds.patch \
            file://0016-libziparchive-include-cstdint-in-zip_writer.h.patch \
+           file://0017-adb-keep-libbase-logging-macros-after-protobuf-inclu.patch \
+           file://0018-adb-keep-libbase-logging-macros-in-more-sources.patch \
            "
 
 SRC_URI[orig.md5sum] = "352376965cdef7bd7505d8fefdd43d50"
 SRC_URI[orig.sha256sum] = "ec1d317608db3328bfbddf7152c8d7f185c7c87b2175081416344434546a43da"
 SRC_URI[debian.md5sum] = "1de890bd272da9e8cd35bc9579802f1f"
 SRC_URI[debian.sha256sum] = "f03a89b82ea8dfbe3cb77d5326eedf0d15984f5896885e8c5df64cf421819579"
+
+UPSTREAM_CHECK_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-tools/"
+UPSTREAM_CHECK_REGEX = "android-platform-tools_(?P<pver>\d+(\.\d+)+)\.orig\.tar"
 
 S = "${UNPACKDIR}/android-platform-tools-${PV}"
 B = "${UNPACKDIR}/${BPN}"

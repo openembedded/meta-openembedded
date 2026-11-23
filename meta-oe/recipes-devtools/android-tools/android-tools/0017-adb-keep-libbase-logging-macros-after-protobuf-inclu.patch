@@ -1,0 +1,67 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Felix Yan <felixonmars@archlinux.org>
+Date: Thu, 27 Aug 2026 16:00:00 +0800
+Subject: [PATCH] adb: keep libbase logging macros after protobuf includes
+
+Protobuf 36's descriptor.h includes absl/log/log.h, which defines the
+short LOG and VLOG macros. Several adb sources include generated protobuf
+headers after adb's libbase logging/trace headers; those protobuf headers
+then replace adb's macros and make adb_trace.h's LOG(DEBUG) expand as
+Abseil logging, where DEBUG is not a valid severity.
+
+sysdeps.h is the first include for most adb translation units. Include
+descriptor.h first from it, so Abseil's short logging macros are seen
+before android-base/logging.h and adb_trace.h install adb's macros.
+Include sysdeps.h first from adb_install.cpp too.
+
+This keeps adb's logging behavior intact and avoids per-include macro
+save/restore blocks.
+
+Adapted to the Debian android-platform-tools 35.0.2 source layout. This
+version's sysdeps.h has no protobuf-first include yet, and has no
+mdns_tracker.cpp. Includes the adb_install.cpp change from the follow-up
+commit
+https://github.com/nmeum/android-tools/commit/9a1844a13b5519a879de88f1dcb1c06fcad15780
+
+Upstream-Status: Backport [https://github.com/nmeum/android-tools/commit/69a8c54dcd8c49d5b5eb22fa5c3c992d80e0bb2b]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ packages/modules/adb/client/adb_install.cpp | 2 +-
+ packages/modules/adb/sysdeps.h              | 7 +++++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+--- a/packages/modules/adb/client/adb_install.cpp
++++ b/packages/modules/adb/client/adb_install.cpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include "sysdeps.h"
+ #include "adb_install.h"
+ 
+ #include <fcntl.h>
+@@ -39,7 +40,6 @@
+ #include "commandline.h"
+ #include "fastdeploy.h"
+ #include "incremental.h"
+-#include "sysdeps.h"
+ 
+ using namespace std::literals;
+ 
+--- a/packages/modules/adb/sysdeps.h
++++ b/packages/modules/adb/sysdeps.h
+@@ -24,6 +24,13 @@
+ #  undef _WIN32
+ #endif
+ 
++// Include protobuf headers first, because they expose Abseil's LOG/VLOG macros
++// that android-base/logging.h and adb_trace.h redefine later. Not all modules
++// that include sysdeps.h use protobufs, so only include them if they exist.
++#if __has_include("google/protobuf/descriptor.h")
++#include "google/protobuf/descriptor.h"
++#endif
++
+ #include <errno.h>
+ 
+ #include <optional>

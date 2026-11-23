@@ -1,0 +1,257 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 12:00:00 -0800
+Subject: [PATCH] adb: keep libbase logging macros in more sources
+
+With protobuf >= 36, a protobuf header included after
+android-base/logging.h or adb_trace.h replaces the LOG/VLOG macros with
+Abseil's. The previous patch includes descriptor.h from sysdeps.h, so
+include sysdeps.h before libbase's logging headers in the adb, adbd and
+libadb sources that include them first, and include pairing.pb.h first
+in pairing_connection.cpp, which does not use sysdeps.h. Otherwise VLOG
+expands to Abseil's and adb/adbd fail to link with undefined
+absl::log_internal::VLogSite symbols, and other files silently log
+through Abseil instead of libbase.
+
+sysdeps.h redefines open/close/read as macros, so where a file includes
+<fstream> or <sstream>, keep the standard headers before sysdeps.h.
+
+Abseil's cord.h declares a global namespace strings, which clashes with
+the static strings descriptor in usb_ffs.cpp, so rename it to
+usb_strings.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ packages/modules/adb/adb_io.cpp                                |    2 +-
+ packages/modules/adb/adb_listeners.cpp                         |    2 +-
+ packages/modules/adb/adb_utils.cpp                             |    2 +-
+ packages/modules/adb/client/adb_wifi.cpp                       |    7 ++++---
+ packages/modules/adb/client/incremental_server.cpp             |    3 ++-
+ packages/modules/adb/client/incremental_utils.cpp              |    2 +-
+ packages/modules/adb/client/pairing/pairing_client.cpp         |    3 ++-
+ packages/modules/adb/daemon/adb_wifi.cpp                       |    2 +-
+ packages/modules/adb/daemon/usb_ffs.cpp                        |    6 +++---
+ packages/modules/adb/pairing_connection/pairing_connection.cpp |    4 ++--
+ packages/modules/adb/transport_fd.cpp                          |    3 ++-
+ 11 files changed, 20 insertions(+), 16 deletions(-)
+
+--- a/packages/modules/adb/adb_io.cpp
++++ b/packages/modules/adb/adb_io.cpp
+@@ -16,6 +16,7 @@
+ 
+ #define TRACE_TAG RWX
+ 
++#include "sysdeps.h"
+ #include "adb_io.h"
+ 
+ #include <unistd.h>
+@@ -32,7 +33,6 @@
+ #include "adb.h"
+ #include "adb_trace.h"
+ #include "adb_utils.h"
+-#include "sysdeps.h"
+ 
+ bool SendProtocolString(borrowed_fd fd, std::string_view s) {
+     unsigned int length = s.size();
+--- a/packages/modules/adb/adb_listeners.cpp
++++ b/packages/modules/adb/adb_listeners.cpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include "sysdeps.h"
+ #include "adb_listeners.h"
+ 
+ #include <stdio.h>
+@@ -29,7 +30,6 @@
+ #include <cutils/sockets.h>
+ 
+ #include "socket_spec.h"
+-#include "sysdeps.h"
+ #include "transport.h"
+ 
+ // A listener is an entity which binds to a local port and, upon receiving a connection on that
+--- a/packages/modules/adb/adb_utils.cpp
++++ b/packages/modules/adb/adb_utils.cpp
+@@ -16,6 +16,7 @@
+ 
+ #define TRACE_TAG ADB
+ 
++#include "sysdeps.h"
+ #include "adb_utils.h"
+ #include "adb_unique_fd.h"
+ 
+@@ -35,7 +36,6 @@
+ 
+ #include "adb.h"
+ #include "adb_trace.h"
+-#include "sysdeps.h"
+ 
+ #ifdef _WIN32
+ #  ifndef WIN32_LEAN_AND_MEAN
+--- a/packages/modules/adb/client/adb_wifi.cpp
++++ b/packages/modules/adb/client/adb_wifi.cpp
+@@ -14,13 +14,15 @@
+  * limitations under the License.
+  */
+ 
+-#include "adb_wifi.h"
+-
+ #include <fstream>
+ #include <random>
+ #include <thread>
+ #include <type_traits>
+ 
++#include "sysdeps.h"
++
++#include "adb_wifi.h"
++
+ #include <adb/crypto/key.h>
+ #include <adb/crypto/x509_generator.h>
+ #include <android-base/file.h>
+@@ -32,7 +34,6 @@
+ #include "adb_mdns.h"
+ #include "adb_utils.h"
+ #include "client/adb_client.h"
+-#include "sysdeps.h"
+ 
+ using adbwifi::pairing::PairingClient;
+ using namespace adb::crypto;
+--- a/packages/modules/adb/client/incremental_server.cpp
++++ b/packages/modules/adb/client/incremental_server.cpp
+@@ -34,6 +34,8 @@
+ #include <type_traits>
+ #include <unordered_set>
+ 
++#include "sysdeps.h"
++
+ #include "adb.h"
+ #include "adb_client.h"
+ #include "adb_io.h"
+@@ -41,7 +43,6 @@
+ #include "adb_unique_fd.h"
+ #include "adb_utils.h"
+ #include "incremental_utils.h"
+-#include "sysdeps.h"
+ 
+ namespace incremental {
+ 
+--- a/packages/modules/adb/client/incremental_utils.cpp
++++ b/packages/modules/adb/client/incremental_utils.cpp
+@@ -16,6 +16,7 @@
+ 
+ #define TRACE_TAG INCREMENTAL
+ 
++#include "sysdeps.h"
+ #include "incremental_utils.h"
+ 
+ #include <android-base/endian.h>
+@@ -32,7 +33,6 @@
+ 
+ #include "adb_io.h"
+ #include "adb_trace.h"
+-#include "sysdeps.h"
+ 
+ using namespace std::literals;
+ 
+--- a/packages/modules/adb/client/pairing/pairing_client.cpp
++++ b/packages/modules/adb/client/pairing/pairing_client.cpp
+@@ -23,13 +23,14 @@
+ #include <thread>
+ #include <vector>
+ 
++#include "sysdeps.h"
++
+ #include <android-base/logging.h>
+ #include <android-base/parsenetaddress.h>
+ #include <android-base/stringprintf.h>
+ #include <android-base/thread_annotations.h>
+ #include <android-base/unique_fd.h>
+ #include <cutils/sockets.h>
+-#include "sysdeps.h"
+ 
+ namespace adbwifi {
+ namespace pairing {
+--- a/packages/modules/adb/daemon/adb_wifi.cpp
++++ b/packages/modules/adb/daemon/adb_wifi.cpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include "sysdeps.h"
+ #include "adb_wifi.h"
+ 
+ #include <unistd.h>
+@@ -24,7 +25,6 @@
+ 
+ #include "adb.h"
+ #include "daemon/mdns.h"
+-#include "sysdeps.h"
+ #include "transport.h"
+ 
+ using namespace android::base;
+--- a/packages/modules/adb/daemon/usb_ffs.cpp
++++ b/packages/modules/adb/daemon/usb_ffs.cpp
+@@ -235,10 +235,10 @@
+         __le16 code;
+         const char str1[sizeof(STR_INTERFACE_)];
+     } __attribute__((packed)) lang0;
+-} __attribute__((packed)) strings = {
++} __attribute__((packed)) usb_strings = {
+     .header = {
+         .magic = cpu_to_le32(FUNCTIONFS_STRINGS_MAGIC),
+-        .length = cpu_to_le32(sizeof(strings)),
++        .length = cpu_to_le32(sizeof(usb_strings)),
+         .str_count = cpu_to_le32(1),
+         .lang_count = cpu_to_le32(1),
+     },
+@@ -294,7 +294,7 @@
+             }
+         }
+ 
+-        if (adb_write(control.get(), &strings, sizeof(strings)) < 0) {
++        if (adb_write(control.get(), &usb_strings, sizeof(usb_strings)) < 0) {
+             PLOG(ERROR) << "failed to write USB strings";
+             return false;
+         }
+--- a/packages/modules/adb/pairing_connection/pairing_connection.cpp
++++ b/packages/modules/adb/pairing_connection/pairing_connection.cpp
+@@ -14,6 +14,8 @@
+  * limitations under the License.
+  */
+ 
++#include "pairing.pb.h"
++
+ #include "adb/pairing/pairing_connection.h"
+ 
+ #include <stddef.h>
+@@ -32,8 +34,6 @@
+ #include <android-base/macros.h>
+ #include <android-base/unique_fd.h>
+ 
+-#include "pairing.pb.h"
+-
+ using namespace adb;
+ using android::base::unique_fd;
+ using TlsError = tls::TlsConnection::TlsError;
+--- a/packages/modules/adb/transport_fd.cpp
++++ b/packages/modules/adb/transport_fd.cpp
+@@ -14,6 +14,8 @@
+  * limitations under the License.
+  */
+ 
++#include "sysdeps.h"
++
+ #include <stdint.h>
+ 
+ #include <deque>
+@@ -28,7 +30,6 @@
+ 
+ #include "adb_unique_fd.h"
+ #include "adb_utils.h"
+-#include "sysdeps.h"
+ #include "transport.h"
+ #include "types.h"
+ 
