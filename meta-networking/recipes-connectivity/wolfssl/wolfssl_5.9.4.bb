@@ -19,6 +19,8 @@ SRC_URI = " \
 
 SRCREV = "3c5eead44904df64e6a5a1f4ebdce377d35a849a"
 
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)-stable"
+
 
 inherit autotools ptest
 
