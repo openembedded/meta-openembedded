@@ -9,13 +9,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2d38c9e0d63058b051065fb7b1102a8"
 
 DEPENDS = "zlib"
 
-SRC_URI = "git://github.com/assimp/assimp.git;protocol=https;branch=master \
-           file://CVE-2026-117608.patch \
-"
+SRC_URI = "git://github.com/assimp/assimp.git;protocol=https;branch=master;tag=v${PV}"
 
-SRCREV = "fe1965b3e73f7c241265e8e5b3015764936a6ce5"
+SRCREV = "a79ff6bbce54d3e01186a918dc6374ed55317426"
 
-PV = "5.x+git${SRCPV}"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 inherit cmake
 
