@@ -31,8 +31,10 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-argcomplete \
     python3-argexec \
     python3-argh \
+    python3-argparse-manpage \
     python3-arpeggio \
     python3-asciitree \
+    python3-ast-serialize \
     python3-aspectlib \
     python3-astor \
     python3-astroid \
@@ -218,6 +220,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-langtable \
     python3-lazy-object-proxy \
     python3-libconf \
+    python3-librt \
     python3-license-expression \
     python3-ldap \
     python3-lockfile \
@@ -297,6 +300,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-protobuf \
     python3-ptyprocess \
     python3-pulsectl \
+    python3-puremagic \
     python3-py-cpuinfo \
     python3-py-ubjson \
     python3-pyalsaaudio \
@@ -333,6 +337,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pynacl \
     python3-pynetlinux \
     python3-pyparted \
+    python3-pypdf \
     python3-pyperclip \
     python3-pyperf \
     python3-pyrad \
@@ -419,6 +424,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-textparser \
     python3-texttable \
     python3-thrift \
+    python3-tibs \
     python3-tinyrecord \
     python3-tornado \
     python3-toolz \
