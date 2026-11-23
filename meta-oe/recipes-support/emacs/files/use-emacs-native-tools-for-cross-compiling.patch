@@ -14,60 +14,23 @@ version of the recipe instead.
 
 Signed-off-by: Alejandro Enedino Hernandez Samaniego <alejandro@enedino.org>
 
-Index: emacs-29.1/src/Makefile.in
-===================================================================
---- emacs-29.1.orig/src/Makefile.in
-+++ emacs-29.1/src/Makefile.in
-@@ -542,7 +542,7 @@ ifeq ($(CHECK_STRUCTS),true)
- pdumper.o: dmpstruct.h
- endif
- dmpstruct.h: $(srcdir)/dmpstruct.awk
--dmpstruct.h: $(libsrc)/make-fingerprint$(EXEEXT) $(dmpstruct_headers)
-+dmpstruct.h:  $(dmpstruct_headers)
- 	$(AM_V_GEN)POSIXLY_CORRECT=1 awk -f $(srcdir)/dmpstruct.awk \
- 		$(dmpstruct_headers) > $@
+diff --git a/Makefile.in b/Makefile.in
+index 04c21fc..912d455 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -320,7 +320,7 @@ GLIB_COMPILE_SCHEMAS = glib-compile-schemas
+ TRANSFORM = @program_transform_name@
  
-@@ -651,8 +651,7 @@
- ## Strictly speaking, emacs does not depend directly on all of $lisp,
- ## since not all pieces are used on all platforms.  But DOC depends
- ## on all of $lisp, and emacs depends on DOC, so it is ok to use $lisp here.
--emacs$(EXEEXT): temacs$(EXEEXT) \
--                $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
-+emacs$(EXEEXT): $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
-                 $(lispsource)/international/charprop.el ${charsets}
- ifeq ($(SYSTEM_TYPE),cygwin)
- 	find ${top_builddir} -name '*.eln' | rebase -v -O -T -
-@@ -695,7 +695,7 @@ endif
- $(etc)/DOC: $(libsrc)/make-docfile$(EXEEXT) $(doc_obj)
- 	$(AM_V_GEN)$(MKDIR_P) $(etc)
- 	$(AM_V_at)rm -f $(etc)/DOC
--	$(AM_V_at)$(libsrc)/make-docfile -d $(srcdir) \
-+	make-docfile -d $(srcdir) \
- 	  $(SOME_MACHINE_OBJECTS) $(doc_obj) > $(etc)/DOC
+ # Prevent any settings in the user environment causing problems.
+-unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
++unexport  EMACSDOC EMACSPATH
  
- $(libsrc)/make-docfile$(EXEEXT) $(libsrc)/make-fingerprint$(EXEEXT): \
-@@ -712,7 +712,7 @@ buildobj.h: Makefile
- GLOBAL_SOURCES = $(base_obj:.o=.c) $(NS_OBJC_OBJ:.o=.m)
- 
- gl-stamp: $(libsrc)/make-docfile$(EXEEXT) $(GLOBAL_SOURCES)
--	$(AM_V_GLOBALS)$(libsrc)/make-docfile -d $(srcdir) -g $(doc_obj) > globals.tmp
-+	make-docfile -d $(srcdir) -g $(doc_obj) > globals.tmp
- 	$(AM_V_at)$(top_srcdir)/build-aux/move-if-change globals.tmp globals.h
- 	$(AM_V_at)echo timestamp > $@
- 
-@@ -726,7 +726,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
- 	$(MAKE) -C $(dir $@) all
- 
- ifeq ($(HAVE_PDUMPER),yes)
--MAKE_PDUMPER_FINGERPRINT = $(libsrc)/make-fingerprint$(EXEEXT)
-+MAKE_PDUMPER_FINGERPRINT = make-fingerprint
- else
- MAKE_PDUMPER_FINGERPRINT =
- endif
-Index: emacs-29.1/lisp/Makefile.in
-===================================================================
---- emacs-29.1.orig/lisp/Makefile.in
-+++ emacs-29.1/lisp/Makefile.in
+ # What emacs should be called when installed.
+ EMACS_NAME = `echo emacs | sed '$(TRANSFORM)'`
+diff --git a/lisp/Makefile.in b/lisp/Makefile.in
+index 1142147..f1cd99b 100644
+--- a/lisp/Makefile.in
++++ b/lisp/Makefile.in
 @@ -53,7 +53,7 @@ FIND_DELETE = @FIND_DELETE@
  # We never change directory before running Emacs, so a relative file
  # name is fine, and makes life easier.  If we need to change
@@ -77,7 +40,7 @@ Index: emacs-29.1/lisp/Makefile.in
  
  # Command line flags for Emacs.
  
-@@ -109,7 +109,7 @@ MAIN_FIRST = ./emacs-lisp/eieio.el ./ema
+@@ -112,7 +112,7 @@ MAIN_FIRST = ./emacs-lisp/eieio.el ./emacs-lisp/eieio-base.el \
    ./org/oc.el ./org/ol.el ./emacs-lisp/cl-lib.el
  
  # Prevent any settings in the user environment causing problems.
@@ -86,16 +49,53 @@ Index: emacs-29.1/lisp/Makefile.in
  
  # The actual Emacs command run in the targets below.
  emacs = '$(EMACS)' $(EMACSOPT)
-Index: emacs-29.1/Makefile.in
-===================================================================
---- emacs-29.1.orig/Makefile.in
-+++ emacs-29.1/Makefile.in
-@@ -328,7 +328,7 @@ GLIB_COMPILE_SCHEMAS = glib-compile-sche
- TRANSFORM = @program_transform_name@
+diff --git a/src/Makefile.in b/src/Makefile.in
+index 111f94f..d30c854 100644
+--- a/src/Makefile.in
++++ b/src/Makefile.in
+@@ -518,7 +518,7 @@ ifeq ($(CHECK_STRUCTS),true)
+ pdumper.o: dmpstruct.h
+ endif
+ dmpstruct.h: $(srcdir)/dmpstruct.awk
+-dmpstruct.h: $(libsrc)/make-fingerprint$(EXEEXT) $(dmpstruct_headers)
++dmpstruct.h:  $(dmpstruct_headers)
+ 	$(AM_V_GEN)POSIXLY_CORRECT=1 $(AWK) -f $(srcdir)/dmpstruct.awk \
+ 		$(dmpstruct_headers) > $@
  
- # Prevent any settings in the user environment causing problems.
--unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
-+unexport  EMACSDOC EMACSPATH
+@@ -627,8 +627,7 @@ SYSTEM_TYPE = @SYSTEM_TYPE@
+ ## Strictly speaking, emacs does not depend directly on all of $lisp,
+ ## since not all pieces are used on all platforms.  But DOC depends
+ ## on all of $lisp, and emacs depends on DOC, so it is ok to use $lisp here.
+-emacs$(EXEEXT): temacs$(EXEEXT) \
+-                $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
++emacs$(EXEEXT): $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
+                 $(lispsource)/international/charprop.el ${charsets}
+ ifeq ($(SYSTEM_TYPE),cygwin)
+ 	find ${top_builddir} -name '*.eln' | rebase -v -O -T -
+@@ -663,7 +662,7 @@ endif
+ $(etc)/DOC: $(libsrc)/make-docfile$(EXEEXT) $(doc_obj)
+ 	$(AM_V_GEN)$(MKDIR_P) $(etc)
+ 	$(AM_V_at)rm -f $(etc)/DOC
+-	$(AM_V_at)$(libsrc)/make-docfile -d $(srcdir) \
++	make-docfile -d $(srcdir) \
+ 	  $(SOME_MACHINE_OBJECTS) $(doc_obj) > $(etc)/DOC
  
- # What emacs should be called when installed.
- EMACS_NAME = `echo emacs | sed '$(TRANSFORM)'`
+ $(libsrc)/make-docfile$(EXEEXT) $(libsrc)/make-fingerprint$(EXEEXT): \
+@@ -680,7 +679,7 @@ buildobj.h: Makefile
+ GLOBAL_SOURCES = $(base_obj:.o=.c) $(NS_OBJC_OBJ:.o=.m)
+ 
+ gl-stamp: $(libsrc)/make-docfile$(EXEEXT) $(GLOBAL_SOURCES)
+-	$(AM_V_GLOBALS)$(libsrc)/make-docfile -d $(srcdir) -g $(doc_obj) > globals.tmp
++	make-docfile -d $(srcdir) -g $(doc_obj) > globals.tmp
+ 	$(AM_V_at)$(top_srcdir)/build-aux/move-if-change globals.tmp globals.h
+ 	$(AM_V_at)echo timestamp > $@
+ 
+@@ -694,7 +693,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
+ 	$(MAKE) -C $(dir $@) all
+ 
+ ifeq ($(HAVE_PDUMPER),yes)
+-MAKE_PDUMPER_FINGERPRINT = $(libsrc)/make-fingerprint$(EXEEXT)
++MAKE_PDUMPER_FINGERPRINT = make-fingerprint
+ else
+ MAKE_PDUMPER_FINGERPRINT =
+ endif

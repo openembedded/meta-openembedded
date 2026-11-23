@@ -4,10 +4,7 @@ HOMEPAGE = "https://www.gnu.org/software/emacs/"
 LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-SRC_URI = " \
-    ${GNU_MIRROR}/emacs/${BP}.tar.xz \
-    file://0001-Support-Tree-sitter-version-0.26-and-later.patch \
-"
+SRC_URI = "${GNU_MIRROR}/emacs/${BP}.tar.xz"
 UPSTREAM_CHECK_URI = "${GNU_MIRROR}/emacs/"
 
 SRC_URI:append:class-target = " \
@@ -16,7 +13,7 @@ SRC_URI:append:class-target = " \
     file://leim_dont-unexport-EMACSDATA.patch \
 "
 
-SRC_URI[sha256sum] = "b3f36f18a6dd2715713370166257de2fae01f9d38cfe878ced9b1e6ded5befd9"
+SRC_URI[sha256sum] = "1da5790d9580c81932b5bf700633114468da7b3412d69faa767daebf974f4586"
 
 CVE_STATUS[CVE-2007-6109] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
 
