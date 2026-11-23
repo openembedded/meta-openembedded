@@ -13,7 +13,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/src/include/storage/s_lock.h b/src/include/storage/s_lock.h
-index 2f73f9f..04b0f8a 100644
+index c9e5251..f893cef 100644
 --- a/src/include/storage/s_lock.h
 +++ b/src/include/storage/s_lock.h
 @@ -243,11 +243,12 @@ spin_delay(void)

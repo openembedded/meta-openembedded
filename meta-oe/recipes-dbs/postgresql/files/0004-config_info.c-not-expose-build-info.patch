@@ -15,10 +15,10 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  2 files changed, 2 insertions(+), 70 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 3a0fc92..88b8f1c 100644
+index db975ae..6afd525 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2025, PostgreSQL Global Development Group])
+@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2026, PostgreSQL Global Development Group])
  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
  AC_CONFIG_AUX_DIR(config)
  AC_PREFIX_DEFAULT(/usr/local/pgsql)
@@ -28,7 +28,7 @@ index 3a0fc92..88b8f1c 100644
  [PG_MAJORVERSION=`expr "$PACKAGE_VERSION" : '\([0-9][0-9]*\)'`]
  [PG_MINORVERSION=`expr "$PACKAGE_VERSION" : '.*\.\([0-9][0-9]*\)'`]
 diff --git a/src/common/config_info.c b/src/common/config_info.c
-index 113a8a6..b8f21c8 100644
+index 572ae3a..34a4cae 100644
 --- a/src/common/config_info.c
 +++ b/src/common/config_info.c
 @@ -38,7 +38,7 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)

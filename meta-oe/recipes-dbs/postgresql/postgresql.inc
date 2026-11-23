@@ -32,6 +32,8 @@ SRC_URI = "https://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
     file://run-ptest \
     file://pg_config \
 "
+UPSTREAM_CHECK_URI = "https://ftp.postgresql.org/pub/source/"
+UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
 
 LEAD_SONAME = "libpq.so"
 

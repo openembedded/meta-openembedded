@@ -22,7 +22,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/test/regress/expected/sysviews.out b/src/test/regress/expected/sysviews.out
-index 83228cf..c378012 100644
+index 132b56a..318c39b 100644
 --- a/src/test/regress/expected/sysviews.out
 +++ b/src/test/regress/expected/sysviews.out
 @@ -66,7 +66,7 @@ and c1.path[c2.level] = c2.path[c2.level];
@@ -35,7 +35,7 @@ index 83228cf..c378012 100644
  ----
   t
 diff --git a/src/test/regress/sql/sysviews.sql b/src/test/regress/sql/sysviews.sql
-index 66179f0..0f15661 100644
+index 507e400..bebb838 100644
 --- a/src/test/regress/sql/sysviews.sql
 +++ b/src/test/regress/sql/sysviews.sql
 @@ -43,7 +43,7 @@ where c2.name = 'CacheMemoryContext'
