@@ -13,10 +13,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bd8de4f63e06b1ccc06e9f8dc5b1aa97"
 DEPENDS = "protobuf-native protobuf"
 
 SRC_URI = "git://github.com/protobuf-c/protobuf-c.git;branch=master;protocol=https \
-"
+           file://0001-Fix-compilation-against-protobuf-v34.patch \
+           "
 SRC_URI:append:class-native = " file://0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch"
 
 SRCREV = "4719fdd7760624388c2c5b9d6759eb6a47490626"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 
 inherit autotools pkgconfig
