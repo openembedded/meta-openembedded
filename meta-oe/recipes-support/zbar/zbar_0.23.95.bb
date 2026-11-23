@@ -14,6 +14,8 @@ SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https;tag=${
            "
 SRCREV = "dc19fcc7da58e8cf84ba1ec417e24b04609feb23"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 DEPENDS += "xmlto-native"
 
 PACKAGECONFIG ??= "\
