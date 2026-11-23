@@ -7,7 +7,7 @@ BUGTRACKER = "https://trac.wxwidgets.org/"
 # distributing the sources of an application using the library even in the
 # case of static linking.
 LICENSE = "LGPL-2.0-or-later WITH WxWindows-exception-3.1"
-LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
+LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=7971b9ce85ba3665488582c8e9ec6188"
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
 inherit lib_package binconfig pkgconfig
@@ -25,9 +25,10 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https;
            file://0006-Fix-locale-on-musl.patch \
            file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
            "
-SRCREV = "749625e0ea4d70d1f75494aa52231d835531a618"
+SRCREV = "3b7c7fc839093ad28146bd17555af2565c792c96"
 
-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+# Even minor versions are the stable series
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d*[02468]\.\d+)$"
 
 # These can be either 'builtin' or 'sys' and builtin means cloned soures are
 # build. So these cannot be PACKAGECONFIGs and let's use libs where we can (see
