@@ -2,42 +2,44 @@ SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
 SECTION = "libs"
 
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+# MIT for the bundled HarfBuzz (BUILD_HARFBUZZ)
+LICENSE = "Apache-2.0 AND MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                    file://3rdparty/harfbuzz/COPYING;md5=b98429b8e8e3c2a67cfef01e99e4893d"
 
 ARM_INSTRUCTION_SET:armv4 = "arm"
 ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "0654a42e19215ef25b1d367d822f3c630447e7c7"
-SRCREV_contrib = "a8e9acd62cabd30419dba83007f2ac0d07de5e2c"
+SRCREV_opencv = "e4f78fbcf1a773fbed69e14500e8b734963eb585"
+SRCREV_contrib = "b67a855188a3d683813731010f6d39ac614733a4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
 SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
 # kleidicv must match version of OpenCV
-SRCREV_kleidicv = "b1dbf474b8685b97a64d03e828b359fbdc050d1f"
+SRCREV_kleidicv = "cacea38588eb35de69075a0a1a876b82bfcd88dd"
 
-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv_kleidicv"
-SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
-           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV} \
+SRCREV_FORMAT = "opencv_contrib_boostdesc_vgg_face_wechat-qrcode_fastcv_kleidicv"
+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=5.x;protocol=https;tag=${PV} \
+           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=5.x;protocol=https;tag=${PV} \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/boostdesc;name=boostdesc;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250715;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
            file://0003-To-fix-errors-as-following.patch \
-           file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
-           file://29533.patch \
            "
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
-SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
+SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;tag=26.09;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
 
 
 # OpenCV wants to download more files during configure.  We download these in
@@ -78,6 +80,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
     -DOPENCV_GENERATE_PKGCONFIG=ON \
     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
     -DOPENCV_ALLOW_DOWNLOADS=OFF \
+    -DBUILD_HARFBUZZ=ON \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
@@ -103,7 +106,7 @@ PACKAGECONFIG:remove:libc-musl:riscv32 = "tbb"
 PACKAGECONFIG[gapi] = "-DWITH_ADE=ON -Dade_DIR=${STAGING_LIBDIR},-DWITH_ADE=OFF,ade"
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
-PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DPROTOBUF_UPDATE_FILES=ON -DBUILD_PROTOBUF=OFF -DCMAKE_CXX_STANDARD=17,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
+PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DPROTOBUF_UPDATE_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
 PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
 PACKAGECONFIG[freetype] = "-DBUILD_opencv_freetype=ON,-DBUILD_opencv_freetype=OFF,freetype,"
 PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
@@ -178,12 +181,12 @@ python populate_packages:prepend () {
 PACKAGES_DYNAMIC += "^libopencv-.*"
 
 FILES:${PN} = ""
-FILES:${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
-FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig  ${libdir}/cmake/opencv4/*.cmake"
-FILES:${PN}-staticdev += "${libdir}/opencv4/3rdparty/*.a"
-FILES:${PN}-apps = "${bindir}/* ${datadir}/opencv4 ${datadir}/licenses"
-FILES:${PN}-java = "${datadir}/OpenCV/java"
-FILES:${PN}-samples = "${datadir}/opencv4/samples/"
+FILES:${PN}-dbg += "${datadir}/java/opencv5/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
+FILES:${PN}-dev = "${includedir} ${libdir}/pkgconfig  ${libdir}/cmake/opencv5/*.cmake"
+FILES:${PN}-staticdev += "${libdir}/opencv5/3rdparty/*.a"
+FILES:${PN}-apps = "${bindir}/* ${datadir}/opencv5 ${datadir}/licenses"
+FILES:${PN}-java = "${datadir}/java/opencv5"
+FILES:${PN}-samples = "${datadir}/opencv5/samples/"
 
 INSANE_SKIP:${PN}-java = "libdir"
 INSANE_SKIP:${PN}-dbg = "libdir"
@@ -209,9 +212,9 @@ do_install:append() {
         mv ${D}/usr/lib/* ${D}/${libdir}/
         rm -rf ${D}/usr/lib
     fi
-    # remove setup_vars_opencv4.sh as its content is confusing and useless
-    if [ -f ${D}${bindir}/setup_vars_opencv4.sh ]; then
-        rm -rf ${D}${bindir}/setup_vars_opencv4.sh
+    # remove setup_vars_opencv5.sh as its content is confusing and useless
+    if [ -f ${D}${bindir}/setup_vars_opencv5.sh ]; then
+        rm -rf ${D}${bindir}/setup_vars_opencv5.sh
     fi
 
     find ${B}/modules -name "*.cpp" | xargs -r grep -l "${S}" | while read -r fn; do
@@ -227,9 +230,9 @@ do_install:append() {
 
 do_install:append:class-target() {
     # remove build host path to improve reproducibility
-    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
+    if [ -f ${D}${libdir}/cmake/opencv5/OpenCVModules.cmake ]; then
         sed -e 's@${STAGING_DIR_HOST}@@g' \
-            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
+            -i ${D}${libdir}/cmake/opencv5/OpenCVModules.cmake
     fi
 }
 
