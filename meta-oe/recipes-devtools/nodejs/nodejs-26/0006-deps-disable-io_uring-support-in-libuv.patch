@@ -18,13 +18,14 @@ Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 Updated by Jason Schonberg <schonm@gamil.com> August 1, 2025 for nodejs 22.18.0
 which uses libuv 1.51.0
 ---
- deps/uv/src/unix/linux.c | 29 +----------------------------
- 1 file changed, 1 insertion(+), 28 deletions(-)
+ deps/uv/src/unix/linux.c | 31 +------------------------------
+ 1 file changed, 1 insertion(+), 30 deletions(-)
 
 diff --git a/deps/uv/src/unix/linux.c b/deps/uv/src/unix/linux.c
+index 1109648..ca84eb5 100644
 --- a/deps/uv/src/unix/linux.c
 +++ b/deps/uv/src/unix/linux.c
-@@ -465,36 +465,7 @@
+@@ -462,36 +462,7 @@ static int uv__use_io_uring(uint32_t flags) {
    /* See https://github.com/libuv/libuv/issues/4283. */
    return 0; /* Random SIGSEGV in signal handler. */
  #else
@@ -61,5 +62,4 @@ diff --git a/deps/uv/src/unix/linux.c b/deps/uv/src/unix/linux.c
 +return 0; /* pseudo doesn't support io_uring https://bugzilla.yoctoproject.org/show_bug.cgi?id=15244 */
  #endif
  }
- 
  

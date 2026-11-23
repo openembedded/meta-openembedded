@@ -34,11 +34,13 @@ do_unpack[postfuncs] += "prune_sources"
 
 Upstream-Status: Inappropriate [embedded specific]
 
+diff --git a/Makefile b/Makefile
+index 15de440..c6f95ca 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -179,7 +179,7 @@ with-code-cache test-code-cache:
+@@ -181,7 +181,7 @@ with-code-cache test-code-cache:
  	$(warning '$@' target is a noop)
-
+ 
  out/Makefile: config.gypi common.gypi node.gyp \
 -	deps/*/*.gyp \
 +	deps/llhttp/llhttp.gyp deps/ada/ada.gyp deps/nbytes/nbytes.gyp \

@@ -47,7 +47,7 @@ Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
  3 files changed, 77 insertions(+), 6 deletions(-)
 
 diff --git a/deps/v8/src/regexp/gen-regexp-special-case.cc b/deps/v8/src/regexp/gen-regexp-special-case.cc
-index 86f6b212c93..98f70975be1 100644
+index 86f6b21..98f7097 100644
 --- a/deps/v8/src/regexp/gen-regexp-special-case.cc
 +++ b/deps/v8/src/regexp/gen-regexp-special-case.cc
 @@ -9,6 +9,7 @@
@@ -111,7 +111,7 @@ index 86f6b212c93..98f70975be1 100644
  
  void WriteHeader(const char* header_filename) {
 diff --git a/deps/v8/src/regexp/regexp-parser.cc b/deps/v8/src/regexp/regexp-parser.cc
-index 2792cd0f1e9..dd883c3eddc 100644
+index 2792cd0..dd883c3 100644
 --- a/deps/v8/src/regexp/regexp-parser.cc
 +++ b/deps/v8/src/regexp/regexp-parser.cc
 @@ -10,6 +10,7 @@
@@ -158,7 +158,7 @@ index 2792cd0f1e9..dd883c3eddc 100644
    }
    // In the case where ICU is not included, we act as if the unicode flag is
 diff --git a/deps/v8/src/regexp/special-case.h b/deps/v8/src/regexp/special-case.h
-index 753c9231ede..80b88a308cc 100644
+index 753c923..80b88a3 100644
 --- a/deps/v8/src/regexp/special-case.h
 +++ b/deps/v8/src/regexp/special-case.h
 @@ -7,8 +7,8 @@

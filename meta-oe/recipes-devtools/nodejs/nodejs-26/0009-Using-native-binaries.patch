@@ -22,9 +22,10 @@ Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
  2 files changed, 8 insertions(+)
 
 diff --git a/node.gyp b/node.gyp
+index 5334b8a..d2b3ce6 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -993,6 +993,7 @@
+@@ -1062,6 +1062,7 @@
            'action_name': 'node_js2c',
            'process_outputs_as_sources': 1,
            'inputs': [
@@ -32,7 +33,7 @@ diff --git a/node.gyp b/node.gyp
              '<(node_js2c_exec)',
              '<@(library_files)',
              '<@(deps_files)',
-@@ -1013,6 +1014,7 @@
+@@ -1082,6 +1083,7 @@
            ],
            'action': [
              '<@(emulator)',
@@ -40,7 +41,7 @@ diff --git a/node.gyp b/node.gyp
              '<(node_js2c_exec)',
              '<@(_outputs)',
              'lib',
-@@ -1072,6 +1074,7 @@
+@@ -1141,6 +1143,7 @@
                    'action_name': 'node_mksnapshot',
                    'process_outputs_as_sources': 1,
                    'inputs': [
@@ -49,9 +50,10 @@ diff --git a/node.gyp b/node.gyp
                      '<(node_snapshot_main)',
                    ],
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+index fd8394b..85dfc80 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -113,6 +113,7 @@
+@@ -121,6 +121,7 @@
          {
            'action_name': 'run_torque_action',
            'inputs': [  # Order matters.
@@ -59,7 +61,7 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
              '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFFIX)',
              '<@(torque_files)',
            ],
-@@ -145,6 +146,7 @@
+@@ -153,6 +154,7 @@
            ],
            'action': [
              '<@(emulator)',
@@ -67,7 +69,7 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
              '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)torque<(EXECUTABLE_SUFFIX)',
              '-o', '<(SHARED_INTERMEDIATE_DIR)/torque-generated',
              '-v8-root', '<(V8_ROOT)',
-@@ -257,6 +259,7 @@
+@@ -265,6 +267,7 @@
          {
            'action_name': 'generate_bytecode_builtins_list_action',
            'inputs': [
@@ -75,7 +77,7 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
              '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)bytecode_builtins_list_generator<(EXECUTABLE_SUFFIX)',
            ],
            'outputs': [
-@@ -443,6 +446,7 @@
+@@ -430,6 +433,7 @@
              ],
            },
            'inputs': [
@@ -83,7 +85,7 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
              '<(mksnapshot_exec)',
            ],
            'outputs': [
-@@ -1976,6 +1980,7 @@
+@@ -2084,6 +2088,7 @@
          {
            'action_name': 'run_gen-regexp-special-case_action',
            'inputs': [
@@ -91,5 +93,3 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
              '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)gen-regexp-special-case<(EXECUTABLE_SUFFIX)',
            ],
            'outputs': [
---
-2.34.1

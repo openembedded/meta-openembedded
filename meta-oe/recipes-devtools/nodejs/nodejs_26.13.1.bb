@@ -1,8 +1,8 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "Apache-2.0 AND Artistic-2.0 AND BSD-2-Clause AND BSD-3-Clause AND BlueOak-1.0.0 AND ISC AND MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=edc0683b77d2c503217642fa000b5b31"
-FILESEXTRAPATHS:prepend := "${THISDIR}/nodejs-24:"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=89253653f0ff2153f09502963f07bb42"
+FILESEXTRAPATHS:prepend := "${THISDIR}/nodejs-26:"
 
 CVE_PRODUCT = "nodejs node.js"
 
@@ -29,15 +29,17 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0006-deps-disable-io_uring-support-in-libuv.patch \
            file://0007-positional-args.patch \
            file://0008-custom-env.patch \
-           file://0010-v8-fix-Wtemplate-body-error-with-GCC-15-on-ia32.patch \
            file://0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch \
-           file://0012-histogram-restrict-avx2-dispatch-to-x86_64.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
            file://0009-Using-native-binaries.patch \
            "
-SRC_URI[sha256sum] = "48ca3aa8a9b02133356922ef4fc80200e00598c80a4ef446f7c39a459222593d"
+SRC_URI[sha256sum] = "a7f6204ff63b6a2cd274d48903285abb86ed53a99070e532d4c2fd787457d9e6"
+
+# Even-numbered majors are the LTS lines
+UPSTREAM_CHECK_URI = "https://nodejs.org/dist/"
+UPSTREAM_CHECK_REGEX = "v(?P<pver>\d*[02468]\.\d+\.\d+)/"
 
 S = "${UNPACKDIR}/node-v${PV}"
 
@@ -144,6 +146,7 @@ do_configure () {
     # $TARGET_ARCH settings don't match --dest-cpu settings
     python3 configure.py --verbose --prefix=${prefix} \
                --shared-openssl \
+               --v8-disable-temporal-support \
                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
                --dest-os=linux \
                --libdir=${baselib} \
@@ -172,7 +175,7 @@ do_install_ptest () {
 }
 
 PACKAGES =+ "${PN}-npm"
-FILES:${PN}-npm = "${nonarch_libdir}/node_modules ${bindir}/npm ${bindir}/npx ${bindir}/corepack"
+FILES:${PN}-npm = "${nonarch_libdir}/node_modules ${bindir}/npm ${bindir}/npx"
 RDEPENDS:${PN}-npm = "bash python3-core python3-shell python3-datetime \
     python3-misc python3-multiprocessing"
 
@@ -198,7 +201,10 @@ python set_gyp_variables () {
         d.setVar("CC_host", d.getVar("BUILD_CC"))
         d.setVar("CFLAGS_host", d.getVar("BUILD_CFLAGS"))
         d.setVar("CXX_host", d.getVar("BUILD_CXX"))
-        d.setVar("CXXFLAGS_host", d.getVar("BUILD_CXXFLAGS"))
+        # V8's NEON hex decoding (src/objects/simd.cc) relies on implicit vector
+        # conversions, which GCC rejects without -flax-vector-conversions
+        d.setVar("CXXFLAGS_host", d.getVar("BUILD_CXXFLAGS") +
+                 (" -flax-vector-conversions" if d.getVar("BUILD_ARCH") == "aarch64" else ""))
         d.setVar("LDFLAGS_host", d.getVar("BUILD_LDFLAGS"))
         d.setVar("AR_host", d.getVar("BUILD_AR"))
 }

@@ -9,7 +9,7 @@ Upstream-Status: Inappropriate [embedded specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/fixtures/run-script/node_modules/.bin/custom-env b/test/fixtures/run-script/node_modules/.bin/custom-env
-index e6f291c6..1430f2e9 100755
+index e6f291c..1430f2e 100755
 --- a/test/fixtures/run-script/node_modules/.bin/custom-env
 +++ b/test/fixtures/run-script/node_modules/.bin/custom-env
 @@ -1,2 +1,2 @@

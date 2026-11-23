@@ -9,6 +9,7 @@ Upstream-Status: Inappropriate [embedded specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/fixtures/run-script/node_modules/.bin/positional-args b/test/fixtures/run-script/node_modules/.bin/positional-args
+index 18c7bfa..1739ce6 100755
 --- a/test/fixtures/run-script/node_modules/.bin/positional-args
 +++ b/test/fixtures/run-script/node_modules/.bin/positional-args
 @@ -1,3 +1,3 @@
@@ -16,5 +17,3 @@ diff --git a/test/fixtures/run-script/node_modules/.bin/positional-args b/test/f
 +#!/bin/sh
  echo "Arguments: '$@'"
  echo "The total number of arguments is: $#"
---
-2.34.1
