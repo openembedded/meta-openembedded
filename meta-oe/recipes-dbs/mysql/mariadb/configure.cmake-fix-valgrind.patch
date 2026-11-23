@@ -21,10 +21,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/configure.cmake b/configure.cmake
-index 61f30a75..3e730082 100644
+index c8d7396..cf6d20e 100644
 --- a/configure.cmake
 +++ b/configure.cmake
-@@ -881,10 +881,9 @@ ENDIF()
+@@ -902,10 +902,9 @@ ENDIF()
  
  IF(WITH_VALGRIND)
    SET(HAVE_valgrind 1)

@@ -15,10 +15,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 7 deletions(-)
 
 diff --git a/support-files/CMakeLists.txt b/support-files/CMakeLists.txt
-index ee1d420e..a99c0605 100644
+index 26d9c1d..afa9011 100644
 --- a/support-files/CMakeLists.txt
 +++ b/support-files/CMakeLists.txt
-@@ -245,12 +245,5 @@ IF(UNIX AND NOT WITHOUT_SERVER)
+@@ -252,13 +252,6 @@ IF(UNIX AND NOT WITHOUT_SERVER)
        INSTALL(FILES rpm/enable_encryption.preset DESTINATION ${INSTALL_SYSCONF2DIR}
                COMPONENT IniFiles)
      ENDIF()
@@ -31,3 +31,4 @@ index ee1d420e..a99c0605 100644
 -                   COMPONENT SupportFiles)
    ENDIF(INSTALL_SYSCONFDIR)
  ENDIF()
+ 

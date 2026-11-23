@@ -35,6 +35,3 @@ index 1538b6cc..cdccb2c5 100644
  
  set(MRN_ALL_SOURCES
    ${MRN_SOURCES}
--- 
-2.34.1
-

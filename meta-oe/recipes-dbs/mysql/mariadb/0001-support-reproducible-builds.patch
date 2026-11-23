@@ -17,10 +17,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
-index 3a7c9d36..ac868072 100644
+index 1463ffd5..bd66a081 100644
 --- a/sql/CMakeLists.txt
 +++ b/sql/CMakeLists.txt
-@@ -400,10 +400,10 @@ ELSE()
+@@ -435,10 +435,10 @@ ELSE()
    CONFIGURE_FILE(myskel.m4.in myskel.m4)
    BISON_TARGET(gen_mariadb_cc_hh ${CMAKE_CURRENT_BINARY_DIR}/yy_mariadb.yy
                                   ${CMAKE_CURRENT_BINARY_DIR}/yy_mariadb.cc
@@ -33,6 +33,3 @@ index 3a7c9d36..ac868072 100644
  ENDIF()
  
  IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
--- 
-2.34.1
-

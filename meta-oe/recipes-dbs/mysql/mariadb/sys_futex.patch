@@ -13,7 +13,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 6 insertions(+)
 
 diff --git a/storage/innobase/sync/srw_lock.cc b/storage/innobase/sync/srw_lock.cc
-index 28b586de..3ee71142 100644
+index 5a419373..cfcd5393 100644
 --- a/storage/innobase/sync/srw_lock.cc
 +++ b/storage/innobase/sync/srw_lock.cc
 @@ -226,6 +226,12 @@ void ssux_lock_impl<spinloop>::wake() noexcept { WakeByAddressSingle(&readers);

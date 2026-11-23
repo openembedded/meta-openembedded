@@ -8,7 +8,7 @@ Upstream-Status: Submitted [https://github.com/MariaDB/server/pull/1981/files#r2
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 --- a/include/my_rdtsc.h
 +++ b/include/my_rdtsc.h
-@@ -226,7 +226,7 @@ static inline ulonglong my_timer_cycles(
+@@ -225,7 +225,7 @@ static inline ulonglong my_timer_cycles(
          "sub %0, zero, %0\n"
          "and %1, %1, %0\n"
          : "=r"(result_hi0), "=r"(result_lo), "=r"(result_hi1));

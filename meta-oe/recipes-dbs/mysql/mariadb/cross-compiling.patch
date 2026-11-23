@@ -14,10 +14,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
  1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3828420c..ee38615a 100644
+index 810c9c27..2978974d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -428,11 +428,6 @@ CHECK_LIBFMT()
+@@ -460,11 +460,6 @@ CHECK_LIBFMT()
  ADD_SUBDIRECTORY(tpool)
  CHECK_SYSTEMD()
  

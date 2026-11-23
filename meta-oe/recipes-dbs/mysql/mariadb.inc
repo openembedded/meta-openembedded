@@ -25,11 +25,12 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
            file://riscv32.patch \
            file://0001-support-reproducible-builds.patch \
            file://0001-storage-mroonga-CMakeLists.txt-fix-reproducible-buil.patch \
-           file://0001-MDEV-40287-AES_ENCRYPT-and-KDF-return-NULL-with-Open.patch \
           "
-SRC_URI[sha256sum] = "1bb254b106d0a7ca871cfa18fa6e18d4b80a7430f9ec9d1571ec4271a13def96"
+SRC_URI[sha256sum] = "75aae4d48df905734e24a85b955bbcdc43f4b122b450bc4ad2bc92f5d1ac578d"
 
-UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
+UPSTREAM_CHECK_URI = "https://archive.mariadb.org/"
+# 12.3 is the current long-term support series
+UPSTREAM_CHECK_REGEX = "mariadb-(?P<pver>12\.3\.\d+)/"
 
 BINCONFIG_GLOB = "mysql_config"
 
@@ -168,7 +169,7 @@ mariadb_sysroot_preprocess () {
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
-    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
+    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h
 
     install -d ${D}/${sysconfdir}/init.d
     install -m 0644 ${UNPACKDIR}/my.cnf ${D}/${sysconfdir}/
@@ -248,6 +249,7 @@ FILES:libmysqlclient-dev = " \
     ${libdir}/libmysqlclient.so \
     ${libdir}/libmariadb.so \
     ${sysconfdir}/aclocal \
+    ${datadir}/cmake/mariadb-plugin \
     ${bindir}/mysql_config"
 FILES:libmysqlclient-staticdev = "\
     ${libdir}/*.a"
