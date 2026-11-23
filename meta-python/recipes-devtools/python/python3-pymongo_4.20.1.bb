@@ -36,3 +36,5 @@ RDEPENDS:${PN} += " \
     python3-difflib \
     python3-logging \
 "
+
+BBCLASSEXTEND = "native"
