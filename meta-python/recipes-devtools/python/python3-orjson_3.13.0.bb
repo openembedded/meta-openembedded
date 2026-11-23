@@ -18,8 +18,6 @@ SRC_URI += " \
 "
 DEPENDS = "python3-maturin-native"
 
-RDEPENDS:${PN} += "python3-maturin python3-mypy"
-
 do_compile:prepend() {
     sed -i "/panic = \"abort\"/d" ${S}/Cargo.toml
 }
