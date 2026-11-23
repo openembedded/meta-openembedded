@@ -14,7 +14,10 @@ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https;tag=LMDB_${P
            file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
            "
 
-SRCREV = "69087ced3cb6082f7dcfb4fc2dcaa3b68a7e2e8c"
+SRCREV = "028f61b6832032174f893484719ed4848d8d60db"
+
+# Stay on 0.9: 1.0 changes the on-disk format
+UPSTREAM_CHECK_GITTAGREGEX = "LMDB_(?P<pver>0\.9(\.\d+)+)"
 
 inherit ptest
 
