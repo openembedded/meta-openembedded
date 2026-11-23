@@ -12,6 +12,7 @@ RDEPENDS:packagegroup-meta-oe-extended += "\
 "
 RDEPENDS:packagegroup-meta-oe-support += "\
     nvmetcli \
+    rasdaemon \
     smem \
 "
 RDEPENDS:packagegroup-meta-oe-extended:remove:libc-musl = "lcdproc"
