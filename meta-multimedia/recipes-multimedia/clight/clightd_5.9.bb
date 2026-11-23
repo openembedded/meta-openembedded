@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRCREV = "d4e88b1d351d61151c99a399abd526d9b7dda12d"
 SRC_URI = "git://github.com/FedeDP/${BPN};protocol=https;branch=master;tag=${PV} \
+           file://0001-sensors-als-Port-to-libiio-1.0-API.patch \
 "
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig systemd features_check
 

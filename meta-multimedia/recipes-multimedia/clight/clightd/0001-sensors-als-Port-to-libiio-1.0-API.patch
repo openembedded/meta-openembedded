@@ -1,0 +1,165 @@
+From 3b4827e17401ec026a2d82e1632d3c456a5191c8 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Sun, 22 Nov 2026 23:35:34 -0800
+Subject: [PATCH] sensors/als: Port to libiio 1.0 API
+
+libiio 1.0 breaks the 0.x API: the header moved to <iio/iio.h>,
+iio_create_local_context() is gone (use iio_create_context() with the
+"local:" URI), channels are enabled in an iio_channels_mask, and
+buffers are read through an iio_stream instead of
+iio_device_create_buffer()/iio_buffer_refill(). Functions returning
+pointers now report errors with pointer-encoded error codes.
+
+Use a stream with a single one-sample block, which waits for a fresh
+sample on every capture like the old refill did, and release the
+context, mask and stream on every exit path.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/modules/sensors/als.c | 74 ++++++++++++++++++++++++++-------------
+ 1 file changed, 49 insertions(+), 25 deletions(-)
+
+diff --git a/src/modules/sensors/als.c b/src/modules/sensors/als.c
+index eee98e6..8bb67ee 100644
+--- a/src/modules/sensors/als.c
++++ b/src/modules/sensors/als.c
+@@ -1,6 +1,6 @@
+ #include <sensor.h>
+ #include <udev.h>
+-#include <iio.h>
++#include <iio/iio.h>
+ #include <sys/time.h>
+ #include "als.h"
+ 
+@@ -67,17 +67,21 @@ static double iio_buffer_capture(struct als_device *als, double *pct, const int
+     INFO("[IIO-BUF] Start capture: '%s' sysname.\n", sysname);
+     
+     
++    struct iio_channels_mask *mask = NULL;
++    struct iio_stream *stream = NULL;
++
+     /* Getting local iio device context */
+-    struct iio_context *local_ctx = iio_create_local_context();
+-    if (!local_ctx) {
+-        fprintf(stderr, "Failed to create local iio ctx.\n");
++    struct iio_context *local_ctx = iio_create_context(NULL, "local:");
++    int err = iio_err(local_ctx);
++    if (err) {
++        fprintf(stderr, "Failed to create local iio ctx: %s\n", strerror(-err));
+         return ctr;
+     }
+     
+     const struct iio_device *dev = iio_context_find_device(local_ctx, sysname);
+     if (!dev) {
+-        fprintf(stderr, "Couldn't find device '%s': %m\n", sysname);
+-        return ctr;
++        fprintf(stderr, "Couldn't find device '%s'.\n", sysname);
++        goto out;
+     }
+     
+     INFO("[IIO-BUF] Found device.\n");
+@@ -91,32 +95,45 @@ static double iio_buffer_capture(struct als_device *als, double *pct, const int
+     
+     INFO("[IIO-BUF] Channel name: '%s'.\n", channel_name);
+     
+-    struct iio_channel *ch = iio_device_find_channel(dev, channel_name, false);
++    const struct iio_channel *ch = iio_device_find_channel(dev, channel_name, false);
+     if (!ch) {
+-        fprintf(stderr, "Failed to fetch '%s' channel: %m\n", channel_name);
+-        return ctr;
++        fprintf(stderr, "Failed to fetch '%s' channel.\n", channel_name);
++        goto out;
+     }
+     
+     if (iio_channel_is_output(ch)) {
+         fprintf(stderr, "Wrong output channel selected.\n");
+-        return ctr;
++        goto out;
+     }
+     if (!iio_channel_is_scan_element(ch)) {
+         fprintf(stderr, "Channel is not a scan element.\n");
+-        return ctr;
++        goto out;
+     }
+     
+-    iio_channel_enable(ch);
+-    if (!iio_channel_is_enabled(ch)) {
++    mask = iio_create_channels_mask(iio_device_get_channels_count(dev));
++    if (!mask) {
++        fprintf(stderr, "Failed to create channels mask.\n");
++        goto out;
++    }
++    iio_channel_enable(ch, mask);
++    if (!iio_channel_is_enabled(ch, mask)) {
+         fprintf(stderr, "Failed to enable channel '%s'!\n", channel_name);
+-        return ctr;
++        goto out;
+     }
+     
+     INFO("[IIO-BUF] Creating buffer.\n");
+-    struct iio_buffer *rxbuf = iio_device_create_buffer(dev, 1, false);
++    struct iio_buffer *rxbuf = iio_device_get_buffer(dev, 0);
+     if (!rxbuf) {
+-        fprintf(stderr, "Failed to allocated buffer: %m\n");
+-        return ctr;
++        fprintf(stderr, "Device has no buffer.\n");
++        goto out;
++    }
++    /* A single block of a single sample: each capture waits for a fresh sample */
++    stream = iio_buffer_create_stream(rxbuf, 1, 1, mask);
++    err = iio_err(stream);
++    if (err) {
++        stream = NULL;
++        fprintf(stderr, "Failed to allocated buffer: %s\n", strerror(-err));
++        goto out;
+     }
+     
+     // Load scale
+@@ -124,7 +141,7 @@ static double iio_buffer_capture(struct als_device *als, double *pct, const int
+     const struct iio_data_format *fmt = iio_channel_get_data_format(ch);
+     if (!fmt) {
+         fprintf(stderr, "Failed to fetch channel format.\n");
+-        return ctr;
++        goto out;
+     }
+     if (fmt->with_scale) {
+         scale = fmt->scale;
+@@ -133,14 +150,14 @@ static double iio_buffer_capture(struct als_device *als, double *pct, const int
+     INFO("[IIO-BUF] Data fmt: bits: %d | signed: %d | len: %d | rep: %d | scale: %f | has_scale: %d | shift: %d.\n", 
+            fmt->bits, fmt->is_signed, fmt->length, fmt->repeat, fmt->scale, fmt->with_scale, fmt->shift);
+ 
+-    const size_t read_size = fmt->bits / 8;
+     for (int i = 0; i < num_captures; i++) {
+-        int ret = iio_buffer_refill(rxbuf);
+-        INFO("[IIO-BUF] Refill ret: %d/%ld\n", ret, read_size);
+-        if (ret == read_size) {
++        const struct iio_block *block = iio_stream_get_next_block(stream);
++        err = iio_err(block);
++        INFO("[IIO-BUF] Refill ret: %d\n", err);
++        if (!err) {
+             int64_t val = 0;
+-            if (ret == read_size) {
+-                iio_channel_read(ch, rxbuf, &val, read_size);
++            size_t ret = iio_channel_read(ch, block, &val, sizeof(val), false);
++            if (ret > 0) {
+                 INFO("[IIO-BUF] Read %ld\n", val);
+                 double illuminance = (double)val * scale;
+                 ctr++;
+@@ -150,7 +167,14 @@ static double iio_buffer_capture(struct als_device *als, double *pct, const int
+         }
+         usleep(interval * 1000);
+     }
+-    iio_buffer_destroy(rxbuf);
++
++out:
++    if (stream) {
++        iio_stream_destroy(stream);
++    }
++    if (mask) {
++        iio_channels_mask_destroy(mask);
++    }
+     iio_context_destroy(local_ctx);
+     return ctr;
+ }
