@@ -15,12 +15,14 @@ LIC_FILES_CHKSUM = "file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d842
 
 SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
            file://0001-FindGObjectIntrospection.cmake-prefix-variables-obta.patch \
-           file://0001-FindGI-drop-bare-system-include-dirs-from-g-ir-scann.patch \
            file://reproducibility.patch \
            file://no-musttail-arm.patch \
+           file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
+           file://t6-not-declared.patch \
            file://sys_futex.patch \
            file://fix-ftbfs-riscv64.patch \
-           file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
+           file://0001-Source-cmake-FindGLib.cmake-do-not-set-include-dirs-.patch \
+           file://0001-libpas-Do-not-include-stdatomic.h-from-C-translation.patch \
            "
 SRC_URI[sha256sum] = "2779c1b46f88762e8400650271ba14452dc4e30b37059981552d8b562b7d0862"
 
@@ -37,7 +39,6 @@ DEPENDS += " \
           ruby-native \
           gperf-native \
           unifdef-native \
-          cairo \
           harfbuzz \
           jpeg \
           atk \
@@ -45,32 +46,29 @@ DEPENDS += " \
           gtk+3 \
           libxslt \
           libtasn1 \
-          libnotify \
           gstreamer1.0 \
           gstreamer1.0-plugins-base \
           gstreamer1.0-plugins-bad \
           glib-2.0-native \
           gettext-native \
           libsoup \
-          libepoxy \
           "
 
-PACKAGECONFIG ??= " \
-	   ${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
-	   ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'webgl opengl', '', d)} \
-	   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'webgl gles2', d)} \
-	   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl-or-es', '', d)} \
-	   enchant \
-	   libsecret \
-	   "
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'webgl opengl', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'webgl gles2', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl-or-es', '', d)} \
+                   enchant \
+                   libsecret \
+                  "
 
+PACKAGECONFIG[assertions] = "-DUSE_CXX_STDLIB_ASSERTIONS=ON,-DUSE_CXX_STDLIB_ASSERTIONS=OFF,"
 PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND_TARGET=ON,-DENABLE_WAYLAND_TARGET=OFF,wayland libwpe wpebackend-fdo wayland-native"
 PACKAGECONFIG[angle] = "-DUSE_ANGLE_WEBGL=ON,-DUSE_ANGLE_WEBGL=OFF"
 PACKAGECONFIG[x11] = "-DENABLE_X11_TARGET=ON,-DENABLE_X11_TARGET=OFF,virtual/libx11 libxcomposite libxdamage libxrender libxt"
 PACKAGECONFIG[geoclue] = "-DENABLE_GEOLOCATION=ON,-DENABLE_GEOLOCATION=OFF,geoclue"
 PACKAGECONFIG[enchant] = "-DENABLE_SPELLCHECK=ON,-DENABLE_SPELLCHECK=OFF,enchant2"
 PACKAGECONFIG[gles2] = "-DENABLE_GLES2=ON,-DENABLE_GLES2=OFF,virtual/libgles2"
-PACKAGECONFIG[jpegxl] = " -DUSE_JPEGXL=ON,-DUSE_JPEGXL=OFF,libjxl"
 PACKAGECONFIG[webgl] = "-DENABLE_WEBGL=ON,-DENABLE_WEBGL=OFF,virtual/egl"
 PACKAGECONFIG[opengl] = "-DENABLE_GRAPHICS_CONTEXT_GL=ON,-DENABLE_GRAPHICS_CONTEXT_GL=OFF,virtual/egl"
 PACKAGECONFIG[opengl-or-es] = "-DUSE_OPENGL_OR_ES=ON,-DUSE_OPENGL_OR_ES=OFF"
@@ -84,26 +82,26 @@ PACKAGECONFIG[lcms] = "-DUSE_LCMS=ON,-DUSE_LCMS=OFF,lcms"
 PACKAGECONFIG[journald] = "-DENABLE_JOURNALD_LOG=ON,-DENABLE_JOURNALD_LOG=OFF,systemd"
 PACKAGECONFIG[avif] = "-DUSE_AVIF_LOG=ON,-DUSE_AVIF=OFF,libavif"
 PACKAGECONFIG[media-recorder] = "-DENABLE_MEDIA_RECORDER=ON,-DENABLE_MEDIA_RECORDER=OFF,gstreamer1.0-plugins-bad"
-PACKAGECONFIG[gamepad] = "-DENABLE_GAMEPAD=ON,-DENABLE_GAMEPAD=OFF,libmanette"
-PACKAGECONFIG[webrtc] = "-DENABLE_WEB_RTC=ON,-DENABLE_WEB_RTC=OFF"
-PACKAGECONFIG[bubblewrap] = "-DENABLE_BUBBLEWRAP_SANDBOX=ON -DBWRAP_EXECUTABLE=${bindir}/bwrap -DDBUS_PROXY_EXECUTABLE=${bindir}/xdg-dbus-proxy,-DENABLE_BUBBLEWRAP_SANDBOX=OFF,,bubblewrap xdg-dbus-proxy"
+PACKAGECONFIG[jpegxl] = "-DUSE_JPEGXL=ON,-DUSE_JPEGXL=OFF,libjxl"
 PACKAGECONFIG[backtrace] = "-DUSE_LIBBACKTRACE=ON,-DUSE_LIBBACKTRACE=OFF,libbacktrace"
+PACKAGECONFIG[gamepad] = "-DENABLE_GAMEPAD=ON,-DENABLE_GAMEPAD=OFF,libmanette"
 PACKAGECONFIG[sysprof-capture] = "-DUSE_SYSTEM_SYSPROF_CAPTURE=YES,-DUSE_SYSTEM_SYSPROF_CAPTURE=NO,sysprof"
 PACKAGECONFIG[speech] = "-DENABLE_SPEECH_SYNTHESIS=ON,-DENABLE_SPEECH_SYNTHESIS=OFF,flite"
-PACKAGECONFIG[librice] = "-DUSE_LIBRICE=YES,-DUSE_LIBRICE=NO,librice"
+PACKAGECONFIG[librice] = "-DUSE_LIBRICE=ON,-DUSE_LIBRICE=OFF,librice"
+PACKAGECONFIG[webrtc] = "-DENABLE_WEB_RTC=ON,-DENABLE_WEB_RTC=OFF"
+PACKAGECONFIG[bubblewrap] = "-DENABLE_BUBBLEWRAP_SANDBOX=ON -DBWRAP_EXECUTABLE=${bindir}/bwrap -DDBUS_PROXY_EXECUTABLE=${bindir}/xdg-dbus-proxy,-DENABLE_BUBBLEWRAP_SANDBOX=OFF,,bubblewrap xdg-dbus-proxy"
 
 EXTRA_OECMAKE = " \
-	-DPORT=GTK \
-	-DUSE_GTK4=OFF \
-	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_INTROSPECTION=ON', '-DENABLE_INTROSPECTION=OFF', d)} \
-	${@bb.utils.contains('GIDOCGEN_ENABLED', 'True', '-DENABLE_DOCUMENTATION=ON', '-DENABLE_DOCUMENTATION=OFF', d)} \
-        ${@oe.utils.vartrue('DEBUG_BUILD', '-DWEBKIT_NO_INLINE_HINTS=ON', '-DWEBKIT_NO_INLINE_HINTS=OFF', d)} \
-	-DENABLE_MINIBROWSER=ON \
-	-DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
-        -DUSE_SOUP2=OFF \
-		"
-# pass -g1 to massively reduce the size of the debug symbols (4.3GB to 700M at time of writing)
-DEBUG_LEVELFLAG = "-g1"
+                 -DPORT=GTK \
+                 ${@oe.utils.vartrue('GI_DATA_ENABLED', '-DENABLE_INTROSPECTION=ON', '-DENABLE_INTROSPECTION=OFF', d)} \
+                 ${@oe.utils.vartrue('GIDOCGEN_ENABLED', '-DENABLE_DOCUMENTATION=ON', '-DENABLE_DOCUMENTATION=OFF', d)} \
+                 ${@oe.utils.vartrue('DEBUG_BUILD', '-DWEBKIT_NO_INLINE_HINTS=ON', '-DWEBKIT_NO_INLINE_HINTS=OFF', d)} \
+                 -DENABLE_MINIBROWSER=ON \
+                 -DUSE_GTK4=OFF \
+                 -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
+                 -DENABLE_RELEASE_LOG=ON \
+                 -DUSE_SOUP2=OFF \
+                 "
 
 # Javascript JIT is not supported on ARC
 EXTRA_OECMAKE:append:arc = " -DENABLE_JIT=OFF "
@@ -130,6 +128,7 @@ EXTRA_OECMAKE:append:armv6 = " -DENABLE_JIT=OFF "
 
 # JIT does not work on RISCV
 EXTRA_OECMAKE:append:riscv32 = " -DENABLE_JIT=OFF"
+EXTRA_OECMAKE:append:riscv64 = " -DENABLE_JIT=OFF"
 
 # JIT not supported on MIPS either
 EXTRA_OECMAKE:append:mipsarch = " -DENABLE_JIT=OFF -DENABLE_C_LOOP=ON "
@@ -160,13 +159,17 @@ ARM_INSTRUCTION_SET:armv7a = "thumb"
 ARM_INSTRUCTION_SET:armv7r = "thumb"
 ARM_INSTRUCTION_SET:armv7ve = "thumb"
 
-# ANGLE requires SSE support as of webkit 2.40.x on 32 bit x86
-COMPATIBLE_HOST:x86 = "${@bb.utils.contains_any('TUNE_FEATURES', 'core2 corei7', '.*', 'null', d)}"
+# As of 2.52.4, 32 bit x86 builds are broken:
+# https://autobuilder.yoctoproject.org/valkyrie/#/builders/6/builds/4013/steps/12/logs/stdio
+COMPATIBLE_HOST:x86 = "null"
 
 # introspection inside qemu-arm hangs forever on musl/arm builds
 # therefore disable GI_DATA
 GI_DATA_ENABLED:libc-musl:armv7a = "False"
 GI_DATA_ENABLED:libc-musl:armv7ve = "False"
+
+# Can't be built with ccache
+CCACHE_DISABLE = "1"
 
 do_install:append() {
 	mv ${D}${bindir}/WebKitWebDriver ${D}${bindir}/WebKitWebDriver3
@@ -183,7 +186,9 @@ src_package_preprocess () {
             ${B}/WebKitGTK/DerivedSources/webkit/*.cpp
 }
 
-
-# complation fails with Clang-21 issue - https://github.com/llvm/llvm-project/issues/132322
-# Can be removed when clang is updated to v22
-TOOLCHAIN:arm = "gcc"
+# Pass -g1 to massively reduce the size of the
+# debug symbols (4.3GB to 700M at time of writing)
+# workaround error:
+# qemux86-64: "relocation truncated to fit: R_X86_64_32 against `.debug_info'"
+# qemuarm64: "relocation truncated to fit: R_AARCH64_ABS32 against `.debug_info'"
+DEBUG_LEVELFLAG = "-g1"

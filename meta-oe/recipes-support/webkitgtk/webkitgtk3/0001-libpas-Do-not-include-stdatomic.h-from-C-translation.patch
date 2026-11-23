@@ -1,0 +1,57 @@
+From ed10e504c0a627769973d3078548bbd54ed750f9 Mon Sep 17 00:00:00 2001
+From: Pablo Saavedra <psaavedra@igalia.com>
+Date: Thu, 17 Sep 2026 12:05:38 +0200
+Subject: [PATCH] Do not include <stdatomic.h> from C++ translation units
+ https://bugs.webkit.org/show_bug.cgi?id=324345
+
+Reviewed by NOBODY (OOPS!).
+
+310886@main added an unconditional <stdatomic.h> include to pas_utils.h.
+GCC 13 cross builds in Yocto fail to compile C++ translation units that
+pull in pas_utils.h because of it. 312138@main fixed the equivalent
+breakage for xcodebuild by moving libpas to gnu++23, but a CMake build
+using an older C++ standard is not covered by that.
+
+The include cannot simply be dropped for C++. clang requires
+<stdatomic.h> to be included wherever the _Atomic qualifier is used
+(-Wqualifier-requires-header), and PAS_ATOMIC_TYPE() expands to _Atomic
+under PAS_COMPILER(CLANG). pas_utils.h suppresses that diagnostic around
+its own body, but PAS_DEFINE_COMPACT_ATOMIC_PTR() expands in other
+headers -- pas_segregated_heap.h and friends -- which are outside that
+region. Satisfying those expansions is what 310886@main needed the
+include for.
+
+No other compiler sees _Atomic here: PAS_ATOMIC_TYPE() expands to a plain
+type and the atomic operations go through the __atomic builtins, and the
+__c11_atomic_* uses in this file are all inside PAS_COMPILER(CLANG)
+blocks. So keep the include for clang, where it is load-bearing and where
+this is a no-op, and skip it only for the C++ compilers that never need
+it.
+
+No new tests. Build fix. Verified by preprocessing pas_utils.h from C++
+with both compilers: g++ no longer reaches <stdatomic.h> while clang++
+still does, and Source/bmalloc/bmalloc/bmalloc.cpp still compiles with
+both.
+
+* Source/bmalloc/libpas/src/libpas/pas_utils.h:
+
+Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/74158]
+Signed-off-by: Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+---
+ Source/bmalloc/libpas/src/libpas/pas_utils.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Source/bmalloc/libpas/src/libpas/pas_utils.h b/Source/bmalloc/libpas/src/libpas/pas_utils.h
+index 433b26f0..49117c2f 100644
+--- a/Source/bmalloc/libpas/src/libpas/pas_utils.h
++++ b/Source/bmalloc/libpas/src/libpas/pas_utils.h
+@@ -42,7 +42,9 @@
+ #endif
+ 
+ #include <limits.h>
++#if !defined(__cplusplus) || defined(__clang__)
+ #include <stdatomic.h>
++#endif
+ #include <stdbool.h>
+ #include <stdint.h>
+ #include <string.h>

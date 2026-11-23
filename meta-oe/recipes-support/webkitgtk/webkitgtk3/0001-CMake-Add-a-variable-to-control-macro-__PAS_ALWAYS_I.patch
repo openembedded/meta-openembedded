@@ -1,4 +1,4 @@
-From bbf661310448d430350eb2ad8c5869ace648dcf8 Mon Sep 17 00:00:00 2001
+From 73f7316ee08a5369555e3e631d48ba6a5a01cf9e Mon Sep 17 00:00:00 2001
 From: Kai Kang <kai.kang@windriver.com>
 Date: Fri, 11 Aug 2023 14:20:48 +0800
 Subject: [PATCH] Add a variable to control macro
@@ -35,18 +35,21 @@ gcc option `-Og` is used.
 * Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h:
 * Source/cmake/WebKitCompilerFlags.cmake:
 
+Rebased on 2.54.2.
+
 Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/16601]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
  Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h | 2 +-
- Source/cmake/WebKitCompilerFlags.cmake              | 7 +++++++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ Source/cmake/WebKitCompilerFlags.cmake              | 8 ++++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
+diff --git a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
+index c42ee5f1..353c58f3 100644
 --- a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
 +++ b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-@@ -45,7 +45,7 @@
+@@ -45,7 +45,7 @@ __PAS_BEGIN_EXTERN_C;
  #define __SUSPICIOUS__
  #define __BROKEN__
  
@@ -55,13 +58,16 @@ Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE __attribute__((__always_inline__))
  #else
  #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE
+diff --git a/Source/cmake/WebKitCompilerFlags.cmake b/Source/cmake/WebKitCompilerFlags.cmake
+index 0793c789..9a139f2f 100644
 --- a/Source/cmake/WebKitCompilerFlags.cmake
 +++ b/Source/cmake/WebKitCompilerFlags.cmake
-@@ -635,3 +635,10 @@
+@@ -635,3 +635,11 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND WTF_CPU_MIPS)
      # (see comment #28 in the link above).
      WEBKIT_PREPEND_GLOBAL_COMPILER_FLAGS(-mno-lxc1-sxc1)
  endif ()
 +
++# rebased on 2.54.2
 +# It fails to compile with `gcc -Og`
 +set(WEBKIT_NO_INLINE_HINTS OFF CACHE BOOL "Disable funtion attribute always_inline for WebKit")
 +
