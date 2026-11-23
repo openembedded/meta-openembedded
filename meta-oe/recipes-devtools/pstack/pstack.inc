@@ -15,27 +15,13 @@ DEPENDS += "zlib xz libunwind elfutils"
 
 RDEPENDS:${PN} += "elfutils"
 
-do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 ${B}/pstack ${D}${bindir}/pstack
+EXTRA_OECMAKE += "-DCMAKE_SKIP_INSTALL_RPATH=ON"
 
-    install -d ${D}${libdir}
-    install -m 0755 ${B}/libprocman.so.${PV} ${D}${libdir}/libprocman.so.${PV}
-    ln -sf libprocman.so.${PV} ${D}${libdir}/libprocman.so
-    install -m 0755 ${B}/libdwelf.so.${PV}  ${D}${libdir}/libdwelf.so.${PV}
-    ln -sf libdwelf.so.${PV}  ${D}${libdir}/libdwelf.so
-}
+# libhdbg.so is an unversioned LD_PRELOAD heap debugging library
+PACKAGES =+ "${PN}-hdbg"
+FILES:${PN}-hdbg = "${libdir}/libhdbg.so"
 
-PACKAGES = "${PN}"
-FILES:${PN} = "${bindir}/pstack"
-FILES:${PN} += "${libdir}/libprocman.so.${PV}"
-FILES:${PN} += "${libdir}/libdwelf.so.${PV}"
-
-PACKAGES += "${PN}-dbg"
-FILES:${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debug ${sbindir}/.debug"
-
-PACKAGES += "${PN}-dev"
-FILES:${PN}-dev += "${base_libdir}/*.so"
+FILES:${PN} += "${datadir}/pstack"
 
 TOOLCHAIN = "gcc"
 
