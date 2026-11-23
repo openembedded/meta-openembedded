@@ -12,10 +12,11 @@ DEPENDS += "perl-native bison-native flex-native python3-native python3-setuptoo
 
 SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
             file://pass-options-to-AR.patch \
-            file://fix_parallel_make.patch \
 			file://0001-bind2-Use-pmcpp-from-native-builds.patch \
-            file://0001-pcp-htop-fix-header-build-race-condition.patch \
            "
+
+# libpcp exports list getdomainname, which libpcp defines only when libc lacks it
+LDFLAGS:append:toolchain-clang = " -Wl,--undefined-version"
 
 export PCP_DIR = "${RECIPE_SYSROOT_NATIVE}"
 #export PCP_RUN_DIR = "${RECIPE_SYSROOT_NATIVE}"
@@ -105,12 +106,12 @@ do_install () {
 PACKAGE_BEFORE_PN = "${PN}-xsos"
 PACKAGES =+ " ${PN}-export-zabbix-agent ${PN}-testsuite \
 	libpcp-gui2  libpcp-gui2-dev \
-	libpcp-import1 libpcp-archive1 \
+	libpcp-import1 libpcp-import2 libpcp-archive1 \
 	libpcp-mmv1 libpcp-mmv1-dev \
 	libpcp-pmda3 libpcp-pmda3-dev \
 	libpcp-trace2 libpcp-trace2-dev \
 	libpcp-web1 libpcp-web1-dev \
-	libpcp3 libpcp3-dev python3-${PN}\
+	libpcp3 libpcp3-dev libpcp4 python3-${PN}\
 "
 FILES:libpcp-gui2 = "${libdir}/libpcp_gui.so.2 \
 "
@@ -140,6 +141,10 @@ INSANE_SKIP:libpcp-mmv1-dev = "staticdev"
 
 FILES:libpcp-import1 = " \
 	${libdir}/libpcp_import.so.1 \
+"
+FILES:libpcp-import2 = " \
+	${libdir}/libpcp_import.so.2 \
+	${nonarch_libdir}/tmpfiles.d/libpcp_import.conf \
 "
 FILES:libpcp-pmda3 = " \
 	${libdir}/libpcp_pmda.so.3 \
@@ -183,12 +188,16 @@ INSANE_SKIP:libpcp-web1-dev = "staticdev"
 FILES:libpcp3 = " \
 	${libdir}/libpcp.so.3 \
 "
+FILES:libpcp4 = " \
+	${libdir}/libpcp.so.4 \
+"
 
 FILES:${PN}-xsos = " \
 	${libexecdir}/pcp/bin/pcp-xsos \
 "
 FILES:${PN} = " \
 	${sysconfdir}/pcp \
+	${sysconfdir}/atop \
 	${sysconfdir}/cron.d \
 	${sysconfdir}/init.d \
 	${libexecdir} \
@@ -209,7 +218,7 @@ FILES:${PN} = " \
 	${localstatedir}/lib/pcp/config \
 	${localstatedir}/lib/pcp/pmdas/ \
 	${localstatedir}/lib/pcp/pmns \
-	${libdir}/libpcp_fault.so.3 \
+	${libdir}/libpcp_fault.so.4 \
 	${nonarch_libdir}/tmpfiles.d/pcp-reboot-init.conf \
 "
 
