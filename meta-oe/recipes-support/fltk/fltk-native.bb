@@ -2,21 +2,19 @@ require ${BPN}.inc
 
 DEPENDS = "zlib-native jpeg-native libpng-native libxext-native libxft-native"
 
-SRC_URI += "file://fltk-native-link-libdl.patch"
-
-UPSTREAM_CHECK_URI = "https://www.fltk.org/software.php"
-
 inherit native
 
 EXTRA_OECMAKE += " \
-    -DOPTION_BUILD_SHARED_LIBS=OFF \
-    -DOPTION_USE_THREADS=OFF \
-    -DOPTION_USE_XDBE=OFF \
-    -DOPTION_USE_XFT=OFF \
-    -DFLTK_BUILD_TEST=OFF \
-    -DOPTION_USE_XINERAMA=OFF \
-    -DOPTION_USE_XFIXES=OFF \
-    -DOPTION_USE_XCURSOR=OFF \
+    -DFLTK_BACKEND_WAYLAND=OFF \
+    -DFLTK_BUILD_SHARED_LIBS=OFF \
+    -DFLTK_BUILD_GL=OFF \
+    -DFLTK_USE_PTHREADS=OFF \
+    -DFLTK_USE_XFT=OFF \
+    -DFLTK_USE_XINERAMA=OFF \
+    -DFLTK_USE_XFIXES=OFF \
+    -DFLTK_USE_XCURSOR=OFF \
+    -DFLTK_USE_XRENDER=OFF \
+    -DHAVE_TRUNC=1 \
 "
 
 do_install:append() {

@@ -1,35 +1,32 @@
 require ${BPN}.inc
 
-DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
+DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft libxrender"
 
 inherit features_check binconfig lib_package gtk-icon-cache mime mime-xdg
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0003-fluid-CMakeLists.txt-Do-not-export-fluid-target.patch"
 
-UPSTREAM_CHECK_URI = "https://www.fltk.org/software.php"
-
-EXTRA_OECMAKE = " \
-    -DOPTION_BUILD_SHARED_LIBS=ON \
-    -DOPTION_USE_THREADS=ON \
-    -DFLTK_BUILD_TEST=OFF \
-    -DOPTION_USE_XDBE=ON \
-    -DOPTION_USE_XFT=ON \
-    -DFLTK_CONFIG_PATH=${libdir}/cmake \
+EXTRA_OECMAKE += " \
+    -DFLTK_BUILD_SHARED_LIBS=ON \
+    -DFLTK_USE_PTHREADS=ON \
+    -DFLTK_USE_XFT=ON \
 "
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
+# The Wayland backend builds a hybrid Wayland/X11 library, which needs all optional X11 extensions
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl wayland', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xinerama xfixes xcursor', '', d)}"
 
-PACKAGECONFIG[cairo] = "-DOPTION_CAIRO=ON,-DOPTION_CAIRO=OFF,cairo"
-PACKAGECONFIG[opengl] = "-DOPTION_USE_GL=ON,-DOPTION_USE_GL=OFF,virtual/libgl"
-PACKAGECONFIG[xinerama] = "-DOPTION_USE_XINERAMA=ON,-DOPTION_USE_XINERAMA=OFF,libxinerama"
-PACKAGECONFIG[xfixes] = "-DOPTION_USE_XFIXES=ON,-DOPTION_USE_XFIXES=OFF,libxfixes"
-PACKAGECONFIG[xcursor] = "-DOPTION_USE_XCURSOR=ON,-DOPTION_USE_XCURSOR=OFF,libxcursor"
+PACKAGECONFIG[cairo] = "-DFLTK_OPTION_CAIRO_WINDOW=ON,-DFLTK_OPTION_CAIRO_WINDOW=OFF,cairo"
+FLTK_GL_DEPS = "virtual/libgl libglu ${@bb.utils.contains('PACKAGECONFIG', 'wayland', 'virtual/egl', '', d)}"
+PACKAGECONFIG[opengl] = "-DFLTK_BUILD_GL=ON,-DFLTK_BUILD_GL=OFF,${FLTK_GL_DEPS}"
+PACKAGECONFIG[wayland] = "-DFLTK_BACKEND_WAYLAND=ON -DFLTK_USE_SYSTEM_LIBDECOR=ON,-DFLTK_BACKEND_WAYLAND=OFF,wayland wayland-native wayland-protocols libxkbcommon libdecor cairo pango dbus"
+PACKAGECONFIG[xinerama] = "-DFLTK_USE_XINERAMA=ON,-DFLTK_USE_XINERAMA=OFF,libxinerama"
+PACKAGECONFIG[xfixes] = "-DFLTK_USE_XFIXES=ON,-DFLTK_USE_XFIXES=OFF,libxfixes"
+PACKAGECONFIG[xcursor] = "-DFLTK_USE_XCURSOR=ON,-DFLTK_USE_XCURSOR=OFF,libxcursor"
 
 do_install:append() {
-    sed -i -e 's,${TMPDIR},,g' ${D}${bindir}/fltk-config
-    sed -i -e 's,${TMPDIR},,g' ${D}${datadir}/fltk/UseFLTK.cmake
-    sed -i -e 's,${TMPDIR},,g' ${D}${datadir}/fltk/FLTK-Targets.cmake
+    sed -i -e 's,${TMPDIR},,g' ${D}${bindir}/fltk-config ${D}${datadir}/fltk/*.cmake
 }
 
 python populate_packages:prepend () {

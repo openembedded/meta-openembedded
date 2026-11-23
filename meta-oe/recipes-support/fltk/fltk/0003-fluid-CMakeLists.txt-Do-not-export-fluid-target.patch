@@ -22,21 +22,19 @@ Upstream-Status: Inappropriate [OE specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- fluid/CMakeLists.txt | 1 -
- 1 file changed, 1 deletion(-)
+ fluid/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/fluid/CMakeLists.txt b/fluid/CMakeLists.txt
-index 472c84c..f971121 100644
+index 7792446..df5a391 100644
 --- a/fluid/CMakeLists.txt
 +++ b/fluid/CMakeLists.txt
-@@ -86,7 +86,6 @@ if (APPLE AND (NOT OPTION_APPLE_X11))
-   install (TARGETS fluid DESTINATION ${FLTK_BINDIR})
- else()
-   install (TARGETS fluid
--    EXPORT FLTK-Targets
-     RUNTIME DESTINATION ${FLTK_BINDIR}
-     LIBRARY DESTINATION ${FLTK_LIBDIR}
-     ARCHIVE DESTINATION ${FLTK_LIBDIR}
--- 
-2.31.1
-
+@@ -194,7 +194,7 @@ target_link_libraries(fluid-lib PUBLIC fltk::images)
+ 
+ # Build targets
+ 
+-make_target(fluid TRUE "${MAIN_FILES}" fluid-lib fluid TRUE)
++make_target(fluid TRUE "${MAIN_FILES}" fluid-lib fluid FALSE)
+ 
+ # Build the console app on Windows
+ # This is done for all Windows targets, even if cross-compiling.
