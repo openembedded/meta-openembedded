@@ -9,16 +9,15 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://copying.txt;md5=462e4b97f73ef12f8171c3c546ce4e8d"
 
 SRC_URI = " \
-    git://github.com/g-truc/glm;branch=master;protocol=https \
-    file://0001-Silence-clang-warnings.patch \
-    file://0001-Do-not-use-Werror-with-clang.patch \
+    git://github.com/g-truc/glm;branch=1.0;protocol=https;tag=${PV} \
     file://glmConfig.cmake.in \
     file://glmConfigVersion.cmake.in \
     file://glm.pc.in \
     file://glmTargets.cmake \
 "
-SRCREV = "efec5db081e3aad807d0731e172ac597f6a39447"
-PV .= "+0.9.9.9+git"
+SRCREV = "8d1fd52e5ab5590e2c81768ace50c72bae28f2ed"
+
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
 
 inherit cmake
