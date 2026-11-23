@@ -16,7 +16,7 @@ do_install:append () {
     install -m 0644 ${S}/conf/mctpd-dbus.conf \
             ${D}${datadir}/dbus-1/system.d/mctpd.conf
     install -d ${D}${nonarch_libdir}/sysusers.d
-    printf 'u! mctpd - "mctpd daemon" / /bin/false\n' > ${D}${nonarch_libdir}/sysusers.d/mctpd.conf
+    printf 'u! mctpd - "mctpd daemon" / /bin/false\ng mctp-admin\n' > ${D}${nonarch_libdir}/sysusers.d/mctpd.conf
 }
 FILES:${PN} += "${datadir}/dbus-1/system.d/mctpd.conf ${nonarch_libdir}/sysusers.d/mctpd.conf"
 
@@ -24,6 +24,7 @@ SYSTEMD_SERVICE:${PN} = "mctpd.service mctp.target mctp-local.target"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "-r -U -d / -s /bin/false mctpd"
+GROUPADD_PARAM:${PN} = "-r mctp-admin"
 
 DEPENDS += "systemd"
 REQUIRED_DISTRO_FEATURES = "systemd"
