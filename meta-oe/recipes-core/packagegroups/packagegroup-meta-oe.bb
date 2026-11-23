@@ -270,6 +270,7 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
     libxerces-c \
     lshw \
     ltrace \
+    lua-std-normalize \
     luajit \
     luaposix \
     mcpp \
