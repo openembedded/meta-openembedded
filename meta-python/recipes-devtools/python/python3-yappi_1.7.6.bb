@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "c94281936af77c00c6ac2306a0e7f85a67e354d717120df85fcc5dfb92
 
 SRC_URI += " \
            file://0002-Fix-import-of-tests.utils-to-enable-pytest.patch \
+           file://0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch \
            "
 
 inherit pypi python_setuptools_build_meta ptest-python-pytest

@@ -1,0 +1,36 @@
+From 99e422d5bcf9edff8427f9ccb5476ffec64c3348 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 12:39:11 -0800
+Subject: [PATCH] Detect suspended coroutines on Python 3.15 and newer
+
+IS_SUSPENDED() checks the current instruction for YIELD_VALUE only when
+PY_MINOR_VERSION is 14. On 3.15 it falls back to the gi_frame_state
+check meant for Python < 3.13, which does not detect the suspension, so
+every resume of a coroutine counts as a new call and the asyncio tests
+fail, e.g.:
+
+  test_asyncio.py::SingleThreadTests::test_issue58
+  AssertionError: 2 != 4 : async_sleep 2 0 4.005451 2.002725
+
+Use the instruction check for 3.14 and later.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ yappi/_yappi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/yappi/_yappi.c b/yappi/_yappi.c
+index 8b867ef..ffd9e68 100644
+--- a/yappi/_yappi.c
++++ b/yappi/_yappi.c
+@@ -228,7 +228,7 @@ IS_SUSPENDED(PyFrameObject *frame) {
+     if (gen == NULL) {
+         return 0;
+     }
+-#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION == 14
++#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 14
+     unsigned char curr_op_code = (*frame->f_frame->instr_ptr).op.code;
+     return curr_op_code == YIELD_VALUE || curr_op_code == INSTRUMENTED_YIELD_VALUE;
+ #elif PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION == 13
