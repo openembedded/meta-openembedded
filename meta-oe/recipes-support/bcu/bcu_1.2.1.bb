@@ -11,8 +11,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=884d48c2aa7b82e1ad4a33909fab24b6"
 
 SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;nobranch=1;tag=${BPN}_${PV} \
            file://0001-CMakeLists-do-not-use-vendored-libcurl.patch \
+           file://0001-create_version_h.sh-Add-a-shebang.patch \
            "
 SRCREV = "1c79dcf115bcf2c8ad632dadbc749c5e25c52cb1"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^bcu_(?P<pver>\d+(\.\d+)+)$"
 
 
 DEPENDS = "curl libyaml libusb1 openssl libftdi"

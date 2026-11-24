@@ -1,0 +1,30 @@
+From 5cf6653144fe9b3dcb892f40cb919d4536711a5a Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 19:28:03 -0800
+Subject: [PATCH] create_version_h.sh: Add a shebang
+
+CMake runs this script directly through execute_process(). Without a
+"#!" line the kernel cannot execute it, and CMake 4.5 reports
+"exec format error" and carries on, so version.h is never created
+and the build fails with:
+
+  bcu.c:58:10: fatal error: 'version.h' file not found
+
+Add a /bin/sh shebang so the script can be run directly.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ create_version_h.sh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/create_version_h.sh b/create_version_h.sh
+index e777359..0b6ed65 100755
+--- a/create_version_h.sh
++++ b/create_version_h.sh
+@@ -1,3 +1,4 @@
++#!/bin/sh
+ echo creating ${1}/version.h
+ 
+ if [ "${APPVEYOR_BUILD_VERSION}" = "" ];
