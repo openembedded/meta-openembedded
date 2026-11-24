@@ -9,7 +9,7 @@ CVE_PRODUCT = "tox-dev:filelock"
 
 SRC_URI += "file://run-ptest"
 
-SRC_URI[sha256sum] = "143407310acf479e82d88068e3b9a6486f45fb410c0ed8729fe7359eaabeb6f1"
+SRC_URI[sha256sum] = "4c5ee627c401f1863ac6a0de9a14a28d3bb5f8c730b45e2fd6e5dbc79cf34b9e"
 
 BBCLASSEXTEND = "native nativesdk"
 
