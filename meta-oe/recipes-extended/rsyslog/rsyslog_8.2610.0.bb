@@ -33,7 +33,7 @@ SRC_URI:append:libc-musl = " \
 SRC_URI[sha256sum] = "7bdf95e81ea6c0ee5d586342d57d2a6e395b089fb3c67318a0dc555816de404b"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/tags"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)$"
 
 CVE_PRODUCT = "rsyslog:rsyslog"
 CVE_STATUS[CVE-2015-3243] = "fix-file-included: The shipped default rsyslog.conf contains the fix"
