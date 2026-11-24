@@ -13,6 +13,9 @@ HOMEPAGE = "https://en.wikipedia.org/wiki/Tnftp"
 SECTION = "net"
 LICENSE = "BSD-2-Clause"
 
+# Fixed upstream in 20050103: https://security.gentoo.org/glsa/200501-24
+CVE_STATUS[CVE-2004-1294] = "fixed-version: Fixed upstream in 20050103"
+
 DEPENDS = "ncurses"
 
 SRC_URI = "https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
