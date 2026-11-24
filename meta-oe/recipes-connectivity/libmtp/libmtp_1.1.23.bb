@@ -21,7 +21,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.g
 SRC_URI[sha256sum] = "74a2b6e8cb4a0304e95b995496ea3ac644c29371649b892b856e22f12a0bdeed"
 
 UPSTREAM_CHECK_URI = "https://github.com/libmtp/libmtp/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools pkgconfig lib_package
 
