@@ -19,8 +19,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://webmin.service \
             "
 SRC_URI[sha256sum] = "617af07a890bea18a83dca5c9d7168de1ad4d5f3076d8a1df3475f123748dc21"
-UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
-UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/webadmin/files/webmin/"
+UPSTREAM_CHECK_REGEX = "webmin/(?P<pver>\d+(\.\d+)+)/"
 
 inherit perlnative update-rc.d systemd
 
