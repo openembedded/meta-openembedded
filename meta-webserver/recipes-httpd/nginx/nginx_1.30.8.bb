@@ -2,7 +2,7 @@ require nginx.inc
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
 
-SRC_URI[sha256sum] = "2565b5c837050e958f70fb0f73c48e2bca4542ad349fd356f46fb0c72610bc6e"
+SRC_URI[sha256sum] = "f867314ada32e717b949930859656c48a72dc6657aec598db58af2f98a40e1c1"
 
 inherit upstream-version-is-even
 
@@ -20,3 +20,4 @@ CVE_STATUS[CVE-2026-123633] = "fixed-version: Fixed since 1.30.7"
 CVE_STATUS[CVE-2026-123634] = "fixed-version: Fixed since 1.30.7"
 CVE_STATUS[CVE-2026-123640] = "fixed-version: Fixed since 1.30.7"
 CVE_STATUS[CVE-2026-125283] = "fixed-version: Fixed since 1.30.7"
+CVE_STATUS[CVE-2026-132779] = "fixed-version: Fixed since 1.30.8"
