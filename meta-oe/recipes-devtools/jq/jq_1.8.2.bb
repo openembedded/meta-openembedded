@@ -12,6 +12,7 @@ SRCREV = "34f7186b86743a083a589741b6cea95293524108"
 
 SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
            file://run-ptest \
+           file://CVE-2026-40164-follow-up.patch \
            "
 
 CVE_PRODUCT = "jq_project:jq jqlang:jq"
