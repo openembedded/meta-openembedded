@@ -124,3 +124,7 @@ python() {
 CVE_PRODUCT = "open-vm-tools vmware:tools vmware:open_vm_tools"
 CVE_STATUS[CVE-2014-4199] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
 CVE_STATUS[CVE-2014-4200] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
+
+# VMSA-2026-0009.1, section 3e: VMware Tools for Windows only.
+# https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495
+CVE_STATUS[CVE-2026-123894] = "not-applicable-platform: Affects VMware Tools for Windows; this recipe builds Linux open-vm-tools."
