@@ -49,6 +49,11 @@ PACKAGECONFIG[nvidia-ns-decode] = "-Dnvidia-ns-decode=enabled,-Dnvidia-ns-decode
 PACKAGECONFIG[yitian-ns-decode] = "-Dyitian-ns-decode=enabled,-Dyitian-ns-decode=disabled"
 
 do_install:append() {
+	if [ "${libdir}/systemd/system" != "${systemd_system_unitdir}" ]; then
+		install -d ${D}${systemd_system_unitdir}
+		mv ${D}${libdir}/systemd/system/* ${D}${systemd_system_unitdir}/
+		rm -rf ${D}${libdir}/systemd
+	fi
 	install -d ${D}${sysconfdir}/init.d
 	install -m 755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/rasdaemon
 }
