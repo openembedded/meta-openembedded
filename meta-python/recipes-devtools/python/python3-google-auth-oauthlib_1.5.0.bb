@@ -17,6 +17,7 @@ RDEPENDS:${PN}-ptest += " \
         python3-click \
         python3-cryptography \
         python3-mock \
+        python3-plistlib \
         python3-pytest \
         python3-unittest-automake-output \
         python3-unixadmin \
