@@ -28,22 +28,32 @@ do_install_ptest:append() {
 # psutil/jinja2/packaging are oe-core; fastapi/uvicorn/defusedxml are
 # meta-python.
 RDEPENDS:${PN} += " \
-    python3-psutil \
-    python3-packaging \
+    python3-asyncio \
+    python3-crypt \
+    python3-ctypes \
+    python3-curses \
+    python3-datetime \
     python3-defusedxml \
     python3-fastapi \
-    python3-uvicorn \
+    python3-io \
     python3-jinja2 \
     python3-json \
     python3-logging \
-    python3-asyncio \
+    python3-misc \
     python3-multiprocessing \
     python3-netclient \
+    python3-packaging \
+    python3-psutil \
+    python3-statistics \
+    python3-threading \
+    python3-unixadmin \
+    python3-uvicorn \
     python3-xml \
 "
 
 RDEPENDS:${PN}-ptest += " \
     python3-requests \
+    python3-shell \
 "
 
 # Optional fast-JSON accelerator glances uses if present.
