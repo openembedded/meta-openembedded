@@ -1,0 +1,160 @@
+From 11dc4a4ce000fd3de7699da939195726b147d5de Mon Sep 17 00:00:00 2001
+From: Andri Yngvason <andri@yngvason.is>
+Date: Tue, 19 May 2026 21:23:59 +0000
+Subject: [PATCH 2/4] crypto: Remove hash digest size argument
+
+This has been removed in nettle 4.
+
+Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/f97805deaaea]
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
+ include/crypto.h          |  7 +++----
+ src/auth/apple-dh.c       |  3 +--
+ src/auth/rsa-aes.c        | 16 ++++++++--------
+ src/crypto/nettle/hash.c  | 14 +++++++-------
+ src/stream/ws/handshake.c |  3 +--
+ 5 files changed, 20 insertions(+), 23 deletions(-)
+
+diff --git a/include/crypto.h b/include/crypto.h
+index 9a1aee415f12..1e5886f7b2fe 100644
+--- a/include/crypto.h
++++ b/include/crypto.h
+@@ -88,12 +88,11 @@ void crypto_hash_del(struct crypto_hash* self);
+ 
+ void crypto_hash_append(struct crypto_hash* self, const uint8_t* src,
+ 		size_t len);
+-void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst,
+-		size_t len);
++void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst);
+ 
+-void crypto_hash_one(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
++void crypto_hash_one(uint8_t* dst, enum crypto_hash_type type,
+ 		const uint8_t* src, size_t src_len);
+-void crypto_hash_many(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
++void crypto_hash_many(uint8_t* dst, enum crypto_hash_type type,
+ 		const struct crypto_data_entry *src);
+ 
+ // RSA
+diff --git a/src/auth/apple-dh.c b/src/auth/apple-dh.c
+index 43833970892c..238561861155 100644
+--- a/src/auth/apple-dh.c
++++ b/src/auth/apple-dh.c
+@@ -78,8 +78,7 @@ int apple_dh_handle_response(struct nvnc_client* client)
+ 	crypto_key_del(shared_secret);
+ 
+ 	uint8_t hash[16] = {};
+-	crypto_hash_one(hash, sizeof(hash), CRYPTO_HASH_MD5, shared_buf,
+-			sizeof(shared_buf));
++	crypto_hash_one(hash, CRYPTO_HASH_MD5, shared_buf, sizeof(shared_buf));
+ 
+ 	struct crypto_cipher* cipher;
+ 	cipher = crypto_cipher_new(NULL, hash, CRYPTO_CIPHER_AES128_ECB);
+diff --git a/src/auth/rsa-aes.c b/src/auth/rsa-aes.c
+index dea2e7c84e2d..d2f217d4c501 100644
+--- a/src/auth/rsa-aes.c
++++ b/src/auth/rsa-aes.c
+@@ -154,8 +154,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
+ 
+ 	// ClientSessionKey = the first 16 bytes of SHA1(ServerRandom || ClientRandom)
+ 	uint8_t client_session_key[32];
+-	crypto_hash_many(client_session_key, client_rsa_aes_hash_len(client),
+-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
++	crypto_hash_many(client_session_key, client->rsa.hash_type,
++			(const struct crypto_data_entry[]) {
+ 		{ client->rsa.challenge, client->rsa.challenge_len },
+ 		{ client_random, client->rsa.challenge_len },
+ 		{}
+@@ -163,8 +163,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
+ 
+ 	// ServerSessionKey = the first 16 bytes of SHA1(ClientRandom || ServerRandom)
+ 	uint8_t server_session_key[32];
+-	crypto_hash_many(server_session_key, client_rsa_aes_hash_len(client),
+-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
++	crypto_hash_many(server_session_key, client->rsa.hash_type,
++			(const struct crypto_data_entry[]) {
+ 		{ client_random, client->rsa.challenge_len },
+ 		{ client->rsa.challenge, client->rsa.challenge_len },
+ 		{}
+@@ -195,8 +195,8 @@ static int on_rsa_aes_challenge(struct nvnc_client* client)
+ 	uint32_t client_key_len_be = htonl(client_key_len * 8);
+ 
+ 	uint8_t server_hash[32] = {};
+-	crypto_hash_many(server_hash, client_rsa_aes_hash_len(client),
+-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
++	crypto_hash_many(server_hash, client->rsa.hash_type,
++			(const struct crypto_data_entry[]) {
+ 		{ (uint8_t*)&server_key_len_be, 4 },
+ 		{ server_modulus, server_key_len },
+ 		{ server_exponent, server_key_len },
+@@ -249,8 +249,8 @@ static int on_rsa_aes_client_hash(struct nvnc_client* client)
+ 	uint32_t client_key_len_be = htonl(client_key_len * 8);
+ 
+ 	uint8_t client_hash[32] = {};
+-	crypto_hash_many(client_hash, client_rsa_aes_hash_len(client),
+-			client->rsa.hash_type, (const struct crypto_data_entry[]) {
++	crypto_hash_many(client_hash, client->rsa.hash_type,
++			(const struct crypto_data_entry[]) {
+ 		{ (uint8_t*)&client_key_len_be, 4 },
+ 		{ client_modulus, client_key_len },
+ 		{ client_exponent, client_key_len },
+diff --git a/src/crypto/nettle/hash.c b/src/crypto/nettle/hash.c
+index 9fbfe5f7c717..832953305d44 100644
+--- a/src/crypto/nettle/hash.c
++++ b/src/crypto/nettle/hash.c
+@@ -31,7 +31,7 @@ struct crypto_hash {
+ 	} ctx;
+ 
+ 	void (*update)(void* ctx, size_t len, const uint8_t* src);
+-	void (*digest)(void* ctx, size_t len, uint8_t* dst);
++	void (*digest)(void* ctx, uint8_t* dst);
+ };
+ 
+ struct crypto_hash* crypto_hash_new(enum crypto_hash_type type)
+@@ -75,27 +75,27 @@ void crypto_hash_append(struct crypto_hash* self, const uint8_t* src,
+ 	self->update(&self->ctx, len, src);
+ }
+ 
+-void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst, size_t len)
++void crypto_hash_digest(struct crypto_hash* self, uint8_t* dst)
+ {
+-	self->digest(&self->ctx, len, dst);
++	self->digest(&self->ctx, dst);
+ }
+ 
+-void crypto_hash_one(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
++void crypto_hash_one(uint8_t* dst, enum crypto_hash_type type,
+ 		const uint8_t* src, size_t src_len)
+ {
+ 	struct crypto_hash *hash = crypto_hash_new(type);
+ 	crypto_hash_append(hash, src, src_len);
+-	crypto_hash_digest(hash, dst, dst_len);
++	crypto_hash_digest(hash, dst);
+ 	crypto_hash_del(hash);
+ }
+ 
+-void crypto_hash_many(uint8_t* dst, size_t dst_len, enum crypto_hash_type type,
++void crypto_hash_many(uint8_t* dst, enum crypto_hash_type type,
+ 		const struct crypto_data_entry *src)
+ {
+ 	struct crypto_hash *hash = crypto_hash_new(type);
+ 	for (int i = 0; src[i].data && src[i].len; ++i)
+ 		crypto_hash_append(hash, src[i].data, src[i].len);
+-	crypto_hash_digest(hash, dst, dst_len);
++	crypto_hash_digest(hash, dst);
+ 	crypto_hash_del(hash);
+ }
+ 
+diff --git a/src/stream/ws/handshake.c b/src/stream/ws/handshake.c
+index 80881189236e..aa0db3f9f2c2 100644
+--- a/src/stream/ws/handshake.c
++++ b/src/stream/ws/handshake.c
+@@ -79,8 +79,7 @@ ssize_t ws_handshake(char* output, size_t output_maxlen, const char* input)
+ 		goto failure;
+ 
+ 	uint8_t hash[20];
+-	crypto_hash_many(hash, sizeof(hash), CRYPTO_HASH_SHA1,
+-			(struct crypto_data_entry[]){
++	crypto_hash_many(hash, sizeof(hash), (struct crypto_data_entry[]){
+ 		{ (uint8_t*)challenge, strlen(challenge) },
+ 		{ (uint8_t*)magic_uuid, strlen(magic_uuid) },
+ 		{}

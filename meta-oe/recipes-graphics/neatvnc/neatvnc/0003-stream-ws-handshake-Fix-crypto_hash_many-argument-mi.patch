@@ -1,0 +1,27 @@
+From 0c1a96814ac70ae59905cfbb013c3d6e3147b703 Mon Sep 17 00:00:00 2001
+From: Andri Yngvason <andri@yngvason.is>
+Date: Thu, 30 Jul 2026 10:35:25 +0000
+Subject: [PATCH 3/4] stream: ws: handshake: Fix crypto_hash_many argument
+ mixup
+
+This fixes mistake in f97805deaaea489a1c8c851324163a92a3125195.
+
+Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/8e0d226064d0]
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
+ src/stream/ws/handshake.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/stream/ws/handshake.c b/src/stream/ws/handshake.c
+index aa0db3f9f2c2..9cb6f1c58856 100644
+--- a/src/stream/ws/handshake.c
++++ b/src/stream/ws/handshake.c
+@@ -79,7 +79,7 @@ ssize_t ws_handshake(char* output, size_t output_maxlen, const char* input)
+ 		goto failure;
+ 
+ 	uint8_t hash[20];
+-	crypto_hash_many(hash, sizeof(hash), (struct crypto_data_entry[]){
++	crypto_hash_many(hash, CRYPTO_HASH_SHA1, (struct crypto_data_entry[]){
+ 		{ (uint8_t*)challenge, strlen(challenge) },
+ 		{ (uint8_t*)magic_uuid, strlen(magic_uuid) },
+ 		{}

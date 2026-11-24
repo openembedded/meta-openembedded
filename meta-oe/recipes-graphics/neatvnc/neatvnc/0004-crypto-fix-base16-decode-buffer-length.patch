@@ -1,0 +1,29 @@
+From 556ea1d187a70c08c99d0871c8920e3f7874664f Mon Sep 17 00:00:00 2001
+From: Chad Voegele <chad@voegele.me>
+Date: Thu, 11 Jun 2026 12:41:03 +0000
+Subject: [PATCH 4/4] crypto: fix base16 decode buffer length
+
+Upstream-Status: Backport [https://github.com/any1/neatvnc/commit/8057ec4ad673]
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
+ src/crypto/nettle/key.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/src/crypto/nettle/key.c b/src/crypto/nettle/key.c
+index 3b69de259436..45e53187fc22 100644
+--- a/src/crypto/nettle/key.c
++++ b/src/crypto/nettle/key.c
+@@ -91,7 +91,7 @@ static void initialise_p(mpz_t p)
+ 		"15728E5A8AACAA68FFFFFFFFFFFFFFFF";
+ 
+ 	char buf[256];
+-	size_t len = 0;
++	size_t len = sizeof(buf);
+ 	struct base16_decode_ctx ctx;
+ 	nettle_base16_decode_init(&ctx);
+ 	nettle_base16_decode_update(&ctx, &len, (uint8_t*)buf, sizeof(s) - 1, s);
+@@ -174,4 +174,3 @@ struct crypto_key* crypto_derive_shared_secret(
+ 
+ 	return shared;
+ }
+-

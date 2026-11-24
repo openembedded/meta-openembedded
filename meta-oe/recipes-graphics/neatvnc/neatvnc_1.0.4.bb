@@ -4,7 +4,12 @@ HOMEPAGE = "https://github.com/any1/neatvnc"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
 
-SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV}"
+SRC_URI = "git://github.com/any1/neatvnc;branch=v1.0;protocol=https;tag=v${PV} \
+           file://0001-Use-nettle-hogweed-version-4.patch \
+           file://0002-crypto-Remove-hash-digest-size-argument.patch \
+           file://0003-stream-ws-handshake-Fix-crypto_hash_many-argument-mi.patch \
+           file://0004-crypto-fix-base16-decode-buffer-length.patch \
+           "
 
 SRCREV = "ffce32d6d04e702d5d8055e28e038c7f68a0caf4"
 
