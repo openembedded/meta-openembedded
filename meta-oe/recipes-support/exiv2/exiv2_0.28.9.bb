@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${
            file://0001-Allow-test-data-path-configuration.patch \
            "
 SRCREV = "b0859fc61fea5dedfc898aece6b15893ddf4314e"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake gettext ptest
 
