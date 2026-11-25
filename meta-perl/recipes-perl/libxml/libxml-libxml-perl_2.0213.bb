@@ -32,6 +32,8 @@ SRC_URI[libxml.sha256sum] = "2af21c5d61ac34ea26a5fabf15ba5a5841e648f7189db3e33b6
 
 S = "${UNPACKDIR}/XML-LibXML-${PV}"
 
+UPSTREAM_CHECK_REGEX = "XML-LibXML-(?P<pver>\d+\.\d+)\.tar\.gz"
+
 inherit cpan ptest-perl pkgconfig
 
 BBCLASSEXTEND = "native"
