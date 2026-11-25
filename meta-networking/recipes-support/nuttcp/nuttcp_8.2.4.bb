@@ -10,7 +10,8 @@ LICENSE = "GPL-2.0-only"
 SECTION = "net"
 LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff528d226bf85e05c5"
 
-UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
+UPSTREAM_CHECK_URI = "http://nuttcp.net/nuttcp/beta/"
+UPSTREAM_CHECK_REGEX = "nuttcp-(?P<pver>\d+(\.\d+)+)\.c"
 
 SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
            file://nuttcp@.service \
