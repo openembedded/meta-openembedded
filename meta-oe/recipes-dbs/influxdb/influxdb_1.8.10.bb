@@ -16,6 +16,9 @@ require ${BPN}-go-mods.inc
 
 SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
 
+# 2.x and 3.x are separate rewrites; this recipe tracks the 1.x series
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>1\.\d+\.\d+)$"
+
 GO_IMPORT = "github.com/influxdata/influxdb"
 GO_INSTALL = "\
     ${GO_IMPORT}/cmd/influx \
