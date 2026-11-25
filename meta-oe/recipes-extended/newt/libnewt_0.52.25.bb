@@ -8,23 +8,23 @@ shared library needed by programs built with newt, as well as a \
 /usr/bin/dialog replacement called whiptail.  Newt is based on the \
 slang library."
 
-HOMEPAGE = "https://releases.pagure.org/newt/"
+HOMEPAGE = "https://gitlab.com/newt-ui/newt"
 SECTION = "libs"
 
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
 # slang needs to be >= 2.2
-DEPENDS = "slang popt python3"
+DEPENDS = "slang popt python3 gettext-native"
 
-SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
+SRC_URI = "git://gitlab.com/newt-ui/newt.git;protocol=https;branch=master;tag=${PV} \
            file://cross_ar.patch \
            file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
            "
 
-SRC_URI[sha256sum] = "ef0ca9ee27850d1a5c863bb7ff9aa08096c9ed312ece9087b30f3a426828de82"
+SRCREV = "9b9e7e8936f51f83a7259c5f0a9b4ff909cbd39a"
 
-S = "${UNPACKDIR}/newt-${PV}"
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools-brokensep python3native python3-dir python3targetconfig
 
