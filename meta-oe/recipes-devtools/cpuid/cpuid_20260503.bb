@@ -12,6 +12,8 @@ SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
            "
 SRC_URI[sha256sum] = "8ee10fb48d4aa20c484a75d6852883710286ed2975c314bda6d0b0383908cbfe"
 
+UPSTREAM_CHECK_REGEX = "cpuid-(?P<pver>\d+)\.src\.tar"
+
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 
 inherit perlnative
