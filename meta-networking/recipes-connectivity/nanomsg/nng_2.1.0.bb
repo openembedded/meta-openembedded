@@ -11,6 +11,8 @@ SRC_URI = "git://github.com/nanomsg/nng.git;branch=main;protocol=https \
 
 SRCREV = "0912dcbd63f2f44324fa974e9fc9695c7621abb9"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 inherit cmake pkgconfig ptest
 
 EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DNNG_ENABLE_NNGCAT=ON \
