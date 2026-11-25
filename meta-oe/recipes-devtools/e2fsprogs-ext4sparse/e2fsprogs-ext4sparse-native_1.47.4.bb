@@ -8,6 +8,7 @@ DEPENDS = "e2fsprogs-native android-tools-native"
 
 SRC_URI = "git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git;branch=master;protocol=https"
 SRCREV = "ece89fac4603e400155b7bbf6326284f8511bca9"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit native
 
