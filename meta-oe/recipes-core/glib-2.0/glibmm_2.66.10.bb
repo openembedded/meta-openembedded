@@ -14,6 +14,9 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
 SRC_URI[archive.sha256sum] = "2b61780203aed98e701d3ea57c8f353e7c8ada9706a79be782f6c5153dd035c0"
 
+# 2.68+ (glibmm-2.68 API) is packaged as glibmm-2.68
+UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/"
+
 FILES:${PN} = "${libdir}/lib*.so.*"
 FILES:${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
 
