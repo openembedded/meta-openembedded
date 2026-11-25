@@ -8,6 +8,8 @@ DEPENDS = "sqlite3 sqlite3-native"
 SRC_URI = "https://download.osgeo.org/${BPN}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "af5b731c145c1d13c4e3b4eeb7d167e94e845e440f71e3496b4ed8dae0291960"
 
+UPSTREAM_CHECK_REGEX = "proj-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit bash-completion cmake lib_package pkgconfig
 
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF"
