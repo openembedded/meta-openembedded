@@ -12,7 +12,7 @@ DEPENDS = "glib-2.0-native pangomm-2.48 glibmm gtk4 cairomm-1.16 gdk-pixbuf-nati
 
 GNOMEBN = "gtkmm"
 
-inherit gnomebase features_check
+inherit gnomebase features_check upstream-version-is-even
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 
