@@ -35,6 +35,9 @@ SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-
            "
 SRC_URI[sha256sum] = "064f2f185673c5493df83f6400b799f3a359de56118b6ba37c4327111f2fcd8b"
 
+UPSTREAM_CHECK_URI = "https://github.com/thkukuk/ypbind-mt/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+
 inherit systemd update-rc.d
 
 SYSTEMD_SERVICE:${PN} = "ypbind.service"
