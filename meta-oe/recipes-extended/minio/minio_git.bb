@@ -22,6 +22,7 @@ LICENSE = "AGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=eb1e647870add0502f8f010b19de32af"
 
 PV = "${SRCREV_mc}"
+UPSTREAM_CHECK_COMMITS = "1"
 
 inherit go
 inherit goarch
