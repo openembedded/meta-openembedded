@@ -17,6 +17,7 @@ SRC_URI = "\
 "
 SRCREV = "f65321736475429316f07ee94ec0deac8e46ec4a"
 
+UPSTREAM_CHECK_COMMITS = "1"
 
 inherit autotools pkgconfig
 
