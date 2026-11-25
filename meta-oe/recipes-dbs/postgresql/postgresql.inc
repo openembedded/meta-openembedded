@@ -236,7 +236,7 @@ do_install_ptest() {
     chown -R postgres:postgres ${D}${PTEST_PATH}
 }
 
-RDEPENDS:${PN}-ptest += "${PN}-client ${PN}-contrib perl"
+RDEPENDS:${PN}-ptest += "${PN}-client ${PN}-contrib perl ${PN}-locale-es"
 FILES:${PN}-ptest += "${libdir}/${BPN}/regress.so"
 
 # server needs to configure user and group
