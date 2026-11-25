@@ -14,6 +14,8 @@ inherit klibc autotools siteinfo
 SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git;branch=master"
 SRCREV = "15d78e5799eea7ec5ea9c5897ae95aaa0ce8970c"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 BUILD_PATCHES = "file://0001-force-static-build.patch \
                  file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch \
                  "
