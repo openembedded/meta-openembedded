@@ -29,7 +29,8 @@ SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls
 
 SRCREV = "068ff080b369adfac81509f9b57b2afabaf82dc5"
 
-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+# Track the 3.6 LTS branch; 4.x is a new major series with API changes
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>3\.6(\.\d+)+)$"
 
 inherit cmake update-alternatives ptest
 
