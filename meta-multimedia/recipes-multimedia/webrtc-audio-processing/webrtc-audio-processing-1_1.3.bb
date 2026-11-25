@@ -17,6 +17,9 @@ SRC_URI = " \
 SRC_URI[sha256sum] = "2365e93e778d7b61b5d6e02d21c47d97222e9c7deff9e1d0838ad6ec2e86f1b9"
 S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
 
+# 2.x is packaged as webrtc-audio-processing-2
+UPSTREAM_CHECK_REGEX = "webrtc-audio-processing-(?P<pver>1(\.\d+)+)\.tar"
+
 LDFLAGS:append:libc-musl = " -lexecinfo"
 
 inherit meson pkgconfig
