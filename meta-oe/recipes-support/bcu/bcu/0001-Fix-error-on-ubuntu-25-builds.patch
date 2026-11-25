@@ -1,0 +1,40 @@
+From 6ee0a2792ac66f6beb7c9082e3441b3fd4a96a5d Mon Sep 17 00:00:00 2001
+From: Costin Constantin <costin.constantin@nxp.com>
+Date: Mon, 12 Oct 2026 13:17:40 +0300
+Subject: [PATCH] Fix error on ubuntu 25+ builds
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fix building on versions of Ubuntu greater than 25.04.
+The following error is encountered:
+bcu.c:930:41: error: passing argument 1 of ‘free_device_linkedlist_backward’
+from incompatible pointer type [-Wincompatible-pointer-types]
+
+Signed-off-by: Costin Constantin <costin.constantin@nxp.com>
+Upstream-Status: Backport [https://github.com/nxp-imx/bcu/commit/6ee0a2792ac66f6beb7c9082e3441b3fd4a96a5d]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ bcu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/bcu.c b/bcu.c
+index d4219fb..bd8c2f1 100644
+--- a/bcu.c
++++ b/bcu.c
+@@ -1,5 +1,5 @@
+ /*
+-* Copyright 2019-2021 NXP.
++* Copyright 2019-2026 NXP.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+@@ -927,7 +927,7 @@ static void set_eeprom_boot_mode(struct options_setting* setting)
+ 	if (board->boot_configs[j].name == NULL) {
+ 		printf("set_boot_mode: No correct boot configuration provided for boot_mode %s!\n", board->boot_modes[i].name);
+ 	}
+-	free_device_linkedlist_backward(end_point);
++	free_device_linkedlist_backward(&end_point->device);
+ }
+ 
+ static void set_boot_mode(struct options_setting* setting)
