@@ -6,6 +6,7 @@ SRCREV = "00dbec2636ae0385ad028587e20e446272ff97ec"
 PV = "1.1+git"
 
 SRC_URI = "git://github.com/freesmartphone/cornucopia.git;protocol=https;branch=master"
+UPSTREAM_CHECK_COMMITS = "1"
 S = "${UNPACKDIR}/${BP}/tools/serial_forward"
 
 inherit autotools native
