@@ -14,6 +14,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
            "
 SRC_URI[sha256sum] = "da99f8c573c4d9e63f493c7e24447126aea25b53b4c076ec79266874e29b1975"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/fetchmail/files/branch_6.6/"
+UPSTREAM_CHECK_REGEX = "fetchmail-(?P<pver>\d+(\.\d+)+)\.tar\.xz"
+
 inherit autotools gettext pkgconfig python3-dir python3native
 
 EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${prefix} --disable-rpath "
