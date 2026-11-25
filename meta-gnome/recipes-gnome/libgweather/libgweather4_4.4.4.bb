@@ -13,6 +13,9 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 SRC_URI += "file://0001-Allow-building-gir-in-cross-environments.patch"
 SRC_URI[archive.sha256sum] = "7017677753cdf7d1fdc355e4bfcdb1eba8369793a8df24d241427a939cbf4283"
 
+# 40.0 is an older libgweather-3 release; odd minors are development releases
+UPSTREAM_CHECK_REGEX = "libgweather-(?P<pver>4\.\d*[02468](\.\d+)+)\.tar"
+
 GTKDOC_MESON_OPTION = "gtk_doc"
 VALA_MESON_OPTION = "enable_vala"
 
