@@ -1,25 +1,22 @@
 DESCRIPTION = "dlm control daemon and tool"
 
 SECTION = "utils"
-HOMEPAGE = "https://fedorahosted.org/cluster/wiki/HomePage"
+HOMEPAGE = "https://gitlab.com/linux-gfs2/dlm"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
-SRC_URI = "https://pagure.io/dlm/archive/dlm-${PV}/dlm-dlm-${PV}.tar.gz \
+SRC_URI = "git://gitlab.com/linux-gfs2/dlm.git;protocol=https;branch=main;tag=dlm-${PV} \
            file://0001-Include-sys-sysmacros.h-for-major-minor-macros-in-gl.patch \
            file://0001-make-Replace-cp-a-with-mode-preserving-options.patch \
            file://0002-dlm_controld-Define-__always_inline-when-libc-does-n.patch \
            "
 
-SRC_URI[sha256sum] = "8dc23b97390236032a2fe19068c7dad23f82fb624732c9bff6898b6996c9b700"
+SRCREV = "c5929265f4c3e3f8adb0126c456424b70c9a546e"
 
-UPSTREAM_CHECK_URI = "https://releases.pagure.org/dlm/"
-UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+UPSTREAM_CHECK_GITTAGREGEX = "^dlm-(?P<pver>\d+(\.\d+)+)$"
 
 LICENSE = "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://README.license;md5=531f5086ad0f36f6e22cb6085e1c41d5"
-
-S = "${UNPACKDIR}/dlm-dlm-${PV}"
 
 DEPENDS += "corosync"
 
