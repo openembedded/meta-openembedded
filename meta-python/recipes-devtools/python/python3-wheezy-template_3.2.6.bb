@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/akornatskyy/wheezy.template"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa10554c46b94944529c6a886cf85631"
 
-SRC_URI[sha256sum] = "c7c0bf85af0f70ca2ef4b6ea9a74ef372f73392aa17bea0d885dcba7356d0867"
+SRC_URI[sha256sum] = "a00429a7bd1cb83fb6a4a5b67c486a08c8ac5a58e96bc9de7d806f9b1918f7df"
 
 inherit pypi python_setuptools_build_meta
 
