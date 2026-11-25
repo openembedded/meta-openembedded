@@ -17,6 +17,8 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
 
 SRC_URI[sha256sum] = "618541584054093d53be8a2d9e81c97174f30f00af91cb8700a97e442d79ef5b"
 
+UPSTREAM_CHECK_REGEX = "hddtemp-(?P<pver>\d+(\.\d+)+-beta\d+)\.tar"
+
 LIC_FILES_CHKSUM = "file://GPL-2;md5=eb723b61539feef013de476e68b5c50a"
 
 inherit autotools gettext update-rc.d
