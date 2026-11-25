@@ -13,6 +13,8 @@ SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-
 "
 SRC_URI[sha256sum] = "43be2dd349daffe016dd1400c5d11285828c22fea35ca5109f21f3ed50605080"
 
+UPSTREAM_CHECK_REGEX = "libspatialite-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF = "--enable-freexl=no --disable-rttopo --disable-minizip"
