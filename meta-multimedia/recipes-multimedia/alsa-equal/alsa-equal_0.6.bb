@@ -15,6 +15,9 @@ SRC_URI = " \
 SRC_URI[md5sum] = "d2edc7710c72cbf3ab297c414e35ebda"
 SRC_URI[sha256sum] = "916e7d152added24617efc350142438a46099efe062bd8781d36dbf10b4e6ff0"
 
+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/a/alsaequal/"
+UPSTREAM_CHECK_REGEX = "alsaequal_(?P<pver>\d+(\.\d+)+)\.orig\.tar"
+
 S = "${UNPACKDIR}/alsaequal"
 
 EXTRA_OEMAKE = " \
