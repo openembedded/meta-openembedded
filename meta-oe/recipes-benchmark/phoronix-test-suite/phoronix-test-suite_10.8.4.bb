@@ -5,7 +5,7 @@ LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "console/tests"
 
-SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz \
+SRC_URI = "https://github.com/phoronix-test-suite/phoronix-test-suite/releases/download/v${PV}/${BP}.tar.gz \
            file://CVE-2022-40704.patch \
           "
 
