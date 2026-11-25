@@ -41,6 +41,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BP}.tar.gz \
 SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
 SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openl2tp/files/openl2tp/"
+UPSTREAM_CHECK_REGEX = "/openl2tp/(?P<pver>\d+(\.\d+)+)/"
+
 inherit pkgconfig systemd ptest
 
 SYSTEMD_SERVICE:${PN} = "openl2tpd.service"
