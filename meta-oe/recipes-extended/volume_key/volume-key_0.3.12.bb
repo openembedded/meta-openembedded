@@ -8,9 +8,12 @@ HOMEPAGE = "https://pagure.io/volume_key"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
-"
+# releases.pagure.org is gone; Debian ships the unmodified release tarball
+SRC_URI = "${DEBIAN_MIRROR}/main/v/${BPN}/${BPN}_${PV}.orig.tar.xz"
 SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd77309b"
+
+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/v/${BPN}/"
+UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)\.orig\.tar"
 
 SRCNAME = "volume_key"
 S = "${UNPACKDIR}/${SRCNAME}-${PV}"
