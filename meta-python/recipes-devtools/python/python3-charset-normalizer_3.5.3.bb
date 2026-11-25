@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
 
 SRC_URI += "file://0001-pyproject.toml-relax-setuptools-upper-bound.patch"
-SRC_URI[sha256sum] = "39de2a259fc954455c57274dc94c79d5842774e1247a016aff30bc0efed0f4ef"
+SRC_URI[sha256sum] = "a250888753faa289e2997962fbb17c4960cbdb58575533ca6fceee68c224bdff"
 
 DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 
