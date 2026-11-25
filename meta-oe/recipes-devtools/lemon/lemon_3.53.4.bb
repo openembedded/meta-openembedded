@@ -6,6 +6,7 @@ SECTION = "devel"
 LIC_FILES_CHKSUM = "file://tool/lemon.c;endline=8;md5=c7551a78fa3fdecd96d1ad6761d205ee"
 
 SRC_URI = "git://github.com/sqlite/sqlite;protocol=https;branch=branch-3.53"
+UPSTREAM_CHECK_GITTAGREGEX = "^version-(?P<pver>\d+(\.\d+)+)$"
 
 SRCREV = "b09c88c14082339b66c7b7158d609a771e64ca69"
 
