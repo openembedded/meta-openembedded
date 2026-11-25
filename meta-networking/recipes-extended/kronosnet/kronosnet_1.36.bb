@@ -16,7 +16,8 @@ SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1;ta
 
 BB_GIT_SHALLOW_EXTRA_REFS = "refs/tags/v${PV}"
 
-UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
+# v1.9x tags are 2.0 pre-releases
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>1\.[0-8]?\d)$"
 
 inherit autotools pkgconfig
 
