@@ -20,8 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SI/SIMONW/${SRCNAME}-${PV}.tar.gz"
 SRC_URI[sha256sum] = "970fd13accd3d538e637db080ebbd9898020c8b5591837c8493a39edd737922d"
 
 
-UPSTREAM_CHECK_REGEX = "Module\-Pluggable\-(?P<pver>(\d+\.\d+))"
-UPSTREAM_CHECK_URI = "https://metacpan.org/release/${SRCNAME}"
+UPSTREAM_CHECK_REGEX = "Module-Pluggable-(?P<pver>\d+\.\d+)\.tar\.gz"
 
 S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
