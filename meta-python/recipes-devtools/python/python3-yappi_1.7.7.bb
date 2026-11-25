@@ -4,14 +4,15 @@ HOMEPAGE = "https://github.com/sumerc/yappi"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
 
-SRC_URI[sha256sum] = "c94281936af77c00c6ac2306a0e7f85a67e354d717120df85fcc5dfb9243d4dd"
-
-SRC_URI += " \
+# 1.7.7 is tagged on GitHub but was never uploaded to PyPI
+SRC_URI = "git://github.com/sumerc/yappi.git;protocol=https;branch=master;tag=v${PV} \
            file://0002-Fix-import-of-tests.utils-to-enable-pytest.patch \
            file://0003-Detect-suspended-coroutines-on-Python-3.15-and-newer.patch \
            "
+SRCREV = "d6593ea0bce0a13c65bd44511c3cee858b5985e8"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
-inherit pypi python_setuptools_build_meta ptest-python-pytest
+inherit python_setuptools_build_meta ptest-python-pytest
 
 RDEPENDS:${PN} += "\
     python3-datetime \
