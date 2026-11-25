@@ -26,6 +26,8 @@ SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=h
 		  "
 SRCREV = "6a484e6e61cc51a22a9943762dc2ff6883914f38"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 inherit features_check meson mime mime-xdg pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "opengl"
