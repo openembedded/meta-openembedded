@@ -11,7 +11,7 @@ SRC_URI = "https://github.com/tmux/tmux/releases/download/${PV}/tmux-${PV}.tar.g
 SRC_URI[sha256sum] = "e79c699c7e949dccd0a4a125e17b8d1261e311b16979dbc8eb34542f3966d82e"
 
 UPSTREAM_CHECK_URI = "https://github.com/tmux/tmux/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+[a-z]?)"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+[a-z]?)$"
 
 inherit autotools pkgconfig
 
