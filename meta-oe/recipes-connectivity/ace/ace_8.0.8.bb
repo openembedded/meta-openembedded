@@ -14,7 +14,7 @@ SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-${@d.
 SRC_URI[sha256sum] = "d56f06d99508139e7a537122fdf52fb0c4d17805510094527643e1007857c421"
 
 UPSTREAM_CHECK_URI = "https://github.com/DOCGroup/ACE_TAO/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/ACE%2BTAO-(?P<pver>\d+(_\d+)+)$"
 
 CVE_STATUS[CVE-2009-1147] = "cpe-incorrect: this CVE is for vmware ace"
 
