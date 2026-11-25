@@ -22,6 +22,8 @@ SRC_URI = "git://github.com/ndpgroup/vpnc;branch=master;protocol=https \
            file://0009-reduce-lifetime-value.patch \
            "
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+r\d+-\d+jnpr\d+)$"
+
 PACKAGECONFIG ?= "gnutls"
 
 PACKAGECONFIG[gnutls] = ",,gnutls"
