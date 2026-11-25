@@ -13,6 +13,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 SRC_URI[md5sum] = "caf0db059d8b8d35d6f08e6c0e1c7dfe"
 SRC_URI[sha256sum] = "7cb1ff09506ae911ca9860bef4af08c2403f3e131f6c913a2cbd6ddca4215b53"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/libavc1394/files/libavc1394/"
+UPSTREAM_CHECK_REGEX = "libavc1394-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit autotools pkgconfig
 
 LDFLAGS:append:libc-musl = " -largp"
