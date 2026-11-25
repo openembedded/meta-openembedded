@@ -16,7 +16,7 @@ SRC_URI = "https://github.com/openlink/iODBC/releases/download/v${PV}/${BP}.tar.
 SRC_URI[sha256sum] = "3898b32d07961360f6f2cf36db36036b719a230e476469258a80f32243e845fa"
 
 UPSTREAM_CHECK_URI = "https://github.com/openlink/iODBC/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools
 
