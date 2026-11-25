@@ -17,6 +17,10 @@ inherit gnomebase gobject-introspection gtk-doc vala
 
 SRC_URI[archive.sha256sum] = "606c28aaae7b1f3ef5c8eabe5e7dffd7c5a1c866d25b7671fb847fe287a72b8b"
 
+# 0.16 is packaged as gexiv2
+UPSTREAM_CHECK_URI = "https://download.gnome.org/sources/gexiv2/0.14/"
+UPSTREAM_CHECK_REGEX = "gexiv2-(?P<pver>0\.14(\.\d+)+)\.tar"
+
 # The command line tool and the python override would clash with the files
 # installed by the current gexiv2 recipe.
 # AI-Generated: this recipe was created with Claude Code.
