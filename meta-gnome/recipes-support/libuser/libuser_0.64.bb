@@ -1,8 +1,8 @@
 SUMMARY = "user and group account administration library"
 DESCRIPTION = "The libuser library implements a standardized interface for manipulating and administering user \
 and group accounts"
-HOMEPAGE = "https://pagure.io/libuser"
-BUGTRACKER = "https://pagure.io/libuser/issues"
+HOMEPAGE = "https://codeberg.org/libuser/libuser"
+BUGTRACKER = "https://codeberg.org/libuser/libuser/issues"
 
 LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
@@ -11,14 +11,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 
 SECTION = "base"
 
-SRC_URI = "https://releases.pagure.org/libuser/libuser-${PV}.tar.gz \
+SRC_URI = "git://codeberg.org/libuser/libuser.git;protocol=https;branch=master;tag=${BP} \
            file://0001-docs-Disable-building.patch \
            file://0002-remove-unused-execinfo.h.patch \
            file://gtkdoc.patch \
            file://0001-configure.ac-update-version-to-0.64.patch \
            "
 
-SRC_URI[sha256sum] = "ea6094c72cb9e60a42fb53509dc98d124a340f1c9222783b503208adc16a0a8f"
+SRCREV = "ce81277cb5cd5235e22be453aa496e3f4190724c"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^libuser-(?P<pver>\d+(\.\d+)+)$"
 
 DEPENDS = "bison-native popt libpam glib-2.0 python3"
 
