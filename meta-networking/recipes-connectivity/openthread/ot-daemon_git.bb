@@ -14,6 +14,7 @@ PV = "0.1+git"
 SRC_URI = "git://github.com/openthread/openthread.git;protocol=https;branch=main \
            "
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake
 
