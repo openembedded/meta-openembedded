@@ -35,6 +35,8 @@ SRCREV_driver = "d4efc80ece48174a71c1a420cb52d233fa94f946"
 
 SRCREV_FORMAT = "sysdig_falco"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 #Add this function to generate driver_config.h
 do_configure:prepend() {
     mkdir -p ${WORKDIR}/driver_Make
