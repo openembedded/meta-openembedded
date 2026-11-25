@@ -10,6 +10,8 @@ SRC_URI = "git://github.com/NetworkBlockDevice/${BPN}.git;branch=master;protocol
            "
 SRCREV = "f96f7fca3b37f4254c26c95f5c6c9dae70e030a1"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^nbd-(?P<pver>\d+(\.\d+)+)$"
+
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--enable-syslog --enable-lfs --disable-manpages"
