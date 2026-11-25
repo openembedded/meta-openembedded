@@ -11,6 +11,9 @@ SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz \
 
 SRC_URI[sha256sum] = "1f2092d536c0a3193efc53e4a50f3cee65c0ef1a78d31e5404f1c663fff7b7f4"
 
+UPSTREAM_CHECK_URI = "https://github.com/phoronix-test-suite/phoronix-test-suite/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)$"
+
 S = "${UNPACKDIR}/phoronix-test-suite"
 
 inherit systemd allarch mime mime-xdg
