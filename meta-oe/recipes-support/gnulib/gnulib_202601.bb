@@ -15,6 +15,7 @@ SRCREV = "4a3650d88725e8fda6387fbdbaa0ed98cdca76ce"
 
 SRC_URI = "git://git.savannah.gnu.org/git/gnulib.git;branch=stable-${PV};protocol=https \
 "
+UPSTREAM_CHECK_COMMITS = "1"
 
 
 do_install () {
