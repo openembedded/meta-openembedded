@@ -9,6 +9,9 @@ SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.gz;downloadfilen
 "
 SRC_URI[sha256sum] = "22103a37eaa28489169a0927bc01e0596c3485fc4d29fc8456c07fd2c70fca6d"
 
+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/s/ssmping/"
+UPSTREAM_CHECK_REGEX = "ssmping_(?P<pver>\d+(\.\d+)+)\.orig\.tar"
+
 CFLAGS += "-D_GNU_SOURCE "
 
 do_install() {
