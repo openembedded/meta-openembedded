@@ -13,6 +13,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.sha256sum] = "38ca0b050b065de4e3da0c182df657437757063bbf0c4b6c9567ddba019b1d68"
 
+# 2.48+ is packaged as pangomm-2.48
+UPSTREAM_CHECK_REGEX = "pangomm-(?P<pver>2\.46(\.\d+)+)\.tar"
+
 FILES:${PN} = "${libdir}/lib*.so.*"
 FILES:${PN}-dev += "${libdir}/*/include/ ${libdir}/pangomm-*/"
 
