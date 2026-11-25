@@ -25,7 +25,7 @@ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz
 SRC_URI[sha256sum] = "db0a97ae7ee1f46430b5ad79127a7594849a222adc1934eeb3e5aa14843ff47e"
 
 UPSTREAM_CHECK_URI = "https://github.com/cfengine/masterfiles/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools
 
