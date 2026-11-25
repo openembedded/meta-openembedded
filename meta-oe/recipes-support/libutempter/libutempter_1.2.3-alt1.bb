@@ -13,6 +13,7 @@ SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=mas
            file://0001-Fix-macro-error.patch \
            file://0002-Proper-macro-path-generation.patch \
            "
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+-alt\d+)$"
 
 S = "${UNPACKDIR}/${BP}/${BPN}"
 
