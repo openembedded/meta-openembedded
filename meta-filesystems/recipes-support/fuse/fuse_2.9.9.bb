@@ -19,8 +19,9 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
 SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
 SRC_URI[sha256sum] = "d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7c1b4b5"
 
-UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
-UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
+# 3.x is packaged as fuse3
+UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases?q=fuse-2&expanded=true"
+UPSTREAM_CHECK_REGEX = "releases/tag/fuse-(?P<pver>2(\.\d+)+)$"
 
 CVE_PRODUCT = "fuse_project:fuse fuse:fuse"
 
