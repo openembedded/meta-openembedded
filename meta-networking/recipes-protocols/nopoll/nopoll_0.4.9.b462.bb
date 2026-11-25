@@ -15,6 +15,8 @@ SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \
           "
 SRC_URI[sha256sum] = "80bfa3e0228e88e290dd23eb94d9bb1f4d726fb117c11cfb048cbdd1d71d379a"
 
+UPSTREAM_CHECK_REGEX = "nopoll-(?P<pver>\d+(\.\d+)+\.b\d+)\.tar\.gz"
+
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-nopoll-doc"
