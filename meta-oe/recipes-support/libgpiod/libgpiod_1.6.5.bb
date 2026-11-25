@@ -10,6 +10,9 @@ SRC_URI += " \
 
 SRC_URI[sha256sum] = "ae280f697bf035a1fb780c9972e5c81d0d2712b7ab6124fb3fba24619daa72bc"
 
+# The 2.x series is packaged in libgpiod_2.x.bb
+UPSTREAM_CHECK_REGEX = "libgpiod-(?P<pver>1(\.\d+)+)\.tar"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-1.x:"
 
 inherit autotools python3native
