@@ -14,6 +14,7 @@ S = "${UNPACKDIR}/Gammu-${PV}"
 SRC_URI[sha256sum] = "92478c1c6d8df193f3d5e36648fd05fc3eff26254034f025cad2a0ffba5aec23"
 
 UPSTREAM_CHECK_URI = "https://github.com/gammu/gammu/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
 
 DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
 
