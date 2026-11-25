@@ -17,6 +17,8 @@ SRC_URI = "https://deb.debian.org/debian/pool/main/a/android-platform-external-b
 SRC_URI[md5sum] = "83d24d2f3136ba6a486b5464369b91b4"
 SRC_URI[sha256sum] = "f9223e8c15ad5d9e3f1cd50861f4c272658864661e2332bea5d60952aa0930cd"
 
+UPSTREAM_CHECK_REGEX = "android-platform-external-boringssl_(?P<pver>\d+(\.\d+)+\+r\d+)\.orig\.tar"
+
 # The Debian orig tarball unpacks to android-platform-external-boringssl-${PV}/
 # with the actual source under a src/ subdirectory.
 S = "${UNPACKDIR}/android-platform-external-boringssl-${PV}/src"
