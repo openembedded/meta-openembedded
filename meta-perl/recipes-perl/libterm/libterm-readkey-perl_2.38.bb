@@ -18,7 +18,6 @@ SRC_URI[sha256sum] = "5a645878dc570ac33661581fbb090ff24ebce17d43ea53fd22e105a856
 
 S = "${UNPACKDIR}/TermReadKey-${PV}"
 
-UPSTREAM_CHECK_URI = "https://metacpan.org/release/TermReadKey"
 UPSTREAM_CHECK_REGEX = "TermReadKey\-(?P<pver>(\d+\.\d+))(?!_\d+)\.tar.gz"
 
 # It needs depend on native to let dynamic loader use native modules
