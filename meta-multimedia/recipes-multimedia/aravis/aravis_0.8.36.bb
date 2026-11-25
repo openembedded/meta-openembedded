@@ -19,7 +19,8 @@ SRC_URI = "https://github.com/AravisProject/aravis/releases/download/${PV}/${BPN
 SRC_URI[sha256sum] = "246deaa0042a387ff1bc00332d0fb80537ce14abde2c28d1a54c91f17adc51bf"
 
 UPSTREAM_CHECK_URI = "https://github.com/AravisProject/aravis/releases"
-UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
+# odd minor versions are development releases
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+\.\d*[02468](\.\d+)+)$"
 
 EXTRA_OEMESON += "-Dtests=false"
 
