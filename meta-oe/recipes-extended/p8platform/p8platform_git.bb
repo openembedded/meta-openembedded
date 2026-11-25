@@ -8,6 +8,7 @@ PV = "2.1.0.1+git"
 
 SRC_URI = "git://github.com/Pulse-Eight/platform.git;branch=master;protocol=https"
 SRCREV = "2748be52ae27e6007ef548b697d4a03ff7de4291"
+UPSTREAM_CHECK_GITTAGREGEX = "^p8-platform-(?P<pver>\d+(\.\d+)+)$"
 
 
 inherit cmake pkgconfig
