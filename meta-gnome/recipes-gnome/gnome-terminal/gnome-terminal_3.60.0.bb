@@ -25,6 +25,8 @@ SRC_URI = " \
 "
 SRCREV = "5d1d01d8bad69d33b0048f7791ebb6b0c7fb9f21"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+\.\d*[02468](\.\d+)+)$"
+
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"
 PACKAGECONFIG[search_provider] = "-Dsearch_provider=true,-Dsearch_provider=false,gnome-shell"
