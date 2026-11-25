@@ -11,6 +11,9 @@ SRC_URI = "http://dl.fefe.de/${BP}.tar.bz2"
 SRC_URI[md5sum] = "421c4855bd3148b7d0a4342942b4bf13"
 SRC_URI[sha256sum] = "6cfa72edd5f7717bf7a4a93ccc74c4abd89892360e2e0bb095a73c24b9359b88"
 
+UPSTREAM_CHECK_URI = "http://www.fefe.de/ncp/"
+UPSTREAM_CHECK_REGEX = "ncp-(?P<pver>\d+(\.\d+)+)\.tar\.bz2"
+
 EXTRA_OEMAKE = "\
     DIET= \
     DEBUG=nostrip \
