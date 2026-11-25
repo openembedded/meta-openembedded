@@ -5,20 +5,21 @@ DESCRIPTION = "The Liberation(tm) Fonts is a font family originally \
 created by Ascender(c) which aims at metric compatibility with \
 Arial, Times New Roman, Courier New."
 
-HOMEPAGE = "https://fedorahosted.org/liberation-fonts/"
+HOMEPAGE = "https://github.com/liberationfonts/liberation-sans-narrow"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-SRC_URI = "https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-${PV}.tar.gz \
+# 1.07.6 is attached to the release notes, not uploaded as a release asset
+SRC_URI = "https://github.com/liberationfonts/liberation-sans-narrow/files/2579431/liberation-narrow-fonts-ttf-${PV}.tar.gz \
            file://30-0-liberation-sans-narrow.conf \
 "
 
-SRC_URI[sha256sum] = "61a7e2b6742a43c73e8762cdfeaf6dfcf9abdd2cfa0b099a9854d69bc4cfee5c"
+SRC_URI[sha256sum] = "8879d89b5ff7b506c9fc28efc31a5c0b954bbe9333e66e5283d27d20a8519ea3"
 
 UPSTREAM_CHECK_URI = "https://github.com/liberationfonts/liberation-sans-narrow/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)"
 
-S = "${UNPACKDIR}/liberation-fonts-ttf-${PV}"
+S = "${UNPACKDIR}/liberation-narrow-fonts-ttf-${PV}"
 
 do_install:append () {
     install -d ${D}${datadir}/fonts/TTF/
