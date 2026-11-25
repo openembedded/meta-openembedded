@@ -10,6 +10,8 @@ SRCREV = "a03d7413becefc8d55c8aa3df58b55b9bd0e9052"
 
 PV = "0.1+git"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 inherit setuptools3
 
 BBCLASSEXTEND = "native nativesdk"
