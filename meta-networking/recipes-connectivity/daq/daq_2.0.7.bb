@@ -14,6 +14,10 @@ SRC_URI = "https://www.snort.org/downloads/snort/${BPN}-${PV}.tar.gz;downloadfil
            file://daq-fix-incompatible-pointer-type-error.patch \
            "
 SRC_URI[sha256sum] = "d1f6709bc5dbddee3fdf170cdc1e49fb926e2031d4869ecf367a8c47efc87279"
+
+# 3.x is packaged as libdaq
+UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
+UPSTREAM_CHECK_REGEX = "daq-(?P<pver>2(\.\d+)+)\.tar\.gz"
 # these 2 create undeclared dependency on libdnet and libnetfilter-queue from meta-networking
 # this error from test-dependencies script:
 # daq/daq/latest lost dependency on  libdnet libmnl libnetfilter-queue libnfnetlink
