@@ -21,6 +21,8 @@ SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=htt
            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
            "
 
+# Only the 0.5.1 compat series is packaged as celt051
+UPSTREAM_CHECK_GITTAGREGEX = "^compat-v(?P<pver>0\.5\.1(\.\d+)*)$"
 
 inherit pkgconfig autotools-brokensep
 
