@@ -7,11 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = "git://github.com/linux-can/socketcand;branch=master;protocol=https"
 SRCREV = "998b0394d028e791aa97d549bfc686b4fbadf5ee"
-# Release tags are "0.6.1" (older ones "v0.6.0").
-UPSTREAM_CHECK_GITTAGREGEX = "v?(?P<pver>\d+(\.\d+)+)"
-# PV is "git" (AUTOINC recipe with no numeric PV), so the resolved tag (0.6.1)
-# has nothing to compare against; reported unknown rather than broken.
-UPSTREAM_VERSION_UNKNOWN = "1"
+UPSTREAM_CHECK_COMMITS = "1"
 
 inherit meson pkgconfig
 
