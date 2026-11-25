@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
 SRC_URI = "http://files.libburnia-project.org/releases/libisoburn-${PV}.tar.gz"
 SRC_URI[sha256sum] = "a977b03dc3686d9fdca600458b1578f9cac2b875609bd5ec21f5ada55f20ec50"
 
+UPSTREAM_CHECK_REGEX = "libisoburn-(?P<pver>\d+(\.\d+)+(\.pl\d+)?)\.tar\.gz"
+
 # The patchlevel (.pl02) tarball unpacks into a directory without the
 # patchlevel suffix.
 S = "${UNPACKDIR}/libisoburn-${@d.getVar('PV').split('.pl')[0]}"
