@@ -6,6 +6,7 @@ SECTION = "graphics"
 
 SRCREV = "7affe74d77f93a622bb5002789d5332d32e512ee"
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=main;protocol=https;tag=vulkan-sdk-${PV}"
+UPSTREAM_CHECK_GITTAGREGEX = "^vulkan-sdk-(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig
 
