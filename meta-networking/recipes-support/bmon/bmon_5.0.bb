@@ -11,5 +11,8 @@ DEPENDS = "libconfuse libnl ncurses"
 SRC_URI = "https://github.com/Jafaral/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
 SRC_URI[sha256sum] = "6016e41fdda9166b86b09a0ac601a0c453c3b35acdf904c97a8a555459ad73c0"
 
+UPSTREAM_CHECK_URI = "https://github.com/Jafaral/bmon/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools pkgconfig
 
