@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "b0a374d771cdd081125f38c3abd079657642301c71a543d555e2bf2191
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
 
-inherit autotools pkgconfig gettext gobject-introspection vala gtk-doc
+inherit autotools pkgconfig gettext gobject-introspection vala gtk-doc upstream-version-is-even
 
 # GCC 14+ promotes -Wincompatible-pointer-types to an error. This 0.24.2
 # release predates the stricter C rules (e.g. g_ptr_array_new_full callback
