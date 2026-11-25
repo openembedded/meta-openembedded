@@ -16,6 +16,9 @@ SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
            "
 SRC_URI[sha256sum] = "1973c7732f1f9f0a4c0ccf2c1ce462c7c25060b25643ea90f9b98f53a813faec"
 
+UPSTREAM_CHECK_URI = "http://www.inet.no/dante/download.html"
+UPSTREAM_CHECK_REGEX = "dante-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 # without --without-gssapi, config.log will contain reference to /usr/lib
 # as a consequence of GSSAPI path being set to /usr by default.
 # --with-gssapi-path=PATH specify gssapi path
