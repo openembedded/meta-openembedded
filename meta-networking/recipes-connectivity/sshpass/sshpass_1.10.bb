@@ -8,4 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 
 SRC_URI[sha256sum] = "ad1106c203cbb56185ca3bad8c6ccafca3b4064696194da879f81c8d7bdfeeda"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sshpass/files/sshpass/"
+UPSTREAM_CHECK_REGEX = "/sshpass/(?P<pver>\d+(\.\d+)+)/"
+
 inherit autotools
