@@ -19,6 +19,7 @@ SRC_URI = "gitsm://github.com/openthread/wpantund.git;protocol=https;branch=mast
            file://basename.patch \
            "
 
+UPSTREAM_CHECK_COMMITS = "1"
 
 inherit pkgconfig perlnative autotools
 
