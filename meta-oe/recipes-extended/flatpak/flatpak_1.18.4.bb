@@ -10,6 +10,9 @@ SRC_URI = " \
 
 SRCREV = "a02d0ba48abe9aacc377de15699e5d8c024b5669"
 
+# Odd minor versions are development releases
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+\.\d*[02468]\.\d+)$"
+
 
 inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
 
