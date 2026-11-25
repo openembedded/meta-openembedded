@@ -16,6 +16,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://0001-juju-Do-not-use-variable-length-arrays-in-structs.patch \
            "
 SRC_URI[sha256sum] = "537ceb78dd3cef271a183f4a176191d1cecf85f025520e6bd3758b0e19e6609f"
+
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/libdc1394/files/libdc1394-2/"
+UPSTREAM_CHECK_REGEX = "libdc1394-2/(?P<pver>\d+(\.\d+)+)/"
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
