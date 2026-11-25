@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = "file://mipi-dbi-cmd;beginline=4;endline=13;md5=5e3d3f14cc87a
 SRCREV = "1cbd40135a8c7f25d7b444a7fac77fd3c3ad471e"
 
 SRC_URI = "git://github.com/notro/panel-mipi-dbi.git;protocol=https;branch=main"
+UPSTREAM_CHECK_COMMITS = "1"
 
 
 inherit native
