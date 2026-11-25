@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b83e3e9ab94483903b3bc21d9a1d41ed"
 
 SRC_URI = "git://github.com/tree-sitter/tree-sitter.git;protocol=https;branch=release-0.27;tag=v${PV}"
 SRCREV = "3fb7be49145acfb07e33b61ed5689e2b6771b2e9"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig
 
