@@ -18,6 +18,9 @@ SRC_URI = "\
 SRC_URI[mdsum] = "a37a1a8b8f9228522196a122a1c2dd32"
 SRC_URI[sha256sum] = "c1d75f2e9c7b38fd4695be66eff4533395248132f3cc61f375196403c4d8de42"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/streamripper/files/streamripper%20%28current%29/"
+UPSTREAM_CHECK_REGEX = "%28current%29/(?P<pver>\d+(\.\d+)+)/"
+
 inherit autotools pkgconfig
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_cc_c23=no"
