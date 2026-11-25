@@ -21,6 +21,8 @@ SRC_URI = "git://github.com/rhboot/grubby.git;protocol=https;;branch=main \
            file://run-ptest \
            "
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 RDEPENDS:${PN} += "dracut"
 
 inherit ptest
