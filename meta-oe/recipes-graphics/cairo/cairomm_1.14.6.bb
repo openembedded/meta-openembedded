@@ -10,6 +10,9 @@ DEPENDS += "boost cairo libsigc++-2.0"
 SRC_URI = "https://www.cairographics.org/releases/${BP}.tar.xz"
 SRC_URI[sha256sum] = "7e0d5c7f29175d573a03ab5c45aef63f48dd91a5caf335a404cd763e4b7cea4a"
 
+# 1.16+ is packaged as cairomm-1.16
+UPSTREAM_CHECK_REGEX = "cairomm-(?P<pver>1\.14(\.\d+)+)\.tar"
+
 FILES:${PN}-doc += "${datadir}/devhelp"
 FILES:${PN}-dev += "${libdir}/cairomm-*/"
 
