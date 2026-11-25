@@ -5,9 +5,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "apache2 avahi"
 
-SRC_URI = "git://git.0pointer.net/mod_dnssd.git;protocol=https;branch=master"
-SRCREV = "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
+SRC_URI = "https://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-${PV}.tar.gz \
+           file://0001-build-system-properly-quote-CFLAGS-LIBS-for-apxs.patch \
+           file://0002-mod_dnssd.c-Use-ap_unixd_setup_child.patch \
+           "
+SRC_URI[sha256sum] = "2cd171d76eba398f03c1d5bcc468a1756f4801cd8ed5bd065086e4374997c5aa"
 
+UPSTREAM_CHECK_REGEX = "mod_dnssd-(?P<pver>\d+(\.\d+)+)\.tar"
+
+S = "${UNPACKDIR}/mod_dnssd-${PV}"
 
 EXTRA_OECONF = "--disable-lynx"
 

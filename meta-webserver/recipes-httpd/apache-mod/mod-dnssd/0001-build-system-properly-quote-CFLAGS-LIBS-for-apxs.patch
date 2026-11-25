@@ -1,0 +1,30 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Lennart Poettering <lennart@poettering.net>
+Date: Mon, 20 Apr 2009 03:08:28 +0200
+Subject: [PATCH 1/2] build-system: properly quote CFLAGS/LIBS for apxs
+
+Should fix build on systems where AVAHI_LIBS/AVAHI_CFLAGS is not empty.
+
+Pointed out by Scott Brian.
+
+Upstream-Status: Backport [https://git.0pointer.net/mod_dnssd.git/commit/?id=9476b3bd4f7cf90df5408a6a6b169db210c2c10a]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/Makefile.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Makefile.in b/src/Makefile.in
+index fd99c17..702f2b2 100644
+--- a/src/Makefile.in
++++ b/src/Makefile.in
+@@ -16,8 +16,8 @@
+ 
+ APXS=@APXS@
+ APACHECTL=@APACHECTL@
+-LIBS=-Wl,"@LIBS@" @AVAHI_LIBS@
+-CFLAGS=-Wc,"@CFLAGS@" @AVAHI_CFLAGS@
++LIBS=-Wl,"@LIBS@ @AVAHI_LIBS@"
++CFLAGS=-Wc,"@CFLAGS@ @AVAHI_CFLAGS@"
+ 
+ all: mod_dnssd.la
+ 
