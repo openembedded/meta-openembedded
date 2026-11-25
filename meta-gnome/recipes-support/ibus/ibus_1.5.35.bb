@@ -12,6 +12,8 @@ SRC_URI = " \
 "
 SRCREV = "d464316d9b9613005c5573a010fec7f9b40b93b6"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 inherit meson gettext features_check pkgconfig python3native
 inherit bash-completion gobject-introspection gtk-doc gtk-icon-cache vala
 
