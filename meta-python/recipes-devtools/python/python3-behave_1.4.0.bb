@@ -7,6 +7,8 @@ PV .= "+git${SRCREV}"
 SRCREV = "aca602b4410163fe4be045ce86c9d76ec34a717a"
 SRC_URI += "git://github.com/behave/behave;branch=main;protocol=https"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 
 inherit python_setuptools_build_meta
 
