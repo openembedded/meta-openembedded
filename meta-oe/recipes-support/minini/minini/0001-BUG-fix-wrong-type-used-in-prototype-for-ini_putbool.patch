@@ -1,0 +1,23 @@
+From 797be9d2b883222d387732df73945d52c99ec994 Mon Sep 17 00:00:00 2001
+From: Thiadmer Riemersma <thiadmer.riemersma@gmail.com>
+Date: Sat, 6 Jan 2024 17:16:27 +0100
+Subject: [PATCH] BUG fix: wrong type used in prototype for ini_putbool()
+ function.
+
+Upstream-Status: Backport [https://github.com/compuphase/minIni/commit/797be9d2b883222d387732df73945d52c99ec994]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ dev/minIni.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/dev/minIni.h
++++ b/dev/minIni.h
+@@ -51,7 +51,7 @@
+ #endif
+ 
+ #if !defined INI_READONLY
+-int  ini_putbool(const TCHAR *Section, const TCHAR *Key, int Value, const TCHAR *Filename);
++int  ini_putbool(const mTCHAR *Section, const mTCHAR *Key, int Value, const mTCHAR *Filename);
+ int  ini_putl(const mTCHAR *Section, const mTCHAR *Key, long Value, const mTCHAR *Filename);
+ int  ini_puts(const mTCHAR *Section, const mTCHAR *Key, const mTCHAR *Value, const mTCHAR *Filename);
+ #if defined INI_REAL
