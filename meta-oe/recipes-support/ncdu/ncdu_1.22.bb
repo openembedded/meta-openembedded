@@ -14,6 +14,8 @@ DEPENDS += "ncurses"
 
 SRC_URI += "git://code.blicky.net/yorhel/ncdu.git;protocol=https;branch=master;tag=v${PV}"
 SRCREV = "7a1437389691c4adf1999afce63850c808602f08"
+# 2.x is a Zig rewrite, which OE has no toolchain for
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>1(\.\d+)+)$"
 
 inherit autotools pkgconfig
 
