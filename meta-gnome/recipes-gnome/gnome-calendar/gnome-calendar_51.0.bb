@@ -18,7 +18,7 @@ DEPENDS = " \
 "
 
 GTKIC_VERSION = '4'
-inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
+inherit gnomebase gsettings gtk-icon-cache gettext features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "opengl"
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
@@ -28,6 +28,8 @@ SRC_URI += "file://0001-Support-building-against-libical-4.0.patch"
 export GI_TYPELIB_PATH = "${STAGING_LIBDIR}/girepository-1.0/"
 
 SRC_URI[archive.sha256sum] = "77c290450c40834392cdea2c40451561e98f43d5dae93cd9e915051a6708dc30"
+
+UPSTREAM_CHECK_REGEX = "gnome-calendar-(?P<pver>\d+\.\d+)\.tar"
 
 FILES:${PN} += " \
     ${datadir}/gnome-shell \
