@@ -14,6 +14,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.sha256sum] = "ae449192a582a2582a95e0602b15d792bbd639e836339b81ef916aa87540ac5c"
 
+# 2.36+ (atkmm-2.36 API) is packaged as atkmm-2.36
+UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/"
+
 EXTRA_OEMESON = "-Dbuild-documentation=false"
 
 FILES:${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
