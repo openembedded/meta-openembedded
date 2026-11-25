@@ -17,3 +17,5 @@ SRC_URI = " \
 S = "${UNPACKDIR}/SDL_net-${PV}"
 
 SRC_URI[sha256sum] = "5f4a7a8bb884f793c278ac3f3713be41980c5eedccecff0260411347714facb4"
+
+UPSTREAM_CHECK_REGEX = "SDL_net-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
