@@ -13,6 +13,8 @@ SRC_URI[sha256sum] = "1bb7a6e0c0d251f23d6e60bf84c9adefc5b74eec58475bfee4d39107e6
 
 S = "${UNPACKDIR}/MIME-Charset-${PV}"
 
+UPSTREAM_CHECK_REGEX = "MIME-Charset-(?P<pver>\d+\.\d+(\.\d+)?)\.tar\.gz"
+
 inherit cpan
 
 BBCLASSEXTEND = "native"
