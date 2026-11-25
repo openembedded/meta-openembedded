@@ -10,7 +10,7 @@ inherit pypi python_setuptools_build_meta cython
 DEPENDS += "python3-grpcio python3-wheel-native"
 
 SRC_URI += "file://0001-abseil-raw_hash_set-include-immintrin.h-instead-of-b.patch"
-SRC_URI[sha256sum] = "9439be3cfae21974656abf0c07d0e203535162069f2d786667ad6f618c83b5be"
+SRC_URI[sha256sum] = "85a46eb8b59c208138c36a936a7407b27d466130053ed35957b39f13a939f24b"
 
 RDEPENDS:${PN} = "python3-grpcio"
 

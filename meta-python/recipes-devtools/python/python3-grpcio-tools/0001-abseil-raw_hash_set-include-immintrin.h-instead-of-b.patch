@@ -1,4 +1,4 @@
-From f97638e64eb1deeb599ed33237adb71625789ed5 Mon Sep 17 00:00:00 2001
+From 4612086b090cb25bb6504dd6faad8c67b9803a93 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 24 Jun 2026 00:00:00 +0000
 Subject: [PATCH] abseil: raw_hash_set: include <immintrin.h> instead of
