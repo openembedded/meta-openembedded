@@ -10,4 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/opencore-amr/${BP}.tar.gz"
 SRC_URI[md5sum] = "03de025060a4f16c4c44218f65e13e95"
 SRC_URI[sha256sum] = "483eb4061088e2b34b358e47540b5d495a96cd468e361050fae615b1809dc4a1"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/opencore-amr/files/opencore-amr/"
+UPSTREAM_CHECK_REGEX = "opencore-amr-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit autotools
