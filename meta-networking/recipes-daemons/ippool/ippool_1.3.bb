@@ -37,6 +37,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
 SRC_URI[md5sum] = "e2401e65db26a3764585b97212888fae"
 SRC_URI[sha256sum] = "d3eab7d6cad5da8ccc9d1e31d5303e27a39622c07bdb8fa3618eea314412075b"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openl2tp/files/ippool/"
+UPSTREAM_CHECK_REGEX = "/ippool/(?P<pver>\d+(\.\d+)+)/"
+
 inherit systemd
 
 DEPENDS = "readline ppp ncurses gzip-native rpcsvc-proto-native libtirpc"
