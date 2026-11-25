@@ -11,6 +11,9 @@ SRC_URI = "http://quitte.de/dsp/${BPN}_${PV}.tar.bz2 \
 SRC_URI[md5sum] = "36b30c7c7db2d2bc5f4f54077e97b5ee"
 SRC_URI[sha256sum] = "e7496c5bce05abebe3dcb635926153bbb58a9337a6e423f048d3b61d8a4f98c9"
 
+UPSTREAM_CHECK_URI = "http://quitte.de/dsp/caps.html"
+UPSTREAM_CHECK_REGEX = "caps_(?P<pver>\d+(\.\d+)+)\.tar"
+
 EXTRA_OEMAKE = " \
     CC='${CXX}' \
     CFLAGS='${CFLAGS} -ffast-math -funroll-loops -fPIC -DPIC' \
