@@ -40,6 +40,9 @@ ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
 SRC_URI[md5sum] = "79a9c1f9023d53f35bb82bf446150a72"
 SRC_URI[sha256sum] = "a0d26931bf731f97514da266d079d8bc7d73c65b3499ed080576ab606b21c0ce"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/esmtp/files/esmtp/"
+UPSTREAM_CHECK_REGEX = "/esmtp/(?P<pver>\d+(\.\d+)+)/"
+
 do_install:append() {
     # only one file /usr/lib/sendmail in ${D}${libdir}
     rm -rf ${D}${libdir}
