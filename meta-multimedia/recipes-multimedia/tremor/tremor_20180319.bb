@@ -12,6 +12,8 @@ SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https;branch=master \
 "
 SRCREV = "7c30a66346199f3f09017a09567c6c8a3a0eedc8"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 
 inherit autotools pkgconfig
 
