@@ -15,6 +15,8 @@ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master;tag=$
 
 SRCREV = "14aeb09f5a0856812dbe08ead3c21f99e8860aa0"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+){3})$"
+
 PACKAGES =+ "${PN}-scripts"
 
 inherit cmake pkgconfig
