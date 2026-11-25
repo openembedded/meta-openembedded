@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = "\
-    git://git.openwrt.org/project/libubox.git;branch=master \
+    git://git.openwrt.org/project/libubox.git;protocol=https;branch=master \
     file://0001-cmake-Set-library-version.patch \
     file://0002-cmake-fix-the-CMAKE_INSTALL_LIBDIR.patch \
     file://0003-cmake-Don-t-include-lua-and-examples-directories-if-.patch \
