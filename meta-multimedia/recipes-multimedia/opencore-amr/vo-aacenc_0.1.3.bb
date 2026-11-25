@@ -10,4 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/opencore-amr/${BP}.tar.gz"
 SRC_URI[md5sum] = "b574da1d92d75fc40b0b75aa16f24ac4"
 SRC_URI[sha256sum] = "e51a7477a359f18df7c4f82d195dab4e14e7414cbd48cf79cc195fc446850f36"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/opencore-amr/files/vo-aacenc/"
+UPSTREAM_CHECK_REGEX = "vo-aacenc-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit autotools
