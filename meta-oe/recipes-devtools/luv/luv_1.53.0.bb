@@ -7,6 +7,9 @@ LUV_REV = "1"
 SRC_URI = "https://github.com/luvit/luv/releases/download/${PV}-${LUV_REV}/luv-${PV}-${LUV_REV}.tar.gz"
 SRC_URI[sha256sum] = "569b488d5d31609ea466a6c70e008a42661ec773ea1584d3d766d46280ab7cf4"
 
+UPSTREAM_CHECK_URI = "https://github.com/luvit/luv/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/v?(?P<pver>\d+(\.\d+)+)-\d+$"
+
 S = "${UNPACKDIR}/luv-${PV}-${LUV_REV}"
 
 DEPENDS = "luajit libuv"
