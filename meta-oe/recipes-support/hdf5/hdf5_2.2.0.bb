@@ -25,8 +25,8 @@ SRC_URI = "https://github.com/HDFGroup/hdf5/releases/download/${PV}/${BPN}-${PV}
            "
 SRC_URI[sha256sum] = "1a1ab8209b35586fbc1aa279ba76d102130b95badcb20ca329587219112d8c16"
 
-UPSTREAM_CHECK_URI = "https://support.hdfgroup.org/releases/hdf5/"
-UPSTREAM_CHECK_REGEX = "\./(?P<pver>\d+(\.\d+)+)/index\.html"
+UPSTREAM_CHECK_URI = "https://github.com/HDFGroup/hdf5/releases"
+UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
 
 FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
 
