@@ -16,6 +16,9 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.sha256sum] = "19e383c82d5dd89db275e00b82864e90414d4c3fb3d100b2f996bcc2338a4cc7"
 
+# 4.x is packaged as gtkmm4
+UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/"
+
 EXTRA_OEMESON = "-Dbuild-demos=false"
 
 FILES:${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
