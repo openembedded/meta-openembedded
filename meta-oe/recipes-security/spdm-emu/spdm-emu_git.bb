@@ -11,11 +11,7 @@ SRC_URI = "gitsm://github.com/DMTF/spdm-emu;protocol=https;branch=main \
            "
 
 SRCREV = "ea77f25410cc01098320c0b44b3e150192ec4d5e"
-# Upstream release tags are "X.Y.Z" (newest 3.8.0).
-UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
-# PV is "git" (AUTOINC recipe with no numeric PV), so the resolved tag (3.8.0)
-# has nothing to compare against; reported unknown rather than broken.
-UPSTREAM_VERSION_UNKNOWN = "1"
+UPSTREAM_CHECK_COMMITS = "1"
 inherit cmake pkgconfig systemd
 
 # Use mbedtls until openssl build is fixed.
