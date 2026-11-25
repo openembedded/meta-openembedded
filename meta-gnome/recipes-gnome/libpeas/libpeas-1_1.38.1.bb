@@ -18,6 +18,9 @@ SRC_URI += "file://0001-Remove-builddir-and-srcdir-paths-from-test-binaries.patc
 SRC_URI[archive.sha256sum] = "e82fd328adcac1aba34b64136bdfcbbacf2b3258a8bc4e5f480a72502a611ae9"
 S = "${UNPACKDIR}/libpeas-${PV}"
 
+# 2.x is packaged as libpeas
+UPSTREAM_CHECK_REGEX = "libpeas-(?P<pver>1\.\d*[02468](\.\d+)+)\.tar"
+
 PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
 
 PACKAGES =+ "${PN}-demo ${PN}-python3"
