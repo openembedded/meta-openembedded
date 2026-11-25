@@ -23,6 +23,9 @@ SRC_URI = "git://github.com/mininet/openflow;protocol=https;branch=master \
            file://0001-Makefile.am-Specify-export-dynamic-directly-to-linke.patch \
            file://0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch \
 "
+
+UPSTREAM_CHECK_COMMITS = "1"
+
 CVE_STATUS[CVE-2015-1611] = "not-applicable-config: Not referred to our implementation of openflow"
 CVE_STATUS[CVE-2015-1612] = "not-applicable-config: Not referred to our implementation of openflow"
 CVE_STATUS[CVE-2018-1078] = "cpe-incorrect: This CVE is not for this product but cve-check assumes it is \
