@@ -7,4 +7,6 @@ SRC_URI[sha256sum] = "e11528d63e75461d45b86c23f9db8260303d6ab6cae075fa9eddb44527
 
 inherit pypi python_setuptools_build_meta cython
 
+UPSTREAM_CHECK_REGEX = "(?i)reedsolo-(?P<pver>\d+(\.\d+)+(b\d+)?)\.tar\.gz"
+
 RDEPENDS:${PN} += "python3-core"
