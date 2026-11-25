@@ -16,6 +16,9 @@ SRC_URI = "http://downloads.sourceforge.net/tsocks/tsocks-${PV}.tar.gz \
 SRC_URI[md5sum] = "51caefd77e5d440d0bbd6443db4fc0f8"
 SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863f5b347"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tsocks/files/"
+UPSTREAM_CHECK_REGEX = "tsocks-(?P<pver>\d+(\.\d+)+(beta\d+)?)\.tar\.gz"
+
 inherit autotools-brokensep
 
 LIBS:append:libc-musl = " -lssp_nonshared"
