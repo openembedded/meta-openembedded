@@ -23,6 +23,9 @@ SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8
 
 S = "${UNPACKDIR}/${SRCNAME}-${PV}"
 
+UPSTREAM_CHECK_URI = "https://github.com/nphilipp/${SRCNAME}/tags"
+UPSTREAM_CHECK_REGEX = "releases/tag/python-slip-(?P<pver>\d+(\.\d+)+)$"
+
 do_compile:prepend() {
     sed -e 's/@VERSION@/${PV}/g' ${S}/setup.py.in > ${S}/setup.py
 }
