@@ -11,6 +11,8 @@ SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.4-release;ta
            file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
 "
 
+UPSTREAM_CHECK_GITTAGREGEX = "^zfs-(?P<pver>\d+\.\d+\.(?!99$)\d+)$"
+
 # Using both 'module' and 'autotools' classes seems a bit odd, they both
 # define a do_compile function.
 # That's why we opt for module-base, also this prevents module splitting.
