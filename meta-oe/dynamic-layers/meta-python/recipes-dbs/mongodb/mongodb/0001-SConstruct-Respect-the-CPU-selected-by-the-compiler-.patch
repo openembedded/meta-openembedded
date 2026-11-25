@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 07:52:52 -0800
+Subject: [PATCH] SConstruct: Respect the CPU selected by the compiler command
+
+SConstruct adds default -march=/-mcpu=/-mtune= flags for aarch64,
+ppc64le and s390x unless one of CCFLAGS, CFLAGS or CXXFLAGS already
+has the same flag. Cross toolchains pass the target CPU as part of CC
+and CXX, often as -mcpu= instead of -march=, so the defaults were
+added anyway. On aarch64 this builds for ARMv8.2-A, which does not run
+on ARMv8.0 cores such as Cortex-A53 and Cortex-A72.
+
+Look at CC and CXX as well, and treat -mcpu= as also selecting the
+architecture and the tuning.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ SConstruct | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 45e78a8d..b79e01a8 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -3272,11 +3272,17 @@ if not env.TargetOSIs('windows', 'macOS') and (env.ToolchainIs('GCC', 'clang')):
+ 
+     default_targeting_flags = default_targeting_flags_for_architecture.get(env['TARGET_ARCH'])
+     if default_targeting_flags:
+-        search_variables = ['CCFLAGS', 'CFLAGS', 'CXXFLAGS']
++        # Also look at the compiler command, where cross toolchains pass the
++        # target CPU, and treat -mcpu= as selecting the architecture and tuning.
++        user_flags = shlex.split(env.subst('$CC $CXX $CCFLAGS $CFLAGS $CXXFLAGS'))
++        equivalent_flags = {
++            '-march=': ('-march=', '-mcpu='),
++            '-mcpu=': ('-march=', '-mcpu='),
++            '-mtune=': ('-mtune=', '-mcpu='),
++        }
+         for targeting_flag, targeting_flag_value in default_targeting_flags.items():
+-            if not any(
+-                    flag_value.startswith(targeting_flag) for search_variable in search_variables
+-                    for flag_value in env[search_variable]):
++            prefixes = equivalent_flags.get(targeting_flag, (targeting_flag, ))
++            if not any(flag_value.startswith(prefixes) for flag_value in user_flags):
+                 env.Append(CCFLAGS=[f'{targeting_flag}{targeting_flag_value}'])
+ 
+ # Needed for auth tests since key files are stored in git with mode 644.

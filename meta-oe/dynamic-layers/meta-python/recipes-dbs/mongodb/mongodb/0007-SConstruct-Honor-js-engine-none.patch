@@ -1,0 +1,37 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 10:00:00 -0800
+Subject: [PATCH] SConstruct: Honor --js-engine=none
+
+get_option("js-engine") returns the string "none", which is true in
+the "if jsEngine:" checks of the SConscripts, so mozjs and the mozjs
+scripting library are built anyway. With --server-js=off, mongod then
+links both scripting_none and the mozjs scripting library:
+
+  ld.lld: error: duplicate symbol: mongo::ScriptEngine::setup(mongo::ExecutionEnvironment, bool)
+  >>> defined at engine_none.cpp:35
+  >>> defined at engine.cpp:52
+
+Map "none" to None so --js-engine=none builds without mozjs.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ SConstruct | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/SConstruct b/SConstruct
+--- a/SConstruct
++++ b/SConstruct
+@@ -1645,7 +1645,10 @@
+ 
+ noshell = has_option("noshell")
+ 
++# "none" is a valid choice, but a non-empty string, so map it to None
+ jsEngine = get_option("js-engine")
++if jsEngine == "none":
++    jsEngine = None
+ 
+ serverJs = get_option("server-js") == "on"
+ 

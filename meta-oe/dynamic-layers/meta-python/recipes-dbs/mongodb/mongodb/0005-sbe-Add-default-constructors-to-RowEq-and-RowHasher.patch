@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 13:00:00 -0800
+Subject: [PATCH] sbe: Add default constructors to RowEq and RowHasher
+
+libstdc++ 16 value-initializes the hash and equality functors of
+std::unordered_map with copy-list-initialization ("_M_hash{}"), which
+fails when the only default constructor is explicit:
+
+  hashtable_policy.h:1077:70: error: chosen constructor is explicit in copy-initialization
+  row.h:409:14: note: explicit constructor declared here
+
+Add non-explicit default constructors and keep the converting
+constructors explicit.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/db/exec/sbe/values/row.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/mongo/db/exec/sbe/values/row.h b/src/mongo/db/exec/sbe/values/row.h
+index b0ae9212..09d16a59 100644
+--- a/src/mongo/db/exec/sbe/values/row.h
++++ b/src/mongo/db/exec/sbe/values/row.h
+@@ -347,7 +347,8 @@ template <typename RowType>
+ struct RowEq {
+     using ComparatorType = StringData::ComparatorInterface;
+ 
+-    explicit RowEq(const ComparatorType* comparator = nullptr) : _comparator(comparator) {}
++    RowEq() = default;
++    explicit RowEq(const ComparatorType* comparator) : _comparator(comparator) {}
+ 
+     bool operator()(const RowType& lhs, const RowType& rhs) const {
+         for (size_t idx = 0; idx < lhs.size(); ++idx) {
+@@ -406,7 +407,8 @@ template <typename RowType>
+ struct RowHasher {
+     using CollatorType = CollatorInterface*;
+ 
+-    explicit RowHasher(const CollatorType collator = nullptr) : _collator(collator) {}
++    RowHasher() = default;
++    explicit RowHasher(const CollatorType collator) : _collator(collator) {}
+ 
+     std::size_t operator()(const RowType& k) const {
+         size_t res = hashInit();

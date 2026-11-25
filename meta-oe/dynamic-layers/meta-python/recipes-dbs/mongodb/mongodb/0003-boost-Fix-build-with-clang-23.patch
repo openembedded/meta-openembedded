@@ -3,7 +3,7 @@ From: Khem Raj <khem.raj@oss.qualcomm.com>
 Date: Mon, 9 Nov 2026 09:00:00 -0800
 Subject: [PATCH] boost: Fix build with clang 23
 
-Backport fixes from newer Boost to the bundled Boost 1.70:
+Backport fixes from newer Boost to the bundled Boost 1.79:
 
 - numeric_conversion and log: use boost::integral_constant instead of
   mpl::integral_c for enum constants. mpl::integral_c computes the
@@ -21,10 +21,17 @@ Backport fixes from newer Boost to the bundled Boost 1.70:
 Upstream-Status: Backport [https://github.com/boostorg/numeric_conversion/commit/50a1eae942effb0a9b90724323ef8f2a67e7984a https://github.com/boostorg/log/commit/77f1e20bd69c2e7a9e25e6a9818ae6105f7d070c https://github.com/boostorg/thread/commit/49ccf9c30a0ca556873dbf64b12b0d741d1b3e66]
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
-diff --git a/src/third_party/boost-1.70.0/boost/log/utility/strictest_lock.hpp b/src/third_party/boost-1.70.0/boost/log/utility/strictest_lock.hpp
-index 5dd48b4f..05c7a037 100644
---- a/src/third_party/boost-1.70.0/boost/log/utility/strictest_lock.hpp
-+++ b/src/third_party/boost-1.70.0/boost/log/utility/strictest_lock.hpp
+ .../boost/boost/log/utility/strictest_lock.hpp  | 17 +++++++++--------
+ .../conversion/detail/int_float_mixture.hpp     | 10 +++++-----
+ .../numeric/conversion/detail/sign_mixture.hpp  | 10 +++++-----
+ .../conversion/detail/udt_builtin_mixture.hpp   | 10 +++++-----
+ src/third_party/boost/boost/thread/future.hpp   |  2 +-
+ 5 files changed, 25 insertions(+), 24 deletions(-)
+
+diff --git a/src/third_party/boost/boost/log/utility/strictest_lock.hpp b/src/third_party/boost/boost/log/utility/strictest_lock.hpp
+index accc8b7a..80e71bde 100644
+--- a/src/third_party/boost/boost/log/utility/strictest_lock.hpp
++++ b/src/third_party/boost/boost/log/utility/strictest_lock.hpp
 @@ -17,6 +17,7 @@
  #define BOOST_LOG_UTILITY_STRICTEST_LOCK_HPP_INCLUDED_
  
@@ -86,10 +93,10 @@ index 5dd48b4f..05c7a037 100644
  {
  };
  
-diff --git a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/int_float_mixture.hpp b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/int_float_mixture.hpp
+diff --git a/src/third_party/boost/boost/numeric/conversion/detail/int_float_mixture.hpp b/src/third_party/boost/boost/numeric/conversion/detail/int_float_mixture.hpp
 index 464e5275..7690d07a 100644
---- a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/int_float_mixture.hpp
-+++ b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/int_float_mixture.hpp
+--- a/src/third_party/boost/boost/numeric/conversion/detail/int_float_mixture.hpp
++++ b/src/third_party/boost/boost/numeric/conversion/detail/int_float_mixture.hpp
 @@ -16,15 +16,15 @@
  #include "boost/numeric/conversion/int_float_mixture_enum.hpp"
  #include "boost/numeric/conversion/detail/meta.hpp"
@@ -111,10 +118,10 @@ index 464e5275..7690d07a 100644
  
    // Metafunction:
    //
-diff --git a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/sign_mixture.hpp b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/sign_mixture.hpp
+diff --git a/src/third_party/boost/boost/numeric/conversion/detail/sign_mixture.hpp b/src/third_party/boost/boost/numeric/conversion/detail/sign_mixture.hpp
 index c7f9e42a..fde15840 100644
---- a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/sign_mixture.hpp
-+++ b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/sign_mixture.hpp
+--- a/src/third_party/boost/boost/numeric/conversion/detail/sign_mixture.hpp
++++ b/src/third_party/boost/boost/numeric/conversion/detail/sign_mixture.hpp
 @@ -16,15 +16,15 @@
  #include "boost/numeric/conversion/sign_mixture_enum.hpp"
  #include "boost/numeric/conversion/detail/meta.hpp"
@@ -136,10 +143,10 @@ index c7f9e42a..fde15840 100644
  
    // Metafunction:
    //
-diff --git a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/udt_builtin_mixture.hpp b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
+diff --git a/src/third_party/boost/boost/numeric/conversion/detail/udt_builtin_mixture.hpp b/src/third_party/boost/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
 index 36dbc491..a39d29fd 100644
---- a/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
-+++ b/src/third_party/boost-1.70.0/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
+--- a/src/third_party/boost/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
++++ b/src/third_party/boost/boost/numeric/conversion/detail/udt_builtin_mixture.hpp
 @@ -15,15 +15,15 @@
  #include "boost/numeric/conversion/udt_builtin_mixture_enum.hpp"
  #include "boost/numeric/conversion/detail/meta.hpp"
@@ -161,10 +168,10 @@ index 36dbc491..a39d29fd 100644
  
    // Metafunction:
    //
-diff --git a/src/third_party/boost-1.70.0/boost/thread/future.hpp b/src/third_party/boost-1.70.0/boost/thread/future.hpp
-index 3d1b29d4..2862fc0a 100644
---- a/src/third_party/boost-1.70.0/boost/thread/future.hpp
-+++ b/src/third_party/boost-1.70.0/boost/thread/future.hpp
+diff --git a/src/third_party/boost/boost/thread/future.hpp b/src/third_party/boost/boost/thread/future.hpp
+index bbf0ffc8..989babac 100644
+--- a/src/third_party/boost/boost/thread/future.hpp
++++ b/src/third_party/boost/boost/thread/future.hpp
 @@ -4669,7 +4669,7 @@ namespace detail
        }
        run_it& operator=(BOOST_THREAD_RV_REF(run_it) x) BOOST_NOEXCEPT {

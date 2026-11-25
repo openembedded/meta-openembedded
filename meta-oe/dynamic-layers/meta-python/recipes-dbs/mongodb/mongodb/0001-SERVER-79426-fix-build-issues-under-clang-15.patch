@@ -1,0 +1,275 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Colin Stolley <colin.stolley@mongodb.com>
+Date: Mon, 31 Jul 2023 16:27:55 +0000
+Subject: [PATCH] SERVER-79426: fix build issues under clang-15.
+
+Upstream-Status: Backport [https://github.com/mongodb/mongo/commit/eb02e5a121019b7dcdc28ebd4ec96e777075141e]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/db/cst/c_node.h                     | 59 ++++++++++---------
+ src/mongo/db/exec/near.cpp                    | 30 +++++-----
+ .../optimizer/cascades/logical_rewriter.cpp   |  2 +-
+ src/mongo/db/query/stats/max_diff.cpp         |  2 +-
+ src/mongo/s/write_ops/write_op.h              | 52 ++++++++--------
+ src/mongo/util/net/ssl_types.h                |  6 +-
+ .../dist/absl/hash/internal/low_level_hash.cc |  2 +-
+ 7 files changed, 78 insertions(+), 75 deletions(-)
+
+diff --git a/src/mongo/db/cst/c_node.h b/src/mongo/db/cst/c_node.h
+index af77b493..0ac1f8b7 100644
+--- a/src/mongo/db/cst/c_node.h
++++ b/src/mongo/db/cst/c_node.h
+@@ -218,34 +218,37 @@ public:
+     using Fieldname = stdx::variant<KeyFieldname, UserFieldname, FieldnamePath>;
+     using ArrayChildren = std::vector<CNode>;
+     using ObjectChildren = std::vector<std::pair<Fieldname, CNode>>;
+-    stdx::variant<ArrayChildren,
+-                  ObjectChildren,
+-                  CompoundInclusionKey,
+-                  CompoundExclusionKey,
+-                  CompoundInconsistentKey,
+-                  KeyValue,
+-                  NonZeroKey,
+-                  ValuePath,
+-                  UserDouble,
+-                  UserString,
+-                  UserBinary,
+-                  UserUndefined,
+-                  UserObjectId,
+-                  UserBoolean,
+-                  UserDate,
+-                  UserNull,
+-                  UserRegex,
+-                  UserDBPointer,
+-                  UserJavascript,
+-                  UserSymbol,
+-                  UserJavascriptWithScope,
+-                  UserInt,
+-                  UserTimestamp,
+-                  UserLong,
+-                  UserDecimal,
+-                  UserMinKey,
+-                  UserMaxKey>
+-        payload;
++    using Payload = stdx::variant<ArrayChildren,
++                                  ObjectChildren,
++                                  CompoundInclusionKey,
++                                  CompoundExclusionKey,
++                                  CompoundInconsistentKey,
++                                  KeyValue,
++                                  NonZeroKey,
++                                  ValuePath,
++                                  UserDouble,
++                                  UserString,
++                                  UserBinary,
++                                  UserUndefined,
++                                  UserObjectId,
++                                  UserBoolean,
++                                  UserDate,
++                                  UserNull,
++                                  UserRegex,
++                                  UserDBPointer,
++                                  UserJavascript,
++                                  UserSymbol,
++                                  UserJavascriptWithScope,
++                                  UserInt,
++                                  UserTimestamp,
++                                  UserLong,
++                                  UserDecimal,
++                                  UserMinKey,
++                                  UserMaxKey>;
++    Payload payload;
++
++    CNode() = default;
++    CNode(Payload p) : payload(std::move(p)){};
+ 
+     /*
+      * Returns whether this fieldname is the key fieldname representing the _id syntax.
+diff --git a/src/mongo/db/exec/near.cpp b/src/mongo/db/exec/near.cpp
+index 05bc2735..4cb2e558 100644
+--- a/src/mongo/db/exec/near.cpp
++++ b/src/mongo/db/exec/near.cpp
+@@ -42,6 +42,21 @@ namespace mongo {
+ using std::unique_ptr;
+ using std::vector;
+ 
++/**
++ * Holds a generic search result with a distance computed in some fashion.
++ */
++struct NearStage::SearchResult {
++    SearchResult(WorkingSetID resultID, double distance) : resultID(resultID), distance(distance) {}
++
++    bool operator<(const SearchResult& other) const {
++        // We want increasing distance, not decreasing, so we reverse the <
++        return distance > other.distance;
++    }
++
++    WorkingSetID resultID;
++    double distance;
++};
++
+ NearStage::NearStage(ExpressionContext* expCtx,
+                      const char* typeName,
+                      StageType type,
+@@ -114,21 +129,6 @@ PlanStage::StageState NearStage::doWork(WorkingSetID* out) {
+     return nextState;
+ }
+ 
+-/**
+- * Holds a generic search result with a distance computed in some fashion.
+- */
+-struct NearStage::SearchResult {
+-    SearchResult(WorkingSetID resultID, double distance) : resultID(resultID), distance(distance) {}
+-
+-    bool operator<(const SearchResult& other) const {
+-        // We want increasing distance, not decreasing, so we reverse the <
+-        return distance > other.distance;
+-    }
+-
+-    WorkingSetID resultID;
+-    double distance;
+-};
+-
+ // Set "toReturn" when NEED_YIELD.
+ PlanStage::StageState NearStage::bufferNext(WorkingSetID* toReturn) {
+     //
+diff --git a/src/mongo/db/query/optimizer/cascades/logical_rewriter.cpp b/src/mongo/db/query/optimizer/cascades/logical_rewriter.cpp
+index 17052b69..ad68ce61 100644
+--- a/src/mongo/db/query/optimizer/cascades/logical_rewriter.cpp
++++ b/src/mongo/db/query/optimizer/cascades/logical_rewriter.cpp
+@@ -149,7 +149,7 @@ std::pair<GroupIdType, NodeIdSet> LogicalRewriter::addNode(const ABT& node,
+             continue;
+         }
+ 
+-        for (const auto [type, priority] : _activeRewriteSet) {
++        for (const auto& [type, priority] : _activeRewriteSet) {
+             auto& groupQueue = _memo.getLogicalRewriteQueue(nodeMemoId._groupId);
+             groupQueue.push(std::make_unique<LogicalRewriteEntry>(priority, type, nodeMemoId));
+ 
+diff --git a/src/mongo/db/query/stats/max_diff.cpp b/src/mongo/db/query/stats/max_diff.cpp
+index 93b33499..a27d5364 100644
+--- a/src/mongo/db/query/stats/max_diff.cpp
++++ b/src/mongo/db/query/stats/max_diff.cpp
+@@ -245,7 +245,7 @@ DataDistribution getDataDistribution(const std::vector<SBEValue>& sortedInput) {
+ 
+     // Compute normalized areas.
+     size_t i = 0;
+-    for (const auto [endIdx, area] : result.typeClassBounds) {
++    for (const auto& [endIdx, area] : result.typeClassBounds) {
+         // We ensure above that the area for the current type bracket is never 0.
+         tassert(7299703, str::stream() << "maximum area for type bracket is zero", area != 0.0);
+         // Iterate over all values in the current type bracket.
+diff --git a/src/mongo/s/write_ops/write_op.h b/src/mongo/s/write_ops/write_op.h
+index e6f268fc..5df27ddc 100644
+--- a/src/mongo/s/write_ops/write_op.h
++++ b/src/mongo/s/write_ops/write_op.h
+@@ -38,7 +38,7 @@
+ namespace mongo {
+ 
+ struct TargetedWrite;
+-struct ChildWriteOp;
++class WriteOp;
+ 
+ enum WriteOpState {
+     // Item is ready to be targeted
+@@ -62,6 +62,31 @@ enum WriteOpState {
+     WriteOpState_Unknown
+ };
+ 
++/**
++ * State of a write in-progress (to a single shard) which is one part of a larger write
++ * operation.
++ *
++ * As above, the write op may finish in either a successful (_Completed) or unsuccessful
++ * (_Error) state.
++ */
++struct ChildWriteOp {
++    ChildWriteOp(WriteOp* const parent) : parentOp(parent) {}
++
++    const WriteOp* const parentOp;
++
++    WriteOpState state{WriteOpState_Ready};
++
++    // non-zero when state == _Pending
++    // Not owned here but tracked for reporting
++    TargetedWrite* pendingWrite{nullptr};
++
++    // filled when state > _Pending
++    std::unique_ptr<ShardEndpoint> endpoint;
++
++    // filled when state == _Error or (optionally) when state == _Cancelled
++    boost::optional<write_ops::WriteError> error;
++};
++
+ /**
+  * State of a single write item in-progress from a client request.
+  *
+@@ -183,31 +208,6 @@ private:
+     // stores the shards where this write operation succeeded
+     absl::flat_hash_set<ShardId> _successfulShardSet;
+ };
+-/**
+- * State of a write in-progress (to a single shard) which is one part of a larger write
+- * operation.
+- *
+- * As above, the write op may finish in either a successful (_Completed) or unsuccessful
+- * (_Error) state.
+- */
+-struct ChildWriteOp {
+-    ChildWriteOp(WriteOp* const parent) : parentOp(parent) {}
+-
+-    const WriteOp* const parentOp;
+-
+-    WriteOpState state{WriteOpState_Ready};
+-
+-    // non-zero when state == _Pending
+-    // Not owned here but tracked for reporting
+-    TargetedWrite* pendingWrite{nullptr};
+-
+-    // filled when state > _Pending
+-    std::unique_ptr<ShardEndpoint> endpoint;
+-
+-    // filled when state == _Error or (optionally) when state == _Cancelled
+-    boost::optional<write_ops::WriteError> error;
+-};
+-
+ // First value is write item index in the batch, second value is child write op index
+ typedef std::pair<int, int> WriteOpRef;
+ 
+diff --git a/src/mongo/util/net/ssl_types.h b/src/mongo/util/net/ssl_types.h
+index bb65d271..284e07dd 100644
+--- a/src/mongo/util/net/ssl_types.h
++++ b/src/mongo/util/net/ssl_types.h
+@@ -61,6 +61,9 @@ public:
+         auto equalityLens() const {
+             return std::tie(oid, type, value);
+         }
++        bool operator==(const Entry& rhs) const {
++            return this->equalityLens() == rhs.equalityLens();
++        }
+     };
+ 
+     SSLX509Name() = default;
+@@ -110,9 +113,6 @@ private:
+ };
+ 
+ std::ostream& operator<<(std::ostream&, const SSLX509Name&);
+-inline bool operator==(const SSLX509Name::Entry& lhs, const SSLX509Name::Entry& rhs) {
+-    return lhs.equalityLens() == rhs.equalityLens();
+-}
+ inline bool operator<(const SSLX509Name::Entry& lhs, const SSLX509Name::Entry& rhs) {
+     return lhs.equalityLens() < rhs.equalityLens();
+ }
+diff --git a/src/third_party/abseil-cpp/dist/absl/hash/internal/low_level_hash.cc b/src/third_party/abseil-cpp/dist/absl/hash/internal/low_level_hash.cc
+index 6f9cb9c7..d288f3ec 100644
+--- a/src/third_party/abseil-cpp/dist/absl/hash/internal/low_level_hash.cc
++++ b/src/third_party/abseil-cpp/dist/absl/hash/internal/low_level_hash.cc
+@@ -40,7 +40,7 @@ static uint64_t Mix(uint64_t v0, uint64_t v1) {
+ }
+ 
+ uint64_t LowLevelHash(const void* data, size_t len, uint64_t seed,
+-                      const uint64_t salt[]) {
++                      const uint64_t salt[5]) {
+   const uint8_t* ptr = static_cast<const uint8_t*>(data);
+   uint64_t starting_length = static_cast<uint64_t>(len);
+   uint64_t current_state = seed ^ salt[0];

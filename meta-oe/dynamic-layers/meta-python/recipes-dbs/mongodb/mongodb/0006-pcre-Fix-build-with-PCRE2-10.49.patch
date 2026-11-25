@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 13:00:00 -0800
+Subject: [PATCH] pcre: Fix build with PCRE2 10.49
+
+PCRE2 10.49 no longer defines PCRE2_ERROR_CONDITION_ATOMIC_ASSERTION_EXPECTED
+and uses its old value 198 for PCRE2_ERROR_MISSING_OCTAL_DIGIT, so the
+build with --use-system-pcre2 fails:
+
+  src/mongo/util/pcre.cpp:75:62: error: use of undeclared identifier 'PCRE2_ERROR_CONDITION_ATOMIC_ASSERTION_EXPECTED'
+
+Map the error to a code PCRE2 does not use when the header lacks it.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/util/pcre.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/mongo/util/pcre.cpp b/src/mongo/util/pcre.cpp
+index ef38a6ff..90a16b5b 100644
+--- a/src/mongo/util/pcre.cpp
++++ b/src/mongo/util/pcre.cpp
+@@ -71,6 +71,11 @@ std::string pcre2ErrorMessage(int e) {
+     return std::string(buf, len);
+ }
+ 
++// PCRE2 10.49 no longer defines this error; give it a code PCRE2 does not use
++#ifndef PCRE2_ERROR_CONDITION_ATOMIC_ASSERTION_EXPECTED
++#define PCRE2_ERROR_CONDITION_ATOMIC_ASSERTION_EXPECTED (-1000)
++#endif
++
+ #define X_(name) std::pair{Errc::name, PCRE2_##name},
+ constexpr std::array errTable{MONGO_PCRE_ERROR_EXPAND_TABLE_(X_)};
+ #undef X_

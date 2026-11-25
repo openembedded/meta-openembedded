@@ -10,25 +10,32 @@ load with:
 
 Use parse() from the packaging module instead.
 
-Upstream-Status: Inappropriate [v4.4 branch is EOL]
+Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
+ SConstruct                        | 2 +-
+ site_scons/site_tools/ccache.py   | 2 +-
+ site_scons/site_tools/icecream.py | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
 diff --git a/SConstruct b/SConstruct
+index 9750ca0b..e84797c6 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -16,7 +16,7 @@
- import uuid
+@@ -19,7 +19,7 @@ import uuid
+ from datetime import datetime
  from glob import glob
  
 -from pkg_resources import parse_version
 +from packaging.version import parse as parse_version
  
  import SCons
- 
+ import SCons.Script
 diff --git a/site_scons/site_tools/ccache.py b/site_scons/site_tools/ccache.py
+index dc7ca4cd..e0c20554 100644
 --- a/site_scons/site_tools/ccache.py
 +++ b/site_scons/site_tools/ccache.py
-@@ -26,7 +26,7 @@
+@@ -26,7 +26,7 @@ import re
  import subprocess
  
  import SCons
@@ -38,9 +45,10 @@ diff --git a/site_scons/site_tools/ccache.py b/site_scons/site_tools/ccache.py
  # This is the oldest version of ccache that offers support for -gsplit-dwarf
  _ccache_version_min = parse_version("3.2.3")
 diff --git a/site_scons/site_tools/icecream.py b/site_scons/site_tools/icecream.py
+index e7340b51..44b11062 100644
 --- a/site_scons/site_tools/icecream.py
 +++ b/site_scons/site_tools/icecream.py
-@@ -25,7 +25,7 @@
+@@ -25,7 +25,7 @@ import re
  import subprocess
  import urllib
  

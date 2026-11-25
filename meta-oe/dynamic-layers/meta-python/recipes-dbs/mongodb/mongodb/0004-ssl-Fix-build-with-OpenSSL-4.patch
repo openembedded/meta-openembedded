@@ -5,34 +5,49 @@ Subject: [PATCH] ssl: Fix build with OpenSSL 4
 
 OpenSSL 4 makes ASN1_STRING opaque, removes ASN1_STRING_data() and
 ERR_remove_state(), and returns const pointers from
-X509_EXTENSION_get_object() and X509_EXTENSION_get_data().
+X509_EXTENSION_get_object(), X509_EXTENSION_get_data(),
+X509_get_subject_name() and X509_get_issuer_name().
 
 Use the ASN1_STRING accessors, which are available since OpenSSL 1.1,
-make the extension pointers const, and only call ERR_remove_state() with
-OpenSSL older than 1.1, where it is not a no-op.
+make the extension and name pointers const, and only call
+ERR_remove_state() with OpenSSL older than 1.1, where it is not a
+no-op.
 
-Upstream-Status: Inappropriate [v4.4 branch is EOL]
+Upstream-Status: Pending
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
+ src/mongo/util/net/openssl_init.cpp        |  2 ++
+ src/mongo/util/net/ssl_manager_openssl.cpp | 42 ++++++++++++----------
+ 2 files changed, 26 insertions(+), 18 deletions(-)
+
 diff --git a/src/mongo/util/net/openssl_init.cpp b/src/mongo/util/net/openssl_init.cpp
-index c4980bb0..93b6e4fc 100644
+index 794c2b99..dec88c8d 100644
 --- a/src/mongo/util/net/openssl_init.cpp
 +++ b/src/mongo/util/net/openssl_init.cpp
-@@ -77,7 +77,9 @@ public:
+@@ -87,7 +87,9 @@ public:
  
          // The `guard` callback will cause an invocation of `getID`, so it must be destroyed first.
          static thread_local ManagedId managedId;
 +#if OPENSSL_VERSION_NUMBER < 0x10100000L
-         static thread_local auto guard = makeGuard([] { ERR_remove_state(0); });
+         static thread_local ScopeGuard guard([] { ERR_remove_state(0); });
 +#endif
  
          return managedId.id;
      }
 diff --git a/src/mongo/util/net/ssl_manager_openssl.cpp b/src/mongo/util/net/ssl_manager_openssl.cpp
-index 60cde955..fa55bb7d 100644
+index 0a6d51bb..a64d4dec 100644
 --- a/src/mongo/util/net/ssl_manager_openssl.cpp
 +++ b/src/mongo/util/net/ssl_manager_openssl.cpp
-@@ -1433,7 +1433,10 @@ SSLX509Name getCertificateSubjectX509Name(X509* cert) {
+@@ -378,7 +378,7 @@ UniqueStackOfX509 SSLgetVerifiedChain(SSL* s) {
+     return UniqueStackOfX509(X509_STORE_CTX_get1_chain(ctx.get()));
+ }
+ 
+-SSLX509Name convertX509ToSSLX509Name(X509_NAME* x509Name) {
++SSLX509Name convertX509ToSSLX509Name(const X509_NAME* x509Name) {
+     std::vector<std::vector<SSLX509Name::Entry>> entries;
+ 
+     int count = X509_NAME_entry_count(x509Name);
+@@ -406,7 +406,10 @@ SSLX509Name convertX509ToSSLX509Name(X509_NAME* x509Name) {
  
          const auto* str = X509_NAME_ENTRY_get_data(entry);
          rdn.emplace_back(
@@ -44,7 +59,7 @@ index 60cde955..fa55bb7d 100644
      }
      if (!rdn.empty()) {
          entries.push_back(std::move(rdn));
-@@ -2904,7 +2907,7 @@ Future<SSLPeerInfo> SSLManagerOpenSSL::parseAndValidatePeerCertificate(
+@@ -3394,7 +3397,7 @@ Future<SSLPeerInfo> SSLManagerOpenSSL::parseAndValidatePeerCertificate(
              const GENERAL_NAME* currentName = sk_GENERAL_NAME_value(sanNames, i);
              if (currentName && currentName->type == GEN_DNS) {
                  std::string dnsName(
@@ -53,7 +68,7 @@ index 60cde955..fa55bb7d 100644
                  auto swCIDRDNSName = CIDR::parse(dnsName);
                  if (swCIDRDNSName.isOK()) {
                      LOGV2_WARNING(23237,
-@@ -2925,14 +2928,16 @@ Future<SSLPeerInfo> SSLManagerOpenSSL::parseAndValidatePeerCertificate(
+@@ -3415,14 +3418,16 @@ Future<SSLPeerInfo> SSLManagerOpenSSL::parseAndValidatePeerCertificate(
                  auto ipAddrStruct = currentName->d.iPAddress;
                  struct sockaddr_storage ss;
                  memset(&ss, 0, sizeof(ss));
@@ -74,28 +89,37 @@ index 60cde955..fa55bb7d 100644
                  }
                  auto ipAddress =
                      SockAddr(reinterpret_cast<struct sockaddr*>(&ss), sizeof(ss)).getAddr();
-@@ -3026,15 +3031,16 @@ StatusWith<stdx::unordered_set<RoleName>> SSLManagerOpenSSL::_parsePeerRoles(X50
-     stdx::unordered_set<RoleName> roles;
+@@ -3518,22 +3523,22 @@ StatusWith<SSLManagerOpenSSL::ParsedPeerExtensions> SSLManagerOpenSSL::_parsePee
+     ParsedPeerExtensions parsed;
      for (int i = 0; i < extCount; i++) {
          X509_EXTENSION* ex = sk_X509_EXTENSION_value(exts, i);
 -        ASN1_OBJECT* obj = X509_EXTENSION_get_object(ex);
 +        const ASN1_OBJECT* obj = X509_EXTENSION_get_object(ex);
  
          if (!OBJ_cmp(obj, rolesObj)) {
-             // We've found an extension which has our roles OID
+             // mongodbRoles extension.
 -            ASN1_OCTET_STRING* data = X509_EXTENSION_get_data(ex);
+-            auto ptr = reinterpret_cast<char*>(data->data);
+-            auto swRoles = parsePeerRoles(ConstDataRange(ptr, ptr + data->length));
 +            const ASN1_OCTET_STRING* data = X509_EXTENSION_get_data(ex);
- 
-             return parsePeerRoles(
--                ConstDataRange(reinterpret_cast<char*>(data->data),
--                               reinterpret_cast<char*>(data->data) + data->length));
-+                ConstDataRange(reinterpret_cast<const char*>(ASN1_STRING_get0_data(data)),
-+                               reinterpret_cast<const char*>(ASN1_STRING_get0_data(data)) +
-+                                   ASN1_STRING_length(data)));
-         }
-     }
- 
-@@ -3054,14 +3060,15 @@ StatusWith<boost::optional<std::vector<DERInteger>>> SSLManagerOpenSSL::_parseTL
++            auto ptr = reinterpret_cast<const char*>(ASN1_STRING_get0_data(data));
++            auto swRoles = parsePeerRoles(ConstDataRange(ptr, ptr + ASN1_STRING_length(data)));
+             if (!swRoles.isOK()) {
+                 return std::move(swRoles.getStatus());
+             }
+             parsed.roles = std::move(swRoles.getValue());
+         } else if (!OBJ_cmp(obj, clusterMembershipObj)) {
+             // mongodbClusterMembership extension.
+-            ASN1_OCTET_STRING* data = X509_EXTENSION_get_data(ex);
+-            auto ptr = reinterpret_cast<char*>(data->data);
+-            auto swMembership = parseDERString(ConstDataRange(ptr, ptr + data->length));
++            const ASN1_OCTET_STRING* data = X509_EXTENSION_get_data(ex);
++            auto ptr = reinterpret_cast<const char*>(ASN1_STRING_get0_data(data));
++            auto swMembership = parseDERString(ConstDataRange(ptr, ptr + ASN1_STRING_length(data)));
+             if (!swMembership.isOK()) {
+                 return std::move(swMembership.getStatus());
+             }
+@@ -3557,14 +3562,15 @@ StatusWith<boost::optional<std::vector<DERInteger>>> SSLManagerOpenSSL::_parseTL
      ASN1_OBJECT* featuresObj = OBJ_nid2obj(NID_tlsfeature);
      for (int i = 0; i < extCount; i++) {
          X509_EXTENSION* ex = sk_X509_EXTENSION_value(exts, i);

@@ -1,18 +1,32 @@
-Subject: [PATCH] stacktrace: Define ARCH_BITS for ppc64
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 Nov 2026 07:53:32 -0800
+Subject: [PATCH] stacktrace: Define ARCH_BITS for ppc64 and s390x
+
+musl does not define __ELF_NATIVE_CLASS, so ARCH_BITS is only set for
+x86_64 and aarch64 and the build fails on the other 64-bit targets:
 
 src/mongo/util/stacktrace_somap.cpp:89:2: error: #error Unknown target architecture.
 stacktrace_somap.cpp:92:33: error: 'ELFCLASSARCH_BITS' was not declared in this scope
 
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/util/stacktrace_somap.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/mongo/util/stacktrace_somap.cpp b/src/mongo/util/stacktrace_somap.cpp
+index a9045da0..fe8ea889 100644
 --- a/src/mongo/util/stacktrace_somap.cpp
 +++ b/src/mongo/util/stacktrace_somap.cpp
-@@ -81,7 +81,7 @@ void addUnameToSoMap(BSONObjBuilder* soM
+@@ -83,7 +83,7 @@ void addUnameToSoMap(BSONObjBuilder* soMap) {
  
  #if defined(__ELF_NATIVE_CLASS)  // determine ARCH_BITS
  #define ARCH_BITS __ELF_NATIVE_CLASS
 -#elif defined(__x86_64__) || defined(__aarch64__)
-+#elif defined(__x86_64__) || defined(__aarch64__)  || defined(__powerpc64__)
++#elif defined(__x86_64__) || defined(__aarch64__) || defined(__powerpc64__) || defined(__s390x__)
  #define ARCH_BITS 64
- #elif defined(__i386__) || defined(__arm__)
+ #elif defined(__arm__)
  #define ARCH_BITS 32

@@ -1,0 +1,133 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Colin Stolley <cstolley@gmail.com>
+Date: Thu, 27 Jul 2023 15:55:08 +0000
+Subject: [PATCH] SERVER-77007: MongoDB fails to compile with Clang 15 with
+ C++20
+
+Upstream-Status: Backport [https://github.com/mongodb/mongo/commit/688f62c2904a8630acf44298bb040fce787386cf]
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/db/exec/document_value/value.cpp        | 12 ++++++------
+ src/mongo/db/exec/document_value/value.h          |  2 +-
+ src/mongo/db/exec/document_value/value_internal.h | 13 +++++++------
+ 3 files changed, 14 insertions(+), 13 deletions(-)
+
+diff --git a/src/mongo/db/exec/document_value/value.cpp b/src/mongo/db/exec/document_value/value.cpp
+index bb78d59a..3c04fc14 100644
+--- a/src/mongo/db/exec/document_value/value.cpp
++++ b/src/mongo/db/exec/document_value/value.cpp
+@@ -136,7 +136,7 @@ void ValueStorage::putDocument(Document&& d) {
+     putRefCountable(std::move(d._storage));
+ }
+ 
+-void ValueStorage::putVector(boost::intrusive_ptr<RCVector>&& vec) {
++void ValueStorage::putVector(boost::intrusive_ptr<RCVector<Value>>&& vec) {
+     fassert(16485, bool(vec));
+     putRefCountable(std::move(vec));
+ }
+@@ -200,7 +200,7 @@ Value::Value(const BSONElement& elem) : _storage(elem.type()) {
+         }
+ 
+         case Array: {
+-            auto vec = make_intrusive<RCVector>();
++            auto vec = make_intrusive<RCVector<Value>>();
+             BSONForEach(sub, elem.embeddedObject()) {
+                 vec->vec.push_back(Value(sub));
+             }
+@@ -262,7 +262,7 @@ Value::Value(const BSONElement& elem) : _storage(elem.type()) {
+ }
+ 
+ Value::Value(const BSONArray& arr) : _storage(Array) {
+-    auto vec = make_intrusive<RCVector>();
++    auto vec = make_intrusive<RCVector<Value>>();
+     BSONForEach(sub, arr) {
+         vec->vec.push_back(Value(sub));
+     }
+@@ -270,7 +270,7 @@ Value::Value(const BSONArray& arr) : _storage(Array) {
+ }
+ 
+ Value::Value(const vector<BSONObj>& vec) : _storage(Array) {
+-    auto storageVec = make_intrusive<RCVector>();
++    auto storageVec = make_intrusive<RCVector<Value>>();
+     storageVec->vec.reserve(vec.size());
+     for (auto&& obj : vec) {
+         storageVec->vec.push_back(Value(obj));
+@@ -279,7 +279,7 @@ Value::Value(const vector<BSONObj>& vec) : _storage(Array) {
+ }
+ 
+ Value::Value(const vector<Document>& vec) : _storage(Array) {
+-    auto storageVec = make_intrusive<RCVector>();
++    auto storageVec = make_intrusive<RCVector<Value>>();
+     storageVec->vec.reserve(vec.size());
+     for (auto&& obj : vec) {
+         storageVec->vec.push_back(Value(obj));
+@@ -1171,7 +1171,7 @@ size_t Value::getApproximateSize() const {
+ 
+         case Array: {
+             size_t size = sizeof(Value);
+-            size += sizeof(RCVector);
++            size += sizeof(RCVector<Value>);
+             const size_t n = getArray().size();
+             for (size_t i = 0; i < n; ++i) {
+                 size += getArray()[i].getApproximateSize();
+diff --git a/src/mongo/db/exec/document_value/value.h b/src/mongo/db/exec/document_value/value.h
+index e5b92976..6168be9e 100644
+--- a/src/mongo/db/exec/document_value/value.h
++++ b/src/mongo/db/exec/document_value/value.h
+@@ -110,7 +110,7 @@ public:
+     explicit Value(const std::vector<BSONObj>& vec);
+     explicit Value(const std::vector<Document>& vec);
+     explicit Value(std::vector<Value> vec)
+-        : _storage(Array, make_intrusive<RCVector>(std::move(vec))) {}
++        : _storage(Array, make_intrusive<RCVector<Value>>(std::move(vec))) {}
+     explicit Value(const BSONBinData& bd) : _storage(BinData, bd) {}
+     explicit Value(const BSONRegEx& re) : _storage(RegEx, re) {}
+     explicit Value(const BSONCodeWScope& cws) : _storage(CodeWScope, cws) {}
+diff --git a/src/mongo/db/exec/document_value/value_internal.h b/src/mongo/db/exec/document_value/value_internal.h
+index b19af0e7..55477fb8 100644
+--- a/src/mongo/db/exec/document_value/value_internal.h
++++ b/src/mongo/db/exec/document_value/value_internal.h
+@@ -49,11 +49,12 @@ class Value;
+ 
+ // TODO: a MutableVector, similar to MutableDocument
+ /// A heap-allocated reference-counted std::vector
++template <typename T>
+ class RCVector : public RefCountable {
+ public:
+     RCVector() {}
+-    RCVector(std::vector<Value> v) : vec(std::move(v)) {}
+-    std::vector<Value> vec;
++    RCVector(std::vector<T> v) : vec(std::move(v)) {}
++    std::vector<T> vec;
+ };
+ 
+ class RCCodeWScope : public RefCountable {
+@@ -128,7 +129,7 @@ public:
+         type = t;
+         putDocument(std::move(d));
+     }
+-    ValueStorage(BSONType t, boost::intrusive_ptr<RCVector>&& a) {
++    ValueStorage(BSONType t, boost::intrusive_ptr<RCVector<Value>>&& a) {
+         zero();
+         type = t;
+         putVector(std::move(a));
+@@ -231,7 +232,7 @@ public:
+ 
+     /// These are only to be called during Value construction on an empty Value
+     void putString(StringData s);
+-    void putVector(boost::intrusive_ptr<RCVector>&& v);
++    void putVector(boost::intrusive_ptr<RCVector<Value>>&& v);
+     void putDocument(const Document& d);
+     void putDocument(Document&& d);
+     void putRegEx(const BSONRegEx& re);
+@@ -273,8 +274,8 @@ public:
+     }
+ 
+     const std::vector<Value>& getArray() const {
+-        dassert(typeid(*genericRCPtr) == typeid(const RCVector));
+-        const RCVector* arrayPtr = static_cast<const RCVector*>(genericRCPtr);
++        dassert(typeid(*genericRCPtr) == typeid(const RCVector<Value>));
++        const RCVector<Value>* arrayPtr = static_cast<const RCVector<Value>*>(genericRCPtr);
+         return arrayPtr->vec;
+     }
+ 

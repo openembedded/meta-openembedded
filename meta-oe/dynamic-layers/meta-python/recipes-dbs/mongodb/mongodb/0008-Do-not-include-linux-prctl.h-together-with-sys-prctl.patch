@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 16:20:35 -0800
+Subject: [PATCH] Do not include linux/prctl.h together with sys/prctl.h
+
+musl's sys/prctl.h defines struct prctl_mm_map and the PR_* constants
+itself, so including linux/prctl.h as well redefines the struct:
+
+  sys/prctl.h:88:8: error: redefinition of 'prctl_mm_map'
+
+glibc's sys/prctl.h includes linux/prctl.h, and PR_GET_THP_DISABLE,
+the only definition used here, is available from sys/prctl.h on both,
+so drop the linux/prctl.h include.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ src/mongo/db/startup_warnings_mongod.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/mongo/db/startup_warnings_mongod.cpp b/src/mongo/db/startup_warnings_mongod.cpp
+index d3c975e..18f9966 100644
+--- a/src/mongo/db/startup_warnings_mongod.cpp
++++ b/src/mongo/db/startup_warnings_mongod.cpp
+@@ -36,7 +36,6 @@
+ #include <fstream>
+ 
+ #ifdef __linux__
+-#include <linux/prctl.h>
+ #include <sys/prctl.h>
+ #endif  // __linux__
+ 

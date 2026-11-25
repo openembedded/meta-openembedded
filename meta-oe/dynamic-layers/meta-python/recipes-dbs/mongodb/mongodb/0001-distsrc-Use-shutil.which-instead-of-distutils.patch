@@ -1,0 +1,40 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 07:52:25 -0800
+Subject: [PATCH] distsrc: Use shutil.which instead of distutils
+
+distutils was removed from the standard library in Python 3.12, and
+the copy that setuptools provides is deprecated. The distsrc tool is
+always loaded, so the build fails when distutils is not available.
+
+Use shutil.which(), which distsrc.py already imports shutil for.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ site_scons/site_tools/distsrc.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/site_scons/site_tools/distsrc.py b/site_scons/site_tools/distsrc.py
+index 83f47f2a..a6871d95 100644
+--- a/site_scons/site_tools/distsrc.py
++++ b/site_scons/site_tools/distsrc.py
+@@ -30,8 +30,6 @@ import time
+ import zipfile
+ import io
+ 
+-from distutils.spawn import find_executable
+-
+ __distsrc_callbacks = []
+ 
+ 
+@@ -176,7 +174,7 @@ def distsrc_action_generator(source, target, env, for_signature):
+     # using the env.
+     git_path = env.WhereIs("git")
+     if not git_path:
+-        git_path = find_executable("git")
++        git_path = shutil.which("git")
+ 
+     if not git_path:
+         return build_error_action("Could not find git - cannot create distsrc archive")
