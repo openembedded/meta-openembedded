@@ -14,7 +14,7 @@ SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
            file://abseil-ppc-fixes.patch \
            file://0001-abseil-raw_hash_set-include-immintrin.h-instead-of-b.patch \
            "
-SRC_URI[sha256sum] = "8e18f15d1b09b8771edbf59d634b26cbe4903bc2577cb667264934a6655eb8b4"
+SRC_URI[sha256sum] = "45c4efd77dbfbb92cfebe493518c7e2a97ef3f4da2673508f81214b7493d7cca"
 
 RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
 

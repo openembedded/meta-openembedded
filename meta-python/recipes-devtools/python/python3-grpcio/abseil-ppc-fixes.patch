@@ -1,4 +1,4 @@
-From 42b215f964b2c13db4adb0ee72f024607f74e6d1 Mon Sep 17 00:00:00 2001
+From 1aa6db269ca0293cb0ad0ecdcea0085a4487ed6a Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 13 Mar 2021 10:26:25 -0800
 Subject: [PATCH] An all-in-one patch that fixes several issues:
@@ -22,7 +22,7 @@ Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
  4 files changed, 12 insertions(+), 5 deletions(-)
 
 diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
-index 68f9273..5dbfaab 100644
+index 73e4145..52cffa7 100644
 --- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
 +++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock.cc
 @@ -20,7 +20,7 @@
@@ -44,7 +44,7 @@ index 68f9273..5dbfaab 100644
  int64_t UnscaledCycleClock::Now() {
  #ifdef __GLIBC__
 diff --git a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
-index 43a3dab..196a853 100644
+index 9a0841d..934d5d7 100644
 --- a/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
 +++ b/third_party/abseil-cpp/absl/base/internal/unscaledcycleclock_config.h
 @@ -21,7 +21,8 @@
@@ -58,7 +58,7 @@ index 43a3dab..196a853 100644
  #define ABSL_HAVE_UNSCALED_CYCLECLOCK_IMPLEMENTATION 1
  #else
 diff --git a/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc b/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
-index 3dd6ba1..9f0601c 100644
+index 9a47f19..005239f 100644
 --- a/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
 +++ b/third_party/abseil-cpp/absl/debugging/internal/examine_stack.cc
 @@ -36,6 +36,10 @@
@@ -72,7 +72,7 @@ index 3dd6ba1..9f0601c 100644
  #include "absl/base/attributes.h"
  #include "absl/base/internal/raw_logging.h"
  #include "absl/base/macros.h"
-@@ -177,8 +181,10 @@ void* GetProgramCounter(void* const vuc) {
+@@ -191,8 +195,10 @@ void* GetProgramCounter(void* const vuc) {
      return reinterpret_cast<void*>(context->uc_mcontext.pc);
  #elif defined(__powerpc64__)
      return reinterpret_cast<void*>(context->uc_mcontext.gp_regs[32]);
@@ -85,10 +85,10 @@ index 3dd6ba1..9f0601c 100644
      return reinterpret_cast<void*>(context->uc_mcontext.__gregs[REG_PC]);
  #elif defined(__s390__) && !defined(__s390x__)
 diff --git a/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h b/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
-index 88949fe..4e26a6b 100644
+index c82d4a3..f7ee6cb 100644
 --- a/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
 +++ b/third_party/abseil-cpp/absl/debugging/internal/stacktrace_config.h
-@@ -67,7 +67,7 @@
+@@ -68,7 +68,7 @@
  #elif defined(__i386__) || defined(__x86_64__)
  #define ABSL_STACKTRACE_INL_HEADER \
    "absl/debugging/internal/stacktrace_x86-inl.inc"
