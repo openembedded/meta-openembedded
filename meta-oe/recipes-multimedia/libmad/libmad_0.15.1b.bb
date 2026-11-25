@@ -23,6 +23,9 @@ SRC_URI:append:toolchain-clang = " file://0004-Remove-clang-unsupported-compiler
 
 SRC_URI[sha256sum] = "bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/mad/files/libmad/"
+UPSTREAM_CHECK_REGEX = "libmad/(?P<pver>\d+(\.\d+)+[a-z]?)/$"
+
 CVE_PRODUCT:append = " mad_libmad"
 
 S = "${UNPACKDIR}/libmad-${PV}"
