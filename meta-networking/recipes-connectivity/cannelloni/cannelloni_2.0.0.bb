@@ -5,6 +5,8 @@ LICENSE = "GPL-2.0-only"
 SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
 SRCREV = "9f649ef21710999c6f674bc3d914ab2e88363bac"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit cmake
