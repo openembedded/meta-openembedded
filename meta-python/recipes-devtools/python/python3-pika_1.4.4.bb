@@ -16,6 +16,8 @@ SRC_URI = "\
     file://run-ptest \
 "
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 inherit python_setuptools_build_meta ptest-python-pytest
 
 
