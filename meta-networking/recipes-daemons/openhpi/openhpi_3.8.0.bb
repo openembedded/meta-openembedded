@@ -51,6 +51,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
 SRC_URI[md5sum] = "fffda3deea8a0d3671a72eea9d13a4df"
 SRC_URI[sha256sum] = "c94332a29160dd75cb799c027e614690c00263b0fabed87417707bec04c38723"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openhpi/files/openhpi-stable/"
+UPSTREAM_CHECK_REGEX = "/openhpi-stable/(?P<pver>\d+(\.\d+)+)/"
+
 inherit autotools pkgconfig ptest update-rc.d systemd
 
 PACKAGES =+ "${PN}-libs"
