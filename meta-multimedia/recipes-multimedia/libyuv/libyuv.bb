@@ -10,6 +10,8 @@ SRC_URI = "git://chromium.googlesource.com/libyuv/libyuv;protocol=https;branch=m
 SRCREV = "5a17753597d77dee881d9d93097ca2c2079e9409"
 PV = "0.1+git"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 inherit cmake
 
 PACKAGECONFIG ??= "jpeg"
