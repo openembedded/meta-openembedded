@@ -12,6 +12,7 @@ DEPENDS = "clang"
 
 SRCREV = "01a091d16b3dedb808db21f32ed3e761737a3691"
 SRC_URI = "git://github.com/include-what-you-use/include-what-you-use.git;protocol=https;branch=clang_22;tag=${PV}"
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+\.\d+)$"
 
 inherit cmake python3native
 
