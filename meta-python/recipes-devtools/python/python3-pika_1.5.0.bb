@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=678ec81495ba50edf81e84e4f1aa69f3"
 
 # The PyPI package omits some files for testing like tests/__init__.py
 # so use the GitHub source instead.
-SRCREV = "60fee4203a30d5dfa0500857cea6a65ef571d46c"
+SRCREV = "b26d4a5541a002dd6c1a9643b8db452977843dd7"
 SRC_URI = "\
-    git://github.com/pika/pika;branch=1.4.x;protocol=https;tag=${PV} \
+    git://github.com/pika/pika;branch=main;protocol=https;tag=${PV} \
     file://run-ptest \
 "
 
