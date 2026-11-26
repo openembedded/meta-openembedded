@@ -193,24 +193,24 @@ fluidsynth: synth_one_block:all voices>: 97.000/103.681/251.000
 Upstream-Status: Inappropriate [embedded-specific]
 
 ---
- src/rvoice/fluid_rvoice_mixer.c | 55 ++++++++++++++++++++++++++++++++-
- 1 file changed, 54 insertions(+), 1 deletion(-)
+ src/rvoice/fluid_rvoice_mixer.cpp | 55 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 55 insertions(+), 0 deletions(-)
 
-diff --git a/src/rvoice/fluid_rvoice_mixer.c b/src/rvoice/fluid_rvoice_mixer.c
-index af0ef75d..07a357c7 100644
---- a/src/rvoice/fluid_rvoice_mixer.c
-+++ b/src/rvoice/fluid_rvoice_mixer.c
-@@ -27,6 +27,9 @@
+diff --git a/src/rvoice/fluid_rvoice_mixer.cpp b/src/rvoice/fluid_rvoice_mixer.cpp
+--- a/src/rvoice/fluid_rvoice_mixer.cpp
++++ b/src/rvoice/fluid_rvoice_mixer.cpp
+@@ -26,6 +26,10 @@
  #include "fluid_ladspa.h"
  #include "fluid_synth.h"
  
 +#if defined(__ARM_NEON__)
 +#include "arm_neon.h"
 +#endif
++
+ #include <atomic>
+ #include <new>
  
- // If less than x voices, the thread overhead is larger than the gain,
- // so don't activate the thread(s).
-@@ -1053,9 +1056,15 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t *dst, fluid_mixer_buffers_t *src,
+@@ -1454,8 +1458,15 @@
      int i, j;
      int scount = current_blockcount * FLUID_BUFSIZE;
      int minbuf;
@@ -222,20 +222,19 @@ index af0ef75d..07a357c7 100644
 +#else
      fluid_real_t *FLUID_RESTRICT base_src;
      fluid_real_t *FLUID_RESTRICT base_dst;
--
 +#endif
+ 
      minbuf = dst->buf_count;
  
-     if(minbuf > src->buf_count)
-@@ -1063,6 +1072,27 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t *dst, fluid_mixer_buffers_t *src,
+@@ -1464,6 +1475,27 @@
          minbuf = src->buf_count;
      }
  
 +#if defined(__ARM_NEON__) && defined(WITH_FLOAT)
-+    base_src_left = fluid_align_ptr(src->left_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_dst_left = fluid_align_ptr(dst->left_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_src_right = fluid_align_ptr(src->right_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_dst_right = fluid_align_ptr(dst->right_buf, FLUID_DEFAULT_ALIGNMENT);
++    base_src_left = static_cast<fluid_real_t *>(fluid_align_ptr(src->left_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_dst_left = static_cast<fluid_real_t *>(fluid_align_ptr(dst->left_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_src_right = static_cast<fluid_real_t *>(fluid_align_ptr(src->right_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_dst_right = static_cast<fluid_real_t *>(fluid_align_ptr(dst->right_buf, FLUID_DEFAULT_ALIGNMENT));
 +
 +    for(i = 0; i < minbuf; i++)
 +    {
@@ -252,10 +251,10 @@ index af0ef75d..07a357c7 100644
 +        }
 +    }
 +#else
-     base_src = fluid_align_ptr(src->left_buf, FLUID_DEFAULT_ALIGNMENT);
-     base_dst = fluid_align_ptr(dst->left_buf, FLUID_DEFAULT_ALIGNMENT);
+     base_src = static_cast<fluid_real_t *>(fluid_align_ptr(src->left_buf, FLUID_DEFAULT_ALIGNMENT));
+     base_dst = static_cast<fluid_real_t *>(fluid_align_ptr(dst->left_buf, FLUID_DEFAULT_ALIGNMENT));
  
-@@ -1090,6 +1120,7 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t *dst, fluid_mixer_buffers_t *src,
+@@ -1491,6 +1523,7 @@
              base_dst[dsp_i] += base_src[dsp_i];
          }
      }
@@ -263,15 +262,15 @@ index af0ef75d..07a357c7 100644
  
      minbuf = dst->fx_buf_count;
  
-@@ -1098,6 +1129,27 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t *dst, fluid_mixer_buffers_t *src,
+@@ -1499,6 +1532,27 @@
          minbuf = src->fx_buf_count;
      }
  
 +#if defined(__ARM_NEON__) && defined(WITH_FLOAT)
-+    base_src_left = fluid_align_ptr(src->fx_left_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_dst_left = fluid_align_ptr(dst->fx_left_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_src_right = fluid_align_ptr(src->fx_right_buf, FLUID_DEFAULT_ALIGNMENT);
-+    base_dst_right = fluid_align_ptr(dst->fx_right_buf, FLUID_DEFAULT_ALIGNMENT);
++    base_src_left = static_cast<fluid_real_t *>(fluid_align_ptr(src->fx_left_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_dst_left = static_cast<fluid_real_t *>(fluid_align_ptr(dst->fx_left_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_src_right = static_cast<fluid_real_t *>(fluid_align_ptr(src->fx_right_buf, FLUID_DEFAULT_ALIGNMENT));
++    base_dst_right = static_cast<fluid_real_t *>(fluid_align_ptr(dst->fx_right_buf, FLUID_DEFAULT_ALIGNMENT));
 +
 +    for(i = 0; i < minbuf; i++)
 +    {
@@ -288,10 +287,10 @@ index af0ef75d..07a357c7 100644
 +        }
 +    }
 +#else
-     base_src = fluid_align_ptr(src->fx_left_buf, FLUID_DEFAULT_ALIGNMENT);
-     base_dst = fluid_align_ptr(dst->fx_left_buf, FLUID_DEFAULT_ALIGNMENT);
+     base_src = static_cast<fluid_real_t *>(fluid_align_ptr(src->fx_left_buf, FLUID_DEFAULT_ALIGNMENT));
+     base_dst = static_cast<fluid_real_t *>(fluid_align_ptr(dst->fx_left_buf, FLUID_DEFAULT_ALIGNMENT));
  
-@@ -1125,6 +1177,7 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t *dst, fluid_mixer_buffers_t *src,
+@@ -1526,6 +1580,7 @@
              base_dst[dsp_i] += base_src[dsp_i];
          }
      }
@@ -301,4 +300,3 @@ index af0ef75d..07a357c7 100644
  
 -- 
 2.20.1
-

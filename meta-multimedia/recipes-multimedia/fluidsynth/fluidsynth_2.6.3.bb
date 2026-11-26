@@ -21,7 +21,8 @@ SRC_URI = " \
     file://0003-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
 SRCREV_FORMAT = "fluidsynth"
-SRCREV_fluidsynth = "c3b244ddfd094489a5490beee013c621a504adf2"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+SRCREV_fluidsynth = "cd8b576ae6d33b805378356e5b33ec9f9c5b2e1b"
 SRCREV_gcem = "012ae73c6d0a2cb09ffe86475f5c6fba3926e200"
 SRCREV_signalsmith-audio-basics = "012d2be17b0eb6839628f8c73687c4ccccc1bb01"
 SRCREV_signalsmith-linear = "5668673560146a9cfe38c25315071e3fd68c8317"
