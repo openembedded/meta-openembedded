@@ -4,13 +4,15 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
 
-SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https;tag=v${PV} \
            file://run-ptest \
            file://0001-allow-build-with-cmake-4.patch \
            file://CVE-2026-87933.patch \
            file://0001-CMake-Install-to-relative-destinations.patch \
          "
 SRCREV = "c859b25da02955fef659d658b8f324b5cde87be3"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig ptest
 
