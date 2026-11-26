@@ -17,7 +17,10 @@ SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
 
 LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
 
-SRC_URI[sha256sum] = "e53b1ac288d017d66dde0471cd429a806168ecf07179d7f019572d7a7e05f0d6"
+SRC_URI[sha256sum] = "8eaa1b1b8d3c36ce8ddeae6d79c9a05360dcba5930115112c078415bcbe0d16d"
+
+UPSTREAM_CHECK_URI = "https://download.samba.org/pub/tevent/"
+UPSTREAM_CHECK_REGEX = "tevent-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
 
 inherit pkgconfig ptest waf-samba
 
