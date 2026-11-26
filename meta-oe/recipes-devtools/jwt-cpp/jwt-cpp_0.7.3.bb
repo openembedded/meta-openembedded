@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
 SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https;tag=v${PV} \
             "
 
-SRCREV = "b0ea29a58fc852a67d4e896d266880c2c63b0c4c"
+SRCREV = "f573f993c9a85cd919a430a5a7a2b7bbb9036a93"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 DEPENDS = "openssl"
 
