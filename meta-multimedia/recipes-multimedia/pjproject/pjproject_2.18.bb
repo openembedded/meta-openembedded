@@ -12,19 +12,9 @@ SECTION = "libs"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag=${PV} \
-           file://0001-ssl_sock_ossl-fix-OpenSSL-4.0-compatibility.patch \
-           file://CVE-2026-57160.patch \
-           file://CVE-2026-57161.patch \
-           file://CVE-2026-57162.patch \
-           file://CVE-2026-57163.patch \
-           file://CVE-2026-57164.patch \
-           file://CVE-2026-57165.patch \
-           file://CVE-2026-57166.patch \
-           file://CVE-2026-77396.patch \
-           file://CVE-2026-84975.patch \
-           "
-SRCREV = "5a457451fa2712ba18e12b01738e8ff3af2b26fd"
+SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag=${PV}"
+SRCREV = "bd4a7189d83d94237b6f42f3b8274664dbe6ff94"
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 
 DEPENDS = "swig-native python3-setuptools-native"
 
