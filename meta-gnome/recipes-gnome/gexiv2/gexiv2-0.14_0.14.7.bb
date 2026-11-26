@@ -15,7 +15,7 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 
 inherit gnomebase gobject-introspection gtk-doc vala
 
-SRC_URI[archive.sha256sum] = "606c28aaae7b1f3ef5c8eabe5e7dffd7c5a1c866d25b7671fb847fe287a72b8b"
+SRC_URI[archive.sha256sum] = "373b67b24f1a7b5c0606aaf0ea00b352f9511751e21deba0bac650bd5159c93d"
 
 # 0.16 is packaged as gexiv2
 UPSTREAM_CHECK_URI = "https://download.gnome.org/sources/gexiv2/0.14/"
