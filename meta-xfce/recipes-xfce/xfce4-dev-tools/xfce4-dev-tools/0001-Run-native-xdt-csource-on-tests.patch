@@ -6,28 +6,28 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Tests cannot be opted out so let them pass.
+Tests cannot be opted out so let them pass; use the native xdt-csource
+in cross builds.
 
 Upstream-Status: Inappropriate [OE specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- tests/Makefile.am | 2 +-
+ tests/meson.build | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/Makefile.am b/tests/Makefile.am
-index fa0832c..7c46bbf 100644
---- a/tests/Makefile.am
-+++ b/tests/Makefile.am
-@@ -26,7 +26,7 @@ DISTCLEANFILES = test-xdt-csource-data.c
- BUILT_SOURCES = test-xdt-csource-data.c
+diff --git a/tests/meson.build b/tests/meson.build
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -5,7 +5,7 @@ test_xdt_csource_data = custom_target(
+     'data' / 'data.txt',
+   ],
+   output: 'test-xdt-csource-data.c',
+-  command: [xdt_csource, '--extern', '--build-list', 'data_bin', '@INPUT0@', 'data_txt', '@INPUT1@'],
++  command: [find_program('xdt-csource', native: true), '--extern', '--build-list', 'data_bin', '@INPUT0@', 'data_txt', '@INPUT1@'],
+   capture: true,
+ )
  
- test-xdt-csource-data.c: Makefile $(srcdir)/data/data.bin $(srcdir)/data/data.txt
--	$(top_builddir)/xdt-csource/xdt-csource --extern --build-list data_bin $(srcdir)/data/data.bin data_txt $(srcdir)/data/data.txt > test-xdt-csource-data.c
-+	xdt-csource --extern --build-list data_bin $(srcdir)/data/data.bin data_txt $(srcdir)/data/data.txt > test-xdt-csource-data.c
- 
- clean-local:
- 	rm -f *.core core core.*
 -- 
 2.26.2
-
