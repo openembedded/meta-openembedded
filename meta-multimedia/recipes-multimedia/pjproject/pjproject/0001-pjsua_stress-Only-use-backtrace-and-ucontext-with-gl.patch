@@ -1,0 +1,51 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 15:30:12 -0800
+Subject: [PATCH] pjsua_stress: Only use backtrace() and ucontext with glibc
+
+PJSUA_STRESS_GLIBC was defined for every non-Android Linux build, so on
+musl the stress harness included <execinfo.h> and failed to build:
+
+  pjsua_stress.c:58:12: fatal error: 'execinfo.h' file not found
+
+Keep defining _GNU_SOURCE for Linux before the first libc include, but
+only enable the backtrace and ucontext code when __GLIBC__ is defined.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ pjsip/src/test/pjsua_stress.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/pjsip/src/test/pjsua_stress.c b/pjsip/src/test/pjsua_stress.c
+index b1d9056..0a887df 100644
+--- a/pjsip/src/test/pjsua_stress.c
++++ b/pjsip/src/test/pjsua_stress.c
+@@ -41,11 +41,7 @@
+  * backtrace() only from API 33 and its ucontext_t has a different shape.
+  * This harness runs on the Linux and macOS CI targets, so keep it off there.
+  */
+-#if defined(__linux__) && !defined(__ANDROID__)
+-#  define PJSUA_STRESS_GLIBC 1
+-#endif
+-
+-#if defined(PJSUA_STRESS_GLIBC) && !defined(_GNU_SOURCE)
++#if defined(__linux__) && !defined(__ANDROID__) && !defined(_GNU_SOURCE)
+ #  define _GNU_SOURCE 1
+ #endif
+ 
+@@ -54,6 +50,13 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++/* backtrace() and the ucontext layout used below are glibc specific;
++ * musl and other Linux C libraries have neither <execinfo.h> nor
++ * REG_RIP, so only enable them for glibc (known after a libc include). */
++#if defined(__linux__) && !defined(__ANDROID__) && defined(__GLIBC__)
++#  define PJSUA_STRESS_GLIBC 1
++#endif
++
+ #if defined(PJSUA_STRESS_GLIBC) || defined(__APPLE__)
+ #  include <execinfo.h>
+ #  include <signal.h>

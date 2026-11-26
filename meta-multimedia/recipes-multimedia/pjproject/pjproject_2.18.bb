@@ -12,7 +12,9 @@ SECTION = "libs"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag=${PV}"
+SRC_URI = "git://github.com/pjsip/pjproject.git;protocol=https;branch=master;tag=${PV} \
+           file://0001-pjsua_stress-Only-use-backtrace-and-ucontext-with-gl.patch \
+           "
 SRCREV = "bd4a7189d83d94237b6f42f3b8274664dbe6ff94"
 UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 
