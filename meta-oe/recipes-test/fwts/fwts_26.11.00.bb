@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/fwts/fwts.git;protocol=https;branch=master;tag=V${PV
            file://0005-Undefine-PAGE_SIZE.patch \
            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
            "
-SRCREV = "f06eeafe26509961bfdffa60feb855623d79224e"
+SRCREV = "0bd8cc696caf7552f43a3c77c720beb5e6006e85"
 
 # fwts.ubuntu.com no longer serves releases, use the upstream git tags.
 UPSTREAM_CHECK_URI = "https://github.com/fwts/fwts/tags"
