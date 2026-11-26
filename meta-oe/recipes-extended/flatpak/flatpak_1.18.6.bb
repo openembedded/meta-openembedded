@@ -8,7 +8,7 @@ SRC_URI = " \
     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
 "
 
-SRCREV = "a02d0ba48abe9aacc377de15699e5d8c024b5669"
+SRCREV = "7a986ba376d9e2fd8857b0afcdf5d171ef733b1f"
 
 # Odd minor versions are development releases
 UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+\.\d*[02468]\.\d+)$"
