@@ -8,10 +8,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "git://github.com/xelerance/xl2tpd.git;branch=master;protocol=https \
-    file://0001-Fix-build-with-GCC-15.patch \
-"
-SRCREV = "1ef2a025981223c1e16fc833bef226c86ff8c295"
+SRC_URI = "git://github.com/xelerance/xl2tpd.git;branch=master;protocol=https;tag=v${PV}"
+SRCREV = "07b3063e2b6870fad16366bc8d7c52a6f2a4292f"
 
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+\.\d+)$"
 
