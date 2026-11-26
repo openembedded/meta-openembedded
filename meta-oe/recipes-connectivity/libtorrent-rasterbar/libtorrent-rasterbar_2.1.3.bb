@@ -10,10 +10,11 @@ SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https;t
 	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal \
            "
 
-SRCREV = "6da363d2994f17c0b3c0450d124cf73a31a73847"
+SRCREV = "87b77c039e98200e0e7625ddc5bdc55b44c7f2c1"
 SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
 SRCREV_FORMAT .= "_try_signal"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig python3targetconfig
 
