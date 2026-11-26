@@ -40,7 +40,7 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen upstream-
 REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd"
 
 SRC_URI = "https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_version('${PV}', 1)}/gnome-control-center-${PV}.tar.xz"
-SRC_URI[sha256sum] = "1054976c2f1977f770ba134b872f547c89db7005e4422f09a96d521379c083cb"
+SRC_URI[sha256sum] = "6dab67eab50ec842ae55c797b180b853b8a8d3f0292cf4325a081fbb5b75ffc1"
 
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
 
