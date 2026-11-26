@@ -15,8 +15,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS = "gd"
 
-SRC_URI = "git://github.com/fsphil/fswebcam.git;protocol=https;branch=master;tag=${PV}"
+SRC_URI = "git://codeberg.org/fsphil/fswebcam.git;protocol=https;branch=master;tag=${PV}"
 SRCREV = "db35d4bbd336885a44f017ff142bc9523dbdce3c"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+)$"
 
 # Compile gd with PACKAGECONFIG fontconfig for easier font selection
 RRECOMMENDS:${PN} = "ttf-dejavu-sans"
