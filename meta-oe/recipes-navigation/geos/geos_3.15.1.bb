@@ -6,7 +6,10 @@ LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "d5e5192a686d065eaed082de14dd26244c5c8e02bff16b2c6cce3265f648e00e"
+SRC_URI[sha256sum] = "8eb6dc2ea78b00c2f5109c6b0dba9e028c60bad42d7b1b0cc9952b12dc71f571"
+
+UPSTREAM_CHECK_URI = "https://download.osgeo.org/geos/"
+UPSTREAM_CHECK_REGEX = "geos-(?P<pver>\d+(\.\d+)+)\.tar\.bz2"
 
 inherit cmake pkgconfig binconfig
 
