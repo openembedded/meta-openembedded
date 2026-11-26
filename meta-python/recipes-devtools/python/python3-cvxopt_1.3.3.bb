@@ -12,9 +12,9 @@ UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
 CVE_PRODUCT = "cvxopt"
 
 RDEPENDS:${PN} += "lapack suitesparse"
-DEPENDS += "lapack suitesparse"
+DEPENDS += "lapack python3-setuptools-scm-native suitesparse"
 
-inherit setuptools3
+inherit python_setuptools_build_meta
 
 export CVXOPT_BLAS_LIB_DIR = "${STAGING_LIBDIR}"
 export CVXOPT_SUITESPARSE_LIB_DIR = "${STAGING_LIBDIR}"
