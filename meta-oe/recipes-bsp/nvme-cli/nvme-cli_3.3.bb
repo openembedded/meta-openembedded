@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
 NO_GENERIC_LICENSE[Gary-S-Brown-CRC32] = "LICENSES/LicenseRef-Gary-S-Brown-CRC32.txt"
 
 DEPENDS = "json-c"
-SRCREV = "ce55132af26607e1904a0f449f94eeae028cfee5"
+SRCREV = "c19af560d1869636104de5ab4e41420cbfdef395"
 
 SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https;tag=v${PV}"
 
@@ -22,9 +22,9 @@ inherit bash-completion meson pkgconfig systemd
 PACKAGECONFIG ??= "keyutils openssl"
 PACKAGECONFIG[discoverd] = "-Dnvme-discoverd=enabled,-Dnvme-discoverd=disabled,systemd"
 PACKAGECONFIG[keyutils] = "-Dkeyutils=enabled,-Dkeyutils=disabled,keyutils"
-PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive"
+PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive,libarchive"
 PACKAGECONFIG[libdbus] = "-Dlibdbus=enabled,-Dlibdbus=disabled,dbus"
-PACKAGECONFIG[libkmod] = "-Dlibkmod=enabled,-Dlibkmod=disabled,kmod"
+PACKAGECONFIG[libkmod] = "-Dlibkmod=enabled,-Dlibkmod=disabled,kmod,libkmod"
 PACKAGECONFIG[liburing] = "-Dliburing=enabled,-Dliburing=disabled,liburing"
 PACKAGECONFIG[openssl] = "-Dopenssl=enabled,-Dopenssl=disabled,openssl"
 
@@ -44,7 +44,8 @@ pkg_postinst_ontarget:${PN}-user () {
 PACKAGES =+ "libnvme3 ${PN}-dracut ${PN}-zsh-completion ${PN}-user"
 
 FILES:libnvme3 = "${libdir}/libnvme3${SOLIBS}"
-FILES:${PN} += "${systemd_system_unitdir} ${nonarch_libdir}/NetworkManager"
+FILES:${PN} += "${systemd_system_unitdir} ${nonarch_libdir}/NetworkManager ${nonarch_libdir}/nvme"
+FILES:${PN}-dbg += "${libdir}/${BPN}/*/plugins/.debug"
 FILES:${PN}-dracut = "${nonarch_libdir}/dracut/dracut.conf.d"
 FILES:${PN}-zsh-completion = "${datadir}/zsh/site-functions"
 ALLOW_EMPTY:${PN}-user = "1"
