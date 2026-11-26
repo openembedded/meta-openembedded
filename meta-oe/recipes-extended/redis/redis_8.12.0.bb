@@ -17,7 +17,10 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
            file://0006-src-Makefile-do-not-build-the-test-modules-from-all.patch \
           "
-SRC_URI[sha256sum] = "edde778f6bdee7581e42fc139ca9e07e2822212092f7501f99989656e3629d02"
+SRC_URI[sha256sum] = "b0100a879b2d45dc97d8fda941127609d648f8913008db1b65a2f72a8ae36c8b"
+
+UPSTREAM_CHECK_URI = "https://download.redis.io/releases/"
+UPSTREAM_CHECK_REGEX = "redis-(?P<pver>\d+\.\d+\.\d+)\.tar"
 
 RPROVIDES:${PN} = "virtual-redis"
 
@@ -54,7 +57,7 @@ TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 CFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
 
 do_compile:prepend() {
-    oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
+    oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise croaring
 }
 
 # 8.10.0's default "all"/"build" goal also builds the bundled modules
@@ -66,7 +69,8 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake install PREFIX=${D}${prefix}
+    # The top-level install is now "deploy", which also builds and installs the modules
+    oe_runmake -C src install PREFIX=${D}${prefix}
     install -d ${D}/${sysconfdir}/redis
     install -m 0644 ${UNPACKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
     install -d ${D}/${sysconfdir}/init.d
