@@ -1,0 +1,46 @@
+From ff049c6ceb557efbaed3c4b209872d851c620f4a Mon Sep 17 00:00:00 2001
+From: Guillaume Champagne <champagne.guillaume.c@gmail.com>
+Date: Mon, 20 Feb 2023 13:48:18 -0500
+Subject: [PATCH] tools: create-ccan-tree: use native tools built by yocto
+
+If tools are built during the target build the compilation flags may be
+incompatible with the host. Thus, assume yocto pre-built the necessary
+binaries and use them as is.
+
+Upstream-Status: Inappropriate [embedded specific]
+---
+ tools/create-ccan-tree | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
+
+diff --git a/tools/create-ccan-tree b/tools/create-ccan-tree
+index 64fc36e7..46f86a81 100755
+--- a/lib/ccan.git/tools/create-ccan-tree
++++ b/lib/ccan.git/tools/create-ccan-tree
+@@ -82,18 +82,12 @@ tmpdir="$(mktemp -d)"
+ # sanity check, we don't want to be overwriting stuff in arbitrary dirs
+ [ $? -eq 0 -a -d "${tmpdir}" ] || exit 1
+ 
+-# We'll need the ccan_depends tool, but also a clean source tree. Build
+-# tools/ccan_depends, and store it in $tmpdir for later use
+-
+-echo "Building ccan_depends"
+-ccan_depends="$tmpdir/ccan_depends"
+-make -s -C "$srcdir" tools/ccan_depends
+-[ $? -eq 0 ] || exit 1
+-cp "$srcdir/tools/ccan_depends" "$ccan_depends"
+-
+-echo "Cleaning source tree"
+-make -s -C "$srcdir" clean
+-[ $? -eq 0 ] || exit 1
++# We assume ccan_depends was pre-built by yocto
++if [ ! -e ${srcdir}/tools/ccan_depends ]
++then
++	echo "tools/ccan_depends not built" >&2
++	exit 1
++fi
+ 
+ # clean up on error
+ trap 'rm -rf $tmpdir' EXIT
+-- 
+2.30.2
+
