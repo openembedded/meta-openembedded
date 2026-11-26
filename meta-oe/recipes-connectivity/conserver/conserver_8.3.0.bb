@@ -17,7 +17,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b28513e7b696027d3d2b8dbf117f9fe5"
 
 DEPENDS = "virtual/crypt"
 
-inherit autotools ptest systemd useradd
+inherit autotools ptest systemd
+inherit_defer ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'useradd', '', d)}
 
 SRC_URI = "\
     git://github.com/bstansell/conserver;protocol=https;branch=master;tag=v${PV} \
@@ -81,9 +82,7 @@ RDEPENDS:${PN}-ptest += "bash"
 
 SYSTEMD_SERVICE:${PN} = "${PN}.service"
 
-USERADD_PACKAGES = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)} \
-"
+USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "\
     -M -d /invalid -r -U -s ${sbindir}/nologin conserver; \
 "
