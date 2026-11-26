@@ -11,4 +11,4 @@ GTKDOC_MESON_OPTION = "gtk-doc"
 
 inherit xfce gtk-doc gobject-introspection vala
 
-SRC_URI[sha256sum] = "205677cb96b778e5079eeac80f3a636d2a909b08fcf2aa05bfe4513c69c27f29"
+SRC_URI[sha256sum] = "509e0ead3bc98c4f04b79069be7521b7cc35b63702262e148c5364b5a08e2e9a"
