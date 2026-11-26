@@ -12,7 +12,10 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "4fb0d2d4d14a4ef6448c788cb2bcfde9fbe00b8d4bdc637a7e4c08f8c5453a55"
+SRC_URI[sha256sum] = "95d3f68a482561c68fbc1a136b7e10098b7068493451b53380b322388403aa6f"
+
+UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/parallel/"
+UPSTREAM_CHECK_REGEX = "parallel-(?P<pver>\d{8})\.tar\.bz2"
 
 inherit autotools bash-completion
 
