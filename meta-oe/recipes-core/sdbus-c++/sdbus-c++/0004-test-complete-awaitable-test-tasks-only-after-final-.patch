@@ -1,0 +1,104 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 04:08:14 -0800
+Subject: [PATCH] test: complete awaitable test tasks only after final
+ suspension
+
+The Task type used by the awaitable integration tests fulfilled its
+std::promise inside final_suspend(), before the coroutine had suspended.
+The test thread wakes up in Task::get(), finishes the test and destroys
+the coroutine in ~Task() while the event loop thread is still running
+the coroutine's final_suspend(). Destroying a coroutine that is not
+suspended is undefined behaviour; when the host is loaded, the tests
+segfault in InvokesMethodAsynchronouslyOnClientSideWithAwaitable and
+the other awaitable tests.
+
+Return an awaiter from final_suspend() that fulfils the promise in
+await_suspend(), when the coroutine is already suspended and may be
+destroyed.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ .../DBusAwaitableMethodsTests.cpp             | 56 ++++++++++++-------
+ 1 file changed, 35 insertions(+), 21 deletions(-)
+
+diff --git a/tests/integrationtests/DBusAwaitableMethodsTests.cpp b/tests/integrationtests/DBusAwaitableMethodsTests.cpp
+index 092dfc0..2be50d6 100644
+--- a/tests/integrationtests/DBusAwaitableMethodsTests.cpp
++++ b/tests/integrationtests/DBusAwaitableMethodsTests.cpp
+@@ -66,19 +66,27 @@ struct Task {
+         std::suspend_always initial_suspend() noexcept { return {}; }
+ 
+         // final_suspend suspends so that the test code can retrieve the result
+-        // or exception from the promise before the coroutine is destroyed
+-        std::suspend_always final_suspend() noexcept
+-        {
+-            if (exception)
++        // or exception from the promise before the coroutine is destroyed.
++        // Complete the future only once the coroutine is suspended: the test
++        // thread destroys the coroutine as soon as get() returns, which must
++        // not happen while the coroutine is still running on the event loop thread.
++        struct FinalAwaiter {
++            bool await_ready() const noexcept { return false; }
++            void await_suspend(std::coroutine_handle<promise_type> hnd) noexcept
+             {
+-                completion.set_exception(exception);
++                auto& promise = hnd.promise();
++                if (promise.exception)
++                {
++                    promise.completion.set_exception(promise.exception);
++                }
++                else
++                {
++                    promise.completion.set_value(std::move(promise.value));
++                }
+             }
+-            else
+-            {
+-                completion.set_value(std::move(value));
+-            }
+-            return {};
+-        }
++            void await_resume() const noexcept {}
++        };
++        FinalAwaiter final_suspend() noexcept { return {}; }
+ 
+         void return_value(T val) { value = std::move(val); }
+         void unhandled_exception() { exception = std::current_exception(); }
+@@ -121,18 +129,24 @@ struct Task<void> {
+ 
+         std::suspend_always initial_suspend() noexcept { return {}; } // NOLINT(readability-convert-member-functions-to-static)
+ 
+-        std::suspend_always final_suspend() noexcept
+-        {
+-            if (exception)
++        // See Task<T>: complete the future only once the coroutine is suspended
++        struct FinalAwaiter {
++            bool await_ready() const noexcept { return false; }
++            void await_suspend(std::coroutine_handle<promise_type> hnd) noexcept
+             {
+-                completion.set_exception(exception);
++                auto& promise = hnd.promise();
++                if (promise.exception)
++                {
++                    promise.completion.set_exception(promise.exception);
++                }
++                else
++                {
++                    promise.completion.set_value();
++                }
+             }
+-            else
+-            {
+-                completion.set_value();
+-            }
+-            return {};
+-        }
++            void await_resume() const noexcept {}
++        };
++        FinalAwaiter final_suspend() noexcept { return {}; }
+ 
+         void return_void() {}
+         void unhandled_exception() { exception = std::current_exception(); }

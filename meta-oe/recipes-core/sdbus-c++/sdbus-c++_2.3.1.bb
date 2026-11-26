@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=ma
            file://0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch \
            file://0002-tests-Use-a-longer-timeout-for-the-large-argument-me.patch \
            file://0003-tests-Relax-the-measured-timeout-bound-in-timeout-te.patch \
+           file://0004-test-complete-awaitable-test-tasks-only-after-final-.patch \
            file://run-ptest"
 
 EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
