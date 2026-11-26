@@ -10,10 +10,9 @@ DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind l
 SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master;tag=${PV} \
            file://0001-cmake-Check-for-HP-libunwind.patch \
            file://0001-cmake-Pass-noline-flag-to-flex.patch \
-           file://0001-ssl-fix-const-qualifiers-for-OpenSSL-4.0.patch \
 		  "
 
-SRCREV = "14aeb09f5a0856812dbe08ead3c21f99e8860aa0"
+SRCREV = "fe29cbe7403acc0dd428065a69d8f29cc311c18e"
 
 UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+){3})$"
 
