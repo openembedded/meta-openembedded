@@ -14,16 +14,8 @@ DEPENDS += "qemu-native zlib"
 SRC_URI = "https://github.com/HDFGroup/hdf5/releases/download/${PV}/${BPN}-${PV}.tar.gz \
            file://0002-Remove-suffix-shared-from-shared-library-name.patch \
            file://0001-cmake-remove-build-flags.patch \
-           file://CVE-2026-19025.patch \
-           file://CVE-2026-19026-CVE-2026-19027-CVE-2026-19028.patch \
-           file://CVE-2026-19023-CVE-2026-19024.patch \
-           file://CVE-2026-120689.patch \
-           file://CVE-2026-120754-CVE-2026-120755.patch \
-           file://CVE-2026-120756.patch \
-           file://CVE-2026-120757.patch \
-           file://CVE-2026-120758.patch \
            "
-SRC_URI[sha256sum] = "1a1ab8209b35586fbc1aa279ba76d102130b95badcb20ca329587219112d8c16"
+SRC_URI[sha256sum] = "cd462ef0578927ae75f9e010a806b0dd28f19152db2abf6919cb94f9d5b9b8b0"
 
 UPSTREAM_CHECK_URI = "https://github.com/HDFGroup/hdf5/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"

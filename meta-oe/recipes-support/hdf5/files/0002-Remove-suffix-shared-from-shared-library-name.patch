@@ -9,14 +9,11 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 
 Adapted to v2.0.0
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-
 ---
- CMakeLists.txt | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
-
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -278,20 +278,20 @@
+@@ -256,20 +256,20 @@ set (HDF5_F90_TEST_LIB_TARGET     "${HDF5_F90_TEST_LIB_CORENAME}-static")
  set (HDF5_F90_C_TEST_LIB_TARGET   "${HDF5_F90_C_TEST_LIB_CORENAME}-static")
  set (HDF5_HL_F90_LIB_TARGET       "${HDF5_HL_F90_LIB_CORENAME}-static")
  set (HDF5_HL_F90_C_LIB_TARGET     "${HDF5_HL_F90_C_LIB_CORENAME}-static")
