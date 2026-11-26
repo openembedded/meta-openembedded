@@ -10,10 +10,8 @@ DEPENDS = "libpam openldap"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "f8ad9921f94d683d9cd40566694709308a12ae71"
-SRC_URI = "git://github.com/smackysnacks/pam_ldapdb;branch=master;protocol=https;tag=v${PV} \
-           file://0001-Include-sys-time.h-for-struct-timeval.patch \
-           "
+SRCREV = "bfd92da201b2ce412fc4094442427aa68c2526d8"
+SRC_URI = "git://github.com/smackysnacks/pam_ldapdb;branch=master;protocol=https;tag=v${PV}"
 
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
