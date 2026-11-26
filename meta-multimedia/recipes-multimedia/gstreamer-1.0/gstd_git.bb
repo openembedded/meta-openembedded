@@ -9,11 +9,14 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstre
 
 SRCBRANCH ?= "master"
 SRCREV = "d3e1daefb999c3ba0f4fcc4744b53aab2aaa5f2d"
-SRC_URI = "git://git@github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SRCBRANCH} \
+SRC_URI = "git://github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SRCBRANCH};tag=v${PV} \
            file://0001-gstd-Remove-redundant-rpaths.patch"
 
-# Remove the +really when upstream version is > 1.0
-PV = "1.0+really0.16.0"
+# PV used to be 1.0+really0.16.0
+PE = "1"
+PV = "0.16.0"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 GTKDOC_MESON_OPTION = "enable-gtk-doc"
 
