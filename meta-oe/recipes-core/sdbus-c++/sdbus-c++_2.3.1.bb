@@ -24,6 +24,8 @@ SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=ma
            file://0004-test-complete-awaitable-test-tasks-only-after-final-.patch \
            file://run-ptest"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
                  -DSDBUSCPP_BUILD_DOCS=ON \
                  -DSDBUSCPP_BUILD_DOXYGEN_DOCS=OFF"
