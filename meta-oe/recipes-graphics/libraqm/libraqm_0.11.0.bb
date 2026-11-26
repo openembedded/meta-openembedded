@@ -16,6 +16,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=af4502a870b471d3ac78abacb7abfa37"
 SRC_URI = "git://github.com/HOST-Oman/libraqm.git;protocol=https;branch=main;tag=v${PV}"
 SRCREV = "08ee1537e63f93bf926498e12b12ed15ee383216"
 
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
+
 DEPENDS = "freetype fribidi harfbuzz"
 
 inherit meson pkgconfig
@@ -23,3 +25,5 @@ inherit meson pkgconfig
 PACKAGECONFIG ?= ""
 
 PACKAGECONFIG[sheenbidi] = "-Dsheenbidi=true,-Dsheenbidi=false,sheenbidi"
+
+BBCLASSEXTEND = "native"
