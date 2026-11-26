@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=http
            "
 SRCREV = "6a5667f432e1c5fe5591025ab03a2f8df37116b4"
 
-UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
+UPSTREAM_CHECK_GITTAGREGEX = "^poco-(?P<pver>\d+(\.\d+)+)-release$"
 
 
 inherit cmake ptest
