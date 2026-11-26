@@ -28,10 +28,15 @@ inherit cmake ptest
 PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataPostgreSQL DataSQLite DNSSDAvahi Zip Encodings Prometheus FastLogger"
 # MongoDB does not build for all architectures yet keep in sync with COMPATIBLE_HOST list in mongodb recipe
 # and mongodb needs meta-python enabled as well
+PACKAGECONFIG:remove:arm = "MongoDB"
+PACKAGECONFIG:remove:i586 = "MongoDB"
+PACKAGECONFIG:remove:i686 = "MongoDB"
+PACKAGECONFIG:remove:loongarch64 = "MongoDB"
 PACKAGECONFIG:remove:riscv32 = "MongoDB"
 PACKAGECONFIG:remove:riscv64 = "MongoDB"
 PACKAGECONFIG:remove:mipsarch = "MongoDB"
 PACKAGECONFIG:remove:powerpc = "MongoDB"
+PACKAGECONFIG:remove:powerpc64 = "MongoDB"
 # Following options have dependencies on recipes which don't have native variant
 PACKAGECONFIG:remove:class-native = "MongoDB DataODBC DataPostgreSQL DNSSDAvahi"
 
