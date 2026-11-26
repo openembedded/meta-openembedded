@@ -1,0 +1,63 @@
+From 8b4198cb0bfe07667b7444a7df479c042c9cbee2 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 07:54:16 -0800
+Subject: [PATCH 2/2] iox_query_udf: Allow using pre-downloaded UDF artifacts
+
+The build script downloads the precompiled Python WASM UDF component
+for the target triple from GitHub. Add IOX_QUERY_UDF_DOWNLOAD_DIR to
+use artifacts that were fetched beforehand (offline builds), failing
+instead of downloading when they are missing, and IOX_QUERY_UDF_TARGET
+to select the artifact when the Rust target triple is a custom one.
+The checksums are still verified.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ core/iox_query_udf/build.rs | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/core/iox_query_udf/build.rs b/core/iox_query_udf/build.rs
+index 187d256..05979c1 100644
+--- a/core/iox_query_udf/build.rs
++++ b/core/iox_query_udf/build.rs
+@@ -50,7 +50,11 @@ fn main() {
+         })
+         .collect::<HashMap<_, _>>();
+ 
+-    let target = std::env::var("TARGET").unwrap();
++    // Allow selecting the artifact for build systems using custom target triples.
++    println!("cargo:rerun-if-env-changed=IOX_QUERY_UDF_TARGET");
++    let target = std::env::var("IOX_QUERY_UDF_TARGET")
++        .or_else(|_| std::env::var("TARGET"))
++        .unwrap();
+     let elf_file = format!("datafusion_udf_wasm_python.release.{target}.elf");
+     let Some(elf_file_checksum) = checksums.get(&elf_file) else {
+         panic!("no checksum found for {elf_file}")
+@@ -67,6 +71,14 @@ fn fetch_artifact(name: &str, checksum: &str) -> PathBuf {
+         return target_file;
+     }
+ 
++    // Offline builds provide the artifacts in IOX_QUERY_UDF_DOWNLOAD_DIR.
++    if std::env::var_os("IOX_QUERY_UDF_DOWNLOAD_DIR").is_some() {
++        panic!(
++            "{} is missing or does not match checksum {checksum}",
++            target_file.display()
++        );
++    }
++
+     // build timestamp in URL has a specific format:
+     // - the TZ offset is not included (it's always UTC anyways)
+     // - since `:` doesn't work in URLs, `-` is used
+@@ -154,6 +166,11 @@ fn get_cargo_target_dir() -> Result<std::path::PathBuf, Box<dyn std::error::Erro
+ 
+ /// Get download location.
+ fn download_target_location(name: &str) -> PathBuf {
++    println!("cargo:rerun-if-env-changed=IOX_QUERY_UDF_DOWNLOAD_DIR");
++    if let Some(dir) = std::env::var_os("IOX_QUERY_UDF_DOWNLOAD_DIR") {
++        return PathBuf::from(dir).join(name);
++    }
++
+     let out_dir = get_cargo_target_dir().unwrap();
+     let download_dir = out_dir
+         .join("cfg_independent_downloads")

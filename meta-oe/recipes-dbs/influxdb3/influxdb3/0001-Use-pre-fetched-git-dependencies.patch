@@ -1,0 +1,355 @@
+From 656202422ed06dcec8661c4b6e0382b15dd0521d Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 07:52:38 -0800
+Subject: [PATCH 1/2] Use pre-fetched git dependencies
+
+Point the git dependencies (the influxdata forks of arrow-datafusion
+and arrow-rs-object-store, and datafusion-udf-wasm) at local checkouts
+fetched by the build system, and drop their git sources from Cargo.lock
+so that cargo can build offline with --frozen.
+
+Upstream-Status: Inappropriate [oe specific]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ Cargo.lock | 37 -------------------------------------
+ Cargo.toml | 18 +++++++++---------
+ 2 files changed, 9 insertions(+), 46 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index 7a42748..020bbc8 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1655,7 +1655,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "arrow-schema",
+@@ -1709,7 +1708,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-catalog"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1733,7 +1731,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-catalog-listing"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1755,7 +1752,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -1778,7 +1774,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-common-runtime"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "futures",
+  "log",
+@@ -1788,7 +1783,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-datasource"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-compression",
+@@ -1822,7 +1816,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-datasource-arrow"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "arrow-ipc",
+@@ -1845,7 +1838,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-datasource-csv"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1867,7 +1859,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-datasource-json"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1888,7 +1879,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-datasource-parquet"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1917,12 +1907,10 @@ dependencies = [
+ [[package]]
+ name = "datafusion-doc"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ 
+ [[package]]
+ name = "datafusion-execution"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1942,7 +1930,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-expr"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -1964,7 +1951,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-expr-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -1976,7 +1962,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "arrow-buffer",
+@@ -2005,7 +1990,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-aggregate"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -2025,7 +2009,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-aggregate-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -2037,7 +2020,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-nested"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "arrow-ord",
+@@ -2059,7 +2041,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-table"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "async-trait",
+@@ -2074,7 +2055,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-window"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2091,7 +2071,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-functions-window-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "datafusion-common",
+  "datafusion-physical-expr-common",
+@@ -2100,7 +2079,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-macros"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "datafusion-doc",
+  "quote",
+@@ -2110,7 +2088,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-optimizer"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "chrono",
+@@ -2129,7 +2106,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-physical-expr"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -2152,7 +2128,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-physical-expr-adapter"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2166,7 +2141,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-physical-expr-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -2182,7 +2156,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-physical-optimizer"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2200,7 +2173,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-physical-plan"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "ahash",
+  "arrow",
+@@ -2230,7 +2202,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-proto"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "chrono",
+@@ -2256,7 +2227,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-proto-common"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2266,7 +2236,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-pruning"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2282,7 +2251,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-session"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "async-trait",
+  "datafusion-common",
+@@ -2295,7 +2263,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-sql"
+ version = "52.5.0"
+-source = "git+https://github.com/influxdata/arrow-datafusion.git?rev=676dd338f8fe8464a861b5c74ec3c4de8325d382#676dd338f8fe8464a861b5c74ec3c4de8325d382"
+ dependencies = [
+  "arrow",
+  "bigdecimal",
+@@ -2312,7 +2279,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-udf-wasm-arrow2bytes"
+ version = "0.1.0"
+-source = "git+https://github.com/influxdata/datafusion-udf-wasm.git?rev=9186474d530904e787e8903b61f586c10e97e317#9186474d530904e787e8903b61f586c10e97e317"
+ dependencies = [
+  "arrow",
+ ]
+@@ -2320,7 +2286,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-udf-wasm-host"
+ version = "0.1.0"
+-source = "git+https://github.com/influxdata/datafusion-udf-wasm.git?rev=9186474d530904e787e8903b61f586c10e97e317#9186474d530904e787e8903b61f586c10e97e317"
+ dependencies = [
+  "arrow",
+  "datafusion-common",
+@@ -2348,7 +2313,6 @@ dependencies = [
+ [[package]]
+ name = "datafusion-udf-wasm-query"
+ version = "0.1.0"
+-source = "git+https://github.com/influxdata/datafusion-udf-wasm.git?rev=9186474d530904e787e8903b61f586c10e97e317#9186474d530904e787e8903b61f586c10e97e317"
+ dependencies = [
+  "datafusion-common",
+  "datafusion-execution",
+@@ -5598,7 +5562,6 @@ dependencies = [
+ [[package]]
+ name = "object_store"
+ version = "0.12.5"
+-source = "git+https://github.com/influxdata/arrow-rs-object-store.git?rev=36cca19484f8a7da8a7bbfb3410135791c8e929e#36cca19484f8a7da8a7bbfb3410135791c8e929e"
+ dependencies = [
+  "async-trait",
+  "base64 0.22.1",
+diff --git a/Cargo.toml b/Cargo.toml
+index 46fee4e..bc6dacd 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -267,8 +267,8 @@ parquet_file = { path = "core/parquet_file" }
+ influxdb3_shutdown = { path = "influxdb3_shutdown" }
+ 
+ # Datafusion UDF WASM hosting for the iox_query_udf crate:
+-datafusion-udf-wasm-host = { git = "https://github.com/influxdata/datafusion-udf-wasm.git", rev = "9186474d530904e787e8903b61f586c10e97e317", default-features = false }
+-datafusion-udf-wasm-query = { git = "https://github.com/influxdata/datafusion-udf-wasm.git", rev = "9186474d530904e787e8903b61f586c10e97e317" }
++datafusion-udf-wasm-host = { path = "../influxdb-git-deps/datafusion-udf-wasm/host", default-features = false }
++datafusion-udf-wasm-query = { path = "../influxdb-git-deps/datafusion-udf-wasm/query" }
+ 
+ [workspace.lints.rust]
+ missing_copy_implementations = "deny"
+@@ -329,7 +329,7 @@ debug = false
+ # base-object-store-0125) plus the directory-sync fixes of
+ # influxdata/arrow-rs-object-store#5 mirrored onto it (#9, merged as
+ # 36cca19). Drop when upgrading to object_store >= 0.14.
+-object_store = { git = "https://github.com/influxdata/arrow-rs-object-store.git", rev = "36cca19484f8a7da8a7bbfb3410135791c8e929e" }
++object_store = { path = "../influxdb-git-deps/arrow-rs-object-store" }
+ # Use DataFusion fork
+ # Pinned to https://github.com/influxdata/arrow-datafusion/tree/upgrade-df-ver5250-d
+ # See for contents:
+@@ -340,9 +340,9 @@ object_store = { git = "https://github.com/influxdata/arrow-rs-object-store.git"
+ # NOTE: This is an incomplete list of datafusion dependencies, but enough to get all dependencies to use our forked
+ #       version. Should you ever encounter a `datafusion-*` crate that is duplicated (i.e. `Cargo.lock` lists both the
+ #       crates.io release and our fork), just add it to this list here.
+-datafusion = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
+-datafusion-common = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
+-datafusion-execution = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
+-datafusion-expr = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
+-datafusion-proto = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
+-datafusion-sql = { git = "https://github.com/influxdata/arrow-datafusion.git", rev = "676dd338f8fe8464a861b5c74ec3c4de8325d382" }
++datafusion = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/core" }
++datafusion-common = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/common" }
++datafusion-execution = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/execution" }
++datafusion-expr = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/expr" }
++datafusion-proto = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/proto" }
++datafusion-sql = { path = "../influxdb-git-deps/arrow-datafusion/datafusion/sql" }

@@ -11,4 +11,5 @@ influxdb:x:622:influxdb::/var/lib/influxdb:/bin/nologin
 mongodb:x:623:nogroup::/:/bin/nologin
 gpio-manager:x:624:gpio::/:/bin/nologin
 flatpak:x:625:625:Flatpak system helper:/:/sbin/nologin
+influxdb3:x:626:influxdb3::/var/lib/influxdb3:/bin/nologin
 

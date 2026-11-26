@@ -1,0 +1,26 @@
+[Unit]
+Description=InfluxDB 3 Core
+Documentation=https://docs.influxdata.com/influxdb3/core/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=influxdb3
+Group=influxdb3
+EnvironmentFile=/etc/influxdb3/influxdb3.conf
+ExecStart=/usr/bin/influxdb3 serve --node-id ${INFLUXDB3_NODE_ID} --object-store ${INFLUXDB3_OBJECT_STORE} --data-dir ${INFLUXDB3_DATA_DIR} $INFLUXDB3_OPTS
+WorkingDirectory=/var/lib/influxdb3
+StateDirectory=influxdb3
+LogsDirectory=influxdb3
+Restart=on-failure
+KillMode=control-group
+LimitNOFILE=65536
+UMask=0027
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

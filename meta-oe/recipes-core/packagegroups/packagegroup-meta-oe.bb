@@ -221,6 +221,9 @@ RDEPENDS:packagegroup-meta-oe-dbs = "\
 "
 RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc = "rocksdb"
 RDEPENDS:packagegroup-meta-oe-dbs:remove:riscv32 = "influxdb"
+# The prebuilt Python UDF component of influxdb3 exists only for these
+RDEPENDS:packagegroup-meta-oe-dbs:append:aarch64 = " influxdb3"
+RDEPENDS:packagegroup-meta-oe-dbs:append:x86-64 = " influxdb3"
 
 RDEPENDS:packagegroup-meta-oe-devtools = "\
     abseil-cpp \
