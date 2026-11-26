@@ -1,9 +1,19 @@
 #!/bin/sh
 
+# The tests call std::locale(""), which libstdc++ on musl only accepts for "C"
+export LC_ALL=C
+
+# Set at build time for libcs where some tests cannot pass
+args=""
+
 cd tests
 for atest in tomlplusplus_* ; do
     rm -rf tests.log
-    ./${atest} > tests.log 2>&1
+    if [ "${atest}" = "tomlplusplus_tests" ] && [ -n "${args}" ]; then
+        ./${atest} "${args}" > tests.log 2>&1
+    else
+        ./${atest} > tests.log 2>&1
+    fi
     if [ $? = 0 ] ; then
         echo "PASS: ${atest}"
     else
