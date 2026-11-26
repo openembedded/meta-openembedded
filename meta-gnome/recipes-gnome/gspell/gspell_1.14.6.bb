@@ -12,4 +12,4 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 
 EXTRA_OEMESON = "-Dgspell_app=false -Dtests=false -Dinstall_tests=false"
 
-SRC_URI[archive.sha256sum] = "788783b56fc3d03283b3aa29302d0b958aeca88835e10b1ec61f19e0efc7e8a4"
+SRC_URI[archive.sha256sum] = "d02a6f1ff3cf324798f184062a6777302ef4b325deab277d8469d3816c69282d"
