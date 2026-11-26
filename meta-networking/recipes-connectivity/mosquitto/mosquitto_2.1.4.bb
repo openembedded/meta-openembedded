@@ -18,7 +18,10 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://mosquitto.init \
 "
 
-SRC_URI[sha256sum] = "fd905380691ac65ea5a93779e8214941829e3d6e038d5edff9eac5fd74cbed02"
+SRC_URI[sha256sum] = "ca30b26ccd3041c0e11fc407fe4f2e62bc445e8d8dea94a083cc60c09bd5ea30"
+
+UPSTREAM_CHECK_URI = "https://mosquitto.org/files/source/"
+UPSTREAM_CHECK_REGEX = "mosquitto-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
 
 inherit systemd update-rc.d useradd cmake pkgconfig
 
