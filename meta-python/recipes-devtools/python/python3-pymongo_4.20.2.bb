@@ -8,7 +8,7 @@ HOMEPAGE = "https://github.com/mongodb/mongo-python-driver"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI[sha256sum] = "1ac112b3ffa3d010cfc2fc54e3ae677a12c63d18c6115db4451df64f1a1175eb"
+SRC_URI[sha256sum] = "b6407c115176d9aef64594630b8f79ea10d8a272dc2df586b158534d7e152e16"
 
 CVE_PRODUCT = "mongodb:python_driver mongodb:pymongo"
 
