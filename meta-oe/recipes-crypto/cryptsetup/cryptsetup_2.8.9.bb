@@ -24,7 +24,10 @@ DEPENDS:append:libc-musl = " argp-standalone"
 LDFLAGS:append:libc-musl = " -largp"
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "3acfa685f2dd7fcc832e0b77bc7093aa7da554a51ce8dafbb4138eaa854eee35"
+SRC_URI[sha256sum] = "8667085a4f59174928948b501b4a2a68f7f1cce1cfe46170b8f40fa6534742b3"
+
+UPSTREAM_CHECK_URI = "https://gitlab.com/cryptsetup/cryptsetup/-/tags"
+UPSTREAM_CHECK_REGEX = "/-/tags/v(?P<pver>\d+(\.\d+)+)$"
 
 inherit autotools gettext pkgconfig
 
