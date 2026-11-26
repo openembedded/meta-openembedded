@@ -9,7 +9,7 @@ LICENSE_FLAGS = "commercial"
 inherit pypi python_setuptools_build_meta
 
 SRC_URI += "file://0001-setup.py-support-cross-compiling.patch"
-SRC_URI[sha256sum] = "521ebffb8a181d56c3904e5a61f20903edee0d9d3275967b8fb345f866215c06"
+SRC_URI[sha256sum] = "8a13d15106c9dbbd66a65966edee2ee0de3950c18dc3ea42912442cda803ea4c"
 
 DEPENDS += "libheif python3-wheel-native"
 
