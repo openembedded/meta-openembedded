@@ -17,7 +17,7 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "e0149076aeff009d35fd495e55379cb78f1eb53f"
+SRCREV = "d83ce705c6abae6526dfdeecbc736aa199eda339"
 SRC_URI = "\
     git://github.com/fluent/fluent-bit.git;branch=master;protocol=https;tag=v${PV} \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
@@ -30,7 +30,7 @@ SRC_URI:append:libc-musl = "\
 "
 
 # prefix tag with "v" to avoid upgrade to random tags like "20220215"
-UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>(\d+(\.\d+)+))"
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 
 PACKAGECONFIG ??= "\
