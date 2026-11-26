@@ -26,8 +26,9 @@ SRC_URI = "git://github.com/postgresql-interfaces/psqlodbc.git;protocol=https;br
            file://run-ptest \
            "
 
-SRCREV = "96fa03dbc968c40920c907bf18d3b4cbd8efeebc"
+SRCREV = "b7fb29e201ea9449209923ff3f84e1c3d640b912"
 PV_WITH_USCORE = "${@d.getVar('PV').replace('.', '_')}"
+UPSTREAM_CHECK_GITTAGREGEX = "^REL-(?P<pver>\d+(_\d+)+)$"
 
 DEPENDS += "postgresql unixodbc"
 
