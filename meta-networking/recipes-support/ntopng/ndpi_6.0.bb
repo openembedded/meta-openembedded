@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/ntop/nDPI.git;branch=6.0-stable;protocol=https;tag=$
            file://CVE-2026-116744.patch \
           "
 
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d+(\.\d+)+)$"
+
 inherit autotools pkgconfig
 
 CPPFLAGS += "${SELECTED_OPTIMIZATION}"
