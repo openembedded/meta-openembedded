@@ -16,7 +16,7 @@ DEPENDS = " \
 
 inherit gnomebase gsettings itstool gobject-introspection gnome-help gettext upstream-version-is-even mime-xdg gtk-icon-cache features_check
 
-SRC_URI[archive.sha256sum] = "67cada96a2409c859f378e82fbe868b0e9c00a69e6b7b885d542c64ea2a1297d"
+SRC_URI[archive.sha256sum] = "40a560efe9fff957376fd92358580839acc79e2065addbf8491f7a14438c5755"
 
 UPSTREAM_CHECK_URI = "https://gitlab.gnome.org/GNOME/file-roller/-/tags"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
