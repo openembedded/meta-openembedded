@@ -12,6 +12,9 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
            "
 SRC_URI[sha256sum] = "72f7937f36d98fb348e9fa044ad1e72955982ec5938609b18e4ee7c9e04f83f2"
 
+UPSTREAM_CHECK_URI = "https://download.savannah.gnu.org/releases/gpsd/"
+UPSTREAM_CHECK_REGEX = "gpsd-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
+
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
 
 INITSCRIPT_PACKAGES = "gpsd-conf"
