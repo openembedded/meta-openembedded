@@ -17,7 +17,9 @@ DEPENDS = "\
 
 SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master;tag=v${PV} \
 "
-SRCREV = "76b19854eea88bb0ca6df64f33fe8bec08130e6f"
+SRCREV = "3b5a62b27b1851784a9bd8d358828164f46d1793"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cmake pkgconfig
 
