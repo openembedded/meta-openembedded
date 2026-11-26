@@ -8,6 +8,8 @@ DEPENDS = "rsync-native llvm-native libcap"
 # net: libbpf (elfutils, zlib), YNL code generation (python3-pyyaml-native,
 # python3-jsonschema-native), reuseport_bpf_numa (numactl) and tcp_mmap (openssl)
 DEPENDS += "elfutils numactl openssl python3-jsonschema-native python3-pyyaml-native zlib"
+# net and net/lib build their BPF objects with clang, whatever the toolchain
+DEPENDS += "clang-native"
 
 S = "${UNPACKDIR}"
 
