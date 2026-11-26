@@ -18,12 +18,8 @@ inherit pypi python_hatchling ptest-python-pytest
 DEPENDS += "\
     python3-hatch-fancy-pypi-readme-native \
     python3-hatch-vcs-native \
+    python3-python-sbom-native \
 "
-
-# python-sbom (an SBOM metadata hatch hook) isn't packaged in OE
-do_configure:prepend() {
-    sed -i -e '/python-sbom\[hatch\]/d' -e '/build.hooks.python-sbom/d' ${S}/pyproject.toml
-}
 
 RDEPENDS:${PN} += " \
     python3-core \
