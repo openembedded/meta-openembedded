@@ -7,12 +7,14 @@ DESCRIPTION = "Taisei Project is an open source fan-game set in the world of \
 HOMEPAGE = "https://taisei-project.org"
 BUGTRACKER = "https://github.com/taisei-project/taisei/issues"
 LICENSE = "CC-BY-4.0 AND CC0-1.0 AND MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=1a11ffd7e1bdd1d3156cecec60a2846f"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=23a03cac0907277013b7af25f8ed1494"
 
 DEPENDS = "\
     cglm \
     freetype \
+    gettext-native \
     libsdl3 \
+    libunibreak \
     libwebp \
     opusfile \
     zstd \
@@ -20,11 +22,8 @@ DEPENDS = "\
 DEPENDS:append:libc-musl = " libucontext"
 LDFLAGS:append:libc-musl = " -lucontext"
 
-SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https;tag=v${PV} \
-           file://0001-misc-fix-discarded-const-qualifiers-in-char-pointer-.patch \
-		   file://0001-vfs-avoid-unnecessary-recursion-in-vfs_mkparents.patch \
-		  "
-SRCREV = "6a484e6e61cc51a22a9943762dc2ff6883914f38"
+SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=https;tag=v${PV}"
+SRCREV = "5bfc9b842fe6d9bb8d1610f76f442ba07c72c4cf"
 
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
