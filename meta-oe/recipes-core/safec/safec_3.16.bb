@@ -6,10 +6,8 @@ SECTION = "lib"
 
 inherit autotools pkgconfig
 
-SRCREV = "39a0a819f80853498e48a6e601a446a122b64aaa"
-SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https;tag=v${PV} \
-           file://0001-vsnprintf_s-Increase-Buffer-Size-by-1.patch \
-		  "
+SRCREV = "3a2487e8ad2fbb7be4e5e14043e91a86879a0ab5"
+SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https;tag=v${PV}"
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+(\.\d+)?)$"
 
 # arm-yoe-linux-gnueabi-clang: error: argument unused during compilation: '-mretpoline' [-Werror,-Wunused-command-line-argument]
