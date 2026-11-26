@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 DEPENDS = "sqlite3 sqlite3-native"
 
 SRC_URI = "https://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[sha256sum] = "af5b731c145c1d13c4e3b4eeb7d167e94e845e440f71e3496b4ed8dae0291960"
+SRC_URI[sha256sum] = "791a0610547eeabb17006cfd49cdbd2034f3240f47ed5e88a1031811f4e2bcf3"
 
 UPSTREAM_CHECK_REGEX = "proj-(?P<pver>\d+(\.\d+)+)\.tar\.gz"
 
