@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=3b83ef96387f14655fc854dd
 
 SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master;tag=v${PV};destsuffix=${GO_SRCURI_DESTSUFFIX}"
 
-SRCREV = "0d7ca333b4818c4176324ac258abb96828ea84d1"
+SRCREV = "7265a673baf73d8e4c97db7390929f132e734959"
 # v1.0.912 is a stray 2020 tag, not a release
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>(?!1\.0\.912$)\d+(\.\d+)+)$"
 
