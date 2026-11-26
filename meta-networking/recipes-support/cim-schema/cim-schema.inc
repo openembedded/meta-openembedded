@@ -6,4 +6,7 @@ details for integration with other management models. The schema\
 provides the actual model descriptions."
 
 HOMEPAGE = "http://www.dmtf.org/"
+
+# dmtf.org links each schema release only as cim_schema_vNNNN, which the check cannot map to PV
+UPSTREAM_VERSION_UNKNOWN = "1"
 SECTION = "libs"
