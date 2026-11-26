@@ -24,11 +24,8 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH}
            file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
            "
 
-# Upstream dropped the language-major prefix after v6.31.1: releases are now
-# tagged vNN.N (v36.2 == this recipe's 7.36.2, cf. PROTOC_VERSION above). Match
-# those two-component tags so the real latest release is reported; the leading
-# C++ major in PV means the comparison stays off-by-a-major, so this reads as UPDATE
-# rather than MATCH even when current.
+# Tags are vNN.N (protoc version, v36.2 == PV 7.36.2) but PV is the libprotobuf version, so tags never compare equal to PV.
+UPSTREAM_VERSION_UNKNOWN = "1"
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+\.\d+)$"
 
 CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
