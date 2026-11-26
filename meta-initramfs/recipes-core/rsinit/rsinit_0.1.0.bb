@@ -6,8 +6,10 @@ LICENSE = "GPL-2.0-only AND CC0-1.0"
 LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0-only.txt;md5=570a9b3749dd0463a1778803b12a6dce \
                     file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032"
 
-SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main"
-SRCREV = "${PV}"
+SRC_URI = "git://github.com/pengutronix/rsinit.git;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "91732bdc0364e0bd0bc3a77dbedfa3a1dd330a1a"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 inherit cargo cargo-update-recipe-crates
 
