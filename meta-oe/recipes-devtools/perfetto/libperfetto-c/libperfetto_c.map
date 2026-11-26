@@ -1,0 +1,8 @@
+{
+  global:
+    perfetto_*;
+    Perfetto*;
+
+  local:
+    *;
+};
