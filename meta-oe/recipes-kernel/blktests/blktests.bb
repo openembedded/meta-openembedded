@@ -7,13 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-3.0;md5=d32239bcb673463ab874e80d47fae504
 
 SRCREV = "9aa2023312bfcdd6b31c24b6e4a4a5c2d4f870d2"
 SRC_URI = " \
-	git://github.com/osandov/blktests.git;nobranch=1;protocol=https \
+	git://github.com/osandov/blktests.git;branch=master;protocol=https \
 	"
 
-# Upstream repo carries no tags at all (releases are plain master commits) and
-# UPSTREAM_CHECK_COMMITS cannot work here because SRC_URI uses nobranch=1, so
-# there is no ref for latest_revision to resolve.
-UPSTREAM_VERSION_UNKNOWN = "1"
+# Upstream has no release tags, so check master for new commits
+UPSTREAM_CHECK_COMMITS = "1"
 
 
 inherit autotools-brokensep
