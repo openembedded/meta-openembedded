@@ -20,6 +20,9 @@ RDEPENDS:${PN}-dev = ""
 # tag 0.8.4+cpprest-lts
 SRCREV = "c011de4608e8221412f2ea9be5d755a68a4e5e29"
 
+# The fork has no release tags to compare PV with, so check for new commits
+UPSTREAM_CHECK_COMMITS = "1"
+
 
 inherit cmake
 
