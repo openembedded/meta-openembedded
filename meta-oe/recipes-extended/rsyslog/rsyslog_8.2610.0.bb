@@ -22,6 +22,7 @@ SRC_URI = "https://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://rsyslog.conf \
            file://rsyslog.logrotate \
            file://rsyslog.service \
+           file://50-rsyslog.conf \
            file://run-ptest \
            file://0001-tests-disable-the-check-for-inotify.patch \
            file://0001-tests-tcpflood.c-Pass-correct-parameter-type-to-send.patch \
@@ -168,10 +169,15 @@ do_install:append() {
         install -d ${D}${systemd_system_unitdir}
         install -m 644 ${UNPACKDIR}/rsyslog.service ${D}${systemd_system_unitdir}
         sed -i -e "s,@sbindir@,${sbindir},g" ${D}${systemd_system_unitdir}/rsyslog.service
+        # rsyslog.service reads syslog.socket, which journald only feeds
+        # when ForwardToSyslog is enabled. imjournal reads the journal itself.
+        if ${@bb.utils.contains('PACKAGECONFIG', 'imjournal', 'false', 'true', d)}; then
+            install -D -m 0644 ${UNPACKDIR}/50-rsyslog.conf ${D}${systemd_unitdir}/journald.conf.d/50-rsyslog.conf
+        fi
     fi
 }
 
-FILES:${PN} += "${bindir}"
+FILES:${PN} += "${bindir} ${systemd_unitdir}/journald.conf.d/50-rsyslog.conf"
 
 INITSCRIPT_NAME = "syslog"
 INITSCRIPT_PARAMS = "defaults"
