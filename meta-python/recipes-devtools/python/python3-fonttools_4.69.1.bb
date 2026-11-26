@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/fonttools/fonttools"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=211c9e4671bde3881351f22a2901f692"
 
-SRC_URI[sha256sum] = "73294e233070f71e2b3653b6bd8564af676d57f26d075761fb06d1ab2e4a7a5d"
+SRC_URI[sha256sum] = "d09a2ea8ed4c71ac52e789ba9313da3e26cee3f812400d7e8a8b3a38d0f98dfe"
 
 inherit pypi setuptools3
 
