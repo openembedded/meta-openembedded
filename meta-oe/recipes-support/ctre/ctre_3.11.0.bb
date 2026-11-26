@@ -4,8 +4,8 @@ HOMEPAGE = "https://github.com/hanickadot/compile-time-regular-expressions"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2e982d844baa4df1c80de75470e0c5cb"
 
-SRC_URI = "git://github.com/hanickadot/compile-time-regular-expressions.git;protocol=https;branch=main"
-SRCREV = "eb9577aae3515d14e6c5564f9aeb046d2e7c1124"
+SRC_URI = "git://github.com/hanickadot/compile-time-regular-expressions.git;protocol=https;branch=main;tag=v${PV}"
+SRCREV = "4ab18abfd88ccfc867734bf5d31b13285854577e"
 UPSTREAM_CHECK_GITTAGREGEX = "^v(?P<pver>\d+(\.\d+)+)$"
 
 
