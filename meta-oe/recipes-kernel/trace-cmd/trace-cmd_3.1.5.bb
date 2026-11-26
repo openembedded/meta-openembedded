@@ -1,5 +1,5 @@
 SUMMARY = "User-space front-end command-line tool for ftrace"
-HOMEPAGE = "https://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git"
+HOMEPAGE = "https://www.trace-cmd.org/"
 
 LICENSE = "GPL-2.0-only AND LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
@@ -7,15 +7,12 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd \
     "
 
-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git;branch=master;protocol=https \
+SRC_URI = "git://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git;branch=master;protocol=https \
            file://0001-Replace-LFS64-interfaces-off64_t-and-lseek64.patch \
            file://0002-Drop-using-_LARGEFILE64_SOURCE.patch \
            file://0001-Do-not-emit-useless-rpath.patch"
 SRCREV = "18233e4c32857cb7ddd4960beeec8360ed834fc5"
-# The kernel.org mirror we fetch from only tags up to trace-cmd-v2.9.x; the 3.x
-# line (PV 3.1.5) lives in the newer trace-cmd.org repo, so no tag here matches PV.
-UPSTREAM_CHECK_GITTAGREGEX = "trace-cmd-v(?P<pver>\d+(\.\d+)+)"
-UPSTREAM_VERSION_UNKNOWN = "1"
+UPSTREAM_CHECK_GITTAGREGEX = "^trace-cmd-v(?P<pver>\d+(\.\d+)+)$"
 
 
 DEPENDS += "libtraceevent libtracefs zstd xmlto-native asciidoc-native swig-native bison-native flex-native"
