@@ -8,11 +8,14 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 require ${BPN}-licenses.inc
 
-SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX} \
+SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=master;tag=${PV};destsuffix=${GO_SRCURI_DESTSUFFIX} \
            file://cloudflared.service \
            file://default \
            "
-SRCREV = "518d7f7969b764df628bb4b1088f0f154901dc4e"
+SRCREV = "dc57315806d5faa8715f728fd37b5302c81c467b"
+
+UPSTREAM_CHECK_GITTAGREGEX = "^(?P<pver>\d{4}\.\d+\.\d+)$"
+
 require ${BPN}-go-mods.inc
 
 GO_IMPORT = "github.com/cloudflare/cloudflared"

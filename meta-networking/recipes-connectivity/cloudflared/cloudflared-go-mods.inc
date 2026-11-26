@@ -57,13 +57,13 @@ SRC_URI += "\
     gomod://go.opentelemetry.io/otel/trace;version=v1.47.0;sha256sum=dfffa6cb848954b5d3413007b6553ad3e508a9fc992a81ab4bd9026c236229be \
     gomod://go.opentelemetry.io/proto/otlp;version=v1.11.0;sha256sum=790b98d472e7095511fa7feddd04e1d85bd844226e03ba482bd4105ef2217e09 \
     gomod://go.uber.org/automaxprocs;version=v1.6.0;sha256sum=964c6f548f7ee6df9fa3a9080d722c7950060bda0cb84ff9e2ae065f078813c4 \
-    gomod://golang.org/x/crypto;version=v0.58.0;sha256sum=b0a45594cda20ddb4264d84aeff9b588b8570bf6a2833c51a0b821734a298d95 \
-    gomod://golang.org/x/net;version=v0.61.0;sha256sum=f6843a98d608298e48a6ca287292c9a6fae066284050ce174d5ffb781c9b3dcf \
+    gomod://golang.org/x/crypto;version=v0.59.0;sha256sum=b5cff645013a39d6b3348dce3c53eb452de71309f9a6831c5b12b3f8d6caf1d2 \
+    gomod://golang.org/x/net;version=v0.62.0;sha256sum=50e869800f4921e910eb6550369f937c7187d130a7f7f78a26ef9b589a7071a6 \
     gomod://golang.org/x/oauth2;version=v0.36.0;sha256sum=15bf65ff103e5dafc809d78cd037a1d1e88ccb8451824e851156002a13304504 \
-    gomod://golang.org/x/sync;version=v0.24.0;sha256sum=ca3fcf3ea8259e75891f7947e1a816a5b89402c542d45d8bbbd9e061b0c58019 \
-    gomod://golang.org/x/sys;version=v0.49.0;sha256sum=e73a06591ca0d7016ce3ccb45c36a8ed7128468aecc1a357f94d815c760c6b31 \
-    gomod://golang.org/x/term;version=v0.47.0;sha256sum=d990d5ab94dfa41ba980645b721bba7490064337a01bb03e6cacace70e8df0bf \
-    gomod://golang.org/x/text;version=v0.43.0;sha256sum=b75131f628f6e2e4892fd638d33127e952a5027775e0162b94ba069cb4e13863 \
+    gomod://golang.org/x/sync;version=v0.25.0;sha256sum=c27da17d7e217dec0c2f8c715e5ce2b92815fa76fc08da13c41a73dd6a67dfe0 \
+    gomod://golang.org/x/sys;version=v0.50.0;sha256sum=b115e8a144a7c9d1df3ffb8af20b283e162844b5b624a97ee342955cca69b9e6 \
+    gomod://golang.org/x/term;version=v0.48.0;sha256sum=3f6dfe1b6031005d556ad54027c191636299aa4496fd631d1b1dcd23ada8bec7 \
+    gomod://golang.org/x/text;version=v0.44.0;sha256sum=e51c60a7d121a493048b1638023983ce183bd5d70df1db495423ce1415663202 \
     gomod://google.golang.org/genproto/googleapis/api;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=df4e8023b2b9efa58561b12e3177f4fb6789e2a271a9e03baf6f6501c7961694 \
     gomod://google.golang.org/genproto/googleapis/rpc;version=v0.0.0-20260720211330-0afa2a65878a;sha256sum=03a9f622788b07abc4873b3b57bdd9a3e2c8ca248587a2196578dda0bf74ddd5 \
     gomod://google.golang.org/grpc;version=v1.83.2;sha256sum=84292905a694e17862d15abc123a6f7f7efa9e1e3a77e80120982ff95b2605ea \
