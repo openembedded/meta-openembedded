@@ -11,6 +11,9 @@ S = "${UNPACKDIR}"
 SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${BPN}/${BPN}_${PV}.zip"
 SRC_URI[sha256sum] = "d4486fda0413f8a81a87e0dd2329f50f2a8a7cb4147b48cf147f0160add8174a"
 
+# Google Code is shut down; the read-only archive has no listing to check
+UPSTREAM_VERSION_UNKNOWN = "1"
+
 do_install() {
     install -d ${D}${datadir}/icons
     for theme in `find -name 'Faenza*.tar.gz'`; do
