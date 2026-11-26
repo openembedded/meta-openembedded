@@ -2,19 +2,19 @@ DESCRIPTION = "Utilities to collect and visualise system statistics"
 HOMEPAGE = "http://www.i-scream.org/libstatgrab/"
 
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
 
 DEPENDS = "ncurses"
 
 PACKAGES:prepend = "statgrab statgrab-dbg saidar saidar-dbg ${PN}-mrtg "
 
 # don't use the git tag unless docbooc2x is available to build the manpages
-SRC_URI = "https://github.com/libstatgrab/libstatgrab/releases/download/LIBSTATGRAB_0_92_1/libstatgrab-${PV}.tar.gz \
+SRC_URI = "https://github.com/libstatgrab/libstatgrab/releases/download/LIBSTATGRAB_${@d.getVar('PV').replace('.', '_')}/libstatgrab-${PV}.tar.gz \
           "
-SRC_URI[sha256sum] = "5688aa4a685547d7174a8a373ea9d8ee927e766e3cc302bdee34523c2c5d6c11"
+SRC_URI[sha256sum] = "ff559fcd4da75a4023af986c02c52ad51d4b68ae83fc0c8c461026126a8ebefa"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
-UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\_\d+)+)"
+UPSTREAM_CHECK_REGEX = "releases/tag/LIBSTATGRAB_(?P<pver>\d+(_\d+)+)"
 
 # Perl5 is for tests only
 EXTRA_OECONF = "--without-perl5 --with-mnttab=/proc/mounts"
