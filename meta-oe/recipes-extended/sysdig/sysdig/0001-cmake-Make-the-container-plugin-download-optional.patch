@@ -1,0 +1,33 @@
+From 6bfcd5ea1c21bc521cc51070ab0cbff7938373d9 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 22:27:25 -0800
+Subject: [PATCH] cmake: Make the container plugin download optional
+
+The container plugin is a prebuilt binary which container_plugin.cmake
+fetches from download.falco.org at configure time. That is not possible
+in an offline build and the binary is not built for the target. Add an
+option to skip it; sysdig only loads the plugin if it is installed.
+
+Upstream-Status: Pending
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 68344a3..ea6de77 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -163,7 +163,10 @@ endif()
+ include(falcosecurity-libs)
+ include(yaml-cpp)
+ include(nlohmann-json)
+-include(container_plugin)
++option(ENABLE_CONTAINER_PLUGIN "Download and install the prebuilt container plugin" ON)
++if(ENABLE_CONTAINER_PLUGIN)
++	include(container_plugin)
++endif()
+ 
+ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+ 	if(NOT DEFINED DRIVER_VERSION)
