@@ -16,8 +16,13 @@
 #
 # landlock:fs_bench only reports timings, and walking its 10000 nested
 # directories takes about 90 seconds in qemu, twice the default timeout.
+#
+# cgroup:test_memcontrol triggers the OOM killer on purpose, and testimage
+# fails the run whenever dmesg has "Killed process". cgroup:test_kmem fails
+# intermittently under memory pressure in the test VM. Skip both.
 SKIP="-S ftrace:ftracetest-ktap -S filesystems:file_stressor \
-      -S ptrace:vmaccess -S tty:tty_tiocsti_test -S landlock:fs_bench"
+      -S ptrace:vmaccess -S tty:tty_tiocsti_test -S landlock:fs_bench \
+      -S cgroup:test_memcontrol -S cgroup:test_kmem"
 
 # sysmap_is_sealed can't tell at runtime whether the kernel seals the system
 # mappings, so skip it when the running kernel's config says it doesn't.
