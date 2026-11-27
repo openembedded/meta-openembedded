@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=c624803bdf6fc1c4ce39f5ae11d7bd05"
 
 inherit pypi python_hatchling
 
-SRC_URI[sha256sum] = "75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"
+SRC_URI[sha256sum] = "700928ee6c1f4213795e67c47eba8f8553639069fea89199f71d654e38edc593"
 
 CVE_PRODUCT = "encode:httpx"
 
