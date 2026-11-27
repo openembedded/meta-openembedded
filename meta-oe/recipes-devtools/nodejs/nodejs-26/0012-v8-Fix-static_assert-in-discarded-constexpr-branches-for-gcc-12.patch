@@ -1,0 +1,73 @@
+From f5ce52fd44c5f3f9bc6d9134fc1c14e4eabec2a4 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 17:16:05 -0800
+Subject: [PATCH] v8: Fix static_assert in discarded constexpr branches for gcc
+ 12
+
+GCC before 13 evaluates a static_assert whose condition does not depend
+on a template parameter when it parses the template, even inside the
+discarded branch of an if constexpr. GCC 13 implemented P2593 and defers
+the check. On 64-bit targets this breaks two places in V8:
+
+- turboshaft::AssemblerOpInterface::SmiLessThan() asserts the 32-bit
+  tagged layout in the branch that is only taken with 4-byte tagged
+  values.
+- IterableForEach() asserts that typed array element types fit in an
+  int, including in the branch discarded for the BigInt64, BigUint64 and
+  Uint32 element types.
+
+Hoist the first check in front of the if constexpr, where it holds for
+both layouts, and make the second depend on the IntVisitor template
+parameter so it is only checked on instantiation.
+
+Node.js 26 requires GCC 13.2, but Debian 12 build hosts ship GCC 12 and
+use it for the host tools (CXX(host)).
+
+Upstream-Status: Inappropriate [Node.js 26 requires GCC >= 13.2; this is for older build host compilers]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ deps/v8/src/builtins/builtins-iterator-inl.h | 10 ++++++----
+ deps/v8/src/compiler/turboshaft/assembler.h  |  5 +++--
+ 2 files changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/deps/v8/src/builtins/builtins-iterator-inl.h b/deps/v8/src/builtins/builtins-iterator-inl.h
+index a8632ba9..eb9081cf 100644
+--- a/deps/v8/src/builtins/builtins-iterator-inl.h
++++ b/deps/v8/src/builtins/builtins-iterator-inl.h
+@@ -272,10 +272,12 @@ MaybeDirectHandle<Object> IterableForEach(Isolate* isolate,
+             return MaybeDirectHandle<Object>();                             \
+           }                                                                 \
+         } else {                                                            \
+-          static_assert(std::numeric_limits<ctype>::max() <=                \
+-                        std::numeric_limits<int>::max());                   \
+-          static_assert(std::numeric_limits<ctype>::min() >=                \
+-                        std::numeric_limits<int>::min());                   \
++          static_assert(sizeof(IntVisitor) > 0 &&                           \
++                        std::numeric_limits<ctype>::max() <=                \
++                            std::numeric_limits<int>::max());               \
++          static_assert(sizeof(IntVisitor) > 0 &&                           \
++                        std::numeric_limits<ctype>::min() >=                \
++                            std::numeric_limits<int>::min());               \
+           if (!int_visitor(static_cast<int>(val))) {                        \
+             return MaybeDirectHandle<Object>();                             \
+           }                                                                 \
+diff --git a/deps/v8/src/compiler/turboshaft/assembler.h b/deps/v8/src/compiler/turboshaft/assembler.h
+index 85ca7d42..cef87c7b 100644
+--- a/deps/v8/src/compiler/turboshaft/assembler.h
++++ b/deps/v8/src/compiler/turboshaft/assembler.h
+@@ -1832,11 +1832,12 @@ class AssemblerOpInterface : public Next {
+   V<Word32> SmiOpName(ConstOrV<Smi> left, ConstOrV<Smi> right) {           \
+     V<WordPtr> l = BitcastTaggedToWordPtrForTagAndSmiBits(resolve(left));  \
+     V<WordPtr> r = BitcastTaggedToWordPtrForTagAndSmiBits(resolve(right)); \
++    static_assert(kTaggedSize == kInt64Size ||                             \
++                  (kTaggedSize == kInt32Size &&                            \
++                   v8::internal::SmiValuesAre31Bits()));                   \
+     if constexpr (kTaggedSize == kInt64Size) {                             \
+       return IntPtrOpName(l, r);                                           \
+     } else {                                                               \
+-      static_assert(kTaggedSize == kInt32Size);                            \
+-      static_assert(v8::internal::SmiValuesAre31Bits());                   \
+       return Int32OpName(TruncateWordPtrToWord32(l),                       \
+                          TruncateWordPtrToWord32(r));                      \
+     }                                                                      \

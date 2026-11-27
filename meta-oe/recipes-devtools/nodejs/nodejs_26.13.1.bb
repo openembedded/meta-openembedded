@@ -30,6 +30,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0007-positional-args.patch \
            file://0008-custom-env.patch \
            file://0011-v8-handle-supplementary-case-equivalents-of-BMP-characters.patch \
+           file://0012-v8-Fix-static_assert-in-discarded-constexpr-branches-for-gcc-12.patch \
            file://run-ptest \
            "
 SRC_URI:append:class-target = " \
