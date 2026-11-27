@@ -11,6 +11,8 @@ DEPENDS:append:libc-musl = " argp-standalone"
 SRCREV = "842ed731248a9daded38774d8fb26c7b09474461"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https;tag=v${PV} \
            file://0001-include-libgen.h-for-basename.patch \
+           file://0002-build-Fix-a-build-error-with-make-shuffle-for-arch-c.patch \
+           file://0003-build-Fix-a-build-error-with-make-shuffle.patch \
            "
 
 LDFLAGS:append:libc-musl = " -largp"

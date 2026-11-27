@@ -1,0 +1,44 @@
+From 2347c298f7ac45f2a55dea065deadd0eabc410f1 Mon Sep 17 00:00:00 2001
+From: Khem Raj <khem.raj@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 23:25:06 -0800
+Subject: [PATCH] build: Fix a build error with make --shuffle for arch
+ common.o
+
+The misc/symbols and misc/dbginfo link $(objdir)/arch/$(ARCH)/common.o
+but the top-level Makefile has no rule for it; it's built by the arch
+Makefile as a part of uftrace-arch.a.  When make reaches the object
+before uftrace-arch.a, it falls back to the builtin %.o rule which lacks
+the -iquote include paths (or fails with "No rule to make target" when
+objdir is different from srcdir):
+
+  $ make -j16 --shuffle=2
+  ...
+  arch/x86_64/common.c:10:10: fatal error: uftrace.h: No such file or directory
+  make: *** [<builtin>: .../arch/x86_64/common.o] Error 1
+
+Building the tool alone, like `make $PWD/misc/symbols` in a clean tree,
+fails the same way every time.
+
+Add a rule with an empty recipe that makes the object depend on
+uftrace-arch.a so that it's always built by the arch Makefile.
+
+Upstream-Status: Submitted [https://github.com/namhyung/uftrace/pull/2079]
+AI-Generated: Uses Claude Code
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index a4e43a12..a220cc86 100644
+--- a/Makefile
++++ b/Makefile
+@@ -316,6 +316,8 @@ $(LIBMCOUNT_ARCH_OBJS): $(wildcard $(srcdir)/arch/$(ARCH)/*.[cS]) $(LIBMCOUNT_DE
+ $(UFTRACE_ARCH_OBJS): $(wildcard $(srcdir)/arch/$(ARCH)/*.[cS]) $(COMMON_DEPS)
+ 	@$(MAKE) -B -C $(srcdir)/arch/$(ARCH) $@
+ 
++$(objdir)/arch/$(ARCH)/common.o: $(UFTRACE_ARCH_OBJS) ;
++
+ $(objdir)/uftrace.o: $(srcdir)/uftrace.c $(objdir)/version.h $(COMMON_DEPS)
+ 	$(QUIET_CC)$(CC) $(UFTRACE_CFLAGS) -c -o $@ $<
+ 
