@@ -16,10 +16,7 @@ SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master;tag=${GITT
 "
 SRCREV = "a0d75fbab3ea01bf5b36f813f0ec0d1bfa2db745"
 
-inherit meson pkgconfig features_check
-
-# Depends on libepoxy
-REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'pdf', 'opengl', '', d)}"
+inherit meson pkgconfig
 
 PACKAGECONFIG ??= "gif png pdf"
 PACKAGECONFIG[gif] = "-Dgif=enabled,-Dgif=disabled,giflib"
@@ -27,8 +24,6 @@ PACKAGECONFIG[png] = "-Dpng=enabled,-Dpng=disabled,libpng"
 PACKAGECONFIG[tiff] = "-Dtiff=enabled,-Dtiff=disabled,tiff"
 PACKAGECONFIG[motif] = "-Dmotif=enabled,-Dmotif=disabled,libx11 libxext libxpm libxt openmotif"
 PACKAGECONFIG[webp] = "-Dwebp=enabled,-Dwebp=disabled,libwebp"
-PACKAGECONFIG[pdf] = "-Dpdf=enabled,-Dpdf=disabled,poppler libepoxy"
-
-CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DEGL_NO_X11=1', d)}"
+PACKAGECONFIG[pdf] = "-Dpdf=enabled,-Dpdf=disabled,poppler"
 
 RDEPENDS:${PN} = "ttf-dejavu-sans-mono"
