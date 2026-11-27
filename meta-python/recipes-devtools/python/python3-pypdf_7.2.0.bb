@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/py-pdf/pypdf"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=15692a75ec5daafc92ff9e5505a17cc5"
 
-SRC_URI[sha256sum] = "2eff4e2fc5fb22a6d6711e6f1166cdc9ab5765d90cd0d77dfea3f4aa91a27b1d"
+SRC_URI[sha256sum] = "b2c637b6f0be3def1f762fd8be20118736bafdffc75badab80db003d7a9ed110"
 
 inherit pypi python_flit_core
 
